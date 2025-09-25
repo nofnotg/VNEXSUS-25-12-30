@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-08-21T12:50:25.531Z",
+  "model": "o1-mini",
+  "error": "400 Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.",
+  "stack": "Error: 400 Unsupported parameter: 'max_tokens' is not supported with this model. Use 'max_completion_tokens' instead.\n    at APIError.generate (file:///C:/MVP_v7_2AI/backend/node_modules/openai/core/error.mjs:41:20)\n    at OpenAI.makeStatusError (file:///C:/MVP_v7_2AI/backend/node_modules/openai/client.mjs:156:32)\n    at OpenAI.makeRequest (file:///C:/MVP_v7_2AI/backend/node_modules/openai/client.mjs:301:30)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AIVerificationSystem.attemptVerification (file:///C:/MVP_v7_2AI/backend/ai-verification/index.js:178:22)\n    at async AIVerificationSystem.verifySingleCase (file:///C:/MVP_v7_2AI/backend/ai-verification/index.js:125:16)\n    at async testO1Mini (file:///C:/MVP_v7_2AI/backend/ai-verification/test-o1-mini.js:40:20)",
+  "success": false
+}

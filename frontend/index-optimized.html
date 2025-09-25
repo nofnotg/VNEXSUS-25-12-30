@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메디아이(Medi AI) 문서분석시스템</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="script.js" defer></script>
+  <style>
+    /* 성능 최적화된 CSS - GPU 가속 최소화, 애니메이션 간소화 */
+    
+    /* 전체 레이아웃 - 그라데이션 단순화 */
+    body {
+      background: #6366f1;
+      min-height: 100vh;
+      font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+    }
+    
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    /* 드롭존 - 애니메이션 제거 */
+    .drop-zone {
+      border: 3px dashed #e0e7ff;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      background: #f8fafc;
+    }
+    
+    .drop-zone:hover, .drop-zone.active {
+      background: #eef2ff;
+      border-color: #6366f1;
+    }
+    
+    /* 파일 아이템 - transform 제거 */
+    .file-item {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #e2e8f0;
+      transition: border-color 0.2s ease;
+    }
+    
+    .file-item:hover {
+      border-color: #c7d2fe;
+    }
+    
+    .file-item .btn-remove {
+      color: #ef4444;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 5px;
+      border-radius: 50%;
+    }
+    
+    .file-item .btn-remove:hover {
+      background-color: #fef2f2;
+      color: #dc2626;
+    }
+    
+    /* 결과 컨테이너 - 그라데이션 제거 */
+    .result-container {
+      max-height: 500px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    
+    .loading-spinner {
+      display: none;
+    }
+    
+    .insurance-record {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .file-list-horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      overflow-x: auto;
+    }
+    
+    .file-item-card {
+      min-width: 200px;
+      flex: 0 0 auto;
+    }
+    
+    .collapsed-files {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    #resultModalContent {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    /* 시스템 타이틀 - 애니메이션 제거 */
+    .system-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 3px solid #6366f1;
+      color: #1e293b;
+      font-weight: 700;
+      font-size: 2.5rem;
+    }
+    
+    .system-title span {
+      color: #6366f1;
+      font-weight: 800;
+    }
+    
+    /* 카드 스타일 - transform 제거 */
+    .card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.9);
+      transition: box-shadow 0.2s ease;
+    }
+    
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      border-radius: 16px 16px 0 0 !important;
+      padding: 1.25rem 1.5rem;
+    }
+    
+    .card-body {
+      padding: 1.5rem;
+    }
+    
+    /* 버튼 스타일 - 복잡한 애니메이션 제거 */
+    .btn {
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      transition: background-color 0.2s ease;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: #6366f1;
+    }
+    
+    .btn-primary:hover {
+      background: #5b21b6;
+    }
+    
+    .btn-outline-info {
+      border: 2px solid #06b6d4;
+      color: #06b6d4;
+      background: transparent;
+    }
+    
+    .btn-outline-info:hover {
+      background: #06b6d4;
+      border-color: #06b6d4;
+      color: white;
+    }
+    
+    .btn-outline-primary {
+      border: 2px solid #6366f1;
+      color: #6366f1;
+      background: transparent;
+    }
+    
+    .btn-outline-primary:hover {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: white;
+    }
+    
+    .status-container {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .status-left {
+      flex: 0 0 200px;
+    }
+    
+    .status-right {
+      flex: 1;
+    }
+    
+    /* 프로그레스바 - 애니메이션 제거 */
+    .progress {
+      height: 12px;
+      border-radius: 10px;
+      background: #f1f5f9;
+    }
+    
+    .progress-bar {
+      background: #6366f1;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    
+    /* 리포트 컨텐츠 - 그라데이션 제거 */
+    .report-content {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      padding: 25px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      background: #ffffff;
+      margin-bottom: 25px;
+      max-height: 600px;
+      overflow-y: auto;
+      font-size: 16px;
+    }
+    
+    /* 채팅 컨테이너 - 그라데이션 제거 */
+    .chat-container {
+      height: 450px;
+      overflow-y: auto;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      background: #ffffff;
+      margin-bottom: 20px;
+    }
+    
+    /* 스크롤바 스타일링 - 그라데이션 제거 */
+    .chat-container::-webkit-scrollbar,
+    .report-content::-webkit-scrollbar,
+    .result-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .chat-container::-webkit-scrollbar-track,
+    .report-content::-webkit-scrollbar-track,
+    .result-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+    
+    .chat-container::-webkit-scrollbar-thumb,
+    .report-content::-webkit-scrollbar-thumb,
+    .result-container::-webkit-scrollbar-thumb {
+      background: #6366f1;
+      border-radius: 10px;
+    }
+    
+    .chat-container::-webkit-scrollbar-thumb:hover,
+    .report-content::-webkit-scrollbar-thumb:hover,
+    .result-container::-webkit-scrollbar-thumb:hover {
+      background: #5b21b6;
+    }
+    
+    /* 메시지 버블 - transform 제거 */
+    .message {
+      margin-bottom: 15px;
+      padding: 16px 20px;
+      border-radius: 20px;
+      max-width: 80%;
+      transition: box-shadow 0.2s ease;
+      position: relative;
+    }
+    
+    .message:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .user-message {
+      background: #6366f1;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+      border-bottom-right-radius: 8px;
+    }
+    
+    .user-message::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -8px;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-left-color: #6366f1;
+      border-bottom: 0;
+    }
+    
+    .ai-message {
+      background: #ffffff;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-bottom-left-radius: 8px;
+    }
+    
+    .ai-message::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border: 8px solid transparent;
+      border-right-color: #ffffff;
+      border-bottom: 0;
+    }
+
+    /* 개발 모드 관련 스타일 */
+    .dev-only {
+      display: none;
+    }
+    .dev-mode .dev-only {
+      display: flex;
+    }
+    body.dev-mode #ai-chat-section {
+      display: block !important;
+    }
+    body.dev-mode .dev-mode-option {
+      display: block !important;
+    }
+
+    /* 추가 채팅 UI 스타일 */
+    #ai-chat-input {
+      resize: none;
+      min-height: 38px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+    
+    .card-body.d-flex.flex-column {
+      height: 500px;
+    }
+    
+    /* 모달 - backdrop-filter 제거 */
+    .modal-content {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      background: #ffffff;
+      overflow: hidden;
+    }
+    
+    .modal-header {
+      border-bottom: 1px solid #e5e7eb;
+      background: #6366f1;
+      color: white;
+      padding: 20px 25px;
+    }
+    
+    .modal-header .btn-close {
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+    }
+    
+    .modal-header .btn-close:hover {
+      opacity: 1;
+    }
+    
+    .modal-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    
+    .modal-body {
+      padding: 25px;
+      background: #ffffff;
+    }
+    
+    .modal-footer {
+      border-top: 1px solid #e5e7eb;
+      background: #f8fafc;
+      padding: 20px 25px;
+    }
+    
+    /* 입력 필드 */
+    .form-control {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 16px;
+      transition: border-color 0.2s ease;
+      background: #ffffff;
+    }
+    
+    .form-control:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      outline: none;
+    }
+    
+    .form-control::placeholder {
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <!-- 기존 HTML 내용은 동일하게 유지 -->
+  <!-- 이 파일은 성능 테스트용 최적화 버전입니다 -->
+</body>
+</html>

@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "보험청구 심사 시 보존해야 할 의료 정보 카테고리",
+    "usage": "의료문서 OCR 후 시계열 요약표 작성 시 보존할 정보",
+    "priority": 1
+  },
+  "categories": {
+    "Infectious_and_Parasitic_Diseases": {
+      "category_id": "R001",
+      "korean_name": "감염성 및 기생충성 질환",
+      "english_name": "Infectious and Parasitic Diseases (Significant)",
+      "comment": "주요 감염이나 합병증/후유증 가능성이 있는 감염증. 매우 경미한 조건은 제외됨.",
+      "keywords": [
+        "감염", "Infection", "결핵", "Tuberculosis", "TB", "간염", "Hepatitis", "HBV", "HCV", 
+        "패혈증", "Sepsis", "HIV", "AIDS", "STD", "STI", "성병", "진균증", "Mycosis", 
+        "기생충", "Parasite"
+      ],
+      "kcd_codes": ["A00-B99"],
+      "details": {
+        "A00-A09": {"korean_name": "장 감염 질환 (중증)", "english_name": "Intestinal infectious diseases (Severe)"},
+        "A15-A19": {"korean_name": "결핵", "english_name": "Tuberculosis"},
+        "A30-A49": {"korean_name": "기타 세균성 질환 (수막염, 패혈증 등)", "english_name": "Other bacterial diseases (Meningitis, Sepsis, etc.)"},
+        "A50-A64": {"korean_name": "주로 성행위로 전파되는 감염", "english_name": "Infections with a predominantly sexual mode of transmission"},
+        "B15-B19": {"korean_name": "바이러스 간염 (만성 포함)", "english_name": "Viral hepatitis (incl. Chronic)"},
+        "B20-B24": {"korean_name": "인체 면역결핍 바이러스병 [HIV]", "english_name": "Human immunodeficiency virus [HIV] disease"},
+        "B25-B34": {"korean_name": "기타 바이러스성 질환 (중증)", "english_name": "Other viral diseases (Severe)"},
+        "B35-B49": {"korean_name": "진균증 (심재성 등)", "english_name": "Mycoses (Deep, etc.)"},
+        "B50-B64": {"korean_name": "원충성 질환 (말라리아 등)", "english_name": "Protozoal diseases (Malaria, etc.)"},
+        "B90-B94": {"korean_name": "감염성 및 기생충성 질환의 후유증", "english_name": "Sequelae of infectious and parasitic diseases"}
+      }
+    },
+    "Pregnancy_Childbirth_Puerperium_Complications": {
+      "category_id": "R015",
+      "korean_name": "임신, 출산 및 산후기 (합병증)",
+      "english_name": "Pregnancy, Childbirth, Puerperium (Complications)",
+      "comment": "모성 또는 태아 건강에 영향을 미치는 합병증 및 중요한 사건에 중점.",
+      "keywords": [
+        "자궁외 임신", "Ectopic pregnancy", "유산 (합병증)", "Miscarriage (complicated)",
+        "임신중독증", "Preeclampsia", "자간증", "Eclampsia", "임신성 당뇨", "Gestational diabetes",
+        "GDM", "전치태반", "Placenta previa", "태반 조기 박리", "Placental abruption",
+        "조기 진통", "Preterm labor", "산후 출혈", "Postpartum hemorrhage", "PPH"
+      ],
+      "kcd_codes": ["O00-O99"],
+      "details": {
+        "O00-O08": {"korean_name": "유산으로 종결되는 임신", "english_name": "Pregnancy with abortive outcome"},
+        "O10-O16": {"korean_name": "임신성 고혈압성 장애", "english_name": "Hypertensive disorders in pregnancy, childbirth and the puerperium"},
+        "O20-O29": {"korean_name": "기타 산과적 병태 (임신성 당뇨 등)", "english_name": "Other maternal disorders (Gestational diabetes, etc.)"},
+        "O30-O48": {"korean_name": "태아 및 양막강 관련 문제", "english_name": "Maternal care related to the fetus and amniotic cavity"},
+        "O60-O75": {"korean_name": "진통 및 분만 합병증", "english_name": "Complications of labour and delivery"},
+        "O85-O92": {"korean_name": "산후기 합병증", "english_name": "Complications predominantly related to the puerperium"},
+        "O94-O99": {"korean_name": "기타 산과적 병태", "english_name": "Other obstetric conditions"}
+      }
+    },
+    "Perinatal_Period_Conditions": {
+      "category_id": "R016",
+      "korean_name": "출생전후기에 기원한 특정 병태",
+      "english_name": "Certain Conditions Originating in the Perinatal Period",
+      "comment": "신생아에 영향을 미치는 중요한 상태.",
+      "keywords": [
+        "미숙아", "Premature infant", "저체중 출생아", "Low birth weight", "LBW", "VLBW",
+        "출생 외상", "Birth trauma", "신생아 호흡곤란 증후군", "Respiratory distress syndrome of newborn",
+        "RDS", "신생아 패혈증", "Neonatal sepsis", "NICU"
+      ],
+      "kcd_codes": ["P00-P96"]
+    },
+    "Congenital_Malformations": {
+      "category_id": "R017",
+      "korean_name": "선천 기형, 변형 및 염색체 이상",
+      "english_name": "Congenital Malformations, Deformations, Chromosomal Abnormalities",
+      "comment": "종종 장기적인 치료 또는 수술이 필요한 중요한 선천성 이상.",
+      "keywords": [
+        "선천성 심장 기형", "Congenital heart defect", "CHD", "VSD", "ASD", "TOF",
+        "다운 증후군", "Down syndrome", "구순구개열", "Cleft lip/palate", "선천성 기형", "Congenital anomaly"
+      ],
+      "kcd_codes": ["Q00-Q99"]
+    },
+    "Injury_Poisoning_External_Causes": {
+      "category_id": "R018",
+      "korean_name": "손상, 중독 및 외인에 의한 특정 기타 결과",
+      "english_name": "Injury, Poisoning, and Consequences of External Causes",
+      "comment": "모든 중요한 손상, 중독 및 그 합병증.",
+      "keywords": [
+        "손상", "Injury", "외상", "Trauma", "골절", "Fracture", "Fx", "탈구", "Dislocation",
+        "염좌 (중증)", "Sprain (Severe)", "좌상 (중증)", "Strain (Severe)", "뇌진탕", "Concussion",
+        "외상성 뇌손상", "Traumatic Brain Injury", "TBI", "화상", "Burn", "중독", "Poisoning",
+        "절단", "Amputation", "합병증", "Complication", "수술 후 합병증", "Post-operative complication", "ORIF"
+      ],
+      "kcd_codes": ["S00-T88"]
+    },
+    "Significant_Procedures_Treatments": {
+      "category_id": "R019",
+      "korean_name": "주요 시술 및 처치",
+      "english_name": "Significant Procedures and Treatments",
+      "comment": "클레임 평가에 중요한 특정 절차 및 치료.",
+      "keywords": [
+        "수술", "Surgery", "Operation", "Op", "-ectomy", "-otomy", "-plasty", "-rrhaphy", "-stomy",
+        "이식", "Transplant", "생검", "Biopsy", "Bx", "항암 화학요법", "Chemotherapy", "Chemo",
+        "방사선 치료", "Radiation therapy", "Radiotherapy", "RTx", "투석", "Dialysis", "Hemodialysis", "HD",
+        "Peritoneal dialysis", "PD", "인공호흡기 치료", "Mechanical ventilation", "Ventilator care",
+        "수혈", "Blood transfusion", "BT", "OR", "Post-op", "Pre-op"
+      ],
+      "kcd_codes": [
+        "Z40-Z54"
+      ]
+    },
+    "Status_Posts_Devices": {
+      "category_id": "R020",
+      "korean_name": "상태 및 인공 삽입물",
+      "english_name": "Status Posts and Presence of Devices",
+      "comment": "이식물, 장치 또는 중요한 절차 이후 상태의 존재.",
+      "keywords": [
+        "이식 상태", "Transplanted status", "심박 조절기", "Pacemaker", "인공 관절", "Artificial joint",
+        "인공 판막", "Artificial valve", "스텐트", "Stent", "장루", "Ostomy"
+      ],
+      "kcd_codes": [
+        "Z94", "Z95", "Z96", "Z97", "Z90", "Z93", "Z99"
+      ]
+    },
+    "Specific_Significant_Encounters": {
+      "category_id": "R021",
+      "korean_name": "기타 주요 내원 정보",
+      "english_name": "Specific Significant Encounters",
+      "comment": "중요한 건강 이벤트를 나타내는 기타 특정 만남.",
+      "keywords": [
+        "출생아", "Liveborn infant", "완화 의료", "Palliative care"
+      ],
+      "kcd_codes": [
+        "Z38", "Z51.5"
+      ]
+    },
+    "New_Diseases_Of_Concern": {
+      "category_id": "R022",
+      "korean_name": "신기원 불명 또는 특정 우려 신종 질환",
+      "english_name": "New Diseases of Uncertain Etiology or Specific Concern",
+      "comment": "새롭게 부상하는 질병이나 공중 보건 우려에 대한 코드.",
+      "keywords": [
+        "COVID-19", "코로나19", "SARS", "사스", "Zika", "지카"
+      ],
+      "kcd_codes": [
+        "U04", "U06", "U07.0", "U07.1", "U07.2", "U09", "U10"
+      ]
+    }
+  }
+}

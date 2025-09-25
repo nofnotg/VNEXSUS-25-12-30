@@ -1,23 +1,41 @@
-const { v4: uuidv4 } = require('uuid');
-const pdfAnalyzer = require('../services/pdfAnalyzer');
-const textractService = require('../services/textractService');
-const ocrMerger = require('../services/ocrMerger');
-const fileHandler = require('../utils/fileHandler');
+/**
+ * OCR 컨트롤러
+ * PDF 파일 업로드 및 텍스트 추출 API 처리
+ * @module controllers/ocrController
+ */
+import { v4 as uuidv4 } from 'uuid';
+import * as pdfAnalyzer from '../services/pdfAnalyzer.js';
+// import * as textractService from '../services/textractService.js';
+import * as visionService from '../services/visionService.js';
+import * as ocrMerger from '../services/ocrMerger.js';
+import * as fileHelper from '../utils/fileHelper.js';
+import { logService } from '../utils/logger.js';
+import pdfProcessor from '../utils/pdfProcessor.js';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 
 // 진행 중인 작업 추적을 위한 메모리 저장소
 const jobStore = {};
+
+// 임시 디렉토리 경로
+const TEMP_DIR = process.env.TEMP_DIR || '../temp';
 
 /**
  * PDF 파일 업로드 및 OCR 처리 컨트롤러
  * @param {Object} req - Express 요청 객체
  * @param {Object} res - Express 응답 객체
  */
-exports.uploadPdfs = async (req, res) => {
+export const uploadPdfs = async (req, res) => {
   try {
+    // CORS 헤더 추가
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
     // 파일이 없는 경우 에러 반환
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ 
-        error: '업로드할 PDF 파일이 없습니다.',
+        error: '업로드할 파일이 없습니다.',
         status: 'error',
         code: 'NO_FILES'
       });
@@ -35,14 +53,38 @@ exports.uploadPdfs = async (req, res) => {
       });
     }
 
-    // PDF 파일만 확인
-    const invalidFiles = req.files.filter(file => file.mimetype !== 'application/pdf');
+    // 지원되는 파일 형식 확인
+    const allowedMimeTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
+    const invalidFiles = req.files.filter(file => !allowedMimeTypes.includes(file.mimetype));
     if (invalidFiles.length > 0) {
       return res.status(400).json({ 
-        error: 'PDF 파일만 업로드 가능합니다.',
+        error: 'PDF, PNG, JPG, JPEG 파일만 업로드 가능합니다.',
         status: 'error',
         code: 'INVALID_FILE_TYPE',
         invalidFiles: invalidFiles.map(f => f.originalname)
+      });
+    }
+
+    // 파일 무결성 검증 - 파일 사이즈가 0인 파일 체크
+    const emptyFiles = req.files.filter(file => file.size === 0);
+    if (emptyFiles.length > 0) {
+      return res.status(400).json({
+        error: '빈 파일이 포함되어 있습니다.',
+        status: 'error',
+        code: 'EMPTY_FILES',
+        emptyFiles: emptyFiles.map(f => f.originalname)
+      });
+    }
+
+    // 최소 파일 크기 검증 (100 바이트 미만은 손상된 파일로 간주)
+    const minFileSize = 100; // 바이트
+    const tooSmallFiles = req.files.filter(file => file.size < minFileSize);
+    if (tooSmallFiles.length > 0) {
+      return res.status(400).json({
+        error: '손상된 파일이 포함되어 있습니다.',
+        status: 'error',
+        code: 'CORRUPT_FILES',
+        corruptFiles: tooSmallFiles.map(f => ({ name: f.originalname, size: f.size }))
       });
     }
 
@@ -62,15 +104,15 @@ exports.uploadPdfs = async (req, res) => {
     // 비동기 처리 시작 (응답은 먼저 보냄)
     res.status(202).json({ 
       jobId, 
-      message: 'PDF 분석 작업이 시작되었습니다.',
+      message: '파일 분석 작업이 시작되었습니다.',
       status: 'processing',
       statusUrl: `/api/ocr/status/${jobId}`,
       resultUrl: `/api/ocr/result/${jobId}`
     });
 
     // 각 파일 처리 (비동기)
-    processPdfFiles(jobId, files).catch(error => {
-      console.error('PDF 처리 중 예상치 못한 오류:', error);
+    processFiles(jobId, files).catch(error => {
+      logService('ocrController', `파일 처리 중 예상치 못한 오류: ${error.message}`, 'error');
       if (jobStore[jobId]) {
         jobStore[jobId].status = 'failed';
         jobStore[jobId].error = '서버 내부 오류가 발생했습니다. 관리자에게 문의하세요.';
@@ -79,7 +121,7 @@ exports.uploadPdfs = async (req, res) => {
     });
     
   } catch (error) {
-    console.error('업로드 처리 중 오류:', error);
+    logService('ocrController', `업로드 처리 중 오류: ${error.message}`, 'error');
     res.status(500).json({ 
       error: '파일 처리 중 서버 오류가 발생했습니다.', 
       status: 'error',
@@ -94,7 +136,7 @@ exports.uploadPdfs = async (req, res) => {
  * @param {Object} req - Express 요청 객체
  * @param {Object} res - Express 응답 객체
  */
-exports.getStatus = (req, res) => {
+export const getStatus = (req, res) => {
   try {
     const { jobId } = req.params;
     
@@ -114,7 +156,7 @@ exports.getStatus = (req, res) => {
       elapsedTime: getElapsedTime(statusInfo.startTime)
     });
   } catch (error) {
-    console.error('상태 확인 중 오류:', error);
+    logService('ocrController', `상태 확인 중 오류: ${error.message}`, 'error');
     res.status(500).json({ 
       error: '상태 확인 중 오류가 발생했습니다.',
       status: 'error',
@@ -129,7 +171,7 @@ exports.getStatus = (req, res) => {
  * @param {Object} req - Express 요청 객체
  * @param {Object} res - Express 응답 객체
  */
-exports.getResult = (req, res) => {
+export const getResult = (req, res) => {
   try {
     const { jobId } = req.params;
     
@@ -178,7 +220,7 @@ exports.getResult = (req, res) => {
       results: job.results
     });
   } catch (error) {
-    console.error('결과 조회 중 오류:', error);
+    logService('ocrController', `결과 조회 중 오류: ${error.message}`, 'error');
     res.status(500).json({ 
       error: '결과 조회 중 오류가 발생했습니다.',
       status: 'error',
@@ -189,151 +231,261 @@ exports.getResult = (req, res) => {
 };
 
 /**
- * 비동기 PDF 파일 처리 함수
- * @param {string} jobId - 작업 ID
- * @param {Array} files - 업로드된 파일 배열
+ * OCR 서비스 상태 확인 컨트롤러
+ * @param {Object} req - Express 요청 객체
+ * @param {Object} res - Express 응답 객체
  */
-async function processPdfFiles(jobId, files) {
+export const getOcrStatus = async (req, res) => {
   try {
-    const jobData = jobStore[jobId];
-    const allResults = {};
+    // 각 OCR 서비스 상태 확인
+    const visionStatus = await visionService.getServiceStatus();
+    // const textractStatus = await textractService.getServiceStatus();
+    const textractStatus = { success: false, message: 'Textract 비활성화' };
+    
+    res.json({
+      services: {
+        vision: visionStatus,
+        textract: textractStatus
+      },
+      activeServices: [
+        ...(visionStatus.available ? ['vision'] : []),
+        ...(textractStatus.available ? ['textract'] : [])
+      ],
+      canProcessFiles: visionStatus.available || textractStatus.available
+    });
+  } catch (error) {
+    logService('ocrController', `OCR 서비스 상태 확인 중 오류: ${error.message}`, 'error');
+    res.status(500).json({
+      error: 'OCR 서비스 상태 확인 중 오류가 발생했습니다.',
+      status: 'error',
+      message: error.message
+    });
+  }
+};
 
+/**
+ * 파일 처리 (OCR 및 텍스트 추출)
+ * @param {string} jobId - 작업 ID
+ * @param {Array} files - 업로드된 파일 배열 (PDF, PNG, JPG, JPEG)
+ */
+async function processFiles(jobId, files) {
+  try {
+    logService('ocrController', `파일 처리 시작 (총 ${files.length}개 파일)`, 'info', { jobId });
+    
+    // OCR 설정 로깅
+    const useTextract = process.env.USE_TEXTRACT === 'true';
+    const useVision = process.env.USE_VISION !== 'false';
+    const enableVisionOcr = process.env.ENABLE_VISION_OCR === 'true';
+    
+    // 작업 데이터 초기화
+    const jobData = jobStore[jobId];
+    jobData.status = 'processing';
+    jobData.filesTotal = files.length;
+    jobData.filesProcessed = 0;
+    jobData.startedAt = new Date().toISOString();
+    
+    // 임시 디렉토리 확인 및 생성
+    const tempDir = path.resolve(TEMP_DIR);
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    
+    // 각 파일 처리
     for (let i = 0; i < files.length; i++) {
+      const fileStartTime = new Date();
+      const file = files[i];
+      const fileId = `file_${i+1}`;
+      let tempFilePath = null;
+      
       try {
-        const file = files[i];
-        const fileId = `file_${i+1}`;
+        logService('ocrController', `파일 처리 중: ${file.originalname} (${i+1}/${files.length})`, 'info', { 
+          jobId, 
+          fileSize: `${(file.size / 1024).toFixed(2)} KB`,
+          mimeType: file.mimetype
+        });
         
-        console.log(`[작업 ${jobId}] 파일 처리 중: ${file.originalname} (${i+1}/${files.length})`);
+        // 1. 임시 파일로 저장
+        tempFilePath = path.join(tempDir, `${uuidv4()}_${file.originalname}`);
+        fs.writeFileSync(tempFilePath, file.buffer);
         
-        // 1. PDF 페이지 분석 (텍스트/이미지 구분)
-        const pdfAnalysis = await pdfAnalyzer.analyzePdf(file.buffer);
+        // 2. 파일 형식에 따른 처리
+        let processorResult;
         
-        console.log(`[작업 ${jobId}] PDF 분석 완료: 총 ${pdfAnalysis.pageCount}페이지 (텍스트: ${pdfAnalysis.textPageCount}, 이미지: ${pdfAnalysis.imagePageCount})`);
-        
-        // 2. 각 페이지 처리 (텍스트 추출 또는 OCR)
-        const pagesResults = [];
-        
-        for (const page of pdfAnalysis.pages) {
+        if (file.mimetype === 'application/pdf') {
+          // PDF 파일 처리
+          const processorOptions = {
+            useVision,
+            useTextract,
+            forceOcr: enableVisionOcr && isScannablePdf(file.originalname),
+            cleanupTemp: true,
+            fileName: path.basename(tempFilePath)
+          };
+          
+          processorResult = await pdfProcessor.processPdf(file.buffer, processorOptions);
+          
+          if (!processorResult.success) {
+            throw new Error(processorResult.error || 'PDF 처리에 실패했습니다.');
+          }
+        } else if (file.mimetype.startsWith('image/')) {
+          // 이미지 파일 처리 (Vision API 사용)
           try {
-            if (page.isImagePage) {
-              // 이미지 페이지는 Textract로 OCR 처리
-              console.log(`[작업 ${jobId}] 페이지 ${page.pageNum} OCR 처리 중...`);
-              const ocrResult = await textractService.processImagePage(page);
-              pagesResults.push({ 
-                pageNum: page.pageNum, 
-                isImage: true,
-                text: ocrResult
-              });
-            } else {
-              // 텍스트 페이지는 바로 추출된 텍스트 사용
-              console.log(`[작업 ${jobId}] 페이지 ${page.pageNum} 텍스트 추출 완료`);
-              pagesResults.push({ 
-                pageNum: page.pageNum, 
-                isImage: false,
-                text: page.text
-              });
-            }
-          } catch (pageError) {
-            console.error(`[작업 ${jobId}] 페이지 ${page.pageNum} 처리 중 오류:`, pageError);
-            // 페이지 오류가 있어도 계속 진행
-            pagesResults.push({ 
-              pageNum: page.pageNum, 
-              isImage: page.isImagePage,
-              text: `[오류: 페이지 처리 실패 - ${pageError.message}]`,
-              error: pageError.message
-            });
+            const ocrResult = await visionService.extractTextFromImage(file.buffer);
+            
+            processorResult = {
+              success: true,
+              text: ocrResult.text || '',
+              textLength: ocrResult.text ? ocrResult.text.length : 0,
+              pageCount: 1,
+              isScannedPdf: false,
+              textSource: 'vision_ocr',
+              ocrSource: 'google_vision',
+              steps: ['image_upload', 'vision_ocr'],
+              confidence: ocrResult.confidence || 0
+            };
+          } catch (error) {
+            throw new Error(`이미지 OCR 처리에 실패했습니다: ${error.message}`);
+          }
+        } else {
+          throw new Error(`지원되지 않는 파일 형식입니다: ${file.mimetype}`);
+        }
+        
+        // 3. 결과 저장
+        const fileEndTime = new Date();
+        const fileProcessingTime = (fileEndTime - fileStartTime) / 1000;
+        
+        jobData.results[fileId] = {
+          filename: file.originalname,
+          fileSize: file.size,
+          mimeType: file.mimetype,
+          pageCount: processorResult.pageCount || 0,
+          isScannedPdf: processorResult.isScannedPdf || false,
+          processingSteps: processorResult.steps,
+          textSource: processorResult.textSource,
+          ocrSource: processorResult.ocrSource,
+          mergedText: processorResult.text || '',
+          textLength: processorResult.textLength || 0,
+          processingTime: `${fileProcessingTime.toFixed(2)}초`,
+          processedAt: new Date().toISOString()
+        };
+        
+        logService('ocrController', `파일 처리 완료: ${file.originalname}`, 'info', { 
+          jobId, 
+          processingTime: `${fileProcessingTime.toFixed(2)}초`,
+          textSource: processorResult.textSource,
+          textLength: processorResult.textLength || 0
+        });
+        
+        // 4. 진행 상황 업데이트
+        jobData.filesProcessed++;
+        
+      } catch (fileError) {
+        // 개별 파일 처리 실패 시 오류 기록하고 다음 파일로 진행
+        const fileEndTime = new Date();
+        const fileProcessingTime = (fileEndTime - fileStartTime) / 1000;
+        
+        logService('ocrController', `파일 처리 실패: ${files[i].originalname} - ${fileError.message}`, 'error', { 
+          jobId, 
+          processingTime: `${fileProcessingTime.toFixed(2)}초`,
+          error: fileError.stack
+        });
+        
+        // 에러 유형에 따른 사용자 친화적인 메시지
+        let userErrorMessage = fileError.message;
+        if (fileError.message.includes('stream must have data')) {
+          userErrorMessage = 'PDF 파일이 손상되었거나 비어 있습니다.';
+        } else if (fileError.message.includes('password') || fileError.message.includes('encrypted')) {
+          userErrorMessage = '암호화된 PDF 파일입니다. 암호를 해제한 후 다시 시도해주세요.';
+        } else if (fileError.message.includes('xfa form') || fileError.message.includes('XFA')) {
+          userErrorMessage = 'XFA 기반 PDF 양식은 지원되지 않습니다.';
+        }
+        
+        jobData.results[`file_${i+1}`] = {
+          filename: files[i].originalname,
+          fileSize: files[i].size,
+          mimeType: files[i].mimetype,
+          error: true,
+          errorMessage: userErrorMessage,
+          errorDetail: fileError.message,
+          processingTime: `${fileProcessingTime.toFixed(2)}초`,
+          processedAt: new Date().toISOString()
+        };
+        
+        // 임시 파일 정리
+        if (tempFilePath && fs.existsSync(tempFilePath)) {
+          try {
+            fs.unlinkSync(tempFilePath);
+            logService('ocrController', `임시 파일 삭제 완료: ${tempFilePath}`, 'debug', { jobId });
+          } catch (unlinkError) {
+            logService('ocrController', `임시 파일 삭제 실패: ${unlinkError.message}`, 'error', { jobId });
           }
         }
         
-        // 3. 모든 페이지 텍스트 병합
-        const mergedText = ocrMerger.mergeResults(pagesResults);
-        
-        // 결과 저장
-        allResults[fileId] = {
-          filename: file.originalname,
-          pageCount: pdfAnalysis.pageCount,
-          textPageCount: pdfAnalysis.textPageCount,
-          imagePageCount: pdfAnalysis.imagePageCount,
-          mergedText: mergedText,
-          pages: pagesResults.map(p => ({ 
-            pageNum: p.pageNum, 
-            isImage: p.isImage,
-            error: p.error
-          }))
-        };
-        
-        // 처리 상태 업데이트
-        jobData.filesProcessed++;
-        console.log(`[작업 ${jobId}] 파일 처리 완료: ${file.originalname} (${jobData.filesProcessed}/${jobData.filesTotal})`);
-      } catch (fileError) {
-        console.error(`[작업 ${jobId}] 파일 처리 중 오류 (${files[i].originalname}):`, fileError);
-        // 하나의 파일 처리 오류가 있어도 계속 진행
-        allResults[`file_${i+1}`] = {
-          filename: files[i].originalname,
-          error: fileError.message,
-          mergedText: `[오류: 파일 처리 실패 - ${fileError.message}]`
-        };
         jobData.filesProcessed++;
       }
     }
     
     // 모든 파일 처리 완료
     jobData.status = 'completed';
-    jobData.results = allResults;
     jobData.completedAt = new Date().toISOString();
     
-    console.log(`[작업 ${jobId}] 모든 파일 처리 완료 (${jobData.filesTotal}개)`);
-    
-    // 임시 파일 정리
-    try {
-      const cleanedCount = fileHandler.cleanAllTrackedFiles();
-      console.log(`[작업 ${jobId}] 임시 파일 정리 완료 (${cleanedCount}개)`);
-    } catch (cleanError) {
-      console.error(`[작업 ${jobId}] 임시 파일 정리 중 오류:`, cleanError);
-    }
-    
-    // 작업 데이터는 30분 후 메모리에서 삭제 (메모리 관리)
-    setTimeout(() => {
-      console.log(`[작업 ${jobId}] 작업 데이터 메모리에서 삭제`);
-      delete jobStore[jobId];
-    }, 30 * 60 * 1000);
+    logService('ocrController', `모든 PDF 처리 완료 (${files.length}개 파일)`, 'info', { 
+      jobId, 
+      elapsedTime: getElapsedTime(jobData.startTime, jobData.completedAt) 
+    });
     
   } catch (error) {
-    console.error(`[작업 ${jobId}] PDF 처리 중 치명적 오류:`, error);
+    // 전체 처리 실패 시
+    logService('ocrController', `PDF 처리 중 오류 발생`, 'error', { jobId, error: error.message, stack: error.stack });
+    
     if (jobStore[jobId]) {
       jobStore[jobId].status = 'failed';
       jobStore[jobId].error = error.message;
       jobStore[jobId].completedAt = new Date().toISOString();
     }
     
-    // 임시 파일 정리 시도
-    try {
-      fileHandler.cleanAllTrackedFiles();
-    } catch (cleanError) {
-      console.error(`[작업 ${jobId}] 오류 후 임시 파일 정리 중 추가 오류:`, cleanError);
-    }
-    
-    throw error; // 에러 전파하여 상위 catch에서 처리
+    throw error;
   }
 }
 
 /**
- * 경과 시간 계산 (ISO 문자열 기준)
+ * 파일명을 기반으로 OCR이 필요한 스캔된 PDF를 추정
+ * @param {string} filename - 파일명
+ * @returns {boolean} - OCR 필요 여부
+ */
+function isScannablePdf(filename) {
+  const lowerFilename = filename.toLowerCase();
+  const scanKeywords = ['scan', '스캔', 'scanned', '스캔본', '진단서', '소견서', '처방전', '검사결과'];
+  
+  return scanKeywords.some(keyword => lowerFilename.includes(keyword));
+}
+
+/**
+ * 경과 시간 계산
  * @param {string} startTime - 시작 시간 (ISO 문자열)
  * @param {string} endTime - 종료 시간 (ISO 문자열, 없으면 현재 시간)
- * @returns {string} 경과 시간 문자열 (MM:SS 형식)
+ * @returns {string} 경과 시간 문자열
  */
 function getElapsedTime(startTime, endTime) {
-  try {
-    const start = new Date(startTime).getTime();
-    const end = endTime ? new Date(endTime).getTime() : Date.now();
-    const elapsedSec = Math.floor((end - start) / 1000);
-    
-    const minutes = Math.floor(elapsedSec / 60);
-    const seconds = elapsedSec % 60;
-    
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  } catch (error) {
-    return '00:00';
+  const start = new Date(startTime);
+  const end = endTime ? new Date(endTime) : new Date();
+  const diff = Math.round((end - start) / 1000); // 초 단위
+  
+  const hours = Math.floor(diff / 3600);
+  const minutes = Math.floor((diff % 3600) / 60);
+  const seconds = diff % 60;
+  
+  if (hours > 0) {
+    return `${hours}시간 ${minutes}분 ${seconds}초`;
+  } else if (minutes > 0) {
+    return `${minutes}분 ${seconds}초`;
+  } else {
+    return `${seconds}초`;
   }
-} 
+}
+
+export default {
+  uploadPdfs,
+  getStatus,
+  getResult,
+  getOcrStatus
+};

@@ -1,144 +1,150 @@
-const {
-  TextractClient,
-  DetectDocumentTextCommand,
-  StartDocumentTextDetectionCommand,
-  GetDocumentTextDetectionCommand
-} = require('@aws-sdk/client-textract');
-const {
-  S3Client,
-  PutObjectCommand,
-  GetObjectCommand,
-  HeadObjectCommand,
-  DeleteObjectCommand
-} = require('@aws-sdk/client-s3');
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { v4: uuidv4 } = require('uuid');
+/**
+ * AWS Textract OCR 서비스
+ * PDF 파일에서 텍스트를 추출하는 기능 제공
+ * @module services/textractService
+ */
+import { 
+  TextractClient, 
+  DetectDocumentTextCommand, 
+  StartDocumentTextDetectionCommand, 
+  GetDocumentTextDetectionCommand 
+} from '@aws-sdk/client-textract';
+import { 
+  S3Client, 
+  PutObjectCommand, 
+  GetObjectCommand, 
+  HeadObjectCommand, 
+  DeleteObjectCommand 
+} from '@aws-sdk/client-s3';
+import dotenv from 'dotenv';
+import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import * as visionService from './visionService.js';
+import { fileURLToPath } from 'url';
+import * as gcsService from './gcsService.js';
+import * as fileHelper from '../utils/fileHelper.js';
+import { logOcrStart, logOcrComplete, logOcrError } from '../utils/logger.js';
 
-// AWS Textract 클라이언트 생성
-const textractClient = new TextractClient({
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
-});
+dotenv.config();
 
-// AWS S3 클라이언트 생성
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
-});
+// ES 모듈에서 __dirname 대체
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// S3 버킷 및 접두사 설정
-const s3Bucket = process.env.S3_BUCKET || 'textract-pdf-ocr-bucket';
-const s3Prefix = process.env.S3_PREFIX || 'temp-uploads/';
+// OCR 설정 로깅
+const USE_TEXTRACT = process.env.USE_TEXTRACT === 'true';
+console.log(`AWS Textract 사용${USE_TEXTRACT ? '이 활성화되었습니다.' : '이 비활성화되었습니다. Google Vision OCR을 사용합니다.'}`);
 
-// 필수 환경 변수 검증
-(function validateEnvironmentVariables() {
-  const requiredEnvVars = [
-    'AWS_REGION', 
-    'AWS_ACCESS_KEY_ID', 
-    'AWS_SECRET_ACCESS_KEY',
-    'S3_BUCKET',
-    'TEXTRACT_SNS_TOPIC',
-    'TEXTRACT_ROLE_ARN'
-  ];
-  
-  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-  
-  if (missingVars.length > 0) {
-    console.warn(`경고: 다음 환경 변수가 설정되지 않았습니다: ${missingVars.join(', ')}`);
-  }
-  
-  // SNS 토픽 ARN 형식 검증
-  if (process.env.TEXTRACT_SNS_TOPIC && !process.env.TEXTRACT_SNS_TOPIC.startsWith('arn:aws:sns:')) {
-    console.warn('경고: TEXTRACT_SNS_TOPIC이 올바른 ARN 형식이 아닙니다. (arn:aws:sns:region:account-id:topic-name)');
-  }
-  
-  // IAM Role ARN 형식 검증
-  if (process.env.TEXTRACT_ROLE_ARN && !process.env.TEXTRACT_ROLE_ARN.startsWith('arn:aws:iam:')) {
-    console.warn('경고: TEXTRACT_ROLE_ARN이 올바른 ARN 형식이 아닙니다. (arn:aws:iam::account-id:role/role-name)');
-  }
-})();
+// S3 설정 정보
+const S3_BUCKET = process.env.S3_BUCKET || 'med-report-assistant';
+const S3_PREFIX = process.env.S3_PREFIX || 'temp-uploads/';
+const S3_REGION = process.env.AWS_REGION || 'ap-northeast-2';
+const TEXTRACT_ROLE_ARN = process.env.TEXTRACT_ROLE_ARN;
+const TEXTRACT_SNS_TOPIC = process.env.TEXTRACT_SNS_TOPIC;
 
-// 이미지 페이지 OCR 처리 메인 함수
-exports.processImagePage = async (pageData) => {
-  try {
-    console.log(`페이지 ${pageData.page}를 OCR 처리 중...`);
-    
-    // AWS 인증 정보가 있으면 실제 Textract 비동기 호출
-    if (process.env.AWS_ACCESS_KEY_ID && 
-        process.env.AWS_ACCESS_KEY_ID !== 'YOUR_ACCESS_KEY_ID') {
-      
-      // 1. PDF 버퍼를 S3에 업로드
-      const s3Key = await uploadToS3(pageData.originalPdfBuffer, `page_${pageData.page}_${uuidv4()}.pdf`);
-      console.log(`S3에 업로드 완료: ${s3Key}`);
-      
-      // 2. S3 객체가 정상적으로 업로드 되었는지 확인
-      await verifyS3Upload(s3Key);
-      
-      // 3. Textract 비동기 작업 시작 (S3 경로 기반)
-      const jobId = await startTextractJobS3(s3Key);
-      console.log(`Textract 작업 시작됨 (JobId: ${jobId})`);
-      
-      // 4. 작업 완료까지 대기
-      const textractResult = await waitForTextractJob(jobId);
-      console.log(`Textract 작업 완료: ${textractResult.length} 자 추출됨`);
-      
-      // 5. S3에서 임시 파일 삭제
-      await deleteFromS3(s3Key);
-      console.log(`S3 임시 파일 삭제 완료: ${s3Key}`);
-      
-      return textractResult;
-    }
-    
-    // 인증 정보가 없으면 간단한 더미 OCR 결과 반환
-    await new Promise(resolve => setTimeout(resolve, 500)); // 약간의 지연 시간
-    
-    const dummyText = [
-      `이 페이지는 이미지로 판단되어 OCR로 처리되었습니다. (페이지 ${pageData.page})`,
-      `실제 AWS Textract 연동 시 이 텍스트는 추출된 실제 텍스트로 대체됩니다.`,
-      `이 텍스트는 더미 데이터입니다.`,
-      `인증 정보를 설정하여 실제 Textract 서비스를 연동하세요.`
-    ].join('\n\n');
-    
-    return dummyText;
-  } catch (error) {
-    console.error('이미지 페이지 OCR 처리 중 오류:', error);
-    throw new Error(`OCR 처리 중 오류: ${error.message}`);
-  }
-};
+console.log('S3 설정 정보:');
+console.log(`- 버킷 이름: ${S3_BUCKET}`);
+console.log(`- 접두사: ${S3_PREFIX}`);
+console.log(`- 리전: ${S3_REGION}`);
+
+// S3 클라이언트 초기화
+let s3Client = null;
+let textractClient = null;
 
 /**
- * 파일 버퍼를 S3에 업로드
- * @param {Buffer} buffer - 파일 버퍼
- * @param {string} filename - 저장할 파일 이름
- * @returns {string} S3 객체 키
+ * S3 클라이언트 가져오기
+ * @returns {S3Client} S3 클라이언트
  */
-async function uploadToS3(buffer, filename) {
-  try {
-    // 파일 유효성 검사 - PDF 포맷인지 검증
-    validatePdfFormat(buffer);
-    
-    // S3 객체 키 생성
-    const key = `${s3Prefix}${filename}`;
-    
-    // S3에 업로드
-    const command = new PutObjectCommand({
-      Bucket: s3Bucket,
-      Key: key,
-      Body: buffer,
-      ContentType: 'application/pdf'
+function getS3Client() {
+  if (!s3Client) {
+    s3Client = new S3Client({
+      region: S3_REGION
     });
+  }
+  return s3Client;
+}
+
+/**
+ * Textract 클라이언트 가져오기
+ * @returns {TextractClient} Textract 클라이언트
+ */
+function getTextractClient() {
+  if (!textractClient) {
+    textractClient = new TextractClient({
+      region: S3_REGION
+    });
+  }
+  return textractClient;
+}
+
+/**
+ * PDF 파일 OCR 처리 (전체 페이지)
+ * @param {string} filePath - 로컬 PDF 파일 경로
+ * @returns {Promise<Object>} - OCR 처리 결과
+ */
+export async function processPdfFile(filePath) {
+  // 성능 측정 시작
+  const perfData = logOcrStart('TEXTRACT-OCR', filePath);
+  
+  try {
+    // 1. PDF 파일 유효성 검사
+    const pdfInfo = fileHelper.validatePdfFile(filePath);
+    if (!pdfInfo.isValid) {
+      throw new Error(`유효하지 않은 PDF 파일: ${pdfInfo.error}`);
+    }
     
-    await s3Client.send(command);
-    console.log(`S3 업로드 성공: s3://${s3Bucket}/${key}`);
-    return key;
+    // 2. PDF 파일을 S3에 업로드
+    const s3Key = await uploadPdfToS3(filePath);
+    
+    // 3. Textract 작업 시작
+    const jobId = await startTextractJob(s3Key);
+    
+    // 4. Textract 작업 완료 대기 및 결과 가져오기
+    const textractResults = await waitForTextractJob(jobId);
+    
+    // 5. 결과 처리
+    const processedResults = processTextractResults(textractResults);
+    
+    // 6. S3에서 파일 정리 (선택사항)
+    try {
+      await deleteFromS3(s3Key);
+    } catch (cleanupError) {
+      // 정리 오류는 결과에 영향을 주지 않도록 무시 (로그만 기록)
+    }
+    
+    // 7. 결과 반환 및 성능 측정 완료 로깅
+    return logOcrComplete(perfData, processedResults);
+  } catch (error) {
+    // 오류 로깅 및 오류 정보 반환
+    return logOcrError(perfData, error);
+  }
+}
+
+/**
+ * PDF 파일을 S3에 업로드
+ * @param {string} filePath - 로컬 파일 경로
+ * @returns {Promise<string>} S3 키
+ */
+async function uploadPdfToS3(filePath) {
+  try {
+    const s3 = getS3Client();
+    const fileContent = fs.readFileSync(filePath);
+    const filename = path.basename(filePath);
+    const s3Key = `${S3_PREFIX}${Date.now()}-${filename}`;
+    
+    const uploadParams = {
+      Bucket: S3_BUCKET,
+      Key: s3Key,
+      Body: fileContent,
+      ContentType: 'application/pdf'
+    };
+    
+    console.log(`PDF 파일 S3 업로드 중: ${filePath} -> s3://${S3_BUCKET}/${s3Key}`);
+    await s3.send(new PutObjectCommand(uploadParams));
+    console.log(`S3 업로드 완료: ${s3Key}`);
+    return s3Key;
   } catch (error) {
     console.error('S3 업로드 중 오류:', error);
     throw new Error(`S3 업로드 실패: ${error.message}`);
@@ -146,81 +152,53 @@ async function uploadToS3(buffer, filename) {
 }
 
 /**
- * S3에서 파일 삭제
- * @param {string} key - S3 객체 키
+ * S3 업로드 확인
+ * @param {string} key - S3 키
+ * @returns {Promise<boolean>} 업로드 확인 결과
  */
-async function deleteFromS3(key) {
+async function verifyS3Upload(key) {
   try {
-    const command = new DeleteObjectCommand({
-      Bucket: s3Bucket,
+    const s3 = getS3Client();
+    const headParams = {
+      Bucket: S3_BUCKET,
       Key: key
-    });
+    };
     
-    await s3Client.send(command);
-    console.log(`S3 객체 삭제 성공: ${key}`);
+    await s3.send(new HeadObjectCommand(headParams));
+    return true;
   } catch (error) {
-    // 삭제 실패해도 심각한 문제는 아니므로 로그만 남김
-    console.warn(`S3 객체 삭제 실패: ${key}`, error);
-  }
-}
-
-/**
- * PDF 포맷 검증
- * @param {Buffer} buffer - PDF 파일 버퍼
- */
-function validatePdfFormat(buffer) {
-  // PDF 매직 넘버 (파일 시그니처) 확인
-  // PDF 파일은 %PDF로 시작함
-  const pdfSignature = buffer.slice(0, 4).toString();
-  if (pdfSignature !== '%PDF') {
-    throw new Error('유효하지 않은 PDF 파일 포맷입니다. PDF 파일은 %PDF로 시작해야 합니다.');
-  }
-  
-  // PDF 형식 추가 검증 (EOF 마커 확인)
-  const lastBytes = buffer.slice(buffer.length - 6).toString();
-  if (!lastBytes.includes('%%EOF')) {
-    console.warn('PDF 파일이 올바른 EOF 마커로 끝나지 않습니다. 손상되었을 수 있습니다.');
-  }
-  
-  // 5MB 이상인 경우 경고
-  if (buffer.length > 5 * 1024 * 1024) {
-    console.warn('PDF 파일 크기가 5MB를 초과합니다. 큰 파일은 Textract 처리가 오래 걸릴 수 있습니다.');
+    throw new Error(`S3 객체 확인 실패: ${error.message}`);
   }
 }
 
 /**
  * S3에 업로드된 문서를 기반으로 Textract 작업 시작
  * @param {string} s3Key - S3 객체 키
- * @returns {string} Textract Job ID
+ * @returns {Promise<string>} Textract Job ID
  */
-async function startTextractJobS3(s3Key) {
+async function startTextractJob(s3Key) {
   try {
-    console.log(`Textract 작업 시작 (S3 경로): ${s3Key}`);
-    const bucket = process.env.S3_BUCKET || DEFAULT_S3_BUCKET;
+    // S3 객체 존재 확인
+    await verifyS3Upload(s3Key);
     
-    // 1. 먼저 S3에 객체가 존재하는지 확인
-    try {
-      await verifyS3Upload(s3Key);
-    } catch (error) {
-      console.error('S3 객체 확인 오류:', error);
-      throw new Error(`업로드된 파일을 S3에서 찾을 수 없습니다. 파일 경로: ${s3Key}`);
+    // 필수 환경 변수 확인
+    if (!TEXTRACT_ROLE_ARN || !TEXTRACT_SNS_TOPIC) {
+      throw new Error('Textract SNS 설정이 없습니다. TEXTRACT_ROLE_ARN 및 TEXTRACT_SNS_TOPIC 환경 변수가 필요합니다.');
     }
     
-    // 2. 설정 확인 및 로깅
-    console.log(`사용 중인 Textract 역할 ARN: ${process.env.TEXTRACT_ROLE_ARN}`);
-    console.log(`사용 중인 SNS 토픽 ARN: ${process.env.TEXTRACT_SNS_TOPIC}`);
-
-    // 3. Textract 비동기 작업 시작 (S3 경로 기반)
+    const textractClient = getTextractClient();
+    
+    // Textract 비동기 작업 시작
     const command = new StartDocumentTextDetectionCommand({
       DocumentLocation: {
         S3Object: {
-          Bucket: bucket,
+          Bucket: S3_BUCKET,
           Name: s3Key
         }
       },
       NotificationChannel: {
-        RoleArn: process.env.TEXTRACT_ROLE_ARN,
-        SNSTopicArn: process.env.TEXTRACT_SNS_TOPIC
+        RoleArn: TEXTRACT_ROLE_ARN,
+        SNSTopicArn: TEXTRACT_SNS_TOPIC
       }
     });
 
@@ -247,9 +225,10 @@ async function startTextractJobS3(s3Key) {
     } else if (error.name === 'AccessDeniedException' || error.message.includes('Access denied')) {
       throw new Error(`
 액세스가 거부되었습니다. 다음 사항을 확인하세요:
-- Textract 역할(${process.env.TEXTRACT_ROLE_ARN})에 S3 버킷(${bucket}) 접근 권한이 있는지 확인
+- Textract 역할(${TEXTRACT_ROLE_ARN})에 S3 버킷(${S3_BUCKET}) 접근 권한이 있는지 확인
+- Textract 역할에 SNS 토픽(${TEXTRACT_SNS_TOPIC})에 대한 sns:Publish 권한이 있는지 확인
 - S3 버킷 정책이 Textract 서비스의 접근을 허용하는지 확인
-- 해당 리전(${process.env.AWS_REGION})에서 Textract 서비스를 사용할 수 있는지 확인
+- 해당 리전(${S3_REGION})에서 Textract 서비스를 사용할 수 있는지 확인
 - AWS 계정에 Textract 서비스 사용 권한이 있는지 확인
 
 오류 상세: ${error.message}
@@ -261,154 +240,166 @@ async function startTextractJobS3(s3Key) {
 }
 
 /**
- * S3 객체가 정상적으로 업로드 되었는지 확인
- * @param {string} key - S3 객체 키
- */
-async function verifyS3Upload(key) {
-  try {
-    const command = new HeadObjectCommand({
-      Bucket: process.env.S3_BUCKET || DEFAULT_S3_BUCKET,
-      Key: key
-    });
-    
-    // 객체가 존재하는지 확인 (404가 발생하지 않으면 성공)
-    await s3Client.send(command);
-    console.log(`S3 객체 확인 성공: ${key}`);
-  } catch (error) {
-    console.error('S3 객체 확인 실패:', error);
-    throw new Error(`S3 객체 확인 실패: ${error.message}`);
-  }
-}
-
-/**
  * Textract 작업 완료 대기 및 결과 가져오기
- * @param {string} jobId - 작업 ID
- * @returns {string} 추출된 텍스트
+ * @param {string} jobId - Textract 작업 ID
+ * @returns {Promise<Array>} Textract 결과 배열
  */
 async function waitForTextractJob(jobId) {
   try {
-    console.log(`작업 ID: ${jobId}의 완료 대기 중...`);
-    
-    let jobCompleted = false;
-    let result = '';
+    const textractClient = getTextractClient();
+    const allBlocks = [];
     let nextToken = null;
-    let allBlocks = [];
-    const maxRetries = 60; // 최대 60회 재시도 (약 10분)
-    let retries = 0;
+    let jobStatus = 'IN_PROGRESS';
+    let retryCount = 0;
     
-    while (!jobCompleted && retries < maxRetries) {
+    // 작업 완료 대기
+    while (jobStatus === 'IN_PROGRESS') {
       try {
         const command = new GetDocumentTextDetectionCommand({
-          JobId: jobId,
-          NextToken: nextToken
+          JobId: jobId
         });
         
         const response = await textractClient.send(command);
+        jobStatus = response.JobStatus;
         
-        if (response.JobStatus === 'SUCCEEDED') {
-          // 결과 블록들 수집
-          if (response.Blocks) {
-            allBlocks = allBlocks.concat(response.Blocks);
+        if (jobStatus === 'SUCCEEDED') {
+          // 결과 수집
+          if (response.Blocks && response.Blocks.length > 0) {
+            allBlocks.push(...response.Blocks);
           }
           
-          // 다음 페이지가 있는지 확인
-          if (response.NextToken) {
-            nextToken = response.NextToken;
-          } else {
-            // 모든 페이지를 가져왔으면 완료
-            jobCompleted = true;
-            result = extractTextFromBlocks(allBlocks);
+          // 다음 페이지가 있는 경우 추가 결과 가져오기
+          nextToken = response.NextToken;
+          while (nextToken) {
+            const nextPageCommand = new GetDocumentTextDetectionCommand({
+              JobId: jobId,
+              NextToken: nextToken
+            });
+            
+            const nextPageResponse = await textractClient.send(nextPageCommand);
+            if (nextPageResponse.Blocks && nextPageResponse.Blocks.length > 0) {
+              allBlocks.push(...nextPageResponse.Blocks);
+            }
+            
+            nextToken = nextPageResponse.NextToken;
           }
-        } else if (response.JobStatus === 'FAILED') {
+          
+          break;
+        } else if (jobStatus === 'FAILED') {
           throw new Error(`Textract 작업 실패: ${response.StatusMessage || '알 수 없는 오류'}`);
-        } else {
-          // 아직 진행 중, 잠시 대기
-          console.log(`작업 상태: ${response.JobStatus}, 재시도: ${retries + 1}/${maxRetries}`);
-          await new Promise(resolve => setTimeout(resolve, 10000)); // 10초 대기
-          retries++;
         }
+        
+        // 아직 진행 중인 경우 대기 후 재시도
+        await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (error) {
-        if (error.name === 'ThrottlingException') {
-          // API 제한 오류 시 더 길게 대기
-          console.warn('API 제한 오류 발생, 30초 대기 후 재시도...');
-          await new Promise(resolve => setTimeout(resolve, 30000));
-        } else {
-          throw error;
+        // 최대 재시도 횟수 초과 시 오류 발생
+        if (++retryCount >= MAX_RETRIES) {
+          throw new Error(`Textract 작업 상태 확인 중 최대 재시도 횟수 초과: ${error.message}`);
         }
+        
+        // 일시적 오류인 경우 대기 후 재시도
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
       }
     }
     
-    if (!jobCompleted) {
-      throw new Error(`최대 재시도 횟수 초과: Textract 작업이 ${maxRetries}회 재시도 후에도 완료되지 않았습니다.`);
-    }
-    
-    return result;
+    return allBlocks;
   } catch (error) {
-    console.error('Textract 작업 결과 대기 중 오류:', error);
     throw new Error(`Textract 작업 결과 가져오기 실패: ${error.message}`);
   }
 }
 
 /**
- * 텍스트 블록에서 텍스트 추출
- * @param {Array} blocks - Textract 블록
- * @returns {string} 추출된 텍스트
+ * Textract 결과 처리
+ * @param {Array} blocks - Textract 블록 배열
+ * @returns {Object} 처리된 OCR 결과
  */
-function extractTextFromBlocks(blocks) {
+function processTextractResults(blocks) {
   try {
-    if (!blocks || !Array.isArray(blocks) || blocks.length === 0) {
-      return '추출된 텍스트가 없습니다.';
-    }
+    // 페이지별 텍스트 추출
+    const pageTexts = {};
+    let fullText = '';
     
-    // LINE 타입의 블록만 필터링하고 텍스트 추출
-    const lines = blocks
-      .filter(block => block.BlockType === 'LINE')
-      .map(block => block.Text)
-      .filter(text => text && text.trim().length > 0);
+    // 페이지 번호 확인 및 텍스트 수집
+    blocks.forEach(block => {
+      if (block.BlockType === 'LINE' && block.Text) {
+        const pageNum = block.Page || 1;
+        
+        if (!pageTexts[pageNum]) {
+          pageTexts[pageNum] = '';
+        }
+        
+        pageTexts[pageNum] += block.Text + '\n';
+        fullText += block.Text + '\n';
+      }
+    });
     
-    if (lines.length === 0) {
-      return '추출된 텍스트가 없습니다.';
-    }
+    // 페이지 배열 생성
+    const pages = Object.entries(pageTexts).map(([pageNum, text]) => ({
+      page: parseInt(pageNum, 10),
+      text: text.trim()
+    }));
     
-    return lines.join('\n');
+    // 페이지 순서대로 정렬
+    pages.sort((a, b) => a.page - b.page);
+    
+    return {
+      text: fullText.trim(),
+      pages,
+      pageCount: pages.length,
+      blockCount: blocks.length
+    };
   } catch (error) {
-    console.error('텍스트 블록 추출 중 오류:', error);
-    return '텍스트 추출 실패';
+    throw new Error(`Textract 결과 처리 실패: ${error.message}`);
   }
 }
 
 /**
- * 버퍼를 임시 파일로 저장
- * @param {Buffer} buffer - 파일 버퍼
- * @param {string} extension - 파일 확장자
- * @returns {string} 임시 파일 경로
+ * S3에서 파일 삭제
+ * @param {string} key - S3 키
+ * @returns {Promise<boolean>} 삭제 성공 여부
  */
-async function saveTempFile(buffer, extension = 'pdf') {
+async function deleteFromS3(key) {
   try {
-    const tempDir = process.env.TEMP_DIR || path.join(os.tmpdir(), 'pdf-ocr');
+    const s3 = getS3Client();
+    const deleteParams = {
+      Bucket: S3_BUCKET,
+      Key: key
+    };
     
-    // 임시 디렉토리가 없으면 생성
-    if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir, { recursive: true });
-    }
-    
-    const filename = `${uuidv4()}.${extension}`;
-    const filePath = path.join(tempDir, filename);
-    
-    // 파일 저장
-    fs.writeFileSync(filePath, buffer);
-    
-    // 1시간 후 자동 삭제 (실제 구현에서는 더 짧게 설정)
-    setTimeout(() => {
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-        console.log(`임시 파일 삭제됨: ${filePath}`);
-      }
-    }, 60 * 60 * 1000);
-    
-    return filePath;
+    await s3.send(new DeleteObjectCommand(deleteParams));
+    console.log(`S3 객체 삭제 성공: ${key}`);
+    return true;
   } catch (error) {
-    console.error('임시 파일 저장 중 오류:', error);
-    throw new Error(`임시 파일 저장 실패: ${error.message}`);
+    throw new Error(`S3 객체 삭제 실패: ${error.message}`);
   }
-} 
+}
+
+/**
+ * OCR 서비스 상태 확인
+ * @returns {Promise<Object>} 서비스 상태 정보
+ */
+export async function getServiceStatus() {
+  try {
+    const configValid = !!(TEXTRACT_ROLE_ARN && TEXTRACT_SNS_TOPIC && S3_BUCKET);
+    
+    return {
+      service: 'TEXTRACT-OCR',
+      available: USE_TEXTRACT && configValid,
+      enabled: USE_TEXTRACT,
+      hasRoleArn: !!TEXTRACT_ROLE_ARN,
+      hasSnsTopic: !!TEXTRACT_SNS_TOPIC,
+      hasBucket: !!S3_BUCKET
+    };
+  } catch (error) {
+    return {
+      service: 'TEXTRACT-OCR',
+      available: false,
+      error: error.message
+    };
+  }
+}
+
+export default {
+  processPdfFile,
+  getServiceStatus
+}; 

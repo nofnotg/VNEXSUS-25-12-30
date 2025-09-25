@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "보험청구 심사 시 조건부로 제거 여부를 결정하는 의료 정보 카테고리",
+    "usage": "의료문서 OCR 후 시계열 요약표 작성 시 조건부 제거 정보",
+    "priority": 3
+  },
+  "categories": {
+    "Symptoms_Signs_Abnormal_Findings": {
+      "category_id": "CR001",
+      "korean_name": "증상, 징후, 이상/검사 이상 소견",
+      "english_name": "Symptoms, Signs, Abnormal Findings",
+      "comment": "관련된 확정적 진단('보존' 카테고리에서)이 있고 이들이 이차적으로 나열된 경우에만 제거. 방문의 주된 이유이거나 확정적 진단이 없는 경우 유지.",
+      "keywords": [
+        "두통", "Headache", "HA", "복통", "Abdominal Pain", "abd pain", "기침", "Cough", "발열", "Fever", "T", "체온",
+        "고혈압 소견", "Finding of high blood pressure", "혈압 상승", "Elevated BP", "BP",
+        "혈당 수치 상승", "Elevated blood sugar level", "혈당", "BS", "Blood Sugar",
+        "심전도 이상", "Abnormal ECG finding", "ECG", "EKG",
+        "엑스레이 이상 소견", "Abnormal X-ray finding", "X-ray", "CXR", "Chest X-ray",
+        "Sx", "symptom", "증상", "CP", "Chest Pain", "흉통", "SOB", "Shortness of Breath", "호흡곤란",
+        "N/V", "Nausea/Vomiting", "오심/구토", "어지러움", "Dizziness", "현기증", "Vertigo",
+        "SpO2", "Oxygen Saturation", "산소포화도",
+        "UA", "Urinalysis", "소변검사", "ABG", "Arterial Blood Gas", "동맥혈가스검사",
+        "LFT", "Liver Function Test", "간기능검사", "RFT", "Renal Function Test", "신기능검사",
+        "CBC", "Complete Blood Count", "전혈구검사", "결과", "finding", "소견"
+      ],
+      "kcd_codes": ["R00-R99"]
+    },
+    "External_Causes_of_Morbidity": {
+      "category_id": "CR002",
+      "korean_name": "질병 이환 및 사망의 외인",
+      "english_name": "External Causes of Morbidity",
+      "comment": "손상/중독의 '어떻게'를 설명. 일반적으로 사고/손상/중독 클레임에 대한 맥락을 제공하기 위해 유지. 질병 클레임의 경우 원인이 클레임 평가와 명확하게 관련이 없는 경우에만 제거 가능.",
+      "keywords": [
+        "낙상", "Fall", "교통사고", "Traffic Accident", "MVA", "Motor Vehicle Accident", "충돌", "Collision",
+        "익수", "Drowning", "화상 원인", "Cause of Burn", "중독 원인", "Cause of Poisoning", "OD", "Overdose",
+        "폭행", "Assault", "자해", "Self-harm", "사고", "Accident", "손상", "Injury", "외상", "Trauma",
+        "GSW", "Gun Shot Wound", "총상"
+      ],
+      "kcd_codes": ["V01-Y98"]
+    },
+    "Chronic_Disease_Information": {
+      "category_id": "CR003",
+      "korean_name": "만성 질환 정보",
+      "english_name": "Chronic Disease Information",
+      "comment": "일반적으로 위험 요인 및 잠재적 합병증에 대한 맥락으로 유지. 특정 만성 상태가 현재 클레임 및 그 합병증과 절대적으로 관련이 없다고 확실히 판단될 수 있는 경우에만 제거(자동화하기 매우 어려움, 검토를 위해 플래그 지정이 더 안전). 환자 병력 포함.",
+      "keywords": [
+        "고혈압", "Hypertension", "HTN", "당뇨병", "Diabetes Mellitus", "DM", "고지혈증", "Hyperlipidemia", "HLD",
+        "천식", "Asthma", "관절염", "Arthritis", "RA", "Rheumatoid Arthritis",
+        "만성 신부전", "Chronic Kidney Disease", "CKD", "만성 폐쇄성 폐질환", "COPD", "Chronic Obstructive Pulmonary Disease",
+        "관상동맥질환", "Coronary Artery Disease", "CAD", "울혈성 심부전", "Congestive Heart Failure", "CHF",
+        "과거력", "Past History", "Hx", "PMHx", "Past Medical History", "기저질환", "Underlying Disease", "없음", "없고 있음"
+      ],
+      "kcd_codes": [
+        "I10-I15", "E10-E14", "E78", "J44-J46", "M05-M19", "N18", "I25", "I50",
+        "Z80-Z99"
+      ]
+    },
+    "Preventive_Medical_Services": {
+      "category_id": "CR004",
+      "korean_name": "예방적 의료 서비스",
+      "english_name": "Preventive Medical Services",
+      "comment": "소견 없이 순전히 일상적인 스크리닝/예방접종이며 정책에서 특별히 보장되는 혜택이 아닌 경우 제거. 진단으로 이어지거나 상태 관리의 일부이거나 특별히 보장되는 예방 서비스인 경우 유지.",
+      "keywords": [
+        "예방접종", "Vaccination", "Immunization", "flu shot", "독감 예방접종", "백신", "vaccine",
+        "정기 검진", "Periodic Examination", "선별 검사", "Screening Test", "검진", "checkup",
+        "대장내시경 검사(스크리닝)", "Screening Colonoscopy", "Colo", "Colonoscopy",
+        "유방촬영술(스크리닝)", "Screening Mammogram", "Mammo", "Mammography",
+        "자궁경부암 검사", "Pap Smear", "Pap", "PPD", "Tuberculosis test", "결핵검사",
+        "PE", "Physical Examination"
+      ],
+      "kcd_codes": [
+        "Z00-Z01", "Z11-Z13", "Z23-Z28"
+      ]
+    },
+    "Dental_Treatment": {
+      "category_id": "CR005",
+      "korean_name": "치과 치료",
+      "english_name": "Dental Treatment",
+      "comment": "보험 정책이 명시적으로 치과 보장을 제외하거나 특정 치과 라이더가 없는 경우에만 제거. 치과 보장이 있는 경우 유지.",
+      "keywords": [
+        "치아 우식", "Dental Caries", "충치 치료", "Cavity Treatment",
+        "치주염", "Periodontitis", "잇몸 치료", "Gum Treatment", "Gingivitis", "치은염",
+        "발치", "Tooth Extraction", "Ext", "Extraction",
+        "신경 치료", "Root Canal Treatment", "RCT",
+        "임플란트", "Dental Implant", "틀니", "Denture", "치과", "Dentistry", "치아", "Tooth", "Teeth"
+      ],
+      "kcd_codes": ["K00-K14"]
+    },
+    "Routine_Pregnancy_Childbirth_Information": {
+      "category_id": "CR006",
+      "korean_name": "정상 임신/출산 관련 정보",
+      "english_name": "Routine Pregnancy/Childbirth Information",
+      "comment": "정책에 출산 보장/라이더가 없고 합병증이 발생하지 않은 경우에만 일상적인 산전 관리 세부 사항 및 정상 분만 기록 제거. 모든 합병증 코드(O00-O75, O85-O99), 관련 치료 및 제왕절개 기록 유지.",
+      "keywords": [
+        "정상 임신", "Normal Pregnancy", "산전 진찰", "Prenatal Checkup", "Prenatal", "임신", "Pregnancy",
+        "정상 분만", "Normal Delivery", "SVD", "Spontaneous Vaginal Delivery",
+        "산후 관리", "Postpartum Care", "Postpartum",
+        "LMP", "Last Menstrual Period", "마지막 월경일",
+        "EDC", "EDD", "Estimated Date of Confinement/Delivery", "출산 예정일",
+        "OB", "Obstetrics", "GYN", "Gynecology", "산부인과"
+      ],
+      "kcd_codes": [
+        "Z33.1", "Z34", "Z35", "Z36", "Z39", "O80"
+      ]
+    },
+    "Mental_Health_Information": {
+      "category_id": "CR007",
+      "korean_name": "정신 건강 정보 (중등도/중증)",
+      "english_name": "Mental Health Information (Moderate/Severe)",
+      "comment": "정책 보장(제외/제한) 및 클레임 관련성에 따라 평가. 중증 상태(예: 조현병 F20, 양극성 F31, 주요 우울증 F32/F33) 유지. 심리 치료 노트는 더 높은 민감도/개인 정보 보호 규칙이 있을 수 있음.",
+      "keywords": [
+        "우울증", "Depression", "MDD", "Major Depressive Disorder",
+        "조울증", "Bipolar Disorder", "조현병", "Schizophrenia",
+        "불안장애", "Anxiety Disorder", "GAD", "Generalized Anxiety Disorder",
+        "공황장애", "Panic Disorder", "외상후 스트레스장애", "PTSD", "Post-Traumatic Stress Disorder",
+        "정신과 약물", "Psychiatric Medication", "정신과 치료", "Psychiatric Treatment", "Psych", "Psychiatry"
+      ],
+      "kcd_codes": ["F01-F99"]
+    },
+    "Lifestyle_Information": {
+      "category_id": "CR008",
+      "korean_name": "생활 습관 정보",
+      "english_name": "Lifestyle Information",
+      "comment": "일반적으로 위험 요인(예: 관련 질병에 대한 흡연/알코올)에 대한 맥락으로 유지. 특정 조건이나 클레임과 명확하게 관련이 없는 일반적인 조언이나 세부 사항에 대해서만 제거 고려.",
+      "keywords": [
+        "흡연력", "Smoking History", "Tob", "Tobacco", "PPD", "Packs Per Day", "금연", "Smoking Cessation",
+        "음주력", "Alcohol History", "EtOH", "Ethanol", "Alcohol", "절주", "Alcohol Reduction",
+        "식이 습관", "Dietary Habits", "운동 습관", "Exercise Habits", "비만", "Obesity"
+      ],
+      "kcd_codes": [
+        "Z72.0", "Z72.1", "Z72.2", "E66"
+      ]
+    },
+    "Other_Specific_Encounters": {
+      "category_id": "CR009",
+      "korean_name": "기타 특정 내원 정보 (조건부)",
+      "english_name": "Other Specific Encounters (Conditional)",
+      "comment": "만남 이유가 클레임 맥락이나 정책 보장과 명확하게 관련이 없는 경우에만 제거.",
+      "keywords": [
+        "장기/조직 기증자", "Donor of organ/tissue",
+        "시술 미시행", "Procedure not carried out",
+        "성형수술 후 후속조치", "Follow-up care involving plastic surgery"
+      ],
+      "kcd_codes": [
+        "Z52", "Z53", "Z42"
+      ]
+    }
+  }
+}

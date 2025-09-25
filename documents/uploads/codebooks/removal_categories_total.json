@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "보험청구 심사 시 제거할 의료 정보 카테고리",
+    "usage": "의료문서 OCR 후 시계열 요약표 작성 시 제거할 정보",
+    "priority": 2
+  },
+  "categories": {
+    "Personal_Identifiable_Information": {
+      "category_id": "RM001",
+      "korean_name": "개인 식별 정보",
+      "english_name": "Personal Identifiable Information",
+      "comment": "PII. 일반적으로 마스킹/익명화됨. 식별을 위한 키워드 나열.",
+      "keywords": [
+        "주민등록번호", "Resident Registration Number", "RRN",
+        "환자명", "Patient Name",
+        "성명", "Name",
+        "주소", "Address",
+        "전화번호", "Phone Number", "연락처", "Contact",
+        "이메일", "Email",
+        "생년월일", "Date of Birth", "DOB"
+      ],
+      "kcd_codes": []
+    },
+    "Non_Medical_Personal_Information": {
+      "category_id": "RM002",
+      "korean_name": "비의료 개인 정보",
+      "english_name": "Non-Medical Personal Information",
+      "comment": "클레임에 대한 의학적 평가와 일반적으로 관련이 없는 정보.",
+      "keywords": [
+        "직업", "Occupation", "회사명", "Company Name",
+        "가족관계", "Family Relationship", "(e.g., 배우자 OOO, 자녀 OOO - Specific names of family members)",
+        "경제상태", "Economic Status", "수입", "Income",
+        "사회생활", "Social Life", "취미", "Hobby",
+        "종교", "Religion"
+      ],
+      "kcd_codes": []
+    },
+    "Administrative_Information": {
+      "category_id": "RM003",
+      "korean_name": "행정 정보",
+      "english_name": "Administrative Information",
+      "comment": "의학적 상태 자체와 관련이 없는 행정적 세부 사항.",
+      "keywords": [
+        "진료예약", "Appointment Schedule", "예약 변경", "Reschedule",
+        "주차 확인", "Parking Validation",
+        "병원 만족도 조사", "Hospital Satisfaction Survey",
+        "원무과", "Hospital Administration Office", "접수", "Reception", "Registration",
+        "수납", "Payment", "보험 청구 문의", "Insurance Claim Inquiry"
+      ],
+      "kcd_codes": []
+    },
+    "Very_Minor_Self_Limiting_Conditions": {
+      "category_id": "RM004",
+      "korean_name": "매우 경미하며 자기 제한적인 상태 (합병증 없는 경우)",
+      "english_name": "Very Minor and Self-Limiting Conditions (Uncomplicated)",
+      "comment": "합병증이 발생하거나 장기 치료의 주요 이유가 아닌 한 일반적으로 청구되지 않음. 분명히 합병증이 없고 이차적인 경우에만 주의하여 제거.",
+      "keywords": [
+        "단순 감기", "Common Cold", "급성 비인두염", "Acute Nasopharyngitis", "URI", "Upper Respiratory Infection", "단순 URI",
+        "가벼운 소화불량", "Mild Indigestion", "단순 소화불량", "Simple Dyspepsia",
+        "일시적인 가려움", "Temporary Itching", "단순 발진", "Simple Rash",
+        "Sx", "symptoms"
+      ],
+      "kcd_codes": ["J00"]
+    },
+    "Routine_Checkups_Without_Findings": {
+      "category_id": "RM005",
+      "korean_name": "이상 소견 없는 정기 검진/스크리닝",
+      "english_name": "Routine Checkups without Findings",
+      "comment": "유의한 이상이 발견되지 않은 일반 건강검진 또는 스크리닝. 정상 소견 포함.",
+      "keywords": [
+        "건강검진 결과 정상", "Health Checkup Normal",
+        "정기 검진", "Routine Checkup", "스크리닝 정상", "Screening Normal",
+        "특이소견 없음", "No Specific Findings", "No Abnormal Findings",
+        "WNL", "Within Normal Limits",
+        "WDWN", "Well-Developed, Well-Nourished",
+        "PE", "Physical Examination"
+      ],
+      "kcd_codes": [
+        "Z00.0"
+      ]
+    },
+    "Cosmetic_Procedures": {
+      "category_id": "RM006",
+      "korean_name": "미용 목적 시술/수술",
+      "english_name": "Cosmetic Procedures",
+      "comment": "주로 미적 향상을 위한 절차로, 일반적으로 표준 보험에서 제외됨.",
+      "keywords": [
+        "미용 목적", "Cosmetic Purpose", "성형수술", "Plastic Surgery",
+        "쌍꺼풀 수술", "Blepharoplasty", "코 성형", "Rhinoplasty",
+        "지방흡입", "Liposuction", "보톡스", "Botox", "필러", "Filler",
+        "피부 미용", "Skin Aesthetics", "레이저 제모", "Laser Hair Removal",
+        "주름 개선", "Wrinkle Improvement", "미백 치료", "Whitening Treatment"
+      ],
+      "kcd_codes": ["Z41.1"]
+    },
+    "Non_Claim_Related_Counseling": {
+      "category_id": "RM007",
+      "korean_name": "청구 비관련 상담",
+      "english_name": "Non-Claim Related Counseling",
+      "comment": "보장되는 의료/정신 건강 상태 또는 특정 보험 혜택과 직접 관련이 없는 일반 상담 세션.",
+      "keywords": [
+        "심리상담", "Psychological Counseling", "지지 상담", "Supportive Counseling",
+        "생활 상담", "Lifestyle Counseling", "단순 상담", "Simple Consultation"
+      ],
+      "kcd_codes": ["Z71.9"]
+    },
+    "Traditional_Korean_Medicine": {
+      "category_id": "RM008",
+      "korean_name": "한의 범주 분류",
+      "english_name": "Traditional Korean Medicine (Hanbang)",
+      "comment": "일반적으로 서양 의학 중심 보험에서 제외됨. 한방 보장이 존재하는 경우 정책 세부 사항 검토.",
+      "keywords": [
+        "한의", "Hanbang", "Traditional Korean Medicine", "한약", "Herbal Medicine",
+        "침", "Acupuncture", "뜸", "Moxibustion", "부항", "Cupping",
+        "사상체질", "Sasang Constitution"
+      ],
+      "kcd_codes": ["U50-U99"]
+    },
+    "Non_Covered_Administrative_Encounters": {
+      "category_id": "RM009",
+      "korean_name": "명백한 비급여 행정 목적 내원",
+      "english_name": "Clearly Non-Covered Administrative Encounters",
+      "comment": "일반적인 건강 보험에서 보장하지 않는 순전히 행정적 또는 법적 이유로 인한 방문.",
+      "keywords": [
+        "진단서 발급", "Issuance of Medical Certificate", "서류 발급", "Document Issuance",
+        "병무용 진단서", "Certificate for Military Service", "법적 목적 검사", "Medico-legal Examination"
+      ],
+      "kcd_codes": [
+        "Z02", "Z04"
+      ]
+    },
+    "Malingering": {
+      "category_id": "RM010",
+      "korean_name": "꾀병",
+      "english_name": "Malingering",
+      "comment": "가장된 질병을 나타내는 진단.",
+      "keywords": [
+        "꾀병", "Malingering", "허위 보고", "Feigned Report"
+      ],
+      "kcd_codes": ["Z76.5"]
+    }
+  }
+}

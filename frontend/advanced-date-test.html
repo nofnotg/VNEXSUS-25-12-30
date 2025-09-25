@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고급 날짜 분류 시스템 테스트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #4facfe;
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.loading {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .json-viewer {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .timeline {
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #4facfe;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #4facfe;
+            min-width: 120px;
+        }
+
+        .timeline-role {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .timeline-confidence {
+            margin-left: auto;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 600;
+            color: #4facfe;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4facfe;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .sample-texts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .sample-text {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sample-text:hover {
+            background: #e9ecef;
+            border-color: #4facfe;
+        }
+
+        .sample-text h4 {
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .sample-text p {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 고급 날짜 분류 시스템</h1>
+            <p>비정형 의료문서의 텍스트 배열별 정확한 날짜 구분 테스트</p>
+        </div>
+
+        <div class="content">
+            <!-- 문서 입력 섹션 -->
+            <div class="section">
+                <h3>📄 의료문서 텍스트 입력</h3>
+                
+                <div class="form-group">
+                    <label for="documentText">분석할 의료문서 텍스트:</label>
+                    <textarea id="documentText" placeholder="의료문서 텍스트를 입력하세요...\n\n예시:\n환자는 2024년 1월 15일 내원하여 검사를 받았습니다.\n진단일은 2024년 1월 20일이며, 치료는 2024년 1월 25일부터 시작되었습니다.\n과거력: 2023년 12월 10일 유사한 증상으로 타 병원 방문\n다음 예약일: 2024년 2월 15일"></textarea>
+                </div>
+
+                <div class="sample-texts">
+                    <div class="sample-text" onclick="loadSampleText(1)">
+                        <h4>📋 일반 진료 기록</h4>
+                        <p>내원일, 진단일, 치료일이 포함된 기본적인 의료 기록</p>
+                    </div>
+                    <div class="sample-text" onclick="loadSampleText(2)">
+                        <h4>🏥 복합 의료 기록</h4>
+                        <p>과거력, 현재 진료, 미래 예약이 혼재된 복잡한 기록</p>
+                    </div>
+                    <div class="sample-text" onclick="loadSampleText(3)">
+                        <h4>📊 검사 결과 기록</h4>
+                        <p>여러 검사 날짜와 결과 확인 날짜가 포함된 기록</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 분석 옵션 섹션 -->
+            <div class="section">
+                <h3>⚙️ 분석 옵션</h3>
+                
+                <div class="options-grid">
+                    <div class="form-group">
+                        <label for="minimumConfidence">최소 신뢰도:</label>
+                        <input type="range" id="minimumConfidence" min="0" max="1" step="0.1" value="0.7">
+                        <span id="confidenceValue">0.7</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aiProvider">AI 제공자:</label>
+                        <select id="aiProvider">
+                            <option value="claude">Claude (Anthropic)</option>
+                            <option value="openai">OpenAI GPT</option>
+                            <option value="both">Both (교차 검증)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="groupByRole" checked>
+                            <label for="groupByRole">역할별 그룹화</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="enableAI" checked>
+                            <label for="enableAI">AI 강화 분석</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 제어 버튼 섹션 -->
+            <div class="section">
+                <h3>🎮 제어 패널</h3>
+                
+                <button class="btn" onclick="analyzeDocument()" id="analyzeBtn">
+                    📊 문서 분석 시작
+                </button>
+                
+                <button class="btn btn-secondary" onclick="getPerformanceMetrics()">
+                    📈 성능 메트릭 조회
+                </button>
+                
+                <button class="btn btn-secondary" onclick="getSystemHealth()">
+                    💚 시스템 상태 확인
+                </button>
+                
+                <button class="btn btn-danger" onclick="clearCache()">
+                    🧹 캐시 정리
+                </button>
+            </div>
+
+            <!-- 결과 표시 섹션 -->
+            <div class="section" id="resultsSection" style="display: none;">
+                <h3>📊 분석 결과</h3>
+                
+                <div class="result-container">
+                    <div class="result-header">
+                        <h4 id="resultTitle">분석 결과</h4>
+                        <span class="status" id="resultStatus">대기중</span>
+                    </div>
+                    
+                    <div id="resultContent">
+                        <!-- 결과가 여기에 표시됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let currentRequestId = null;
+        let analysisResult = null;
+
+        // 신뢰도 슬라이더 업데이트
+        document.getElementById('minimumConfidence').addEventListener('input', function(e) {
+            document.getElementById('confidenceValue').textContent = e.target.value;
+        });
+
+        // 샘플 텍스트 로드
+        function loadSampleText(type) {
+            const sampleTexts = {
+                1: `환자명: 김철수 (남, 45세)\n내원일: 2024년 1월 15일\n주소: 복통, 소화불량\n\n진료 내용:\n- 초진: 2024년 1월 15일 오전 10시\n- 혈액검사 시행일: 2024년 1월 15일\n- 복부 CT 촬영일: 2024년 1월 16일\n- 진단 확정일: 2024년 1월 18일\n\n진단명: 급성 위염\n치료 시작일: 2024년 1월 18일\n다음 예약일: 2024년 2월 1일`,
+                
+                2: `환자명: 이영희 (여, 62세)\n\n과거력:\n- 2023년 8월 15일: 고혈압 진단 (타 병원)\n- 2023년 11월 20일: 당뇨병 진단\n- 2023년 12월 5일: 심전도 이상 소견\n\n현재 진료:\n- 내원일: 2024년 1월 10일\n- 혈압 측정일: 2024년 1월 10일 (150/90)\n- 혈당 검사일: 2024년 1월 11일\n- 심전도 재검사일: 2024년 1월 12일\n\n향후 계획:\n- 다음 진료 예약: 2024년 2월 10일\n- 정기 검진 예정일: 2024년 4월 10일\n- 약물 조정 검토일: 2024년 3월 1일`,
+                
+                3: `검사 의뢰서\n\n환자: 박민수 (남, 38세)\n의뢰일: 2024년 1월 8일\n\n검사 일정:\n1. 혈액검사\n   - 채혈일: 2024년 1월 9일 오전 8시\n   - 결과 확인일: 2024년 1월 10일\n\n2. 영상검사\n   - MRI 촬영일: 2024년 1월 11일\n   - 판독 완료일: 2024년 1월 12일\n   - 결과 설명일: 2024년 1월 15일\n\n3. 조직검사\n   - 생검 시행일: 2024년 1월 16일\n   - 병리 결과일: 2024년 1월 22일\n\n최종 진단 예정일: 2024년 1월 25일\n치료 계획 수립일: 2024년 1월 26일`
+            };
+            
+            document.getElementById('documentText').value = sampleTexts[type] || '';
+        }
+
+        // 문서 분석
+        async function analyzeDocument() {
+            const documentText = document.getElementById('documentText').value.trim();
+            
+            if (!documentText) {
+                alert('분석할 문서 텍스트를 입력해주세요.');
+                return;
+            }
+
+            const options = {
+                minimumConfidence: parseFloat(document.getElementById('minimumConfidence').value),
+                groupByRole: document.getElementById('groupByRole').checked,
+                enableAI: document.getElementById('enableAI').checked,
+                aiProvider: document.getElementById('aiProvider').value
+            };
+
+            setLoading(true);
+            showResults('분석 중...', 'loading');
+
+            try {
+                const response = await fetch('http://localhost:3030/api/advanced-date/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        documentText,
+                        options
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentRequestId = result.requestId;
+                    analysisResult = result.result;
+                    displayAnalysisResult(result);
+                } else {
+                    showResults(`분석 실패: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('분석 오류:', error);
+                showResults(`네트워크 오류: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // 성능 메트릭 조회
+        async function getPerformanceMetrics() {
+            setLoading(true);
+            showResults('성능 메트릭 조회 중...', 'loading');
+
+            try {
+                const response = await fetch('http://localhost:3030/api/advanced-date/performance');
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayPerformanceMetrics(result);
+                } else {
+                    showResults(`메트릭 조회 실패: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('메트릭 조회 오류:', error);
+                showResults(`네트워크 오류: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // 시스템 상태 확인
+        async function getSystemHealth() {
+            setLoading(true);
+            showResults('시스템 상태 확인 중...', 'loading');
+
+            try {
+                const response = await fetch('http://localhost:3030/api/advanced-date/health');
+                const result = await response.json();
+                
+                if (result.success) {
+                    displaySystemHealth(result);
+                } else {
+                    showResults(`상태 확인 실패: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('상태 확인 오류:', error);
+                showResults(`네트워크 오류: ${error.message}`, 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // 캐시 정리
+        async function clearCache() {
+            if (!confirm('캐시를 정리하시겠습니까?')) {
+                return;
+            }
+
+            setLoading(true);
+
+            try {
+                const response = await fetch('http://localhost:3030/api/advanced-date/cache', {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('캐시가 성공적으로 정리되었습니다.');
+                } else {
+                    alert(`캐시 정리 실패: ${result.error}`);
+                }
+            } catch (error) {
+                console.error('캐시 정리 오류:', error);
+                alert(`네트워크 오류: ${error.message}`);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // 분석 결과 표시
+        function displayAnalysisResult(result) {
+            const { requestId, cached, result: analysisData } = result;
+            
+            let html = `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value">${analysisData.statistics?.totalDates || 0}</div>
+                        <div class="stat-label">총 날짜 수</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(analysisData.metadata?.processingTime || 0).toFixed(2)}ms</div>
+                        <div class="stat-label">처리 시간</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${cached ? '캐시됨' : '신규'}</div>
+                        <div class="stat-label">결과 유형</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${requestId.substring(0, 8)}...</div>
+                        <div class="stat-label">요청 ID</div>
+                    </div>
+                </div>
+            `;
+
+            // 날짜 타임라인 표시
+            if (analysisData.result?.dateTimeline && analysisData.result.dateTimeline.length > 0) {
+                html += `
+                    <div class="timeline">
+                        <h4>📅 날짜 타임라인</h4>
+                `;
+                
+                analysisData.result.dateTimeline.forEach(date => {
+                    html += `
+                        <div class="timeline-item">
+                            <div class="timeline-date">${date.date || '날짜 없음'}</div>
+                            <div class="timeline-role">${date.role || '역할 없음'}</div>
+                            <div>${date.text || ''}</div>
+                            <div class="timeline-confidence">신뢰도: ${(date.confidence * 100).toFixed(1)}%</div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            }
+
+            // 상세 JSON 결과
+            html += `
+                <div style="margin-top: 20px;">
+                    <h4>📋 상세 결과 (JSON)</h4>
+                    <div class="json-viewer">${JSON.stringify(analysisData, null, 2)}</div>
+                </div>
+            `;
+
+            showResults(html, 'success', '분석 완료');
+        }
+
+        // 성능 메트릭 표시
+        function displayPerformanceMetrics(result) {
+            const { performance, system } = result;
+            
+            let html = `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value">${system.queueSize}</div>
+                        <div class="stat-label">처리 대기열</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${system.cacheSize}</div>
+                        <div class="stat-label">캐시 크기</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(system.uptime / 3600).toFixed(1)}h</div>
+                        <div class="stat-label">가동 시간</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(system.memoryUsage.heapUsed / 1024 / 1024).toFixed(1)}MB</div>
+                        <div class="stat-label">메모리 사용량</div>
+                    </div>
+                </div>
+            `;
+
+            html += `
+                <div style="margin-top: 20px;">
+                    <h4>📊 상세 메트릭 (JSON)</h4>
+                    <div class="json-viewer">${JSON.stringify(result, null, 2)}</div>
+                </div>
+            `;
+
+            showResults(html, 'success', '성능 메트릭');
+        }
+
+        // 시스템 상태 표시
+        function displaySystemHealth(result) {
+            const { health } = result;
+            
+            let html = `
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: #28a745;">${health.status}</div>
+                        <div class="stat-label">시스템 상태</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${health.version}</div>
+                        <div class="stat-label">Node.js 버전</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(health.uptime / 3600).toFixed(1)}h</div>
+                        <div class="stat-label">가동 시간</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${(health.memory.heapUsed / 1024 / 1024).toFixed(1)}MB</div>
+                        <div class="stat-label">메모리 사용량</div>
+                    </div>
+                </div>
+            `;
+
+            html += `
+                <div style="margin-top: 20px;">
+                    <h4>💚 시스템 상태 (JSON)</h4>
+                    <div class="json-viewer">${JSON.stringify(result, null, 2)}</div>
+                </div>
+            `;
+
+            showResults(html, 'success', '시스템 상태');
+        }
+
+        // 결과 표시 헬퍼
+        function showResults(content, status, title = '결과') {
+            const resultsSection = document.getElementById('resultsSection');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultStatus = document.getElementById('resultStatus');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultsSection.style.display = 'block';
+            resultTitle.textContent = title;
+            resultStatus.textContent = status === 'loading' ? '처리중' : status === 'success' ? '성공' : '오류';
+            resultStatus.className = `status ${status}`;
+            resultContent.innerHTML = content;
+            
+            // 결과 섹션으로 스크롤
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 로딩 상태 설정
+        function setLoading(isLoading) {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            
+            if (isLoading) {
+                analyzeBtn.disabled = true;
+                analyzeBtn.innerHTML = '<span class="loading"></span> 분석 중...';
+            } else {
+                analyzeBtn.disabled = false;
+                analyzeBtn.innerHTML = '📊 문서 분석 시작';
+            }
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧬 고급 날짜 분류 시스템 테스트 페이지가 로드되었습니다.');
+            
+            // 첫 번째 샘플 텍스트 로드
+            loadSampleText(1);
+        });
+    </script>
+</body>
+</html>

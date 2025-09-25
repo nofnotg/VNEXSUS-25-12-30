@@ -1,0 +1,34 @@
+{
+  "name": "medreport-ai-mvp",
+  "version": "1.0.0",
+  "description": "Medical Report AI Analysis System",
+  "type": "module",
+  "scripts": {
+    "start:backend": "cd backend && node app.js",
+    "start:frontend": "cd frontend && npx http-server . -p 8080 -c-1",
+    "start:dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "check:env": "node -e \"console.log('Environment check:', process.env.NODE_ENV, process.env.PORT)\"",
+    "validate:env": "node scripts/validate-environment.js",
+    "protect:init": "node scripts/protect-config.js --init",
+    "protect:check": "node scripts/protect-config.js",
+    "protect:update": "node scripts/protect-config.js --update",
+    "deploy:check": "npm run validate:env && npm run protect:check"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^5.2.0",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "iconv-lite": "^0.6.3",
+    "idb": "^8.0.3",
+    "multer": "^2.0.2",
+    "node-fetch": "^2.7.0",
+    "openai": "^5.11.0",
+    "playwright": "^1.54.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}

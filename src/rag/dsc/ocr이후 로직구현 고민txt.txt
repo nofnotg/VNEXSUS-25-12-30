@@ -1,0 +1,141 @@
+1. 목표 및 범위
+구간	목표	기존 코드 활용	개선 포인트
+Upload	100 MB 이하 PDF 업로드 (Signed URL)	backend/controllers/upload.js	용량가드·TTL 30 분
+OCR	GCS → Vision Async → Firestore	backend/services/visionService.js, src/bridge/bridgeSubscriber.js	비동기 큐·재시도
+Tagger	KoELECTRA-LoRA NER + 문맥 Linker	신규 src/tagger/	문장-단락-사건 3계층
+보조 판단기	“Anchor 판별” LLM 함수	신규 src/assistant/anchorJudge.js	함수-콜 GPT 4o
+Linker/RAG	KCD + 약어 + Drug/Lab 정규화	src/rag/ (kcd json·abbr csv)	Weaviate KB 스키마
+Report	GPT Refine → Markdown → react-pdf	backend/postprocess/reportBuilder.js	템플릿 분리·토큰 로깅
+Dashboard	Supabase jobs/usage/chats 실시간	frontend/src/pages/Dashboard.jsx	supabase.channel
+________________________________________
+2. 핵심 아키텍처 다이어그램
+css
+복사편집
+Client ─┬─► /upload-url (SignedURL)
+        │
+        ├─► GCS(raw) ──► CF:onFinalize ─► Vision Async
+        │                               └─► Firestore(ocr_raw)
+        │
+        ├─► Cloud Task(queue) ─► Tagger(LoRA) ──► ① anchorJudge(GPT)
+        │                                         ② Event Builder
+        │                                         ③ Weaviate normalize
+        │                                         ④ Firestore(events)
+        │
+        ├─► composeReport(GPT 4o) ─► Markdown ─► react-pdf ─► Supabase(report)
+        │
+        └─► Dashboard: jobs / usage / trace (Supabase realtime)
+________________________________________
+3. 모듈 구조 (압축파일 분석)
+모듈	LOC	역할
+backend/app.js	322	Express 부트스트랩
+backend/controllers/ocrController.js	464	Vision OCR 요청
+backend/modules/ai/aiService.js	583	GPT 호출 랩퍼
+backend/postprocess/reportBuilder.js	517	Markdown → Excel / txt
+src/bridge/bridgeSubscriber.js	219	Pub/Sub OCR 파서
+신규 src/tagger/	–	LoRA NER, Event builder
+신규 src/assistant/anchorJudge.js	–	보조판단기 LLM 함수
+기존 코드는 최대한 재사용하고, OCR → Tagger 접점, Tagger → GPT 부분만 교체합니다.
+________________________________________
+4. 보조판단기(Anchor Judge) 설계
+항목	내용
+입력	sentence, {dateCandidates:[], hospitalCandidates:[]}
+출력	{isAnchor:boolean, reason:string}
+프롬프트	보조판단기 회의록에서 정의한 예시를 few-shot (SYSTEM+FUNCTION)
+호출 방식	GPT 4o 함수호출 모드 (토큰 300↓)
+사용처	Tagger 단계에서 “이 문장이 날짜 블록 시작인지?” 판정
+________________________________________
+5. PRD-as-Code STEP 파일 목록
+파일	기간	완료 기준 (Jest)
+00_security.md	1 d	ENV 검사 패스, 101 MB 업로드 413
+01_ocr_pipeline.md	4 d	sample.pdf → ocr_raw/{id} 저장
+02_tagger.md	6 d	10 샘플 Precision ≥ 0.9
+03_linker_rag.md	3 d	정규코드 매칭 0.85↑
+04_report_compose.md	4 d	PDF < 500 kB / doc, time < 8 s
+05_dashboard_trace.md	2 d	traceId 헤더·Cloud Trace 확인
+각 파일은 시그니처·코드 스켈레톤을 포함하며 ♦︎표시 부분만 Cursor AI가 flesh-out.
+________________________________________
+6. STEP 파일 샘플 (02_tagger.md)
+md
+복사편집
+# 02 Event Tagger
+
+## 목표
+OCR 텍스트 → Event[] (JSON) 변환
+
+## 파일
+- src/tagger/buildEvents.ts  (새로 생성)
+- models/koelectra_lora.bin  (이미 존재)
+
+## 로직
+1. kss 로 문장 분리
+2. LoRA NER 태깅 (DATE / HOSPITAL / DIAG / PROC / OPINION / ETC)
+3. anchorJudge(sentence) 호출 → isAnchor = true 면 새 블록
+4. eventId = sha1(hospital+primaryDiag)
+5. 블록 단위 Event JSON 반환
+
+## 테스트
+- tests/tagger.test.ts : 10개 샘플 Precision ≥ 0.9
+- 속도: 1.5 s / 10 k chars
+
+### 스켈레톤
+```ts
+export async function buildEvents(raw:string){
+  const sentences = kss.split(raw);
+  const events:{[id:string]:Event} = {};
+  let current:{date?:string,hospital?:string} = {};
+  for(const s of sentences){
+     if(await anchorJudge(s).isAnchor){ current = detectAnchor(s); }
+     const tags = await nerTag(s);
+     const id = genEventId(current, tags);
+     events[id] = merge(events[id], tags, current);
+  }
+  return Object.values(events).sort(byDate);
+}
+yaml
+복사편집
+
+---
+
+## 7. 개선 우선순위 요약 (지난 코드 기준)
+
+| 영역 | 원인 (파일) | 증상 | 개선 |
+|------|-------------|------|------|
+| GCS TTL 없음 | 업로드 버킷 설정 X | 원본 무한 저장 | **00_security**에서 lifecycle 30 min |
+| OCR 콜백 폴링 | `controllers/ocrController.js` | 실시간 지연 | Cloud Task 큐로 대체 |
+| 한글 인코딩 깨짐 | `postprocess/preprocessor.js` | 일부 문서 깨어짐 | `iconv-lite` UTF-8 강제 |
+| Token 폭증 | `aiService.js` | 보고서 비용↑ | GPT Refine만 사용, 태깅은 로컬 |
+
+---
+
+## 8. Roadmap & 담당
+
+| 주차 | 목표 | 담당 |
+|------|------|------|
+| 1주 | STEP 00, 01 완료 | Cursor |
+| 2-3주 | STEP 02 (Tagger + Judge) | Cursor + 외주 모델 |
+| 4주 | STEP 03 (RAG) | Cursor |
+| 5주 | STEP 04 (Report PDF) | Cursor |
+| 6주 | STEP 05 (Dashboard) | Cursor |
+
+당신은 **`spec/` 준비 + 테스트 시나리오 정의 + Prompt YAML 관리**만 하면 됩니다.
+
+---
+
+## 9. 다음 행동 체크리스트 (당신)
+
+1. `/spec/schema.yaml` 생성 → 필드 10 종 확정  
+2. `sample/` 폴더에 추출텍스트 10 건 복사  
+3. **00_security.md**·**01_ocr_pipeline.md** 파일을 `tasks/`에 저장 후 Composer 실행  
+4. PR Merge 후 Jest 리포트 확인 → 문제 없으면 STEP 02 진행  
+
+---
+
+### 이 구조로 가면?
+
+- **비개발자 PM**도 “문서 + 예시”만으로 구조를 확장 → **생태계화** 가능  
+- 룰(코드)과 프롬프트가 계층적으로 분리 → **진화 가능한 시스템** 완성  
+- GPT 비용은 월 $20 내외(로컬 Tagger + Phase-2 Refine) → **운영비 부담 최소**  
+
+**이제 Cursor AI에게 첫 두 STEP을 던져 보세요.  
+‘사건’이 살아서 흐르는 리포트가 1주일 안에 화면에 찍힐 겁니다.**
+ㅜ

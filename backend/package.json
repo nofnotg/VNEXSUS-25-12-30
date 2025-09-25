@@ -1,29 +1,32 @@
 {
-  "name": "backend",
+  "name": "medreport-ai-backend",
   "version": "1.0.0",
+  "description": "Medical Report AI Backend Server",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test:vision": "node test-vision.js",
+    "check:env": "node -e \"console.log('Backend Environment:', {NODE_ENV: process.env.NODE_ENV, PORT: process.env.PORT, VISION_ENABLED: process.env.ENABLE_VISION_OCR})\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.782.0",
-    "@aws-sdk/client-textract": "^3.782.0",
-    "body-parser": "^1.20.2",
+    "@google-cloud/pubsub": "^5.1.0",
+    "@google-cloud/storage": "^7.16.0",
+    "@google-cloud/vision": "^5.3.2",
+    "axios": "^1.11.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.18.2",
-    "multer": "^1.4.5-lts.2",
+    "dotenv": "^17.2.1",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "fs-extra": "^11.3.0",
+    "multer": "^2.0.2",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^5.11.0",
     "pdf-parse": "^1.1.1",
-    "sharp": "^0.33.2",
+    "pdf2pic": "^3.2.0",
+    "sharp": "^0.34.3",
     "uuid": "^11.1.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
   }
 }

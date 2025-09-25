@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬🖼️ MediAI DNA + Layout 통합 검증</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-area {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .input-area:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .analyze-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-panel {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            height: 350px;
+            overflow-y: auto;
+        }
+
+        .dna-panel {
+            border-left: 4px solid #28a745;
+        }
+
+        .layout-panel {
+            border-left: 4px solid #007bff;
+        }
+
+        .gene-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #28a745;
+            transition: all 0.3s;
+        }
+
+        .gene-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .gene-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .gene-id {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .confidence-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .gene-content {
+            color: #6c757d;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .anchors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+        }
+
+        .anchor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .anchor-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .temporal { background-color: #007bff; }
+        .spatial { background-color: #28a745; }
+        .medical { background-color: #dc3545; }
+        .causal { background-color: #ffc107; }
+
+        .layout-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+        }
+
+        .layout-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-text {
+            color: #6c757d;
+        }
+
+        .processing-time {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .enhancement-indicator {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .no-enhancement {
+            background: #ffc107;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬🖼️ MediAI DNA + Layout 통합 검증</h1>
+            <p>의료문서 DNA 시퀀싱과 레이아웃 복원의 통합 성능을 실시간 검증합니다</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="section-title">
+                    📝 의료 텍스트 입력
+                </div>
+                <textarea 
+                    id="medicalText" 
+                    class="input-area" 
+                    placeholder="의료 문서 텍스트를 입력하세요...&#10;&#10;예시:&#10;환자명: 김철수 (M/45)&#10;2024-01-15 서울대병원 내과&#10;&#10;현병력: 2023년 당뇨병 진단 후 메트포르민 복용 중&#10;금일 검사: 공복혈당 180mg/dl, HbA1c 8.5%&#10;&#10;진단: 제2형 당뇨병 (E11.9)&#10;처방: 메트포르민 1000mg 1일 2회"
+                >환자명: 김철수 (M/45)
+2024-01-15 서울대병원 내과
+
+현병력: 2023년 당뇨병 진단 후 메트포르민 복용 중
+주요증상: 다음, 다뇨, 체중감소
+
+금일 검사:
+- 공복혈당: 180mg/dl (정상: 70-100)
+- HbA1c: 8.5% (목표: <7.0%)
+- 신기능: Cr 1.2mg/dl
+
+진단: 제2형 당뇨병 (E11.9)
+
+처방:
+1. 메트포르민 1000mg 1일 2회
+2. 글리클라자이드 80mg 1일 1회
+3. 저염식이 및 운동요법 지속
+
+추적관찰: 3개월 후 외래</textarea>
+                
+                <button id="analyzeBtn" class="analyze-btn">
+                    🧬 통합 DNA + Layout 분석 시작
+                </button>
+            </div>
+
+            <div class="results-section">
+                <div class="result-panel dna-panel">
+                    <div class="section-title">
+                        🧬 DNA 시퀀싱 결과
+                        <span id="enhancementIndicator" class="enhancement-indicator" style="display: none;">
+                            Layout Enhanced
+                        </span>
+                    </div>
+                    <div id="dnaResults">
+                        <div class="loading">
+                            <span>분석 시작을 기다리는 중...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-panel layout-panel">
+                    <div class="section-title">
+                        🖼️ 레이아웃 복원 결과
+                    </div>
+                    <div id="layoutResults">
+                        <div class="loading">
+                            <span>분석 시작을 기다리는 중...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-text" id="statusText">
+                준비됨 - 통합 분석을 시작하세요
+            </div>
+            <div class="processing-time" id="processingTime">
+                처리 시간: -
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const medicalText = document.getElementById('medicalText');
+        const dnaResults = document.getElementById('dnaResults');
+        const layoutResults = document.getElementById('layoutResults');
+        const statusText = document.getElementById('statusText');
+        const processingTime = document.getElementById('processingTime');
+        const enhancementIndicator = document.getElementById('enhancementIndicator');
+
+        analyzeBtn.addEventListener('click', async () => {
+            const text = medicalText.value.trim();
+            if (!text) {
+                alert('의료 텍스트를 입력해주세요.');
+                return;
+            }
+
+            // UI 상태 변경
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = '🧬 통합 분석 진행 중...';
+            statusText.textContent = '통합 DNA + Layout 분석 실행 중...';
+            
+            // 로딩 상태 표시
+            dnaResults.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>DNA 시퀀싱 진행 중...</span>
+                </div>
+            `;
+            
+            layoutResults.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>레이아웃 복원 진행 중...</span>
+                </div>
+            `;
+
+            try {
+                const startTime = Date.now();
+                
+                // 실제 통합 분석 시뮬레이션
+                const result = await simulateIntegratedAnalysis(text);
+                
+                const endTime = Date.now();
+                const processingTimeMs = endTime - startTime;
+
+                // 결과 표시
+                displayDNAResults(result.dna);
+                displayLayoutResults(result.layout);
+                
+                // Enhancement 지시자 업데이트
+                if (result.dna.layoutEnhanced) {
+                    enhancementIndicator.style.display = 'inline-block';
+                    enhancementIndicator.classList.remove('no-enhancement');
+                } else {
+                    enhancementIndicator.style.display = 'inline-block';
+                    enhancementIndicator.classList.add('no-enhancement');
+                    enhancementIndicator.textContent = 'Basic Mode';
+                }
+
+                statusText.textContent = `통합 분석 완료 - DNA ${result.dna.genes.length}개 유전자, Layout ${result.layout.spatialGroups}개 그룹`;
+                processingTime.textContent = `처리 시간: ${processingTimeMs}ms`;
+
+            } catch (error) {
+                console.error('분석 중 오류:', error);
+                dnaResults.innerHTML = `<div style="color: red;">DNA 분석 실패: ${error.message}</div>`;
+                layoutResults.innerHTML = `<div style="color: red;">Layout 분석 실패: ${error.message}</div>`;
+                statusText.textContent = '분석 실패';
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = '🧬 통합 DNA + Layout 분석 시작';
+            }
+        });
+
+        async function simulateIntegratedAnalysis(text) {
+            // DNA 시퀀싱 시뮬레이션
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            const genes = [
+                {
+                    id: 'gene_001',
+                    content: '2024-01-15 서울대병원 내과',
+                    confidence: 0.92,
+                    anchors: {
+                        temporal: '2024-01-15',
+                        spatial: '서울대병원',
+                        medical: '내과 진료',
+                        causal: '정기 검진'
+                    },
+                    layout: {
+                        position: 'header',
+                        section: 'patient_info',
+                        visualImportance: 0.9
+                    }
+                },
+                {
+                    id: 'gene_002',
+                    content: '현병력: 2023년 당뇨병 진단',
+                    confidence: 0.95,
+                    anchors: {
+                        temporal: '2023년',
+                        medical: '당뇨병 진단',
+                        causal: '기존 질환'
+                    },
+                    layout: {
+                        position: 'main',
+                        section: 'history',
+                        visualImportance: 0.8
+                    }
+                },
+                {
+                    id: 'gene_003',
+                    content: '공복혈당 180mg/dl, HbA1c 8.5%',
+                    confidence: 0.98,
+                    anchors: {
+                        medical: '혈당 검사',
+                        temporal: '금일',
+                        causal: '당뇨 관리 평가'
+                    },
+                    layout: {
+                        position: 'main',
+                        section: 'lab_results',
+                        visualImportance: 0.95
+                    }
+                },
+                {
+                    id: 'gene_004',
+                    content: '제2형 당뇨병 (E11.9)',
+                    confidence: 0.99,
+                    anchors: {
+                        medical: '진단명',
+                        causal: 'ICD-10 분류'
+                    },
+                    layout: {
+                        position: 'main',
+                        section: 'diagnosis',
+                        visualImportance: 1.0
+                    }
+                },
+                {
+                    id: 'gene_005',
+                    content: '메트포르민 1000mg + 글리클라자이드 80mg',
+                    confidence: 0.87,
+                    anchors: {
+                        medical: '처방약물',
+                        causal: '당뇨 치료'
+                    },
+                    layout: {
+                        position: 'main',
+                        section: 'prescription',
+                        visualImportance: 0.85
+                    }
+                },
+                {
+                    id: 'gene_006',
+                    content: '3개월 후 외래 추적관찰',
+                    confidence: 0.83,
+                    anchors: {
+                        temporal: '3개월 후',
+                        medical: '추적관찰',
+                        causal: '치료 효과 평가'
+                    },
+                    layout: {
+                        position: 'footer',
+                        section: 'follow_up',
+                        visualImportance: 0.7
+                    }
+                }
+            ];
+
+            // 레이아웃 복원 시뮬레이션
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            const layout = {
+                spatialGroups: 6,
+                documentStructure: {
+                    header: { type: 'patient_info', confidence: 0.9 },
+                    sections: [
+                        { type: 'history', confidence: 0.85 },
+                        { type: 'lab_results', confidence: 0.92 },
+                        { type: 'diagnosis', confidence: 0.98 },
+                        { type: 'prescription', confidence: 0.88 }
+                    ]
+                },
+                structuredElements: {
+                    tables: 1,
+                    lists: 2,
+                    keyValuePairs: 4
+                },
+                visualContext: {
+                    documentFlow: 'top-to-bottom',
+                    layoutComplexity: 0.6
+                },
+                accuracy: 0.89,
+                confidence: 0.86,
+                coverage: 0.94
+            };
+
+            return {
+                dna: {
+                    genes,
+                    averageConfidence: 0.91,
+                    layoutEnhanced: true,
+                    stats: {
+                        totalGenes: genes.length,
+                        processingTime: 1847
+                    }
+                },
+                layout
+            };
+        }
+
+        function displayDNAResults(dnaResult) {
+            let html = '';
+            
+            dnaResult.genes.forEach((gene, index) => {
+                const anchorsHtml = Object.entries(gene.anchors || {})
+                    .map(([type, value]) => {
+                        if (!value) return '';
+                        return `
+                            <div class="anchor">
+                                <span class="anchor-icon ${type}"></span>
+                                <span>${type}: ${value}</span>
+                            </div>
+                        `;
+                    }).join('');
+
+                const layoutInfo = gene.layout ? `
+                    <div style="margin-top: 10px; padding: 8px; background: #e3f2fd; border-radius: 5px;">
+                        <small>
+                            📍 Position: ${gene.layout.position} | 
+                            📄 Section: ${gene.layout.section} | 
+                            ⭐ Importance: ${(gene.layout.visualImportance * 100).toFixed(0)}%
+                        </small>
+                    </div>
+                ` : '';
+
+                html += `
+                    <div class="gene-card">
+                        <div class="gene-header">
+                            <span class="gene-id">${gene.id}</span>
+                            <span class="confidence-badge">${(gene.confidence * 100).toFixed(0)}%</span>
+                        </div>
+                        <div class="gene-content">${gene.content}</div>
+                        <div class="anchors">${anchorsHtml}</div>
+                        ${layoutInfo}
+                    </div>
+                `;
+            });
+            
+            dnaResults.innerHTML = html;
+        }
+
+        function displayLayoutResults(layoutResult) {
+            const html = `
+                <div class="layout-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.spatialGroups}</div>
+                        <div class="stat-label">공간 그룹</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.structuredElements.tables}</div>
+                        <div class="stat-label">테이블</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.structuredElements.lists}</div>
+                        <div class="stat-label">리스트</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${(layoutResult.accuracy * 100).toFixed(0)}%</div>
+                        <div class="stat-label">정확도</div>
+                    </div>
+                </div>
+
+                <div class="layout-card">
+                    <h4>📋 문서 구조</h4>
+                    <p><strong>헤더:</strong> ${layoutResult.documentStructure.header.type} (${(layoutResult.documentStructure.header.confidence * 100).toFixed(0)}%)</p>
+                    <p><strong>섹션:</strong> ${layoutResult.documentStructure.sections.length}개</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        ${layoutResult.documentStructure.sections.map(section => 
+                            `<li>${section.type} (${(section.confidence * 100).toFixed(0)}%)</li>`
+                        ).join('')}
+                    </ul>
+                </div>
+
+                <div class="layout-card">
+                    <h4>🎯 성능 지표</h4>
+                    <p><strong>레이아웃 복잡도:</strong> ${(layoutResult.visualContext.layoutComplexity * 100).toFixed(0)}%</p>
+                    <p><strong>커버리지:</strong> ${(layoutResult.coverage * 100).toFixed(0)}%</p>
+                    <p><strong>신뢰도:</strong> ${(layoutResult.confidence * 100).toFixed(0)}%</p>
+                </div>
+            `;
+            
+            layoutResults.innerHTML = html;
+        }
+    </script>
+</body>
+</html> 

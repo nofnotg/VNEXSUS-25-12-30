@@ -1,0 +1,726 @@
+{
+  "type": "comparison",
+  "timestamp": "2025-08-21T12:58:52.280Z",
+  "data": {
+    "hybrid": [
+      {
+        "caseId": 1,
+        "method": "hybrid",
+        "processingTime": 2974,
+        "inputSize": 83,
+        "cleanedSize": 83,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보**  \n- **환자명**: 김철수  \n- **생년월일**: 1980-05-15  \n- **성별**: 남  \n\n**진료 정보**  \n- **진료일**: 2024-01-15  \n- **진단**:  \n  - 고혈압  \n  - 당뇨병  \n\n**처방 정보**  \n- **처방약**:  \n  - 혈압약  \n  - 혈당강하제  \n\n**의사 정보**  \n- **의사명**: 이영희  ",
+        "usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 128,
+          "total_tokens": 243,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:27.141Z"
+      },
+      {
+        "caseId": 2,
+        "method": "hybrid",
+        "processingTime": 2026,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보:**\n- **환자명:** 박영희\n- **생년월일:** 1975-08-22\n- **성별:** 여\n\n**진료 정보:**\n- **진료일:** 2024-01-16\n- **진단:** 갑상선기능항진증\n- **처방:** 항갑상선제\n- **의사:** 김민수",
+        "usage": {
+          "prompt_tokens": 110,
+          "completion_tokens": 91,
+          "total_tokens": 201,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:29.169Z"
+      },
+      {
+        "caseId": 3,
+        "method": "hybrid",
+        "processingTime": 1802,
+        "inputSize": 85,
+        "cleanedSize": 85,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보:**\n- **환자명:** 이민수\n- **생년월일:** 1990-12-03\n- **성별:** 남\n\n**진료 정보:**\n- **진료일:** 2024-01-17\n- **진단:** 위염, 역류성식도염\n- **처방:** 위산억제제, 소화제\n- **의사:** 박지은",
+        "usage": {
+          "prompt_tokens": 115,
+          "completion_tokens": 96,
+          "total_tokens": 211,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:30.974Z"
+      },
+      {
+        "caseId": 4,
+        "method": "hybrid",
+        "processingTime": 2839,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**핵심 의료 정보 추출 및 구조화:**\n\n- **환자 정보:**\n  - 환자명: 테스트환자4\n  - 생년월일: 1985-01-01\n  - 성별: 남\n\n- **진료 정보:**\n  - 진료일: 2024-01-14\n  - 진단: 일반검진\n  - 처방: 종합비타민\n  - 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 102,
+          "total_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:33.818Z"
+      },
+      {
+        "caseId": 5,
+        "method": "hybrid",
+        "processingTime": 1910,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "다음은 주어진 의료 텍스트에서 추출한 핵심 정보입니다:\n\n- **환자명**: 테스트환자5\n- **생년월일**: 1985-01-01\n- **성별**: 남\n- **진료일**: 2024-01-15\n- **진단**: 일반검진\n- **처방**: 종합비타민\n- **의사**: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 100,
+          "total_tokens": 206,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:35.729Z"
+      },
+      {
+        "caseId": 6,
+        "method": "hybrid",
+        "processingTime": 1998,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보:**\n- 환자명: 테스트환자6\n- 생년월일: 1985-01-01\n- 성별: 남\n\n**진료 정보:**\n- 진료일: 2024-01-16\n- 진단: 일반검진\n- 처방: 종합비타민\n- 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 80,
+          "total_tokens": 186,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:37.728Z"
+      },
+      {
+        "caseId": 7,
+        "method": "hybrid",
+        "processingTime": 2159,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보:**\n- 환자명: 테스트환자7\n- 생년월일: 1985-01-01\n- 성별: 남\n\n**진료 정보:**\n- 진료일: 2024-01-17\n- 진단: 일반검진\n- 처방: 종합비타민\n- 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 80,
+          "total_tokens": 186,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:39.888Z"
+      },
+      {
+        "caseId": 8,
+        "method": "hybrid",
+        "processingTime": 2090,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**핵심 의료 정보 추출 및 구조화:**\n\n- **환자 정보:**\n  - 환자명: 테스트환자8\n  - 생년월일: 1985-01-01\n  - 성별: 남\n\n- **진료 정보:**\n  - 진료일: 2024-01-18\n  - 진단: 일반검진\n  - 처방: 종합비타민\n  - 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 102,
+          "total_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:41.978Z"
+      },
+      {
+        "caseId": 9,
+        "method": "hybrid",
+        "processingTime": 2239,
+        "inputSize": 78,
+        "cleanedSize": 78,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**핵심 의료 정보 추출 및 구조화:**\n\n- **환자 정보:**\n  - 환자명: 테스트환자9\n  - 생년월일: 1985-01-01\n  - 성별: 남\n\n- **진료 정보:**\n  - 진료일: 2024-01-19\n  - 진단: 일반검진\n  - 처방: 종합비타민\n  - 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 102,
+          "total_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:44.218Z"
+      },
+      {
+        "caseId": 10,
+        "method": "hybrid",
+        "processingTime": 2724,
+        "inputSize": 79,
+        "cleanedSize": 79,
+        "reductionRate": "0.00",
+        "aiAnalysis": "핵심 의료 정보 추출 및 구조화:\n\n- **환자명**: 테스트환자10\n- **생년월일**: 1985-01-01\n- **성별**: 남\n- **진료일**: 2024-01-20\n- **진단**: 일반검진\n- **처방**: 종합비타민\n- **의사**: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 93,
+          "total_tokens": 199,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:46.943Z"
+      },
+      {
+        "caseId": 11,
+        "method": "hybrid",
+        "processingTime": 2473,
+        "inputSize": 79,
+        "cleanedSize": 79,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**핵심 의료 정보 추출 및 구조화:**\n\n- **환자 정보:**\n  - 환자명: 테스트환자11\n  - 생년월일: 1985-01-01\n  - 성별: 남\n\n- **진료 정보:**\n  - 진료일: 2024-01-21\n  - 진단: 일반검진\n  - 처방: 종합비타민\n  - 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 102,
+          "total_tokens": 208,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:49.417Z"
+      },
+      {
+        "caseId": 12,
+        "method": "hybrid",
+        "processingTime": 2859,
+        "inputSize": 79,
+        "cleanedSize": 79,
+        "reductionRate": "0.00",
+        "aiAnalysis": "**환자 정보:**\n- 환자명: 테스트환자12\n- 생년월일: 1985-01-01\n- 성별: 남\n\n**진료 정보:**\n- 진료일: 2024-01-22\n- 진단: 일반검진\n- 처방: 종합비타민\n- 의사: 담당의사",
+        "usage": {
+          "prompt_tokens": 106,
+          "completion_tokens": 80,
+          "total_tokens": 186,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        },
+        "timestamp": "2025-08-21T12:58:52.277Z"
+      }
+    ],
+    "pureLogic": [
+      {
+        "caseId": 1,
+        "method": "pureLogic",
+        "processingTime": 1,
+        "inputSize": 83,
+        "processedSize": 83,
+        "extractedEntities": {
+          "dates": [
+            "1980-05-15",
+            "2024-01-15"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 고혈압, 당뇨병"
+          ],
+          "doctors": [
+            "의사: 이영희"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1980-05-15",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1980-05-15",
+            "2024-01-15"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:27.142Z"
+      },
+      {
+        "caseId": 2,
+        "method": "pureLogic",
+        "processingTime": 1,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1975-08-22",
+            "2024-01-16"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 갑상선기능항진증"
+          ],
+          "doctors": [
+            "의사: 김민수"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1975-08-22",
+            "gender": "여"
+          },
+          "medicalHistory": [
+            "1975-08-22",
+            "2024-01-16"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:29.170Z"
+      },
+      {
+        "caseId": 3,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 85,
+        "processedSize": 85,
+        "extractedEntities": {
+          "dates": [
+            "1990-12-03",
+            "2024-01-17"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 위염, 역류성식도염"
+          ],
+          "doctors": [
+            "의사: 박지은"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1990-12-03",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1990-12-03",
+            "2024-01-17"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:30.974Z"
+      },
+      {
+        "caseId": 4,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-14"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-14"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:33.818Z"
+      },
+      {
+        "caseId": 5,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-15"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-15"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:35.729Z"
+      },
+      {
+        "caseId": 6,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-16"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-16"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:37.728Z"
+      },
+      {
+        "caseId": 7,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-17"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-17"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:39.888Z"
+      },
+      {
+        "caseId": 8,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-18"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-18"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:41.978Z"
+      },
+      {
+        "caseId": 9,
+        "method": "pureLogic",
+        "processingTime": 1,
+        "inputSize": 78,
+        "processedSize": 78,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-19"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-19"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:44.219Z"
+      },
+      {
+        "caseId": 10,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 79,
+        "processedSize": 79,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-20"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-20"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:46.943Z"
+      },
+      {
+        "caseId": 11,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 79,
+        "processedSize": 79,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-21"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-21"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:49.417Z"
+      },
+      {
+        "caseId": 12,
+        "method": "pureLogic",
+        "processingTime": 0,
+        "inputSize": 79,
+        "processedSize": 79,
+        "extractedEntities": {
+          "dates": [
+            "1985-01-01",
+            "2024-01-22"
+          ],
+          "hospitals": [],
+          "diagnoses": [
+            "진단: 일반검진"
+          ],
+          "doctors": [
+            "의사: 담당의사"
+          ]
+        },
+        "structuredData": {
+          "patientInfo": {
+            "name": "",
+            "birthDate": "1985-01-01",
+            "gender": "남"
+          },
+          "medicalHistory": [
+            "1985-01-01",
+            "2024-01-22"
+          ],
+          "treatments": []
+        },
+        "timestamp": "2025-08-21T12:58:52.277Z"
+      }
+    ],
+    "comparison": {
+      "performance": {
+        "hybrid": {
+          "avgProcessingTime": 2341.0833333333335,
+          "totalCost": 0.0008876999999999997,
+          "avgReductionRate": 0
+        },
+        "pureLogic": {
+          "avgProcessingTime": 0.25,
+          "totalCost": 0,
+          "avgProcessingEfficiency": 100
+        }
+      },
+      "recommendation": "pureLogic",
+      "analysis": {
+        "speedComparison": "하이브리드 방식이 936333.3% 느림",
+        "costEffectiveness": "하이브리드 방식 총 비용: $0.0009",
+        "qualityAssessment": "정성적 평가 필요 - AI 분석의 정확도 vs 로직 기반의 일관성"
+      }
+    }
+  }
+}

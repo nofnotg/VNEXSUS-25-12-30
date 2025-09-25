@@ -1,0 +1,337 @@
+/**
+ * 의료-보험 통합 시계열 요약표 생성 모듈
+ * 
+ * 이 모듈은 의료 문서와 보험 관련 문서를 분석하여 
+ * 시간순으로 정렬된 통합 병력사항 요약 경과표를 생성합니다.
+ */
+
+class MedicalTimelineGenerator {
+  constructor() {
+    // 이벤트 유형 정의
+    this.EVENT_TYPES = {
+      MEDICAL_VISIT: 'medical_visit',     // 일반 진료
+      DIAGNOSIS: 'diagnosis',             // 진단
+      EXAMINATION: 'examination',         // 검사
+      HOSPITALIZATION: 'hospitalization', // 입원
+      SURGERY: 'surgery',                 // 수술
+      MEDICATION: 'medication',           // 약물 처방
+      TREATMENT: 'treatment',             // 치료
+      INSURANCE: 'insurance',             // 보험 관련 이벤트
+      CLAIM: 'claim',                     // 보험금 청구 이벤트
+      OTHER: 'other'                      // 기타
+    };
+
+    // 이벤트 중요도 정의
+    this.IMPORTANCE_LEVELS = {
+      HIGH: 'high',       // 중요 진단, 수술, 보험금 청구 등
+      MEDIUM: 'medium',   // 일반 진료, 검사, 처방 등
+      LOW: 'low'          // 참고 사항
+    };
+
+    // 진단코드 정규식 패턴 (ICD-10, KCD 등)
+    this.DIAGNOSIS_CODE_PATTERN = /([A-Z]\d{2})(\.\d{1,2})?/g;
+    
+    // 날짜 정규식 패턴들
+    this.DATE_PATTERNS = [
+      /\d{4}-\d{2}-\d{2}/,                   // YYYY-MM-DD
+      /\d{4}\.\d{2}\.\d{2}/,                 // YYYY.MM.DD
+      /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/,     // YYYY년 MM월 DD일
+    ];
+    
+    // 주요 의학 용어 및 보험 용어 사전
+    this.TERM_DICTIONARY = {
+      // 의료 용어
+      "진단": "diagnosis",
+      "검사": "examination",
+      "입원": "hospitalization",
+      "퇴원": "discharge",
+      "수술": "surgery",
+      "치료": "treatment",
+      "항암": "chemotherapy",
+      "방사선": "radiation",
+      "초진": "first_visit",
+      "재진": "follow_up",
+      "외래": "outpatient",
+      
+      // 보험 관련 용어
+      "가입": "enrollment",
+      "보장개시": "coverage_start",
+      "청구": "claim",
+      "보험금": "benefit",
+      "면책기간": "waiting_period",
+      "심사": "review"
+    };
+    
+    // 중요 질환 코드 (예시)
+    this.IMPORTANT_DIAGNOSIS_CODES = {
+      "C": "암", // 악성 신생물
+      "I21": "심근경색",
+      "I63": "뇌경색",
+      "E10": "제1형 당뇨병",
+      "E11": "제2형 당뇨병",
+      "J45": "천식"
+    };
+  }
+
+  /**
+   * 날짜 문자열을 Date 객체로 파싱
+   * @param {string} dateStr - 날짜 문자열
+   * @return {Date|null} - 파싱된 Date 객체 또는 실패시 null
+   */
+  parseDate(dateStr) {
+    if (!dateStr) return null;
+    
+    // YYYY-MM-DD 형식
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      return new Date(dateStr);
+    }
+    
+    // YYYY.MM.DD 형식
+    if (/^\d{4}\.\d{2}\.\d{2}$/.test(dateStr)) {
+      return new Date(dateStr.replace(/\./g, '-'));
+    }
+    
+    // YYYY년 MM월 DD일 형식
+    const koreanDateMatch = dateStr.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (koreanDateMatch) {
+      const [_, year, month, day] = koreanDateMatch;
+      return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    }
+    
+    return null;
+  }
+
+  /**
+   * 텍스트에서 날짜 추출
+   * @param {string} text - 검색할 텍스트
+   * @return {Array} - 추출된 모든 날짜 문자열의 배열
+   */
+  extractDates(text) {
+    const dates = [];
+    
+    this.DATE_PATTERNS.forEach(pattern => {
+      const matches = text.match(new RegExp(pattern, 'g'));
+      if (matches) {
+        dates.push(...matches);
+      }
+    });
+    
+    return dates;
+  }
+
+  /**
+   * 텍스트에서 진단 코드 추출
+   * @param {string} text - 검색할 텍스트
+   * @return {Array} - 추출된 진단 코드 배열
+   */
+  extractDiagnosisCodes(text) {
+    const codes = [];
+    let match;
+    
+    while ((match = this.DIAGNOSIS_CODE_PATTERN.exec(text)) !== null) {
+      // 진단코드 추출
+      const fullCode = match[0];
+      
+      // 코드와 함께 진단명도 추출 시도
+      let diagnosisName = "";
+      const afterCodeText = text.substring(match.index + fullCode.length, match.index + fullCode.length + 100);
+      
+      // 다음 코드 또는 줄바꿈까지 텍스트 추출
+      const nextCodeMatch = afterCodeText.match(this.DIAGNOSIS_CODE_PATTERN);
+      const nextLinebreakIndex = afterCodeText.indexOf('\n');
+      
+      let endIndex = afterCodeText.length;
+      if (nextCodeMatch && nextCodeMatch.index > 0) {
+        endIndex = Math.min(endIndex, nextCodeMatch.index);
+      }
+      if (nextLinebreakIndex > 0) {
+        endIndex = Math.min(endIndex, nextLinebreakIndex);
+      }
+      
+      diagnosisName = afterCodeText.substring(0, endIndex).trim();
+      
+      codes.push({
+        code: fullCode,
+        name: diagnosisName
+      });
+    }
+    
+    return codes;
+  }
+
+  /**
+   * 텍스트에서 병원/기관명 추출
+   * @param {string} text - 검색할 텍스트
+   * @return {Array} - 추출된 기관명 배열
+   */
+  extractInstitutions(text) {
+    // 일반적인 병원 명칭 패턴
+    const hospitalPatterns = [
+      /(\S+대학교병원)/g,
+      /(\S+병원)/g,
+      /(\S+의원)/g,
+      /(\S+클리닉)/g,
+      /(\S+센터)/g,
+      /(\S+손해보험)/g
+    ];
+    
+    const institutions = new Set();
+    
+    hospitalPatterns.forEach(pattern => {
+      const matches = text.match(pattern);
+      if (matches) {
+        matches.forEach(match => institutions.add(match));
+      }
+    });
+    
+    return Array.from(institutions);
+  }
+
+  /**
+   * 텍스트 블록에서 이벤트 유형 추정
+   * @param {string} text - 분석할 텍스트
+   * @return {string} - 추정된 이벤트 유형 (EVENT_TYPES 중 하나)
+   */
+  inferEventType(text) {
+    const textLower = text.toLowerCase();
+    
+    // 입원 관련 키워드
+    if (/(입원|퇴원|재원)/.test(text)) {
+      return this.EVENT_TYPES.HOSPITALIZATION;
+    }
+    
+    // 수술 관련 키워드
+    if (/(수술|시술|이식)/.test(text)) {
+      return this.EVENT_TYPES.SURGERY;
+    }
+    
+    // 진단 관련 키워드
+    if (/(진단|소견|판정|확진)/.test(text)) {
+      return this.EVENT_TYPES.DIAGNOSIS;
+    }
+    
+    // 검사 관련 키워드
+    if (/(검사|x-ray|x선|엑스레이|ct|mri|초음파|내시경)/.test(textLower)) {
+      return this.EVENT_TYPES.EXAMINATION;
+    }
+    
+    // 치료 관련 키워드
+    if (/(치료|항암|방사선|요법)/.test(text)) {
+      return this.EVENT_TYPES.TREATMENT;
+    }
+    
+    // 약물 처방 관련 키워드
+    if (/(처방|약물|투약|복용|주사)/.test(text)) {
+      return this.EVENT_TYPES.MEDICATION;
+    }
+    
+    // 보험 관련 키워드
+    if (/(보험|가입|청약|보장|개시|만기)/.test(text)) {
+      return this.EVENT_TYPES.INSURANCE;
+    }
+    
+    // 보험금 청구 관련 키워드
+    if (/(청구|지급|심사|사정)/.test(text)) {
+      return this.EVENT_TYPES.CLAIM;
+    }
+    
+    // 명확한 패턴이 없으면 일반 진료로 간주
+    if (/(진료|내원|방문|외래)/.test(text)) {
+      return this.EVENT_TYPES.MEDICAL_VISIT;
+    }
+    
+    // 기타
+    return this.EVENT_TYPES.OTHER;
+  }
+
+  /**
+   * 이벤트의 중요도 평가
+   * @param {Object} event - 이벤트 객체
+   * @return {string} - 중요도 레벨 (IMPORTANCE_LEVELS 중 하나)
+   */
+  evaluateImportance(event) {
+    // 암, 심장질환, 뇌질환 등 중요 질환 진단은 높은 중요도
+    if (event.eventType === this.EVENT_TYPES.DIAGNOSIS) {
+      const hasMajorDiagnosis = event.diagnoses.some(d => {
+        // 암(C) 코드, 심근경색(I21), 뇌경색(I63) 등 중요 질환 체크
+        return d.code.startsWith('C') || d.code.startsWith('I21') || d.code.startsWith('I63');
+      });
+      
+      if (hasMajorDiagnosis) return this.IMPORTANCE_LEVELS.HIGH;
+    }
+    
+    // 수술, 입원, 중요 치료는 높은 중요도
+    if ([this.EVENT_TYPES.SURGERY, this.EVENT_TYPES.HOSPITALIZATION].includes(event.eventType)) {
+      return this.IMPORTANCE_LEVELS.HIGH;
+    }
+    
+    // 보험 가입, 보장 개시, 청구는 높은 중요도
+    if ([this.EVENT_TYPES.INSURANCE, this.EVENT_TYPES.CLAIM].includes(event.eventType)) {
+      return this.IMPORTANCE_LEVELS.HIGH;
+    }
+    
+    // 검사, 약물 처방 등은 중간 중요도
+    if ([this.EVENT_TYPES.EXAMINATION, this.EVENT_TYPES.MEDICATION, this.EVENT_TYPES.TREATMENT].includes(event.eventType)) {
+      return this.IMPORTANCE_LEVELS.MEDIUM;
+    }
+    
+    // 일반 진료는 낮은 중요도
+    return this.IMPORTANCE_LEVELS.LOW;
+  }
+
+  /**
+   * 텍스트 블록에서 이벤트 추출
+   * @param {string} text - 분석할 텍스트 블록
+   * @return {Object|null} - 추출된 이벤트 객체 또는 null
+   */
+  extractEvent(text) {
+    // 날짜 추출
+    const dateStrings = this.extractDates(text);
+    if (!dateStrings || dateStrings.length === 0) return null;
+    
+    // 첫 번째 날짜를 이벤트 날짜로 사용
+    const eventDate = this.parseDate(dateStrings[0]);
+    if (!eventDate) return null;
+    
+    // 기관/병원 추출
+    const institutions = this.extractInstitutions(text);
+    const institution = institutions.length > 0 ? institutions[0] : "알 수 없음";
+    
+    // 진단 코드 및 이름 추출
+    const diagnoses = this.extractDiagnosisCodes(text);
+    
+    // 이벤트 유형 추정
+    const eventType = this.inferEventType(text);
+    
+    // 일반적인 이벤트 요약 생성
+    let eventSummary = "";
+    
+    // 이벤트 유형에 따라 요약 생성
+    switch (eventType) {
+      case this.EVENT_TYPES.DIAGNOSIS:
+        if (diagnoses.length > 0) {
+          eventSummary = `${diagnoses[0].name || diagnoses[0].code} 진단`;
+        } else {
+          eventSummary = "진단 시행";
+        }
+        break;
+        
+      case this.EVENT_TYPES.HOSPITALIZATION:
+        eventSummary = text.includes("퇴원") ? "퇴원" : "입원";
+        break;
+        
+      case this.EVENT_TYPES.SURGERY:
+        eventSummary = "수술 시행";
+        break;
+        
+      case this.EVENT_TYPES.EXAMINATION:
+        eventSummary = "검사 시행";
+        break;
+        
+      case this.EVENT_TYPES.TREATMENT:
+        eventSummary = "치료 시행";
+        if (text.includes("항암")) eventSummary = "항암치료 시행";
+        if (text.includes("방사선")) eventSummary = "방사선치료 시행";
+        break;
+        
+      case this.EVENT_

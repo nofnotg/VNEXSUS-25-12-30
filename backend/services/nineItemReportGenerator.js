@@ -1,0 +1,875 @@
+/**
+ * 📄 Nine-Item Report Generator
+ * Task 06: 9항목 보고서 생성기
+ * 
+ * DNA 분석 결과를 손해사정 표준 9항목 보고서로 변환합니다.
+ * 1. 내원일, 2. 내원경위, 3. 입퇴원기간, 4. 통원기간, 5. 진단병명
+ * 6. 검사내용및결과, 7. 치료사항, 8. 과거력(기왕력), 9. 기타사항(추가연관성)
+ */
+
+const { AIService } = require('./aiService');
+const DynamicValidationEngine = require('./DynamicValidationEngine');
+const HybridProcessingEngine = require('./HybridProcessingEngine');
+const PerformanceMonitor = require('./PerformanceMonitor');
+const logger = require('../utils/logger');
+
+class NineItemReportGenerator {
+    constructor() {
+        this.aiService = new AIService();
+        this.dynamicValidator = new DynamicValidationEngine();
+        this.hybridEngine = new HybridProcessingEngine();
+        this.performanceMonitor = new PerformanceMonitor();
+        this.extractors = this.initializeExtractors();
+        this.templates = this.initializeTemplates();
+    }
+
+    /**
+     * 추출기 초기화
+     */
+    initializeExtractors() {
+        return {
+            visitDates: new VisitDateExtractor(),
+            visitReasons: new VisitReasonExtractor(),
+            admissionPeriods: new AdmissionPeriodExtractor(),
+            outpatientPeriods: new OutpatientPeriodExtractor(),
+            diagnoses: new DiagnosisExtractor(),
+            examinations: new ExaminationExtractor(),
+            treatments: new TreatmentExtractor(),
+            pastHistory: new PastHistoryExtractor(),
+            correlations: new CorrelationExtractor()
+        };
+    }
+
+    /**
+     * 템플릿 초기화
+     */
+    initializeTemplates() {
+        return {
+            standard: this.standardTemplate.bind(this),
+            detailed: this.detailedTemplate.bind(this),
+            summary: this.summaryTemplate.bind(this)
+        };
+    }
+
+    /**
+     * 텍스트 추출 (동적 검증용)
+     */
+    extractTextFromGenes(genes) {
+        return genes.map(gene => gene.content || gene.text || '').join(' ');
+    }
+
+    /**
+     * 의료 기록 추출 (동적 검증용)
+     */
+    extractMedicalRecords(genes) {
+        return genes.filter(gene => gene.type === 'medical' || gene.category === 'medical');
+    }
+
+    /**
+     * 날짜 추출 (동적 검증용)
+     */
+    extractDates(genes) {
+        const datePattern = /\d{4}[-./]\d{1,2}[-./]\d{1,2}/g;
+        const allText = this.extractTextFromGenes(genes);
+        return allText.match(datePattern) || [];
+    }
+
+    /**
+     * 보고서 생성
+     * @param {Object} dnaAnalysisResult - DNA 분석 결과
+     * @param {Object} patientInfo - 환자 정보
+     * @param {Object} options - 생성 옵션
+     * @returns {Object} 9항목 보고서
+     */
+    async generateReport(dnaAnalysisResult, patientInfo = {}, options = {}) {
+        try {
+            logger.info('📄 Starting 9-item report generation');
+            
+            // 성능 모니터링 시작
+            const taskId = `report_${Date.now()}_${patientInfo?.id || 'unknown'}`;
+            this.performanceMonitor.startTask(taskId, 'nine_item_report');
+            
+            const { extracted_genes = [], causal_network = {} } = dnaAnalysisResult;
+            
+            // 1. 하이브리드 처리로 데이터 전처리
+            const hybridResult = await this.hybridEngine.processAdaptively({
+                genes: extracted_genes,
+                network: causal_network,
+                patient: patientInfo
+            }, options);
+            
+            // 2. 각 항목별 정보 추출 (하이브리드 결과 사용)
+            const nineItems = await this.extractNineItems(
+                hybridResult.processedData.genes || extracted_genes, 
+                hybridResult.processedData.network || causal_network, 
+                patientInfo
+            );
+            
+            // 2. 보고서 템플릿 적용
+            const templateType = options.template || 'standard';
+            const report = await this.applyTemplate(nineItems, templateType, options);
+            
+            // 3. 동적 품질 검증
+            const rawData = {
+                text: this.extractTextFromGenes(extracted_genes),
+                medicalRecords: this.extractMedicalRecords(extracted_genes),
+                dates: this.extractDates(extracted_genes)
+            };
+            const validation = this.dynamicValidator.validateWithDynamicWeights(nineItems, rawData);
+            
+            // 4. 최종 결과 구성
+            const result = {
+                success: true,
+                report: report.content,
+                metadata: {
+                    ...report.metadata,
+                    hybridProcessing: {
+                        strategy: hybridResult.strategy,
+                        confidence: hybridResult.confidence,
+                        processingTime: hybridResult.metadata?.processingTime
+                    }
+                },
+                nineItems,
+                validation,
+                hybridResult: {
+                    strategy: hybridResult.strategy,
+                    confidence: hybridResult.confidence,
+                    performanceStats: this.hybridEngine.getPerformanceStats()
+                },
+                statistics: this.generateStatistics(extracted_genes, nineItems),
+                performanceMetrics: this.performanceMonitor.getCurrentMetrics()
+            };
+            
+            // 성능 모니터링 완료
+            this.performanceMonitor.completeTask(taskId, {
+                accuracy: {
+                    overall: validation.score,
+                    dynamicWeighting: validation.score,
+                    hybridStrategy: hybridResult.confidence * 100
+                }
+            });
+            
+            logger.info(`✅ 9-item report generated successfully (Quality: ${validation.score}/100)`);
+            return result;
+            
+        } catch (error) {
+            logger.error('❌ Error generating 9-item report:', error);
+            
+            // 성능 모니터링 실패 기록
+            if (taskId) {
+                this.performanceMonitor.failTask(taskId, error.message);
+            }
+            
+            return {
+                success: false,
+                error: error.message,
+                partialResults: {}
+            };
+        }
+    }
+
+    /**
+     * 9항목 정보 추출
+     */
+    async extractNineItems(genes, causalNetwork, patientInfo) {
+        const nineItems = {};
+        
+        // 병렬 추출 실행
+        const extractionPromises = Object.entries(this.extractors).map(async ([itemName, extractor]) => {
+            try {
+                const result = await extractor.extract(genes, causalNetwork, patientInfo);
+                nineItems[itemName] = result;
+                logger.info(`✅ ${itemName} extraction completed`);
+            } catch (error) {
+                logger.error(`❌ ${itemName} extraction failed:`, error);
+                nineItems[itemName] = this.getEmptyItem(itemName);
+            }
+        });
+        
+        await Promise.all(extractionPromises);
+        
+        return nineItems;
+    }
+
+    /**
+     * 템플릿 적용
+     */
+    async applyTemplate(nineItems, templateType, options) {
+        const template = this.templates[templateType];
+        if (!template) {
+            throw new Error(`Template '${templateType}' not found`);
+        }
+        
+        const content = await template(nineItems, options);
+        
+        return {
+            content,
+            metadata: {
+                generatedAt: new Date().toISOString(),
+                templateType,
+                version: '1.0',
+                generator: 'MediAI DNA Sequencing v7'
+            }
+        };
+    }
+
+    /**
+     * 표준 템플릿
+     */
+    async standardTemplate(items, options = {}) {
+        const reportDate = new Date().toLocaleDateString('ko-KR');
+        const overallConfidence = this.calculateOverallConfidence(items);
+        
+        // AI를 통한 종합의견 생성
+        const conclusiveOpinion = await this.generateConclusiveOpinion(items);
+        
+        return `
+==================================================
+          손해사정 의료기록 경과보고서
+==================================================
+
+■ 보고서 정보
+- 작성일: ${reportDate}
+- 분석방법: AI DNA 시퀀싱 분석
+- 신뢰도: ${(overallConfidence * 100).toFixed(1)}%
+
+■ 1. 내원일
+${this.formatSection(items.visitDates)}
+
+■ 2. 내원경위
+${this.formatSection(items.visitReasons)}
+
+■ 3. 입퇴원기간
+${this.formatSection(items.admissionPeriods)}
+
+■ 4. 통원기간
+${this.formatSection(items.outpatientPeriods)}
+
+■ 5. 진단병명
+${this.formatSection(items.diagnoses)}
+
+■ 6. 검사내용및결과
+${this.formatSection(items.examinations)}
+
+■ 7. 치료사항
+${this.formatSection(items.treatments)}
+
+■ 8. 과거력(기왕력)
+${this.formatSection(items.pastHistory)}
+
+■ 9. 기타사항(추가연관성)
+${this.formatSection(items.correlations)}
+
+■ 종합의견
+${conclusiveOpinion}
+
+==================================================
+보고서 생성 완료 - MediAI DNA Sequencing v7
+==================================================
+`;
+    }
+
+    /**
+     * 상세 템플릿
+     */
+    async detailedTemplate(items, options = {}) {
+        const standardReport = await this.standardTemplate(items, options);
+        
+        const detailedAnalysis = `
+
+■ 상세 분석 정보
+
+📊 추출 통계:
+${this.generateExtractionStatistics(items)}
+
+🔗 인과관계 분석:
+${this.generateCausalAnalysis(items)}
+
+⚠️ 주의사항:
+${this.generateWarnings(items)}
+
+📋 품질 지표:
+${this.generateQualityIndicators(items)}
+`;
+        
+        return standardReport + detailedAnalysis;
+    }
+
+    /**
+     * 요약 템플릿
+     */
+    async summaryTemplate(items, options = {}) {
+        const keyFindings = this.extractKeyFindings(items);
+        const conclusiveOpinion = await this.generateConclusiveOpinion(items);
+        
+        return `
+■ 의료기록 요약 보고서
+
+📅 주요 내원일: ${keyFindings.visitDates}
+🏥 주요 진단: ${keyFindings.diagnoses}
+💊 주요 치료: ${keyFindings.treatments}
+📋 기왕력: ${keyFindings.pastHistory}
+
+■ 종합의견
+${conclusiveOpinion}
+`;
+    }
+
+    /**
+     * 섹션 포맷팅
+     */
+    formatSection(sectionData) {
+        if (!sectionData || !sectionData.summary) {
+            return '정보를 추출할 수 없습니다.';
+        }
+        
+        let formatted = sectionData.summary;
+        
+        // 신뢰도 표시
+        if (sectionData.confidence !== undefined) {
+            formatted += `\n(신뢰도: ${(sectionData.confidence * 100).toFixed(1)}%)`;
+        }
+        
+        // 상세 정보 추가
+        if (sectionData.details && sectionData.details.length > 0) {
+            formatted += '\n\n상세 정보:';
+            sectionData.details.forEach((detail, index) => {
+                formatted += `\n${index + 1}. ${detail}`;
+            });
+        }
+        
+        return formatted;
+    }
+
+    /**
+     * 종합의견 생성
+     */
+    async generateConclusiveOpinion(items) {
+        try {
+            const prompt = this.buildConclusiveOpinionPrompt(items);
+            const response = await this.aiService.generateResponse(prompt, {
+                model: 'claude-3-sonnet-20240229',
+                maxTokens: 1000,
+                temperature: 0.3
+            });
+            
+            return response.trim();
+            
+        } catch (error) {
+            logger.error('❌ Error generating conclusive opinion:', error);
+            return '종합의견 생성 중 오류가 발생했습니다. 전문가 검토가 필요합니다.';
+        }
+    }
+
+    /**
+     * 종합의견 프롬프트 구축
+     */
+    buildConclusiveOpinionPrompt(items) {
+        const itemsSummary = Object.entries(items)
+            .map(([key, value]) => `${key}: ${value.summary || '정보 없음'}`)
+            .join('\n');
+        
+        return `
+9항목 의료기록 분석 결과를 바탕으로 손해사정 관점의 종합의견을 작성해주세요.
+
+분석 결과:
+${itemsSummary}
+
+작성 원칙:
+1. 객관적 사실만 기술, 추측 금지
+2. 의학적 인과관계의 명확한 근거 제시
+3. 보험가입 전후 상황의 객관적 비교
+4. 향후 치료 경과 및 예후 전망
+5. 손해사정 시 특별 고려사항
+
+길이: 200-300자 내외
+톤: 전문적, 객관적, 명확
+
+종합의견:
+`;
+    }
+
+    // 기존 검증 메서드들은 DynamicValidationEngine으로 대체됨
+
+    /**
+     * 전체 신뢰도 계산
+     */
+    calculateOverallConfidence(items) {
+        const confidenceValues = Object.values(items)
+            .map(item => item.confidence || 0)
+            .filter(conf => conf > 0);
+        
+        if (confidenceValues.length === 0) return 0;
+        
+        return confidenceValues.reduce((sum, conf) => sum + conf, 0) / confidenceValues.length;
+    }
+
+    /**
+     * 통계 생성
+     */
+    generateStatistics(genes, nineItems) {
+        return {
+            totalGenesAnalyzed: genes.length,
+            itemsCompleted: Object.keys(nineItems).length,
+            overallConfidence: this.calculateOverallConfidence(nineItems),
+            generationTime: new Date().toISOString(),
+            extractionErrors: Object.values(nineItems).filter(item => item.extractionError).length
+        };
+    }
+
+    /**
+     * 빈 항목 생성
+     */
+    getEmptyItem(itemName) {
+        return {
+            summary: `${itemName} 정보를 추출할 수 없습니다.`,
+            confidence: 0,
+            extractionError: true,
+            details: []
+        };
+    }
+
+    /**
+     * 주요 발견사항 추출
+     */
+    extractKeyFindings(items) {
+        return {
+            visitDates: items.visitDates?.summary?.substring(0, 50) || '정보 없음',
+            diagnoses: items.diagnoses?.summary?.substring(0, 50) || '정보 없음',
+            treatments: items.treatments?.summary?.substring(0, 50) || '정보 없음',
+            pastHistory: items.pastHistory?.summary?.substring(0, 50) || '정보 없음'
+        };
+    }
+
+    /**
+     * 추출 통계 생성
+     */
+    generateExtractionStatistics(items) {
+        const stats = Object.entries(items).map(([key, value]) => {
+            const confidence = value.confidence || 0;
+            const status = value.extractionError ? '실패' : '성공';
+            return `- ${key}: ${status} (신뢰도: ${(confidence * 100).toFixed(1)}%)`;
+        });
+        
+        return stats.join('\n');
+    }
+
+    /**
+     * 인과관계 분석 생성
+     */
+    generateCausalAnalysis(items) {
+        const correlations = items.correlations;
+        if (!correlations || !correlations.summary) {
+            return '인과관계 분석 정보가 없습니다.';
+        }
+        
+        return correlations.summary;
+    }
+
+    /**
+     * 경고사항 생성
+     */
+    generateWarnings(items) {
+        const warnings = [];
+        
+        Object.entries(items).forEach(([key, value]) => {
+            if (value.extractionError) {
+                warnings.push(`${key} 항목 추출 실패`);
+            }
+            
+            if (value.confidence && value.confidence < 0.5) {
+                warnings.push(`${key} 항목 신뢰도 낮음 (${(value.confidence * 100).toFixed(1)}%)`);
+            }
+        });
+        
+        return warnings.length > 0 ? warnings.join('\n') : '특별한 주의사항이 없습니다.';
+    }
+
+    /**
+     * 품질 지표 생성
+     */
+    generateQualityIndicators(items) {
+        const totalItems = Object.keys(items).length;
+        const successfulItems = Object.values(items).filter(item => !item.extractionError).length;
+        const avgConfidence = this.calculateOverallConfidence(items);
+        
+        return `
+- 총 항목 수: ${totalItems}
+- 성공적 추출: ${successfulItems}/${totalItems}
+- 평균 신뢰도: ${(avgConfidence * 100).toFixed(1)}%
+- 완성도: ${((successfulItems / totalItems) * 100).toFixed(1)}%`;
+    }
+}
+
+/**
+ * 내원일 추출기
+ */
+class VisitDateExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const visitDates = [];
+        const datePattern = /\d{4}[-.]\d{1,2}[-.]\d{1,2}|\d{1,2}[-.]\d{1,2}[-.]\d{4}/g;
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            const matches = content.match(datePattern);
+            
+            if (matches) {
+                matches.forEach(match => {
+                    visitDates.push({
+                        date: match,
+                        context: content.substring(0, 100),
+                        confidence: gene.confidence || 0.7
+                    });
+                });
+            }
+            
+            // 시간 앵커 확인
+            if (gene.anchors && gene.anchors.temporal) {
+                visitDates.push({
+                    date: gene.anchors.temporal,
+                    context: content.substring(0, 100),
+                    confidence: gene.confidence || 0.8
+                });
+            }
+        });
+        
+        // 중복 제거 및 정렬
+        const uniqueDates = [...new Set(visitDates.map(d => d.date))];
+        uniqueDates.sort();
+        
+        return {
+            summary: uniqueDates.length > 0 ? 
+                `총 ${uniqueDates.length}회 내원\n주요 내원일: ${uniqueDates.slice(0, 5).join(', ')}` :
+                '내원일 정보를 찾을 수 없습니다.',
+            dates: uniqueDates,
+            details: visitDates.slice(0, 10),
+            confidence: visitDates.length > 0 ? 
+                visitDates.reduce((sum, d) => sum + d.confidence, 0) / visitDates.length : 0
+        };
+    }
+}
+
+/**
+ * 내원경위 추출기
+ */
+class VisitReasonExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const reasons = [];
+        const reasonKeywords = ['주증상', '호소', '내원경위', '응급', '통증', '불편', '증상'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            reasonKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    reasons.push({
+                        reason: content,
+                        keyword,
+                        confidence: gene.confidence || 0.7
+                    });
+                }
+            });
+        });
+        
+        const summary = reasons.length > 0 ?
+            reasons.slice(0, 3).map(r => r.reason.substring(0, 100)).join('\n') :
+            '내원경위 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            reasons: reasons.slice(0, 5),
+            confidence: reasons.length > 0 ?
+                reasons.reduce((sum, r) => sum + r.confidence, 0) / reasons.length : 0
+        };
+    }
+}
+
+/**
+ * 입퇴원기간 추출기
+ */
+class AdmissionPeriodExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const admissions = [];
+        const admissionKeywords = ['입원', '퇴원', '병동', '입실', '전실'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            admissionKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    admissions.push({
+                        content,
+                        keyword,
+                        confidence: gene.confidence || 0.7
+                    });
+                }
+            });
+        });
+        
+        const summary = admissions.length > 0 ?
+            `입원 관련 기록 ${admissions.length}건 확인` :
+            '입퇴원 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            admissions: admissions.slice(0, 5),
+            confidence: admissions.length > 0 ?
+                admissions.reduce((sum, a) => sum + a.confidence, 0) / admissions.length : 0
+        };
+    }
+}
+
+/**
+ * 통원기간 추출기
+ */
+class OutpatientPeriodExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const outpatient = [];
+        const outpatientKeywords = ['외래', '통원', '재진', '추적', '경과관찰'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            outpatientKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    outpatient.push({
+                        content,
+                        keyword,
+                        confidence: gene.confidence || 0.7
+                    });
+                }
+            });
+        });
+        
+        const summary = outpatient.length > 0 ?
+            `외래 치료 기록 ${outpatient.length}건 확인` :
+            '통원 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            outpatient: outpatient.slice(0, 5),
+            confidence: outpatient.length > 0 ?
+                outpatient.reduce((sum, o) => sum + o.confidence, 0) / outpatient.length : 0
+        };
+    }
+}
+
+/**
+ * 진단병명 추출기
+ */
+class DiagnosisExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const diagnoses = [];
+        const diagnosisKeywords = ['진단', '병명', '질환', '소견', 'Dx', 'diagnosis'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            diagnosisKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    diagnoses.push({
+                        diagnosis: content,
+                        keyword,
+                        confidence: gene.confidence || 0.8
+                    });
+                }
+            });
+            
+            // 의료 앵커 확인
+            if (gene.anchors && gene.anchors.medical) {
+                diagnoses.push({
+                    diagnosis: gene.anchors.medical,
+                    keyword: 'medical_anchor',
+                    confidence: gene.confidence || 0.9
+                });
+            }
+        });
+        
+        const uniqueDiagnoses = [...new Set(diagnoses.map(d => d.diagnosis))];
+        const summary = uniqueDiagnoses.length > 0 ?
+            `진단명 ${uniqueDiagnoses.length}건:\n${uniqueDiagnoses.slice(0, 5).join('\n')}` :
+            '진단병명 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            items: uniqueDiagnoses,
+            details: diagnoses.slice(0, 10),
+            confidence: diagnoses.length > 0 ?
+                diagnoses.reduce((sum, d) => sum + d.confidence, 0) / diagnoses.length : 0
+        };
+    }
+}
+
+/**
+ * 검사내용및결과 추출기
+ */
+class ExaminationExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const examinations = [];
+        const examKeywords = ['검사', '촬영', 'CT', 'MRI', 'X-ray', '혈액검사', '소변검사', '결과'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            examKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    examinations.push({
+                        examination: content,
+                        keyword,
+                        confidence: gene.confidence || 0.8
+                    });
+                }
+            });
+        });
+        
+        const summary = examinations.length > 0 ?
+            `검사 기록 ${examinations.length}건 확인` :
+            '검사내용 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            examinations: examinations.slice(0, 10),
+            confidence: examinations.length > 0 ?
+                examinations.reduce((sum, e) => sum + e.confidence, 0) / examinations.length : 0
+        };
+    }
+}
+
+/**
+ * 치료사항 추출기
+ */
+class TreatmentExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const treatments = [];
+        const treatmentKeywords = ['치료', '처방', '투약', '수술', '시술', '요법', 'Tx', 'treatment'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            treatmentKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    treatments.push({
+                        treatment: content,
+                        keyword,
+                        confidence: gene.confidence || 0.8
+                    });
+                }
+            });
+        });
+        
+        const uniqueTreatments = [...new Set(treatments.map(t => t.treatment))];
+        const summary = uniqueTreatments.length > 0 ?
+            `치료 기록 ${uniqueTreatments.length}건:\n${uniqueTreatments.slice(0, 5).join('\n')}` :
+            '치료사항 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            items: uniqueTreatments,
+            details: treatments.slice(0, 10),
+            confidence: treatments.length > 0 ?
+                treatments.reduce((sum, t) => sum + t.confidence, 0) / treatments.length : 0
+        };
+    }
+}
+
+/**
+ * 과거력 추출기
+ */
+class PastHistoryExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const pastHistory = [];
+        const pastKeywords = ['과거력', '기왕력', '병력', '이전', '과거', '예전', 'Hx', 'history'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            pastKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    pastHistory.push({
+                        history: content,
+                        keyword,
+                        confidence: gene.confidence || 0.7
+                    });
+                }
+            });
+        });
+        
+        // 보험가입일 이전 정보 필터링 (가능한 경우)
+        const enrollmentDate = patientInfo.insurance_enrollment_date;
+        if (enrollmentDate) {
+            // 날짜 비교 로직 추가 가능
+        }
+        
+        const summary = pastHistory.length > 0 ?
+            `과거력 기록 ${pastHistory.length}건 확인` :
+            '과거력 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            pastHistory: pastHistory.slice(0, 10),
+            confidence: pastHistory.length > 0 ?
+                pastHistory.reduce((sum, p) => sum + p.confidence, 0) / pastHistory.length : 0
+        };
+    }
+}
+
+/**
+ * 기타사항(추가연관성) 추출기
+ */
+class CorrelationExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const correlations = [];
+        
+        // 인과관계 네트워크에서 연관성 추출
+        if (causalNetwork && causalNetwork.edges) {
+            causalNetwork.edges.forEach(edge => {
+                correlations.push({
+                    correlation: `${edge.source} → ${edge.target} (${edge.type})`,
+                    confidence: edge.confidence || 0.7,
+                    type: edge.type
+                });
+            });
+        }
+        
+        // 유전자 간 연관성 분석
+        const correlationKeywords = ['연관', '관련', '인과', '원인', '결과', '영향'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            correlationKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    correlations.push({
+                        correlation: content,
+                        keyword,
+                        confidence: gene.confidence || 0.6
+                    });
+                }
+            });
+        });
+        
+        const summary = correlations.length > 0 ?
+            `연관성 분석 ${correlations.length}건 확인` :
+            '추가 연관성 정보를 찾을 수 없습니다.';
+        
+        return {
+            summary,
+            correlations: correlations.slice(0, 10),
+            confidence: correlations.length > 0 ?
+                correlations.reduce((sum, c) => sum + c.confidence, 0) / correlations.length : 0
+        };
+    }
+}
+
+module.exports = { 
+    NineItemReportGenerator,
+    VisitDateExtractor,
+    VisitReasonExtractor,
+    AdmissionPeriodExtractor,
+    OutpatientPeriodExtractor,
+    DiagnosisExtractor,
+    ExaminationExtractor,
+    TreatmentExtractor,
+    PastHistoryExtractor,
+    CorrelationExtractor
+};

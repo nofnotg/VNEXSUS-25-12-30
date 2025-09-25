@@ -1,0 +1,628 @@
+{
+  "caseNumber": 5,
+  "timestamp": "2025-08-17T13:28:27.843Z",
+  "detailedResult": {
+    "caseNumber": 5,
+    "hasReportFile": true,
+    "processingTime": 24,
+    "success": true,
+    "validation": {
+      "hasPatientInfo": true,
+      "hasValidName": true,
+      "hasMedicalRecords": true,
+      "hasInsuranceInfo": true,
+      "noNaNValues": false,
+      "processingSuccess": true,
+      "overallScore": 0.8333333333333334
+    },
+    "patientInfo": {
+      "patientName": "김태형",
+      "birthDate": "yyyy-mm-dd",
+      "registrationNumber": "2455470"
+    },
+    "medicalRecordsCount": 52,
+    "insuranceInfoCount": 1,
+    "hospitalizationCount": 13,
+    "testResultsCount": 0,
+    "nanIssues": {
+      "hasNaN": true,
+      "locations": [
+        ".normalizedReport.insuranceConditions.0.company",
+        ".normalizedReport.insuranceHistory.0.company",
+        ".normalizedReport.medicalRecords.20.hospital",
+        ".progressReport"
+      ]
+    },
+    "memoryUsage": {
+      "rss": 48619520,
+      "heapTotal": 10985472,
+      "heapUsed": 8050504,
+      "external": 1815551,
+      "arrayBuffers": 10515
+    }
+  },
+  "fullResult": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "김태형",
+        "birthDate": "yyyy-mm-dd",
+        "registrationNumber": "2455470"
+      },
+      "insuranceConditions": [
+        {
+          "conditionNumber": 1,
+          "company": "제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서 2025년 01월 21일 담당자: 조예은 담당자의 날인이 없는 것은 무효임 세 대 학 연래대학교 연세대학교 의과대학 학과대학 세브란스병원 병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록 2024-12-27 추정진단 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 기타 [예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록 2024-12-27 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 기능검사결과(I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 기능검사결과(I/F형) ECHOCARDIOGRAPHY LABORATORY, SEVERANCE CARDIOVASCULAR HOSPITAL YONSEI UNIVERSITY COLLEGE OF MEDICINE, SEOUL KOREA Exam Date: 2024-12-27 Echo No.: 24 Patient ID 2455470 Location OPD Height: 1. Comments Name: 김태형 Referring Dr.: 홍성진 Sex/Age: M 162.0cm Weight: Study Remark : 62kg BSA 1.67m2 BP: 131/90mmHg 전문심초음파 -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattem (E/e': 5) 2. Regional Wall Motion Abnormality: No 3. [LV GLS]: 15-20% 4. Valves: MV Native Slightly thickened AV Native Slightly thickened TV Native Normal 5. Regurgitation: MR. Trivial 6. Stenosis: MS. No AR AS No TR No 7. Pericardial Effusion: No TS: Intracardiac Thrombi: No Trivial No PR No PS. No Mass: No 8. Diastolic function: Relaxation abnormality of LV filling pattern M-mode/2D Measurement RVD (9-26) mm IVSD (8-11): 9 mm Ao root (22-33) mm LVEDD (42-54): 48 mm IVSS: 12 mm LA (AP/ML/SI): 32// mm LVESD (24-36): 33 LVEF (55-76): mm PWD (8-11): 9 mm LA Vol PWS: 13 mm by M-mode: 62 % LVOT (18-22): mm by Biplane: % LV Mass: 147.8 g by prolate ellipse: by mod simpson LA Vol index (18-28) ml 30.3 ml TV Annulus: mm LV Mass index: 88.5 g/m2 IVC: mm RWT: 0.38 by prolate ellipse: by mod simpson 18.1 Echo Score: Total M T S C MV Annulus (4C/2C): / ml/m2 ml/m2 mm Doppler Measurement Aortic Mitral Tricuspid LVOT (TVI): cm TVI of MR jet: cm TR jet: 2.31 m/sec AV (TVI): cm E (0.6-1): 0.36 m/sec RVSP: 26 mmHg LVOT peak V: m/sec A (0.3-0.8): 0.59 m/sec PSPG/MSPG: mmHg DT (170-210): 132 msec RAP: mPAP 5 mmHg mmHg AV Peak V: m/sec PHT: msec PVR: PSPG/MSPG: AVA by 2D: mmHg MDPG: mmHg MDPG: mmHg HR: /min RVOT VTI: cm by continuity: cm2 MVA by 2D: cm2 Pulmonic PHT of AR jet: msec by PHT: cm2 PSPG/MSPG: mmHg by continuity: cm2 TDI S': 11.0 cm/sec E': 8.0 cm/sec A: 14.0 RVOT AT: cm/sec m/sec E/E': 4.50 Reported by: 박상신 판독의(1차) 박상신 판독의(2차) 조익성 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 입원정보 입원일자 2024-12-31 입원과 심장내과 입원주치의 홍성진 퇴원정보 퇴원일자 2024-12-31 퇴원과 심장내과 퇴원주치의 홍성진 최종진단명(*) 순서 한국질병 구분 확진 진단명 1 주진단 확진 Stable angina pectoris 분류번호 120.88 2 기타진단 확진 Coronary artery disease (1 vessel disease) 125.1 3 기타진단 확진 Diabetes mellitus type 2 with dyslipidemia E11.68 4 기타진단 확진 Dyslipidemia E78.8 5 기타진단 확진 Diastolic heart failure 150.08 투여된 약물 중 잔류효과로 퇴원 후 주의가 필요한 약물 없음 ㅇ있음 시술 및 처치명 수술/처치명 Coronary Angiography 수술/처치코드 Implantable Medical Device 사용 여부 No Yes 치료결과 (*) 완쾌 경쾌 ) 48시간이내 사망 퇴원형태 퇴원지시후 호전안됨 ㅇ 진단뿐 48시간이후 사망 타병원전원 '가망없는 퇴원 )자의 퇴원 탈원 향후 치료계획 외래 추후관리 재입원 없음 기타 담당 전공의사명 진인태 기록자명 진인태(의사) 주치의사명 홍성진 <약어 설명> CAOD coronary artery obstructive disease RFCA radio-frequency catheter ablation DCMP dilated cardiomyopathy HCMP hypertrophic cardiomyopathy NSTEMI non-ST elevation myocardial infarction PAF paroxysmal atrial fibrillation C-angio : coronary angiogram A.fib: atrial fibrillation EPS electrophysiologic studies 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL RHD rheumatic heart disease NSVT: non-sustained ventricular tachycardia A-flutter : atrial flutter 1/2 출력일: 2025-01-21 퇴원요약 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 CTO chronic total occlusion 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 퇴원요약 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 입원일자 2024-12-31 입원과 심장내과 주호소 현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 감염성질환 초기평가 1. 증상 및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography 2025-01-01 2024-12-31 complication 없이 퇴원한다. 기록자명 진인태(의사) <약어 설명> BMI : body mass index BP(D): Blood Pressure(Diastolic) BP(S) : Blood Pressure(Systolic) BT body temperature C-sec : cesarean section CVA cerebrovascular accident CVA tenderness costovertebral angle DM diabetes mellitus 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 DOE dyspnea on exertion ECOG eastern cooperative oncology group HEENT : head, ear, eye, nose and throat 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 연령 구분 ●영유아기 학령전기 학령기 ㅇ 청소년기 성인 일반 정보 간호정보조사(초기사정) 2024-12-31 종교 ㅇ 없음 ○ 기독교 천주교 ㅇ 불교 ㅇ기타 보호자 (Main care giver) □ 없음 □ 배우자 □ 부 |기타 모 □ 자녀 □ 조부 조모 형제 □ 자매 □ 간병인 지난 2주동안 기분이 가라앉거나, 우울하거나, 희망이 없다고 느낀 기간 ) 없음 ○ 2~3일 이상 ○ 7일 이상 ㅇ 거의 매일 ㅇ 확인 불가능 지난 2주동안 평소 하던 일에 대한 흥미가 없어지거나 즐거움을 느끼지 못한 기간 없음 ○ 2~3일 이상 ○7일 이상 ㅇ 거의 매일 ㅇ 확인불가능 * 정서 평가 0 The Patient Health Questionnaire -2(PHQ-2) (2003). 교육과 진료에 영향을 주는 가치와 신념(Value & belief) 없음 ㅇ있음 현병력 주 증상 및 내원 과정 CAG하기 위해 입원함 복용중인 약 없음 있음 투약 상태 약품명 1회 투여개수 수량 단위 1회 투여량 횟수 용법 및 투여시간 약품코드 유효함량 Closone [1 C/C] 1 C 용량 단위 1 C 1 PO D2CLOSO2 1 내원 시 환자 상태 통증 없음 의식 상태 명료(alert) 있음 입원 전에 있었음 의사 소통 √ 원만함 어려움 불가능함 기타 과거력 과거병력 없음 있음 입원 및 수술 이력 없음 ㅇ있음 ㅇ 알 수 없음 Allergy Allergy / 없음 식품 ADL 수행 능력 화장실 가기 자가 부분 보조 ㅇ완전 보조 이동하기 낙상 경험 자가 ○ 부분 보조 없음 낙상 시기 ㆍ완전 보조 영양 상태 1개월간 체중변화 없음 ㅇ 증가함 ㅇ 감소함 체중변화 kg 최근 1주일간 식사량 변화 없음 ㅇ 증가 감소 식이 주의 사항 「없음 ㅇ 열량 조절 ㅇ 체중 조절 ㅇ 염분 제한 ㅇ 수분 제한 ㅇ 단백질 제한 ㅇ 지방 제한 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 간호정보조사(초기사정) 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 2024-12-31 기타 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography (Rt. dominant) AVB ACO Coronary angiography (Right dominant) Date 2024-12-31 홍성진 Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant Puncture site Review 진인태 Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath -> PAD+Coban RCA C JR 5-4 Minimal LN of PRCA LCA c JL 5-4 Tubular ecc. 50% LN of MLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 110cc Conclusion Recommend concor 1.25mg qd, livalo 2mg qd 일주일 뒤 외래 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 기록자명 이재준 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 Coronary angiography note 검사 Date 2024-12-31 Pre-procedural diagnosis Typical angina; Coronary angiography Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath RCA C JR 5-4 - Minimal LN of PRCA LCA C JL 5-4 PAD+Coban Tubular ecc. 50% LN of mLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 90cc 시술과정 중 특이사항 Comment Contrast Visipaque 320 lodixanol 652mg/ml - Scanlux 300 iodixanol 612mg/ml → Blood loss No Yes 조영제 알러지 No Yes 피부 상태 이상 No Yes Conclusions a. Clinical diagnosis b. Anatomical diagnosis Stable Angina ; CCS class Normal & minimal dz. 시술 후 계획 Recommendation 1VD 2VD 3VD Lt main disease Total occlusion ? acute chronic RCA LAD LCX 1. Close monitor for puncture site 2. Close monitor for development of chest pain Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant 영상의학과 홍성진 박규태 원종윤 <약어 설명> ACS : acute coronary syndrone ACT activated coagulation time Af atril fibrillation APC: atrial premature complex 전자서명자: 박규태 ECG electrocardigram ECGs electrocardigram : EIA: external iliac artery Fr: french 1/2 p-dLCx proximal-distal left circumflex artery PLAD: proximal left ascending artery pLCx proximal left circumflex artery p-mRCA proximal-mid right coronary artery 출력일: 2025-01-21 세브란스병원 SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 외래재진기록 2025-01-09 진료과 심장내과 주치의 홍성진 BP(S) BP(D) HR 146 mmHg 83mmHg 82/min Subjective Objective Assessment LAD MILKING 2024-12-31 concor 1.25mg qd, livalo 2mg qd Plan HbA1c 9.5 진단명 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 진료과 내분비내과 주치의 주호소 이병완 주호소 기간 Pl newly detected diabetes 과거력 당뇨병 유 무 진단 년도 기간 진단 당시 나이 세 고혈압 No Yes 관상동맥질환 No Yes 뇌혈관질환 No Yes 종양 No Yes 간염 No Yes 수술력 No Yes 약물부작용 No Yes 기타 질환 음주력 No Yes Quit 흡연력 No Current smoker PYRS √ Ex-smoker 년전 quit PYRS Current medication Pul.Tbc No Yes Drug Allergy No ** Yes ? Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Other 알레르기 No Yes 가족력 당뇨 No Yes 심장혈관질환 No Yes 뇌혈관질환 No Yes 기타 No Yes ROS Weight loss No Yes BP(S) 125 mmHg 신체계측 전자서명자: 이병완 세브란스병원 SEVERANCE HOSPITAL BP(D) 87 mmHg Sulfonamide Cephalosporin 외래초진기록 2025-01-14 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 Physical Exam 외래초진기록 2025-01-14 신장 162.5cm 체중 63.2Kg IBW % BMI 24 허리 둘레 93.0cm WHR 엉덩이 둘레 97.0cm 체중 변화 증 감 20세 체중 최소체중 Kg 최대체중 Kg 기타 General appearance normal abnormal Skin normal abnormal HEENT normal abnormal Neck normal abnormal Chest/lung normal abnormal Heart normal abnormal Abdomen normal abnormal Back and extremity normal abnormal Impression T2D Plan MMT 향후치료계획 OHAS 기록자명 이병완(의사) <약어 설명> BMI: body mass index WHR waist to hip ratio BP(S) : Blood Pressure(Systolic) IBW ideal body weight ROS Review of system HEENT : head, ear, eye, nose and throat PYRS pack-years BP(D): Blood Pressure(Diastolic) 전자서명자: 이병완 2/2 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ========== 2025-1-24 4:08 PM 기본진료정보 순번 진료시작일 병·의원&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강"
+        }
+      ],
+      "insuranceHistory": [
+        {
+          "period": "[보험 가입 3개월 이내]",
+          "company": "제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서 2025년 01월 21일 담당자: 조예은 담당자의 날인이 없는 것은 무효임 세 대 학 연래대학교 연세대학교 의과대학 학과대학 세브란스병원 병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록 2024-12-27 추정진단 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 기타 [예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록 2024-12-27 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 기능검사결과(I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 기능검사결과(I/F형) ECHOCARDIOGRAPHY LABORATORY, SEVERANCE CARDIOVASCULAR HOSPITAL YONSEI UNIVERSITY COLLEGE OF MEDICINE, SEOUL KOREA Exam Date: 2024-12-27 Echo No.: 24 Patient ID 2455470 Location OPD Height: 1. Comments Name: 김태형 Referring Dr.: 홍성진 Sex/Age: M 162.0cm Weight: Study Remark : 62kg BSA 1.67m2 BP: 131/90mmHg 전문심초음파 -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattem (E/e': 5) 2. Regional Wall Motion Abnormality: No 3. [LV GLS]: 15-20% 4. Valves: MV Native Slightly thickened AV Native Slightly thickened TV Native Normal 5. Regurgitation: MR. Trivial 6. Stenosis: MS. No AR AS No TR No 7. Pericardial Effusion: No TS: Intracardiac Thrombi: No Trivial No PR No PS. No Mass: No 8. Diastolic function: Relaxation abnormality of LV filling pattern M-mode/2D Measurement RVD (9-26) mm IVSD (8-11): 9 mm Ao root (22-33) mm LVEDD (42-54): 48 mm IVSS: 12 mm LA (AP/ML/SI): 32// mm LVESD (24-36): 33 LVEF (55-76): mm PWD (8-11): 9 mm LA Vol PWS: 13 mm by M-mode: 62 % LVOT (18-22): mm by Biplane: % LV Mass: 147.8 g by prolate ellipse: by mod simpson LA Vol index (18-28) ml 30.3 ml TV Annulus: mm LV Mass index: 88.5 g/m2 IVC: mm RWT: 0.38 by prolate ellipse: by mod simpson 18.1 Echo Score: Total M T S C MV Annulus (4C/2C): / ml/m2 ml/m2 mm Doppler Measurement Aortic Mitral Tricuspid LVOT (TVI): cm TVI of MR jet: cm TR jet: 2.31 m/sec AV (TVI): cm E (0.6-1): 0.36 m/sec RVSP: 26 mmHg LVOT peak V: m/sec A (0.3-0.8): 0.59 m/sec PSPG/MSPG: mmHg DT (170-210): 132 msec RAP: mPAP 5 mmHg mmHg AV Peak V: m/sec PHT: msec PVR: PSPG/MSPG: AVA by 2D: mmHg MDPG: mmHg MDPG: mmHg HR: /min RVOT VTI: cm by continuity: cm2 MVA by 2D: cm2 Pulmonic PHT of AR jet: msec by PHT: cm2 PSPG/MSPG: mmHg by continuity: cm2 TDI S': 11.0 cm/sec E': 8.0 cm/sec A: 14.0 RVOT AT: cm/sec m/sec E/E': 4.50 Reported by: 박상신 판독의(1차) 박상신 판독의(2차) 조익성 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 입원정보 입원일자 2024-12-31 입원과 심장내과 입원주치의 홍성진 퇴원정보 퇴원일자 2024-12-31 퇴원과 심장내과 퇴원주치의 홍성진 최종진단명(*) 순서 한국질병 구분 확진 진단명 1 주진단 확진 Stable angina pectoris 분류번호 120.88 2 기타진단 확진 Coronary artery disease (1 vessel disease) 125.1 3 기타진단 확진 Diabetes mellitus type 2 with dyslipidemia E11.68 4 기타진단 확진 Dyslipidemia E78.8 5 기타진단 확진 Diastolic heart failure 150.08 투여된 약물 중 잔류효과로 퇴원 후 주의가 필요한 약물 없음 ㅇ있음 시술 및 처치명 수술/처치명 Coronary Angiography 수술/처치코드 Implantable Medical Device 사용 여부 No Yes 치료결과 (*) 완쾌 경쾌 ) 48시간이내 사망 퇴원형태 퇴원지시후 호전안됨 ㅇ 진단뿐 48시간이후 사망 타병원전원 '가망없는 퇴원 )자의 퇴원 탈원 향후 치료계획 외래 추후관리 재입원 없음 기타 담당 전공의사명 진인태 기록자명 진인태(의사) 주치의사명 홍성진 <약어 설명> CAOD coronary artery obstructive disease RFCA radio-frequency catheter ablation DCMP dilated cardiomyopathy HCMP hypertrophic cardiomyopathy NSTEMI non-ST elevation myocardial infarction PAF paroxysmal atrial fibrillation C-angio : coronary angiogram A.fib: atrial fibrillation EPS electrophysiologic studies 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL RHD rheumatic heart disease NSVT: non-sustained ventricular tachycardia A-flutter : atrial flutter 1/2 출력일: 2025-01-21 퇴원요약 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 CTO chronic total occlusion 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 퇴원요약 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 입원일자 2024-12-31 입원과 심장내과 주호소 현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 감염성질환 초기평가 1. 증상 및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography 2025-01-01 2024-12-31 complication 없이 퇴원한다. 기록자명 진인태(의사) <약어 설명> BMI : body mass index BP(D): Blood Pressure(Diastolic) BP(S) : Blood Pressure(Systolic) BT body temperature C-sec : cesarean section CVA cerebrovascular accident CVA tenderness costovertebral angle DM diabetes mellitus 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 DOE dyspnea on exertion ECOG eastern cooperative oncology group HEENT : head, ear, eye, nose and throat 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 연령 구분 ●영유아기 학령전기 학령기 ㅇ 청소년기 성인 일반 정보 간호정보조사(초기사정) 2024-12-31 종교 ㅇ 없음 ○ 기독교 천주교 ㅇ 불교 ㅇ기타 보호자 (Main care giver) □ 없음 □ 배우자 □ 부 |기타 모 □ 자녀 □ 조부 조모 형제 □ 자매 □ 간병인 지난 2주동안 기분이 가라앉거나, 우울하거나, 희망이 없다고 느낀 기간 ) 없음 ○ 2~3일 이상 ○ 7일 이상 ㅇ 거의 매일 ㅇ 확인 불가능 지난 2주동안 평소 하던 일에 대한 흥미가 없어지거나 즐거움을 느끼지 못한 기간 없음 ○ 2~3일 이상 ○7일 이상 ㅇ 거의 매일 ㅇ 확인불가능 * 정서 평가 0 The Patient Health Questionnaire -2(PHQ-2) (2003). 교육과 진료에 영향을 주는 가치와 신념(Value & belief) 없음 ㅇ있음 현병력 주 증상 및 내원 과정 CAG하기 위해 입원함 복용중인 약 없음 있음 투약 상태 약품명 1회 투여개수 수량 단위 1회 투여량 횟수 용법 및 투여시간 약품코드 유효함량 Closone [1 C/C] 1 C 용량 단위 1 C 1 PO D2CLOSO2 1 내원 시 환자 상태 통증 없음 의식 상태 명료(alert) 있음 입원 전에 있었음 의사 소통 √ 원만함 어려움 불가능함 기타 과거력 과거병력 없음 있음 입원 및 수술 이력 없음 ㅇ있음 ㅇ 알 수 없음 Allergy Allergy / 없음 식품 ADL 수행 능력 화장실 가기 자가 부분 보조 ㅇ완전 보조 이동하기 낙상 경험 자가 ○ 부분 보조 없음 낙상 시기 ㆍ완전 보조 영양 상태 1개월간 체중변화 없음 ㅇ 증가함 ㅇ 감소함 체중변화 kg 최근 1주일간 식사량 변화 없음 ㅇ 증가 감소 식이 주의 사항 「없음 ㅇ 열량 조절 ㅇ 체중 조절 ㅇ 염분 제한 ㅇ 수분 제한 ㅇ 단백질 제한 ㅇ 지방 제한 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 간호정보조사(초기사정) 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 2024-12-31 기타 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography (Rt. dominant) AVB ACO Coronary angiography (Right dominant) Date 2024-12-31 홍성진 Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant Puncture site Review 진인태 Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath -> PAD+Coban RCA C JR 5-4 Minimal LN of PRCA LCA c JL 5-4 Tubular ecc. 50% LN of MLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 110cc Conclusion Recommend concor 1.25mg qd, livalo 2mg qd 일주일 뒤 외래 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 기록자명 이재준 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 Coronary angiography note 검사 Date 2024-12-31 Pre-procedural diagnosis Typical angina; Coronary angiography Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath RCA C JR 5-4 - Minimal LN of PRCA LCA C JL 5-4 PAD+Coban Tubular ecc. 50% LN of mLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 90cc 시술과정 중 특이사항 Comment Contrast Visipaque 320 lodixanol 652mg/ml - Scanlux 300 iodixanol 612mg/ml → Blood loss No Yes 조영제 알러지 No Yes 피부 상태 이상 No Yes Conclusions a. Clinical diagnosis b. Anatomical diagnosis Stable Angina ; CCS class Normal & minimal dz. 시술 후 계획 Recommendation 1VD 2VD 3VD Lt main disease Total occlusion ? acute chronic RCA LAD LCX 1. Close monitor for puncture site 2. Close monitor for development of chest pain Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant 영상의학과 홍성진 박규태 원종윤 <약어 설명> ACS : acute coronary syndrone ACT activated coagulation time Af atril fibrillation APC: atrial premature complex 전자서명자: 박규태 ECG electrocardigram ECGs electrocardigram : EIA: external iliac artery Fr: french 1/2 p-dLCx proximal-distal left circumflex artery PLAD: proximal left ascending artery pLCx proximal left circumflex artery p-mRCA proximal-mid right coronary artery 출력일: 2025-01-21 세브란스병원 SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 외래재진기록 2025-01-09 진료과 심장내과 주치의 홍성진 BP(S) BP(D) HR 146 mmHg 83mmHg 82/min Subjective Objective Assessment LAD MILKING 2024-12-31 concor 1.25mg qd, livalo 2mg qd Plan HbA1c 9.5 진단명 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 진료과 내분비내과 주치의 주호소 이병완 주호소 기간 Pl newly detected diabetes 과거력 당뇨병 유 무 진단 년도 기간 진단 당시 나이 세 고혈압 No Yes 관상동맥질환 No Yes 뇌혈관질환 No Yes 종양 No Yes 간염 No Yes 수술력 No Yes 약물부작용 No Yes 기타 질환 음주력 No Yes Quit 흡연력 No Current smoker PYRS √ Ex-smoker 년전 quit PYRS Current medication Pul.Tbc No Yes Drug Allergy No ** Yes ? Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Other 알레르기 No Yes 가족력 당뇨 No Yes 심장혈관질환 No Yes 뇌혈관질환 No Yes 기타 No Yes ROS Weight loss No Yes BP(S) 125 mmHg 신체계측 전자서명자: 이병완 세브란스병원 SEVERANCE HOSPITAL BP(D) 87 mmHg Sulfonamide Cephalosporin 외래초진기록 2025-01-14 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 Physical Exam 외래초진기록 2025-01-14 신장 162.5cm 체중 63.2Kg IBW % BMI 24 허리 둘레 93.0cm WHR 엉덩이 둘레 97.0cm 체중 변화 증 감 20세 체중 최소체중 Kg 최대체중 Kg 기타 General appearance normal abnormal Skin normal abnormal HEENT normal abnormal Neck normal abnormal Chest/lung normal abnormal Heart normal abnormal Abdomen normal abnormal Back and extremity normal abnormal Impression T2D Plan MMT 향후치료계획 OHAS 기록자명 이병완(의사) <약어 설명> BMI: body mass index WHR waist to hip ratio BP(S) : Blood Pressure(Systolic) IBW ideal body weight ROS Review of system HEENT : head, ear, eye, nose and throat PYRS pack-years BP(D): Blood Pressure(Diastolic) 전자서명자: 이병완 2/2 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ========== 2025-1-24 4:08 PM 기본진료정보 순번 진료시작일 병·의원&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강"
+        }
+      ],
+      "medicalRecords": [
+        {
+          "date": "",
+          "hospital": "주: 1. 이 진료의뢰서는 1차진료후 2차진료를 받고자 하는 경우 1차 진료담당의사로부터 요양급여 기준에 따라 무상으로 교부됩니다. 2. 의사의 탈급일부터 7일(공휴일 제외)이내에 사용하여야 합니다. 3. 환자상태 및 진료소견란에는 현증, 검사, 투약 등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "prescription": "등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:",
+          "notes": "란에는 현증, 검사, 투약 등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:"
+        },
+        {
+          "date": "",
+          "hospital": "(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "prescription": "전을 참고하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (",
+          "notes": "하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (; 정상B 고혈압ㆍ당뇨병 질환의심 김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다. * 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) ("
+        },
+        {
+          "date": "",
+          "hospital": "미확인 의료기관",
+          "reason": "이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.",
+          "diagnosis": "미확인",
+          "prescription": "치료 무 진찰 금연필요 절주 필요 신체활동 필요 근력운동 필요 (문진) 생활습관 담당 의사와 상담하십시오. 실시대상자 여부 결과 표면항원 일반 정밀( B형간염 해당 비해당 표면항체 일반 정밀( ) ) □ 항체있음 □ 항체없음 B형 간염 보유자 의심 □판정 보류 우울증상이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.",
+          "notes": "빈혈 등 혈색소(g/dL) 19.2 여 12.0~15.5 □ 빈혈 의심 □ 정상 유질환자 당뇨병 공복혈당(mg/dL) 153 100.0미만 □ 공복혈당장애 의심 ■ 당뇨병 의심 총콜레스테롤(mg/dL) 203 200.0 미만 정상 고콜레스테롤혈증 의심 고밀도 콜레스테롤(mg/dL) 41 60.0이상 이상지질혈증 ■ 고중성지방혈증 의심 혈액검사 중성지방(mg/dL) 187 150.0미만 낮은 HDL 콜레스테롤 의심 |저밀도 콜레스트롤(mg/dL) 125 130.0미만 □ 유질환자 혈청크레아티닌(mg/dL) 1 1.5이하 ■ 정상 신장질환 신사구체여과율(e-GFR) 79 60.0이상 신장기능 이상 의심 (mL/min/1.73m²) |AST(SGOT)(IU/L) 26 40.0이하 정상 간장질환 [ALT(SGPT)(IU/L) 12 35.0이하 간기능 이상 의심 남 63.0이하 |감마지티피(X-GTP)(IU/L) 32 여 35.0이하 요검사 요단백 정상 경계 영상 흉부촬영 정상 비활동성 폐결핵 질환의심: 단백뇨 의심 기타: 검사 과거병력 무 약물치료 무 진찰 금연필요 절주 필요 신체활동 필요 근력운동 필요 (문진) 생활습관 담당 의사와 상담하십시오. 실시대상자 여부 결과 표면항원 일반 정밀( B형간염 해당 비해당 표면항체 일반 정밀( ) ) □ 항체있음 □ 항체없음 B형 간염 보유자 의심 □판정 보류 우울증상이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.; 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다."
+        },
+        {
+          "date": "2024-06-05",
+          "hospital": "(요양기관기호",
+          "visitDate": "2024-06-05",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2025-01-24",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2025-01-24",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "에서 요양급여(진료가 필요하다는 건강검진종합소견이 있는 경우 요양급여의뢰서(진료의뢰서)로 갈음됩니다. 본 자료는 개인정보보호법에 관한법률에 의거 엄격히 개인의 비밀이 유지되어야하며, 발급목적 외 타 업무의 증빙자료로 사용되어 발생되는 모든 책임은 본인에게 있으며 공단에는 일체 이의를 제기할 수 없습니다. 국민건강보험공단 이사장 직인 보험공단 ========== 파일: e??i? e³?i?? e² i§?_i??i??e² i§?(24e??).pdf ========== 2024 년도 위암 검진 결과 내 역 발급번호: WGK01-17377-02854-14972-75827 KOR www.nhis.or.kr/. 성 명 김태형 주민번호 600809-1****** 검사항목 결 과 [병형(부위)] 판정 1 이상소견없음() 위장조영 판독소견 2",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "이 있는 경우 요양급여의뢰서(진료의뢰서)로 갈음됩니다. 본 자료는 개인정보보호법에 관한법률에 의거 엄격히 개인의 비밀이 유지되어야하며, 발급목적 외 타 업무의 증빙자료로 사용되어 발생되는 모든 책임은 본인에게 있으며 공단에는 일체 이의를 제기할 수 없습니다. 국민건강보험공단 이사장 직인 보험공단 ========== 파일: e??i? e³?i?? e² i§?_i??i??e² i§?(24e??).pdf ========== 2024 년도 위암 검진 결과 내 역 발급번호: WGK01-17377-02854-14972-75827 KOR www.nhis.or.kr/. 성 명 김태형 주민번호 600809-1****** 검사항목 결 과 [병형(부위)] 판정 1 이상소견없음() 위장조영 판독소견 2"
+        },
+        {
+          "date": "",
+          "hospital": "미확인 의료기관",
+          "reason": "이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명",
+          "diagnosis": "권고사항 위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명",
+          "notes": "23 조직진단 권고사항 위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명"
+        },
+        {
+          "date": "2024-05-30",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2024-05-30",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2024-06-05",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2024-06-05",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2025-01-24",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2025-01-24",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "미확인 의료기관",
+          "reason": "체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.",
+          "diagnosis": "권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.",
+          "notes": "조직진단 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.; 3 기타 조직진단 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다."
+        },
+        {
+          "date": "2024-06-05",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2024-06-05",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2025-01-21",
+          "hospital": "병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록",
+          "visitDate": "2025-01-21",
+          "reason": "및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2025-01-24",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2025-01-24",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "의무기록사본 피보험자 : 김태형 빈경환 세브란스병원 SEVERANCE HOSPITAL 발행번호: 2025-8328 등록번호: 2455470 환자성명: 김태형 용도: 보험회사제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 1/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일:",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록",
+          "reason": "정기 진료",
+          "diagnosis": "소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록",
+          "notes": "[예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록; ] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록"
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "(I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일:"
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 2/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일:"
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일:",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "미확인 의료기관",
+          "reason": "정기 진료",
+          "diagnosis": "구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일:",
+          "notes": "진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일:"
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ==========",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "신경과 외래 AR908 통의 진단 1 28,540 3,140 25,400 |영상검사 상 기타 이 (양방치 과보철 장 2",
+          "reason": "정기 진료",
+          "diagnosis": "1 28,540 3,140 25,400 |영상검사 상 기타 이 (양방치 과보철 장 2",
+          "notes": "이 (양방치 과보철 장 2"
+        },
+        {
+          "date": "",
+          "hospital": "외래 AZ463 치의 부착 및 조정을 90,740 63,540 27,200 위하여 보 3",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 17,090 11,990 5,100 10",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 64,720 45,320 19,400 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7"
+        },
+        {
+          "date": "",
+          "hospital": "|구강악 \"과 (양방)불 치과 한원의 외래 AKO881 칠지로 12,610 8,910 3,700 돌기 구강악 14",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "(양방)불 치과 안원회 외래 AK0881 칠지로 1 12,610 8,910 3,700 돌기 구강악 덴티스킨치과 15",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)치 안면외 외래 AS0256 과 근을 포함 한 치관의 파절 61,750 43,250 18,500 20|",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7"
+        },
+        {
+          "date": "",
+          "hospital": "학과 로 폐색을 외래 AN401 동반한 전 |립전층식 1 17,320 16,320 1,000 28",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "과 (양방)어 외래 AS400 깨 및 위패 의 타박상 1 19,560 18,560 1,000 33",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "과 (양방)어 외래 | AS400 깨 및 위패 1 의 타박상 19,560 18,560 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?"
+        },
+        {
+          "date": "",
+          "hospital": "(양방)어 외래 AS400 깨 및 위팰 의 타박상 51,530 50,530 1,000 (양방)요 36",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "학과 로 폐색을 외래 AN401 동반한 전 |립전층식 증 1 72,770 71,770 1,000 (양방)달 리 분류되 37 |",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "존과 외래 AZ463 치의 부착 32,850 31,850 1,000 및 조정을 위하여 보 (양방)기 41 |",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "내과 외래 AU071 확인된 코 83,260 83,260 로나바이 러스 질환 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7"
+        },
+        {
+          "date": "",
+          "hospital": "내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 46|",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 47 |",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 48 |",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 러스 질환 (양방)기 49",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "존과 외래 AK0538 타 명시된 만성 치주 염 9,800 8,800 1,000 (양방)기 50|",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "존과 외래 AK0538 타 명시된 만성 치주 14,780 13,780 1,000 염 (양방)기 52 |",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 11,580 10,580 1,000 54",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 88,170 87,170 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7"
+        },
+        {
+          "date": "",
+          "hospital": "치과보 존과 (양방)상 외래 AKO21 아질의 우 식 14,780 13,780 1,000 (양방)기 58|",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "증의학 외래 | AS600 이 없는 손 마취통 26,900 25,900 1,000 가락의 타 박상 구강악 덴티스킨치과 61",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "구강악 (양방)만 안면외 외래 AK0530 단순치 1 과 추염 113,930 112,930 1,000 65",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "존과 (양방)치 외래 AK0311 아의 습관 성 마모 52,680 51,680 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7"
+        },
+        {
+          "date": "",
+          "hospital": "&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ㆍ 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7"
+        }
+      ],
+      "hospitalizationRecords": [
+        {
+          "date": "",
+          "hospital": "에서 진료 및 검사 원하여 문의드리오니 고진선처 바랍니다. 감사합니다. 898-9 진료실4",
+          "reason": "응급실 내원",
+          "diagnosis": "미확인",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 퇴원요약 2/2 출력일:",
+          "reason": "응급실 내원",
+          "diagnosis": "미확인",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL 입원기록 1/3 출력일:",
+          "reason": "현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:",
+          "diagnosis": "미확인",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": "Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:; 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:"
+        },
+        {
+          "date": "",
+          "hospital": "방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography",
+          "reason": "및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography",
+          "diagnosis": "Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": "퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography"
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일:",
+          "reason": "응급실 내원",
+          "diagnosis": "미확인",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일:",
+          "reason": "응급실 내원",
+          "diagnosis": "미확인",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)중 추신경계 1",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)중 추신경계 1",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 12",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 12",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 23",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 23",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)어 34 |",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)어 34 |",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)바 |이러스가 45|",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)바 |이러스가 45|",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)불 56|",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)불 56|",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        },
+        {
+          "date": "",
+          "hospital": "&약국 진단과 입원/ 주상병 외래 코드 주상병명 내원 총 진료비 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)만 의원 67",
+          "reason": "응급실 내원",
+          "diagnosis": "과 입원/ 주상병 외래 코드 주상병명 내원 총 진료비 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)만 의원 67",
+          "admissionPeriod": "undefined ~ undefined",
+          "surgeryInfo": null,
+          "notes": ""
+        }
+      ],
+      "insuranceClaims": [
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7"
+        },
+        {
+          "date": "",
+          "company": "미확인 보험사",
+          "paymentDate": null,
+          "amount": null,
+          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7"
+        }
+      ]
+    },
+    "progressReport": "NaN\n의료 경과보고서\nMedical Progress Report\n생성일: 2025.08.17\nNaN\n\n■ 환자 정보 (Patient Information)\nNaN\n환자명: 김태형\n생년월일: 미확인 (만 미확인세)\n등록번호: 2455470\n\n■ 보험 가입 조건 (Insurance Conditions)\nNaN\n1. 제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서 2025년 01월 21일 담당자: 조예은 담당자의 날인이 없는 것은 무효임 세 대 학 연래대학교 연세대학교 의과대학 학과대학 세브란스병원 병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록 2024-12-27 추정진단 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 기타 [예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록 2024-12-27 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 기능검사결과(I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 기능검사결과(I/F형) ECHOCARDIOGRAPHY LABORATORY, SEVERANCE CARDIOVASCULAR HOSPITAL YONSEI UNIVERSITY COLLEGE OF MEDICINE, SEOUL KOREA Exam Date: 2024-12-27 Echo No.: 24 Patient ID 2455470 Location OPD Height: 1. Comments Name: 김태형 Referring Dr.: 홍성진 Sex/Age: M 162.0cm Weight: Study Remark : 62kg BSA 1.67m2 BP: 131/90mmHg 전문심초음파 -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattem (E/e': 5) 2. Regional Wall Motion Abnormality: No 3. [LV GLS]: 15-20% 4. Valves: MV Native Slightly thickened AV Native Slightly thickened TV Native Normal 5. Regurgitation: MR. Trivial 6. Stenosis: MS. No AR AS No TR No 7. Pericardial Effusion: No TS: Intracardiac Thrombi: No Trivial No PR No PS. No Mass: No 8. Diastolic function: Relaxation abnormality of LV filling pattern M-mode/2D Measurement RVD (9-26) mm IVSD (8-11): 9 mm Ao root (22-33) mm LVEDD (42-54): 48 mm IVSS: 12 mm LA (AP/ML/SI): 32// mm LVESD (24-36): 33 LVEF (55-76): mm PWD (8-11): 9 mm LA Vol PWS: 13 mm by M-mode: 62 % LVOT (18-22): mm by Biplane: % LV Mass: 147.8 g by prolate ellipse: by mod simpson LA Vol index (18-28) ml 30.3 ml TV Annulus: mm LV Mass index: 88.5 g/m2 IVC: mm RWT: 0.38 by prolate ellipse: by mod simpson 18.1 Echo Score: Total M T S C MV Annulus (4C/2C): / ml/m2 ml/m2 mm Doppler Measurement Aortic Mitral Tricuspid LVOT (TVI): cm TVI of MR jet: cm TR jet: 2.31 m/sec AV (TVI): cm E (0.6-1): 0.36 m/sec RVSP: 26 mmHg LVOT peak V: m/sec A (0.3-0.8): 0.59 m/sec PSPG/MSPG: mmHg DT (170-210): 132 msec RAP: mPAP 5 mmHg mmHg AV Peak V: m/sec PHT: msec PVR: PSPG/MSPG: AVA by 2D: mmHg MDPG: mmHg MDPG: mmHg HR: /min RVOT VTI: cm by continuity: cm2 MVA by 2D: cm2 Pulmonic PHT of AR jet: msec by PHT: cm2 PSPG/MSPG: mmHg by continuity: cm2 TDI S': 11.0 cm/sec E': 8.0 cm/sec A: 14.0 RVOT AT: cm/sec m/sec E/E': 4.50 Reported by: 박상신 판독의(1차) 박상신 판독의(2차) 조익성 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 입원정보 입원일자 2024-12-31 입원과 심장내과 입원주치의 홍성진 퇴원정보 퇴원일자 2024-12-31 퇴원과 심장내과 퇴원주치의 홍성진 최종진단명(*) 순서 한국질병 구분 확진 진단명 1 주진단 확진 Stable angina pectoris 분류번호 120.88 2 기타진단 확진 Coronary artery disease (1 vessel disease) 125.1 3 기타진단 확진 Diabetes mellitus type 2 with dyslipidemia E11.68 4 기타진단 확진 Dyslipidemia E78.8 5 기타진단 확진 Diastolic heart failure 150.08 투여된 약물 중 잔류효과로 퇴원 후 주의가 필요한 약물 없음 ㅇ있음 시술 및 처치명 수술/처치명 Coronary Angiography 수술/처치코드 Implantable Medical Device 사용 여부 No Yes 치료결과 (*) 완쾌 경쾌 ) 48시간이내 사망 퇴원형태 퇴원지시후 호전안됨 ㅇ 진단뿐 48시간이후 사망 타병원전원 '가망없는 퇴원 )자의 퇴원 탈원 향후 치료계획 외래 추후관리 재입원 없음 기타 담당 전공의사명 진인태 기록자명 진인태(의사) 주치의사명 홍성진 <약어 설명> CAOD coronary artery obstructive disease RFCA radio-frequency catheter ablation DCMP dilated cardiomyopathy HCMP hypertrophic cardiomyopathy NSTEMI non-ST elevation myocardial infarction PAF paroxysmal atrial fibrillation C-angio : coronary angiogram A.fib: atrial fibrillation EPS electrophysiologic studies 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL RHD rheumatic heart disease NSVT: non-sustained ventricular tachycardia A-flutter : atrial flutter 1/2 출력일: 2025-01-21 퇴원요약 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 CTO chronic total occlusion 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 퇴원요약 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 입원일자 2024-12-31 입원과 심장내과 주호소 현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 감염성질환 초기평가 1. 증상 및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography 2025-01-01 2024-12-31 complication 없이 퇴원한다. 기록자명 진인태(의사) <약어 설명> BMI : body mass index BP(D): Blood Pressure(Diastolic) BP(S) : Blood Pressure(Systolic) BT body temperature C-sec : cesarean section CVA cerebrovascular accident CVA tenderness costovertebral angle DM diabetes mellitus 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 DOE dyspnea on exertion ECOG eastern cooperative oncology group HEENT : head, ear, eye, nose and throat 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 연령 구분 ●영유아기 학령전기 학령기 ㅇ 청소년기 성인 일반 정보 간호정보조사(초기사정) 2024-12-31 종교 ㅇ 없음 ○ 기독교 천주교 ㅇ 불교 ㅇ기타 보호자 (Main care giver) □ 없음 □ 배우자 □ 부 |기타 모 □ 자녀 □ 조부 조모 형제 □ 자매 □ 간병인 지난 2주동안 기분이 가라앉거나, 우울하거나, 희망이 없다고 느낀 기간 ) 없음 ○ 2~3일 이상 ○ 7일 이상 ㅇ 거의 매일 ㅇ 확인 불가능 지난 2주동안 평소 하던 일에 대한 흥미가 없어지거나 즐거움을 느끼지 못한 기간 없음 ○ 2~3일 이상 ○7일 이상 ㅇ 거의 매일 ㅇ 확인불가능 * 정서 평가 0 The Patient Health Questionnaire -2(PHQ-2) (2003). 교육과 진료에 영향을 주는 가치와 신념(Value & belief) 없음 ㅇ있음 현병력 주 증상 및 내원 과정 CAG하기 위해 입원함 복용중인 약 없음 있음 투약 상태 약품명 1회 투여개수 수량 단위 1회 투여량 횟수 용법 및 투여시간 약품코드 유효함량 Closone [1 C/C] 1 C 용량 단위 1 C 1 PO D2CLOSO2 1 내원 시 환자 상태 통증 없음 의식 상태 명료(alert) 있음 입원 전에 있었음 의사 소통 √ 원만함 어려움 불가능함 기타 과거력 과거병력 없음 있음 입원 및 수술 이력 없음 ㅇ있음 ㅇ 알 수 없음 Allergy Allergy / 없음 식품 ADL 수행 능력 화장실 가기 자가 부분 보조 ㅇ완전 보조 이동하기 낙상 경험 자가 ○ 부분 보조 없음 낙상 시기 ㆍ완전 보조 영양 상태 1개월간 체중변화 없음 ㅇ 증가함 ㅇ 감소함 체중변화 kg 최근 1주일간 식사량 변화 없음 ㅇ 증가 감소 식이 주의 사항 「없음 ㅇ 열량 조절 ㅇ 체중 조절 ㅇ 염분 제한 ㅇ 수분 제한 ㅇ 단백질 제한 ㅇ 지방 제한 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 간호정보조사(초기사정) 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 2024-12-31 기타 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography (Rt. dominant) AVB ACO Coronary angiography (Right dominant) Date 2024-12-31 홍성진 Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant Puncture site Review 진인태 Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath -> PAD+Coban RCA C JR 5-4 Minimal LN of PRCA LCA c JL 5-4 Tubular ecc. 50% LN of MLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 110cc Conclusion Recommend concor 1.25mg qd, livalo 2mg qd 일주일 뒤 외래 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 기록자명 이재준 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 Coronary angiography note 검사 Date 2024-12-31 Pre-procedural diagnosis Typical angina; Coronary angiography Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath RCA C JR 5-4 - Minimal LN of PRCA LCA C JL 5-4 PAD+Coban Tubular ecc. 50% LN of mLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 90cc 시술과정 중 특이사항 Comment Contrast Visipaque 320 lodixanol 652mg/ml - Scanlux 300 iodixanol 612mg/ml → Blood loss No Yes 조영제 알러지 No Yes 피부 상태 이상 No Yes Conclusions a. Clinical diagnosis b. Anatomical diagnosis Stable Angina ; CCS class Normal & minimal dz. 시술 후 계획 Recommendation 1VD 2VD 3VD Lt main disease Total occlusion ? acute chronic RCA LAD LCX 1. Close monitor for puncture site 2. Close monitor for development of chest pain Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant 영상의학과 홍성진 박규태 원종윤 <약어 설명> ACS : acute coronary syndrone ACT activated coagulation time Af atril fibrillation APC: atrial premature complex 전자서명자: 박규태 ECG electrocardigram ECGs electrocardigram : EIA: external iliac artery Fr: french 1/2 p-dLCx proximal-distal left circumflex artery PLAD: proximal left ascending artery pLCx proximal left circumflex artery p-mRCA proximal-mid right coronary artery 출력일: 2025-01-21 세브란스병원 SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 외래재진기록 2025-01-09 진료과 심장내과 주치의 홍성진 BP(S) BP(D) HR 146 mmHg 83mmHg 82/min Subjective Objective Assessment LAD MILKING 2024-12-31 concor 1.25mg qd, livalo 2mg qd Plan HbA1c 9.5 진단명 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 진료과 내분비내과 주치의 주호소 이병완 주호소 기간 Pl newly detected diabetes 과거력 당뇨병 유 무 진단 년도 기간 진단 당시 나이 세 고혈압 No Yes 관상동맥질환 No Yes 뇌혈관질환 No Yes 종양 No Yes 간염 No Yes 수술력 No Yes 약물부작용 No Yes 기타 질환 음주력 No Yes Quit 흡연력 No Current smoker PYRS √ Ex-smoker 년전 quit PYRS Current medication Pul.Tbc No Yes Drug Allergy No ** Yes ? Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Other 알레르기 No Yes 가족력 당뇨 No Yes 심장혈관질환 No Yes 뇌혈관질환 No Yes 기타 No Yes ROS Weight loss No Yes BP(S) 125 mmHg 신체계측 전자서명자: 이병완 세브란스병원 SEVERANCE HOSPITAL BP(D) 87 mmHg Sulfonamide Cephalosporin 외래초진기록 2025-01-14 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 Physical Exam 외래초진기록 2025-01-14 신장 162.5cm 체중 63.2Kg IBW % BMI 24 허리 둘레 93.0cm WHR 엉덩이 둘레 97.0cm 체중 변화 증 감 20세 체중 최소체중 Kg 최대체중 Kg 기타 General appearance normal abnormal Skin normal abnormal HEENT normal abnormal Neck normal abnormal Chest/lung normal abnormal Heart normal abnormal Abdomen normal abnormal Back and extremity normal abnormal Impression T2D Plan MMT 향후치료계획 OHAS 기록자명 이병완(의사) <약어 설명> BMI: body mass index WHR waist to hip ratio BP(S) : Blood Pressure(Systolic) IBW ideal body weight ROS Review of system HEENT : head, ear, eye, nose and throat PYRS pack-years BP(D): Blood Pressure(Diastolic) 전자서명자: 이병완 2/2 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ========== 2025-1-24 4:08 PM 기본진료정보 순번 진료시작일 병·의원&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강\n   가입일: 미확인\n   상품명: 미확인 상품\n   담보내용: 미확인 담보\n   상태: 유효\n\n■ 보험 가입 이력 (Insurance History)\nNaN\n[보험 가입 3개월 이내]\n미확인 제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서 2025년 01월 21일 담당자: 조예은 담당자의 날인이 없는 것은 무효임 세 대 학 연래대학교 연세대학교 의과대학 학과대학 세브란스병원 병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록 2024-12-27 추정진단 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 기타 [예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록 2024-12-27 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 기능검사결과(I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 기능검사결과(I/F형) ECHOCARDIOGRAPHY LABORATORY, SEVERANCE CARDIOVASCULAR HOSPITAL YONSEI UNIVERSITY COLLEGE OF MEDICINE, SEOUL KOREA Exam Date: 2024-12-27 Echo No.: 24 Patient ID 2455470 Location OPD Height: 1. Comments Name: 김태형 Referring Dr.: 홍성진 Sex/Age: M 162.0cm Weight: Study Remark : 62kg BSA 1.67m2 BP: 131/90mmHg 전문심초음파 -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattem (E/e': 5) 2. Regional Wall Motion Abnormality: No 3. [LV GLS]: 15-20% 4. Valves: MV Native Slightly thickened AV Native Slightly thickened TV Native Normal 5. Regurgitation: MR. Trivial 6. Stenosis: MS. No AR AS No TR No 7. Pericardial Effusion: No TS: Intracardiac Thrombi: No Trivial No PR No PS. No Mass: No 8. Diastolic function: Relaxation abnormality of LV filling pattern M-mode/2D Measurement RVD (9-26) mm IVSD (8-11): 9 mm Ao root (22-33) mm LVEDD (42-54): 48 mm IVSS: 12 mm LA (AP/ML/SI): 32// mm LVESD (24-36): 33 LVEF (55-76): mm PWD (8-11): 9 mm LA Vol PWS: 13 mm by M-mode: 62 % LVOT (18-22): mm by Biplane: % LV Mass: 147.8 g by prolate ellipse: by mod simpson LA Vol index (18-28) ml 30.3 ml TV Annulus: mm LV Mass index: 88.5 g/m2 IVC: mm RWT: 0.38 by prolate ellipse: by mod simpson 18.1 Echo Score: Total M T S C MV Annulus (4C/2C): / ml/m2 ml/m2 mm Doppler Measurement Aortic Mitral Tricuspid LVOT (TVI): cm TVI of MR jet: cm TR jet: 2.31 m/sec AV (TVI): cm E (0.6-1): 0.36 m/sec RVSP: 26 mmHg LVOT peak V: m/sec A (0.3-0.8): 0.59 m/sec PSPG/MSPG: mmHg DT (170-210): 132 msec RAP: mPAP 5 mmHg mmHg AV Peak V: m/sec PHT: msec PVR: PSPG/MSPG: AVA by 2D: mmHg MDPG: mmHg MDPG: mmHg HR: /min RVOT VTI: cm by continuity: cm2 MVA by 2D: cm2 Pulmonic PHT of AR jet: msec by PHT: cm2 PSPG/MSPG: mmHg by continuity: cm2 TDI S': 11.0 cm/sec E': 8.0 cm/sec A: 14.0 RVOT AT: cm/sec m/sec E/E': 4.50 Reported by: 박상신 판독의(1차) 박상신 판독의(2차) 조익성 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 입원정보 입원일자 2024-12-31 입원과 심장내과 입원주치의 홍성진 퇴원정보 퇴원일자 2024-12-31 퇴원과 심장내과 퇴원주치의 홍성진 최종진단명(*) 순서 한국질병 구분 확진 진단명 1 주진단 확진 Stable angina pectoris 분류번호 120.88 2 기타진단 확진 Coronary artery disease (1 vessel disease) 125.1 3 기타진단 확진 Diabetes mellitus type 2 with dyslipidemia E11.68 4 기타진단 확진 Dyslipidemia E78.8 5 기타진단 확진 Diastolic heart failure 150.08 투여된 약물 중 잔류효과로 퇴원 후 주의가 필요한 약물 없음 ㅇ있음 시술 및 처치명 수술/처치명 Coronary Angiography 수술/처치코드 Implantable Medical Device 사용 여부 No Yes 치료결과 (*) 완쾌 경쾌 ) 48시간이내 사망 퇴원형태 퇴원지시후 호전안됨 ㅇ 진단뿐 48시간이후 사망 타병원전원 '가망없는 퇴원 )자의 퇴원 탈원 향후 치료계획 외래 추후관리 재입원 없음 기타 담당 전공의사명 진인태 기록자명 진인태(의사) 주치의사명 홍성진 <약어 설명> CAOD coronary artery obstructive disease RFCA radio-frequency catheter ablation DCMP dilated cardiomyopathy HCMP hypertrophic cardiomyopathy NSTEMI non-ST elevation myocardial infarction PAF paroxysmal atrial fibrillation C-angio : coronary angiogram A.fib: atrial fibrillation EPS electrophysiologic studies 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL RHD rheumatic heart disease NSVT: non-sustained ventricular tachycardia A-flutter : atrial flutter 1/2 출력일: 2025-01-21 퇴원요약 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 CTO chronic total occlusion 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 퇴원요약 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 입원일자 2024-12-31 입원과 심장내과 주호소 현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 감염성질환 초기평가 1. 증상 및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography 2025-01-01 2024-12-31 complication 없이 퇴원한다. 기록자명 진인태(의사) <약어 설명> BMI : body mass index BP(D): Blood Pressure(Diastolic) BP(S) : Blood Pressure(Systolic) BT body temperature C-sec : cesarean section CVA cerebrovascular accident CVA tenderness costovertebral angle DM diabetes mellitus 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명 : 김태형 DOE dyspnea on exertion ECOG eastern cooperative oncology group HEENT : head, ear, eye, nose and throat 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 연령 구분 ●영유아기 학령전기 학령기 ㅇ 청소년기 성인 일반 정보 간호정보조사(초기사정) 2024-12-31 종교 ㅇ 없음 ○ 기독교 천주교 ㅇ 불교 ㅇ기타 보호자 (Main care giver) □ 없음 □ 배우자 □ 부 |기타 모 □ 자녀 □ 조부 조모 형제 □ 자매 □ 간병인 지난 2주동안 기분이 가라앉거나, 우울하거나, 희망이 없다고 느낀 기간 ) 없음 ○ 2~3일 이상 ○ 7일 이상 ㅇ 거의 매일 ㅇ 확인 불가능 지난 2주동안 평소 하던 일에 대한 흥미가 없어지거나 즐거움을 느끼지 못한 기간 없음 ○ 2~3일 이상 ○7일 이상 ㅇ 거의 매일 ㅇ 확인불가능 * 정서 평가 0 The Patient Health Questionnaire -2(PHQ-2) (2003). 교육과 진료에 영향을 주는 가치와 신념(Value & belief) 없음 ㅇ있음 현병력 주 증상 및 내원 과정 CAG하기 위해 입원함 복용중인 약 없음 있음 투약 상태 약품명 1회 투여개수 수량 단위 1회 투여량 횟수 용법 및 투여시간 약품코드 유효함량 Closone [1 C/C] 1 C 용량 단위 1 C 1 PO D2CLOSO2 1 내원 시 환자 상태 통증 없음 의식 상태 명료(alert) 있음 입원 전에 있었음 의사 소통 √ 원만함 어려움 불가능함 기타 과거력 과거병력 없음 있음 입원 및 수술 이력 없음 ㅇ있음 ㅇ 알 수 없음 Allergy Allergy / 없음 식품 ADL 수행 능력 화장실 가기 자가 부분 보조 ㅇ완전 보조 이동하기 낙상 경험 자가 ○ 부분 보조 없음 낙상 시기 ㆍ완전 보조 영양 상태 1개월간 체중변화 없음 ㅇ 증가함 ㅇ 감소함 체중변화 kg 최근 1주일간 식사량 변화 없음 ㅇ 증가 감소 식이 주의 사항 「없음 ㅇ 열량 조절 ㅇ 체중 조절 ㅇ 염분 제한 ㅇ 수분 제한 ㅇ 단백질 제한 ㅇ 지방 제한 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 간호정보조사(초기사정) 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 2024-12-31 기타 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography (Rt. dominant) AVB ACO Coronary angiography (Right dominant) Date 2024-12-31 홍성진 Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant Puncture site Review 진인태 Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath -> PAD+Coban RCA C JR 5-4 Minimal LN of PRCA LCA c JL 5-4 Tubular ecc. 50% LN of MLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 110cc Conclusion Recommend concor 1.25mg qd, livalo 2mg qd 일주일 뒤 외래 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 기록자명 이재준 전자서명자: 윤나영 세브란스병원 SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명 : 김태형 Coronary angiography note 검사 Date 2024-12-31 Pre-procedural diagnosis Typical angina; Coronary angiography Under local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm) Lt. RA c 6Fr sheath RCA C JR 5-4 - Minimal LN of PRCA LCA C JL 5-4 PAD+Coban Tubular ecc. 50% LN of mLAD c moderate milking [FFR at LAD] XBG 6-3.5 Pressure wire Baseline 0.94 94/100mmHg Adenosine 0.93 93/100mmHg Sigmart: 0.93 93/100mmHg Contrast visipaque 90cc 시술과정 중 특이사항 Comment Contrast Visipaque 320 lodixanol 652mg/ml - Scanlux 300 iodixanol 612mg/ml → Blood loss No Yes 조영제 알러지 No Yes 피부 상태 이상 No Yes Conclusions a. Clinical diagnosis b. Anatomical diagnosis Stable Angina ; CCS class Normal & minimal dz. 시술 후 계획 Recommendation 1VD 2VD 3VD Lt main disease Total occlusion ? acute chronic RCA LAD LCX 1. Close monitor for puncture site 2. Close monitor for development of chest pain Operator 1 (입원주치의) Operator 2 (시술선택의, 협진주치의) Assisstant 영상의학과 홍성진 박규태 원종윤 <약어 설명> ACS : acute coronary syndrone ACT activated coagulation time Af atril fibrillation APC: atrial premature complex 전자서명자: 박규태 ECG electrocardigram ECGs electrocardigram : EIA: external iliac artery Fr: french 1/2 p-dLCx proximal-distal left circumflex artery PLAD: proximal left ascending artery pLCx proximal left circumflex artery p-mRCA proximal-mid right coronary artery 출력일: 2025-01-21 세브란스병원 SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 외래재진기록 2025-01-09 진료과 심장내과 주치의 홍성진 BP(S) BP(D) HR 146 mmHg 83mmHg 82/min Subjective Objective Assessment LAD MILKING 2024-12-31 concor 1.25mg qd, livalo 2mg qd Plan HbA1c 9.5 진단명 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 진료과 내분비내과 주치의 주호소 이병완 주호소 기간 Pl newly detected diabetes 과거력 당뇨병 유 무 진단 년도 기간 진단 당시 나이 세 고혈압 No Yes 관상동맥질환 No Yes 뇌혈관질환 No Yes 종양 No Yes 간염 No Yes 수술력 No Yes 약물부작용 No Yes 기타 질환 음주력 No Yes Quit 흡연력 No Current smoker PYRS √ Ex-smoker 년전 quit PYRS Current medication Pul.Tbc No Yes Drug Allergy No ** Yes ? Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Other 알레르기 No Yes 가족력 당뇨 No Yes 심장혈관질환 No Yes 뇌혈관질환 No Yes 기타 No Yes ROS Weight loss No Yes BP(S) 125 mmHg 신체계측 전자서명자: 이병완 세브란스병원 SEVERANCE HOSPITAL BP(D) 87 mmHg Sulfonamide Cephalosporin 외래초진기록 2025-01-14 1/2 출력일: 2025-01-21 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125****남/64세 환자명: 김태형 Physical Exam 외래초진기록 2025-01-14 신장 162.5cm 체중 63.2Kg IBW % BMI 24 허리 둘레 93.0cm WHR 엉덩이 둘레 97.0cm 체중 변화 증 감 20세 체중 최소체중 Kg 최대체중 Kg 기타 General appearance normal abnormal Skin normal abnormal HEENT normal abnormal Neck normal abnormal Chest/lung normal abnormal Heart normal abnormal Abdomen normal abnormal Back and extremity normal abnormal Impression T2D Plan MMT 향후치료계획 OHAS 기록자명 이병완(의사) <약어 설명> BMI: body mass index WHR waist to hip ratio BP(S) : Blood Pressure(Systolic) IBW ideal body weight ROS Review of system HEENT : head, ear, eye, nose and throat PYRS pack-years BP(D): Blood Pressure(Diastolic) 전자서명자: 이병완 2/2 출력일: 2025-01-21 출력자: 조예은 세브란스병원 SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ========== 2025-1-24 4:08 PM 기본진료정보 순번 진료시작일 병·의원&약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강 가입 (미확인)\n\n■ 진료 기록 (Medical Records)\nNaN\n[미확인] 주: 1. 이 진료의뢰서는 1차진료후 2차진료를 받고자 하는 경우 1차 진료담당의사로부터 요양급여 기준에 따라 무상으로 교부됩니다. 2. 의사의 탈급일부터 7일(공휴일 제외)이내에 사용하여야 합니다. 3. 환자상태 및 진료소견란에는 현증, 검사, 투약 등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n처방: 등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:\n특이사항: 란에는 현증, 검사, 투약 등 주요진료내용을 구체적으로 기재하기 바라며 여백 부족시에는 뒷면을 활용하기 바랍니다. 작성자: 권진영 세브란스병원 SEVERANCE HOSPITAL 진료의뢰서 1/1 출력일:\n중증도: 경미\n\n[미확인] (종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n처방: 전을 참고하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (\n특이사항: 하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (; 정상B 고혈압ㆍ당뇨병 질환의심 김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다. * 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오. 김태형 님은 다음 사항에 대한 관리가 필요합니다. 의심 질환: 신장질환, 당뇨병 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함. 유질환자 ※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원 (종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에 대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다. * 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한 세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능) 유질환: 해당사항없음 생활습관 관리 |위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일 이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오. * * 기타 혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함. 이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음. * 혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다. 구분 목표질환 검사항목 결과 (참고치) 키 (cm) 및 몸무게(kg) 160.2 63.8 저체중 정상 과체중 비만 비만/복부비만 체질량지수(kg/m²) 허리둘레 (cm) 24.9 (18.5미만) (\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.\n진단명: 미확인\n처방: 치료 무 진찰 금연필요 절주 필요 신체활동 필요 근력운동 필요 (문진) 생활습관 담당 의사와 상담하십시오. 실시대상자 여부 결과 표면항원 일반 정밀( B형간염 해당 비해당 표면항체 일반 정밀( ) ) □ 항체있음 □ 항체없음 B형 간염 보유자 의심 □판정 보류 우울증상이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.\n특이사항: 빈혈 등 혈색소(g/dL) 19.2 여 12.0~15.5 □ 빈혈 의심 □ 정상 유질환자 당뇨병 공복혈당(mg/dL) 153 100.0미만 □ 공복혈당장애 의심 ■ 당뇨병 의심 총콜레스테롤(mg/dL) 203 200.0 미만 정상 고콜레스테롤혈증 의심 고밀도 콜레스테롤(mg/dL) 41 60.0이상 이상지질혈증 ■ 고중성지방혈증 의심 혈액검사 중성지방(mg/dL) 187 150.0미만 낮은 HDL 콜레스테롤 의심 |저밀도 콜레스트롤(mg/dL) 125 130.0미만 □ 유질환자 혈청크레아티닌(mg/dL) 1 1.5이하 ■ 정상 신장질환 신사구체여과율(e-GFR) 79 60.0이상 신장기능 이상 의심 (mL/min/1.73m²) |AST(SGOT)(IU/L) 26 40.0이하 정상 간장질환 [ALT(SGPT)(IU/L) 12 35.0이하 간기능 이상 의심 남 63.0이하 |감마지티피(X-GTP)(IU/L) 32 여 35.0이하 요검사 요단백 정상 경계 영상 흉부촬영 정상 비활동성 폐결핵 질환의심: 단백뇨 의심 기타: 검사 과거병력 무 약물치료 무 진찰 금연필요 절주 필요 신체활동 필요 근력운동 필요 (문진) 생활습관 담당 의사와 상담하십시오. 실시대상자 여부 결과 표면항원 일반 정밀( B형간염 해당 비해당 표면항체 일반 정밀( ) ) □ 항체있음 □ 항체없음 B형 간염 보유자 의심 □판정 보류 우울증상이 없음( 0~4점) 가벼운 우울증상(5~9점) 우울증 해당 비해당 □ 중간 정도 우울증 의심(10~19점) 특이소견 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.; 없음(0~5점) □ 심한 우울증 의심 (20~~27점) 인지기능장애 해당 비해당 □ 인지기능 저하 의심(6점 이상) 측정부위 T-점수 골밀도 검사 해당 비해당 정상 골감소증 골다공증 노인신체기능검사 해당 비해당 정상 신체기능저하 낙상 정상 낙상 고위험자 일상생활 수행능력 정상 노인기능평가 해당 비해당 (문진) 예방접종 배뇨장애 ? 일상생활 도움 필요 인플루엔자 접종 필요 폐렴구균 접종 필요 접종 필요 없음 정상 배뇨장애 의심 귀하의 건강검진결과를 위와 같이 통보합니다.\n중증도: 경미\n\n[2024.06.05] (요양기관기호\n내원일: 2024.06.05\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[2025.01.24] 미확인 의료기관\n내원일: 2025.01.24\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 에서 요양급여(진료가 필요하다는 건강검진종합소견이 있는 경우 요양급여의뢰서(진료의뢰서)로 갈음됩니다. 본 자료는 개인정보보호법에 관한법률에 의거 엄격히 개인의 비밀이 유지되어야하며, 발급목적 외 타 업무의 증빙자료로 사용되어 발생되는 모든 책임은 본인에게 있으며 공단에는 일체 이의를 제기할 수 없습니다. 국민건강보험공단 이사장 직인 보험공단 ========== 파일: e??i? e³?i?? e² i§?_i??i??e² i§?(24e??).pdf ========== 2024 년도 위암 검진 결과 내 역 발급번호: WGK01-17377-02854-14972-75827 KOR www.nhis.or.kr/. 성 명 김태형 주민번호 600809-1****** 검사항목 결 과 [병형(부위)] 판정 1 이상소견없음() 위장조영 판독소견 2\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 이 있는 경우 요양급여의뢰서(진료의뢰서)로 갈음됩니다. 본 자료는 개인정보보호법에 관한법률에 의거 엄격히 개인의 비밀이 유지되어야하며, 발급목적 외 타 업무의 증빙자료로 사용되어 발생되는 모든 책임은 본인에게 있으며 공단에는 일체 이의를 제기할 수 없습니다. 국민건강보험공단 이사장 직인 보험공단 ========== 파일: e??i? e³?i?? e² i§?_i??i??e² i§?(24e??).pdf ========== 2024 년도 위암 검진 결과 내 역 발급번호: WGK01-17377-02854-14972-75827 KOR www.nhis.or.kr/. 성 명 김태형 주민번호 600809-1****** 검사항목 결 과 [병형(부위)] 판정 1 이상소견없음() 위장조영 판독소견 2\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명\n진단명: 권고사항 위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명\n특이사항: 23 조직진단 권고사항 위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명\n중증도: 경미\n\n[2024.05.30] 미확인 의료기관\n내원일: 2024.05.30\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[2024.06.05] 미확인 의료기관\n내원일: 2024.06.05\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[2025.01.24] 미확인 의료기관\n내원일: 2025.01.24\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.\n진단명: 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.\n특이사항: 조직진단 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.; 3 기타 조직진단 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다.\n중증도: 위중\n\n[2024.06.05] 미확인 의료기관\n내원일: 2024.06.05\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[2025.01.21] 병원장한 세브란스병원 SEVERANCE HOSPITAL 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 진료과 심장내과 주치의 홍성진 SBP 131 mmHg DBP 90mmHg 맥박 107회/분 주호소 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록\n내원일: 2025.01.21\n내원사유: 및 현재질병상태 가슴이 조이듯이 아프다. 식은땀이 엄청많이/ 1년전부터 걸어가다가/ 숨이찰 때/ 과거력 (others) 당뇨의심된다 들음/ 고혈압 (-) 신체검진 (others) smoking- 10년전 끊음/1갑씩 피웠다 외래초진기록\n진단명: 미확인\n중증도: 경미\n\n[2025.01.24] 미확인 의료기관\n내원일: 2025.01.24\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 의무기록사본 피보험자 : 김태형 빈경환 세브란스병원 SEVERANCE HOSPITAL 발행번호: 2025-8328 등록번호: 2455470 환자성명: 김태형 용도: 보험회사제출 발급매수: 19 매 의무기록 사본 증명서 NSEL UNIVERSI 이 사본은 의무기록 원본과 틀림이 없음을 증명합니다. 이 사본은 위의 용도 외에는 사용할 수 없습니다. 의무기록 사본 증명서\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL 1/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일:\n중증도: 경미\n\n[미확인] 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록\n특이사항: [예) 외부병원 진단소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록; ] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: (I/F형) 검사결과 Impression Image Name 전자서명자: 박상신 세브란스병원 SEVERANCE HOSPITAL -Chest pain- 1. No RWMA 2. Normal sized cardiac chambers with normal global LV systolic function (EF: 62%) 3. Relaxation abnormality of LV filling pattern (E/e': 5) 1/2 출력일:\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL Responsible Dr. : 조익성 2/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL 2/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 전자서명자: 김혜주 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일:\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL Coronary angiography (Right dominant) 2/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL 출력자: 조예은 원본대조필 등록번호: 2455470 주민등록번호: 600809-125**** 남/64세 환자명: 김태형 Coronary angiography note AVB atrio-ventricular block IIA internal iliac artery BAL: balloon JL Judkins left BCL: basic cycle length CAG: coronary angiography C-angio coronary angiography CAOD coronary artery occlusive disease CTI: cavo-tricuspid isthmus CV cardioversion dLAD: distal left ascending artery dLCx: distal left circumflex artery dLM: distal left main dRCA distal right coronary artery DS: diameter stenosis ecc eccentric JLG: Judkins left guiding JR: Judkins right JRG: Judkins right guding PRCA proximal right coronary artery R/S residual stenosis RAP right atrial pacing RBBB right bundle branch block RI: ramus intermedius RIPV: right inferior pulmonary vein RVP: rapid ventricular pacing SA stable angina SFA superficial femoral artery SH side hole LBBB: left bundle branch block LCA: left coronary artery LIPV: left inferior pulmonary vein LSPV left superior pulmonary vein m-dRCA: mid-distal right coronary artery MLAD: mid left ascending artery MLD minimal lumen diameter NC: non-compliance SVEST single ventricular extra stimulus test UA: unstable angina XBG extra backup guiding 전자서명자: 박규태 세브란스병원 SEVERANCE HOSPITAL 2/2 출력일:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일:\n특이사항: 진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일:\n중증도: 경미\n\n[미확인] SEVERANCE HOSPITAL 원본대조필 ========== 파일: i?￢i??i?? i§?e￡?e?´i?­_e¹ i??i??(2024e¹?i§ ).pdf ==========\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 신경과 외래 AR908 통의 진단 1 28,540 3,140 25,400 |영상검사 상 기타 이 (양방치 과보철 장 2\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 1 28,540 3,140 25,400 |영상검사 상 기타 이 (양방치 과보철 장 2\n특이사항: 이 (양방치 과보철 장 2\n중증도: 경미\n\n[미확인] 외래 AZ463 치의 부착 및 조정을 90,740 63,540 27,200 위하여 보 3\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 17,090 11,990 5,100 10\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 64,720 45,320 19,400 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7\n중증도: 경미\n\n[미확인] |구강악 \"과 (양방)불 치과 한원의 외래 AKO881 칠지로 12,610 8,910 3,700 돌기 구강악 14\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] (양방)불 치과 안원회 외래 AK0881 칠지로 1 12,610 8,910 3,700 돌기 구강악 덴티스킨치과 15\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)치 안면외 외래 AS0256 과 근을 포함 한 치관의 파절 61,750 43,250 18,500 20|\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] &약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7\n중증도: 경미\n\n[미확인] 학과 로 폐색을 외래 AN401 동반한 전 |립전층식 1 17,320 16,320 1,000 28\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 (양방)어 외래 AS400 깨 및 위패 의 타박상 1 19,560 18,560 1,000 33\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 (양방)어 외래 | AS400 깨 및 위패 1 의 타박상 19,560 18,560 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?\n중증도: 경미\n\n[미확인] (양방)어 외래 AS400 깨 및 위팰 의 타박상 51,530 50,530 1,000 (양방)요 36\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 학과 로 폐색을 외래 AN401 동반한 전 |립전층식 증 1 72,770 71,770 1,000 (양방)달 리 분류되 37 |\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 존과 외래 AZ463 치의 부착 32,850 31,850 1,000 및 조정을 위하여 보 (양방)기 41 |\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 내과 외래 AU071 확인된 코 83,260 83,260 로나바이 러스 질환 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7\n중증도: 경미\n\n[미확인] 내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 46|\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 47 |\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 ㅣ러스 질환 (양방)바 |이러스가 48 |\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 내과 외래 AU071 확인된 코 83,260 83,260 0 |로나바이 러스 질환 (양방)기 49\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 존과 외래 AK0538 타 명시된 만성 치주 염 9,800 8,800 1,000 (양방)기 50|\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 존과 외래 AK0538 타 명시된 만성 치주 14,780 13,780 1,000 염 (양방)기 52 |\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 11,580 10,580 1,000 54\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)불 안면외 외래 AK0881 규칙치조 과 돌기 88,170 87,170 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7\n중증도: 경미\n\n[미확인] 치과보 존과 (양방)상 외래 AKO21 아질의 우 식 14,780 13,780 1,000 (양방)기 58|\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 증의학 외래 | AS600 이 없는 손 마취통 26,900 25,900 1,000 가락의 타 박상 구강악 덴티스킨치과 61\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 구강악 (양방)만 안면외 외래 AK0530 단순치 1 과 추염 113,930 112,930 1,000 65\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 존과 (양방)치 외래 AK0311 아의 습관 성 마모 52,680 51,680 1,000 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ? 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7\n중증도: 경미\n\n[미확인] &약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ㆍ 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7\n중증도: 경미\n\n■ 입원 기록 (Hospitalization Records)\nNaN\n[미확인] 에서 진료 및 검사 원하여 문의드리오니 고진선처 바랍니다. 감사합니다. 898-9 진료실4\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 미확인\n입원기간: undefined ~ undefined\n\n[미확인] SEVERANCE HOSPITAL 퇴원요약 2/2 출력일:\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 미확인\n입원기간: undefined ~ undefined\n\n[미확인] SEVERANCE HOSPITAL 입원기록 1/3 출력일:\n내원일: 미확인\n내원사유: 현재질병상태 입원주치의 홍성진 For Coronary angiography 상기 64세 남환 typical angina symptom으로 금일 Coronary angiography 시행위해 입원함. 과거력 Hypertension No Yes Pul. Tbc No Yes DM No Yes Hepatitis No Yes Smoking No Yes 10년전 금연 금연교육 시행 계획함 Alcohol No Yes Allergy Drug No Yes 항생제 진통제 조영제 | 기타 Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:\n진단명: 미확인\n입원기간: undefined ~ undefined\n특이사항: Food 및 기타 No Yes Hypercholesterolemia Cardiac disease No No Old CVA No ㅇㅇㅇ Yes Yes Yes 말초동맥 및 경동맥 질환 No Yes Coronary artery bypass graft No Yes Others 신체조사 General appearance 이상소견 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:; 없음 Skin HEENT Neck Chest/lung Heart Abdomen Back and extremity 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 없음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 이상소견 있음 ㅇ이상소견 있음 )이상소견 있음 others (Physical Exam) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 입원기록 1/3 출력일:\n\n[미확인] 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography\n내원일: 미확인\n내원사유: 및 기간 입원기록 발열 기간 일전 |호흡기증상 기간 일전 |소화기증상 기간 일전 |해당없음 (미상환자 포함) 2. 최근 1달 이내 방문한 나라 ) 해당없음 없음 ㅇ있음 3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문 없음 있음 4. 밀접 접촉자 |해당없음 아니오 예 5. 신종 감염병 의심환자 아니오 예 추정진단 Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography\n진단명: Typical angina 계획 Coronary angiography 퇴원계획 퇴원 후 치료식이 여부 N 추후 관리 계획 |가정간호사업소 호스피스 타 병원 전원 외래 사회 복지서비스 연계 필요성 ? N ? Y 기타 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography\n입원기간: undefined ~ undefined\n특이사항: 퇴원시 요구사항 치료계획 + Problem Goal 목표일 수정목표일 계획일 부 angina Coronary angiography\n\n[미확인] SEVERANCE HOSPITAL ICS: Impulse conducting system(of the heart) LMCL left midclavicular line LNs : lymph nodes LOM limitation of motion NSVD normal spontaneous vaginal delivery PAOD peripheral arterial occlusive disease PMI point of maximum impulse PR: pulse rate 2/3 출력일:\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 미확인\n입원기간: undefined ~ undefined\n\n[미확인] SEVERANCE HOSPITAL Pul. Tbc pulmonary tuberculosis RHB regular heart beat 입원기록 3/3 출력일:\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 미확인\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)중 추신경계 1\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)중 추신경계 1\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 12\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 12\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 23\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) 23\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)어 34 |\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 코드 내원 총 진료비 주상병명 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)어 34 |\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)바 |이러스가 45|\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)바 |이러스가 45|\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)불 56|\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 내원 총 진료비 주상병명 코드 건강보험 등 일수 (건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)불 56|\n입원기간: undefined ~ undefined\n\n[미확인] &약국 진단과 입원/ 주상병 외래 코드 주상병명 내원 총 진료비 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)만 의원 67\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 입원/ 주상병 외래 코드 주상병명 내원 총 진료비 건강보험 등 일수(건강보험 적용분) 혜택받은 금액 내가 낸 의료비 (진료비) (양방)만 의원 67\n입원기간: undefined ~ undefined\n\n■ 보험 청구 이력 (Insurance Claims)\nNaN\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/7\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/7\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/7 ?\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/7\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/7\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/7\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 7/7\n\n■ 종합 소견 (Summary)\nNaN\n총 진료 기록: 65건\n진료 기간: 미확인 ~ 미확인\n주요 진단명: 권고사항 위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다. 검진일 판정일 판정의사 검진기관 면허번호 판정의 사명 검진기관기호 검진기관명, 권고사항 분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없 을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다 . 그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료 상담을 받으시기 바랍니다., 계획 typical angina 다음주 화요일/ 검사합병증 설명드림/ 과거력 고혈압 No Yes 당뇨병 No Yes 고지혈증 No Yes 가족력[급사 포함] No Yes Pul.Tbc No Yes 간염 No Yes ** Drug Allergy No Yes ?Yes 선택시 구체적인 항생제 계열도 선택해주세요. Penicillin Sulfonamide ? Cephalosporin Other 알레르기 No Yes 흡연력 담배를 피운 적이 없다 예전에는 피웠으나 끊었다 (하루1 현재 피우고 있다 (하루 갑씩 10년전 끊기 전까지) 갑씩 년째) 음주 스트레스 '아니오 흉통, 가슴답답함 없음 있음 특별한 유발 요인 없이 때때로 5분 ㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5 예 회 1 병) 한 달에 한두 번 평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다. 있음 불안하거나 신경 쓸 때 호흡곤란 없음 있음 부정맥(두근거림) 없음 3분 한 달에 한두 번 실신 없음 ㅇ있음 언제 쓰러졌습니까? 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 1/2 출력일:, 소견] 없음 쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오 있음 예 복용약 없음 있음 신체검진 General appearance normal abnormal Skin normal abnormal HEENT normal Neck normal Chest/lung normal Heart normal Abdomen normal 00000 abnormal abnormal abnormal abnormal Back and extremity normal abnormal abnormal 기록자명 홍성진(의사) 전자서명자: 홍성진 세브란스병원 SEVERANCE HOSPITAL 외래초진기록, 구분 확진 주진단 확진 Stable angina pectoris 기타진단 기타진단 확진 확진 Typical angina Coronary artery disease (1 vessel disease) 기록자명 홍성진(의사) 진단명 전자서명자: 홍성진 1/1 출력일:\n주요 소견:\n  - 총 13회 입원 이력\n  - 총 7건 보험 청구 이력\n\nNaN\n보고서 생성 완료 - 2025. 8. 17. 오후 10:28:27\nNaN",
+    "reportMetadata": {
+      "generatedAt": "2025-08-17T13:28:27.840Z",
+      "format": "text",
+      "totalSections": 10,
+      "recordCount": 74
+    },
+    "statistics": {
+      "originalLength": 29843,
+      "processedLength": 27373,
+      "recordsFound": 71,
+      "insuranceCount": 1,
+      "timelineEvents": 71
+    },
+    "processingTime": 1755437307840
+  }
+}

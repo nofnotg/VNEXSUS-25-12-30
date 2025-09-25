@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-08-17T04:07:43.544Z",
+  "totalCases": 0,
+  "successfulCases": 0,
+  "failedCases": 0,
+  "caseResults": [],
+  "overallPatterns": {
+    "successRate": null,
+    "averageQualityScore": null,
+    "stageEffectiveness": {
+      "stage1": {
+        "avgSegments": 0,
+        "successRate": 0
+      },
+      "stage2": {
+        "avgItems": 0,
+        "successRate": 0
+      },
+      "stage3": {
+        "avgHospitals": 0,
+        "avgDiagnoses": 0,
+        "successRate": 0
+      },
+      "stage4": {
+        "avgLength": 0,
+        "successRate": 0
+      }
+    },
+    "commonFailurePoints": [],
+    "bestPerformingCases": [],
+    "worstPerformingCases": []
+  },
+  "recommendations": {
+    "postProcessingLogic": [
+      {
+        "priority": "HIGH",
+        "issue": "Stage3 병원 추출 실패",
+        "recommendation": "병원명 추출 로직 강화 - 정규식 패턴 개선 및 의료기관 사전 확장"
+      },
+      {
+        "priority": "HIGH",
+        "issue": "Stage3 진단명 추출 실패",
+        "recommendation": "진단명 추출 로직 강화 - KCD 코드 매핑 및 의학용어 사전 활용"
+      }
+    ],
+    "aiPromptOptimization": [],
+    "pipelineArchitecture": [],
+    "priorityActions": [
+      "1. Stage3 엔티티 추출 로직 전면 개선",
+      "2. AI 프롬프트에 후처리 결과 활용 방법 명시",
+      "3. 성공 케이스 패턴 분석하여 로직 표준화",
+      "4. 실패 케이스 원인 분석 및 예외 처리 강화"
+    ]
+  }
+}

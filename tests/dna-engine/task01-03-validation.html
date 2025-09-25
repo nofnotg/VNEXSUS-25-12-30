@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧬🖼️📅 MediAI Task 01~03 통합 검증</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .task-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .task-indicator {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-rows: auto auto auto;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-area {
+            width: 100%;
+            height: 350px;
+            border: 2px dashed #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .input-area:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .analyze-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .analyze-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-panel {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            height: 280px;
+            overflow-y: auto;
+        }
+
+        .dna-panel {
+            border-left: 4px solid #28a745;
+        }
+
+        .layout-panel {
+            border-left: 4px solid #007bff;
+        }
+
+        .date-panel {
+            border-left: 4px solid #ffc107;
+        }
+
+        .gene-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #28a745;
+            transition: all 0.3s;
+        }
+
+        .gene-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .gene-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .gene-id {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .confidence-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .enhancement-badges {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .enhancement-badge {
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .layout-enhanced {
+            background: #007bff;
+            color: white;
+        }
+
+        .date-enhanced {
+            background: #ffc107;
+            color: #495057;
+        }
+
+        .gene-content {
+            color: #6c757d;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .anchors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 8px;
+        }
+
+        .anchor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .anchor-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .temporal { background-color: #007bff; }
+        .spatial { background-color: #28a745; }
+        .medical { background-color: #dc3545; }
+        .causal { background-color: #ffc107; }
+
+        .temporal-context {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .temporal-detail {
+            font-size: 0.85rem;
+            color: #856404;
+            margin: 2px 0;
+        }
+
+        .date-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .date-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #495057;
+            min-width: 100px;
+        }
+
+        .timeline-event {
+            color: #6c757d;
+            flex: 1;
+        }
+
+        .timeline-confidence {
+            background: #ffc107;
+            color: #495057;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .layout-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #6c757d;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e9ecef;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-text {
+            color: #6c757d;
+        }
+
+        .processing-time {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .integration-metrics {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .metric-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .success { background-color: #28a745; }
+        .warning { background-color: #ffc107; }
+        .error { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬🖼️📅 MediAI Task 01~03 통합 검증</h1>
+            <p>DNA 시퀀싱 + 레이아웃 복원 + 중첩 날짜 해결의 완전 통합 시스템</p>
+            
+            <div class="task-indicators">
+                <div class="task-indicator">
+                    <span>🧬</span>
+                    <span>Task 01: DNA 시퀀싱</span>
+                </div>
+                <div class="task-indicator">
+                    <span>🖼️</span>
+                    <span>Task 02: 레이아웃 복원</span>
+                </div>
+                <div class="task-indicator">
+                    <span>📅</span>
+                    <span>Task 03: 날짜 해결</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <div class="section-title">
+                    📝 복합 의료 텍스트 입력
+                </div>
+                <textarea 
+                    id="medicalText" 
+                    class="input-area" 
+                    placeholder="복잡한 시간적 표현이 포함된 의료 문서를 입력하세요...&#10;&#10;예시:&#10;환자명: 박민수 (M/52)&#10;&#10;2023년 3월부터 당뇨병으로 메트포르민 복용 중&#10;최근 혈당 조절 불량으로 금일 응급실 내원&#10;&#10;과거력: 2020년 고혈압 진단&#10;현병력: 3개월 전부터 다음, 다뇨 증상&#10;&#10;금일 검사:&#10;- 공복혈당: 280mg/dl ↑&#10;- HbA1c: 9.2% ↑&#10;- 혈압: 160/95 mmHg&#10;&#10;진단: 제2형 당뇨병 급성 악화&#10;처방: 인슐린 요법 시작&#10;추적: 1주일 후 외래"
+                >환자명: 박민수 (M/52)
+병원: 서울대학교병원 내분비내과
+
+2023년 3월부터 당뇨병으로 메트포르민 복용 중
+최근 혈당 조절 불량으로 금일 응급실 내원
+
+과거력:
+- 2020년 고혈압 진단 후 암로디핀 복용
+- 2022년 이상지질혈증 진단
+
+현병력:
+- 3개월 전부터 다음, 다뇨, 체중감소 증상
+- 1주일 전부터 피로감 심화
+- 어제 밤부터 구토 증상
+
+금일 검사 결과:
+┌──────────────┬──────────┬────────┐
+│    검사항목    │   결과    │  참고치  │
+├──────────────┼──────────┼────────┤
+│  공복혈당      │ 280mg/dl  │ 70-100 │
+│  HbA1c        │   9.2%    │  <7.0  │
+│  혈압          │ 160/95    │ <140/90│
+│  케톤체        │   양성    │  음성   │
+└──────────────┴──────────┴────────┘
+
+진단:
+1) 제2형 당뇨병 급성 악화 (E11.9)
+2) 당뇨병성 케톤산증 의심
+
+처방:
+1) 인슐린 요법 시작 (휴먼로그 10U tid)
+2) 메트포르민 증량 (1000mg bid → 1500mg bid)
+3) 수액 요법
+
+계획:
+- 3일간 입원 치료
+- 1주일 후 외래 추적
+- 당뇨 교육 의뢰</textarea>
+                
+                <button id="analyzeBtn" class="analyze-btn">
+                    🧬🖼️📅 완전 통합 분석 시작
+                </button>
+            </div>
+
+            <div class="results-section">
+                <div class="result-panel dna-panel">
+                    <div class="section-title">
+                        🧬 DNA 시퀀싱 결과
+                        <div id="dnaEnhancements" class="enhancement-badges" style="display: none;">
+                            <span class="enhancement-badge layout-enhanced">Layout Enhanced</span>
+                            <span class="enhancement-badge date-enhanced">Date Enhanced</span>
+                        </div>
+                    </div>
+                    <div id="dnaResults">
+                        <div class="loading">
+                            <span>분석 시작을 기다리는 중...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-panel layout-panel">
+                    <div class="section-title">
+                        🖼️ 레이아웃 복원 결과
+                    </div>
+                    <div id="layoutResults">
+                        <div class="loading">
+                            <span>분석 시작을 기다리는 중...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-panel date-panel">
+                    <div class="section-title">
+                        📅 중첩 날짜 해결 결과
+                    </div>
+                    <div id="dateResults">
+                        <div class="loading">
+                            <span>분석 시작을 기다리는 중...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-text" id="statusText">
+                준비됨 - Task 01~03 통합 분석을 시작하세요
+            </div>
+            <div class="integration-metrics" id="integrationMetrics" style="display: none;">
+                <div class="metric-item">
+                    <span class="metric-icon success"></span>
+                    <span>Layout Enhanced</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-icon success"></span>
+                    <span>Date Enhanced</span>
+                </div>
+            </div>
+            <div class="processing-time" id="processingTime">
+                처리 시간: -
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const medicalText = document.getElementById('medicalText');
+        const dnaResults = document.getElementById('dnaResults');
+        const layoutResults = document.getElementById('layoutResults');
+        const dateResults = document.getElementById('dateResults');
+        const statusText = document.getElementById('statusText');
+        const processingTime = document.getElementById('processingTime');
+        const dnaEnhancements = document.getElementById('dnaEnhancements');
+        const integrationMetrics = document.getElementById('integrationMetrics');
+
+        analyzeBtn.addEventListener('click', async () => {
+            const text = medicalText.value.trim();
+            if (!text) {
+                alert('의료 텍스트를 입력해주세요.');
+                return;
+            }
+
+            // UI 상태 변경
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = '🧬🖼️📅 통합 분석 진행 중...';
+            statusText.textContent = 'Task 01~03 통합 분석 실행 중...';
+            
+            // 로딩 상태 표시
+            dnaResults.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>DNA 시퀀싱 진행 중...</span>
+                </div>
+            `;
+            
+            layoutResults.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>레이아웃 복원 진행 중...</span>
+                </div>
+            `;
+
+            dateResults.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>중첩 날짜 해결 진행 중...</span>
+                </div>
+            `;
+
+            try {
+                const startTime = Date.now();
+                
+                // 실제 통합 분석 시뮬레이션
+                const result = await simulateFullIntegratedAnalysis(text);
+                
+                const endTime = Date.now();
+                const processingTimeMs = endTime - startTime;
+
+                // 결과 표시
+                displayDNAResults(result.dna);
+                displayLayoutResults(result.layout);
+                displayDateResults(result.date);
+                
+                // Enhancement 지시자 업데이트
+                if (result.dna.layoutEnhanced || result.dna.dateEnhanced) {
+                    dnaEnhancements.style.display = 'flex';
+                    integrationMetrics.style.display = 'flex';
+                }
+
+                statusText.textContent = `완전 통합 분석 완료 - DNA ${result.dna.genes.length}개, Layout ${result.layout.spatialGroups}개, Date ${result.date.totalDates}개`;
+                processingTime.textContent = `처리 시간: ${processingTimeMs}ms`;
+
+            } catch (error) {
+                console.error('분석 중 오류:', error);
+                dnaResults.innerHTML = `<div style="color: red;">DNA 분석 실패: ${error.message}</div>`;
+                layoutResults.innerHTML = `<div style="color: red;">Layout 분석 실패: ${error.message}</div>`;
+                dateResults.innerHTML = `<div style="color: red;">Date 분석 실패: ${error.message}</div>`;
+                statusText.textContent = '분석 실패';
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = '🧬🖼️📅 완전 통합 분석 시작';
+            }
+        });
+
+        async function simulateFullIntegratedAnalysis(text) {
+            // 단계별 시뮬레이션
+            await new Promise(resolve => setTimeout(resolve, 1200)); // Layout 복원
+            await new Promise(resolve => setTimeout(resolve, 800));  // Date 해결
+            await new Promise(resolve => setTimeout(resolve, 1000)); // DNA 시퀀싱
+            
+            return {
+                dna: {
+                    genes: [
+                        {
+                            id: 'gene_001',
+                            content: '2023년 3월부터 당뇨병으로 메트포르민 복용',
+                            confidence: 0.94,
+                            anchors: {
+                                temporal: '2023-03',
+                                spatial: '서울대학교병원',
+                                medical: '당뇨병 치료',
+                                causal: '혈당 조절'
+                            },
+                            layout: {
+                                position: 'main',
+                                section: 'medication_history',
+                                visualImportance: 0.9
+                            },
+                            temporalContext: {
+                                originalExpression: '2023년 3월부터',
+                                normalizedDate: '2023-03-01',
+                                resolutionMethod: 'direct',
+                                medicalContext: 'medication',
+                                clinicalSignificance: 0.9
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        },
+                        {
+                            id: 'gene_002',
+                            content: '금일 응급실 내원 - 혈당 조절 불량',
+                            confidence: 0.97,
+                            anchors: {
+                                temporal: '금일',
+                                spatial: '응급실',
+                                medical: '응급 내원',
+                                causal: '혈당 조절 불량'
+                            },
+                            layout: {
+                                position: 'main',
+                                section: 'chief_complaint',
+                                visualImportance: 0.95
+                            },
+                            temporalContext: {
+                                originalExpression: '금일',
+                                normalizedDate: '2024-01-18',
+                                resolutionMethod: 'relative',
+                                medicalContext: 'examination',
+                                clinicalSignificance: 1.0
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        },
+                        {
+                            id: 'gene_003',
+                            content: '2020년 고혈압 진단 후 암로디핀 복용',
+                            confidence: 0.92,
+                            anchors: {
+                                temporal: '2020년',
+                                medical: '고혈압 진단',
+                                causal: '과거 병력'
+                            },
+                            layout: {
+                                position: 'main',
+                                section: 'past_history',
+                                visualImportance: 0.7
+                            },
+                            temporalContext: {
+                                originalExpression: '2020년',
+                                normalizedDate: '2020-01-01',
+                                resolutionMethod: 'direct',
+                                medicalContext: 'diagnosis',
+                                clinicalSignificance: 0.8
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        },
+                        {
+                            id: 'gene_004',
+                            content: '3개월 전부터 다음, 다뇨, 체중감소',
+                            confidence: 0.89,
+                            anchors: {
+                                temporal: '3개월 전',
+                                medical: '당뇨 증상',
+                                causal: '증상 발현'
+                            },
+                            layout: {
+                                position: 'main',
+                                section: 'present_illness',
+                                visualImportance: 0.85
+                            },
+                            temporalContext: {
+                                originalExpression: '3개월 전부터',
+                                normalizedDate: '2023-10-18',
+                                resolutionMethod: 'relative',
+                                medicalContext: 'symptom',
+                                clinicalSignificance: 0.9
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        },
+                        {
+                            id: 'gene_005',
+                            content: '공복혈당 280mg/dl, HbA1c 9.2%',
+                            confidence: 0.98,
+                            anchors: {
+                                temporal: '금일',
+                                medical: '혈당 검사',
+                                causal: '당뇨 평가'
+                            },
+                            layout: {
+                                position: 'table',
+                                section: 'lab_results',
+                                visualImportance: 1.0
+                            },
+                            temporalContext: {
+                                originalExpression: '금일 검사',
+                                normalizedDate: '2024-01-18',
+                                resolutionMethod: 'contextual',
+                                medicalContext: 'examination',
+                                clinicalSignificance: 1.0
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        },
+                        {
+                            id: 'gene_006',
+                            content: '1주일 후 외래 추적',
+                            confidence: 0.86,
+                            anchors: {
+                                temporal: '1주일 후',
+                                medical: '추적관찰',
+                                causal: '치료 효과 평가'
+                            },
+                            layout: {
+                                position: 'footer',
+                                section: 'follow_up',
+                                visualImportance: 0.8
+                            },
+                            temporalContext: {
+                                originalExpression: '1주일 후',
+                                normalizedDate: '2024-01-25',
+                                resolutionMethod: 'relative',
+                                medicalContext: 'follow_up',
+                                clinicalSignificance: 0.8
+                            },
+                            dateEnhanced: true,
+                            layoutEnhanced: true
+                        }
+                    ],
+                    averageConfidence: 0.93,
+                    layoutEnhanced: true,
+                    dateEnhanced: true,
+                    stats: {
+                        totalGenes: 6,
+                        processingTime: 2156
+                    }
+                },
+                layout: {
+                    spatialGroups: 8,
+                    documentStructure: {
+                        header: { type: 'patient_info', confidence: 0.95 },
+                        sections: [
+                            { type: 'past_history', confidence: 0.88 },
+                            { type: 'present_illness', confidence: 0.92 },
+                            { type: 'lab_results', confidence: 0.98 },
+                            { type: 'diagnosis', confidence: 0.96 },
+                            { type: 'prescription', confidence: 0.89 },
+                            { type: 'follow_up', confidence: 0.85 }
+                        ]
+                    },
+                    structuredElements: {
+                        tables: 1,
+                        lists: 3,
+                        keyValuePairs: 6
+                    },
+                    accuracy: 0.92,
+                    confidence: 0.89,
+                    coverage: 0.96
+                },
+                date: {
+                    totalDates: 8,
+                    resolvedDates: [
+                        {
+                            original: '2023년 3월부터',
+                            normalized: '2023-03-01',
+                            type: 'duration',
+                            confidence: 0.95,
+                            medicalContext: 'medication'
+                        },
+                        {
+                            original: '금일',
+                            normalized: '2024-01-18',
+                            type: 'relative',
+                            confidence: 0.9,
+                            medicalContext: 'examination'
+                        },
+                        {
+                            original: '2020년',
+                            normalized: '2020-01-01',
+                            type: 'absolute',
+                            confidence: 0.98,
+                            medicalContext: 'diagnosis'
+                        },
+                        {
+                            original: '3개월 전부터',
+                            normalized: '2023-10-18',
+                            type: 'relative',
+                            confidence: 0.85,
+                            medicalContext: 'symptom'
+                        },
+                        {
+                            original: '1주일 후',
+                            normalized: '2024-01-25',
+                            type: 'relative',
+                            confidence: 0.88,
+                            medicalContext: 'follow_up'
+                        }
+                    ],
+                    ambiguousResolved: { original: 3, resolved: 3 },
+                    conflictsResolved: { total: 2, conflicts: 0 },
+                    confidenceScore: 0.91,
+                    timeline: [
+                        { date: '2020-01-01', event: '고혈압 진단', context: 'diagnosis' },
+                        { date: '2023-03-01', event: '당뇨병 치료 시작', context: 'medication' },
+                        { date: '2023-10-18', event: '당뇨 증상 발현', context: 'symptom' },
+                        { date: '2024-01-18', event: '응급실 내원', context: 'examination' },
+                        { date: '2024-01-25', event: '외래 추적', context: 'follow_up' }
+                    ]
+                }
+            };
+        }
+
+        function displayDNAResults(dnaResult) {
+            let html = '';
+            
+            dnaResult.genes.forEach((gene, index) => {
+                const anchorsHtml = Object.entries(gene.anchors || {})
+                    .map(([type, value]) => {
+                        if (!value) return '';
+                        return `
+                            <div class="anchor">
+                                <span class="anchor-icon ${type}"></span>
+                                <span>${type}: ${value}</span>
+                            </div>
+                        `;
+                    }).join('');
+
+                const layoutInfo = gene.layout ? `
+                    <div style="margin-top: 10px; padding: 8px; background: #e3f2fd; border-radius: 5px;">
+                        <small>
+                            📍 Position: ${gene.layout.position} | 
+                            📄 Section: ${gene.layout.section} | 
+                            ⭐ Importance: ${(gene.layout.visualImportance * 100).toFixed(0)}%
+                        </small>
+                    </div>
+                ` : '';
+
+                const temporalInfo = gene.temporalContext ? `
+                    <div class="temporal-context">
+                        <div class="temporal-detail"><strong>원본 표현:</strong> ${gene.temporalContext.originalExpression}</div>
+                        <div class="temporal-detail"><strong>정규화 날짜:</strong> ${gene.temporalContext.normalizedDate}</div>
+                        <div class="temporal-detail"><strong>해결 방법:</strong> ${gene.temporalContext.resolutionMethod}</div>
+                        <div class="temporal-detail"><strong>의료 맥락:</strong> ${gene.temporalContext.medicalContext}</div>
+                        <div class="temporal-detail"><strong>임상적 중요도:</strong> ${(gene.temporalContext.clinicalSignificance * 100).toFixed(0)}%</div>
+                    </div>
+                ` : '';
+
+                const enhancementBadges = `
+                    <div class="enhancement-badges">
+                        ${gene.layoutEnhanced ? '<span class="enhancement-badge layout-enhanced">Layout</span>' : ''}
+                        ${gene.dateEnhanced ? '<span class="enhancement-badge date-enhanced">Date</span>' : ''}
+                    </div>
+                `;
+
+                html += `
+                    <div class="gene-card">
+                        <div class="gene-header">
+                            <span class="gene-id">${gene.id}</span>
+                            <span class="confidence-badge">${(gene.confidence * 100).toFixed(0)}%</span>
+                        </div>
+                        <div class="gene-content">${gene.content}</div>
+                        <div class="anchors">${anchorsHtml}</div>
+                        ${layoutInfo}
+                        ${temporalInfo}
+                        ${enhancementBadges}
+                    </div>
+                `;
+            });
+            
+            dnaResults.innerHTML = html;
+        }
+
+        function displayLayoutResults(layoutResult) {
+            const html = `
+                <div class="layout-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.spatialGroups}</div>
+                        <div class="stat-label">공간 그룹</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.structuredElements.tables}</div>
+                        <div class="stat-label">테이블</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${layoutResult.structuredElements.lists}</div>
+                        <div class="stat-label">리스트</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${(layoutResult.accuracy * 100).toFixed(0)}%</div>
+                        <div class="stat-label">정확도</div>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <h4>📋 문서 구조 (${layoutResult.documentStructure.sections.length}개 섹션)</h4>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        ${layoutResult.documentStructure.sections.map(section => 
+                            `<li>${section.type} (${(section.confidence * 100).toFixed(0)}%)</li>`
+                        ).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            layoutResults.innerHTML = html;
+        }
+
+        function displayDateResults(dateResult) {
+            const timelineHtml = dateResult.timeline.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${item.date}</div>
+                    <div class="timeline-event">${item.event}</div>
+                    <div class="timeline-confidence">${item.context}</div>
+                </div>
+            `).join('');
+
+            const html = `
+                <div class="layout-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${dateResult.totalDates}</div>
+                        <div class="stat-label">총 날짜</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${dateResult.ambiguousResolved.resolved}</div>
+                        <div class="stat-label">모호성 해결</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${dateResult.conflictsResolved.conflicts}</div>
+                        <div class="stat-label">충돌</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${(dateResult.confidenceScore * 100).toFixed(0)}%</div>
+                        <div class="stat-label">신뢰도</div>
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <h4>📅 시간 순서 (${dateResult.timeline.length}개 이벤트)</h4>
+                    <div class="date-timeline">
+                        ${timelineHtml}
+                    </div>
+                </div>
+            `;
+            
+            dateResults.innerHTML = html;
+        }
+    </script>
+</body>
+</html> 

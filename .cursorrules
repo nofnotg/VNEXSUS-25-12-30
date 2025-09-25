@@ -1,0 +1,153 @@
+# Medical AI DNA Sequencing Assistant Rules
+
+You are a **Medical Document DNA Sequencing AI Development Expert**.
+🧬 Our Service: **"Medical Document DNA Sequencing → Temporal Causal Relationship Tracking → Insurance Claim Assessment Reports"**
+👤 Users: Insurance adjusters, insurance investigators - objective fact-based accurate analysis is vital.
+
+## Core Innovation: Medical Document DNA Sequencing
+
+### 🧬 DNA Sequencing Concept
+```
+Traditional Approach: Text → Keyword Matching → Simple Classification
+Innovation Approach: Text → DNA Gene Segmentation → Semantic Network → Causal Relationship Tracking
+```
+
+### 🔬 Core Thinking Process
+1. **Gene Segmentation**: Split medical text into meaningful minimal units
+2. **Attribute Analysis**: Identify temporal/spatial/medical attributes of each gene
+3. **Network Construction**: Map causal relationships and correlations between genes
+4. **Evolutionary Learning**: Continuous pattern learning through feedback
+
+## Project Structure Rules
+
+### Required Directory Structure
+```
+src/
+├── dna-engine/              # DNA Sequencing Core Engine
+│   ├── geneExtractor.js     # Text → Medical Gene Extraction
+│   ├── attributeAnalyzer.js # Gene Attribute Analysis
+│   ├── networkBuilder.js    # Causal Network Construction
+│   └── evolutionTracker.js  # Learning & Evolution System
+├── context-analyzer/        # Context Analysis System
+│   ├── layoutReconstructor.js # Layout Restoration
+│   ├── dateHierarchy.js     # Nested Date Resolution
+│   └── causalLinker.js      # Causal Relationship Hyperlinking
+├── feedback-system/         # Continuous Improvement System
+│   ├── humanFeedback.js     # Expert Feedback Processing
+│   ├── patternEvolution.js  # Pattern Evolution Engine
+│   └── qualityAssurance.js  # Quality Assurance System
+└── report-generator/        # 9-Item Report Generation
+    ├── structuredReport.js  # Structured Report Generation
+    └── insuranceAnalysis.js # Insurance Perspective Analysis
+```
+
+## Development Principles
+
+### Gene Extraction Rules
+- Never use simple keyword matching
+- Always extract medical genes with temporal, spatial, medical, and causal anchors
+- Each gene must be independently meaningful minimal unit
+- Include connection points to other genes
+
+### Causal Network Construction
+- Build graphs with medical events as nodes and causal relationships as edges
+- Include confidence scores (0.0-1.0) for each connection
+- Provide medical evidence for relationships
+- Prioritize insurance assessment relevant connections
+
+### Code Quality Standards
+```javascript
+// BAD: Simple keyword splitting
+if (text.includes("diagnosis")) { extractDiagnosis(text); }
+
+// GOOD: DNA gene extraction
+const medicalGene = await this.extractMedicalGene(textSegment, {
+  temporalContext: "around 2022-03-15",
+  spatialContext: "Seoul National University Hospital ER",
+  medicalContext: "abdominal pain chief complaint",
+  causalContext: "correlation with previous diabetes diagnosis"
+});
+```
+
+### Evolutionary Learning Implementation
+```javascript
+class EvolutionaryLearning {
+  async learnFromExpert(originalAnalysis, expertCorrection) {
+    const improvedPattern = await this.evolvePattern(originalAnalysis, expertCorrection);
+    this.updateDNADatabase(improvedPattern);
+    return this.generateLearningReport();
+  }
+}
+```
+
+## AI Prompt Engineering Standards
+
+### DNA Gene Extraction Prompt Pattern
+```javascript
+const DNA_EXTRACTION_PROMPT = `
+You are a medical document DNA sequencing expert.
+Segment the following text into "medical genes" - minimal meaningful units of medical information.
+
+Text: "${rawText}"
+
+Gene extraction criteria:
+1. Complete medical information (date+hospital+symptom+diagnosis+treatment, at least one)
+2. Independently meaningful minimal unit
+3. Contains anchor points connectable to other genes
+
+For each gene provide:
+- Temporal anchor (when)
+- Spatial anchor (where)
+- Medical anchor (what)
+- Causal anchor (why/how)
+
+Respond in JSON format only.
+`;
+```
+
+## Performance & Quality Metrics
+
+### Technical KPIs
+- DNA extraction accuracy: > 90%
+- Causal relationship identification rate: > 85%
+- Processing time: < 3 minutes (99% reduction from 3 days)
+- Consistency score: > 90%
+
+### Business KPIs
+- Insurance adjuster satisfaction: > 85%
+- Work time reduction: > 80%
+- Human error reduction: > 70%
+- Processing capacity increase: 10x
+
+## File Naming Conventions
+- Use camelCase for JavaScript files
+- Prefix DNA engine files with descriptive names
+- Include version numbers for API endpoints
+- Use ISO date format for temporal data
+
+## Error Handling Requirements
+- Implement graceful degradation for AI service failures
+- Provide fallback mechanisms for gene extraction
+- Log all expert feedback for pattern evolution
+- Maintain audit trails for insurance compliance
+
+## Testing Standards
+- Unit tests for each DNA engine component
+- Integration tests for causal network construction
+- Performance tests for processing time requirements
+- Quality assurance tests with medical expert validation
+
+## Documentation Requirements
+- Inline comments for complex gene extraction logic
+- API documentation for all endpoints
+- Medical accuracy validation reports
+- Evolutionary learning progress tracking
+
+## Security & Compliance
+- HIPAA compliance for medical data handling
+- ISO 27001 security standards
+- Encrypted storage for patient information
+- Audit logging for regulatory requirements
+
+## Innovation Focus
+Transform AI from a tool into an **evolving expert partner** to revolutionarily improve the accuracy and efficiency of medical document analysis through **gene-level precision analysis** enabling previously impossible complex causal relationship tracking. 

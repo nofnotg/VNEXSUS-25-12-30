@@ -3,10 +3,10 @@
  * @module utils/fileHandler
  */
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { v4: uuidv4 } = require('uuid');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import { v4 as uuidv4 } from 'uuid';
 
 // 기본 임시 디렉토리 경로
 const defaultTempDir = process.env.TEMP_DIR || path.join(os.tmpdir(), 'pdf-ocr');
@@ -43,7 +43,7 @@ const ensureTempDir = (tempDir = defaultTempDir) => {
  * @param {number} maxAgeMinutes - 최대 보존 시간(분) (기본값: 60분)
  * @returns {string} 임시 파일 경로
  */
-exports.saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir, maxAgeMinutes = 60) => {
+export const saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir, maxAgeMinutes = 60) => {
   try {
     const dir = ensureTempDir(tempDir);
     const filename = `${uuidv4()}.${extension}`;
@@ -58,7 +58,7 @@ exports.saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir, max
     // N분 후 자동 삭제
     const timeoutMs = maxAgeMinutes * 60 * 1000;
     setTimeout(() => {
-      exports.removeFile(filePath);
+      removeFile(filePath);
     }, timeoutMs);
     
     return filePath;
@@ -73,7 +73,7 @@ exports.saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir, max
  * @param {string} filePath - 삭제할 파일 경로
  * @returns {boolean} 삭제 성공 여부
  */
-exports.removeFile = (filePath) => {
+export const removeFile = (filePath) => {
   try {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
@@ -95,7 +95,7 @@ exports.removeFile = (filePath) => {
  * @param {string} tempDir - 임시 디렉토리 경로 (기본값: defaultTempDir)
  * @returns {number} 삭제된 파일 수
  */
-exports.cleanTempDir = (tempDir = defaultTempDir) => {
+export const cleanTempDir = (tempDir = defaultTempDir) => {
   try {
     if (!fs.existsSync(tempDir)) {
       return 0;
@@ -127,7 +127,7 @@ exports.cleanTempDir = (tempDir = defaultTempDir) => {
  * @param {string} tempDir - 임시 디렉토리 경로 (기본값: defaultTempDir)
  * @returns {number} 삭제된 파일 수
  */
-exports.cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) => {
+export const cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) => {
   try {
     if (!fs.existsSync(tempDir)) {
       return 0;
@@ -164,7 +164,7 @@ exports.cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) => {
  * 추적 중인 모든 임시 파일 정리
  * @returns {number} 삭제된 파일 수
  */
-exports.cleanAllTrackedFiles = () => {
+export const cleanAllTrackedFiles = () => {
   let removedCount = 0;
   
   for (const filePath of tempFiles) {
@@ -188,21 +188,21 @@ exports.cleanAllTrackedFiles = () => {
  * 현재 추적 중인 임시 파일 목록 가져오기
  * @returns {Array<string>} 임시 파일 경로 배열
  */
-exports.getTrackedFiles = () => {
+export const getTrackedFiles = () => {
   return Array.from(tempFiles);
 };
 
 // 프로세스 종료 시 모든 임시 파일 정리
 process.on('exit', () => {
-  exports.cleanAllTrackedFiles();
+  cleanAllTrackedFiles();
 });
 
 // 예기치 않은 예외 발생 시에도 파일 정리
 process.on('SIGINT', () => {
-  exports.cleanAllTrackedFiles();
+  cleanAllTrackedFiles();
   process.exit(0);
 });
 
 // 앱 실행 시 기존 임시 디렉토리 정리 (오래된 파일)
 ensureTempDir();
-exports.cleanOldTempFiles(60); 
+cleanOldTempFiles(60); 

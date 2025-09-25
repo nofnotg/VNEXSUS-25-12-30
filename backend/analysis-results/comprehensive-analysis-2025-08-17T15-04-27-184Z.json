@@ -1,0 +1,1013 @@
+{
+  "dateClassification": {
+    "currentAccuracy": 0,
+    "dateImportance": 0.09250804268255299,
+    "contentAccuracy": 1,
+    "weightingNeeds": [
+      "복잡도 기반 가중치",
+      "복잡도 기반 가중치",
+      "복잡도 기반 가중치",
+      "복잡도 기반 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치",
+      "대량 데이터 가중치",
+      "복잡도 기반 가중치"
+    ]
+  },
+  "unstructuredDocuments": {
+    "informationLoss": [
+      {
+        "caseId": "Case1",
+        "lossRate": 0.3355358353844137,
+        "reasons": [
+          "구조 불일치",
+          "패턴 미인식"
+        ]
+      },
+      {
+        "caseId": "Case4",
+        "lossRate": 0.30849591225335593,
+        "reasons": [
+          "구조 불일치",
+          "패턴 미인식"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "lossRate": 0.3064683934732149,
+        "reasons": [
+          "구조 불일치",
+          "패턴 미인식"
+        ]
+      },
+      {
+        "caseId": "Case6",
+        "lossRate": 0.3158392271803311,
+        "reasons": [
+          "구조 불일치",
+          "패턴 미인식"
+        ]
+      }
+    ],
+    "informationOverload": [
+      {
+        "caseId": "Case1",
+        "overloadRate": 0.28125536773142173,
+        "reasons": [
+          "중복 데이터",
+          "불필요 메타데이터"
+        ]
+      },
+      {
+        "caseId": "Case3",
+        "overloadRate": 0.27599353441755425,
+        "reasons": [
+          "중복 데이터",
+          "불필요 메타데이터"
+        ]
+      },
+      {
+        "caseId": "Case9",
+        "overloadRate": 0.24569182270867285,
+        "reasons": [
+          "중복 데이터",
+          "불필요 메타데이터"
+        ]
+      },
+      {
+        "caseId": "Case11",
+        "overloadRate": 0.2905839511038109,
+        "reasons": [
+          "중복 데이터",
+          "불필요 메타데이터"
+        ]
+      }
+    ],
+    "patternVariations": [
+      {
+        "caseId": "Case1",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case2",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case3",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case4",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case5",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case6",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case7",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case8",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case9",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case10",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case11",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      },
+      {
+        "caseId": "Case12",
+        "patterns": [
+          "환자정보 패턴",
+          "의료기록 패턴",
+          "보험정보 패턴"
+        ],
+        "variations": 0.1
+      }
+    ],
+    "structuralIssues": []
+  },
+  "dataRemovalComparison": {
+    "preElimination": {
+      "totalScore": 95,
+      "contextPreservation": 1,
+      "processingEfficiency": 0.75,
+      "accuracyRate": 0.277524128047659,
+      "cases": [
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.25862068965517243
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.26515151515151514
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2702702702702703
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.27439024390243905
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2770083102493075
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.27918781725888325
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2810304449648712
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2826086956521739
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2839756592292089
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2849905003166561
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.2860548271752086
+        },
+        {
+          "score": 95,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.75,
+          "accuracyRate": 0.28700056274620145
+        }
+      ]
+    },
+    "postElimination": {
+      "totalScore": 100,
+      "contextPreservation": 1,
+      "processingEfficiency": 0.8499999999999998,
+      "accuracyRate": 0.277524128047659,
+      "cases": [
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.25862068965517243
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.26515151515151514
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2702702702702703
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.27439024390243905
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2770083102493075
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.27918781725888325
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2810304449648712
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2826086956521739
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2839756592292089
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2849905003166561
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.2860548271752086
+        },
+        {
+          "score": 100,
+          "contextPreservation": 1,
+          "processingEfficiency": 0.85,
+          "accuracyRate": 0.28700056274620145
+        }
+      ]
+    }
+  },
+  "dynamicWeighting": {
+    "currentSystem": {
+      "totalScore": 77.89532915240646,
+      "cases": [
+        {
+          "score": 77.97979797979798,
+          "components": {
+            "date": 1,
+            "content": 0.6727272727272727,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.95138888888889,
+          "components": {
+            "date": 1,
+            "content": 0.671875,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.92998477929984,
+          "components": {
+            "date": 1,
+            "content": 0.6712328767123288,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.91327913279133,
+          "components": {
+            "date": 1,
+            "content": 0.6707317073170731,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.89987789987791,
+          "components": {
+            "date": 1,
+            "content": 0.6703296703296704,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.88888888888889,
+          "components": {
+            "date": 1,
+            "content": 0.6699999999999999,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.87971457696229,
+          "components": {
+            "date": 1,
+            "content": 0.6697247706422018,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.8719397363465,
+          "components": {
+            "date": 1,
+            "content": 0.6694915254237288,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.8652668416448,
+          "components": {
+            "date": 1,
+            "content": 0.6692913385826771,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.859477124183,
+          "components": {
+            "date": 1,
+            "content": 0.6691176470588236,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.8544061302682,
+          "components": {
+            "date": 1,
+            "content": 0.6689655172413793,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        },
+        {
+          "score": 77.84992784992785,
+          "components": {
+            "date": 1,
+            "content": 0.6688311688311688,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.3333333333333333,
+            "content": 0.3333333333333333,
+            "structure": 0.3333333333333333
+          }
+        }
+      ]
+    },
+    "dynamicSystem": {
+      "totalScore": 80.39339201234067,
+      "cases": [
+        {
+          "score": 78.54545454545455,
+          "components": {
+            "date": 1,
+            "content": 0.6727272727272727,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.35000000000000003,
+            "content": 0.35000000000000003,
+            "structure": 0.30000000000000004
+          }
+        },
+        {
+          "score": 78.515625,
+          "components": {
+            "date": 1,
+            "content": 0.671875,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.35000000000000003,
+            "content": 0.35000000000000003,
+            "structure": 0.30000000000000004
+          }
+        },
+        {
+          "score": 78.49315068493152,
+          "components": {
+            "date": 1,
+            "content": 0.6712328767123288,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.35000000000000003,
+            "content": 0.35000000000000003,
+            "structure": 0.30000000000000004
+          }
+        },
+        {
+          "score": 78.47560975609755,
+          "components": {
+            "date": 1,
+            "content": 0.6707317073170731,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.35000000000000003,
+            "content": 0.35000000000000003,
+            "structure": 0.30000000000000004
+          }
+        },
+        {
+          "score": 78.46153846153847,
+          "components": {
+            "date": 1,
+            "content": 0.6703296703296704,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.35000000000000003,
+            "content": 0.35000000000000003,
+            "structure": 0.30000000000000004
+          }
+        },
+        {
+          "score": 81.76666666666667,
+          "components": {
+            "date": 1,
+            "content": 0.6699999999999999,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.75840978593271,
+          "components": {
+            "date": 1,
+            "content": 0.6697247706422018,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.75141242937853,
+          "components": {
+            "date": 1,
+            "content": 0.6694915254237288,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.74540682414698,
+          "components": {
+            "date": 1,
+            "content": 0.6692913385826771,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.74019607843137,
+          "components": {
+            "date": 1,
+            "content": 0.6691176470588236,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.73563218390805,
+          "components": {
+            "date": 1,
+            "content": 0.6689655172413793,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        },
+        {
+          "score": 81.73160173160173,
+          "components": {
+            "date": 1,
+            "content": 0.6688311688311688,
+            "structure": 0.6666666666666666
+          },
+          "weights": {
+            "date": 0.45,
+            "content": 0.30000000000000004,
+            "structure": 0.25
+          }
+        }
+      ]
+    },
+    "hybridStrategy": {
+      "totalScore": 83.60861925778273,
+      "cases": [
+        {
+          "score": 79.68213462704536,
+          "logic": {
+            "score": 78.54545454545455,
+            "components": {
+              "date": 1,
+              "content": 0.6727272727272727,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.35000000000000003,
+              "content": 0.35000000000000003,
+              "structure": 0.30000000000000004
+            }
+          },
+          "ai": {
+            "score": 81.38715474943157,
+            "confidence": 87.40448173997532,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 90.28150173659101
+        },
+        {
+          "score": 81.3215006982047,
+          "logic": {
+            "score": 78.515625,
+            "components": {
+              "date": 1,
+              "content": 0.671875,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.35000000000000003,
+              "content": 0.35000000000000003,
+              "structure": 0.30000000000000004
+            }
+          },
+          "ai": {
+            "score": 85.53031424551175,
+            "confidence": 88.26873649337539,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 88.6003743017953
+        },
+        {
+          "score": 85.07349066572746,
+          "logic": {
+            "score": 78.49315068493152,
+            "components": {
+              "date": 1,
+              "content": 0.6712328767123288,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.35000000000000003,
+              "content": 0.35000000000000003,
+              "structure": 0.30000000000000004
+            }
+          },
+          "ai": {
+            "score": 94.94400063692139,
+            "confidence": 90.82946565873213,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 84.81692029317666
+        },
+        {
+          "score": 84.82267208312733,
+          "logic": {
+            "score": 78.47560975609755,
+            "components": {
+              "date": 1,
+              "content": 0.6707317073170731,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.35000000000000003,
+              "content": 0.35000000000000003,
+              "structure": 0.30000000000000004
+            }
+          },
+          "ai": {
+            "score": 94.343265573672,
+            "confidence": 85.77043228365858,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 85.04318157540925
+        },
+        {
+          "score": 80.84427481113212,
+          "logic": {
+            "score": 78.46153846153847,
+            "components": {
+              "date": 1,
+              "content": 0.6703296703296704,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.35000000000000003,
+              "content": 0.35000000000000003,
+              "structure": 0.30000000000000004
+            }
+          },
+          "ai": {
+            "score": 84.41837933552263,
+            "confidence": 93.40492455342493,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 89.00187903502173
+        },
+        {
+          "score": 82.83286514313517,
+          "logic": {
+            "score": 81.76666666666667,
+            "components": {
+              "date": 1,
+              "content": 0.6699999999999999,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 84.43216285783791,
+            "confidence": 88.70746963411639,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 91.64046819019815
+        },
+        {
+          "score": 86.90600456686133,
+          "logic": {
+            "score": 81.75840978593271,
+            "components": {
+              "date": 1,
+              "content": 0.6697247706422018,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 94.62739673825422,
+            "confidence": 93.15724546557763,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 87.55576913344449
+        },
+        {
+          "score": 79.16511686416656,
+          "logic": {
+            "score": 81.75141242937853,
+            "components": {
+              "date": 1,
+              "content": 0.6694915254237288,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 75.2856735163486,
+            "confidence": 89.70344265492432,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 87.52797384132747
+        },
+        {
+          "score": 86.30629501338376,
+          "logic": {
+            "score": 81.74540682414698,
+            "components": {
+              "date": 1,
+              "content": 0.6692913385826771,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 93.14762729723893,
+            "confidence": 89.26126955638563,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 88.13727454042201
+        },
+        {
+          "score": 86.86318130834441,
+          "logic": {
+            "score": 81.74019607843137,
+            "components": {
+              "date": 1,
+              "content": 0.6691176470588236,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 94.54765915321397,
+            "confidence": 88.8358401743181,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 87.5730932014595
+        },
+        {
+          "score": 86.70006635458468,
+          "logic": {
+            "score": 81.73563218390805,
+            "components": {
+              "date": 1,
+              "content": 0.6689655172413793,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 94.14671761059961,
+            "confidence": 87.68077710413417,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 87.7298187028866
+        },
+        {
+          "score": 82.78582895767991,
+          "logic": {
+            "score": 81.73160173160173,
+            "components": {
+              "date": 1,
+              "content": 0.6688311688311688,
+              "structure": 0.6666666666666666
+            },
+            "weights": {
+              "date": 0.45,
+              "content": 0.30000000000000004,
+              "structure": 0.25
+            }
+          },
+          "ai": {
+            "score": 84.36716979679719,
+            "confidence": 91.47878120940084,
+            "features": [
+              "패턴 인식",
+              "의미 분석",
+              "맥락 이해"
+            ]
+          },
+          "confidence": 91.63841346656251
+        }
+      ]
+    }
+  },
+  "hybridStrategy": {}
+}

@@ -8,7 +8,7 @@
  * @param {Array} pagesResults - 페이지별 결과 배열
  * @returns {string} 병합된 텍스트
  */
-exports.mergeResults = (pagesResults) => {
+export const mergeResults = (pagesResults) => {
   try {
     // 페이지 번호로 정렬
     const sortedResults = [...pagesResults].sort((a, b) => a.pageNum - b.pageNum);
@@ -31,7 +31,7 @@ exports.mergeResults = (pagesResults) => {
  * @param {Array} pagesResults - 페이지별 결과 배열
  * @returns {Object} 정형화된 결과 객체
  */
-exports.formatResultsAsJson = (pagesResults) => {
+export const formatResultsAsJson = (pagesResults) => {
   try {
     // 페이지 번호로 정렬
     const sortedResults = [...pagesResults].sort((a, b) => a.pageNum - b.pageNum);
@@ -44,7 +44,7 @@ exports.formatResultsAsJson = (pagesResults) => {
         isImage: page.isImage,
         text: (page.text || '').trim()
       })),
-      mergedText: exports.mergeResults(sortedResults)
+      mergedText: mergeResults(sortedResults)
     };
     
     return formattedResults;
@@ -59,7 +59,7 @@ exports.formatResultsAsJson = (pagesResults) => {
  * @param {Object} filesResults - 파일별 결과 객체
  * @returns {Object} 병합된 최종 결과
  */
-exports.mergeMultipleFiles = (filesResults) => {
+export const mergeMultipleFiles = (filesResults) => {
   try {
     const mergedResults = {
       totalFiles: Object.keys(filesResults).length,

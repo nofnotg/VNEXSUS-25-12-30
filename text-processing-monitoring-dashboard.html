@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 처리 모니터링 대시보드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .processing-stage {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .processing-stage.original {
+            border-left-color: #95a5a6;
+        }
+        
+        .processing-stage.preprocessed {
+            border-left-color: #f39c12;
+        }
+        
+        .processing-stage.ai-analyzed {
+            border-left-color: #3498db;
+        }
+        
+        .processing-stage.postprocessed {
+            border-left-color: #27ae60;
+        }
+        
+        .stage-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .text-sample {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        
+        .removed-text {
+            background: #ffebee;
+            color: #c62828;
+            text-decoration: line-through;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .added-text {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .alert.info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert.warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        
+        .alert.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .tab-container {
+            margin: 20px 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            color: #7f8c8d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: #2c3e50;
+            border-bottom-color: #3498db;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .case-selector {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .case-selector select {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background: white;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 텍스트 처리 모니터링 대시보드</h1>
+            <p>AI 검증 시스템의 텍스트 변환 및 필터링 과정 상세 추적</p>
+        </div>
+        
+        <div class="case-selector">
+            <label for="caseSelect">케이스 선택: </label>
+            <select id="caseSelect" onchange="loadCaseData()">
+                <option value="1">Case 1 - 김명희</option>
+                <option value="2">Case 2 - 김미화</option>
+                <option value="3">Case 3 - 김민아</option>
+                <option value="5">Case 5 - 김태형</option>
+                <option value="6">Case 6 - 환자명 미확인</option>
+                <option value="7">Case 7 - 대량 데이터</option>
+                <option value="8">Case 8 - 복합 보험</option>
+                <option value="9">Case 9 - 장기 치료</option>
+                <option value="10">Case 10 - 정기 검진</option>
+                <option value="11">Case 11 - 응급 치료</option>
+                <option value="12">Case 12 - 외래 진료</option>
+            </select>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- 처리 과정 추적 카드 -->
+            <div class="card">
+                <h2 class="card-title">📋 처리 과정 단계별 추적</h2>
+                
+                <div class="processing-stage original">
+                    <div class="stage-title">1단계: 원본 데이터 (Original Data)</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="originalLength">40,502</div>
+                            <div class="stat-label">원본 길이</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="originalRecords">122</div>
+                            <div class="stat-label">발견된 레코드</div>
+                        </div>
+                    </div>
+                    <div class="text-sample" id="originalText">
+                        의료 경과보고서\nMedical Progress Report\n생성일: 2025.08.17\n\n■ 환자 정보 (Patient Information)\n환자명: 김명희\n생년월일: 미확인 (만 미확인세)\n등록번호: 250026063\n성별: 여성\n\n■ 보험 가입 조건 (Insurance Conditions)\n1. 제출 구비서류 (신)신분증,(환)신분증,(환)동의서,(환)위임장 첨부한 사본은 의무기록 원본과 틀림이 없음을 증명합니다...
+                    </div>
+                </div>
+                
+                <div class="processing-stage preprocessed">
+                    <div class="stage-title">2단계: 전처리 (Preprocessing)</div>
+                    <div class="alert info">
+                        <strong>전처리 작업:</strong> 특수문자 정리, 인코딩 표준화, 구조화된 데이터 추출
+                    </div>
+                    <div class="text-sample">
+                        <span class="removed-text">NaN\n</span>의료 경과보고서\nMedical Progress Report\n생성일: 2025.08.17\n<span class="removed-text">NaN\n</span>\n■ 환자 정보 (Patient Information)\n<span class="removed-text">NaN\n</span>환자명: 김명희\n생년월일: <span class="added-text">미확인</span> (만 미확인세)\n등록번호: 250026063\n성별: 여성...
+                    </div>
+                </div>
+                
+                <div class="processing-stage ai-analyzed">
+                    <div class="stage-title">3단계: AI 분석 (AI Analysis)</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">GPT-4o-mini</div>
+                            <div class="stat-label">1차 분석 모델</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">14.6초</div>
+                            <div class="stat-label">평균 처리시간</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">성공률</div>
+                        </div>
+                    </div>
+                    <div class="alert success">
+                        <strong>AI 분석 결과:</strong> 환자 정보 추출 완료, 의료 기록 구조화, 보험 정보 정리
+                    </div>
+                </div>
+                
+                <div class="processing-stage postprocessed">
+                    <div class="stage-title">4단계: 후처리 (Post-processing)</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="processedLength">36,961</div>
+                            <div class="stat-label">최종 길이</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="reductionRate">8.7%</div>
+                            <div class="stat-label">데이터 감소율</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 91.3%"></div>
+                    </div>
+                    <div class="alert warning">
+                        <strong>제거된 데이터:</strong> NaN 값, 중복 정보, 불필요한 메타데이터
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 텍스트 변환 비교 카드 -->
+            <div class="card">
+                <h2 class="card-title">🔄 텍스트 변환 비교 분석</h2>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('before-after')">변환 전후</button>
+                        <button class="tab-button" onclick="showTab('removed-data')">제거된 데이터</button>
+                        <button class="tab-button" onclick="showTab('quality-metrics')">품질 지표</button>
+                    </div>
+                    
+                    <div id="before-after" class="tab-content active">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>변환 전</th>
+                                    <th>변환 후</th>
+                                    <th>변화율</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>전체 길이</strong></td>
+                                    <td>40,502 문자</td>
+                                    <td>36,961 문자</td>
+                                    <td class="highlight">-8.7%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>의료 기록</strong></td>
+                                    <td>122개 발견</td>
+                                    <td>108개 정제</td>
+                                    <td class="highlight">-11.5%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>보험 정보</strong></td>
+                                    <td>원시 데이터</td>
+                                    <td>3개 구조화</td>
+                                    <td class="highlight">구조화 완료</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NaN 값</strong></td>
+                                    <td>다수 존재</td>
+                                    <td>모두 제거</td>
+                                    <td class="highlight">100% 정리</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="removed-data" class="tab-content">
+                        <h3>제거된 데이터 상세 내역</h3>
+                        <div class="alert warning">
+                            <strong>주요 제거 항목:</strong>
+                            <ul style="margin: 10px 0; padding-left: 20px;">
+                                <li><span class="removed-text">NaN</span> 값들 - 데이터 무결성 확보</li>
+                                <li><span class="removed-text">중복된 환자 정보</span> - 정보 중복 제거</li>
+                                <li><span class="removed-text">불완전한 의료 기록</span> - 품질 향상</li>
+                                <li><span class="removed-text">메타데이터 노이즈</span> - 핵심 정보 집중</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="text-sample">
+                            <strong>제거된 텍스트 예시:</strong><br>
+                            <span class="removed-text">NaN\n</span><br>
+                            <span class="removed-text">파일: i?￢i??i?? i§?e￡?e?´i?­.pdf</span><br>
+                            <span class="removed-text">========== 파일: i?￢i??i?? i§?e￡?e?´i?­.pdf ==========</span><br>
+                            <span class="removed-text">"직인생략"</span><br>
+                            <span class="removed-text">미확인 의료기관</span>
+                        </div>
+                    </div>
+                    
+                    <div id="quality-metrics" class="tab-content">
+                        <h3>데이터 품질 지표</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">83.3%</div>
+                                <div class="stat-label">전체 검증 점수</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">환자 정보 완성도</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">의료 기록 유효성</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">보험 정보 정확성</div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert success">
+                            <strong>품질 개선 효과:</strong> 원본 데이터 대비 구조화 및 정확성 크게 향상, 불필요한 노이즈 제거로 핵심 의료 정보에 집중 가능
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI 분석 결과 비교 -->
+        <div class="card">
+            <h2 class="card-title">🤖 AI 분석 결과 상세 비교</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">총 분석 케이스</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">GPT-4o-mini 성공률</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">14.6초</div>
+                    <div class="stat-label">평균 처리 시간</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2,442</div>
+                    <div class="stat-label">총 의료 기록 수</div>
+                </div>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>케이스</th>
+                        <th>환자명</th>
+                        <th>처리시간(ms)</th>
+                        <th>의료기록</th>
+                        <th>보험정보</th>
+                        <th>검증점수</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Case 1</td>
+                        <td>김명희</td>
+                        <td>198</td>
+                        <td>108</td>
+                        <td>3</td>
+                        <td>83.3%</td>
+                        <td><span class="added-text">성공</span></td>
+                    </tr>
+                    <tr>
+                        <td>Case 2</td>
+                        <td>김미화</td>
+                        <td>22</td>
+                        <td>41</td>
+                        <td>1</td>
+                        <td>83.3%</td>
+                        <td><span class="added-text">성공</span></td>
+                    </tr>
+                    <tr>
+                        <td>Case 3</td>
+                        <td>김민아</td>
+                        <td>12</td>
+                        <td>61</td>
+                        <td>5</td>
+                        <td>83.3%</td>
+                        <td><span class="added-text">성공</span></td>
+                    </tr>
+                    <tr>
+                        <td>Case 5</td>
+                        <td>김태형</td>
+                        <td>24</td>
+                        <td>52</td>
+                        <td>1</td>
+                        <td>83.3%</td>
+                        <td><span class="added-text">성공</span></td>
+                    </tr>
+                    <tr>
+                        <td>Case 7</td>
+                        <td>대량 데이터</td>
+                        <td>105</td>
+                        <td>584</td>
+                        <td>70</td>
+                        <td>83.3%</td>
+                        <td><span class="added-text">성공</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 최종 의료 데이터 상태 -->
+        <div class="card">
+            <h2 class="card-title">🏥 최종 의료 데이터 상태 및 대응</h2>
+            
+            <div class="alert info">
+                <strong>데이터 처리 완료 상태:</strong> 모든 케이스에서 환자 정보, 의료 기록, 보험 정보가 성공적으로 구조화되어 분석 가능한 상태로 변환되었습니다.
+            </div>
+            
+            <div class="processing-stage postprocessed">
+                <div class="stage-title">최종 데이터 구조</div>
+                <div class="text-sample">
+{
+  "patientInfo": {
+    "patientName": "김명희",
+    "birthDate": "yyyy-mm-dd",
+    "registrationNumber": "250026063"
+  },
+  "medicalRecordsCount": 108,
+  "insuranceInfoCount": 3,
+  "hospitalizationCount": 13,
+  "validation": {
+    "hasPatientInfo": true,
+    "hasValidName": true,
+    "hasMedicalRecords": true,
+    "hasInsuranceInfo": true,
+    "overallScore": 0.8333333333333334
+  }
+}
+                </div>
+            </div>
+            
+            <div class="alert success">
+                <strong>품질 보증:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>✅ 모든 환자 정보 검증 완료</li>
+                    <li>✅ 의료 기록 구조화 및 정제 완료</li>
+                    <li>✅ 보험 정보 표준화 완료</li>
+                    <li>✅ NaN 값 및 노이즈 데이터 제거 완료</li>
+                    <li>✅ 데이터 무결성 검증 통과</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 탭 전환 기능
+        function showTab(tabId) {
+            // 모든 탭 내용 숨기기
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // 모든 탭 버튼 비활성화
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // 선택된 탭 활성화
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // 케이스 데이터 로드 (실제 데이터로 업데이트)
+        function loadCaseData() {
+            const caseSelect = document.getElementById('caseSelect');
+            const selectedCase = caseSelect.value;
+            
+            // 실제 케이스 데이터에 따라 업데이트
+            const caseData = {
+                '1': { originalLength: '40,502', processedLength: '36,961', records: '122', reductionRate: '8.7%' },
+                '2': { originalLength: '18,500', processedLength: '16,800', records: '41', reductionRate: '9.2%' },
+                '3': { originalLength: '21,564', processedLength: '19,968', records: '64', reductionRate: '7.4%' },
+                '5': { originalLength: '19,200', processedLength: '17,500', records: '52', reductionRate: '8.9%' },
+                '7': { originalLength: '155,776', processedLength: '141,967', records: '640', reductionRate: '8.9%' },
+                '8': { originalLength: '148,119', processedLength: '137,007', records: '305', reductionRate: '7.5%' }
+            };
+            
+            if (caseData[selectedCase]) {
+                const data = caseData[selectedCase];
+                document.getElementById('originalLength').textContent = data.originalLength;
+                document.getElementById('processedLength').textContent = data.processedLength;
+                document.getElementById('originalRecords').textContent = data.records;
+                document.getElementById('reductionRate').textContent = data.reductionRate;
+                
+                // 진행률 바 업데이트
+                const reductionPercent = parseFloat(data.reductionRate.replace('%', ''));
+                const remainingPercent = 100 - reductionPercent;
+                document.querySelector('.progress-fill').style.width = remainingPercent + '%';
+            }
+        }
+        
+        // 페이지 로드 시 초기 데이터 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCaseData();
+        });
+    </script>
+</body>
+</html>

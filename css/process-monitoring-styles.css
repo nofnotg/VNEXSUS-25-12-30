@@ -1,0 +1,664 @@
+/* 처리 과정 모니터링 시스템 스타일 */
+
+/* 전체 모니터링 컨테이너 */
+.monitoring-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* 처리 과정 플로우 */
+.process-flow-monitor {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    grid-column: 1 / -1;
+}
+
+.process-flow-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.process-flow-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.flow-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #545b62;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 처리 단계 타임라인 */
+.process-flow-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.process-step {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.process-step.processing {
+    border-left-color: #007bff;
+    background: #e3f2fd;
+}
+
+.process-step.completed {
+    border-left-color: #28a745;
+    background: #e8f5e8;
+}
+
+.process-step.error {
+    border-left-color: #dc3545;
+    background: #ffeaea;
+}
+
+.step-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    position: relative;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #6c757d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.step-status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    border: 2px solid white;
+}
+
+.step-status-indicator.pending {
+    background: #6c757d;
+}
+
+.step-status-indicator.processing {
+    background: #007bff;
+    animation: pulse 1.5s infinite;
+}
+
+.step-status-indicator.completed {
+    background: #28a745;
+}
+
+.step-status-indicator.error {
+    background: #dc3545;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.step-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step-title {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.step-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.step-timing {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.step-details {
+    margin-left: 16px;
+}
+
+.details-btn {
+    padding: 4px 8px;
+    background: #e9ecef;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.details-btn:hover {
+    background: #dee2e6;
+}
+
+/* 진행률 바 */
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar.small {
+    width: 150px;
+    height: 6px;
+}
+
+.progress-bar.mini {
+    width: 100px;
+    height: 4px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* 처리 요약 */
+.process-summary {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.summary-label {
+    font-weight: 500;
+    color: #495057;
+    white-space: nowrap;
+}
+
+/* 날짜별 데이터 블록 */
+.date-blocks-monitor {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-blocks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.date-blocks-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.blocks-filter {
+    display: flex;
+    gap: 12px;
+}
+
+.blocks-filter select {
+    padding: 6px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.date-blocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.date-block {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.date-block:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.date-block.pending {
+    border-left: 4px solid #6c757d;
+}
+
+.date-block.processing {
+    border-left: 4px solid #007bff;
+    background: #f8f9ff;
+}
+
+.date-block.completed {
+    border-left: 4px solid #28a745;
+    background: #f8fff8;
+}
+
+.date-block.error {
+    border-left: 4px solid #dc3545;
+    background: #fff8f8;
+}
+
+.block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.block-date {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.block-status {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.block-status.pending {
+    background: #e9ecef;
+    color: #6c757d;
+}
+
+.block-status.processing {
+    background: #cce5ff;
+    color: #0056b3;
+}
+
+.block-status.completed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.block-status.error {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.block-content {
+    margin-bottom: 12px;
+}
+
+.block-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.block-actions {
+    text-align: center;
+}
+
+.block-actions button {
+    padding: 4px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.block-actions button:hover {
+    background: #0056b3;
+}
+
+/* 처리 로그 */
+.processing-logs {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.logs-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.logs-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.logs-tabs {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6c757d;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.tab-btn:hover {
+    color: #007bff;
+}
+
+.logs-content {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.logs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.log-item {
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 4px solid #dee2e6;
+    background: #f8f9fa;
+}
+
+.log-item.info {
+    border-left-color: #17a2b8;
+    background: #e8f4f8;
+}
+
+.log-item.warning {
+    border-left-color: #ffc107;
+    background: #fff8e1;
+}
+
+.log-item.error {
+    border-left-color: #dc3545;
+    background: #ffeaea;
+}
+
+.log-timestamp {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 4px;
+}
+
+.log-message {
+    font-size: 14px;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.log-details {
+    font-size: 12px;
+    color: #6c757d;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+
+/* 성능 메트릭 */
+.performance-metrics {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.performance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.performance-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.metric-card {
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.metric-title {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.metric-unit {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.performance-chart {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f8f9fa;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .monitoring-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .monitoring-container {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .process-flow-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .flow-controls {
+        justify-content: center;
+    }
+    
+    .process-step {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .step-icon {
+        margin-right: 0;
+    }
+    
+    .date-blocks-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .process-summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* 스크롤바 스타일링 */
+.logs-content::-webkit-scrollbar,
+.date-blocks-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.logs-content::-webkit-scrollbar-track,
+.date-blocks-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.logs-content::-webkit-scrollbar-thumb,
+.date-blocks-grid::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.logs-content::-webkit-scrollbar-thumb:hover,
+.date-blocks-grid::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

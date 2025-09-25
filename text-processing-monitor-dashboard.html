@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 처리 모니터링 대시보드</title>
+    <link rel="stylesheet" href="css/unified-dashboard-styles.css">
+    <link rel="stylesheet" href="css/text-diff-styles.css">
+    <link rel="stylesheet" href="css/process-monitoring-styles.css">
+    <link rel="stylesheet" href="css/advanced-features-styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .control-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .case-selector label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .case-selector select {
+            padding: 10px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .case-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .flow-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step.active .flow-icon {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .flow-step.completed .flow-icon {
+            background: #27ae60;
+            color: white;
+        }
+
+        .flow-step.pending .flow-icon {
+            background: #ecf0f1;
+            color: #95a5a6;
+        }
+
+        .flow-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .text-stage-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+
+        .panel-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .stage-indicator {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stage-original { background: #e8f4fd; color: #1e88e5; }
+        .stage-basic { background: #fff3e0; color: #fb8c00; }
+        .stage-hybrid { background: #f3e5f5; color: #8e24aa; }
+        .stage-ai { background: #e8f5e8; color: #43a047; }
+
+        .text-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            border: 2px solid #e0e6ed;
+        }
+
+        .text-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .text-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .text-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .text-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        .diff-highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            border-left: 3px solid #ffc107;
+        }
+
+        .removed-text {
+            background: #f8d7da;
+            text-decoration: line-through;
+            color: #721c24;
+        }
+
+        .added-text {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stats-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .progress-section {
+            margin-top: 25px;
+        }
+
+        .progress-item {
+            margin-bottom: 15px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e6ed;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: #7f8c8d;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e6ed;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .flow-step:not(:last-child)::after {
+                content: '↓';
+                right: auto;
+                bottom: -15px;
+                top: auto;
+            }
+        }
+        
+        /* 12개 케이스 종합 분석 스타일 */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .summary-card h5 {
+            margin: 0 0 10px 0;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .summary-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .cases-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .case-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .case-header h6 {
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .case-status {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .status-indicator {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .status-indicator.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-indicator.failed {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .case-metrics {
+            margin: 10px 0;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+        
+        .metric-value.available {
+            color: #28a745;
+            font-weight: 500;
+        }
+        
+        .metric-value.unavailable {
+            color: #dc3545;
+            font-weight: 500;
+        }
+        
+        .charts-container {
+            margin-top: 20px;
+        }
+        
+        .chart-section {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .chart-section h6 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .success-rate-chart, .processing-time-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .rate-bar, .time-bar {
+            display: grid;
+            grid-template-columns: 100px 1fr 80px;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rate-label, .time-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .rate-progress, .time-progress {
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .rate-fill, .time-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .rate-value, .time-value {
+            font-size: 12px;
+            font-weight: 500;
+            color: #2c3e50;
+            text-align: right;
+        }
+        
+        .analysis-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .analysis-controls select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+        }
+        
+        .analysis-controls button {
+            padding: 8px 16px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .analysis-controls button:hover {
+            background: #0056b3;
+        }
+        
+        .analysis-controls button.btn-outline {
+            background: white;
+            color: #007bff;
+        }
+        
+        .analysis-controls button.btn-outline:hover {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1 class="dashboard-title">🔍 텍스트 처리 모니터링 대시보드</h1>
+            <p class="dashboard-subtitle">AI 의료 데이터 처리 과정의 실시간 모니터링 및 분석</p>
+        </header>
+
+        <div class="control-panel">
+            <div class="card mb-4">
+                <div class="card-header">케이스 선택 및 제어</div>
+                <div class="card-body">
+                    <div class="d-flex justify-between align-center gap-lg">
+                        <div class="case-selector">
+                            <label for="caseSelect" class="form-label">분석 케이스:</label>
+                            <select id="caseSelect" class="form-control">
+                                <option value="">케이스를 선택하세요</option>
+                                <option value="1">Case 1</option>
+                                <option value="2">Case 2</option>
+                                <option value="3">Case 3</option>
+                                <option value="4">Case 4</option>
+                                <option value="5">Case 5</option>
+                                <option value="6">Case 6</option>
+                                <option value="7">Case 7</option>
+                                <option value="8">Case 8</option>
+                                <option value="9">Case 9</option>
+                                <option value="10">Case 10</option>
+                                <option value="11">Case 11</option>
+                                <option value="12">Case 12</option>
+                                <option value="13">Case 13</option>
+                            </select>
+                        </div>
+                        <div class="btn-group">
+                            <button id="refreshBtn" class="btn btn-secondary">새로고침</button>
+                            <button id="toggleMonitoringBtn" class="btn btn-primary">모니터링 보기</button>
+                            <button id="toggleAdvancedFeaturesBtn" class="btn btn-info">고급 기능</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 처리 과정 모니터링 섹션 -->
+            <div class="card" id="monitoringSection" style="display: none;">
+                <div class="card-header d-flex justify-between align-center">
+                    <h2 class="m-0">🔍 실시간 처리 모니터링</h2>
+                    <div class="d-flex gap-sm">
+                        <button id="startProcessBtn" class="btn btn-sm btn-success">처리 시작</button>
+                        <button id="pauseProcessBtn" class="btn btn-sm btn-warning">일시정지</button>
+                        <button id="stopProcessBtn" class="btn btn-sm btn-danger">중지</button>
+                        <button id="clearLogsBtn" class="btn btn-sm btn-secondary">로그 지우기</button>
+                        <button id="exportLogsBtn" class="btn btn-sm btn-info">로그 내보내기</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 처리 과정 플로우 -->
+                    <div class="mb-4">
+                        <h3 class="mb-3">처리 과정 플로우</h3>
+                        <div id="processFlowTimeline" class="process-flow-timeline">
+                            <!-- 처리 단계들이 동적으로 추가됩니다 -->
+                        </div>
+                    <div id="processSummary" class="process-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">전체 진행률:</span>
+                            <div class="progress-bar">
+                                <div id="overallProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span id="overallProgressText" class="progress-text">0%</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">예상 완료 시간:</span>
+                            <span id="estimatedTime">--:--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">처리 상태:</span>
+                            <span id="processStatus" class="block-status pending">대기중</span>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- 날짜별 데이터 블록 -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-between align-center mb-3">
+                            <h3 class="m-0">날짜별 데이터 블록</h3>
+                            <div class="d-flex gap-sm">
+                                <select id="dateFilter" class="form-control">
+                                    <option value="all">전체 날짜</option>
+                                </select>
+                                <select id="statusFilter" class="form-control">
+                                    <option value="all">전체 상태</option>
+                                    <option value="pending">대기중</option>
+                                    <option value="processing">처리중</option>
+                                    <option value="completed">완료</option>
+                                    <option value="error">오류</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="dateBlocksGrid" class="date-blocks-grid">
+                            <!-- 날짜별 블록들이 동적으로 추가됩니다 -->
+                        </div>
+                    </div>
+
+                    <!-- 처리 로그 -->
+                    <div class="mb-4">
+                        <div class="d-flex justify-between align-center mb-3">
+                            <h3 class="m-0">처리 로그</h3>
+                            <div class="d-flex gap-sm">
+                                <button class="btn btn-sm btn-primary log-tab active" data-tab="all">전체</button>
+                                <button class="btn btn-sm btn-secondary log-tab" data-tab="info">정보</button>
+                                <button class="btn btn-sm btn-secondary log-tab" data-tab="warning">경고</button>
+                                <button class="btn btn-sm btn-secondary log-tab" data-tab="error">오류</button>
+                            </div>
+                        </div>
+                        <div class="logs-content">
+                            <div id="logsList" class="logs-list">
+                                <!-- 로그 항목들이 동적으로 추가됩니다 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 성능 메트릭 -->
+                    <div>
+                        <div class="d-flex justify-between align-center mb-3">
+                            <h3 class="m-0">성능 메트릭</h3>
+                            <button id="refreshMetricsBtn" class="btn btn-sm btn-secondary">새로고침</button>
+                        </div>
+                        <div class="grid grid-4 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-value" id="avgProcessingTime">0</div>
+                                <div class="stat-label">평균 처리 시간 (초)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="memoryUsage">0</div>
+                                <div class="stat-label">메모리 사용량 (MB)</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="processedBlocks">0</div>
+                                <div class="stat-label">처리된 블록 수</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="errorRate">0</div>
+                                <div class="stat-label">오류율 (%)</div>
+                            </div>
+                        </div>
+                        <div class="performance-chart">
+                            <canvas id="performanceChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-flow">
+                <div class="flow-step pending" id="step-original">
+                    <div class="flow-icon">📄</div>
+                    <div class="flow-label">원본 텍스트</div>
+                </div>
+                <div class="flow-step pending" id="step-basic">
+                    <div class="flow-icon">🔧</div>
+                    <div class="flow-label">기본 후처리</div>
+                </div>
+                <div class="flow-step pending" id="step-hybrid">
+                    <div class="flow-icon">⚙️</div>
+                    <div class="flow-label">하이브리드 처리</div>
+                </div>
+                <div class="flow-step pending" id="step-ai">
+                    <div class="flow-icon">🤖</div>
+                    <div class="flow-label">AI 보고서</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- 텍스트 처리 단계별 시각화 -->
+            <div class="grid grid-2 mb-5">
+                <!-- 원본 텍스트 -->
+                <div class="card">
+                    <div class="card-header d-flex justify-between align-center">
+                        <h3 class="m-0">📄 원본 텍스트</h3>
+                        <span class="badge badge-secondary">ORIGINAL</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-panel-content" id="originalText">
+                            케이스를 선택하면 원본 텍스트가 표시됩니다.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기본 후처리 텍스트 -->
+                <div class="card">
+                    <div class="card-header d-flex justify-between align-center">
+                        <h3 class="m-0">🔧 기본 후처리</h3>
+                        <div class="d-flex align-center gap-sm">
+                            <span class="badge badge-info">BASIC</span>
+                            <button class="btn btn-sm btn-secondary" id="basicDiffBtn">변화 보기</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-panel-content" id="basicProcessedText">
+                            기본 후처리 결과가 표시됩니다.
+                        </div>
+                        <div class="diff-container" id="basicDiffContainer" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 mb-5">
+                <!-- 하이브리드 후처리 텍스트 -->
+                <div class="card">
+                    <div class="card-header d-flex justify-between align-center">
+                        <h3 class="m-0">⚡ 하이브리드 후처리</h3>
+                        <div class="d-flex align-center gap-sm">
+                            <span class="badge badge-warning">HYBRID</span>
+                            <button class="btn btn-sm btn-secondary" id="hybridDiffBtn">변화 보기</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-panel-content" id="hybridProcessedText">
+                            하이브리드 후처리 결과가 표시됩니다.
+                        </div>
+                        <div class="diff-container" id="hybridDiffContainer" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- AI 보고서 텍스트 -->
+                <div class="card">
+                    <div class="card-header d-flex justify-between align-center">
+                        <h3 class="m-0">🤖 AI 보고서</h3>
+                        <div class="d-flex align-center gap-sm">
+                            <span class="badge badge-success">AI REPORT</span>
+                            <button class="btn btn-sm btn-secondary" id="aiDiffBtn">변화 보기</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-panel-content" id="aiReportText">
+                            AI 보고서가 표시됩니다.
+                        </div>
+                        <div class="diff-container" id="aiDiffContainer" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 처리 단계별 변화 요약 -->
+            <div class="card mb-5" id="processing-summary" style="display: none;">
+                <div class="card-header">
+                    <h3 class="m-0">📊 텍스트 처리 단계별 변화 요약</h3>
+                    <p class="text-muted m-0">각 처리 단계에서의 텍스트 변화량과 품질 지표</p>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-4" id="summary-stats"></div>
+                    <div class="summary-changes" id="summary-changes"></div>
+                </div>
+            </div>
+
+            <!-- 키워드 변화 추적 -->
+            <div class="card mb-5" id="keyword-tracking" style="display: none;">
+                <div class="card-header">
+                    <h3 class="m-0">🔍 키워드 변화 추적</h3>
+                </div>
+                <div class="card-body">
+                    <div class="keyword-section">
+                        <h4>🏥 의료 용어</h4>
+                        <div class="keyword-list" id="medical-keywords"></div>
+                    </div>
+                    <div class="keyword-section">
+                        <h4>📅 날짜 정보</h4>
+                        <div class="keyword-list" id="date-keywords"></div>
+                    </div>
+                    <div class="keyword-section">
+                        <h4>🔢 수치 데이터</h4>
+                        <div class="keyword-list" id="number-keywords"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 품질 점수 -->
+            <div class="card mb-5" id="quality-score" style="display: none;">
+                <div class="card-header">
+                    <h3 class="m-0">⭐ 텍스트 품질 점수</h3>
+                    <div class="quality-overall" id="quality-overall">0</div>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-4" id="quality-metrics"></div>
+                </div>
+            </div>
+
+            <div class="text-stage-panel">
+                <div class="panel-header">
+                    <div class="panel-title">텍스트 처리 단계</div>
+                    <div class="stage-indicator stage-original" id="currentStage">원본 데이터</div>
+                </div>
+                <div class="text-content" id="textContent">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        케이스를 선택하여 텍스트 처리 과정을 확인하세요.
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="panel-header">
+                    <div class="panel-title">처리 통계</div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="originalLength">-</div>
+                        <div class="stat-label">원본 문자 수</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="processedLength">-</div>
+                        <div class="stat-label">처리 후 문자 수</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="reductionRate">-</div>
+                        <div class="stat-label">압축률</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="processingTime">-</div>
+                        <div class="stat-label">처리 시간</div>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3 style="margin-bottom: 20px; color: #2c3e50;">처리 진행률</h3>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>텍스트 추출</span>
+                            <span id="extractProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="extractBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>기본 후처리</span>
+                            <span id="basicProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="basicBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>하이브리드 처리</span>
+                            <span id="hybridProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="hybridBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>AI 분석</span>
+                            <span id="aiProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="aiBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="messageArea"></div>
+    </div>
+
+    <!-- 고급 기능 토글 버튼 -->
+    <div class="advanced-features-toggle">
+        <button id="advancedFeaturesToggle" title="고급 기능">
+            ⚙️
+        </button>
+    </div>
+
+    <!-- 고급 기능 패널 -->
+    <div class="advanced-features-panel" id="advancedFeaturesPanel">
+        <div class="advanced-features-header">
+            <h3>고급 기능</h3>
+            <button class="advanced-features-close" id="advancedFeaturesClose">&times;</button>
+        </div>
+        
+        <div class="advanced-features-tabs">
+            <button class="advanced-features-tab active" data-tab="search">검색</button>
+            <button class="advanced-features-tab" data-tab="filter">필터</button>
+            <button class="advanced-features-tab" data-tab="export">내보내기</button>
+            <button class="advanced-features-tab" data-tab="compare">비교</button>
+        </div>
+        
+        <!-- 검색 탭 -->
+        <div class="advanced-features-content active" id="searchTab">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="globalSearch" class="form-control" placeholder="텍스트 검색...">
+                    <div class="search-options">
+                        <label><input type="checkbox" id="caseSensitive"> 대소문자 구분</label>
+                        <label><input type="checkbox" id="wholeWord"> 전체 단어</label>
+                        <label><input type="checkbox" id="useRegex"> 정규식</label>
+                    </div>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 필터 탭 -->
+        <div class="advanced-features-content" id="filterTab">
+            <div class="filter-container">
+                <div class="filter-panel">
+                    <h4>필터 설정</h4>
+                    <div class="filter-group">
+                        <label>날짜 범위:</label>
+                        <input type="date" id="startDate" class="form-control">
+                        <input type="date" id="endDate" class="form-control">
+                    </div>
+                    <div class="filter-group">
+                        <label>텍스트 길이:</label>
+                        <input type="number" id="minLength" class="form-control" placeholder="최소">
+                        <input type="number" id="maxLength" class="form-control" placeholder="최대">
+                    </div>
+                    <div class="filter-group">
+                        <label>처리 단계:</label>
+                        <select id="stageFilter" class="form-control">
+                            <option value="all">전체</option>
+                            <option value="original">원본</option>
+                            <option value="basic">기본 후처리</option>
+                            <option value="hybrid">하이브리드 후처리</option>
+                            <option value="ai_report">AI 보고서</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>키워드:</label>
+                        <input type="text" id="keywordFilter" class="form-control" placeholder="쉼표로 구분">
+                    </div>
+                    <div class="filter-actions">
+                        <button id="applyFilter" class="btn btn-primary">필터 적용</button>
+                        <button id="clearFilter" class="btn btn-secondary">필터 초기화</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 내보내기 탭 -->
+        <div class="advanced-features-content" id="exportTab">
+            <div class="export-container">
+                <div class="export-panel">
+                    <h4>데이터 내보내기</h4>
+                    <div class="export-options">
+                        <div class="export-format">
+                            <label>형식 선택:</label>
+                            <select id="exportFormat" class="form-control">
+                                <option value="pdf">PDF</option>
+                                <option value="excel">Excel</option>
+                                <option value="json">JSON</option>
+                                <option value="txt">텍스트</option>
+                            </select>
+                        </div>
+                        <div class="export-content">
+                            <label>내보낼 내용:</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" id="includeOriginal" checked> 원본 텍스트</label>
+                                <label><input type="checkbox" id="includeProcessed" checked> 처리된 텍스트</label>
+                                <label><input type="checkbox" id="includeMetrics" checked> 성능 메트릭</label>
+                                <label><input type="checkbox" id="includeLogs"> 처리 로그</label>
+                            </div>
+                        </div>
+                        <div class="export-settings">
+                            <label><input type="checkbox" id="includeTimestamp" checked> 타임스탬프 포함</label>
+                            <label><input type="checkbox" id="compressOutput"> 압축 출력</label>
+                        </div>
+                    </div>
+                    <button id="exportData" class="btn btn-success">내보내기</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 비교 탭 -->
+        <div class="advanced-features-content" id="compareTab">
+            <div class="comparison-container">
+                <div class="comparison-panel">
+                    <h4>12 Cases 종합 분석</h4>
+                    <div class="analysis-controls">
+                        <div class="control-group">
+                            <label>분석 유형:</label>
+                            <select id="analysisType" class="form-control">
+                                <option value="overview">전체 개요</option>
+                                <option value="performance">성능 비교</option>
+                                <option value="ai-models">AI 모델 비교</option>
+                                <option value="accuracy">정확도 분석</option>
+                                <option value="processing-time">처리 시간 분석</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <button id="loadAllCases" class="btn btn-primary">전체 케이스 로드</button>
+                            <button id="generateReport" class="btn btn-success">보고서 생성</button>
+                            <button id="exportAnalysis" class="btn btn-info">분석 결과 내보내기</button>
+                        </div>
+                    </div>
+                    
+                    <div id="allCasesOverview" class="all-cases-overview">
+                        <div class="cases-summary" id="casesSummary"></div>
+                        <div class="cases-grid" id="casesGrid"></div>
+                        <div class="performance-charts" id="performanceCharts"></div>
+                    </div>
+                    
+                    <div class="comparison-selector" style="margin-top: 20px;">
+                        <h5>개별 케이스 비교</h5>
+                        <div class="selector-group">
+                            <label>비교 대상 A:</label>
+                            <select id="compareA" class="form-control">
+                                <option value="">선택하세요</option>
+                            </select>
+                        </div>
+                        <div class="selector-group">
+                            <label>비교 대상 B:</label>
+                            <select id="compareB" class="form-control">
+                                <option value="">선택하세요</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="comparison-options">
+                        <label><input type="checkbox" id="showLineNumbers" checked> 줄 번호 표시</label>
+                        <label><input type="checkbox" id="ignoreWhitespace"> 공백 무시</label>
+                        <label><input type="checkbox" id="showStatistics" checked> 통계 표시</label>
+                    </div>
+                    <button id="startComparison" class="btn btn-primary">비교 시작</button>
+                    <div id="comparisonResult" class="comparison-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 알림 시스템 -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script>
+        class TextProcessingMonitor {
+            constructor() {
+                this.currentCase = null;
+                this.currentStage = 'original';
+                this.data = {
+                    original: '',
+                    basic: '',
+                    hybrid: '',
+                    ai: ''
+                };
+                this.stats = {
+                    originalLength: 0,
+                    processedLength: 0,
+                    reductionRate: 0,
+                    processingTime: 0
+                };
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                document.getElementById('caseSelect').addEventListener('change', (e) => {
+                    if (e.target.value) {
+                        this.loadCase(e.target.value);
+                    }
+                });
+
+                document.getElementById('refreshBtn').addEventListener('click', () => {
+                    if (this.currentCase) {
+                        this.loadCase(this.currentCase);
+                    }
+                });
+
+                // 단계별 클릭 이벤트
+                ['original', 'basic', 'hybrid', 'ai'].forEach(stage => {
+                    document.getElementById(`step-${stage}`).addEventListener('click', () => {
+                        if (this.currentCase) {
+                            this.showStage(stage);
+                        }
+                    });
+                });
+
+                // 12개 케이스 종합 분석 이벤트 리스너
+                document.getElementById('loadAllCases').addEventListener('click', () => {
+                    this.loadAllCasesData();
+                });
+
+                document.getElementById('generateReport').addEventListener('click', () => {
+                    this.generateComprehensiveReport();
+                });
+
+                document.getElementById('exportAnalysis').addEventListener('click', () => {
+                    this.exportAnalysisResults();
+                });
+
+                document.getElementById('analysisType').addEventListener('change', (e) => {
+                    if (this.allCasesData) {
+                        this.renderAllCasesOverview(e.target.value);
+                    }
+                });
+            }
+
+            async loadCase(caseNumber) {
+                this.currentCase = caseNumber;
+                this.showMessage('케이스 데이터를 로드하는 중...', 'info');
+                
+                try {
+                    // 원본 데이터 로드
+                    await this.loadOriginalData(caseNumber);
+                    // 처리된 데이터 로드
+                    await this.loadProcessedData(caseNumber);
+                    // AI 결과 로드
+                    await this.loadAIResults(caseNumber);
+                    
+                    this.updateProgress();
+                    this.showStage('original');
+                    this.showMessage(`Case ${caseNumber} 데이터가 성공적으로 로드되었습니다.`, 'success');
+                } catch (error) {
+                    this.showMessage(`데이터 로드 중 오류가 발생했습니다: ${error.message}`, 'error');
+                }
+            }
+
+            async loadOriginalData(caseNumber) {
+                try {
+                    // 여러 가능한 원본 데이터 경로 시도
+                    const possiblePaths = [
+                        `/src/rag/case_sample/Case${caseNumber}.txt`,
+                        `/case_sample/Case${caseNumber}.txt`,
+                        `/case_sample/case${caseNumber}.txt`,
+                        `/backend/case_sample/Case${caseNumber}.txt`,
+                        `/backend/case_sample/case${caseNumber}.txt`
+                    ];
+                    
+                    let originalText = null;
+                    for (const path of possiblePaths) {
+                        try {
+                            const response = await fetch(path);
+                            if (response.ok) {
+                                originalText = await response.text();
+                                console.log(`원본 데이터 로드 성공: ${path}`);
+                                break;
+                            }
+                        } catch (e) {
+                            console.warn(`원본 데이터 로드 실패 (${path}):`, e.message);
+                            continue;
+                        }
+                    }
+                    
+                    if (originalText) {
+                        this.data.original = originalText;
+                        this.stats.originalLength = originalText.length;
+                        this.updateFlowStep('original', 'completed');
+                    } else {
+                        throw new Error('모든 원본 데이터 경로에서 파일을 찾을 수 없습니다.');
+                    }
+                } catch (error) {
+                    console.error('원본 데이터 로드 실패:', error);
+                    this.data.original = '원본 데이터를 로드할 수 없습니다.';
+                }
+            }
+
+            async loadProcessedData(caseNumber) {
+                try {
+                    // 실제 존재하는 파일명 시도 (케이스 번호에 따라)
+                    const possibleFiles = [
+                        `Case${caseNumber}_fixed_result.json`,
+                        `case${caseNumber}_extended_result.json`
+                    ];
+                    
+                    let processedData = null;
+                    for (const fileName of possibleFiles) {
+                        try {
+                            const response = await fetch(`/backend/postprocess/test_outputs/${fileName}`);
+                            if (response.ok) {
+                                processedData = await response.json();
+                                break;
+                            }
+                        } catch (e) {
+                            console.warn(`후처리 결과 파일 로드 실패 (${fileName}):`, e.message);
+                            continue;
+                        }
+                    }
+                    
+                    if (processedData) {
+                        // 기본 후처리 결과 (의료 기록 부분)
+                        this.data.basic = this.extractMedicalRecords(processedData);
+                        
+                        // 하이브리드 처리 결과 (구조화된 데이터)
+                        this.data.hybrid = this.formatStructuredData(processedData);
+                        
+                        this.stats.processedLength = this.data.hybrid.length;
+                        this.stats.reductionRate = Math.round((1 - this.stats.processedLength / this.stats.originalLength) * 100);
+                        
+                        this.updateFlowStep('basic', 'completed');
+                        this.updateFlowStep('hybrid', 'completed');
+                    } else {
+                        throw new Error('모든 후처리 결과 파일을 찾을 수 없습니다.');
+                    }
+                } catch (error) {
+                    console.error('처리된 데이터 로드 실패:', error);
+                    this.data.basic = '기본 후처리 데이터를 로드할 수 없습니다.';
+                    this.data.hybrid = '하이브리드 처리 데이터를 로드할 수 없습니다.';
+                }
+            }
+
+            async loadAIResults(caseNumber) {
+                try {
+                    // 최신 AI 검증 결과 디렉토리 (실제 존재하는 경로)
+                    const latestDir = 'verification-2025-08-21T11-47-50-712Z';
+                    
+                    // GPT-4o-mini 결과 로드
+                    let gpt4oResult = null;
+                    try {
+                        const gpt4oResponse = await fetch(`/backend/ai-verification/results/${latestDir}/gpt-4o-mini-results.json`);
+                        if (gpt4oResponse.ok) {
+                            const gpt4oData = await gpt4oResponse.json();
+                            gpt4oResult = gpt4oData.detailedResults?.gpt4oMini?.results?.find(r => r.caseId == caseNumber);
+                        }
+                    } catch (e) {
+                        console.warn('GPT-4o-mini 결과 로드 실패:', e.message);
+                    }
+                    
+                    // o1-mini 결과 로드
+                    let o1Result = null;
+                    try {
+                        const o1Response = await fetch(`/backend/ai-verification/results/${latestDir}/o1-mini-results.json`);
+                        if (o1Response.ok) {
+                            const o1Data = await o1Response.json();
+                            o1Result = o1Data.detailedResults?.o1Mini?.results?.find(r => r.caseId == caseNumber);
+                        }
+                    } catch (e) {
+                        console.warn('o1-mini 결과 로드 실패:', e.message);
+                    }
+                    
+                    // 종합 보고서 로드
+                    let comprehensiveData = null;
+                    try {
+                        const compResponse = await fetch(`/backend/ai-verification/results/${latestDir}/comprehensive-report.json`);
+                        if (compResponse.ok) {
+                            comprehensiveData = await compResponse.json();
+                        }
+                    } catch (e) {
+                        console.warn('종합 보고서 로드 실패:', e.message);
+                    }
+                    
+                    // AI 결과 통합 및 포맷팅
+                    const aiResults = {
+                        gpt4oMini: gpt4oResult,
+                        o1Mini: o1Result,
+                        comprehensive: comprehensiveData,
+                        summary: this.generateAISummary(gpt4oResult, o1Result, comprehensiveData, caseNumber)
+                    };
+                    
+                    this.data.ai = this.formatEnhancedAIReport(aiResults);
+                    this.stats.processingTime = gpt4oResult?.processingTime || 0;
+                    this.updateFlowStep('ai', 'completed');
+                    
+                } catch (error) {
+                    console.error('AI 결과 로드 실패:', error);
+                    this.data.ai = `AI 분석 결과를 로드할 수 없습니다: ${error.message}`;
+                    this.updateFlowStep('ai', 'pending');
+                }
+            }
+            
+            generateAISummary(gpt4oResult, o1Result, comprehensiveData, caseNumber) {
+                const summary = {
+                    caseId: caseNumber,
+                    models: {
+                        gpt4oMini: {
+                            success: gpt4oResult?.success || false,
+                            processingTime: gpt4oResult?.processingTime || 0,
+                            confidence: gpt4oResult?.result?.confidence || 'N/A'
+                        },
+                        o1Mini: {
+                            success: o1Result?.success || false,
+                            processingTime: o1Result?.processingTime || 0,
+                            confidence: o1Result?.result?.confidence || 'N/A'
+                        }
+                    },
+                    overallSuccess: comprehensiveData?.summary?.successRates || {},
+                    timestamp: comprehensiveData?.metadata?.generatedAt || new Date().toISOString()
+                };
+                
+                return summary;
+            }
+            
+            formatEnhancedAIReport(aiResults) {
+                let report = '=== AI 검증 종합 보고서 ===\n\n';
+                
+                // 요약 정보
+                if (aiResults.summary) {
+                    report += `케이스 ID: ${aiResults.summary.caseId}\n`;
+                    report += `검증 시간: ${aiResults.summary.timestamp}\n\n`;
+                    
+                    report += '=== 모델별 성능 ===\n';
+                    report += `GPT-4o-mini: ${aiResults.summary.models.gpt4oMini.success ? '성공' : '실패'} `;
+                    report += `(${aiResults.summary.models.gpt4oMini.processingTime}ms)\n`;
+                    report += `o1-mini: ${aiResults.summary.models.o1Mini.success ? '성공' : '실패'} `;
+                    report += `(${aiResults.summary.models.o1Mini.processingTime}ms)\n\n`;
+                }
+                
+                // GPT-4o-mini 상세 결과
+                if (aiResults.gpt4oMini?.success && aiResults.gpt4oMini.result) {
+                    report += '=== GPT-4o-mini 분석 결과 ===\n';
+                    const result = aiResults.gpt4oMini.result;
+                    
+                    if (result.patient_info) {
+                        report += '환자 정보:\n';
+                        Object.entries(result.patient_info).forEach(([key, value]) => {
+                            report += `  ${key}: ${value}\n`;
+                        });
+                        report += '\n';
+                    }
+                    
+                    if (result.medical_records) {
+                        report += '의료 기록 요약:\n';
+                        result.medical_records.slice(0, 3).forEach((record, index) => {
+                            report += `  [${index + 1}] ${record.date}: ${record.content?.substring(0, 100)}...\n`;
+                        });
+                        report += '\n';
+                    }
+                    
+                    if (result.confidence) {
+                        report += `신뢰도: ${result.confidence}\n\n`;
+                    }
+                }
+                
+                // 전체 시스템 성능
+                if (aiResults.comprehensive?.summary) {
+                    const summary = aiResults.comprehensive.summary;
+                    report += '=== 전체 시스템 성능 ===\n';
+                    report += `총 케이스 수: ${summary.totalCases}\n`;
+                    report += `성공률:\n`;
+                    Object.entries(summary.successRates).forEach(([model, rate]) => {
+                        report += `  ${model}: ${rate}\n`;
+                    });
+                }
+                
+                return report;
+            }
+
+            extractMedicalRecords(data) {
+                if (data.medical_records && Array.isArray(data.medical_records)) {
+                    return data.medical_records.map(record => {
+                        return `날짜: ${record.date || 'N/A'}\n내용: ${record.content || 'N/A'}\n`;
+                    }).join('\n---\n\n');
+                }
+                return '의료 기록 데이터가 없습니다.';
+            }
+
+            formatStructuredData(data) {
+                let formatted = '';
+                
+                if (data.patient_info) {
+                    formatted += '=== 환자 정보 ===\n';
+                    Object.entries(data.patient_info).forEach(([key, value]) => {
+                        formatted += `${key}: ${value}\n`;
+                    });
+                    formatted += '\n';
+                }
+                
+                if (data.medical_records) {
+                    formatted += '=== 의료 기록 ===\n';
+                    data.medical_records.forEach((record, index) => {
+                        formatted += `[${index + 1}] ${record.date}: ${record.content}\n`;
+                    });
+                    formatted += '\n';
+                }
+                
+                if (data.validation_scores) {
+                    formatted += '=== 검증 점수 ===\n';
+                    Object.entries(data.validation_scores).forEach(([key, value]) => {
+                        formatted += `${key}: ${value}\n`;
+                    });
+                }
+                
+                return formatted;
+            }
+
+            formatAIReport(aiData) {
+                let report = '=== AI 분석 보고서 ===\n\n';
+                
+                if (aiData.analysis_result) {
+                    report += '분석 결과:\n' + aiData.analysis_result + '\n\n';
+                }
+                
+                if (aiData.quality_score) {
+                    report += `품질 점수: ${aiData.quality_score}\n`;
+                }
+                
+                if (aiData.token_usage) {
+                    report += `토큰 사용량: ${aiData.token_usage}\n`;
+                }
+                
+                if (aiData.processing_time) {
+                    report += `처리 시간: ${aiData.processing_time}초\n`;
+                }
+                
+                return report;
+            }
+
+            showStage(stage) {
+                this.currentStage = stage;
+                
+                // 단계 표시 업데이트
+                ['original', 'basic', 'hybrid', 'ai'].forEach(s => {
+                    const element = document.getElementById(`step-${s}`);
+                    element.classList.remove('active');
+                    if (s === stage) {
+                        element.classList.add('active');
+                    }
+                });
+                
+                // 텍스트 내용 표시
+                const textContent = document.getElementById('textContent');
+                textContent.textContent = this.data[stage] || '데이터가 없습니다.';
+                
+                // 단계 표시기 업데이트
+                const stageIndicator = document.getElementById('currentStage');
+                const stageNames = {
+                    original: '원본 데이터',
+                    basic: '기본 후처리',
+                    hybrid: '하이브리드 처리',
+                    ai: 'AI 보고서'
+                };
+                const stageClasses = {
+                    original: 'stage-original',
+                    basic: 'stage-basic',
+                    hybrid: 'stage-hybrid',
+                    ai: 'stage-ai'
+                };
+                
+                stageIndicator.textContent = stageNames[stage];
+                stageIndicator.className = `stage-indicator ${stageClasses[stage]}`;
+                
+                // 통계 업데이트
+                this.updateStats();
+            }
+
+            updateFlowStep(step, status) {
+                const element = document.getElementById(`step-${step}`);
+                element.classList.remove('pending', 'active', 'completed');
+                element.classList.add(status);
+            }
+
+            updateProgress() {
+                const progressSteps = [
+                    { id: 'extract', value: this.data.original ? 100 : 0 },
+                    { id: 'basic', value: this.data.basic ? 100 : 0 },
+                    { id: 'hybrid', value: this.data.hybrid ? 100 : 0 },
+                    { id: 'ai', value: this.data.ai ? 100 : 0 }
+                ];
+                
+                progressSteps.forEach(step => {
+                    document.getElementById(`${step.id}Progress`).textContent = `${step.value}%`;
+                    document.getElementById(`${step.id}Bar`).style.width = `${step.value}%`;
+                });
+            }
+
+            updateStats() {
+                document.getElementById('originalLength').textContent = this.stats.originalLength.toLocaleString();
+                document.getElementById('processedLength').textContent = this.stats.processedLength.toLocaleString();
+                document.getElementById('reductionRate').textContent = `${this.stats.reductionRate}%`;
+                document.getElementById('processingTime').textContent = `${this.stats.processingTime}초`;
+            }
+
+            showMessage(message, type) {
+                const messageArea = document.getElementById('messageArea');
+                const messageClass = type === 'error' ? 'error-message' : 
+                                   type === 'success' ? 'success-message' : 'info-message';
+                
+                messageArea.innerHTML = `<div class="${messageClass}">${message}</div>`;
+                
+                setTimeout(() => {
+                    messageArea.innerHTML = '';
+                }, 5000);
+            }
+            
+            // 12개 케이스 종합 분석 기능
+            async loadAllCasesData() {
+                const allCasesData = {};
+                const latestDir = 'verification-2025-08-21T11-47-50-712Z';
+                
+                try {
+                    // 종합 보고서 로드
+                    const compResponse = await fetch(`/backend/ai-verification/results/${latestDir}/comprehensive-report.json`);
+                    if (compResponse.ok) {
+                        allCasesData.comprehensive = await compResponse.json();
+                    }
+                    
+                    // GPT-4o-mini 결과 로드
+                    const gpt4oResponse = await fetch(`/backend/ai-verification/results/${latestDir}/gpt-4o-mini-results.json`);
+                    if (gpt4oResponse.ok) {
+                        allCasesData.gpt4oMini = await gpt4oResponse.json();
+                    }
+                    
+                    // o1-mini 결과 로드
+                    const o1Response = await fetch(`/backend/ai-verification/results/${latestDir}/o1-mini-results.json`);
+                    if (o1Response.ok) {
+                        allCasesData.o1Mini = await o1Response.json();
+                    }
+                    
+                    // 각 케이스별 후처리 결과 로드
+                    for (let i = 1; i <= 12; i++) {
+                        try {
+                            const basicResponse = await fetch(`/backend/postprocess/results/case${i}/basic-postprocess.json`);
+                            const hybridResponse = await fetch(`/backend/postprocess/results/case${i}/hybrid-postprocess.json`);
+                            
+                            if (!allCasesData.cases) allCasesData.cases = {};
+                            allCasesData.cases[`case${i}`] = {
+                                basic: basicResponse.ok ? await basicResponse.json() : null,
+                                hybrid: hybridResponse.ok ? await hybridResponse.json() : null
+                            };
+                        } catch (e) {
+                            console.warn(`Case ${i} 후처리 결과 로드 실패:`, e.message);
+                        }
+                    }
+                    
+                    this.allCasesData = allCasesData;
+                    this.renderAllCasesOverview();
+                    return allCasesData;
+                    
+                } catch (error) {
+                    console.error('전체 케이스 데이터 로드 실패:', error);
+                    this.showMessage('전체 케이스 데이터를 로드할 수 없습니다.', 'error');
+                    return null;
+                }
+            }
+            
+            renderAllCasesOverview(analysisType = 'overview') {
+                if (!this.allCasesData) {
+                    this.showMessage('전체 케이스 데이터가 로드되지 않았습니다.', 'warning');
+                    return;
+                }
+                
+                const allCasesData = this.allCasesData;
+                const summaryDiv = document.getElementById('casesSummary');
+                const gridDiv = document.getElementById('casesGrid');
+                const chartsDiv = document.getElementById('performanceCharts');
+                
+                // 요약 정보 렌더링
+                if (allCasesData.comprehensive?.summary) {
+                    const summary = allCasesData.comprehensive.summary;
+                    summaryDiv.innerHTML = `
+                        <div class="summary-cards">
+                            <div class="summary-card">
+                                <h5>총 케이스 수</h5>
+                                <div class="summary-value">${summary.totalCases}</div>
+                            </div>
+                            <div class="summary-card">
+                                <h5>GPT-4o-mini 성공률</h5>
+                                <div class="summary-value">${summary.successRates['gpt-4o-mini'] || '0%'}</div>
+                            </div>
+                            <div class="summary-card">
+                                <h5>o1-mini 성공률</h5>
+                                <div class="summary-value">${summary.successRates['o1-mini'] || '0%'}</div>
+                            </div>
+                            <div class="summary-card">
+                                <h5>총 처리 시간</h5>
+                                <div class="summary-value">${Math.round(summary.totalExecutionTime / 1000)}초</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // 케이스 그리드 렌더링
+                let gridHTML = '<div class="cases-grid-container">';
+                for (let i = 1; i <= 12; i++) {
+                    const gpt4oResult = allCasesData.gpt4oMini?.detailedResults?.gpt4oMini?.results?.find(r => r.caseId == i);
+                    const o1Result = allCasesData.o1Mini?.detailedResults?.o1Mini?.results?.find(r => r.caseId == i);
+                    const caseData = allCasesData.cases?.[`case${i}`];
+                    
+                    gridHTML += `
+                        <div class="case-card" data-case="${i}">
+                            <div class="case-header">
+                                <h6>Case ${i}</h6>
+                                <div class="case-status">
+                                    <span class="status-indicator ${gpt4oResult?.success ? 'success' : 'failed'}">GPT-4o</span>
+                                    <span class="status-indicator ${o1Result?.success ? 'success' : 'failed'}">o1</span>
+                                </div>
+                            </div>
+                            <div class="case-metrics">
+                                <div class="metric">
+                                    <span>기본 후처리:</span>
+                                    <span class="metric-value ${caseData?.basic ? 'available' : 'unavailable'}">
+                                        ${caseData?.basic ? '완료' : '미완료'}
+                                    </span>
+                                </div>
+                                <div class="metric">
+                                    <span>하이브리드:</span>
+                                    <span class="metric-value ${caseData?.hybrid ? 'available' : 'unavailable'}">
+                                        ${caseData?.hybrid ? '완료' : '미완료'}
+                                    </span>
+                                </div>
+                                <div class="metric">
+                                    <span>처리 시간:</span>
+                                    <span class="metric-value">${gpt4oResult?.processingTime || 0}ms</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="monitor.loadCase(${i})">상세 보기</button>
+                        </div>
+                    `;
+                }
+                gridHTML += '</div>';
+                gridDiv.innerHTML = gridHTML;
+                
+                // 성능 차트 렌더링
+                this.renderPerformanceCharts(allCasesData, chartsDiv);
+            }
+            
+            renderPerformanceCharts(allCasesData, container) {
+                let chartsHTML = '<div class="charts-container">';
+                
+                // 모델별 성공률 차트
+                if (allCasesData.comprehensive?.summary?.successRates) {
+                    const rates = allCasesData.comprehensive.summary.successRates;
+                    chartsHTML += `
+                        <div class="chart-section">
+                            <h6>모델별 성공률</h6>
+                            <div class="success-rate-chart">
+                                <div class="rate-bar">
+                                    <div class="rate-label">GPT-4o-mini</div>
+                                    <div class="rate-progress">
+                                        <div class="rate-fill" style="width: ${rates['gpt-4o-mini'] || '0%'}"></div>
+                                    </div>
+                                    <div class="rate-value">${rates['gpt-4o-mini'] || '0%'}</div>
+                                </div>
+                                <div class="rate-bar">
+                                    <div class="rate-label">o1-mini</div>
+                                    <div class="rate-progress">
+                                        <div class="rate-fill" style="width: ${rates['o1-mini'] || '0%'}"></div>
+                                    </div>
+                                    <div class="rate-value">${rates['o1-mini'] || '0%'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // 케이스별 처리 시간 차트
+                chartsHTML += `
+                    <div class="chart-section">
+                        <h6>케이스별 처리 시간</h6>
+                        <div class="processing-time-chart">
+                `;
+                
+                for (let i = 1; i <= 12; i++) {
+                    const gpt4oResult = allCasesData.gpt4oMini?.detailedResults?.gpt4oMini?.results?.find(r => r.caseId == i);
+                    const processingTime = gpt4oResult?.processingTime || 0;
+                    const maxTime = 10000; // 최대 10초로 가정
+                    const percentage = Math.min((processingTime / maxTime) * 100, 100);
+                    
+                    chartsHTML += `
+                        <div class="time-bar">
+                            <div class="time-label">Case ${i}</div>
+                            <div class="time-progress">
+                                <div class="time-fill" style="width: ${percentage}%"></div>
+                            </div>
+                            <div class="time-value">${processingTime}ms</div>
+                        </div>
+                    `;
+                }
+                
+                chartsHTML += '</div></div></div>';
+                container.innerHTML = chartsHTML;
+            }
+            
+            generateComprehensiveReport() {
+                if (!this.allCasesData) {
+                    this.showMessage('먼저 전체 케이스 데이터를 로드해주세요.', 'warning');
+                    return;
+                }
+                
+                const report = this.createDetailedReport(this.allCasesData);
+                
+                // 보고서를 새 창에 표시
+                const reportWindow = window.open('', '_blank');
+                reportWindow.document.write(`
+                    <html>
+                        <head>
+                            <title>MediAI DNA 시퀀싱 시스템 v7.2 종합 분석 보고서</title>
+                            <style>
+                                body { font-family: 'Courier New', monospace; padding: 20px; line-height: 1.6; }
+                                h1, h2, h3 { color: #2c3e50; }
+                                .summary { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0; }
+                                .case-detail { border-left: 3px solid #007bff; padding-left: 15px; margin: 10px 0; }
+                                .success { color: #28a745; }
+                                .failed { color: #dc3545; }
+                                .warning { color: #ffc107; }
+                            </style>
+                        </head>
+                        <body>
+                            <pre>${report}</pre>
+                        </body>
+                    </html>
+                `);
+                reportWindow.document.close();
+                
+                this.showMessage('종합 분석 보고서가 생성되었습니다.', 'success');
+            }
+            
+            createDetailedReport(allCasesData) {
+                let report = '=== MediAI DNA 시퀀싱 시스템 v7.2 종합 분석 보고서 ===\n\n';
+                report += `생성 시간: ${new Date().toLocaleString()}\n\n`;
+                
+                if (allCasesData.comprehensive?.summary) {
+                    const summary = allCasesData.comprehensive.summary;
+                    report += '=== 전체 시스템 성능 ===\n';
+                    report += `총 케이스 수: ${summary.totalCases}\n`;
+                    report += `총 실행 시간: ${Math.round(summary.totalExecutionTime / 1000)}초\n\n`;
+                    
+                    report += '=== AI 모델 성능 ===\n';
+                    Object.entries(summary.successRates).forEach(([model, rate]) => {
+                        report += `${model}: ${rate}\n`;
+                    });
+                    report += '\n';
+                }
+                
+                report += '=== 케이스별 상세 분석 ===\n';
+                for (let i = 1; i <= 12; i++) {
+                    const gpt4oResult = allCasesData.gpt4oMini?.detailedResults?.gpt4oMini?.results?.find(r => r.caseId == i);
+                    const o1Result = allCasesData.o1Mini?.detailedResults?.o1Mini?.results?.find(r => r.caseId == i);
+                    const caseData = allCasesData.cases?.[`case${i}`];
+                    
+                    report += `\nCase ${i}:\n`;
+                    report += `  GPT-4o-mini: ${gpt4oResult?.success ? '성공' : '실패'} (${gpt4oResult?.processingTime || 0}ms)\n`;
+                    report += `  o1-mini: ${o1Result?.success ? '성공' : '실패'} (${o1Result?.processingTime || 0}ms)\n`;
+                    report += `  기본 후처리: ${caseData?.basic ? '완료' : '미완료'}\n`;
+                    report += `  하이브리드 처리: ${caseData?.hybrid ? '완료' : '미완료'}\n`;
+                }
+                
+                return report;
+            }
+            
+            exportAnalysisResults() {
+                if (!this.allCasesData) {
+                    this.showMessage('먼저 전체 케이스 데이터를 로드해주세요.', 'warning');
+                    return;
+                }
+                
+                const analysisType = document.getElementById('analysisType').value;
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                
+                // JSON 형태로 분석 결과 내보내기
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    analysisType: analysisType,
+                    summary: this.allCasesData.comprehensive?.summary || {},
+                    detailedResults: {
+                        gpt4oMini: this.allCasesData.gpt4oMini?.detailedResults || {},
+                        o1Mini: this.allCasesData.o1Mini?.detailedResults || {},
+                        postProcessing: this.allCasesData.cases || {}
+                    },
+                    report: this.createDetailedReport(this.allCasesData)
+                };
+                
+                // 파일 다운로드
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `mediai-analysis-${analysisType}-${timestamp}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                this.showMessage('분석 결과가 성공적으로 내보내졌습니다.', 'success');
+            }
+        }
+
+        // 대시보드 초기화
+        let monitor;
+        document.addEventListener('DOMContentLoaded', () => {
+            monitor = new TextProcessingMonitor();
+        });
+    </script>
+    <script src="js/text-diff-visualizer.js"></script>
+    <script src="js/virtual-scroll-optimizer.js"></script>
+    <script src="js/process-monitoring-system.js"></script>
+    <script src="js/advanced-features.js"></script>
+    <script src="js/text-processing-dashboard.js"></script>
+</body>
+</html>

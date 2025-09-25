@@ -1,0 +1,1544 @@
+{
+  "caseAnalysis": {
+    "Case1": {
+      "originalText": {
+        "length": 40502,
+        "lines": 3474,
+        "koreanRatio": 0.27820848353167743
+      },
+      "realReport": null,
+      "aiReport": null,
+      "stageResults": {},
+      "dataFlow": {
+        "stage1ToStage2": {
+          "status": "missing_data"
+        },
+        "stage2ToStage3": {
+          "status": "missing_data"
+        },
+        "stage3ToStage4": {
+          "status": "missing_data"
+        },
+        "overallLoss": {
+          "hospitalLoss": 0,
+          "diagnosisLoss": "partial",
+          "visitLoss": "partial"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case2": {
+      "originalText": {
+        "length": 22902,
+        "lines": 1408,
+        "koreanRatio": 0.18282246092044363
+      },
+      "realReport": {
+        "length": 2069,
+        "lines": 89,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 243,
+        "lines": 16,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": false,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 31,
+            "hospitalsFound": 3,
+            "datesFound": 29
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 12,
+            "dateRange": {
+              "start": "2017-12-22",
+              "end": "2025-02-26",
+              "span": 12
+            },
+            "periodDistribution": {
+              "total": 31,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 15,
+                "percentage": "48.4"
+              },
+              "other": {
+                "count": 16,
+                "percentage": "51.6"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 243,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들\n- 보험 정보 없음\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트\n- 의료 이벤트 없음\n\n**참고사항:**\n- 제공된 데이터에 따르면, 환자는 병원 방문 기록이 없으며, 진단 기록도 없습니다.\n- 보험 가입 전후의 의료 이벤트가 없으므로 고지의무 위반 우려는 없습니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 12,
+            "dateRange": {
+              "start": "2017-12-22",
+              "end": "2025-02-26",
+              "span": 12
+            },
+            "periodDistribution": {
+              "total": 31,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 15,
+                "percentage": "48.4"
+              },
+              "other": {
+                "count": 16,
+                "percentage": "51.6"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 243,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 3,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case3": {
+      "originalText": {
+        "length": 21564,
+        "lines": 1568,
+        "koreanRatio": 0.26827119272862177
+      },
+      "realReport": {
+        "length": 2701,
+        "lines": 114,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 323,
+        "lines": 22,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": false,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 7,
+            "hospitalsFound": 3,
+            "datesFound": 7
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "1991-06-24",
+              "end": "2025-03-18",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 7,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 7,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 323,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들\n- 보험 정보 없음\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 의료 이벤트 없음\n\n**고지의무 위반 우려:** \n- 현재 제공된 데이터에는 보험 가입 전후의 의료 기록이 없으므로 고지의무 위반 여부를 판단할 수 없습니다. \n\n**요약:** \n- 총 병원 방문 횟수: 0회\n- 총 병원 수: 0개\n- 방문 기간: 정보 없음\n\n현재 데이터는 의료 이벤트가 없으므로 추가적인 정보가 필요합니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "1991-06-24",
+              "end": "2025-03-18",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 7,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 7,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 323,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 3,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case5": {
+      "originalText": {
+        "length": 73863,
+        "lines": 4024,
+        "koreanRatio": 0.4865629611578192
+      },
+      "realReport": {
+        "length": 2039,
+        "lines": 93,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 379,
+        "lines": 24,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 15,
+            "hospitalsFound": 2,
+            "datesFound": 13
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2020-03-20",
+              "end": "2025-03-13",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 15,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 3,
+                "percentage": "20.0"
+              },
+              "other": {
+                "count": 12,
+                "percentage": "80.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 379,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면, 병원 방문 및 진단 기록이 없습니다.\n- 보험 가입 전후의 의료 기록이 없으므로 고지의무 위반 우려는 없습니다. \n\n**요약:**\n- 총 병원 수: 0\n- 총 방문 횟수: 0\n- 의료 기록 기간: 없음\n\n**추가 정보 필요:**\n- 환자의 구체적인 보험 정보 및 병원 방문 기록이 필요합니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2020-03-20",
+              "end": "2025-03-13",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 15,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 3,
+                "percentage": "20.0"
+              },
+              "other": {
+                "count": 12,
+                "percentage": "80.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 379,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 2,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case6": {
+      "originalText": {
+        "length": 29843,
+        "lines": 2434,
+        "koreanRatio": 0.3189357638307141
+      },
+      "realReport": {
+        "length": 2673,
+        "lines": 115,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 390,
+        "lines": 23,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 3,
+            "hospitalsFound": 2,
+            "datesFound": 3
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 2,
+            "dateRange": {
+              "start": "2024-12-31",
+              "end": "2025-01-21",
+              "span": 2
+            },
+            "periodDistribution": {
+              "total": 3,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 3,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 390,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면, 병원 방문 기록 및 진단 기록이 없습니다.\n- 보험 가입 전후의 의료 이벤트가 없으므로 고지의무 위반 우려는 현재로서는 없습니다. \n\n**요약:**\n- 총 병원 수: 0\n- 총 방문 횟수: 0\n- 방문 기간: 정보 없음\n\n추가적인 의료 이벤트나 보험 정보가 제공될 경우, 시간축 경과표를 업데이트할 수 있습니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 2,
+            "dateRange": {
+              "start": "2024-12-31",
+              "end": "2025-01-21",
+              "span": 2
+            },
+            "periodDistribution": {
+              "total": 3,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 3,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 390,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 2,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case7": {
+      "originalText": {
+        "length": 60630,
+        "lines": 5761,
+        "koreanRatio": 0.25428005937654624
+      },
+      "realReport": {
+        "length": 2003,
+        "lines": 84,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 326,
+        "lines": 17,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 3,
+            "hospitalsFound": 1,
+            "datesFound": 2
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 2,
+            "dateRange": {
+              "start": "2021-01-26",
+              "end": "2025-02-19",
+              "span": 2
+            },
+            "periodDistribution": {
+              "total": 3,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 1,
+                "percentage": "33.3"
+              },
+              "other": {
+                "count": 2,
+                "percentage": "66.7"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 326,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 제공된 보험 정보 없음\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 제공된 의료 이벤트 정보 없음\n\n**참고사항:**\n- 현재 제공된 데이터에는 병원 방문 기록이나 진단 정보가 없습니다.\n- 보험 가입일 이전의 의료 기록이 없으므로 고지의무 위반 우려는 현재로서는 없습니다.\n- 추가적인 의료 이벤트나 보험 정보가 제공될 경우, 시간축 경과표를 업데이트할 수 있습니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 2,
+            "dateRange": {
+              "start": "2021-01-26",
+              "end": "2025-02-19",
+              "span": 2
+            },
+            "periodDistribution": {
+              "total": 3,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 1,
+                "percentage": "33.3"
+              },
+              "other": {
+                "count": 2,
+                "percentage": "66.7"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 326,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 1,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case8": {
+      "originalText": {
+        "length": 155776,
+        "lines": 13682,
+        "koreanRatio": 0.20385682004930156
+      },
+      "realReport": {
+        "length": 3561,
+        "lines": 149,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 327,
+        "lines": 17,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 22,
+            "hospitalsFound": 4,
+            "datesFound": 22
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2024-12-02",
+              "end": "2025-02-13",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 22,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 22,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 327,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 제공된 보험 정보 없음\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 제공된 의료 이벤트 정보 없음\n\n**참고사항:**\n- 현재 제공된 데이터에는 병원 방문 기록이나 진단 기록이 없습니다.\n- 보험 가입 전후의 의료 이벤트가 없으므로 고지의무 위반 우려는 없습니다.\n- 추가적인 의료 이벤트가 발생할 경우, 보험 가입 전후로 구분하여 고지의무 위반 여부를 검토해야 합니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2024-12-02",
+              "end": "2025-02-13",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 22,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 22,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 327,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 4,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case9": {
+      "originalText": {
+        "length": 148119,
+        "lines": 10950,
+        "koreanRatio": 0.2622891053814838
+      },
+      "realReport": {
+        "length": 2340,
+        "lines": 99,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 341,
+        "lines": 17,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 23,
+            "hospitalsFound": 3,
+            "datesFound": 22
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 13,
+            "dateRange": {
+              "start": "2008-01-06",
+              "end": "2082-04-09",
+              "span": 13
+            },
+            "periodDistribution": {
+              "total": 23,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 8,
+                "percentage": "34.8"
+              },
+              "other": {
+                "count": 15,
+                "percentage": "65.2"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 341,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면, 병원 방문 기록 및 진단 기록이 없습니다.\n- 보험 가입 전후의 의료 이벤트가 없으므로 고지의무 위반 우려는 현재로서는 없습니다.\n- 추가적인 의료 이벤트나 보험 정보가 제공될 경우, 시간축 경과표를 업데이트할 수 있습니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 13,
+            "dateRange": {
+              "start": "2008-01-06",
+              "end": "2082-04-09",
+              "span": 13
+            },
+            "periodDistribution": {
+              "total": 23,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 8,
+                "percentage": "34.8"
+              },
+              "other": {
+                "count": 15,
+                "percentage": "65.2"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 341,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 3,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case10": {
+      "originalText": {
+        "length": 220101,
+        "lines": 13395,
+        "koreanRatio": 0.20367013325700473
+      },
+      "realReport": {
+        "length": 3321,
+        "lines": 147,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 297,
+        "lines": 16,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 186,
+            "hospitalsFound": 7,
+            "datesFound": 163
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 33,
+            "dateRange": {
+              "start": "1969-06-05",
+              "end": "2025-01-13",
+              "span": 33
+            },
+            "periodDistribution": {
+              "total": 186,
+              "last3Months": {
+                "count": 2,
+                "percentage": "1.1"
+              },
+              "last5Years": {
+                "count": 98,
+                "percentage": "52.7"
+              },
+              "other": {
+                "count": 88,
+                "percentage": "47.3"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 297,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면 병원 방문 기록이 없으며, 따라서 고지의무 위반 우려는 없습니다.\n- 추가적인 의료 이벤트나 보험 정보가 제공되지 않아 상세한 분석이 불가능합니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 33,
+            "dateRange": {
+              "start": "1969-06-05",
+              "end": "2025-01-13",
+              "span": 33
+            },
+            "periodDistribution": {
+              "total": 186,
+              "last3Months": {
+                "count": 2,
+                "percentage": "1.1"
+              },
+              "last5Years": {
+                "count": 98,
+                "percentage": "52.7"
+              },
+              "other": {
+                "count": 88,
+                "percentage": "47.3"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 297,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 7,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case11": {
+      "originalText": {
+        "length": 88611,
+        "lines": 7073,
+        "koreanRatio": 0.11121644039679046
+      },
+      "realReport": {
+        "length": 3595,
+        "lines": 138,
+        "hasPatientInfo": true,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 272,
+        "lines": 16,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 16,
+            "hospitalsFound": 5,
+            "datesFound": 15
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2011-08-11",
+              "end": "2025-01-07",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 16,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 16,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 272,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면 병원 방문 기록이 없으며, 따라서 고지의무 위반 우려는 없습니다.\n- 추가적인 의료 이벤트나 보험 정보가 제공되지 않았습니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 6,
+            "dateRange": {
+              "start": "2011-08-11",
+              "end": "2025-01-07",
+              "span": 6
+            },
+            "periodDistribution": {
+              "total": 16,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 16,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 272,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 5,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    },
+    "Case12": {
+      "originalText": {
+        "length": 182368,
+        "lines": 11660,
+        "koreanRatio": 0.24601903842779435
+      },
+      "realReport": {
+        "length": 4210,
+        "lines": 159,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": true
+      },
+      "aiReport": {
+        "length": 374,
+        "lines": 23,
+        "hasPatientInfo": false,
+        "hasMedicalEvents": true,
+        "hasTimelineEvents": false
+      },
+      "stageResults": {
+        "stage1": {
+          "name": "원시 데이터 세그멘테이션",
+          "summary": {
+            "totalSegments": 100,
+            "hospitalsFound": 2,
+            "datesFound": 89
+          },
+          "data": {}
+        },
+        "stage2": {
+          "name": "시간축 데이터 정규화",
+          "summary": {
+            "totalItems": 31,
+            "dateRange": {
+              "start": "2023-05-17",
+              "end": "2025-01-21",
+              "span": 31
+            },
+            "periodDistribution": {
+              "total": 100,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 100,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "data": {}
+        },
+        "stage3": {
+          "name": "엔티티 정규화 및 통계",
+          "summary": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "data": {}
+        },
+        "stage4": {
+          "name": "AI 보고서 합성",
+          "summary": {
+            "reportLength": 374,
+            "tokensUsed": 55
+          },
+          "data": "### 1. 환자 기본정보\n- 이름: 환자명 미상\n- 생년월일: 생년월일 미상\n\n### 2. 보험 조건들 (각 보험사별로 구분)\n- 현재 제공된 보험 정보가 없습니다.\n\n### 3. 보험 가입 시점 표시\n- 보험 가입일: 2023-01-01\n\n### 4. 시간축 의료 이벤트 (날짜순 정렬)\n- 현재 제공된 의료 이벤트 정보가 없습니다.\n\n**참고사항:**\n- 제공된 데이터에 따르면 병원 방문 기록이 없으며, 진단 기록도 없습니다.\n- 보험 가입 전후의 의료 이벤트가 없으므로 고지의무 위반 우려는 없습니다. \n\n**요약:**\n- 총 병원 수: 0\n- 총 방문 횟수: 0\n- 방문 기간: 해당 없음\n\n현재 데이터로는 보험 손해사정에 필요한 추가적인 정보가 필요합니다."
+        }
+      },
+      "dataFlow": {
+        "stage1ToStage2": {
+          "dataPreserved": {
+            "totalItems": 31,
+            "dateRange": {
+              "start": "2023-05-17",
+              "end": "2025-01-21",
+              "span": 31
+            },
+            "periodDistribution": {
+              "total": 100,
+              "last3Months": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "last5Years": {
+                "count": 0,
+                "percentage": "0.0"
+              },
+              "other": {
+                "count": 100,
+                "percentage": "100.0"
+              }
+            }
+          },
+          "lossDetected": false
+        },
+        "stage2ToStage3": {
+          "dataPreserved": {
+            "uniqueHospitals": 0,
+            "uniqueDiagnoses": 0,
+            "totalVisits": 0
+          },
+          "lossDetected": false
+        },
+        "stage3ToStage4": {
+          "dataPreserved": {
+            "reportLength": 374,
+            "tokensUsed": 55
+          },
+          "lossDetected": false
+        },
+        "overallLoss": {
+          "hospitalLoss": 2,
+          "diagnosisLoss": "complete",
+          "visitLoss": "complete"
+        }
+      },
+      "qualityMetrics": {}
+    }
+  },
+  "stageAnalysis": {
+    "stage1": {
+      "totalSegments": 406,
+      "totalHospitals": 32,
+      "totalDates": 365,
+      "cases": [
+        {
+          "case": "Case2",
+          "segments": 31,
+          "hospitals": 3,
+          "dates": 29
+        },
+        {
+          "case": "Case3",
+          "segments": 7,
+          "hospitals": 3,
+          "dates": 7
+        },
+        {
+          "case": "Case5",
+          "segments": 15,
+          "hospitals": 2,
+          "dates": 13
+        },
+        {
+          "case": "Case6",
+          "segments": 3,
+          "hospitals": 2,
+          "dates": 3
+        },
+        {
+          "case": "Case7",
+          "segments": 3,
+          "hospitals": 1,
+          "dates": 2
+        },
+        {
+          "case": "Case8",
+          "segments": 22,
+          "hospitals": 4,
+          "dates": 22
+        },
+        {
+          "case": "Case9",
+          "segments": 23,
+          "hospitals": 3,
+          "dates": 22
+        },
+        {
+          "case": "Case10",
+          "segments": 186,
+          "hospitals": 7,
+          "dates": 163
+        },
+        {
+          "case": "Case11",
+          "segments": 16,
+          "hospitals": 5,
+          "dates": 15
+        },
+        {
+          "case": "Case12",
+          "segments": 100,
+          "hospitals": 2,
+          "dates": 89
+        }
+      ]
+    },
+    "stage2": {
+      "successCount": 10,
+      "failureCount": 0,
+      "cases": [
+        {
+          "case": "Case2",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case3",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case5",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case6",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case7",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case8",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case9",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case10",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case11",
+          "success": true,
+          "processingTime": 0
+        },
+        {
+          "case": "Case12",
+          "success": true,
+          "processingTime": 0
+        }
+      ]
+    },
+    "stage3": {
+      "totalHospitals": 0,
+      "totalDiagnoses": 0,
+      "totalVisits": 0,
+      "cases": [
+        {
+          "case": "Case2",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case3",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case5",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case6",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case7",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case8",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case9",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case10",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case11",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        },
+        {
+          "case": "Case12",
+          "hospitals": 0,
+          "diagnoses": 0,
+          "visits": 0
+        }
+      ]
+    },
+    "stage4": {
+      "totalReports": 10,
+      "averageLength": 327.2,
+      "cases": [
+        {
+          "case": "Case2",
+          "reportLength": 243,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case3",
+          "reportLength": 323,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case5",
+          "reportLength": 379,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case6",
+          "reportLength": 390,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case7",
+          "reportLength": 326,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case8",
+          "reportLength": 327,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case9",
+          "reportLength": 341,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case10",
+          "reportLength": 297,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case11",
+          "reportLength": 272,
+          "tokensUsed": 55
+        },
+        {
+          "case": "Case12",
+          "reportLength": 374,
+          "tokensUsed": 55
+        }
+      ]
+    }
+  },
+  "dataLossAnalysis": {
+    "criticalFindings": {
+      "zeroHospitalCases": 10,
+      "zeroDiagnosisCases": 10,
+      "zeroVisitCases": 10,
+      "totalCases": 10
+    },
+    "stage3FailureRate": 100
+  },
+  "qualityComparison": {
+    "averageRealReportLength": 2592,
+    "averageAiReportLength": 297,
+    "averageQualityGap": 2295,
+    "qualityRatio": 11
+  }
+}

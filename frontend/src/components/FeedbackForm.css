@@ -1,0 +1,239 @@
+/* 피드백 폼 컨테이너 */
+.feedback-form-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 380px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 성공 메시지 컨테이너 */
+.feedback-form-container.success {
+  padding: 0;
+}
+
+.feedback-success {
+  padding: 24px;
+  text-align: center;
+}
+
+.feedback-success h3 {
+  margin: 0 0 12px;
+  color: #0ca678;
+  font-size: 18px;
+}
+
+.feedback-success p {
+  margin: 0 0 24px;
+  color: #495057;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 폼 헤더 */
+.feedback-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.feedback-form-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.feedback-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #868e96;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.feedback-close-btn:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* 폼 본체 */
+.feedback-form {
+  padding: 20px;
+}
+
+/* 점수 슬라이더 */
+.feedback-score-container {
+  margin-bottom: 20px;
+}
+
+.feedback-score-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.score-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.score-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e9ecef;
+  outline: none;
+}
+
+.score-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4dabf7;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4dabf7;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-display {
+  font-weight: 600;
+  color: #4dabf7;
+  font-size: 16px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.score-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #868e96;
+}
+
+/* 코멘트 입력 영역 */
+.feedback-comment-container {
+  margin-bottom: 16px;
+}
+
+.feedback-comment-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.feedback-comment-container textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.feedback-comment-container textarea:focus {
+  outline: none;
+  border-color: #4dabf7;
+  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+}
+
+/* 오류 메시지 */
+.feedback-error {
+  padding: 10px;
+  margin-bottom: 16px;
+  background-color: #fff5f5;
+  border: 1px solid #ffa8a8;
+  border-radius: 4px;
+  color: #e03131;
+  font-size: 13px;
+}
+
+/* 액션 버튼 영역 */
+.feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.feedback-cancel-btn,
+.feedback-submit-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feedback-cancel-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #495057;
+}
+
+.feedback-cancel-btn:hover {
+  background-color: #e9ecef;
+}
+
+.feedback-submit-btn {
+  background-color: #4dabf7;
+  border: 1px solid #4dabf7;
+  color: #fff;
+}
+
+.feedback-submit-btn:hover {
+  background-color: #3b8acc;
+  border-color: #3b8acc;
+}
+
+.feedback-cancel-btn:disabled,
+.feedback-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+  .feedback-form-container {
+    width: 90%;
+    max-width: 380px;
+    bottom: 10px;
+    right: 10px;
+  }
+} 
