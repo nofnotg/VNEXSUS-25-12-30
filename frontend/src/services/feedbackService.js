@@ -8,7 +8,7 @@ import axios from 'axios';
 // API 기본 URL 설정
 const API_URL = process.env.NODE_ENV === 'production' 
   ? '/api/feedback'
-  : 'http://localhost:3000/api/feedback';
+  : 'http://localhost:3030/api/feedback';
 
 /**
  * 피드백 서비스 클래스
@@ -145,4 +145,4 @@ class FeedbackService {
 // 싱글톤 인스턴스 생성
 const feedbackService = new FeedbackService();
 
-export default feedbackService; 
+export default feedbackService;

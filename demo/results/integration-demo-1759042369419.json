@@ -1,0 +1,570 @@
+{
+  "metadata": {
+    "demoVersion": "1.0.0",
+    "timestamp": 1759042500938,
+    "duration": -1759042369420,
+    "generatedAt": "2025-09-28T06:55:00.938Z"
+  },
+  "demoResults": {
+    "startTime": 1759042369420,
+    "endTime": null,
+    "testCases": [
+      {
+        "name": "기본 의료 보고서 생성",
+        "prompt": "환자 김철수(45세, 남성)의 당뇨병 진단 및 치료 계획을 포함한 의료 보고서를 작성해주세요....",
+        "options": {
+          "priority": "normal"
+        },
+        "success": true,
+        "duration": 2021,
+        "service": "existing",
+        "tokenUsage": {
+          "promptTokens": 13,
+          "completionTokens": 558,
+          "totalTokens": 0
+        },
+        "qualityScore": 0,
+        "optimizationApplied": true,
+        "timestamp": 1759042369554
+      },
+      {
+        "name": "복잡한 다중 증상 분석",
+        "prompt": "환자 이영희(62세, 여성)가 호흡곤란, 가슴 통증, 부종을 호소하고 있습니다. 심혈관계 질환 가능성을 포함한 종합적인 의료 보고서를 작성해주세요....",
+        "options": {
+          "priority": "high",
+          "context": {
+            "symptoms": [
+              "dyspnea",
+              "chest_pain",
+              "edema"
+            ]
+          }
+        },
+        "success": true,
+        "duration": 2811,
+        "service": "existing",
+        "tokenUsage": {
+          "promptTokens": 20,
+          "completionTokens": 317,
+          "totalTokens": 0
+        },
+        "qualityScore": 0,
+        "optimizationApplied": true,
+        "timestamp": 1759042372589
+      },
+      {
+        "name": "응급 상황 보고서",
+        "prompt": "응급실에 내원한 환자 박민수(28세, 남성)의 교통사고 외상에 대한 응급 의료 보고서를 신속하게 작성해주세요....",
+        "options": {
+          "priority": "urgent",
+          "context": {
+            "emergency": true
+          }
+        },
+        "success": true,
+        "duration": 1215,
+        "service": "existing",
+        "tokenUsage": {
+          "promptTokens": 15,
+          "completionTokens": 224,
+          "totalTokens": 0
+        },
+        "qualityScore": 0,
+        "optimizationApplied": true,
+        "timestamp": 1759042376415
+      },
+      {
+        "name": "소아과 진료 보고서",
+        "prompt": "소아 환자 최지우(7세, 여성)의 발열과 기침 증상에 대한 소아과 전문 의료 보고서를 작성해주세요....",
+        "options": {
+          "priority": "normal",
+          "context": {
+            "specialty": "pediatrics"
+          }
+        },
+        "success": true,
+        "duration": 1691,
+        "service": "existing",
+        "tokenUsage": {
+          "promptTokens": 13,
+          "completionTokens": 577,
+          "totalTokens": 0
+        },
+        "qualityScore": 0,
+        "optimizationApplied": true,
+        "timestamp": 1759042378646
+      },
+      {
+        "name": "정신건강 평가 보고서",
+        "prompt": "환자 정수민(35세, 남성)의 우울증 및 불안장애 증상에 대한 정신건강 평가 보고서를 작성해주세요....",
+        "options": {
+          "priority": "normal",
+          "context": {
+            "specialty": "psychiatry"
+          }
+        },
+        "success": true,
+        "duration": 2613,
+        "service": "existing",
+        "tokenUsage": {
+          "promptTokens": 13,
+          "completionTokens": 434,
+          "totalTokens": 0
+        },
+        "qualityScore": 0,
+        "optimizationApplied": true,
+        "timestamp": 1759042381350
+      }
+    ],
+    "performanceMetrics": {
+      "concurrentTest": {
+        "totalRequests": 3,
+        "successCount": 2,
+        "failureCount": 1,
+        "successRate": 0.6666666666666666,
+        "totalTime": 2185,
+        "averageTime": 728.3333333333334,
+        "results": [
+          {
+            "success": false,
+            "service": "existing",
+            "duration": 1073
+          },
+          {
+            "success": true,
+            "service": "existing",
+            "duration": 2182
+          },
+          {
+            "success": true,
+            "service": "existing",
+            "duration": 1261
+          }
+        ]
+      },
+      "loadTest": {
+        "totalRequests": 10,
+        "successCount": 10,
+        "failureCount": 0,
+        "successRate": 1,
+        "totalTime": 38357,
+        "averageDuration": 2027.4,
+        "totalTokens": 0,
+        "averageTokens": 0,
+        "throughput": "0.26"
+      },
+      "stressTest": {
+        "totalRequests": 5,
+        "successCount": 5,
+        "failureCount": 0,
+        "successRate": 1,
+        "totalTime": 3680,
+        "totalTokens": 0,
+        "systemStability": "stable"
+      }
+    },
+    "errors": [],
+    "summary": {},
+    "initialization": {
+      "timestamp": 1759042369549,
+      "status": "success",
+      "components": {
+        "isInitialized": true,
+        "isRunning": true,
+        "config": {
+          "enableEnhancedService": true,
+          "enableOptimization": true,
+          "enableMonitoring": true,
+          "enableCompatibility": true,
+          "integrationMode": "gradual",
+          "enableDetailedLogging": true,
+          "logDirectory": "./demo/logs",
+          "enableAutoTuning": true,
+          "tuningInterval": 30000,
+          "enableAlerts": true,
+          "alertThresholds": {
+            "errorRate": 0.05,
+            "responseTime": 30000,
+            "compatibilityScore": 0.8
+          }
+        },
+        "state": {
+          "startTime": 1759042369547,
+          "totalRequests": 0,
+          "successfulRequests": 0,
+          "failedRequests": 0,
+          "lastHealthCheck": 1759042369548,
+          "componentStatus": {
+            "enhancedService": "active",
+            "optimizer": "active",
+            "monitor": "active",
+            "compatibility": "active"
+          },
+          "performanceSummary": {
+            "averageResponseTime": 3877.6756765906025,
+            "tokenSavings": 0,
+            "qualityScore": 0,
+            "compatibilityScore": null
+          }
+        },
+        "components": [
+          "enhancedService",
+          "optimizer",
+          "monitor",
+          "compatibility"
+        ]
+      }
+    },
+    "healthCheck": {
+      "timestamp": 1759042369550,
+      "overall": "healthy",
+      "components": {
+        "enhancedService": {
+          "status": "unknown",
+          "details": "Status method not available"
+        },
+        "optimizer": {
+          "status": "unknown",
+          "details": "Status method not available"
+        },
+        "monitor": {
+          "status": "healthy",
+          "details": {
+            "isMonitoring": true,
+            "uptime": 124,
+            "totalRequests": 0,
+            "totalErrors": 0,
+            "activeAlerts": 0,
+            "currentMetrics": {
+              "tokenEfficiency": 0,
+              "averageResponseTime": 0,
+              "qualityScore": 0,
+              "errorRate": 0,
+              "throughput": 0,
+              "cacheHitRate": 0,
+              "memoryUsage": 0.013026930503730886,
+              "cpuUsage": 0
+            },
+            "lastUpdate": 1759042369426
+          }
+        },
+        "compatibility": {
+          "status": "healthy",
+          "details": {
+            "currentStage": 0,
+            "rolloutStartTime": 1759042369545,
+            "lastStageTransition": 1759042369545,
+            "isRollingBack": false,
+            "abTestActive": true,
+            "abTestStartTime": 1759042369545,
+            "abTestResults": {
+              "enhanced": {
+                "requests": 4,
+                "successes": 4,
+                "failures": 0,
+                "totalTime": 0
+              },
+              "existing": {
+                "requests": 32,
+                "successes": 31,
+                "failures": 1,
+                "totalTime": 65713
+              }
+            },
+            "compatibilityScore": 1,
+            "lastCompatibilityCheck": 1759042369544,
+            "fallbackActive": false,
+            "fallbackReason": null,
+            "fallbackStartTime": null,
+            "fallbackCount": 0,
+            "config": {
+              "enableABTest": true,
+              "enhancedServiceRatio": 0.3,
+              "abTestDuration": 604800000,
+              "enableGradualRollout": true,
+              "rolloutStages": [
+                0.1,
+                0.3,
+                0.5,
+                0.8,
+                1
+              ],
+              "stageTransitionThreshold": 0.95,
+              "enableCompatibilityCheck": true,
+              "compatibilityThreshold": 0.9,
+              "enableAutoFallback": true,
+              "fallbackThreshold": 0.8,
+              "fallbackCooldown": 300000,
+              "enableDetailedLogging": true,
+              "logDirectory": "demo\\logs\\compatibility",
+              "metricsRetention": 30
+            },
+            "metrics": {
+              "compatibility": 1,
+              "abTest": 0,
+              "rollout": 0,
+              "fallback": 0
+            }
+          }
+        }
+      }
+    },
+    "abTestResults": {
+      "testResults": [
+        {
+          "success": true,
+          "service": "enhanced",
+          "duration": 12262,
+          "userId": "user_0"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 2501,
+          "userId": "user_1"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 2374,
+          "userId": "user_2"
+        },
+        {
+          "success": true,
+          "service": "enhanced",
+          "duration": 11982,
+          "userId": "user_3"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 1868,
+          "userId": "user_4"
+        },
+        {
+          "success": true,
+          "service": "enhanced",
+          "duration": 13259,
+          "userId": "user_0"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 2326,
+          "userId": "user_1"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 2757,
+          "userId": "user_2"
+        },
+        {
+          "success": true,
+          "service": "enhanced",
+          "duration": 9642,
+          "userId": "user_3"
+        },
+        {
+          "success": true,
+          "service": "existing",
+          "duration": 2250,
+          "userId": "user_4"
+        }
+      ],
+      "analysis": {
+        "duration": 125015,
+        "enhanced": {
+          "requests": 4,
+          "successes": 4,
+          "failures": 0,
+          "totalTime": 0,
+          "successRate": 1,
+          "averageResponseTime": 0,
+          "errorRate": 0
+        },
+        "existing": {
+          "requests": 29,
+          "successes": 28,
+          "failures": 1,
+          "totalTime": 59355,
+          "successRate": 0.9655172413793104,
+          "averageResponseTime": 2046.7241379310344,
+          "errorRate": 0.034482758620689655
+        },
+        "statisticalSignificance": {
+          "significant": false,
+          "reason": "insufficient_sample_size",
+          "minSampleSize": 30
+        },
+        "recommendation": {
+          "action": "continue_testing",
+          "reason": "no_significant_difference",
+          "details": "통계적으로 유의한 차이가 발견되지 않았습니다. 더 많은 데이터가 필요합니다."
+        }
+      }
+    },
+    "errorHandlingTests": [
+      {
+        "name": "빈 프롬프트 테스트",
+        "success": true,
+        "expectedError": true,
+        "actualError": false,
+        "passed": false
+      },
+      {
+        "name": "매우 긴 프롬프트 테스트",
+        "success": true,
+        "expectedError": false,
+        "actualError": false,
+        "passed": true
+      },
+      {
+        "name": "특수 문자 프롬프트 테스트",
+        "success": true,
+        "expectedError": false,
+        "actualError": false,
+        "passed": true
+      }
+    ],
+    "analysis": {
+      "timestamp": 1759042500935,
+      "totalDuration": -1759042369420,
+      "basicTests": {
+        "total": 5,
+        "successful": 5,
+        "failed": 0,
+        "averageDuration": 2070.2,
+        "averageQualityScore": 0,
+        "serviceDistribution": {
+          "existing": 5
+        }
+      },
+      "performance": {
+        "concurrentTestPassed": false,
+        "loadTestPassed": true,
+        "stressTestPassed": true,
+        "overallPerformance": "good"
+      },
+      "errorHandling": {
+        "totalErrors": 0,
+        "errorsByPhase": {},
+        "errorHandlingTestsPassed": 2
+      },
+      "overallAssessment": {
+        "grade": "A",
+        "strengths": [
+          "높은 기본 기능 안정성",
+          "안정적인 에러 처리"
+        ],
+        "weaknesses": [],
+        "recommendations": []
+      }
+    }
+  },
+  "integrationReport": {
+    "timestamp": 1759042500937,
+    "systemStatus": {
+      "isRunning": true,
+      "uptime": 131390,
+      "totalRequests": 36,
+      "successRate": 1
+    },
+    "componentStatus": {
+      "enhancedService": "active",
+      "optimizer": "active",
+      "monitor": "active",
+      "compatibility": "active"
+    },
+    "performanceSummary": {
+      "averageResponseTime": 3877.6756765906025,
+      "tokenSavings": 0,
+      "qualityScore": 0,
+      "compatibilityScore": null
+    },
+    "componentDetails": {
+      "monitor": {
+        "isMonitoring": true,
+        "uptime": 131511,
+        "totalRequests": 36,
+        "totalErrors": 0,
+        "activeAlerts": 0,
+        "currentMetrics": {
+          "tokenEfficiency": 0,
+          "averageResponseTime": 0,
+          "qualityScore": 0,
+          "errorRate": 0,
+          "throughput": 0,
+          "cacheHitRate": 0,
+          "memoryUsage": 0.013987997946319622,
+          "cpuUsage": 0
+        },
+        "lastUpdate": 1759042369426
+      },
+      "compatibility": {
+        "currentStage": 0,
+        "rolloutStartTime": 1759042369545,
+        "lastStageTransition": 1759042369545,
+        "isRollingBack": false,
+        "abTestActive": true,
+        "abTestStartTime": 1759042369545,
+        "abTestResults": {
+          "enhanced": {
+            "requests": 4,
+            "successes": 4,
+            "failures": 0,
+            "totalTime": 0
+          },
+          "existing": {
+            "requests": 32,
+            "successes": 31,
+            "failures": 1,
+            "totalTime": 65713
+          }
+        },
+        "compatibilityScore": null,
+        "lastCompatibilityCheck": 1759042500934,
+        "fallbackActive": false,
+        "fallbackReason": null,
+        "fallbackStartTime": null,
+        "fallbackCount": 0,
+        "config": {
+          "enableABTest": true,
+          "enhancedServiceRatio": 0.3,
+          "abTestDuration": 604800000,
+          "enableGradualRollout": true,
+          "rolloutStages": [
+            0.1,
+            0.3,
+            0.5,
+            0.8,
+            1
+          ],
+          "stageTransitionThreshold": 0.95,
+          "enableCompatibilityCheck": true,
+          "compatibilityThreshold": 0.9,
+          "enableAutoFallback": true,
+          "fallbackThreshold": 0.8,
+          "fallbackCooldown": 300000,
+          "enableDetailedLogging": true,
+          "logDirectory": "demo\\logs\\compatibility",
+          "metricsRetention": 30
+        },
+        "metrics": {
+          "compatibility": 37,
+          "abTest": 36,
+          "rollout": 0,
+          "fallback": 0
+        }
+      }
+    }
+  },
+  "summary": {
+    "totalTests": 5,
+    "successfulTests": 5,
+    "totalErrors": 0,
+    "overallGrade": "A",
+    "performanceRating": "good"
+  },
+  "recommendations": []
+}

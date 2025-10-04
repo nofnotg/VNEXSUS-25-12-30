@@ -54,11 +54,11 @@ export const uploadPdfs = async (req, res) => {
     }
 
     // 지원되는 파일 형식 확인
-    const allowedMimeTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
+    const allowedMimeTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'text/plain'];
     const invalidFiles = req.files.filter(file => !allowedMimeTypes.includes(file.mimetype));
     if (invalidFiles.length > 0) {
       return res.status(400).json({ 
-        error: 'PDF, PNG, JPG, JPEG 파일만 업로드 가능합니다.',
+        error: 'PDF, PNG, JPG, JPEG, TXT 파일만 업로드 가능합니다.',
         status: 'error',
         code: 'INVALID_FILE_TYPE',
         invalidFiles: invalidFiles.map(f => f.originalname)
@@ -76,8 +76,8 @@ export const uploadPdfs = async (req, res) => {
       });
     }
 
-    // 최소 파일 크기 검증 (100 바이트 미만은 손상된 파일로 간주)
-    const minFileSize = 100; // 바이트
+    // 최소 파일 크기 검증 (텍스트 파일은 더 작은 크기 허용)
+    const minFileSize = 10; // 바이트 (텍스트 파일 고려하여 축소)
     const tooSmallFiles = req.files.filter(file => file.size < minFileSize);
     if (tooSmallFiles.length > 0) {
       return res.status(400).json({

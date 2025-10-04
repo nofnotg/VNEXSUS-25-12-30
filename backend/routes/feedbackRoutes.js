@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     const savedFeedback = await feedbackHandler.saveFeedback(feedbackData);
     res.status(201).json(savedFeedback);
   } catch (error) {
-    logger.error('피드백 제출 오류:', error);
+    logger.logService('feedbackRoutes', '피드백 제출 오류: ' + error.message, 'error', error);
     res.status(500).json({ message: '피드백 저장 중 오류가 발생했습니다.' });
   }
 });
@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
     const feedbacks = await feedbackHandler.getFeedbacks(filters);
     res.json(feedbacks);
   } catch (error) {
-    logger.error('피드백 목록 조회 오류:', error);
+    logger.logService('feedbackRoutes', '피드백 목록 조회 오류: ' + error.message, 'error', error);
     res.status(500).json({ message: '피드백 목록 조회 중 오류가 발생했습니다.' });
   }
 });
@@ -67,7 +67,7 @@ router.get('/stats', async (req, res) => {
     const stats = await feedbackHandler.getFeedbackStats();
     res.json(stats);
   } catch (error) {
-    logger.error('피드백 통계 조회 오류:', error);
+    logger.logService('feedbackRoutes', '피드백 통계 조회 오류: ' + error.message, 'error', error);
     res.status(500).json({ message: '피드백 통계 조회 중 오류가 발생했습니다.' });
   }
 });
@@ -82,7 +82,7 @@ router.get('/:id', async (req, res) => {
     const feedback = await feedbackHandler.getFeedbackById(req.params.id);
     res.json(feedback);
   } catch (error) {
-    logger.error(`피드백 조회 오류 (ID: ${req.params.id}):`, error);
+    logger.logService('feedbackRoutes', `피드백 조회 오류 (ID: ${req.params.id}): ` + error.message, 'error', error);
     
     if (error.message.includes('찾을 수 없습니다')) {
       return res.status(404).json({ message: error.message });
@@ -147,4 +147,4 @@ router.post('/:id/improvement', async (req, res) => {
   }
 });
 
-export default router; 
+export default router;

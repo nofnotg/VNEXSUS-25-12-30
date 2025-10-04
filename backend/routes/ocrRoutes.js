@@ -15,6 +15,8 @@ router.use(cors({
   origin: function(origin, callback) {
     // 허용할 출처 목록
     const allowedOrigins = [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
       'http://localhost:5173', 
       'http://localhost:5174', 
       'http://localhost:5175', 
@@ -37,27 +39,28 @@ router.use(cors({
 // 메모리 스토리지 설정 (파일을 메모리에 저장)
 const storage = multer.memoryStorage();
 
-// 파일 필터링 함수 - PDF 및 이미지 파일 허용
+// 파일 필터링 함수 - PDF, 이미지 및 텍스트 파일 허용
 const fileFilter = (req, file, cb) => {
   // 허용되는 MIME 타입 정의
   const allowedMimeTypes = [
     'application/pdf',
     'image/png',
     'image/jpeg',
-    'image/jpg'
+    'image/jpg',
+    'text/plain'
   ];
   
   // MIME 타입 검증
   if (!allowedMimeTypes.includes(file.mimetype)) {
-    return cb(new Error('PDF, PNG, JPG, JPEG 파일만 업로드 가능합니다.'), false);
+    return cb(new Error('PDF, PNG, JPG, JPEG, TXT 파일만 업로드 가능합니다.'), false);
   }
   
   // 파일 확장자 검증
   const ext = path.extname(file.originalname).toLowerCase();
-  const allowedExtensions = ['.pdf', '.png', '.jpg', '.jpeg'];
+  const allowedExtensions = ['.pdf', '.png', '.jpg', '.jpeg', '.txt'];
   
   if (!allowedExtensions.includes(ext)) {
-    return cb(new Error('PDF, PNG, JPG, JPEG 파일만 업로드 가능합니다.'), false);
+    return cb(new Error('PDF, PNG, JPG, JPEG, TXT 파일만 업로드 가능합니다.'), false);
   }
   
   // 허용

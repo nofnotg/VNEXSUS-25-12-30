@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VNEXSUS AI 모델 설정 및 성능 개선 진행 현황</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #0b1220;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --border: #1f2937;
+    }
+    html, body { height: 100%; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif; background: radial-gradient(1200px 800px at 10% 0%, #0a0f1d 0%, #0f172a 40%, #0b1220 100%); color: var(--text); }
+    .container { max-width: 1100px; margin: 48px auto; padding: 0 20px; }
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .badge { padding: 6px 10px; border: 1px solid var(--border); color: var(--muted); border-radius: 999px; font-size: 12px; }
+    h1 { margin: 0; font-size: 26px; letter-spacing: 0.2px; }
+    .panel { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } }
+    h2 { margin: 0 0 10px; font-size: 18px; color: var(--accent); }
+    h3 { margin: 18px 0 10px; font-size: 16px; color: #cbd5e1; }
+    p { margin: 8px 0; color: var(--text); line-height: 1.6; }
+    ul { margin: 10px 0 0 18px; color: var(--text); line-height: 1.6; }
+    code, .code { background: #0a0f1d; padding: 2px 6px; border: 1px solid var(--border); border-radius: 6px; color: #e2e8f0; }
+    .kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+    .kpi .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+    .kpi .label { font-size: 12px; color: var(--muted); }
+    .kpi .value { margin-top: 6px; font-size: 20px; font-weight: 700; }
+    .value.ok { color: var(--ok); } .value.warn { color: var(--warn); } .value.bad { color: var(--bad); }
+    .list-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+    .files { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; color: #cbd5e1; }
+    .small { color: var(--muted); font-size: 12px; }
+    .footer { margin-top: 24px; color: var(--muted); font-size: 12px; text-align: right; }
+    a { color: #93c5fd; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span class="badge">Progress Report</span>
+      <h1>VNEXSUS AI 모델 설정 및 성능 개선 진행 현황</h1>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <h2>작업 개요</h2>
+      <p>룰 기반 처리 파이프라인과 Gemini 2.5 Flash 통합을 개선하고, 배치 검증 자동화를 통해 성능을 정량 평가하는 작업을 수행했습니다. 본 페이지는 현재까지의 변경 사항과 검증 결과, 다음 단계 제안을 요약합니다.</p>
+      <div class="kpi">
+        <div class="card">
+          <div class="label">배치 비교 대상</div>
+          <div class="value">Case1 ~ Case9</div>
+        </div>
+        <div class="card">
+          <div class="label">평균 유사도</div>
+          <div class="value warn">21%</div>
+        </div>
+        <div class="card">
+          <div class="label">평균 정확도</div>
+          <div class="value bad">4%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>주요 코드 변경 사항</h2>
+        <h3>1) Gemini 통합</h3>
+        <ul>
+          <li><span class="code">geminiClient.js</span>: <strong>dnaSequencingPrompt</strong>에 <em>ICD-10 코드 앵커</em> 추가.</li>
+          <li><span class="code">geminiClient.js</span>: <strong>processMedicalText()</strong>의 <em>generateContent</em> 호출에 <span class="code">generationConfig</span> 적용(temperature, maxOutputTokens, topP, candidateCount).</li>
+        </ul>
+        <h3>2) 비교 지표 반영</h3>
+        <ul>
+          <li><span class="code">caseValidator.js</span>: <strong>extractMedicalTermsFromGeminiResult</strong>에서 <em>anchors.icd_code</em>를 포함하여 의료 용어/코드 추출 확장.</li>
+        </ul>
+        <div class="small">비밀 정보(키 등)는 코드에 직접 노출하지 않았으며, 환경 변수 기반 구성을 유지했습니다.</div>
+      </div>
+
+      <div class="panel">
+        <h2>검증 파이프라인 업데이트</h2>
+        <ul>
+          <li><span class="code">validationRunner.js</span>를 통해 <em>CaseValidator</em>를 배치 실행하고, 룰 기반 vs Gemini 성능을 자동 비교.</li>
+          <li>HTML 보고서 자동 생성과 Phase1/Phase2 구조·콘텐츠 평가 로직 재확인.</li>
+        </ul>
+        <h3>실행 결과</h3>
+        <ul>
+          <li>평균 유사도: <strong>21%</strong>, 평균 정확도: <strong>4%</strong></li>
+          <li>결과 JSON: <span class="code">C:\VNEXSUS_Bin\validation-results\gemini-validation-2025-09-25T12-28-34-450Z.json</span></li>
+          <li>HTML 보고서: <span class="code">C:\VNEXSUS_Bin\validation-results\gemini-validation-report-2025-09-25T12-28-34-588Z.html</span></li>
+          <li>Phase 1/2 성공률·평균 처리시간: 표본 한정 및 응답 포맷 이슈로 0%/NaN 관측</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>룰 기반 처리 모듈 하이라이트</h2>
+        <div class="list-card">
+          <ul>
+            <li>정규화: <span class="files">medicalDocumentNormalizer.js</span></li>
+            <li>태깅: <span class="files">eventTagger.ts, tagRules.json</span></li>
+            <li>날짜 앵커/분류: <span class="files">EnhancedDateAnchor, AdvancedTextArrayDateClassifier</span></li>
+            <li>DNA 시퀀싱/인과망: <span class="files">DNASequencingEngine, causalNetworkBuilder.js</span></li>
+            <li>서비스 통합: <span class="files">medicalAnalysisService.js</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>개선 권장사항 요약</h2>
+        <ul>
+          <li>Gemini 출력 포맷 일관성 강제: 스키마 앵커(필수 필드, 타입, 예시) 강화</li>
+          <li>토큰 예산 관리: maxOutputTokens/요약 단계화로 과적합 방지</li>
+          <li>룰-모델 하이브리드: 룰 기반 사후검증/보정 파이프라인 활성화</li>
+          <li>데이터 다양성 확대: 비정형/스캔 OCR 변형 샘플 추가</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px;">
+      <h2>Pending TODOs</h2>
+      <ul>
+        <li>비정형 의료문서 대응 핵심 코어 기술 정리(스키마/파이프라인/리스크 관리/모니터링)</li>
+        <li>실제 Gemini API 키 설정 후 실모드 재검증 실행 및 보고서 재생성</li>
+        <li>프롬프트/파라미터 반복 최적화(온도 유지, Top-P/길이 제약 등 세부 조정)</li>
+      </ul>
+    </div>
+
+    <div class="panel" style="margin-top:16px;">
+      <h2>참고 파일</h2>
+      <ul>
+        <li>분석 문서: <span class="files">VNEXSUS_AI모델_설정_및_성능개선_분석.md</span>, <span class="files">VNEXSUS_모듈별_데이터흐름_매핑.md</span>, <span class="files">VNEXSUS_파이프라인_아키텍처_분석.md</span></li>
+        <li>프론트엔드 정적 경로: <span class="files">/frontend (http://localhost:8080/)</span></li>
+      </ul>
+    </div>
+
+    <div class="footer">마지막 업데이트: <span id="updatedAt" class="small"></span></div>
+  </div>
+
+  <script>
+    const el = document.getElementById('updatedAt');
+    if (el) {
+      const d = new Date();
+      const z = n => String(n).padStart(2, '0');
+      el.textContent = `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}`;
+    }
+  </script>
+</body>
+</html>

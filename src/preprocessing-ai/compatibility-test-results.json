@@ -1,0 +1,82 @@
+{
+  "ruleBasedOnly": [
+    {
+      "documentId": "compat_test_1",
+      "processingTime": 23,
+      "extractedFields": [
+        "patientName",
+        "birthDate",
+        "visitDate",
+        "prescription"
+      ],
+      "fieldCount": 4,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    },
+    {
+      "documentId": "compat_test_2",
+      "processingTime": 2,
+      "extractedFields": [],
+      "fieldCount": 0,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    },
+    {
+      "documentId": "compat_test_3",
+      "processingTime": 2,
+      "extractedFields": [],
+      "fieldCount": 0,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    }
+  ],
+  "hybridMode": [
+    {
+      "documentId": "compat_test_1",
+      "processingTime": 3,
+      "extractedFields": [
+        "patientName",
+        "birthDate",
+        "visitDate",
+        "prescription"
+      ],
+      "fieldCount": 4,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    },
+    {
+      "documentId": "compat_test_2",
+      "processingTime": 2,
+      "extractedFields": [],
+      "fieldCount": 0,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    },
+    {
+      "documentId": "compat_test_3",
+      "processingTime": 5,
+      "extractedFields": [],
+      "fieldCount": 0,
+      "confidence": 0,
+      "accuracy": 0,
+      "success": true,
+      "errors": []
+    }
+  ],
+  "compatibility": {
+    "fieldExtraction": true,
+    "dataConsistency": true,
+    "performanceStability": true,
+    "errorHandling": true
+  }
+}

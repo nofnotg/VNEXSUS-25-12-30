@@ -36,7 +36,8 @@ class NineItemReportGenerator {
             examinations: new ExaminationExtractor(),
             treatments: new TreatmentExtractor(),
             pastHistory: new PastHistoryExtractor(),
-            correlations: new CorrelationExtractor()
+            correlations: new CorrelationExtractor(),
+            doctorOpinion: new DoctorOpinionExtractor()
         };
     }
 
@@ -214,54 +215,59 @@ class NineItemReportGenerator {
     }
 
     /**
-     * 표준 템플릿
+     * 표준 템플릿 (최종 확장형)
      */
     async standardTemplate(items, options = {}) {
         const reportDate = new Date().toLocaleDateString('ko-KR');
         const overallConfidence = this.calculateOverallConfidence(items);
         
-        // AI를 통한 종합의견 생성
-        const conclusiveOpinion = await this.generateConclusiveOpinion(items);
+        // 일자별 경과표 생성
+        const chronologicalProgress = await this.generateChronologicalProgress(items);
         
         return `
 ==================================================
-          손해사정 의료기록 경과보고서
+          손해사정 보고서 (최종 확장형)
 ==================================================
 
-■ 보고서 정보
-- 작성일: ${reportDate}
-- 분석방법: AI DNA 시퀀싱 분석
-- 신뢰도: ${(overallConfidence * 100).toFixed(1)}%
+■ 내원일시
+${this.formatVisitDateTime(items.visitDates)}
 
-■ 1. 내원일
-${this.formatSection(items.visitDates)}
+■ 내원경위
+${this.formatVisitReason(items.visitReasons)}
 
-■ 2. 내원경위
-${this.formatSection(items.visitReasons)}
+■ 진단병명
+${this.formatDiagnosisWithKCD(items.diagnoses)}
 
-■ 3. 입퇴원기간
-${this.formatSection(items.admissionPeriods)}
+■ 검사결과
+${this.formatExaminationResults(items.examinations)}
+${this.formatCancerPathologyIfApplicable(items)}
 
-■ 4. 통원기간
-${this.formatSection(items.outpatientPeriods)}
+■ 치료내용
+${this.formatTreatmentDetails(items.treatments)}
 
-■ 5. 진단병명
-${this.formatSection(items.diagnoses)}
+■ 통원기간
+${this.formatOutpatientPeriod(items.outpatientPeriods)}
 
-■ 6. 검사내용및결과
-${this.formatSection(items.examinations)}
+■ 입원기간
+${this.formatAdmissionPeriod(items.admissionPeriods)}
 
-■ 7. 치료사항
-${this.formatSection(items.treatments)}
+■ 과거병력
+${this.formatPastHistory(items.pastHistory)}
 
-■ 8. 과거력(기왕력)
-${this.formatSection(items.pastHistory)}
+■ 의사소견
+${this.formatDoctorOpinion(items.doctorOpinion)}
 
-■ 9. 기타사항(추가연관성)
-${this.formatSection(items.correlations)}
+---
+## 고지의무 검토
+${this.formatDisclosureObligationReview(items)}
 
-■ 종합의견
-${conclusiveOpinion}
+---
+## 원발암/전이암 판정 (해당 시)
+${this.formatPrimaryCancerAssessment(items)}
+
+---
+종합 결론:
+${this.formatComprehensiveConclusion(items)}
 
 ==================================================
 보고서 생성 완료 - MediAI DNA Sequencing v7
@@ -313,6 +319,557 @@ ${this.generateQualityIndicators(items)}
 ■ 종합의견
 ${conclusiveOpinion}
 `;
+    }
+
+    /**
+     * 내원일시 포맷팅
+     */
+    formatVisitDateTime(items) {
+        if (!items || !items.dates || items.dates.length === 0) {
+            return '- 해당 정보 없음';
+        }
+        
+        return items.dates.map(date => {
+            // yyyy.mm.dd 형식으로 변환
+            const dateMatch = date.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+            if (dateMatch) {
+                const [, year, month, day] = dateMatch;
+                return `${year}.${month.padStart(2, '0')}.${day.padStart(2, '0')}`;
+            }
+            return date;
+        }).join('\n');
+    }
+
+    /**
+     * 내원경위 포맷팅
+     */
+    formatVisitReason(items) {
+        if (!items || !items.reasons || items.reasons.length === 0) {
+            return '- 해당 정보 없음';
+        }
+        
+        return items.reasons.map(item => {
+            // 외부 병원 진료의뢰 및 조직검사 결과 요약 형태로 포맷팅
+            return item.reason;
+        }).join('\n');
+    }
+
+    /**
+     * 진단병명 KCD-10 포맷팅
+     */
+    formatDiagnosisWithKCD(items) {
+        if (!items || !items.items || items.items.length === 0) {
+            return '- 해당 정보 없음';
+        }
+        
+        return items.items.map(item => {
+            // KCD-10 코드 기준, 영문 원어 + 한글 병명
+            const kcdMatch = item.match(/([A-Z]\d{2}\.?\d?)/);
+            if (kcdMatch) {
+                return item;
+            } else {
+                return `${item} (KCD-10 코드 확인 필요)`;
+            }
+        }).join('\n');
+    }
+
+    /**
+     * 검사결과 포맷팅 (영문 원어 + 한글 번역 병기)
+     */
+    formatExaminationResults(items) {
+        if (!items || !items.examinations || items.examinations.length === 0) {
+            return '- 해당 정보 없음';
+        }
+        
+        return items.examinations.map(item => {
+            let result = '';
+            
+            // 검사명 처리 (영문 원어 + 한글 번역)
+            let examName = item.examination;
+            
+            // 일반적인 검사명 영한 매핑
+            const examTranslations = {
+                'Fine needle aspiration cytology': '세침흡인세포검사',
+                'Brain CT': '뇌영상검사',
+                'Brain MRI': '뇌자기공명영상',
+                'Angiography': '뇌혈관조영',
+                'TEE': '경식도심초음파',
+                'Echocardiography': '심초음파검사',
+                'Blood test': '혈액검사',
+                'Lipid panel': '지질검사',
+                'Complete Blood Count': '전혈구검사',
+                'Liver function test': '간기능검사',
+                'CT': 'CT (Computed Tomography, 컴퓨터 단층촬영)',
+                'MRI': 'MRI (Magnetic Resonance Imaging, 자기공명영상)',
+                'X-ray': 'X-ray (엑스레이)',
+                'Ultrasound': 'Ultrasound (초음파)',
+                'Biopsy': 'Biopsy (조직검사)',
+                'Endoscopy': 'Endoscopy (내시경)',
+                'Pathology': 'Pathology (병리검사)',
+                'PET': 'PET (Positron Emission Tomography, 양전자방출단층촬영)',
+                'Mammography': 'Mammography (유방촬영술)',
+                'Colonoscopy': 'Colonoscopy (대장내시경)',
+                'Gastroscopy': 'Gastroscopy (위내시경)',
+                'Bronchoscopy': 'Bronchoscopy (기관지내시경)',
+                'EKG': 'EKG (Electrocardiogram, 심전도)',
+                'ECG': 'ECG (Electrocardiogram, 심전도)',
+                'Bone scan': 'Bone scan (골스캔)'
+            };
+            
+            // 영문 검사명을 찾아서 한글 번역 추가
+            let translatedName = examName;
+            Object.keys(examTranslations).forEach(english => {
+                if (examName.includes(english) && !examName.includes(examTranslations[english])) {
+                    translatedName = examName.replace(english, `${english} → ${examTranslations[english]}`);
+                }
+            });
+            
+            result += `검사명: ${translatedName}\n`;
+            
+            // 검사일 추출
+            const dateMatch = item.examination.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+            if (dateMatch) {
+                const examDate = `${dateMatch[1]}.${dateMatch[2].padStart(2, '0')}.${dateMatch[3].padStart(2, '0')}`;
+                result += `검사일: ${examDate}\n`;
+            }
+            
+            // 검사결과 및 소견 추출
+            if (item.result) {
+                result += `검사결과: ${item.result}\n`;
+            }
+            
+            if (item.findings) {
+                result += `소견: ${item.findings}\n`;
+            }
+            
+            // 암의 경우 조직검사 보고일 추가 기재
+            const cancerKeywords = ['cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm', '암', '악성', '종양'];
+            const isCancerRelated = cancerKeywords.some(keyword => 
+                item.examination.toLowerCase().includes(keyword.toLowerCase())
+            );
+            
+            if (isCancerRelated) {
+                const reportDateMatch = item.examination.match(/보고일?[:\s]*(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+                if (reportDateMatch) {
+                    const reportDate = `${reportDateMatch[1]}.${reportDateMatch[2].padStart(2, '0')}.${reportDateMatch[3].padStart(2, '0')}`;
+                    result += `보고일: ${reportDate}\n`;
+                }
+            }
+            
+            return result.trim();
+        }).join('\n\n') + '\n※ 암의 경우 조직검사 보고일까지 기재';
+    }
+
+    /**
+     * 암 관련 조직검사 결과 포맷팅 (해당시에만)
+     */
+    formatCancerPathologyIfApplicable(items) {
+        // 암 관련 키워드 검색
+        const cancerKeywords = ['cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm', '암', '악성', '종양', 'adenocarcinoma', 'squamous cell carcinoma'];
+        const hasCancer = Object.values(items).some(itemData => 
+            itemData && itemData.summary && 
+            cancerKeywords.some(keyword => 
+                itemData.summary.toLowerCase().includes(keyword.toLowerCase())
+            )
+        );
+        
+        if (!hasCancer) {
+            return '';
+        }
+        
+        // 암 관련 조직검사 정보 추출
+        const pathologyInfo = items.examinations?.examinations?.filter(item => 
+            item.examination.toLowerCase().includes('pathology') || 
+            item.examination.includes('조직검사') ||
+            item.examination.includes('TNM') ||
+            item.examination.includes('biopsy') ||
+            item.examination.includes('histology')
+        ) || [];
+        
+        if (pathologyInfo.length === 0) {
+            return '\n■ 수술 후 조직검사 결과 (암의 경우만)\n- 조직검사 정보 확인 필요\n';
+        }
+        
+        const formatted = pathologyInfo.map(item => {
+            let result = '';
+            
+            // 검사명 추출 (영문 + 한글)
+            const examName = item.examination;
+            result += `검사명: ${examName}\n`;
+            
+            // 검사일 추출
+            const examDateMatch = item.examination.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+            if (examDateMatch) {
+                const examDate = `${examDateMatch[1]}.${examDateMatch[2].padStart(2, '0')}.${examDateMatch[3].padStart(2, '0')}`;
+                result += `검사일: ${examDate}\n`;
+            }
+            
+            // 보고일 추출 (검사일과 다른 경우)
+            const reportDateMatch = item.examination.match(/보고일?[:\s]*(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+            if (reportDateMatch) {
+                const reportDate = `${reportDateMatch[1]}.${reportDateMatch[2].padStart(2, '0')}.${reportDateMatch[3].padStart(2, '0')}`;
+                result += `보고일: ${reportDate}\n`;
+            }
+            
+            // 조직검사 소견 추출
+            const pathologyFindings = item.examination.match(/(carcinoma|adenocarcinoma|squamous cell|moderately differentiated|poorly differentiated|well differentiated)/gi);
+            if (pathologyFindings) {
+                result += `조직검사 소견: ${pathologyFindings.join(', ')}\n`;
+            }
+            
+            // TNM 병기 추출
+            const tnmMatch = item.examination.match(/T(\d+)N(\d+)M(\d+)|TNM[:\s]*([T]\d+[N]\d+[M]\d+)/i);
+            if (tnmMatch) {
+                const tnmStage = tnmMatch[0];
+                result += `병기 TNM: ${tnmStage}\n`;
+            }
+            
+            return result.trim();
+        }).join('\n\n');
+        
+        return `\n■ 수술 후 조직검사 결과 (암의 경우만)\n${formatted}\n`;
+    }
+
+    /**
+     * 치료내용 상세 포맷팅
+     */
+    formatTreatmentDetails(items) {
+        if (!items || !items.items || items.items.length === 0) {
+            return '- 해당 정보 없음';
+        }
+        
+        return items.items.map(item => {
+            // 수술, 처치, 약물, 방사선, 기타 치료 내역 구체적으로 기재
+            return `- ${item}`;
+        }).join('\n');
+    }
+
+    /**
+     * 통원기간 포맷팅
+     */
+    formatOutpatientPeriod(items) {
+        if (!items || !items.outpatient || items.outpatient.length === 0) {
+            return '없음';
+        }
+        
+        // yyyy.mm.dd ~ yyyy.mm.dd / n회 통원 형식으로 강화
+        return items.outpatient.map(item => {
+            const content = item.content;
+            
+            // 다양한 날짜 형식 처리 (YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD)
+            const dateRegex = /(\d{4})[.\/\-](\d{1,2})[.\/\-](\d{1,2})/g;
+            const dates = [];
+            let match;
+            
+            while ((match = dateRegex.exec(content)) !== null) {
+                const formattedDate = `${match[1]}.${match[2].padStart(2, '0')}.${match[3].padStart(2, '0')}`;
+                dates.push(new Date(match[1], match[2] - 1, match[3]));
+            }
+            
+            // 횟수 정보 추출 (다양한 패턴)
+            const countMatch = content.match(/(\d+)\s*회|총\s*(\d+)\s*회|방문\s*(\d+)\s*회|(\d+)\s*번/);
+            const visitCount = countMatch ? (countMatch[1] || countMatch[2] || countMatch[3] || countMatch[4]) : null;
+            
+            if (dates.length >= 2) {
+                // 날짜 정렬
+                dates.sort((a, b) => a - b);
+                const startDate = dates[0];
+                const endDate = dates[dates.length - 1];
+                
+                const formatDate = (date) => {
+                    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                };
+                
+                const count = visitCount || dates.length;
+                return `${formatDate(startDate)} ~ ${formatDate(endDate)} / ${count}회 통원`;
+            } else if (dates.length === 1) {
+                // 단일 통원일
+                const date = dates[0];
+                const formatDate = (date) => {
+                    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                };
+                return `${formatDate(date)} / 1회 통원`;
+            } else {
+                // 날짜 정보가 없는 경우 원본 내용 반환
+                const count = visitCount || '확인필요';
+                return `통원기간 확인필요 / ${count}회 통원`;
+            }
+        }).join('\n');
+    }
+
+    /**
+     * 입원기간 포맷팅
+     */
+    formatAdmissionPeriod(items) {
+        if (!items || !items.admissions || items.admissions.length === 0) {
+            return '없음';
+        }
+        
+        // yyyy.mm.dd ~ yyyy.mm.dd / n일 입원 형식으로 강화
+        return items.admissions.map(item => {
+            const content = item.content;
+            
+            // 다양한 날짜 형식 처리 (YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD)
+            const dateRegex = /(\d{4})[.\/\-](\d{1,2})[.\/\-](\d{1,2})/g;
+            const dates = [];
+            let match;
+            
+            while ((match = dateRegex.exec(content)) !== null) {
+                dates.push(new Date(match[1], match[2] - 1, match[3]));
+            }
+            
+            // 일수 정보 추출 (다양한 패턴)
+            const daysMatch = content.match(/(\d+)\s*일|총\s*(\d+)\s*일|입원\s*(\d+)\s*일|(\d+)\s*박/);
+            const admissionDays = daysMatch ? (daysMatch[1] || daysMatch[2] || daysMatch[3] || daysMatch[4]) : null;
+            
+            if (dates.length >= 2) {
+                // 날짜 정렬
+                dates.sort((a, b) => a - b);
+                const startDate = dates[0];
+                const endDate = dates[dates.length - 1];
+                
+                const formatDate = (date) => {
+                    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                };
+                
+                // 실제 입원 일수 계산 (입원일 ~ 퇴원일)
+                const calculatedDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+                const days = admissionDays || calculatedDays;
+                
+                return `${formatDate(startDate)} ~ ${formatDate(endDate)} / ${days}일 입원`;
+            } else if (dates.length === 1) {
+                // 단일 입원일 (당일 입퇴원)
+                const date = dates[0];
+                const formatDate = (date) => {
+                    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+                };
+                const days = admissionDays || '1';
+                return `${formatDate(date)} / ${days}일 입원`;
+            } else {
+                // 날짜 정보가 없는 경우 원본 내용 반환
+                const days = admissionDays || '확인필요';
+                return `입원기간 확인필요 / ${days}일 입원`;
+            }
+        }).join('\n');
+    }
+
+    /**
+     * 과거병력 포맷팅
+     */
+    formatPastHistory(items) {
+        if (!items || !items.pastHistory || items.pastHistory.length === 0) {
+            return '- 특이사항 없음';
+        }
+        
+        return items.pastHistory.map(item => {
+            // 주요 질환 및 과거 수술력
+            return `- ${item.history}`;
+        }).join('\n');
+    }
+
+    /**
+     * 의사소견 포맷팅 (EMR 확인시에만)
+     */
+    formatDoctorOpinion(items) {
+        if (!items || !items.opinions || items.opinions.length === 0) {
+            return '- EMR 내 처방·지시사항 확인되지 않음';
+        }
+        
+        // EMR 관련 키워드 확장
+        const emrKeywords = [
+            'EMR', '의무기록', '처방', '지시', '차트', 'chart',
+            '진료기록', '의사기록', '주치의', '담당의',
+            '처방전', '처방지', '진단서', '소견서',
+            'Progress Note', 'Doctor Note', 'Physician Note',
+            '진료소견', '치료계획', '치료방침'
+        ];
+        
+        // EMR 기반 의사소견 필터링 (더 정확한 매칭)
+        const emrOpinions = items.opinions.filter(opinion => {
+            const content = (opinion.opinion || '').toLowerCase();
+            const keyword = (opinion.keyword || '').toLowerCase();
+            const source = (opinion.source || '').toLowerCase();
+            
+            return emrKeywords.some(emrKeyword => 
+                keyword.includes(emrKeyword.toLowerCase()) ||
+                content.includes(emrKeyword.toLowerCase()) ||
+                source.includes(emrKeyword.toLowerCase())
+            );
+        });
+        
+        if (emrOpinions.length === 0) {
+            return '- EMR 내 처방·지시사항 확인되지 않음';
+        }
+        
+        return emrOpinions.map(opinion => {
+            let result = '';
+            
+            // 의사소견 출처 명시
+            if (opinion.source) {
+                result += `[${opinion.source}] `;
+            }
+            
+            // 날짜 정보 포함
+            if (opinion.date) {
+                const dateMatch = opinion.date.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/);
+                if (dateMatch) {
+                    const formattedDate = `${dateMatch[1]}.${dateMatch[2].padStart(2, '0')}.${dateMatch[3].padStart(2, '0')}`;
+                    result += `(${formattedDate}) `;
+                }
+            }
+            
+            // 주치의 진단·치료 권고사항 기재
+            result += opinion.opinion;
+            
+            // 처방 상세 정보 추가
+            if (opinion.prescription) {
+                result += ` - 처방: ${opinion.prescription}`;
+            }
+            
+            // 치료 지시사항 추가
+            if (opinion.instruction) {
+                result += ` - 지시: ${opinion.instruction}`;
+            }
+            
+            return `- ${result}`;
+        }).join('\n');
+    }
+
+    /**
+     * 일자별 경과표 생성 (연대순 정리)
+     */
+    async generateChronologicalProgress(items) {
+        const events = [];
+        
+        // 내원일시 추가
+        if (items.visitDates && items.visitDates.length > 0) {
+            items.visitDates.forEach(visit => {
+                events.push({
+                    date: visit.date,
+                    content: `${visit.type || '내원'} - ${visit.reason || '진료'}`,
+                    examinations: '',
+                    treatments: ''
+                });
+            });
+        }
+        
+        // 검사 결과 추가
+        if (items.examinations && items.examinations.length > 0) {
+            items.examinations.forEach(exam => {
+                if (exam.date) {
+                    events.push({
+                        date: exam.date,
+                        content: '검사 시행',
+                        examinations: `${exam.name} - ${exam.result}`,
+                        treatments: ''
+                    });
+                }
+            });
+        }
+        
+        // 치료 내용 추가
+        if (items.treatments && items.treatments.length > 0) {
+            items.treatments.forEach(treatment => {
+                if (treatment.date) {
+                    events.push({
+                        date: treatment.date,
+                        content: '치료 시행',
+                        examinations: '',
+                        treatments: treatment.description
+                    });
+                }
+            });
+        }
+        
+        // 날짜순 정렬
+        events.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+        if (events.length === 0) {
+            return `
+📑 일자별 경과표
+
+| 일자 | 경과내용 | 주요검사 및 결과 | 치료내용 |
+|------|----------|------------------|----------|
+| - | 기록된 경과 없음 | - | - |`;
+        }
+        
+        const tableRows = events.map(event => {
+            const dateStr = new Date(event.date).toLocaleDateString('ko-KR');
+            return `| ${dateStr} | ${event.content} | ${event.examinations || '-'} | ${event.treatments || '-'} |`;
+        }).join('\n');
+        
+        return `
+📑 일자별 경과표
+
+| 일자 | 경과내용 | 주요검사 및 결과 | 치료내용 |
+|------|----------|------------------|----------|
+${tableRows}`;
+    }
+
+    /**
+     * 일자별 경과표 생성
+     */
+    async generateChronologicalProgress(items) {
+        // 모든 항목에서 날짜 정보 추출
+        const events = [];
+        
+        // 각 항목별로 날짜와 내용 추출
+        Object.entries(items).forEach(([category, itemData]) => {
+            if (itemData && itemData.summary) {
+                const dateMatches = itemData.summary.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/g);
+                if (dateMatches) {
+                    dateMatches.forEach(dateStr => {
+                        const normalizedDate = dateStr.replace(/-/g, '.');
+                        events.push({
+                            date: normalizedDate,
+                            category: category,
+                            content: itemData.summary,
+                            confidence: itemData.confidence
+                        });
+                    });
+                }
+            }
+        });
+        
+        // 날짜순 정렬
+        events.sort((a, b) => {
+            const dateA = new Date(a.date.replace(/\./g, '-'));
+            const dateB = new Date(b.date.replace(/\./g, '-'));
+            return dateA - dateB;
+        });
+        
+        if (events.length === 0) {
+            return '일자별 경과 정보 없음';
+        }
+        
+        // 테이블 형태로 포맷팅
+        let table = '일자\t경과내용\t주요검사 및 결과\t치료내용\n';
+        table += '─'.repeat(80) + '\n';
+        
+        events.forEach(event => {
+            const category = this.getCategoryKorean(event.category);
+            table += `${event.date}\t${category}\t${event.content.substring(0, 50)}...\t관련 치료\n`;
+        });
+        
+        return table;
+    }
+
+    /**
+     * 카테고리 한글명 변환
+     */
+    getCategoryKorean(category) {
+        const categoryMap = {
+            'visitDates': '내원',
+            'visitReasons': '내원경위',
+            'diagnoses': '진단',
+            'examinations': '검사',
+            'treatments': '치료',
+            'admissionPeriods': '입원',
+            'outpatientPeriods': '통원',
+            'pastHistory': '과거력',
+            'doctorOpinion': '의사소견'
+        };
+        return categoryMap[category] || category;
     }
 
     /**
@@ -861,6 +1418,154 @@ class CorrelationExtractor {
     }
 }
 
+    /**
+     * 고지의무 검토 포맷팅
+     */
+    formatDisclosureObligationReview(items) {
+        const reviewSections = [
+            '- 5년 이내: 질환 진단/수술/입원 여부',
+            '- 2년 이내: 입원/수술 여부', 
+            '- 3개월 이내: 질병 의심·확정진단·추가검사·입원소견 여부'
+        ];
+        
+        // 과거력에서 고지의무 관련 정보 추출
+        let disclosureViolation = '위반 없음';
+        let violationReason = '';
+        
+        if (items.pastHistory && items.pastHistory.pastHistory) {
+            const pastHistoryItems = items.pastHistory.pastHistory;
+            const hasRecentHistory = pastHistoryItems.some(item => {
+                const content = item.history.toLowerCase();
+                return content.includes('수술') || content.includes('입원') || content.includes('진단');
+            });
+            
+            if (hasRecentHistory) {
+                disclosureViolation = '고지의무 위반';
+                violationReason = '\n(위반 시, 청구 질환과의 인과관계 설명 포함)';
+            }
+        }
+        
+        return `${reviewSections.join('\n')}\n본 사안은 [${disclosureViolation}]으로 판단됨.${violationReason}`;
+    }
+
+    /**
+     * 원발암/전이암 판정 포맷팅 (해당 시)
+     */
+    formatPrimaryCancerAssessment(items) {
+        // 암 관련 키워드 검색
+        const cancerKeywords = ['cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm', '암', '악성', '종양'];
+        const hasCancer = Object.values(items).some(itemData => 
+            itemData && itemData.summary && 
+            cancerKeywords.some(keyword => 
+                itemData.summary.toLowerCase().includes(keyword.toLowerCase())
+            )
+        );
+        
+        if (!hasCancer) {
+            return '- 해당 없음 (암 관련 진단 확인되지 않음)';
+        }
+        
+        const assessmentSections = [
+            '- 조직검사 소견: ○○ carcinoma, moderately differentiated',
+            '- 해부학적 위치: AV 6cm 직장부위 → 직장 원발암 기준 충족',
+            '- 림프절/타장기 소견: 전이 의심되나 원발 기준 부정하지 않음',
+            '최종 판정: [원발암 / 전이암]'
+        ];
+        
+        // 실제 데이터에서 조직검사 정보 추출
+        if (items.examinations && items.examinations.examinations) {
+            const pathologyResults = items.examinations.examinations.filter(exam => 
+                exam.examination.toLowerCase().includes('pathology') ||
+                exam.examination.includes('조직검사') ||
+                exam.examination.includes('TNM')
+            );
+            
+            if (pathologyResults.length > 0) {
+                assessmentSections[0] = `- 조직검사 소견: ${pathologyResults[0].examination}`;
+            }
+        }
+        
+        return assessmentSections.join('\n');
+    }
+
+    /**
+     * 종합 결론 포맷팅
+     */
+    formatComprehensiveConclusion(items) {
+        // 보험약관상 지급 판단 및 손해사정 의견
+        const conclusionElements = [];
+        
+        // 진단명 기반 판단
+        if (items.diagnoses && items.diagnoses.items && items.diagnoses.items.length > 0) {
+            conclusionElements.push(`진단명: ${items.diagnoses.items[0]}`);
+        }
+        
+        // 치료 내용 기반 판단
+        if (items.treatments && items.treatments.items && items.treatments.items.length > 0) {
+            conclusionElements.push(`주요 치료: ${items.treatments.items[0]}`);
+        }
+        
+        // 고지의무 위반 여부
+        const disclosureStatus = this.formatDisclosureObligationReview(items).includes('위반 없음') ? 
+            '고지의무 위반 없음' : '고지의무 위반 의심';
+        conclusionElements.push(disclosureStatus);
+        
+        // 최종 지급 판단
+        const paymentDecision = disclosureStatus.includes('위반 없음') ? 
+            '보험약관상 지급 대상으로 판단됨' : '보험약관상 지급 검토 필요';
+        
+        const conclusion = `
+${conclusionElements.join('\n')}
+\n${paymentDecision}
+[보험약관상 지급 판단 및 손해사정 의견 기재]`;
+        
+        return conclusion;
+    }
+
+/**
+ * 의사소견 추출기
+ */
+class DoctorOpinionExtractor {
+    async extract(genes, causalNetwork, patientInfo) {
+        const opinions = [];
+        const opinionKeywords = ['의사소견', '주치의', '진단', '권고', '처방', '지시', 'EMR', '의무기록', '소견서', 'opinion', 'recommendation'];
+        
+        genes.forEach(gene => {
+            const content = gene.content || gene.raw_text || '';
+            
+            opinionKeywords.forEach(keyword => {
+                if (content.includes(keyword)) {
+                    opinions.push({
+                        opinion: content,
+                        keyword,
+                        confidence: gene.confidence || 0.8
+                    });
+                }
+            });
+        });
+        
+        // EMR 내 처방·지시사항 확인 필터링
+        const emrOpinions = opinions.filter(opinion => 
+            opinion.keyword === 'EMR' || 
+            opinion.keyword === '의무기록' || 
+            opinion.keyword === '처방' || 
+            opinion.keyword === '지시'
+        );
+        
+        const summary = emrOpinions.length > 0 ?
+            `의사소견 ${emrOpinions.length}건 확인 (EMR 기반)` :
+            '의사소견 정보를 찾을 수 없습니다 (EMR 확인 필요).';
+        
+        return {
+            summary,
+            opinions: emrOpinions.slice(0, 10),
+            allOpinions: opinions.slice(0, 10),
+            confidence: emrOpinions.length > 0 ?
+                emrOpinions.reduce((sum, o) => sum + o.confidence, 0) / emrOpinions.length : 0
+        };
+    }
+}
+
 module.exports = { 
     NineItemReportGenerator,
     VisitDateExtractor,
@@ -871,5 +1576,6 @@ module.exports = {
     ExaminationExtractor,
     TreatmentExtractor,
     PastHistoryExtractor,
-    CorrelationExtractor
+    CorrelationExtractor,
+    DoctorOpinionExtractor
 };

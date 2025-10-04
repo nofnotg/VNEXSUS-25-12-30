@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT-4o Mini Enhanced Integration Demo Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { text-align: center; border-bottom: 2px solid #007acc; padding-bottom: 20px; margin-bottom: 30px; }
+        .section { margin-bottom: 30px; }
+        .section h2 { color: #007acc; border-left: 4px solid #007acc; padding-left: 10px; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .metric-card { background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #28a745; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #007acc; }
+        .metric-label { color: #666; font-size: 14px; }
+        .grade-F { color: #dc3545; }
+        .test-results { margin: 20px 0; }
+        .test-item { background: #f8f9fa; margin: 10px 0; padding: 15px; border-radius: 6px; border-left: 4px solid #007acc; }
+        .success { border-left-color: #28a745; }
+        .failure { border-left-color: #dc3545; }
+        .performance-bar { width: 100%; height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+        .performance-fill { height: 100%; background: linear-gradient(90deg, #28a745, #ffc107, #dc3545); transition: width 0.3s ease; }
+        .recommendations { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 15px; }
+        .timestamp { color: #666; font-size: 12px; text-align: right; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 GPT-4o Mini Enhanced Integration Demo Report</h1>
+            <p>통합 시스템 성능 검증 및 분석 결과</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 전체 요약</h2>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value grade-F">F</div>
+                    <div class="metric-label">전체 평가</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0/5</div>
+                    <div class="metric-label">성공한 테스트</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">총 에러 수</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">poor</div>
+                    <div class="metric-label">성능 평가</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 기본 기능 테스트 결과</h2>
+            <div class="test-results">
+                
+                    <div class="test-item failure">
+                        <h4>기본 의료 보고서 생성 ❌</h4>
+                        <p><strong>소요 시간:</strong> 0ms</p>
+                        <p><strong>사용 서비스:</strong> N/A</p>
+                        <p><strong>품질 점수:</strong> 0.0%</p>
+                        <p style="color: #dc3545;"><strong>에러:</strong> this.components.monitor.recordError is not a function</p>
+                    </div>
+                
+                    <div class="test-item failure">
+                        <h4>복잡한 다중 증상 분석 ❌</h4>
+                        <p><strong>소요 시간:</strong> 0ms</p>
+                        <p><strong>사용 서비스:</strong> N/A</p>
+                        <p><strong>품질 점수:</strong> 0.0%</p>
+                        <p style="color: #dc3545;"><strong>에러:</strong> this.components.monitor.recordError is not a function</p>
+                    </div>
+                
+                    <div class="test-item failure">
+                        <h4>응급 상황 보고서 ❌</h4>
+                        <p><strong>소요 시간:</strong> 0ms</p>
+                        <p><strong>사용 서비스:</strong> N/A</p>
+                        <p><strong>품질 점수:</strong> 0.0%</p>
+                        <p style="color: #dc3545;"><strong>에러:</strong> this.components.monitor.recordError is not a function</p>
+                    </div>
+                
+                    <div class="test-item failure">
+                        <h4>소아과 진료 보고서 ❌</h4>
+                        <p><strong>소요 시간:</strong> 0ms</p>
+                        <p><strong>사용 서비스:</strong> N/A</p>
+                        <p><strong>품질 점수:</strong> 0.0%</p>
+                        <p style="color: #dc3545;"><strong>에러:</strong> this.components.monitor.recordError is not a function</p>
+                    </div>
+                
+                    <div class="test-item failure">
+                        <h4>정신건강 평가 보고서 ❌</h4>
+                        <p><strong>소요 시간:</strong> 0ms</p>
+                        <p><strong>사용 서비스:</strong> N/A</p>
+                        <p><strong>품질 점수:</strong> 0.0%</p>
+                        <p style="color: #dc3545;"><strong>에러:</strong> this.components.monitor.recordError is not a function</p>
+                    </div>
+                
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <h2>📈 성능 분석</h2>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">0ms</div>
+                    <div class="metric-label">평균 응답 시간</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.0%</div>
+                    <div class="metric-label">평균 품질 점수</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">poor</div>
+                    <div class="metric-label">전체 성능 평가</div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <div class="section">
+            <h2>💡 권장사항</h2>
+            <div class="recommendations">
+                <ul>
+                    <li>기본 기능 테스트 케이스 재검토</li><li>성능 병목 지점 분석 및 개선</li>
+                </ul>
+            </div>
+        </div>
+        
+
+        <div class="timestamp">
+            리포트 생성 시간: 2025-09-28T06:48:35.239Z<br>
+            총 소요 시간: -1759041973.4초
+        </div>
+    </div>
+</body>
+</html>

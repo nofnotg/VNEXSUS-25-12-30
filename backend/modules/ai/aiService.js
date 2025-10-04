@@ -23,8 +23,8 @@ class AIService {
   constructor(options = {}) {
     // 설정 옵션
     this.options = {
-      defaultProvider: options.defaultProvider || 'anthropic',
-      defaultModel: options.defaultModel || 'claude-3-haiku-20240307',
+      defaultProvider: options.defaultProvider || 'openai',
+      defaultModel: options.defaultModel || 'gpt-4o-mini',
       logDirectory: options.logDirectory || path.join(__dirname, '../../logs/ai'),
       maxRetries: options.maxRetries || 3,
       timeout: options.timeout || 30000, // 30초
@@ -41,7 +41,7 @@ class AIService {
     
     // 제공자별 기본 모델 설정
     this.defaultModels = {
-      openai: 'gpt-3.5-turbo',
+      openai: 'gpt-4o-mini',
       anthropic: 'claude-3-haiku-20240307',
       azure: 'gpt-35-turbo',
       cohere: 'command'
@@ -512,4 +512,4 @@ class AIService {
   }
 }
 
-export default AIService; 
+export default AIService;

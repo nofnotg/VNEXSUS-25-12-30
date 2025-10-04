@@ -1,0 +1,521 @@
+{
+  "metadata": {
+    "demoVersion": "1.0.0",
+    "timestamp": 1759042115239,
+    "duration": -1759041973408,
+    "generatedAt": "2025-09-28T06:48:35.239Z"
+  },
+  "demoResults": {
+    "startTime": 1759041973408,
+    "endTime": null,
+    "testCases": [
+      {
+        "name": "기본 의료 보고서 생성",
+        "success": false,
+        "error": "this.components.monitor.recordError is not a function",
+        "timestamp": 1759041976136
+      },
+      {
+        "name": "복잡한 다중 증상 분석",
+        "success": false,
+        "error": "this.components.monitor.recordError is not a function",
+        "timestamp": 1759041977526
+      },
+      {
+        "name": "응급 상황 보고서",
+        "success": false,
+        "error": "this.components.monitor.recordError is not a function",
+        "timestamp": 1759041979795
+      },
+      {
+        "name": "소아과 진료 보고서",
+        "success": false,
+        "error": "this.components.monitor.recordError is not a function",
+        "timestamp": 1759041981721
+      },
+      {
+        "name": "정신건강 평가 보고서",
+        "success": false,
+        "error": "this.components.monitor.recordError is not a function",
+        "timestamp": 1759041982946
+      }
+    ],
+    "performanceMetrics": {
+      "concurrentTest": {
+        "totalRequests": 3,
+        "successCount": 0,
+        "failureCount": 3,
+        "successRate": 0,
+        "totalTime": 2842,
+        "averageTime": 947.3333333333334,
+        "results": [
+          {
+            "success": false,
+            "error": "this.components.monitor.recordError is not a function"
+          },
+          {
+            "success": false,
+            "error": "this.components.monitor.recordError is not a function"
+          },
+          {
+            "success": false,
+            "error": "this.components.monitor.recordError is not a function"
+          }
+        ]
+      },
+      "loadTest": {
+        "totalRequests": 10,
+        "successCount": 0,
+        "failureCount": 10,
+        "successRate": 0,
+        "totalTime": 37358,
+        "averageDuration": 1926.9,
+        "totalTokens": 0,
+        "averageTokens": 0,
+        "throughput": "0.00"
+      },
+      "stressTest": {
+        "totalRequests": 5,
+        "successCount": 0,
+        "failureCount": 5,
+        "successRate": 0,
+        "totalTime": 3405,
+        "totalTokens": 0,
+        "systemStability": "unstable"
+      }
+    },
+    "errors": [
+      {
+        "timestamp": 1759041976136,
+        "phase": "basic_function_test",
+        "testCase": "기본 의료 보고서 생성",
+        "error": "this.components.monitor.recordError is not a function"
+      },
+      {
+        "timestamp": 1759041977526,
+        "phase": "basic_function_test",
+        "testCase": "복잡한 다중 증상 분석",
+        "error": "this.components.monitor.recordError is not a function"
+      },
+      {
+        "timestamp": 1759041979795,
+        "phase": "basic_function_test",
+        "testCase": "응급 상황 보고서",
+        "error": "this.components.monitor.recordError is not a function"
+      },
+      {
+        "timestamp": 1759041981721,
+        "phase": "basic_function_test",
+        "testCase": "소아과 진료 보고서",
+        "error": "this.components.monitor.recordError is not a function"
+      },
+      {
+        "timestamp": 1759041982946,
+        "phase": "basic_function_test",
+        "testCase": "정신건강 평가 보고서",
+        "error": "this.components.monitor.recordError is not a function"
+      }
+    ],
+    "summary": {},
+    "initialization": {
+      "timestamp": 1759041973538,
+      "status": "success",
+      "components": {
+        "isInitialized": true,
+        "isRunning": true,
+        "config": {
+          "enableEnhancedService": true,
+          "enableOptimization": true,
+          "enableMonitoring": true,
+          "enableCompatibility": true,
+          "integrationMode": "gradual",
+          "enableDetailedLogging": true,
+          "logDirectory": "./demo/logs",
+          "enableAutoTuning": true,
+          "tuningInterval": 30000,
+          "enableAlerts": true,
+          "alertThresholds": {
+            "errorRate": 0.05,
+            "responseTime": 30000,
+            "compatibilityScore": 0.8
+          }
+        },
+        "state": {
+          "startTime": 1759041973536,
+          "totalRequests": 0,
+          "successfulRequests": 0,
+          "failedRequests": 0,
+          "lastHealthCheck": 1759041973537,
+          "componentStatus": {
+            "enhancedService": "active",
+            "optimizer": "active",
+            "monitor": "active",
+            "compatibility": "active"
+          },
+          "performanceSummary": {
+            "averageResponseTime": 0,
+            "tokenSavings": 0,
+            "qualityScore": 0,
+            "compatibilityScore": 0
+          }
+        },
+        "components": [
+          "enhancedService",
+          "optimizer",
+          "monitor",
+          "compatibility"
+        ]
+      }
+    },
+    "healthCheck": {
+      "timestamp": 1759041973540,
+      "overall": "healthy",
+      "components": {
+        "enhancedService": {
+          "status": "unknown",
+          "details": "Status method not available"
+        },
+        "optimizer": {
+          "status": "unknown",
+          "details": "Status method not available"
+        },
+        "monitor": {
+          "status": "healthy",
+          "details": {
+            "isMonitoring": true,
+            "uptime": 129,
+            "totalRequests": 0,
+            "totalErrors": 0,
+            "activeAlerts": 0,
+            "currentMetrics": {
+              "tokenEfficiency": 0,
+              "averageResponseTime": 0,
+              "qualityScore": 0,
+              "errorRate": 0,
+              "throughput": 0,
+              "cacheHitRate": 0,
+              "memoryUsage": 0.013109391857334006,
+              "cpuUsage": 0
+            },
+            "lastUpdate": 1759041973411
+          }
+        },
+        "compatibility": {
+          "status": "healthy",
+          "details": {
+            "currentStage": 0,
+            "rolloutStartTime": 1759041973533,
+            "lastStageTransition": 1759041973533,
+            "isRollingBack": false,
+            "abTestActive": true,
+            "abTestStartTime": 1759041973532,
+            "abTestResults": {
+              "enhanced": {
+                "requests": 0,
+                "successes": 0,
+                "failures": 0,
+                "totalTime": 0
+              },
+              "existing": {
+                "requests": 0,
+                "successes": 0,
+                "failures": 0,
+                "totalTime": 0
+              }
+            },
+            "compatibilityScore": 1,
+            "lastCompatibilityCheck": 1759041973531,
+            "fallbackActive": false,
+            "fallbackReason": null,
+            "fallbackStartTime": null,
+            "fallbackCount": 0,
+            "config": {
+              "enableABTest": true,
+              "enhancedServiceRatio": 0.3,
+              "abTestDuration": 604800000,
+              "enableGradualRollout": true,
+              "rolloutStages": [
+                0.1,
+                0.3,
+                0.5,
+                0.8,
+                1
+              ],
+              "stageTransitionThreshold": 0.95,
+              "enableCompatibilityCheck": true,
+              "compatibilityThreshold": 0.9,
+              "enableAutoFallback": true,
+              "fallbackThreshold": 0.8,
+              "fallbackCooldown": 300000,
+              "enableDetailedLogging": true,
+              "logDirectory": "demo\\logs\\compatibility",
+              "metricsRetention": 30
+            },
+            "metrics": {
+              "compatibility": 1,
+              "abTest": 0,
+              "rollout": 0,
+              "fallback": 0
+            }
+          }
+        }
+      }
+    },
+    "abTestResults": {
+      "testResults": [
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_0"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_1"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_2"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_3"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_4"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_0"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_1"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_2"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_3"
+        },
+        {
+          "success": false,
+          "error": "this.components.monitor.recordError is not a function",
+          "userId": "user_4"
+        }
+      ],
+      "analysis": {
+        "duration": 136730,
+        "enhanced": {
+          "requests": 0,
+          "successes": 0,
+          "failures": 0,
+          "totalTime": 0,
+          "successRate": 0,
+          "averageResponseTime": 0,
+          "errorRate": 0
+        },
+        "existing": {
+          "requests": 0,
+          "successes": 0,
+          "failures": 0,
+          "totalTime": 0,
+          "successRate": 0,
+          "averageResponseTime": 0,
+          "errorRate": 0
+        },
+        "statisticalSignificance": {
+          "significant": false,
+          "reason": "insufficient_sample_size",
+          "minSampleSize": 30
+        },
+        "recommendation": {
+          "action": "continue_testing",
+          "reason": "no_significant_difference",
+          "details": "통계적으로 유의한 차이가 발견되지 않았습니다. 더 많은 데이터가 필요합니다."
+        }
+      }
+    },
+    "errorHandlingTests": [
+      {
+        "name": "빈 프롬프트 테스트",
+        "success": false,
+        "expectedError": true,
+        "actualError": true,
+        "error": "this.components.monitor.recordError is not a function",
+        "passed": true
+      },
+      {
+        "name": "매우 긴 프롬프트 테스트",
+        "success": false,
+        "expectedError": false,
+        "actualError": true,
+        "error": "this.components.monitor.recordError is not a function",
+        "passed": false
+      },
+      {
+        "name": "특수 문자 프롬프트 테스트",
+        "success": false,
+        "expectedError": false,
+        "actualError": true,
+        "error": "this.components.monitor.recordError is not a function",
+        "passed": false
+      }
+    ],
+    "analysis": {
+      "timestamp": 1759042115235,
+      "totalDuration": -1759041973408,
+      "basicTests": {
+        "total": 5,
+        "successful": 0,
+        "failed": 5,
+        "averageDuration": 0,
+        "averageQualityScore": 0,
+        "serviceDistribution": {}
+      },
+      "performance": {
+        "concurrentTestPassed": false,
+        "loadTestPassed": false,
+        "stressTestPassed": false,
+        "overallPerformance": "poor"
+      },
+      "errorHandling": {
+        "totalErrors": 5,
+        "errorsByPhase": {
+          "basic_function_test": 5
+        },
+        "errorHandlingTestsPassed": 1
+      },
+      "overallAssessment": {
+        "grade": "F",
+        "strengths": [],
+        "weaknesses": [
+          "기본 기능 안정성 개선 필요",
+          "성능 최적화 필요"
+        ],
+        "recommendations": [
+          "기본 기능 테스트 케이스 재검토",
+          "성능 병목 지점 분석 및 개선"
+        ]
+      }
+    }
+  },
+  "integrationReport": {
+    "timestamp": 1759042115239,
+    "systemStatus": {
+      "isRunning": true,
+      "uptime": 141703,
+      "totalRequests": 36,
+      "successRate": 1
+    },
+    "componentStatus": {
+      "enhancedService": "active",
+      "optimizer": "active",
+      "monitor": "active",
+      "compatibility": "active"
+    },
+    "performanceSummary": {
+      "averageResponseTime": 0,
+      "tokenSavings": 0,
+      "qualityScore": 0,
+      "compatibilityScore": 0
+    },
+    "componentDetails": {
+      "monitor": {
+        "isMonitoring": true,
+        "uptime": 141828,
+        "totalRequests": 0,
+        "totalErrors": 0,
+        "activeAlerts": 0,
+        "currentMetrics": {
+          "tokenEfficiency": 0,
+          "averageResponseTime": 0,
+          "qualityScore": 0,
+          "errorRate": 0,
+          "throughput": 0,
+          "cacheHitRate": 0,
+          "memoryUsage": 0.013599251565047774,
+          "cpuUsage": 0
+        },
+        "lastUpdate": 1759041973411
+      },
+      "compatibility": {
+        "currentStage": 0,
+        "rolloutStartTime": 1759041973533,
+        "lastStageTransition": 1759041973533,
+        "isRollingBack": false,
+        "abTestActive": true,
+        "abTestStartTime": 1759041973532,
+        "abTestResults": {
+          "enhanced": {
+            "requests": 0,
+            "successes": 0,
+            "failures": 0,
+            "totalTime": 0
+          },
+          "existing": {
+            "requests": 0,
+            "successes": 0,
+            "failures": 0,
+            "totalTime": 0
+          }
+        },
+        "compatibilityScore": 1,
+        "lastCompatibilityCheck": 1759041973531,
+        "fallbackActive": false,
+        "fallbackReason": null,
+        "fallbackStartTime": null,
+        "fallbackCount": 0,
+        "config": {
+          "enableABTest": true,
+          "enhancedServiceRatio": 0.3,
+          "abTestDuration": 604800000,
+          "enableGradualRollout": true,
+          "rolloutStages": [
+            0.1,
+            0.3,
+            0.5,
+            0.8,
+            1
+          ],
+          "stageTransitionThreshold": 0.95,
+          "enableCompatibilityCheck": true,
+          "compatibilityThreshold": 0.9,
+          "enableAutoFallback": true,
+          "fallbackThreshold": 1.0000000000000002,
+          "fallbackCooldown": 300000,
+          "enableDetailedLogging": true,
+          "logDirectory": "demo\\logs\\compatibility",
+          "metricsRetention": 30
+        },
+        "metrics": {
+          "compatibility": 1,
+          "abTest": 0,
+          "rollout": 0,
+          "fallback": 0
+        }
+      }
+    }
+  },
+  "summary": {
+    "totalTests": 5,
+    "successfulTests": 0,
+    "totalErrors": 5,
+    "overallGrade": "F",
+    "performanceRating": "poor"
+  },
+  "recommendations": [
+    "기본 기능 테스트 케이스 재검토",
+    "성능 병목 지점 분석 및 개선"
+  ]
+}

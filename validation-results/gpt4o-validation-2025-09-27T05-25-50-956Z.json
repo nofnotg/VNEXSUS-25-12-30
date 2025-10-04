@@ -1,0 +1,1815 @@
+{
+  "title": "VNEXSUS GPT-4o Mini 검증 보고서",
+  "version": "1.0.0",
+  "timestamp": "2025-09-27T05:25:50.955Z",
+  "model": "gpt-4o-mini",
+  "total_test_cases": 14,
+  "connection_test": {
+    "success": true,
+    "response_time": 2244,
+    "api_key_valid": true,
+    "model": "gpt-4o-mini",
+    "timestamp": "2025-09-27T05:18:41.023Z"
+  },
+  "phase1_results": {
+    "phase": 1,
+    "total_cases": 3,
+    "successful_cases": 3,
+    "failed_cases": 0,
+    "results": [
+      {
+        "case_id": "Case1",
+        "case_number": 1,
+        "success": true,
+        "processing_time": 13487,
+        "confidence": 0.95,
+        "error": null,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김명희",
+            "age": "67",
+            "gender": "F"
+          },
+          "visit_info": {
+            "date": "2025-02-17",
+            "hospital": "한림대학교 강남성심병원",
+            "department": "신경외과"
+          },
+          "diagnosis": {
+            "primary": "현기증 NOS",
+            "secondary": [
+              "Other specified cerebrovascular diseases"
+            ],
+            "codes": [
+              "R42",
+              "I67.8"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "MRI",
+              "result": "White matter hypersignal intensities of presumed vascular origin, Fazekas 1. Microbleed, left operculum.",
+              "unit": null,
+              "reference_range": null
+            },
+            {
+              "test_name": "Blood Test",
+              "result": "Hb 11.4, RBC count 3.52, WBC count 5.58, Neut count 3.69",
+              "unit": null,
+              "reference_range": null
+            },
+            {
+              "test_name": "Cholesterol Test",
+              "result": "Cholesterol 180 mg/dL, Triglyceride 181 mg/dL, HDL 62 mg/dL, LDL 93 mg/dL",
+              "unit": null,
+              "reference_range": null
+            }
+          ],
+          "medications": [
+            {
+              "name": "GINEXIN-F TAB.",
+              "dosage": "80mg",
+              "frequency": "1회 10일"
+            },
+            {
+              "name": "LOXFEN TAB.",
+              "dosage": "1",
+              "frequency": "3회 7일 두통시"
+            },
+            {
+              "name": "Stillen Tab.",
+              "dosage": "60mg",
+              "frequency": "1회 3회 7일 두통시"
+            },
+            {
+              "name": "SETOPEN TAB",
+              "dosage": "325mg",
+              "frequency": "3회 7일 두통시"
+            }
+          ],
+          "treatments": [
+            "약물 주사치료"
+          ],
+          "notes": "환자는 어지럼증과 두통을 호소하며, MRI 검사 결과 소혈관 질환이 의심됨.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        },
+        "expected_result": {
+          "patient_info": {
+            "name": null,
+            "age": null,
+            "gender": null
+          },
+          "diagnosis": {
+            "primary": "후 관련 보험금 청구함.",
+            "codes": [
+              "E11.78",
+              "J04.0",
+              "K29.7",
+              "J30.4",
+              "H10.3",
+              "I67.8",
+              "I62.9",
+              "I66.8",
+              "I67.8",
+              "I67.8",
+              "J04.0",
+              "K29.7",
+              "J30.4",
+              "H10.3"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "Case2",
+        "case_number": 2,
+        "success": true,
+        "processing_time": 14444,
+        "confidence": 0.95,
+        "error": null,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김미화",
+            "age": "36",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2024-04-03",
+            "hospital": "삼성서울병원",
+            "department": "외과"
+          },
+          "diagnosis": {
+            "primary": "Hemangioma of liver",
+            "secondary": [],
+            "codes": [
+              "D1802"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "WBC Count",
+              "result": "6.01",
+              "unit": "x103/μL",
+              "reference_range": "4.0-10.0"
+            },
+            {
+              "test_name": "Hemoglobin",
+              "result": "13.3",
+              "unit": "g/dL",
+              "reference_range": "12.0-16.0"
+            },
+            {
+              "test_name": "Platelet Count",
+              "result": "304",
+              "unit": "x103/μL",
+              "reference_range": "150-450"
+            },
+            {
+              "test_name": "Albumin",
+              "result": "4.3",
+              "unit": "g/dL",
+              "reference_range": "3.5-5.0"
+            },
+            {
+              "test_name": "Bilirubin, Total",
+              "result": "1.5",
+              "unit": "mg/dL",
+              "reference_range": "0.1-1.2"
+            },
+            {
+              "test_name": "AST",
+              "result": "146",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "ALT",
+              "result": "130",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "CRP",
+              "result": "1.9",
+              "unit": "mg/dL",
+              "reference_range": "<0.5"
+            }
+          ],
+          "medications": [],
+          "treatments": [
+            "Laparoscopic right hemihepatectomy"
+          ],
+          "notes": "환자는 2017년부터 간혈관종으로 진단받았으며, 크기가 증가하여 수술적 치료가 필요함.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        },
+        "expected_result": {
+          "patient_info": {
+            "name": null,
+            "age": null,
+            "gender": null
+          },
+          "diagnosis": {
+            "primary": "후 매년 크기 증가 소견으",
+            "codes": [
+              "D13.4",
+              "D18.02",
+              "D18.02",
+              "D18.02",
+              "D18.02",
+              "D18.02",
+              "D18.02"
+            ]
+          }
+        }
+      },
+      {
+        "case_id": "Case3",
+        "case_number": 3,
+        "success": true,
+        "processing_time": 25384,
+        "confidence": 0.95,
+        "error": null,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김민아",
+            "age": "33",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2024-12-13",
+            "hospital": "이화여자대학교의과대학부속목동병원",
+            "department": "신경과"
+          },
+          "diagnosis": {
+            "primary": "천막상 뇌의 행동양식 불명 또는 미상의 신생물",
+            "secondary": [
+              "Migraine",
+              "Dizziness"
+            ],
+            "codes": [
+              "D43.0",
+              "R42"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "Total calcium",
+              "result": "8.5",
+              "unit": "mg/dL",
+              "reference_range": "8.5-10.5"
+            },
+            {
+              "test_name": "Platelet",
+              "result": "262",
+              "unit": "10^9/L",
+              "reference_range": "150-400"
+            },
+            {
+              "test_name": "Glucose",
+              "result": "118",
+              "unit": "mg/dL",
+              "reference_range": "70-100"
+            },
+            {
+              "test_name": "BUN",
+              "result": "6",
+              "unit": "mg/dL",
+              "reference_range": "7-20"
+            },
+            {
+              "test_name": "Total cholesterol",
+              "result": "154",
+              "unit": "mg/dL",
+              "reference_range": "<200"
+            },
+            {
+              "test_name": "Total Protein",
+              "result": "7.2",
+              "unit": "g/dL",
+              "reference_range": "6.0-8.5"
+            },
+            {
+              "test_name": "Albumin",
+              "result": "4.1",
+              "unit": "g/dL",
+              "reference_range": "3.5-5.0"
+            },
+            {
+              "test_name": "AST",
+              "result": "20",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "ALT",
+              "result": "11",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "0.65",
+              "unit": "mg/dL",
+              "reference_range": "0.6-1.2"
+            },
+            {
+              "test_name": "WBC",
+              "result": "6.84",
+              "unit": "10^9/L",
+              "reference_range": "4.0-10.0"
+            },
+            {
+              "test_name": "RBC",
+              "result": "4.39",
+              "unit": "10^12/L",
+              "reference_range": "4.0-5.5"
+            },
+            {
+              "test_name": "Hemoglobin",
+              "result": "12.8",
+              "unit": "g/dL",
+              "reference_range": "12.0-16.0"
+            },
+            {
+              "test_name": "Hematocrit",
+              "result": "39.1",
+              "unit": "%",
+              "reference_range": "37-47"
+            },
+            {
+              "test_name": "Phosphorus",
+              "result": "3.6",
+              "unit": "mg/dL",
+              "reference_range": "2.5-4.5"
+            }
+          ],
+          "medications": [],
+          "treatments": [
+            "경과관찰",
+            "생활 스타일 조절 권유"
+          ],
+          "notes": "특이사항 없음",
+          "confidence": 0.95,
+          "extracted_genes": []
+        },
+        "expected_result": {
+          "patient_info": {
+            "name": null,
+            "age": null,
+            "gender": null
+          },
+          "diagnosis": {
+            "primary": "후 관련 보험금 청구함.",
+            "codes": [
+              "D43.0",
+              "D43.0",
+              "D43.0"
+            ]
+          }
+        }
+      }
+    ],
+    "average_processing_time": 17772,
+    "success_rate": 100
+  },
+  "phase2_results": {
+    "phase": 2,
+    "total_cases": 14,
+    "results": [
+      {
+        "case_id": "Case1",
+        "case_number": 1,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 12,
+        "confidence": 0.95,
+        "processing_time": 12392,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김명희",
+            "age": "67",
+            "gender": "F"
+          },
+          "visit_info": {
+            "date": "2025-02-17",
+            "hospital": "한림대학교 강남성심병원",
+            "department": "신경외과"
+          },
+          "diagnosis": {
+            "primary": "현기증 NOS",
+            "secondary": [
+              "Other specified cerebrovascular diseases"
+            ],
+            "codes": [
+              "R42",
+              "I67.8"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "MRI",
+              "result": "White matter hypersignal intensities of presumed vascular origin, Fazekas 1. Microbleed, left operculum.",
+              "unit": null,
+              "reference_range": null
+            },
+            {
+              "test_name": "Blood Test",
+              "result": "Hb 11.4, RBC count 3.52, WBC count 5.58, Neut count 3.69",
+              "unit": null,
+              "reference_range": null
+            },
+            {
+              "test_name": "Cholesterol",
+              "result": "180 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "Normal"
+            },
+            {
+              "test_name": "Triglyceride",
+              "result": "181 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "Normal"
+            },
+            {
+              "test_name": "HDL-cholesterol",
+              "result": "62 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "Normal"
+            },
+            {
+              "test_name": "LDL-cholesterol",
+              "result": "93 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "Normal"
+            }
+          ],
+          "medications": [
+            {
+              "name": "GINEXIN-F TAB.",
+              "dosage": "80mg",
+              "frequency": "1회 10일"
+            },
+            {
+              "name": "LOXFEN TAB.",
+              "dosage": "1",
+              "frequency": "3회 7일"
+            },
+            {
+              "name": "Stillen Tab.",
+              "dosage": "60mg",
+              "frequency": "3회 7일"
+            },
+            {
+              "name": "SETOPEN TAB",
+              "dosage": "325mg",
+              "frequency": "3회 7일"
+            }
+          ],
+          "treatments": [
+            "약물 주사치료"
+          ],
+          "notes": "환자는 어지럼증과 두통을 호소하며, MRI 검사 결과 소혈관 질환이 의심됨.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case2",
+        "case_number": 2,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 15,
+        "confidence": 0.95,
+        "processing_time": 14128,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김미화",
+            "age": "36",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2024-04-03",
+            "hospital": "삼성서울병원",
+            "department": "외과"
+          },
+          "diagnosis": {
+            "primary": "Hemangioma of liver",
+            "secondary": [],
+            "codes": [
+              "D1802"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "WBC Count",
+              "result": "6.01",
+              "unit": "x103/μL",
+              "reference_range": "4.0-10.0"
+            },
+            {
+              "test_name": "Hemoglobin",
+              "result": "13.3",
+              "unit": "g/dL",
+              "reference_range": "12.0-16.0"
+            },
+            {
+              "test_name": "Platelet Count",
+              "result": "304",
+              "unit": "x103/μL",
+              "reference_range": "150-400"
+            },
+            {
+              "test_name": "Albumin",
+              "result": "4.3",
+              "unit": "g/dL",
+              "reference_range": "3.5-5.0"
+            },
+            {
+              "test_name": "Bilirubin, Total",
+              "result": "0.6",
+              "unit": "mg/dL",
+              "reference_range": "0.1-1.2"
+            },
+            {
+              "test_name": "AST",
+              "result": "38",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "ALT",
+              "result": "19",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "0.7",
+              "unit": "mg/dL",
+              "reference_range": "0.6-1.2"
+            },
+            {
+              "test_name": "CRP",
+              "result": "0.19",
+              "unit": "mg/dL",
+              "reference_range": "<0.5"
+            }
+          ],
+          "medications": [],
+          "treatments": [
+            "Laparoscopic right hemihepatectomy"
+          ],
+          "notes": "환자는 2017년부터 간혈관종으로 진단받았으며, 크기가 증가하여 수술적 치료를 받음. 수술 후 회복 중이며, 퇴원 후 외래 진료 계획 있음.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case3",
+        "case_number": 3,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 16,
+        "confidence": 0.95,
+        "processing_time": 19391,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김민아",
+            "age": "33",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2024-12-13",
+            "hospital": "이화여자대학교의과대학부속목동병원",
+            "department": "신경과"
+          },
+          "diagnosis": {
+            "primary": "천막상 뇌의 행동양식 불명 또는 미상의 신생물",
+            "secondary": [
+              "Migraine",
+              "Dizziness"
+            ],
+            "codes": [
+              "D43.0",
+              "R42"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "Total calcium",
+              "result": "8.5",
+              "unit": "mg/dL",
+              "reference_range": "8.5-10.5"
+            },
+            {
+              "test_name": "Platelet",
+              "result": "262",
+              "unit": "10^9/L",
+              "reference_range": "150-400"
+            },
+            {
+              "test_name": "Glucose",
+              "result": "118",
+              "unit": "mg/dL",
+              "reference_range": "70-100"
+            },
+            {
+              "test_name": "BUN",
+              "result": "6",
+              "unit": "mg/dL",
+              "reference_range": "7-20"
+            },
+            {
+              "test_name": "Total cholesterol",
+              "result": "154",
+              "unit": "mg/dL",
+              "reference_range": "<200"
+            },
+            {
+              "test_name": "Total Protein",
+              "result": "7.2",
+              "unit": "g/dL",
+              "reference_range": "6.0-8.3"
+            },
+            {
+              "test_name": "Albumin",
+              "result": "4.1",
+              "unit": "g/dL",
+              "reference_range": "3.5-5.0"
+            },
+            {
+              "test_name": "AST",
+              "result": "20",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "ALT",
+              "result": "11",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "0.65",
+              "unit": "mg/dL",
+              "reference_range": "0.6-1.2"
+            },
+            {
+              "test_name": "WBC",
+              "result": "6.84",
+              "unit": "10^9/L",
+              "reference_range": "4.0-10.0"
+            },
+            {
+              "test_name": "RBC",
+              "result": "4.39",
+              "unit": "10^12/L",
+              "reference_range": "4.0-5.5"
+            },
+            {
+              "test_name": "Hemoglobin",
+              "result": "12.8",
+              "unit": "g/dL",
+              "reference_range": "12.0-16.0"
+            },
+            {
+              "test_name": "Hematocrit",
+              "result": "39.1",
+              "unit": "%",
+              "reference_range": "37-47"
+            },
+            {
+              "test_name": "Phosphorus",
+              "result": "3.6",
+              "unit": "mg/dL",
+              "reference_range": "2.5-4.5"
+            }
+          ],
+          "medications": [],
+          "treatments": [
+            "경과관찰",
+            "생활 스타일 조절 권유"
+          ],
+          "notes": "응급실 검사에서 특이점은 보이지 않음. 최근 과로하는 경향 있음.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case4",
+        "case_number": 4,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 0,
+        "confidence": 0.95,
+        "processing_time": 15939,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김정애",
+            "age": "78",
+            "gender": "F"
+          },
+          "visit_info": {
+            "date": "2025-01-11",
+            "hospital": "가톨릭대학교 서울성모병원",
+            "department": "외과"
+          },
+          "diagnosis": {
+            "primary": "Ascending colon cancer",
+            "secondary": [],
+            "codes": [
+              "C182"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "병리검사",
+              "result": "Adenocarcinoma, moderately differentiated",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "분변잠혈검사",
+              "result": "음성",
+              "unit": "ng/ml",
+              "reference_range": "100 ng/ml"
+            },
+            {
+              "test_name": "위내시경",
+              "result": "양성 위궤양, 위축성 위염, 점막하종양",
+              "unit": "",
+              "reference_range": ""
+            }
+          ],
+          "medications": [
+            {
+              "name": "Encover",
+              "dosage": "200ml",
+              "frequency": "3bag #3 x 8days"
+            },
+            {
+              "name": "Megestrol acetate suspension",
+              "dosage": "40mg/ml, 20ml",
+              "frequency": "#1 x 7days"
+            },
+            {
+              "name": "Ramnos cap.",
+              "dosage": "250mg",
+              "frequency": "#3 x 7days"
+            },
+            {
+              "name": "Phospha 250 neutral tab.",
+              "dosage": "3T",
+              "frequency": "#3 x 7days"
+            },
+            {
+              "name": "Cefaclor cap.",
+              "dosage": "250mg",
+              "frequency": "#3 x 7days"
+            },
+            {
+              "name": "Flasinyl tab.",
+              "dosage": "250mg",
+              "frequency": "#3 x 7days"
+            }
+          ],
+          "treatments": [
+            "Laparoscopic right hemicolectomy"
+          ],
+          "notes": "퇴원 시 환자상태 호전됨(경쾌)",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case5",
+        "case_number": 5,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 10,
+        "confidence": 0.95,
+        "processing_time": 19209,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김태형",
+            "age": "64",
+            "gender": "남"
+          },
+          "visit_info": {
+            "date": "2024-12-12",
+            "hospital": "굿웰스의원",
+            "department": "심장내과"
+          },
+          "diagnosis": {
+            "primary": "Stable angina pectoris",
+            "secondary": [
+              "Coronary artery disease (1 vessel disease)",
+              "Diabetes mellitus type 2 with dyslipidemia",
+              "Dyslipidemia",
+              "Diastolic heart failure"
+            ],
+            "codes": [
+              "120.88",
+              "125.1",
+              "E11.68",
+              "E78.8",
+              "150.08"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "혈압",
+              "result": "131/90 mmHg",
+              "unit": "mmHg",
+              "reference_range": "정상"
+            },
+            {
+              "test_name": "심전도",
+              "result": "Normal sized cardiac chambers with normal global LV systolic function (EF: 62%)",
+              "unit": "",
+              "reference_range": "정상"
+            },
+            {
+              "test_name": "혈색소",
+              "result": "19.2 g/dL",
+              "unit": "g/dL",
+              "reference_range": "여 12.0~15.5"
+            },
+            {
+              "test_name": "공복혈당",
+              "result": "153 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "100.0 미만"
+            },
+            {
+              "test_name": "총콜레스테롤",
+              "result": "203 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "200.0 미만"
+            },
+            {
+              "test_name": "중성지방",
+              "result": "187 mg/dL",
+              "unit": "mg/dL",
+              "reference_range": "150.0 미만"
+            },
+            {
+              "test_name": "신사구체여과율",
+              "result": "79 mL/min/1.73m²",
+              "unit": "mL/min/1.73m²",
+              "reference_range": "60.0 이상"
+            }
+          ],
+          "medications": [
+            {
+              "name": "Concor",
+              "dosage": "1.25 mg",
+              "frequency": "qd"
+            },
+            {
+              "name": "Livalo",
+              "dosage": "2 mg",
+              "frequency": "qd"
+            }
+          ],
+          "treatments": [
+            "Coronary Angiography"
+          ],
+          "notes": "특이사항 없음",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case6",
+        "case_number": 6,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 12,
+        "confidence": 0.95,
+        "processing_time": 22026,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "석향숙",
+            "age": "60",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2025-02-26",
+            "hospital": "명지병원",
+            "department": "심장내과"
+          },
+          "diagnosis": {
+            "primary": "변형 협심증",
+            "secondary": [
+              "관상동맥 병",
+              "상세불명의 고지질혈증",
+              "합병증을 동반하지 않은 2형 당뇨병"
+            ],
+            "codes": [
+              "1201",
+              "1251",
+              "E785",
+              "E119"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "BUN",
+              "result": "29.2",
+              "unit": "mg/dL",
+              "reference_range": "9-23"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "0.73",
+              "unit": "mg/dL",
+              "reference_range": "0.5-1.1"
+            },
+            {
+              "test_name": "NT-proBNP",
+              "result": "128.00",
+              "unit": "pg/mL",
+              "reference_range": "<125"
+            },
+            {
+              "test_name": "Troponin I",
+              "result": "<2.51",
+              "unit": "pg/mL",
+              "reference_range": "<38.64"
+            },
+            {
+              "test_name": "Cholesterol",
+              "result": "155",
+              "unit": "mg/dL",
+              "reference_range": "<239"
+            },
+            {
+              "test_name": "Triglyceride",
+              "result": "139",
+              "unit": "mg/dL",
+              "reference_range": "<150"
+            },
+            {
+              "test_name": "HDL-Cholesterol",
+              "result": "50",
+              "unit": "mg/dL",
+              "reference_range": ">40"
+            },
+            {
+              "test_name": "LDL-Cholesterol",
+              "result": "83",
+              "unit": "mg/dL",
+              "reference_range": "<129"
+            }
+          ],
+          "medications": [
+            {
+              "name": "Rosulord",
+              "dosage": "5mg",
+              "frequency": "1x1"
+            },
+            {
+              "name": "Isotril ER",
+              "dosage": "60mg",
+              "frequency": "2x1"
+            },
+            {
+              "name": "Nitroglycerin",
+              "dosage": "0.6mg",
+              "frequency": "1x1"
+            }
+          ],
+          "treatments": [
+            "관상동맥 조영술",
+            "약물 치료 계획"
+          ],
+          "notes": "향후 6개월 이상 지속적으로 약물 치료 유지하면서 추적관찰 필요.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case7",
+        "case_number": 7,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 7,
+        "confidence": 0.95,
+        "processing_time": 66058,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "양재진",
+            "age": "55",
+            "gender": "남"
+          },
+          "visit_info": {
+            "date": "2025-01-15",
+            "hospital": "가톨릭대학교 서울성모병원",
+            "department": "종양내과"
+          },
+          "diagnosis": {
+            "primary": "Tonsil cancer",
+            "secondary": [
+              "Poorly differentiated carcinoma",
+              "Metastatic carcinoma"
+            ],
+            "codes": [
+              "cT3 or T4",
+              "N3b"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "Lymph node fine needle aspiration",
+              "result": "Positive for malignant cells, suggestive of metastatic carcinoma",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "Tonsil excisional biopsy",
+              "result": "Squamous cell carcinoma, moderately differentiated",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "PET CT",
+              "result": "Hypermetabolic malignancy involving right side palatine tonsil",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "MRI Neck",
+              "result": "Diffuse enhancing mucosal thickening at oropharyngeal wall",
+              "unit": "",
+              "reference_range": ""
+            }
+          ],
+          "medications": [
+            {
+              "name": "Docetaxel",
+              "dosage": "80mg",
+              "frequency": "1 time"
+            },
+            {
+              "name": "Cisplatin",
+              "dosage": "50mg",
+              "frequency": "1 time"
+            },
+            {
+              "name": "5-FU",
+              "dosage": "1000mg",
+              "frequency": "1 time"
+            },
+            {
+              "name": "Dexamethasone",
+              "dosage": "5mg",
+              "frequency": "1 time"
+            }
+          ],
+          "treatments": [
+            "Induction chemotherapy",
+            "Chemoport insertion"
+          ],
+          "notes": "Patient has a history of smoking and is currently undergoing chemotherapy. Follow-up required for monitoring side effects.",
+          "confidence": 0.95,
+          "extracted_genes": [
+            "HPV-associated"
+          ]
+        }
+      },
+      {
+        "case_id": "Case8",
+        "case_number": 8,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 10,
+        "confidence": 0.95,
+        "processing_time": 81247,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "이광욱",
+            "age": "70",
+            "gender": "남"
+          },
+          "visit_info": {
+            "date": "2025-03-26",
+            "hospital": "세브란스병원",
+            "department": "신경과"
+          },
+          "diagnosis": {
+            "primary": "Unstable angina",
+            "secondary": [
+              "Coronary artery disease (left main)",
+              "Coronary artery disease (2 vessel disease)",
+              "Internal carotid artery stenosis",
+              "Diabetes mellitus type 2 with dyslipidemia"
+            ],
+            "codes": [
+              "120.0",
+              "125.1",
+              "165.2",
+              "E11.9"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "ABI (Ankle/Brachial Index)",
+              "result": "0.80 / 0.89",
+              "unit": "N/A",
+              "reference_range": "0.97 - 1.25 (Normal)"
+            },
+            {
+              "test_name": "Glucose",
+              "result": "134",
+              "unit": "mg/dL",
+              "reference_range": "70 - 100 (Normal)"
+            },
+            {
+              "test_name": "HbA1c",
+              "result": "6.7",
+              "unit": "%",
+              "reference_range": "< 5.7 (Normal)"
+            },
+            {
+              "test_name": "LDL-Cholesterol",
+              "result": "49.6",
+              "unit": "mg/dL",
+              "reference_range": "< 100 (Optimal)"
+            }
+          ],
+          "medications": [
+            {
+              "name": "Aspirin protect",
+              "dosage": "100 mg",
+              "frequency": "1 T PO"
+            },
+            {
+              "name": "Herben",
+              "dosage": "30 mg",
+              "frequency": "2 T PO"
+            },
+            {
+              "name": "Lipitor",
+              "dosage": "80 mg",
+              "frequency": "1 T PO"
+            },
+            {
+              "name": "Platless",
+              "dosage": "75 mg",
+              "frequency": "1 T PO"
+            },
+            {
+              "name": "Rabiet",
+              "dosage": "10 mg",
+              "frequency": "1 T PO"
+            },
+            {
+              "name": "Sigmart",
+              "dosage": "5 mg",
+              "frequency": "2 T PO"
+            },
+            {
+              "name": "Cozaar",
+              "dosage": "100 mg",
+              "frequency": "1 T PO"
+            },
+            {
+              "name": "Trajenta",
+              "dosage": "5 mg",
+              "frequency": "1 T PO"
+            }
+          ],
+          "treatments": [
+            "PTA c DCB at Rt. SFA"
+          ],
+          "notes": "환자는 안정적인 상태이며, 혈당 조절을 위해 약물 변경이 필요함.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case9",
+        "case_number": 9,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 16,
+        "confidence": 0.95,
+        "processing_time": 23748,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "임승희",
+            "age": "55",
+            "gender": "여자"
+          },
+          "visit_info": {
+            "date": "2024-10-31",
+            "hospital": "대림성모병원",
+            "department": "유방외과"
+          },
+          "diagnosis": {
+            "primary": "Intraductal carcinoma in situ of breast, right",
+            "secondary": [
+              "Benign neoplasm of pituitary gland",
+              "Hyperlipidemia, unspecified",
+              "Vitamin D deficiency, unspecified"
+            ],
+            "codes": [
+              "D05.10",
+              "D35.2",
+              "E78.5"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "Prolactin",
+              "result": "7.6",
+              "unit": "ng/mL",
+              "reference_range": "0-20 ng/mL"
+            },
+            {
+              "test_name": "Lipid Panel",
+              "result": "156-50-59-71",
+              "unit": "mg/dL",
+              "reference_range": "0-200 mg/dL"
+            },
+            {
+              "test_name": "HbA1c",
+              "result": "5.5",
+              "unit": "%",
+              "reference_range": "4.0-5.6%"
+            },
+            {
+              "test_name": "Vitamin D",
+              "result": "31.7",
+              "unit": "ng/mL",
+              "reference_range": "30-100 ng/mL"
+            }
+          ],
+          "medications": [
+            {
+              "name": "리바로정",
+              "dosage": "2mg",
+              "frequency": "1T #1 x 40days"
+            },
+            {
+              "name": "뉴티린연질캡슐",
+              "dosage": "2C",
+              "frequency": "#2 x 40days"
+            },
+            {
+              "name": "디카맥스디정",
+              "dosage": "250mg",
+              "frequency": "1T #1 x 40days"
+            },
+            {
+              "name": "둘코락스 에스 장용정",
+              "dosage": "1T",
+              "frequency": "#1 x 40days"
+            },
+            {
+              "name": "리피다운캡슐",
+              "dosage": "120mg",
+              "frequency": "1C #1 x 40days"
+            }
+          ],
+          "treatments": [
+            "Lumpectomy, Rt(Breast)",
+            "Partial breast reconstruction, Rt(Breast)"
+          ],
+          "notes": "환자는 유방암 진단 후 호르몬 치료 중이며, 뇌하수체에 대한 추적 관찰이 필요함.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case10",
+        "case_number": 10,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 10,
+        "confidence": 0.95,
+        "processing_time": 11909,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "이주희",
+            "age": "39",
+            "gender": "F"
+          },
+          "visit_info": {
+            "date": "2024-10-21",
+            "hospital": "가톨릭대학교 은평성모병원",
+            "department": "산부인과"
+          },
+          "diagnosis": {
+            "primary": "Subclinical hypothyroidism, SGA",
+            "secondary": [
+              "Acute Posthemorrhagic Anemia",
+              "Breech presentation"
+            ],
+            "codes": [
+              "N77.1",
+              "AZ3480"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "TSH",
+              "result": "4.19",
+              "unit": "mIU/L",
+              "reference_range": "0.4-4.0"
+            },
+            {
+              "test_name": "Free T4",
+              "result": "0.90",
+              "unit": "ng/dL",
+              "reference_range": "0.8-1.8"
+            },
+            {
+              "test_name": "T3",
+              "result": "1.43",
+              "unit": "ng/mL",
+              "reference_range": "0.8-2.0"
+            }
+          ],
+          "medications": [
+            {
+              "name": "LT4",
+              "dosage": "25 mcg",
+              "frequency": "daily"
+            }
+          ],
+          "treatments": [
+            "LCT C/sec (Low cervical transverse cesarean section)"
+          ],
+          "notes": "Patient has a history of hip dysplasia surgery. Follow-up required for thyroid management.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case11",
+        "case_number": 11,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 11,
+        "confidence": 0.95,
+        "processing_time": 21398,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "허전권",
+            "age": "73",
+            "gender": "M"
+          },
+          "visit_info": {
+            "date": "2025-01-21",
+            "hospital": "강북삼성병원",
+            "department": "소화기내과"
+          },
+          "diagnosis": {
+            "primary": "Malignant neoplasm of gallbladder",
+            "secondary": [
+              "Disease of gallbladder, unspecified"
+            ],
+            "codes": [
+              "C23",
+              "AK829"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "H.PYLORI (UREASE BREATH TEST)",
+              "result": "Positive",
+              "unit": "64.0",
+              "reference_range": ">10"
+            },
+            {
+              "test_name": "Liver biopsy",
+              "result": "ADENOCARCINOMA, MODERATELY DIFFERENTIATED",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "PET CT",
+              "result": "Suggestive of GB cancer with multiple LNs and both hepatic lobes metastasis.",
+              "unit": "",
+              "reference_range": ""
+            },
+            {
+              "test_name": "CT Abdomen and Pelvis",
+              "result": "Increase in extent of GB cancer and liver and lymph node metastases.",
+              "unit": "",
+              "reference_range": ""
+            }
+          ],
+          "medications": [
+            {
+              "name": "Tamipool Inj",
+              "dosage": "1V IVD 1회",
+              "frequency": "IV INFUSION"
+            },
+            {
+              "name": "MucoSTA Tab",
+              "dosage": "100mg",
+              "frequency": "2회 (아침, 저녁식후 30분)"
+            },
+            {
+              "name": "Gabapenin Cap",
+              "dosage": "100mg",
+              "frequency": "2회 (아침, 저녁식후 30분)"
+            },
+            {
+              "name": "Airtal Tab",
+              "dosage": "100mg",
+              "frequency": "2회 (아침, 저녁식후 30분)"
+            }
+          ],
+          "treatments": [
+            "EUS-FNB",
+            "Liver biopsy",
+            "ERCP"
+          ],
+          "notes": "환자는 GB cancer로 진단받고 있으며, 간 전이 및 림프절 전이가 확인되었습니다. 향후 치료 계획은 항암치료를 포함합니다.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case12",
+        "case_number": 12,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 15,
+        "confidence": 0.95,
+        "processing_time": 21512,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김선삼",
+            "age": "53",
+            "gender": "남"
+          },
+          "visit_info": {
+            "date": "2025-02-19",
+            "hospital": "이화여자대학교의료원",
+            "department": "소화기내과"
+          },
+          "diagnosis": {
+            "primary": "알콜성 간경화",
+            "secondary": [
+              "위장관 출혈",
+              "신부전증"
+            ],
+            "codes": [
+              "K70.3",
+              "K92.2",
+              "K76.7"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "CBC",
+              "result": "10800",
+              "unit": "cells/uL",
+              "reference_range": "4,500-11,000"
+            },
+            {
+              "test_name": "CRP",
+              "result": "4.55",
+              "unit": "mg/dL",
+              "reference_range": "0-0.5"
+            },
+            {
+              "test_name": "Glucose",
+              "result": "35",
+              "unit": "mg/dL",
+              "reference_range": "70-100"
+            },
+            {
+              "test_name": "AST",
+              "result": "143",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "ALT",
+              "result": "31",
+              "unit": "U/L",
+              "reference_range": "0-40"
+            },
+            {
+              "test_name": "BUN",
+              "result": "13.9",
+              "unit": "mg/dL",
+              "reference_range": "7-20"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "1.98",
+              "unit": "mg/dL",
+              "reference_range": "0.6-1.2"
+            }
+          ],
+          "medications": [
+            {
+              "name": "Vasopressin",
+              "dosage": "20 unit",
+              "frequency": "1회"
+            },
+            {
+              "name": "Epinephrine",
+              "dosage": "1 mg",
+              "frequency": "1회"
+            },
+            {
+              "name": "Calcium gluconate",
+              "dosage": "2 g",
+              "frequency": "1회"
+            },
+            {
+              "name": "Sodium bicarbonate",
+              "dosage": "20 mL",
+              "frequency": "1회"
+            },
+            {
+              "name": "Norepinephrine",
+              "dosage": "20 mg",
+              "frequency": "1회"
+            },
+            {
+              "name": "Esomeprazole",
+              "dosage": "40 mg",
+              "frequency": "1회"
+            }
+          ],
+          "treatments": [
+            "내시경적 지혈술",
+            "중환자실 관리",
+            "CRRT"
+          ],
+          "notes": "환자는 알콜성 간경화로 인한 위장관 출혈로 입원하였으며, 치료 후에도 상태가 악화되어 사망함.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case13",
+        "case_number": 13,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 23,
+        "confidence": 0.95,
+        "processing_time": 12327,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "김인화",
+            "age": "55",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2025-03-13",
+            "hospital": "누가재활의학과의원",
+            "department": "재활의학과"
+          },
+          "diagnosis": {
+            "primary": "추간판탈출증",
+            "secondary": [
+              "요추의 염좌 및 긴장",
+              "신경뿌리병증을 동반한 요추 및 기타 추간판장애"
+            ],
+            "codes": [
+              "S33.0",
+              "G55.1"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "L-spine MRI",
+              "result": "Disk bulging, Annular tear and HIVD, Central protrusion",
+              "unit": null,
+              "reference_range": null
+            },
+            {
+              "test_name": "근전도검사",
+              "result": "요추 4-5번 척추신경근병증",
+              "unit": null,
+              "reference_range": null
+            }
+          ],
+          "medications": [
+            {
+              "name": "신경차단술",
+              "dosage": null,
+              "frequency": null
+            },
+            {
+              "name": "물리치료",
+              "dosage": null,
+              "frequency": null
+            },
+            {
+              "name": "인대강화주사",
+              "dosage": null,
+              "frequency": null
+            }
+          ],
+          "treatments": [
+            "안정",
+            "물리치료",
+            "신경차단술",
+            "인대강화주사"
+          ],
+          "notes": "2024년 4월 12일 빗길에 미끄러져 넘어져 요통 및 하지 방사통 호소.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      },
+      {
+        "case_id": "Case14",
+        "case_number": 14,
+        "success": true,
+        "accuracy": 0,
+        "similarity": 14,
+        "confidence": 0.95,
+        "processing_time": 15556,
+        "gpt4o_result": {
+          "patient_info": {
+            "name": "석향숙",
+            "age": "60",
+            "gender": "여"
+          },
+          "visit_info": {
+            "date": "2025-02-26",
+            "hospital": "명지병원",
+            "department": "심장내과"
+          },
+          "diagnosis": {
+            "primary": "변형 협심증",
+            "secondary": [
+              "관상동맥 병",
+              "상세불명의 고지질혈증",
+              "합병증을 동반하지 않은 2형 당뇨병"
+            ],
+            "codes": [
+              "1201",
+              "1251",
+              "E785",
+              "E119"
+            ]
+          },
+          "test_results": [
+            {
+              "test_name": "BUN",
+              "result": "29.2",
+              "unit": "mg/dL",
+              "reference_range": "9-23"
+            },
+            {
+              "test_name": "Creatinine",
+              "result": "0.73",
+              "unit": "mg/dL",
+              "reference_range": "0.5-1.1"
+            },
+            {
+              "test_name": "NT-proBNP",
+              "result": "128.00",
+              "unit": "pg/mL",
+              "reference_range": "<125"
+            },
+            {
+              "test_name": "Troponin I",
+              "result": "<2.51",
+              "unit": "pg/mL",
+              "reference_range": "<38.64"
+            },
+            {
+              "test_name": "Cholesterol",
+              "result": "155",
+              "unit": "mg/dL",
+              "reference_range": "<239"
+            },
+            {
+              "test_name": "HDL",
+              "result": "50",
+              "unit": "mg/dL",
+              "reference_range": ">40"
+            },
+            {
+              "test_name": "LDL",
+              "result": "83",
+              "unit": "mg/dL",
+              "reference_range": "<129"
+            }
+          ],
+          "medications": [
+            {
+              "name": "자디앙듀오정",
+              "dosage": "12.5/1000mg",
+              "frequency": "1x1"
+            },
+            {
+              "name": "아세타졸정",
+              "dosage": "1g",
+              "frequency": "1x1"
+            },
+            {
+              "name": "알티스정",
+              "dosage": "480mg",
+              "frequency": "1x1"
+            },
+            {
+              "name": "디핀스정",
+              "dosage": "80/5mg",
+              "frequency": "1x1"
+            },
+            {
+              "name": "에제로바정",
+              "dosage": "10/5mg",
+              "frequency": "1x1"
+            },
+            {
+              "name": "니자리딘캡슐",
+              "dosage": "150mg",
+              "frequency": "1x1"
+            }
+          ],
+          "treatments": [
+            "관상동맥 조영술 시행",
+            "약물 치료 계획"
+          ],
+          "notes": "향후 6개월 이상 지속적으로 약물 치료 유지하면서 추적관찰 필요.",
+          "confidence": 0.95,
+          "extracted_genes": []
+        }
+      }
+    ],
+    "accuracy_scores": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "similarity_scores": [
+      12,
+      15,
+      16,
+      0,
+      10,
+      12,
+      7,
+      10,
+      16,
+      10,
+      11,
+      15,
+      23,
+      14
+    ],
+    "average_accuracy": 0,
+    "average_similarity": 12,
+    "average_confidence": 1
+  },
+  "comparison_analysis": {
+    "comparison_type": "GPT-4o Mini vs Rule-based System",
+    "total_cases": 14,
+    "gpt4o_advantages": [
+      "자연어 이해 능력",
+      "컨텍스트 파악",
+      "유연한 데이터 추출",
+      "다양한 형식 처리"
+    ],
+    "rule_based_advantages": [
+      "일관된 결과",
+      "빠른 처리 속도",
+      "예측 가능한 동작",
+      "낮은 비용"
+    ],
+    "recommendation": "GPT-4o Mini는 복잡한 의료 텍스트 분석에 적합하나, 비용과 처리 시간을 고려한 하이브리드 접근 권장"
+  },
+  "summary": {
+    "total_cases": 14,
+    "phase1_success_rate": 100,
+    "phase2_average_accuracy": 0,
+    "phase2_average_similarity": 12,
+    "average_processing_time": 17772,
+    "overall_performance": 34
+  },
+  "recommendations": [
+    "GPT-4o Mini는 의료 텍스트 분석에서 높은 유연성을 보임",
+    "처리 시간과 비용을 고려한 최적화 필요",
+    "룰기반 시스템과의 하이브리드 접근 권장",
+    "프롬프트 엔지니어링을 통한 정확도 개선 가능"
+  ]
+}

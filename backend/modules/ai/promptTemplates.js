@@ -162,7 +162,73 @@ class PromptTemplates {
 - 이름 → [환자명], [의사명] 등으로 대체
 - 식별번호 → [주민번호], [차트번호] 등으로 대체
 - 날짜는 그대로 유지 (의료 정보의 시간적 맥락이 중요하므로)
-- 병원명, 약물명, 진단명은 그대로 유지`
+- 병원명, 약물명, 진단명은 그대로 유지`,
+      
+      'nine_item_report_final.txt': `당신은 손해사정 보고서 작성 전문가입니다. 주어진 의료 데이터를 분석하여 최종 확장형 손해사정 보고서를 작성해주세요.
+
+📋 보고서 작성 원칙:
+1. 모든 검사명은 영문 원어 + 한글 번역을 병기합니다
+2. 암 관련 문서인 경우 → 조직검사 보고일 및 병기까지 반드시 포함합니다
+3. 통원/입원은 반드시 구분하여, 해당 기간·횟수·일수를 명시합니다
+4. 의사소견은 전자의무기록(EMR) 내 처방·지시사항이 확인될 경우만 기재합니다
+5. 일자별 경과표 작성 시 위 항목을 토대로 연대순 정리합니다
+
+입력 데이터:
+{medicalData}
+
+출력 형식:
+==================================================
+          손해사정 보고서 (최종 확장형)
+==================================================
+
+■ 내원일시: yyyy.mm.dd
+{visitDateTime}
+
+■ 내원경위: (외부 병원 진료의뢰, 조직검사 결과 등 요약)
+{visitReason}
+
+■ 진단병명: (KCD-10 코드 기준, 영문 원어 + 한글 병명)
+{diagnosisWithKCD}
+
+■ 검사결과:
+(검사명, 검사일, 검사결과, 소견 / 원어 + 한글 번역)
+※ 암의 경우 조직검사 보고일까지 기재
+{examinationResults}
+
+■ 수술 후 조직검사 결과 (암의 경우만):
+(검사명, 검사일, 보고일, 조직검사 소견, 병기 TNM)
+{cancerPathologyResults}
+
+■ 치료내용: (수술/약물/방사선/처치 등)
+{treatmentContent}
+
+■ 통원기간: yyyy.mm.dd ~ yyyy.mm.dd / n회 통원
+{outpatientPeriod}
+
+■ 입원기간: yyyy.mm.dd ~ yyyy.mm.dd / n일 입원
+{admissionPeriod}
+
+■ 과거병력: (주요 질환, 합병증 등 기재)
+{pastHistory}
+
+■ 의사소견: (주치의 기재 내용 요약)
+{doctorOpinion}
+
+---
+## 고지의무 검토
+{disclosureObligationReview}
+
+---
+## 원발암/전이암 판정 (해당 시)
+{primaryCancerAssessment}
+
+---
+종합 결론:
+[보험약관상 지급 판단 및 손해사정 의견 기재]
+{comprehensiveConclusion}
+
+📑 일자별 경과표
+{chronologicalProgress}`
     };
     
     for (const [filename, content] of Object.entries(defaultTemplates)) {
@@ -428,4 +494,4 @@ class PromptTemplates {
   }
 }
 
-export default PromptTemplates; 
+export default PromptTemplates;

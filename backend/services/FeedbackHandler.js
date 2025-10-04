@@ -32,10 +32,10 @@ class FeedbackHandler {
       } catch (error) {
         // 피드백 파일이 없으면 빈 배열로 초기화
         await fs.writeFile(FEEDBACK_FILE, JSON.stringify([], null, 2));
-        logger.info('피드백 데이터 파일 생성 완료');
+        logger.logService('FeedbackHandler', '피드백 데이터 파일 생성 완료', 'info');
       }
     } catch (error) {
-      logger.error('피드백 핸들러 초기화 오류:', error);
+      logger.logService('FeedbackHandler', '피드백 핸들러 초기화 오류: ' + error.message, 'error', error);
     }
   }
 
@@ -66,10 +66,10 @@ class FeedbackHandler {
       feedbacks.push(newFeedback);
       await fs.writeFile(FEEDBACK_FILE, JSON.stringify(feedbacks, null, 2));
       
-      logger.info(`새 피드백 저장 완료: ${newFeedback.id}`);
+      logger.logService('FeedbackHandler', `새 피드백 저장 완료: ${newFeedback.id}`, 'info');
       return newFeedback;
     } catch (error) {
-      logger.error('피드백 저장 오류:', error);
+      logger.logService('FeedbackHandler', '피드백 저장 오류: ' + error.message, 'error', error);
       throw new Error('피드백 저장 중 오류가 발생했습니다.');
     }
   }
@@ -120,7 +120,7 @@ class FeedbackHandler {
       
       return feedbacks;
     } catch (error) {
-      logger.error('피드백 조회 오류:', error);
+      logger.logService('FeedbackHandler', '피드백 조회 오류: ' + error.message, 'error', error);
       throw new Error('피드백 조회 중 오류가 발생했습니다.');
     }
   }
@@ -141,7 +141,7 @@ class FeedbackHandler {
       
       return feedback;
     } catch (error) {
-      logger.error(`피드백 ID 조회 오류 (${feedbackId}):`, error);
+      logger.logService('FeedbackHandler', `피드백 ID 조회 오류 (${feedbackId}): ` + error.message, 'error', error);
       throw error;
     }
   }
@@ -164,10 +164,10 @@ class FeedbackHandler {
       feedbacks[feedbackIndex].status = status;
       await fs.writeFile(FEEDBACK_FILE, JSON.stringify(feedbacks, null, 2));
       
-      logger.info(`피드백 상태 업데이트: ${feedbackId} -> ${status}`);
+      logger.logService('FeedbackHandler', `피드백 상태 업데이트: ${feedbackId} -> ${status}`, 'info');
       return feedbacks[feedbackIndex];
     } catch (error) {
-      logger.error(`피드백 상태 업데이트 오류 (${feedbackId}):`, error);
+      logger.logService('FeedbackHandler', `피드백 상태 업데이트 오류 (${feedbackId}): ` + error.message, 'error', error);
       throw error;
     }
   }
@@ -201,10 +201,10 @@ class FeedbackHandler {
       feedbacks[feedbackIndex].improvementSuggestions.push(newSuggestion);
       await fs.writeFile(FEEDBACK_FILE, JSON.stringify(feedbacks, null, 2));
       
-      logger.info(`피드백 개선 제안 추가: ${feedbackId} -> ${improvementId}`);
+      logger.logService('FeedbackHandler', `피드백 개선 제안 추가: ${feedbackId} -> ${improvementId}`, 'info');
       return { feedback: feedbacks[feedbackIndex], suggestion: newSuggestion };
     } catch (error) {
-      logger.error(`피드백 개선 제안 추가 오류 (${feedbackId}):`, error);
+      logger.logService('FeedbackHandler', `피드백 개선 제안 추가 오류 (${feedbackId}): ` + error.message, 'error', error);
       throw error;
     }
   }
@@ -273,7 +273,7 @@ class FeedbackHandler {
         lastUpdated: new Date().toISOString()
       };
     } catch (error) {
-      logger.error('피드백 통계 계산 오류:', error);
+      logger.logService('FeedbackHandler', '피드백 통계 계산 오류: ' + error.message, 'error', error);
       throw new Error('피드백 통계 계산 중 오류가 발생했습니다.');
     }
   }
@@ -288,10 +288,10 @@ class FeedbackHandler {
       const data = await fs.readFile(FEEDBACK_FILE, 'utf8');
       return JSON.parse(data);
     } catch (error) {
-      logger.error('피드백 데이터 로드 오류:', error);
+      logger.logService('FeedbackHandler', '피드백 데이터 로드 오류: ' + error.message, 'error', error);
       return [];
     }
   }
 }
 
-export default FeedbackHandler; 
+export default FeedbackHandler;

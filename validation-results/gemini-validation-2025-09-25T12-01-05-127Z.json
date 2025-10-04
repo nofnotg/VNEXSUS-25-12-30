@@ -1,0 +1,378 @@
+{
+  "report_info": {
+    "title": "VNEXSUS Gemini 2.5 Flash 검증 보고서",
+    "version": "1.0",
+    "timestamp": "2025-09-25T12:01:05.126Z",
+    "total_test_cases": 5
+  },
+  "connection_test": {
+    "success": true,
+    "response_time": 1,
+    "api_key_valid": true,
+    "model": "gemini-2.0-flash-exp",
+    "timestamp": "2025-09-25T12:01:05.097Z"
+  },
+  "phase1_results": {
+    "total_cases": 3,
+    "successful_cases": 0,
+    "success_rate": 0,
+    "average_accuracy": null,
+    "average_processing_time": null,
+    "meets_threshold": false,
+    "detailed_results": [
+      {
+        "case_id": "case_001",
+        "success": false,
+        "processing_time": 3,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        },
+        "gemini_result": {
+          "extracted_genes": [
+            "BRCA1",
+            "TP53"
+          ],
+          "date_anchoring": {
+            "primary_dates": [
+              "2024년 1월 15일",
+              "2024년 2월 20일"
+            ],
+            "confidence_scores": [
+              0.8,
+              0.8
+            ]
+          },
+          "filtered_content": {
+            "original_length": 93,
+            "filtered_length": 83.7,
+            "removed_elements": [
+              "개인정보",
+              "연락처"
+            ]
+          },
+          "causal_network": {
+            "relationships": [
+              {
+                "cause": "BRCA1",
+                "effect": "질병",
+                "strength": 0.7
+              },
+              {
+                "cause": "TP53",
+                "effect": "질병",
+                "strength": 0.7
+              }
+            ]
+          },
+          "confidence_summary": {
+            "overall_confidence": 0.75,
+            "gene_extraction": 0.8,
+            "date_anchoring": 0.7,
+            "filtering": 0.8,
+            "causal_analysis": 0.7
+          },
+          "metadata": {
+            "processing_time_ms": 1150.5037496468672,
+            "model_used": "mock-gemini-2.0-flash-exp",
+            "timestamp": "2025-09-25T12:01:05.118Z",
+            "test_mode": true
+          }
+        }
+      },
+      {
+        "case_id": "case_002",
+        "success": false,
+        "processing_time": 0,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        },
+        "gemini_result": {
+          "extracted_genes": [
+            "EGFR",
+            "KRAS"
+          ],
+          "date_anchoring": {
+            "primary_dates": [
+              "2023년 12월 10일",
+              "2024년 3월 5일"
+            ],
+            "confidence_scores": [
+              0.8,
+              0.8
+            ]
+          },
+          "filtered_content": {
+            "original_length": 115,
+            "filtered_length": 103.5,
+            "removed_elements": [
+              "개인정보",
+              "연락처"
+            ]
+          },
+          "causal_network": {
+            "relationships": [
+              {
+                "cause": "EGFR",
+                "effect": "질병",
+                "strength": 0.7
+              },
+              {
+                "cause": "KRAS",
+                "effect": "질병",
+                "strength": 0.7
+              }
+            ]
+          },
+          "confidence_summary": {
+            "overall_confidence": 0.75,
+            "gene_extraction": 0.8,
+            "date_anchoring": 0.7,
+            "filtering": 0.8,
+            "causal_analysis": 0.7
+          },
+          "metadata": {
+            "processing_time_ms": 1475.0822240830348,
+            "model_used": "mock-gemini-2.0-flash-exp",
+            "timestamp": "2025-09-25T12:01:05.119Z",
+            "test_mode": true
+          }
+        }
+      },
+      {
+        "case_id": "case_003",
+        "success": false,
+        "processing_time": 1,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        },
+        "gemini_result": {
+          "extracted_genes": [
+            "ALK",
+            "ROS1"
+          ],
+          "date_anchoring": {
+            "primary_dates": [
+              "2024년 4월 1일"
+            ],
+            "confidence_scores": [
+              0.8
+            ]
+          },
+          "filtered_content": {
+            "original_length": 77,
+            "filtered_length": 69.3,
+            "removed_elements": [
+              "개인정보",
+              "연락처"
+            ]
+          },
+          "causal_network": {
+            "relationships": [
+              {
+                "cause": "ALK",
+                "effect": "질병",
+                "strength": 0.7
+              },
+              {
+                "cause": "ROS1",
+                "effect": "질병",
+                "strength": 0.7
+              }
+            ]
+          },
+          "confidence_summary": {
+            "overall_confidence": 0.75,
+            "gene_extraction": 0.8,
+            "date_anchoring": 0.7,
+            "filtering": 0.8,
+            "causal_analysis": 0.7
+          },
+          "metadata": {
+            "processing_time_ms": 1435.5052338887485,
+            "model_used": "mock-gemini-2.0-flash-exp",
+            "timestamp": "2025-09-25T12:01:05.120Z",
+            "test_mode": true
+          }
+        }
+      }
+    ]
+  },
+  "phase2_results": {
+    "total_cases": 5,
+    "successful_cases": 0,
+    "success_rate": 0,
+    "average_accuracy": null,
+    "average_processing_time": null,
+    "meets_accuracy_threshold": false,
+    "meets_time_threshold": false,
+    "detailed_results": [
+      {
+        "case_id": "case_001",
+        "success": false,
+        "processing_time": 1261.7239755998394,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        }
+      },
+      {
+        "case_id": "case_002",
+        "success": false,
+        "processing_time": 1254.011503180444,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        }
+      },
+      {
+        "case_id": "case_003",
+        "success": false,
+        "processing_time": 997.2302305046251,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        }
+      },
+      {
+        "case_id": "case_004",
+        "success": false,
+        "processing_time": 957.3727600993716,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 1,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        }
+      },
+      {
+        "case_id": "case_005",
+        "success": false,
+        "processing_time": 1295.481533730167,
+        "accuracy_score": 0.77,
+        "confidence_score": 0.75,
+        "genes_extracted": 2,
+        "validation_details": {
+          "success": false,
+          "accuracy": 0.77,
+          "details": {
+            "genes_accuracy": 0.8,
+            "date_accuracy": 0.8,
+            "filter_accuracy": 0.7,
+            "overall_accuracy": 0.77,
+            "success": false
+          }
+        }
+      }
+    ]
+  },
+  "comparison_analysis": {
+    "rule_based": {
+      "average_accuracy": 0.9,
+      "average_processing_time": 180000,
+      "success_rate": 95,
+      "consistency_score": 0.92
+    },
+    "gemini_flash": {
+      "average_accuracy": null,
+      "average_processing_time": null,
+      "success_rate": 0,
+      "consistency_score": 0.85
+    },
+    "comparison": {
+      "accuracy_difference": null,
+      "time_improvement": null,
+      "success_rate_difference": -95,
+      "recommendation": "PROCEED: 단계적 전환 진행 가능"
+    }
+  },
+  "overall_assessment": {
+    "gemini_ready": false,
+    "recommendation": "PROCEED: 단계적 전환 진행 가능",
+    "next_steps": [
+      "⚠️ 프롬프트 개선 및 재검증 필요",
+      "⚠️ 하이브리드 접근법 검토",
+      "📊 지속적 모니터링 시스템 구축",
+      "👥 사용자 피드백 수집 프로세스 수립"
+    ],
+    "risk_assessment": [
+      "MEDIUM: 처리 실패율 높음 - 서비스 안정성 우려"
+    ]
+  },
+  "detailed_metrics": {
+    "accuracy_improvement": null,
+    "time_improvement": null,
+    "success_rate": 0,
+    "consistency_score": 0.85
+  }
+}

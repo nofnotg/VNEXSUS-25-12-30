@@ -159,7 +159,7 @@ const PORT = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:3030'],
+  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:3030'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -198,6 +198,20 @@ app.use('/api/advanced-date', advancedDateRoutes);
 app.use('/api/monitoring', monitoringRoutes);
 app.use('/api/case-analysis', caseAnalysisRouter);
 app.use('/api', router);
+
+// API 상태 확인 라우트 추가
+app.get('/api/status', (req, res) => {
+  res.json({
+    success: true,
+    status: 'healthy',
+    message: 'VNEXSUS OCR 서비스가 정상적으로 작동 중입니다.',
+    timestamp: new Date().toISOString(),
+    services: {
+      ocr: 'active',
+      vision: process.env.ENABLE_VISION_OCR === 'true' ? 'active' : 'inactive'
+    }
+  });
+});
 
 // 기본 라우트 (프론트엔드 인덱스 페이지)
 app.get('/', (req, res) => {

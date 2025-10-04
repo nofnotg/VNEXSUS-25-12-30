@@ -4,6 +4,7 @@ class MonitoringDashboard {
     this.isConnected = false;
     this.eventSource = null;
     this.refreshInterval = null;
+    this.reconnectAttempts = 0;
     this.init();
   }
 
@@ -51,35 +52,51 @@ class MonitoringDashboard {
 
   connectSSE() {
     try {
-      this.eventSource = new EventSource('http://localhost:3030/api/monitoring/stream');
-      
-      this.eventSource.onopen = () => {
-        this.isConnected = true;
-        this.updateSystemStatus('정상');
-        this.addLog('실시간 스트림 연결됨', 'success');
-      };
-      
-      this.eventSource.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          this.updateRealTimeMetrics(data);
-        } catch (error) {
-          console.error('SSE 데이터 파싱 오류:', error);
-        }
-      };
-      
-      this.eventSource.onerror = (error) => {
-        this.isConnected = false;
-        this.updateSystemStatus('연결 오류');
-        this.addLog('실시간 스트림 연결 오류', 'error');
-        
-        // 재연결 시도
-        setTimeout(() => {
-          if (this.eventSource.readyState === EventSource.CLOSED) {
-            this.connectSSE();
+      // 백엔드 서버 상태 확인 후 연결
+      fetch('http://localhost:3030/api/status')
+        .then(response => {
+          if (response.ok) {
+            this.eventSource = new EventSource('http://localhost:3030/api/monitoring/stream');
+            
+            this.eventSource.onopen = () => {
+              this.isConnected = true;
+              this.updateSystemStatus('정상');
+              this.addLog('실시간 스트림 연결됨', 'success');
+            };
+            
+            this.eventSource.onmessage = (event) => {
+              try {
+                const data = JSON.parse(event.data);
+                this.updateRealTimeMetrics(data);
+              } catch (error) {
+                console.error('SSE 데이터 파싱 오류:', error);
+              }
+            };
+            
+            this.eventSource.onerror = (error) => {
+              this.isConnected = false;
+              this.updateSystemStatus('연결 오류');
+              this.addLog('실시간 스트림 연결 오류', 'error');
+              
+              // 재연결 시도 (최대 3회)
+              if (this.reconnectAttempts < 3) {
+                this.reconnectAttempts++;
+                setTimeout(() => {
+                  if (this.eventSource.readyState === EventSource.CLOSED) {
+                    this.connectSSE();
+                  }
+                }, 5000 * this.reconnectAttempts);
+              }
+            };
+          } else {
+            console.warn('백엔드 서버가 응답하지 않습니다. 모니터링 스트림을 건너뜁니다.');
+            this.updateSystemStatus('서버 미응답');
           }
-        }, 5000);
-      };
+        })
+        .catch(error => {
+          console.warn('백엔드 서버 연결 실패:', error.message);
+          this.updateSystemStatus('서버 연결 실패');
+        });
     } catch (error) {
       console.error('SSE 연결 실패:', error);
       this.addLog('실시간 스트림 연결 실패: ' + error.message, 'error');
@@ -727,6 +744,18 @@ class CaseAnalysisManager {
     updateVisualization() {
         this.updateTable();
         this.updateChart();
+    }
+    
+    updateComparisonTable() {
+        // 비교 테이블 업데이트 로직
+        if (!this.caseData || this.caseData.length === 0) {
+            console.log('비교 테이블 업데이트: 데이터 없음');
+            return;
+        }
+        
+        console.log('비교 테이블 업데이트 중...');
+        this.updateVisualization();
+        this.updateProgressBars();
     }
     
     async exportComparisonResults() {

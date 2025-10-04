@@ -465,4 +465,30 @@ class EnhancedMassiveDateBlockProcessor {
   }
 }
 
+// CommonJS 호환성을 위한 export 추가
+const analyzeMedicalRelevance = (text) => {
+  // 의료 관련성 분석 함수 (간단한 구현)
+  const medicalKeywords = ['진료', '검사', '수술', '입원', '퇴원', '처방', '투약', '치료', '진단', '소견'];
+  const keywordCount = medicalKeywords.filter(keyword => text.includes(keyword)).length;
+  return keywordCount / medicalKeywords.length;
+};
+
+const createDateBlocks = (textArray) => {
+  // 날짜 블록 생성 함수 (간단한 구현)
+  const processor = new EnhancedMassiveDateBlockProcessor();
+  return processor.processEnhancedDateBlocks(textArray.join('\n'));
+};
+
+// ES 모듈과 CommonJS 모두 지원
 export default EnhancedMassiveDateBlockProcessor;
+export { analyzeMedicalRelevance, createDateBlocks };
+
+// CommonJS 호환성
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    default: EnhancedMassiveDateBlockProcessor,
+    EnhancedMassiveDateBlockProcessor,
+    analyzeMedicalRelevance,
+    createDateBlocks
+  };
+}
