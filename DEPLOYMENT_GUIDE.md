@@ -1,136 +1,314 @@
-# 배포 및 환경 설정 가이드
+# VNEXSUS AI 의료 문서 처리 시스템 배포 가이드
 
-## 🚨 중요 사항
-이 문서는 파일 업로드부터 OCR 처리까지의 핵심 기능이 정상 동작하도록 하는 필수 설정들을 포함합니다.
-**개발자는 이 설정들을 변경하기 전에 반드시 팀과 상의해야 합니다.**
+## 📋 시스템 개요
 
-## 필수 환경 변수 (.env 파일)
+VNEXSUS AI 의료 문서 처리 시스템은 Phase 1 (기본 처리) + Phase 2 (AI 프롬프트 보강)가 통합된 완전한 의료 문서 분석 솔루션입니다.
 
-### 🔒 절대 변경 금지 항목
-다음 설정들은 현재 정상 동작하는 시스템의 핵심 구성요소입니다:
+## 🏗️ 시스템 아키텍처
 
+### Backend (Node.js)
+- **포트**: 3030
+- **주요 기능**: 
+  - 의료 문서 OCR 처리
+  - AI 프롬프트 보강 시스템
+  - 병원별 템플릿 캐시
+  - 컨텍스트 분석기
+  - 향상된 전처리기
+
+### Frontend (정적 파일 서버)
+- **포트**: 3000
+- **주요 기능**:
+  - 웹 인터페이스
+  - 파일 업로드
+  - 결과 표시
+  - 피드백 시스템
+
+## 🚀 배포 준비사항
+
+### 1. 시스템 요구사항
+```
+- Node.js 22.14.0 이상
+- npm 또는 yarn
+- 최소 4GB RAM
+- 10GB 이상 디스크 공간
+```
+
+### 2. 환경 변수 설정
+
+#### Backend (.env)
 ```env
-# 서버 포트 설정 (변경 시 CORS 오류 발생 가능)
-PORT=3030
-MAIN_PORT=8888
 NODE_ENV=production
-
-# OCR 서비스 설정 (변경 시 OCR 기능 중단)
+PORT=3030
+OPENAI_API_KEY=your-actual-openai-api-key
 ENABLE_VISION_OCR=true
-USE_VISION=true
-USE_TEXTRACT=false
 ```
 
-### 🔑 인증 정보 (환경별 설정 필요)
-새로운 환경에서는 다음 값들을 해당 환경에 맞게 설정해야 합니다:
-
+#### 추가 환경 변수 (선택사항)
 ```env
-# Google Cloud 설정
-GCP_PROJECT_ID=medreport-assistant
-GOOGLE_APPLICATION_CREDENTIALS=C:/VisionKeys/medreport-assistant-e4e428ceaad0.json
-GOOGLE_CLOUD_VISION_API_KEY=AIzaSyBIw0kynZ2q5NNB8qmNmT2PXWKyEpr0-70
-GCS_BUCKET_NAME=medreport-vision-ocr-bucket
-GCS_BUCKET=medreport-vision-ocr-bucket
+# Google Cloud Vision API (OCR 향상)
+GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json
 
-# AI 서비스 API 키
-CLAUDE_API_KEY=sk-ant-api03-...
-OPENAI_API_KEY=sk-proj-...
+# 로깅 설정
+LOG_LEVEL=info
+LOG_FILE=logs/app.log
+
+# 캐시 설정
+CACHE_TTL=3600
+TEMPLATE_CACHE_SIZE=1000
 ```
 
-## 서버 구동 방법
+### 3. 의존성 설치
 
-### 1. 백엔드 서버 (포트 3030)
+#### Backend
 ```bash
 cd backend
-node app.js
+npm install --production
 ```
 
-### 2. 프론트엔드 서버 (포트 8080)
+#### Frontend (정적 파일 서버)
 ```bash
 cd frontend
-npx http-server . -p 8080 -c-1
-```
-
-## CORS 설정
-
-### 🚨 중요: 허용된 Origin 목록
-다음 파일들의 CORS 설정을 변경할 때는 반드시 개발팀과 상의하세요:
-
-- `backend/app.js`
-- `backend/routes/ocrRoutes.js`
-
-현재 허용된 Origins:
-- http://localhost:5173
-- http://localhost:5174
-- http://localhost:5175
-- http://localhost:8080
-- http://localhost:3030
-
-## 파일 구조 보호
-
-### 절대 삭제/이동 금지 파일들
-```
-backend/
-├── app.js                 # 메인 서버 파일
-├── routes/ocrRoutes.js    # OCR API 라우트
-├── controllers/           # API 컨트롤러
-├── services/             # OCR 서비스 로직
-└── utils/                # 유틸리티 함수
-
-frontend/
-├── script.js             # 메인 프론트엔드 로직
-├── index.html            # 메인 페이지
-└── config/insurers.json  # 보험사 설정
-```
-
-## 의존성 관리
-
-### 백엔드 필수 패키지
-```json
-{
-  "@google-cloud/vision": "^4.0.0",
-  "@google-cloud/storage": "^7.0.0",
-  "express": "^4.18.0",
-  "cors": "^2.8.5",
-  "multer": "^1.4.5",
-  "uuid": "^9.0.0"
-}
-```
-
-### 프론트엔드 서버
-```bash
 npm install -g http-server
 ```
 
-## 트러블슈팅
+## 📦 배포 단계
 
-### 1. CORS 오류
-- 백엔드와 프론트엔드 포트가 올바른지 확인
-- allowedOrigins 목록에 사용 중인 포트가 포함되어 있는지 확인
+### 1. 소스 코드 배포
+```bash
+# 프로덕션 서버에 코드 복사
+scp -r VNEXSUS_Bin/ user@production-server:/opt/vnexsus/
 
-### 2. OCR 서비스 오류
-- Google Cloud 인증 파일 경로 확인
-- API 키 유효성 확인
-- 프로젝트 ID 정확성 확인
+# 또는 Git을 사용한 배포
+git clone https://github.com/your-repo/vnexsus-ai.git /opt/vnexsus/
+```
 
-### 3. 파일 업로드 오류
-- temp 디렉토리 권한 확인
-- 파일 크기 제한 확인
+### 2. 권한 설정
+```bash
+sudo chown -R app:app /opt/vnexsus/
+sudo chmod +x /opt/vnexsus/backend/app.js
+```
 
-## 새로운 환경 설정 체크리스트
+### 3. 서비스 등록 (systemd)
 
-- [ ] .env 파일 생성 및 환경별 값 설정
-- [ ] Google Cloud 인증 파일 배치
-- [ ] 필요한 디렉토리 생성 (temp, uploads 등)
-- [ ] 의존성 패키지 설치
-- [ ] 포트 충돌 확인
-- [ ] 방화벽 설정 확인
-- [ ] 백엔드 서버 구동 테스트
-- [ ] 프론트엔드 서버 구동 테스트
-- [ ] 파일 업로드 기능 테스트
-- [ ] OCR 처리 기능 테스트
+#### Backend 서비스
+```ini
+# /etc/systemd/system/vnexsus-backend.service
+[Unit]
+Description=VNEXSUS AI Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=app
+WorkingDirectory=/opt/vnexsus/backend
+ExecStart=/usr/bin/node app.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### Frontend 서비스
+```ini
+# /etc/systemd/system/vnexsus-frontend.service
+[Unit]
+Description=VNEXSUS AI Frontend Service
+After=network.target
+
+[Service]
+Type=simple
+User=app
+WorkingDirectory=/opt/vnexsus/frontend
+ExecStart=/usr/bin/npx http-server -p 3000 -c-1
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 4. 서비스 시작
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable vnexsus-backend
+sudo systemctl enable vnexsus-frontend
+sudo systemctl start vnexsus-backend
+sudo systemctl start vnexsus-frontend
+```
+
+## 🔍 상태 확인
+
+### 서비스 상태
+```bash
+sudo systemctl status vnexsus-backend
+sudo systemctl status vnexsus-frontend
+```
+
+### 로그 확인
+```bash
+sudo journalctl -u vnexsus-backend -f
+sudo journalctl -u vnexsus-frontend -f
+```
+
+### 헬스 체크
+```bash
+# Backend API 확인
+curl http://localhost:3030/health
+
+# Frontend 확인
+curl http://localhost:3000
+```
+
+## 🔧 성능 최적화
+
+### 1. PM2를 사용한 프로세스 관리
+```bash
+npm install -g pm2
+
+# Backend 실행
+pm2 start backend/app.js --name vnexsus-backend
+
+# 클러스터 모드 (멀티코어 활용)
+pm2 start backend/app.js --name vnexsus-backend -i max
+```
+
+### 2. Nginx 리버스 프록시 설정
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    # Frontend
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # Backend API
+    location /api/ {
+        proxy_pass http://localhost:3030/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        client_max_body_size 50M;
+    }
+}
+```
+
+## 📊 모니터링
+
+### 1. 시스템 메트릭
+- CPU 사용률
+- 메모리 사용률
+- 디스크 I/O
+- 네트워크 트래픽
+
+### 2. 애플리케이션 메트릭
+- API 응답 시간
+- 처리된 문서 수
+- 오류율
+- 캐시 히트율
+
+### 3. 로그 모니터링
+```bash
+# 실시간 로그 모니터링
+tail -f /opt/vnexsus/backend/logs/app.log
+
+# 오류 로그 필터링
+grep "ERROR" /opt/vnexsus/backend/logs/app.log
+```
+
+## 🔒 보안 설정
+
+### 1. 방화벽 설정
+```bash
+# 필요한 포트만 개방
+sudo ufw allow 22    # SSH
+sudo ufw allow 80    # HTTP
+sudo ufw allow 443   # HTTPS
+sudo ufw enable
+```
+
+### 2. SSL/TLS 설정
+```bash
+# Let's Encrypt 인증서 설치
+sudo certbot --nginx -d your-domain.com
+```
+
+### 3. API 키 보안
+- 환경 변수로 관리
+- 정기적인 키 로테이션
+- 접근 권한 최소화
+
+## 🚨 장애 대응
+
+### 1. 일반적인 문제 해결
+
+#### Backend 서비스 실패
+```bash
+# 서비스 재시작
+sudo systemctl restart vnexsus-backend
+
+# 로그 확인
+sudo journalctl -u vnexsus-backend --since "1 hour ago"
+```
+
+#### 메모리 부족
+```bash
+# 메모리 사용량 확인
+free -h
+ps aux --sort=-%mem | head
+
+# 프로세스 재시작
+sudo systemctl restart vnexsus-backend
+```
+
+#### 디스크 공간 부족
+```bash
+# 디스크 사용량 확인
+df -h
+
+# 로그 파일 정리
+sudo find /opt/vnexsus -name "*.log" -mtime +7 -delete
+```
+
+### 2. 백업 및 복구
+```bash
+# 설정 파일 백업
+tar -czf vnexsus-config-$(date +%Y%m%d).tar.gz /opt/vnexsus/backend/.env
+
+# 템플릿 캐시 백업
+tar -czf vnexsus-cache-$(date +%Y%m%d).tar.gz /opt/vnexsus/backend/postprocess/templates/
+```
+
+## 📈 확장성 고려사항
+
+### 1. 수평 확장
+- 로드 밸런서 구성
+- 여러 인스턴스 배포
+- 세션 공유 설정
+
+### 2. 수직 확장
+- CPU/메모리 증설
+- SSD 스토리지 사용
+- 네트워크 대역폭 확장
+
+## ✅ 배포 체크리스트
+
+- [ ] 환경 변수 설정 완료
+- [ ] 의존성 설치 완료
+- [ ] 서비스 등록 완료
+- [ ] 방화벽 설정 완료
+- [ ] SSL 인증서 설치 완료
+- [ ] 모니터링 설정 완료
+- [ ] 백업 설정 완료
+- [ ] 헬스 체크 통과
+- [ ] 성능 테스트 완료
+- [ ] 문서화 완료
 
 ---
 
-**⚠️ 경고: 이 가이드의 설정을 변경하기 전에 반드시 개발팀과 상의하세요.**
-**시스템의 안정성을 위해 테스트 환경에서 먼저 검증 후 적용하세요.**
+**배포 완료 후 연락처**: 시스템 관리자 또는 개발팀
+**긴급 상황 대응**: 24/7 모니터링 및 알림 시스템 구축 권장

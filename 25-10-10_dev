@@ -1,0 +1,210 @@
+핵심 통찰 (3–4줄)
+
+**단일모델(gpt-4o-mini)**이라도 프롬프트를 **모듈화(전처리/시퀀싱/보고서)**하고 출력 스키마(데이터 계약) 를 고정하면, 일관성과 재현성이 크게 향상됩니다.
+
+LLM은 “후보 추출+근거 스팬 제공”에 집중하고, 결정(귀속/정렬/에피소드/링킹) 은 자체 룰엔진이 담당할 때 품질·비용·안정성이 동시에 올라갑니다.
+
+적응형 선행귀속(날짜 앞 0~5줄), 병원별 템플릿 캐시, 트렁크(암/뇌/심장/사망/수술/MRI) 부스트 룰을 결합하면 다회 통원·복수 문서 연결성이 개선됩니다.
+
+‘기타’는 없음을 허용하되, 존재 시 “연관성검토/가능성검토” 꼬리표를 자동 부착하여 단서 보존(삭제 금지) + 보고서 가독성 두 마리 토끼를 잡습니다.
+
+단계별 실행 방안 (전처리 → 룰엔진 → 시퀀싱 → 보고서)
+0) 공통: Data Contract v1 (LLM 출력 계약)
+
+원칙: 삭제/정렬/병합 금지, 입력 순서 유지. LLM은 후보·근거만 제시.
+
+필드(요약):
+
+date{raw, iso?, candidates[], confidence}
+
+hospital{raw, canonical?, candidates[]} / dept{raw?} / visitType{raw, canonical?}
+
+dx{raw[], code3?, candidates[]}
+
+tests[]/procedures[]/meds[] 각 항목 {raw, canonical?, attrs?, confidence, spans[]}
+
+notes{raw, tags:[LOW-LINK|ADMIN|CONTEXT], spans[]}
+
+trunkHint[] (CANCER|NEURO|CARDIO|DEATH|SURGERY|MRI 후보 태그)
+
+evidence{spans[]}, flags[]
+
+이 계약을 전처리 프롬프트 출력과 DNA시퀀싱 프롬프트 입력/출력 모두에 재사용하면, 단일모델에서도 단계간 일관성이 보장됩니다. 
+
+VNEXSUS_Pipeline_Documentation
+
+1) 전처리AI (gpt-4o-mini) — “세그먼트/태깅/근거/후보”에 집중
+
+목표: 보일러플레이트 제거 후 라인 배열을 받아 앵커(날짜/기관/행위) 기준 세그먼트화, 각 이벤트에 raw+canonical 후보+spans.
+
+금지: 삭제/정렬/병합/요약/판단.
+
+산출: Data Contract v1(JSON)
+
+✅ SYSTEM 프롬프트 (고정)
+역할: 의료 OCR 라인 배열에서 '세그먼트·태깅·근거·후보'를 생성한다.
+금지: 삭제/정렬/병합/요약/판단. 사실만.
+요구: 모든 필드에서 raw 유지, canonical 후보(0~3개)와 candidates[], spans(page:line 또는 char-index) 포함.
+notes는 [LOW-LINK]/[ADMIN]/[CONTEXT] 태그만 부여(삭제 금지).
+trunkHint에 암/뇌/심장/사망/수술/MRI 신호 후보만 기록(결정은 룰엔진).
+출력: Data Contract v1(JSON)만.
+
+✅ USER 프롬프트 템플릿
+입력(보일러플레이트 제거·PII 마스킹 후 라인):
+<<<LINES
+{{joined_lines}}
+LINES
+
+앵커 힌트:
+- 방문유형 후보: {초진, 재진, 입원, 퇴원, 통원, 검사, 수술, 처치, 기타}
+- 동의어 사전(요약): {{tests_lex}}, {{procs_lex}}, {{meds_lex}}
+
+지침:
+1) 날짜·기관·행위 앵커로 세그먼트화. 날짜 앞뒤 모두 spans로 근거 표시.
+2) 각 항목 canonical 후보 0~3개, 확신 없으면 null.
+3) notes는 단서 보존. 가족력/사회·환경/알레르기도 삭제 금지, 단 [CONTEXT]/[LOW-LINK]/[ADMIN] 태깅.
+4) trunkHint에 (CANCER/NEURO/CARDIO/DEATH/SURGERY/MRI) 후보 기록.
+
+출력: Data Contract v1(JSON)
+
+2) 룰엔진 (비-LLM) — 결정 주도 + 적응형 선행귀속 + 템플릿 캐시 + 트렁크 부스트
+
+결정 주체: 룰엔진(귀속/정렬/에피소드/링킹/종합).
+
+적응형 선행귀속: 날짜 앞 0~5줄 가변(앵커강도 평균 + 템플릿 신뢰도 + 트렁크 점수).
+
+템플릿 캐시: hospitalCanon#docTitle 키로 헤더/푸터/라벨을 누적, conf(0~1) 관리 → 전처리 안정화.
+
+트렁크 부스트: CANCER/NEURO/CARDIO/DEATH/SURGERY/MRI 감지 시 링크 윈도우·가중치 상향.
+
+// src/rules/adaptiveLeading.ts
+export function leadingWindowFor(segment:string[], dateIdx:number, {tplConf=0.5, trunkAvg=0}){
+  const base=2, max=5;
+  const prev = Array.from({length:5},(_,k)=> segment[dateIdx-(k+1)]).filter(Boolean);
+  const anchorScore = (s:string)=> (/\d{4}[./-]\d{1,2}[./-]\d{1,2}|년|월|일/.test(s)?3:0)
+                                  + (/(병원|의료원|센터|의원)/.test(s)?1:0)
+                                  + (/(입원|퇴원|수술|검사|처치|초진|재진|투약|처방)/.test(s)?2:0);
+  const avg = prev.length ? prev.map(anchorScore).reduce((a,b)=>a+b,0)/prev.length : 0;
+  const expand = Math.round(avg/2 + tplConf*2 + trunkAvg*1);
+  return Math.max(0, Math.min(base+expand, max));
+}
+
+# config/linking.yml (트렁크 부스트 + 윈도우)
+windows: { suspect_to_test_days:14, test_to_treat_days:30, treat_to_follow_days:180 }
+boost:
+  CANCER: { test_to_treat_days:+10, weight:+0.3 }
+  NEURO:  { suspect_to_test_days:+7,  weight:+0.2 }
+  CARDIO: { test_to_treat_days:+7,   weight:+0.2 }
+  DEATH:  { follow_to_close_days:+30, weight:+0.5 }
+  SURGERY:{ treat_to_follow_days:+30, weight:+0.2 }
+  MRI:    { suspect_to_test_days:+7,  weight:+0.1 }
+
+
+역할 분리 요지: 전처리AI는 후보·근거를 풍성히, 판단은 룰엔진. 이렇게 해야 다회 통원 링크, 날짜 모호성, 문서 간 연결이 안정적으로 올라갑니다. 
+
+VNEXSUS_Pipeline_Documentation
+
+3) DNA 시퀀싱(LLM) — 앵커 풍성화 + 연결성 설명 보강(서술 강화)
+
+목표: 룰엔진이 확정한 이벤트/에피소드에 대해 앵커(temporal/spatial/medical/causal) 를 서술형으로 보강하고, 보고서 9항목 채우기용 풍성한 문장을 생성.
+
+금지: 진단·판정·권고 추정 금지. 오로지 입력 근거 재서술.
+
+출력: genes[] (앵커·근거·짧은 내러티브), narrativeHints[](보고서용 문장 조각).
+
+✅ SYSTEM 프롬프트 (DNA/서술 강화)
+역할: 룰엔진이 확정한 의료 이벤트들을 바탕으로, 각 이벤트의 앵커(temporal/spatial/medical/causal)를 서술형으로 정교화한다.
+금지: 의학적 판단/권고/추정. 사실 재서술만.
+요구: 각 이벤트마다 근거 원문 스팬 일부를 인용(따옴표)하고, 이를 바탕으로 2~3문장의 내러티브를 작성.
+결과: genes[], narrativeHints[] JSON. 단, 진단명/검사/치료는 원문 표현을 유지하되 동의어는 괄호에 병기 가능.
+
+✅ USER 프롬프트 템플릿
+입력:
+- 확정 이벤트 배열(JSON): {{ruledEventsJson}}
+- 근거 스팬(원문 일부): {{evidenceSnippets}}
+
+지침:
+1) 각 이벤트에 대해 temporal/spatial/medical/causal 앵커를 한 문장씩 명확히 표현.
+2) "원문 근거: «…»" 꼴 인용 1개 이상 포함.
+3) 연결관계가 있는 경우 "이전 사건[#n]과 연계"처럼 중립적 표현만 사용(판단 금지).
+4) narrativeHints에 보고서 9항목에 들어갈 수 있는 간결한 문장 조각을 제공.
+
+출력(JSON):
+{ "genes":[{id, anchors:{temporal,spatial,medical,causal}, evidence:["…"] , narrative:"…"}], "narrativeHints":[ "…" ] }
+
+4) 보고서AI(LLM) — 9항목 서술 강화 + ‘기타’ 처리 규약
+
+목표: 9항목 표준(진단/검사/치료/입·퇴원/통원/투약/기타/보험메타 등)을 간결한 조각이 아니라 짧은 문단으로 풍성화.
+
+‘기타’ 규약:
+
+없음인 경우 → "기타: 없음"
+
+존재 시 → 항목 말미에 — 연관성검토: …; 가능성검토: …(둘 중 해당만) 자동 부착
+
+단, 가족력/사회·환경/알레르기는 삭제 금지 + [CONTEXT]로 별도 라인에 표기(요구에 따라 비노출 가능)
+
+✅ SYSTEM 프롬프트 (보고서)
+역할: 확정 이벤트와 narrativeHints로 9항목 보고서를 작성한다.
+스타일: 중립·사실 중심. 각 항목은 2~4문장 서술로 구성(장황 금지).
+특칙: '기타'는 없으면 "없음". 있으면 말미에 '— 연관성검토: ...; 가능성검토: ...'를 덧붙인다.
+금지: 진단/치료의 종류나 인과관계를 추정하지 말 것. 원문과 룰엔진 확정치만 사용.
+출력: Markdown 텍스트(9개 섹션).
+
+✅ USER 프롬프트 템플릿
+입력:
+- 확정 이벤트(룰엔진 출력): {{ruledEventsJson}}
+- DNA 시퀀싱 내러티브 힌트: {{narrativeHints}}
+- 보험/피보험자 메타: {{policyMeta}}
+
+지침:
+1) 날짜 오름차순. 동일일자 다건은 범주별 묶고 괄호로 개수 표기.
+2) 동일 에피소드 내 서술은 연결 문장 1개 삽입(예: "동일 내원 범주 내 평가").
+3) '기타'는 [LOW-LINK]/[CONTEXT]/[ADMIN] 태그 순으로 노출. 없으면 '없음'.
+
+출력: 보고서 Markdown
+
+룰엔진 고도화: 링크·에피소드/통원 강화·‘기타’ 꼬리표 자동화
+
+a) 에피소드/링킹 핵심 로직
+
+// src/rules/linker.ts (개념)
+type Ev = { id:string; date:string; hosp:string; dept?:string; dxCode3?:string; types:string[]; trunk?:string[] };
+export function linkEvents(events:Ev[], cfg){
+  // 1) 병원/과/진단코드/트렁크 가중치 기반 후보 링킹 스코어
+  // 2) windows + boost 적용 (config/linking.yml)
+  // 3) 최종 스코어 상위만 양방향 링크
+  // 4) episode 그룹화(간격 기본 28d, 트렁크별 상향)
+}
+
+
+b) 통원 강화(다회 방문 인지) 룰 트릭
+
+같은 병원+과(+dxCode3)가 28일 내 연속이면 통원 에피소드 가중치 +0.2
+
+검사→치료 30일 내면 같은 에피소드로 묶고 보고서에 (links: test#3 → treat#5) 꼬리표
+
+약물 용량 변경/추가 시 episode 내부 조정 이벤트로 태깅
+
+c) ‘기타’ 꼬리표 자동화
+
+// src/report/otherTail.ts
+export function otherTail(items:{text:string, linkLow?:boolean, poss?:boolean}[]){
+  if (!items.length) return "없음";
+  return items.map(o=>{
+    const tails = [];
+    if (o.linkLow) tails.push("연관성검토: 낮음/추후확인");
+    if (o.poss)    tails.push("가능성검토: 관련 가능");
+    return tails.length? `${o.text} — ${tails.join("; ")}` : o.text;
+  }).join("\n");
+}
+
+고려사항 맵
+
+재현성: 프롬프트/룰/YAML/스키마 모두에 버전 태그(예: @v2)를 파일명에 부여. 회귀세트(≥30문서)로 P@1, 정합률 모니터링.
+
+비용/속도: gpt-4o-mini는 추출·서술 보강에만 사용. 후보 폭을 줄이는 lexicon+간단 유사도로 LLM 호출 길이 최소화.
+
+안전/객관성: 진단 확정·권고·추정 금지. 논란 여지 문구는 원문 인용으로 방어.
+
+운영: featureFlags.yml 로 점진 적용(template_cache, adaptive_leading, trunk_boost, episode_index_in_report). 플래그 OFF 시 기존 결과 바이트 동일.

@@ -1,10 +1,10 @@
 /**
  * AI 보고서 생성 모듈
  * 
- * Claude 3.7 Haiku API를 활용하여 구조화된 의료 데이터를 기반으로 보고서를 생성합니다.
+ * GPT-4o-mini API를 활용하여 구조화된 의료 데이터를 기반으로 보고서를 생성합니다.
  */
 
-import claudeService from '../../services/claudeService.js';
+import gpt4oMiniEnhancedService from '../../services/gpt4oMiniEnhancedService.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -27,7 +27,7 @@ export class AiReportGenerator {
   async generateReport(structuredData) {
     try {
       console.log('AI 보고서 생성 시작...');
-      const report = await claudeService.generateMedicalReport(structuredData);
+      const report = await gpt4oMiniEnhancedService.generateMedicalReport(structuredData);
       console.log('AI 보고서 생성 완료');
       return report;
     } catch (error) {
@@ -62,4 +62,4 @@ export class AiReportGenerator {
   }
 }
 
-export default new AiReportGenerator(); 
+export default new AiReportGenerator();

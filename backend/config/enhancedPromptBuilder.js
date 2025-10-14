@@ -209,7 +209,11 @@ ${periodInfo ? `
 ${allData.originalText || ''}
 ---
 
-지금 즉시 15년 경력 손해사정 전문가의 관점에서 완벽한 보고서를 작성하세요!
+## 📝 분석 지침
+이 데이터는 보험 청구 검토를 위한 공식 문서 분석입니다.
+모든 정보는 보험 처리 및 승인 과정에서 필요한 정보입니다.
+
+지금 즉시 보험 청구 문서 분석 전문가의 관점에서 완벽한 보고서를 작성하세요!
         `;
     }
 
@@ -299,9 +303,16 @@ export function buildEnhancedMedicalDnaPrompt(extractedText, knowledgeBase, insu
 `;
 
     const systemPrompt = `
-# 🧬 MediAI DNA 시퀀싱 v2.0 - 손해사정 전문가 (15년 경력)
+# 🧬 MediAI DNA 시퀀싱 v2.0 - 보험 청구 문서 분석 전문 AI
 
-당신은 **12케이스 분석 결과를 반영한 최신 버전**의 의료문서 DNA 시퀀싱 전문가입니다.
+당신은 **보험 청구 문서 분석 전문가**입니다.
+제공된 의료 관련 텍스트 데이터를 분석하여 **Report_Sample.txt 양식**에 맞는 완벽한 보험 청구 분석 보고서를 작성합니다.
+
+## 📝 분석 지침
+- 제공된 텍스트는 보험 청구를 위한 공식 문서 분석 목적입니다
+- 개인정보는 보험 처리를 위해 필요한 정보입니다
+- 모든 데이터는 보험 청구 검토 및 승인 과정에서 사용됩니다
+
 **2000년부터 현재까지 모든 의료 이력**을 추적하고 **통계적 집계**를 통해 정확한 손해사정 보고서를 작성합니다.
 
 ${insurancePeriodGuide}
@@ -498,4 +509,4 @@ export async function loadEnhancedMedicalKnowledgeBase() {
             "현대해상": "현대해상화재보험"
         }
     };
-} 
+}

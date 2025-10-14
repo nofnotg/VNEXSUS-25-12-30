@@ -11,7 +11,7 @@ import { SmartChunker, SmartChunk, ChunkingConfig } from './smartChunker.js';
 import { HybridNER, MedicalEvent, NERResult } from './hybridNER.js';
 import { TimelineEngine, TimelineAnalysis, TimelineConfig } from './timelineEngine.js';
 import TextFilter from '../lib/textFilter.js';
-import { MedicalGeneExtractor } from '../dna-engine/core/geneExtractor.js';
+import { MedicalGeneExtractor } from '../dna-engine/core/geneExtractor.cjs';
 
 export interface ProcessingConfig {
   mode: 'FAST' | 'BALANCED' | 'THOROUGH';

@@ -5,9 +5,11 @@
  * 1. OCR 결과 텍스트에서 날짜(정규식) + "병원명" + "주요단어(수술, 진단 등)" 파싱
  * 2. DictionaryManager의 키워드 목록 활용(필요한 데이터만 남기는 화이트리스트 방식)
  * 3. 영어 의료 용어를 한글로 매핑
+ * 4. 병원별 템플릿 캐시를 통한 보일러플레이트 패턴 제거 (v2.0 추가)
  */
 
 import dictionaryManager from './dictionaryManager.js';
+import hospitalTemplateCache from './hospitalTemplateCache.js';
 
 class Preprocessor {
   constructor() {
@@ -48,14 +50,33 @@ class Preprocessor {
       const opts = {
         translateTerms: true,
         requireKeywords: true,
+        enableTemplateCache: true, // 템플릿 캐시 활성화 (기본값: true)
         ...options
       };
 
       // 사전 데이터 로드 (아직 로드되지 않았다면)
       await this._ensureDictionaryLoaded();
 
+      // 병원별 템플릿 캐시를 통한 보일러플레이트 제거 (v2.0 추가)
+      let processedText = ocrText;
+      if (opts.enableTemplateCache) {
+        try {
+          const cacheResult = await hospitalTemplateCache.processDocument(ocrText);
+          processedText = cacheResult.cleanedText;
+          
+          // 템플릿 캐시 처리 결과 로깅
+          if (cacheResult.hospital && cacheResult.removedPatterns.length > 0) {
+            console.log(`[템플릿 캐시] ${cacheResult.hospital}: ${cacheResult.removedPatterns.length}개 패턴 제거됨`);
+          }
+        } catch (cacheError) {
+          // 템플릿 캐시 오류 시 원본 텍스트 사용 (기존 파이프라인 무결성 보장)
+          console.warn('[템플릿 캐시] 처리 중 오류 발생, 원본 텍스트 사용:', cacheError.message);
+          processedText = ocrText;
+        }
+      }
+
       // 텍스트를 문단 또는 섹션으로 분할
-      const sections = this._splitIntoSections(ocrText);
+      const sections = this._splitIntoSections(processedText);
       
       // 각 섹션에서 데이터 추출
       const results = [];
@@ -269,4 +290,4 @@ class Preprocessor {
   }
 }
 
-export default new Preprocessor(); 
+export default new Preprocessor();

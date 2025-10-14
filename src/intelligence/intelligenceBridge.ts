@@ -8,7 +8,7 @@
  */
 
 import { AdaptiveProcessor, ProcessingConfig, ProcessingContext, AdaptiveResult } from './adaptiveProcessor';
-import { MedicalGeneExtractor } from '../dna-engine/core/geneExtractor.js';
+import { MedicalGeneExtractor } from '../dna-engine/core/geneExtractor.cjs';
 import TextFilter from '../lib/textFilter';
 import { eventTagger } from '../lib/eventTagger';
 import { reportMaker } from '../lib/reportMaker';

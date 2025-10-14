@@ -3,7 +3,18 @@
  * 실제 API 키를 사용한 전체 배치 검증 수행
  */
 
-import CaseValidator from './src/gemini-integration/caseValidator.js';
+/**
+ * Validation Runner - GPT-4o-mini 검증 실행기
+ */
+
+// import CaseValidator from './src/gemini-integration/caseValidator.js';
+// Gemini 서비스 비활성화로 인해 주석 처리됨
+
+console.log('⚠️ Gemini 서비스가 비활성화되어 검증 실행기를 사용할 수 없습니다.');
+console.log('GPT-4o-mini 단일 모델로 전환되었습니다.');
+
+// 기존 검증 로직은 비활성화됨
+// console.log('🚀 VNEXSUS Gemini 검증 시스템 시작...');
 import path from 'path';
 import { fileURLToPath } from 'url';
 

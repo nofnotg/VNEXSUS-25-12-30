@@ -3,7 +3,18 @@
  * 각 단계를 개별적으로 테스트하여 문제점 파악
  */
 
-import CaseValidator from './src/gemini-integration/caseValidator.js';
+/**
+ * Simple Validation Test - GPT-4o-mini 단일 모델 테스트
+ */
+
+// import CaseValidator from './src/gemini-integration/caseValidator.js';
+// Gemini 서비스 비활성화로 인해 주석 처리됨
+
+console.log('⚠️ Gemini 서비스가 비활성화되어 검증 테스트를 사용할 수 없습니다.');
+console.log('GPT-4o-mini 단일 모델로 전환되었습니다.');
+
+// 기존 검증 로직은 비활성화됨
+// console.log('\n2️⃣ Gemini API 연결 테스트...');
 
 async function simpleTest() {
     console.log('🧪 CaseValidator 간단 테스트 시작...');

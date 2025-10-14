@@ -1,0 +1,156 @@
+{
+  "timestamp": "2025-10-07T12:56:45.277Z",
+  "testType": "comprehensive_real_case_test",
+  "performanceMetrics": {
+    "totalProcessingTime": 398,
+    "totalDocuments": 10,
+    "totalNoiseReduced": 755.3091933398343,
+    "hospitalPatterns": {},
+    "averageNoiseReduction": 75.53091933398343
+  },
+  "testResults": [
+    {
+      "testType": "templateCacheAlone",
+      "results": [
+        {
+          "file": "Case1.txt",
+          "hospital": "미감지",
+          "originalLength": 40502,
+          "cleanedLength": 94,
+          "noiseReduction": 99.77,
+          "processingTime": 51,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case10.txt",
+          "hospital": "미감지",
+          "originalLength": 88611,
+          "cleanedLength": 161,
+          "noiseReduction": 99.82,
+          "processingTime": 26,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case11.txt",
+          "hospital": "미감지",
+          "originalLength": 182368,
+          "cleanedLength": 154,
+          "noiseReduction": 99.92,
+          "processingTime": 149,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case12.txt",
+          "hospital": "미감지",
+          "originalLength": 63642,
+          "cleanedLength": 4457,
+          "noiseReduction": 93,
+          "processingTime": 108,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case13.txt",
+          "hospital": "미감지",
+          "originalLength": 73863,
+          "cleanedLength": 4803,
+          "noiseReduction": 93.5,
+          "processingTime": 18,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case14.txt",
+          "hospital": "미감지",
+          "originalLength": 50676,
+          "cleanedLength": 102,
+          "noiseReduction": 99.8,
+          "processingTime": 27,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case14_vnexsus.txt",
+          "hospital": "미감지",
+          "originalLength": 1509,
+          "cleanedLength": 1329,
+          "noiseReduction": 11.93,
+          "processingTime": 2,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case2.txt",
+          "hospital": "미감지",
+          "originalLength": 22902,
+          "cleanedLength": 3887,
+          "noiseReduction": 83.03,
+          "processingTime": 6,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case2_vnexsus.txt",
+          "hospital": "미감지",
+          "originalLength": 2057,
+          "cleanedLength": 1805,
+          "noiseReduction": 12.25,
+          "processingTime": 6,
+          "patternsFound": 0
+        },
+        {
+          "file": "Case3.txt",
+          "hospital": "미감지",
+          "originalLength": 21564,
+          "cleanedLength": 8128,
+          "noiseReduction": 62.31,
+          "processingTime": 5,
+          "patternsFound": 0
+        }
+      ]
+    },
+    {
+      "testType": "preprocessorIntegration",
+      "withoutCache": [
+        {
+          "file": "Case1.txt",
+          "processingTime": 118,
+          "sectionsCount": 0,
+          "success": true
+        },
+        {
+          "file": "Case10.txt",
+          "processingTime": 63,
+          "sectionsCount": 0,
+          "success": true
+        },
+        {
+          "file": "Case11.txt",
+          "processingTime": 106,
+          "sectionsCount": 0,
+          "success": true
+        }
+      ],
+      "withCache": [
+        {
+          "file": "Case1.txt",
+          "processingTime": 8,
+          "sectionsCount": 0,
+          "success": true
+        },
+        {
+          "file": "Case10.txt",
+          "processingTime": 16,
+          "sectionsCount": 0,
+          "success": true
+        },
+        {
+          "file": "Case11.txt",
+          "processingTime": 102,
+          "sectionsCount": 0,
+          "success": true
+        }
+      ]
+    }
+  ],
+  "conclusion": {
+    "successRate": "100.0",
+    "averageNoiseReduction": "75.53",
+    "hospitalDetectionRate": "0.0"
+  }
+}

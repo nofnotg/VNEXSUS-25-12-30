@@ -5,25 +5,21 @@
  * "의료 유전자"로 분할하고 앵커 정보를 추출합니다.
  */
 
-import axios from 'axios';
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import path from 'path';
+const axios = require('axios');
+const fs = require('fs').promises;
+const EnhancedContextualPromptBuilder = require('./enhancedContextualPromptBuilder');
+require('dotenv').config();
 
-// 환경 변수 로드
-dotenv.config();
-
-// __dirname 설정 (ESM)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export class MedicalGeneExtractor {
+class MedicalGeneExtractor {
   constructor() {
     // OpenAI API 설정
     this.apiKey = process.env.OPENAI_API_KEY;
     this.apiUrl = 'https://api.openai.com/v1/chat/completions';
-    this.model = 'gpt-4o';
+    this.model = 'gpt-4o-mini'; // GPT-4o Mini로 변경
     this.maxTokens = 4096;
+    
+    // 향상된 문맥 인식 프롬프트 빌더 초기화
+    this.contextualPromptBuilder = new EnhancedContextualPromptBuilder();
     
     // DNA 추출 통계
     this.stats = {
@@ -59,8 +55,8 @@ export class MedicalGeneExtractor {
         throw new Error('OPENAI_API_KEY 환경변수가 설정되지 않았습니다.');
       }
 
-      // DNA 추출 프롬프트 생성
-      const prompt = this.buildDNAExtractionPrompt(rawText, options);
+      // 프롬프트 생성 (향상된 문맥 인식 버전 사용)
+      const prompt = this.contextualPromptBuilder.buildEnhancedDNAExtractionPrompt(rawText, options);
       
       // OpenAI API 호출
       const response = await this.callOpenAIApi(prompt);
@@ -374,8 +370,10 @@ ${rawText}
   }
 }
 
+module.exports = MedicalGeneExtractor;
+
 // 직접 실행 시 테스트
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (require.main === module) {
   const extractor = new MedicalGeneExtractor();
   extractor.test().catch(console.error);
-} 
+}

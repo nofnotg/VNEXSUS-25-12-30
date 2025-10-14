@@ -1,0 +1,93 @@
+{
+  "genes": [
+    {
+      "id": "gene_001",
+      "content": "환자 김명희는 2025년 2월 17일 어지럼증과 두통을 주소로 한림대학교 강남성심병원 신경외과에 내원하였으며, 이는 2025년 1월부터 시작된 증상으로, 특히 호수공원에서 걷다가 쓰러진 경험이 있었다.",
+      "anchors": {
+        "temporal": "2025-02-17 (증상 발현 1개월 후 내원)",
+        "spatial": "한림대학교 강남성심병원 신경외과 (초진 및 진단을 위한 장소)",
+        "medical": "어지럼증 및 두통 주소 초진 (신경학적 검사 필요)",
+        "causal": "1개월간 지속된 증상으로 인한 의료진 상담 필요성 대두"
+      },
+      "confidence": 0.95,
+      "type": "symptom",
+      "connections": [
+        {
+          "target": "gene_002",
+          "relationship": "직접적 연결",
+          "description": "초진 후 MRI 검사 진행"
+        }
+      ],
+      "narrative_context": "환자의 의료 여정의 시작점으로, 후속 진단 과정의 근거가 되는 핵심 증상 제시",
+      "extracted_at": "2025-10-09T15:30:49.849Z"
+    },
+    {
+      "id": "gene_002",
+      "content": "2025년 2월 17일, 환자는 신경외과에서 MRI 검사를 받았으며, 검사 결과 백질 고신호 강도와 미세출혈이 발견되었다.",
+      "anchors": {
+        "temporal": "2025-02-17 (초진 당일 검사 진행)",
+        "spatial": "한림대학교 강남성심병원 MRI실 (진단을 위한 검사 장소)",
+        "medical": "MRI 검사 결과 (진단적 정보 제공)",
+        "causal": "어지럼증과 두통의 원인 규명을 위한 필수 검사"
+      },
+      "confidence": 0.9,
+      "type": "diagnosis",
+      "connections": [
+        {
+          "target": "gene_003",
+          "relationship": "맥락적 연결",
+          "description": "MRI 결과에 따른 치료 계획 수립"
+        }
+      ],
+      "narrative_context": "진단적 검사 결과로, 환자의 상태를 이해하고 치료 방향을 설정하는 데 중요한 역할",
+      "extracted_at": "2025-10-09T15:30:49.865Z"
+    },
+    {
+      "id": "gene_003",
+      "content": "2025년 2월 18일, 환자는 MRI 검사 결과를 바탕으로 약물 치료를 시작하였으며, 증상 개선을 위한 지속적인 관리가 필요하다는 진단을 받았다.",
+      "anchors": {
+        "temporal": "2025-02-18 (MRI 결과에 따른 치료 시작)",
+        "spatial": "한림대학교 강남성심병원 (치료 및 관리 장소)",
+        "medical": "약물 치료 시작 (치료 계획 수립)",
+        "causal": "MRI 결과에 따른 치료 필요성 대두"
+      },
+      "confidence": 0.92,
+      "type": "treatment",
+      "connections": [
+        {
+          "target": "gene_001",
+          "relationship": "의미적 연결",
+          "description": "초기 증상에 대한 치료 반응 관찰"
+        }
+      ],
+      "narrative_context": "치료 과정의 중요한 단계로, 환자의 상태 개선을 위한 지속적인 관리 필요성 강조",
+      "extracted_at": "2025-10-09T15:30:49.865Z"
+    }
+  ],
+  "extraction_summary": {
+    "total_genes": 3,
+    "average_confidence": 0.92,
+    "narrative_coherence": 0.93,
+    "contextual_depth": "high",
+    "temporal_coverage": "2025-01-01 ~ 2025-02-18",
+    "spatial_coverage": [
+      "한림대학교 강남성심병원",
+      "MRI실"
+    ],
+    "medical_events": [
+      "초진",
+      "진단",
+      "치료"
+    ],
+    "causal_chains": [
+      {
+        "sequence": [
+          "gene_001",
+          "gene_002",
+          "gene_003"
+        ],
+        "description": "증상 발현 → 진단 → 치료의 자연스러운 의료 과정"
+      }
+    ]
+  }
+}

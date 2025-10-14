@@ -1269,11 +1269,7 @@ async function handleCreateSummary() {
             aiReportSection.scrollIntoView({ behavior: 'smooth' });
           }
           
-          // 채팅 섹션 활성화
-          const aiChatSection = document.getElementById('ai-chat-section');
-          if (aiChatSection) {
-            aiChatSection.classList.remove('d-none');
-          }
+
           
           // 타임라인 데이터 추출 및 표시
           const timelineData = extractTimelineFromReport(data.report);

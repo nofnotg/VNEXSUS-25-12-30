@@ -5,7 +5,7 @@
  * 완전한 의료문서 분석 파이프라인을 구축합니다.
  */
 
-import { MedicalGeneExtractor } from './geneExtractor.js';
+import { MedicalGeneExtractor } from './geneExtractor.cjs';
 import { LayoutReconstructor } from './layoutReconstructor.js';
 import { NestedDateResolver } from './nestedDateResolver.js';
 import { CausalNetworkBuilder } from './causalNetworkBuilder.js';
@@ -600,4 +600,4 @@ export class VisionDNABridge {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const bridge = new VisionDNABridge();
   bridge.test().catch(console.error);
-} 
+}

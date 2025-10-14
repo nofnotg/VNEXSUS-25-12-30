@@ -1,0 +1,175 @@
+단계별 실행 방안
+1) 적응형 선행귀속(Adaptive Leading Attachment)
+
+아이디어: 날짜 앞 라인들의 앵커 점수(날짜·기관·행위/트렁크 키워드·양식 라벨), 캐시 신뢰도, 문서 길이/밀도를 조합해 선행 범위를 0~5줄로 동적으로 결정.
+
+// src/segment/adaptiveLeading.ts
+import { DATE, HOSP, ACT } from "./anchors";
+import { trunkScore } from "../rules/trunkClassifier"; // 암/뇌/심장/사망/수술/MRI 신호 점수화
+import { getTemplateConfidence } from "../template/cache"; // 병원별 템플릿 신뢰도(0~1)
+
+type Ctx = { hospitalCanon?: string; templateId?: string; };
+const clamp = (v:number, a:number, b:number)=> Math.max(a, Math.min(b, v));
+
+function anchorScore(s:string){
+  let s1 = (DATE.test(s)?3:0) + (HOSP.test(s)?1:0) + (ACT.test(s)?2:0);
+  s1 += trunkScore(s); // 암/뇌/심장/사망/수술/MRI 키워드 가중 (0~2)
+  return s1;
+}
+
+/** 날짜라인 index 앞에서 최대 몇 줄을 포함할지 동적으로 계산 */
+export function leadingWindowFor(segment:string[], dateIdx:number, ctx:Ctx){
+  const base = 2;
+  const tplConf = getTemplateConfidence(ctx.templateId) ?? 0.5;  // 0~1
+  const maxCap = 5; // 절대 상한
+
+  // 직전 1~5줄의 패턴 강도 평균
+  const lines = [];
+  for (let k=1;k<=5;k++){
+    const i = dateIdx - k; if (i<0) break;
+    lines.push(anchorScore(segment[i]));
+  }
+  const avg = lines.length ? lines.reduce((a,b)=>a+b,0)/lines.length : 0;
+
+  // 가중: 템플릿 신뢰도가 높으면 “패턴 일관성”이 있으므로 선행 확대에 우호적
+  // 트렁크 신호가 강하면 선행을 더 공격적으로 확대
+  const expand = Math.round(avg/2 + tplConf*2);
+  return clamp(base + expand, 0, maxCap);
+}
+
+/** 적응형 선행귀속 적용 */
+export function sliceWithAdaptiveLeading(segment:string[], dateIdx:number, ctx:Ctx){
+  const k = leadingWindowFor(segment, dateIdx, ctx);
+  const start = Math.max(0, dateIdx - k);
+  return segment.slice(start);
+}
+
+
+“2줄을 주의깊게 보되 3줄 이상도 고려”를 룰로 자동화: 고정값 대신 앵커강도 + 템플릿 신뢰도로 선행 폭을 결정.
+
+2) Q2 명확화 — 병원별 템플릿 캐시(Boilerplate Cache)
+
+개념: 같은 병원/양식의 문서에는 동일/유사 헤더·푸터·양식 라벨이 반복됩니다. 이 패턴을 캐싱해서 다음 문서부터 즉시 제거/마스킹합니다.
+
+// src/template/cache.ts
+type TemplateSig = { header:string[]; footer:string[]; fixed:string[] };
+const _cache = new Map<string, { sig:TemplateSig; conf:number; updatedAt:number }>();
+
+export function updateTemplate(templateId:string, sig:TemplateSig, quality:number){
+  const conf = Math.min(1, Math.max(0, quality));
+  _cache.set(templateId, { sig, conf, updatedAt: Date.now() });
+}
+export function getTemplate(templateId?:string){ return templateId ? _cache.get(templateId)?.sig : undefined; }
+export function getTemplateConfidence(templateId?:string){ return templateId ? (_cache.get(templateId)?.conf ?? 0) : 0; }
+
+/** 병원/양식 키 생성: 병원 Canon + 서식 제목 등 */
+export function inferTemplateId(hospitalCanon?:string, docTitle?:string){
+  return [hospitalCanon||"UNKNOWN", docTitle||"GEN"].join("#");
+}
+
+
+어떻게 쓰나요?
+
+초기 배치에서 layoutMiner로 헤더/푸터/고정 라벨을 뽑아 updateTemplate() 호출(정확도 기반 conf 부여).
+
+이후 같은 병원·양식 문서가 들어오면 getTemplate()로 불러와 즉시 제거/마스킹 → 노이즈 대폭 감소, 선행귀속/세그먼트 품질 증가.
+
+검토자가 “맞다/아니다” 한 클릭 피드백 → conf 업데이트.
+
+3) 트렁크(암/뇌/심장/사망/수술/MRI) 우선 감시 + 선행귀속·링크 가중
+
+핵심: 트렁크 신호가 있으면 선행귀속을 공격적으로 확대하고(최대 5줄), 링킹 윈도우/가중치를 상승.
+
+// src/rules/trunkClassifier.ts
+export function trunkScore(s:string){ // 0~2
+  if (/(사망|사체|사인)/.test(s)) return 2;
+  if (/(C\d{2}|암|항암|종양|biopsy)/i.test(s)) return 2;
+  if (/(뇌졸중|중풍|뇌경색|I6\d)/.test(s)) return 2;
+  if (/(협심증|심근경색|스텐트|I2\d)/.test(s)) return 2;
+  if (/(수술|절제|봉합|관삽입|op\b|OR\b)/i.test(s)) return 1;
+  if (/(MRI|Brain MRI)/i.test(s)) return 1;
+  return 0;
+}
+
+# config/linking.yml (가중/윈도우 상승)
+windows:
+  suspect_to_test_days: 14
+  test_to_treat_days: 30
+  treat_to_follow_days: 180
+boost:
+  trunk:
+    CANCER: { test_to_treat_days: +10, weight: +0.3 }
+    NEURO:  { suspect_to_test_days: +7,  weight: +0.2 }
+    CARDIO: { test_to_treat_days: +7,   weight: +0.2 }
+    DEATH:  { follow_to_close_days: +30, weight: +0.5 }
+    SURGERY:{ treat_to_follow_days: +30, weight: +0.2 }
+    MRI:    { suspect_to_test_days: +7,  weight: +0.1 }
+
+
+룰엔진은 트렁크가 감지되면 상기의 부스트를 실시간 적용(코드 변경 없이 YAML 수정으로 튜닝).
+
+4) 전처리AI 프롬프트 보강(룰엔진 선도 지원)
+
+삭제·정렬·병합 금지 유지.
+
+각 이벤트에 raw + canonical 후보 0~3개 + spans 제공.
+
+트렁크 후보(암/뇌/심장/사망/수술/MRI) 추정 태그만 붙임(결정은 룰엔진).
+
+[SYSTEM]
+- 역할: 의료문서 라인 배열을 세그먼트/태깅하고, 룰엔진이 사용할 후보와 근거(spans)를 제공.
+- 금지: 삭제/정렬/병합/요약/판단.
+- 요구: 각 필드 raw 유지 + canonical 후보(0~3) + spans(page:line 또는 char-index).
+- 트렁크 신호(암/뇌/심장/사망/수술/MRI)는 "trunkHint" 배열에 기록(결정은 룰엔진).
+- 출력: Data Contract v1(JSON)만.
+
+[USER]
+입력 라인(보일러플레이트 제거/PII 마스킹 후):
+<<<
+{{lines}}
+>>>
+지침:
+1) 날짜·기관·행위 앵커 기반 세그먼트. 날짜 앞뒤 모두 spans로 근거 표시.
+2) 각 항목 canonical 후보 0~3개, 확신 없으면 null.
+3) notes는 [LOW-LINK]/[ADMIN]/[CONTEXT] 태그만 부여(삭제 금지).
+4) trunkHint에 (CANCER/NEURO/CARDIO/DEATH/SURGERY/MRI) 후보를 기록.
+
+5) 파이프라인 통합(현 흐름 유지)
+
+파일업로드 → OCR → (템플릿 캐시 기반) 보일러플레이트 제거 → 세그먼트/적응형 선행귀속 → 전처리AI(JSON 후보·근거) → 룰엔진(canonicalize/link/episode; trunk 부스트 적용) → 보고서AI(9항목)
+
+Feature Flags로 점진 활성화:
+
+template_cache, adaptive_leading, trunk_boost
+
+// src/index.ts (개념 흐름만)
+const tplId = inferTemplateId(hospitalCanon, docTitle);
+const bp = getTemplate(tplId) ?? mineBoilerplate(pages); // 최초라면 채굴
+const pages2 = stripBoilerplate(pages, bp);
+const lines = scrubMinimal(pages2.flat());
+const segs  = splitSegments(lines);
+const blocks= segs.flatMap(seg => segToDateBlocksAdaptive(seg, {templateId: tplId}));
+
+const preDoc = await callPreAI(blocks); // 삭제/정렬/병합 금지
+const ruled  = runRuleEngine(preDoc, { linkingConfig, trunkBoost:true });
+const md     = await report9(ruled, { episodeIndex:true, linksTail:true });
+
+고려사항 맵
+
+재현성: YAML 파라미터/프롬프트 버전 관리 → 회귀세트 30문서로 품질 모니터링.
+
+성능: 템플릿 캐시는 병원별로 누적 정확도(conf) 계산, conf<0.4는 자동 비활성화.
+
+안정성: 플래그 OFF 시 기존 결과 바이트 동일; ON은 보고서 상단에 “(enhanced)” 마크로 구분.
+
+객관성: 트렁크도 “표현만 강화”—판단·권고 없음, 근거 spans로 감사추적.
+
+실행 리소스(붙여쓰기 핀셋)
+
+적응형 선행귀속: src/segment/adaptiveLeading.ts (위 코드)
+
+템플릿 캐시: src/template/cache.ts (위 코드)
+
+트렁크 스코어/부스트: src/rules/trunkClassifier.ts + config/linking.yml (위 예시)
+
+프롬프트 파일: prompts/PRE_AI_SYSTEM@v2.txt, prompts/PRE_AI_USER@v2.hbs (위 지침)

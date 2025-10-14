@@ -3,7 +3,17 @@
  * CaseValidator의 runFullValidation을 직접 호출
  */
 
-import CaseValidator from './src/gemini-integration/caseValidator.js';
+/**
+ * Full Validation Test - GPT-4o-mini 단일 모델 테스트
+ */
+
+// import CaseValidator from './src/gemini-integration/caseValidator.js';
+// Gemini 서비스 비활성화로 인해 주석 처리됨
+
+console.log('⚠️ Gemini 서비스가 비활성화되어 전체 검증 테스트를 사용할 수 없습니다.');
+console.log('GPT-4o-mini 단일 모델로 전환되었습니다.');
+
+// 기존 검증 로직은 비활성화됨
 
 async function runFullValidation() {
     console.log('🚀 Full Validation 시작...');

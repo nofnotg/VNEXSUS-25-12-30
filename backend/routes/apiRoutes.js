@@ -3,7 +3,8 @@ import { reportHandler } from '../../dist/controllers/reportController.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import openaiService from '../../src/services/openaiService.js';
+// import openaiService from '../../src/services/openaiService.js'; // 비활성화됨
+import { GPT4oMiniEnhancedService } from '../../src/services/gpt4oMiniEnhancedService.js';
 import { MedicalTimelineGenerator } from '../../src/timeline/MedicalTimelineGenerator.js';
 
 // ES 모듈에서 __dirname 대체
@@ -11,6 +12,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = express.Router();
+
+// GPT-4o-mini 서비스 인스턴스 생성
+const gpt4oMiniService = new GPT4oMiniEnhancedService();
 
 // generateSimplifiedReport 함수는 파일 하단에 정의됨
 
@@ -120,11 +124,22 @@ router.post('/continue-chat', async (req, res) => {
     messages.push({ role: 'user', content: message });
     
     try {
-      // OpenAI API 호출하여 응답 생성
-      console.log('🤖 OpenAI API를 통한 대화 응답 생성 중...');
-      const aiResponse = await openaiService.generateChatResponse(messages, {
-        patientInfo: sessionData.patientInfo
+      // GPT-4o-mini API 호출하여 응답 생성
+      console.log('🤖 GPT-4o-mini API를 통한 대화 응답 생성 중...');
+      
+      // GPT-4o-mini 서비스를 사용하여 채팅 응답 생성
+      const chatInput = {
+        ocrText: message,
+        patientInfo: sessionData.patientInfo,
+        messages: messages
+      };
+      
+      const aiResult = await gpt4oMiniService.generateMedicalReport(chatInput, {
+        mode: 'chat',
+        temperature: 0.7
       });
+      
+      const aiResponse = aiResult.report || aiResult.response || '응답을 생성할 수 없습니다.';
       
       // 응답 저장
       messages.push({ role: 'assistant', content: aiResponse });
@@ -136,7 +151,7 @@ router.post('/continue-chat', async (req, res) => {
       
       res.json({ success: true, response: aiResponse, messages });
     } catch (apiError) {
-      console.error('⚠️ OpenAI API 호출 오류:', apiError);
+      console.error('⚠️ GPT-4o-mini API 호출 오류:', apiError);
       
       if (apiError.response) {
         console.error('📊 응답 상태:', apiError.response.status);
@@ -324,50 +339,75 @@ function applyRetainFiltering(text, retainKeywords) {
 /**
  * 단순화된 보고서 생성 함수 (폴백용)
  * @param {string} text 입력 텍스트
- * @returns {Object} 단순화된 보고서 객체
+ * @returns {string} 프론트엔드 호환 보고서 텍스트
  */
 function generateSimplifiedReport(text) {
   if (!text || typeof text !== 'string') {
-    return {
-      summary: '입력 텍스트가 없습니다.',
-      keyPoints: [],
-      wordCount: 0,
-      generatedAt: new Date().toISOString()
-    };
+    return `=== 의료 보고서 (단순화 버전) ===
+
+[시스템 알림] 입력 텍스트가 없어 보고서를 생성할 수 없습니다.
+
+생성 시간: ${new Date().toLocaleString('ko-KR')}
+처리 방식: 단순화된 폴백 처리`;
   }
 
   const lines = text.split('\n').filter(line => line.trim() !== '');
   const wordCount = text.split(/\s+/).filter(word => word.trim() !== '').length;
   
-  // 간단한 키워드 추출
+  // 간단한 키워드 추출 및 분석
   const medicalKeywords = [
     '진단', '치료', '검사', '수술', '처방', '증상', '질병', '환자',
-    '의료', '병원', '클리닉', '약물', '투약', '처치', '소견', '판독'
+    '의료', '병원', '클리닉', '약물', '투약', '처치', '소견', '판독',
+    '입원', '외래', '응급', '수술', '재활', '통증', '발열', '혈압'
   ];
   
   const keyPoints = [];
+  const medicalContent = [];
+  
   lines.forEach((line, index) => {
     const hasKeyword = medicalKeywords.some(keyword => line.includes(keyword));
-    if (hasKeyword && keyPoints.length < 5) {
-      keyPoints.push({
-        line: index + 1,
-        content: line.substring(0, 100) + (line.length > 100 ? '...' : ''),
-        type: 'medical_content'
-      });
+    if (hasKeyword) {
+      if (keyPoints.length < 5) {
+        keyPoints.push({
+          line: index + 1,
+          content: line.trim(),
+          type: 'medical_content'
+        });
+      }
+      medicalContent.push(line.trim());
     }
   });
   
-  // 기본 요약 생성
-  const summary = `문서 분석 결과: 총 ${lines.length}줄, ${wordCount}단어로 구성된 의료 문서입니다. ${keyPoints.length}개의 주요 의료 관련 내용이 식별되었습니다.`;
-  
-  return {
-    summary,
-    keyPoints,
-    wordCount,
-    lineCount: lines.length,
-    generatedAt: new Date().toISOString(),
-    type: 'simplified_fallback'
-  };
+  // 프론트엔드 호환 보고서 형식으로 생성
+  const reportText = `=== 의료 보고서 (단순화 버전) ===
+
+[시스템 알림] AI 서비스 연결 실패로 인해 단순화된 보고서를 제공합니다.
+
+■ 문서 기본 정보
+- 총 라인 수: ${lines.length}줄
+- 총 단어 수: ${wordCount}단어
+- 의료 관련 내용: ${medicalContent.length}개 항목 식별
+
+■ 주요 의료 내용 (최대 5개)
+${keyPoints.length > 0 ? 
+  keyPoints.map((point, idx) => `${idx + 1}. ${point.content}`).join('\n') :
+  '의료 관련 키워드가 식별되지 않았습니다.'
+}
+
+■ 전체 문서 내용 요약
+${medicalContent.length > 0 ? 
+  `의료 문서로 판단되며, ${medicalContent.length}개의 의료 관련 내용이 포함되어 있습니다.` :
+  '일반 문서로 판단되며, 특별한 의료 내용이 식별되지 않았습니다.'
+}
+
+■ 처리 정보
+- 생성 시간: ${new Date().toLocaleString('ko-KR')}
+- 처리 방식: 단순화된 폴백 처리 (AI 서비스 미사용)
+- 상태: 기본 텍스트 분석 완료
+
+[참고] 정확한 의료 분석을 위해서는 AI 서비스 연결이 필요합니다.`;
+
+  return reportText;
 }
 
 export default router;

@@ -410,22 +410,25 @@ export async function extractTextFromImage(imageBuffer) {
     };
     
     // 성능 로깅
-    logOcrComplete(SERVICE_NAME, 'image_buffer', perfData, {
-      processingTimeSeconds: perfData.processingTime,
-      textLength: extractedText.length,
-      confidence: confidence
-    });
-    
+    if (perfData && perfData.startTime) {
+      logOcrComplete(perfData, {
+        text: extractedText,
+        textLength: extractedText.length,
+        confidence: confidence
+      });
+    }
+
     console.log(`[${SERVICE_NAME}] 이미지 OCR 처리 완료`, {
-      processingTimeSeconds: perfData.processingTime,
       textLength: extractedText.length,
       confidence: confidence
     });
-    
+
     return result_data;
     
   } catch (error) {
-    logOcrError(SERVICE_NAME, 'image_buffer', perfData, error);
+    if (perfData && perfData.startTime) {
+      logOcrError(perfData, error);
+    }
     console.error(`[${SERVICE_NAME}] 이미지 OCR 처리 실패:`, error.message);
     throw new Error(`이미지 OCR 처리 실패: ${error.message}`);
   }

@@ -1,6 +1,6 @@
 /**
- * AI 서비스 모듈
- * 여러 AI 제공자(OpenAI, Anthropic 등)에 대한 통합된 인터페이스 제공
+ * AI 서비스 모듈 - GPT-4o-mini 단일 모델 전용
+ * GPT-4o-mini만 사용하도록 단순화된 인터페이스 제공
  */
 
 import axios from 'axios';
@@ -21,30 +21,32 @@ dotenv.config();
 
 class AIService {
   constructor(options = {}) {
-    // 설정 옵션
+    // 설정 옵션 - GPT-4o-mini 단일 모델로 고정
     this.options = {
-      defaultProvider: options.defaultProvider || 'openai',
-      defaultModel: options.defaultModel || 'gpt-4o-mini',
+      defaultProvider: 'openai', // 고정
+      defaultModel: 'gpt-4o-mini', // 고정
       logDirectory: options.logDirectory || path.join(__dirname, '../../logs/ai'),
       maxRetries: options.maxRetries || 3,
       timeout: options.timeout || 30000, // 30초
       ...options
     };
     
-    // API 키 설정
+    // API 키 설정 - OpenAI만 사용
     this.apiKeys = {
-      openai: process.env.OPENAI_API_KEY,
-      anthropic: process.env.ANTHROPIC_API_KEY,
-      azure: process.env.AZURE_OPENAI_API_KEY,
-      cohere: process.env.COHERE_API_KEY
+      openai: process.env.OPENAI_API_KEY
+      // 다른 제공자들은 비활성화됨
+      // anthropic: process.env.ANTHROPIC_API_KEY,
+      // azure: process.env.AZURE_OPENAI_API_KEY,
+      // cohere: process.env.COHERE_API_KEY
     };
     
-    // 제공자별 기본 모델 설정
+    // 기본 모델 설정 - GPT-4o-mini만 사용
     this.defaultModels = {
-      openai: 'gpt-4o-mini',
-      anthropic: 'claude-3-haiku-20240307',
-      azure: 'gpt-35-turbo',
-      cohere: 'command'
+      openai: 'gpt-4o-mini'
+      // 다른 제공자들은 비활성화됨
+      // anthropic: 'claude-3-haiku-20240307',
+      // azure: 'gpt-35-turbo',
+      // cohere: 'command'
     };
     
     // 제공자별 엔드포인트 설정

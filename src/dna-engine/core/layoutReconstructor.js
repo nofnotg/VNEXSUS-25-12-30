@@ -5,7 +5,7 @@
  * 시각적 구조를 복원하고 의미 있는 컨텍스트를 추출합니다.
  */
 
-import { MedicalGeneExtractor } from './geneExtractor.js';
+import { MedicalGeneExtractor } from './geneExtractor.cjs';
 
 export class LayoutReconstructor {
   constructor() {
@@ -518,4 +518,4 @@ export class LayoutReconstructor {
     complexity += elements.lists.length * 0.1;
     return Math.min(complexity, 1.0);
   }
-} 
+}

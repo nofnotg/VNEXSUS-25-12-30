@@ -1,0 +1,364 @@
+{
+  "testSuite": "Phase 2 AI 프롬프트 보강 시스템 통합 테스트",
+  "version": "2.0.0",
+  "timestamp": "2025-10-07T13:12:19.291Z",
+  "testCases": 7,
+  "results": {
+    "promptEnhancer": {
+      "totalTests": 7,
+      "successfulTests": 7,
+      "averageImprovementScore": 27.428571428571427,
+      "averageProcessingTime": 17.428571428571427,
+      "testDetails": [
+        {
+          "testCase": "Case1.txt",
+          "success": true,
+          "improvementScore": 34,
+          "processingTime": 38,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "Case10.txt",
+          "success": true,
+          "improvementScore": 34,
+          "processingTime": 21,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "Case10_report.txt",
+          "success": true,
+          "improvementScore": 25,
+          "processingTime": 2,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "Case11.txt",
+          "success": true,
+          "improvementScore": 34,
+          "processingTime": 54,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "Case11_report.txt",
+          "success": true,
+          "improvementScore": 23,
+          "processingTime": 5,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "synthetic_simple.txt",
+          "success": true,
+          "improvementScore": 19,
+          "processingTime": 1,
+          "recommendedModel": "gpt-4o-mini"
+        },
+        {
+          "testCase": "synthetic_complex.txt",
+          "success": true,
+          "improvementScore": 23,
+          "processingTime": 1,
+          "recommendedModel": "gpt-4o-mini"
+        }
+      ],
+      "successRate": 100
+    },
+    "contextAnalyzer": {
+      "totalTests": 7,
+      "successfulTests": 7,
+      "averageContextScore": 61.379999999999995,
+      "averageProcessingTime": 20.428571428571427,
+      "documentTypeAccuracy": 100,
+      "testDetails": [
+        {
+          "testCase": "Case1.txt",
+          "success": true,
+          "contextScore": 80.1,
+          "documentType": "discharge_summary",
+          "processingTime": 40
+        },
+        {
+          "testCase": "Case10.txt",
+          "success": true,
+          "contextScore": 84,
+          "documentType": "discharge_summary",
+          "processingTime": 31
+        },
+        {
+          "testCase": "Case10_report.txt",
+          "success": true,
+          "contextScore": 58.63,
+          "documentType": "lab_report",
+          "processingTime": 3
+        },
+        {
+          "testCase": "Case11.txt",
+          "success": true,
+          "contextScore": 83.8,
+          "documentType": "prescription",
+          "processingTime": 65
+        },
+        {
+          "testCase": "Case11_report.txt",
+          "success": true,
+          "contextScore": 49.7,
+          "documentType": "lab_report",
+          "processingTime": 2
+        },
+        {
+          "testCase": "synthetic_simple.txt",
+          "success": true,
+          "contextScore": 29.25,
+          "documentType": "prescription",
+          "processingTime": 1
+        },
+        {
+          "testCase": "synthetic_complex.txt",
+          "success": true,
+          "contextScore": 44.18,
+          "documentType": "progress_note",
+          "processingTime": 1
+        }
+      ],
+      "successRate": 100
+    },
+    "enhancedPreprocessor": {
+      "totalTests": 7,
+      "successfulTests": 7,
+      "averageImprovementScore": null,
+      "averageProcessingTime": 1204.142857142857,
+      "averageReductionRate": 73.67,
+      "phaseSuccessRates": {
+        "templateCache": 100,
+        "aiProcessing": 100,
+        "postProcessing": 100
+      },
+      "testDetails": [
+        {
+          "testCase": "Case1.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 99.86,
+          "processingTime": 1070,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "Case10.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 99.94,
+          "processingTime": 1058,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "Case10_report.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 97.93,
+          "processingTime": 1107,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "Case11.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 99.97,
+          "processingTime": 1505,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "Case11_report.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 98.15,
+          "processingTime": 1272,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "synthetic_simple.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": -50,
+          "processingTime": 1275,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        },
+        {
+          "testCase": "synthetic_complex.txt",
+          "success": true,
+          "improvementScore": 0,
+          "reductionRate": 69.84,
+          "processingTime": 1142,
+          "phasesCompleted": [
+            "templateCache",
+            "aiProcessing",
+            "postProcessing"
+          ]
+        }
+      ],
+      "successRate": 100
+    },
+    "integration": {},
+    "performance": {
+      "systemStatus": {
+        "version": "2.0.0",
+        "initialized": false,
+        "config": {
+          "enableTemplateCache": true,
+          "enablePromptEnhancement": true,
+          "enableContextAnalysis": true,
+          "fallbackMode": "graceful",
+          "maxRetries": 3,
+          "timeout": 45000
+        },
+        "performanceMetrics": {
+          "totalProcessed": 7,
+          "templateCacheHits": 7,
+          "promptEnhancements": 0,
+          "contextAnalyses": 0,
+          "averageProcessingTime": 1192,
+          "successRate": 100,
+          "errorCount": 0,
+          "improvementScore": null
+        },
+        "timingMetrics": {
+          "templateCache": 393,
+          "contextAnalysis": 290,
+          "promptEnhancement": 0,
+          "aiProcessing": 7136,
+          "postProcessing": 32
+        },
+        "components": {
+          "templateCache": {
+            "initialized": true,
+            "totalHospitals": 4,
+            "totalPatterns": 83,
+            "totalDocumentsProcessed": 11,
+            "cacheDirectory": "C:\\VNEXSUS_Bin\\backend\\backend\\data\\hospital-templates"
+          },
+          "contextAnalyzer": {
+            "version": "2.0.0",
+            "initialized": true,
+            "documentTypes": 6,
+            "patternCount": 9
+          },
+          "promptEnhancer": {
+            "version": "2.0.0",
+            "initialized": true,
+            "templatesLoaded": 3,
+            "medicalTermsCount": 26,
+            "hospitalPatternsCount": 3,
+            "totalEnhancements": 7
+          }
+        }
+      },
+      "performanceReport": {
+        "summary": {
+          "totalProcessed": 7,
+          "successRate": "100.0%",
+          "averageProcessingTime": "1192ms",
+          "averageImprovementScore": "NaN%"
+        },
+        "phasePerformance": {
+          "templateCacheHitRate": "100.0%",
+          "contextAnalysisRate": "0.0%",
+          "promptEnhancementRate": "0.0%"
+        },
+        "timingBreakdown": [
+          {
+            "phase": "templateCache",
+            "averageTime": "56ms"
+          },
+          {
+            "phase": "contextAnalysis",
+            "averageTime": "41ms"
+          },
+          {
+            "phase": "promptEnhancement",
+            "averageTime": "0ms"
+          },
+          {
+            "phase": "aiProcessing",
+            "averageTime": "1019ms"
+          },
+          {
+            "phase": "postProcessing",
+            "averageTime": "5ms"
+          }
+        ]
+      },
+      "componentHealth": {
+        "promptEnhancer": {
+          "version": "2.0.0",
+          "initialized": true,
+          "templatesLoaded": 3,
+          "medicalTermsCount": 26,
+          "hospitalPatternsCount": 3,
+          "totalEnhancements": 7
+        },
+        "contextAnalyzer": {
+          "version": "2.0.0",
+          "initialized": true,
+          "documentTypes": 6,
+          "patternCount": 9
+        }
+      }
+    },
+    "initialization": {
+      "success": false,
+      "components": {
+        "promptEnhancer": true,
+        "contextAnalyzer": true,
+        "enhancedPreprocessor": false
+      },
+      "timestamp": "2025-10-07T13:12:10.526Z"
+    }
+  },
+  "summary": {
+    "overallSuccess": true,
+    "componentResults": {
+      "promptEnhancer": {
+        "successRate": "100.0%",
+        "averageProcessingTime": "17ms",
+        "totalTests": 7
+      },
+      "contextAnalyzer": {
+        "successRate": "100.0%",
+        "averageProcessingTime": "20ms",
+        "totalTests": 7
+      },
+      "enhancedPreprocessor": {
+        "successRate": "100.0%",
+        "averageProcessingTime": "1204ms",
+        "totalTests": 7
+      }
+    },
+    "performanceMetrics": {
+      "averageReduction": "73.7%"
+    },
+    "issues": []
+  },
+  "recommendations": []
+}

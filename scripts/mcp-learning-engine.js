@@ -256,7 +256,7 @@ class MCPLearningEngine {
         
         try {
             // 모델 기반 처리 요청
-            const response = await fetch(`${this.baseURL}/api/mcp-processing`, {
+            const response = await fetch(`${this.baseURL}/api/alp-processing`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
