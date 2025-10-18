@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VNEXSUS 파이프라인 심층 피드백 리포트</title>
+  <style>
+    :root { --bg:#0f172a; --panel:#0b1324; --text:#e5e7eb; --muted:#94a3b8; --accent:#60a5fa; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family: Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 56px; }
+    header { padding: 20px 22px; background: #0b1220; border: 1px solid #1e293b; border-radius: 12px; }
+    h1 { margin: 0 0 6px; font-size: 22px; }
+    .sub { color: var(--muted); font-size: 13px; }
+    section { margin-top: 16px; padding: 16px 18px; background: var(--panel); border: 1px solid #1e293b; border-radius: 12px; }
+    h2 { margin: 0 0 10px; font-size: 18px; }
+    h3 { margin: 14px 0 8px; font-size: 16px; color: #cbd5e1; }
+    ul { margin: 6px 0 10px 18px; }
+    li { margin: 4px 0; }
+    .bq { padding: 10px 12px; background: #0a101f; border-left: 3px solid var(--accent); border-radius: 8px; color: #cbd5e1; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+    .card { padding: 12px; background: #0c1528; border: 1px solid #1f2937; border-radius: 10px; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color:#d1d5db; }
+    .code { background:#0a101f; border:1px solid #1f2937; border-radius:8px; padding:10px; white-space: pre-wrap; }
+    .foot { margin-top: 12px; color: var(--muted); font-size: 12px; text-align:right; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>VNEXSUS 파이프라인 심층 피드백 리포트</h1>
+      <div class="sub">전처리LLM → 룰엔진 → 보고서LLM · 프롬프트/로직 구조 피드백 · 2025-10-18</div>
+    </header>
+
+    <section>
+      <h2>요약 (Executive Summary)</h2>
+      <div class="bq">
+        현재 파이프라인(파일업로드→OCR→전처리LLM→룰엔진→보고서LLM)은 도메인 적합성이 높습니다. 
+        개선의 초점은 <b>일관 출력(Structured Output)</b>, <b>룰엔진의 기준선 강화</b>, <b>프롬프트의 역할 분리</b>, <b>품질 게이트</b>입니다. 
+        파괴적 재설계(제로베이스)는 선택지로 보되, 우선은 <i>현 파이프라인 위</i>에서 <b>Core Layer</b>를 강화하는 접근이 효율적입니다.
+      </div>
+    </section>
+
+    <section>
+      <h2>현 파이프라인 적합성 평가</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>강점</h3>
+          <ul>
+            <li>의료 특화 날짜 엔진(TextArrayDateController)·Anchoring 로직 보유.</li>
+            <li>프롬프트 라이브러리(질환별 검사규칙·결재용 요약 규칙) 선행 정립.</li>
+            <li>OCR→AI→후처리→보고서의 <b>전형적 도메인 흐름</b>과 일치.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>약점</h3>
+          <ul>
+            <li>LLM 응답의 <b>스키마 강제</b>가 부족해 다운스트림 일관성이 흔들림.</li>
+            <li>룰엔진과 프롬프트 간 <b>역할 중복</b> 구간 존재(질환별 검사셋 적용 위치).</li>
+            <li>품질/오류에 대한 <b>게이트·재시도·폴백</b> 정책 미비.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>기회</h3>
+          <ul>
+            <li>Disclosure(3m/2y/5y)·Disease Rule·Primary/Metastasis를 <b>Core Layer</b>로 고정.</li>
+            <li>LLM은 <b>서술·요약·번역</b>에 집중, 구조·판정은 <b>룰/스키마</b>로 견고화.</li>
+            <li>보고서LLM 뒤에 <b>Final Summary</b>를 자동 삽입해 사용자 가독성 향상.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>프롬프트 구조 피드백</h2>
+      <h3>권고</h3>
+      <ul>
+        <li><b>전처리LLM</b>: 문장 정규화·검사/진단 후보 추출까지. <i>판정</i>은 하지 않음.</li>
+        <li><b>보고서LLM</b>: 이미 정규화된 핵심 필드(JSON)를 입력으로 받아 서술·요약만 수행.</li>
+        <li><b>Final Summary Prompt</b>: 포맷 고정(결재용), 변형 금지. 모델 온도 0.1.</li>
+        <li><b>모든 LLM 호출</b>은 <i>Structured Output</i>을 기본으로 채택(JSON block + text block).</li>
+      </ul>
+      <h3>개선 포인트</h3>
+      <ul>
+        <li>질환별 검사 규칙은 프롬프트 힌트가 아니라 <b>룰엔진 매핑 결과</b>로 제공(필드화).</li>
+        <li>암 원발/전이는 LLM 추론보다는 <b>키워드·조직학·해부학 맵핑</b>으로 선판정 후 라인 고정 출력.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>룰엔진 로직 구성 피드백</h2>
+      <h3>Disclosure Engine</h3>
+      <ul>
+        <li>계약일·윈도우(3m/2y/5y)로 태그→<b>해당/해당없음/위반의심</b> 판정.
+        <div class="mono code">if (window==="3m" && contains([의심,확정,추가검사,입원/수술 필요])) → 해당
+if (window==="2y" && contains([입원,수술])) → 해당
+if (window==="5y" && contains([암,협심증,심근경색])) → 해당
+if (해당 && claim과 인과 키워드 매칭) → 위반의심</div></li>
+        <li><b>판정 설명(Evidence)</b>을 Array로 축적하여 보고서에 연결.</li>
+      </ul>
+      <h3>Disease Rule Mapper</h3>
+      <ul>
+        <li>텍스트에서 <b>검사명·날짜·핵심소견</b> 추출 → 질환군별 필수 필드만 남김.</li>
+        <li>협심증(협착률/TIMI), AMI(Troponin/CK-MB/EKG), 부정맥(EKG/Holter), 뇌혈관(부위/폐색/범위), 암(TNM/병리)을 필드화.</li>
+      </ul>
+      <h3>Primary/Metastasis</h3>
+      <ul>
+        <li>조직학/해부학 키워드로 원발 부위 감지 → 전이 부위 리스트업.</li>
+        <li>문장 고정: <b>분류: ✅ [원발] 원발 + [전이] 전이</b> (없으면 "전이 없음").</li>
+      </ul>
+      <h3>품질 게이트</h3>
+      <ul>
+        <li>각 단계 산출물에 <b>스키마 검사</b>와 <b>재시도/폴백</b>을 도입.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>후처리 로직(제로베이스 검토 제안)</h2>
+      <ul>
+        <li><b>Intake</b>: OCR 정규화(JSON 필드화: exam/date/result/source/hospital).</li>
+        <li><b>Canon</b>: 질환군 매핑·키워드 정규화·숫자 추출.</li>
+        <li><b>Temporal</b>: 날짜 앵커링(기 존재) + 윈도우 태깅(Disclosure).</li>
+        <li><b>Decision</b>: 원발/전이 판정·Disclosure 판정·에비던스 묶기.</li>
+        <li><b>Compose</b>: 보고서LLM(Full) + Final Summary(결재용) 생성.</li>
+        <li><b>Validate</b>: Full/ Summary/ Disclosure 스키마 검사 → 실패 시 폴백(간결 템플릿).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>우선순위 실행안 (파이프라인 유지 전제)</h2>
+      <h3>즉시(1~2주)</h3>
+      <ul>
+        <li>프롬프트 역할 분리: 전처리LLM(추출)·보고서LLM(서술)·FinalSummary(고정양식).</li>
+        <li>Disclosure v1·DiseaseRule v1·Primary/Metastasis v1을 <b>서비스 레이어</b>에 탑재.</li>
+        <li>Structured Output(스키마 검사)을 저장 직전에 적용.</li>
+      </ul>
+      <h3>단기(3~6주)</h3>
+      <ul>
+        <li>질환군 커버리지 확장(협심증·AMI·부정맥·뇌혈관·암 외 항목).</li>
+        <li>Evidence 트레이싱(출처/라인)으로 감사가능성 확보.</li>
+        <li>품질 메트릭 대시보드(정확도·결측률·재시도율).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>리스크 · 완화</h2>
+      <ul>
+        <li><span class="bad">LLM 변동성</span> → 스키마 강제·온도 0.1~0.2·재시도·요약 프롬프트 고정.</li>
+        <li><span class="warn">룰 과적합</span> → 병원별 템플릿을 RAG로 흡수, 룰엔진은 최소 공통핵심 유지.</li>
+        <li><span class="warn">실무 데이터 결측</span> → 템플릿에 <i>미기재</i> 표기, 폴백 텍스트 제공.</li>
+      </ul>
+      <div class="foot">© VNEXSUS · Partner CTO View</div>
+    </section>
+  </div>
+</body>
+</html>

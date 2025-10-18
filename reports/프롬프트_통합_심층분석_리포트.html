@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VNEXSUS 프롬프트 통합 심층분석 리포트</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #0b1324;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --chip: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial; line-height: 1.55; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 56px; }
+    header { padding: 22px 24px; background: linear-gradient(180deg, #0b1220 0%, #0b1324 100%); border: 1px solid #1e293b; border-radius: 14px; }
+    h1 { margin: 0 0 4px; font-size: 24px; font-weight: 700; letter-spacing: 0.2px; }
+    .sub { color: var(--muted); font-size: 13px; }
+    section { margin-top: 18px; padding: 18px 20px; background: var(--panel); border: 1px solid #1e293b; border-radius: 12px; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0.2px; }
+    h3 { margin: 18px 0 8px; font-size: 16px; color: #cbd5e1; }
+    ul { margin: 6px 0 8px 18px; }
+    li { margin: 4px 0; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .card { padding: 12px; background: #0c1528; border: 1px solid #1f2937; border-radius: 10px; }
+    .chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: var(--chip); color: var(--text); font-size: 12px; margin: 2px 4px 2px 0; border: 1px solid #1f2937; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .bq { padding: 12px; background: #0a101f; border-left: 3px solid var(--accent); border-radius: 8px; color: #cbd5e1; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace; font-size: 12px; color: #d1d5db; }
+    .code { background: #0a101f; padding: 10px; border: 1px solid #1f2937; border-radius: 8px; white-space: pre-wrap; }
+    .score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .score .card strong { display: block; font-size: 20px; margin-bottom: 6px; }
+    .foot { margin-top: 18px; font-size: 12px; color: var(--muted); text-align: right; }
+    a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>VNEXSUS 프롬프트 통합 심층분석 리포트</h1>
+      <div class="sub">CEO/CTO 관점의 객관적 평가와 실행 계획 · 2025-10-18</div>
+    </header>
+
+    <section>
+      <h2>요약 (Executive Summary)</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="chip">정렬도(문서↔앱)</div>
+          <p><span class="ok">높음</span> · 프롬프트 기반 보고 규격과 현 파이프라인(OCR→AI→후처리→리포트)이 크게 일치. 다만 고지의무 엔진·질환별 검사규칙의 코드화/자동화가 부족.</p>
+        </div>
+        <div class="card">
+          <div class="chip">현재 운영성</div>
+          <p><span class="ok">운영 가능</span> · 서버 정상, OCR·AI 연계 작동. <span class="warn">테스트/보안/모니터링</span>은 미흡.</p>
+        </div>
+        <div class="card">
+          <div class="chip">실행 난이도</div>
+          <p><span class="warn">중</span> · 규칙 엔진(날짜 윈도우·질환별 검사셋·원발/전이)과 Structured Output 통합이 핵심.</p>
+        </div>
+      </div>
+      <div class="score" style="margin-top:12px;">
+        <div class="card"><strong>86</strong>합치성(문서↔앱)</div>
+        <div class="card"><strong>72</strong>현재 구현성</div>
+        <div class="card"><strong>64</strong>테스트/보안 성숙도</div>
+        <div class="card"><strong>88</strong>발전/혁신 가능성</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>문서 그룹별 핵심 의도</h2>
+      <h3>1) 고지의무 위반 프롬프트 (2문서)</h3>
+      <ul>
+        <li>보험가입일 기준 <b>3개월·2년·5년</b> 윈도우별 자동 분류(의심/확정/입원/수술/중대질환).</li>
+        <li>청구병명과 <b>인과관계</b>가 있는 과거 치료·검사 이력을 추출하고 위반 여부를 표기.</li>
+        <li>Make/Python 등 <b>자동화 시나리오</b>로 바로 적용 가능한 프롬프트 구조 제공.</li>
+      </ul>
+      <h3>2) 손해사정 보고서 프롬프트 (대화형 정의)</h3>
+      <ul>
+        <li>실무 손해사정 관점의 <b>보고 흐름</b>과 항목(진단, 검사, 치료, 기간, 의사소견) 정의.</li>
+        <li><b>입원/통원 구분</b>과 암 특화 항목(조직검사, 보고일, TNM, 원발/전이) 명시.</li>
+      </ul>
+      <h3>3) 질환별 검사결과 규칙 + 최종 요약 규칙</h3>
+      <ul>
+        <li>협심증/AMI/부정맥/뇌혈관/암 등 <b>질환군별 필수 검사셋</b>을 표준화.</li>
+        <li>보고서 마지막에 <b>결재용 요약본</b>을 고정 템플릿으로 자동 생성.</li>
+      </ul>
+      <div class="bq">결론: 문서들은 <b>정형 보고 규격 + 고지의무 로직 + 질환별 검사셋</b>을 조합해 <b>일관된 자동 보고</b>를 지향합니다.</div>
+    </section>
+
+    <section>
+      <h2>현재 앱 상태 진단</h2>
+      <ul>
+        <li><b>서버/파이프라인</b>: Express 서버 정상. Google Vision OCR, GPT-4o Mini 연계, 후처리 파이프라인(날짜/엔티티/리포트 빌더) 가동.</li>
+        <li><b>프론트</b>: 파일 업로드·상태 표시 UI 존재. 결재용 요약 출력 템플릿은 프롬프트 문서 수준에서 정의.</li>
+        <li><b>DNA/날짜 엔진</b>: 텍스트 배열 날짜 분류·Anchoring 모듈 존재(정확도 높음).</li>
+        <li><b>부족</b>: 
+          <ul>
+            <li><span class="warn">고지의무 윈도우 엔진</span>의 <b>일관된 코드화</b> 및 리포트 통합 부족.</li>
+            <li><span class="warn">질환별 검사셋 규칙</span>을 <b>자동 적용</b>하는 미들웨어 부재.</li>
+            <li><span class="warn">Structured Output</span>(JSON Schema) 표준화·검증 부족.</li>
+            <li><span class="warn">테스트/모니터링/보안</span>: 실무 수준 미흡(키 보관, 커버리지, 알림).</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>강점 · 약점 · 취약점 · 혁신성</h2>
+      <div class="grid">
+        <div class="card"><h3>강점</h3>
+          <ul>
+            <li>OCR·AI·후처리 <b>기본 토대</b> 완비.</li>
+            <li>의료 특화 <b>날짜·Anchoring</b> 엔진 기 개발.</li>
+            <li><b>프롬프트 라이브러리</b> 풍부(실무 규격 반영).</li>
+          </ul>
+        </div>
+        <div class="card"><h3>약점</h3>
+          <ul>
+            <li>규칙 엔진 <b>코드 통합</b>·범용화 부족.</li>
+            <li>프론트 <b>메타 입력</b>(가입일/상품규격) UI 부재.</li>
+            <li><b>테스트/모니터링</b> 미흡.</li>
+          </ul>
+        </div>
+        <div class="card"><h3>취약점</h3>
+          <ul>
+            <li>환경 변수/키 <b>보안 통제</b> 약함.</li>
+            <li>모델 응답 <b>신뢰성 검증</b>(스키마 밸리데이션) 부족.</li>
+          </ul>
+        </div>
+      </div>
+      <h3 style="margin-top:12px;">혁신성/발전성/현실성/개연성/구현성</h3>
+      <ul>
+        <li><b>혁신성</b>: 도메인 규칙(고지의무·질환별 검사셋)을 <b>LLM+Logic Hybrid</b>로 운영 → 설명가능·감사가능.</li>
+        <li><b>발전성</b>: 프롬프트→모듈화→RAG/룰엔진 병행 확장 용이.</li>
+        <li><b>현실성</b>: 현재 코드베이스와 높은 합치성. 2~4주 단계적 출시 가능.</li>
+        <li><b>개연성/구현성</b>: 스키마 기반 Structured Output으로 구현 리스크 감소.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>제로베이스 제안 아키텍처</h2>
+      <h3>모듈 구조</h3>
+      <div class="code mono code">
+- controllers/
+  - ReportGenerationController.ts (Full + Summary 생성)
+  - DisclosureController.ts (3m/2y/5y 분류 + 위반 판정)
+
+- services/
+  - DiseaseRuleService.ts (질환군별 검사셋 추출·표준화)
+  - PromptOrchestrator.ts (System/User/Tool 프롬프트 조립)
+  - StructuredOutputValidator.ts (JSON Schema 검증)
+  - PrimaryMetastasisClassifier.ts (암 원발/전이 판정)
+
+- pipelines/
+  - Intake → OCR → Preprocess → DiseaseRules → DateAnchoring → Disclosure → AI Compose → Postprocess → Persist → Export(PDF)
+
+- schemas/
+  - report.schema.json (Full + Summary + Classification)
+  - disclosure.schema.json (windows, evidence, linkage)
+  - record.schema.json (exam, date, result, source)
+      </div>
+      <h3>핵심 로직</h3>
+      <ul>
+        <li><b>Disclosure Engine</b>: 계약일·상품규격(disclosure_windows: [3m,2y,5y]) 입력 → 기간 내 record를 태깅(evidence) → 위반/해당없음 판정.
+        </li>
+        <li><b>Disease Rule Mapper</b>: record.text에서 <i>검사명·일자·소견</i>을 추출 → 질환군별 필수 필드만 정규화.</li>
+        <li><b>Primary/Metastasis Classifier</b>: 조직학·해부학 위치로 원발 판정 + 전이 부위 병기.</li>
+        <li><b>Prompt Orchestrator</b>: Full Report 생성 후 Final Summary Prompt로 <b>결재용 요약</b> 자동 생성.</li>
+        <li><b>Structured Output</b>: 모든 AI 응답을 <i>JSON Schema</i>로 강제 → 프런트/서류/저장에 일관 적용.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>API · 데이터 스키마 (제안)</h2>
+      <div class="code mono code">POST /api/report/generate
+Body {
+  contract_date: "YYYY-MM-DD",
+  product_type: "3.2.5",
+  disclosure_windows: ["3m","2y","5y"],
+  claimant: { name, dob },
+  records: [
+    { date, hospital, source, text, tags? }
+  ]
+}
+Response {
+  full_report: { ...structured },
+  summary_report: { ...structured },
+  disclosure: {
+    window: "3m|2y|5y",
+    status: "해당|해당없음|위반의심",
+    evidence: [{ date, text, linkage_to_claim }]
+  },
+  classification: "분류: ✅ 자궁내막암 원발 + 복막 및 림프절 전이",
+  meta: { model, tokens, duration }
+}
+      </div>
+    </section>
+
+    <section>
+      <h2>갭 분석 → 실행 단계</h2>
+      <h3>즉시(1주)</h3>
+      <ul>
+        <li><b>프론트 메타 입력</b>: 계약일·상품규격·윈도우·청구진단 입력 필드 추가.</li>
+        <li><b>Disclosure Engine v1</b>: 3m/2y/5y 기간 태깅·판정 로직(Logic first) 구현.</li>
+        <li><b>Final Summary</b> 통합: 모든 보고서에 결재용 요약 자동 삽입.</li>
+        <li><b>JSON Schema</b>로 Full/ Summary/ Disclosure 응답 강제.</li>
+      </ul>
+      <h3>단기(2~4주)</h3>
+      <ul>
+        <li><b>DiseaseRuleService</b> 구현(협심증/AMI/부정맥/뇌혈관/암).</li>
+        <li><b>Primary/Metastasis</b> 판정 로직 + 템플릿 라인 고정 출력.</li>
+        <li><b>E2E 테스트</b>: 12개 케이스, 통합 파이프라인 자동화.</li>
+        <li><b>보안 개선</b>: 키 하드코딩 제거, .env 검증, Secret Manager 연동.</li>
+      </ul>
+      <h3>중기(6~8주)</h3>
+      <ul>
+        <li><b>RAG</b>로 병원별 템플릿/검사 문구 정밀화.</li>
+        <li><b>모니터링/알림</b>: 성능·오류·품질 메트릭 대시보드.</li>
+        <li><b>PDF 템플릿</b>·내보내기 자동화.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>리스크 · 완화</h2>
+      <ul>
+        <li><span class="bad">모델 일관성</span> → <b>Schema 검증·재시도(temperature 0.2)</b>, 디터미니즘 확보.</li>
+        <li><span class="bad">보안</span> → 키 환경변수화, 접근로그·권한분리.</li>
+        <li><span class="warn">데이터 품질</span> → OCR 전처리 필드화, 날짜 파싱 실패 graceful degrade.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>결론 · 권고</h2>
+      <div class="bq">
+        현재 앱은 <b>자동 보고</b>의 기반을 갖추었고, 문서에 제시된 규칙을 <b>룰엔진+프롬프트</b>로 흡수하면 <i>실무 수준</i> 품질에 도달합니다. 
+        <b>Disclosure</b>·<b>Disease Rules</b>·<b>Structured Output</b> 3축을 우선 구현하여 “Full + Summary + 분류라인”을 일관 생산하세요.
+      </div>
+      <ul>
+        <li>이번 스프린트 목표: <b>Disclosure v1 + Summary 통합 + Schema 고정</b>.</li>
+        <li>다음 스프린트: <b>DiseaseRuleService</b> 전면 적용, E2E 테스트 12케이스.</li>
+      </ul>
+      <div class="foot">© VNEXSUS · Partner CTO View</div>
+    </section>
+  </div>
+</body>
+</html>
