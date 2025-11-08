@@ -9,6 +9,7 @@ import InsuranceValidationService from '../services/insuranceValidationService.j
 import MedicalTermTranslationService from '../services/medicalTermTranslationService.js';
 // NineItemReportGenerator는 대형 모듈이므로 필요 시점에 동적 import로 로드
 import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../../src/shared/logging/logger.js';
+import { normalizeDiagnosisLines } from '../../src/shared/utils/report/normalizeDiagnosisLine.js';
 // EnhancedMedicalTermProcessor는 CJS 모듈이므로 동적 import로 로드하여 테스트 환경(Jest) 호환성을 확보
 
 const router = express.Router();
@@ -158,6 +159,17 @@ router.post('/generate', async (req, res) => {
       } catch (err) {
         logProcessingError('nine_item_generate', err, { patientId: patientInfo.patientId });
       }
+    }
+
+    // 진단 라인 정규화(중복 제거/괄호 정리/ICD 표기 통일)
+    try {
+      const { normalizedText, stats } = normalizeDiagnosisLines(enhancedText);
+      if (stats.adjustments > 0) {
+        logger.info({ event: 'diagnosis_normalization_applied', adjustments: stats.adjustments });
+      }
+      enhancedText = normalizedText;
+    } catch (err) {
+      logProcessingError('diagnosis_normalization', err, { patientId: patientInfo.patientId });
     }
 
     const processingTimeMs = Date.now() - startTime;
