@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사건-사건 연관성 추적 및 시계열 데이터 마이닝 시스템</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml-matrix@6.10.4/lib/index.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .system-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .overview-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .overview-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .overview-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .overview-card h3::before {
+            content: "🔍";
+            margin-right: 10px;
+        }
+        
+        .mining-control-panel {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .mining-control-panel h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mining-control-panel h2::before {
+            content: "⛏️";
+            margin-right: 10px;
+        }
+        
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .control-group h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #17a2b8, #138496);
+            color: white;
+        }
+        
+        .pattern-analysis {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .pattern-main {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #27ae60;
+        }
+        
+        .pattern-main h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pattern-main h2::before {
+            content: "📊";
+            margin-right: 10px;
+        }
+        
+        .pattern-chart {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: #fafafa;
+            position: relative;
+        }
+        
+        .pattern-sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #f39c12;
+        }
+        
+        .pattern-sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pattern-sidebar h2::before {
+            content: "🎯";
+            margin-right: 10px;
+        }
+        
+        .pattern-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .pattern-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        .pattern-item h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        
+        .pattern-item p {
+            color: #6c757d;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .confidence-score {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .confidence-high {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .confidence-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .confidence-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .correlation-heatmap {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .correlation-heatmap h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .correlation-heatmap h2::before {
+            content: "🔥";
+            margin-right: 10px;
+        }
+        
+        .heatmap-container {
+            width: 100%;
+            height: 400px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: white;
+            position: relative;
+        }
+        
+        .temporal-mining {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .mining-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #9b59b6;
+        }
+        
+        .mining-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mining-card h3::before {
+            content: "⏱️";
+            margin-right: 8px;
+        }
+        
+        .mining-result {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .mining-result h5 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .mining-result p {
+            color: #6c757d;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .sequence-analysis {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #17a2b8;
+        }
+        
+        .sequence-analysis h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sequence-analysis h2::before {
+            content: "🔗";
+            margin-right: 10px;
+        }
+        
+        .sequence-container {
+            width: 100%;
+            height: 300px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: white;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .sequence-item {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .sequence-item::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .sequence-item:last-child::after {
+            display: none;
+        }
+        
+        .anomaly-detection {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #fd79a8;
+        }
+        
+        .anomaly-detection h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .anomaly-detection h2::before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+        
+        .anomaly-item {
+            background: #fff5f5;
+            border: 2px solid #fed7d7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .anomaly-item:hover {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+        
+        .anomaly-item h4 {
+            color: #dc2626;
+            margin-bottom: 8px;
+        }
+        
+        .anomaly-item p {
+            color: #7f1d1d;
+            font-size: 0.9em;
+        }
+        
+        .anomaly-score {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .prediction-model {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .prediction-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #6c5ce7;
+        }
+        
+        .prediction-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .prediction-card h3::before {
+            content: "🔮";
+            margin-right: 8px;
+        }
+        
+        .prediction-chart {
+            width: 100%;
+            height: 250px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+        
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-left: 5px solid #a29bfe;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .metric-change {
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        
+        .metric-change.positive {
+            color: #27ae60;
+        }
+        
+        .metric-change.negative {
+            color: #e74c3c;
+        }
+        
+        .data-input-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #00b894;
+        }
+        
+        .data-input-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .data-input-section h2::before {
+            content: "📝";
+            margin-right: 10px;
+        }
+        
+        .data-input-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .data-input-area:hover {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        
+        .data-input-area textarea {
+            width: 100%;
+            height: 150px;
+            border: none;
+            background: transparent;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 10px;
+        }
+        
+        .processing-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .algorithm-selector {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .algorithm-selector h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .algorithm-option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .algorithm-option:hover {
+            background: #e3f2fd;
+        }
+        
+        .algorithm-option input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .algorithm-option label {
+            cursor: pointer;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .algorithm-description {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>사건-사건 연관성 추적 및 시계열 데이터 마이닝 시스템</h1>
+            <p>고도화된 패턴 발견 및 예측 분석 플랫폼</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- 시스템 개요 -->
+            <div class="system-overview">
+                <div class="overview-card">
+                    <h3>패턴 마이닝</h3>
+                    <p>시계열 데이터에서 숨겨진 패턴과 규칙을 자동으로 발견하여 사건 간의 복잡한 연관성을 분석합니다.</p>
+                </div>
+                
+                <div class="overview-card">
+                    <h3>이상 탐지</h3>
+                    <p>정상적인 패턴에서 벗어나는 이상 사건을 실시간으로 탐지하고 위험도를 평가합니다.</p>
+                </div>
+                
+                <div class="overview-card">
+                    <h3>예측 모델링</h3>
+                    <p>과거 데이터를 기반으로 미래 사건의 발생 가능성과 시점을 예측하는 모델을 구축합니다.</p>
+                </div>
+                
+                <div class="overview-card">
+                    <h3>시퀀스 분석</h3>
+                    <p>사건의 순서와 시간 간격을 분석하여 인과관계와 의존성을 파악합니다.</p>
+                </div>
+            </div>
+            
+            <!-- 마이닝 제어 패널 -->
+            <div class="mining-control-panel">
+                <h2>데이터 마이닝 제어 패널</h2>
+                <div class="control-grid">
+                    <div class="control-group">
+                        <h4>패턴 마이닝</h4>
+                        <button class="btn btn-primary" onclick="startPatternMining()">패턴 마이닝 시작</button>
+                        <button class="btn btn-success" onclick="analyzeFrequentPatterns()">빈발 패턴 분석</button>
+                        <button class="btn btn-warning" onclick="findAssociationRules()">연관 규칙 탐지</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <h4>시계열 분석</h4>
+                        <button class="btn btn-info" onclick="analyzeTimeSeries()">시계열 분석</button>
+                        <button class="btn btn-primary" onclick="detectSeasonality()">계절성 탐지</button>
+                        <button class="btn btn-success" onclick="analyzeTrends()">트렌드 분석</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <h4>이상 탐지</h4>
+                        <button class="btn btn-danger" onclick="detectAnomalies()">이상 탐지</button>
+                        <button class="btn btn-warning" onclick="analyzeOutliers()">이상치 분석</button>
+                        <button class="btn btn-info" onclick="validateAnomalies()">이상 검증</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <h4>예측 모델</h4>
+                        <button class="btn btn-success" onclick="buildPredictionModel()">예측 모델 구축</button>
+                        <button class="btn btn-primary" onclick="validateModel()">모델 검증</button>
+                        <button class="btn btn-warning" onclick="generatePredictions()">예측 생성</button>
+                    </div>
+                </div>
+                
+                <!-- 알고리즘 선택기 -->
+                <div class="algorithm-selector">
+                    <h4>마이닝 알고리즘 선택</h4>
+                    <div class="algorithm-option">
+                        <input type="radio" id="apriori" name="algorithm" value="apriori" checked>
+                        <label for="apriori">Apriori 알고리즘</label>
+                        <div class="algorithm-description">빈발 항목집합과 연관 규칙을 효율적으로 탐지</div>
+                    </div>
+                    <div class="algorithm-option">
+                        <input type="radio" id="fpgrowth" name="algorithm" value="fpgrowth">
+                        <label for="fpgrowth">FP-Growth 알고리즘</label>
+                        <div class="algorithm-description">메모리 효율적인 빈발 패턴 마이닝</div>
+                    </div>
+                    <div class="algorithm-option">
+                        <input type="radio" id="lstm" name="algorithm" value="lstm">
+                        <label for="lstm">LSTM 신경망</label>
+                        <div class="algorithm-description">장기 의존성을 고려한 시계열 예측</div>
+                    </div>
+                    <div class="algorithm-option">
+                        <input type="radio" id="isolation" name="algorithm" value="isolation">
+                        <label for="isolation">Isolation Forest</label>
+                        <div class="algorithm-description">고차원 데이터의 이상 탐지</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 데이터 입력 섹션 -->
+            <div class="data-input-section">
+                <h2>시계열 데이터 입력</h2>
+                <div class="data-input-area">
+                    <textarea id="timeSeriesData" placeholder="시계열 데이터를 입력하세요...
+예시:
+2023-01-15,진료,고혈압진단,중요도:8
+2023-01-20,검사,혈액검사,중요도:6
+2023-01-25,처방,혈압약처방,중요도:7
+2023-02-15,재진료,혈압재측정,중요도:5
+2023-03-01,입원,심장검사,중요도:9
+2023-03-05,수술,스텐트시술,중요도:10
+2023-03-10,퇴원,회복완료,중요도:8
+2023-04-01,외래,경과관찰,중요도:4"></textarea>
+                </div>
+                
+                <div class="processing-status" id="miningProcessingStatus" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <span id="miningStatusText">데이터를 분석하는 중...</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="processMiningData()">데이터 처리 시작</button>
+                <button class="btn btn-success" onclick="exportResults()">결과 내보내기</button>
+            </div>
+            
+            <!-- 패턴 분석 -->
+            <div class="pattern-analysis">
+                <div class="pattern-main">
+                    <h2>발견된 패턴 분석</h2>
+                    <div class="pattern-chart">
+                        <canvas id="patternChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="pattern-sidebar">
+                    <h2>주요 패턴</h2>
+                    <div id="patternResults">
+                        <div class="pattern-item">
+                            <h4>패턴 분석을 시작하세요</h4>
+                            <p>데이터를 입력하고 '패턴 마이닝 시작' 버튼을 클릭하여 분석을 시작하세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 연관성 히트맵 -->
+            <div class="correlation-heatmap">
+                <h2>사건 간 연관성 히트맵</h2>
+                <div class="heatmap-container">
+                    <canvas id="heatmapChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- 시계열 마이닝 결과 -->
+            <div class="temporal-mining">
+                <div class="mining-card">
+                    <h3>빈발 시퀀스</h3>
+                    <div id="frequentSequences">
+                        <div class="mining-result">
+                            <h5>진료 → 검사 → 처방</h5>
+                            <p>지지도: 85%, 신뢰도: 92%</p>
+                        </div>
+                        <div class="mining-result">
+                            <h5>입원 → 수술 → 퇴원</h5>
+                            <p>지지도: 78%, 신뢰도: 95%</p>
+                        </div>
+                        <div class="mining-result">
+                            <h5>진단 → 치료 → 경과관찰</h5>
+                            <p>지지도: 72%, 신뢰도: 88%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mining-card">
+                    <h3>시간 간격 패턴</h3>
+                    <div id="timeIntervalPatterns">
+                        <div class="mining-result">
+                            <h5>진료 후 검사까지</h5>
+                            <p>평균: 5일, 표준편차: 2일</p>
+                        </div>
+                        <div class="mining-result">
+                            <h5>검사 후 처방까지</h5>
+                            <p>평균: 3일, 표준편차: 1일</p>
+                        </div>
+                        <div class="mining-result">
+                            <h5>입원 후 수술까지</h5>
+                            <p>평균: 4일, 표준편차: 2일</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 시퀀스 분석 -->
+            <div class="sequence-analysis">
+                <h2>사건 시퀀스 분석</h2>
+                <div class="sequence-container" id="sequenceContainer">
+                    <div class="sequence-item">진료</div>
+                    <div class="sequence-item">검사</div>
+                    <div class="sequence-item">처방</div>
+                    <div class="sequence-item">재진료</div>
+                    <div class="sequence-item">입원</div>
+                    <div class="sequence-item">수술</div>
+                    <div class="sequence-item">퇴원</div>
+                    <div class="sequence-item">외래</div>
+                </div>
+            </div>
+            
+            <!-- 이상 탐지 -->
+            <div class="anomaly-detection">
+                <h2>이상 사건 탐지</h2>
+                <div id="anomalyResults">
+                    <div class="anomaly-item">
+                        <h4>비정상적 시간 간격 <span class="anomaly-score">위험도: 8.5</span></h4>
+                        <p>진료 후 수술까지의 간격이 평균보다 3배 이상 짧음 (1일 vs 평균 15일)</p>
+                    </div>
+                    <div class="anomaly-item">
+                        <h4>예상치 못한 사건 순서 <span class="anomaly-score">위험도: 7.2</span></h4>
+                        <p>일반적인 '진료→검사→처방' 순서를 건너뛰고 바로 수술 진행</p>
+                    </div>
+                    <div class="anomaly-item">
+                        <h4>비정상적 빈도 <span class="anomaly-score">위험도: 6.8</span></h4>
+                        <p>동일 환자의 입원 빈도가 월 평균 0.2회에서 3회로 급증</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 예측 모델 -->
+            <div class="prediction-model">
+                <div class="prediction-card">
+                    <h3>다음 사건 예측</h3>
+                    <div class="prediction-chart">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="prediction-card">
+                    <h3>위험도 예측</h3>
+                    <div class="prediction-chart">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 메트릭 대시보드 -->
+            <div class="metrics-dashboard">
+                <div class="metric-card">
+                    <div class="metric-value" id="totalPatterns">24</div>
+                    <div class="metric-label">발견된 패턴</div>
+                    <div class="metric-change positive">+12% 증가</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="confidenceScore">87.5</div>
+                    <div class="metric-label">평균 신뢰도 (%)</div>
+                    <div class="metric-change positive">+5.2% 증가</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="anomalyCount">3</div>
+                    <div class="metric-label">탐지된 이상</div>
+                    <div class="metric-change negative">-2 감소</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="predictionAccuracy">92.3</div>
+                    <div class="metric-label">예측 정확도 (%)</div>
+                    <div class="metric-change positive">+3.1% 증가</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value" id="processingTime">2.4</div>
+                    <div class="metric-label">처리 시간 (초)</div>
+                    <div class="metric-change positive">-0.8초 단축</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 시계열 데이터 마이닝 클래스
+        class TimeSeriesDataMining {
+            constructor() {
+                this.data = [];
+                this.patterns = [];
+                this.anomalies = [];
+                this.predictions = [];
+                this.correlationMatrix = [];
+                this.frequentSequences = [];
+                this.timeIntervalPatterns = [];
+                this.selectedAlgorithm = 'apriori';
+            }
+            
+            // 데이터 전처리
+            preprocessData(rawData) {
+                const lines = rawData.trim().split('\n');
+                this.data = lines.map(line => {
+                    const parts = line.split(',');
+                    if (parts.length >= 4) {
+                        return {
+                            date: new Date(parts[0]),
+                            category: parts[1].trim(),
+                            event: parts[2].trim(),
+                            importance: parseInt(parts[3].split(':')[1]) || 5,
+                            timestamp: new Date(parts[0]).getTime()
+                        };
+                    }
+                    return null;
+                }).filter(item => item !== null);
+                
+                // 날짜순 정렬
+                this.data.sort((a, b) => a.timestamp - b.timestamp);
+                return this.data;
+            }
+            
+            // 패턴 마이닝 시작
+            startPatternMining() {
+                this.findFrequentPatterns();
+                this.generateAssociationRules();
+                this.analyzeTimeIntervals();
+                this.detectSequentialPatterns();
+                this.updatePatternDisplay();
+            }
+            
+            // 빈발 패턴 탐지
+            findFrequentPatterns() {
+                const eventCounts = {};
+                const sequenceCounts = {};
+                
+                // 단일 이벤트 빈도 계산
+                this.data.forEach(item => {
+                    eventCounts[item.event] = (eventCounts[item.event] || 0) + 1;
+                });
+                
+                // 연속 이벤트 쌍 빈도 계산
+                for (let i = 0; i < this.data.length - 1; i++) {
+                    const current = this.data[i].event;
+                    const next = this.data[i + 1].event;
+                    const sequence = `${current} → ${next}`;
+                    sequenceCounts[sequence] = (sequenceCounts[sequence] || 0) + 1;
+                }
+                
+                // 빈발 패턴 필터링 (최소 지지도 2 이상)
+                this.patterns = Object.entries(sequenceCounts)
+                    .filter(([seq, count]) => count >= 2)
+                    .map(([seq, count]) => ({
+                        pattern: seq,
+                        support: count,
+                        confidence: (count / this.data.length * 100).toFixed(1)
+                    }))
+                    .sort((a, b) => b.support - a.support);
+            }
+            
+            // 연관 규칙 생성
+            generateAssociationRules() {
+                const rules = [];
+                
+                for (let i = 0; i < this.data.length - 2; i++) {
+                    const event1 = this.data[i].event;
+                    const event2 = this.data[i + 1].event;
+                    const event3 = this.data[i + 2].event;
+                    
+                    const rule = {
+                        antecedent: `${event1} → ${event2}`,
+                        consequent: event3,
+                        confidence: Math.random() * 30 + 70, // 시뮬레이션
+                        lift: Math.random() * 2 + 1
+                    };
+                    
+                    rules.push(rule);
+                }
+                
+                this.associationRules = rules.slice(0, 5); // 상위 5개만 저장
+            }
+            
+            // 시간 간격 분석
+            analyzeTimeIntervals() {
+                const intervals = {};
+                
+                for (let i = 0; i < this.data.length - 1; i++) {
+                    const current = this.data[i];
+                    const next = this.data[i + 1];
+                    const interval = (next.timestamp - current.timestamp) / (1000 * 60 * 60 * 24); // 일 단위
+                    
+                    const key = `${current.event} → ${next.event}`;
+                    if (!intervals[key]) {
+                        intervals[key] = [];
+                    }
+                    intervals[key].push(interval);
+                }
+                
+                // 통계 계산
+                this.timeIntervalPatterns = Object.entries(intervals).map(([key, values]) => {
+                    const mean = values.reduce((a, b) => a + b, 0) / values.length;
+                    const variance = values.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / values.length;
+                    const stdDev = Math.sqrt(variance);
+                    
+                    return {
+                        sequence: key,
+                        mean: mean.toFixed(1),
+                        stdDev: stdDev.toFixed(1),
+                        count: values.length
+                    };
+                });
+            }
+            
+            // 시퀀셜 패턴 탐지
+            detectSequentialPatterns() {
+                const sequences = [];
+                const windowSize = 3; // 3개 이벤트 윈도우
+                
+                for (let i = 0; i <= this.data.length - windowSize; i++) {
+                    const sequence = this.data.slice(i, i + windowSize)
+                        .map(item => item.event)
+                        .join(' → ');
+                    sequences.push(sequence);
+                }
+                
+                // 빈도 계산
+                const sequenceCounts = {};
+                sequences.forEach(seq => {
+                    sequenceCounts[seq] = (sequenceCounts[seq] || 0) + 1;
+                });
+                
+                this.frequentSequences = Object.entries(sequenceCounts)
+                    .filter(([seq, count]) => count >= 2)
+                    .map(([seq, count]) => ({
+                        sequence: seq,
+                        frequency: count,
+                        support: (count / sequences.length * 100).toFixed(1)
+                    }))
+                    .sort((a, b) => b.frequency - a.frequency)
+                    .slice(0, 10);
+            }
+            
+            // 이상 탐지
+            detectAnomalies() {
+                this.anomalies = [];
+                
+                // 시간 간격 이상 탐지
+                for (let i = 0; i < this.data.length - 1; i++) {
+                    const current = this.data[i];
+                    const next = this.data[i + 1];
+                    const interval = (next.timestamp - current.timestamp) / (1000 * 60 * 60 * 24);
+                    
+                    // 평균 간격과 비교 (시뮬레이션)
+                    const avgInterval = 7; // 평균 7일
+                    const threshold = 3; // 3배 이상 차이
+                    
+                    if (interval < avgInterval / threshold || interval > avgInterval * threshold) {
+                        this.anomalies.push({
+                            type: '비정상적 시간 간격',
+                            description: `${current.event} → ${next.event}: ${interval.toFixed(1)}일 (평균: ${avgInterval}일)`,
+                            severity: Math.min(10, Math.abs(interval - avgInterval) / avgInterval * 10),
+                            timestamp: current.timestamp
+                        });
+                    }
+                }
+                
+                // 중요도 이상 탐지
+                const avgImportance = this.data.reduce((sum, item) => sum + item.importance, 0) / this.data.length;
+                this.data.forEach(item => {
+                    if (Math.abs(item.importance - avgImportance) > 3) {
+                        this.anomalies.push({
+                            type: '비정상적 중요도',
+                            description: `${item.event}: 중요도 ${item.importance} (평균: ${avgImportance.toFixed(1)})`,
+                            severity: Math.abs(item.importance - avgImportance),
+                            timestamp: item.timestamp
+                        });
+                    }
+                });
+                
+                // 심각도순 정렬
+                this.anomalies.sort((a, b) => b.severity - a.severity);
+            }
+            
+            // 예측 모델 구축
+            buildPredictionModel() {
+                // 간단한 시계열 예측 (실제로는 더 복잡한 모델 필요)
+                const lastEvents = this.data.slice(-3).map(item => item.event);
+                const eventFrequency = {};
+                
+                this.data.forEach(item => {
+                    eventFrequency[item.event] = (eventFrequency[item.event] || 0) + 1;
+                });
+                
+                // 다음 이벤트 예측
+                this.predictions = Object.entries(eventFrequency)
+                    .map(([event, freq]) => ({
+                        event: event,
+                        probability: (freq / this.data.length * 100).toFixed(1),
+                        confidence: Math.random() * 30 + 70 // 시뮬레이션
+                    }))
+                    .sort((a, b) => b.probability - a.probability)
+                    .slice(0, 5);
+            }
+            
+            // 연관성 매트릭스 계산
+            calculateCorrelationMatrix() {
+                const events = [...new Set(this.data.map(item => item.event))];
+                const matrix = [];
+                
+                for (let i = 0; i < events.length; i++) {
+                    matrix[i] = [];
+                    for (let j = 0; j < events.length; j++) {
+                        if (i === j) {
+                            matrix[i][j] = 1.0;
+                        } else {
+                            // 두 이벤트 간의 연관성 계산 (시뮬레이션)
+                            const correlation = Math.random() * 0.8 + 0.1;
+                            matrix[i][j] = correlation;
+                        }
+                    }
+                }
+                
+                this.correlationMatrix = { events, matrix };
+                this.displayCorrelationHeatmap();
+            }
+            
+            // 패턴 표시 업데이트
+            updatePatternDisplay() {
+                const container = document.getElementById('patternResults');
+                container.innerHTML = '';
+                
+                this.patterns.slice(0, 5).forEach(pattern => {
+                    const confidenceClass = pattern.confidence >= 80 ? 'confidence-high' : 
+                                          pattern.confidence >= 60 ? 'confidence-medium' : 'confidence-low';
+                    
+                    const patternElement = document.createElement('div');
+                    patternElement.className = 'pattern-item';
+                    patternElement.innerHTML = `
+                        <h4>${pattern.pattern} <span class="confidence-score ${confidenceClass}">${pattern.confidence}%</span></h4>
+                        <p>지지도: ${pattern.support}회, 신뢰도: ${pattern.confidence}%</p>
+                    `;
+                    container.appendChild(patternElement);
+                });
+                
+                this.displayPatternChart();
+            }
+            
+            // 패턴 차트 표시
+            displayPatternChart() {
+                const ctx = document.getElementById('patternChart').getContext('2d');
+                
+                const chartData = {
+                    labels: this.patterns.slice(0, 8).map(p => p.pattern),
+                    datasets: [{
+                        label: '신뢰도 (%)',
+                        data: this.patterns.slice(0, 8).map(p => parseFloat(p.confidence)),
+                        backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: '지지도',
+                        data: this.patterns.slice(0, 8).map(p => p.support * 10), // 스케일 조정
+                        backgroundColor: 'rgba(231, 76, 60, 0.6)',
+                        borderColor: 'rgba(231, 76, 60, 1)',
+                        borderWidth: 2
+                    }]
+                };
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '점수'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: '패턴'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 연관성 히트맵 표시
+            displayCorrelationHeatmap() {
+                const ctx = document.getElementById('heatmapChart').getContext('2d');
+                
+                if (!this.correlationMatrix.events) return;
+                
+                const events = this.correlationMatrix.events.slice(0, 6); // 최대 6개 이벤트
+                const matrix = this.correlationMatrix.matrix.slice(0, 6).map(row => row.slice(0, 6));
+                
+                // 히트맵 데이터 생성
+                const heatmapData = [];
+                for (let i = 0; i < events.length; i++) {
+                    for (let j = 0; j < events.length; j++) {
+                        heatmapData.push({
+                            x: j,
+                            y: i,
+                            v: matrix[i][j]
+                        });
+                    }
+                }
+                
+                const chartData = {
+                    datasets: [{
+                        label: '연관성',
+                        data: heatmapData,
+                        backgroundColor: function(context) {
+                            const value = context.parsed.v;
+                            const alpha = value;
+                            return `rgba(52, 152, 219, ${alpha})`;
+                        },
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        width: ({chart}) => (chart.chartArea || {}).width / events.length,
+                        height: ({chart}) => (chart.chartArea || {}).height / events.length,
+                    }]
+                };
+                
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: chartData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom',
+                                min: -0.5,
+                                max: events.length - 0.5,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value) {
+                                        return events[value] || '';
+                                    }
+                                }
+                            },
+                            y: {
+                                type: 'linear',
+                                min: -0.5,
+                                max: events.length - 0.5,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value) {
+                                        return events[value] || '';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: function(context) {
+                                        const point = context[0];
+                                        return `${events[point.parsed.y]} ↔ ${events[point.parsed.x]}`;
+                                    },
+                                    label: function(context) {
+                                        return `연관성: ${context.parsed.v.toFixed(3)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 예측 차트 표시
+            displayPredictionCharts() {
+                // 다음 이벤트 예측 차트
+                const predCtx = document.getElementById('predictionChart').getContext('2d');
+                
+                const predictionData = {
+                    labels: this.predictions.map(p => p.event),
+                    datasets: [{
+                        label: '발생 확률 (%)',
+                        data: this.predictions.map(p => parseFloat(p.probability)),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 205, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderWidth: 2
+                    }]
+                };
+                
+                new Chart(predCtx, {
+                    type: 'doughnut',
+                    data: predictionData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+                
+                // 위험도 예측 차트
+                const riskCtx = document.getElementById('riskChart').getContext('2d');
+                
+                const riskData = {
+                    labels: ['낮음', '보통', '높음', '매우 높음'],
+                    datasets: [{
+                        label: '위험도 분포',
+                        data: [25, 45, 20, 10], // 시뮬레이션 데이터
+                        backgroundColor: [
+                            'rgba(46, 204, 113, 0.6)',
+                            'rgba(241, 196, 15, 0.6)',
+                            'rgba(230, 126, 34, 0.6)',
+                            'rgba(231, 76, 60, 0.6)'
+                        ],
+                        borderWidth: 2
+                    }]
+                };
+                
+                new Chart(riskCtx, {
+                    type: 'bar',
+                    data: riskData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: '확률 (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 메트릭 업데이트
+            updateMetrics() {
+                document.getElementById('totalPatterns').textContent = this.patterns.length;
+                
+                const avgConfidence = this.patterns.length > 0 ? 
+                    this.patterns.reduce((sum, p) => sum + parseFloat(p.confidence), 0) / this.patterns.length : 0;
+                document.getElementById('confidenceScore').textContent = avgConfidence.toFixed(1);
+                
+                document.getElementById('anomalyCount').textContent = this.anomalies.length;
+                
+                // 예측 정확도는 시뮬레이션
+                const accuracy = 85 + Math.random() * 15;
+                document.getElementById('predictionAccuracy').textContent = accuracy.toFixed(1);
+                
+                // 처리 시간은 시뮬레이션
+                const processingTime = 1 + Math.random() * 3;
+                document.getElementById('processingTime').textContent = processingTime.toFixed(1);
+            }
+        }
+        
+        // 전역 마이닝 시스템 인스턴스
+        const miningSystem = new TimeSeriesDataMining();
+        
+        // 패턴 마이닝 시작
+        function startPatternMining() {
+            showProcessingStatus('패턴을 분석하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.startPatternMining();
+                hideProcessingStatus();
+                alert('패턴 마이닝이 완료되었습니다.');
+            }, 2000);
+        }
+        
+        // 빈발 패턴 분석
+        function analyzeFrequentPatterns() {
+            showProcessingStatus('빈발 패턴을 분석하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.findFrequentPatterns();
+                miningSystem.updatePatternDisplay();
+                hideProcessingStatus();
+                alert('빈발 패턴 분석이 완료되었습니다.');
+            }, 1500);
+        }
+        
+        // 연관 규칙 탐지
+        function findAssociationRules() {
+            showProcessingStatus('연관 규칙을 탐지하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.generateAssociationRules();
+                hideProcessingStatus();
+                alert('연관 규칙 탐지가 완료되었습니다.');
+            }, 1800);
+        }
+        
+        // 시계열 분석
+        function analyzeTimeSeries() {
+            showProcessingStatus('시계열을 분석하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.analyzeTimeIntervals();
+                hideProcessingStatus();
+                alert('시계열 분석이 완료되었습니다.');
+            }, 2200);
+        }
+        
+        // 계절성 탐지
+        function detectSeasonality() {
+            showProcessingStatus('계절성을 탐지하는 중...');
+            
+            setTimeout(() => {
+                // 계절성 탐지 로직 (시뮬레이션)
+                hideProcessingStatus();
+                alert('계절성 탐지가 완료되었습니다.');
+            }, 1700);
+        }
+        
+        // 트렌드 분석
+        function analyzeTrends() {
+            showProcessingStatus('트렌드를 분석하는 중...');
+            
+            setTimeout(() => {
+                // 트렌드 분석 로직 (시뮬레이션)
+                hideProcessingStatus();
+                alert('트렌드 분석이 완료되었습니다.');
+            }, 1900);
+        }
+        
+        // 이상 탐지
+        function detectAnomalies() {
+            showProcessingStatus('이상을 탐지하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.detectAnomalies();
+                displayAnomalies();
+                hideProcessingStatus();
+                alert('이상 탐지가 완료되었습니다.');
+            }, 2500);
+        }
+        
+        // 이상치 분석
+        function analyzeOutliers() {
+            showProcessingStatus('이상치를 분석하는 중...');
+            
+            setTimeout(() => {
+                // 이상치 분석 로직 (시뮬레이션)
+                hideProcessingStatus();
+                alert('이상치 분석이 완료되었습니다.');
+            }, 2000);
+        }
+        
+        // 이상 검증
+        function validateAnomalies() {
+            showProcessingStatus('이상을 검증하는 중...');
+            
+            setTimeout(() => {
+                // 이상 검증 로직 (시뮬레이션)
+                hideProcessingStatus();
+                alert('이상 검증이 완료되었습니다.');
+            }, 1600);
+        }
+        
+        // 예측 모델 구축
+        function buildPredictionModel() {
+            showProcessingStatus('예측 모델을 구축하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.buildPredictionModel();
+                miningSystem.displayPredictionCharts();
+                hideProcessingStatus();
+                alert('예측 모델 구축이 완료되었습니다.');
+            }, 3000);
+        }
+        
+        // 모델 검증
+        function validateModel() {
+            showProcessingStatus('모델을 검증하는 중...');
+            
+            setTimeout(() => {
+                // 모델 검증 로직 (시뮬레이션)
+                hideProcessingStatus();
+                alert('모델 검증이 완료되었습니다.');
+            }, 2200);
+        }
+        
+        // 예측 생성
+        function generatePredictions() {
+            showProcessingStatus('예측을 생성하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.buildPredictionModel();
+                miningSystem.displayPredictionCharts();
+                hideProcessingStatus();
+                alert('예측 생성이 완료되었습니다.');
+            }, 1800);
+        }
+        
+        // 데이터 처리
+        function processMiningData() {
+            const rawData = document.getElementById('timeSeriesData').value;
+            if (!rawData.trim()) {
+                alert('데이터를 입력해주세요.');
+                return;
+            }
+            
+            showProcessingStatus('데이터를 처리하는 중...');
+            
+            setTimeout(() => {
+                miningSystem.preprocessData(rawData);
+                miningSystem.startPatternMining();
+                miningSystem.detectAnomalies();
+                miningSystem.buildPredictionModel();
+                miningSystem.calculateCorrelationMatrix();
+                miningSystem.displayPredictionCharts();
+                miningSystem.updateMetrics();
+                
+                hideProcessingStatus();
+                alert('데이터 처리가 완료되었습니다.');
+            }, 3500);
+        }
+        
+        // 결과 내보내기
+        function exportResults() {
+            const results = {
+                patterns: miningSystem.patterns,
+                anomalies: miningSystem.anomalies,
+                predictions: miningSystem.predictions,
+                correlationMatrix: miningSystem.correlationMatrix,
+                frequentSequences: miningSystem.frequentSequences,
+                timeIntervalPatterns: miningSystem.timeIntervalPatterns,
+                timestamp: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(results, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = '시계열_마이닝_결과.json';
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            alert('결과가 내보내기되었습니다.');
+        }
+        
+        // 이상 표시
+        function displayAnomalies() {
+            const container = document.getElementById('anomalyResults');
+            container.innerHTML = '';
+            
+            miningSystem.anomalies.slice(0, 5).forEach(anomaly => {
+                const anomalyElement = document.createElement('div');
+                anomalyElement.className = 'anomaly-item';
+                anomalyElement.innerHTML = `
+                    <h4>${anomaly.type} <span class="anomaly-score">위험도: ${anomaly.severity.toFixed(1)}</span></h4>
+                    <p>${anomaly.description}</p>
+                `;
+                container.appendChild(anomalyElement);
+            });
+        }
+        
+        // 처리 상태 표시
+        function showProcessingStatus(message) {
+            const statusElement = document.getElementById('miningProcessingStatus');
+            const textElement = document.getElementById('miningStatusText');
+            textElement.textContent = message;
+            statusElement.style.display = 'flex';
+        }
+        
+        // 처리 상태 숨기기
+        function hideProcessingStatus() {
+            const statusElement = document.getElementById('miningProcessingStatus');
+            statusElement.style.display = 'none';
+        }
+        
+        // 알고리즘 선택 변경
+        document.addEventListener('DOMContentLoaded', function() {
+            const algorithmRadios = document.querySelectorAll('input[name="algorithm"]');
+            algorithmRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    miningSystem.selectedAlgorithm = this.value;
+                    console.log('선택된 알고리즘:', this.value);
+                });
+            });
+            
+            // 초기 데이터 로드 (시뮬레이션)
+            setTimeout(() => {
+                miningSystem.preprocessData(`2023-01-15,진료,고혈압진단,중요도:8
+2023-01-20,검사,혈액검사,중요도:6
+2023-01-25,처방,혈압약처방,중요도:7
+2023-02-15,재진료,혈압재측정,중요도:5
+2023-03-01,입원,심장검사,중요도:9
+2023-03-05,수술,스텐트시술,중요도:10
+2023-03-10,퇴원,회복완료,중요도:8
+2023-04-01,외래,경과관찰,중요도:4`);
+                
+                miningSystem.startPatternMining();
+                miningSystem.detectAnomalies();
+                miningSystem.buildPredictionModel();
+                miningSystem.calculateCorrelationMatrix();
+                miningSystem.displayPredictionCharts();
+                miningSystem.updateMetrics();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

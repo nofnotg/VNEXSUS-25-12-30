@@ -216,7 +216,7 @@ export const validatePdfFile = (filePath) => {
 
 // 앱 시작 시 임시 디렉토리 초기화
 ensureTempDir();
-cleanOldTempFiles();
+// cleanOldTempFiles(); // 모듈 로딩 시 실행하지 않고 필요할 때만 호출
 
 export default {
   ensureTempDir,
@@ -225,4 +225,4 @@ export default {
   cleanTempDir,
   cleanOldTempFiles,
   validatePdfFile
-}; 
+};

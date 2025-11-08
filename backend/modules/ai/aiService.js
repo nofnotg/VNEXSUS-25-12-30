@@ -21,28 +21,30 @@ dotenv.config();
 
 class AIService {
   constructor(options = {}) {
-    // 설정 옵션 - GPT-4o-mini 단일 모델로 고정
+    // 설정 옵션 - Gemini를 기본으로 설정
     this.options = {
-      defaultProvider: 'openai', // 고정
-      defaultModel: 'gpt-4o-mini', // 고정
+      defaultProvider: process.env.USE_GEMINI === 'true' ? 'gemini' : 'openai', // Gemini 우선
+      defaultModel: process.env.USE_GEMINI === 'true' ? 'gemini-2.0-flash-exp' : 'gpt-4o-mini',
       logDirectory: options.logDirectory || path.join(__dirname, '../../logs/ai'),
       maxRetries: options.maxRetries || 3,
       timeout: options.timeout || 30000, // 30초
       ...options
     };
     
-    // API 키 설정 - OpenAI만 사용
+    // API 키 설정 - OpenAI와 Gemini 지원
     this.apiKeys = {
-      openai: process.env.OPENAI_API_KEY
+      openai: process.env.OPENAI_API_KEY,
+      gemini: process.env.GEMINI_API_KEY
       // 다른 제공자들은 비활성화됨
       // anthropic: process.env.ANTHROPIC_API_KEY,
       // azure: process.env.AZURE_OPENAI_API_KEY,
       // cohere: process.env.COHERE_API_KEY
     };
     
-    // 기본 모델 설정 - GPT-4o-mini만 사용
+    // 기본 모델 설정 - GPT-4o-mini와 Gemini 지원
     this.defaultModels = {
-      openai: 'gpt-4o-mini'
+      openai: 'gpt-4o-mini',
+      gemini: 'gemini-2.0-flash-exp'
       // 다른 제공자들은 비활성화됨
       // anthropic: 'claude-3-haiku-20240307',
       // azure: 'gpt-35-turbo',

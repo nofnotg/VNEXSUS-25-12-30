@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 업로드 디버그 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .debug-log {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 9999;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>파일 업로드 디버그 테스트</h1>
+    
+    <div class="upload-area">
+        <input type="file" id="fileInput" multiple>
+        <br><br>
+        <button id="uploadBtn">파일 업로드</button>
+    </div>
+    
+    <div id="status"></div>
+    
+    <div id="debug-log" class="debug-log"></div>
+
+    <script>
+        // 디버그 로그 함수
+        function debugLog(message) {
+            console.log(message);
+            
+            const debugDiv = document.getElementById('debug-log');
+            const timestamp = new Date().toLocaleTimeString();
+            debugDiv.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            debugDiv.scrollTop = debugDiv.scrollHeight;
+        }
+
+        // 파일 업로드 함수
+        async function uploadFiles() {
+            debugLog('🚀 uploadFiles 함수 호출됨');
+            
+            const fileInput = document.getElementById('fileInput');
+            const files = Array.from(fileInput.files);
+            
+            debugLog('📁 선택된 파일 수: ' + files.length);
+            debugLog('📄 선택된 파일들: ' + files.map(f => f.name + ' (' + f.size + ' bytes)').join(', '));
+            
+            if (files.length === 0) {
+                debugLog('❌ 선택된 파일이 없음');
+                alert('업로드할 파일을 선택해주세요');
+                return;
+            }
+            
+            debugLog('✅ 파일 체크 통과, 업로드 시작');
+            
+            try {
+                // FormData 생성
+                const formData = new FormData();
+                files.forEach(file => {
+                    formData.append('files', file);
+                });
+                
+                debugLog('📦 FormData 생성 완료');
+                debugLog('🌐 API 요청 시작: http://localhost:3030/api/ocr/upload');
+                
+                // API 요청
+                const response = await fetch('http://localhost:3030/api/ocr/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                debugLog('📡 응답 받음 - 상태: ' + response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    debugLog('❌ 응답 오류: ' + errorText);
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                debugLog('✅ 업로드 성공: ' + JSON.stringify(result));
+                
+                document.getElementById('status').innerHTML = 
+                    `<p>업로드 성공! Job ID: ${result.jobId}</p>`;
+                
+            } catch (error) {
+                debugLog('💥 오류 발생: ' + error.message);
+                document.getElementById('status').innerHTML = 
+                    `<p style="color: red;">오류: ${error.message}</p>`;
+            }
+        }
+
+        // 이벤트 리스너 등록
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('🚀 페이지 로드 완료');
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            if (uploadBtn) {
+                debugLog('✅ 업로드 버튼 찾음, 이벤트 리스너 추가');
+                uploadBtn.addEventListener('click', function() {
+                    debugLog('🖱️ 업로드 버튼 클릭됨!');
+                    uploadFiles();
+                });
+            } else {
+                debugLog('❌ 업로드 버튼을 찾을 수 없음');
+            }
+        });
+    </script>
+</body>
+</html>

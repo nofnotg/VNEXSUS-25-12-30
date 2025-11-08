@@ -25,6 +25,10 @@ export interface IntelligenceRequest {
   outputFormat?: 'STANDARD' | 'ENHANCED' | 'MULTI_PANEL';
   patientInfo?: any;
   insuranceInfo?: any;
+  // Progressive RAG 관련 옵션
+  enableProgressiveRAG?: boolean;
+  ragMaxResults?: number;
+  ragConfidenceThreshold?: number;
 }
 
 export interface IntelligenceResponse {
@@ -372,7 +376,15 @@ class IntelligenceController {
       accuracyThreshold: request.accuracyThreshold || 0.8,
       realTimeMode: request.enableRealTime || false,
       patientInfo: request.patientInfo,
-      insuranceInfo: request.insuranceInfo
+      insuranceInfo: request.insuranceInfo,
+      // Progressive RAG 통합 옵션
+      enableProgressiveRAG: request.enableProgressiveRAG || false,
+      ragOptions: {
+        maxResults: request.ragMaxResults || 10,
+        confidenceThreshold: request.ragConfidenceThreshold || 0.7,
+        includeContext: true,
+        includeICDCodes: true
+      }
     };
   }
 

@@ -16,6 +16,19 @@ import bodyParser from 'body-parser';
 import fs from 'fs';
 import axios from 'axios';
 
+// 새로운 구조화된 라우트 import (CommonJS 모듈을 동적으로 import)
+let advancedDateRoutes;
+let middlewares;
+
+// 동적 import를 사용하여 CommonJS 모듈 로드
+async function loadModules() {
+  const advancedDateModule = await import('./modules/medical-analysis/routes/advancedDateRoutes.js');
+  advancedDateRoutes = advancedDateModule.default || advancedDateModule;
+  
+  const middlewareModule = await import('./shared/middleware/index.js');
+  middlewares = middlewareModule;
+}
+
 // 환경 변수 로드
 dotenv.config();
 console.log('OpenAI API 키 설정 상태:', process.env.OPENAI_API_KEY ? '설정됨' : '설정되지 않음');
@@ -27,11 +40,21 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3030;
 
-// 미들웨어
-app.use(cors());
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(express.static(path.join(__dirname, '../public')));
+// 서버 시작 함수
+async function startServer() {
+  // 모듈 로드
+  await loadModules();
+  
+  // 미들웨어
+  app.use(middlewares.securityHeadersMiddleware);
+  app.use(cors());
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+  app.use(express.static(path.join(__dirname, '../public')));
+  app.use(middlewares.requestLoggingMiddleware);
+
+  // 새로운 구조화된 API 라우트
+  app.use('/api/v2/medical-analysis', advancedDateRoutes);
 
 // 디버깅을 위한 에러 핸들러 미들웨어
 app.use((err, req, res, next) => {
@@ -364,9 +387,17 @@ app.use((req, res, next) => {
   }
 });
 
-// 서버 시작
-app.listen(PORT, () => {
-  console.log(`✅ 테스트 서버 실행 중: http://localhost:${PORT}`);
-  console.log(`💡 접속 경로: http://localhost:${PORT}`);
-  console.log(`🔄 OpenAI GPT-4 Turbo API 모드로 설정되었습니다.`);
-}); 
+  // 404 및 에러 핸들링 미들웨어 (모든 라우트 뒤에 배치)
+  app.use(middlewares.notFoundMiddleware);
+  app.use(middlewares.errorHandlingMiddleware);
+
+  // 서버 시작
+  app.listen(PORT, () => {
+    console.log(`🚀 서버가 포트 ${PORT}에서 실행 중입니다.`);
+    console.log(`📊 테스트 페이지: http://localhost:${PORT}/test`);
+    console.log(`🏥 새로운 고급 날짜 분석 API: http://localhost:${PORT}/api/v2/medical-analysis/advanced-date`);
+  });
+}
+
+// 서버 시작 실행
+startServer().catch(console.error);

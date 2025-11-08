@@ -9,7 +9,7 @@
  * → 기준날짜: 2023년, 상대날짜: 금일(오늘)
  */
 
-export class NestedDateResolver {
+class NestedDateResolver {
   constructor() {
     // 날짜 패턴 정의
     this.datePatterns = {
@@ -622,8 +622,8 @@ export class NestedDateResolver {
   extractTreatmentHistory(timeline, text) {
     const treatments = timeline.filter(point => 
       point.medicalContext === 'medication' || 
-      point.text.includes('치료') || 
-      point.text.includes('처방')
+      (point.text && point.text.includes('치료')) || 
+      (point.text && point.text.includes('처방'))
     );
     
     return treatments.map(treatment => ({
@@ -708,4 +708,6 @@ export class NestedDateResolver {
     if (text.includes('년')) return 'year';
     return 'approximate';
   }
-} 
+}
+
+module.exports = { NestedDateResolver };

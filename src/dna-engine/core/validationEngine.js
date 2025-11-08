@@ -13,7 +13,7 @@
 
 import { globalErrorHandler, safeExecute, safeExecuteWithRetry } from './errorHandler.js';
 
-export class ValidationEngine {
+class ValidationEngine {
   constructor() {
     this.version = '1.0.0';
     
@@ -503,3 +503,5 @@ export class ValidationEngine {
     };
   }
 }
+
+export { ValidationEngine };

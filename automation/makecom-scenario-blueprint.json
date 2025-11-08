@@ -1,0 +1,240 @@
+{
+  "name": "VNEXSUS 고지의무 분석 및 보고서 생성 자동화",
+  "description": "의무기록 업로드부터 고지의무 분석, 손해사정보고서 생성까지 완전 자동화",
+  "version": "1.0.0",
+  "modules": [
+    {
+      "id": "webhook_in",
+      "module": "webhook:custom-webhook",
+      "version": 1,
+      "parameters": {
+        "hook": "YOUR_WEBHOOK_ID_HERE",
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "validate_payload",
+      "module": "util:SetVariables",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "variables": [
+          {
+            "name": "contract_date",
+            "value": "{{webhook_in.contract_date}}"
+          },
+          {
+            "name": "product_type", 
+            "value": "{{webhook_in.product_type}}"
+          },
+          {
+            "name": "claim_diagnosis",
+            "value": "{{webhook_in.claim_diagnosis}}"
+          },
+          {
+            "name": "claimant_name",
+            "value": "{{webhook_in.claimant.name}}"
+          },
+          {
+            "name": "claimant_dob",
+            "value": "{{webhook_in.claimant.dob}}"
+          },
+          {
+            "name": "medical_records",
+            "value": "{{webhook_in.records}}"
+          }
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "http_openai",
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": false,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "url": "https://api.openai.com/v1/chat/completions",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer {{OPENAI_API_KEY}}"
+          },
+          {
+            "name": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": {
+            "model": "gpt-4o",
+            "messages": [
+              {
+                "role": "system",
+                "content": "당신은 보험 손해사정 전문가입니다. 피보험자의 과거부터 현재 청구까지의 전체 의무기록을 분석하여 보험 가입 전후 의무기록을 검토하고, 보험 계약 전 알릴의무 사항 규정에 맞도록 보고서를 작성해야 합니다.\n\n## 핵심 기능\n1. 보험가입일 기준으로 3개월, 2년, 5년 이내 진료내역을 자동 분류\n2. 고지의무 해당 가능 진료를 자동 태깅\n3. 확장형 보고서와 요약본을 작성\n\n## 고지의무 자동 검토 알고리즘\n- 3개월 이내: 의심, 진단, 확정, 새로운, 질병, 입원, 필요, 소견, 수술, 추가검사, 재검사, 정밀검사, 조직검사\n- 2년 이내: 입원, 수술, 상해, 질병, 치료, 시술, 처치\n- 5년 이내: 암, 협심증, 급성심근경색, 심근경색, 간경화, 뇌경색, 뇌출혈, 뇌혈관, 중대질병, 악성종양\n\n## AI 판단 규칙\n1. 날짜 계산: 보험가입일과 각 진료일의 차이를 정확히 계산\n2. 키워드 매칭: 각 기간별 키워드가 포함된 진료 기록을 자동 태깅\n3. 질병별 특수 규칙 적용\n4. 위험도 평가 및 권고사항 생성\n\n## 출력 형식\n### 확장형 보고서\n- 환자 정보, 보험 정보, 의료 이력 상세\n- 고지의무 분석 결과 (기간별 분류)\n- 종합 소견 및 권고사항\n\n### 결제용 요약본\n- 핵심 정보만 간략히 정리\n- 고지의무 위반 가능성 요약\n- 최종 판단 및 조치사항\n\n## 언어 출력 형식\n- 모든 날짜: yyyy.mm.dd 형식\n- 의학용어: 원어+한글 병기 (예: Endometrial carcinoma (자궁내막암))\n- 암의 경우 필수 문장: \"분류: [원발 부위명] 원발 + [전이 부위명] 전이\"\n\n응답은 반드시 JSON 형식으로 다음 구조를 따라주세요:\n{\n  \"fullReport\": \"확장형 보고서 전체 내용\",\n  \"summaryReport\": \"결제용 요약본 내용\",\n  \"disclosureAnalysis\": {\n    \"threeMonths\": [],\n    \"twoYears\": [],\n    \"fiveYears\": [],\n    \"riskLevel\": \"high|medium|low\",\n    \"recommendations\": []\n  }\n}"
+              },
+              {
+                "role": "user",
+                "content": "보험가입일: {{validate_payload.contract_date}}\n상품유형: {{validate_payload.product_type}}\n청구진단: {{validate_payload.claim_diagnosis}}\n피보험자: {{validate_payload.claimant_name}} ({{validate_payload.claimant_dob}})\n\n의무기록:\n{{join(map(validate_payload.medical_records; \"병원: \" + hospital + \", 날짜: \" + date + \", 내용: \" + text); \"\n\")}}\n\n위 정보를 바탕으로 고지의무 분석 및 손해사정보고서를 작성해주세요."
+              }
+            ],
+            "temperature": 0.3,
+            "max_tokens": 4000
+          }
+        }
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "parse_openai",
+      "module": "util:TextParser",
+      "version": 1,
+      "parameters": {
+        "pattern": "```json\\s*({[\\s\\S]*?})\\s*```|({[\\s\\S]*})",
+        "global": false,
+        "sensitive": false,
+        "multiline": true,
+        "singleline": false,
+        "continueOnError": false
+      },
+      "mapper": {
+        "text": "{{http_openai.data.choices[0].message.content}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "gdocs_create",
+      "module": "google-docs:createDocument",
+      "version": 1,
+      "parameters": {
+        "connection": "YOUR_GOOGLE_CONNECTION_ID"
+      },
+      "mapper": {
+        "title": "손해사정보고서_{{validate_payload.claimant_name}}_{{formatDate(now; \"YYYY-MM-DD_HH-mm-ss\")}}",
+        "body": "{{parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).fullReport}}\n\n=== 요약본 ===\n\n{{parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).summaryReport}}\n\n=== 고지의무 분석 ===\n\n위험도: {{parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).disclosureAnalysis.riskLevel}}\n\n권고사항:\n{{join(parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).disclosureAnalysis.recommendations; \"\n- \")}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "gdrive_export_pdf",
+      "module": "google-drive:exportFile",
+      "version": 1,
+      "parameters": {
+        "connection": "YOUR_GOOGLE_CONNECTION_ID"
+      },
+      "mapper": {
+        "fileId": "{{gdocs_create.id}}",
+        "mimeType": "application/pdf"
+      },
+      "metadata": {
+        "designer": {
+          "x": 1500,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": "webhook_out",
+      "module": "webhook:custom-webhook-response",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "status": "200",
+        "headers": [],
+        "body": {
+          "type": "json",
+          "data": {
+            "success": true,
+            "doc_id": "{{gdocs_create.id}}",
+            "doc_title": "{{gdocs_create.title}}",
+            "pdf_file_id": "{{gdrive_export_pdf.fileId}}",
+            "pdf_download_url": "https://drive.google.com/file/d/{{gdrive_export_pdf.fileId}}/view",
+            "note": "Google Drive에서 공유권한 설정 시 외부열람 가능",
+            "preview": "{{substring(replace(replace(parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).fullReport;\"\\\\n\";\"\\n\");\"\\\\\\\"\";\"\\\"\") ;0;1200)}}",
+            "disclosure_analysis": "{{parseJSON(coalesce(parse_openai.matches[1]; parse_openai.matches[2])).disclosureAnalysis}}",
+            "processing_time": "{{formatDate(now; \"YYYY-MM-DD HH:mm:ss\")}}"
+          }
+        }
+      },
+      "metadata": {
+        "designer": {
+          "x": 1800,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "webhook_in",
+      "to": "validate_payload"
+    },
+    {
+      "from": "validate_payload", 
+      "to": "http_openai"
+    },
+    {
+      "from": "http_openai",
+      "to": "parse_openai"
+    },
+    {
+      "from": "parse_openai",
+      "to": "gdocs_create"
+    },
+    {
+      "from": "gdocs_create",
+      "to": "gdrive_export_pdf"
+    },
+    {
+      "from": "gdrive_export_pdf",
+      "to": "webhook_out"
+    }
+  ],
+  "metadata": {
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": false,
+      "sequential": false,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "us1.make.com"
+  }
+}

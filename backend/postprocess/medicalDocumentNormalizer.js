@@ -12,6 +12,8 @@ import MedicalEntityExtractor from './medicalEntityExtractor.js';
 import MassiveDateBlockProcessor from './massiveDateBlockProcessor.js';
 import DateOrganizer from './dateOrganizer.js';
 import ReportTemplateEngine from './reportTemplateEngine.js';
+import InsuranceValidationService from '../services/insuranceValidationService.js';
+import AIFilteringService from '../services/aiFilteringService.js';
 
 class MedicalDocumentNormalizer {
   constructor() {
@@ -19,6 +21,8 @@ class MedicalDocumentNormalizer {
     this.massiveDateProcessor = new MassiveDateBlockProcessor();
     this.dateOrganizer = new DateOrganizer();
     this.templateEngine = new ReportTemplateEngine();
+    this.insuranceValidator = new InsuranceValidationService();
+    this.aiFilter = new AIFilteringService();
     
     // 의료 문서 섹션 패턴
     this.sectionPatterns = {
@@ -101,9 +105,13 @@ class MedicalDocumentNormalizer {
       const patientInfo = this._extractPatientInfo(preprocessedText);
       console.log('👤 환자 정보 추출 완료:', patientInfo.name || '미확인');
       
-      // 3단계: 보험 정보 추출
-      const insuranceInfo = this._extractInsuranceInfo(preprocessedText);
+      // 3단계: 보험 정보 추출 (개선된 검증 포함)
+      const insuranceInfo = await this._extractInsuranceInfo(preprocessedText);
       console.log('🏥 보험 정보 추출 완료:', insuranceInfo.length + '개 보험');
+      
+      // 보험 정보 검증 통계 생성
+      const insuranceStats = this._generateInsuranceValidationStats(insuranceInfo);
+      console.log('📊 보험 정보 검증 통계:', insuranceStats);
       
       // 4단계: 의료 기록 추출 및 날짜별 정렬
       const medicalRecords = this._extractMedicalRecords(preprocessedText);
@@ -203,30 +211,107 @@ class MedicalDocumentNormalizer {
   }
 
   /**
-   * 보험 정보 추출
+   * 보험 정보 추출 (개선된 버전)
    * @param {string} text 전처리된 텍스트
-   * @returns {Array} 보험 정보 배열
+   * @returns {Array} 검증된 보험 정보 배열
    * @private
    */
-  _extractInsuranceInfo(text) {
+  async _extractInsuranceInfo(text) {
     const insuranceList = [];
     
     // 보험 관련 섹션 찾기
     const insuranceSections = text.split(/(?=보험|가입)/gi);
     
-    insuranceSections.forEach(section => {
+    for (const section of insuranceSections) {
       const insurance = {};
       
       // 보험사명 추출
       const companyMatch = section.match(this.sectionPatterns.insuranceInfo.company);
       if (companyMatch) {
-        insurance.company = companyMatch[0].replace(/(?:보험사|보험회사)\s*[:：]?\s*/, '').trim();
+        const rawCompanyName = companyMatch[0].replace(/(?:보험사|보험회사)\s*[:：]?\s*/, '').trim();
+        
+        // AI 필터링 및 검증
+        const aiAnalysis = await this.aiFilter.analyzeInsuranceCompany(rawCompanyName, {
+          document: section,
+          documentType: 'medical_record'
+        });
+        
+        // 기본 검증
+        const validation = this.insuranceValidator.validateInsuranceCompany(rawCompanyName);
+        
+        // 검증 결과에 따른 처리
+        if (validation.isValid && validation.isInsurer) {
+          insurance.company = validation.normalizedName;
+          insurance.companyValidation = {
+            status: 'valid',
+            confidence: aiAnalysis.confidence,
+            originalInput: rawCompanyName,
+            correctionApplied: validation.matchType !== 'exact'
+          };
+        } else if (validation.category === 'claims_adjuster') {
+          // 손해사정회사는 '정보없음'으로 처리
+          insurance.company = '정보없음';
+          insurance.companyValidation = {
+            status: 'filtered_out',
+            reason: '손해사정조사회사',
+            originalInput: rawCompanyName,
+            confidence: aiAnalysis.confidence
+          };
+        } else {
+          // 사용자 입력 오류 보정 시도
+          const correction = this.aiFilter.correctUserInput(rawCompanyName);
+          if (correction.corrected) {
+            const correctedValidation = this.insuranceValidator.validateInsuranceCompany(correction.suggestion);
+            if (correctedValidation.isValid) {
+              insurance.company = correctedValidation.normalizedName;
+              insurance.companyValidation = {
+                status: 'corrected',
+                originalInput: rawCompanyName,
+                correctedInput: correction.suggestion,
+                confidence: correction.confidence
+              };
+            } else {
+              insurance.company = '정보없음';
+              insurance.companyValidation = {
+                status: 'invalid',
+                reason: '등록되지 않은 보험사',
+                originalInput: rawCompanyName,
+                confidence: aiAnalysis.confidence
+              };
+            }
+          } else {
+            insurance.company = '정보없음';
+            insurance.companyValidation = {
+              status: 'invalid',
+              reason: validation.reason,
+              originalInput: rawCompanyName,
+              confidence: aiAnalysis.confidence
+            };
+          }
+        }
       }
       
-      // 가입일 추출
+      // 가입일 추출 및 검증
       const joinMatch = section.match(this.sectionPatterns.insuranceInfo.joinDate);
       if (joinMatch) {
-        insurance.joinDate = this._normalizeDate(joinMatch[0]);
+        const rawJoinDate = joinMatch[0];
+        const dateExtraction = this.aiFilter.extractAndValidateDates(rawJoinDate);
+        
+        if (dateExtraction.found && dateExtraction.dates.length > 0) {
+          insurance.joinDate = dateExtraction.dates[0].formatted;
+          insurance.joinDateValidation = {
+            status: 'valid',
+            originalInput: rawJoinDate,
+            confidence: 'high'
+          };
+        } else {
+          insurance.joinDate = this._normalizeDate(rawJoinDate);
+          insurance.joinDateValidation = {
+            status: 'fallback',
+            originalInput: rawJoinDate,
+            confidence: 'medium'
+          };
+        }
       }
       
       // 상품명 추출
@@ -244,7 +329,7 @@ class MedicalDocumentNormalizer {
       if (Object.keys(insurance).length > 0) {
         insuranceList.push(insurance);
       }
-    });
+    }
     
     return insuranceList;
   }
@@ -283,16 +368,40 @@ class MedicalDocumentNormalizer {
     const sections = [];
     const dateMatches = [];
     
-    // 모든 날짜 패턴 찾기
-    Object.values(this.datePatterns).forEach(pattern => {
+    // 텍스트 타입 검증
+    if (!text || typeof text !== 'string') {
+      console.warn('⚠️ _splitByDateSections: 유효하지 않은 텍스트 입력');
+      return sections;
+    }
+    
+    console.log('🔍 입력 텍스트 전체:');
+    console.log(`"${text}"`);
+    
+    // 모든 날짜 패턴 찾기 - 긴 패턴부터 우선 매치
+    const patternOrder = ['standard', 'withTime', 'medical', 'korean', 'compact', 'short'];
+    
+    patternOrder.forEach(patternName => {
+      const pattern = this.datePatterns[patternName];
       let match;
       while ((match = pattern.exec(text)) !== null) {
-        dateMatches.push({
-          date: match[0],
-          index: match.index
+        // 이미 매치된 위치와 겹치는지 확인
+        const isOverlapping = dateMatches.some(existing => {
+          const existingEnd = existing.index + existing.date.length;
+          const matchEnd = match.index + match[0].length;
+          return (match.index < existingEnd && matchEnd > existing.index);
         });
+        
+        if (!isOverlapping) {
+          dateMatches.push({
+            date: match[0],
+            index: match.index,
+            pattern: patternName
+          });
+        }
       }
     });
+    
+    console.log('🔍 발견된 날짜 매치들:', dateMatches);
     
     // 날짜 위치순 정렬
     dateMatches.sort((a, b) => a.index - b.index);
@@ -303,7 +412,11 @@ class MedicalDocumentNormalizer {
       const end = i < dateMatches.length - 1 ? dateMatches[i + 1].index : text.length;
       const sectionText = text.substring(start, end);
       
-      if (sectionText.trim().length > 10) { // 최소 길이 체크
+      console.log(`🔍 Section ${i}: start=${start}, end=${end}`);
+      console.log(`📝 Raw section text: "${sectionText}"`);
+      console.log(`📝 Trimmed section text: "${sectionText.trim()}"`);
+      
+      if (sectionText && typeof sectionText === 'string' && sectionText.trim().length > 10) { // 최소 길이 체크
         sections.push(sectionText.trim());
       }
     }
@@ -529,9 +642,14 @@ class MedicalDocumentNormalizer {
    * @private
    */
   _formatMedicalRecords(timelineData) {
-    return timelineData
-      .filter(record => record.type === 'medical_record')
-      .map(record => ({
+    console.log('🔍 _formatMedicalRecords 디버깅:');
+    console.log('timelineData 길이:', timelineData.length);
+    console.log('timelineData 샘플:', timelineData.slice(0, 2));
+    
+    const filtered = timelineData.filter(record => record.type === 'medical_record');
+    console.log('필터링된 기록 수:', filtered.length);
+    
+    return filtered.map(record => ({
         date: record.formattedDate,
         hospital: record.hospital || '미확인 의료기관',
         visitDate: record.date,
@@ -550,20 +668,31 @@ class MedicalDocumentNormalizer {
    * @private
    */
   _formatHospitalizationRecords(hospitalizationRecords) {
-    return hospitalizationRecords.map(record => ({
-      date: record.formattedDate,
-      hospital: record.hospital || '미확인 의료기관',
-      visitDate: record.date,
-      reason: record.symptoms || '응급실 내원',
-      diagnosis: record.diagnosis || '미확인',
-      admissionPeriod: `${record.admissionDate} ~ ${record.dischargeDate}`,
-      surgeryInfo: record.surgeryName ? {
-        name: record.surgeryName,
-        date: record.surgeryDate,
-        code: record.surgeryCode
-      } : null,
-      notes: this._extractAdditionalNotes(record.rawText)
-    }));
+    return hospitalizationRecords.map(record => {
+      // admissionDate와 dischargeDate의 undefined 값 처리
+      const admissionDate = record.admissionDate || 'N/A';
+      const dischargeDate = record.dischargeDate || 'N/A';
+      
+      // 둘 다 N/A인 경우 전체를 N/A로 처리
+      const admissionPeriod = (admissionDate === 'N/A' && dischargeDate === 'N/A') 
+        ? 'N/A' 
+        : `${admissionDate} ~ ${dischargeDate}`;
+
+      return {
+        date: record.formattedDate,
+        hospital: record.hospital || '미확인 의료기관',
+        visitDate: record.date,
+        reason: record.symptoms || '응급실 내원',
+        diagnosis: record.diagnosis || '미확인',
+        admissionPeriod: admissionPeriod,
+        surgeryInfo: record.surgeryName ? {
+          name: record.surgeryName,
+          date: record.surgeryDate,
+          code: record.surgeryCode
+        } : null,
+        notes: this._extractAdditionalNotes(record.rawText)
+      };
+    });
   }
 
   /**
@@ -742,6 +871,86 @@ class MedicalDocumentNormalizer {
   _extractPaymentAmount(text) {
     const amountMatch = text.match(/(?:지급금액|금액)\s*[:：]?\s*([\d,]+)\s*원/);
     return amountMatch ? amountMatch[1] : null;
+  }
+
+  /**
+   * 보험 정보 검증 통계 생성
+   * @param {Array} insuranceInfo 보험 정보 배열
+   * @returns {Object} 검증 통계
+   * @private
+   */
+  _generateInsuranceValidationStats(insuranceInfo) {
+    const stats = {
+      total: insuranceInfo.length,
+      valid: 0,
+      invalid: 0,
+      corrected: 0,
+      filteredOut: 0,
+      validationDetails: []
+    };
+
+    insuranceInfo.forEach(insurance => {
+      if (insurance.companyValidation) {
+        const validation = insurance.companyValidation;
+        stats.validationDetails.push({
+          company: insurance.company,
+          status: validation.status,
+          originalInput: validation.originalInput,
+          confidence: validation.confidence
+        });
+
+        switch (validation.status) {
+          case 'valid':
+            stats.valid++;
+            break;
+          case 'corrected':
+            stats.valid++;
+            stats.corrected++;
+            break;
+          case 'filtered_out':
+            stats.filteredOut++;
+            break;
+          case 'invalid':
+            stats.invalid++;
+            break;
+        }
+      }
+    });
+
+    return stats;
+  }
+
+  /**
+   * 의료 기록에 시각화 정보 추가
+   * @param {Array} medicalRecords 의료 기록 배열
+   * @param {string} insuranceJoinDate 보험 가입일
+   * @returns {Array} 시각화 정보가 추가된 의료 기록
+   * @private
+   */
+  _addVisualizationInfo(medicalRecords, insuranceJoinDate) {
+    if (!insuranceJoinDate) {
+      return medicalRecords.map(record => ({
+        ...record,
+        visualization: {
+          category: 'unknown',
+          period: '정보없음',
+          colorCode: '#999999',
+          description: '보험 가입일 정보 없음'
+        }
+      }));
+    }
+
+    return medicalRecords.map(record => {
+      const eventClassification = this.insuranceValidator.classifyEventByJoinDate(
+        insuranceJoinDate,
+        record.date
+      );
+
+      return {
+        ...record,
+        visualization: eventClassification
+      };
+    });
   }
 }
 

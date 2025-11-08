@@ -17,7 +17,7 @@
 
 import { globalErrorHandler, safeExecute, safeExecuteWithRetry } from './errorHandler.js';
 
-export class EnhancedDateAnchor {
+class EnhancedDateAnchor {
   constructor() {
     this.version = '1.0.0';
     this.conflictResolver = new ConflictResolver();
@@ -899,7 +899,7 @@ export class EnhancedDateAnchor {
  * Conflict Resolution 클래스
  * 날짜 충돌을 해결하는 전용 클래스
  */
-export class ConflictResolver {
+class ConflictResolver {
   constructor() {
     this.resolutionStrategies = {
       'temporal_logic': this.resolveTemporalLogic.bind(this),
@@ -1191,7 +1191,7 @@ export class ConflictResolver {
  * Unified Confidence Calculator 클래스
  * 통합된 신뢰도 계산 시스템
  */
-export class UnifiedConfidenceCalculator {
+class UnifiedConfidenceCalculator {
   constructor() {
     this.weights = {
       textClarity: 0.3,
@@ -1310,7 +1310,7 @@ export class UnifiedConfidenceCalculator {
  * Evidence Tracker 클래스
  * 증거 추적 및 관리 시스템
  */
-export class EvidenceTracker {
+class EvidenceTracker {
   constructor() {
     this.evidenceStore = new Map();
   }
@@ -1436,4 +1436,4 @@ export class EvidenceTracker {
 }
 
 // 기본 내보내기
-export default EnhancedDateAnchor;
+export { EnhancedDateAnchor, ConflictResolver, UnifiedConfidenceCalculator, EvidenceTracker };

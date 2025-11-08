@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 // DNA 분석 파이프라인 통합 테스트
 async function testDnaAnalysisPipeline() {
@@ -170,9 +170,11 @@ async function main() {
     
     console.log(`전체 성공률: ${successRate}% (${overallSuccess}/${overallTotal})`);
     
-    if (beforeMetrics && afterMetrics) {
+    if (beforeMetrics && afterMetrics && beforeMetrics.memoryUsage && afterMetrics.memoryUsage) {
         console.log(`메모리 변화: ${beforeMetrics.memoryUsage.heapUsed} → ${afterMetrics.memoryUsage.heapUsed}`);
         console.log(`분석 횟수 증가: ${afterMetrics.totalAnalyses - beforeMetrics.totalAnalyses}`);
+    } else {
+        console.log('메모리 변화: 메트릭스 정보 없음');
     }
     
     console.log('\n🎯 다음 단계 권장사항:');

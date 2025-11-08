@@ -12,13 +12,20 @@ import router from './routes/apiRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import dnaReportRoutes from './routes/dnaReportRoutes.js';
 import enhancedDnaValidationRoutes from './routes/enhancedDnaValidationRoutes.js';
+import coreEngineRoutes from './routes/coreEngineRoutes.js';
+import enhancedCoreRoutes from './routes/enhancedCoreRoutes.js';
 import devStudioRoutes from './routes/devStudioRoutes.js';
 import devStudioIntegratedRoutes from './routes/devStudioIntegratedRoutes.js';
 import alpProcessingRoutes from './routes/alp-processing.js';
 import intelligenceRoutes from './routes/intelligenceRoutes.js';
+// Advanced Date API (legacy v1 routes with /analyze, /performance, etc.)
 import advancedDateRoutes from '../src/routes/advancedDateRoutes.js';
 import monitoringRoutes from './routes/monitoring.js';
 import caseAnalysisRouter from './routes/case-analysis.js';
+import hybridRoutes from './routes/hybridRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
+import ragRoutes from './routes/ragRoutes.js';
+import enhancedReportRoutes from './routes/enhancedReportRoute.js';
 import * as visionService from './services/visionService.js';
 
 // PDF 테스트 비활성화 (pdf-parse 모듈의 테스트 코드가 특정 PDF 파일을 찾지 못하는 문제 해결)
@@ -159,13 +166,20 @@ const PORT = process.env.PORT || 3000;
 
 // CORS 설정
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:8080', 'http://127.0.0.1:8080', 'http://localhost:3030'],
+  origin: [
+    'http://localhost:3000', 'http://127.0.0.1:3000',
+    'http://localhost:5173', 'http://127.0.0.1:5173',
+    'http://localhost:5174', 'http://127.0.0.1:5174',
+    'http://localhost:8080', 'http://127.0.0.1:8080',
+    'http://localhost:8081', 'http://127.0.0.1:8081',
+    'http://localhost:3030'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-console.log(`CORS 설정: 개발 환경 - 특정 출처 허용 (localhost:5173, localhost:5174, localhost:5175, localhost:3030, localhost:8080)`);
+console.log(`CORS 설정: 개발 환경 - 특정 출처 허용 (localhost:5173, localhost:5174, localhost:3030, localhost:8080, localhost:8081)`);
 
 // body-parser 미들웨어 설정
 app.use(express.json({ limit: '100mb' }));
@@ -183,13 +197,19 @@ app.use('/reports', express.static(path.join(__dirname, '../temp/reports')));
 app.use('/reports', express.static(path.join(__dirname, './temp/reports')));
 
 // API 라우트 설정 (전체 활성화)
-app.use('/api/ocr', ocrRoutes);
+console.log('=== API 라우트 등록 시작 ===');
+app.use('/api/ocr', (req, res, next) => {
+  console.log(`OCR 라우트 요청: ${req.method} ${req.path}`);
+  next();
+}, ocrRoutes);
 app.use('/api/enhanced-ocr', enhancedOcrRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/postprocess', postProcessRoutes);
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/dna-report', dnaReportRoutes);
 app.use('/api/enhanced-dna-validation', enhancedDnaValidationRoutes);
+app.use('/api/core-engine', coreEngineRoutes);
+app.use('/api/enhanced-core', enhancedCoreRoutes);
 app.use('/api/dev/studio', devStudioRoutes);
 app.use('/api/dev/studio', devStudioIntegratedRoutes);
 app.use('/api/alp-processing', alpProcessingRoutes);
@@ -197,6 +217,10 @@ app.use('/api/intelligence', intelligenceRoutes);
 app.use('/api/advanced-date', advancedDateRoutes);
 app.use('/api/monitoring', monitoringRoutes);
 app.use('/api/case-analysis', caseAnalysisRouter);
+app.use('/api/hybrid', hybridRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/rag', ragRoutes);
+app.use('/api/enhanced-report', enhancedReportRoutes);
 app.use('/api', router);
 
 // API 상태 확인 라우트 추가

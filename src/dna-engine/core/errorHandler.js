@@ -3,7 +3,7 @@
  * Phase 2 Error Handling Enhancement
  */
 
-export class ErrorHandler {
+class ErrorHandler {
   constructor() {
     this.version = '2.0.0';
     this.errorLog = [];
@@ -480,12 +480,12 @@ export class ErrorHandler {
 }
 
 // 전역 에러 핸들러 인스턴스
-export const globalErrorHandler = new ErrorHandler();
+const globalErrorHandler = new ErrorHandler();
 
 /**
  * 안전한 함수 실행 래퍼
  */
-export function safeExecute(fn, context = {}) {
+function safeExecute(fn, context = {}) {
   return async (...args) => {
     try {
       const result = await fn(...args);
@@ -499,7 +499,7 @@ export function safeExecute(fn, context = {}) {
 /**
  * 재시도 로직이 포함된 안전한 실행
  */
-export function safeExecuteWithRetry(fn, context = {}, maxRetries = 3) {
+function safeExecuteWithRetry(fn, context = {}, maxRetries = 3) {
   return async (...args) => {
     let lastError;
     
@@ -531,3 +531,10 @@ export function safeExecuteWithRetry(fn, context = {}, maxRetries = 3) {
     return globalErrorHandler.handleError(lastError, context);
   };
 }
+
+export { 
+  ErrorHandler, 
+  globalErrorHandler, 
+  safeExecute, 
+  safeExecuteWithRetry 
+};

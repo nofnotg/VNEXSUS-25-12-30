@@ -83,6 +83,24 @@ class EnhancedEntityExtractor {
     console.log('📊 입력 텍스트 분석:');
     console.log(`   - 텍스트 길이: ${text ? text.length : 0}자`);
     console.log(`   - 텍스트 타입: ${typeof text}`);
+    
+    // 텍스트 타입 검증 및 변환
+    if (!text) {
+      console.warn('⚠️ null 또는 undefined 입력');
+      return this.createEmptyResult();
+    }
+    
+    // 문자열이 아닌 경우 문자열로 변환
+    if (typeof text !== 'string') {
+      console.log(`   - 문자열이 아닌 타입 감지: ${typeof text}, 변환 시도`);
+      try {
+        text = String(text);
+      } catch (error) {
+        console.error('⚠️ 문자열 변환 실패:', error);
+        return this.createEmptyResult();
+      }
+    }
+    
     console.log(`   - 빈 텍스트 여부: ${!text || text.trim().length === 0}`);
     
     if (text && text.length > 0) {
@@ -92,8 +110,8 @@ class EnhancedEntityExtractor {
       console.log(`   - "CT" 키워드 포함: ${text.includes('CT')}`);
     }
 
-    if (!text || typeof text !== 'string' || text.trim().length === 0) {
-      console.warn('⚠️ 빈 텍스트 또는 유효하지 않은 입력');
+    if (!text || text.trim().length === 0) {
+      console.warn('⚠️ 빈 텍스트 입력');
       return this.createEmptyResult();
     }
 
@@ -408,4 +426,4 @@ class EnhancedEntityExtractor {
   }
 }
 
-export default new EnhancedEntityExtractor(); 
+export default EnhancedEntityExtractor;

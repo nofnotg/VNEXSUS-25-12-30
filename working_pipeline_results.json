@@ -1,0 +1,333 @@
+{
+  "tests": [
+    {
+      "name": "API 상태",
+      "endpoint": "/api/status",
+      "success": true,
+      "result": {
+        "status": 200,
+        "headers": {
+          "x-powered-by": "Express",
+          "vary": "Origin",
+          "access-control-allow-credentials": "true",
+          "content-type": "application/json; charset=utf-8",
+          "content-length": "194",
+          "etag": "W/\"c2-SwL02ghPHe8qzFmYpbtGU1E/Rak\"",
+          "date": "Sat, 01 Nov 2025 12:12:52 GMT",
+          "connection": "keep-alive",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "success": true,
+          "status": "healthy",
+          "message": "VNEXSUS OCR 서비스가 정상적으로 작동 중입니다.",
+          "timestamp": "2025-11-01T12:12:52.843Z",
+          "services": {
+            "ocr": "active",
+            "vision": "active"
+          }
+        }
+      }
+    },
+    {
+      "name": "코어 엔진 분석",
+      "endpoint": "/api/core-engine/analyze",
+      "success": true,
+      "result": {
+        "status": 200,
+        "headers": {
+          "x-powered-by": "Express",
+          "vary": "Origin",
+          "access-control-allow-credentials": "true",
+          "content-type": "application/json; charset=utf-8",
+          "content-length": "42",
+          "etag": "W/\"2a-Cfahxz+TrjMNLojHBuvbv4bBPT0\"",
+          "date": "Sat, 01 Nov 2025 12:12:52 GMT",
+          "connection": "keep-alive",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "metrics": {
+            "elapsedMs": 14
+          },
+          "warnings": []
+        }
+      }
+    },
+    {
+      "name": "하이브리드 처리",
+      "endpoint": "/api/hybrid/process",
+      "success": true,
+      "result": {
+        "status": 200,
+        "headers": {
+          "x-powered-by": "Express",
+          "vary": "Origin",
+          "access-control-allow-credentials": "true",
+          "content-type": "application/json; charset=utf-8",
+          "content-length": "8875",
+          "etag": "W/\"22ab-xQN0mGexuEUmiSibB73AlrXYadA\"",
+          "date": "Sat, 01 Nov 2025 12:12:52 GMT",
+          "connection": "keep-alive",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "success": true,
+          "requestId": "hybrid_1761999172876_y82483vfm",
+          "processingTime": 2251,
+          "result": {
+            "entities": [],
+            "dates": [
+              {
+                "date": "2025-02-16",
+                "originalDate": "2025-02-16",
+                "confidence": 0.95,
+                "content": "2025.02.17",
+                "type": "coreEngineAnchor",
+                "source": "core"
+              },
+              {
+                "date": "2025-03-23",
+                "originalDate": "2025-03-23",
+                "confidence": 0.95,
+                "content": "25-03-24",
+                "type": "coreEngineAnchor",
+                "source": "core"
+              },
+              {
+                "date": "2025-03-09",
+                "originalDate": "2025-03-09",
+                "confidence": 0.95,
+                "content": "20250310",
+                "type": "coreEngineAnchor",
+                "source": "core"
+              },
+              {
+                "date": "2025-02-17",
+                "originalDate": "2025.02.17",
+                "confidence": 0.7000000000000001,
+                "content": "2025.02.17 진료구분 о입원 ⊙ 외래 일어날 때 어지럼증 -호수공원 걷다가 핑돌면서 쓰러진적 있다함. - 상기 환자의 검사 및 치료를 위하여 전원 합니다. 감사합니다. 이기설의원 가정의학과 전문의.. 주소:양천구 신월3동 194-26 전화:605-8983, 280727174 요양지정번호:13373857 사업자번호:117-58-04840 의사면허번호: 18018 원장 21 발급일 \n\n2025-02-17 담당의사 이기섭 (서명 또는 날인) 면허번호 38018 요양기관지정번호 11373857 명 칭 이기섭의원 주: 1. 이 진료의뢰서는 1차진료후 2차진료를 받고자 하는 경우 1차 진료담당의사로부터 요양급여 기준에 따라 무상으로 교부됩니다. 110. 3. 일사상태 국산호초반에홑의현동,검사, 부약사릉추요쟌호내용을 구체적으로 기재하기 바라며 250002509653 부족시에는 뒷면을 활용하기 바랍니다. 원본대조필 한림대회 의 무 기록팀 등성 등록번호: 250026063 명: 김명희 외래기록지 주민번호: 570725-2 나이/성별: 67세/F 진료일: 20250310 [\n\n2025-02-17 14:40 한정훈 신경외과] 주호소 증상 두통, 어지럼증 통증평가(있을 경우 하단 버튼 눌러 평가) Numeric Rating Scale: 중등도[6] 중등도 이상의 통증에 대한 중재: - 관찰 (observation) 통증의 양상: 날카로움 통증의 위치: 측두엽 Present illness Past history 통증의 빈도: 간헐적 통증의 기간 : 10분 한달",
+                "type": "korean",
+                "source": "legacy"
+              },
+              {
+                "date": "2025-03-10",
+                "originalDate": "2025-03-10",
+                "confidence": 0.7000000000000001,
+                "content": "2025-03-10 발급자 서명 김지현 주. 1. 의무기록팀 \"발급자 서명\"이 없는 것은 무효입니다. 2. 상기 용도 외에는 이 사본을 사용할 수 없으며, 용도가 완료된 후 즉시 파본, 폐기하여야 합니다. 한림대학교강남성심병원 \"직인생략\" 250026063 김명희 570725-2 진료의뢰서 250026063 보험자기호 보험자명칭 의료보험증번호 (세대관리번호) 30236346791 보험자성명 김명희 주민등록번호 수진자성명 김명희 주민등록번호 570725-2057811 수진자주소 서울 양천구 신월3동 174-2 상병명 현기증 NOS 분류기호 R42 진료기간 환자상태및 진료소견 *주증상 어지럼증",
+                "type": "korean",
+                "source": "legacy"
+              },
+              {
+                "date": "2025-03-24",
+                "originalDate": "2025-03-24",
+                "confidence": 0.7000000000000001,
+                "content": "2025-03-24 20:47:05 G 해오름손해사정(주) REAL SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD. 강남성심병원 의무기록사본 총 0부 (표지제외) 빈경환 의무기록 사본 증명서 발행번호 2025-16564 등록번호 250026063 환자명 김명희 [센터]진료과 [뇌신경센터] 신경외과 신청자 대리인 발급매수 14 OH 발급용도 보험회사 제출 구비서류 (신)신분증,(환)신분증,(환)동의서,(환)위임장 첨부한 사본은 의무기록 원본과 틀림이 없음을 증명합니다.",
+                "type": "korean",
+                "source": "legacy"
+              }
+            ],
+            "medical": {
+              "conditions": [],
+              "medications": [],
+              "procedures": [],
+              "symptoms": []
+            },
+            "medicalEvents": [],
+            "timeline": [],
+            "patientInfo": {},
+            "insuranceInfo": [],
+            "diagnostics": [],
+            "primaryDateSource": "dateProcessor",
+            "validation": {
+              "level": "standard",
+              "passed": true,
+              "issues": [],
+              "score": 1
+            },
+            "merge": {
+              "id": "merge_1761999174940_d6s3g9u2o",
+              "strategy": "confidence",
+              "processingTime": 8,
+              "confidenceScore": 0.6625000000000001,
+              "timestamp": "2025-11-01T12:12:54.948Z",
+              "inputSources": {
+                "dateProcessing": {
+                  "processingMode": "hybrid",
+                  "processingTime": 66,
+                  "confidence": 0.8250000000000001,
+                  "itemCount": 12
+                },
+                "normalization": {
+                  "processingMode": "unknown",
+                  "processingTime": 0,
+                  "confidence": 0.5,
+                  "itemCount": 0
+                }
+              }
+            }
+          },
+          "entities": [],
+          "dates": [
+            {
+              "date": "2025-02-16",
+              "originalDate": "2025-02-16",
+              "confidence": 0.95,
+              "content": "2025.02.17",
+              "type": "coreEngineAnchor",
+              "source": "core"
+            },
+            {
+              "date": "2025-03-23",
+              "originalDate": "2025-03-23",
+              "confidence": 0.95,
+              "content": "25-03-24",
+              "type": "coreEngineAnchor",
+              "source": "core"
+            },
+            {
+              "date": "2025-03-09",
+              "originalDate": "2025-03-09",
+              "confidence": 0.95,
+              "content": "20250310",
+              "type": "coreEngineAnchor",
+              "source": "core"
+            },
+            {
+              "date": "2025-02-17",
+              "originalDate": "2025.02.17",
+              "confidence": 0.7000000000000001,
+              "content": "2025.02.17 진료구분 о입원 ⊙ 외래 일어날 때 어지럼증 -호수공원 걷다가 핑돌면서 쓰러진적 있다함. - 상기 환자의 검사 및 치료를 위하여 전원 합니다. 감사합니다. 이기설의원 가정의학과 전문의.. 주소:양천구 신월3동 194-26 전화:605-8983, 280727174 요양지정번호:13373857 사업자번호:117-58-04840 의사면허번호: 18018 원장 21 발급일 \n\n2025-02-17 담당의사 이기섭 (서명 또는 날인) 면허번호 38018 요양기관지정번호 11373857 명 칭 이기섭의원 주: 1. 이 진료의뢰서는 1차진료후 2차진료를 받고자 하는 경우 1차 진료담당의사로부터 요양급여 기준에 따라 무상으로 교부됩니다. 110. 3. 일사상태 국산호초반에홑의현동,검사, 부약사릉추요쟌호내용을 구체적으로 기재하기 바라며 250002509653 부족시에는 뒷면을 활용하기 바랍니다. 원본대조필 한림대회 의 무 기록팀 등성 등록번호: 250026063 명: 김명희 외래기록지 주민번호: 570725-2 나이/성별: 67세/F 진료일: 20250310 [\n\n2025-02-17 14:40 한정훈 신경외과] 주호소 증상 두통, 어지럼증 통증평가(있을 경우 하단 버튼 눌러 평가) Numeric Rating Scale: 중등도[6] 중등도 이상의 통증에 대한 중재: - 관찰 (observation) 통증의 양상: 날카로움 통증의 위치: 측두엽 Present illness Past history 통증의 빈도: 간헐적 통증의 기간 : 10분 한달",
+              "type": "korean",
+              "source": "legacy"
+            },
+            {
+              "date": "2025-03-10",
+              "originalDate": "2025-03-10",
+              "confidence": 0.7000000000000001,
+              "content": "2025-03-10 발급자 서명 김지현 주. 1. 의무기록팀 \"발급자 서명\"이 없는 것은 무효입니다. 2. 상기 용도 외에는 이 사본을 사용할 수 없으며, 용도가 완료된 후 즉시 파본, 폐기하여야 합니다. 한림대학교강남성심병원 \"직인생략\" 250026063 김명희 570725-2 진료의뢰서 250026063 보험자기호 보험자명칭 의료보험증번호 (세대관리번호) 30236346791 보험자성명 김명희 주민등록번호 수진자성명 김명희 주민등록번호 570725-2057811 수진자주소 서울 양천구 신월3동 174-2 상병명 현기증 NOS 분류기호 R42 진료기간 환자상태및 진료소견 *주증상 어지럼증",
+              "type": "korean",
+              "source": "legacy"
+            },
+            {
+              "date": "2025-03-24",
+              "originalDate": "2025-03-24",
+              "confidence": 0.7000000000000001,
+              "content": "2025-03-24 20:47:05 G 해오름손해사정(주) REAL SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD. 강남성심병원 의무기록사본 총 0부 (표지제외) 빈경환 의무기록 사본 증명서 발행번호 2025-16564 등록번호 250026063 환자명 김명희 [센터]진료과 [뇌신경센터] 신경외과 신청자 대리인 발급매수 14 OH 발급용도 보험회사 제출 구비서류 (신)신분증,(환)신분증,(환)동의서,(환)위임장 첨부한 사본은 의무기록 원본과 틀림이 없음을 증명합니다.",
+              "type": "korean",
+              "source": "legacy"
+            }
+          ],
+          "medical": {
+            "conditions": [],
+            "medications": [],
+            "procedures": [],
+            "symptoms": []
+          },
+          "hybrid": {
+            "processingMode": "unified",
+            "pipelineStages": [
+              {
+                "name": "dateProcessing",
+                "duration": 182,
+                "results": 4,
+                "success": 4,
+                "nestedDateResolution": {
+                  "success": true,
+                  "resolvedCount": 0,
+                  "hierarchyDepth": 0
+                }
+              },
+              {
+                "name": "medicalNormalization",
+                "duration": 230,
+                "results": 3,
+                "success": 3
+              },
+              {
+                "name": "resultAnalysis",
+                "duration": 1638,
+                "bestDateScore": 0.8250000000000001,
+                "bestMedicalScore": 0
+              },
+              {
+                "name": "resultMerging",
+                "duration": 11,
+                "finalConfidence": 0
+              }
+            ],
+            "qualityScore": 0.42500000000000004,
+            "confidence": 0
+          },
+          "performance": {
+            "totalPipelineTime": 2066,
+            "stageBreakdown": [
+              {
+                "name": "dateProcessing",
+                "duration": 182,
+                "results": 4,
+                "success": 4,
+                "nestedDateResolution": {
+                  "success": true,
+                  "resolvedCount": 0,
+                  "hierarchyDepth": 0
+                }
+              },
+              {
+                "name": "medicalNormalization",
+                "duration": 230,
+                "results": 3,
+                "success": 3
+              },
+              {
+                "name": "resultAnalysis",
+                "duration": 1638,
+                "bestDateScore": 0.8250000000000001,
+                "bestMedicalScore": 0
+              },
+              {
+                "name": "resultMerging",
+                "duration": 11,
+                "finalConfidence": 0
+              }
+            ],
+            "efficiency": 1.5934172313649564
+          }
+        }
+      }
+    },
+    {
+      "name": "고급 날짜 분석",
+      "endpoint": "/api/advanced-date/analyze",
+      "success": false,
+      "result": {
+        "status": 500,
+        "headers": {
+          "x-powered-by": "Express",
+          "vary": "Origin",
+          "access-control-allow-credentials": "true",
+          "content-type": "application/json; charset=utf-8",
+          "content-length": "2124",
+          "etag": "W/\"84c-+JuH2CLHYpLftAx4KIeN7YWKgi4\"",
+          "date": "Sat, 01 Nov 2025 12:12:55 GMT",
+          "connection": "keep-alive",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "success": false,
+          "error": "stream is not readable",
+          "code": "INTERNAL_ERROR",
+          "timestamp": "2025-11-01T12:12:55.141Z",
+          "path": "/analyze",
+          "method": "POST",
+          "details": "InternalServerError: stream is not readable\n    at readStream (C:\\VNEXSUS_Bin\\node_modules\\raw-body\\index.js:185:17)\n    at getRawBody (C:\\VNEXSUS_Bin\\node_modules\\raw-body\\index.js:116:12)\n    at read (C:\\VNEXSUS_Bin\\node_modules\\body-parser\\lib\\read.js:79:3)\n    at jsonParser (C:\\VNEXSUS_Bin\\node_modules\\body-parser\\lib\\types\\json.js:138:5)\n    at Layer.handle [as handle_request] (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at file:///C:/VNEXSUS_Bin/src/routes/advancedDateRoutes.js:25:3\n    at Layer.handle [as handle_request] (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at Function.handle (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:175:3)\n    at router (C:\\VNEXSUS_Bin\\node_modules\\express\\lib\\router\\index.js:47:12)\n    at Layer.handleRequest (C:\\VNEXSUS_Bin\\backend\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\VNEXSUS_Bin\\backend\\node_modules\\router\\index.js:342:13)\n    at C:\\VNEXSUS_Bin\\backend\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\VNEXSUS_Bin\\backend\\node_modules\\router\\index.js:582:12)\n    at next (C:\\VNEXSUS_Bin\\backend\\node_modules\\router\\index.js:291:5)"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "success": 3,
+    "failed": 1
+  }
+}

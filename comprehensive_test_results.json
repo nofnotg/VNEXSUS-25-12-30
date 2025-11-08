@@ -1,0 +1,120 @@
+{
+  "working": [
+    {
+      "path": "/api/status",
+      "method": "GET",
+      "name": "API 상태"
+    }
+  ],
+  "notFound": [
+    {
+      "path": "/api/enhanced-ocr",
+      "method": "GET",
+      "name": "향상된 OCR"
+    },
+    {
+      "path": "/api/chat",
+      "method": "GET",
+      "name": "채팅"
+    },
+    {
+      "path": "/api/postprocess",
+      "method": "GET",
+      "name": "후처리"
+    },
+    {
+      "path": "/api/core-engine",
+      "method": "GET",
+      "name": "코어 엔진"
+    },
+    {
+      "path": "/api/enhanced-core",
+      "method": "GET",
+      "name": "향상된 코어"
+    },
+    {
+      "path": "/api/dev/studio",
+      "method": "GET",
+      "name": "개발 스튜디오"
+    },
+    {
+      "path": "/api/advanced-date",
+      "method": "GET",
+      "name": "고급 날짜 분석"
+    },
+    {
+      "path": "/api/hybrid",
+      "method": "GET",
+      "name": "하이브리드"
+    },
+    {
+      "path": "/api/rag",
+      "method": "GET",
+      "name": "RAG"
+    },
+    {
+      "path": "/api/enhanced-report",
+      "method": "GET",
+      "name": "향상된 보고서"
+    }
+  ],
+  "errors": [],
+  "postTests": [
+    {
+      "path": "/api/enhanced-ocr/process",
+      "method": "POST",
+      "name": "향상된 OCR 처리",
+      "status": 400,
+      "success": false
+    },
+    {
+      "path": "/api/postprocess/analyze",
+      "method": "POST",
+      "name": "후처리 분석",
+      "status": 404,
+      "success": false
+    },
+    {
+      "path": "/api/core-engine/analyze",
+      "method": "POST",
+      "name": "코어 엔진 분석",
+      "status": 400,
+      "success": false
+    },
+    {
+      "path": "/api/enhanced-core/process",
+      "method": "POST",
+      "name": "향상된 코어 처리",
+      "status": 404,
+      "success": false
+    },
+    {
+      "path": "/api/advanced-date/analyze",
+      "method": "POST",
+      "name": "고급 날짜 분석",
+      "status": 500,
+      "success": false
+    },
+    {
+      "path": "/api/hybrid/process",
+      "method": "POST",
+      "name": "하이브리드 처리",
+      "status": 400,
+      "success": false
+    },
+    {
+      "path": "/api/rag/process",
+      "method": "POST",
+      "name": "RAG 처리",
+      "status": 404,
+      "success": false
+    },
+    {
+      "path": "/api/enhanced-report/generate",
+      "method": "POST",
+      "name": "향상된 보고서 생성",
+      "status": 404,
+      "success": false
+    }
+  ]
+}

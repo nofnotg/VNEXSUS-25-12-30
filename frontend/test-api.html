@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 테스트</title>
+</head>
+<body>
+    <h1>OCR API 테스트</h1>
+    
+    <div>
+        <h2>서비스 상태 확인</h2>
+        <button onclick="testServiceStatus()">서비스 상태 확인</button>
+        <div id="serviceStatusResult"></div>
+    </div>
+    
+    <div>
+        <h2>파일 업로드 테스트</h2>
+        <input type="file" id="testFile" accept=".pdf,.png,.jpg,.jpeg,.txt">
+        <button onclick="testUpload()">업로드 테스트</button>
+        <div id="uploadResult"></div>
+    </div>
+
+    <script>
+        const OCR_API_URL = 'http://localhost:3030/api/ocr';
+        
+        async function testServiceStatus() {
+            const resultDiv = document.getElementById('serviceStatusResult');
+            resultDiv.innerHTML = '테스트 중...';
+            
+            try {
+                console.log('서비스 상태 확인 요청:', `${OCR_API_URL}/service-status`);
+                
+                const response = await fetch(`${OCR_API_URL}/service-status`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+                
+                console.log('응답 상태:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('응답 데이터:', data);
+                
+                resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+            } catch (error) {
+                console.error('서비스 상태 확인 오류:', error);
+                resultDiv.innerHTML = `<div style="color: red;">오류: ${error.message}</div>`;
+            }
+        }
+        
+        async function testUpload() {
+            const fileInput = document.getElementById('testFile');
+            const resultDiv = document.getElementById('uploadResult');
+            
+            if (!fileInput.files.length) {
+                resultDiv.innerHTML = '<div style="color: red;">파일을 선택해주세요.</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '업로드 중...';
+            
+            try {
+                const formData = new FormData();
+                formData.append('files', fileInput.files[0]);
+                
+                console.log('업로드 요청:', `${OCR_API_URL}/upload`);
+                console.log('파일:', fileInput.files[0]);
+                
+                const response = await fetch(`${OCR_API_URL}/upload`, {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+                
+                console.log('업로드 응답 상태:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('업로드 오류 응답:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('업로드 응답 데이터:', data);
+                
+                resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                
+            } catch (error) {
+                console.error('업로드 오류:', error);
+                resultDiv.innerHTML = `<div style="color: red;">오류: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 업로드 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .upload-area { border: 2px dashed #ccc; padding: 20px; margin: 20px 0; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; font-family: monospace; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>파일 업로드 테스트</h1>
+    
+    <div class="upload-area">
+        <input type="file" id="fileInput" multiple>
+        <button onclick="testUpload()">업로드 테스트</button>
+    </div>
+    
+    <div id="log" class="log"></div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+            console.log(message);
+        }
+        
+        async function testUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+            
+            if (files.length === 0) {
+                log('❌ 파일을 선택해주세요');
+                return;
+            }
+            
+            log(`📁 선택된 파일: ${files.length}개`);
+            
+            try {
+                const formData = new FormData();
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('files', files[i]);
+                    log(`📄 파일 ${i+1}: ${files[i].name} (${files[i].size} bytes, ${files[i].type})`);
+                }
+                
+                const url = 'http://localhost:3030/api/ocr/upload';
+                log(`🚀 API 요청 시작: ${url}`);
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                log(`📡 응답 상태: ${response.status} ${response.statusText}`);
+                log(`📋 응답 헤더: ${JSON.stringify(Object.fromEntries(response.headers.entries()), null, 2)}`);
+                
+                const responseText = await response.text();
+                log(`📄 응답 내용: ${responseText}`);
+                
+                if (response.ok) {
+                    const data = JSON.parse(responseText);
+                    log(`✅ 업로드 성공! Job ID: ${data.jobId}`);
+                } else {
+                    log(`❌ 업로드 실패: ${responseText}`);
+                }
+                
+            } catch (error) {
+                log(`💥 오류 발생: ${error.message}`);
+                log(`📚 오류 스택: ${error.stack}`);
+            }
+        }
+        
+        // 페이지 로드 시 초기 로그
+        window.addEventListener('load', () => {
+            log('🎯 테스트 페이지 로드 완료');
+            log(`🌐 현재 URL: ${window.location.href}`);
+            log(`🔗 대상 API: http://localhost:3030/api/ocr/upload`);
+        });
+    </script>
+</body>
+</html>

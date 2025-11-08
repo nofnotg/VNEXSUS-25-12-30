@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNA 시퀀싱 기반 손해사정 보고서 개선 미적용 원인 분석 리포트</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --muted: #cbd5e1;
+      --fg: #e5e7eb;
+      --accent: #22d3ee;
+      --warn: #f59e0b;
+      --error: #ef4444;
+      --ok: #10b981;
+    }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--fg); margin: 0; }
+    header { padding: 24px; border-bottom: 1px solid #1f2937; background: linear-gradient(90deg, #0ea5e9 0%, #22d3ee 100%); color: #041424; }
+    h1 { margin: 0; font-size: 20px; }
+    main { padding: 24px; }
+    section { background: var(--panel); border: 1px solid #1f2937; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    h2 { font-size: 16px; margin: 0 0 12px; color: var(--accent); }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; color: var(--muted); }
+    code, kbd { background: #0b1220; color: #93c5fd; padding: 2px 6px; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    pre { background: #0b1220; color: #c7d2fe; padding: 12px; border-radius: 12px; overflow-x: auto; border: 1px solid #1e293b; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .ok { background: rgba(16,185,129,.12); color: var(--ok); border: 1px solid rgba(16,185,129,.35); }
+    .warn { background: rgba(245,158,11,.12); color: var(--warn); border: 1px solid rgba(245,158,11,.35); }
+    .error { background: rgba(239,68,68,.12); color: var(--error); border: 1px solid rgba(239,68,68,.35); }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .kv { display: grid; grid-template-columns: 180px 1fr; gap: 8px; align-items: start; }
+    .kv .k { color: #9ca3af; }
+    .kv .v { color: var(--fg); }
+    footer { padding: 16px 24px; color: #94a3b8; font-size: 12px; }
+  </style>
+  <meta name="robots" content="noindex" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="VNEXSUS DNA 시퀀싱 기반 손해사정 보고서 개선 미적용 원인 분석 및 통합 계획" />
+  <link rel="icon" href="data:," />
+  <!-- 로컬 미리보기 전용 문서. 서버 라우트/버튼에는 영향을 주지 않습니다. -->
+</head>
+<body>
+  <header>
+    <h1>DNA 시퀀싱 기반 손해사정 보고서 개선 미적용 원인 분석 리포트</h1>
+    <div class="small">VNEXSUS · 내부 품질 점검 문서 (로컬 프리뷰용)</div>
+  </header>
+  <main>
+    <section>
+      <h2>현상 요약</h2>
+      <ul>
+        <li>사용자 입력 기반으로 생성된 보고서에 <code>가입보험사: 해오름손해사정(주)</code>가 표기됨.</li>
+        <li>진단명 포맷이 개선안(<code>한글 (영문, ICD)</code>) 미적용 상태로 <code>영문 + ICD</code>만 표기됨.</li>
+        <li><code>Report_Sample.txt</code> 구조와 일부 통계(예: <code>YYYY.MM.DD ~ YYYY.MM.DD / X회 통원</code>)는 유지되나, 용어/보험사 구분 개선은 반영되지 않음.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>조사 결과</h2>
+      <div class="grid">
+        <div>
+          <h3 class="small">라우트/컨트롤러 경로</h3>
+          <ul>
+            <li><code>backend/routes/dnaReportRoutes.js</code>: GPT 호출 후 <code>reportText</code>를 그대로 반환.</li>
+            <li><code>backend/routes/devStudioRoutes.js</code> 및 <code>backend/controllers/devStudioController.js</code>: <code>Report_Sample.txt</code> 양식 프롬프트 기반 생성.</li>
+            <li><code>backend/config/enhancedPromptBuilder.js</code>: 강화된 DNA 파이프라인 프롬프트 정의(분절/시간/엔티티/통계/합성).</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="small">강화 모듈 상태</h3>
+          <ul>
+            <li><code>enhancedMedicalTermProcessor.js</code>: 보험사/손해사정사 구분 및 용어 양방향(한/영) 처리 로직 존재.</li>
+            <li><code>enhancedReportTemplateEngine.js</code>: 
+              <span class="muted">RAG·고지의무 자동화·질병별 검사 규칙·양방향 용어</span> 통합 템플릿 엔진 존재.</li>
+            <li><code>backend/services/nineItemReportGenerator.js</code>: 9항목 추출/포맷 로직 존재(서비스 레벨), 라우트 연계 미확인.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="small">구체 증거 (코드 스니펫)</h3>
+      <pre><code>// dnaReportRoutes.js (요약)
+const { systemPrompt, userPrompt } = buildEnhancedMedicalDnaPrompt(...);
+const completion = await openai.chat.completions.create({ model: "gpt-4o-mini", messages: [...] });
+const reportText = completion.choices[0].message.content;
+return res.json({ report: reportText, reportText });
+
+// 미적용 포인트: reportText에 대해 용어/보험사 구분 후처리 미수행
+
+// enhancedMedicalTermProcessor.js (요약)
+// excludeInsuranceCompanyKeywords에 손해사정사 키워드 포함, 보험사와 구분 처리 가능
+// ICD 한/영 매핑 및 축약어 확장 기능 존재
+
+// nineItemReportGenerator.js (요약)
+// 9항목 템플릿(standard/detailed/summary) 및 DiagnosisExtractor 보유
+// 현재 백엔드 라우트에서 직접 호출 흔적 없음
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>근본 원인 분석</h2>
+      <ul>
+        <li>라우트가 <code>LLM → reportText 반환</code>의 단순 경로를 사용하며, 
+          <strong>강화 용어처리/템플릿 엔진으로 후처리</strong> 단계가 파이프라인에 <em>연결되지 않음</em>.</li>
+        <li>손해사정사(<code>해오름손해사정(주)</code>)와 보험사 구분 로직은 모듈에 존재하나, 
+          <strong>API 응답 구성에서 필터링/정규화 미적용</strong>.</li>
+        <li>9항목 보고서 생성기는 서비스 레벨에 구현되어 있으나, 
+          <strong>DNA 보고서 라우트와의 연동 경로 부재</strong>로 개선효과가 보고서에 반영되지 않음.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>파이프라인/버튼 영향도</h2>
+      <ul>
+        <li>기존 버튼/라우트는 정상 동작(생성/응답 반환). 
+          <span class="badge ok">동작 OK</span></li>
+        <li>다만 <strong>후처리 미적용</strong>으로 인해 보고서 품질(보험사/손해사정사 구분, 진단명 양방향 표기)이 저하. 
+          <span class="badge warn">품질 경고</span></li>
+        <li>제안 통합은 <strong>응답 필드(<code>report</code>, <code>reportText</code>) 유지</strong>로 호환성 보장. 
+          <span class="badge ok">호환성 보장</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>개선안 및 통합 계획</h2>
+      <ol>
+        <li><strong>후처리 단계 주입</strong>: <code>dnaReportRoutes.js</code>에서 LLM 응답 수신 후
+          <code>EnhancedMedicalTermProcessor.processComprehensive(reportText)</code> 실행 → 
+          보험사/손해사정사 구분, 진단명 <span class="muted">한글(영문, ICD)</span> 표준화.</li>
+        <li><strong>템플릿 엔진 적용</strong>: <code>EnhancedReportTemplateEngine</code>으로 <code>Report_Sample.txt</code> 포맷 준수 + 
+          고지의무(3개월/2년/5년) 자동 주석 삽입.</li>
+        <li><strong>9항목 병행 출력 옵션</strong>: 응답에 <code>reportNineItem</code> 추가(기본 off). 
+          프런트 버튼 <span class="muted">[고급 보고서]</span>에서만 노출.</li>
+        <li><strong>안전 가드</strong>: 실패 시 <code>reportText</code> 원본을 그대로 반환(백워드 호환).</li>
+      </ol>
+      <pre><code>// 통합 의사코드 (설계)
+import { EnhancedMedicalTermProcessor } from '../../enhancedMedicalTermProcessor.js';
+import { EnhancedReportTemplateEngine } from '../../enhancedReportTemplateEngine.js';
+
+const term = new EnhancedMedicalTermProcessor();
+const engine = new EnhancedReportTemplateEngine({ termProcessor: term });
+
+const raw = reportText; // LLM 응답
+const normalized = await term.processComprehensive(raw);
+const finalText = await engine.renderReportSampleFormat(normalized, { insuranceJoinDate });
+
+res.json({ report: finalText, reportText: finalText, ...meta });
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>검증 항목</h2>
+      <div class="grid">
+        <div>
+          <h3 class="small">엣지케이스 (5)</h3>
+          <ul>
+            <li>보험 가입일 미제공 → <code>[미제공]</code> 표기, 고지의무 판단 보류.</li>
+            <li>손해사정사만 존재(보험사 없음) → 보험사 섹션 비우고 <code>조정기관</code>으로 분류.</li>
+            <li>진단명이 영문만 존재 → <code>한글(영문, ICD)</code>로 양방향 변환.</li>
+            <li>통원기간 여러 회 → <code>YYYY.MM.DD ~ YYYY.MM.DD / N회 통원</code> 정규화.</li>
+            <li>중복 병원명/검사명 → 유니크 병합 및 출처 표시.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="small">성능 영향·대안</h3>
+          <ul>
+            <li><strong>대안 A</strong>: 라우트 내 동기 후처리(간단, 지연 소폭↑). 트레이드오프: 응답시간 +30~80ms.</li>
+            <li><strong>대안 B</strong>: 비동기 파이프라인(워크큐로 후처리, UI는 원본 표시 후 갱신). 트레이드오프: 구현 복잡도↑.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>통합 후 기대 결과 (샘플 포맷)</h2>
+      <pre><code>진단명: 협심증 (Stable angina pectoris, ICD: I20.9)
+진단명: 흉통 상세불명 (Chest pain, unspecified, ICD: R07.4)
+보험사: [미제공]
+조정기관: 해오름손해사정(주)
+통원기간: 2024.12.12 ~ 2024.12.12 / 1회 통원
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>다음 액션</h2>
+      <ul>
+        <li>라우트 후처리 주입(용어/템플릿) → <code>reportText</code> 유지.</li>
+        <li>옵션 플래그로 9항목 보고서 병행 출력 추가.</li>
+        <li>Vitest 유닛/통합 테스트 추가(엣지케이스 5종 포함).</li>
+        <li>CI 가드: <code>eslint · typecheck · vitest --coverage · secretlint</code> 통과 확인.</li>
+      </ul>
+      <div class="kv">
+        <div class="k">파이프라인 무중단</div><div class="v"><span class="badge ok">기존 버튼/응답 필드 유지</span></div>
+        <div class="k">적용 범위</div><div class="v">DNA 보고서 라우트 후처리 단계</div>
+        <div class="k">롤백 계획</div><div class="v">환경 변수 플래그로 즉시 비활성화</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>참고 링크/파일</h2>
+      <ul>
+        <li><code>backend/routes/dnaReportRoutes.js</code></li>
+        <li><code>backend/controllers/devStudioController.js</code></li>
+        <li><code>backend/routes/devStudioRoutes.js</code></li>
+        <li><code>backend/config/enhancedPromptBuilder.js</code></li>
+        <li><code>backend/services/nineItemReportGenerator.js</code></li>
+        <li><code>enhancedMedicalTermProcessor.js</code></li>
+        <li><code>enhancedReportTemplateEngine.js</code></li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    이 문서는 로컬 프리뷰를 위해 생성되었으며, 서버 라우트/버튼 동작에는 영향을 주지 않습니다.
+  </footer>
+</body>
+</html>
+

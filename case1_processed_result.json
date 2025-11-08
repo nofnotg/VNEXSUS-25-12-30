@@ -1,0 +1,99 @@
+{
+  "success": true,
+  "data": {
+    "success": true,
+    "processingTime": 255,
+    "pipeline": {
+      "massiveDateBlocks": {
+        "dateBlocks": [],
+        "structuredGroups": [],
+        "processedSize": 0,
+        "statistics": {
+          "averageConfidence": 0,
+          "filteringRate": 0
+        }
+      },
+      "preprocessedData": [
+        {
+          "date": "2025-03-24",
+          "hospital": "강남성심병원",
+          "rawText": "2025-03-24 20:47:05\nG\n해오름손해사정(주)\nREAL SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n강남성심병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ],
+      "organizedData": [
+        {
+          "date": "2025-03-24",
+          "hospitals": [
+            "강남성심병원"
+          ],
+          "items": [
+            {
+              "date": "2025-03-24",
+              "hospital": "강남성심병원",
+              "rawText": "2025-03-24 20:47:05\nG\n해오름손해사정(주)\nREAL SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n강남성심병원",
+              "keywordMatches": [],
+              "mappedTerms": [],
+              "shouldExclude": false,
+              "excludedMatches": []
+            }
+          ]
+        }
+      ],
+      "aiExtractedData": null,
+      "finalReport": {
+        "filename": "report_2025-10-26T12-08-38_47c63446.json",
+        "filePath": "C:\\VNEXSUS_Bin\\temp\\reports\\report_2025-10-26T12-08-38_47c63446.json",
+        "downloadUrl": "/reports/report_2025-10-26T12-08-38_47c63446.json",
+        "data": {
+          "title": "병력사항 요약 경과표",
+          "generatedAt": "2025-10-26T12:08:38.422Z",
+          "patientInfo": {},
+          "stats": {
+            "total": 1,
+            "within3Months": 0,
+            "within5Years": 0
+          },
+          "items": [
+            {
+              "date": "2025-03-24",
+              "keywordMatches": [],
+              "mappedTerms": [],
+              "isWithin3Months": false,
+              "isWithin5Years": false
+            }
+          ]
+        },
+        "reportId": "47c63446-3f0b-4c66-8a4c-1a878b0c80c5",
+        "format": "json",
+        "timestamp": "2025-10-26T12:08:38.425Z",
+        "patientInfo": {},
+        "preview": [
+          {
+            "date": "2025-03-24",
+            "hospital": "병원명미상",
+            "diagnosis": [],
+            "treatment": []
+          }
+        ]
+      }
+    },
+    "statistics": {
+      "originalTextLength": 40502,
+      "processedGroups": 0,
+      "dateBlocks": 0,
+      "confidence": 0,
+      "filteringRate": 0
+    },
+    "metadata": {
+      "version": "7.2",
+      "timestamp": "2025-10-26T12:08:38.426Z",
+      "processingMode": "RULE_BASED",
+      "pipelineSteps": 5
+    }
+  },
+  "timestamp": "2025-10-26T12:08:38.426Z"
+}

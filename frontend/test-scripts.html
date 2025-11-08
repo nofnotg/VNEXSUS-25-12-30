@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크립트 테스트</title>
+</head>
+<body>
+    <h1>스크립트 테스트</h1>
+    <div id="test-output"></div>
+
+    <script>
+        console.log('테스트 시작');
+        
+        // 네임스페이스 초기화
+        window.VNEXSUSApp = window.VNEXSUSApp || {};
+        
+        function testScript(scriptName, scriptSrc) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = scriptSrc;
+                script.onload = () => {
+                    console.log(`✓ ${scriptName} 로드 성공`);
+                    resolve();
+                };
+                script.onerror = (error) => {
+                    console.error(`✗ ${scriptName} 로드 실패:`, error);
+                    reject(error);
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        async function runTests() {
+            const output = document.getElementById('test-output');
+            
+            try {
+                await testScript('VisualizationComponents', 'components/visualizationComponents.js?v=1.0.3');
+                output.innerHTML += '<p>✓ VisualizationComponents 로드 성공</p>';
+                
+                await testScript('ReportRenderer', 'components/reportRenderer.js?v=1.0.3');
+                output.innerHTML += '<p>✓ ReportRenderer 로드 성공</p>';
+                
+                await testScript('Script.js', 'script.js?v=1.0.3');
+                output.innerHTML += '<p>✓ Script.js 로드 성공</p>';
+                
+                await testScript('AI Report', 'ai-report.js?v=1.0.3');
+                output.innerHTML += '<p>✓ AI Report 로드 성공</p>';
+                
+                output.innerHTML += '<p><strong>모든 스크립트가 성공적으로 로드되었습니다!</strong></p>';
+                
+            } catch (error) {
+                output.innerHTML += `<p style="color: red;">오류 발생: ${error.message}</p>`;
+            }
+        }
+
+        runTests();
+    </script>
+</body>
+</html>

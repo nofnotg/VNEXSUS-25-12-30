@@ -23,7 +23,7 @@ class EnhancedSystemTester {
    */
   async runComprehensiveTest() {
     console.log('🧪 향상된 날짜 블록 처리 시스템 종합 테스트 시작...');
-    console.log('=' * 60);
+    console.log('='.repeat(60));
     
     try {
       // Case 파일 목록 가져오기
@@ -282,7 +282,7 @@ class EnhancedSystemTester {
    */
   _analyzeOverallResults() {
     console.log('\n📊 종합 결과 분석');
-    console.log('=' * 40);
+    console.log('='.repeat(40));
     
     const successfulTests = this.testResults.filter(result => result.success);
     const failedTests = this.testResults.filter(result => !result.success);

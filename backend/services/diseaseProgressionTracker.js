@@ -6,6 +6,14 @@
  * 기존 질환과 신규 질환을 구분하고 보험 리스크를 평가합니다.
  */
 
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
 const { AIService } = require('./aiService');
 const logger = require('../utils/logger');
 
@@ -1024,4 +1032,4 @@ ${eventsText}
     }
 }
 
-module.exports = { DiseaseProgressionTracker };
+export { DiseaseProgressionTracker };

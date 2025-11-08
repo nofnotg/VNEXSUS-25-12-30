@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>통합 고도화 보고서 파이프라인 (Core Engine + 후처리)</title>
+  <style>
+    :root { --bg:#0f1217; --card:#141923; --text:#e6edf3; --muted:#9aa4af; --accent:#58a6ff; --good:#2ea043; --warn:#d29922; --bad:#f85149; }
+    body { margin:0; font-family:Segoe UI, Roboto, Apple SD Gothic Neo, Malgun Gothic, sans-serif; background:var(--bg); color:var(--text); }
+    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
+    h1 { font-size:26px; margin:0 0 14px; }
+    h2 { font-size:20px; margin:30px 0 10px; }
+    p, li { line-height:1.6; }
+    .card { background:var(--card); border:1px solid #222; border-radius:10px; padding:18px; margin:16px 0; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .badge { display:inline-block; font-size:12px; padding:2px 8px; border-radius:20px; background:#1b2130; color:var(--muted); margin-left:8px; }
+    .step { display:flex; align-items:flex-start; gap:10px; margin:8px 0; }
+    .step .n { width:26px; height:26px; border-radius:50%; background:#1b2130; color:#aeb6bf; display:flex; align-items:center; justify-content:center; font-size:12px; flex:0 0 auto; }
+    ul { padding-left:18px; }
+    .tag { font-size:12px; color:var(--muted); }
+    .ok { color:var(--good); }
+    .warn { color:var(--warn); }
+    .no { color:var(--bad); }
+    .table { width:100%; border-collapse:collapse; margin-top:8px; }
+    .table th, .table td { border:1px solid #243042; padding:8px; text-align:left; font-size:13px; }
+    .table th { background:#182032; color:#cbd4de; }
+    .table tr:nth-child(even) { background:#11161f; }
+    .muted { color:var(--muted); }
+    .small { font-size:12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>통합 고도화 보고서 파이프라인</h1>
+    <p class="muted">Core Engine(Enhanced DNA Sequencing)와 기존 후처리(PostProcessingManager)를 결합해, 건당 3–5분 품질 예산을 활용하여 더 꼼꼼하고 풍성한 보고서를 생성하는 설계 제안입니다.</p>
+
+    <div class="card">
+      <h2>요약</h2>
+      <ul>
+        <li>통합 가능: 두 시스템은 라우터·서비스 레벨에서 자연스럽게 결합 가능합니다. <span class="badge">/api/enhanced-dna-validation</span></li>
+        <li>상호 보완: 코어엔진의 빠른 추출/정규화 + 후처리의 날짜·그룹화·보고서 빌더를 합치면 정확도·완결성 향상</li>
+        <li>케이스 비교: <span class="badge">case_sample</span> 기반으로 AI 보고서 vs 실보고서를 다수 케이스로 논리 비교·채점 가능</li>
+        <li>품질 예산(3–5분): 다중 패스 검증/보강을 수행해 오탈자·누락·충돌을 줄이고 근거 링크(Evidence)를 강화</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>통합 아키텍처</h2>
+      <div class="grid">
+        <div>
+          <p class="tag">사용 모듈/라우트</p>
+          <ul>
+            <li>후처리: <code>PostProcessingManager.processOCRResult()</code></li>
+            <li>코어엔진: <code>EnhancedDnaValidator (Stage1–4)</code> · <span class="badge">/api/enhanced-dna-validation/analyze</span></li>
+            <li>보고서: <code>NineItemReportGenerator.generateReport()</code></li>
+          </ul>
+        </div>
+        <div>
+          <p class="tag">권장 파이프라인</p>
+          <div class="step"><div class="n">0</div><div>접수·OCR·클린업 (후처리 전처리)</div></div>
+          <div class="step"><div class="n">1</div><div>세그멘테이션·타임라인 정규화 (Stage1–2)</div></div>
+          <div class="step"><div class="n">2</div><div>엔티티 정규화·신뢰도 집계 (Stage3 + Confidence)</div></div>
+          <div class="step"><div class="n">3</div><div>AI 보고서 합성 (Stage4)</div></div>
+          <div class="step"><div class="n">4</div><div>9항목 표준 보고서 생성·증거 첨부</div></div>
+          <div class="step"><div class="n">5</div><div>동적 검증·충돌 탐지·누락 보강</div></div>
+          <div class="step"><div class="n">6</div><div>최종 편집(요약/상세/인쇄) 및 내보내기</div></div>
+        </div>
+      </div>
+      <table class="table small">
+        <tr><th>품질 목표</th><th>전략</th></tr>
+        <tr><td>정확도</td><td>날짜 앵커·의사/병원 매핑·검사/치료 근거 추적 강화</td></tr>
+        <tr><td>완결성</td><td>누락 감지(9항목 빈칸 탐지)·지식베이스 질의로 보강</td></tr>
+        <tr><td>일관성</td><td>타임라인 충돌 검사(입·퇴원/통원 중복·역전)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>케이스별 비교·채점</h2>
+      <ul>
+        <li><span class="badge">/api/enhanced-dna-validation/validate-case</span>로 <code>CaseX.txt</code>와 <code>CaseX_report.txt</code>를 비교</li>
+        <li>지표: 정확도(앵커/엔티티 일치), 완결성(9항목 충족률), 충돌(타임라인/진단 모순), 근거성(인용/출처)</li>
+        <li>대상: Case1–10(+), 최소 6–8케이스로 통계적 패턴 도출</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>3–5분 품질 예산 전략</h2>
+      <ul>
+        <li>멀티 패스 합성: 초안(30–45초) → 표적 보강(60–90초) → 검토(60–120초)</li>
+        <li>타겟 리트리벌: 누락/의심 섹션에 한해 지식베이스/사전(진단·검사) 조회</li>
+        <li>동적 검증: 날짜·수치·코드(검사/치료명) 자동 검사 + 경고 리포트</li>
+        <li>레드팀 프롬프트: 자체 모순·가정·불확실성 점검 문답 삽입</li>
+        <li>근거 번들: 원문 스니펫·타임라인 링크·표준코드 매핑(가능 시) 포함</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>통합 엔드포인트 제안</h2>
+      <p class="small muted">실제 구현은 기존 라우트와 서비스 조합으로 간단히 확장 가능합니다.</p>
+      <pre class="small" style="white-space:pre-wrap; background:#0e1420; padding:10px; border-radius:8px; border:1px solid #223;">
+POST /api/unified-report/generate
+Body: { extractedText, patientInfo, qualityLevel: "fast|balanced|thorough" }
+Flow:
+  1) PostProcessingManager.processOCRResult(extractedText, opts)
+  2) EnhancedDnaValidator Stage1–4 실행 (정규화+AI 합성)
+  3) NineItemReportGenerator.generateReport(dnaResult, patientInfo)
+  4) DynamicValidationEngine로 누락/충돌/증거 점검
+  5) HTML/PDF/JSON 출력(요약/상세/인쇄 모드)
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>기대 효과 및 로드맵</h2>
+      <ul>
+        <li>단기(즉시): 통합 호출로 일관된 9항목 보고서·증거 강화</li>
+        <li>중기(3–6개월): 지식베이스·전문 룰(심사/의학/법률)의 부분 자동화</li>
+        <li>장기(12개월): 하이브리드 AI-전문가 리뷰 시스템, 대량 처리·품질 상향</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>권고</h2>
+      <ul>
+        <li>통합 오케스트레이터(Service) 구현 및 케이스 배치 비교(최소 6–8건)</li>
+        <li>3–5분 품질 예산 옵션을 API 파라미터화하여 운영 모드 제공</li>
+        <li>리포트에 근거 링크·경고 박스를 기본 포함해 신뢰도 향상</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -7,6 +7,13 @@
  * 6. 검사내용및결과, 7. 치료사항, 8. 과거력(기왕력), 9. 기타사항(추가연관성)
  */
 
+import { createRequire } from 'module';
+import path from 'path';
+
+// Jest 환경 호환을 위해 import.meta.url 사용을 제거하고
+// 현재 프로젝트 루트 기준으로 require 컨텍스트를 생성합니다.
+const require = createRequire(path.resolve(process.cwd(), 'backend', 'services', 'nineItemReportGenerator.js'));
+
 const { AIService } = require('./aiService');
 const DynamicValidationEngine = require('./DynamicValidationEngine');
 const HybridProcessingEngine = require('./HybridProcessingEngine');
@@ -18,7 +25,7 @@ class NineItemReportGenerator {
         this.aiService = new AIService();
         this.dynamicValidator = new DynamicValidationEngine();
         this.hybridEngine = new HybridProcessingEngine();
-        this.performanceMonitor = new PerformanceMonitor();
+        this.performanceMonitor = new PerformanceMonitor({ enableAlerts: false });
         this.extractors = this.initializeExtractors();
         this.templates = this.initializeTemplates();
     }
@@ -1566,7 +1573,7 @@ class DoctorOpinionExtractor {
     }
 }
 
-module.exports = { 
+export { 
     NineItemReportGenerator,
     VisitDateExtractor,
     VisitReasonExtractor,
@@ -1579,3 +1586,5 @@ module.exports = {
     CorrelationExtractor,
     DoctorOpinionExtractor
 };
+
+export default NineItemReportGenerator;

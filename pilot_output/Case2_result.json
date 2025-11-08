@@ -1,0 +1,1027 @@
+{
+  "caseId": "Case2",
+  "caseBundle": {
+    "id": "case_1761279687459_dd0qdd0bn",
+    "caseId": "Case2",
+    "processingId": null,
+    "version": "2.0.0",
+    "qualityScore": {
+      "overallScore": 35,
+      "qualityGate": "insufficient",
+      "breakdown": {
+        "informationPreservation": {
+          "textPreservationRatio": 0.4161490683229814,
+          "structuralPreservationRatio": 1,
+          "semanticPreservationRatio": 0,
+          "score": 12,
+          "details": {
+            "originalLength": 644,
+            "preservedLength": 268,
+            "originalKeywords": 0,
+            "preservedKeywords": 0,
+            "keywordOverlap": 0
+          }
+        },
+        "entityExtraction": {
+          "precision": 0,
+          "recall": 0,
+          "f1Score": 0,
+          "confidenceDistribution": {
+            "high": 7,
+            "medium": 3,
+            "low": 0
+          },
+          "typeAccuracy": {
+            "anatomy": {
+              "count": 3,
+              "totalConfidence": 2.0999999999999996,
+              "averageConfidence": 0.6999999999999998
+            },
+            "value": {
+              "count": 7,
+              "totalConfidence": 6,
+              "averageConfidence": 0.8571428571428571
+            }
+          },
+          "score": 0,
+          "details": {
+            "totalEntities": 10,
+            "highConfidenceEntities": 7,
+            "averageConfidence": 0.8099999999999999
+          }
+        },
+        "temporalNormalization": {
+          "temporalCoverage": 0,
+          "dateAccuracy": 0,
+          "sequenceAccuracy": 1,
+          "inferenceQuality": 1,
+          "score": 8,
+          "details": {
+            "totalEvents": 10,
+            "datedEvents": 0,
+            "inferredEvents": 0,
+            "timeSpan": null
+          }
+        },
+        "contextualClassification": {
+          "segmentationQuality": 1,
+          "contextAccuracy": 0,
+          "domainClassification": 1,
+          "coherenceScore": 0.5,
+          "score": 15,
+          "details": {
+            "totalSegments": 1,
+            "contextualSegments": 0,
+            "medicalSegments": 1,
+            "averageConfidence": 0.5
+          }
+        }
+      },
+      "detailedAnalysis": {
+        "strengths": [],
+        "weaknesses": [
+          "정보 보존도",
+          "엔티티 추출",
+          "시간 정규화"
+        ],
+        "riskFactors": [
+          "시간 정보 부족"
+        ],
+        "improvementAreas": [
+          "preservation",
+          "entity",
+          "temporal",
+          "context"
+        ],
+        "confidenceAnalysis": {
+          "average": null,
+          "min": null,
+          "max": null,
+          "distribution": {
+            "high": 0,
+            "medium": 0,
+            "low": 0
+          }
+        },
+        "performanceMetrics": {
+          "entitiesPerSegment": 10,
+          "eventsPerEntity": 1,
+          "averageSegmentLength": 268
+        }
+      },
+      "recommendations": [
+        {
+          "priority": "high",
+          "category": "quality_improvement",
+          "description": "품질 점수가 목표치(70점)에 미달합니다. 전반적인 개선이 필요합니다."
+        },
+        {
+          "priority": "medium",
+          "category": "weakness_improvement",
+          "description": "정보 보존도 영역의 개선이 필요합니다."
+        },
+        {
+          "priority": "medium",
+          "category": "weakness_improvement",
+          "description": "엔티티 추출 영역의 개선이 필요합니다."
+        },
+        {
+          "priority": "medium",
+          "category": "weakness_improvement",
+          "description": "시간 정규화 영역의 개선이 필요합니다."
+        },
+        {
+          "priority": "high",
+          "category": "risk_mitigation",
+          "description": "시간 정보 부족 위험 요소에 대한 대응이 필요합니다."
+        }
+      ],
+      "metadata": {
+        "processingTime": 12,
+        "timestamp": "2025-10-24T04:21:27.471Z",
+        "version": "1.0.0"
+      }
+    },
+    "originalText": "\n                환자명: 김철수 (남, 45세)\n                진료일: 2024년 3월 15일\n                \n                주소: 복부 통증으로 내원\n                \n                현병력:\n                2024년 2월 20일부터 상복부 통증 시작\n                통증은 식후 악화되며 야간에 심해짐\n                3월 10일 타 병원에서 위내시경 검사 시행\n                위궤양 진단받고 PPI 처방받아 복용 중\n                \n                과거력:\n                2020년 고혈압 진단\n                현재 리시노프릴 5mg 복용 중\n                \n                검사 결과:\n                혈압: 140/90 mmHg\n                체온: 36.8℃\n                맥박: 72회/분\n                \n                진단: 위궤양, 고혈압\n                처방: 오메프라졸 20mg, 리시노프릴 5mg 지속\n                ",
+    "segments": [
+      {
+        "id": "seg_1761279687424_y31hnymzn",
+        "text": "환자명: 김철수 (남, 45세) 진료일: 2024년 3월 15일 주소: 복부 통증으로 내원 현병력: 2024년 2월 20일부터 상복부 통증 시작 통증은 식후 악화되며 야간에 심해짐 3월 10일 타 병원에서 위내시경 검사 시행 위궤양 진단받고 PPI 처방받아 복용 중 과거력: 2020년 고혈압 진단 현재 리시노프릴 5mg 복용 중 검사 결과: 혈압: 140/90 mmHg 체온: 36.8 맥박: 72회/분 진단: 위궤양, 고혈압 처방: 오메프라졸 20mg, 리시노프릴 5mg 지속",
+        "sourceIndex": 0,
+        "contextType": "general",
+        "medicalDomain": "general",
+        "confidence": 0.5,
+        "position": {
+          "start": 0,
+          "end": 268
+        },
+        "metadata": {
+          "length": 268,
+          "wordCount": 64,
+          "hasDatePattern": false,
+          "hasMedicalTerms": true,
+          "hospitalIndex": 0,
+          "segmentationMethod": "length-based",
+          "medicalTermDensity": 0.15625
+        },
+        "createdAt": "2025-10-24T04:21:27.424Z"
+      }
+    ],
+    "entities": [
+      {
+        "id": "ent_1761279687437_9oodkfbt1",
+        "type": "anatomy",
+        "subtype": "organ",
+        "text": "복부",
+        "normalizedText": "복부",
+        "value": null,
+        "unit": null,
+        "confidence": 0.7,
+        "position": {
+          "start": 40,
+          "end": 42
+        },
+        "context": "환자명: 김철수 (남, 45세) 진료일: 2024년 3월 15일 주소: 복부 통증으로 내원 현병력: 2024년 2월 20일부터 상복부 통증 시작 통증은 식후 악화",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687437_tc4qx9v31",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "복부",
+            "position": {
+              "start": 40,
+              "end": 42
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "anatomy_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.437Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn"
+        },
+        "createdAt": "2025-10-24T04:21:27.437Z"
+      },
+      {
+        "id": "ent_1761279687438_jquy22kt4",
+        "type": "anatomy",
+        "subtype": "organ",
+        "text": "일부",
+        "normalizedText": "일부",
+        "value": null,
+        "unit": null,
+        "confidence": 0.7,
+        "position": {
+          "start": 67,
+          "end": 69
+        },
+        "context": " 진료일: 2024년 3월 15일 주소: 복부 통증으로 내원 현병력: 2024년 2월 20일부터 상복부 통증 시작 통증은 식후 악화되며 야간에 심해짐 3월 10일 타 병원에서 위내",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687438_34m44313f",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "일부",
+            "position": {
+              "start": 67,
+              "end": 69
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "anatomy_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.438Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn"
+        },
+        "createdAt": "2025-10-24T04:21:27.438Z"
+      },
+      {
+        "id": "ent_1761279687438_u9ppagnhb",
+        "type": "anatomy",
+        "subtype": "organ",
+        "text": "상복부",
+        "normalizedText": "상복부",
+        "value": null,
+        "unit": null,
+        "confidence": 0.7,
+        "position": {
+          "start": 71,
+          "end": 74
+        },
+        "context": ": 2024년 3월 15일 주소: 복부 통증으로 내원 현병력: 2024년 2월 20일부터 상복부 통증 시작 통증은 식후 악화되며 야간에 심해짐 3월 10일 타 병원에서 위내시경 검",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687438_9n4brp8xy",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "상복부",
+            "position": {
+              "start": 71,
+              "end": 74
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "anatomy_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.438Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn"
+        },
+        "createdAt": "2025-10-24T04:21:27.438Z"
+      },
+      {
+        "id": "ent_1761279687439_jqp1ty9lm",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "5mg",
+        "normalizedText": "5mg",
+        "value": 5,
+        "unit": "mg",
+        "confidence": 0.9,
+        "position": {
+          "start": 176,
+          "end": 179
+        },
+        "context": " 중 과거력: 2020년 고혈압 진단 현재 리시노프릴 5mg 복용 중 검사 결과: 혈압: 140/90 mmH",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687439_o25yqre7b",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "5mg",
+            "position": {
+              "start": 176,
+              "end": 179
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.439Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.439Z"
+      },
+      {
+        "id": "ent_1761279687439_9rqwo5hqk",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "90 mm",
+        "normalizedText": "90 mm",
+        "value": 90,
+        "unit": "mm",
+        "confidence": 0.9,
+        "position": {
+          "start": 200,
+          "end": 205
+        },
+        "context": "리시노프릴 5mg 복용 중 검사 결과: 혈압: 140/90 mmHg 체온: 36.8 맥박: 72회/분 진단:",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687439_a3wklsna2",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "90 mm",
+            "position": {
+              "start": 200,
+              "end": 205
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.439Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      },
+      {
+        "id": "ent_1761279687440_imkg0dgxo",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "20mg",
+        "normalizedText": "20mg",
+        "value": 20,
+        "unit": "mg",
+        "confidence": 0.9,
+        "position": {
+          "start": 250,
+          "end": 254
+        },
+        "context": " 72회/분 진단: 위궤양, 고혈압 처방: 오메프라졸 20mg, 리시노프릴 5mg 지속",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687440_v583au37k",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "20mg",
+            "position": {
+              "start": 250,
+              "end": 254
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.440Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      },
+      {
+        "id": "ent_1761279687440_3otkc977t",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "5mg",
+        "normalizedText": "5mg",
+        "value": 5,
+        "unit": "mg",
+        "confidence": 0.9,
+        "position": {
+          "start": 262,
+          "end": 265
+        },
+        "context": "궤양, 고혈압 처방: 오메프라졸 20mg, 리시노프릴 5mg 지속",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687440_f5kvbugeq",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "5mg",
+            "position": {
+              "start": 262,
+              "end": 265
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.440Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      },
+      {
+        "id": "ent_1761279687440_0h8jf2ssd",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "혈압: 140/90",
+        "normalizedText": "혈압: 140/90",
+        "value": 140,
+        "unit": null,
+        "confidence": 0.8,
+        "position": {
+          "start": 192,
+          "end": 202
+        },
+        "context": "압 진단 현재 리시노프릴 5mg 복용 중 검사 결과: 혈압: 140/90 mmHg 체온: 36.8 맥박: 7",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687440_0lp1ekrv0",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "혈압: 140/90",
+            "position": {
+              "start": 192,
+              "end": 202
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.440Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      },
+      {
+        "id": "ent_1761279687440_jocxp4fnu",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "체온: 36.8",
+        "normalizedText": "체온: 36.8",
+        "value": 36.8,
+        "unit": null,
+        "confidence": 0.8,
+        "position": {
+          "start": 208,
+          "end": 216
+        },
+        "context": "g 복용 중 검사 결과: 혈압: 140/90 mmHg 체온: 36.8 맥박: 72회/분 진단: 위궤양, 고혈",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687440_tcrp2tbcd",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "체온: 36.8",
+            "position": {
+              "start": 208,
+              "end": 216
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.440Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      },
+      {
+        "id": "ent_1761279687440_hrx4pl9lm",
+        "type": "value",
+        "subtype": "measurement",
+        "text": "맥박: 72",
+        "normalizedText": "맥박: 72",
+        "value": 72,
+        "unit": null,
+        "confidence": 0.8,
+        "position": {
+          "start": 217,
+          "end": 223
+        },
+        "context": " 결과: 혈압: 140/90 mmHg 체온: 36.8 맥박: 72회/분 진단: 위궤양, 고혈압 처방: 오메프",
+        "attributes": {},
+        "relations": [],
+        "evidence": [
+          {
+            "id": "evd_1761279687440_fjqnmp5f9",
+            "type": "pattern",
+            "source": "unknown",
+            "content": "맥박: 72",
+            "position": {
+              "start": 217,
+              "end": 223
+            },
+            "confidence": 0.8,
+            "supportedClaim": "",
+            "extractionRule": "value_pattern",
+            "metadata": {
+              "method": "manual",
+              "validator": null
+            },
+            "createdAt": "2025-10-24T04:21:27.440Z"
+          }
+        ],
+        "validationStatus": "pending",
+        "metadata": {
+          "extractionMethod": "pattern-based",
+          "medicalCode": null,
+          "synonyms": [],
+          "segmentId": "seg_1761279687424_y31hnymzn",
+          "isNormalRange": true
+        },
+        "createdAt": "2025-10-24T04:21:27.440Z"
+      }
+    ],
+    "events": [
+      {
+        "id": "evt_1761279687452_q40uzpkbl",
+        "type": "medical_general",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "anatomy: 복부",
+        "entities": [
+          "ent_1761279687437_9oodkfbt1"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_sek6ptg34",
+        "type": "medical_general",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "anatomy: 일부",
+        "entities": [
+          "ent_1761279687438_jquy22kt4"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_lysc3mgwf",
+        "type": "medical_general",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "anatomy: 상복부",
+        "entities": [
+          "ent_1761279687438_u9ppagnhb"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_nrjeyp9tc",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 5mg",
+        "entities": [
+          "ent_1761279687439_jqp1ty9lm"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_qnetpfxsg",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 90 mm",
+        "entities": [
+          "ent_1761279687439_9rqwo5hqk"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_tdglvit8e",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 20mg",
+        "entities": [
+          "ent_1761279687440_imkg0dgxo"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_4vj01b2wm",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 5mg",
+        "entities": [
+          "ent_1761279687440_3otkc977t"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_4loyka9aw",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 혈압: 140/90",
+        "entities": [
+          "ent_1761279687440_0h8jf2ssd"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_jq3kolsx0",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 체온: 36.8",
+        "entities": [
+          "ent_1761279687440_jocxp4fnu"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      },
+      {
+        "id": "evt_1761279687453_kprdjrhr0",
+        "type": "medical_measurement",
+        "date": null,
+        "normalizedDate": null,
+        "dateConfidence": 0,
+        "description": "value: 맥박: 72",
+        "entities": [
+          "ent_1761279687440_hrx4pl9lm"
+        ],
+        "evidence": [],
+        "relevanceScore": 0,
+        "temporalRelations": [],
+        "metadata": {
+          "source": "unknown",
+          "extractionMethod": "temporal_normalization",
+          "validationStatus": "pending",
+          "sourceSegment": "seg_1761279687424_y31hnymzn",
+          "temporalConfidence": 0,
+          "dateConfidence": 0
+        },
+        "createdAt": "2025-10-24T04:21:27.453Z"
+      }
+    ],
+    "evidence": [],
+    "taggedBlocks": [],
+    "relevanceScores": [],
+    "originalData": {
+      "rawText": "\n                환자명: 김철수 (남, 45세)\n                진료일: 2024년 3월 15일\n                \n                주소: 복부 통증으로 내원\n                \n                현병력:\n                2024년 2월 20일부터 상복부 통증 시작\n                통증은 식후 악화되며 야간에 심해짐\n                3월 10일 타 병원에서 위내시경 검사 시행\n                위궤양 진단받고 PPI 처방받아 복용 중\n                \n                과거력:\n                2020년 고혈압 진단\n                현재 리시노프릴 5mg 복용 중\n                \n                검사 결과:\n                혈압: 140/90 mmHg\n                체온: 36.8℃\n                맥박: 72회/분\n                \n                진단: 위궤양, 고혈압\n                처방: 오메프라졸 20mg, 리시노프릴 5mg 지속\n                ",
+      "sourceDocuments": [],
+      "preservedStructure": {}
+    },
+    "metadata": {
+      "processingTimeMs": 0,
+      "memoryUsageMB": 0,
+      "pipelineVersion": "2.0.0",
+      "qualityMetrics": {},
+      "processingDate": "2025-10-24T04:21:27.458Z",
+      "version": "1.0.0",
+      "testCase": true
+    },
+    "createdAt": "2025-10-24T04:21:27.459Z",
+    "updatedAt": "2025-10-24T04:21:27.459Z"
+  },
+  "qualityScore": {
+    "overallScore": 35,
+    "qualityGate": "insufficient",
+    "breakdown": {
+      "informationPreservation": {
+        "textPreservationRatio": 0.4161490683229814,
+        "structuralPreservationRatio": 1,
+        "semanticPreservationRatio": 0,
+        "score": 12,
+        "details": {
+          "originalLength": 644,
+          "preservedLength": 268,
+          "originalKeywords": 0,
+          "preservedKeywords": 0,
+          "keywordOverlap": 0
+        }
+      },
+      "entityExtraction": {
+        "precision": 0,
+        "recall": 0,
+        "f1Score": 0,
+        "confidenceDistribution": {
+          "high": 7,
+          "medium": 3,
+          "low": 0
+        },
+        "typeAccuracy": {
+          "anatomy": {
+            "count": 3,
+            "totalConfidence": 2.0999999999999996,
+            "averageConfidence": 0.6999999999999998
+          },
+          "value": {
+            "count": 7,
+            "totalConfidence": 6,
+            "averageConfidence": 0.8571428571428571
+          }
+        },
+        "score": 0,
+        "details": {
+          "totalEntities": 10,
+          "highConfidenceEntities": 7,
+          "averageConfidence": 0.8099999999999999
+        }
+      },
+      "temporalNormalization": {
+        "temporalCoverage": 0,
+        "dateAccuracy": 0,
+        "sequenceAccuracy": 1,
+        "inferenceQuality": 1,
+        "score": 8,
+        "details": {
+          "totalEvents": 10,
+          "datedEvents": 0,
+          "inferredEvents": 0,
+          "timeSpan": null
+        }
+      },
+      "contextualClassification": {
+        "segmentationQuality": 1,
+        "contextAccuracy": 0,
+        "domainClassification": 1,
+        "coherenceScore": 0.5,
+        "score": 15,
+        "details": {
+          "totalSegments": 1,
+          "contextualSegments": 0,
+          "medicalSegments": 1,
+          "averageConfidence": 0.5
+        }
+      }
+    },
+    "detailedAnalysis": {
+      "strengths": [],
+      "weaknesses": [
+        "정보 보존도",
+        "엔티티 추출",
+        "시간 정규화"
+      ],
+      "riskFactors": [
+        "시간 정보 부족"
+      ],
+      "improvementAreas": [
+        "preservation",
+        "entity",
+        "temporal",
+        "context"
+      ],
+      "confidenceAnalysis": {
+        "average": null,
+        "min": null,
+        "max": null,
+        "distribution": {
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      "performanceMetrics": {
+        "entitiesPerSegment": 10,
+        "eventsPerEntity": 1,
+        "averageSegmentLength": 268
+      }
+    },
+    "recommendations": [
+      {
+        "priority": "high",
+        "category": "quality_improvement",
+        "description": "품질 점수가 목표치(70점)에 미달합니다. 전반적인 개선이 필요합니다."
+      },
+      {
+        "priority": "medium",
+        "category": "weakness_improvement",
+        "description": "정보 보존도 영역의 개선이 필요합니다."
+      },
+      {
+        "priority": "medium",
+        "category": "weakness_improvement",
+        "description": "엔티티 추출 영역의 개선이 필요합니다."
+      },
+      {
+        "priority": "medium",
+        "category": "weakness_improvement",
+        "description": "시간 정규화 영역의 개선이 필요합니다."
+      },
+      {
+        "priority": "high",
+        "category": "risk_mitigation",
+        "description": "시간 정보 부족 위험 요소에 대한 대응이 필요합니다."
+      }
+    ],
+    "metadata": {
+      "processingTime": 12,
+      "timestamp": "2025-10-24T04:21:27.471Z",
+      "version": "1.0.0"
+    }
+  },
+  "validation": {
+    "informationPreservation": true,
+    "entityExtraction": true,
+    "temporalNormalization": true,
+    "contextualClassification": false,
+    "overallValidation": false
+  },
+  "snapshotId": "snapshot_1761279687413_hvl7orfmd",
+  "success": false
+}

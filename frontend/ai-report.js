@@ -1,3 +1,6 @@
+(function() {
+'use strict';
+
 /**
  * AI 보고서 생성 기능
  * 
@@ -159,8 +162,8 @@ async function generateAIReport() {
   try {
     // 텍스트가 추출되지 않았으면 OCR 결과 가져오기
     if (!extractedText) {
-      if (resultData && resultData.results) {
-        const ocrTexts = Object.values(resultData.results).map(item => item.mergedText);
+  if (resultData && resultData.results) {
+    const ocrTexts = Object.values(resultData.results).map(item => item.mergedText || item.text || item.rawText || '');
         extractedText = ocrTexts.join('\n\n');
       } else {
         try {
@@ -178,7 +181,7 @@ async function generateAIReport() {
     }
     
     if (!extractedText) {
-      alert('분석된 텍스트가 없습니다. 먼저 문서를 업로드하고 분석을 완료해주세요.');
+      updateStatus('warning', '분석된 텍스트가 없습니다. 먼저 문서를 업로드하고 분석을 완료해주세요.');
       return;
     }
     
@@ -373,3 +376,13 @@ function extractTimelineFromReport(reportMarkdown) {
     return [];
   }
 }
+
+// 전역 네임스페이스에 필요한 함수들 노출
+window.VNEXSUSApp.AIReport = {
+  initAIReport: initAIReport,
+  generateAIReport: generateAIReport,
+  handleOCRComplete: handleOCRComplete,
+  handleTimelineGenerated: handleTimelineGenerated
+};
+
+})(); // IIFE 종료

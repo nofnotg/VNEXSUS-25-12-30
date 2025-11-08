@@ -1,24 +1,71 @@
-// DOM 요소
-const dropZone = document.getElementById('dropZone');
-const fileInput = document.getElementById('fileInput');
-const fileList = document.getElementById('fileList');
-const fileCount = document.getElementById('fileCount');
-const toggleFilesBtn = document.getElementById('toggleFilesBtn');
-const clearBtn = document.getElementById('clearBtn');
-const uploadBtn = document.getElementById('uploadBtn');
-const statusContainer = document.getElementById('statusContainer');
-const statusSpinner = document.getElementById('statusSpinner');
-const resultType = document.getElementById('resultType');
-const viewResultsBtn = document.getElementById('viewResultsBtn');
-const resultModalContent = document.getElementById('resultModalContent');
-const addInsuranceBtn = document.getElementById('addInsuranceBtn');
-const insuranceRecords = document.getElementById('insuranceRecords');
-const createSummaryBtn = document.getElementById('createSummaryBtn');
-const progressBar = document.getElementById('progressBar');
-const progressStatus = document.getElementById('progressStatus');
+(function() {
+'use strict';
+
+// 네임스페이스를 통한 안전한 변수 관리
+if (!window.VNEXSUSApp) {
+    window.VNEXSUSApp = {};
+}
+
+// DOM 요소를 네임스페이스에 저장
+window.VNEXSUSApp.elements = {};
+
+// DOM 요소 초기화 함수
+function initDOMElements() {
+  const elements = window.VNEXSUSApp.elements;
+  elements.dropZone = document.getElementById('dropZone');
+  elements.fileInput = document.getElementById('fileInput');
+  elements.fileList = document.getElementById('fileList');
+  elements.fileCount = document.getElementById('fileCount');
+  elements.toggleFilesBtn = document.getElementById('toggleFilesBtn');
+  elements.clearBtn = document.getElementById('clearBtn');
+  elements.uploadBtn = document.getElementById('uploadBtn');
+  elements.statusContainer = document.getElementById('statusContainer');
+  elements.statusSpinner = document.getElementById('statusSpinner');
+  elements.resultType = document.getElementById('resultType');
+  elements.viewResultsBtn = document.getElementById('viewResultsBtn');
+  elements.resultModalContent = document.getElementById('resultModalContent');
+  elements.addInsuranceBtn = document.getElementById('addInsuranceBtn');
+  elements.insuranceRecords = document.getElementById('insuranceRecords');
+  elements.createSummaryBtn = document.getElementById('createSummaryBtn');
+  elements.progressBar = document.getElementById('progressBar');
+  elements.progressStatus = document.getElementById('progressStatus');
+  
+  // 기존 코드와의 호환성을 위한 전역 변수 설정
+  window.dropZone = elements.dropZone;
+  window.fileInput = elements.fileInput;
+  window.fileList = elements.fileList;
+  window.fileCount = elements.fileCount;
+  window.toggleFilesBtn = elements.toggleFilesBtn;
+  window.clearBtn = elements.clearBtn;
+  window.uploadBtn = elements.uploadBtn;
+  window.statusContainer = elements.statusContainer;
+  window.statusSpinner = elements.statusSpinner;
+  window.resultType = elements.resultType;
+  window.viewResultsBtn = elements.viewResultsBtn;
+  window.resultModalContent = elements.resultModalContent;
+  window.addInsuranceBtn = elements.addInsuranceBtn;
+  window.insuranceRecords = elements.insuranceRecords;
+  window.createSummaryBtn = elements.createSummaryBtn;
+  window.progressBar = elements.progressBar;
+  window.progressStatus = elements.progressStatus;
+}
 
 // 전역 변수로 결과 모달 선언
 let resultsModal = null;
+let reportRenderer = null; // 새로운 보고서 렌더러 추가
+
+// 디버그 로그를 화면에 표시하는 함수
+// 개발 환경에서만 디버그 로그 표시 (프로덕션에서는 비활성화)
+function debugLog(message) {
+  // 개발 환경에서만 로그 출력 (localhost 또는 debug 파라미터가 있을 때)
+  const isDevelopment = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1' ||
+                       new URLSearchParams(window.location.search).has('debug');
+  
+  if (isDevelopment) {
+    console.log(message);
+  }
+}
 
 // 설정
 const BASE_URL = window.location.origin; // "http://localhost:5174"
@@ -29,9 +76,16 @@ const MAX_FILES = 100;
 const MAX_TOTAL_SIZE = 100 * 1024 * 1024; // 100MB
 const POLLING_INTERVAL = 2000; // 2초
 
-// 상태 변수
+// 워크플로우 단계 관리
+// 전역 변수들
 let selectedFiles = [];
 let currentJobId = null;
+let insuranceRecords = [];
+
+// Legacy workflow/event handlers removed. Initialization is performed via initApp() and initializeEventListeners().
+
+// 기존 함수들과의 연동을 위한 수정된 함수들
+let currentSessionId = null; // AI 세션 ID 저장용
 let resultData = null;
 let summaryData = null; // 요약표 데이터 저장 변수 추가
 let pollingTimeout = null;
@@ -49,6 +103,26 @@ let systemStatus = 'active';
 
 // 이벤트 리스너
 document.addEventListener('DOMContentLoaded', initApp);
+
+// 앱 초기화 함수
+function initApp() {
+  // DOM 요소 초기화
+  initDOMElements();
+  
+  // 새로운 보고서 렌더러 초기화
+  if (typeof window.VNEXSUSApp !== 'undefined' && window.VNEXSUSApp.ReportRenderer) {
+    reportRenderer = new window.VNEXSUSApp.ReportRenderer();
+    console.log('보고서 렌더러가 초기화되었습니다.');
+  } else {
+    console.warn('ReportRenderer 클래스를 찾을 수 없습니다.');
+  }
+  
+  // 기존 초기화 로직 계속...
+  initializeEventListeners();
+  loadInsurerOptions();
+  initializeInsuranceDateSelectors();
+  initializeRealTimeMonitoring();
+}
 
 // 처리 품질 계산 함수
 function calculateProcessingQuality(results) {
@@ -283,29 +357,33 @@ function updateInsurersDropdown(selectElement) {
   });
 }
 
-// 앱 초기화
-function initApp() {
-  console.log('앱 초기화 시작');
-  
-  // 페이지 요소 초기화
-  resultsModal = null;
-  
-  // 실시간 모니터링 시작
-  startRealTimeMonitoring();
-  
+// 이벤트 리스너 초기화 함수
+function initializeEventListeners() {
   // 파일 입력 관련 이벤트 리스너
-  dropZone.addEventListener('dragover', handleDragOver);
-  dropZone.addEventListener('dragleave', handleDragLeave);
-  dropZone.addEventListener('drop', handleFileDrop);
-  dropZone.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', handleFileSelect);
+  if (dropZone) {
+    dropZone.addEventListener('dragover', handleDragOver);
+    dropZone.addEventListener('dragleave', handleDragLeave);
+    dropZone.addEventListener('drop', handleFileDrop);
+    dropZone.addEventListener('click', () => fileInput.click());
+  }
+  
+  if (fileInput) {
+    fileInput.addEventListener('change', handleFileSelect);
+  }
   
   // 버튼 이벤트 리스너
-  clearBtn.addEventListener('click', clearFiles);
-  uploadBtn.addEventListener('click', uploadFiles);
+  if (clearBtn) {
+    clearBtn.addEventListener('click', clearFiles);
+  }
+  
+  if (uploadBtn) {
+    uploadBtn.addEventListener('click', function(event) {
+      uploadFiles();
+    });
+  }
   
   if (toggleFilesBtn) {
-  toggleFilesBtn.addEventListener('click', toggleFilesView);
+    toggleFilesBtn.addEventListener('click', toggleFilesView);
   }
   
   if (viewResultsBtn) {
@@ -317,29 +395,14 @@ function initApp() {
     resultType.addEventListener('change', displayResults);
   }
   
-  // 보험 정보 입력 관련 초기화
-  if (addInsuranceBtn && insuranceRecords) {
+  // 보험 정보 입력 관련 이벤트
+  if (addInsuranceBtn) {
     addInsuranceBtn.addEventListener('click', addInsuranceRecord);
-    
-    // 기존 보험 레코드에 날짜 선택 필드 설정
-    updateExistingDateFields();
-    
-    // 요약표 생성 버튼
-    if (createSummaryBtn) {
-      createSummaryBtn.addEventListener('click', handleCreateSummary);
-    }
   }
   
-  // 보험사 목록 로드
-  loadInsurers().then(() => {
-    // 보험사 드롭다운 업데이트
-    const insuranceCompanySelects = document.querySelectorAll('.insurance-company');
-    insuranceCompanySelects.forEach(updateInsurersDropdown);
-  });
-  
-  // 개발 모드 상태 초기화
-  const isDevMode = localStorage.getItem('devMode') === 'true';
-  updateDevModeUI(isDevMode);
+  if (createSummaryBtn) {
+    createSummaryBtn.addEventListener('click', handleCreateSummary);
+  }
   
   // 새 기능: 상세분석 버튼과 정제 데이터 버튼 이벤트 리스너 추가
   const viewRawTextBtn = document.getElementById('view-raw-text-btn');
@@ -352,6 +415,12 @@ function initApp() {
   if (viewRefinedTextBtn) {
     viewRefinedTextBtn.addEventListener('click', handleViewRefinedText);
   }
+}
+
+// 실시간 모니터링 초기화 함수
+function initializeRealTimeMonitoring() {
+  // 실시간 모니터링 시작
+  startRealTimeMonitoring();
   
   // 모니터링 대시보드 초기화
   if (typeof MonitoringDashboard !== 'undefined') {
@@ -359,6 +428,30 @@ function initApp() {
     monitoringDashboard.init();
     console.log('모니터링 대시보드 초기화 완료');
   }
+}
+
+// 보험사 옵션 로드 함수
+function loadInsurerOptions() {
+  // 보험사 목록 로드
+  loadInsurers().then(() => {
+    // 보험사 드롭다운 업데이트
+    const insuranceCompanySelects = document.querySelectorAll('.insurance-company');
+    insuranceCompanySelects.forEach(updateInsurersDropdown);
+  });
+}
+
+// 보험 날짜 선택기 초기화 함수
+function initializeInsuranceDateSelectors() {
+  // 기존 보험 레코드에 날짜 선택 필드 설정
+  updateExistingDateFields();
+  
+  // 개발 모드 상태 초기화
+  const isDevMode = localStorage.getItem('devMode') === 'true';
+  updateDevModeUI(isDevMode);
+}
+
+// 기존 코드 (이벤트 리스너 부분 제거)
+function startApplication() {
   
   console.log('앱 초기화 완료');
   return true;
@@ -478,7 +571,11 @@ function handleFileDrop(e) {
 // 파일 선택 처리
 function handleFileSelect(e) {
   const files = e.target.files;
-  addFiles(files);
+  
+  if (files && files.length > 0) {
+    addFiles(files);
+  }
+  
   fileInput.value = ''; // 입력 초기화
 }
 
@@ -491,7 +588,7 @@ function addFiles(fileList) {
   
   // 파일 개수 제한 확인
   if (selectedFiles.length + validFiles.length > MAX_FILES) {
-    alert(`최대 ${MAX_FILES}개의 파일만 업로드할 수 있습니다.`);
+    updateStatus('warning', `최대 ${MAX_FILES}개의 파일만 업로드할 수 있습니다.`);
     return;
   }
   
@@ -500,14 +597,16 @@ function addFiles(fileList) {
   const newFilesSize = validFiles.reduce((total, file) => total + file.size, 0);
   
   if (currentTotalSize + newFilesSize > MAX_TOTAL_SIZE) {
-    alert(`총 파일 크기가 100MB를 초과할 수 없습니다.`);
+    updateStatus('warning', `총 파일 크기가 100MB를 초과할 수 없습니다.`);
     return;
   }
   
   // 파일 추가
+  let addedCount = 0;
   validFiles.forEach(file => {
     if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
       selectedFiles.push(file);
+      addedCount++;
     }
   });
   
@@ -598,34 +697,57 @@ function clearFiles() {
 async function uploadFiles() {
   try {
     // 파일 체크
+    console.log('uploadFiles 호출됨, selectedFiles:', selectedFiles);
+    console.log('selectedFiles.length:', selectedFiles.length);
+    
     if (selectedFiles.length === 0) {
-      alert('업로드할 파일을 선택해주세요');
+      console.warn('선택된 파일이 없음');
+      updateStatus('warning', '먼저 분석할 파일을 선택해주세요.');
       return;
     }
-    
-    // 버튼 비활성화 및 로딩 표시
-    uploadBtn.disabled = true;
-    statusSpinner.style.display = 'inline-block';
-    
-    // 상태 및 프로그레스바 업데이트
-    updateStatus('primary', '문서 분석이 시작되었습니다...');
-    updateProgressBar(10, "업로드 중");
     
     // FormData 생성
     const formData = new FormData();
     selectedFiles.forEach(file => {
       formData.append('files', file);
     });
+
+    // 보험 정보 수집
+    const patientName = document.getElementById('patientName').value.trim();
+    const patientMemo = document.getElementById('patientMemo').value.trim();
+    
+    // 보험 기록 수집 (현재 UI 클래스명과 일치하도록 수정)
+    const insuranceData = [];
+    document.querySelectorAll('.insurance-record').forEach(record => {
+      const company = record.querySelector('.insurance-company')?.value?.trim() || '';
+      const enrollmentDate = record.querySelector('.insurance-date')?.value || '';
+      const productName = record.querySelector('.insurance-product')?.value?.trim() || '';
+      const period = record.querySelector('.insurance-period')?.value || '';
+
+      if (company || enrollmentDate || productName || period) {
+        insuranceData.push({
+          company,
+          enrollmentDate,
+          productName,
+          period
+        });
+      }
+    });
+
+    formData.append('patientName', patientName);
+    formData.append('patientMemo', patientMemo);
+    formData.append('insuranceData', JSON.stringify(insuranceData));
+    
+    // 진행 상태 업데이트
+    updateOCRProgress(10, '파일 업로드 중...');
     
     console.log(`API 요청 시작: ${OCR_API_URL}/upload (파일 ${selectedFiles.length}개)`);
-    console.log('OCR_API_URL:', OCR_API_URL);
-    console.log('전체 URL:', `${OCR_API_URL}/upload`);
-    console.log('선택된 파일들:', selectedFiles.map(f => ({ name: f.name, size: f.size, type: f.type })));
     
     // API 요청
     const response = await fetch(`${OCR_API_URL}/upload`, {
       method: 'POST',
-      body: formData
+      body: formData,
+      credentials: 'include'
     });
     
     console.log(`API 응답 상태: ${response.status} ${response.statusText}`);
@@ -649,15 +771,7 @@ async function uploadFiles() {
     
     console.log(`작업 ID 수신: ${currentJobId}`);
     
-    // 상태 업데이트
-    updateStatus('primary', `
-      <div>문서 분석이 시작되었습니다.</div>
-      <div><strong>작업 ID:</strong> ${currentJobId}</div>
-      <div><strong>상태:</strong> <span id="jobStatus">처리 중</span></div>
-      <div><strong>진행률:</strong> <span id="jobProgress">0/${selectedFiles.length}</span> 파일 처리됨</div>
-    `);
-    
-    updateProgressBar(20, "분석 중");
+    updateOCRProgress(30, '문서 분석 시작...');
     
     // 작업 상태 폴링 시작
     startPolling(currentJobId);
@@ -665,8 +779,8 @@ async function uploadFiles() {
   } catch (error) {
     console.error('업로드 오류:', error);
     console.error('오류 스택:', error.stack);
+    updateOCRProgress(0, '업로드 실패: ' + error.message);
     updateStatus('danger', `[메디아이] 업로드 오류: ${error.message}`);
-    updateProgressBar(0, "오류 발생");
     uploadBtn.disabled = false;
     statusSpinner.style.display = 'none';
   }
@@ -682,25 +796,29 @@ function startPolling(jobId) {
   // 폴링 함수
   const pollStatus = async () => {
     try {
-      const response = await fetch(`${OCR_API_URL}/status/${jobId}`);
+      console.log(`폴링 요청 시작: ${OCR_API_URL}/status/${jobId}`);
+      const response = await fetch(`${OCR_API_URL}/status/${jobId}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      
+      console.log(`폴링 응답 상태: ${response.status} ${response.statusText}`);
       
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('폴링 오류 응답:', errorData);
         throw new Error(errorData.error || '상태 확인 실패');
       }
       
       const data = await response.json();
       
-      // 상태 업데이트
-      const jobStatusEl = document.getElementById('jobStatus');
-      const jobProgressEl = document.getElementById('jobProgress');
-      
-      if (jobStatusEl) jobStatusEl.textContent = data.status;
-      if (jobProgressEl) jobProgressEl.textContent = `${data.filesProcessed}/${data.filesTotal}`;
-      
-      // 프로그레스바 업데이트
-      const percentage = data.filesTotal > 0 ? Math.round((data.filesProcessed / data.filesTotal) * 80) + 20 : 20;
-      updateProgressBar(percentage, data.status === 'processing' ? "분석 중" : data.status);
+      // 프로그레스바 업데이트 (새로운 워크플로우용)
+      const percentage = data.filesTotal > 0 ? Math.round((data.filesProcessed / data.filesTotal) * 70) + 30 : 30;
+      updateOCRProgress(percentage, data.status === 'processing' ? '문서 분석 중...' : data.status);
       
       // 완료 시 결과 가져오기
       if (data.status === 'completed') {
@@ -710,10 +828,8 @@ function startPolling(jobId) {
       
       // 오류 시 폴링 중단
       if (data.status === 'failed') {
+        updateOCRProgress(0, '문서 분석 실패');
         updateStatus('danger', `[메디아이] 문서 처리 실패: ${data.error || '알 수 없는 오류'}`);
-        updateProgressBar(0, "처리 실패");
-        statusSpinner.style.display = 'none';
-        uploadBtn.disabled = false;
         return;
       }
       
@@ -736,7 +852,17 @@ function startPolling(jobId) {
 // 결과 가져오기
 async function fetchResults(jobId) {
   try {
-    const response = await fetch(`${OCR_API_URL}/result/${jobId}`);
+    console.log(`결과 요청 시작: ${OCR_API_URL}/result/${jobId}`);
+    const response = await fetch(`${OCR_API_URL}/result/${jobId}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+    
+    console.log(`결과 응답 상태: ${response.status} ${response.statusText}`);
     
     if (!response.ok) {
       const errorData = await response.json();
@@ -746,15 +872,14 @@ async function fetchResults(jobId) {
     const data = await response.json();
     resultData = data;
     
-    // UI 업데이트
+    // 새로운 워크플로우 UI 업데이트
+    updateOCRProgress(100, '문서 분석 완료!');
     updateStatus('success', `문서 처리 완료! ${Object.keys(data.results).length}개 파일 처리됨`);
-    statusSpinner.style.display = 'none';
-    uploadBtn.disabled = false;
-    viewResultsBtn.disabled = false;
-    createSummaryBtn.disabled = false;
     
-    // 프로그레스바 업데이트
-    updateProgressBar(100, "완료");
+    // 결과 보기/요약표 버튼 활성화
+    const createSummaryBtnEl = document.getElementById('createSummaryBtn');
+    if (createSummaryBtnEl) createSummaryBtnEl.disabled = false;
+    if (window.viewResultsBtn) window.viewResultsBtn.disabled = false;
     
     // 모니터링 메트릭 업데이트
     totalAnalyses += Object.keys(data.results).length;
@@ -773,43 +898,65 @@ async function fetchResults(jobId) {
     // 결과 표시
     displayResults();
     
-    // 다운로드 버튼 숨기기 (요약표가 생성되기 전까지)
-    const downloadBtn = document.getElementById('downloadReportBtn');
-    if (downloadBtn) {
-      downloadBtn.style.display = 'none';
-    }
-    
   } catch (error) {
     console.error('결과 가져오기 오류:', error);
-    updateStatus('danger', `[메디아이] 결과 가져오기 오류: ${error.message}`);
-    updateProgressBar(0, "오류 발생");
-    statusSpinner.style.display = 'none';
-    uploadBtn.disabled = false;
+    updateOCRProgress(0, '결과 가져오기 실패');
   }
 }
 
+// 문서 ID 포맷팅 함수
 // 상태 메시지 업데이트
 function updateStatus(type, message) {
   statusContainer.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
 }
 
-// 프로그레스바 업데이트
-function updateProgressBar(percentage, statusText) {
-  progressBar.style.width = `${percentage}%`;
-  progressBar.setAttribute('aria-valuenow', percentage);
-  progressBar.textContent = `${percentage}%`;
+// 분리된 프로그레스바 업데이트 함수들
+function updateOCRProgress(percentage, statusText) {
+  const ocrProgressBar = document.getElementById('ocrProgressBar');
+  const ocrProgressPercentage = document.getElementById('ocrProgressPercentage');
+  const ocrProgressStatus = document.getElementById('ocrProgressStatus');
   
-  if (percentage === 0) {
-    progressBar.classList.remove('bg-success', 'bg-danger', 'bg-warning');
-  } else if (percentage < 30) {
-    progressBar.classList.remove('bg-success', 'bg-danger');
-    progressBar.classList.add('bg-warning');
-  } else if (percentage === 100) {
-    progressBar.classList.remove('bg-warning', 'bg-danger');
-    progressBar.classList.add('bg-success');
+  if (ocrProgressBar && ocrProgressPercentage && ocrProgressStatus) {
+    ocrProgressBar.style.width = `${percentage}%`;
+    ocrProgressBar.setAttribute('aria-valuenow', percentage);
+    ocrProgressPercentage.textContent = `${percentage}%`;
+    
+    ocrProgressStatus.textContent = statusText;
+    ocrProgressStatus.className = 'progress-status text-center';
+    
+    if (percentage > 0 && percentage < 100) {
+      ocrProgressStatus.classList.add('processing');
+    } else if (percentage === 100) {
+      ocrProgressStatus.classList.add('completed');
+    }
   }
+}
+
+function updateReportProgress(percentage, statusText) {
+  const reportProgressBar = document.getElementById('reportProgressBar');
+  const reportProgressPercentage = document.getElementById('reportProgressPercentage');
+  const reportProgressStatus = document.getElementById('reportProgressStatus');
   
-  progressStatus.textContent = statusText;
+  if (reportProgressBar && reportProgressPercentage && reportProgressStatus) {
+    reportProgressBar.style.width = `${percentage}%`;
+    reportProgressBar.setAttribute('aria-valuenow', percentage);
+    reportProgressPercentage.textContent = `${percentage}%`;
+    
+    reportProgressStatus.textContent = statusText;
+    reportProgressStatus.className = 'progress-status text-center';
+    
+    if (percentage > 0 && percentage < 100) {
+      reportProgressStatus.classList.add('processing');
+    } else if (percentage === 100) {
+      reportProgressStatus.classList.add('completed');
+    }
+  }
+}
+
+// 기존 프로그레스바 업데이트 (하위 호환성 유지)
+function updateProgressBar(percentage, statusText) {
+  // OCR 진행 상황으로 간주
+  updateOCRProgress(percentage, statusText);
 }
 
 // 결과 표시
@@ -1028,7 +1175,7 @@ function addInsuranceRecord() {
     if (insuranceRecords.childElementCount > 1) {
       newRecord.remove();
     } else {
-      alert('최소 1개의 보험 정보는 유지해야 합니다.');
+      updateStatus('warning', '최소 1개의 보험 정보는 유지해야 합니다.');
     }
   });
   
@@ -1149,8 +1296,13 @@ function presetToRange(join, preset) {
 // 요약표 작성 처리
 async function handleCreateSummary() {
   try {
+    console.log('handleCreateSummary 호출됨');
+    console.log('resultData:', resultData);
+    
     if (!resultData || !resultData.results) {
-      alert('[메디아이] 문서 처리 결과가 없습니다. 먼저 파일을 업로드하고 문서 처리를 완료해주세요.');
+      console.warn('문서 처리 결과가 없음');
+      // 더 구체적인 안내 메시지로 변경
+      alert('[메디아이] 문서 처리가 완료되지 않았습니다. 먼저 파일을 업로드하고 문서 분석을 완료해주세요.');
       return;
     }
     
@@ -1206,15 +1358,18 @@ async function handleCreateSummary() {
     };
     
     // OCR 결과 텍스트 추출
-    const ocrTexts = Object.values(resultData.results).map(item => item.mergedText);
+    const ocrTexts = Object.values(resultData.results).map(item => item.mergedText || item.text || item.rawText || '');
     const extractedText = ocrTexts.join('\n\n');
     
     // API 요청 시작
     createSummaryBtn.disabled = true;
-    updateStatus('info', 'AI 요약표 생성 중...');
-    updateProgressBar(30, "처리 중");
+    updateReportProgress(10, "요약표 생성 시작");
     
     console.log('AI 요약표 생성 요청 시작');
+    console.log('API_URL:', API_URL);
+    console.log('요청 데이터:', { text: extractedText.substring(0, 100) + '...', patientInfo });
+    
+    updateReportProgress(30, "AI 분석 중");
     
     // AI 보고서 생성 API 사용
     const response = await fetch(`${API_URL}/generate-report`, {
@@ -1238,12 +1393,16 @@ async function handleCreateSummary() {
       })
     });
     
+    console.log('AI API 응답 상태:', response.status, response.statusText);
+    
     if (!response.ok) {
       const errorData = await response.json();
+      console.error('AI API 오류:', errorData);
+      updateReportProgress(0, "생성 실패");
       throw new Error(errorData.error || 'AI 요약표 생성 실패');
     }
     
-    updateProgressBar(90, "완료 중");
+    updateReportProgress(80, "보고서 생성 중");
     
     const data = await response.json();
     console.log('AI 요약표 생성 응답 데이터:', data);
@@ -1252,8 +1411,7 @@ async function handleCreateSummary() {
       // AI 세션 ID 저장 (채팅용)
       currentSessionId = data.sessionId;
       
-      updateStatus('success', 'AI 요약표 생성 완료!');
-      updateProgressBar(100, "완료");
+      updateReportProgress(100, "생성 완료");
       
       // AI 보고서 내용 표시
       if (data.report) {
@@ -1284,24 +1442,36 @@ async function handleCreateSummary() {
           }
         }
       } else {
-        alert('AI 요약표 생성은 완료되었으나 보고서 내용이 없습니다.');
-      }
+          updateReportProgress(0, "보고서 내용 없음");
+        }
     } else {
       throw new Error(data.error || 'AI 요약표 생성 실패');
     }
   } catch (error) {
     console.error('요약표 생성 오류:', error);
-    updateStatus('danger', `요약표 생성 실패: ${error.message}`);
-    updateProgressBar(0, "실패");
+    console.error('오류 스택:', error.stack);
+    
+    // 더 구체적인 에러 메시지 제공
+    let errorMessage = '요약표 생성 실패';
+    if (error.message.includes('fetch')) {
+      errorMessage = '서버 연결 실패. 네트워크 상태를 확인해주세요.';
+    } else if (error.message.includes('AI')) {
+      errorMessage = 'AI 서비스 오류가 발생했습니다.';
+    } else {
+      errorMessage = `요약표 생성 실패: ${error.message}`;
+    }
+    
+    updateReportProgress(0, "생성 실패");
     createSummaryBtn.disabled = false;
     
     // 기존 룰 기반 방식으로 폴백
     try {
-      alert('AI 요약표 생성에 실패했습니다. 기존 방식으로 시도합니다.');
+      console.log('룰 기반 폴백 시도 중...');
+      updateReportProgress(20, "기존 방식으로 재시도");
       useRuleBasedSummaryGeneration();
     } catch (fallbackError) {
       console.error('기존 방식 폴백 오류:', fallbackError);
-      alert('요약표 생성에 실패했습니다. 다시 시도해주세요.');
+      updateReportProgress(0, "모든 방식 실패");
     }
   }
 }
@@ -1353,12 +1523,14 @@ async function useRuleBasedSummaryGeneration() {
     };
     
     // OCR 결과 텍스트 추출
-    const ocrTexts = Object.values(resultData.results).map(item => item.mergedText);
+    const ocrTexts = Object.values(resultData.results).map(item => item.mergedText || item.text || item.rawText || '');
     
     updateStatus('info', '룰 기반 요약표 생성 중...');
-    updateProgressBar(30, "처리 중");
+    updateReportProgress(20, "룰 기반 분석 시작");
     
     console.log('단순화된 요약표 생성 요청 - 의료지식 처리 비활성화');
+    
+    updateReportProgress(40, "데이터 처리 중");
     
     const response = await fetch(POSTPROCESS_API_URL, {
       method: 'POST',
@@ -1381,10 +1553,11 @@ async function useRuleBasedSummaryGeneration() {
     
     if (!response.ok) {
       const errorData = await response.json();
+      updateReportProgress(0, "생성 실패");
       throw new Error(errorData.error || '요약표 생성 실패');
     }
     
-    updateProgressBar(90, "완료 중");
+    updateReportProgress(85, "보고서 완성 중");
     
     const data = await response.json();
     console.log('요약표 생성 응답 데이터:', data);
@@ -1394,7 +1567,7 @@ async function useRuleBasedSummaryGeneration() {
       summaryData = data;
       
       updateStatus('success', '요약표 생성 완료!');
-      updateProgressBar(100, "완료");
+      updateReportProgress(100, "생성 완료");
       
       // 다운로드 링크 생성
       if (data.report) {
@@ -1408,6 +1581,9 @@ async function useRuleBasedSummaryGeneration() {
         if (downloadBtn) {
           downloadBtn.style.display = 'inline-block';
         }
+        
+        // 개선된 보고서 버튼 추가
+        addEnhancedReportButton();
         
         // 텍스트 파일 직접 가져오기
         try {
@@ -1852,7 +2028,7 @@ function handleOCRResult(result) {
 // 새 함수 추가: 상세분석보기 (전체 추출 텍스트) 핸들러
 async function handleViewRawText() {
   if (!resultData || !resultData.results) {
-    alert('추출된 텍스트가 없습니다. 먼저 파일을 업로드하고 처리를 완료해주세요.');
+    updateStatus('warning', '추출된 텍스트가 없습니다. 먼저 파일을 업로드하고 처리를 완료해주세요.');
     return;
   }
   
@@ -1868,14 +2044,14 @@ async function handleViewRawText() {
     openDataInNewWindow('전체 추출 텍스트', combinedText);
   } catch (error) {
     console.error('상세분석 데이터 표시 오류:', error);
-    alert('데이터를 가져오는 중 오류가 발생했습니다.');
+    updateStatus('error', '데이터를 가져오는 중 오류가 발생했습니다.');
   }
 }
 
 // 새 함수 추가: 정제 데이터 핸들러
 async function handleViewRefinedText() {
   if (!resultData || !resultData.jobId) {
-    alert('처리된 작업이 없습니다. 먼저 파일을 업로드하고 처리를 완료해주세요.');
+    updateStatus('warning', '처리된 작업이 없습니다. 먼저 파일을 업로드하고 처리를 완료해주세요.');
     return;
   }
   
@@ -1883,7 +2059,7 @@ async function handleViewRefinedText() {
     // 정제 데이터(소거 사전 적용 데이터) 가져오기
     const refinedData = await fetchFilteredResults('exclude');
     if (!refinedData) {
-      alert('정제 데이터를 가져올 수 없습니다.');
+      updateStatus('warning', '정제 데이터를 가져올 수 없습니다.');
       return;
     }
     
@@ -1891,7 +2067,7 @@ async function handleViewRefinedText() {
     openDataInNewWindow('정제 데이터 (소거 사전 적용)', refinedData);
   } catch (error) {
     console.error('정제 데이터 가져오기 오류:', error);
-    alert('정제 데이터를 가져오는 중 오류가 발생했습니다.');
+    updateStatus('error', '정제 데이터를 가져오는 중 오류가 발생했습니다.');
   }
 }
 
@@ -1934,3 +2110,495 @@ function openDataInNewWindow(title, content) {
   // 문서 닫기
   newWindow.document.close();
 }
+
+// ========== 개선된 보고서 생성 기능 ==========
+
+/**
+ * 개선된 보고서 생성 함수
+ * @param {string} jobId 작업 ID
+ * @param {Object} options 옵션
+ */
+async function generateEnhancedReport(jobId, options = {}) {
+    try {
+        console.log(`[개선된 보고서] 생성 시작 - jobId: ${jobId}`);
+        
+        updateStatus('info', '개선된 보고서 생성 중...');
+        updateProgressBar(10, "AI 필터링 및 검증 중");
+        
+        const response = await fetch('/api/enhanced-report/generate-enhanced-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                jobId: jobId,
+                options: {
+                    enableAIFiltering: true,
+                    enableVisualization: true,
+                    includeValidationStats: true,
+                    ...options
+                }
+            })
+        });
+        
+        updateProgressBar(50, "보고서 처리 중");
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || '개선된 보고서 생성 실패');
+        }
+        
+        const data = await response.json();
+        console.log('[개선된 보고서] 생성 완료:', data);
+        
+        updateProgressBar(80, "렌더링 중");
+        
+        if (data.success && data.data) {
+            // 개선된 보고서 렌더링
+            await renderEnhancedReport(data.data);
+            
+            updateStatus('success', '개선된 보고서 생성 완료!');
+            updateProgressBar(100, "완료");
+            
+            return data.data;
+        } else {
+            throw new Error('보고서 데이터가 없습니다.');
+        }
+        
+    } catch (error) {
+        console.error('[개선된 보고서] 생성 오류:', error);
+        updateStatus('danger', `개선된 보고서 생성 실패: ${error.message}`);
+        updateProgressBar(0, "오류");
+        throw error;
+    }
+}
+
+/**
+ * 개선된 보고서 렌더링 함수
+ * @param {Object} reportData 보고서 데이터
+ */
+async function renderEnhancedReport(reportData) {
+    try {
+        console.log('[개선된 보고서] 렌더링 시작');
+        
+        // ReportRenderer 인스턴스 확인
+        if (window.reportRenderer && typeof window.reportRenderer.renderReport === 'function') {
+            // 개선된 렌더러로 보고서 렌더링
+            const reportContainer = document.getElementById('enhanced-report-container') || 
+                                   createEnhancedReportContainer();
+            
+            await window.reportRenderer.renderReport(reportData, reportContainer);
+            
+            // 컨테이너 표시
+            reportContainer.classList.remove('d-none');
+            reportContainer.scrollIntoView({ behavior: 'smooth' });
+            
+            console.log('[개선된 보고서] 고급 렌더링 완료');
+        } else {
+            console.warn('ReportRenderer가 초기화되지 않았습니다. 기본 렌더링을 사용합니다.');
+            renderBasicReport(reportData);
+        }
+        
+    } catch (error) {
+        console.error('[개선된 보고서] 렌더링 오류:', error);
+        // 기본 렌더링으로 폴백
+        renderBasicReport(reportData);
+    }
+}
+
+/**
+ * 개선된 보고서 컨테이너 생성
+ */
+function createEnhancedReportContainer() {
+    const container = document.createElement('div');
+    container.id = 'enhanced-report-container';
+    container.className = 'mt-4 d-none';
+    
+    // 결과 컨테이너에 추가
+    const resultContainer = document.getElementById('result-container') || 
+                           document.querySelector('.container');
+    
+    if (resultContainer) {
+        resultContainer.appendChild(container);
+    }
+    
+    return container;
+}
+
+/**
+ * 기본 보고서 렌더링 (폴백)
+ * @param {Object} reportData 보고서 데이터
+ */
+function renderBasicReport(reportData) {
+    console.log('[기본 보고서] 렌더링 시작');
+    
+    const container = document.getElementById('enhanced-report-container') || 
+                     createEnhancedReportContainer();
+    
+    const { normalizedReport, processingStats, metadata } = reportData;
+    
+    let html = `
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-file-medical"></i> 개선된 의료 문서 분석 보고서
+                </h4>
+                <small>생성일: ${new Date(reportData.generatedAt || Date.now()).toLocaleString('ko-KR')}</small>
+            </div>
+            <div class="card-body">
+    `;
+    
+    // 처리 통계
+    if (processingStats) {
+        html += `
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${processingStats.totalFiles || 0}</h5>
+                            <p class="card-text">처리된 파일</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${processingStats.totalPages || 0}</h5>
+                            <p class="card-text">총 페이지</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${Math.round((processingStats.totalTextLength || 0) / 1000)}K</h5>
+                            <p class="card-text">추출된 텍스트</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <i class="bi bi-check-circle text-success"></i>
+                            </h5>
+                            <p class="card-text">AI 검증 완료</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // 보험 검증 통계
+    if (normalizedReport?.insuranceValidationStats) {
+        const stats = normalizedReport.insuranceValidationStats;
+        html += `
+            <div class="mb-4">
+                <h5><i class="bi bi-shield-check"></i> 보험사 검증 통계</h5>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="text-center">
+                            <div class="h4 text-primary">${stats.total || 0}</div>
+                            <small>총 검증</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-center">
+                            <div class="h4 text-success">${stats.valid || 0}</div>
+                            <small>유효</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-center">
+                            <div class="h4 text-warning">${stats.corrected || 0}</div>
+                            <small>보정됨</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-center">
+                            <div class="h4 text-danger">${stats.invalid || 0}</div>
+                            <small>무효</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="text-center">
+                            <div class="h4 text-muted">${stats.filteredOut || 0}</div>
+                            <small>필터됨</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // 환자 정보
+    if (normalizedReport?.patientInfo) {
+        const patient = normalizedReport.patientInfo;
+        html += `
+            <div class="mb-4">
+                <h5><i class="bi bi-person"></i> 환자 정보</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        ${patient.name ? `<tr><td width="120">이름</td><td>${patient.name}</td></tr>` : ''}
+                        ${patient.birthDate ? `<tr><td>생년월일</td><td>${patient.birthDate}</td></tr>` : ''}
+                        ${patient.gender ? `<tr><td>성별</td><td>${patient.gender}</td></tr>` : ''}
+                        ${patient.address ? `<tr><td>주소</td><td>${patient.address}</td></tr>` : ''}
+                    </table>
+                </div>
+            </div>
+        `;
+    }
+    
+    // 보험 정보
+    if (normalizedReport?.insuranceInfo) {
+        html += `<div class="mb-4"><h5><i class="bi bi-shield"></i> 보험 정보</h5>`;
+        
+        const insuranceList = Array.isArray(normalizedReport.insuranceInfo) ? 
+                             normalizedReport.insuranceInfo : [normalizedReport.insuranceInfo];
+        
+        insuranceList.forEach((insurance, index) => {
+            html += `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h6>보험 ${index + 1}</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                ${insurance.company ? `<tr><td width="120">보험사</td><td>${insurance.company}</td></tr>` : ''}
+                                ${insurance.joinDate ? `<tr><td>가입일</td><td>${insurance.joinDate}</td></tr>` : ''}
+                                ${insurance.product ? `<tr><td>상품명</td><td>${insurance.product}</td></tr>` : ''}
+                                ${insurance.validationStatus ? `<tr><td>검증상태</td><td><span class="badge bg-${getValidationBadgeColor(insurance.validationStatus)}">${insurance.validationStatus}</span></td></tr>` : ''}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `</div>`;
+    }
+    
+    // 의료 기록 타임라인
+    if (normalizedReport?.medicalRecords && normalizedReport.medicalRecords.length > 0) {
+        html += `
+            <div class="mb-4">
+                <h5><i class="bi bi-clock-history"></i> 의료 기록 타임라인</h5>
+                <div class="timeline">
+        `;
+        
+        normalizedReport.medicalRecords.forEach((record, index) => {
+            const categoryClass = getCategoryClass(record.visualization?.category);
+            const categoryIcon = getCategoryIcon(record.visualization?.category);
+            
+            html += `
+                <div class="timeline-item ${categoryClass}">
+                    <div class="timeline-marker">
+                        <i class="bi ${categoryIcon}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h6>${record.date || '날짜 미상'}</h6>
+                            ${record.visualization?.category ? `<span class="badge bg-${getCategoryBadgeColor(record.visualization.category)}">${getCategoryLabel(record.visualization.category)}</span>` : ''}
+                        </div>
+                        ${record.hospital ? `<p class="mb-1"><strong>병원:</strong> ${record.hospital}</p>` : ''}
+                        ${record.diagnosis ? `<p class="mb-1"><strong>진단:</strong> ${Array.isArray(record.diagnosis) ? record.diagnosis.join(', ') : record.diagnosis}</p>` : ''}
+                        ${record.treatment ? `<p class="mb-1"><strong>치료:</strong> ${Array.isArray(record.treatment) ? record.treatment.join(', ') : record.treatment}</p>` : ''}
+                        ${record.notes ? `<p class="mb-0 text-muted"><small>${record.notes}</small></p>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+            </div>
+        `;
+    }
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    // 타임라인 스타일 추가
+    addTimelineStyles();
+    
+    container.innerHTML = html;
+    container.classList.remove('d-none');
+    
+    console.log('[기본 보고서] 렌더링 완료');
+}
+
+/**
+ * 타임라인 스타일 추가
+ */
+function addTimelineStyles() {
+    if (!document.getElementById('timeline-styles')) {
+        const style = document.createElement('style');
+        style.id = 'timeline-styles';
+        style.textContent = `
+            .timeline {
+                position: relative;
+                padding-left: 30px;
+            }
+            .timeline::before {
+                content: '';
+                position: absolute;
+                left: 15px;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background: #dee2e6;
+            }
+            .timeline-item {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            .timeline-marker {
+                position: absolute;
+                left: -22px;
+                top: 5px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #fff;
+                border: 2px solid #dee2e6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+            }
+            .timeline-content {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                border-left: 4px solid #dee2e6;
+            }
+            .timeline-item.within_3months .timeline-marker { border-color: #dc3545; background: #fff5f5; }
+            .timeline-item.within_3months .timeline-content { border-left-color: #dc3545; }
+            .timeline-item.within_5years .timeline-marker { border-color: #ffc107; background: #fffbf0; }
+            .timeline-item.within_5years .timeline-content { border-left-color: #ffc107; }
+            .timeline-item.after_join .timeline-marker { border-color: #28a745; background: #f0fff4; }
+            .timeline-item.after_join .timeline-content { border-left-color: #28a745; }
+            .timeline-item.before_5years .timeline-marker { border-color: #6c757d; background: #f8f9fa; }
+            .timeline-item.before_5years .timeline-content { border-left-color: #6c757d; }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/**
+ * 헬퍼 함수들
+ */
+function getValidationBadgeColor(status) {
+    switch (status) {
+        case 'valid': return 'success';
+        case 'corrected': return 'warning';
+        case 'invalid': return 'danger';
+        default: return 'secondary';
+    }
+}
+
+function getCategoryClass(category) {
+    return category || 'unknown';
+}
+
+function getCategoryIcon(category) {
+    switch (category) {
+        case 'within_3months': return 'bi-exclamation-triangle';
+        case 'within_5years': return 'bi-info-circle';
+        case 'after_join': return 'bi-check-circle';
+        case 'before_5years': return 'bi-clock';
+        default: return 'bi-question-circle';
+    }
+}
+
+function getCategoryBadgeColor(category) {
+    switch (category) {
+        case 'within_3months': return 'danger';
+        case 'within_5years': return 'warning';
+        case 'after_join': return 'success';
+        case 'before_5years': return 'secondary';
+        default: return 'light';
+    }
+}
+
+function getCategoryLabel(category) {
+    switch (category) {
+        case 'within_3months': return '3개월 이내';
+        case 'within_5years': return '5년 이내';
+        case 'after_join': return '가입 후';
+        case 'before_5years': return '5년 이전';
+        default: return '미분류';
+    }
+}
+
+/**
+ * 작업 ID로 개선된 보고서 생성
+ * @param {string} jobId 작업 ID
+ */
+async function generateEnhancedReportFromJobId(jobId) {
+    if (!jobId) {
+        updateStatus('warning', '작업 ID가 없습니다. 먼저 OCR 처리를 완료해주세요.');
+        return;
+    }
+    
+    try {
+        await generateEnhancedReport(jobId);
+    } catch (error) {
+        console.error('개선된 보고서 생성 실패:', error);
+    }
+}
+
+/**
+ * 개선된 보고서 버튼을 기존 UI에 추가
+ */
+function addEnhancedReportButton() {
+    // 기존 다운로드 버튼 찾기
+    const downloadBtn = document.getElementById('downloadReportBtn');
+    if (!downloadBtn) return;
+    
+    // 이미 버튼이 있는지 확인
+    if (document.getElementById('enhancedReportBtn')) return;
+    
+    // 개선된 보고서 생성 버튼 생성
+    const enhancedReportBtn = document.createElement('button');
+    enhancedReportBtn.id = 'enhancedReportBtn';
+    enhancedReportBtn.className = 'btn btn-primary ms-2';
+    enhancedReportBtn.innerHTML = '<i class="bi bi-magic"></i> 개선된 보고서 생성';
+    enhancedReportBtn.onclick = () => {
+        const jobId = getCurrentJobId();
+        if (jobId) {
+            generateEnhancedReportFromJobId(jobId);
+        } else {
+            updateStatus('warning', '작업 ID를 찾을 수 없습니다.');
+        }
+    };
+    
+    // 다운로드 버튼 옆에 추가
+    downloadBtn.parentNode.insertBefore(enhancedReportBtn, downloadBtn.nextSibling);
+}
+
+/**
+ * 현재 작업 ID 가져오기
+ */
+function getCurrentJobId() {
+    // 전역 변수에서 jobId 찾기
+    if (window.currentJobId) return window.currentJobId;
+    if (window.jobId) return window.jobId;
+    if (resultData && resultData.jobId) return resultData.jobId;
+    
+    // URL 파라미터에서 찾기
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobIdFromUrl = urlParams.get('jobId');
+    if (jobIdFromUrl) return jobIdFromUrl;
+    
+    return null;
+}
+
+// 전역 네임스페이스에 필요한 함수들 노출
+window.VNEXSUSApp.initApp = initApp;
+window.VNEXSUSApp.showResultsModal = showResultsModal;
+window.VNEXSUSApp.getCurrentJobId = getCurrentJobId;
+
+})(); // IIFE 종료

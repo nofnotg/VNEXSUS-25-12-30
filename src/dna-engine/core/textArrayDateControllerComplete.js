@@ -9,7 +9,7 @@ import { EnhancedDateAnchor } from './enhancedDateAnchor.js';
 import { ValidationEngine } from './validationEngine.js';
 import { globalErrorHandler, safeExecute, safeExecuteWithRetry } from './errorHandler.js';
 
-export class TextArrayDateController {
+class TextArrayDateController {
   constructor() {
     this.version = '1.0.0';
     this.classifier = new AdvancedTextArrayDateClassifier();
@@ -263,4 +263,29 @@ export class TextArrayDateController {
 
     return processed.split(/\n+/).filter(line => line.trim().length > 0);
   }
+
+  /**
+   * 성능 리포트 생성(Phase 2)
+   */
+  generatePerformanceReport() {
+    const totalCacheOps = (this.cacheStats?.hits || 0) + (this.cacheStats?.misses || 0);
+    const hitRate = totalCacheOps > 0 ? (this.cacheStats.hits / totalCacheOps) : 0;
+
+    return {
+      version: this.version,
+      metrics: this.performanceMetrics,
+      cacheStats: {
+        ...this.cacheStats,
+        hitRate
+      },
+      cacheInfo: {
+        preprocessCacheSize: this.preprocessCache?.size ?? 0,
+        datePatternCacheSize: this.datePatternCache?.size ?? 0,
+        medicalKeywordCacheSize: this.medicalKeywordCache?.size ?? 0
+      },
+      timestamp: new Date().toISOString()
+    };
+  }
 }
+
+export { TextArrayDateController };

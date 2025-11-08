@@ -74,6 +74,7 @@ class MassiveDateBlockProcessor {
   async processMassiveDateBlocks(ocrText, options = {}) {
     try {
       console.log('🔍 거대 날짜 블록 처리 시작...');
+      console.log('📝 입력 텍스트:', ocrText.substring(0, 200) + '...');
       
       // 1단계: 텍스트 전처리 및 정제
       const cleanedText = this._cleanText(ocrText);
@@ -90,6 +91,7 @@ class MassiveDateBlockProcessor {
       // 4단계: 작은 패턴 분석 (Level 3)
       const smallBlocks = this._analyzeSmallBlocks(cleanedText);
       console.log(`📅 작은 블록 분석 완료: ${smallBlocks.totalDates}개 날짜 발견`);
+      console.log('📅 발견된 날짜들:', smallBlocks.dates);
       
       // 5단계: 날짜 기반 그룹핑 및 구조화
       const structuredData = this._structureDateBasedGroups({
@@ -103,6 +105,8 @@ class MassiveDateBlockProcessor {
       const optimizedData = this._optimizeAndFilter(structuredData, options);
       
       console.log('✅ 거대 날짜 블록 처리 완료');
+      console.log('📊 최종 dateBlocks:', optimizedData.dateBlocks);
+      
       return {
         success: true,
         originalSize: ocrText.length,
@@ -308,11 +312,22 @@ class MassiveDateBlockProcessor {
       });
     });
     
-    // 3. 작은 블록을 해당 날짜 그룹에 할당
+    // 3. 작은 블록을 해당 날짜 그룹에 할당 - 한국어 날짜 포함
     Object.values(smallBlocks.dates).flat().forEach(dateBlock => {
       const normalizedDate = this._normalizeDateString(dateBlock.value);
       if (groups.has(normalizedDate)) {
         groups.get(normalizedDate).smallBlocks.push(dateBlock);
+      } else {
+        // 새로운 날짜 그룹 생성 (한국어 날짜 포함)
+        groups.set(normalizedDate, {
+          date: normalizedDate,
+          originalDate: dateBlock.value,
+          sections: [],
+          mediumBlocks: [],
+          smallBlocks: [dateBlock],
+          content: dateBlock.context || dateBlock.value,
+          confidence: 0.5
+        });
       }
     });
     
@@ -342,12 +357,15 @@ class MassiveDateBlockProcessor {
     const dateBlocks = [];
     
     groups.forEach(group => {
-      // 신뢰도 기준 필터링
-      if (group.confidence >= (options.minConfidence || 0.3)) {
+      // 신뢰도 기준 필터링 - 한국어 날짜의 경우 더 관대한 기준 적용
+      const minConfidence = group.originalDate ? 0.1 : (options.minConfidence || 0.3);
+      
+      if (group.confidence >= minConfidence) {
         // 중요 키워드 포함 여부 확인
         const hasImportantKeywords = this._hasImportantKeywords(group.content);
         
-        if (hasImportantKeywords || options.includeAll) {
+        // 한국어 날짜이거나 중요 키워드가 있는 경우 포함
+        if (hasImportantKeywords || options.includeAll || group.originalDate) {
           optimizedGroups.push({
             ...group,
             optimized: true,
@@ -356,9 +374,11 @@ class MassiveDateBlockProcessor {
           
           dateBlocks.push({
             date: group.date,
-            type: 'optimized',
+            originalDate: group.originalDate || group.date,
+            type: group.originalDate ? 'korean' : 'optimized',
             content: group.content,
-            confidence: group.confidence
+            confidence: group.confidence,
+            context: group.context
           });
         }
       }

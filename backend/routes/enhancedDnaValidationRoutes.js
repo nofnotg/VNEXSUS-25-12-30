@@ -12,11 +12,11 @@ import enhancedEntityExtractor from '../postprocess/enhancedEntityExtractor.js';
 import aiEntityExtractor from '../postprocess/aiEntityExtractor.js'; // 🤖 AI 기반 추출기
 
 // 🚀 Enhanced Date-Data Anchoring Engine (GPT-5 분석 기반)
-import { EnhancedDateAnchor } from '../../src/dna-engine/core/enhancedDateAnchor.js';
+import { EnhancedDateAnchor } from '../services/core-engine/enhanced/enhancedDateAnchor.js';
 
 // 🔧 통합 Confidence Pipeline (GPT-5 분석 기반)
-import UnifiedConfidencePipeline from '../../src/dna-engine/core/confidencePipeline.js';
-import RealTimeQualityMonitor from '../../src/dna-engine/core/realTimeQualityMonitor.js';
+import UnifiedConfidencePipeline from '../services/core-engine/enhanced/confidencePipeline.js';
+import RealTimeQualityMonitor from '../services/core-engine/enhanced/realTimeQualityMonitor.js';
 
 // OpenAI import
 import OpenAI from 'openai';

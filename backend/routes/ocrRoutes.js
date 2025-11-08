@@ -116,9 +116,6 @@ const uploadErrorHandler = (err, req, res, next) => {
 // OCR 결과를 파싱 큐로 전달하는 미들웨어
 const publishToParsingQueue = async (req, res, next) => {
   try {
-    // 원래 핸들러 호출
-    await ocrController.uploadPdfs(req, res);
-    
     // 응답에서 필요한 정보 추출
     const result = res.locals.ocrResult;
     
@@ -128,17 +125,29 @@ const publishToParsingQueue = async (req, res, next) => {
         json: { fileId: result.id, ocrJson: result.jsonPath }
       });
       
-      logService('ocrRoutes', `OCR 결과 파싱 큐로 전달됨: ${result.id}`, 'info');
+      logService.info('ocrRoutes', `OCR 결과 파싱 큐로 전달됨: ${result.id}`);
     }
   } catch (error) {
-    logService('ocrRoutes', `파싱 큐 전달 중 오류: ${error.message}`, 'error');
-    // 오류가 발생해도 원래 응답은 보냄
-    next();
+    logService.error('ocrRoutes', `파싱 큐 전달 중 오류: ${error.message}`);
   }
+  next();
 };
 
 // 경로 정의
-router.post('/upload', upload.array('files', 8), uploadErrorHandler, publishToParsingQueue);
+router.get('/test', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'OCR 라우터가 정상적으로 작동 중입니다.',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// 단순화된 업로드 라우트 - 디버깅용
+router.post('/upload', upload.array('files', 8), (req, res, next) => {
+  console.log('=== 미들웨어 체인 진입 ===');
+  console.log('파일 수:', req.files ? req.files.length : 0);
+  next();
+}, uploadErrorHandler, ocrController.uploadPdfs);
 router.get('/status/:jobId', ocrController.getStatus);
 router.get('/result/:jobId', ocrController.getResult);
 router.get('/service-status', ocrController.getOcrStatus);

@@ -15,18 +15,22 @@
 
 import express from 'express';
 import { AdvancedDateController } from '../controllers/advancedDateController.js';
+import { logger } from '../shared/logging/logger.js';
 
 const router = express.Router();
 const controller = new AdvancedDateController();
 
-// 미들웨어: 요청 로깅
+// 미들웨어: 요청 로깅(구조화 로깅)
 router.use((req, res, next) => {
-  console.log(`🔗 Advanced Date API: ${req.method} ${req.path}`);
+  try {
+    logger.logApiRequest(req, { event: 'advanced_date_route_request' });
+  } catch (_) {
+    // ignore logging errors to avoid breaking route
+  }
   next();
 });
 
-// 미들웨어: 요청 크기 제한
-router.use(express.json({ limit: '10mb' }));
+// 요청 바디 파싱은 app 레벨에서 처리함 (중복 파싱 방지)
 
 /**
  * 텍스트 배열 날짜 분석
@@ -130,7 +134,13 @@ router.delete('/cache', (req, res) => {
     });
     
   } catch (error) {
-    console.error('❌ 캐시 정리 실패:', error);
+    logger.error({
+      event: 'advanced_date_cache_clear_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.path,
+      method: req.method
+    });
     
     res.status(500).json({
       success: false,
@@ -155,7 +165,13 @@ router.get('/queue', (req, res) => {
     });
     
   } catch (error) {
-    console.error('❌ 대기열 상태 조회 실패:', error);
+    logger.error({
+      event: 'advanced_date_queue_status_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.path,
+      method: req.method
+    });
     
     res.status(500).json({
       success: false,
@@ -189,7 +205,13 @@ router.get('/health', (req, res) => {
     });
     
   } catch (error) {
-    console.error('❌ 헬스 체크 실패:', error);
+    logger.error({
+      event: 'advanced_date_health_check_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.path,
+      method: req.method
+    });
     
     res.status(500).json({
       success: false,
@@ -203,7 +225,13 @@ router.get('/health', (req, res) => {
  * 에러 핸들링 미들웨어
  */
 router.use((error, req, res, next) => {
-  console.error('❌ Advanced Date API 에러:', error);
+  logger.error({
+    event: 'advanced_date_api_error',
+    error: error?.message,
+    stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+    path: req.path,
+    method: req.method
+  });
   
   // 이미 응답이 전송된 경우
   if (res.headersSent) {

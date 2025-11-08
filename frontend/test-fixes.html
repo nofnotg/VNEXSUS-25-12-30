@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정사항 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        button { margin: 5px; padding: 10px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>VNEXSUS 수정사항 테스트</h1>
+    
+    <div class="test-section">
+        <h2>1. 파일 업로드 중복창 문제 테스트</h2>
+        <p>dropZone 클릭 시 파일 선택창이 한 번만 열리는지 확인</p>
+        <button onclick="testFileUpload()">파일 업로드 테스트</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. "파일을 선택하세요" 메시지 테스트</h2>
+        <p>파일이 선택되지 않았을 때만 메시지가 표시되는지 확인</p>
+        <button onclick="testFileMessage()">파일 메시지 테스트</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. 요약표 생성 에러 처리 테스트</h2>
+        <p>더 구체적인 에러 메시지와 로깅이 작동하는지 확인</p>
+        <button onclick="testSummaryError()">요약표 에러 테스트</button>
+    </div>
+    
+    <div class="log" id="testLog">
+        테스트 로그가 여기에 표시됩니다...
+    </div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('testLog');
+            logDiv.innerHTML += new Date().toLocaleTimeString() + ': ' + message + '<br>';
+        }
+        
+        function testFileUpload() {
+            log('파일 업로드 테스트 시작');
+            log('실제 테스트는 메인 페이지에서 dropZone을 클릭하여 확인하세요');
+            log('예상 결과: 파일 선택창이 한 번만 열림');
+        }
+        
+        function testFileMessage() {
+            log('파일 메시지 테스트 시작');
+            log('실제 테스트는 메인 페이지에서 파일 선택 없이 "문서 분석 시작" 버튼 클릭');
+            log('예상 결과: 파일이 없을 때만 "파일을 선택해주세요" 메시지 표시');
+        }
+        
+        function testSummaryError() {
+            log('요약표 에러 테스트 시작');
+            log('실제 테스트는 메인 페이지에서 문서 처리 없이 "요약표 생성하기" 버튼 클릭');
+            log('예상 결과: 더 구체적인 안내 메시지 표시');
+        }
+        
+        // 페이지 로드 시 초기 메시지
+        window.onload = function() {
+            log('테스트 페이지 로드 완료');
+            log('각 테스트 버튼을 클릭하여 수정사항을 확인하세요');
+        };
+    </script>
+</body>
+</html>

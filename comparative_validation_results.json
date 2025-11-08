@@ -1,0 +1,79 @@
+{
+  "inputData": {
+    "originalText": "2025-03-24 20:47:05\r\nG\r\n해오름손해사정(주)\r\nREAL SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\r\n강남성심병원\r\n의무기록사본\r\n총 0부\r\n(표지제외)\r\n빈경환\r\n\r\n의무기록 사본 증명서\r\n발행번호\r\n2025-16564\r\n등록번호\r\n250026063\r\n환자명\r\n김명희\r\n[센터]진료과\r\n[뇌신경센터]\r\n신경외과\r\n신청자\r\n대리인\r\n발급매수\r\n14 OH\r\n발급용도\r\n보험회사 제출\r\n구비서류 (신)신분증,(환)신분증,(환)동의서,(환)위임장\r\n첨부한 사본은 의무기록 원본과 틀림이 없음을 증명합니다.\r\n2025-03-10\r\n발급자 서명\r\n김지현\r\n주. 1. 의무기록팀 \"발급자 서명\"이 없는 것은 무효입니다.\r\n2. 상기 용도 외에는 이 사본을 사용할 수 없으며, 용도가 완료된 후 즉시 파본, 폐기하여야 합니다.\r\n한림대학교강남성심병원\r\n\"직인생략\"\r\n\r\n250026063 김명희 570725-2\r\n진료의뢰서\r\n250026063\r\n보험자...",
+    "expectedReport": "\r\n나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2019.09.27 \r\n[5 년 이내] 무배당 AXA 나를지켜주는건강보험 가입 5 년 이내 AXA 손해보험\r\n주식회사 \r\n2019.11.15 \r\n[5 년 이내] \r\n내 원 일 : 2019.11.15 \r\n내원경위 : 당뇨병 관리 목적으로 내원 \r\n진 단 명 : 기타 다발성 합병증을 동반한 2 형 당뇨병(E11.78) \r\n통원기간 : 2019.11.15 ~ 2024.08.14 / 23 회 통원 \r\n- 기 고지사항 \r\n치료내용 : 관련 약물 처방 \r\n내당최내과의\r\n원 \r\n2020.10.28 \r\n[5 년 이내] \r\n내 원 일 : 2020.10.28 \r\n내원경위 : 일상생활 질환 관리 목적으로 내원 \r\n통원기간 : 2020.10.28 ~ 2024.04.11 / 29 회 통원 \r\n치료내용 : 급성후두염(J04.0) \r\n상세불명의 위염(K29.7) \r\n상세불명의 알레르기비염(J30.4) \r\n상세불명의 급성 결막염(H10.3) \r...",
+    "originalLength": 40502,
+    "expectedLength": 2509
+  },
+  "systemOutputs": {
+    "coreEngine": {
+      "metrics": {
+        "elapsedMs": 2
+      },
+      "warnings": []
+    },
+    "hybrid": {
+      "error": {
+        "success": false,
+        "error": "통합 파이프라인 실행 실패: Invalid string length",
+        "requestId": "hybrid_1761999251781_3odgb9kw3",
+        "processingTime": 44139
+      }
+    }
+  },
+  "comparisons": {
+    "coreEngine": {
+      "similarity": 0.015151515151515152,
+      "extractedDates": [],
+      "expectedDates": [
+        "2019.09.27",
+        "2019.11.15",
+        "2024.08.14",
+        "2020.10.28",
+        "2024.04.11",
+        "2023.10.20",
+        "2024.01.27",
+        "2023.09.27",
+        "2024.06.27",
+        "2024.09.27",
+        "2025.02.17",
+        "2025.02.18",
+        "2020.03.14",
+        "2025.03.07"
+      ],
+      "dateMatchRate": 0,
+      "medicalKeywords": [],
+      "expectedKeywords": [
+        "진료",
+        "치료",
+        "검사",
+        "진단",
+        "처방",
+        "약물",
+        "병원",
+        "의원",
+        "입원",
+        "혈압",
+        "당뇨",
+        "고혈압",
+        "폐",
+        "간",
+        "뇌",
+        "척추"
+      ],
+      "keywordMatchRate": 0
+    }
+  },
+  "summary": {
+    "totalTests": 2,
+    "successfulTests": 1,
+    "failedTests": 1,
+    "overallScore": 50
+  },
+  "qualityMetrics": {
+    "dataAccuracy": 0,
+    "contentRelevance": 0,
+    "formatConsistency": 0,
+    "contextualQuality": 0.3787878787878788
+  }
+}

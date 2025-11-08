@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM 프롬프트 최적화 밀키트 가이드</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .ab-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .set-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .set-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .set-a {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, #f8f9fa 100%);
+        }
+        .set-b {
+            border-color: #007bff;
+            background: linear-gradient(135deg, #cce7ff 0%, #f8f9fa 100%);
+        }
+        .set-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .set-a .set-title {
+            color: #155724;
+        }
+        .set-b .set-title {
+            color: #004085;
+        }
+        .prompt-template {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .config-section {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .file-reference {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .metric-item {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .metric-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #495057;
+        }
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #6c757d;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -15px;
+            top: 15px;
+            background: #6c757d;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .validation-checklist {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .validation-checklist ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .validation-checklist li {
+            margin: 8px 0;
+        }
+        .comparison-highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+        .tag {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+        .tag.conservative {
+            background: #28a745;
+        }
+        .tag.aggressive {
+            background: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 LLM 프롬프트 최적화 밀키트</h1>
+        <p class="subtitle">전처리 & 보고서 생성을 위한 실전 가이드 - A/B 세트 제공</p>
+
+        <div class="comparison-highlight">
+            <h3>📋 밀키트 사용법</h3>
+            <p><strong>A세트:</strong> 안정성 우선 (Conservative/Stable) - 검증된 방법론 중심</p>
+            <p><strong>B세트:</strong> 혁신성 우선 (Aggressive/Innovative) - 최신 기법 적용</p>
+            <p>프로젝트 상황과 리스크 허용도에 따라 적절한 세트를 선택하거나 혼합 사용하세요.</p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>🔧 전처리 (Preprocessing) A/B 세트</h2>
+
+        <div class="ab-container">
+            <!-- A세트: 안정성 우선 -->
+            <div class="set-card set-a">
+                <div class="set-title">
+                    A세트: 안정성 우선 접근법
+                    <div>
+                        <span class="tag conservative">Conservative</span>
+                        <span class="tag conservative">Rule-Based</span>
+                        <span class="tag conservative">Stable</span>
+                    </div>
+                </div>
+
+                <h4>📝 단계별 프롬프트 템플릿</h4>
+
+                <div class="prompt-template">
+# 의료문서 전처리 프롬프트 (안정형)
+
+## 역할 정의
+당신은 의료문서 전처리 전문가입니다. 정확성과 안정성을 최우선으로 합니다.
+
+## 처리 지침
+1. 기존 검증된 룰 엔진 결과를 우선 참조
+2. 불확실한 정보는 "미확인"으로 표시
+3. 의료 전문용어는 표준 코드 매핑 사용
+4. 날짜/시간 정보는 ISO 8601 형식 준수
+
+## 입력 데이터
+{medical_document}
+
+## 출력 형식
+```json
+{
+  "patient_info": {
+    "name": "확인된 경우만",
+    "birth_date": "YYYY-MM-DD 또는 미확인",
+    "gender": "M/F 또는 미확인"
+  },
+  "medical_records": [
+    {
+      "date": "YYYY-MM-DD 또는 미확인",
+      "content": "원문 그대로 보존",
+      "confidence": "high/medium/low"
+    }
+  ],
+  "processing_notes": "처리 과정에서 발생한 이슈"
+}
+```
+
+## 검증 체크리스트
+- [ ] 원본 정보 손실 없음
+- [ ] 표준 형식 준수
+- [ ] 불확실 정보 명시
+                </div>
+
+                <div class="config-section">
+                    <h4>⚙️ 설정 매개변수</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-value">0.3</div>
+                            <div>Temperature</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">2048</div>
+                            <div>Max Tokens</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">0.9</div>
+                            <div>Top P</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">3</div>
+                            <div>Retry Count</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-reference">
+                    <h4>📁 참고 파일 및 문서</h4>
+                    <ul>
+                        <li><strong>backend/postprocess/index.js</strong> - 기존 후처리 로직</li>
+                        <li><strong>test_summary.txt</strong> - 검증된 성능 데이터</li>
+                        <li><strong>hybridController.js</strong> - 하이브리드 처리 구조</li>
+                        <li><strong>의료용어 표준 매핑 테이블</strong></li>
+                    </ul>
+                </div>
+
+                <div class="validation-checklist">
+                    <h4>✅ 검증 방법</h4>
+                    <ul>
+                        <li>기존 룰 엔진 결과와 일치성 검증</li>
+                        <li>의료 전문가 샘플 검토</li>
+                        <li>정보 손실률 측정 (목표: 5% 이하)</li>
+                        <li>처리 시간 모니터링 (목표: 100ms 이하)</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">95%</div>
+                        <div>목표 정확도</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">100ms</div>
+                        <div>목표 처리시간</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B세트: 혁신성 우선 -->
+            <div class="set-card set-b">
+                <div class="set-title">
+                    B세트: 혁신성 우선 접근법
+                    <div>
+                        <span class="tag aggressive">Aggressive</span>
+                        <span class="tag aggressive">AI-Driven</span>
+                        <span class="tag aggressive">Innovative</span>
+                    </div>
+                </div>
+
+                <h4>📝 단계별 프롬프트 템플릿</h4>
+
+                <div class="prompt-template">
+# 의료문서 전처리 프롬프트 (혁신형)
+
+## 역할 정의
+당신은 최신 AI 기술을 활용한 의료문서 분석 전문가입니다. 
+컨텍스트 이해와 추론을 통해 최대한의 정보를 추출합니다.
+
+## 고급 처리 지침
+1. 문맥적 추론을 통한 누락 정보 보완
+2. 의료 지식 그래프 활용한 관계 분석
+3. 다중 모달 정보 통합 (텍스트, 구조, 메타데이터)
+4. 불확실성 정량화 및 신뢰도 점수 제공
+
+## Chain-of-Thought 처리
+단계 1: 문서 구조 분석
+단계 2: 의료 엔티티 추출
+단계 3: 관계 매핑 및 추론
+단계 4: 품질 검증 및 보완
+
+## 입력 데이터
+{medical_document}
+{context_metadata}
+{medical_knowledge_base}
+
+## 출력 형식
+```json
+{
+  "enhanced_extraction": {
+    "patient_profile": {
+      "demographics": "추론 포함",
+      "medical_history": "관계 분석 결과",
+      "risk_factors": "AI 추론 결과"
+    },
+    "clinical_insights": [
+      {
+        "finding": "AI 분석 결과",
+        "confidence_score": 0.85,
+        "reasoning": "추론 과정 설명"
+      }
+    ],
+    "quality_metrics": {
+      "completeness": 0.92,
+      "consistency": 0.88,
+      "medical_validity": 0.90
+    }
+  }
+}
+```
+                </div>
+
+                <div class="config-section">
+                    <h4>⚙️ 설정 매개변수</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-value">0.7</div>
+                            <div>Temperature</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">4096</div>
+                            <div>Max Tokens</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">0.95</div>
+                            <div>Top P</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">5</div>
+                            <div>Retry Count</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-reference">
+                    <h4>📁 참고 파일 및 문서</h4>
+                    <ul>
+                        <li><strong>src/preprocessing-ai/hybridProcessor.js</strong> - AI 전처리 로직</li>
+                        <li><strong>backend/services/HybridProcessingEngine.js</strong> - 하이브리드 엔진</li>
+                        <li><strong>의료 지식 그래프 API</strong></li>
+                        <li><strong>최신 의료 NLP 모델 문서</strong></li>
+                    </ul>
+                </div>
+
+                <div class="validation-checklist">
+                    <h4>✅ 검증 방법</h4>
+                    <ul>
+                        <li>A/B 테스트를 통한 성능 비교</li>
+                        <li>의료 전문가 블라인드 평가</li>
+                        <li>추론 결과의 의학적 타당성 검증</li>
+                        <li>실시간 품질 모니터링</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value">98%</div>
+                        <div>목표 정확도</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">200ms</div>
+                        <div>목표 처리시간</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>📊 보고서 생성 (Report Generation) A/B 세트</h2>
+
+        <div class="ab-container">
+            <!-- A세트: 구조화된 템플릿 기반 -->
+            <div class="set-card set-a">
+                <div class="set-title">
+                    A세트: 구조화된 템플릿 기반
+                    <div>
+                        <span class="tag conservative">Template-Based</span>
+                        <span class="tag conservative">Structured</span>
+                        <span class="tag conservative">Compliant</span>
+                    </div>
+                </div>
+
+                <h4>📝 보고서 생성 프롬프트</h4>
+
+                <div class="prompt-template">
+# 의료보고서 생성 프롬프트 (템플릿형)
+
+## 역할 정의
+의료보고서 작성 전문가로서 표준 템플릿을 준수하여 
+일관성 있고 규정에 맞는 보고서를 생성합니다.
+
+## 보고서 구조 (고정 템플릿)
+1. 환자 기본정보
+2. 주요 소견
+3. 진단 및 평가
+4. 치료 계획
+5. 추적 관찰 사항
+
+## 작성 지침
+- 의료진 검토를 위한 명확한 구조
+- 법적 요구사항 완전 준수
+- 표준 의료용어 사용
+- 객관적 사실 중심 기술
+
+## 입력 데이터
+{processed_medical_data}
+
+## 템플릿 기반 출력
+```
+=== 의료보고서 ===
+작성일: {current_date}
+환자ID: {patient_id}
+
+1. 환자 기본정보
+   - 성명: {name}
+   - 생년월일: {birth_date}
+   - 성별: {gender}
+
+2. 주요 소견
+   {key_findings}
+
+3. 진단 및 평가
+   {diagnosis_assessment}
+
+4. 치료 계획
+   {treatment_plan}
+
+5. 추적 관찰
+   {follow_up}
+
+작성자: AI 보조시스템
+검토 필요: 의료진 승인 대기
+```
+
+## 품질 보장
+- 템플릿 완성도 100% 확인
+- 필수 항목 누락 검사
+- 의료용어 표준성 검증
+                </div>
+
+                <ol class="step-list">
+                    <li><strong>템플릿 로딩:</strong> 표준 보고서 템플릿 적용</li>
+                    <li><strong>데이터 매핑:</strong> 전처리 결과를 템플릿 필드에 매핑</li>
+                    <li><strong>규정 준수 검사:</strong> 의료법규 요구사항 확인</li>
+                    <li><strong>품질 검증:</strong> 완성도 및 일관성 검사</li>
+                    <li><strong>최종 검토:</strong> 의료진 승인 대기 상태로 전환</li>
+                </ol>
+            </div>
+
+            <!-- B세트: 자유형 AI 기반 -->
+            <div class="set-card set-b">
+                <div class="set-title">
+                    B세트: 자유형 AI 기반
+                    <div>
+                        <span class="tag aggressive">Free-Form</span>
+                        <span class="tag aggressive">AI-Driven</span>
+                        <span class="tag aggressive">Adaptive</span>
+                    </div>
+                </div>
+
+                <h4>📝 보고서 생성 프롬프트</h4>
+
+                <div class="prompt-template">
+# 의료보고서 생성 프롬프트 (AI 자유형)
+
+## 역할 정의
+고급 의료 AI로서 각 케이스의 특성에 맞는 
+맞춤형 보고서를 생성합니다.
+
+## 적응형 구조 생성
+케이스 복잡도와 특성에 따라 최적의 보고서 구조를 결정:
+- 단순 케이스: 간결한 요약형
+- 복합 케이스: 상세 분석형  
+- 응급 케이스: 핵심 정보 우선형
+
+## 고급 분석 기능
+1. 패턴 인식 및 이상 징후 탐지
+2. 의료 가이드라인 기반 권고사항
+3. 리스크 평가 및 예후 예측
+4. 개인화된 치료 옵션 제안
+
+## 입력 데이터
+{enhanced_medical_analysis}
+{patient_context}
+{medical_guidelines}
+
+## 동적 출력 생성
+```
+# 개인화 의료분석 보고서
+
+## 🎯 핵심 요약
+{ai_generated_executive_summary}
+
+## 📋 상세 분석
+{adaptive_detailed_analysis}
+
+## ⚠️ 주의사항 및 리스크
+{risk_assessment_with_scores}
+
+## 💡 AI 권고사항
+{personalized_recommendations}
+
+## 📈 예후 및 모니터링
+{predictive_insights}
+
+---
+생성 모델: GPT-4 Medical
+신뢰도 점수: {confidence_score}
+검증 상태: {validation_status}
+```
+
+## 품질 보장
+- 의학적 타당성 실시간 검증
+- 다중 모델 교차 검증
+- 전문가 피드백 학습 반영
+                </div>
+
+                <ol class="step-list">
+                    <li><strong>케이스 분석:</strong> 복잡도 및 특성 평가</li>
+                    <li><strong>구조 결정:</strong> 최적 보고서 형태 선택</li>
+                    <li><strong>AI 분석:</strong> 고급 의료 추론 수행</li>
+                    <li><strong>개인화:</strong> 환자별 맞춤 권고사항 생성</li>
+                    <li><strong>검증:</strong> 다중 모델 교차 검증</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>⚖️ A/B 세트 비교 및 선택 가이드</h2>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background: #f8f9fa;">
+                    <th style="border: 1px solid #dee2e6; padding: 12px;">비교 항목</th>
+                    <th style="border: 1px solid #dee2e6; padding: 12px; color: #155724;">A세트 (안정성 우선)</th>
+                    <th style="border: 1px solid #dee2e6; padding: 12px; color: #004085;">B세트 (혁신성 우선)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;"><strong>구현 복잡도</strong></td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">낮음 (2-3주)</td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">높음 (6-8주)</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;"><strong>리스크 수준</strong></td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">낮음</td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">중간-높음</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;"><strong>성능 예측</strong></td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">95% 안정적</td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">98% 잠재적</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;"><strong>유지보수</strong></td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">쉬움</td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">복잡함</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;"><strong>확장성</strong></td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">제한적</td>
+                    <td style="border: 1px solid #dee2e6; padding: 12px;">높음</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="comparison-highlight">
+            <h3>🎯 선택 가이드라인</h3>
+            <p><strong>A세트를 선택하는 경우:</strong></p>
+            <ul>
+                <li>빠른 구현이 필요한 경우</li>
+                <li>안정성이 최우선인 의료 환경</li>
+                <li>기존 시스템과의 호환성이 중요한 경우</li>
+                <li>리스크를 최소화해야 하는 상황</li>
+            </ul>
+            
+            <p><strong>B세트를 선택하는 경우:</strong></p>
+            <ul>
+                <li>최고 성능이 필요한 경우</li>
+                <li>혁신적 기능이 경쟁 우위인 경우</li>
+                <li>충분한 개발 시간과 리소스가 있는 경우</li>
+                <li>지속적인 AI 모델 업데이트가 가능한 환경</li>
+            </ul>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>🔧 실전 구현 체크리스트</h2>
+
+        <div class="validation-checklist">
+            <h3>📋 프로젝트 시작 전 체크리스트</h3>
+            <ul>
+                <li>□ 현재 시스템 성능 베이스라인 측정</li>
+                <li>□ 의료진 요구사항 명확화</li>
+                <li>□ 규정 준수 요구사항 확인</li>
+                <li>□ 개발 리소스 및 일정 계획</li>
+                <li>□ 테스트 데이터셋 준비</li>
+                <li>□ 품질 검증 기준 설정</li>
+                <li>□ 롤백 계획 수립</li>
+            </ul>
+        </div>
+
+        <div class="validation-checklist">
+            <h3>🚀 구현 단계별 체크리스트</h3>
+            <ul>
+                <li>□ 프롬프트 템플릿 커스터마이징</li>
+                <li>□ 설정 매개변수 튜닝</li>
+                <li>□ 참고 파일 및 문서 통합</li>
+                <li>□ 검증 방법 구현</li>
+                <li>□ 성능 메트릭 모니터링 설정</li>
+                <li>□ A/B 테스트 환경 구축</li>
+                <li>□ 의료진 피드백 수집 체계 구축</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; color: #6c757d; font-style: italic;">
+            본 밀키트는 실제 코드베이스 분석과 성능 데이터를 바탕으로 제작되었습니다.<br>
+            프로젝트 특성에 맞게 조합하여 사용하시기 바랍니다.
+        </p>
+    </div>
+</body>
+</html>

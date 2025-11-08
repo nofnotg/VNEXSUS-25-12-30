@@ -1,0 +1,75 @@
+{
+  "contract_date": "2023-05-15",
+  "product_type": "실손의료보험",
+  "claim_diagnosis": "위암",
+  "claimant": {
+    "name": "김철수",
+    "dob": "1985-03-20",
+    "gender": "남성",
+    "phone": "010-1234-5678"
+  },
+  "records": [
+    {
+      "hospital": "서울대학교병원",
+      "date": "2023-02-10",
+      "text": "상복부 불편감으로 내원. 위내시경 검사 시행. 위체부에 궤양성 병변 관찰됨. 조직검사 필요 소견.",
+      "department": "소화기내과",
+      "doctor": "이영희"
+    },
+    {
+      "hospital": "서울대학교병원", 
+      "date": "2023-02-20",
+      "text": "조직검사 결과: Adenocarcinoma (선암) 확진. 추가 정밀검사 및 병기 결정을 위한 CT 촬영 예정.",
+      "department": "소화기내과",
+      "doctor": "이영희"
+    },
+    {
+      "hospital": "서울대학교병원",
+      "date": "2023-03-05", 
+      "text": "복부 CT 결과: T2N1M0 병기로 판단. 수술적 치료 계획 수립. 위부분절제술 예정.",
+      "department": "외과",
+      "doctor": "박민수"
+    },
+    {
+      "hospital": "서울대학교병원",
+      "date": "2023-06-10",
+      "text": "위부분절제술 시행. 수술 성공적으로 완료. 병리검사 결과 대기 중.",
+      "department": "외과", 
+      "doctor": "박민수"
+    },
+    {
+      "hospital": "서울대학교병원",
+      "date": "2023-06-20",
+      "text": "병리검사 최종 결과: Gastric adenocarcinoma, moderately differentiated, T2N1M0. 보조항암치료 권고.",
+      "department": "종양내과",
+      "doctor": "최수진"
+    },
+    {
+      "hospital": "서울대학교병원",
+      "date": "2022-01-15",
+      "text": "건강검진 목적 내원. 위내시경 검사에서 만성 위염 소견. 정기적 추적관찰 권고.",
+      "department": "소화기내과",
+      "doctor": "김영수"
+    },
+    {
+      "hospital": "강남세브란스병원",
+      "date": "2021-08-20",
+      "text": "복통으로 응급실 내원. 급성 위염 진단. 약물치료 후 호전되어 퇴원.",
+      "department": "응급의학과",
+      "doctor": "정민호"
+    },
+    {
+      "hospital": "삼성서울병원",
+      "date": "2020-11-10",
+      "text": "정기 건강검진. 위내시경에서 경미한 위염 소견 외 특이사항 없음.",
+      "department": "가정의학과",
+      "doctor": "한지영"
+    }
+  ],
+  "metadata": {
+    "request_id": "REQ-2024-001",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "source": "VNEXSUS_Frontend",
+    "version": "1.0"
+  }
+}

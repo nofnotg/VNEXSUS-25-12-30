@@ -8,6 +8,8 @@ process.env.GCS_BUCKET_NAME = 'medreport-vision-ocr-bucket';
 process.env.GCS_UPLOAD_PREFIX = 'temp-uploads/';
 process.env.OPENAI_API_KEY = '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';
 process.env.OPENAI_PROJECT_ID = 'proj_KSOcTWfSoKn4vbmvdDc3NxzL';
+process.env.GEMINI_API_KEY = 'AIzaSyDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'; // Gemini API 키 (실제 키로 교체 필요)
+process.env.USE_GEMINI = 'true'; // Gemini 모델 사용 활성화
 process.env.SKIP_PDF_TESTS = 'true';
 
 console.log('🚀 환경 변수 설정 완료, app.js 시작 중...');
@@ -18,4 +20,4 @@ import('./app.js').then(() => {
 }).catch(error => {
   console.error('❌ app.js 로드 실패:', error);
   process.exit(1);
-}); 
+});

@@ -1,0 +1,423 @@
+{
+  "timestamp": "2025-10-24T00:03:52.654Z",
+  "totalCases": 12,
+  "analyzedCases": 3,
+  "averageQualityScore": 42.83,
+  "results": [
+    {
+      "caseNumber": "Case1",
+      "timestamp": "2025-10-24T00:03:52.609Z",
+      "qualityScore": {
+        "totalScore": 40.12,
+        "detailedScores": {
+          "similarity": 3.624733475479744,
+          "structuralCompleteness": 87.5,
+          "dateAccuracy": 65.51724137931035,
+          "medicalProfessionalism": 13.333333333333334,
+          "lengthRatio": 20.552831029870706
+        },
+        "weights": {
+          "similarity": 0.3,
+          "structuralCompleteness": 0.25,
+          "dateAccuracy": 0.2,
+          "medicalProfessionalism": 0.15,
+          "lengthRatio": 0.1
+        }
+      },
+      "referenceReport": {
+        "length": 4486,
+        "structure": {
+          "elements": {
+            "hasContractInfo": false,
+            "hasClaimInfo": false,
+            "hasInvestigationInfo": false,
+            "hasMedicalHistory": false,
+            "hasTimeline": true,
+            "hasHospitalInfo": false,
+            "hasDiagnosis": false,
+            "hasTreatment": false
+          },
+          "completeness": 12.5
+        },
+        "dates": {
+          "dateCount": 29,
+          "dates": [
+            "2024.09.27",
+            "2057.09.27",
+            "2025-02-18",
+            "2019.09.27",
+            "2019.11.15",
+            "2019.11.15",
+            "2019.11.15",
+            "2024.08.14",
+            "2020.10.28",
+            "2020.10.28",
+            "2020.10.28",
+            "2024.04.11",
+            "2023.10.20",
+            "2024.01.27",
+            "2023.09.27",
+            "2024.06.27",
+            "2024.09.27",
+            "2025.02.17",
+            "2025.02.17",
+            "2025.02.17",
+            "2025.02.18",
+            "2025.02.18",
+            "2020.03.14",
+            "2025.03.07",
+            "2023.10.20",
+            "2024.01.27",
+            "2020.03.14",
+            "2025.03.07",
+            "2025.02.18"
+          ],
+          "hasChronology": true
+        },
+        "keywords": []
+      },
+      "generatedReport": {
+        "length": 922,
+        "structure": {
+          "elements": {
+            "hasContractInfo": true,
+            "hasClaimInfo": true,
+            "hasInvestigationInfo": true,
+            "hasMedicalHistory": false,
+            "hasTimeline": true,
+            "hasHospitalInfo": true,
+            "hasDiagnosis": true,
+            "hasTreatment": true
+          },
+          "completeness": 87.5
+        },
+        "dates": {
+          "dateCount": 19,
+          "dates": [
+            "1957-07-25",
+            "2019-09-27",
+            "2014-09-27",
+            "2019-09-27",
+            "2019-11-15",
+            "2019-11-15",
+            "2019.11.15",
+            "2024.08.14",
+            "2018-09-27",
+            "2019-09-27",
+            "2020-10-28",
+            "2020-10-28",
+            "2020.10.28",
+            "2024.04.11",
+            "2019-09-27",
+            "2025-02-17",
+            "2025-02-17",
+            "2025.02.17",
+            "2025.02.18"
+          ],
+          "hasChronology": true
+        },
+        "keywords": [
+          "진단",
+          "치료",
+          "병원",
+          "환자",
+          "검사",
+          "입원",
+          "통원",
+          "보험",
+          "청구",
+          "질환"
+        ]
+      },
+      "recommendations": [
+        "내용 유사도가 낮습니다. 기준 보고서의 핵심 내용을 더 포함해야 합니다.",
+        "날짜 정보가 부족합니다. 시간순 정보를 더 정확히 포함해야 합니다.",
+        "의료 전문성이 부족합니다. 의료 용어와 진단 정보를 더 포함해야 합니다."
+      ]
+    },
+    {
+      "caseNumber": "Case2",
+      "timestamp": "2025-10-24T00:03:52.627Z",
+      "qualityScore": {
+        "totalScore": 44.55,
+        "detailedScores": {
+          "similarity": 6.790123456790123,
+          "structuralCompleteness": 87.5,
+          "dateAccuracy": 70.83333333333334,
+          "medicalProfessionalism": 13.333333333333334,
+          "lengthRatio": 44.75592073465442
+        },
+        "weights": {
+          "similarity": 0.3,
+          "structuralCompleteness": 0.25,
+          "dateAccuracy": 0.2,
+          "medicalProfessionalism": 0.15,
+          "lengthRatio": 0.1
+        }
+      },
+      "referenceReport": {
+        "length": 2069,
+        "structure": {
+          "elements": {
+            "hasContractInfo": true,
+            "hasClaimInfo": true,
+            "hasInvestigationInfo": true,
+            "hasMedicalHistory": false,
+            "hasTimeline": true,
+            "hasHospitalInfo": true,
+            "hasDiagnosis": true,
+            "hasTreatment": true
+          },
+          "completeness": 87.5
+        },
+        "dates": {
+          "dateCount": 24,
+          "dates": [
+            "2024.04.09",
+            "2088.04.09",
+            "2019.03.23",
+            "2019.03.23",
+            "2019.03.23",
+            "2023.08.07",
+            "2019.04.09",
+            "2024.01.09",
+            "2024.04.03",
+            "2024.04.03",
+            "2024.04.03",
+            "2024.04.03",
+            "2024.04.09",
+            "2024.04.09",
+            "2024.04.09",
+            "2025.02.04",
+            "2025.02.12",
+            "2024.04.09",
+            "2024.04.23",
+            "2024.04.09",
+            "2024.04.09",
+            "2024.04.03",
+            "2024.04.09",
+            "2024.04.09"
+          ],
+          "hasChronology": true
+        },
+        "keywords": [
+          "진단",
+          "치료",
+          "병원",
+          "검사",
+          "수술",
+          "입원",
+          "통원",
+          "보험",
+          "청구",
+          "사고",
+          "질환",
+          "질병"
+        ]
+      },
+      "generatedReport": {
+        "length": 926,
+        "structure": {
+          "elements": {
+            "hasContractInfo": true,
+            "hasClaimInfo": true,
+            "hasInvestigationInfo": true,
+            "hasMedicalHistory": false,
+            "hasTimeline": true,
+            "hasHospitalInfo": true,
+            "hasDiagnosis": true,
+            "hasTreatment": true
+          },
+          "completeness": 87.5
+        },
+        "dates": {
+          "dateCount": 17,
+          "dates": [
+            "1987-10-26",
+            "2019-04-09",
+            "2014-04-09",
+            "2019-04-09",
+            "2019-03-23",
+            "2019-03-23",
+            "2019.03.23",
+            "2023.08.07",
+            "2019-01-09",
+            "2019-04-09",
+            "2019-04-09",
+            "2024-04-03",
+            "2024-04-03",
+            "2024-04-09",
+            "2024-04-09",
+            "2025.02.04",
+            "2025.02.12"
+          ],
+          "hasChronology": true
+        },
+        "keywords": [
+          "진단",
+          "치료",
+          "병원",
+          "환자",
+          "검사",
+          "입원",
+          "통원",
+          "보험",
+          "청구"
+        ]
+      },
+      "recommendations": [
+        "내용 유사도가 낮습니다. 기준 보고서의 핵심 내용을 더 포함해야 합니다.",
+        "날짜 정보가 부족합니다. 시간순 정보를 더 정확히 포함해야 합니다.",
+        "의료 전문성이 부족합니다. 의료 용어와 진단 정보를 더 포함해야 합니다."
+      ]
+    },
+    {
+      "caseNumber": "Case6",
+      "timestamp": "2025-10-24T00:03:52.642Z",
+      "qualityScore": {
+        "totalScore": 43.81,
+        "detailedScores": {
+          "similarity": 3.0690537084398977,
+          "structuralCompleteness": 87.5,
+          "dateAccuracy": 69.23076923076923,
+          "medicalProfessionalism": 20,
+          "lengthRatio": 41.63860830527497
+        },
+        "weights": {
+          "similarity": 0.3,
+          "structuralCompleteness": 0.25,
+          "dateAccuracy": 0.2,
+          "medicalProfessionalism": 0.15,
+          "lengthRatio": 0.1
+        }
+      },
+      "referenceReport": {
+        "length": 2673,
+        "structure": {
+          "elements": {
+            "hasContractInfo": true,
+            "hasClaimInfo": true,
+            "hasInvestigationInfo": true,
+            "hasMedicalHistory": true,
+            "hasTimeline": true,
+            "hasHospitalInfo": true,
+            "hasDiagnosis": true,
+            "hasTreatment": true
+          },
+          "completeness": 100
+        },
+        "dates": {
+          "dateCount": 26,
+          "dates": [
+            "2023.05.10",
+            "2070.05.10",
+            "2024-12-31",
+            "2024.12.31",
+            "2018.05.10",
+            "2023.02.10",
+            "2023.05.10",
+            "2024.12.12",
+            "2024.12.12",
+            "2024.12.12",
+            "2024.12.27",
+            "2024.12.27",
+            "2024.12.31",
+            "2024.12.31",
+            "2024.05.30",
+            "2024.12.31",
+            "2020.01.17",
+            "2023.05.10",
+            "2024.12.31",
+            "2020.01.17",
+            "2024.01.24",
+            "2024.05.30",
+            "2024.12.31",
+            "2024.12.12",
+            "2024.12.27",
+            "2024.12.31"
+          ],
+          "hasChronology": true
+        },
+        "keywords": [
+          "진단",
+          "치료",
+          "병원",
+          "의사",
+          "증상",
+          "검사",
+          "입원",
+          "통원",
+          "보험",
+          "청구",
+          "사고",
+          "질환",
+          "처방",
+          "약물"
+        ]
+      },
+      "generatedReport": {
+        "length": 1113,
+        "structure": {
+          "elements": {
+            "hasContractInfo": true,
+            "hasClaimInfo": true,
+            "hasInvestigationInfo": true,
+            "hasMedicalHistory": false,
+            "hasTimeline": true,
+            "hasHospitalInfo": true,
+            "hasDiagnosis": true,
+            "hasTreatment": true
+          },
+          "completeness": 87.5
+        },
+        "dates": {
+          "dateCount": 18,
+          "dates": [
+            "1961-10-20",
+            "2021-01-26",
+            "2016-01-26",
+            "2021-01-26",
+            "2021-01-26",
+            "2021.01.26",
+            "2021.01.26",
+            "2020-10-26",
+            "2021-01-26",
+            "2021-01-26",
+            "2021-01-26",
+            "2025-02-19",
+            "2025-02-19",
+            "2025-02-26",
+            "2021-01-26",
+            "2025-02-26",
+            "2025-02-26",
+            "2025-02-26"
+          ],
+          "hasChronology": true
+        },
+        "keywords": [
+          "진단",
+          "치료",
+          "병원",
+          "환자",
+          "검사",
+          "입원",
+          "통원",
+          "보험",
+          "청구"
+        ]
+      },
+      "recommendations": [
+        "내용 유사도가 낮습니다. 기준 보고서의 핵심 내용을 더 포함해야 합니다.",
+        "날짜 정보가 부족합니다. 시간순 정보를 더 정확히 포함해야 합니다.",
+        "의료 전문성이 부족합니다. 의료 용어와 진단 정보를 더 포함해야 합니다."
+      ]
+    }
+  ],
+  "recommendations": [
+    "전체적인 품질 개선이 필요합니다. 목표 점수 80점 이상을 위해 시스템 최적화가 필요합니다.",
+    "더 많은 케이스에 대한 분석이 필요합니다. 전체 케이스를 대상으로 테스트해보세요.",
+    "공통 문제: 내용 유사도가 낮습니다. 기준 보고서의 핵심 내용을 더 포함해야 합니다. (3/3 케이스에서 발견)",
+    "공통 문제: 날짜 정보가 부족합니다. 시간순 정보를 더 정확히 포함해야 합니다. (3/3 케이스에서 발견)",
+    "공통 문제: 의료 전문성이 부족합니다. 의료 용어와 진단 정보를 더 포함해야 합니다. (3/3 케이스에서 발견)"
+  ]
+}

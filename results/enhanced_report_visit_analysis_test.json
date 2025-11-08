@@ -1,0 +1,865 @@
+{
+  "jobId": "visit_analysis_test",
+  "generatedAt": "2025-11-03T13:18:24.584Z",
+  "processingStats": {
+    "totalFiles": 1,
+    "totalPages": 0,
+    "totalTextLength": 408,
+    "processingTime": 1762175904584,
+    "aiFilteringEnabled": true,
+    "visualizationEnabled": true
+  },
+  "fileResults": {
+    "file1": {
+      "filename": "test_medical_record.txt",
+      "pageCount": 0,
+      "textPageCount": 0,
+      "imagePageCount": 0,
+      "mergedText": "환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI 촬영\n2023-08-15 서울대학교병원 내과 당뇨병 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진"
+    }
+  },
+  "normalizedReport": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "홍길동",
+        "birthDate": "yyyy-mm-dd",
+        "registrationNumber": "123456-1234567"
+      },
+      "insuranceConditions": [
+        {
+          "conditionNumber": 1,
+          "joinDate": "2020-01-01"
+        }
+      ],
+      "insuranceHistory": [
+        {
+          "period": "[보험 가입 5년 이내]",
+          "date": "2020-01-01",
+          "joinDate": "2020-01-01"
+        }
+      ],
+      "medicalRecords": [
+        {
+          "date": "2020-01-01",
+          "hospital": "미확인 의료기관",
+          "visitDate": "2020-01-01",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-01-15",
+          "hospital": "내과 감기 진료",
+          "visitDate": "2023-01-15",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-02-20",
+          "hospital": "내과 고혈압 진료",
+          "visitDate": "2023-02-20",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-03-10",
+          "hospital": "정형외과 무릎 통증 진료",
+          "visitDate": "2023-03-10",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-04-05",
+          "hospital": "내과 당뇨병 진료",
+          "visitDate": "2023-04-05",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-05-12",
+          "hospital": "심장내과 심전도 검사",
+          "visitDate": "2023-05-12",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-06-18",
+          "hospital": "내과 고혈압 추적관찰",
+          "visitDate": "2023-06-18",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-07-22",
+          "hospital": "정형외과 무릎 MRI 촬영",
+          "visitDate": "2023-07-22",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-08-15",
+          "hospital": "내과 당뇨병 관리",
+          "visitDate": "2023-08-15",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-09-10",
+          "hospital": "심장내과 심장초음파 검사",
+          "visitDate": "2023-09-10",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        },
+        {
+          "date": "2023-10-05",
+          "hospital": "내과 종합검진",
+          "visitDate": "2023-10-05",
+          "reason": "정기 진료",
+          "diagnosis": "미확인",
+          "notes": ""
+        }
+      ],
+      "hospitalizationRecords": [],
+      "insuranceClaims": []
+    },
+    "progressReport": "의료 경과보고서\nMedical Progress Report\n생성일: 2025. 11. 3.\n==================================================\n\n보고서 요약\n--------------------\n생성일시: 2025. 11. 3. 오후 10:18:24\n데이터 항목 수: 0\n",
+    "statistics": {
+      "originalLength": 408,
+      "processedLength": 404,
+      "recordsFound": 11,
+      "insuranceCount": 1,
+      "timelineEvents": 11
+    },
+    "processingTime": 1762175904544,
+    "enhancedMedicalTerms": {
+      "originalText": "\n\n========== 파일: test_medical_record.txt ==========\n\n환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI 촬영\n2023-08-15 서울대학교병원 내과 당뇨병 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진",
+      "processedText": "\n\n========== 파일: test_medical_record.txt ==========\n\n환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI (자기공명영상) 촬영\n2023-08-15 서울대학교병원 내과 당뇨병 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진",
+      "contextFiltering": {
+        "filteredText": "\n\n========== 파일: test_medical_record.txt ==========\n\n환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI 촬영\n2023-08-15 서울대학교병원 내과 당뇨병 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진",
+        "excludedSections": [],
+        "originalLength": 1,
+        "filteredLength": 1
+      },
+      "termEnhancement": {
+        "enhancedText": "\n\n========== 파일: test_medical_record.txt ==========\n\n환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI (자기공명영상) 촬영\n2023-08-15 서울대학교병원 내과 당뇨병 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진",
+        "addedTerms": [
+          "MRI → 자기공명영상"
+        ]
+      },
+      "statistics": {
+        "originalLength": 408,
+        "processedLength": 417,
+        "lengthIncrease": 9,
+        "increasePercentage": "2.21%",
+        "pairedTermsCount": 1,
+        "icdCodesCount": 0,
+        "processingDate": "2025. 11. 3. 오후 10:18:24"
+      },
+      "processingLog": [
+        "문맥 필터링: 0개 섹션 제외",
+        "ICD 코드 처리: 0개 코드 병기 추가",
+        "의료용어 보완: 1개 용어 병기 추가"
+      ],
+      "timestamp": "2025-11-03T13:18:24.549Z"
+    },
+    "enhancedText": "\n\n========== 파일: test_medical_record.txt ==========\n\n환자정보\n성명: 홍길동\n주민등록번호: 123456-1234567\n보험가입일: 2020-01-01\n\n의료기록\n2023-01-15 서울대학교병원 내과 감기 진료\n2023-02-20 서울대학교병원 내과 고혈압 진료\n2023-03-10 삼성서울병원 정형외과 무릎 통증 진료\n2023-04-05 서울대학교병원 내과 당뇨병(diabetes mellitus)(diabetes mellitus) 진료\n2023-05-12 아산병원 심장내과 심전도 검사\n2023-06-18 서울대학교병원 내과 고혈압 추적관찰\n2023-07-22 삼성서울병원 정형외과 무릎 MRI (자기공명영상) 촬영\n2023-08-15 서울대학교병원 내과 당뇨병(diabetes mellitus)(diabetes mellitus) 관리\n2023-09-10 아산병원 심장내과 심장초음파 검사\n2023-10-05 서울대학교병원 내과 종합검진",
+    "visitAnalysis": {
+      "totalVisits": 11,
+      "visitGroups": [
+        {
+          "hospital": "미확인 의료기관",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2020-01-01",
+              "hospital": "미확인 의료기관",
+              "visitDate": "2020-01-01",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2020-01-01T00:00:00.000Z",
+            "end": "2020-01-01T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 감기 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-01-15",
+              "hospital": "내과 감기 진료",
+              "visitDate": "2023-01-15",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-01-15T00:00:00.000Z",
+            "end": "2023-01-15T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 고혈압 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-02-20",
+              "hospital": "내과 고혈압 진료",
+              "visitDate": "2023-02-20",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-02-20T00:00:00.000Z",
+            "end": "2023-02-20T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "정형외과 무릎 통증 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-03-10",
+              "hospital": "정형외과 무릎 통증 진료",
+              "visitDate": "2023-03-10",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-03-10T00:00:00.000Z",
+            "end": "2023-03-10T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 당뇨병 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-04-05",
+              "hospital": "내과 당뇨병 진료",
+              "visitDate": "2023-04-05",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-04-05T00:00:00.000Z",
+            "end": "2023-04-05T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "심장내과 심전도 검사",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-05-12",
+              "hospital": "심장내과 심전도 검사",
+              "visitDate": "2023-05-12",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-05-12T00:00:00.000Z",
+            "end": "2023-05-12T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 고혈압 추적관찰",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-06-18",
+              "hospital": "내과 고혈압 추적관찰",
+              "visitDate": "2023-06-18",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-06-18T00:00:00.000Z",
+            "end": "2023-06-18T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "정형외과 무릎 MRI 촬영",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-07-22",
+              "hospital": "정형외과 무릎 MRI 촬영",
+              "visitDate": "2023-07-22",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-07-22T00:00:00.000Z",
+            "end": "2023-07-22T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 당뇨병 관리",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-08-15",
+              "hospital": "내과 당뇨병 관리",
+              "visitDate": "2023-08-15",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-08-15T00:00:00.000Z",
+            "end": "2023-08-15T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "심장내과 심장초음파 검사",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-09-10",
+              "hospital": "심장내과 심장초음파 검사",
+              "visitDate": "2023-09-10",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-09-10T00:00:00.000Z",
+            "end": "2023-09-10T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        },
+        {
+          "hospital": "내과 종합검진",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "visits": [
+            {
+              "date": "2023-10-05",
+              "hospital": "내과 종합검진",
+              "visitDate": "2023-10-05",
+              "reason": "정기 진료",
+              "diagnosis": "미확인",
+              "notes": ""
+            }
+          ],
+          "dateRange": {
+            "start": "2023-10-05T00:00:00.000Z",
+            "end": "2023-10-05T00:00:00.000Z"
+          },
+          "totalVisits": 1
+        }
+      ],
+      "continuityAnalysis": {
+        "continuousGroups": [],
+        "isolatedVisits": [
+          {
+            "hospital": "미확인 의료기관",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2020-01-01",
+                "hospital": "미확인 의료기관",
+                "visitDate": "2020-01-01",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2020-01-01T00:00:00.000Z",
+              "end": "2020-01-01T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 감기 진료",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-01-15",
+                "hospital": "내과 감기 진료",
+                "visitDate": "2023-01-15",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-01-15T00:00:00.000Z",
+              "end": "2023-01-15T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 고혈압 진료",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-02-20",
+                "hospital": "내과 고혈압 진료",
+                "visitDate": "2023-02-20",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-02-20T00:00:00.000Z",
+              "end": "2023-02-20T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "정형외과 무릎 통증 진료",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-03-10",
+                "hospital": "정형외과 무릎 통증 진료",
+                "visitDate": "2023-03-10",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-03-10T00:00:00.000Z",
+              "end": "2023-03-10T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 당뇨병 진료",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-04-05",
+                "hospital": "내과 당뇨병 진료",
+                "visitDate": "2023-04-05",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-04-05T00:00:00.000Z",
+              "end": "2023-04-05T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "심장내과 심전도 검사",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-05-12",
+                "hospital": "심장내과 심전도 검사",
+                "visitDate": "2023-05-12",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-05-12T00:00:00.000Z",
+              "end": "2023-05-12T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 고혈압 추적관찰",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-06-18",
+                "hospital": "내과 고혈압 추적관찰",
+                "visitDate": "2023-06-18",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-06-18T00:00:00.000Z",
+              "end": "2023-06-18T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "정형외과 무릎 MRI 촬영",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-07-22",
+                "hospital": "정형외과 무릎 MRI 촬영",
+                "visitDate": "2023-07-22",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-07-22T00:00:00.000Z",
+              "end": "2023-07-22T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 당뇨병 관리",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-08-15",
+                "hospital": "내과 당뇨병 관리",
+                "visitDate": "2023-08-15",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-08-15T00:00:00.000Z",
+              "end": "2023-08-15T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "심장내과 심장초음파 검사",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-09-10",
+                "hospital": "심장내과 심장초음파 검사",
+                "visitDate": "2023-09-10",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-09-10T00:00:00.000Z",
+              "end": "2023-09-10T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          },
+          {
+            "hospital": "내과 종합검진",
+            "diagnosis": "미확인",
+            "icdCode": "",
+            "visits": [
+              {
+                "date": "2023-10-05",
+                "hospital": "내과 종합검진",
+                "visitDate": "2023-10-05",
+                "reason": "정기 진료",
+                "diagnosis": "미확인",
+                "notes": ""
+              }
+            ],
+            "dateRange": {
+              "start": "2023-10-05T00:00:00.000Z",
+              "end": "2023-10-05T00:00:00.000Z"
+            },
+            "totalVisits": 1
+          }
+        ],
+        "followUpRequired": [],
+        "treatmentPatterns": {
+          "미확인 의료기관_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 감기 진료_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 고혈압 진료_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "정형외과 무릎 통증 진료_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 당뇨병 진료_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "심장내과 심전도 검사_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 고혈압 추적관찰_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "정형외과 무릎 MRI 촬영_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 당뇨병 관리_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "심장내과 심장초음파 검사_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          },
+          "내과 종합검진_": {
+            "patternType": "single_episode",
+            "frequency": "irregular",
+            "duration": 0,
+            "intensity": "low"
+          }
+        }
+      },
+      "correctedVisitCounts": [
+        {
+          "hospital": "미확인 의료기관",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2020-01-01",
+            "end": "2020-01-01"
+          },
+          "visitDates": [
+            "2020-01-01"
+          ],
+          "correctedDescription": "2020-01-01 ~ 2020-01-01 / 1회 통원"
+        },
+        {
+          "hospital": "내과 감기 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-01-15",
+            "end": "2023-01-15"
+          },
+          "visitDates": [
+            "2023-01-15"
+          ],
+          "correctedDescription": "2023-01-15 ~ 2023-01-15 / 1회 통원"
+        },
+        {
+          "hospital": "내과 고혈압 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-02-20",
+            "end": "2023-02-20"
+          },
+          "visitDates": [
+            "2023-02-20"
+          ],
+          "correctedDescription": "2023-02-20 ~ 2023-02-20 / 1회 통원"
+        },
+        {
+          "hospital": "정형외과 무릎 통증 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-03-10",
+            "end": "2023-03-10"
+          },
+          "visitDates": [
+            "2023-03-10"
+          ],
+          "correctedDescription": "2023-03-10 ~ 2023-03-10 / 1회 통원"
+        },
+        {
+          "hospital": "내과 당뇨병 진료",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-04-05",
+            "end": "2023-04-05"
+          },
+          "visitDates": [
+            "2023-04-05"
+          ],
+          "correctedDescription": "2023-04-05 ~ 2023-04-05 / 1회 통원"
+        },
+        {
+          "hospital": "심장내과 심전도 검사",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-05-12",
+            "end": "2023-05-12"
+          },
+          "visitDates": [
+            "2023-05-12"
+          ],
+          "correctedDescription": "2023-05-12 ~ 2023-05-12 / 1회 통원"
+        },
+        {
+          "hospital": "내과 고혈압 추적관찰",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-06-18",
+            "end": "2023-06-18"
+          },
+          "visitDates": [
+            "2023-06-18"
+          ],
+          "correctedDescription": "2023-06-18 ~ 2023-06-18 / 1회 통원"
+        },
+        {
+          "hospital": "정형외과 무릎 MRI 촬영",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-07-22",
+            "end": "2023-07-22"
+          },
+          "visitDates": [
+            "2023-07-22"
+          ],
+          "correctedDescription": "2023-07-22 ~ 2023-07-22 / 1회 통원"
+        },
+        {
+          "hospital": "내과 당뇨병 관리",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-08-15",
+            "end": "2023-08-15"
+          },
+          "visitDates": [
+            "2023-08-15"
+          ],
+          "correctedDescription": "2023-08-15 ~ 2023-08-15 / 1회 통원"
+        },
+        {
+          "hospital": "심장내과 심장초음파 검사",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-09-10",
+            "end": "2023-09-10"
+          },
+          "visitDates": [
+            "2023-09-10"
+          ],
+          "correctedDescription": "2023-09-10 ~ 2023-09-10 / 1회 통원"
+        },
+        {
+          "hospital": "내과 종합검진",
+          "diagnosis": "미확인",
+          "icdCode": "",
+          "actualVisitCount": 1,
+          "dateRange": {
+            "start": "2023-10-05",
+            "end": "2023-10-05"
+          },
+          "visitDates": [
+            "2023-10-05"
+          ],
+          "correctedDescription": "2023-10-05 ~ 2023-10-05 / 1회 통원"
+        }
+      ],
+      "recommendations": []
+    }
+  },
+  "metadata": {
+    "version": "2.0",
+    "features": [
+      "ai_filtering",
+      "visualization",
+      "validation_stats"
+    ],
+    "options": {
+      "enableVisitAnalysis": true,
+      "enableDetailedAnalysis": true
+    }
+  }
+}

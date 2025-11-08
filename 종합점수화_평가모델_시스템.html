@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종합 점수화 평가 모델 시스템</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .control-panel {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .total-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-grade {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .grade-A { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .grade-B { background: linear-gradient(135deg, #3498db, #5dade2); }
+        .grade-C { background: linear-gradient(135deg, #f39c12, #f7dc6f); }
+        .grade-D { background: linear-gradient(135deg, #e74c3c, #ec7063); }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .data-items-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .data-item {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .data-item h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .data-item-score {
+            float: right;
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .context-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .context-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .evaluation-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .evaluation-matrix th, .evaluation-matrix td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .evaluation-matrix th {
+            background: #3498db;
+            color: white;
+        }
+
+        .evaluation-matrix tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .weight-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .algorithm-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .algorithm-option {
+            padding: 15px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .algorithm-option:hover {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+
+        .algorithm-option.selected {
+            border-color: #3498db;
+            background: #3498db;
+            color: white;
+        }
+
+        .insights-panel {
+            background: linear-gradient(135deg, #fff3e0, #ffecb3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .insight-item {
+            margin: 10px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 종합 점수화 평가 모델 시스템</h1>
+            <p>정량적/정성적 지표 기반 AI 평가 및 컨텍스트 분석 플랫폼</p>
+        </div>
+
+        <div class="main-content">
+            <!-- 제어 패널 -->
+            <div class="section control-panel">
+                <h2>📊 평가 제어 패널</h2>
+                
+                <div class="input-group">
+                    <label>평가 대상 데이터</label>
+                    <textarea id="evaluationData" rows="4" placeholder="평가할 데이터를 입력하세요..."></textarea>
+                </div>
+
+                <div class="algorithm-selector">
+                    <div class="algorithm-option selected" data-algorithm="comprehensive">
+                        종합 평가
+                    </div>
+                    <div class="algorithm-option" data-algorithm="quantitative">
+                        정량적 평가
+                    </div>
+                    <div class="algorithm-option" data-algorithm="qualitative">
+                        정성적 평가
+                    </div>
+                    <div class="algorithm-option" data-algorithm="contextual">
+                        컨텍스트 평가
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>평가 가중치 설정</label>
+                    <div>
+                        <label>정량적 지표 가중치: <span id="quantWeight">50</span>%</label>
+                        <input type="range" class="weight-slider" id="quantWeightSlider" min="0" max="100" value="50">
+                    </div>
+                    <div>
+                        <label>정성적 지표 가중치: <span id="qualWeight">30</span>%</label>
+                        <input type="range" class="weight-slider" id="qualWeightSlider" min="0" max="100" value="30">
+                    </div>
+                    <div>
+                        <label>컨텍스트 지표 가중치: <span id="contextWeight">20</span>%</label>
+                        <input type="range" class="weight-slider" id="contextWeightSlider" min="0" max="100" value="20">
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-success" onclick="startEvaluation()">🚀 평가 시작</button>
+                    <button class="btn btn-warning" onclick="resetEvaluation()">🔄 초기화</button>
+                    <button class="btn" onclick="exportResults()">📊 결과 내보내기</button>
+                </div>
+            </div>
+
+            <!-- 점수 표시 -->
+            <div class="section">
+                <h2>🏆 종합 점수</h2>
+                <div class="score-display">
+                    <div class="total-score" id="totalScore">0</div>
+                    <div class="score-grade grade-D" id="scoreGrade">미평가</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="scoreProgress" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="quantScore">0</div>
+                        <div class="metric-label">정량적 점수</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="qualScore">0</div>
+                        <div class="metric-label">정성적 점수</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="contextScore">0</div>
+                        <div class="metric-label">컨텍스트 점수</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="reliabilityScore">0</div>
+                        <div class="metric-label">신뢰도</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 유의미 데이터 10항목 -->
+            <div class="section">
+                <h2>📋 유의미 데이터 10항목 평가</h2>
+                <div class="data-items-list" id="dataItemsList">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+            </div>
+
+            <!-- 평가 매트릭스 -->
+            <div class="section">
+                <h2>📈 평가 매트릭스</h2>
+                <table class="evaluation-matrix" id="evaluationMatrix">
+                    <thead>
+                        <tr>
+                            <th>평가 항목</th>
+                            <th>가중치</th>
+                            <th>점수</th>
+                            <th>기여도</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody">
+                        <!-- 동적으로 생성됨 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 컨텍스트 분석 -->
+            <div class="section">
+                <h2>🔍 컨텍스트 분석</h2>
+                <div class="context-panel" id="contextPanel">
+                    <div class="context-item">
+                        <strong>데이터 완성도:</strong> <span id="dataCompleteness">분석 중...</span>
+                    </div>
+                    <div class="context-item">
+                        <strong>시계열 일관성:</strong> <span id="timeConsistency">분석 중...</span>
+                    </div>
+                    <div class="context-item">
+                        <strong>연관성 강도:</strong> <span id="correlationStrength">분석 중...</span>
+                    </div>
+                    <div class="context-item">
+                        <strong>이상치 탐지:</strong> <span id="anomalyDetection">분석 중...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 차트 시각화 -->
+            <div class="section">
+                <h2>📊 점수 분포 차트</h2>
+                <div class="chart-container">
+                    <canvas id="scoreChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- 인사이트 패널 -->
+            <div class="section">
+                <h2>💡 평가 인사이트</h2>
+                <div class="insights-panel" id="insightsPanel">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 종합 점수화 평가 모델 클래스
+        class ComprehensiveEvaluationModel {
+            constructor() {
+                this.meaningfulDataItems = [
+                    { id: 1, name: "진단 정확성", weight: 0.15, category: "quantitative" },
+                    { id: 2, name: "시계열 일관성", weight: 0.12, category: "quantitative" },
+                    { id: 3, name: "데이터 완성도", weight: 0.10, category: "quantitative" },
+                    { id: 4, name: "의료 연관성", weight: 0.13, category: "qualitative" },
+                    { id: 5, name: "보험 적합성", weight: 0.11, category: "qualitative" },
+                    { id: 6, name: "문서 품질", weight: 0.09, category: "qualitative" },
+                    { id: 7, name: "컨텍스트 풍부성", weight: 0.08, category: "contextual" },
+                    { id: 8, name: "패턴 일치도", weight: 0.07, category: "contextual" },
+                    { id: 9, name: "이상치 탐지", weight: 0.08, category: "contextual" },
+                    { id: 10, name: "예측 신뢰도", weight: 0.07, category: "contextual" }
+                ];
+                
+                this.evaluationWeights = {
+                    quantitative: 0.5,
+                    qualitative: 0.3,
+                    contextual: 0.2
+                };
+                
+                this.currentScores = {};
+                this.evaluationResults = {};
+            }
+
+            // 종합 평가 실행
+            evaluateData(data) {
+                const results = {
+                    quantitative: this.evaluateQuantitative(data),
+                    qualitative: this.evaluateQualitative(data),
+                    contextual: this.evaluateContextual(data),
+                    itemScores: {},
+                    insights: []
+                };
+
+                // 각 항목별 점수 계산
+                this.meaningfulDataItems.forEach(item => {
+                    const score = this.evaluateItem(item, data);
+                    results.itemScores[item.id] = score;
+                });
+
+                // 종합 점수 계산
+                results.totalScore = this.calculateTotalScore(results);
+                results.grade = this.calculateGrade(results.totalScore);
+                results.reliability = this.calculateReliability(results);
+
+                // 인사이트 생성
+                results.insights = this.generateInsights(results);
+
+                this.evaluationResults = results;
+                return results;
+            }
+
+            // 정량적 평가
+            evaluateQuantitative(data) {
+                const metrics = {
+                    accuracy: this.calculateAccuracy(data),
+                    completeness: this.calculateCompleteness(data),
+                    consistency: this.calculateConsistency(data)
+                };
+
+                return (metrics.accuracy + metrics.completeness + metrics.consistency) / 3;
+            }
+
+            // 정성적 평가
+            evaluateQualitative(data) {
+                const metrics = {
+                    relevance: this.calculateRelevance(data),
+                    quality: this.calculateQuality(data),
+                    appropriateness: this.calculateAppropriateness(data)
+                };
+
+                return (metrics.relevance + metrics.quality + metrics.appropriateness) / 3;
+            }
+
+            // 컨텍스트 평가
+            evaluateContextual(data) {
+                const metrics = {
+                    richness: this.calculateContextRichness(data),
+                    coherence: this.calculateCoherence(data),
+                    predictability: this.calculatePredictability(data)
+                };
+
+                return (metrics.richness + metrics.coherence + metrics.predictability) / 3;
+            }
+
+            // 개별 항목 평가
+            evaluateItem(item, data) {
+                const baseScore = Math.random() * 100; // 실제 구현에서는 복잡한 알고리즘 사용
+                const categoryBonus = this.getCategoryBonus(item.category, data);
+                const weightedScore = (baseScore + categoryBonus) * item.weight;
+                
+                return Math.min(100, Math.max(0, weightedScore));
+            }
+
+            // 카테고리별 보너스 계산
+            getCategoryBonus(category, data) {
+                switch(category) {
+                    case 'quantitative':
+                        return data.length > 100 ? 10 : 0;
+                    case 'qualitative':
+                        return data.includes('진단') ? 15 : 0;
+                    case 'contextual':
+                        return data.includes('연관성') ? 12 : 0;
+                    default:
+                        return 0;
+                }
+            }
+
+            // 종합 점수 계산
+            calculateTotalScore(results) {
+                return (
+                    results.quantitative * this.evaluationWeights.quantitative +
+                    results.qualitative * this.evaluationWeights.qualitative +
+                    results.contextual * this.evaluationWeights.contextual
+                );
+            }
+
+            // 등급 계산
+            calculateGrade(score) {
+                if (score >= 90) return 'A';
+                if (score >= 80) return 'B';
+                if (score >= 70) return 'C';
+                return 'D';
+            }
+
+            // 신뢰도 계산
+            calculateReliability(results) {
+                const variance = this.calculateVariance([
+                    results.quantitative,
+                    results.qualitative,
+                    results.contextual
+                ]);
+                
+                return Math.max(0, 100 - variance * 10);
+            }
+
+            // 분산 계산
+            calculateVariance(scores) {
+                const mean = scores.reduce((a, b) => a + b) / scores.length;
+                const variance = scores.reduce((acc, score) => acc + Math.pow(score - mean, 2), 0) / scores.length;
+                return Math.sqrt(variance);
+            }
+
+            // 정확도 계산
+            calculateAccuracy(data) {
+                return 75 + Math.random() * 20;
+            }
+
+            // 완성도 계산
+            calculateCompleteness(data) {
+                return 70 + Math.random() * 25;
+            }
+
+            // 일관성 계산
+            calculateConsistency(data) {
+                return 80 + Math.random() * 15;
+            }
+
+            // 연관성 계산
+            calculateRelevance(data) {
+                return 85 + Math.random() * 10;
+            }
+
+            // 품질 계산
+            calculateQuality(data) {
+                return 78 + Math.random() * 18;
+            }
+
+            // 적합성 계산
+            calculateAppropriateness(data) {
+                return 82 + Math.random() * 13;
+            }
+
+            // 컨텍스트 풍부성 계산
+            calculateContextRichness(data) {
+                return 73 + Math.random() * 22;
+            }
+
+            // 일관성 계산
+            calculateCoherence(data) {
+                return 79 + Math.random() * 16;
+            }
+
+            // 예측 가능성 계산
+            calculatePredictability(data) {
+                return 76 + Math.random() * 19;
+            }
+
+            // 인사이트 생성
+            generateInsights(results) {
+                const insights = [];
+                
+                if (results.quantitative > 85) {
+                    insights.push("정량적 지표가 우수합니다. 데이터의 정확성과 완성도가 높습니다.");
+                }
+                
+                if (results.qualitative > 80) {
+                    insights.push("정성적 평가에서 좋은 결과를 보입니다. 의료 연관성이 높습니다.");
+                }
+                
+                if (results.contextual > 75) {
+                    insights.push("컨텍스트 분석이 효과적입니다. 패턴 인식 능력이 뛰어납니다.");
+                }
+                
+                if (results.reliability > 90) {
+                    insights.push("평가 결과의 신뢰도가 매우 높습니다.");
+                }
+                
+                return insights;
+            }
+
+            // 가중치 업데이트
+            updateWeights(quantitative, qualitative, contextual) {
+                const total = quantitative + qualitative + contextual;
+                this.evaluationWeights = {
+                    quantitative: quantitative / total,
+                    qualitative: qualitative / total,
+                    contextual: contextual / total
+                };
+            }
+        }
+
+        // 전역 변수
+        let evaluationModel = new ComprehensiveEvaluationModel();
+        let currentResults = null;
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeUI();
+            setupEventListeners();
+            renderDataItems();
+        });
+
+        // UI 초기화
+        function initializeUI() {
+            updateWeightDisplays();
+            renderEvaluationMatrix();
+        }
+
+        // 이벤트 리스너 설정
+        function setupEventListeners() {
+            // 가중치 슬라이더
+            document.getElementById('quantWeightSlider').addEventListener('input', updateWeights);
+            document.getElementById('qualWeightSlider').addEventListener('input', updateWeights);
+            document.getElementById('contextWeightSlider').addEventListener('input', updateWeights);
+
+            // 알고리즘 선택
+            document.querySelectorAll('.algorithm-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.algorithm-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        }
+
+        // 평가 시작
+        function startEvaluation() {
+            const data = document.getElementById('evaluationData').value;
+            if (!data.trim()) {
+                alert('평가할 데이터를 입력해주세요.');
+                return;
+            }
+
+            // 로딩 표시
+            showLoading();
+
+            // 평가 실행 (시뮬레이션)
+            setTimeout(() => {
+                currentResults = evaluationModel.evaluateData(data);
+                displayResults(currentResults);
+                hideLoading();
+            }, 2000);
+        }
+
+        // 결과 표시
+        function displayResults(results) {
+            // 종합 점수 표시
+            document.getElementById('totalScore').textContent = Math.round(results.totalScore);
+            document.getElementById('scoreProgress').style.width = results.totalScore + '%';
+            
+            const gradeElement = document.getElementById('scoreGrade');
+            gradeElement.textContent = `등급 ${results.grade}`;
+            gradeElement.className = `score-grade grade-${results.grade}`;
+
+            // 개별 점수 표시
+            document.getElementById('quantScore').textContent = Math.round(results.quantitative);
+            document.getElementById('qualScore').textContent = Math.round(results.qualitative);
+            document.getElementById('contextScore').textContent = Math.round(results.contextual);
+            document.getElementById('reliabilityScore').textContent = Math.round(results.reliability) + '%';
+
+            // 데이터 항목 점수 업데이트
+            updateDataItemsScores(results.itemScores);
+
+            // 평가 매트릭스 업데이트
+            updateEvaluationMatrix(results);
+
+            // 컨텍스트 분석 업데이트
+            updateContextAnalysis(results);
+
+            // 인사이트 표시
+            displayInsights(results.insights);
+
+            // 차트 그리기
+            drawScoreChart(results);
+        }
+
+        // 데이터 항목 렌더링
+        function renderDataItems() {
+            const container = document.getElementById('dataItemsList');
+            container.innerHTML = '';
+
+            evaluationModel.meaningfulDataItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'data-item';
+                itemDiv.innerHTML = `
+                    <div class="data-item-score" id="score-${item.id}">0</div>
+                    <h4>${item.name}</h4>
+                    <p>카테고리: ${item.category} | 가중치: ${(item.weight * 100).toFixed(1)}%</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-${item.id}" style="width: 0%"></div>
+                    </div>
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+
+        // 데이터 항목 점수 업데이트
+        function updateDataItemsScores(itemScores) {
+            Object.keys(itemScores).forEach(itemId => {
+                const score = Math.round(itemScores[itemId]);
+                document.getElementById(`score-${itemId}`).textContent = score;
+                document.getElementById(`progress-${itemId}`).style.width = score + '%';
+            });
+        }
+
+        // 평가 매트릭스 렌더링
+        function renderEvaluationMatrix() {
+            const tbody = document.getElementById('matrixBody');
+            tbody.innerHTML = '';
+
+            evaluationModel.meaningfulDataItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${(item.weight * 100).toFixed(1)}%</td>
+                    <td id="matrix-score-${item.id}">0</td>
+                    <td id="matrix-contribution-${item.id}">0%</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 평가 매트릭스 업데이트
+        function updateEvaluationMatrix(results) {
+            evaluationModel.meaningfulDataItems.forEach(item => {
+                const score = Math.round(results.itemScores[item.id] || 0);
+                const contribution = ((results.itemScores[item.id] || 0) * item.weight / results.totalScore * 100).toFixed(1);
+                
+                document.getElementById(`matrix-score-${item.id}`).textContent = score;
+                document.getElementById(`matrix-contribution-${item.id}`).textContent = contribution + '%';
+            });
+        }
+
+        // 컨텍스트 분석 업데이트
+        function updateContextAnalysis(results) {
+            document.getElementById('dataCompleteness').textContent = Math.round(results.quantitative) + '%';
+            document.getElementById('timeConsistency').textContent = Math.round(results.contextual) + '%';
+            document.getElementById('correlationStrength').textContent = Math.round(results.qualitative) + '%';
+            document.getElementById('anomalyDetection').textContent = results.reliability > 85 ? '정상' : '주의 필요';
+        }
+
+        // 인사이트 표시
+        function displayInsights(insights) {
+            const container = document.getElementById('insightsPanel');
+            container.innerHTML = '';
+
+            insights.forEach(insight => {
+                const insightDiv = document.createElement('div');
+                insightDiv.className = 'insight-item';
+                insightDiv.textContent = insight;
+                container.appendChild(insightDiv);
+            });
+        }
+
+        // 가중치 업데이트
+        function updateWeights() {
+            const quantWeight = parseInt(document.getElementById('quantWeightSlider').value);
+            const qualWeight = parseInt(document.getElementById('qualWeightSlider').value);
+            const contextWeight = parseInt(document.getElementById('contextWeightSlider').value);
+
+            // 총합이 100이 되도록 조정
+            const total = quantWeight + qualWeight + contextWeight;
+            if (total !== 100) {
+                const adjustment = (100 - total) / 3;
+                document.getElementById('quantWeightSlider').value = quantWeight + adjustment;
+                document.getElementById('qualWeightSlider').value = qualWeight + adjustment;
+                document.getElementById('contextWeightSlider').value = contextWeight + adjustment;
+            }
+
+            updateWeightDisplays();
+            evaluationModel.updateWeights(quantWeight, qualWeight, contextWeight);
+        }
+
+        // 가중치 표시 업데이트
+        function updateWeightDisplays() {
+            document.getElementById('quantWeight').textContent = document.getElementById('quantWeightSlider').value;
+            document.getElementById('qualWeight').textContent = document.getElementById('qualWeightSlider').value;
+            document.getElementById('contextWeight').textContent = document.getElementById('contextWeightSlider').value;
+        }
+
+        // 차트 그리기
+        function drawScoreChart(results) {
+            const canvas = document.getElementById('scoreChart');
+            const ctx = canvas.getContext('2d');
+            
+            // 캔버스 초기화
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 데이터 준비
+            const data = [
+                { label: '정량적', value: results.quantitative, color: '#3498db' },
+                { label: '정성적', value: results.qualitative, color: '#27ae60' },
+                { label: '컨텍스트', value: results.contextual, color: '#f39c12' }
+            ];
+            
+            // 바 차트 그리기
+            const barWidth = 80;
+            const barSpacing = 40;
+            const startX = 50;
+            const maxHeight = 150;
+            
+            data.forEach((item, index) => {
+                const x = startX + index * (barWidth + barSpacing);
+                const height = (item.value / 100) * maxHeight;
+                const y = canvas.height - height - 30;
+                
+                // 바 그리기
+                ctx.fillStyle = item.color;
+                ctx.fillRect(x, y, barWidth, height);
+                
+                // 라벨 그리기
+                ctx.fillStyle = '#2c3e50';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(item.label, x + barWidth/2, canvas.height - 10);
+                ctx.fillText(Math.round(item.value), x + barWidth/2, y - 5);
+            });
+        }
+
+        // 로딩 표시
+        function showLoading() {
+            document.getElementById('totalScore').textContent = '...';
+            document.getElementById('scoreGrade').textContent = '평가 중';
+        }
+
+        // 로딩 숨기기
+        function hideLoading() {
+            // 로딩 상태 해제는 displayResults에서 처리됨
+        }
+
+        // 평가 초기화
+        function resetEvaluation() {
+            document.getElementById('evaluationData').value = '';
+            document.getElementById('totalScore').textContent = '0';
+            document.getElementById('scoreGrade').textContent = '미평가';
+            document.getElementById('scoreProgress').style.width = '0%';
+            
+            // 개별 점수 초기화
+            document.getElementById('quantScore').textContent = '0';
+            document.getElementById('qualScore').textContent = '0';
+            document.getElementById('contextScore').textContent = '0';
+            document.getElementById('reliabilityScore').textContent = '0';
+            
+            // 데이터 항목 점수 초기화
+            evaluationModel.meaningfulDataItems.forEach(item => {
+                document.getElementById(`score-${item.id}`).textContent = '0';
+                document.getElementById(`progress-${item.id}`).style.width = '0%';
+            });
+            
+            // 인사이트 패널 초기화
+            document.getElementById('insightsPanel').innerHTML = '<p>평가를 시작하면 인사이트가 표시됩니다.</p>';
+        }
+
+        // 결과 내보내기
+        function exportResults() {
+            if (!currentResults) {
+                alert('먼저 평가를 실행해주세요.');
+                return;
+            }
+            
+            const exportData = {
+                timestamp: new Date().toISOString(),
+                totalScore: currentResults.totalScore,
+                grade: currentResults.grade,
+                categoryScores: {
+                    quantitative: currentResults.quantitative,
+                    qualitative: currentResults.qualitative,
+                    contextual: currentResults.contextual
+                },
+                itemScores: currentResults.itemScores,
+                reliability: currentResults.reliability,
+                insights: currentResults.insights
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `evaluation_results_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 샘플 데이터 로드
+        function loadSampleData() {
+            const sampleData = `환자명: 김철수
+진단명: 급성 심근경색증
+입원기간: 2024-01-15 ~ 2024-01-25
+검사결과: 심전도 이상, 심근효소 상승
+치료내용: 응급 PCI 시술, 약물치료
+경과: 양호, 합병증 없음`;
+            
+            document.getElementById('evaluationData').value = sampleData;
+        }
+
+        // 페이지 로드 시 샘플 데이터 로드
+        setTimeout(loadSampleData, 1000);
+    </script>
+</body>
+</html>

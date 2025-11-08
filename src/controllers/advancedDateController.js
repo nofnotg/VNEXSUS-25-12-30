@@ -12,6 +12,7 @@
 
 import { TextArrayDateController } from '../dna-engine/core/textArrayDateControllerComplete.js';
 import { AdvancedTextArrayDateClassifier } from '../dna-engine/core/advancedTextArrayDateClassifier.js';
+import { logger } from '../shared/logging/logger.js';
 
 export class AdvancedDateController {
   constructor() {
@@ -41,12 +42,25 @@ export class AdvancedDateController {
       // 요청 ID 생성
       const requestId = this.generateRequestId();
       
-      console.log(`📋 고급 날짜 분석 요청 [${requestId}]: ${documentText.length}자`);
+      logger.info({
+        event: 'advanced_date_analysis_request',
+        requestId,
+        documentLength: documentText.length,
+        optionsSummary: {
+          minimumConfidence: options?.minimumConfidence,
+          groupByRole: options?.groupByRole,
+          enableAI: options?.enableAI
+        }
+      });
       
       // 캐시 확인
       const cacheKey = this.generateCacheKey(documentText, options);
       if (this.resultCache.has(cacheKey)) {
-        console.log(`💾 캐시에서 결과 반환 [${requestId}]`);
+        logger.info({
+          event: 'advanced_date_analysis_cache_hit',
+          requestId,
+          cacheKeyLength: cacheKey.length
+        });
         return res.json({
           success: true,
           requestId,
@@ -77,7 +91,11 @@ export class AdvancedDateController {
       // 처리 완료
       this.processingQueue.delete(requestId);
       
-      console.log(`✅ 고급 날짜 분석 완료 [${requestId}]: ${enhancedResult.result?.documentSummary?.totalDates || 0}개 날짜`);
+      logger.info({
+        event: 'advanced_date_analysis_complete',
+        requestId,
+        totalDates: enhancedResult.result?.documentSummary?.totalDates || 0
+      });
       
       res.json({
         success: true,
@@ -87,7 +105,11 @@ export class AdvancedDateController {
       });
       
     } catch (error) {
-      console.error('❌ 고급 날짜 분석 실패:', error);
+      logger.error({
+        event: 'advanced_date_analysis_failed',
+        error: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
       
       res.status(500).json({
         success: false,
@@ -128,7 +150,11 @@ export class AdvancedDateController {
       });
       
     } catch (error) {
-      console.error('❌ 성능 메트릭 조회 실패:', error);
+      logger.error({
+        event: 'advanced_date_performance_failed',
+        error: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
       
       res.status(500).json({
         success: false,
@@ -154,11 +180,17 @@ export class AdvancedDateController {
         });
       }
       
-      console.log('🔍 결과 검증 시작...');
+      logger.info({
+        event: 'advanced_date_validation_start'
+      });
       
       const validation = await this.performResultValidation(analysisResult, validationCriteria);
       
-      console.log(`✅ 결과 검증 완료: ${validation.overall} (${validation.score.toFixed(2)})`);
+      logger.info({
+        event: 'advanced_date_validation_complete',
+        overall: validation.overall,
+        score: Number.isFinite(validation.score) ? Number(validation.score.toFixed(2)) : validation.score
+      });
       
       res.json({
         success: true,
@@ -167,7 +199,11 @@ export class AdvancedDateController {
       });
       
     } catch (error) {
-      console.error('❌ 결과 검증 실패:', error);
+      logger.error({
+        event: 'advanced_date_validation_failed',
+        error: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
       
       res.status(500).json({
         success: false,
@@ -203,7 +239,11 @@ export class AdvancedDateController {
         });
       }
       
-      console.log(`📅 타임라인 생성 [${requestId}]: ${format} 형식`);
+      logger.info({
+        event: 'advanced_date_timeline_generate',
+        requestId,
+        format
+      });
       
       const timeline = await this.createEnhancedTimeline(analysisResult, { format, sortBy });
       
@@ -221,7 +261,11 @@ export class AdvancedDateController {
       });
       
     } catch (error) {
-      console.error('❌ 타임라인 생성 실패:', error);
+      logger.error({
+        event: 'advanced_date_timeline_failed',
+        error: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
       
       res.status(500).json({
         success: false,
@@ -256,7 +300,11 @@ export class AdvancedDateController {
       }
       
       const batchId = this.generateRequestId();
-      console.log(`📦 배치 분석 시작 [${batchId}]: ${documents.length}개 문서`);
+      logger.info({
+        event: 'advanced_date_batch_start',
+        batchId,
+        totalDocuments: documents.length
+      });
       
       const results = [];
       const errors = [];
@@ -266,7 +314,11 @@ export class AdvancedDateController {
           const document = documents[i];
           const docId = document.id || `doc_${i}`;
           
-          console.log(`📄 문서 분석 중 [${batchId}/${docId}]...`);
+        logger.debug({
+          event: 'advanced_date_batch_doc_processing',
+          batchId,
+          docId
+        });
           
           const result = await this.controller.processDocumentDateArrays(document.text, {
             ...options,
@@ -281,7 +333,13 @@ export class AdvancedDateController {
           });
           
         } catch (error) {
-          console.error(`❌ 문서 분석 실패 [${batchId}/doc_${i}]:`, error);
+        logger.error({
+          event: 'advanced_date_batch_doc_failed',
+          batchId,
+          docId: `doc_${i}`,
+          error: error?.message,
+          stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+        });
           
           errors.push({
             documentId: document.id || `doc_${i}`,
@@ -291,7 +349,12 @@ export class AdvancedDateController {
         }
       }
       
-      console.log(`✅ 배치 분석 완료 [${batchId}]: ${results.length}개 성공, ${errors.length}개 실패`);
+      logger.info({
+        event: 'advanced_date_batch_complete',
+        batchId,
+        successCount: results.length,
+        failureCount: errors.length
+      });
       
       res.json({
         success: true,
@@ -308,7 +371,11 @@ export class AdvancedDateController {
       });
       
     } catch (error) {
-      console.error('❌ 배치 분석 실패:', error);
+      logger.error({
+        event: 'advanced_date_batch_failed',
+        error: error?.message,
+        stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+      });
       
       res.status(500).json({
         success: false,
@@ -690,7 +757,9 @@ export class AdvancedDateController {
    */
   clearCache() {
     this.resultCache.clear();
-    console.log('🧹 결과 캐시가 정리되었습니다.');
+    logger.info({
+      event: 'advanced_date_result_cache_cleared'
+    });
   }
 
   /**

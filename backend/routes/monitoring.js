@@ -8,8 +8,10 @@ import PerformanceMonitor from '../services/PerformanceMonitor.js';
 
 const router = express.Router();
 
-// 전역 성능 모니터 인스턴스
-const globalMonitor = new PerformanceMonitor();
+// 전역 성능 모니터 인스턴스 (알림 비활성화)
+const globalMonitor = new PerformanceMonitor({
+    enableAlerts: false
+});
 
 /**
  * 실시간 메트릭 조회

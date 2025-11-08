@@ -1,9 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// __filename/__dirname 계산은 불필요하므로 제거하여 Jest 환경 호환성 확보
 
 // 🧬 다단계 DNA 시퀀싱 파이프라인
 export class EnhancedMedicalDnaAnalyzer {

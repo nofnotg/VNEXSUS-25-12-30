@@ -1,0 +1,481 @@
+/* 하이브리드 인터페이스 스타일 */
+.hybrid-interface {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+}
+
+/* 헤더 */
+.hybrid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.hybrid-header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-ready {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-processing {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-error {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* 메인 콘텐츠 */
+.hybrid-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+}
+
+/* 설정 패널 */
+.config-panel {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.config-panel h4 {
+  margin: 0 0 20px 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.config-group {
+  margin-bottom: 20px;
+}
+
+.config-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.config-group select,
+.config-group input[type="range"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.config-group select:focus,
+.config-group input[type="range"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.config-group input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* 업로드 섹션 */
+.upload-section {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 드롭존 */
+.drop-zone {
+  border: 3px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+  margin-bottom: 20px;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.drop-zone i {
+  font-size: 48px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.drop-zone p {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.drop-zone small {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* 파일 목록 */
+.file-list {
+  margin-bottom: 20px;
+}
+
+.file-list h5 {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+
+.file-item:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.file-info i {
+  font-size: 20px;
+  color: #6b7280;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.file-size {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.btn-remove:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.btn-remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 처리 버튼 */
+.process-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.process-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.process-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 결과 섹션 */
+.results-section {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.results-section h4 {
+  margin: 0 0 20px 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* 결과 요약 */
+.result-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.summary-card h6 {
+  margin: 0 0 8px 0;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mode-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.mode-legacy {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.mode-core {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.mode-hybrid {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.mode-adaptive {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+/* 신뢰도 표시 */
+.confidence-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.confidence-bar {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  flex: 1;
+}
+
+/* 상세 결과 */
+.detailed-results {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.result-item {
+  background: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.result-item h6 {
+  margin: 0 0 16px 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.analysis-section {
+  margin-bottom: 16px;
+}
+
+.analysis-section h7 {
+  display: block;
+  margin: 0 0 8px 0;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.analysis-content {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.analysis-content p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.analysis-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 성능 메트릭 */
+.metrics-section {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.metrics-section h4 {
+  margin: 0 0 20px 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card h6 {
+  margin: 0 0 12px 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .hybrid-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .config-panel {
+    position: static;
+  }
+  
+  .result-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hybrid-interface {
+    padding: 10px;
+  }
+  
+  .hybrid-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

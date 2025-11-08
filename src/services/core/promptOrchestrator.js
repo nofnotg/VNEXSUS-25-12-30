@@ -1,5 +1,7 @@
-// Prompt Orchestrator — minimal core
-import OpenAI from "openai";
+// Prompt Orchestrator — AI 호출 래퍼
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const OpenAI = require("openai");
 
 export async function orchestrateReport({ model = "gpt-4o-mini", systemPrompt, userPrompt }) {
   const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });

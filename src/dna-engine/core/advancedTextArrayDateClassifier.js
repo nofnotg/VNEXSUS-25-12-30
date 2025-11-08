@@ -17,7 +17,7 @@ import { globalErrorHandler, safeExecute, safeExecuteWithRetry } from './errorHa
 // import { ClaudeService } from '../../services/claudeService.js';
 // import openaiService from '../../services/openaiService.js';
 
-export class AdvancedTextArrayDateClassifier {
+class AdvancedTextArrayDateClassifier {
   constructor() {
     this.version = '2.1.0'; // Phase 1 Emergency Fix
     this.dateAnchor = new EnhancedDateAnchor();
@@ -1347,7 +1347,7 @@ export class AdvancedTextArrayDateClassifier {
 /**
  * 통합 신뢰도 계산기
  */
-export class UnifiedConfidenceCalculator {
+class UnifiedConfidenceCalculator {
   constructor() {
     this.factors = {
       dateFormat: 0.25,      // 날짜 형식 명확성
@@ -1444,7 +1444,7 @@ export class UnifiedConfidenceCalculator {
 /**
  * 증거 추적기
  */
-export class EvidenceTracker {
+class EvidenceTracker {
   constructor() {
     this.evidenceTypes = {
       textual: '텍스트 증거',
@@ -1527,4 +1527,4 @@ export class EvidenceTracker {
   }
 }
 
-export default AdvancedTextArrayDateClassifier;
+export { AdvancedTextArrayDateClassifier, UnifiedConfidenceCalculator, EvidenceTracker };

@@ -1,0 +1,104 @@
+{
+  "id": "Case6",
+  "description": "장기간 치료 과정 - 만성 질환 관리 및 다중 약물 치료",
+  "text": "65세 남성 환자가 2023년 3월 1일 고혈압과 당뇨병으로 내분비내과에 내원하였다. 혈압은 160/95mmHg, 공복혈당은 180mg/dL로 측정되었다. Amlodipine 5mg과 Metformin 500mg을 처방받았다. 4주 후인 3월 29일 추적 관찰에서 혈압 140/85mmHg, 공복혈당 150mg/dL로 개선되었으나 목표치에 미달하여 Losartan 50mg을 추가 처방하였다. 5월 15일 정기 검진에서 HbA1c 7.2%로 당뇨 조절이 불충분하여 Glimepiride 2mg을 추가하였다. 7월 10일 검사에서 혈압 130/80mmHg, HbA1c 6.8%로 목표치에 도달하였다. 8월 20일 환자가 어지러움을 호소하여 응급실 방문, 저혈당(혈당 65mg/dL) 진단 후 Glimepiride 용량을 1mg으로 감량하였다.",
+  "expected": {
+    "segments": [
+      {
+        "id": "seg_1",
+        "text": "65세 남성 환자가 2023년 3월 1일 고혈압과 당뇨병으로 내분비내과에 내원하였다.",
+        "contextType": "hospital_visit",
+        "medicalDomain": "endocrinology",
+        "confidence": 0.95
+      },
+      {
+        "id": "seg_2",
+        "text": "혈압은 160/95mmHg, 공복혈당은 180mg/dL로 측정되었다.",
+        "contextType": "vital_signs",
+        "medicalDomain": "laboratory",
+        "confidence": 0.90
+      },
+      {
+        "id": "seg_3",
+        "text": "Amlodipine 5mg과 Metformin 500mg을 처방받았다.",
+        "contextType": "medication",
+        "medicalDomain": "pharmacy",
+        "confidence": 0.95
+      }
+    ],
+    "entities": [
+      {
+        "id": "ent_1",
+        "text": "고혈압",
+        "type": "diagnosis",
+        "confidence": 0.95,
+        "normalizedForm": "hypertension"
+      },
+      {
+        "id": "ent_2",
+        "text": "당뇨병",
+        "type": "diagnosis",
+        "confidence": 0.95,
+        "normalizedForm": "diabetes_mellitus"
+      },
+      {
+        "id": "ent_3",
+        "text": "Amlodipine",
+        "type": "medication",
+        "confidence": 0.90,
+        "normalizedForm": "amlodipine"
+      },
+      {
+        "id": "ent_4",
+        "text": "Metformin",
+        "type": "medication",
+        "confidence": 0.90,
+        "normalizedForm": "metformin"
+      },
+      {
+        "id": "ent_5",
+        "text": "저혈당",
+        "type": "diagnosis",
+        "confidence": 0.85,
+        "normalizedForm": "hypoglycemia"
+      }
+    ],
+    "events": [
+      {
+        "id": "evt_1",
+        "timestamp": "2023-03-01T00:00:00Z",
+        "type": "hospital_visit",
+        "description": "내분비내과 초진",
+        "confidence": 0.95
+      },
+      {
+        "id": "evt_2",
+        "timestamp": "2023-03-29T00:00:00Z",
+        "type": "follow_up",
+        "description": "추적 관찰 및 약물 조정",
+        "confidence": 0.90
+      },
+      {
+        "id": "evt_3",
+        "timestamp": "2023-05-15T00:00:00Z",
+        "type": "regular_checkup",
+        "description": "정기 검진 및 당뇨약 추가",
+        "confidence": 0.85
+      },
+      {
+        "id": "evt_4",
+        "timestamp": "2023-08-20T00:00:00Z",
+        "type": "emergency_visit",
+        "description": "저혈당으로 응급실 방문",
+        "confidence": 0.90
+      }
+    ],
+    "qualityMetrics": {
+      "informationPreservation": 90,
+      "entityExtraction": 85,
+      "temporalNormalization": 95,
+      "contextualClassification": 80,
+      "targetScore": 70
+    }
+  }
+}

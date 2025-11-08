@@ -41,7 +41,16 @@ router.post('/generate-report', async (req, res) => {
                 extractedText: req.body.text || req.body.extractedText,
                 sessionId: req.body.sessionId,
                 patientInfo: {
-                    insuranceJoinDate: req.body.insuranceJoinDate || req.body.patientInfo?.insuranceJoinDate
+                    insuranceJoinDate: req.body.insuranceJoinDate || req.body.patientInfo?.insuranceJoinDate,
+                    insuranceCompany: req.body.insuranceCompany || req.body.patientInfo?.insuranceCompany
+                },
+                // 개선 옵션을 프록시에서 명시적으로 전달(기본값 활성화)
+                options: {
+                    skipLLM: req.body.options?.skipLLM ?? false,
+                    useNineItem: req.body.options?.useNineItem ?? false,
+                    template: req.body.options?.template,
+                    enableTranslationEnhancement: req.body.options?.enableTranslationEnhancement ?? true,
+                    enableTermProcessing: req.body.options?.enableTermProcessing ?? true
                 }
             })
         });

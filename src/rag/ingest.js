@@ -7,7 +7,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import csv from 'csv-parser';
-import hospitalList from '../rag/raw/hospitals/hospital_general_list.csv';
 
 // ES 모듈에서 __dirname 대체
 const __filename = fileURLToPath(import.meta.url);
@@ -20,8 +19,8 @@ let dataStore = {
   hospital: []
 };
 
-// 간단 맵 : alias → standard
-const map = new Map(hospitalList.map(r=>[r.alias,r.standard]));
+// 병원 데이터 맵 (초기화 시 로드됨)
+let hospitalMap = new Map();
 
 /**
  * 파일에서 데이터를 수집하여 저장소에 추가
@@ -158,4 +157,4 @@ export default {
   getData,
   getAllData,
   saveData
-}; 
+};

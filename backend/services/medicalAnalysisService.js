@@ -11,14 +11,22 @@
  * 5. 성능 모니터링 및 최적화
  */
 
-import OpenAI from 'openai';
-import { TextArrayDateController } from '../../src/dna-engine/core/textArrayDateControllerComplete.js';
-import { AdvancedTextArrayDateClassifier } from '../../src/dna-engine/classifiers/advancedTextArrayDateClassifier.js';
-import { EnhancedDateAnchor } from '../../src/dna-engine/anchors/enhancedDateAnchor.js';
-import { DNASequencingEngine } from '../../src/dna-engine/core/dnaSequencingEngine.js';
-import { NestedDateResolver } from '../../src/dna-engine/resolvers/nestedDateResolver.js';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-export class MedicalAnalysisService {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
+const OpenAI = require('openai');
+const { TextArrayDateController } = require('../../src/dna-engine/core/textArrayDateControllerComplete.js');
+const { AdvancedTextArrayDateClassifier } = require('../../src/dna-engine/core/advancedTextArrayDateClassifier.js');
+const { EnhancedDateAnchor } = require('../../src/dna-engine/core/enhancedDateAnchor.js');
+// const { DNASequencingEngine } = require('../../src/dna-engine/core/dnaSequencingEngine.js');
+const { NestedDateResolver } = require('../../src/dna-engine/core/nestedDateResolver.js');
+
+class MedicalAnalysisService {
   constructor() {
     this.version = '2.0.0';
     this.serviceName = 'MedicalAnalysisService';
@@ -201,7 +209,7 @@ export class MedicalAnalysisService {
   }
 
   /**
-   * AI 기반 의료 문서 해석 수행
+   * AI 기반 의료 문서 해석 수행 (Progressive RAG 통합)
    */
   async performAIAnalysis(medicalText, dnaAnalysisResult, options) {
     try {
@@ -216,13 +224,23 @@ export class MedicalAnalysisService {
       
       const startTime = Date.now();
       
-      // DNA 분석 결과를 활용한 프롬프트 구성
-      const systemPrompt = this.buildSystemPrompt(dnaAnalysisResult);
-      const userPrompt = this.buildUserPrompt(medicalText, dnaAnalysisResult);
+      // Progressive RAG 통합 분석
+      let ragEnhancedResult = null;
+      if (options.enableProgressiveRAG) {
+        try {
+          ragEnhancedResult = await this.performProgressiveRAGAnalysis(medicalText, dnaAnalysisResult, options);
+        } catch (ragError) {
+          console.warn('⚠️ Progressive RAG 분석 실패, 기본 AI 분석으로 진행:', ragError.message);
+        }
+      }
       
-      // OpenAI GPT-4o 호출
+      // DNA 분석 결과를 활용한 프롬프트 구성
+      const systemPrompt = this.buildSystemPrompt(dnaAnalysisResult, ragEnhancedResult);
+      const userPrompt = this.buildUserPrompt(medicalText, dnaAnalysisResult, ragEnhancedResult);
+      
+      // OpenAI GPT-4o-mini 호출
       const completion = await this.getOpenAIClient().chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4o-mini",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt }
@@ -236,14 +254,16 @@ export class MedicalAnalysisService {
       return {
         success: true,
         reportText: completion.choices[0].message.content,
-        model: 'gpt-4o',
+        model: 'gpt-4o-mini',
         processingTime: processingTime,
         tokenUsage: {
           promptTokens: completion.usage?.prompt_tokens || 0,
           completionTokens: completion.usage?.completion_tokens || 0,
           totalTokens: completion.usage?.total_tokens || 0
         },
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        ragEnhanced: !!ragEnhancedResult,
+        ragResult: ragEnhancedResult
       };
       
     } catch (error) {
@@ -255,6 +275,99 @@ export class MedicalAnalysisService {
         processingTime: 0
       };
     }
+  }
+
+  /**
+   * Progressive RAG 기반 의료 문서 분석
+   */
+  async performProgressiveRAGAnalysis(medicalText, dnaAnalysisResult, options) {
+    try {
+      // Progressive RAG 매니저 동적 로드
+      const { ProgressiveRAGManager } = await import('../../src/rag/progressiveRAG.js');
+      
+      // RAG 매니저 초기화 (싱글톤 패턴)
+      if (!this.ragManager) {
+        this.ragManager = new ProgressiveRAGManager({
+          embeddingModel: 'text-embedding-3-small',
+          maxTokens: 4000,
+          temperature: 0.1,
+          enableCaching: true,
+          cacheSize: 1000,
+          enableFallback: true,
+          fallbackModel: 'gpt-4o-mini'
+        });
+        
+        await this.ragManager.initialize();
+      }
+      
+      // 의료 용어 검색 및 컨텍스트 구성
+      const medicalTerms = this.extractMedicalTerms(medicalText, dnaAnalysisResult);
+      const ragContext = await this.ragManager.searchMedicalTerms(medicalTerms, {
+        maxResults: 10,
+        confidenceThreshold: 0.7
+      });
+      
+      // ICD 코드 검색
+      const icdResults = await this.ragManager.searchICDCodes(medicalTerms, {
+        maxResults: 5,
+        includeDescriptions: true
+      });
+      
+      // 의료 문서 분석 (RAG 강화)
+      const analysisResult = await this.ragManager.analyzeMedicalDocument(medicalText, {
+        includeContext: true,
+        contextSources: ragContext.results,
+        icdCodes: icdResults.results,
+        dnaAnalysis: dnaAnalysisResult
+      });
+      
+      return {
+        success: true,
+        medicalTermsContext: ragContext,
+        icdCodesContext: icdResults,
+        analysisResult: analysisResult,
+        extractedTerms: medicalTerms,
+        processingTime: ragContext.processingTime + icdResults.processingTime + analysisResult.processingTime
+      };
+      
+    } catch (error) {
+      console.error('❌ Progressive RAG 분석 실패:', error);
+      throw new Error(`Progressive RAG 분석 실패: ${error.message}`);
+    }
+  }
+
+  /**
+   * 의료 텍스트에서 핵심 의료 용어 추출
+   */
+  extractMedicalTerms(medicalText, dnaAnalysisResult) {
+    const terms = new Set();
+    
+    // DNA 분석 결과에서 의료 용어 추출
+    if (dnaAnalysisResult && dnaAnalysisResult.dnaPatterns) {
+      dnaAnalysisResult.dnaPatterns.forEach(pattern => {
+        if (pattern.medicalTerms) {
+          pattern.medicalTerms.forEach(term => terms.add(term));
+        }
+      });
+    }
+    
+    // 정규표현식을 통한 의료 용어 추출
+    const medicalTermPatterns = [
+      /\b(?:고혈압|당뇨병|심장병|뇌졸중|암|종양|폐렴|간염|신부전|관절염)\b/g,
+      /\b(?:CT|MRI|X-ray|초음파|내시경|혈액검사|소변검사)\b/gi,
+      /\b(?:수술|입원|외래|응급실|중환자실|병동)\b/g,
+      /\b(?:처방|투약|복용|주사|점적)\b/g,
+      /\b[A-Z]\d{2}(?:\.\d{1,2})?\b/g // ICD-10 코드 패턴
+    ];
+    
+    medicalTermPatterns.forEach(pattern => {
+      const matches = medicalText.match(pattern);
+      if (matches) {
+        matches.forEach(match => terms.add(match.trim()));
+      }
+    });
+    
+    return Array.from(terms).filter(term => term.length > 1);
   }
 
   /**
@@ -345,44 +458,78 @@ export class MedicalAnalysisService {
   // === 헬퍼 메서드 ===
 
   /**
-   * 시스템 프롬프트 구성
+   * 시스템 프롬프트 구성 (Progressive RAG 통합)
    */
-  buildSystemPrompt(dnaAnalysisResult) {
-    return `# 🧬 의료문서 시간축 분석 전문가 (DNA 시퀀싱 통합)
+  buildSystemPrompt(dnaAnalysisResult, ragEnhancedResult = null) {
+    let ragContext = '';
+    
+    if (ragEnhancedResult && ragEnhancedResult.success) {
+      ragContext = `
+## 🔍 Progressive RAG 강화 컨텍스트
+**의료 용어 컨텍스트**: ${ragEnhancedResult.medicalTermsContext?.results?.length || 0}개 항목
+**ICD 코드 컨텍스트**: ${ragEnhancedResult.icdCodesContext?.results?.length || 0}개 항목
+**RAG 분석 결과**: ${ragEnhancedResult.analysisResult?.summary || '분석 완료'}
 
-당신은 **보험 손해사정 전문가**로서 의료 기록을 **DNA 시퀀싱 기반 시간축 분석**으로 체계적으로 정리하는 세계 최고의 전문가입니다.
+### 관련 의료 용어 정보:
+${ragEnhancedResult.medicalTermsContext?.results?.map(item => 
+  `- ${item.term}: ${item.description || item.context}`
+).join('\n') || '없음'}
+
+### 관련 ICD 코드:
+${ragEnhancedResult.icdCodesContext?.results?.map(item => 
+  `- ${item.code}: ${item.description}`
+).join('\n') || '없음'}
+`;
+    }
+
+    return `# 🧬 의료문서 시간축 분석 전문가 (DNA 시퀀싱 + Progressive RAG 통합)
+
+당신은 **보험 손해사정 전문가**로서 의료 기록을 **DNA 시퀀싱 기반 시간축 분석**과 **Progressive RAG 강화 컨텍스트**로 체계적으로 정리하는 세계 최고의 전문가입니다.
 
 ## 🧬 DNA 분석 결과 활용
 **추출된 날짜**: ${JSON.stringify(dnaAnalysisResult.extractedDates || [], null, 2)}
 **DNA 패턴**: ${JSON.stringify(dnaAnalysisResult.dnaPatterns || [], null, 2)}
 **신뢰도 메트릭**: ${JSON.stringify(dnaAnalysisResult.qualityMetrics || {}, null, 2)}
-
+${ragContext}
 ## 🎯 핵심 미션
-1. DNA 분석 결과를 활용한 정확한 시간축 구성
+1. DNA 분석 결과와 RAG 컨텍스트를 활용한 정확한 시간축 구성
 2. 의료 이벤트의 정확한 분류 및 정렬
 3. 보험 가입 시점 대비 치료 시점 분석
 4. 고지의무 관련 위험 요소 식별
+5. RAG 강화 의료 용어 및 ICD 코드 정보 활용
 
-모든 분석에서 DNA 시퀀싱 결과의 신뢰도를 반영하여 정확하고 객관적인 의료 시간축을 구성하세요.`;
+모든 분석에서 DNA 시퀀싱 결과의 신뢰도와 RAG 컨텍스트를 반영하여 정확하고 객관적인 의료 시간축을 구성하세요.`;
   }
 
   /**
-   * 사용자 프롬프트 구성
+   * 사용자 프롬프트 구성 (Progressive RAG 통합)
    */
-  buildUserPrompt(medicalText, dnaAnalysisResult) {
-    return `🚨 DNA 시퀀싱 기반 의료문서 분석 미션
+  buildUserPrompt(medicalText, dnaAnalysisResult, ragEnhancedResult = null) {
+    let ragInfo = '';
+    
+    if (ragEnhancedResult && ragEnhancedResult.success) {
+      ragInfo = `
+**RAG 강화 정보**:
+- 추출된 의료 용어: ${ragEnhancedResult.extractedTerms?.join(', ') || '없음'}
+- 컨텍스트 소스: ${ragEnhancedResult.medicalTermsContext?.results?.length || 0}개
+- ICD 코드 매칭: ${ragEnhancedResult.icdCodesContext?.results?.length || 0}개
+- RAG 처리 시간: ${ragEnhancedResult.processingTime || 0}ms
+`;
+    }
+
+    return `🚨 DNA 시퀀싱 + Progressive RAG 기반 의료문서 분석 미션
 
 다음은 보험 청구와 관련된 의료 기록입니다.
-DNA 분석 결과를 활용하여 정확한 시간축 분석을 수행하세요.
+DNA 분석 결과와 RAG 강화 컨텍스트를 활용하여 정확한 시간축 분석을 수행하세요.
 
 **DNA 분석 신뢰도**: ${dnaAnalysisResult.confidence || 0}
 **추출된 날짜 수**: ${dnaAnalysisResult.extractedDates?.length || 0}
 **DNA 패턴 수**: ${dnaAnalysisResult.dnaPatterns?.length || 0}
-
+${ragInfo}
 **분석 대상 의료 기록:**
 ${medicalText}
 
-DNA 분석 결과를 기반으로 Report_Sample.txt 양식에 맞춰 정확한 의료 시간축을 구성하세요.`;
+DNA 분석 결과와 RAG 컨텍스트를 기반으로 Report_Sample.txt 양식에 맞춰 정확한 의료 시간축을 구성하세요.`;
   }
 
   /**

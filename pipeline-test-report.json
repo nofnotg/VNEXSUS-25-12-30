@@ -1,0 +1,469 @@
+{
+  "summary": {
+    "totalTests": 3,
+    "successfulTests": 3,
+    "successRate": "100.0",
+    "averageQualityScore": "75.7",
+    "averageProcessingTime": 270,
+    "targetScore": 80,
+    "targetAchieved": false
+  },
+  "testResults": [
+    {
+      "name": "Case10",
+      "success": true,
+      "processingTime": 459,
+      "ocrResult": {
+        "success": true,
+        "data": {
+          "success": true,
+          "processingTime": 273,
+          "pipeline": {
+            "massiveDateBlocks": {
+              "dateBlocks": [],
+              "structuredGroups": [],
+              "processedSize": 0,
+              "statistics": {
+                "averageConfidence": 0,
+                "filteringRate": 0
+              }
+            },
+            "preprocessedData": [
+              {
+                "date": "2005-01-12",
+                "hospital": "대림성모병원",
+                "rawText": "2005-01-12 14.10.17\n사랑(주)\n다\n해오름손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n대림성모병원",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "organizedData": [
+              {
+                "date": "2005-01-12",
+                "hospital": "대림성모병원",
+                "rawText": "2005-01-12 14.10.17\n사랑(주)\n다\n해오름손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n대림성모병원",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "aiExtractedData": {
+              "entities": {
+                "hospitals": [],
+                "diagnoses": [],
+                "doctors": [],
+                "treatments": [],
+                "dates": [],
+                "visits": {
+                  "totalVisits": 0,
+                  "visitPatterns": []
+                }
+              },
+              "statistics": {
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalDoctors": 0,
+                "totalTreatments": 0,
+                "dateRange": null,
+                "totalVisits": 0,
+                "medicalComplexity": 0
+              },
+              "summary": {
+                "totalSegments": 0,
+                "hospitalsFound": 0,
+                "datesFound": 0,
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalVisits": 0,
+                "dateRange": null,
+                "complexity": 0
+              }
+            },
+            "finalReport": {
+              "filename": "report_2025-10-23T23-54-32_d31d0f5d.json",
+              "filePath": "C:\\VNEXSUS_Bin\\temp\\reports\\report_2025-10-23T23-54-32_d31d0f5d.json",
+              "downloadUrl": "/reports/report_2025-10-23T23-54-32_d31d0f5d.json",
+              "data": {
+                "title": "병력사항 요약 경과표",
+                "generatedAt": "2025-10-23T23:54:32.625Z",
+                "patientInfo": {},
+                "stats": {
+                  "total": 1,
+                  "within3Months": 0,
+                  "within5Years": 0
+                },
+                "items": [
+                  {
+                    "date": "2005-01-12",
+                    "hospital": "대림성모병원",
+                    "content": "2005-01-12 14.10.17\n사랑(주)\n다\n해오름손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n대림성모병원",
+                    "keywordMatches": [],
+                    "mappedTerms": [],
+                    "isWithin3Months": false,
+                    "isWithin5Years": false
+                  }
+                ]
+              },
+              "reportId": "d31d0f5d-fbb6-42fe-b986-6e3528a24d29",
+              "format": "json",
+              "timestamp": "2025-10-23T23:54:32.631Z",
+              "patientInfo": {},
+              "preview": [
+                {
+                  "date": "2005-01-12",
+                  "hospital": "대림성모병원",
+                  "diagnosis": [],
+                  "treatment": []
+                }
+              ]
+            }
+          },
+          "statistics": {
+            "originalTextLength": 220101,
+            "processedGroups": 0,
+            "dateBlocks": 0,
+            "confidence": 0,
+            "filteringRate": 0
+          },
+          "metadata": {
+            "version": "7.2",
+            "timestamp": "2025-10-23T23:54:32.633Z",
+            "processingMode": "AI_ENHANCED",
+            "pipelineSteps": 5
+          }
+        },
+        "processingTime": 0
+      },
+      "generatedReport": {
+        "content": "\n======================================================\n       의료 기록 분석 보고서\n======================================================\n\n환자명: 테스트 환자\n생년월일: 1961-10-20\n보험 가입일: 2023-07-26\n\n■ 요약 정보\n- 총 항목 수: 3개\n- 가입일 3개월 이내 항목: 0개\n- 가입일 5년 이내 항목: 1개\n\n■ 병력 사항 상세\n------------------------------------------------------\n날짜        | 병원        | 진단/처치내용\n------------------------------------------------------\n2025.02.05  | 명지병원    | 변형 협심증, 관상동맥병\n2025.02.19  | 명지병원    | CAG 검사 (30-40% 협착)\n2025.02.26  | 명지병원    | 보존적 치료\n\n■ 분석 결과\n- 허혈성심장질환 진단 기준 부합\n- 고지의무 위반사항 없음\n- 보험금 지급 적정\n\n보고서 생성 완료 - 2025. 10. 24. 오전 8:54:32\n    ",
+        "format": "text",
+        "generatedAt": "2025-10-23T23:54:32.708Z"
+      },
+      "qualityScore": 77,
+      "errors": []
+    },
+    {
+      "name": "Case11",
+      "success": true,
+      "processingTime": 106,
+      "ocrResult": {
+        "success": true,
+        "data": {
+          "success": true,
+          "processingTime": 82,
+          "pipeline": {
+            "massiveDateBlocks": {
+              "dateBlocks": [],
+              "structuredGroups": [],
+              "processedSize": 0,
+              "statistics": {
+                "averageConfidence": 0,
+                "filteringRate": 0
+              }
+            },
+            "preprocessedData": [
+              {
+                "date": "2025-01-20",
+                "hospital": "미상 병원",
+                "rawText": "2025-1-20 2:27 PM\n기본진료정보\n순번 진료시작일 병·의원&약국 진단과\n입원/ 주상병\n외래\n내원\n총 진료비\n코드\n주상병명\n(양방)기\n타 정상임\n건강보험 등\n일수(건강보험 적용분) 혜택받은 금액\n내가 낸 의료비\n(진료비)",
+                "keywordMatches": [
+                  "입원",
+                  "진단"
+                ],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              },
+              {
+                "date": "2024-04-18",
+                "hospital": "미상 병원",
+                "rawText": "1 2024-04-18\n가톨릭",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "organizedData": [
+              {
+                "date": "2024-04-18",
+                "hospital": "미상 병원",
+                "rawText": "1 2024-04-18\n가톨릭",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              },
+              {
+                "date": "2025-01-20",
+                "hospital": "미상 병원",
+                "rawText": "2025-1-20 2:27 PM\n기본진료정보\n순번 진료시작일 병·의원&약국 진단과\n입원/ 주상병\n외래\n내원\n총 진료비\n코드\n주상병명\n(양방)기\n타 정상임\n건강보험 등\n일수(건강보험 적용분) 혜택받은 금액\n내가 낸 의료비\n(진료비)",
+                "keywordMatches": [
+                  "입원",
+                  "진단"
+                ],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "aiExtractedData": {
+              "entities": {
+                "hospitals": [],
+                "diagnoses": [],
+                "doctors": [],
+                "treatments": [],
+                "dates": [],
+                "visits": {
+                  "totalVisits": 0,
+                  "visitPatterns": []
+                }
+              },
+              "statistics": {
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalDoctors": 0,
+                "totalTreatments": 0,
+                "dateRange": null,
+                "totalVisits": 0,
+                "medicalComplexity": 0
+              },
+              "summary": {
+                "totalSegments": 0,
+                "hospitalsFound": 0,
+                "datesFound": 0,
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalVisits": 0,
+                "dateRange": null,
+                "complexity": 0
+              }
+            },
+            "finalReport": {
+              "filename": "report_2025-10-23T23-54-32_8238cff7.json",
+              "filePath": "C:\\VNEXSUS_Bin\\temp\\reports\\report_2025-10-23T23-54-32_8238cff7.json",
+              "downloadUrl": "/reports/report_2025-10-23T23-54-32_8238cff7.json",
+              "data": {
+                "title": "병력사항 요약 경과표",
+                "generatedAt": "2025-10-23T23:54:32.807Z",
+                "patientInfo": {},
+                "stats": {
+                  "total": 2,
+                  "within3Months": 0,
+                  "within5Years": 0
+                },
+                "items": [
+                  {
+                    "date": "2024-04-18",
+                    "hospital": "미상 병원",
+                    "content": "1 2024-04-18\n가톨릭",
+                    "keywordMatches": [],
+                    "mappedTerms": [],
+                    "isWithin3Months": false,
+                    "isWithin5Years": false
+                  },
+                  {
+                    "date": "2025-01-20",
+                    "hospital": "미상 병원",
+                    "content": "2025-1-20 2:27 PM\n기본진료정보\n순번 진료시작일 병·의원&약국 진단과\n입원/ 주상병\n외래\n내원\n총 진료비\n코드\n주상병명\n(양방)기\n타 정상임\n건강보험 등\n일수(건강보험 적용분) 혜택받은 금액\n내가 낸 의료비\n(진료비)",
+                    "keywordMatches": [
+                      "입원",
+                      "진단"
+                    ],
+                    "mappedTerms": [],
+                    "isWithin3Months": false,
+                    "isWithin5Years": false
+                  }
+                ]
+              },
+              "reportId": "8238cff7-5cee-4d6b-b6be-81c602677bdf",
+              "format": "json",
+              "timestamp": "2025-10-23T23:54:32.810Z",
+              "patientInfo": {},
+              "preview": [
+                {
+                  "date": "2024-04-18",
+                  "hospital": "미상 병원",
+                  "diagnosis": [],
+                  "treatment": []
+                },
+                {
+                  "date": "2025-01-20",
+                  "hospital": "미상 병원",
+                  "diagnosis": [
+                    "진단"
+                  ],
+                  "treatment": []
+                }
+              ]
+            }
+          },
+          "statistics": {
+            "originalTextLength": 88611,
+            "processedGroups": 0,
+            "dateBlocks": 0,
+            "confidence": 0,
+            "filteringRate": 0
+          },
+          "metadata": {
+            "version": "7.2",
+            "timestamp": "2025-10-23T23:54:32.811Z",
+            "processingMode": "AI_ENHANCED",
+            "pipelineSteps": 5
+          }
+        },
+        "processingTime": 0
+      },
+      "generatedReport": {
+        "content": "\n======================================================\n       의료 기록 분석 보고서\n======================================================\n\n환자명: 테스트 환자\n생년월일: 1961-10-20\n보험 가입일: 2023-07-26\n\n■ 요약 정보\n- 총 항목 수: 3개\n- 가입일 3개월 이내 항목: 0개\n- 가입일 5년 이내 항목: 1개\n\n■ 병력 사항 상세\n------------------------------------------------------\n날짜        | 병원        | 진단/처치내용\n------------------------------------------------------\n2025.02.05  | 명지병원    | 변형 협심증, 관상동맥병\n2025.02.19  | 명지병원    | CAG 검사 (30-40% 협착)\n2025.02.26  | 명지병원    | 보존적 치료\n\n■ 분석 결과\n- 허혈성심장질환 진단 기준 부합\n- 고지의무 위반사항 없음\n- 보험금 지급 적정\n\n보고서 생성 완료 - 2025. 10. 24. 오전 8:54:32\n    ",
+        "format": "text",
+        "generatedAt": "2025-10-23T23:54:32.814Z"
+      },
+      "qualityScore": 74,
+      "errors": []
+    },
+    {
+      "name": "Case12",
+      "success": true,
+      "processingTime": 245,
+      "ocrResult": {
+        "success": true,
+        "data": {
+          "success": true,
+          "processingTime": 215,
+          "pipeline": {
+            "massiveDateBlocks": {
+              "dateBlocks": [],
+              "structuredGroups": [],
+              "processedSize": 0,
+              "statistics": {
+                "averageConfidence": 0,
+                "filteringRate": 0
+              }
+            },
+            "preprocessedData": [
+              {
+                "date": "2025-02-11",
+                "hospital": "강북삼성병원",
+                "rawText": "2025-02-11 18:49:45\nㄱ 해오름 손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n강북삼성병원 02434882 허전권\n2025 년 01월 21 일\n의료정보실 담당자: 방보경 강북삼성병\n병원\n강북삼성병원",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "organizedData": [
+              {
+                "date": "2025-02-11",
+                "hospital": "강북삼성병원",
+                "rawText": "2025-02-11 18:49:45\nㄱ 해오름 손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n강북삼성병원 02434882 허전권\n2025 년 01월 21 일\n의료정보실 담당자: 방보경 강북삼성병\n병원\n강북삼성병원",
+                "keywordMatches": [],
+                "mappedTerms": [],
+                "shouldExclude": false,
+                "excludedMatches": []
+              }
+            ],
+            "aiExtractedData": {
+              "entities": {
+                "hospitals": [],
+                "diagnoses": [],
+                "doctors": [],
+                "treatments": [],
+                "dates": [],
+                "visits": {
+                  "totalVisits": 0,
+                  "visitPatterns": []
+                }
+              },
+              "statistics": {
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalDoctors": 0,
+                "totalTreatments": 0,
+                "dateRange": null,
+                "totalVisits": 0,
+                "medicalComplexity": 0
+              },
+              "summary": {
+                "totalSegments": 0,
+                "hospitalsFound": 0,
+                "datesFound": 0,
+                "uniqueHospitals": 0,
+                "uniqueDiagnoses": 0,
+                "totalVisits": 0,
+                "dateRange": null,
+                "complexity": 0
+              }
+            },
+            "finalReport": {
+              "filename": "report_2025-10-23T23-54-33_9b5249af.json",
+              "filePath": "C:\\VNEXSUS_Bin\\temp\\reports\\report_2025-10-23T23-54-33_9b5249af.json",
+              "downloadUrl": "/reports/report_2025-10-23T23-54-33_9b5249af.json",
+              "data": {
+                "title": "병력사항 요약 경과표",
+                "generatedAt": "2025-10-23T23:54:33.059Z",
+                "patientInfo": {},
+                "stats": {
+                  "total": 1,
+                  "within3Months": 0,
+                  "within5Years": 0
+                },
+                "items": [
+                  {
+                    "date": "2025-02-11",
+                    "hospital": "강북삼성병원",
+                    "content": "2025-02-11 18:49:45\nㄱ 해오름 손해사정(주)\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\n강북삼성병원 02434882 허전권\n2025 년 01월 21 일\n의료정보실 담당자: 방보경 강북삼성병\n병원\n강북삼성병원",
+                    "keywordMatches": [],
+                    "mappedTerms": [],
+                    "isWithin3Months": false,
+                    "isWithin5Years": false
+                  }
+                ]
+              },
+              "reportId": "9b5249af-19e3-4b09-82f9-2facb33792da",
+              "format": "json",
+              "timestamp": "2025-10-23T23:54:33.060Z",
+              "patientInfo": {},
+              "preview": [
+                {
+                  "date": "2025-02-11",
+                  "hospital": "강북삼성병원",
+                  "diagnosis": [],
+                  "treatment": []
+                }
+              ]
+            }
+          },
+          "statistics": {
+            "originalTextLength": 182368,
+            "processedGroups": 0,
+            "dateBlocks": 0,
+            "confidence": 0,
+            "filteringRate": 0
+          },
+          "metadata": {
+            "version": "7.2",
+            "timestamp": "2025-10-23T23:54:33.060Z",
+            "processingMode": "AI_ENHANCED",
+            "pipelineSteps": 5
+          }
+        },
+        "processingTime": 0
+      },
+      "generatedReport": {
+        "content": "\n======================================================\n       의료 기록 분석 보고서\n======================================================\n\n환자명: 테스트 환자\n생년월일: 1961-10-20\n보험 가입일: 2023-07-26\n\n■ 요약 정보\n- 총 항목 수: 3개\n- 가입일 3개월 이내 항목: 0개\n- 가입일 5년 이내 항목: 1개\n\n■ 병력 사항 상세\n------------------------------------------------------\n날짜        | 병원        | 진단/처치내용\n------------------------------------------------------\n2025.02.05  | 명지병원    | 변형 협심증, 관상동맥병\n2025.02.19  | 명지병원    | CAG 검사 (30-40% 협착)\n2025.02.26  | 명지병원    | 보존적 치료\n\n■ 분석 결과\n- 허혈성심장질환 진단 기준 부합\n- 고지의무 위반사항 없음\n- 보험금 지급 적정\n\n보고서 생성 완료 - 2025. 10. 24. 오전 8:54:33\n    ",
+        "format": "text",
+        "generatedAt": "2025-10-23T23:54:33.063Z"
+      },
+      "qualityScore": 76,
+      "errors": []
+    }
+  ],
+  "recommendations": [
+    "텍스트 후처리 로직 개선",
+    "AI 분석 품질 향상"
+  ]
+}

@@ -10,21 +10,21 @@
 
 import massiveDateBlockProcessor from './massiveDateBlockProcessor.js';
 import EnhancedMassiveDateBlockProcessor from './enhancedMassiveDateBlockProcessor.js';
-import dateOrganizer from './dateOrganizer.js';
+import DateOrganizer from './dateOrganizer.js';
 import preprocessor from './preprocessor.js';
 import reportBuilder from './reportBuilder.js';
 import aiEntityExtractor from './aiEntityExtractor.js';
-import enhancedEntityExtractor from './enhancedEntityExtractor.js';
+import EnhancedEntityExtractor from './enhancedEntityExtractor.js';
 
 class PostProcessingManager {
   constructor() {
     this.massiveDateProcessor = massiveDateBlockProcessor;
     this.enhancedMassiveDateProcessor = new EnhancedMassiveDateBlockProcessor();
-    this.dateOrganizer = dateOrganizer;
+    this.dateOrganizer = new DateOrganizer();
     this.preprocessor = preprocessor;
     this.reportBuilder = reportBuilder;
     this.aiEntityExtractor = aiEntityExtractor;
-    this.enhancedEntityExtractor = enhancedEntityExtractor;
+    this.enhancedEntityExtractor = new EnhancedEntityExtractor();
     
     // 처리 통계
     this.processingStats = {
@@ -102,8 +102,18 @@ class PostProcessingManager {
       let aiExtractedData = null;
       if (options.useAIExtraction) {
         console.log('\n=== 4단계: AI 엔티티 추출 ===');
-        aiExtractedData = await this.enhancedEntityExtractor.extractEntities(
-          massiveDateResult.structuredGroups,
+        // massiveDateResult.structuredGroups를 텍스트로 변환
+        const textForExtraction = Array.isArray(massiveDateResult.structuredGroups) 
+          ? massiveDateResult.structuredGroups.map(group => 
+              typeof group === 'string' ? group : 
+              (group.text || group.content || JSON.stringify(group))
+            ).join('\n')
+          : (typeof massiveDateResult.structuredGroups === 'string' 
+              ? massiveDateResult.structuredGroups 
+              : ocrText);
+        
+        aiExtractedData = await this.enhancedEntityExtractor.extractAllEntities(
+          textForExtraction,
           options.aiExtractionOptions || {}
         );
       }

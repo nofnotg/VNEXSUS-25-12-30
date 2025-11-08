@@ -28,6 +28,12 @@ const TEMP_DIR = process.env.TEMP_DIR || '../temp';
  */
 export const uploadPdfs = async (req, res) => {
   try {
+    console.log('=== 업로드 요청 시작 ===');
+    console.log('파일 수:', req.files ? req.files.length : 0);
+    console.log('요청 헤더:', req.headers);
+    
+    logService.info(`업로드 요청 시작 - 파일 수: ${req.files ? req.files.length : 0}`);
+    
     // CORS 헤더 추가
     res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -111,8 +117,9 @@ export const uploadPdfs = async (req, res) => {
     });
 
     // 각 파일 처리 (비동기)
+    logService.info(`processFiles 함수 호출 시작 - jobId: ${jobId}, 파일 수: ${files.length}`);
     processFiles(jobId, files).catch(error => {
-      logService('ocrController', `파일 처리 중 예상치 못한 오류: ${error.message}`, 'error');
+      logService.error(`파일 처리 중 예상치 못한 오류: ${error.message}`);
       if (jobStore[jobId]) {
         jobStore[jobId].status = 'failed';
         jobStore[jobId].error = '서버 내부 오류가 발생했습니다. 관리자에게 문의하세요.';
@@ -121,12 +128,12 @@ export const uploadPdfs = async (req, res) => {
     });
     
   } catch (error) {
-    logService('ocrController', `업로드 처리 중 오류: ${error.message}`, 'error');
+    logService.error(`업로드 처리 중 오류: ${error.message}`);
+    logService.error(`오류 스택: ${error.stack}`);
     res.status(500).json({ 
-      error: '파일 처리 중 서버 오류가 발생했습니다.', 
+      error: '파일 업로드 중 서버 오류: ' + error.message, 
       status: 'error',
-      code: 'SERVER_ERROR',
-      message: error.message
+      code: 'SERVER_ERROR'
     });
   }
 };
@@ -156,7 +163,7 @@ export const getStatus = (req, res) => {
       elapsedTime: getElapsedTime(statusInfo.startTime)
     });
   } catch (error) {
-    logService('ocrController', `상태 확인 중 오류: ${error.message}`, 'error');
+    logService.error(`상태 확인 중 오류: ${error.message}`);
     res.status(500).json({ 
       error: '상태 확인 중 오류가 발생했습니다.',
       status: 'error',
@@ -220,7 +227,7 @@ export const getResult = (req, res) => {
       results: job.results
     });
   } catch (error) {
-    logService('ocrController', `결과 조회 중 오류: ${error.message}`, 'error');
+    logService.error(`결과 조회 중 오류: ${error.message}`);
     res.status(500).json({ 
       error: '결과 조회 중 오류가 발생했습니다.',
       status: 'error',
@@ -254,7 +261,7 @@ export const getOcrStatus = async (req, res) => {
       canProcessFiles: visionStatus.available || textractStatus.available
     });
   } catch (error) {
-    logService('ocrController', `OCR 서비스 상태 확인 중 오류: ${error.message}`, 'error');
+    logService.error(`OCR 서비스 상태 확인 중 오류: ${error.message}`);
     res.status(500).json({
       error: 'OCR 서비스 상태 확인 중 오류가 발생했습니다.',
       status: 'error',
@@ -270,7 +277,7 @@ export const getOcrStatus = async (req, res) => {
  */
 async function processFiles(jobId, files) {
   try {
-    logService('ocrController', `파일 처리 시작 (총 ${files.length}개 파일)`, 'info', { jobId });
+    logService.info(`파일 처리 시작 (총 ${files.length}개 파일)`, { jobId });
     
     // OCR 설정 로깅
     const useTextract = process.env.USE_TEXTRACT === 'true';
@@ -298,7 +305,7 @@ async function processFiles(jobId, files) {
       let tempFilePath = null;
       
       try {
-        logService('ocrController', `파일 처리 중: ${file.originalname} (${i+1}/${files.length})`, 'info', { 
+        logService.info(`파일 처리 중: ${file.originalname} (${i+1}/${files.length})`, { 
           jobId, 
           fileSize: `${(file.size / 1024).toFixed(2)} KB`,
           mimeType: file.mimetype
@@ -345,6 +352,25 @@ async function processFiles(jobId, files) {
           } catch (error) {
             throw new Error(`이미지 OCR 처리에 실패했습니다: ${error.message}`);
           }
+        } else if (file.mimetype === 'text/plain') {
+          // 텍스트 파일 처리 (직접 읽기)
+          try {
+            const textContent = file.buffer.toString('utf-8');
+            
+            processorResult = {
+              success: true,
+              text: textContent,
+              textLength: textContent.length,
+              pageCount: 1,
+              isScannedPdf: false,
+              textSource: 'direct_text',
+              ocrSource: 'text_file',
+              steps: ['text_file_read'],
+              confidence: 1.0
+            };
+          } catch (error) {
+            throw new Error(`텍스트 파일 처리에 실패했습니다: ${error.message}`);
+          }
         } else {
           throw new Error(`지원되지 않는 파일 형식입니다: ${file.mimetype}`);
         }
@@ -368,7 +394,7 @@ async function processFiles(jobId, files) {
           processedAt: new Date().toISOString()
         };
         
-        logService('ocrController', `파일 처리 완료: ${file.originalname}`, 'info', { 
+        logService.info(`파일 처리 완료: ${file.originalname}`, { 
           jobId, 
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           textSource: processorResult.textSource,
@@ -383,7 +409,7 @@ async function processFiles(jobId, files) {
         const fileEndTime = new Date();
         const fileProcessingTime = (fileEndTime - fileStartTime) / 1000;
         
-        logService('ocrController', `파일 처리 실패: ${files[i].originalname} - ${fileError.message}`, 'error', { 
+        logService.error(`파일 처리 실패: ${files[i].originalname} - ${fileError.message}`, { 
           jobId, 
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           error: fileError.stack
@@ -414,9 +440,9 @@ async function processFiles(jobId, files) {
         if (tempFilePath && fs.existsSync(tempFilePath)) {
           try {
             fs.unlinkSync(tempFilePath);
-            logService('ocrController', `임시 파일 삭제 완료: ${tempFilePath}`, 'debug', { jobId });
+            logService.info(`임시 파일 삭제 완료: ${tempFilePath}`, { jobId });
           } catch (unlinkError) {
-            logService('ocrController', `임시 파일 삭제 실패: ${unlinkError.message}`, 'error', { jobId });
+            logService.error(`임시 파일 삭제 실패: ${unlinkError.message}`, { jobId });
           }
         }
         
@@ -428,14 +454,14 @@ async function processFiles(jobId, files) {
     jobData.status = 'completed';
     jobData.completedAt = new Date().toISOString();
     
-    logService('ocrController', `모든 PDF 처리 완료 (${files.length}개 파일)`, 'info', { 
+    logService.info(`모든 PDF 처리 완료 (${files.length}개 파일)`, { 
       jobId, 
       elapsedTime: getElapsedTime(jobData.startTime, jobData.completedAt) 
     });
     
   } catch (error) {
     // 전체 처리 실패 시
-    logService('ocrController', `PDF 처리 중 오류 발생`, 'error', { jobId, error: error.message, stack: error.stack });
+    logService.error(`PDF 처리 중 오류 발생`, { jobId, error: error.message, stack: error.stack });
     
     if (jobStore[jobId]) {
       jobStore[jobId].status = 'failed';

@@ -1,0 +1,106 @@
+﻿{
+    "FailedTests":  1,
+    "TotalDuration":  0.4190618,
+    "PassedTests":  7,
+    "TotalTests":  8,
+    "StartTime":  {
+                      "value":  "\/Date(1760835598099)\/",
+                      "DisplayHint":  2,
+                      "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                  },
+    "EndTime":  {
+                    "value":  "\/Date(1760835598518)\/",
+                    "DisplayHint":  2,
+                    "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                },
+    "TestDetails":  [
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598187)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "API Status Check",
+                            "ResponseTime":  39.9988,
+                            "Details":  "Service is healthy"
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598243)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Post-processing Health",
+                            "ResponseTime":  39.9652,
+                            "Details":  "Post-processing service is healthy"
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598368)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Simple Text Processing",
+                            "ResponseTime":  118.0039,
+                            "Details":  "Processing time: ms"
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598407)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Complex Medical Text Processing",
+                            "ResponseTime":  36,
+                            "Details":  "Organized data items: 0, Processing time: ms"
+                        },
+                        {
+                            "Status":  "FAIL",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598472)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Debug Mode Processing",
+                            "ResponseTime":  0,
+                            "Details":  "Error: 원격 서버에서 (500) 내부 서버 오류 오류를 반환했습니다."
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598483)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Statistics Retrieval",
+                            "ResponseTime":  7.0091,
+                            "Details":  "Total processed: , Success rate: "
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598498)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Performance Monitoring",
+                            "ResponseTime":  10.0062,
+                            "Details":  "Status: critical"
+                        },
+                        {
+                            "Status":  "PASS",
+                            "Timestamp":  {
+                                              "value":  "\/Date(1760835598514)\/",
+                                              "DisplayHint":  2,
+                                              "DateTime":  "2025년 10월 19일 일요일 오전 9:59:58"
+                                          },
+                            "Name":  "Cache Health Check",
+                            "ResponseTime":  10.006400000000001,
+                            "Details":  "Cache is healthy"
+                        }
+                    ]
+}

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 품질 관리 및 자동 검증 시스템</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .two-column {
+            grid-column: span 2;
+        }
+
+        .control-panel {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-good { background: #27ae60; }
+        .status-warning { background: #f39c12; }
+        .status-error { background: #e74c3c; }
+        .status-processing { background: #3498db; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .quality-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 5px solid #3498db;
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .validation-rules {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .rule-item {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .rule-item h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .rule-status {
+            float: right;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .rule-active {
+            background: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .rule-inactive {
+            background: #fadbd8;
+            color: #e74c3c;
+        }
+
+        .data-flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .flow-step {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: #3498db;
+        }
+
+        .log-viewer {
+            max-height: 250px;
+            overflow-y: auto;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid transparent;
+        }
+
+        .log-info { border-left-color: #3498db; }
+        .log-success { border-left-color: #27ae60; }
+        .log-warning { border-left-color: #f39c12; }
+        .log-error { border-left-color: #e74c3c; }
+
+        .alert-panel {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .alert-critical {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background: #3498db;
+            color: white;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .validation-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .validation-pass {
+            background: #d4edda;
+            border-left: 4px solid #27ae60;
+        }
+
+        .validation-fail {
+            background: #f8d7da;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .chart-container {
+            height: 200px;
+            margin: 15px 0;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hierarchy-tree {
+            margin: 20px 0;
+        }
+
+        .tree-node {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+
+        .tree-child {
+            margin-left: 20px;
+            border-left-color: #95a5a6;
+        }
+
+        .auto-update-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .quality-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .data-flow-diagram {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ 데이터 품질 관리 및 자동 검증 시스템</h1>
+            <p>실시간 데이터 품질 모니터링, 자동화된 검증 프로세스 및 시각적 계층 구조 관리</p>
+        </div>
+
+        <div class="main-content">
+            <!-- 제어 패널 -->
+            <div class="section control-panel full-width">
+                <h2>🎛️ 시스템 제어 패널</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div class="input-group">
+                        <label>데이터 소스</label>
+                        <select id="dataSource">
+                            <option value="rag_prompts">RAG 프롬프트</option>
+                            <option value="medical_records">의료 기록</option>
+                            <option value="insurance_claims">보험 청구</option>
+                            <option value="all">전체 데이터</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>검증 수준</label>
+                        <select id="validationLevel">
+                            <option value="basic">기본 검증</option>
+                            <option value="standard">표준 검증</option>
+                            <option value="comprehensive">종합 검증</option>
+                            <option value="custom">사용자 정의</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>자동 갱신 주기</label>
+                        <select id="updateInterval">
+                            <option value="realtime">실시간</option>
+                            <option value="5min">5분</option>
+                            <option value="15min">15분</option>
+                            <option value="1hour">1시간</option>
+                            <option value="manual">수동</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-success" onclick="startValidation()">🚀 검증 시작</button>
+                    <button class="btn btn-warning" onclick="pauseValidation()">⏸️ 일시정지</button>
+                    <button class="btn" onclick="generateReport()">📊 보고서 생성</button>
+                    <button class="btn btn-danger" onclick="resetSystem()">🔄 시스템 초기화</button>
+                </div>
+            </div>
+
+            <!-- 품질 지표 대시보드 -->
+            <div class="section two-column">
+                <h2>📊 데이터 품질 지표</h2>
+                
+                <div class="quality-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value" id="accuracyScore">95.2</div>
+                        <div class="metric-label">정확성 (%)</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95.2%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value" id="completenessScore">87.8</div>
+                        <div class="metric-label">완성도 (%)</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 87.8%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value" id="consistencyScore">92.1</div>
+                        <div class="metric-label">일관성 (%)</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92.1%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-value" id="validityScore">89.5</div>
+                        <div class="metric-label">유효성 (%)</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 89.5%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="qualityTrendChart" width="400" height="150"></canvas>
+                </div>
+            </div>
+
+            <!-- 실시간 상태 모니터링 -->
+            <div class="section">
+                <h2>🔍 실시간 상태 모니터링</h2>
+                
+                <div class="auto-update-status">
+                    <div>
+                        <span class="status-indicator status-processing"></span>
+                        자동 검증 진행 중
+                    </div>
+                    <div id="lastUpdate">마지막 업데이트: 방금 전</div>
+                </div>
+
+                <div class="alert-panel" id="alertPanel">
+                    <strong>⚠️ 주의사항:</strong> 3개의 데이터 항목에서 품질 이슈가 발견되었습니다.
+                </div>
+
+                <div class="validation-result validation-pass">
+                    ✅ 진단 정확성 검증 통과 (95.2%)
+                </div>
+                
+                <div class="validation-result validation-fail">
+                    ❌ 시계열 일관성 검증 실패 (67.3%)
+                </div>
+                
+                <div class="validation-result validation-pass">
+                    ✅ 데이터 완성도 검증 통과 (87.8%)
+                </div>
+            </div>
+
+            <!-- 검증 규칙 관리 -->
+            <div class="section">
+                <h2>📋 검증 규칙 관리</h2>
+                
+                <div class="validation-rules" id="validationRules">
+                    <div class="rule-item">
+                        <div class="rule-status rule-active">활성</div>
+                        <h4>필수 필드 검증</h4>
+                        <p>환자명, 진단명, 날짜 필드 필수 입력 확인</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-status rule-active">활성</div>
+                        <h4>날짜 형식 검증</h4>
+                        <p>YYYY-MM-DD 형식 준수 확인</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-status rule-inactive">비활성</div>
+                        <h4>중복 데이터 검증</h4>
+                        <p>동일 환자의 중복 기록 탐지</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <div class="rule-status rule-active">활성</div>
+                        <h4>범위 값 검증</h4>
+                        <p>나이, 금액 등 수치 데이터 범위 확인</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 15px;">
+                    <button class="btn" onclick="addValidationRule()">➕ 규칙 추가</button>
+                    <button class="btn btn-warning" onclick="editRules()">✏️ 규칙 편집</button>
+                </div>
+            </div>
+
+            <!-- 데이터 처리 흐름도 -->
+            <div class="section full-width">
+                <h2>🔄 데이터 처리 흐름도</h2>
+                
+                <div class="data-flow-diagram">
+                    <div class="flow-step">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📥</div>
+                        <strong>데이터 수집</strong>
+                        <div style="font-size: 0.9em; color: #7f8c8d;">RAG 프롬프트<br>의료 기록</div>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🔍</div>
+                        <strong>품질 검증</strong>
+                        <div style="font-size: 0.9em; color: #7f8c8d;">정확성<br>완성도</div>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🛠️</div>
+                        <strong>데이터 정제</strong>
+                        <div style="font-size: 0.9em; color: #7f8c8d;">오류 수정<br>표준화</div>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div style="font-size: 2em; margin-bottom: 10px;">✅</div>
+                        <strong>최종 검증</strong>
+                        <div style="font-size: 0.9em; color: #7f8c8d;">일관성<br>유효성</div>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div style="font-size: 2em; margin-bottom: 10px;">💾</div>
+                        <strong>데이터 저장</strong>
+                        <div style="font-size: 0.9em; color: #7f8c8d;">품질 보장<br>백업</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 시각적 계층 구조 -->
+            <div class="section">
+                <h2>🌳 시각적 계층 구조</h2>
+                
+                <div class="hierarchy-tree" id="hierarchyTree">
+                    <div class="tree-node">
+                        <strong>📊 데이터 품질 관리</strong>
+                        <div class="tree-node tree-child">
+                            <strong>🔍 검증 프로세스</strong>
+                            <div class="tree-node tree-child">
+                                정확성 검증
+                            </div>
+                            <div class="tree-node tree-child">
+                                완성도 검증
+                            </div>
+                            <div class="tree-node tree-child">
+                                일관성 검증
+                            </div>
+                        </div>
+                        <div class="tree-node tree-child">
+                            <strong>🛠️ 자동화 도구</strong>
+                            <div class="tree-node tree-child">
+                                실시간 모니터링
+                            </div>
+                            <div class="tree-node tree-child">
+                                자동 갱신
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 검증 결과 테이블 -->
+            <div class="section">
+                <h2>📋 검증 결과 상세</h2>
+                
+                <table class="data-table" id="validationResultsTable">
+                    <thead>
+                        <tr>
+                            <th>데이터 항목</th>
+                            <th>상태</th>
+                            <th>점수</th>
+                            <th>마지막 검증</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>환자 진단 정보</td>
+                            <td><span class="status-indicator status-good"></span>정상</td>
+                            <td>95.2%</td>
+                            <td>2분 전</td>
+                        </tr>
+                        <tr>
+                            <td>시계열 데이터</td>
+                            <td><span class="status-indicator status-warning"></span>주의</td>
+                            <td>67.3%</td>
+                            <td>5분 전</td>
+                        </tr>
+                        <tr>
+                            <td>보험 청구 정보</td>
+                            <td><span class="status-indicator status-good"></span>정상</td>
+                            <td>89.1%</td>
+                            <td>1분 전</td>
+                        </tr>
+                        <tr>
+                            <td>의료 기록</td>
+                            <td><span class="status-indicator status-error"></span>오류</td>
+                            <td>45.7%</td>
+                            <td>3분 전</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 시스템 로그 -->
+            <div class="section">
+                <h2>📝 시스템 로그</h2>
+                
+                <div class="log-viewer" id="systemLog">
+                    <div class="log-entry log-info">[2024-01-20 14:30:15] INFO: 데이터 품질 검증 시작</div>
+                    <div class="log-entry log-success">[2024-01-20 14:30:18] SUCCESS: 진단 정확성 검증 완료 (95.2%)</div>
+                    <div class="log-entry log-warning">[2024-01-20 14:30:22] WARNING: 시계열 일관성 이슈 발견</div>
+                    <div class="log-entry log-error">[2024-01-20 14:30:25] ERROR: 의료 기록 필수 필드 누락</div>
+                    <div class="log-entry log-info">[2024-01-20 14:30:28] INFO: 자동 수정 프로세스 시작</div>
+                    <div class="log-entry log-success">[2024-01-20 14:30:32] SUCCESS: 데이터 정제 완료</div>
+                </div>
+
+                <div style="text-align: center; margin-top: 15px;">
+                    <button class="btn" onclick="clearLog()">🗑️ 로그 지우기</button>
+                    <button class="btn" onclick="exportLog()">📤 로그 내보내기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 데이터 품질 관리 시스템 클래스
+        class DataQualityManagementSystem {
+            constructor() {
+                this.validationRules = [
+                    { id: 1, name: "필수 필드 검증", active: true, priority: "high" },
+                    { id: 2, name: "날짜 형식 검증", active: true, priority: "medium" },
+                    { id: 3, name: "중복 데이터 검증", active: false, priority: "low" },
+                    { id: 4, name: "범위 값 검증", active: true, priority: "high" }
+                ];
+                
+                this.qualityMetrics = {
+                    accuracy: 95.2,
+                    completeness: 87.8,
+                    consistency: 92.1,
+                    validity: 89.5
+                };
+                
+                this.isValidationRunning = false;
+                this.updateInterval = null;
+                this.logEntries = [];
+            }
+
+            // 검증 시작
+            startValidation() {
+                if (this.isValidationRunning) {
+                    this.addLogEntry('WARNING', '검증이 이미 실행 중입니다.');
+                    return;
+                }
+
+                this.isValidationRunning = true;
+                this.addLogEntry('INFO', '데이터 품질 검증을 시작합니다.');
+                
+                // 검증 프로세스 시뮬레이션
+                this.runValidationProcess();
+                
+                // 자동 갱신 설정
+                const interval = document.getElementById('updateInterval').value;
+                this.setupAutoUpdate(interval);
+            }
+
+            // 검증 프로세스 실행
+            runValidationProcess() {
+                const dataSource = document.getElementById('dataSource').value;
+                const validationLevel = document.getElementById('validationLevel').value;
+                
+                this.addLogEntry('INFO', `데이터 소스: ${dataSource}, 검증 수준: ${validationLevel}`);
+                
+                // 각 검증 규칙 실행
+                this.validationRules.forEach(rule => {
+                    if (rule.active) {
+                        setTimeout(() => {
+                            this.executeValidationRule(rule);
+                        }, Math.random() * 2000);
+                    }
+                });
+                
+                // 품질 지표 업데이트
+                setTimeout(() => {
+                    this.updateQualityMetrics();
+                }, 3000);
+            }
+
+            // 개별 검증 규칙 실행
+            executeValidationRule(rule) {
+                const success = Math.random() > 0.3; // 70% 성공률
+                const score = 60 + Math.random() * 40; // 60-100% 점수
+                
+                if (success) {
+                    this.addLogEntry('SUCCESS', `${rule.name} 검증 완료 (${score.toFixed(1)}%)`);
+                } else {
+                    this.addLogEntry('ERROR', `${rule.name} 검증 실패`);
+                }
+                
+                this.updateValidationTable(rule.name, success, score);
+            }
+
+            // 품질 지표 업데이트
+            updateQualityMetrics() {
+                // 랜덤한 변화 적용
+                Object.keys(this.qualityMetrics).forEach(key => {
+                    const change = (Math.random() - 0.5) * 10; // -5% ~ +5% 변화
+                    this.qualityMetrics[key] = Math.max(0, Math.min(100, this.qualityMetrics[key] + change));
+                });
+                
+                // UI 업데이트
+                this.displayQualityMetrics();
+                this.updateQualityChart();
+            }
+
+            // 품질 지표 표시
+            displayQualityMetrics() {
+                document.getElementById('accuracyScore').textContent = this.qualityMetrics.accuracy.toFixed(1);
+                document.getElementById('completenessScore').textContent = this.qualityMetrics.completeness.toFixed(1);
+                document.getElementById('consistencyScore').textContent = this.qualityMetrics.consistency.toFixed(1);
+                document.getElementById('validityScore').textContent = this.qualityMetrics.validity.toFixed(1);
+                
+                // 프로그레스 바 업데이트
+                const progressBars = document.querySelectorAll('.progress-fill');
+                const values = Object.values(this.qualityMetrics);
+                progressBars.forEach((bar, index) => {
+                    if (index < values.length) {
+                        bar.style.width = values[index] + '%';
+                    }
+                });
+            }
+
+            // 검증 테이블 업데이트
+            updateValidationTable(ruleName, success, score) {
+                // 실제 구현에서는 테이블 행을 동적으로 업데이트
+                console.log(`테이블 업데이트: ${ruleName}, 성공: ${success}, 점수: ${score}`);
+            }
+
+            // 자동 갱신 설정
+            setupAutoUpdate(interval) {
+                if (this.updateInterval) {
+                    clearInterval(this.updateInterval);
+                }
+                
+                let intervalMs;
+                switch(interval) {
+                    case 'realtime': intervalMs = 5000; break;
+                    case '5min': intervalMs = 300000; break;
+                    case '15min': intervalMs = 900000; break;
+                    case '1hour': intervalMs = 3600000; break;
+                    default: return;
+                }
+                
+                this.updateInterval = setInterval(() => {
+                    this.updateQualityMetrics();
+                    this.updateLastUpdateTime();
+                }, intervalMs);
+            }
+
+            // 마지막 업데이트 시간 갱신
+            updateLastUpdateTime() {
+                const now = new Date();
+                document.getElementById('lastUpdate').textContent = 
+                    `마지막 업데이트: ${now.toLocaleTimeString()}`;
+            }
+
+            // 로그 엔트리 추가
+            addLogEntry(level, message) {
+                const timestamp = new Date().toLocaleString();
+                const entry = { timestamp, level, message };
+                this.logEntries.push(entry);
+                
+                // 로그 뷰어 업데이트
+                this.updateLogViewer();
+            }
+
+            // 로그 뷰어 업데이트
+            updateLogViewer() {
+                const logViewer = document.getElementById('systemLog');
+                const latestEntries = this.logEntries.slice(-10); // 최근 10개만 표시
+                
+                logViewer.innerHTML = latestEntries.map(entry => {
+                    const levelClass = `log-${entry.level.toLowerCase()}`;
+                    return `<div class="log-entry ${levelClass}">[${entry.timestamp}] ${entry.level}: ${entry.message}</div>`;
+                }).join('');
+                
+                // 스크롤을 맨 아래로
+                logViewer.scrollTop = logViewer.scrollHeight;
+            }
+
+            // 품질 차트 업데이트
+            updateQualityChart() {
+                const canvas = document.getElementById('qualityTrendChart');
+                const ctx = canvas.getContext('2d');
+                
+                // 캔버스 초기화
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 차트 데이터
+                const data = Object.values(this.qualityMetrics);
+                const labels = ['정확성', '완성도', '일관성', '유효성'];
+                const colors = ['#3498db', '#27ae60', '#f39c12', '#e74c3c'];
+                
+                // 바 차트 그리기
+                const barWidth = 60;
+                const barSpacing = 20;
+                const startX = 30;
+                const maxHeight = 120;
+                
+                data.forEach((value, index) => {
+                    const x = startX + index * (barWidth + barSpacing);
+                    const height = (value / 100) * maxHeight;
+                    const y = canvas.height - height - 20;
+                    
+                    // 바 그리기
+                    ctx.fillStyle = colors[index];
+                    ctx.fillRect(x, y, barWidth, height);
+                    
+                    // 라벨 그리기
+                    ctx.fillStyle = '#2c3e50';
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(labels[index], x + barWidth/2, canvas.height - 5);
+                    ctx.fillText(value.toFixed(1) + '%', x + barWidth/2, y - 5);
+                });
+            }
+
+            // 검증 일시정지
+            pauseValidation() {
+                this.isValidationRunning = false;
+                if (this.updateInterval) {
+                    clearInterval(this.updateInterval);
+                    this.updateInterval = null;
+                }
+                this.addLogEntry('INFO', '검증 프로세스가 일시정지되었습니다.');
+            }
+
+            // 시스템 초기화
+            resetSystem() {
+                this.pauseValidation();
+                this.qualityMetrics = {
+                    accuracy: 95.2,
+                    completeness: 87.8,
+                    consistency: 92.1,
+                    validity: 89.5
+                };
+                this.logEntries = [];
+                this.displayQualityMetrics();
+                this.updateLogViewer();
+                this.addLogEntry('INFO', '시스템이 초기화되었습니다.');
+            }
+
+            // 보고서 생성
+            generateReport() {
+                const report = {
+                    timestamp: new Date().toISOString(),
+                    qualityMetrics: this.qualityMetrics,
+                    validationRules: this.validationRules,
+                    logEntries: this.logEntries.slice(-50) // 최근 50개 로그
+                };
+                
+                const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `quality_report_${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                this.addLogEntry('SUCCESS', '품질 보고서가 생성되었습니다.');
+            }
+        }
+
+        // 전역 변수
+        let qualitySystem = new DataQualityManagementSystem();
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            qualitySystem.displayQualityMetrics();
+            qualitySystem.updateQualityChart();
+            qualitySystem.addLogEntry('INFO', '데이터 품질 관리 시스템이 초기화되었습니다.');
+            
+            // 자동 업데이트 시작
+            qualitySystem.setupAutoUpdate('realtime');
+        });
+
+        // 전역 함수들
+        function startValidation() {
+            qualitySystem.startValidation();
+        }
+
+        function pauseValidation() {
+            qualitySystem.pauseValidation();
+        }
+
+        function resetSystem() {
+            if (confirm('시스템을 초기화하시겠습니까?')) {
+                qualitySystem.resetSystem();
+            }
+        }
+
+        function generateReport() {
+            qualitySystem.generateReport();
+        }
+
+        function addValidationRule() {
+            const ruleName = prompt('새 검증 규칙 이름을 입력하세요:');
+            if (ruleName) {
+                qualitySystem.addLogEntry('INFO', `새 검증 규칙 추가: ${ruleName}`);
+            }
+        }
+
+        function editRules() {
+            qualitySystem.addLogEntry('INFO', '검증 규칙 편집 모드로 전환합니다.');
+        }
+
+        function clearLog() {
+            qualitySystem.logEntries = [];
+            qualitySystem.updateLogViewer();
+            qualitySystem.addLogEntry('INFO', '로그가 지워졌습니다.');
+        }
+
+        function exportLog() {
+            const logText = qualitySystem.logEntries.map(entry => 
+                `[${entry.timestamp}] ${entry.level}: ${entry.message}`
+            ).join('\n');
+            
+            const blob = new Blob([logText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `system_log_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 실시간 업데이트 시뮬레이션
+        setInterval(() => {
+            qualitySystem.updateLastUpdateTime();
+        }, 30000); // 30초마다 업데이트
+    </script>
+</body>
+</html>

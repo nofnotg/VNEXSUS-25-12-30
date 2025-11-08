@@ -540,5 +540,6 @@ class AnomalyDetector {
   }
 }
 
-export default RealTimeQualityMonitor;
-export { RealTimeQualityMonitor, AnomalyDetector };
+module.exports = RealTimeQualityMonitor;
+module.exports.RealTimeQualityMonitor = RealTimeQualityMonitor;
+module.exports.AnomalyDetector = AnomalyDetector;

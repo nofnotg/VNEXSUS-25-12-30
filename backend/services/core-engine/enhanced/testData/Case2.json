@@ -1,0 +1,83 @@
+{
+  "id": "Case2",
+  "description": "복잡한 의료 기록 - 다중 병원 방문 및 시간적 관계",
+  "text": "환자는 2023년 1월 15일 서울대병원 응급실에 복통으로 내원하였다. 초기 진단은 급성 충수염 의심이었으며, CT 촬영 결과 충수염이 확진되었다. 같은 날 오후 2시에 복강경 충수절제술을 시행하였다. 수술 후 3일간 입원 치료를 받았으며, 1월 18일 퇴원하였다. 퇴원 후 1주일 뒤인 1월 25일, 수술 부위 통증으로 외래 방문하였으나 정상 소견으로 확인되었다. 2월 10일 강남세브란스병원에서 정기 검진을 받았으며, 혈액검사 상 염증 수치가 약간 상승되어 있었다. 항생제 치료를 1주간 시행한 후 2월 17일 재검사에서 정상화되었다.",
+  "expected": {
+    "segments": [
+      {
+        "id": "seg_1",
+        "text": "환자는 2023년 1월 15일 서울대병원 응급실에 복통으로 내원하였다.",
+        "contextType": "hospital_visit",
+        "medicalDomain": "emergency",
+        "confidence": 0.95
+      },
+      {
+        "id": "seg_2", 
+        "text": "초기 진단은 급성 충수염 의심이었으며, CT 촬영 결과 충수염이 확진되었다.",
+        "contextType": "diagnosis",
+        "medicalDomain": "radiology",
+        "confidence": 0.90
+      },
+      {
+        "id": "seg_3",
+        "text": "같은 날 오후 2시에 복강경 충수절제술을 시행하였다.",
+        "contextType": "procedure",
+        "medicalDomain": "surgery",
+        "confidence": 0.95
+      }
+    ],
+    "entities": [
+      {
+        "id": "ent_1",
+        "text": "급성 충수염",
+        "type": "diagnosis",
+        "confidence": 0.95,
+        "normalizedForm": "acute_appendicitis"
+      },
+      {
+        "id": "ent_2",
+        "text": "복강경 충수절제술",
+        "type": "procedure", 
+        "confidence": 0.90,
+        "normalizedForm": "laparoscopic_appendectomy"
+      },
+      {
+        "id": "ent_3",
+        "text": "CT 촬영",
+        "type": "procedure",
+        "confidence": 0.85,
+        "normalizedForm": "ct_scan"
+      }
+    ],
+    "events": [
+      {
+        "id": "evt_1",
+        "timestamp": "2023-01-15T00:00:00Z",
+        "type": "hospital_visit",
+        "description": "서울대병원 응급실 내원",
+        "confidence": 0.95
+      },
+      {
+        "id": "evt_2",
+        "timestamp": "2023-01-15T14:00:00Z", 
+        "type": "procedure",
+        "description": "복강경 충수절제술 시행",
+        "confidence": 0.90
+      },
+      {
+        "id": "evt_3",
+        "timestamp": "2023-01-18T00:00:00Z",
+        "type": "discharge",
+        "description": "퇴원",
+        "confidence": 0.85
+      }
+    ],
+    "qualityMetrics": {
+      "informationPreservation": 85,
+      "entityExtraction": 80,
+      "temporalNormalization": 90,
+      "contextualClassification": 85,
+      "targetScore": 70
+    }
+  }
+}

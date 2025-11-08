@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 파이프라인 분석 보고서</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .score-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .score-number { font-size: 48px; font-weight: bold; text-align: center; }
+        .score-label { text-align: center; font-size: 18px; margin-top: 10px; }
+        .test-result { border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 5px; }
+        .success { border-left: 5px solid #27ae60; }
+        .failure { border-left: 5px solid #e74c3c; }
+        .recommendation { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .chart { width: 100%; height: 300px; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #f8f9fa; font-weight: bold; }
+        .status-badge { padding: 4px 8px; border-radius: 4px; color: white; font-size: 12px; }
+        .status-success { background: #27ae60; }
+        .status-failure { background: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 VNEXSUS 파이프라인 분석 보고서</h1>
+        
+        <div class="score-card">
+            <div class="score-number">75.7/100</div>
+            <div class="score-label">평균 품질 점수 (목표: 80점)</div>
+        </div>
+
+        <h2>📊 테스트 결과 요약</h2>
+        <table>
+            <tr><th>항목</th><th>결과</th></tr>
+            <tr><td>총 테스트 수</td><td>3개</td></tr>
+            <tr><td>성공률</td><td>100.0%</td></tr>
+            <tr><td>평균 처리 시간</td><td>270ms</td></tr>
+            <tr><td>목표 달성</td><td>❌ 미달성</td></tr>
+        </table>
+
+        <h2>📋 개별 테스트 결과</h2>
+        
+            <div class="test-result success">
+                <h3>Case10 
+                    <span class="status-badge status-success">
+                        성공
+                    </span>
+                </h3>
+                <p><strong>품질 점수:</strong> 77/100</p>
+                <p><strong>처리 시간:</strong> 459ms</p>
+                
+            </div>
+        
+            <div class="test-result success">
+                <h3>Case11 
+                    <span class="status-badge status-success">
+                        성공
+                    </span>
+                </h3>
+                <p><strong>품질 점수:</strong> 74/100</p>
+                <p><strong>처리 시간:</strong> 106ms</p>
+                
+            </div>
+        
+            <div class="test-result success">
+                <h3>Case12 
+                    <span class="status-badge status-success">
+                        성공
+                    </span>
+                </h3>
+                <p><strong>품질 점수:</strong> 76/100</p>
+                <p><strong>처리 시간:</strong> 245ms</p>
+                
+            </div>
+        
+
+        <h2>💡 개선 권장사항</h2>
+        
+            <div class="recommendation">
+                <strong>권장사항:</strong> 텍스트 후처리 로직 개선
+            </div>
+        
+            <div class="recommendation">
+                <strong>권장사항:</strong> AI 분석 품질 향상
+            </div>
+        
+
+        <h2>🔍 문제점 분석</h2>
+        <div class="recommendation">
+            <h3>주요 문제점:</h3>
+            <ul>
+                
+                
+                <li>AI 분석 결과의 정확성 향상 필요</li>
+                
+            </ul>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 5px;">
+            <p><strong>보고서 생성 시간:</strong> 2025. 10. 24. 오전 8:54:33</p>
+            <p><strong>시스템 버전:</strong> VNEXSUS v1.0</p>
+        </div>
+    </div>
+</body>
+</html>
+    

@@ -4,6 +4,14 @@
  * 92.3% 정확도 달성을 목표로 하는 하이브리드 전략
  */
 
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
 const { AIService } = require('./aiService');
 const logger = require('../utils/logger');
 
@@ -379,4 +387,4 @@ class HybridProcessingEngine {
     }
 }
 
-module.exports = HybridProcessingEngine;
+export default HybridProcessingEngine;

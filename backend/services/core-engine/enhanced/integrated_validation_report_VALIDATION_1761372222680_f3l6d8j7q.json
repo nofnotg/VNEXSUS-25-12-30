@@ -1,0 +1,632 @@
+{
+  "id": "VALIDATION_1761372222680_f3l6d8j7q",
+  "timestamp": "2025-10-25T06:03:44.730Z",
+  "totalTime": 2050,
+  "summary": {
+    "overallSuccess": false,
+    "successRate": 0.6972222222222222,
+    "deploymentReady": false,
+    "qualityImprovement": {
+      "qualityAssurance": {
+        "baseline": 0.2,
+        "target": 0.995,
+        "current": 0,
+        "improvement": -0.2,
+        "progress": -0.2515723270440252,
+        "status": "in_progress"
+      }
+    }
+  },
+  "moduleResults": {
+    "success": false,
+    "successRate": 0.05555555555555555,
+    "moduleResults": {
+      "outputFormatter": {
+        "success": false,
+        "successRate": 0,
+        "testCount": 3,
+        "passedTests": 0,
+        "failedTests": 3,
+        "results": [
+          {
+            "test": "output_formatting",
+            "message": "출력 형식화 실패"
+          },
+          {
+            "test": "multiple_formats",
+            "success": false,
+            "message": "0/4 형식 지원"
+          },
+          {
+            "test": "quality_enhancement",
+            "success": false,
+            "message": "module.enhanceDataQuality is not a function"
+          }
+        ]
+      },
+      "qualityMonitor": {
+        "success": false,
+        "successRate": 0.3333333333333333,
+        "testCount": 3,
+        "passedTests": 1,
+        "failedTests": 2,
+        "results": [
+          {
+            "test": "quality_assessment",
+            "success": false,
+            "message": "module.assessQuality is not a function"
+          },
+          {
+            "test": "real_time_monitoring",
+            "success": true,
+            "message": "실시간 모니터링 시작/중지 성공"
+          },
+          {
+            "test": "quality_improvement",
+            "success": false,
+            "message": "module.improveQuality is not a function"
+          }
+        ]
+      },
+      "dateOptimizer": {
+        "success": false,
+        "successRate": 0,
+        "testCount": 3,
+        "passedTests": 0,
+        "failedTests": 3,
+        "results": [
+          {
+            "test": "date_anchoring",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'optimizeDateAnchoring')"
+          },
+          {
+            "test": "batch_optimization",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'optimizeBatch')"
+          },
+          {
+            "test": "performance_metrics",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'getPerformanceMetrics')"
+          }
+        ]
+      },
+      "aiOptimizer": {
+        "success": false,
+        "successRate": 0,
+        "testCount": 3,
+        "passedTests": 0,
+        "failedTests": 3,
+        "results": [
+          {
+            "test": "model_selection",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'selectOptimalModel')"
+          },
+          {
+            "test": "weight_adjustment",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'adjustWeights')"
+          },
+          {
+            "test": "adaptive_learning",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'performAdaptiveLearning')"
+          }
+        ]
+      },
+      "reliabilityStandardizer": {
+        "success": false,
+        "successRate": 0,
+        "testCount": 3,
+        "passedTests": 0,
+        "failedTests": 3,
+        "results": [
+          {
+            "test": "reliability_analysis",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'analyzePipelineReliability')"
+          },
+          {
+            "test": "standardization",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'standardizeReliability')"
+          },
+          {
+            "test": "monitoring_setup",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'setupMonitoring')"
+          }
+        ]
+      },
+      "qualityAssurance": {
+        "success": false,
+        "successRate": 0,
+        "testCount": 3,
+        "passedTests": 0,
+        "failedTests": 3,
+        "results": [
+          {
+            "test": "quality_check",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'performQualityCheck')"
+          },
+          {
+            "test": "batch_quality_check",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'performBatchQualityCheck')"
+          },
+          {
+            "test": "quality_dashboard",
+            "success": false,
+            "message": "Cannot read properties of null (reading 'generateQualityDashboard')"
+          }
+        ]
+      }
+    },
+    "summary": "6개 모듈 중 0개 성공"
+  },
+  "integrationResults": {
+    "success": false,
+    "score": 0.8333333333333333,
+    "results": {
+      "dataFlow": {
+        "success": true,
+        "score": 1,
+        "message": "데이터 흐름 테스트 성공",
+        "steps": 3
+      },
+      "communication": {
+        "success": false,
+        "score": 0.3333333333333333,
+        "message": "2/6 모듈 통신 성공",
+        "tests": [
+          {
+            "module": "outputFormatter",
+            "available": true,
+            "responsive": true
+          },
+          {
+            "module": "qualityMonitor",
+            "available": true,
+            "responsive": true
+          },
+          {
+            "module": "dateOptimizer",
+            "available": false,
+            "responsive": true
+          },
+          {
+            "module": "aiOptimizer",
+            "available": false,
+            "responsive": true
+          },
+          {
+            "module": "reliabilityStandardizer",
+            "available": false,
+            "responsive": true
+          },
+          {
+            "module": "qualityAssurance",
+            "available": false,
+            "responsive": true
+          }
+        ]
+      },
+      "errorHandling": {
+        "success": true,
+        "score": 1,
+        "message": "6/6 오류 처리 성공",
+        "tests": [
+          {
+            "module": "outputFormatter",
+            "handled": true,
+            "message": "오류 처리 성공"
+          },
+          {
+            "module": "qualityMonitor",
+            "handled": true,
+            "message": "오류 처리 성공"
+          },
+          {
+            "module": "dateOptimizer",
+            "handled": true,
+            "message": "오류 처리 성공"
+          },
+          {
+            "module": "aiOptimizer",
+            "handled": true,
+            "message": "오류 처리 성공"
+          },
+          {
+            "module": "reliabilityStandardizer",
+            "handled": true,
+            "message": "오류 처리 성공"
+          },
+          {
+            "module": "qualityAssurance",
+            "handled": true,
+            "message": "오류 처리 성공"
+          }
+        ]
+      },
+      "qualityChain": {
+        "success": true,
+        "score": 1,
+        "message": "품질 체인 최종 품질: 100.0%",
+        "steps": [
+          {
+            "module": "dateOptimizer",
+            "beforeQuality": 0.2,
+            "afterQuality": 1,
+            "improvement": 0.8
+          },
+          {
+            "module": "aiOptimizer",
+            "beforeQuality": 1,
+            "afterQuality": 1,
+            "improvement": 0
+          },
+          {
+            "module": "qualityMonitor",
+            "beforeQuality": 1,
+            "afterQuality": 1,
+            "improvement": 0
+          },
+          {
+            "module": "reliabilityStandardizer",
+            "beforeQuality": 1,
+            "afterQuality": 1,
+            "improvement": 0
+          },
+          {
+            "module": "qualityAssurance",
+            "beforeQuality": 1,
+            "afterQuality": 1,
+            "improvement": 0
+          },
+          {
+            "module": "outputFormatter",
+            "beforeQuality": 1,
+            "afterQuality": 1,
+            "improvement": 0
+          }
+        ],
+        "finalQuality": 1
+      }
+    },
+    "summary": "통합 테스트 평균 점수: 83.3%"
+  },
+  "performanceResults": {
+    "success": true,
+    "score": 1,
+    "results": {
+      "responseTime": {
+        "passed": true,
+        "score": 1,
+        "responseTime": 101,
+        "threshold": 1000,
+        "message": "응답 시간: 101ms (임계값: 1000ms)"
+      },
+      "throughput": {
+        "passed": true,
+        "score": 1,
+        "throughput": 67.6132521974307,
+        "totalTime": 1479,
+        "testCount": 100,
+        "message": "처리량: 67.6 ops/sec"
+      },
+      "resourceUsage": {
+        "passed": true,
+        "score": 1,
+        "memoryUsage": 5.223762512207031,
+        "cpuUsage": {
+          "user": 62000,
+          "system": 171000
+        },
+        "message": "메모리 사용량: 5.2MB"
+      },
+      "scalability": {
+        "passed": true,
+        "score": 1,
+        "results": [
+          {
+            "size": 10,
+            "processingTime": 15,
+            "throughput": 666.6666666666667
+          },
+          {
+            "size": 50,
+            "processingTime": 16,
+            "throughput": 3125
+          },
+          {
+            "size": 100,
+            "processingTime": 19,
+            "throughput": 5263.1578947368425
+          },
+          {
+            "size": 500,
+            "processingTime": 60,
+            "throughput": 8333.333333333334
+          }
+        ],
+        "message": "확장성 테스트 통과"
+      }
+    },
+    "summary": "성능 테스트 평균 점수: 100.0%"
+  },
+  "stressResults": {
+    "success": false,
+    "score": 0.9,
+    "results": {
+      "highLoad": {
+        "passed": true,
+        "score": 1,
+        "totalTime": 108,
+        "completedTasks": 50,
+        "message": "고부하 테스트: 50개 작업을 108ms에 완료"
+      },
+      "concurrentRequests": {
+        "passed": true,
+        "score": 1,
+        "totalTime": 190,
+        "concurrentCount": 20,
+        "successfulRequests": 20,
+        "message": "동시 요청: 20/20 성공"
+      },
+      "memoryPressure": {
+        "passed": false,
+        "score": 0.7,
+        "initialMemory": 5.37451171875,
+        "peakMemory": 6.249641418457031,
+        "finalMemory": 6.249870300292969,
+        "memoryIncrease": 0.8751296997070312,
+        "memoryRecovered": -0.0002288818359375,
+        "message": "메모리 압박 테스트: 0.9MB 증가, -0.0MB 회복"
+      }
+    },
+    "summary": "스트레스 테스트 평균 점수: 90.0%"
+  },
+  "endToEndResults": {
+    "success": false,
+    "totalTime": 1,
+    "stages": 5,
+    "successfulStages": 0,
+    "successRate": 0,
+    "finalQuality": 0.16666666666666666,
+    "pipelineResults": [
+      {
+        "stage": "date_optimization",
+        "result": {
+          "success": false,
+          "message": "Module not available"
+        }
+      },
+      {
+        "stage": "ai_optimization",
+        "result": {
+          "success": false,
+          "message": "Module not available"
+        }
+      },
+      {
+        "stage": "quality_check",
+        "result": {
+          "success": false,
+          "message": "Module not available"
+        }
+      },
+      {
+        "stage": "output_formatting",
+        "result": {
+          "reportId": "MED_1761372224728_qzgxhjjz1",
+          "patientInfo": {
+            "name": "테스트환자",
+            "birthDate": null,
+            "registrationNumber": "미확인",
+            "gender": "M",
+            "age": null
+          },
+          "medicalRecords": [
+            {
+              "recordId": "REC_1",
+              "date": "2024-01-15",
+              "hospital": "미확인 기관",
+              "department": "미확인",
+              "diagnosis": "고혈압",
+              "treatment": "약물치료",
+              "notes": "",
+              "confidence": 0.8
+            }
+          ],
+          "summary": {
+            "totalRecords": 1,
+            "dateRange": "2024-01-15 ~ 2024-01-15",
+            "primaryDiagnoses": [
+              "고혈압"
+            ],
+            "keyFindings": [],
+            "riskFactors": []
+          },
+          "metadata": {
+            "processingTime": 1761372224729,
+            "dataSize": 447,
+            "qualityScore": 1,
+            "confidenceLevel": 0.8,
+            "formatCompliance": {
+              "hasRequiredFields": true,
+              "hasValidStructure": true,
+              "hasMetadata": true
+            },
+            "userOptions": {
+              "format": "json",
+              "validation": true,
+              "threshold": 0.8
+            },
+            "formatVersion": "2.0.0",
+            "generatedAt": "2025-10-25T06:03:44.729Z",
+            "formatter": "StandardizedOutputFormatter"
+          }
+        }
+      },
+      {
+        "stage": "reliability_check",
+        "result": {
+          "success": false,
+          "message": "Module not available"
+        }
+      }
+    ],
+    "finalData": {
+      "patientInfo": {
+        "name": "테스트환자",
+        "age": 45,
+        "gender": "M",
+        "patientId": "TEST001"
+      },
+      "medicalRecords": [
+        {
+          "date": "2024-01-15",
+          "diagnosis": "고혈압",
+          "treatment": "약물치료",
+          "doctor": "김의사"
+        }
+      ],
+      "insuranceClaims": [
+        {
+          "claimId": "CLAIM001",
+          "amount": 150000,
+          "date": "2024-01-15",
+          "status": "approved"
+        }
+      ],
+      "timestamp": 1761372224728,
+      "testId": "E2E_1761372224728"
+    },
+    "summary": "0/5 단계 성공, 최종 품질: 16.7%"
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "quality",
+      "title": "전체 성공률 개선 필요",
+      "description": "현재 성공률 69.7%를 95% 이상으로 향상시켜야 합니다.",
+      "actions": [
+        "실패한 테스트 케이스 분석",
+        "품질 개선 프로세스 강화",
+        "추가 테스트 실행"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "integration",
+      "title": "통합 상태 개선 필요",
+      "description": "모듈 간 통합에서 문제가 발견되었습니다.",
+      "actions": [
+        "모듈 간 인터페이스 검토",
+        "데이터 흐름 최적화",
+        "통합 테스트 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "outputFormatter 모듈 개선 필요",
+      "description": "outputFormatter 모듈의 성공률이 0.0%입니다.",
+      "actions": [
+        "outputFormatter 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "qualityMonitor 모듈 개선 필요",
+      "description": "qualityMonitor 모듈의 성공률이 33.3%입니다.",
+      "actions": [
+        "qualityMonitor 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "dateOptimizer 모듈 개선 필요",
+      "description": "dateOptimizer 모듈의 성공률이 0.0%입니다.",
+      "actions": [
+        "dateOptimizer 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "aiOptimizer 모듈 개선 필요",
+      "description": "aiOptimizer 모듈의 성공률이 0.0%입니다.",
+      "actions": [
+        "aiOptimizer 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "reliabilityStandardizer 모듈 개선 필요",
+      "description": "reliabilityStandardizer 모듈의 성공률이 0.0%입니다.",
+      "actions": [
+        "reliabilityStandardizer 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "module",
+      "title": "qualityAssurance 모듈 개선 필요",
+      "description": "qualityAssurance 모듈의 성공률이 0.0%입니다.",
+      "actions": [
+        "qualityAssurance 모듈 코드 리뷰",
+        "단위 테스트 추가",
+        "오류 처리 강화"
+      ]
+    }
+  ],
+  "nextSteps": [
+    {
+      "step": 1,
+      "title": "문제점 해결",
+      "description": "발견된 문제점들을 우선순위에 따라 해결합니다.",
+      "actions": [
+        "고우선순위 이슈 수정",
+        "추가 테스트 실행",
+        "품질 검증"
+      ]
+    },
+    {
+      "step": 2,
+      "title": "재검증 실행",
+      "description": "문제 해결 후 전체 시스템을 재검증합니다.",
+      "actions": [
+        "통합 테스트 재실행",
+        "성능 테스트 재실행",
+        "배포 준비 상태 확인"
+      ]
+    },
+    {
+      "step": 3,
+      "title": "문서화 및 교육",
+      "description": "시스템 사용법과 유지보수 방법을 문서화합니다.",
+      "actions": [
+        "사용자 매뉴얼 작성",
+        "운영 가이드 작성",
+        "팀 교육 실시"
+      ]
+    }
+  ]
+}

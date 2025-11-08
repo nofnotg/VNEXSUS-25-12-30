@@ -23,14 +23,18 @@
 
 import express from 'express';
 import { DevStudioController } from '../controllers/devStudioController.js';
+import { logger } from '../../src/shared/logging/logger.js';
 
 const router = express.Router();
 const devStudioController = new DevStudioController();
 
-// 요청 로깅 미들웨어
+// 요청 로깅 미들웨어(구조화 로깅)
 router.use((req, res, next) => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] 🔗 통합 Dev Studio API: ${req.method} ${req.originalUrl}`);
+  try {
+    logger.logApiRequest(req, { event: 'dev_studio_route_request' });
+  } catch (_) {
+    // 로깅 실패는 라우팅을 방해하지 않음
+  }
   next();
 });
 
@@ -63,7 +67,13 @@ router.get('/prompts', async (req, res) => {
   try {
     await devStudioController.getPrompts(req, res);
   } catch (error) {
-    console.error('❌ 통합 프롬프트 조회 실패:', error);
+    logger.error({
+      event: 'dev_studio_prompts_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '통합 프롬프트 조회 실패: ' + error.message
@@ -98,7 +108,13 @@ router.get('/case-samples', async (req, res) => {
   try {
     await devStudioController.getCaseSamples(req, res);
   } catch (error) {
-    console.error('❌ 케이스 샘플 목록 조회 실패:', error);
+    logger.error({
+      event: 'dev_studio_case_samples_list_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
         res.status(500).json({
             success: false,
             error: '케이스 샘플 목록 조회 실패: ' + error.message
@@ -130,7 +146,13 @@ router.get('/case-samples/:filename', async (req, res) => {
   try {
     await devStudioController.getCaseSample(req, res);
   } catch (error) {
-    console.error('❌ 케이스 샘플 내용 조회 실패:', error);
+    logger.error({
+      event: 'dev_studio_case_sample_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
         res.status(500).json({
             success: false,
             error: '케이스 샘플 내용 조회 실패: ' + error.message
@@ -182,7 +204,13 @@ router.post('/preprocess-text', async (req, res) => {
   try {
     await devStudioController.preprocessText(req, res);
   } catch (error) {
-    console.error('❌ 통합 전처리 실패:', error);
+    logger.error({
+      event: 'dev_studio_preprocess_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '통합 전처리 실패: ' + error.message
@@ -227,7 +255,13 @@ router.post('/test-prompt', async (req, res) => {
   try {
     await devStudioController.testPrompt(req, res);
   } catch (error) {
-    console.error('❌ 통합 AI 테스트 실패:', error);
+    logger.error({
+      event: 'dev_studio_test_prompt_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '통합 AI 테스트 실패: ' + error.message
@@ -265,7 +299,13 @@ router.get('/performance', async (req, res) => {
   try {
     await devStudioController.getPerformanceMetrics(req, res);
   } catch (error) {
-    console.error('❌ 통합 성능 메트릭 조회 실패:', error);
+    logger.error({
+      event: 'dev_studio_performance_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '성능 메트릭 조회 실패: ' + error.message
@@ -307,7 +347,13 @@ router.post('/date-analysis/analyze', async (req, res) => {
   try {
     await devStudioController.analyzeDates(req, res);
   } catch (error) {
-    console.error('❌ 통합 날짜 분석 실패:', error);
+    logger.error({
+      event: 'dev_studio_analyze_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '날짜 분석 실패: ' + error.message
@@ -335,7 +381,13 @@ router.get('/date-analysis/timeline/:requestId', async (req, res) => {
   try {
     await devStudioController.generateTimeline(req, res);
   } catch (error) {
-    console.error('❌ 통합 타임라인 생성 실패:', error);
+    logger.error({
+      event: 'dev_studio_timeline_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '타임라인 생성 실패: ' + error.message
@@ -373,7 +425,13 @@ router.post('/date-analysis/validate', async (req, res) => {
     // Advanced Date Controller의 검증 기능 활용
     await devStudioController.advancedDateController.validateResults(req, res);
   } catch (error) {
-    console.error('❌ 통합 결과 검증 실패:', error);
+    logger.error({
+      event: 'dev_studio_validation_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '결과 검증 실패: ' + error.message
@@ -421,7 +479,13 @@ router.post('/date-analysis/batch-analyze', async (req, res) => {
     // Advanced Date Controller의 배치 분석 기능 활용
     await devStudioController.advancedDateController.batchAnalyze(req, res);
   } catch (error) {
-    console.error('❌ 통합 배치 분석 실패:', error);
+    logger.error({
+      event: 'dev_studio_batch_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '배치 분석 실패: ' + error.message
@@ -451,7 +515,13 @@ router.delete('/date-analysis/cache', async (req, res) => {
       clearedItems: beforeSize
     });
   } catch (error) {
-    console.error('❌ 통합 캐시 정리 실패:', error);
+    logger.error({
+      event: 'dev_studio_cache_clear_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '캐시 정리 실패: ' + error.message
@@ -489,7 +559,13 @@ router.get('/date-analysis/queue', async (req, res) => {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('❌ 통합 대기열 상태 조회 실패:', error);
+    logger.error({
+      event: 'dev_studio_queue_status_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       error: '대기열 상태 조회 실패: ' + error.message
@@ -556,7 +632,13 @@ router.get('/date-analysis/health', async (req, res) => {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('❌ 통합 시스템 상태 확인 실패:', error);
+    logger.error({
+      event: 'dev_studio_health_failed',
+      error: error?.message,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+      path: req.originalUrl,
+      method: req.method
+    });
     res.status(500).json({
       success: false,
       status: 'error',
@@ -567,7 +649,13 @@ router.get('/date-analysis/health', async (req, res) => {
 
 // 에러 핸들링 미들웨어
 router.use((error, req, res, next) => {
-  console.error('❌ 통합 Dev Studio API 오류:', error);
+  logger.error({
+    event: 'dev_studio_route_error',
+    error: error?.message,
+    stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+    path: req.originalUrl,
+    method: req.method
+  });
   
   res.status(500).json({
     success: false,

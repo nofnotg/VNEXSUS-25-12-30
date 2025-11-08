@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 통합 파이프라인 데이터 처리 흐름도</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .pipeline-section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .icon {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .stage {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .stage:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stage-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stage-number {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .stage-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .stage-description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .module {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        .module:hover {
+            border-color: #3498db;
+            transform: scale(1.02);
+        }
+        
+        .module-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .module-file {
+            background: #e8f4fd;
+            color: #2980b9;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .integration-note {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .integration-note h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .api-endpoints {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .api-endpoints h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .endpoint {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid #27ae60;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .endpoint.legacy {
+            border-left-color: #e74c3c;
+        }
+        
+        .endpoint.hybrid {
+            border-left-color: #9b59b6;
+        }
+        
+        .data-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .data-flow .step {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .data-flow .arrow-right {
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #ecf0f1;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 VNEXSUS 통합 파이프라인</h1>
+            <p>데이터 처리 흐름도 및 시스템 아키텍처</p>
+        </div>
+        
+        <div class="content">
+            <div class="integration-note">
+                <h3>🎯 통합 시스템 개요</h3>
+                <p>VNEXSUS는 기존 후처리 시스템과 코어엔진을 하나의 통합 파이프라인으로 운영하여, 
+                   문서 처리부터 보고서 생성까지 일관된 데이터 처리 흐름을 제공합니다.</p>
+            </div>
+            
+            <!-- Stage 1: 문서 입력 및 OCR -->
+            <div class="pipeline-section">
+                <h2 class="section-title">
+                    <span class="icon">📄</span>
+                    Stage 1: 문서 입력 및 OCR 처리
+                </h2>
+                
+                <div class="stage">
+                    <div class="stage-header">
+                        <div class="stage-number">1</div>
+                        <div class="stage-title">문서 업로드 및 OCR 실행</div>
+                    </div>
+                    <div class="stage-description">
+                        사용자가 업로드한 문서(PDF, 이미지)를 Google Cloud Vision API를 통해 텍스트로 변환합니다.
+                    </div>
+                    
+                    <div class="modules">
+                        <div class="module">
+                            <div class="module-name">📤 파일 업로드 처리</div>
+                            <div class="module-description">
+                                Multer를 사용한 멀티파트 파일 업로드 처리 (최대 100MB, 8개 파일)
+                            </div>
+                            <div class="module-file">ocrRoutes.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🔍 Google Cloud Vision OCR</div>
+                            <div class="module-description">
+                                Google Cloud Vision API를 통한 고정밀 텍스트 추출 및 문서 구조 분석
+                            </div>
+                            <div class="module-file">visionOcrService.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">💾 GCS 파일 저장</div>
+                            <div class="module-description">
+                                Google Cloud Storage에 원본 파일 및 처리 결과 저장
+                            </div>
+                            <div class="module-file">gcsService.js</div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-endpoints">
+                        <h4>🔗 관련 API 엔드포인트</h4>
+                        <div class="endpoint">/api/ocr/upload - OCR 파일 업로드</div>
+                        <div class="endpoint">/api/ocr/status/:jobId - OCR 작업 상태 확인</div>
+                        <div class="endpoint">/api/ocr/result/:jobId - OCR 결과 조회</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Stage 2: 통합 파이프라인 처리 -->
+            <div class="pipeline-section">
+                <h2 class="section-title">
+                    <span class="icon">⚙️</span>
+                    Stage 2: 통합 파이프라인 처리
+                </h2>
+                
+                <div class="stage">
+                    <div class="stage-header">
+                        <div class="stage-number">2</div>
+                        <div class="stage-title">하이브리드 통합 처리</div>
+                    </div>
+                    <div class="stage-description">
+                        OCR 결과를 기존 후처리 시스템과 코어엔진을 통합한 하이브리드 파이프라인으로 처리합니다.
+                    </div>
+                    
+                    <div class="data-flow">
+                        <div class="step">
+                            <strong>날짜 블록 처리</strong><br>
+                            <small>Legacy + Core + Hybrid + Adaptive</small>
+                        </div>
+                        <div class="arrow-right">→</div>
+                        <div class="step">
+                            <strong>의료 문서 정규화</strong><br>
+                            <small>Standard + Enhanced + Adaptive</small>
+                        </div>
+                        <div class="arrow-right">→</div>
+                        <div class="step">
+                            <strong>최적 결과 선택</strong><br>
+                            <small>AI 기반 결과 분석</small>
+                        </div>
+                    </div>
+                    
+                    <div class="modules">
+                        <div class="module">
+                            <div class="module-name">📅 하이브리드 날짜 처리기</div>
+                            <div class="module-description">
+                                4가지 모드(Legacy, Core, Hybrid, Adaptive)로 날짜 블록을 병렬 처리하여 최적 결과 선택
+                            </div>
+                            <div class="module-file">hybridDateProcessor.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🏥 하이브리드 의료 정규화</div>
+                            <div class="module-description">
+                                3가지 정규화 모드(Standard, Enhanced, Adaptive)로 의료 문서 구조화
+                            </div>
+                            <div class="module-file">hybridMedicalNormalizer.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🔄 결과 병합기</div>
+                            <div class="module-description">
+                                다중 처리 결과를 지능적으로 분석하고 최적의 결과를 선택하여 병합
+                            </div>
+                            <div class="module-file">resultMerger.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">📊 성능 모니터</div>
+                            <div class="module-description">
+                                실시간 처리 성능 모니터링 및 최적화 지표 수집
+                            </div>
+                            <div class="module-file">performanceMonitor.js</div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-endpoints">
+                        <h4>🔗 관련 API 엔드포인트</h4>
+                        <div class="endpoint hybrid">/api/hybrid/process - 통합 파이프라인 실행</div>
+                        <div class="endpoint hybrid">/api/hybrid/upload - 파일 업로드 + 통합 처리</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Stage 3: 코어엔진 분석 -->
+            <div class="pipeline-section">
+                <h2 class="section-title">
+                    <span class="icon">🧠</span>
+                    Stage 3: 코어엔진 AI 분석
+                </h2>
+                
+                <div class="stage">
+                    <div class="stage-header">
+                        <div class="stage-number">3</div>
+                        <div class="stage-title">AI 기반 의료 문서 분석</div>
+                    </div>
+                    <div class="stage-description">
+                        코어엔진을 통해 질병 분류, 공개 분석, 전이/원발 분류 등 고도화된 AI 분석을 수행합니다.
+                    </div>
+                    
+                    <div class="data-flow">
+                        <div class="step">
+                            <strong>질병 규칙 매핑</strong><br>
+                            <small>Disease Rule Mapping</small>
+                        </div>
+                        <div class="arrow-right">→</div>
+                        <div class="step">
+                            <strong>공개 분석</strong><br>
+                            <small>Disclosure Analysis</small>
+                        </div>
+                        <div class="arrow-right">→</div>
+                        <div class="step">
+                            <strong>전이/원발 분류</strong><br>
+                            <small>Primary/Metastasis Classification</small>
+                        </div>
+                    </div>
+                    
+                    <div class="modules">
+                        <div class="module">
+                            <div class="module-name">🎯 질병 규칙 매퍼</div>
+                            <div class="module-description">
+                                의료 문서에서 질병 정보를 추출하고 표준 분류 체계에 매핑
+                            </div>
+                            <div class="module-file">diseaseRuleMapper.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">📋 공개 엔진</div>
+                            <div class="module-description">
+                                계약 날짜 기준 공개 의무 분석 및 공개 여부 판단
+                            </div>
+                            <div class="module-file">disclosureEngine.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🔬 전이/원발 분류기</div>
+                            <div class="module-description">
+                                암 진단 정보의 전이성/원발성 분류 및 병기 분석
+                            </div>
+                            <div class="module-file">primaryMetastasisClassifier.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🎼 프롬프트 오케스트레이터</div>
+                            <div class="module-description">
+                                AI 모델 프롬프트 관리 및 최적화된 응답 생성
+                            </div>
+                            <div class="module-file">promptOrchestrator.js</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Stage 4: 보고서 생성 -->
+            <div class="pipeline-section">
+                <h2 class="section-title">
+                    <span class="icon">📊</span>
+                    Stage 4: 보고서 생성 및 출력
+                </h2>
+                
+                <div class="stage">
+                    <div class="stage-header">
+                        <div class="stage-number">4</div>
+                        <div class="stage-title">구조화된 보고서 생성</div>
+                    </div>
+                    <div class="stage-description">
+                        모든 분석 결과를 종합하여 구조화된 의료 보고서를 생성하고 다양한 형태로 출력합니다.
+                    </div>
+                    
+                    <div class="modules">
+                        <div class="module">
+                            <div class="module-name">📝 구조화 출력</div>
+                            <div class="module-description">
+                                분석 결과를 JSON 스키마 기반으로 구조화하여 표준 형식으로 출력
+                            </div>
+                            <div class="module-file">structuredOutput.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">📄 보고서 템플릿</div>
+                            <div class="module-description">
+                                의료 보고서 템플릿 기반 HTML/PDF 보고서 생성
+                            </div>
+                            <div class="module-file">reportGenerator.js</div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">✅ 데이터 검증</div>
+                            <div class="module-description">
+                                생성된 보고서의 데이터 무결성 및 스키마 검증
+                            </div>
+                            <div class="module-file">validateSchema.js</div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric">
+                            <div class="metric-value">4단계</div>
+                            <div class="metric-label">통합 파이프라인</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">7가지</div>
+                            <div class="metric-label">처리 모드</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">실시간</div>
+                            <div class="metric-label">성능 모니터링</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">AI 기반</div>
+                            <div class="metric-label">최적 결과 선택</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 통합 시스템 특징 -->
+            <div class="pipeline-section">
+                <h2 class="section-title">
+                    <span class="icon">🌟</span>
+                    통합 시스템의 핵심 특징
+                </h2>
+                
+                <div class="stage">
+                    <div class="stage-header">
+                        <div class="stage-number">✨</div>
+                        <div class="stage-title">하나의 통합된 처리 흐름</div>
+                    </div>
+                    
+                    <div class="modules">
+                        <div class="module">
+                            <div class="module-name">🔄 하이브리드 처리</div>
+                            <div class="module-description">
+                                기존 후처리 시스템과 코어엔진을 하나의 파이프라인으로 통합하여 
+                                각 단계별로 최적의 처리 방식을 자동 선택
+                            </div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🎯 지능형 결과 선택</div>
+                            <div class="module-description">
+                                다중 처리 모드의 결과를 AI가 분석하여 가장 정확하고 
+                                신뢰할 수 있는 결과를 자동으로 선택
+                            </div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">📊 실시간 성능 최적화</div>
+                            <div class="module-description">
+                                처리 성능을 실시간으로 모니터링하고 병목 구간을 
+                                자동으로 감지하여 최적화 수행
+                            </div>
+                        </div>
+                        
+                        <div class="module">
+                            <div class="module-name">🔧 확장 가능한 아키텍처</div>
+                            <div class="module-description">
+                                모듈화된 구조로 새로운 처리 엔진이나 분석 모듈을 
+                                쉽게 추가할 수 있는 확장 가능한 설계
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="integration-note">
+                <h3>🎉 결론: 통합 파이프라인의 장점</h3>
+                <p>
+                    VNEXSUS 통합 파이프라인은 기존의 분리된 시스템들을 하나로 통합하여 
+                    <strong>일관된 데이터 처리 흐름</strong>을 제공합니다. 
+                    사용자는 더 이상 여러 시스템을 개별적으로 사용할 필요 없이, 
+                    <strong>하나의 통합된 인터페이스</strong>를 통해 문서 업로드부터 
+                    최종 보고서 생성까지 모든 과정을 원활하게 진행할 수 있습니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

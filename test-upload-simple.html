@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR API 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>OCR API 테스트</h1>
+    
+    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <p>파일을 선택하거나 여기에 드래그하세요</p>
+        <input type="file" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg,.txt" style="display: none;">
+    </div>
+    
+    <div id="fileList"></div>
+    
+    <button id="uploadBtn" onclick="uploadFiles()" disabled>업로드</button>
+    <button onclick="clearFiles()">파일 지우기</button>
+    
+    <div id="result"></div>
+
+    <script>
+        let selectedFiles = [];
+        const OCR_API_URL = 'http://localhost:3030/api/ocr';
+        
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+        
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            selectedFiles = files;
+            updateFileList();
+            updateUploadButton();
+        }
+        
+        function updateFileList() {
+            const fileList = document.getElementById('fileList');
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+            
+            const html = selectedFiles.map(file => 
+                `<div>📄 ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</div>`
+            ).join('');
+            
+            fileList.innerHTML = `<h3>선택된 파일 (${selectedFiles.length}개):</h3>${html}`;
+        }
+        
+        function updateUploadButton() {
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = selectedFiles.length === 0;
+        }
+        
+        function clearFiles() {
+            selectedFiles = [];
+            document.getElementById('fileInput').value = '';
+            updateFileList();
+            updateUploadButton();
+            document.getElementById('result').innerHTML = '';
+        }
+        
+        async function uploadFiles() {
+            if (selectedFiles.length === 0) {
+                showResult('파일을 선택해주세요.', 'error');
+                return;
+            }
+            
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = '업로드 중...';
+            
+            try {
+                showResult('업로드 중...', 'success');
+                
+                const formData = new FormData();
+                selectedFiles.forEach(file => {
+                    formData.append('files', file);
+                });
+                
+                console.log('업로드 시작:', selectedFiles.map(f => f.name));
+                
+                const response = await fetch(`${OCR_API_URL}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('응답 상태:', response.status);
+                
+                const responseText = await response.text();
+                console.log('응답 내용:', responseText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${responseText}`);
+                }
+                
+                const data = JSON.parse(responseText);
+                showResult(`업로드 성공!\n작업 ID: ${data.jobId}\n상태: ${data.status}`, 'success');
+                
+                // 상태 확인 시작
+                if (data.jobId) {
+                    checkStatus(data.jobId);
+                }
+                
+            } catch (error) {
+                console.error('업로드 오류:', error);
+                showResult(`업로드 실패: ${error.message}`, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '업로드';
+            }
+        }
+        
+        async function checkStatus(jobId) {
+            try {
+                const response = await fetch(`${OCR_API_URL}/status/${jobId}`);
+                const data = await response.json();
+                
+                showResult(`상태 확인:\n작업 ID: ${jobId}\n상태: ${data.status}\n진행률: ${data.filesProcessed}/${data.filesTotal}`, 'success');
+                
+                if (data.status === 'processing') {
+                    setTimeout(() => checkStatus(jobId), 2000);
+                } else if (data.status === 'completed') {
+                    getResult(jobId);
+                }
+            } catch (error) {
+                console.error('상태 확인 오류:', error);
+                showResult(`상태 확인 실패: ${error.message}`, 'error');
+            }
+        }
+        
+        async function getResult(jobId) {
+            try {
+                const response = await fetch(`${OCR_API_URL}/result/${jobId}`);
+                const data = await response.json();
+                
+                showResult(`결과 조회 성공:\n작업 ID: ${jobId}\n결과: ${JSON.stringify(data, null, 2)}`, 'success');
+            } catch (error) {
+                console.error('결과 조회 오류:', error);
+                showResult(`결과 조회 실패: ${error.message}`, 'error');
+            }
+        }
+        
+        function showResult(message, type) {
+            const result = document.getElementById('result');
+            result.textContent = message;
+            result.className = `result ${type}`;
+        }
+    </script>
+</body>
+</html>

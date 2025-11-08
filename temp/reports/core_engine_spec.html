@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>코어엔진(심장) 통합 사양서 v1</title>
+  <style>
+    :root { --bg:#0f1217; --card:#141923; --text:#e6edf3; --muted:#9aa4af; --accent:#58a6ff; --good:#2ea043; --warn:#d29922; --bad:#f85149; }
+    body { margin:0; font-family:Segoe UI, Roboto, Apple SD Gothic Neo, Malgun Gothic, sans-serif; background:var(--bg); color:var(--text); }
+    .container { max-width:1100px; margin:40px auto; padding:0 20px; }
+    h1 { font-size:26px; margin:0 0 14px; }
+    h2 { font-size:20px; margin:26px 0 10px; }
+    p, li { line-height:1.6; }
+    .card { background:var(--card); border:1px solid #222; border-radius:10px; padding:18px; margin:16px 0; }
+    .muted { color:var(--muted); }
+    code { background:#0e1420; color:#a8c1ff; padding:1px 6px; border-radius:6px; }
+    .mono { font-family:Consolas, Monaco, monospace; font-size:13px; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .table { width:100%; border-collapse:collapse; margin-top:8px; }
+    .table th, .table td { border:1px solid #243042; padding:8px; text-align:left; font-size:13px; }
+    .table th { background:#182032; color:#cbd4de; }
+    .table tr:nth-child(even) { background:#11161f; }
+    .badge { display:inline-block; font-size:12px; padding:2px 8px; border-radius:20px; background:#1b2130; color:#cbd4de; margin-left:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>코어엔진(심장) 통합 사양서 v1</h1>
+    <p class="muted">본 사양서는 <strong>엔진만</strong>을 대상으로 합니다. UI/라우팅/후처리 외부 연결은 별도 단계에서 연동합니다.</p>
+
+    <div class="card">
+      <h2>범위 / 목표</h2>
+      <ul>
+        <li>텍스트→앵커/엔티티 정규화→타임라인 결합→질환별 룰 적용→고지의무 분석→신뢰도 산출→품질게이트→스켈레톤(JSON) 생성</li>
+        <li>결정적/재현 가능한 출력 지향(캐시·온톨로지·룰 기반 + 저온도 모델 호출)</li>
+        <li>3–5분 품질 예산 내에서 누락 최소화, 충돌 통제, 근거(스니펫) 포함</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>아키텍처 개요</h2>
+      <ul>
+        <li><strong>TextIngestor</strong>: 문서 세그먼트화, 전처리(줄바꿈/날짜패턴/병원서식) 정돈</li>
+        <li><strong>AnchorDetector</strong>: 내원/입원/퇴원/검사 시행·보고일, 수술일 등 앵커 추출</li>
+        <li><strong>EntityNormalizer</strong>: 진단/검사/치료/병원 엔티티 동의어·약어 표준화, 코드 매핑</li>
+        <li><strong>TimelineAssembler</strong>: 다병원 이벤트 병합, 역전/중복 제거, 허용 오차 체계</li>
+        <li><strong>DiseaseRuleEngine</strong>: 질환별 필수 검사셋·중요지표 적용(플러그인)</li>
+        <li><strong>DisclosureAnalyzer</strong>: 3/24/60개월 윈도우 라벨링, 인과 설명 스켈레톤</li>
+        <li><strong>ConfidenceScorer</strong>: 근거 밀도/앵커 근접·룰 커버리지 기반 신뢰도 산출</li>
+        <li><strong>DynamicValidationEngine</strong>: 누락·충돌·신뢰도 게이트, 재시도·보강·폴백</li>
+        <li><strong>ReportSynthesizer(core)</strong>: 9–10항목 스켈레톤 JSON만 생성(서술문 제외)</li>
+        <li><strong>EvidenceBinder</strong>: 스니펫/출처 링크 바인딩(시행/보고일 병기)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>핵심 API</h2>
+      <pre class="mono" style="white-space:pre-wrap; background:#0e1420; padding:10px; border-radius:8px; border:1px solid #223;">POST /api/core-engine/analyze
+Body: {
+  extractedText: string | string[],
+  patientInfo?: { name?: string, id?: string, sex?: string, birth?: string },
+  contractDate?: string,            // YYYY-MM-DD
+  claimDiagnosis?: string,          // 원문 진단명
+  qualityLevel?: 'draft'|'standard'|'rigorous',
+  options?: { allowModel?: boolean, temperature?: number, locale?: 'ko'|'en' }
+}
+
+Response: {
+  sections: {
+    summary, timeline, diagnosis, exams, treatments,
+    hospitalCourse, durations, pastHistory, disclosureFindings, adjudicationSkeleton
+  },
+  entities: { hospitals, diagnoses, exams, treatments },
+  anchors: Anchor[],
+  events: Event[],
+  evidence: EvidenceSnippet[],
+  metrics: { coverage, conflicts, confidence, elapsedMs },
+  warnings: Warning[]
+}
+
+Error Codes: CE-INGEST-001, CE-ANCHOR-002, CE-NORM-003, CE-TIME-004,
+             CE-RULE-005, CE-DISC-006, CE-VAL-007, CE-SYN-008
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>데이터 계약 (요약)</h2>
+      <table class="table">
+        <tr><th>타입</th><th>핵심 필드</th><th>설명</th></tr>
+        <tr><td>Anchor</td><td>type, date, sourceId, proximityScore</td><td>내원/입원/퇴원/검사 시행·보고일 등</td></tr>
+        <tr><td>Event</td><td>kind, date, hospitalId, details, evidenceId</td><td>검사/치료/진단/입·퇴원 등 단일 사건</td></tr>
+        <tr><td>Diagnosis</td><td>original, normalized, code?, primaryOrMetastatic?</td><td>원문·정규화·코드(TNM/ICD 가능시)</td></tr>
+        <tr><td>Exam</td><td>name, modality, datePerformed, dateReported, impression</td><td>영상·정밀 검사 중심</td></tr>
+        <tr><td>Treatment</td><td>type, date, dose?, procedure?, result?</td><td>수술/시술/투약/처치</td></tr>
+        <tr><td>DisclosureFinding</td><td>window, keyword, anchorRef, rationale</td><td>3/24/60개월 라벨링 결과</td></tr>
+        <tr><td>EvidenceSnippet</td><td>id, text, sourcePath, lineSpan, dateRefs</td><td>출처·스니펫·날짜 연계</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>파이프라인 상태 머신</h2>
+      <pre class="mono" style="white-space:pre-wrap; background:#0e1420; padding:10px; border-radius:8px; border:1px solid #223;">INIT → INGEST → ANCHOR → NORMALIZE → TIMELINE → RULES → DISCLOSURE → SCORE → VALIDATE → SYNTHESIZE → OUTPUT
+
+각 단계 I/O:
+- INGEST(in: text) → (segments)
+- ANCHOR(segments) → (anchors)
+- NORMALIZE(segments, anchors) → (entities)
+- TIMELINE(entities, anchors) → (events)
+- RULES(events) → (augmented events, requiredSets)
+- DISCLOSURE(events, contractDate) → (findings)
+- SCORE(all) → (confidence per item)
+- VALIDATE(all, qualityLevel) → (issues, retries)
+- SYNTHESIZE(all) → (sections JSON)
+- OUTPUT → (response)
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>품질 게이트 / 예산</h2>
+      <ul>
+        <li>qualityLevel: <code>draft(≤60s)</code>, <code>standard(≤150s)</code>, <code>rigorous(≤300s)</code></li>
+        <li>게이트: 필수 검사셋 커버리지, 앵커 역전/중복, 진단-검사-치료 인과 스코어</li>
+        <li>재시도: 누락 섹션만 제한 리트리벌, 모델 호출은 저온도·고정프롬프트</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>질환별 룰 플러그인</h2>
+      <pre class="mono" style="white-space:pre-wrap; background:#0e1420; padding:10px; border-radius:8px; border:1px solid #223;">interface DiseaseRulePlugin {
+  id: string;
+  appliesTo(diagnosis: Diagnosis): boolean;
+  requiredExamSet(): string[];         // 예: ['심근효소','심전도','관상동맥CT/조영']
+  augment(events: Event[], anchors: Anchor[]): { additions: Event[], warnings: Warning[] };
+}
+
+// 기본 플러그인: 협심증, AMI, 부정맥, 뇌혈관, 암(원발/전이/TNM)
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>고지의무 분석(엔진)</h2>
+      <ul>
+        <li>윈도우: <code>±90/±730/±1825일</code> 기준, 계약일 대비 사건 라벨링</li>
+        <li>키워드: 의심/확정/재검사/추가검사/입원/수술/중대질환</li>
+        <li>출력: finding 목록(윈도우, 키워드, 앵커, 근거, 요약 스켈레톤)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>결정성 / 캐싱</h2>
+      <ul>
+        <li>동일 입력→동일 출력 보장: 룰/온톨로지 우선, 모델 호출은 캐시+고정 시드</li>
+        <li>온톨로지: 동의어 사전, 약어·검사명 표준화 테이블, 병원서식 패턴</li>
+        <li>캐시 키: 해시(text+contractDate+qualityLevel)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>에러/폴백/로깅</h2>
+      <ul>
+        <li>폴백: 최소 스켈레톤(요약·타임라인·진단·기간)만 생성 후 경고</li>
+        <li>로깅 태그: <code>CE-*</code> 코드, 단계, 소요시간, 재시도 횟수, 게이트 결과</li>
+        <li>메트릭: coverage%, conflicts#, confidence_avg, elapsedMs, findings#</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>설정 키</h2>
+      <ul>
+        <li><code>engine.qualityLevel</code>, <code>engine.allowModel</code>, <code>engine.temperature</code></li>
+        <li><code>ontology.synonymsPath</code>, <code>ontology.abbrPath</code>, <code>diseaseRules.path</code></li>
+        <li><code>disclosure.windows</code>: [90, 730, 1825]</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>스켈레톤 섹션(JSON)</h2>
+      <pre class="mono" style="white-space:pre-wrap; background:#0e1420; padding:10px; border-radius:8px; border:1px solid #223;">sections = {
+  summary: {...}, timeline: [...], diagnosis: [...], exams: [...], treatments: [...],
+  hospitalCourse: [...], durations: { admissionDays, outpatientVisits },
+  pastHistory: [...], disclosureFindings: [...], adjudicationSkeleton: { clauses: [...], notes: [...] }
+}
+      </pre>
+    </div>
+
+    <div class="card">
+      <h2>테스트/수용 기준</h2>
+      <ul>
+        <li>케이스 10+: coverage≥0.9, conflicts≤2/케이스, confidence_avg≥0.75</li>
+        <li>고지의무: 적중률≥0.85(표본 기준), 과탐지 경고율≤0.15</li>
+        <li>시간: draft≤60s, standard≤150s, rigorous≤300s(서버 기준)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>핸드오프 가이드(Claude 구현용)</h2>
+      <ul>
+        <li>모듈별 파일: TextIngestor.ts, AnchorDetector.ts, EntityNormalizer.ts, TimelineAssembler.ts, DiseaseRuleEngine.ts, DisclosureAnalyzer.ts, ConfidenceScorer.ts, DynamicValidationEngine.ts, ReportSynthesizer.ts, EvidenceBinder.ts</li>
+        <li>엔드포인트: <code>coreEngine.analyze(req)</code> → 위 상태 머신 순서로 실행</li>
+        <li>룰 플러그인: <code>plugins/</code>에 질환별 파일 추가, <code>registry.json</code>로 로딩</li>
+        <li>동일 입력→동일 출력 유지(캐시/온톨로지/고정 프롬프트)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -6,6 +6,14 @@
  * 의료 논리에 기반한 네트워크를 구축합니다.
  */
 
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+
 const { AIService } = require('./aiService');
 const logger = require('../utils/logger');
 
@@ -628,4 +636,4 @@ ${eventsText}
     }
 }
 
-module.exports = { CausalNetworkBuilder };
+export { CausalNetworkBuilder };

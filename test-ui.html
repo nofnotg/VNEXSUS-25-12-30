@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 테스트 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e8f4fd 0%, #f0f9ff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .status-indicator {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        .status-warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🏥 메디아이 UI 테스트</h1>
+        
+        <div id="test-results">
+            <h3>시스템 상태 확인</h3>
+            <div id="backend-status" class="status-indicator">백엔드 서버 확인 중...</div>
+            <div id="frontend-status" class="status-indicator">프론트엔드 파일 확인 중...</div>
+            <div id="api-status" class="status-indicator">API 연결 확인 중...</div>
+        </div>
+
+        <div class="mt-4">
+            <h3>메인 앱 링크</h3>
+            <div class="d-grid gap-2">
+                <a href="/frontend/" class="btn btn-primary btn-lg">메인 앱으로 이동</a>
+                <a href="/frontend/index.html" class="btn btn-secondary">직접 링크</a>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>디버그 정보</h3>
+            <div id="debug-info">
+                <p><strong>현재 URL:</strong> <span id="current-url"></span></p>
+                <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+                <p><strong>화면 크기:</strong> <span id="screen-size"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 디버그 정보 표시
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('user-agent').textContent = navigator.userAgent;
+        document.getElementById('screen-size').textContent = `${window.innerWidth} x ${window.innerHeight}`;
+
+        // 백엔드 서버 상태 확인
+        async function checkBackendStatus() {
+            const statusDiv = document.getElementById('backend-status');
+            try {
+                const response = await fetch('http://localhost:3030/api/ocr/status/test');
+                if (response.ok || response.status === 404) {
+                    statusDiv.textContent = '✅ 백엔드 서버 정상 (포트 3030)';
+                    statusDiv.className = 'status-indicator status-success';
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusDiv.textContent = `❌ 백엔드 서버 오류: ${error.message}`;
+                statusDiv.className = 'status-indicator status-error';
+            }
+        }
+
+        // 프론트엔드 파일 상태 확인
+        async function checkFrontendStatus() {
+            const statusDiv = document.getElementById('frontend-status');
+            try {
+                const response = await fetch('/frontend/script.js');
+                if (response.ok) {
+                    statusDiv.textContent = '✅ 프론트엔드 파일 정상';
+                    statusDiv.className = 'status-indicator status-success';
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusDiv.textContent = `❌ 프론트엔드 파일 오류: ${error.message}`;
+                statusDiv.className = 'status-indicator status-error';
+            }
+        }
+
+        // API 연결 상태 확인
+        async function checkApiStatus() {
+            const statusDiv = document.getElementById('api-status');
+            try {
+                // CORS 테스트
+                const response = await fetch('http://localhost:3030/api/ocr/upload', {
+                    method: 'OPTIONS'
+                });
+                statusDiv.textContent = '✅ API 연결 정상 (CORS 설정됨)';
+                statusDiv.className = 'status-indicator status-success';
+            } catch (error) {
+                statusDiv.textContent = `⚠️ API 연결 확인 필요: ${error.message}`;
+                statusDiv.className = 'status-indicator status-warning';
+            }
+        }
+
+        // 모든 상태 확인 실행
+        checkBackendStatus();
+        checkFrontendStatus();
+        checkApiStatus();
+    </script>
+</body>
+</html>
