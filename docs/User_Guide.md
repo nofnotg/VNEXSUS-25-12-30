@@ -583,3 +583,72 @@ function analyzeResults(result) {
 ---
 
 *이 가이드는 DNA Engine Phase 2 (v2.0.0) 기준으로 작성되었습니다.*
+
+---
+
+## 외래 에피소드 비교 리포트 생성 가이드
+
+### 비교 실행 및 자동 보고서 생성
+
+- 비교 실행: `npm run analyze:episodes:compare`
+  - 입력: `src/rag/case_sample/*.txt`
+  - 출력 JSON: `results/outpatient-episodes-case-comparison.json`
+  - 자동 생성: CSV `reports/outpatient-episodes-case-comparison.csv`, HTML `reports/outpatient-episodes-case-comparison.html`
+
+### 수동 보고서 생성
+
+- CSV/HTML 동시 생성: `npm run report:all`
+- 개별 실행:
+  - CSV: `npm run report:csv`
+  - HTML: `npm run report:html`
+
+### HTML 미리보기
+
+```bash
+# 로컬 서버로 reports 폴더 서빙 (임시)
+npx http-server reports -p 5500
+
+# 브라우저에서 열기
+# http://127.0.0.1:5500/outpatient-episodes-case-comparison.html
+```
+
+### JSON 구조 및 보고서 내용
+
+- 비교 결과 JSON은 다중 프로필 배열(`results: [{ name, options, summary, aggregate }, ...]`)을 포함합니다.
+- CSV/HTML 보고서는 모든 프로필의 `summary`를 플랫하게 병합하여 다음을 제공합니다:
+  - 파일/설정별 레코드 수, 에피소드 수
+  - 진단 그룹 카운트(열 확장)
+  - 병원 수 및 정규화된 병원 목록
+  - 상위 진단 그룹(HTML 상단 카드)
+
+---
+
+## 의료 사전 외부화 및 라벨 추출 규칙
+
+### 사전(JSON) 위치 및 확장 방법
+
+- 경로: `src/shared/constants/medical/dictionaries.json`
+- 확장 방법:
+  - `hospitalStopwords`: 병원명 오탐 방지를 위한 불용어 추가(예: `"방문"`, `"방문센터"`).
+  - 변경 후 테스트로 검증: `npm test` 또는 관련 유닛 테스트만 실행.
+
+### ICU/센터/클리닉 라벨 추출
+
+- 유틸: `extractHospitalWithLabels(text)` (`src/shared/utils/medicalText.js`)
+- 반환: `{ name?: string, labels: Set<string> }`
+- 라벨 키: `icu`, `center`, `clinic` (한국어/영문/약어 패턴 포함)
+- 엣지케이스:
+  - 병원명이 전부 불용어일 경우(`name` 미정의)에도 라벨은 추출됩니다.
+  - `병원/의원/치과`를 우선하여 병원 엔티티를 장거리 매칭에서 보호합니다.
+
+---
+
+## 트러블슈팅
+
+- 보고서가 비어 보이는 경우:
+  - 입력 JSON(`results/outpatient-episodes-case-comparison.json`)의 `results` 배열에 `summary` 항목이 포함되는지 확인.
+  - HTML 유틸이 다중 프로필을 병합하도록 업데이트되어 있어, 프로필이 비어 있으면 테이블도 비어집니다.
+- 병원명 오탐:
+  - `src/shared/constants/medical/dictionaries.json`의 `hospitalStopwords`에 해당 토큰 추가 후 재실행.
+- ICU/센터/클리닉 라벨 누락:
+  - 텍스트에 약어/영문/한국어 변형이 포함되는지 확인. 유틸은 대표 패턴을 지원합니다.

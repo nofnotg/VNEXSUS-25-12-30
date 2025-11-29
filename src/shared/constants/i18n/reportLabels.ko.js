@@ -1,0 +1,22 @@
+export const REPORT_LABELS_KO = {
+  title_default: "외래 에피소드 사례 비교 요약",
+  meta_generated_at: "생성 시각:",
+  section_aggregate: "집계",
+  section_top_groups: "상위 진단 그룹",
+  section_exports: "내보내기",
+  section_summary_by_config: "파일/설정별 요약",
+  metric_cases: "케이스",
+  metric_total_episodes: "총 에피소드",
+  metric_total_records: "총 레코드",
+  metric_claims_within_window: "기간 내 청구",
+  metric_disease_anchors: "질환 앵커",
+  metric_tests_within_timeframe: "기간 내 검사",
+  export_download_csv: "CSV 다운로드",
+  controls_page_size: "페이지 크기",
+  controls_prev: "이전",
+  controls_next: "다음",
+  controls_page_label: "페이지",
+  controls_rows_label: "행",
+  no_top_groups: "상위 그룹 없음",
+};
+

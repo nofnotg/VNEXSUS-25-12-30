@@ -49,7 +49,7 @@ class EnhancedMedicalTermProcessor {
       'Conjunctivitis': '결막염',
       'Thyroiditis': '갑상선염',
       'Thyroid Nodule': '갑상선 결절',
-      
+
       // 검사 관련
       'CT': '컴퓨터 단층촬영',
       'MRI': '자기공명영상',
@@ -66,7 +66,7 @@ class EnhancedMedicalTermProcessor {
       'Echocardiography': '심장초음파',
       'ECG': '심전도',
       'EKG': '심전도',
-      
+
       // 치료 관련
       'Medication': '약물치료',
       'Surgery': '수술',
@@ -76,7 +76,7 @@ class EnhancedMedicalTermProcessor {
       'Radiotherapy': '방사선치료',
       'Physical Therapy': '물리치료',
       'Rehabilitation': '재활치료',
-      
+
       // 의료기관 관련
       'Hospital': '병원',
       'Clinic': '의원',
@@ -85,7 +85,7 @@ class EnhancedMedicalTermProcessor {
       'Inpatient': '입원',
       'ICU': '중환자실',
       'OR': '수술실',
-      
+
       // 의료진 관련
       'Doctor': '의사',
       'Physician': '의사',
@@ -127,6 +127,27 @@ class EnhancedMedicalTermProcessor {
       'HCV': 'Hepatitis C Virus'
     };
 
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const abbrDir = path.resolve(process.cwd(), '..', 'src', 'rag', 'abbr');
+      if (fs.existsSync(abbrDir)) {
+        const files = fs.readdirSync(abbrDir).filter((f) => f.endsWith('.json'));
+        for (const f of files) {
+          const p = path.join(abbrDir, f);
+          const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+          for (const entry of data) {
+            const ab = String(entry.abbr || '').trim();
+            const eng = String(entry.eng || entry.full || '').trim();
+            const kor = typeof entry.kor === 'string' ? entry.kor.trim() : null;
+            if (ab && eng && !this.medicalAbbreviations[ab]) this.medicalAbbreviations[ab] = eng;
+            if (eng && kor && !this.medicalTermMappings[eng]) this.medicalTermMappings[eng] = kor;
+            if (kor && eng && !this.koreanToEnglishMappings[kor]) this.koreanToEnglishMappings[kor] = eng;
+          }
+        }
+      }
+    } catch (_) { }
+
     // 손해사정 관련 제외 키워드 (보험사가 아닌 손해사정조사회사 구분)
     this.excludeInsuranceCompanyKeywords = [
       '손해사정', '사정조사', '조사회사', '사정회사', '손사', '해오름손해사정'
@@ -134,14 +155,14 @@ class EnhancedMedicalTermProcessor {
   }
 
   /**
-   * ICD 코드 처리 (코드 한글명(영어명) 형식으로 통일)
+   * ICD 코드 처리 ([ICD코드/한글-영어] 형식으로 통일)
    * @param {string} text 처리할 텍스트
    * @returns {string} 처리된 텍스트
    */
   processICDCodes(text) {
     // ICD 코드 패턴 매칭 (예: E11.78, I25.9, R074 등)
     const icdPattern = /([A-Z]\d{2,3}(?:\.\d{1,2})?)/g;
-    
+
     return text.replace(icdPattern, (match, icdCode) => {
       // R074 -> R07.4 형식으로 정규화
       let normalizedCode = icdCode;
@@ -149,19 +170,19 @@ class EnhancedMedicalTermProcessor {
         // 3자리 숫자인 경우 점 추가 (R074 -> R07.4)
         normalizedCode = icdCode.slice(0, 3) + '.' + icdCode.slice(3);
       }
-      
+
       // 정규화된 코드로 매핑 확인
       let mapping = this.icdMappings[normalizedCode];
       if (!mapping) {
         // 원본 코드로도 확인
         mapping = this.icdMappings[icdCode];
       }
-      
+
       if (mapping) {
-        // '코드 한글명(영어명)' 형식으로 통일
-        return `${icdCode} ${mapping.korean}(${mapping.english})`;
+        // '[ICD코드/한글-영어]' 형식으로 통일
+        return `[${icdCode}/${mapping.korean}-${mapping.english}]`;
       }
-      
+
       // 매핑이 없는 경우 원본 반환
       return match;
     });
@@ -237,7 +258,7 @@ class EnhancedMedicalTermProcessor {
 
     sentences.forEach(sentence => {
       let isExcluded = false;
-      
+
       // 손해사정 관련 키워드 체크
       for (const keyword of this.excludeInsuranceCompanyKeywords) {
         if (sentence.includes(keyword)) {
@@ -332,7 +353,7 @@ class EnhancedMedicalTermProcessor {
 
     // 병기된 용어 개수 계산
     const pairedTermsCount = (processedText.match(/\([^)]+\)/g) || []).length;
-    
+
     // ICD 코드 개수 계산
     const icdCodesCount = (processedText.match(/[A-Z]\d{2}(?:\.\d{1,2})?/g) || []).length;
 
@@ -353,7 +374,7 @@ class EnhancedMedicalTermProcessor {
    */
   addMedicalTermMappings(newMappings) {
     Object.assign(this.medicalTermMappings, newMappings);
-    
+
     // 한글-영어 역매핑 업데이트
     Object.entries(newMappings).forEach(([english, korean]) => {
       this.koreanToEnglishMappings[korean] = english;

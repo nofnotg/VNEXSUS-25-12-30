@@ -87,10 +87,10 @@
                 });
                 
                 debugLog('📦 FormData 생성 완료');
-                debugLog('🌐 API 요청 시작: http://localhost:3030/api/ocr/upload');
+                debugLog('🌐 API 요청 시작: http://localhost:3031/api/ocr/upload');
                 
                 // API 요청
-                const response = await fetch('http://localhost:3030/api/ocr/upload', {
+                const response = await fetch('http://localhost:3031/api/ocr/upload', {
                     method: 'POST',
                     body: formData
                 });

@@ -24,14 +24,14 @@ export const ensureTempDir = (tempDir = defaultTempDir) => {
   try {
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
-      logService('fileHelper', `임시 디렉토리 생성됨: ${tempDir}`, 'info');
+      logService.info(`[fileHelper] 임시 디렉토리 생성됨: ${tempDir}`);
     }
     return tempDir;
   } catch (error) {
-    logService('fileHelper', `임시 디렉토리 생성 중 오류 (${tempDir}): ${error.message}`, 'error');
+    logService.error(`[fileHelper] 임시 디렉토리 생성 중 오류 (${tempDir}): ${error.message}`);
     // 임시 디렉토리 생성 실패 시 OS 임시 디렉토리 사용
     const fallbackDir = os.tmpdir();
-    logService('fileHelper', `대체 임시 디렉토리 사용: ${fallbackDir}`, 'warn');
+    logService.warn(`[fileHelper] 대체 임시 디렉토리 사용: ${fallbackDir}`);
     return fallbackDir;
   }
 };
@@ -51,7 +51,7 @@ export const saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir
     const filePath = path.join(dir, filename);
     
     fs.writeFileSync(filePath, buffer);
-    logService('fileHelper', `임시 파일 저장됨: ${filePath}`, 'info');
+    logService.info(`[fileHelper] 임시 파일 저장됨: ${filePath}`);
     
     // 파일 추적에 추가
     tempFiles.add(filePath);
@@ -64,7 +64,7 @@ export const saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir
     
     return filePath;
   } catch (error) {
-    logService('fileHelper', `임시 파일 저장 중 오류: ${error.message}`, 'error');
+    logService.error(`[fileHelper] 임시 파일 저장 중 오류: ${error.message}`);
     throw new Error(`임시 파일 저장 실패: ${error.message}`);
   }
 };
@@ -78,7 +78,7 @@ export const removeFile = (filePath) => {
   try {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
-      logService('fileHelper', `파일 삭제됨: ${filePath}`, 'info');
+      logService.info(`[fileHelper] 파일 삭제됨: ${filePath}`);
       
       // 추적 목록에서 제거
       tempFiles.delete(filePath);
@@ -86,7 +86,7 @@ export const removeFile = (filePath) => {
     }
     return false;
   } catch (error) {
-    logService('fileHelper', `파일 삭제 중 오류 (${filePath}): ${error.message}`, 'error');
+    logService.error(`[fileHelper] 파일 삭제 중 오류 (${filePath}): ${error.message}`);
     return false;
   }
 };
@@ -114,10 +114,10 @@ export const cleanTempDir = (tempDir = defaultTempDir) => {
       }
     }
     
-    logService('fileHelper', `임시 디렉토리 정리 완료 (${removedCount}개 파일 삭제됨): ${tempDir}`, 'info');
+    logService.info(`[fileHelper] 임시 디렉토리 정리 완료 (${removedCount}개 파일 삭제됨): ${tempDir}`);
     return removedCount;
   } catch (error) {
-    logService('fileHelper', `임시 디렉토리 정리 중 오류 (${tempDir}): ${error.message}`, 'error');
+    logService.error(`[fileHelper] 임시 디렉토리 정리 중 오류 (${tempDir}): ${error.message}`);
     return -1;
   }
 };
@@ -153,10 +153,10 @@ export const cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) 
       }
     }
     
-    logService('fileHelper', `오래된 임시 파일 정리 완료 (${removedCount}개 파일 삭제됨): ${tempDir}`, 'info');
+    logService.info(`[fileHelper] 오래된 임시 파일 정리 완료 (${removedCount}개 파일 삭제됨): ${tempDir}`);
     return removedCount;
   } catch (error) {
-    logService('fileHelper', `오래된 임시 파일 정리 중 오류 (${tempDir}): ${error.message}`, 'error');
+    logService.error(`[fileHelper] 오래된 임시 파일 정리 중 오류 (${tempDir}): ${error.message}`);
     return -1;
   }
 };
@@ -204,7 +204,7 @@ export const validatePdfFile = (filePath) => {
       isValid: true
     };
   } catch (error) {
-    logService('fileHelper', `PDF 파일 검증 중 오류 (${filePath}): ${error.message}`, 'error');
+    logService.error(`[fileHelper] PDF 파일 검증 중 오류 (${filePath}): ${error.message}`);
     return {
       path: filePath,
       name: path.basename(filePath),

@@ -1,0 +1,142 @@
+{
+  "contractVersion": "v1",
+  "generatedAt": "2025-11-09T01:24:36.987Z",
+  "profiles": [
+    {
+      "name": "baseline",
+      "options": {},
+      "metrics": {
+        "cases": 29,
+        "records": 3922,
+        "episodes": 3179,
+        "hospitalsUnique": 180
+      },
+      "topGroups": [
+        {
+          "group": "digestive",
+          "count": 253
+        },
+        {
+          "group": "neurological",
+          "count": 70
+        },
+        {
+          "group": "endocrine",
+          "count": 48
+        },
+        {
+          "group": "respiratory",
+          "count": 43
+        },
+        {
+          "group": "cardiovascular",
+          "count": 43
+        },
+        {
+          "group": "orthopedic",
+          "count": 11
+        },
+        {
+          "group": "psychiatric",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "name": "merge_plus",
+      "options": {
+        "windowDays": 21,
+        "maxMergeGapDays": 10,
+        "minCorrelationScore": 0.6,
+        "userWeightConfig": {
+          "sameHospitalBoost": 0.2,
+          "treatmentContinuityBoost": 0.25
+        }
+      },
+      "metrics": {
+        "cases": 29,
+        "records": 3922,
+        "episodes": 3216,
+        "hospitalsUnique": 180
+      },
+      "topGroups": [
+        {
+          "group": "digestive",
+          "count": 381
+        },
+        {
+          "group": "neurological",
+          "count": 70
+        },
+        {
+          "group": "endocrine",
+          "count": 60
+        },
+        {
+          "group": "cardiovascular",
+          "count": 51
+        },
+        {
+          "group": "respiratory",
+          "count": 47
+        },
+        {
+          "group": "orthopedic",
+          "count": 13
+        },
+        {
+          "group": "psychiatric",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "name": "merge_aggressive",
+      "options": {
+        "windowDays": 28,
+        "maxMergeGapDays": 14,
+        "minCorrelationScore": 0.55,
+        "userWeightConfig": {
+          "sameHospitalBoost": 0.25,
+          "treatmentContinuityBoost": 0.3
+        }
+      },
+      "metrics": {
+        "cases": 29,
+        "records": 3922,
+        "episodes": 2815,
+        "hospitalsUnique": 180
+      },
+      "topGroups": [
+        {
+          "group": "digestive",
+          "count": 319
+        },
+        {
+          "group": "neurological",
+          "count": 65
+        },
+        {
+          "group": "endocrine",
+          "count": 53
+        },
+        {
+          "group": "cardiovascular",
+          "count": 43
+        },
+        {
+          "group": "respiratory",
+          "count": 38
+        },
+        {
+          "group": "orthopedic",
+          "count": 10
+        },
+        {
+          "group": "psychiatric",
+          "count": 6
+        }
+      ]
+    }
+  ]
+}

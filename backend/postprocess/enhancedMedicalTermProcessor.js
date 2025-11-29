@@ -221,6 +221,27 @@ class EnhancedMedicalTermProcessor {
       'HCV': 'Hepatitis C Virus'
     };
 
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const abbrDir = path.resolve(process.cwd(), '..', 'src', 'rag', 'abbr');
+      if (fs.existsSync(abbrDir)) {
+        const files = fs.readdirSync(abbrDir).filter((f) => f.endsWith('.json'));
+        for (const f of files) {
+          const p = path.join(abbrDir, f);
+          const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+          for (const entry of data) {
+            const ab = String(entry.abbr || '').trim();
+            const eng = String(entry.eng || entry.full || '').trim();
+            const kor = typeof entry.kor === 'string' ? entry.kor.trim() : null;
+            if (ab && eng && !this.medicalAbbreviations[ab]) this.medicalAbbreviations[ab] = eng;
+            if (eng && kor && !this.medicalTermMappings[eng]) this.medicalTermMappings[eng] = kor;
+            if (kor && eng && !this.koreanToEnglishMappings[kor]) this.koreanToEnglishMappings[kor] = eng;
+          }
+        }
+      }
+    } catch (_) {}
+
     // 손해사정 관련 제외 키워드 (보험사가 아닌 손해사정조사회사 구분)
     this.excludeInsuranceCompanyKeywords = [
       '손해사정', '사정조사', '조사회사', '사정회사', '손사', '해오름손해사정'

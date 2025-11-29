@@ -57,101 +57,62 @@ const formatLogLevel = (level) => {
 };
 
 /**
- * 서비스 로깅 객체
+ * logService: 함수+메서드 하이브리드 (레거시 및 신규 모두 지원)
+ * - 레거시: logService('Context', 'message', 'info'|'warn'|'error'|'debug', data)
+ * - 신규:   logService.info('message', data)
  */
-const logService = {
-  /**
-   * 정보 로그
-   * @param {string} message - 로그 메시지
-   * @param {Object} data - 추가 데이터
-   */
-  info: (message, data = null) => {
-    const timestamp = getTimestamp();
-    const levelStr = formatLogLevel('INFO');
-    
-    let logMessage = `${timestamp} ${levelStr} ${message}`;
-    
-    if (data) {
-      if (typeof data === 'object') {
-        logMessage += `\n${JSON.stringify(data, null, 2)}`;
-      } else {
-        logMessage += ` ${data}`;
-      }
-    }
-    
-    console.log(logMessage);
-    writeToFile(logMessage);
-  },
 
-  /**
-   * 경고 로그
-   * @param {string} message - 로그 메시지
-   * @param {Object} data - 추가 데이터
-   */
-  warn: (message, data = null) => {
-    const timestamp = getTimestamp();
-    const levelStr = formatLogLevel('WARN');
-    
-    let logMessage = `${timestamp} ${levelStr} ${message}`;
-    
-    if (data) {
-      if (typeof data === 'object') {
-        logMessage += `\n${JSON.stringify(data, null, 2)}`;
-      } else {
-        logMessage += ` ${data}`;
-      }
-    }
-    
-    console.warn(logMessage);
-    writeToFile(logMessage);
-  },
+const _write = (level, message, data = null) => {
+  const timestamp = getTimestamp();
+  const levelStr = formatLogLevel(level.toUpperCase());
 
-  /**
-   * 오류 로그
-   * @param {string} message - 로그 메시지
-   * @param {Object} data - 추가 데이터
-   */
-  error: (message, data = null) => {
-    const timestamp = getTimestamp();
-    const levelStr = formatLogLevel('ERROR');
-    
-    let logMessage = `${timestamp} ${levelStr} ${message}`;
-    
-    if (data) {
-      if (typeof data === 'object') {
-        logMessage += `\n${JSON.stringify(data, null, 2)}`;
-      } else {
-        logMessage += ` ${data}`;
-      }
-    }
-    
-    console.error(logMessage);
-    writeToFile(logMessage);
-  },
+  let logMessage = `${timestamp} ${levelStr} ${message}`;
 
-  /**
-   * 디버그 로그
-   * @param {string} message - 로그 메시지
-   * @param {Object} data - 추가 데이터
-   */
-  debug: (message, data = null) => {
-    const timestamp = getTimestamp();
-    const levelStr = formatLogLevel('DEBUG');
-    
-    let logMessage = `${timestamp} ${levelStr} ${message}`;
-    
-    if (data) {
-      if (typeof data === 'object') {
-        logMessage += `\n${JSON.stringify(data, null, 2)}`;
-      } else {
-        logMessage += ` ${data}`;
-      }
+  if (data) {
+    if (typeof data === 'object') {
+      logMessage += `\n${JSON.stringify(data, null, 2)}`;
+    } else {
+      logMessage += ` ${data}`;
     }
-    
-    console.log(logMessage);
-    writeToFile(logMessage);
   }
+
+  // 콘솔 출력 (팀 규칙에 따라 실제 배포에서는 구조화 로거로 교체 필요)
+  if (level === 'error') {
+    console.error(logMessage);
+  } else if (level === 'warn') {
+    console.warn(logMessage);
+  } else if (level === 'debug') {
+    console.debug(logMessage);
+  } else {
+    console.log(logMessage);
+  }
+
+  writeToFile(logMessage);
 };
+
+function logServiceLegacy(context, message, levelOrData = undefined, maybeData = undefined) {
+  let level = 'info';
+  let data = undefined;
+
+  // 3번째 인자가 문자열 레벨이면 레벨로, 아니면 데이터로 처리
+  if (typeof levelOrData === 'string' && ['info', 'warn', 'error', 'debug'].includes(levelOrData)) {
+    level = levelOrData;
+    data = maybeData;
+  } else if (typeof levelOrData !== 'undefined') {
+    // 3번째 인자가 데이터인 경우
+    data = levelOrData;
+  }
+
+  const finalMessage = context ? `[${context}] ${String(message ?? '')}` : String(message ?? '');
+  _write(level, finalMessage, data);
+}
+
+const logService = Object.assign(logServiceLegacy, {
+  info: (message, data = null) => _write('info', message, data),
+  warn: (message, data = null) => _write('warn', message, data),
+  error: (message, data = null) => _write('error', message, data),
+  debug: (message, data = null) => _write('debug', message, data),
+});
 
 /**
  * OCR 처리 시작 로깅

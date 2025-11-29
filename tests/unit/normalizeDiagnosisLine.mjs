@@ -46,3 +46,33 @@ function assertEqual(actual, expected, message) {
 
 console.log('\nAll normalizeDiagnosisLine unit tests passed.');
 
+// 6) Multiple consecutive parentheses merged and nested duplicates removed
+{
+  const input = '협심증(angina pectoris)(angina pectoris) 및 당뇨병(diabetes mellitus)(diabetes mellitus)(Diabetes Mellitus (당뇨병(diabetes mellitus)(diabetes mellitus))) 진단';
+  const { normalizedText } = normalizeDiagnosisLines(input);
+  assertEqual(normalizedText, '협심증(angina pectoris) 및 당뇨병(Diabetes Mellitus) 진단', '연속 괄호 병기 병합 및 중첩 중복 제거');
+}
+
+// 7) ICD stray dot outside parentheses → inside with proper formatting
+{
+  const input = '안정형 협심증(Stable angina pectoris) ((ICD: I20).9 협심증, 상세불명(Angina pectoris, unspecified))';
+  const { normalizedText } = normalizeDiagnosisLines(input);
+  if (!/\(ICD: I20\.9\)/.test(normalizedText)) {
+    console.error('❌ ICD 괄호 외부 점표기 교정 실패', '\nActual  :', normalizedText);
+    process.exit(1);
+  } else {
+    console.log('✅ ICD 괄호 외부 점표기 교정');
+  }
+}
+
+// 8) ICD compact code without dot → insert dot between segments
+{
+  const input = '당뇨병(Diabetes Mellitus) type 2 with dyslipidemia((ICD: E11).68 제2형 당뇨병)';
+  const { normalizedText } = normalizeDiagnosisLines(input);
+  if (!/\(ICD: E11\.68\)/.test(normalizedText)) {
+    console.error('❌ ICD 점 삽입 교정 실패', '\nActual  :', normalizedText);
+    process.exit(1);
+  } else {
+    console.log('✅ ICD 점 삽입 교정');
+  }
+}

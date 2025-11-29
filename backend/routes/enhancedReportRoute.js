@@ -11,6 +11,7 @@ import MedicalDocumentNormalizer from '../postprocess/medicalDocumentNormalizer.
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.cjs');
+const EnhancedReportTemplateEngine = require('../postprocess/enhancedReportTemplateEngine.cjs');
 import InsuranceValidationService from '../services/insuranceValidationService.js';
 import MedicalTermTranslationService from '../services/medicalTermTranslationService.js';
 import MedicalVisitAnalysisService from '../services/medicalVisitAnalysisService.js';
@@ -387,10 +388,63 @@ router.post('/export-report', async (req, res) => {
                     break;
                     
                 case 'html':
-                    // HTML 형식으로 변환 (간단한 템플릿)
-                    exportData = generateHTMLReport(reportData);
-                    contentType = 'text/html';
-                    filename = `enhanced_report_${jobId}.html`;
+                    // 고급 템플릿 엔진으로 HTML 생성
+                    try {
+                        const engine = new EnhancedReportTemplateEngine();
+
+                        // 정규화된 구조화 데이터 매핑
+                        const structured = reportData.normalizedReport?.normalizedReport || {};
+
+                        const firstInsurance = Array.isArray(structured.insuranceConditions) ? structured.insuranceConditions[0] : null;
+
+                        const normalizedData = {
+                            patientInfo: structured.header ? {
+                                name: structured.header.patientName,
+                                birthDate: structured.header.birthDate,
+                                gender: reportData.normalizedReport?.patientInfo?.gender || undefined,
+                                address: undefined,
+                                phone: undefined
+                            } : (reportData.normalizedReport?.patientInfo || {}),
+                            insuranceInfo: {
+                                contractDate: firstInsurance?.joinDate || reportData.normalizedReport?.insuranceInfo?.joinDate || null,
+                                productName: firstInsurance?.productName || reportData.normalizedReport?.insuranceInfo?.productName || null,
+                                insurer: firstInsurance?.company || reportData.normalizedReport?.insuranceInfo?.company || null,
+                                productType: reportData.normalizedReport?.insuranceInfo?.productType || '3.2.5'
+                            },
+                            medicalRecords: Array.isArray(structured.medicalRecords) ? structured.medicalRecords.map(r => ({
+                                date: r.visitDate || r.date || null,
+                                hospital: r.hospital,
+                                diagnosis: Array.isArray(r.diagnosis) ? r.diagnosis.join(', ') : r.diagnosis,
+                                treatment: r.prescription, // 처방을 치료로 근사 매핑
+                                testResults: undefined
+                            })) : []
+                        };
+
+                        const { fullReport } = await engine.generateEnhancedReport(normalizedData, {
+                            format: 'html',
+                            includeDisclosureReview: true,
+                            includeSummary: true,
+                            processTerms: true
+                        });
+
+                        exportData = fullReport;
+                        contentType = 'text/html';
+                        filename = `enhanced_report_${jobId}.html`;
+
+                        // 프리뷰용 정적 파일로도 저장 (reports/ 디렉토리)
+                        const reportsDir = path.resolve(__dirname, '../../reports');
+                        try {
+                            const previewFile = path.join(reportsDir, `enhanced_report_${jobId}.html`);
+                            fs.writeFileSync(previewFile, exportData);
+                        } catch (e) {
+                            console.warn('[HTML 저장] 프리뷰 파일 저장 실패:', e.message);
+                        }
+                    } catch (e) {
+                        console.warn('[고급 템플릿] HTML 생성 실패, 기본 템플릿으로 폴백:', e.message);
+                        exportData = generateHTMLReport(reportData);
+                        contentType = 'text/html';
+                        filename = `enhanced_report_${jobId}.html`;
+                    }
                     break;
                     
                 default:

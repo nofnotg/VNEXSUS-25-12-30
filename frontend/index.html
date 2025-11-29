@@ -623,6 +623,20 @@
   </div>
 
   <div class="container mt-3">
+    <!-- 빠른 링크 -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header bg-light">
+            <h5 class="card-title mb-0">빠른 링크</h5>
+          </div>
+          <div class="card-body">
+            <a href="/report-template-preview.html" class="btn btn-outline-primary me-2">Report Template Preview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 파일 업로드 섹션 -->
     <div class="row">
       <div class="col-12">
@@ -817,6 +831,7 @@
       <div class="section-content">
         <div class="controls">
           <button id="generateAIReportBtn" class="btn btn-primary">보고서 생성</button>
+          <button id="copyReportBtn" class="btn btn-outline-secondary ms-2" disabled>보고서복사</button>
           <div class="form-check form-switch ms-3">
             <input class="form-check-input" type="checkbox" id="auto-generate-toggle" checked>
             <label class="form-check-label" for="auto-generate-toggle">자동 생성</label>
@@ -875,11 +890,12 @@
               <option value="retained" class="dev-mode-option" style="display: none;">Retain 키워드 필터링 결과</option>
             </select>
           </div>
-          <div id="resultModalContent" class="result-container">
+          <div id="resultModalContent" class="result-container" tabindex="0">
             <div class="text-muted">결과가 여기에 표시됩니다.</div>
           </div>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="copyTextBtn">텍스트복사</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
         </div>
       </div>

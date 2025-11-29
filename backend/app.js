@@ -16,6 +16,7 @@ import coreEngineRoutes from './routes/coreEngineRoutes.js';
 import enhancedCoreRoutes from './routes/enhancedCoreRoutes.js';
 import devStudioRoutes from './routes/devStudioRoutes.js';
 import devStudioIntegratedRoutes from './routes/devStudioIntegratedRoutes.js';
+import devCaseManagerRoutes from './routes/devCaseManagerRoutes.js';
 import alpProcessingRoutes from './routes/alp-processing.js';
 import intelligenceRoutes from './routes/intelligenceRoutes.js';
 // Advanced Date API (legacy v1 routes with /analyze, /performance, etc.)
@@ -26,6 +27,7 @@ import hybridRoutes from './routes/hybridRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import ragRoutes from './routes/ragRoutes.js';
 import enhancedReportRoutes from './routes/enhancedReportRoute.js';
+import reportTemplateRoutes from './routes/reportTemplateRoutes.js';
 import * as visionService from './services/visionService.js';
 
 // PDF 테스트 비활성화 (pdf-parse 모듈의 테스트 코드가 특정 PDF 파일을 찾지 못하는 문제 해결)
@@ -196,6 +198,11 @@ app.use('/config', express.static(path.join(__dirname, '../src/config')));
 app.use('/reports', express.static(path.join(__dirname, '../temp/reports')));
 app.use('/reports', express.static(path.join(__dirname, './temp/reports')));
 
+// /reports 접근 시 인덱스로 리다이렉트(디렉토리 루트 접근 편의성 개선)
+app.get('/reports', (req, res) => {
+  res.redirect('/reports/index.html');
+});
+
 // API 라우트 설정 (전체 활성화)
 console.log('=== API 라우트 등록 시작 ===');
 app.use('/api/ocr', (req, res, next) => {
@@ -212,6 +219,7 @@ app.use('/api/core-engine', coreEngineRoutes);
 app.use('/api/enhanced-core', enhancedCoreRoutes);
 app.use('/api/dev/studio', devStudioRoutes);
 app.use('/api/dev/studio', devStudioIntegratedRoutes);
+app.use('/api/dev/studio', devCaseManagerRoutes);
 app.use('/api/alp-processing', alpProcessingRoutes);
 app.use('/api/intelligence', intelligenceRoutes);
 app.use('/api/advanced-date', advancedDateRoutes);
@@ -221,6 +229,7 @@ app.use('/api/hybrid', hybridRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/rag', ragRoutes);
 app.use('/api/enhanced-report', enhancedReportRoutes);
+app.use('/api/report-template', reportTemplateRoutes);
 app.use('/api', router);
 
 // API 상태 확인 라우트 추가
@@ -327,3 +336,16 @@ process.on('uncaughtException', (err) => {
 });
 
 export default app;
+const devCaseApp = express();
+const DEV_CASE_PORT = process.env.DEV_CASE_PORT || 8088;
+devCaseApp.use(express.json({ limit: '50mb' }));
+devCaseApp.use(express.urlencoded({ extended: true, limit: '50mb' }));
+devCaseApp.use('/api/dev/studio', devCaseManagerRoutes);
+devCaseApp.use(express.static(path.join(__dirname, '../frontend'), { index: false }));
+devCaseApp.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dev-case-manager.html'));
+});
+devCaseApp.listen(DEV_CASE_PORT, () => {
+  console.log(`Dev Case Manager 서버가 포트 ${DEV_CASE_PORT}에서 실행 중입니다.`);
+  console.log(`http://localhost:${DEV_CASE_PORT}`);
+});

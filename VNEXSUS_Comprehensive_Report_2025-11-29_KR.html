@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 종합 시스템 리포트</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f6f9;
+        }
+
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 2px solid var(--light-bg);
+            padding: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-good {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .timeline {
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -27px;
+            top: 5px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+        }
+
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h3>VNEXSUS</h3>
+            <p class="small text-muted">시스템 리포트</p>
+        </div>
+        <a href="#overview" class="active"><i class="fas fa-home me-2"></i> 개요</a>
+        <a href="#architecture"><i class="fas fa-sitemap me-2"></i> 아키텍처</a>
+        <a href="#modules"><i class="fas fa-cubes me-2"></i> 모듈</a>
+        <a href="#pipelines"><i class="fas fa-stream me-2"></i> 파이프라인</a>
+        <a href="#gap-analysis"><i class="fas fa-clipboard-check me-2"></i> 현황 분석</a>
+        <a href="#roadmap"><i class="fas fa-road me-2"></i> 로드맵</a>
+    </div>
+
+    <div class="content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="fw-bold">종합 시스템 분석 리포트</h1>
+                <p class="text-muted">생성일: 2025년 11월 29일</p>
+            </div>
+            <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print me-2"></i> 리포트 인쇄</button>
+        </div>
+
+        <!-- Executive Summary -->
+        <section id="overview" class="mb-5">
+            <div class="card">
+                <div class="card-header"><i class="fas fa-info-circle me-2"></i> 경영 요약 (Executive Summary)</div>
+                <div class="card-body">
+                    <p class="lead">VNEXSUS는 의료 기록을 분석하여 고지의무 위반 여부를 판단하고, 전문적인 손해사정 보고서를 자동으로 생성하는 AI 기반 자동화 시스템입니다.
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-primary">95%</h3>
+                            <p class="text-muted">목표 정확도</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-success">30초</h3>
+                            <p class="text-muted">평균 처리 시간</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-info">1,200+</h3>
+                            <p class="text-muted">코드베이스 파일 수</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-warning">Phase 2</h3>
+                            <p class="text-muted">현재 단계</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section id="architecture" class="mb-5">
+            <h2 class="mb-4">시스템 아키텍처</h2>
+            <div class="card">
+                <div class="card-header">고수준 아키텍처 다이어그램</div>
+                <div class="card-body">
+                    <div class="mermaid">
+                        graph TD
+                        User[사용자 / 손해사정사] -->|PDF/이미지 업로드| Frontend[프론트엔드 웹 앱]
+                        Frontend -->|REST API| Backend[Node.js 백엔드 서버]
+
+                        subgraph "핵심 처리 엔진"
+                        Backend -->|OCR 요청| GoogleVision[Google Cloud Vision API]
+                        GoogleVision -->|원시 텍스트| Backend
+                        Backend -->|텍스트 분석| DNAEngine[DNA 시퀀싱 엔진]
+                        DNAEngine -->|맥락 분석| GPT4[OpenAI GPT-4]
+                        DNAEngine -->|심층 분석| Claude[Claude 3.5 Sonnet]
+                        end
+
+                        subgraph "자동화 및 출력"
+                        Backend -->|JSON 데이터| Make[Make.com 웹훅]
+                        Make -->|문서 생성| GoogleDocs[Google Docs]
+                        Make -->|파일 저장| GoogleDrive[Google Drive]
+                        end
+
+                        Make -->|최종 리포트 URL| Backend
+                        Backend -->|리포트 표시| Frontend
+                    </div>
+                    <div class="mt-4">
+                        <h5>주요 구성 요소</h5>
+                        <ul>
+                            <li><strong>프론트엔드</strong>: Vanilla JS + Bootstrap 5. 파일 업로드 및 리포트 조회를 위한 경량화된 반응형 UI.</li>
+                            <li><strong>백엔드</strong>: Node.js + Express. API 요청 처리, 파일 처리, AI 서비스 조율 담당.</li>
+                            <li><strong>DNA 엔진</strong>: 의료 텍스트를 구조화된 데이터(날짜, 진단명, 치료내역)로 "시퀀싱"하는 자체 로직.</li>
+                            <li><strong>AI 레이어</strong>: 일반적인 추론을 위한 GPT-4와 심층 맥락 분석을 위한 Claude 3.5 Sonnet을 결합한 하이브리드
+                                방식.</li>
+                            <li><strong>자동화</strong>: Make.com을 연동하여 완성도 높은 Google Docs/PDF 리포트 생성.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Analysis -->
+        <section id="modules" class="mb-5">
+            <h2 class="mb-4">모듈 분석</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">프론트엔드 모듈</div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>컴포넌트</th>
+                                        <th>기술</th>
+                                        <th>상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>대시보드</td>
+                                        <td>HTML/JS</td>
+                                        <td><span class="status-badge status-good">활성</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>업로드 인터페이스</td>
+                                        <td>Dropzone.js</td>
+                                        <td><span class="status-badge status-good">활성</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>리포트 뷰어</td>
+                                        <td>Custom JS</td>
+                                        <td><span class="status-badge status-good">활성</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>개발 스튜디오</td>
+                                        <td>React (Vite)</td>
+                                        <td><span class="status-badge status-warning">진행 중</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">백엔드 모듈</div>
+                        <div class="card-body">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>컴포넌트</th>
+                                        <th>기술</th>
+                                        <th>상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>API 서버</td>
+                                        <td>Express.js</td>
+                                        <td><span class="status-badge status-good">안정</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>OCR 서비스</td>
+                                        <td>Google Vision</td>
+                                        <td><span class="status-badge status-good">안정</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>DNA 시퀀서</td>
+                                        <td>자체 로직</td>
+                                        <td><span class="status-badge status-good">안정</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>리포트 엔진</td>
+                                        <td>Node.js</td>
+                                        <td><span class="status-badge status-good">안정</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pipelines -->
+        <section id="pipelines" class="mb-5">
+            <h2 class="mb-4">데이터 파이프라인</h2>
+            <div class="card">
+                <div class="card-header">의료 기록 분석 파이프라인</div>
+                <div class="card-body">
+                    <div class="mermaid">
+                        sequenceDiagram
+                        participant Doc as 문서
+                        participant OCR as OCR 엔진
+                        participant Pre as 전처리기
+                        participant DNA as DNA 시퀀서
+                        participant AI as AI 모델
+                        participant Rep as 리포트 생성기
+
+                        Doc->>OCR: 1. 텍스트 추출
+                        OCR->>Pre: 2. 원시 텍스트
+                        Pre->>Pre: 3. 정규화 및 정제
+                        Pre->>DNA: 4. 구조화된 텍스트
+                        DNA->>DNA: 5. 날짜 및 이벤트 식별
+                        DNA->>AI: 6. 맥락 및 인과관계 분석
+                        AI->>DNA: 7. 보강된 데이터
+                        DNA->>Rep: 8. 최종 구조화 데이터
+                        Rep->>Rep: 9. HTML/Excel/PDF 생성
+                    </div>
+                    <div class="alert alert-info mt-3">
+                        <strong>파이프라인 로직:</strong> 핵심 혁신은 비정형 의료 텍스트를 "유전자(최소 단위 사실)"로 분해한 뒤 타임라인으로 재조립하는 "DNA 시퀀싱" 단계에
+                        있습니다.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gap Analysis -->
+        <section id="gap-analysis" class="mb-5">
+            <h2 class="mb-4">현황 및 갭 분석</h2>
+            <div class="card">
+                <div class="card-header">계획 vs 실제</div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>기능 / 요구사항</th>
+                                <th>상태</th>
+                                <th>이슈 / 갭</th>
+                                <th>심각도</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>핵심 DNA 시퀀싱</td>
+                                <td><span class="status-badge status-good">구현됨</span></td>
+                                <td>복잡한 날짜 처리의 정확도 이슈</td>
+                                <td>낮음</td>
+                            </tr>
+                            <tr>
+                                <td>하이브리드 AI (GPT+Claude)</td>
+                                <td><span class="status-badge status-good">구현됨</span></td>
+                                <td>비용 최적화 필요</td>
+                                <td>중간</td>
+                            </tr>
+                            <tr>
+                                <td>자동화 테스트</td>
+                                <td><span class="status-badge status-danger">실패</span></td>
+                                <td>Jest 설정 문제 (ESM/CJS 충돌)</td>
+                                <td>높음</td>
+                            </tr>
+                            <tr>
+                                <td>보안</td>
+                                <td><span class="status-badge status-warning">부분적</span></td>
+                                <td>일부 테스트 코드 내 API 키 하드코딩, npm audit 이슈</td>
+                                <td>높음</td>
+                            </tr>
+                            <tr>
+                                <td>프론트엔드 현대화</td>
+                                <td><span class="status-badge status-warning">진행 중</span></td>
+                                <td>React 마이그레이션 시작되었으나 통합 미완료</td>
+                                <td>중간</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section id="roadmap" class="mb-5">
+            <h2 class="mb-4">향후 로드맵</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h5>Phase 1: 핵심 기반 구축 (완료)</h5>
+                    <p>기본 OCR, DNA 시퀀싱 로직, 단순 리포트 생성 기능 구현.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Phase 2: AI 최적화 (현재)</h5>
+                    <p>하이브리드 AI 게이팅 구현, 정확도 90% 달성, 지연 시간 단축.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Phase 3: 품질 및 확장 (예정)</h5>
+                    <p>테스트 스위트 복구, CI/CD 구축, 보안 강화, React 전면 마이그레이션.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>Phase 4: 엔터프라이즈 기능 (미래)</h5>
+                    <p>다중 사용자 지원, 역할 기반 접근 제어(RBAC), 고급 분석 대시보드.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+</body>
+
+</html>

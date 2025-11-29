@@ -124,7 +124,7 @@ export async function processPdf(pdfInput, options = {}) {
       result.isScannedPdf = isScannedPdf;
     } catch (pdfError) {
       // pdf-parse 에러 발생 - 특정 에러 유형 확인
-      logService('pdfProcessor', `PDF 파싱 실패: ${pdfError.message}`, 'error');
+      logService.error(`[pdfProcessor] PDF 파싱 실패: ${pdfError.message}`);
       
       result.steps.push({
         step: 'pdf_parse',
@@ -207,7 +207,7 @@ export async function processPdf(pdfInput, options = {}) {
           
           // Vision 실패 시 Textract 시도
           if (useTextract) {
-            logService('pdfProcessor', `Vision OCR 실패, Textract 시도: ${visionError.message}`, 'warn');
+            logService.warn(`[pdfProcessor] Vision OCR 실패, Textract 시도: ${visionError.message}`);
           }
         }
       }
@@ -266,7 +266,7 @@ export async function processPdf(pdfInput, options = {}) {
     const endTime = new Date();
     const totalTime = (endTime - startTime) / 1000;
     
-    logService('pdfProcessor', `PDF 처리 실패: ${error.message}`, 'error');
+    logService.error(`[pdfProcessor] PDF 처리 실패: ${error.message}`);
     
     result.success = false;
     result.endTime = endTime.toISOString();

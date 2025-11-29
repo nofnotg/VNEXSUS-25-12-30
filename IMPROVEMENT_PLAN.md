@@ -225,3 +225,75 @@ const enhancedResult = await processor.processDateBlocksEnhanced(textArray);
    - 연관성 분석 결과 검증 체계 구축
 
 이러한 개선사항들을 통해 VNEXSUS 시스템의 의료 데이터 처리 정확도와 사용자 경험을 크게 향상시킬 수 있을 것으로 예상됩니다.
+
+---
+
+## ✅ 검증 기준(Verification Criteria)
+
+- 기능 정상 동작
+  - `POST /api/generate-report` 응답 `200 OK`이며 `pipeline` 값이 `Enhanced DNA Sequencing + Timeline Analysis`로 표시된다.
+  - 옵션 미지정 시 프록시가 `enableTranslationEnhancement=true`, `enableTermProcessing=true`, `skipLLM=false`를 반영한다.
+  - `useNineItem`은 기본 `false`이며, `true`로 전달 시 9항목 보고서 경로로 전환된다.
+- 출력 품질
+  - 진단 라인에 한/영 병기 표기가 적용되고 중복 용어가 제거된다.
+  - ICD 코드가 존재할 경우 표준 포맷 `(ICD: <CODE>)`으로 표기된다.
+  - 트렁크(핵심) 이벤트가 타임라인 상에서 명확히 식별 및 요약된다.
+- 회귀 테스트
+  - 기존 버튼(보고서 생성, OCR, Preprocess/Postprocess, RAG Studio)이 모두 정상 동작한다.
+  - API 스모크 테스트에서 `/api/status`, `/api/ocr/process-text`, `/api/postprocess`, `/api/dev/studio/preprocess-text`가 `2xx`로 응답한다.
+- 로깅/보안
+  - 구조화 로깅에 PII/PHI는 마스킹되어 기록된다(`shared/security/mask.ts`).
+  - `console.*` 사용 없음. 팀 로거(`shared/logging/logger.ts`)만 사용.
+
+---
+
+## 🔗 의존성 매핑(Dependency Mapping)
+
+- 프론트엔드
+  - `frontend/routes/api/generate-report` → 백엔드 프록시로 옵션 전달
+  - 버튼/파이프라인 트리거: Report 생성, 9항목 토글
+- 백엔드 라우트
+  - `backend/routes/apiRoutes.js` → 프록시 옵션 주입(`enableTranslationEnhancement`, `enableTermProcessing`, `skipLLM`, `useNineItem`)
+  - `backend/routes/dnaReportRoutes.js` → DNA 보고서 생성 진입점
+- 서비스/유틸
+  - `services/MedicalTermTranslationService` → 용어 번역/병기, 캐시
+  - `shared/utils/report/normalizeDiagnosisLine.ts`(신규 예정) → 병기/중복 제거/ICD 표기 규칙 적용
+  - `shared/constants/medical.ts` → ICD/민감용어, 포맷 규칙
+- 테스트
+  - `scripts/debug-dna.js` → 라우트 단독 통합 테스트
+  - `tests/integration/dna-report.generate.test.js` → Jest 통합(ESM 설정 필요)
+- 로깅/보안
+  - `shared/logging/logger.ts` → 구조화 로깅
+  - `shared/security/mask.ts` → 마스킹 규칙
+
+---
+
+## 🔄 단계별 적용 계획(작은 단위)
+
+1) 진단 라인 정규화 유틸 추가 및 라우트 후처리에 적용
+- 대상: `normalizeDiagnosisLine.ts`(shared/utils) + 라우트 적용 레이어
+- 테스트: 유닛(Vitest) 8케이스, 라우트 통합 2케이스
+- 수용 기준: 한/영 병기, 중복 제거, 괄호 규칙, ICD 표기 일관
+
+2) 트렁크 이벤트 요약 블록 추가(메타 섹션)
+- 대상: 보고서 본문 상단에 `Trunk Summary` 블록 삽입
+- 테스트: 핵심 이벤트 3종(심혈관, 내분비, 외상) 케이스
+
+3) 9항목 보고 경로 스냅샷 테스트 추가
+- 대상: `useNineItem=true` 분기 검증
+- 테스트: 스냅샷/스키마 계약(Zod)
+
+---
+
+## 🧪 테스트 전략(최소 영향 원칙)
+
+- 우선 순위: 변경된 경로부터 스모크 → 유닛 → 통합 순
+- ESM(Jest) 설정 이슈 시, 라우트 단독 테스트 스크립트로 회귀 확인 후 Jest 설정 개선을 별도 PR에서 처리
+- 성능: 정규화 유틸은 O(n) 문자열 후처리로 핫 경로 영향 최소. 필요 시 캐시 적용.
+
+---
+
+## 📜 롤백/백업
+
+- 백업: `C:\VNEXSUS_Bin\backups\YYYYMMDD-HHMMSS\` 스냅샷 유지
+- 버전: `chore: baseline snapshot before report normalization plan` 커밋 기준으로 롤백 가능

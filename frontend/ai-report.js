@@ -15,6 +15,7 @@ const aiReportContent = document.getElementById('ai-report-content');
 const extractedTextDisplay = document.getElementById('extracted-text-display');
 const autoGenerateToggle = document.getElementById('auto-generate-toggle');
 const devModeToggle = document.getElementById('dev-mode-toggle');
+const copyReportBtn = document.getElementById('copyReportBtn');
 
 // 전역 변수
 let currentSessionId = null;
@@ -35,6 +36,10 @@ function initAIReport() {
   // 버튼 이벤트 핸들러
   if (generateAIReportBtn) {
     generateAIReportBtn.addEventListener('click', generateAIReport);
+  }
+  if (copyReportBtn) {
+    copyReportBtn.addEventListener('click', copyReportContent);
+    copyReportBtn.disabled = true;
   }
   
   // 메시지가 있을 때 UI 표시
@@ -246,6 +251,17 @@ async function generateAIReport() {
       
       // 보고서 내용 표시
       aiReportContent.innerHTML = markdownToHtml(result.report);
+      if (copyReportBtn) copyReportBtn.disabled = false;
+      var rb = document.getElementById('reportProgressBar');
+      var rp = document.getElementById('reportProgressPercentage');
+      var rs = document.getElementById('reportProgressStatus');
+      if (rb && rp && rs) {
+        rb.style.width = '100%';
+        rb.setAttribute('aria-valuenow', 100);
+        rp.textContent = '100%';
+        rs.textContent = '완료';
+        rs.className = 'progress-status text-center completed';
+      }
       
       // 세션 ID 저장
       currentSessionId = result.sessionId;
@@ -269,6 +285,17 @@ async function generateAIReport() {
       // 오류 메시지 표시
       aiReportContent.innerHTML = `<div class="alert alert-danger">보고서 생성 중 오류가 발생했습니다: ${result.error || '알 수 없는 오류'}</div>`;
       aiReportSection.classList.remove('d-none');
+      if (copyReportBtn) copyReportBtn.disabled = true;
+      var rb2 = document.getElementById('reportProgressBar');
+      var rp2 = document.getElementById('reportProgressPercentage');
+      var rs2 = document.getElementById('reportProgressStatus');
+      if (rb2 && rp2 && rs2) {
+        rb2.style.width = '0%';
+        rb2.setAttribute('aria-valuenow', 0);
+        rp2.textContent = '0%';
+        rs2.textContent = '오류';
+        rs2.className = 'progress-status text-center error';
+      }
     }
   } catch (error) {
     console.error('AI 보고서 생성 오류:', error);
@@ -276,7 +303,47 @@ async function generateAIReport() {
     generateAIReportBtn.disabled = false;
     aiReportContent.innerHTML = `<div class="alert alert-danger">보고서 생성 중 오류가 발생했습니다: ${error.message}</div>`;
     aiReportSection.classList.remove('d-none');
+    if (copyReportBtn) copyReportBtn.disabled = true;
+    var rb3 = document.getElementById('reportProgressBar');
+    var rp3 = document.getElementById('reportProgressPercentage');
+    var rs3 = document.getElementById('reportProgressStatus');
+    if (rb3 && rp3 && rs3) {
+      rb3.style.width = '0%';
+      rb3.setAttribute('aria-valuenow', 0);
+      rp3.textContent = '0%';
+      rs3.textContent = '오류';
+      rs3.className = 'progress-status text-center error';
+    }
   }
+}
+
+function copyReportContent() {
+  const container = document.querySelector('.medical-report-container') || aiReportContent;
+  if (!container) return;
+  const text = container.innerText || '';
+  try {
+    navigator.clipboard.writeText(text).then(() => {
+      if (copyReportBtn) {
+        const orig = copyReportBtn.textContent;
+        copyReportBtn.textContent = '복사됨';
+        copyReportBtn.disabled = true;
+        setTimeout(() => { copyReportBtn.textContent = orig; copyReportBtn.disabled = false; }, 1200);
+      }
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+      if (copyReportBtn) {
+        const orig = copyReportBtn.textContent;
+        copyReportBtn.textContent = '복사됨';
+        copyReportBtn.disabled = true;
+        setTimeout(() => { copyReportBtn.textContent = orig; copyReportBtn.disabled = false; }, 1200);
+      }
+    });
+  } catch (_) {}
 }
 
 

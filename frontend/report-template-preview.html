@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report Template Preview</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    header { border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 15px; }
+    .controls { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+    .viewer { border: 1px solid #ddd; padding: 12px; min-height: 300px; }
+    pre { white-space: pre-wrap; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .card { border: 1px solid #ddd; border-radius: 6px; padding: 10px; background: #fafafa; }
+    .card-title { font-weight: bold; margin-bottom: 6px; }
+    .kv { display: flex; justify-content: space-between; font-size: 0.95em; }
+    .muted { color: #666; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Report Template Preview</h1>
+    <p>엔진 기본 템플릿을 API로 호출해 미리보기합니다.</p>
+  </header>
+
+  <div class="controls">
+    <label>
+      Locale:
+      <select id="locale">
+        <option value="ko">ko</option>
+        <option value="en">en</option>
+      </select>
+    </label>
+    <label>
+      Format:
+      <select id="format">
+        <option value="html">html</option>
+        <option value="text">text</option>
+        <option value="json">json</option>
+        <option value="markdown">markdown</option>
+      </select>
+    </label>
+    <button id="loadBtn">Load Preview</button>
+  </div>
+
+  <div id="viewer" class="viewer"></div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const viewer = $('viewer');
+    const localeSel = $('locale');
+    const formatSel = $('format');
+    const btn = $('loadBtn');
+
+    async function loadPreview() {
+      const locale = localeSel.value;
+      const format = formatSel.value;
+      const url = `/api/report-template/basic?locale=${encodeURIComponent(locale)}&format=${encodeURIComponent(format)}`;
+      viewer.innerHTML = 'Loading...';
+      try {
+        const res = await fetch(url);
+        const ct = res.headers.get('content-type') || '';
+        if (!res.ok) {
+          const errText = await res.text();
+          viewer.textContent = `Error ${res.status}: ${errText}`;
+          return;
+        }
+        if (ct.includes('application/json')) {
+          const obj = await res.json();
+          viewer.innerHTML = `<pre>${JSON.stringify(obj, null, 2)}</pre>`;
+        } else {
+          const text = await res.text();
+          if (format === 'html') {
+            viewer.innerHTML = text;
+          } else {
+            viewer.innerHTML = `<pre>${text}</pre>`;
+          }
+        }
+      } catch (e) {
+        viewer.textContent = String(e?.message || e);
+      }
+    }
+
+    btn.addEventListener('click', loadPreview);
+    // initial load
+    loadPreview();
+
+    // --- Summary Contract Section ---
+  </script>
+
+  <hr style="margin:20px 0;" />
+  <section>
+    <h2>Summary Contract</h2>
+    <div class="controls">
+      <label>
+        Input file path:
+        <input id="summaryInput" type="text" placeholder="results/outpatient-episodes-case-comparison.json" style="min-width:360px;" />
+      </label>
+      <button id="summaryBtn">Load Summary</button>
+      <span id="summaryStatus" class="status" style="margin-left:8px;color:#555;"></span>
+    </div>
+    <div id="summaryViewer" class="viewer"></div>
+    <div id="summaryCards" class="card-grid" style="margin-top:12px;"></div>
+  </section>
+
+  <script>
+    const summaryInput = $('summaryInput');
+    const summaryBtn = $('summaryBtn');
+    const summaryViewer = $('summaryViewer');
+    const summaryStatus = $('summaryStatus');
+    const summaryCards = $('summaryCards');
+
+    function renderSummaryCards(data) {
+      if (!data || typeof data !== 'object') {
+        summaryCards.innerHTML = '';
+        return;
+      }
+
+      const cards = [];
+
+      // Contract info card
+      const contractVersion = data.contractVersion ?? 'N/A';
+      const generatedAt = data.generatedAt ?? 'N/A';
+      cards.push(`
+        <div class="card">
+          <div class="card-title">Contract Info</div>
+          <div class="kv"><span>Version</span><span class="muted">${contractVersion}</span></div>
+          <div class="kv"><span>Generated At</span><span class="muted">${generatedAt}</span></div>
+        </div>
+      `);
+
+      // Profiles metrics cards
+      const profiles = Array.isArray(data.profiles) ? data.profiles : [];
+      profiles.forEach((p, idx) => {
+        const title = p?.name ? `Profile: ${p.name}` : `Profile #${idx + 1}`;
+        const metrics = p && typeof p.metrics === 'object' ? p.metrics : null;
+        let metricsHtml = '<div class="muted">No metrics</div>';
+        if (metrics && Object.keys(metrics).length > 0) {
+          metricsHtml = Object.entries(metrics)
+            .map(([k, v]) => `<div class="kv"><span>${k}</span><span class="muted">${String(v)}</span></div>`)
+            .join('');
+        }
+
+        // Disease validation metrics
+        const dv = p && typeof p.diseaseValidation === 'object' ? p.diseaseValidation : null;
+        let dvHtml = '';
+        if (dv && (Object.prototype.hasOwnProperty.call(dv, 'anchors') || Object.prototype.hasOwnProperty.call(dv, 'testsWithinTimeframe'))) {
+          dvHtml = `
+            <div class="card" style="margin-top:8px;">
+              <div class="card-title">Disease Validation</div>
+              ${Object.entries(dv)
+                .map(([k, v]) => `<div class="kv"><span>${k}</span><span class="muted">${String(v)}</span></div>`)
+                .join('')}
+            </div>
+          `;
+        }
+
+        // Top diagnostic groups
+        const topGroups = Array.isArray(p?.topGroups) ? p.topGroups : [];
+        let groupsHtml = '';
+        if (topGroups.length > 0) {
+          const rows = topGroups
+            .map((g) => `<div class="kv"><span>${g.group}</span><span class="muted">${String(g.count)}</span></div>`)
+            .join('');
+          groupsHtml = `
+            <div class="card" style="margin-top:8px;">
+              <div class="card-title">Top Groups</div>
+              ${rows}
+            </div>
+          `;
+        }
+        cards.push(`
+          <div class="card">
+            <div class="card-title">${title}</div>
+            ${metricsHtml}
+          </div>
+          ${dvHtml}
+          ${groupsHtml}
+        `);
+      });
+
+      summaryCards.innerHTML = cards.join('');
+    }
+
+    async function loadSummary() {
+      const inputPath = (summaryInput.value || '').trim();
+      const param = inputPath ? `?input=${encodeURIComponent(inputPath)}` : '';
+      const url = `/api/report-template/summary${param}`;
+      summaryStatus.textContent = 'Loading...';
+      summaryViewer.innerHTML = '';
+      try {
+        const res = await fetch(url);
+        const ct = res.headers.get('content-type') || '';
+        const isJson = ct.includes('application/json');
+        const data = isJson ? await res.json() : await res.text();
+        if (!res.ok || (isJson && data && data.success === false)) {
+          summaryStatus.textContent = `Error ${res.status}`;
+          summaryViewer.innerHTML = `<pre>${isJson ? JSON.stringify(data, null, 2) : String(data)}</pre>`;
+          renderSummaryCards(null);
+          return;
+        }
+        summaryStatus.textContent = 'OK';
+        summaryViewer.innerHTML = `<pre>${isJson ? JSON.stringify(data, null, 2) : String(data)}</pre>`;
+        if (isJson) renderSummaryCards(data);
+      } catch (e) {
+        summaryStatus.textContent = 'Network error';
+        summaryViewer.innerHTML = `<pre>${String(e && e.message ? e.message : e)}</pre>`;
+        renderSummaryCards(null);
+      }
+    }
+
+    summaryBtn.addEventListener('click', loadSummary);
+  </script>
+</body>
+</html>

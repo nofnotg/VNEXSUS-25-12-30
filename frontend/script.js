@@ -69,7 +69,7 @@ function debugLog(message) {
 
 // 설정
 const BASE_URL = window.location.origin; // "http://localhost:5174"
-const OCR_API_URL = 'http://localhost:3030/api/ocr'; // 포트 3030으로 수정
+const OCR_API_URL = 'http://localhost:3030/api/ocr';
 const API_URL = 'http://localhost:3030/api';
 const POSTPROCESS_API_URL = `${API_URL}/postprocess`;
 const MAX_FILES = 100;
@@ -388,6 +388,14 @@ function initializeEventListeners() {
   
   if (viewResultsBtn) {
     viewResultsBtn.addEventListener('click', showResultsModal);
+  }
+  const resultsModalEl = document.getElementById('resultsModal');
+  if (resultsModalEl) {
+    resultsModalEl.addEventListener('keydown', handleModalKeydown);
+  }
+  const copyTextBtn = document.getElementById('copyTextBtn');
+  if (copyTextBtn) {
+    copyTextBtn.addEventListener('click', copyResultText);
   }
   
   // 결과 타입 변경 이벤트
@@ -950,6 +958,11 @@ function updateReportProgress(percentage, statusText) {
     } else if (percentage === 100) {
       reportProgressStatus.classList.add('completed');
     }
+
+    const copyBtn = document.getElementById('copyReportBtn');
+    if (copyBtn) {
+      copyBtn.disabled = percentage !== 100;
+    }
   }
 }
 
@@ -1094,6 +1107,8 @@ function showResultsModal() {
   }
   
   resultsModal.show();
+  const contentEl = document.getElementById('resultModalContent');
+  if (contentEl) { contentEl.focus(); }
   console.log('결과 모달이 표시되었습니다');
 }
 
@@ -2123,7 +2138,7 @@ async function generateEnhancedReport(jobId, options = {}) {
         console.log(`[개선된 보고서] 생성 시작 - jobId: ${jobId}`);
         
         updateStatus('info', '개선된 보고서 생성 중...');
-        updateProgressBar(10, "AI 필터링 및 검증 중");
+        updateReportProgress(10, "AI 필터링 및 검증 중");
         
         const response = await fetch('/api/enhanced-report/generate-enhanced-report', {
             method: 'POST',
@@ -2141,7 +2156,7 @@ async function generateEnhancedReport(jobId, options = {}) {
             })
         });
         
-        updateProgressBar(50, "보고서 처리 중");
+        updateReportProgress(50, "보고서 처리 중");
         
         if (!response.ok) {
             const errorData = await response.json();
@@ -2151,14 +2166,14 @@ async function generateEnhancedReport(jobId, options = {}) {
         const data = await response.json();
         console.log('[개선된 보고서] 생성 완료:', data);
         
-        updateProgressBar(80, "렌더링 중");
+        updateReportProgress(80, "렌더링 중");
         
         if (data.success && data.data) {
             // 개선된 보고서 렌더링
             await renderEnhancedReport(data.data);
             
             updateStatus('success', '개선된 보고서 생성 완료!');
-            updateProgressBar(100, "완료");
+            updateReportProgress(100, "완료");
             
             return data.data;
         } else {
@@ -2168,7 +2183,7 @@ async function generateEnhancedReport(jobId, options = {}) {
     } catch (error) {
         console.error('[개선된 보고서] 생성 오류:', error);
         updateStatus('danger', `개선된 보고서 생성 실패: ${error.message}`);
-        updateProgressBar(0, "오류");
+        updateReportProgress(0, "오류");
         throw error;
     }
 }
@@ -2600,5 +2615,47 @@ function getCurrentJobId() {
 window.VNEXSUSApp.initApp = initApp;
 window.VNEXSUSApp.showResultsModal = showResultsModal;
 window.VNEXSUSApp.getCurrentJobId = getCurrentJobId;
+
+function selectElementText(el) {
+  const selection = window.getSelection();
+  if (!selection) return;
+  selection.removeAllRanges();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  selection.addRange(range);
+}
+
+function handleModalKeydown(e) {
+  const isCtrlA = (e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A');
+  if (!isCtrlA) return;
+  const contentEl = document.getElementById('resultModalContent');
+  if (!contentEl) return;
+  selectElementText(contentEl);
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+async function copyResultText() {
+  const contentEl = document.getElementById('resultModalContent');
+  if (!contentEl) return;
+  const text = contentEl.innerText || '';
+  const btn = document.getElementById('copyTextBtn');
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (_) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (__) {}
+    document.body.removeChild(ta);
+  }
+  if (btn) {
+    const orig = btn.textContent;
+    btn.textContent = '복사됨';
+    btn.disabled = true;
+    setTimeout(function() { btn.textContent = orig; btn.disabled = false; }, 1200);
+  }
+}
 
 })(); // IIFE 종료

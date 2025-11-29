@@ -63,6 +63,8 @@ export class ProgressiveRAGSystem {
       // 기존 RAG 데이터 로드
       await this.loadExistingRAGData();
 
+      await this.loadKCDGuidelines();
+
       // 자동 저장 시작
       if (this.config.autoSave.enabled) {
         this.startAutoSave();
@@ -130,6 +132,63 @@ export class ProgressiveRAGSystem {
       console.log('✅ 기존 RAG 데이터 로드 완료');
     } catch (error) {
       console.error('❌ 기존 RAG 데이터 로드 오류:', error);
+    }
+  }
+
+  async loadKCDGuidelines() {
+    try {
+      const file = path.join(__dirname, 'raw', 'kcd-guidelines_2021.json');
+      if (!fs.existsSync(file)) return;
+      const raw = fs.readFileSync(file, 'utf8');
+      let parsed = null;
+      try {
+        parsed = JSON.parse(raw);
+      } catch (_) {
+        const fixed = `[${raw.replace(/}\s*\{/g, '},{')}]`;
+        try {
+          parsed = JSON.parse(fixed);
+        } catch (e) {
+          return;
+        }
+      }
+      const entries = [];
+      const collect = (obj, sectionKey = '') => {
+        if (!obj) return;
+        Object.entries(obj).forEach(([k, v]) => {
+          if (Array.isArray(v)) {
+            v.forEach((it) => {
+              const code = String(it.code || '').trim();
+              const title = String(it.title || '').trim();
+              const description = String(it.description || '').trim();
+              const text = `${code} ${title} ${description}`.trim();
+              if (text) {
+                entries.push({ text, section: sectionKey || k });
+              }
+            });
+          } else if (v && typeof v === 'object') {
+            collect(v, k);
+          }
+        });
+      };
+      if (Array.isArray(parsed)) {
+        parsed.forEach((p) => collect(p));
+      } else if (parsed && typeof parsed === 'object') {
+        collect(parsed);
+      }
+      if (entries.length > 0) {
+        await this.vectorizer.vectorizeMedicalTerms(
+          entries.map((e) => ({
+            text: e.text,
+            type: 'guideline',
+            category: 'kcd_guideline',
+            source: 'kcd_2021',
+            section: e.section,
+          }))
+        );
+        console.log(`📚 KCD 지침 벡터화 완료: ${entries.length}개`);
+      }
+    } catch (error) {
+      console.error('❌ KCD 지침 로드 오류:', error);
     }
   }
 
@@ -246,7 +305,15 @@ export class ProgressiveRAGSystem {
       categories: ['disease', 'icd', 'kcd']
     };
     
-    return await this.searchMedicalTerms(query, searchOptions);
+    const res = await this.searchMedicalTerms(query, searchOptions);
+    if (res && res.length > 0) return res;
+    const web = await this.webFallbackSearch(`ICD ${query}`, options.topK || 5);
+    if (web.length > 0) {
+      if (this.config.cache.enabled) {
+        this.setCachedSearch(query, web);
+      }
+    }
+    return web;
   }
 
   /**
@@ -301,6 +368,19 @@ export class ProgressiveRAGSystem {
         matches.forEach(match => terms.add(match.trim()));
       }
     });
+  }
+
+  async webFallbackSearch(query, limit = 5) {
+    try {
+      const url = `https://duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
+      const r = await fetch(url);
+      const h = await r.text();
+      const anchors = Array.from(h.matchAll(/<a[^>]+href="([^"]+)"[^>]*>(.*?)<\/a>/gi)).map((m) => ({ href: m[1], title: String(m[2]).replace(/<[^>]+>/g, '') }));
+      const items = anchors.filter((a) => a.title && a.href && !/duckduckgo\.com/.test(a.href)).slice(0, limit);
+      return items.map((it) => ({ text: `${it.title}`, score: 0.7, metadata: { source: 'web', href: it.href, query } }));
+    } catch (_) {
+      return [];
+    }
   }
 
   /**

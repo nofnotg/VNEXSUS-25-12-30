@@ -368,15 +368,37 @@ ${conclusiveOpinion}
         if (!items || !items.items || items.items.length === 0) {
             return '- 해당 정보 없음';
         }
-        
-        return items.items.map(item => {
-            // KCD-10 코드 기준, 영문 원어 + 한글 병명
-            const kcdMatch = item.match(/([A-Z]\d{2}\.?\d?)/);
-            if (kcdMatch) {
-                return item;
-            } else {
-                return `${item} (KCD-10 코드 확인 필요)`;
+
+        const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.js');
+        const proc = new EnhancedMedicalTermProcessor();
+
+        const normalizeCode = (code) => {
+            if (!code) return '';
+            const m = code.match(/^([A-Z])(\d{2})([0-9A-Z]{1,2})?$/);
+            if (m && m[3]) return `${m[1]}${m[2]}.${m[3]}`;
+            return code;
+        };
+
+        return items.items.map((raw) => {
+            const text = String(raw || '').trim();
+            const icd = (text.match(/([A-Z]\d{2,3}(?:\.[0-9A-Z]{1,2})?)/) || [])[1];
+            const code = normalizeCode(icd);
+
+            const enhanced = proc.enhanceMedicalTerms(text).enhancedText;
+
+            if (code) {
+                let mapping = proc.icdMappings[code] || proc.icdMappings[icd];
+                if (!mapping && code.includes('.')) {
+                    const parent = code.split('.')[0];
+                    mapping = proc.icdMappings[parent];
+                }
+                if (mapping) {
+                    return `${mapping.korean}(${mapping.english}) (ICD: ${code})`;
+                }
+                return `${enhanced} (ICD: ${code})`;
             }
+
+            return `${enhanced} (KCD-10 코드 확인 필요)`;
         }).join('\n');
     }
 

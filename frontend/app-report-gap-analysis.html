@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>앱 보고서 양식 갭 분석 리포트</title>
+  <style>
+    :root{--bg:#f7f7f8;--card:#fff;--text:#111;--accent:#0ea5e9;--border:#e5e7eb;--ok:#0f766e;--warn:#b45309;--err:#b91c1c}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.5}
+    header{background:#0b1220;color:#fff;padding:18px 24px}
+    header h1{margin:0;font-size:20px}
+    main{max-width:1000px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
+    .title{font-weight:600;margin-bottom:10px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .list{display:flex;flex-direction:column;gap:8px}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--border);font-size:12px}
+    .ok{background:#ecfdf5;color:#065f46;border-color:#d1fae5}
+    .warn{background:#fff7ed;color:#9a3412;border-color:#ffedd5}
+    .err{background:#fef2f2;color:#7f1d1d;border-color:#fee2e2}
+    .kv{display:grid;grid-template-columns:160px 1fr;gap:8px;margin:6px 0}
+    .section{margin-top:8px}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;white-space:pre-wrap}
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <header>
+    <h1>앱 보고서 양식 갭 분석 리포트</h1>
+  </header>
+  <main>
+    <section class="card">
+      <div class="title">입력 데이터 요약</div>
+      <div class="grid">
+        <div>
+          <div class="kv"><b>환자명</b><span>고영란</span></div>
+          <div class="kv"><b>생년월일</b><span>1963-04-19</span></div>
+        </div>
+        <div>
+          <div class="kv"><b>가입보험사</b><span>[미제공]</span></div>
+          <div class="kv"><b>가입일</b><span>[미제공]</span></div>
+        </div>
+      </div>
+      <div class="section list">
+        <span class="tag">2025-06-07 더자인병원 건강검진, 우울증 검사</span>
+        <span class="tag">2025-06-09 더자인병원 위내시경·헬리코박터 검사</span>
+        <span class="tag">2025-06-09 더자인병원 유방촬영 종괴 의심</span>
+        <span class="tag">2025-06-20 더자인병원 유방 초음파·조직검사</span>
+        <span class="tag">2025-06-26 더자인병원 조직병리 결과 통보(유방암, 전이성 림프절)</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title">계획된 보고서 양식 핵심 요소</div>
+      <div class="list">
+        <div>가입일 기준 <b>3개월/5년</b> 윈도우 강조 표시</div>
+        <div>보험 기준 분류와 <b>담보/특약</b>별 청구구분</div>
+        <div>병원명·내원일·경위·진단·처치 <b>표 형태</b> 요약</div>
+        <div><b>KCD 코드 매핑</b>과 민감 용어 마스킹 정책 적용</div>
+        <div>편집 용이한 줄바꿈 규칙과 <b>요약 섹션</b> 제공</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title">현재 출력 비교</div>
+      <div class="list">
+        <div><span class="tag warn">부족</span> 가입일·보험사 정보가 [미제공]으로 윈도우 계산 불가</div>
+        <div><span class="tag warn">부족</span> 청구사항 분류가 보험 기준으로 묶이지 않음</div>
+        <div><span class="tag ok">충족</span> 날짜순 정렬 및 병원명 표기</div>
+        <div><span class="tag warn">부족</span> KCD 매핑과 마스킹 정책 적용 흔적 없음</div>
+        <div><span class="tag warn">부족</span> 표 형태 요약과 범례(3M/5Y) 미표시</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title">적용되지 않은 이유</div>
+      <div class="list mono">
+        <div>가입일·보험사 데이터 누락 → 윈도우 판단 로직이 비활성화됨 (`backend/postprocess/reportBuilder.js:313–342`).</div>
+        <div>보고서 생성은 존재하나 템플릿 통합 수준이 기본형에 머무름 (`backend/postprocess/reportBuilder.js:98–186`, `204–261`).</div>
+        <div>고급 라우트는 등록되어 있으나 프런트에서 활용 경로 미연계 (`backend/app.js:230–233`).</div>
+        <div>민감어/코드 매핑 오버레이 미연동으로 마스킹·KCD 변환 미적용.</div>
+        <div>이전 환경에서 Vision OCR 비활성화로 스캔 PDF 처리 품질 저하.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title">개선 적용 제안</div>
+      <div class="list">
+        <div>프런트 업로드 폼에 <b>가입일·보험사</b> 입력 추가 후 백엔드로 전달</div>
+        <div>가입일이 있을 때만 3M/5Y 윈도우 표기</div>
+        <div><b>reportBuilder.buildReport</b> 호출 시 `patientInfo.enrollmentDate` 세팅</div>
+        <div>민감어 마스킹·KCD 매핑 오버레이 연계 및 로깅 강화</div>
+        <div>요약 표의 범례와 색상 구분 활성화, 텍스트 보고서 범례 유지</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="title">즉시 실행 체크리스트</div>
+      <div class="list">
+        <div>OCR 활성 상태 검증 완료: Vision <span class="tag ok">active</span></div>
+        <div>프런트 API 포트 정정 완료: `http://localhost:3031/api/ocr`</div>
+        <div>라우트 사용 점검: `/api/enhanced-report`, `/api/report-template` 연결</div>
+        <div>샘플 데이터로 보고서 생성 후 3M/5Y 색상 표기 확인</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

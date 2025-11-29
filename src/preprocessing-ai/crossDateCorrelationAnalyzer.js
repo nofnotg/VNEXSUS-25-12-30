@@ -3,6 +3,9 @@
  * 특히 통원 기록 연계 및 크로스 날짜 연관성 분석
  */
 
+import { z } from 'zod';
+import { logger } from '../shared/logging/logger.js';
+
 class CrossDateCorrelationAnalyzer {
     constructor() {
         // 연관성 분석 가중치
@@ -407,6 +410,248 @@ class CrossDateCorrelationAnalyzer {
         if (content.includes('검사')) return 'examination';
         if (content.includes('처방')) return 'prescription';
         return 'general';
+    }
+
+    /**
+     * 그룹화: 외래 방문 기록을 의료 맥락+시간 인접 기반으로 episode로 통합
+     * records: Array<{ date: string, hospital?: string, reason?: string, diagnosis?: string, content?: string }>
+     * options: { windowDays?: number, maxMergeGapDays?: number, minCorrelationScore?: number, userWeightConfig?: {...} }
+     */
+    groupOutpatientEpisodes(records, options = {}) {
+        const OptionsSchema = z.object({
+            windowDays: z.number().min(1).max(90).default(28),
+            maxMergeGapDays: z.number().min(1).max(90).default(7),
+            minCorrelationScore: z.number().min(0).max(1).default(0.5),
+            userWeightConfig: z.object({
+                primarySymptomWeight: z.number().min(0).max(0.5).default(0.1),
+                secondarySymptomWeight: z.number().min(0).max(0.3).default(0.05),
+                treatmentContinuityBoost: z.number().min(0).max(0.5).default(0.1),
+                sameHospitalBoost: z.number().min(0).max(0.5).default(0.05),
+                diagnosticGroupBoost: z.number().min(0).max(0.5).default(0.1)
+            }).default({})
+        });
+
+        const RecordSchema = z.object({
+            date: z.string(),
+            hospital: z.string().optional(),
+            reason: z.string().optional(),
+            diagnosis: z.string().optional(),
+            content: z.string().optional()
+        });
+
+        try {
+            const parsedOptions = OptionsSchema.parse(options);
+            const parsedRecords = z.array(RecordSchema).parse(records);
+
+            const sorted = parsedRecords
+                .filter(r => this._isParsableDate(r.date))
+                .map((r, idx) => ({ ...r, _id: `rec_${idx}` }))
+                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+            const episodes = [];
+
+            for (const rec of sorted) {
+                const block = this._buildBlockFromRecord(rec);
+                let attached = false;
+
+                // Try attach to an existing episode (prefer the most recent one within window)
+                for (let i = episodes.length - 1; i >= 0; i--) {
+                    const ep = episodes[i];
+                    const lastRec = ep.records[ep.records.length - 1];
+                    const lastBlock = this._buildBlockFromRecord(lastRec);
+
+                    const recGroup = this._classifyDiagnosticGroupFromText(`${rec.reason || ''} ${rec.diagnosis || ''} ${rec.content || ''}`);
+                    const lastRecGroup = this._classifyDiagnosticGroupFromText(`${lastRec.reason || ''} ${lastRec.diagnosis || ''} ${lastRec.content || ''}`);
+
+                    // Hard block: different diagnostic groups should not attach
+                    if (recGroup && lastRecGroup && recGroup !== lastRecGroup) {
+                        continue;
+                    }
+
+                    const details = this._analyzeBlockPairCorrelation(lastBlock, block);
+                    let score = details.score;
+
+                    // Apply user-weighted adjustments
+                    const sameHospital = (lastRec.hospital && rec.hospital && lastRec.hospital === rec.hospital);
+                    const primaryInfo = this._classifySymptomPriority(rec);
+                    const diagBoost = details.details.diagnostic.group ? parsedOptions.userWeightConfig.diagnosticGroupBoost : 0;
+                    const treatBoost = details.details.treatment.continuity?.hasContinuity ? parsedOptions.userWeightConfig.treatmentContinuityBoost : 0;
+                    const hospBoost = sameHospital ? parsedOptions.userWeightConfig.sameHospitalBoost : 0;
+                    const symptomBoost = primaryInfo.priority === 'primary' ? parsedOptions.userWeightConfig.primarySymptomWeight : parsedOptions.userWeightConfig.secondarySymptomWeight;
+                    score = Math.min(1, score + diagBoost + treatBoost + hospBoost + symptomBoost);
+
+                    const daysGap = this._daysBetween(lastRec.date, rec.date);
+                    const withinWindow = daysGap <= parsedOptions.windowDays;
+
+                    if (withinWindow && score >= parsedOptions.minCorrelationScore) {
+                        // attach
+                        ep.records.push(rec);
+                        ep.endDate = rec.date;
+                        ep.hospitals.add(rec.hospital || '');
+                        ep.metrics.primaryCount += (primaryInfo.priority === 'primary' ? 1 : 0);
+                        ep.metrics.secondaryCount += (primaryInfo.priority === 'secondary' ? 1 : 0);
+                        ep.metrics.correlationSum += score;
+                        ep.metrics.links.push({ from: lastRec._id || '', to: rec._id || '', score, daysGap });
+                        ep.groupHints.add(details.details.diagnostic.group || '');
+                        if (recGroup) ep.groupHints.add(recGroup);
+                        attached = true;
+                        break;
+                    }
+                }
+
+                if (!attached) {
+                    const primaryInfo = this._classifySymptomPriority(rec);
+                    const recGroup = this._classifyDiagnosticGroupFromText(`${rec.reason || ''} ${rec.diagnosis || ''} ${rec.content || ''}`);
+                    episodes.push({
+                        id: `episode_${episodes.length + 1}`,
+                        startDate: rec.date,
+                        endDate: rec.date,
+                        hospitals: new Set([rec.hospital || '']),
+                        records: [rec],
+                        metrics: {
+                            primaryCount: primaryInfo.priority === 'primary' ? 1 : 0,
+                            secondaryCount: primaryInfo.priority === 'secondary' ? 1 : 0,
+                            correlationSum: 0,
+                            links: []
+                        },
+                        groupHints: new Set(recGroup ? [recGroup] : [])
+                    });
+                }
+            }
+
+            // Merge adjacent episodes if close and strongly related
+            const merged = [];
+            for (const ep of episodes) {
+                const last = merged[merged.length - 1];
+                if (!last) {
+                    merged.push(ep);
+                    continue;
+                }
+                const gapDays = this._daysBetween(last.endDate, ep.startDate);
+                const hospitalsOverlap = [...last.hospitals].some(h => h && ep.hospitals.has(h));
+                const groupOverlap = [...last.groupHints].some(g => g && ep.groupHints.has(g));
+                // Compute bridge correlation between boundary records
+                const bridgeDetails = this._analyzeBlockPairCorrelation(
+                    this._buildBlockFromRecord(last.records[last.records.length - 1]),
+                    this._buildBlockFromRecord(ep.records[0])
+                );
+                let bridgeScore = bridgeDetails.score;
+                const sameHospitalBridge = hospitalsOverlap;
+                const diagBoostBridge = bridgeDetails.details.diagnostic.group ? parsedOptions.userWeightConfig.diagnosticGroupBoost : 0;
+                const treatBoostBridge = bridgeDetails.details.treatment.continuity?.hasContinuity ? parsedOptions.userWeightConfig.treatmentContinuityBoost : 0;
+                const hospBoostBridge = sameHospitalBridge ? parsedOptions.userWeightConfig.sameHospitalBoost : 0;
+                bridgeScore = Math.min(1, bridgeScore + diagBoostBridge + treatBoostBridge + hospBoostBridge);
+
+                const canMerge = gapDays <= parsedOptions.maxMergeGapDays && (
+                    groupOverlap || bridgeScore >= parsedOptions.minCorrelationScore
+                );
+                if (canMerge) {
+                    last.endDate = ep.endDate;
+                    ep.records.forEach(r => last.records.push(r));
+                    ep.hospitals.forEach(h => last.hospitals.add(h));
+                    ep.groupHints.forEach(g => last.groupHints.add(g));
+                    last.metrics.primaryCount += ep.metrics.primaryCount;
+                    last.metrics.secondaryCount += ep.metrics.secondaryCount;
+                    last.metrics.correlationSum += ep.metrics.correlationSum;
+                    last.metrics.links.push(...ep.metrics.links);
+                } else {
+                    merged.push(ep);
+                }
+            }
+
+            const finalized = merged.map(ep => ({
+                id: ep.id,
+                startDate: ep.startDate,
+                endDate: ep.endDate,
+                recordCount: ep.records.length,
+                hospitals: [...ep.hospitals].filter(Boolean),
+                diagnosticGroup: this._resolveDiagnosticGroup(ep.groupHints),
+                primarySymptomCount: ep.metrics.primaryCount,
+                secondarySymptomCount: ep.metrics.secondaryCount,
+                averageCorrelation: ep.records.length > 1 ? ep.metrics.correlationSum / (ep.records.length - 1) : 0,
+                links: ep.metrics.links
+            }));
+
+            const stats = {
+                totalRecords: sorted.length,
+                episodeCount: finalized.length,
+                avgRecordsPerEpisode: finalized.length ? (sorted.length / finalized.length) : 0,
+                mergedCount: episodes.length - finalized.length,
+                primaryRatio: sorted.length ? (finalized.reduce((acc, e) => acc + e.primarySymptomCount, 0) / sorted.length) : 0
+            };
+
+            logger.info({
+                event: 'groupOutpatientEpisodes',
+                episodes: finalized.length,
+                totalRecords: sorted.length,
+                avgRecordsPerEpisode: stats.avgRecordsPerEpisode,
+                diagnosticGroups: finalized.map(e => e.diagnosticGroup).filter(Boolean),
+                userWeights: parsedOptions.userWeightConfig
+            });
+
+            return { episodes: finalized, stats };
+        } catch (error) {
+            logger.error({ event: 'groupOutpatientEpisodes_error', message: error.message });
+            throw new Error('episode_grouping_failed');
+        }
+    }
+
+    _buildBlockFromRecord(rec) {
+        const contentParts = [rec.reason || '', rec.diagnosis || '', rec.content || '', rec.hospital || ''];
+        const content = contentParts.filter(Boolean).join(' | ');
+        return {
+            id: rec._id || 'record',
+            date: rec.date,
+            content
+        };
+    }
+
+    _isParsableDate(d) {
+        const t = Date.parse(d);
+        return Number.isFinite(t);
+    }
+
+    _daysBetween(d1, d2) {
+        try {
+            const a = new Date(d1).getTime();
+            const b = new Date(d2).getTime();
+            return Math.abs(Math.round((b - a) / (1000 * 60 * 60 * 24)));
+        } catch {
+            return Number.POSITIVE_INFINITY;
+        }
+    }
+
+    _classifySymptomPriority(rec) {
+        const text = `${rec.reason || ''} ${rec.diagnosis || ''} ${rec.content || ''}`.toLowerCase();
+        const primaryPatterns = [/주호소|주증상|chief complaint|cc[: ]/i, /주된|primary/i];
+        const secondaryPatterns = [/부수증상|associated|secondary/i];
+        const isPrimary = primaryPatterns.some(p => p.test(text));
+        const isSecondary = secondaryPatterns.some(p => p.test(text));
+        return {
+            priority: isPrimary ? 'primary' : (isSecondary ? 'secondary' : 'unknown'),
+            confidence: isPrimary || isSecondary ? 0.8 : 0.3
+        };
+    }
+
+    _resolveDiagnosticGroup(groupHints) {
+        const candidates = [...groupHints].filter(Boolean);
+        if (!candidates.length) return null;
+        const freq = candidates.reduce((m, g) => { m[g] = (m[g] || 0) + 1; return m; }, {});
+        return Object.entries(freq).sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    _classifyDiagnosticGroupFromText(text) {
+        const lowered = text.toLowerCase();
+        let best = null;
+        let bestScore = 0;
+        for (const [groupName, keywords] of Object.entries(this.diagnosticGroups)) {
+            const score = this._calculateKeywordPresence(lowered, keywords);
+            if (score > bestScore) {
+                bestScore = score;
+                best = score > 0 ? groupName : null;
+            }
+        }
+        return best;
     }
 }
 

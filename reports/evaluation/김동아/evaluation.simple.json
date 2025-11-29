@@ -1,0 +1,29 @@
+{
+  "caseId": "김동아",
+  "results": {
+    "C:\\VNEXSUS_Bin\\src\\rag\\case_sample_raw\\김동아\\종결보고서_DB손해보험_김동아.pdf": {
+      "success": true,
+      "textLength": 33,
+      "textSource": "pdf_parse_only",
+      "isScannedPdf": true,
+      "processingTime": "0.01초",
+      "type": "actual_report"
+    },
+    "C:\\VNEXSUS_Bin\\src\\rag\\case_sample_raw\\김동아\\해븐리병원.pdf": {
+      "success": true,
+      "textLength": 308,
+      "textSource": "pdf_parse_only",
+      "isScannedPdf": true,
+      "processingTime": "0.02초",
+      "type": "medical_doc"
+    }
+  },
+  "metrics": {
+    "C:\\VNEXSUS_Bin\\src\\rag\\case_sample_raw\\김동아\\종결보고서_DB손해보험_김동아.pdf": {
+      "charAccuracy": 1
+    },
+    "C:\\VNEXSUS_Bin\\src\\rag\\case_sample_raw\\김동아\\해븐리병원.pdf": {
+      "charAccuracy": 1
+    }
+  }
+}

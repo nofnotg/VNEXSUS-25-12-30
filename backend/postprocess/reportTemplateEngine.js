@@ -10,6 +10,7 @@
 
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getLabel } from '../../src/shared/utils/i18n.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -203,20 +204,22 @@ class ReportTemplateEngine {
     
     switch (format) {
       case 'json':
-        return this.createJsonTemplate(data);
+        return this.createJsonTemplate(data, options);
       case 'html':
-        return this.createHtmlTemplate(data);
+        return this.createHtmlTemplate(data, options);
       case 'markdown':
-        return this.createMarkdownTemplate(data);
+        return this.createMarkdownTemplate(data, options);
       default:
-        return this.createTextTemplate(data);
+        return this.createTextTemplate(data, options);
     }
   }
 
   /**
    * 텍스트 템플릿 생성
    */
-  createTextTemplate(data) {
+  createTextTemplate(data, options = {}) {
+    const locale = options.locale === 'ko' ? 'ko' : 'en';
+    const dateLocale = locale === 'ko' ? 'ko-KR' : 'en-US';
     // NaN 값 검증 및 정리 함수
     const sanitizeValue = (value) => {
       if (value === null || value === undefined || value === 'undefined' || 
@@ -231,7 +234,7 @@ class ReportTemplateEngine {
     // 헤더
     template += `${sanitizeValue(data.header?.title || '의료 보고서')}\n`;
     template += `${sanitizeValue(data.header?.subtitle || '')}\n`;
-    template += `생성일: ${new Date().toLocaleDateString('ko-KR')}\n`;
+    template += `${getLabel('meta_generated_at', locale)} ${new Date().toLocaleDateString(dateLocale)}\n`;
     template += '='.repeat(50) + '\n\n';
     
     // 환자 정보
@@ -294,7 +297,7 @@ class ReportTemplateEngine {
     // 요약
     template += '보고서 요약\n';
     template += '-'.repeat(20) + '\n';
-    template += `생성일시: ${new Date().toLocaleString('ko-KR')}\n`;
+    template += `${getLabel('meta_generated_at', locale)} ${new Date().toLocaleString(dateLocale)}\n`;
     template += `데이터 항목 수: ${data.timeline ? data.timeline.length : 0}\n`;
     
     return template;
@@ -303,13 +306,15 @@ class ReportTemplateEngine {
   /**
    * JSON 템플릿 생성
    */
-  createJsonTemplate(data) {
+  createJsonTemplate(data, options = {}) {
+    const locale = options.locale === 'ko' ? 'ko' : 'en';
     return JSON.stringify({
       ...data,
       metadata: {
         generatedAt: new Date().toISOString(),
         version: '1.0.0',
-        format: 'json'
+        format: 'json',
+        locale
       }
     }, null, 2);
   }
@@ -317,10 +322,38 @@ class ReportTemplateEngine {
   /**
    * HTML 템플릿 생성
    */
-  createHtmlTemplate(data) {
+  createHtmlTemplate(data, options = {}) {
+    const locale = options.locale === 'ko' ? 'ko' : 'en';
+    const dateLocale = locale === 'ko' ? 'ko-KR' : 'en-US';
+    const htmlLang = locale === 'ko' ? 'ko' : 'en';
+    // Helper: format ICD codes for display (remove label, bold code, fix minor dot)
+    const formatIcdInText = (text) => {
+      if (typeof text !== 'string' || text.length === 0) return text || '';
+      let s = text;
+      // 1) Fix stray dot outside ICD parentheses: ((ICD: I20).9) -> (ICD: I20.9)
+      s = s.replace(/\(\s*ICD\s*:\s*([A-Z])\s*([0-9]{2})\s*\)\s*\.+\s*([0-9A-Z]{1,2})/g,
+        (_m, L, M, m) => `(ICD: ${L}${M}.${m})`);
+      // Normalizer: to canonical bold code without label
+      const toBoldCode = (code) => {
+        const raw = String(code).replace(/\s+/g, '');
+        if (/^[A-Z][0-9]{2}[0-9A-Z]{1,2}$/.test(raw)) {
+          return `<strong class="icd-code">${raw.slice(0, 3)}.${raw.slice(3)}</strong>`;
+        }
+        return `<strong class="icd-code">${raw}</strong>`;
+      };
+      // 2) Replace (ICD: CODE) with bold code
+      s = s.replace(/\(\s*ICD\s*:\s*([A-Z]\s*[0-9]{2}(?:\s*[0-9A-Z]{1,2})?)\s*\)/g,
+        (_m, code) => toBoldCode(code));
+      // 3) Replace standalone forms: ICD 코드 R074, ICD: I209, ICD I20 9
+      s = s.replace(/ICD\s*코드\s*[:\s]?\s*([A-Z]\s*[0-9]{2}(?:\s*[0-9A-Z]{1,2})?)/g,
+        (_m, code) => toBoldCode(code));
+      s = s.replace(/ICD\s*[:\s]?\s*([A-Z]\s*[0-9]{2}(?:\s*[0-9A-Z]{1,2})?)/g,
+        (_m, code) => toBoldCode(code));
+      return s;
+    };
     return `
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="${htmlLang}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -330,12 +363,13 @@ class ReportTemplateEngine {
         .header { border-bottom: 2px solid #333; padding-bottom: 10px; }
         .section { margin: 20px 0; }
         .timeline-item { margin: 10px 0; padding: 10px; border-left: 3px solid #007bff; }
+        .icd-code { color: #111827; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>${data.header.title}</h1>
-        <p>생성일: ${new Date().toLocaleDateString('ko-KR')}</p>
+        <p>${getLabel('meta_generated_at', locale)} ${new Date().toLocaleDateString(dateLocale)}</p>
     </div>
     
     ${data.patientInfo.name ? `
@@ -352,8 +386,8 @@ class ReportTemplateEngine {
         <h2>의료 경과</h2>
         ${data.timeline.map(item => `
             <div class="timeline-item">
-                <strong>${item.date}</strong>: ${item.event}
-                ${item.details ? `<br><small>${item.details}</small>` : ''}
+                <strong>${item.date}</strong>: ${formatIcdInText(item.event)}
+                ${item.details ? `<br><small>${formatIcdInText(item.details)}</small>` : ''}
             </div>
         `).join('')}
     </div>
@@ -365,11 +399,13 @@ class ReportTemplateEngine {
   /**
    * Markdown 템플릿 생성
    */
-  createMarkdownTemplate(data) {
+  createMarkdownTemplate(data, options = {}) {
+    const locale = options.locale === 'ko' ? 'ko' : 'en';
+    const dateLocale = locale === 'ko' ? 'ko-KR' : 'en-US';
     let template = '';
     
     template += `# ${data.header.title}\n\n`;
-    template += `생성일: ${new Date().toLocaleDateString('ko-KR')}\n\n`;
+    template += `${getLabel('meta_generated_at', locale)} ${new Date().toLocaleDateString(dateLocale)}\n\n`;
     
     if (data.patientInfo.name) {
       template += '## 환자 정보\n\n';

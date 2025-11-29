@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>개발자용 케이스 매니저</title>
+  <style>
+    :root{--bg:#f7f7f8;--card:#fff;--text:#111;--accent:#06b6d4;--accent-dark:#0e7490;--border:#e5e7eb;--border2:#d1d5db;--border3:#cbd5e1;--ok:#0e7490;--warn:#b45309;--error:#b91c1c;--radius:10px;--radius2:8px;--radius3:6px}
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.4}
+    header{background:#111;color:#fff;padding:16px 24px;display:flex;align-items:center;gap:12px}
+    header h1{font-size:18px;margin:0}
+    main{padding:24px;max-width:1280px;margin:0 auto;display:grid;gap:20px;grid-template-columns:1fr 1fr;grid-template-rows:auto 1fr}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px}
+    .card.full{grid-column:1/-1}
+    .row{display:flex;align-items:center;gap:8px}
+    .row>*{flex:none}
+    .row>input,.row>select,.row>textarea{flex:1}
+    input[type="file"]{border:1px dashed var(--border3);background:#fafafa;padding:8px;border-radius:var(--radius2);width:100%}
+    input[type="text"],input[type="number"],textarea,select{padding:10px;border:1px solid var(--border2);border-radius:var(--radius2);font-size:14px}
+    textarea{resize:vertical;min-height:80px}
+    button{padding:10px 14px;border-radius:var(--radius2);border:1px solid #111;background:#111;color:#fff;font-size:14px;cursor:pointer}
+    button.secondary{background:var(--card);color:#111;border:1px solid var(--border2)}
+    button:hover{opacity:.9}
+    .badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:var(--radius3);font-size:12px;font-weight:600;border:1px solid}
+    .badge.ok{background:#ecfeff;border-color:var(--ok);color:var(--ok)}
+    .badge.warn{background:#fff7ed;border-color:var(--warn);color:var(--warn)}
+    .badge.error{background:#fef2f2;border-color:var(--error);color:var(--error)}
+    .badge.info{background:#f0f9ff;border-color:var(--accent);color:var(--accent-dark)}
+    .mono{white-space:pre-wrap;background:#f9fafb;border:1px solid var(--border);border-radius:var(--radius2);padding:12px;font-size:13px;max-height:320px;overflow:auto}
+    .section-title{font-weight:600;font-size:15px;margin-bottom:4px}
+    .file-list{max-height:calc(28px*15);overflow:auto;border:1px solid var(--border);border-radius:var(--radius2);padding:8px;background:#fafafa}
+    .file-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-bottom:1px solid var(--border);min-height:28px}
+    .file-item:last-child{border:none}
+    .file-item .name{flex:1;font-size:14px}
+    .file-item .action{font-size:12px;padding:4px 8px}
+    .file-item .action.view{background:var(--accent);color:#fff;border:none;border-radius:var(--radius3)}
+    .file-item .action.view:hover{background:var(--accent-dark)}
+    .file-item .action.dbl{background:var(--card);color:#111;border:1px solid var(--border2);border-radius:var(--radius3)}
+    .file-item .action.dbl:hover{background:#f3f4f6}
+    .upload-group{border:1px solid var(--border2);border-radius:var(--radius2);padding:12px;background:#fafafa}
+    .upload-group .title{font-size:14px;font-weight:600;margin-bottom:8px}
+    .upload-group .desc{font-size:12px;color:#6b7280;margin-bottom:8px}
+    .preview-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .preview-header .meta{font-size:13px}
+    .preview-content{flex:1;overflow:auto}
+    .preview-empty{color:#6b7280;font-size:13px;text-align:center;padding:24px 0}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    @media(max-width:900px){main{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>개발자용 케이스 매니저</h1>
+    <div class="badge info">상단 목록 확인 후 번호 입력 또는 자동 부여</div>
+  </header>
+  <main>
+    <div class="card full">
+      <div class="row">
+        <div class="section-title">전체 케이스 목록</div>
+        <button class="secondary" id="reload">새로고침</button>
+      </div>
+      <div id="caseList" class="file-list"></div>
+    </div>
+    <div class="card">
+      <div class="section-title">업로드·저장</div>
+      <div class="row">
+        <input id="caseNumber" type="number" min="1" placeholder="케이스 번호">
+        <select id="caseSelect"><option value="">번호 선택</option></select>
+      </div>
+      <div class="upload-group">
+        <div class="title">원문 파일</div>
+        <div class="desc">PDF/TXT/DOC → caseX.txt 저장 및 자동 VNEXSUS 생성</div>
+        <div class="row">
+          <input id="rawFile" type="file" accept=".txt,.pdf,.doc,.docx">
+        </div>
+      </div>
+      <div class="upload-group">
+        <div class="title">사용자 보고서</div>
+        <div class="desc">PDF/TXT/DOC → caseX_report.txt 저장</div>
+        <div class="row">
+          <input id="userReportFile" type="file" accept=".txt,.pdf,.doc,.docx">
+        </div>
+        <div class="row">
+          <textarea id="userReportText" rows="4" placeholder="직접 입력"></textarea>
+        </div>
+      </div>
+      <div class="upload-group">
+        <div class="title">VNEXSUS 보고서</div>
+        <div class="desc">원문 파일 처리 후 자동 생성됩니다.</div>
+        <div class="row">
+          <div class="badge info" id="vnStatus">대기</div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="startProcess">처리 시작</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">미리보기</div>
+      <div id="previewHeader" class="preview-header">
+        <div class="badge info">파일을 선택하세요</div>
+      </div>
+      <div id="previewContent" class="preview-content">
+        <div class="preview-empty">미리보기할 파일을 선택하세요</div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const api = {
+      list: () => fetch('/api/dev/studio/cases').then(r=>r.json()),
+      next: () => fetch('/api/dev/studio/cases/next').then(r=>r.json()),
+      detail: (n) => fetch(`/api/dev/studio/cases/${n}`).then(r=>r.json()),
+      upload: (n, raw, ur) => {
+        const fd = new FormData();
+        if(raw) fd.append('rawFile', raw);
+        if(ur) fd.append('userReportFile', ur);
+        return fetch(`/api/dev/studio/cases/${n}/upload`, { method:'POST', body: fd }).then(r=>r.json());
+      },
+      saveReportText: (n, text) => fetch(`/api/dev/studio/cases/${n}/report`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ text }) }).then(r=>r.json()),
+      content: (n, label) => fetch(`/api/dev/studio/cases/${n}/content/${label}`).then(r=>r.json())
+    };
+    const caseListEl = document.getElementById('caseList');
+    const reloadBtn = document.getElementById('reload');
+    const caseNumberEl = document.getElementById('caseNumber');
+    const caseSelectEl = document.getElementById('caseSelect');
+    const rawFileEl = document.getElementById('rawFile');
+    const urFileEl = document.getElementById('userReportFile');
+    const urTextEl = document.getElementById('userReportText');
+    const vnStatusEl = document.getElementById('vnStatus');
+    const startProcessBtn = document.getElementById('startProcess');
+    const previewHeaderEl = document.getElementById('previewHeader');
+    const previewContentEl = document.getElementById('previewContent');
+    const chooseDefaultLabel = (f)=>{
+      if (f.case) return 'case';
+      if (f.case_sample) return 'case_sample';
+      if (f.case_report) return 'case_report';
+      if (f.case_vnexsus) return 'case_vnexsus';
+      return 'case';
+    };
+    function renderCaseList(items){
+      caseListEl.innerHTML = items.map(it=>{
+        const f = it.files||{};
+        const badge = (v)=> v?'<span class="badge ok">있음</span>':'<span class="badge warn">없음</span>';
+        return `<div class="file-item" data-n="${it.caseNumber}">
+          <span class="name">case${it.caseNumber}</span>
+          <span>${badge(!!f.case)}</span>
+          <span>${badge(!!f.case_sample)}</span>
+          <span>${badge(!!f.case_vnexsus)}</span>
+          <span>${badge(!!f.case_report)}</span>
+          <button class="action view" data-n="${it.caseNumber}" data-label="case">보기</button>
+          <button class="action view" data-n="${it.caseNumber}" data-label="case_report">보고서</button>
+          <button class="action view" data-n="${it.caseNumber}" data-label="case_vnexsus">앱보고서</button>
+        </div>`
+      }).join('');
+      caseListEl.querySelectorAll('.file-item').forEach(item=>{
+        item.addEventListener('dblclick', ()=>{
+          const n = item.getAttribute('data-n');
+          caseNumberEl.value = n;
+          caseSelectEl.value = n;
+        });
+        item.addEventListener('click', async(e)=>{
+          if (e.target.closest('button')) return;
+          const n = item.getAttribute('data-n');
+          const d = await api.detail(n);
+          if(!d.success){
+            previewHeaderEl.innerHTML = '<div class="badge error">보기 실패</div>';
+            previewContentEl.innerHTML = '<div class="preview-empty">'+(d.error||'오류')+'</div>';
+            return;
+          }
+          const label = chooseDefaultLabel(d.files||{});
+          const r = await api.content(n, label);
+          if(!r.success){
+            previewHeaderEl.innerHTML = '<div class="badge error">보기 실패</div>';
+            previewContentEl.innerHTML = '<div class="preview-empty">'+r.error+'</div>';
+            return;
+          }
+          previewHeaderEl.innerHTML = `<div class="badge ok">${label} · 길이 ${r.length}</div>`;
+          previewContentEl.innerHTML = `<div class="mono">${r.content||''}</div>`;
+        });
+      });
+      caseListEl.querySelectorAll('button[data-n]').forEach(b=>{
+        b.addEventListener('click', async()=>{
+          const n = b.getAttribute('data-n');
+          const label = b.getAttribute('data-label');
+          const r = await api.content(n, label);
+          if(!r.success){
+            previewHeaderEl.innerHTML = '<div class="badge error">보기 실패</div>';
+            previewContentEl.innerHTML = '<div class="preview-empty">'+r.error+'</div>';
+            return;
+          }
+          previewHeaderEl.innerHTML = `<div class="badge ok">${label} · 길이 ${r.length}</div>`;
+          previewContentEl.innerHTML = `<div class="mono">${r.content||''}</div>`;
+        });
+      });
+    }
+    async function refresh(){
+      const res = await api.list();
+      if(res.success){
+        renderCaseList(res.cases||[]);
+        const opts = ['<option value="">번호 선택</option>'].concat((res.cases||[]).map(it=>`<option value="${it.caseNumber}">case${it.caseNumber}</option>`));
+        caseSelectEl.innerHTML = opts.join('');
+      }
+    }
+    caseSelectEl.addEventListener('change', ()=>{
+      const v = caseSelectEl.value;
+      caseNumberEl.value = v;
+    });
+    reloadBtn.addEventListener('click', refresh);
+    // 자동 번호 기능 제거됨: 샘플 목록 더블클릭으로 케이스 선택
+    startProcessBtn.addEventListener('click', async()=>{
+      let n = (document.getElementById('caseNumber').value||'').trim();
+      if(!n){ const nx = await api.next(); n = nx.nextCaseNumber; document.getElementById('caseNumber').value = n; }
+      const existsCheck = await api.detail(n);
+      if (existsCheck.success && existsCheck.files && Object.keys(existsCheck.files).length>0){
+        const nx = await api.next();
+        alert(`입력한 번호(case${n})는 이미 존재하여 저장할 수 없습니다. 제안 번호: case${nx.nextCaseNumber}`);
+        document.getElementById('caseNumber').value = nx.nextCaseNumber;
+        return;
+      }
+      const raw = rawFileEl.files[0] || null;
+      const urFile = urFileEl.files[0] || null;
+      const urText = (urTextEl.value||'').trim();
+      if(!raw && !urFile && !urText){ alert('원문 또는 사용자보고서를 첨부하거나 텍스트를 입력하세요'); return; }
+      vnStatusEl.textContent = '처리 중'; vnStatusEl.className = 'badge info';
+      let ok = true;
+      if(raw || urFile){
+        const r = await api.upload(n, raw, urFile, null);
+        if(!r.success){ vnStatusEl.textContent = '오류'; vnStatusEl.className = 'badge error'; ok = false; }
+      }
+      if(urText){
+        const rt = await api.saveReportText(n, urText);
+        if(!rt.success){ vnStatusEl.textContent = '오류'; vnStatusEl.className = 'badge error'; ok = false; }
+      }
+      if(ok){ vnStatusEl.textContent = '완료'; vnStatusEl.className = 'badge ok'; }
+      await refresh();
+      alert('처리 완료');
+    });
+    refresh();
+  </script>
+</body>
+</html>

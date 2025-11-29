@@ -9,6 +9,7 @@ import InsuranceValidationService from '../services/insuranceValidationService.j
 import MedicalTermTranslationService from '../services/medicalTermTranslationService.js';
 // NineItemReportGenerator는 대형 모듈이므로 필요 시점에 동적 import로 로드
 import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../../src/shared/logging/logger.js';
+import { ProgressiveRAGSystem } from '../../src/rag/progressiveRAG.js';
 import { normalizeDiagnosisLines } from '../../src/shared/utils/report/normalizeDiagnosisLine.js';
 // EnhancedMedicalTermProcessor는 CJS 모듈이므로 동적 import로 로드하여 테스트 환경(Jest) 호환성을 확보
 
@@ -173,6 +174,14 @@ router.post('/generate', async (req, res) => {
     }
 
     const processingTimeMs = Date.now() - startTime;
+
+    try {
+      const rag = new ProgressiveRAGSystem();
+      await rag.initialize();
+      await rag.saveAnalysisResult(`dna_${Date.now()}`, enhancedText, { patientId: patientInfo.patientId || null });
+    } catch (e) {
+      logProcessingError('rag_save', e, { patientId: patientInfo.patientId });
+    }
     const responsePayload = {
       success: true,
       message: options.useNineItem

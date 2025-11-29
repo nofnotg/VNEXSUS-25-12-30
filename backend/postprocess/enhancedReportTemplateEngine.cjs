@@ -762,8 +762,222 @@ class EnhancedReportTemplateEngine {
    * @returns {string} HTML 보고서
    */
   buildHtmlReport(reportData) {
-    // HTML 보고서 생성 로직 (필요시 구현)
-    return `<html><body><h1>손해사정 보고서</h1><pre>${this.buildTextReport(reportData)}</pre></body></html>`;
+    const { patientInfo = {}, insuranceInfo = {}, medicalHistory = {}, disclosureReview = null, comprehensiveOpinion = null } = reportData || {};
+
+    const esc = (s) => String(s ?? '').replace(/[&<>]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[ch]));
+    const kvRows = (obj) => Object.entries(obj || {})
+      .filter(([_, v]) => v !== undefined && v !== null && String(v).trim().length > 0)
+      .map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`)
+      .join('');
+
+    // 날짜 포맷(YYYY-MM-DD → YYYY.MM.DD)
+    const formatDateKR = (d) => {
+      if (!d) return '';
+      const m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/);
+      return m ? `${m[1]}.${m[2]}.${m[3]}` : String(d);
+    };
+
+    // 의료명 한글/영문 병기 보장
+    const ensureBilingual = (text) => {
+      const src = String(text || '').trim();
+      if (!src) return '';
+
+      // ICD 코드 분리
+      const icdMatch = src.match(/\(\(?ICD:\s*([^\)]+)\)?\)/i);
+      const icdCode = icdMatch ? icdMatch[1].trim() : '';
+      const base = src.replace(/\(\(?ICD:[^\)]*\)?\)/gi, '').trim();
+
+      // 한글/영문 추출
+      const hasKo = /[\u3131-\u318E\uAC00-\uD7A3]/.test(base);
+      const enParts = base.match(/[A-Za-z][A-Za-z\s\-\,\(\)]+/g);
+      const koParts = base.match(/[\u3131-\u318E\uAC00-\uD7A3][\u3131-\u318E\uAC00-\uD7A3\s\-\,\(\)]+/g);
+
+      // 간단 사전 매핑(부족 시 원문 유지)
+      const ko2en = {
+        '흉통': 'Chest pain',
+        '협심증': 'Angina pectoris',
+        '안정형 협심증': 'Stable angina pectoris',
+        '급성심근경색증': 'Acute myocardial infarction',
+        '당뇨병': 'Diabetes Mellitus',
+        '제2형 당뇨병': 'Type 2 Diabetes Mellitus',
+        '관상동맥조영술': 'Coronary angiography',
+        '외래 재진': 'Outpatient follow-up',
+        '외래 초진': 'Outpatient initial visit'
+      };
+      const en2ko = {
+        'Chest pain': '흉통',
+        'Angina pectoris': '협심증',
+        'Stable angina pectoris': '안정형 협심증',
+        'Acute myocardial infarction': '급성심근경색증',
+        'Diabetes Mellitus': '당뇨병',
+        'Type 2 Diabetes Mellitus': '제2형 당뇨병',
+        'Coronary angiography': '관상동맥조영술',
+        'Outpatient follow-up': '외래 재진',
+        'Outpatient initial visit': '외래 초진'
+      };
+
+      let ko = (koParts && koParts[0]) ? koParts[0].trim() : '';
+      let en = (enParts && enParts[0]) ? enParts[0].trim() : '';
+
+      if (!ko && en) ko = en2ko[en] || '';
+      if (!en && ko) en = ko2en[ko] || '';
+
+      // 둘 다 없는 경우 원문을 한글로 간주
+      if (!ko && !en) {
+        if (hasKo) {
+          ko = base;
+        } else {
+          en = base;
+        }
+      }
+
+      const paired = ko && en ? `${ko} (${en})` : (ko || en || base);
+      return icdCode ? `${paired} (ICD: ${icdCode})` : paired;
+    };
+
+    const testResultsBlock = () => {
+      const tr = medicalHistory?.testResults ? String(medicalHistory.testResults) : '';
+      return tr ? `<pre class="mono">${esc(tr)}</pre>` : '';
+    };
+
+    const surgicalResultsBlock = () => {
+      const sr = medicalHistory?.surgicalResults ? String(medicalHistory.surgicalResults) : '';
+      return sr ? `<pre class="mono">${esc(sr)}</pre>` : '';
+    };
+
+    const disclosureBlock = () => {
+      if (!disclosureReview) return '';
+      const basic = disclosureReview;
+      const enhanced = disclosureReview?.enhancedAnalysis || {};
+      const parts = [];
+      if (basic?.summary) parts.push(`<p>${esc(basic.summary)}</p>`);
+      if (enhanced?.riskAssessment) parts.push(`<p><strong>Risk Assessment:</strong> ${esc(enhanced.riskAssessment)}</p>`);
+      if (enhanced?.recommendations) parts.push(`<p><strong>Recommendations:</strong> ${esc(enhanced.recommendations.join ? enhanced.recommendations.join(', ') : String(enhanced.recommendations))}</p>`);
+      if (enhanced?.detailedReport) parts.push(`<pre class="mono">${esc(enhanced.detailedReport)}</pre>`);
+      return parts.length ? `<section><h2>고지의무 검토</h2>${parts.join('\n')}</section>` : '';
+    };
+
+    const opinionBlock = () => {
+      if (!comprehensiveOpinion) return '';
+      const co = comprehensiveOpinion;
+      const items = [];
+      if (co.summary) items.push(`<p>${esc(co.summary)}</p>`);
+      if (co.recommendation) items.push(`<p><strong>권장사항:</strong> ${esc(co.recommendation)}</p>`);
+      return items.length ? `<section><h2>종합 소견</h2>${items.join('\n')}</section>` : '';
+    };
+
+  const html = `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>손해사정 보고서 (확장형)</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', Arial, sans-serif; margin: 24px; color: #222; }
+    h1 { font-size: 22px; margin: 0 0 16px; }
+    h2 { font-size: 18px; margin: 24px 0 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+    th { text-align: left; width: 220px; color: #444; }
+    th, td { border-bottom: 1px solid #eee; padding: 6px 8px; vertical-align: top; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; background: #f8f9fa; border: 1px solid #eee; padding: 8px; border-radius: 6px; }
+    .meta { color: #666; font-size: 12px; }
+    section { margin-bottom: 16px; }
+    /* Timeline styles */
+    .timeline { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:16px; }
+    .timeline h3 { margin:0 0 8px; font-size:16px; }
+    .window { margin-top:8px; }
+    .window-title { font-weight:600; color:#111827; margin:12px 0 4px; }
+    .year-title { color:#374151; margin:8px 0 4px; }
+    .visit { padding:10px 12px; border:1px solid #e5e7eb; border-radius:6px; background:#fafafa; margin-bottom:8px; }
+    .visit-header { font-weight:600; margin-bottom:6px; }
+    .visit-header .date { color:#111827; }
+    .visit-header .hospital { color:#1f2937; margin-left:8px; }
+    .visit-body { margin:0; line-height:1.6; color:#111827; }
+    .muted { color:#6b7280; }
+  </style>
+  </head>
+<body>
+  <header>
+    <h1>손해사정 보고서 (확장형)</h1>
+    <div class="meta">생성일시: ${esc(new Date().toLocaleString('ko-KR'))}</div>
+  </header>
+
+  <section>
+    <h2>환자 정보</h2>
+    <table>${kvRows(patientInfo) || '<tr><td>정보 없음</td></tr>'}</table>
+  </section>
+
+  <section>
+    <h2>보험 정보</h2>
+    <table>${kvRows(insuranceInfo) || '<tr><td>정보 없음</td></tr>'}</table>
+  </section>
+
+  <section>
+    <h2>의료 이력</h2>
+    <table>
+      ${medicalHistory?.visitDate ? `<tr><th>내원일시</th><td>${esc(medicalHistory.visitDate)}</td></tr>` : ''}
+      ${medicalHistory?.visitReason ? `<tr><th>내원경위</th><td>${esc(medicalHistory.visitReason)}</td></tr>` : ''}
+      ${medicalHistory?.diagnosis ? `<tr><th>진단병명</th><td>${esc(medicalHistory.diagnosis)}</td></tr>` : ''}
+      ${medicalHistory?.treatment ? `<tr><th>치료내용</th><td>${esc(medicalHistory.treatment)}</td></tr>` : ''}
+      ${medicalHistory?.treatmentPeriod ? `<tr><th>치료기간</th><td>${esc(medicalHistory.treatmentPeriod)}</td></tr>` : ''}
+      ${medicalHistory?.pastHistory ? `<tr><th>과거병력</th><td>${esc(medicalHistory.pastHistory)}</td></tr>` : ''}
+      ${medicalHistory?.doctorOpinion ? `<tr><th>의사소견</th><td>${esc(medicalHistory.doctorOpinion)}</td></tr>` : ''}
+    </table>
+    ${testResultsBlock()}
+    ${surgicalResultsBlock()}
+  </section>
+
+  ${(() => {
+    if (!disclosureReview || !disclosureReview.periods) return '';
+    const order = ['3m','2y','5y'];
+    const blocks = [];
+    blocks.push('<section class="timeline">');
+    blocks.push('<h2>시간축 의료 이벤트(날짜순 + 보험 기준 분류)</h2>');
+
+    order.forEach((key) => {
+      const period = disclosureReview.periods[key];
+      if (!period || !period.records || period.records.length === 0) return;
+      blocks.push('<div class="window">');
+      blocks.push(`<div class="window-title">[${esc(period.label)}]</div>`);
+
+      // 연도별 그룹화
+      const byYear = {};
+      period.records.forEach((rec) => {
+        const y = String(rec.date || '').slice(0,4);
+        if (!byYear[y]) byYear[y] = [];
+        byYear[y].push(rec);
+      });
+
+      Object.keys(byYear).sort().forEach((year) => {
+        blocks.push(`<div class="year-title">${esc(year)}년</div>`);
+        byYear[year]
+          .sort((a,b) => String(a.date||'').localeCompare(String(b.date||'')))
+          .forEach((rec) => {
+            const dateKR = formatDateKR(rec.date);
+            const hosp = esc(rec.hospital || '병원명 미상');
+            const diag = esc(ensureBilingual(rec.diagnosis));
+            const signif = rec.significance ? `<span class="muted">(${esc(rec.significance)})</span>` : '';
+            blocks.push('<article class="visit">');
+            blocks.push(`<div class="visit-header"><span class="date">${dateKR}</span> <span class="hospital">${hosp}</span></div>`);
+            blocks.push(`<p class="visit-body">진단명: ${diag} ${signif}</p>`);
+            blocks.push('</article>');
+          });
+      });
+
+      blocks.push('</div>');
+    });
+
+    blocks.push('</section>');
+    return blocks.join('\n');
+  })()}
+
+  ${disclosureBlock()}
+  ${opinionBlock()}
+
+  <footer class="meta">Generated by EnhancedReportTemplateEngine</footer>
+</body>
+</html>`;
+    return html;
   }
 }
 

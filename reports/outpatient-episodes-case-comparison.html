@@ -1,0 +1,1877 @@
+<!doctype html>
+  <html lang="ko">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>외래 에피소드 사례 비교 요약</title>
+      <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 24px; }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    .meta { color: #666; margin-bottom: 16px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; font-size: 13px; }
+    th { background: #f5f7fa; text-align: left; }
+    tr:nth-child(even) { background: #fafafa; }
+    .high { background: #fff3cd; }
+    .tag { display: inline-block; padding: 2px 6px; border-radius: 10px; background: #eef2ff; color: #334155; margin-right: 6px; font-size: 12px; }
+    details { cursor: pointer; }
+    .section { margin-top: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; }
+    .card h3 { margin: 0 0 8px; font-size: 14px; }
+    .controls { display: flex; gap: 12px; align-items: center; margin: 10px 0; }
+    .controls .spacer { flex: 1; }
+    .controls select, .controls button { font-size: 12px; padding: 4px 8px; }
+  </style>
+    </head>
+    <body>
+      <h1>외래 에피소드 사례 비교 요약</h1>
+      <div class="meta">생성 시각: 2025-11-09T02:11:34.905Z</div>
+
+      <div class="section grid">
+        <div class="card">
+          <h3>집계</h3>
+          <div>케이스: 87</div>
+          <div>총 에피소드: 9210</div>
+          <div>총 레코드: 11766</div>
+          <div>기간 내 청구: 12</div>
+          <div>질환 앵커: 6</div>
+          <div>기간 내 검사: 0</div>
+        </div>
+        <div class="card">
+          <h3>상위 진단 그룹</h3>
+          <div><span class="tag">digestive: 953</span>
+<span class="tag">neurological: 205</span>
+<span class="tag">endocrine: 161</span>
+<span class="tag">cardiovascular: 137</span>
+<span class="tag">respiratory: 128</span>
+<span class="tag">orthopedic: 34</span>
+<span class="tag">psychiatric: 20</span></div>
+        </div>
+        <div class="card">
+          <h3>내보내기</h3>
+          <a href="reports/outpatient-episodes-case-comparison.csv">CSV 다운로드</a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>파일/설정별 요약</h3>
+        <div class="controls">
+          <label>페이지 크기
+            <select id="pageSize">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="all">All</option>
+            </select>
+          </label>
+          <div class="spacer"></div>
+          <button id="prev">이전</button>
+          <span id="pageInfo">페이지</span>
+          <button id="next">다음</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>config</th>
+              <th>file</th>
+              <th>records</th>
+              <th>episodes</th>
+              <th>groups_total</th>
+              <th>hospitals_total</th>
+              <th>claim_within_window</th>
+              <th>claim_total</th>
+              <th>disease_anchors</th>
+              <th>disease_tests_within_timeframe</th>
+              <th>hospitals_normalized</th>
+            </tr>
+          </thead>
+          <tbody id="summaryBody">
+            
+      <tr class="">
+        <td>baseline</td>
+        <td>Case1.txt</td>
+        <td>129</td>
+        <td>109</td>
+        <td>34</td>
+        <td>11</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원 …</summary>
+            <div>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원; 이기설의원; 한림대학교 강남성심병원; 은 1개월 이상 입원한 경우병원; 한림대학교강남성심병원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case10.txt</td>
+        <td>191</td>
+        <td>167</td>
+        <td>22</td>
+        <td>8</td>
+        <td>0</td>
+        <td>9</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원 …</summary>
+            <div>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원; 가톨릭대학교 은평성모병원; 그 가톨릭대학교 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case10_report.txt</td>
+        <td>6</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</summary>
+            <div>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>baseline</td>
+        <td>Case11.txt</td>
+        <td>686</td>
+        <td>480</td>
+        <td>71</td>
+        <td>25</td>
+        <td>0</td>
+        <td>37</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원 …</summary>
+            <div>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원; 이안과의원; 강의학과의원; 타워치과의원; 치과의원; 최내과의원; 최대균 남광호; 후과의원; 김소형한의원; 신촌연세병원; 세란병원; 숭실한의원; 삼성병원; 오안과의원; 외과 외래 AB1810가 없는 만의원; 삼성서울병원; 서울특별시 종로구 평동 108번지 강북삼성병원; 감염 병원; 입원 및 수술이력병원; 년 10월 25일 외부병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case11_report.txt</td>
+        <td>23</td>
+        <td>13</td>
+        <td>7</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</summary>
+            <div>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case12.txt</td>
+        <td>96</td>
+        <td>59</td>
+        <td>12</td>
+        <td>20</td>
+        <td>0</td>
+        <td>20</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원 …</summary>
+            <div>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원; 본 의무기록은 홍익병원; 영광종합병원; 영광 종합병원; 상기 환자는 3주 전 타병원; 내원전 병원; 재원여부 병원; 상환 3주 전 타병원; 봄익병원; 이화여자대학교 의과대학부속 목동병원; 이대목동병원; 전남대학교병원; 봉익병원; 추가가산병원; 경유병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case12_report.txt</td>
+        <td>11</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>0</td>
+        <td>8</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>주 전 타 병원; 홍익병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원</summary>
+            <div>주 전 타 병원; 홍익병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case13.txt</td>
+        <td>149</td>
+        <td>121</td>
+        <td>19</td>
+        <td>11</td>
+        <td>0</td>
+        <td>116</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원 …</summary>
+            <div>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원; 보건업 일반병원; 수도권장기보상부 수도장기센터; 수도권장기보상부 수도장기3센터; 년 04월 14일 넘어지는 사고 발생으로 서울바른병원; 화해 신청인 본인은 약관에 따라 제3병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case13_report.txt</td>
+        <td>4</td>
+        <td>4</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울바른병원; 누가재활의학과의원</summary>
+            <div>서울바른병원; 누가재활의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case14.txt</td>
+        <td>74</td>
+        <td>49</td>
+        <td>9</td>
+        <td>5</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</summary>
+            <div>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case14_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case14_vnexsus.txt</td>
+        <td>6</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case1_report.txt</td>
+        <td>10</td>
+        <td>9</td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이기섭의원; 강남성심병원</summary>
+            <div>이기섭의원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case2.txt</td>
+        <td>69</td>
+        <td>60</td>
+        <td>12</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</summary>
+            <div>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case2_report.txt</td>
+        <td>7</td>
+        <td>5</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</summary>
+            <div>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case2_vnexsus.txt</td>
+        <td>9</td>
+        <td>9</td>
+        <td>9</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>SM 영상의학과의원; 삼성서울병원</summary>
+            <div>SM 영상의학과의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case3.txt</td>
+        <td>76</td>
+        <td>61</td>
+        <td>13</td>
+        <td>11</td>
+        <td>0</td>
+        <td>15</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원 …</summary>
+            <div>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원; 목동수치과; 예스안과의원; 이대목동병원; 속목동병원; 이화여자대학교 의과대학부속 목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case3_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이대목동병원; 부터 이대목동병원</summary>
+            <div>이대목동병원; 부터 이대목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case4.txt</td>
+        <td>125</td>
+        <td>112</td>
+        <td>14</td>
+        <td>7</td>
+        <td>0</td>
+        <td>25</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원 …</summary>
+            <div>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case5.txt</td>
+        <td>93</td>
+        <td>83</td>
+        <td>16</td>
+        <td>19</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원 …</summary>
+            <div>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원; 강한내과의원; 안원의 외래 AK0538치과; 과의원; 안면외 외래 AS0256치과; 치과 외래 AK0538 타 명시된치과; 안원의 외래 AK0881 직지초치과; 치주과 외래 AK0531 성 복합지치과; 고혈압·당뇨병이 의심되는 분은 병·의원; 강북삼성병원; 명 칭 굿웰스의원; 세브란스병원; 최근 1달 이내 국내 신종감염병 위험지역 또는 병원; 진단소견병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case5_report.txt</td>
+        <td>10</td>
+        <td>8</td>
+        <td>6</td>
+        <td>3</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>동신병원; 굿웰스의원; 세브란스병원</summary>
+            <div>동신병원; 굿웰스의원; 세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case6.txt</td>
+        <td>132</td>
+        <td>106</td>
+        <td>15</td>
+        <td>10</td>
+        <td>0</td>
+        <td>23</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원 …</summary>
+            <div>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원; 매화가정의학과의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case6_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case7.txt</td>
+        <td>279</td>
+        <td>210</td>
+        <td>15</td>
+        <td>10</td>
+        <td>0</td>
+        <td>81</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원 …</summary>
+            <div>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원; 외래 AK0530 성 단순치 1치과; 건이비인후과의원; 이비인후과의원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case7_report.txt</td>
+        <td>12</td>
+        <td>9</td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울성모병원</summary>
+            <div>서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>baseline</td>
+        <td>Case8.txt</td>
+        <td>458</td>
+        <td>368</td>
+        <td>57</td>
+        <td>15</td>
+        <td>4</td>
+        <td>53</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트 …</summary>
+            <div>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트; 안과병원; 양평병원; 학과병원; 치료 한방치료에서 발생한; 치료; 콜센터; 일산21세기병원; 자택 친척집 타병원; 서류영상발급센터</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case8_report.txt</td>
+        <td>9</td>
+        <td>6</td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원</summary>
+            <div>세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>baseline</td>
+        <td>Case9.txt</td>
+        <td>1219</td>
+        <td>1091</td>
+        <td>100</td>
+        <td>32</td>
+        <td>0</td>
+        <td>151</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과 …</summary>
+            <div>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과; 교치과병원; 인후과의원; 청안과의원; 과의원; 이대서울병원; 조인트힐병원; 열린안과의원; 뇌혈관병원; 제일이비인후과의원; 유방센터; 김성모병원; 의뢰기관 대림성모병원; 재병원; 리성모병원; 대리병원; 림성모병원; 의사; HE 에이치플러스 양지병원; 에이치플러스 양지병원; H 에이치플러스 양지병원; 이화여자대학교 의과대학부속 서울병원; EUMC 이대서울병원; 진료용병원; HO 에이치플러스 양지병원; HO 에어치플러스 양지병원; HEY 에이치플러스 양지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>baseline</td>
+        <td>Case9_report.txt</td>
+        <td>18</td>
+        <td>14</td>
+        <td>9</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</summary>
+            <div>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case1.txt</td>
+        <td>129</td>
+        <td>112</td>
+        <td>37</td>
+        <td>11</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원 …</summary>
+            <div>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원; 이기설의원; 한림대학교 강남성심병원; 은 1개월 이상 입원한 경우병원; 한림대학교강남성심병원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case10.txt</td>
+        <td>191</td>
+        <td>165</td>
+        <td>27</td>
+        <td>8</td>
+        <td>0</td>
+        <td>9</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원 …</summary>
+            <div>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원; 가톨릭대학교 은평성모병원; 그 가톨릭대학교 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case10_report.txt</td>
+        <td>6</td>
+        <td>3</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</summary>
+            <div>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_plus</td>
+        <td>Case11.txt</td>
+        <td>686</td>
+        <td>524</td>
+        <td>121</td>
+        <td>25</td>
+        <td>0</td>
+        <td>37</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원 …</summary>
+            <div>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원; 이안과의원; 강의학과의원; 타워치과의원; 치과의원; 최내과의원; 최대균 남광호; 후과의원; 김소형한의원; 신촌연세병원; 세란병원; 숭실한의원; 삼성병원; 오안과의원; 외과 외래 AB1810가 없는 만의원; 서울특별시 종로구 평동 108번지 강북삼성병원; 삼성서울병원; 감염 병원; 년 10월 25일 외부병원; 입원 및 수술이력병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case11_report.txt</td>
+        <td>23</td>
+        <td>13</td>
+        <td>7</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</summary>
+            <div>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case12.txt</td>
+        <td>96</td>
+        <td>61</td>
+        <td>15</td>
+        <td>20</td>
+        <td>0</td>
+        <td>20</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원 …</summary>
+            <div>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원; 본 의무기록은 홍익병원; 영광종합병원; 상기 환자는 3주 전 타병원; 내원전 병원; 봄익병원; 영광 종합병원; 전남대학교병원; 재원여부 병원; 상환 3주 전 타병원; 봉익병원; 이화여자대학교 의과대학부속 목동병원; 이대목동병원; 추가가산병원; 경유병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case12_report.txt</td>
+        <td>11</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>0</td>
+        <td>8</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>주 전 타 병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원; 홍익병원</summary>
+            <div>주 전 타 병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원; 홍익병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case13.txt</td>
+        <td>149</td>
+        <td>128</td>
+        <td>26</td>
+        <td>11</td>
+        <td>0</td>
+        <td>116</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원 …</summary>
+            <div>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원; 보건업 일반병원; 수도권장기보상부 수도장기센터; 수도권장기보상부 수도장기3센터; 년 04월 14일 넘어지는 사고 발생으로 서울바른병원; 화해 신청인 본인은 약관에 따라 제3병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case13_report.txt</td>
+        <td>4</td>
+        <td>4</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울바른병원; 누가재활의학과의원</summary>
+            <div>서울바른병원; 누가재활의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case14.txt</td>
+        <td>74</td>
+        <td>52</td>
+        <td>13</td>
+        <td>5</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</summary>
+            <div>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case14_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case14_vnexsus.txt</td>
+        <td>6</td>
+        <td>3</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case1_report.txt</td>
+        <td>10</td>
+        <td>9</td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이기섭의원; 강남성심병원</summary>
+            <div>이기섭의원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case2.txt</td>
+        <td>69</td>
+        <td>63</td>
+        <td>15</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</summary>
+            <div>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case2_report.txt</td>
+        <td>7</td>
+        <td>5</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</summary>
+            <div>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case2_vnexsus.txt</td>
+        <td>9</td>
+        <td>9</td>
+        <td>9</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>SM 영상의학과의원; 삼성서울병원</summary>
+            <div>SM 영상의학과의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case3.txt</td>
+        <td>76</td>
+        <td>67</td>
+        <td>19</td>
+        <td>11</td>
+        <td>0</td>
+        <td>15</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원 …</summary>
+            <div>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원; 목동수치과; 예스안과의원; 이대목동병원; 속목동병원; 이화여자대학교 의과대학부속 목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case3_report.txt</td>
+        <td>7</td>
+        <td>7</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이대목동병원; 부터 이대목동병원</summary>
+            <div>이대목동병원; 부터 이대목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case4.txt</td>
+        <td>125</td>
+        <td>111</td>
+        <td>15</td>
+        <td>7</td>
+        <td>0</td>
+        <td>25</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원 …</summary>
+            <div>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case5.txt</td>
+        <td>93</td>
+        <td>83</td>
+        <td>18</td>
+        <td>19</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원 …</summary>
+            <div>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원; 강한내과의원; 안원의 외래 AK0538치과; 과의원; 안면외 외래 AS0256치과; 치과 외래 AK0538 타 명시된치과; 안원의 외래 AK0881 직지초치과; 치주과 외래 AK0531 성 복합지치과; 고혈압·당뇨병이 의심되는 분은 병·의원; 강북삼성병원; 명 칭 굿웰스의원; 세브란스병원; 최근 1달 이내 국내 신종감염병 위험지역 또는 병원; 진단소견병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case5_report.txt</td>
+        <td>10</td>
+        <td>9</td>
+        <td>7</td>
+        <td>3</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>동신병원; 굿웰스의원; 세브란스병원</summary>
+            <div>동신병원; 굿웰스의원; 세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case6.txt</td>
+        <td>132</td>
+        <td>109</td>
+        <td>19</td>
+        <td>10</td>
+        <td>0</td>
+        <td>23</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원 …</summary>
+            <div>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원; 매화가정의학과의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case6_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case7.txt</td>
+        <td>279</td>
+        <td>207</td>
+        <td>32</td>
+        <td>10</td>
+        <td>0</td>
+        <td>81</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원 …</summary>
+            <div>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원; 외래 AK0530 성 단순치 1치과; 건이비인후과의원; 이비인후과의원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case7_report.txt</td>
+        <td>12</td>
+        <td>8</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울성모병원</summary>
+            <div>서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_plus</td>
+        <td>Case8.txt</td>
+        <td>458</td>
+        <td>388</td>
+        <td>88</td>
+        <td>15</td>
+        <td>4</td>
+        <td>53</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트 …</summary>
+            <div>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트; 안과병원; 양평병원; 학과병원; 치료 한방치료에서 발생한; 치료; 콜센터; 자택 친척집 타병원; 일산21세기병원; 서류영상발급센터</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case8_report.txt</td>
+        <td>9</td>
+        <td>6</td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원</summary>
+            <div>세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_plus</td>
+        <td>Case9.txt</td>
+        <td>1219</td>
+        <td>1040</td>
+        <td>115</td>
+        <td>32</td>
+        <td>0</td>
+        <td>151</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과 …</summary>
+            <div>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과; 교치과병원; 인후과의원; 청안과의원; 과의원; 이대서울병원; 조인트힐병원; 열린안과의원; 뇌혈관병원; 제일이비인후과의원; 유방센터; 김성모병원; 의뢰기관 대림성모병원; 재병원; 리성모병원; 대리병원; 림성모병원; 의사; HE 에이치플러스 양지병원; 에이치플러스 양지병원; H 에이치플러스 양지병원; 이화여자대학교 의과대학부속 서울병원; 진료용병원; HO 에이치플러스 양지병원; HO 에어치플러스 양지병원; HEY 에이치플러스 양지병원; EUMC 이대서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_plus</td>
+        <td>Case9_report.txt</td>
+        <td>18</td>
+        <td>14</td>
+        <td>9</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</summary>
+            <div>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case1.txt</td>
+        <td>129</td>
+        <td>107</td>
+        <td>38</td>
+        <td>11</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원 …</summary>
+            <div>내당 최내과의원; 내당최내과의원; 미소랑치과; 이기섭의원; 미소랑치과의; 이기선 의원; 이기설의원; 한림대학교 강남성심병원; 은 1개월 이상 입원한 경우병원; 한림대학교강남성심병원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case10.txt</td>
+        <td>191</td>
+        <td>143</td>
+        <td>22</td>
+        <td>8</td>
+        <td>0</td>
+        <td>9</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원 …</summary>
+            <div>인후과의원; 닥터나인의원; 후과의원; 과의원; 홍익안과의원; 은평성모병원; 가톨릭대학교 은평성모병원; 그 가톨릭대학교 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case10_report.txt</td>
+        <td>6</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</summary>
+            <div>여 년 전 치료 받은 사실 병원; 일자 사고경위 병원; 은평성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_aggressive</td>
+        <td>Case11.txt</td>
+        <td>686</td>
+        <td>442</td>
+        <td>98</td>
+        <td>25</td>
+        <td>0</td>
+        <td>37</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원 …</summary>
+            <div>누네안과병원; 대남의원; 연세예인의원; 의학과의원; 이안안과의원; 강북삼성병원; 이안과의원; 강의학과의원; 타워치과의원; 치과의원; 최내과의원; 최대균 남광호; 후과의원; 김소형한의원; 신촌연세병원; 세란병원; 숭실한의원; 삼성병원; 오안과의원; 외과 외래 AB1810가 없는 만의원; 서울특별시 종로구 평동 108번지 강북삼성병원; 삼성서울병원; 감염 병원; 년 10월 25일 외부병원; 입원 및 수술이력병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case11_report.txt</td>
+        <td>23</td>
+        <td>13</td>
+        <td>7</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</summary>
+            <div>강북삼성병원; 피보험자 동 보험 가입 후 강북삼성병원; 동 보험 암 보장 개시일 이내 강북삼성병원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case12.txt</td>
+        <td>96</td>
+        <td>50</td>
+        <td>15</td>
+        <td>20</td>
+        <td>0</td>
+        <td>20</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원 …</summary>
+            <div>신천한솔의원; 홍익병원; 목동중앙치과병원; 하나로한방병원; 열린의원; 실로암안과병원; 본 의무기록은 홍익병원; 영광종합병원; 영광 종합병원; 상기 환자는 3주 전 타병원; 전남대학교병원; 내원전 병원; 재원여부 병원; 상환 3주 전 타병원; 봄익병원; 봉익병원; 이화여자대학교 의과대학부속 목동병원; 이대목동병원; 추가가산병원; 경유병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case12_report.txt</td>
+        <td>11</td>
+        <td>4</td>
+        <td>3</td>
+        <td>5</td>
+        <td>0</td>
+        <td>8</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>주 전 타 병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원; 홍익병원</summary>
+            <div>주 전 타 병원; 한 잇몸 출혈 및 복부 불편감으로 금일 홍익병원; 에서 알콜성 간경화 진단 받고 치료 위해 홍익병원 내원병원; 이대목동병원; 홍익병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case13.txt</td>
+        <td>149</td>
+        <td>124</td>
+        <td>24</td>
+        <td>11</td>
+        <td>0</td>
+        <td>116</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원 …</summary>
+            <div>인보험1센터; 당사에서는 후유장해 적정성 여부 등을 위해 종합병원; 유선신청센터; 누가재활의학과의원; 통원기간병원; 서울 바른 병원; 보건업 일반병원; 수도권장기보상부 수도장기센터; 수도권장기보상부 수도장기3센터; 년 04월 14일 넘어지는 사고 발생으로 서울바른병원; 화해 신청인 본인은 약관에 따라 제3병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case13_report.txt</td>
+        <td>4</td>
+        <td>4</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울바른병원; 누가재활의학과의원</summary>
+            <div>서울바른병원; 누가재활의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case14.txt</td>
+        <td>74</td>
+        <td>35</td>
+        <td>9</td>
+        <td>5</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</summary>
+            <div>김윤호서울외과의원; 요양기관 종류 의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case14_report.txt</td>
+        <td>7</td>
+        <td>5</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case14_vnexsus.txt</td>
+        <td>6</td>
+        <td>3</td>
+        <td>3</td>
+        <td>2</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case1_report.txt</td>
+        <td>10</td>
+        <td>8</td>
+        <td>4</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이기섭의원; 강남성심병원</summary>
+            <div>이기섭의원; 강남성심병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case2.txt</td>
+        <td>69</td>
+        <td>50</td>
+        <td>15</td>
+        <td>4</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</summary>
+            <div>에스엠영상의학과의원; 삼성서울병원; 하나항맥외과의원; SM 영상의학과의원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case2_report.txt</td>
+        <td>7</td>
+        <td>5</td>
+        <td>3</td>
+        <td>3</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</summary>
+            <div>에스엠영상의학과의원; 서울대학교직장부속의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case2_vnexsus.txt</td>
+        <td>9</td>
+        <td>9</td>
+        <td>9</td>
+        <td>2</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>SM 영상의학과의원; 삼성서울병원</summary>
+            <div>SM 영상의학과의원; 삼성서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case3.txt</td>
+        <td>76</td>
+        <td>56</td>
+        <td>15</td>
+        <td>11</td>
+        <td>0</td>
+        <td>15</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원 …</summary>
+            <div>인후과의원; 라파엘의원; 후과의원; 서피부과의원; 과의원; 김안과병원; 목동수치과; 예스안과의원; 이대목동병원; 속목동병원; 이화여자대학교 의과대학부속 목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case3_report.txt</td>
+        <td>7</td>
+        <td>6</td>
+        <td>1</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이대목동병원; 부터 이대목동병원</summary>
+            <div>이대목동병원; 부터 이대목동병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case4.txt</td>
+        <td>125</td>
+        <td>93</td>
+        <td>12</td>
+        <td>7</td>
+        <td>0</td>
+        <td>25</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원 …</summary>
+            <div>이 문서는 금강아산병원; 금강아산병원; 가톨릭대학교 서울성모병원; 등록번호병원; 건강검진 결과통보서상 상급종합병원; 그 가톨릭대학교 서울성모병원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case5.txt</td>
+        <td>93</td>
+        <td>65</td>
+        <td>14</td>
+        <td>19</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원 …</summary>
+            <div>의료법인동신의료재단 동신병원; 티스치과; 덴티스킨치과; 안원의 외래 AK045 성분란지치과; 안원의 외래 AK045 성불란치치과; 홍제삼성의원; 강한내과의원; 안원의 외래 AK0538치과; 과의원; 안면외 외래 AS0256치과; 치과 외래 AK0538 타 명시된치과; 안원의 외래 AK0881 직지초치과; 치주과 외래 AK0531 성 복합지치과; 고혈압·당뇨병이 의심되는 분은 병·의원; 강북삼성병원; 명 칭 굿웰스의원; 세브란스병원; 진단소견병원; 최근 1달 이내 국내 신종감염병 위험지역 또는 병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case5_report.txt</td>
+        <td>10</td>
+        <td>8</td>
+        <td>7</td>
+        <td>3</td>
+        <td>0</td>
+        <td>5</td>
+        <td>1</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>동신병원; 굿웰스의원; 세브란스병원</summary>
+            <div>동신병원; 굿웰스의원; 세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case6.txt</td>
+        <td>132</td>
+        <td>91</td>
+        <td>15</td>
+        <td>10</td>
+        <td>0</td>
+        <td>23</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원 …</summary>
+            <div>과의원; 우리한의원; 큰나무 의원; 김윤호서울외과의원; 요양기관 종류 의원; 마리치과의원; 매화가정의학과의원; 의료재단 명지병원; 명지병원; 전원 호스피스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case6_report.txt</td>
+        <td>7</td>
+        <td>5</td>
+        <td>2</td>
+        <td>2</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>김윤호서울외과의원; 명지병원</summary>
+            <div>김윤호서울외과의원; 명지병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case7.txt</td>
+        <td>279</td>
+        <td>190</td>
+        <td>17</td>
+        <td>10</td>
+        <td>0</td>
+        <td>81</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원 …</summary>
+            <div>가톨릭대학교 서울성모병원; 인과의원; 비인후과의원; 사당연세365의원; 외래환자 의약품관리료의원; 대항병원; 외래 AK0530 성 단순치 1치과; 건이비인후과의원; 이비인후과의원; 서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case7_report.txt</td>
+        <td>12</td>
+        <td>7</td>
+        <td>4</td>
+        <td>1</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>서울성모병원</summary>
+            <div>서울성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_aggressive</td>
+        <td>Case8.txt</td>
+        <td>458</td>
+        <td>323</td>
+        <td>74</td>
+        <td>15</td>
+        <td>4</td>
+        <td>53</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트 …</summary>
+            <div>세브란스병원; 최근 1달 이내 입원했던 병원; 최근 1달 이내 입원했던병원; 요양시설병원; 치과의원; 일산왕플란트; 안과병원; 양평병원; 학과병원; 치료 한방치료에서 발생한; 치료; 콜센터; 서류영상발급센터; 일산21세기병원; 자택 친척집 타병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case8_report.txt</td>
+        <td>9</td>
+        <td>6</td>
+        <td>6</td>
+        <td>1</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>세브란스병원</summary>
+            <div>세브란스병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="high">
+        <td>merge_aggressive</td>
+        <td>Case9.txt</td>
+        <td>1219</td>
+        <td>947</td>
+        <td>102</td>
+        <td>32</td>
+        <td>0</td>
+        <td>151</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과 …</summary>
+            <div>대림성모병원; 해미소한의원; 양지병원; 남성심병원; 속서울병원; 서울호치과; 교치과병원; 인후과의원; 청안과의원; 과의원; 이대서울병원; 조인트힐병원; 열린안과의원; 뇌혈관병원; 제일이비인후과의원; 유방센터; 김성모병원; 의뢰기관 대림성모병원; 재병원; 리성모병원; 대리병원; 림성모병원; 의사; HE 에이치플러스 양지병원; 에이치플러스 양지병원; H 에이치플러스 양지병원; 이화여자대학교 의과대학부속 서울병원; 진료용병원; HO 에이치플러스 양지병원; HO 에어치플러스 양지병원; HEY 에이치플러스 양지병원; EUMC 이대서울병원</div>
+          </details>
+        </td>
+      </tr>
+    
+
+      <tr class="">
+        <td>merge_aggressive</td>
+        <td>Case9_report.txt</td>
+        <td>18</td>
+        <td>14</td>
+        <td>9</td>
+        <td>4</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0</td>
+        <td>
+          <details>
+            <summary>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</summary>
+            <div>양지병원; 이대서울병원; 피보험자는 대림성모병원; 대림성모병원</div>
+          </details>
+        </td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+      <script>
+        (function(){
+          var tbody = document.getElementById('summaryBody');
+          if (!tbody) return;
+          var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+          var select = document.getElementById('pageSize');
+          var prev = document.getElementById('prev');
+          var next = document.getElementById('next');
+          var info = document.getElementById('pageInfo');
+          var pageSize = 25;
+          var page = 1;
+          var labelPage = '페이지';
+          var labelRows = '행';
+
+          function totalPages(){
+            if (pageSize === -1) return 1;
+            return Math.max(1, Math.ceil(rows.length / pageSize));
+          }
+
+          function render(){
+            var tp = totalPages();
+            if (page > tp) page = tp;
+            for (var i = 0; i < rows.length; i++){
+              var visible = (pageSize === -1) || (i >= (page - 1) * pageSize && i < page * pageSize);
+              rows[i].style.display = visible ? '' : 'none';
+            }
+            info.textContent = labelPage + ' ' + page + ' / ' + tp + ' · ' + labelRows + ' ' + rows.length;
+            prev.disabled = page <= 1;
+            next.disabled = page >= tp;
+          }
+
+          select.addEventListener('change', function(e){
+            var val = String(e.target.value);
+            pageSize = (val === 'all') ? -1 : parseInt(val, 10);
+            page = 1;
+            render();
+          });
+          prev.addEventListener('click', function(){ if (page > 1) { page--; render(); } });
+          next.addEventListener('click', function(){ page++; render(); });
+          render();
+        })();
+      </script>
+    </body>
+  </html>

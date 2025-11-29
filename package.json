@@ -14,7 +14,15 @@
     "test:rag": "node test-progressive-rag.js",
     "test:rag:integration": "node -e \"import('./src/rag/index.js').then(m => m.ProgressiveRAGManager).then(async M => { const mgr = new M({enableTesting: true}); await mgr.initialize(); const results = await mgr.getTestRunner().runIntegrationTestsOnly(); console.log('Integration tests completed:', results); await mgr.stop(); })\"",
     "test:rag:performance": "node -e \"import('./src/rag/index.js').then(m => m.ProgressiveRAGManager).then(async M => { const mgr = new M({enableTesting: true}); await mgr.initialize(); const results = await mgr.getTestRunner().runPerformanceTestsOnly(); console.log('Performance tests completed:', results); await mgr.stop(); })\"",
-    "optimize:rag": "node -e \"import('./src/rag/index.js').then(m => m.ProgressiveRAGManager).then(async M => { const mgr = new M({enableOptimization: true}); await mgr.initialize(); await mgr.start(); const results = await mgr.runOptimization(); console.log('Optimization completed:', results); await mgr.stop(); })\""
+    "optimize:rag": "node -e \"import('./src/rag/index.js').then(m => m.ProgressiveRAGManager).then(async M => { const mgr = new M({enableOptimization: true}); await mgr.initialize(); await mgr.start(); const results = await mgr.runOptimization(); console.log('Optimization completed:', results); await mgr.stop(); })\"",
+    "test:episodes:smoke": "node scripts/outpatient-episodes-smoke.js",
+    "test:episodes:smoke:min": "node scripts/outpatient-episodes-smoke-min.js",
+    "analyze:episodes:case": "node scripts/run-outpatient-episodes-case-sample.js",
+    "analyze:episodes:compare": "node scripts/compare-outpatient-episodes-case.js",
+    "report:csv": "node src/scripts/generateComparisonCsv.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-case-comparison.csv",
+    "report:html": "node src/scripts/cliGenerateComparisonHtml.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-case-comparison.html --title \"Outpatient Episodes Comparison\"",
+    "report:all": "npm run report:csv && npm run report:html",
+    "report:summary": "node src/scripts/cliGenerateSummary.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-summary.json"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^4.7.2",

@@ -1,0 +1,22 @@
+export const REPORT_LABELS_EN = {
+  title_default: "Outpatient Episodes Case Comparison Summary",
+  meta_generated_at: "Generated at:",
+  section_aggregate: "Aggregate",
+  section_top_groups: "Top Diagnostic Groups",
+  section_exports: "Exports",
+  section_summary_by_config: "Summary by File/Config",
+  metric_cases: "Cases",
+  metric_total_episodes: "Total Episodes",
+  metric_total_records: "Total Records",
+  metric_claims_within_window: "Claims Within Window",
+  metric_disease_anchors: "Disease Anchors",
+  metric_tests_within_timeframe: "Tests Within Timeframe",
+  export_download_csv: "Download CSV",
+  controls_page_size: "Page size",
+  controls_prev: "Prev",
+  controls_next: "Next",
+  controls_page_label: "Page",
+  controls_rows_label: "Rows",
+  no_top_groups: "No top groups available.",
+};
+
