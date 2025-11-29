@@ -6,8 +6,11 @@
  * - 모든 출력(Excel/txt/json/고지맵)이 이 이벤트 테이블만 참조
  * - 원문 재요약 경로 차단으로 정밀도 확보
  * 
- * Phase 1 - T02
+ * Phase 1 - T02, T03
  */
+
+import sourceSpanManager from './sourceSpanManager.js';
+
 
 /**
  * MedicalEvent 스키마
@@ -79,6 +82,15 @@ class MedicalEventModel {
 
         // 플래그 설정 (가입일 기준)
         this.setEnrollmentFlags(events, patientInfo);
+
+        // SourceSpan 첨부율 통계 (Phase 1 - T03)
+        const spanStats = sourceSpanManager.calculateAttachmentRate(events);
+        console.log(`📊 SourceSpan 첨부율: ${spanStats.ratePercent}% (${spanStats.withSpan}/${spanStats.total})`);
+
+        if (spanStats.rate < 0.95) {
+            console.warn(`⚠️  목표 미달성: 95% 목표, 현재 ${spanStats.ratePercent}%`);
+            sourceSpanManager.logMissingSpans();
+        }
 
         console.log(`✅ 총 ${events.length}개 이벤트 생성 완료`);
         return events;
@@ -221,43 +233,26 @@ class MedicalEventModel {
     }
 
     /**
-     * 원문 근거 추출
+     * 원문 근거 추출 (Phase 1 - T03 강화)
      * @param {Object} block - 날짜 블록
      * @param {string} rawText - 원문 텍스트
      * @returns {Object} sourceSpan
      */
     extractSourceSpan(block, rawText) {
-        // Phase 1 - T03에서 정교하게 구현 예정
-        // 현재는 기본 구조만 제공
-
-        if (!rawText || !block.rawText) {
-            return {
-                start: 0,
-                end: 0,
-                textPreview: ''
-            };
-        }
-
-        // 원문에서 블록 텍스트 위치 찾기
-        const blockText = block.rawText.substring(0, 100); // 처음 100자
-        const start = rawText.indexOf(blockText);
-
-        if (start === -1) {
-            return {
-                start: 0,
-                end: 0,
-                textPreview: block.rawText.substring(0, 200)
-            };
-        }
-
-        const end = start + block.rawText.length;
-        const preview = rawText.substring(start, Math.min(end, start + 200));
-
-        return {
-            start,
-            end,
-            textPreview: preview
+        // sourceSpanManager 사용 (Phase 1 - T03)
+        // 임시 이벤트 객체 생성 (anchor 수집용)
+        const tempEvent = {
+            id: 'temp',
+            date: block.date || '날짜미상',
+            hospital: block.hospital || '병원명 미상',
+            diagnosis: {
+                name: block.diagnosis || '',
+                code: block.diagnosisCode || null
+            },
+            procedures: block.procedures || []
         };
+
+        return sourceSpanManager.attachSourceSpan(tempEvent, rawText, block);
     }
 
     /**
