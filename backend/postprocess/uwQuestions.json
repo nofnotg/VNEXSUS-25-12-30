@@ -1,0 +1,754 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Underwriting Questions Map",
+    "description": "보험 심사 질문 정의 - 고지의무 위반 판단을 위한 질문 구조",
+    "version": "1.0.0",
+    "lastUpdated": "2025-11-29",
+    "questions": [
+        {
+            "id": "Q_UW_3M_DIAG_TREAT",
+            "title": "가입 전 3개월 이내 진단/치료/검사",
+            "description": "최근 3개월 이내에 질병이나 상해로 인하여 의사의 진찰, 검사, 치료, 투약을 받은 사실이 있습니까?",
+            "period": "3M",
+            "periodDays": 90,
+            "priority": 1,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "수술",
+                    "입원",
+                    "처방"
+                ],
+                "keywords": [
+                    "진단",
+                    "치료",
+                    "검사",
+                    "투약",
+                    "처방",
+                    "진찰"
+                ],
+                "excludeKeywords": [
+                    "건강검진",
+                    "예방접종",
+                    "단순상담"
+                ],
+                "diagnosisCodesPrefix": [],
+                "procedureKeywords": []
+            },
+            "scoring": {
+                "baseWeight": 0.40,
+                "periodBoost": 0.25,
+                "eventTypeBoost": {
+                    "수술": 0.20,
+                    "입원": 0.20,
+                    "검사": 0.10,
+                    "진료": 0.05
+                }
+            },
+            "outputTemplate": {
+                "format": "table",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명",
+                    "치료내용"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "date"
+            }
+        },
+        {
+            "id": "Q_UW_5Y_ADMISSION_SURGERY",
+            "title": "최근 5년 이내 입원/수술",
+            "description": "최근 5년 이내에 질병이나 상해로 인하여 입원 또는 수술을 받은 사실이 있습니까?",
+            "period": "5Y",
+            "periodDays": 1825,
+            "priority": 2,
+            "triggers": {
+                "eventTypes": [
+                    "입원",
+                    "수술"
+                ],
+                "keywords": [
+                    "입원",
+                    "수술",
+                    "개복술",
+                    "개흉술",
+                    "개두술",
+                    "절제술",
+                    "성형술",
+                    "ICU",
+                    "중환자실"
+                ],
+                "excludeKeywords": [
+                    "외래",
+                    "통원"
+                ],
+                "diagnosisCodesPrefix": [],
+                "procedureKeywords": [
+                    "수술",
+                    "절제술",
+                    "성형술",
+                    "우회술",
+                    "삽입술",
+                    "제거술",
+                    "입원",
+                    "admission",
+                    "hospitalization"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.40,
+                "periodBoost": 0.25,
+                "eventTypeBoost": {
+                    "수술": 0.25,
+                    "입원": 0.20
+                }
+            },
+            "outputTemplate": {
+                "format": "table",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명",
+                    "입원/수술내용",
+                    "기간"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "hospital"
+            }
+        },
+        {
+            "id": "Q_UW_TUMOR",
+            "title": "암/종양 진단/검사/치료",
+            "description": "암, 종양, 백혈병 등으로 진단, 검사 또는 치료를 받은 사실이 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 1,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "수술",
+                    "입원",
+                    "처방"
+                ],
+                "keywords": [
+                    "암",
+                    "종양",
+                    "악성",
+                    "양성종양",
+                    "백혈병",
+                    "림프종",
+                    "육종",
+                    "cancer",
+                    "tumor",
+                    "malignancy",
+                    "carcinoma",
+                    "leukemia"
+                ],
+                "excludeKeywords": [
+                    "의심",
+                    "배제",
+                    "음성"
+                ],
+                "diagnosisCodesPrefix": [
+                    "C",
+                    "D0",
+                    "D1",
+                    "D2",
+                    "D3",
+                    "D4"
+                ],
+                "procedureKeywords": [
+                    "조직검사",
+                    "생검",
+                    "biopsy",
+                    "항암",
+                    "chemotherapy",
+                    "방사선치료",
+                    "radiation",
+                    "절제술",
+                    "resection"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.50,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "수술": 0.30,
+                    "검사": 0.20,
+                    "입원": 0.20
+                },
+                "codeBoost": 0.30
+            },
+            "outputTemplate": {
+                "format": "detailed",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "검사/치료내용",
+                    "근거"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_CARDIO",
+            "title": "심혈관질환 진단/검사",
+            "description": "협심증, 심근경색, 관상동맥질환 등 심혈관질환으로 진단 또는 검사를 받은 사실이 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 1,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "수술",
+                    "입원"
+                ],
+                "keywords": [
+                    "심근경색",
+                    "협심증",
+                    "관상동맥",
+                    "심부전",
+                    "부정맥",
+                    "심장마비",
+                    "myocardial infarction",
+                    "angina",
+                    "coronary",
+                    "heart failure"
+                ],
+                "excludeKeywords": [],
+                "diagnosisCodesPrefix": [
+                    "I20",
+                    "I21",
+                    "I22",
+                    "I23",
+                    "I24",
+                    "I25",
+                    "I50"
+                ],
+                "procedureKeywords": [
+                    "CAG",
+                    "관상동맥조영술",
+                    "coronary angiography",
+                    "스텐트",
+                    "stent",
+                    "PTCA",
+                    "PCI",
+                    "관상동맥우회술",
+                    "CABG",
+                    "bypass"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.45,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "수술": 0.30,
+                    "검사": 0.25
+                },
+                "codeBoost": 0.25
+            },
+            "outputTemplate": {
+                "format": "detailed",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "검사/시술내용",
+                    "근거"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_CEREBRO",
+            "title": "뇌혈관질환 진단/검사",
+            "description": "뇌졸중, 뇌출혈, 뇌경색 등 뇌혈관질환으로 진단 또는 검사를 받은 사실이 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 1,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "수술",
+                    "입원"
+                ],
+                "keywords": [
+                    "뇌졸중",
+                    "뇌출혈",
+                    "뇌경색",
+                    "뇌동맥류",
+                    "일과성허혈",
+                    "stroke",
+                    "cerebral hemorrhage",
+                    "cerebral infarction",
+                    "TIA"
+                ],
+                "excludeKeywords": [
+                    "의심",
+                    "배제"
+                ],
+                "diagnosisCodesPrefix": [
+                    "I60",
+                    "I61",
+                    "I62",
+                    "I63",
+                    "I64",
+                    "I65",
+                    "I66",
+                    "I67",
+                    "I68",
+                    "I69"
+                ],
+                "procedureKeywords": [
+                    "뇌혈관조영술",
+                    "cerebral angiography",
+                    "뇌혈관중재술",
+                    "개두술",
+                    "craniotomy"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.45,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "수술": 0.30,
+                    "입원": 0.25
+                },
+                "codeBoost": 0.25
+            },
+            "outputTemplate": {
+                "format": "detailed",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "검사/치료내용",
+                    "근거"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_MAJOR_EXAM",
+            "title": "중대검사 (CT/MRI/CAG/조직검사)",
+            "description": "최근 5년 이내에 CT, MRI, 관상동맥조영술(CAG), 조직검사 등 중대검사를 받은 사실이 있습니까?",
+            "period": "5Y",
+            "periodDays": 1825,
+            "priority": 2,
+            "triggers": {
+                "eventTypes": [
+                    "검사"
+                ],
+                "keywords": [
+                    "CT",
+                    "MRI",
+                    "CAG",
+                    "조직검사",
+                    "생검",
+                    "biopsy",
+                    "PET",
+                    "초음파",
+                    "내시경"
+                ],
+                "excludeKeywords": [
+                    "단순촬영",
+                    "X-ray"
+                ],
+                "diagnosisCodesPrefix": [],
+                "procedureKeywords": [
+                    "CT",
+                    "MRI",
+                    "CAG",
+                    "관상동맥조영술",
+                    "조직검사",
+                    "생검",
+                    "PET-CT",
+                    "초음파",
+                    "내시경",
+                    "기관지경",
+                    "복막경"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.35,
+                "periodBoost": 0.25,
+                "eventTypeBoost": {
+                    "검사": 0.20
+                },
+                "procedureBoost": {
+                    "CAG": 0.30,
+                    "조직검사": 0.30,
+                    "MRI": 0.20,
+                    "CT": 0.15
+                }
+            },
+            "outputTemplate": {
+                "format": "table",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "검사명",
+                    "검사부위",
+                    "결과"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "examType"
+            }
+        },
+        {
+            "id": "Q_UW_CHRONIC_MED",
+            "title": "만성질환 지속투약/추적",
+            "description": "당뇨병, 고혈압, 이상지질혈증 등 만성질환으로 3개월 이상 지속적으로 투약 또는 추적관찰을 받고 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 2,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "처방"
+                ],
+                "keywords": [
+                    "당뇨",
+                    "고혈압",
+                    "이상지질",
+                    "고지혈증",
+                    "diabetes",
+                    "hypertension",
+                    "dyslipidemia"
+                ],
+                "excludeKeywords": [
+                    "의심",
+                    "경계"
+                ],
+                "diagnosisCodesPrefix": [
+                    "E10",
+                    "E11",
+                    "E14",
+                    "I10",
+                    "I11",
+                    "I12",
+                    "I13",
+                    "E78"
+                ],
+                "procedureKeywords": [
+                    "투약",
+                    "처방",
+                    "medication",
+                    "prescription"
+                ],
+                "minOccurrences": 3,
+                "minDuration": 90
+            },
+            "scoring": {
+                "baseWeight": 0.30,
+                "periodBoost": 0.15,
+                "eventTypeBoost": {
+                    "처방": 0.15
+                },
+                "codeBoost": 0.20,
+                "recurrenceBoost": 0.20
+            },
+            "outputTemplate": {
+                "format": "summary",
+                "columns": [
+                    "진단명",
+                    "투약기간",
+                    "최근방문일",
+                    "처방내역"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_LIVER",
+            "title": "간질환 진단/검사",
+            "description": "간경변, 간염, 간기능이상 등 간질환으로 진단 또는 검사를 받은 사실이 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 2,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "입원"
+                ],
+                "keywords": [
+                    "간경변",
+                    "간염",
+                    "간기능",
+                    "간암",
+                    "지방간",
+                    "cirrhosis",
+                    "hepatitis",
+                    "liver"
+                ],
+                "excludeKeywords": [
+                    "정상",
+                    "음성"
+                ],
+                "diagnosisCodesPrefix": [
+                    "B15",
+                    "B16",
+                    "B17",
+                    "B18",
+                    "B19",
+                    "K70",
+                    "K71",
+                    "K72",
+                    "K73",
+                    "K74",
+                    "K75",
+                    "K76"
+                ],
+                "procedureKeywords": [
+                    "간생검",
+                    "liver biopsy",
+                    "간절제술"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.35,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "검사": 0.20,
+                    "입원": 0.25
+                },
+                "codeBoost": 0.25
+            },
+            "outputTemplate": {
+                "format": "detailed",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "검사/치료내용",
+                    "근거"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_KIDNEY",
+            "title": "신장질환 진단/검사",
+            "description": "신부전, 신장염, 신장결석 등 신장질환으로 진단 또는 검사를 받은 사실이 있습니까?",
+            "period": "ALL",
+            "periodDays": null,
+            "priority": 2,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "입원",
+                    "수술"
+                ],
+                "keywords": [
+                    "신부전",
+                    "신장염",
+                    "신장결석",
+                    "투석",
+                    "신장암",
+                    "renal failure",
+                    "nephritis",
+                    "kidney stone",
+                    "dialysis"
+                ],
+                "excludeKeywords": [],
+                "diagnosisCodesPrefix": [
+                    "N00",
+                    "N01",
+                    "N02",
+                    "N03",
+                    "N04",
+                    "N05",
+                    "N18",
+                    "N19",
+                    "N20"
+                ],
+                "procedureKeywords": [
+                    "투석",
+                    "dialysis",
+                    "신장절제술",
+                    "쇄석술"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.35,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "수술": 0.25,
+                    "입원": 0.20
+                },
+                "codeBoost": 0.25
+            },
+            "outputTemplate": {
+                "format": "detailed",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "검사/치료내용",
+                    "근거"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_RESPIRATORY",
+            "title": "호흡기질환 진단/검사",
+            "description": "폐렴, 결핵, 천식, 만성폐쇄성폐질환 등 호흡기질환으로 진단 또는 검사를 받은 사실이 있습니까?",
+            "period": "5Y",
+            "periodDays": 1825,
+            "priority": 3,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "검사",
+                    "입원"
+                ],
+                "keywords": [
+                    "폐렴",
+                    "결핵",
+                    "천식",
+                    "만성폐쇄성폐질환",
+                    "COPD",
+                    "pneumonia",
+                    "tuberculosis",
+                    "asthma"
+                ],
+                "excludeKeywords": [
+                    "의심",
+                    "배제"
+                ],
+                "diagnosisCodesPrefix": [
+                    "J12",
+                    "J13",
+                    "J14",
+                    "J15",
+                    "J16",
+                    "J18",
+                    "J44",
+                    "J45",
+                    "A15",
+                    "A16"
+                ],
+                "procedureKeywords": [
+                    "기관지경",
+                    "bronchoscopy",
+                    "폐생검"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.30,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "입원": 0.20,
+                    "검사": 0.15
+                },
+                "codeBoost": 0.20
+            },
+            "outputTemplate": {
+                "format": "table",
+                "columns": [
+                    "날짜",
+                    "병원",
+                    "진단명(ICD)",
+                    "치료내용"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        },
+        {
+            "id": "Q_UW_MENTAL",
+            "title": "정신질환 진단/치료",
+            "description": "우울증, 조현병, 양극성장애 등 정신질환으로 진단 또는 치료를 받은 사실이 있습니까?",
+            "period": "5Y",
+            "periodDays": 1825,
+            "priority": 3,
+            "triggers": {
+                "eventTypes": [
+                    "진료",
+                    "처방",
+                    "입원"
+                ],
+                "keywords": [
+                    "우울증",
+                    "조현병",
+                    "양극성",
+                    "불안장애",
+                    "공황장애",
+                    "depression",
+                    "schizophrenia",
+                    "bipolar",
+                    "anxiety",
+                    "panic"
+                ],
+                "excludeKeywords": [
+                    "상담",
+                    "스트레스"
+                ],
+                "diagnosisCodesPrefix": [
+                    "F20",
+                    "F25",
+                    "F30",
+                    "F31",
+                    "F32",
+                    "F33",
+                    "F40",
+                    "F41"
+                ],
+                "procedureKeywords": [
+                    "정신과",
+                    "psychiatry",
+                    "항우울제",
+                    "항정신병"
+                ]
+            },
+            "scoring": {
+                "baseWeight": 0.30,
+                "periodBoost": 0.20,
+                "eventTypeBoost": {
+                    "입원": 0.25,
+                    "처방": 0.15
+                },
+                "codeBoost": 0.20
+            },
+            "outputTemplate": {
+                "format": "summary",
+                "columns": [
+                    "진단명",
+                    "치료기간",
+                    "투약내역"
+                ],
+                "includeSourceSpan": true,
+                "groupBy": "diagnosis"
+            }
+        }
+    ],
+    "metadata": {
+        "totalQuestions": 11,
+        "priorityLevels": {
+            "1": "최우선 (암, 심혈관, 뇌혈관)",
+            "2": "중요 (입원/수술, 만성질환, 간/신장)",
+            "3": "일반 (호흡기, 정신)"
+        },
+        "periodTypes": {
+            "3M": "가입 전 3개월",
+            "5Y": "최근 5년",
+            "ALL": "전체 기간"
+        }
+    }
+}
