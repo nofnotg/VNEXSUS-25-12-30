@@ -1,0 +1,165 @@
+{
+  "hospitalId": "요양",
+  "hospitalName": "요양",
+  "patterns": [
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n환자성명\r\n01342",
+      "position": 37441,
+      "length": 17,
+      "hash": "54f80ded3c85572acb2787a654d99cac",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n603",
+      "position": 33433,
+      "length": 9,
+      "hash": "be95ced1e9f4405cab7ffdea95e737b5",
+      "frequency": 5,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목\r\n질병군(DRG) 번호\r\n병실\r\n영상의학과\r\n환자구분\r\n직장조합\r\n야간(공휴일)진료\r\n[ ]야간 [ ]공휴일\r\n영수증번호(연월-일련번호)\r\n2504-00004\r\n급여\r\n금액산정내용\r\n항목\r\n일부 본인부담\r\n전액\r\n비급여\r\n본인부담금 공단부담금\r\n본인부담\r\n⑥ 진료비 총액\r\n13,160\r\n진찰료\r\n3,948\r\n9,212\r\n1인실\r\n0\r\n입원료\r\n2-3인실\r\n0\r\n4인실 이상\r\n0\r\n200 O\r\n0\r\noooo\r\noooo\r\n0\r\n(1+2+3+4)\r\n0\r\n⑦ 공단부담 총액\r\n(2+3)\r\n9,260\r\n⑧ 환자부담 총액\r\n식대\r\n투약 및\r\n행위료\r\n00\r\n3,900\r\n0\r\n0\r\n0\r\n(1-6)+3+4\r\nD\r\nD\r\n0\r\n조제료\r\n약품비\r\n0\r\n0\r\n0\r\nC\r\n0\r\n⑨ 이미 납부한 금액\r\n0\r\n기본항목\r\n행위료\r\n0\r\n0\r\n0\r\n주사료\r\n약품비\r\n0\r\n0\r\n0\r\n마취료\r\n0\r\n0\r\n0\r\n처치 및 수술료\r\n0\r\n0\r\n0\r\n검사료\r\n0\r\n0\r\n0\r\n영상진단료\r\n0\r\n0\r\n0\r\n방사선치료료\r\n0\r\n0\r\n0\r\n치료재료대\r\n0\r\n0\r\n0\r\n재활 및 물리치료료\r\n0\r\n0\r\n0\r\n정신요법료\r\n0\r\n0\r\n0\r\nOOOOOOOOOO\r\n0\r\n0\r\n⑩ 납부할 금액\r\n3,900\r\n(8-9)\r\n0\r\n0\r\n카드\r\n3,900\r\n0\r\n① 납부\r\n현금영수증\r\n0\r\n0\r\n한 금액\r\n현금\r\n0\r\n0\r\n합계\r\n3,900\r\n0\r\n납부하지 않은 금액(⑩-⑩)\r\n0\r\n0\r\n현금영수증 (\r\n0\r\n신분확인번호\r\n전혈 및 혈액성분제제료\r\n0\r\n0\r\n0\r\n0\r\n현금영수증 승인번호\r\nCT 진단료\r\n0\r\n0\r\n0\r\n0\r\n선택항목\r\nMRI 진단료\r\n0\r\n0\r\n0\r\n0\r\n*요양기관 임의활용공간\r\nPET 진단료\r\n0\r\n0\r\n0\r\n0\r\n초음파진단료\r\n0\r\n0\r\n0\r\n0\r\n보철 교정료\r\n0\r\n0\r\n0\r\n0\r\n제증명수수료\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n선별급여\r\n0\r\n0\r\n0\r\n0\r\n65세 이상 등 정액\r\n0\r\n0\r\n0\r\n0\r\n질병군 포괄수가\r\n0\r\n0\r\n0\r\n0\r\n기타\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n상한액 초과금\r\n요양기관 종류\r\n3,900 2\r\n9,260 3\r\n04\r\n0\r\n5\r\n0\r\n[V] 의원급·보건기관\r\n[\r\n]병원급\r\n[\r\n]종합병원\r\n[\r\n]상급종합병원\r\n사업자등록번호\r\n603-95-29501\r\n상호\r\n더으뜸정형외과",
+      "position": 32343,
+      "length": 1121,
+      "hash": "3aef231c055fa21677aab668a6d4b7fc",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n환자 성명\r\n진료기간\r\n01342",
+      "position": 32299,
+      "length": 24,
+      "hash": "1c57a9605c237f9e304736f06a6929c5",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목\r\n영상의학과\r\n항목\r\n[V] 외래 [] 입원 ([] 퇴원[]중간) 진료비 계산서\r\n•\r\n영수증\r\n음성안내. 위변조방지 1)\r\n환자 성명\r\n장복규\r\n진료기간\r\n2025-09-02\r\n질병군(DRG) 번호\r\n병실\r\n환자구분\r\n직장조합\r\n야간(공휴일) 진료\r\n[ ]야간 [ ]공휴일\r\n영수증번호(연월-일련번호)\r\n2504-00005\r\n급여\r\n금액산정내용\r\n일부 본인부담\r\n전액\r\n비급여\r\n본인부담금 공단부담금\r\n본인부담\r\n진찰료\r\n3,948\r\n9,212\r\n0\r\n0\r\n⑥ 진료비 총액\r\n(1+2+3+4)\r\n22,690\r\n1인실\r\n0\r\n입원료\r\n2-3인실\r\n0\r\n4인실 이상\r\n0\r\n식대\r\n0\r\noooo\r\nooo\r\n0\r\n0\r\non\r\n0\r\n0\r\n⑦ 공단부담 총액\r\n(2+3)\r\n14,760\r\n0\r\n0\r\n0\r\n0\r\n⑧ 환자부담 총액\r\n(1-5)+3+4\r\n7,930\r\n투약 및\r\n행위료\r\n0\r\n0\r\n0\r\n0\r\nS\r\n조제료\r\n약품비\r\n0\r\n⑨ 이미 납부한 금액\r\n기본항목\r\n행위료\r\n0\r\n주사료\r\n약품비\r\n0\r\n0\r\nuoo\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n⑩ 납부할 금액\r\n(8-9)\r\n7,900\r\n마취료\r\n0\r\n0\r\n0\r\n0\r\n목\r\n처치 및 수술료\r\n2,133\r\n4,977\r\n0\r\n0\r\n카드\r\n7,900\r\n검사료\r\n영상진단료\r\n방사선치료료\r\n치료재료대\r\n재활 및 물리치료료\r\noooon\r\n0\r\n0\r\n0\r\n0\r\n① 납부\r\n현금영수증\r\n0\r\n0\r\n0\r\n0\r\n한 금액\r\n현금\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n7,900\r\n0\r\n0\r\n0\r\n납부하지 않은 금액(⑩-⑩)\r\n0\r\n0\r\n0\r\n0\r\n0\r\n현금영수증 (\r\n)\r\n정신요법료\r\n0\r\n0\r\n0\r\n0\r\n신분확인번호\r\n전혈 및 혈액성분제제료\r\n0\r\n0\r\n0\r\n0\r\n현금영수증 승인번호\r\nCT 진단료\r\n0\r\n0\r\n0\r\n0\r\n선택항목\r\nMRI 진단료\r\n0\r\n0\r\n0\r\n*요양기관 임의활용공간\r\n0\r\nPET 진단료\r\n0\r\n0\r\n0\r\n초음파진단료\r\n0\r\n0\r\n0\r\n보철 교정료\r\n0\r\n0\r\n0\r\n제증명수수료\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n선별급여\r\n1,936\r\n484\r\n0\r\n65세 이상 등 정액\r\n0\r\n0\r\n0\r\n질병군 포괄수가\r\n0\r\n0\r\n0\r\noooooooo\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n기타\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n상한액 초과금\r\n요양기관 종류\r\n7,930 2 14,760 3\r\n04\r\n0\r\n(5)\r\n0\r\n[V] 의원급 • 보건기관\r\n[\r\n]병원급\r\n[\r\n]종합병원\r\n[\r\n] 상급종합병원\r\n사업자등록번호\r\n603-95-29501\r\n상호\r\n더으뜸정형외과",
+      "position": 29012,
+      "length": 1241,
+      "hash": "0907bc45b73b9bef5a1d3192995b29e5",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n01342",
+      "position": 28998,
+      "length": 11,
+      "hash": "ccbe2c1dd811f7c3138c6da8192c0850",
+      "frequency": 4,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n환자 성명\r\n진료기간\r\n야간(공휴일) 진료\r\n01342",
+      "position": 25823,
+      "length": 36,
+      "hash": "3b5f798dd5371eef262cb6156a01a512",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목\r\n영상의학과\r\n■ 국민건강보험 요양급여의 기준에 관한 규칙 [별지 제6호서식]\r\n[V] 외래\r\n[] 입원 ([] 퇴원[]중간) 진료비 계산서·영수증\r\n음성안내. 위변조방지\r\n환자등록번호\r\n환자 성명\r\n진료기간\r\n야간(공휴일) 진료\r\n01342a\r\n장복규\r\n2025-08-19\r\n질병군(DRG) 번호\r\n병실\r\n환자구분\r\n]야간 [ ]공휴일\r\n영수증번호(연월-일련번호)\r\n직장조합\r\n2504-00006\r\n급여\r\n금액산정내용\r\n항목\r\n일부 본인부담\r\n전액\r\n비급여\r\n본인부담금 공단부담금\r\n본인부담\r\n⑥ 진료비 총액\r\n119,410\r\n진찰료\r\n5,523\r\n12,887\r\n1인실\r\n0\r\n입원료\r\n2-3인실\r\n0\r\n4인실 이상\r\n0\r\n식대\r\n0\r\noooo\r\n0\r\n0\r\n0\r\n투약 및\r\n행위료\r\n0\r\n0\r\n0\r\noooooc\r\n0\r\n(1+2+3+4)\r\n0\r\n0\r\n0\r\n⑦ 공단부담 총액\r\n(2+5)\r\n12,910\r\n0\r\n0\r\n⑧ 환자부담 총액\r\n106,500\r\n0\r\n(1-5)+3+4\r\n0\r\n조제료\r\n약품비\r\n0\r\n⑨ 이미 납부한 금액\r\n0\r\n0\r\n0\r\n0\r\n기본항목\r\n행위료\r\n0\r\n0\r\n0\r\n0\r\n주사료\r\n약품비\r\n0\r\n0\r\n0\r\n0\r\n⑩ 납부할 금액\r\n106,500\r\n(8-9)\r\n마취료\r\n0\r\n0\r\n0\r\n0\r\n처치 및 수술료\r\n0\r\n0\r\n0\r\n0\r\n카드\r\n106,500\r\n검사료\r\n0\r\n0\r\n0\r\n① 납부\r\n현금영수증\r\n0\r\n영상진단료\r\n0\r\n0\r\n0\r\n0\r\n한 금액\r\n현금\r\n0\r\n방사선치료료\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n치료재료대\r\n0\r\n0\r\n0\r\n0\r\n납부하지 않은 금액(⑩-⑩)\r\n106,500\r\n0\r\n재활 및 물리치료료\r\n0\r\n0\r\n0\r\n0\r\n현금영수증 (\r\n)\r\n정신요법료\r\n0\r\n0\r\n0\r\n0\r\n신분확인번호\r\n전혈 및 혈액성분제제료\r\n0\r\n0\r\n0\r\n0\r\n현금영수증 승인번호\r\nCT 진단료\r\n0\r\n0\r\n0\r\n0\r\n*\r\n선택항목\r\nMRI 진단료\r\n0\r\n0\r\n0\r\n0\r\n요양기관 임의활용공간\r\nPET 진단료\r\n0\r\n0\r\n0\r\n0\r\n초음파진단료\r\n0\r\n0\r\n0\r\n100,000\r\n보철 교정료\r\n0\r\n0\r\n0\r\n0\r\n제증명수수료\r\n0\r\n0\r\n0\r\n1,000\r\n0\r\n0\r\n0\r\n선별급여\r\n0\r\n0\r\n0\r\n65세 이상 등 정액\r\n0\r\n0\r\n0\r\n질병군 포괄수가\r\n0\r\n0\r\n0\r\noooo\r\n0\r\n0\r\n0\r\n0\r\n기타\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n(1)\r\n5,500 2 12,910 3\r\n04\r\n101,000\r\n상한액 초과금\r\n(5\r\n0\r\n요양기관 종류\r\n[V] 의원급 • 보건기관\r\n[\r\n]병원급\r\n사업자등록번호\r\n603-95-29501\r\n[ ]종합병원\r\n상호 더으뜸정형외과",
+      "position": 25719,
+      "length": 1278,
+      "hash": "d56210359210ceb874e412de6372bf35",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목\r\n영상의학과\r\n[V] 외래 []입원\r\n[[]퇴원[]중간) 진료비 계산서 영수증\r\n.\r\n환자등록번호\r\n환자 성명\r\n진료기간\r\n01342a\r\n장복규\r\n2025-09-06\r\n질병군(DRG) 번호\r\n병실\r\n환자구분\r\n직장조합\r\n야간(공휴일)진료\r\n[ ]야간 [ ]공휴일\r\n영수증번호(월-일련번호)\r\n2504-00003\r\n급여\r\n금액산정내용\r\n음성안내. 위변조방지\r\n항목\r\n일부 본인부담\r\n전액\r\n비급여\r\n본인부담금 공단부담금\r\n본인부담\r\n진찰료\r\n4,779\r\n11,151\r\n0\r\n0\r\n1인실\r\n0\r\n0\r\n0\r\n입원료\r\n2.322\r\n0\r\n0\r\n0\r\n00\r\n0\r\n⑥ 진료비 총액\r\n(1+2+3+4)\r\n⑦ 공단부담 총액\r\n(2+3)\r\n25,460\r\n16,630\r\n4인실 이상\r\n0\r\n0\r\n0\r\n0\r\n식대\r\n0\r\n0\r\n투약 및\r\n행위료\r\n0\r\noc\r\n0\r\n0\r\n⑧ 환자부담 총액\r\n(1-5)+3+4\r\n8,830\r\n0\r\n0\r\n0\r\n조제료\r\n⑨ 이미 납부한 금액\r\n0\r\n약품비\r\n0\r\n0\r\n0\r\n0\r\n기본항목\r\n행위료\r\n0\r\n0\r\n0\r\n0\r\n주사료\r\n약품비\r\n0\r\n0\r\n0\r\n0\r\n⑩ 납부할 금액\r\n8,800\r\n(8-9)\r\n마취료\r\n0\r\n0\r\n0\r\n0\r\n처치 및 수술료\r\n2,133\r\n4,977\r\n0\r\n0\r\n카드\r\n8,800\r\n검사료\r\n0\r\n0\r\n0\r\n0\r\n① 납부\r\n현금영수증\r\n0\r\n영상진단료\r\n0\r\n0\r\n0\r\n0\r\n한 금액\r\n현금\r\n0\r\n방사선치료료\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n8,800\r\n치료재료대\r\n재활 및 물리치료료\r\noo\r\n0\r\n0\r\n0\r\n0\r\n납부하지 않은 금액(⑩-⑩)\r\n0\r\n0\r\n0\r\n0\r\n0\r\n현금영수증(\r\n정신요법료\r\n0\r\n0\r\n0\r\n0\r\n신분확인번호\r\n전혈 및 혈액성분제제료\r\n0\r\nCT 진단료\r\n0\r\n선택항목\r\nMRI 진단료\r\n0\r\nPET 진단료\r\n0\r\noooo\r\n0\r\n0\r\n0\r\n현금영수증 승인번호\r\n0\r\n0\r\n0\r\n*\r\n0\r\n0\r\n0\r\n요양기관 임의활용공간\r\n0\r\n초음파진단료\r\n0\r\n0\r\n0\r\n보철 교정료\r\n0\r\n0\r\n0\r\n제증명수수료\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n선별급여\r\n1,936\r\n484\r\n0\r\n65세 이상 등 정액\r\n0\r\n0\r\n0\r\n질병군 포괄수가\r\n0\r\n0\r\n0\r\n기타\r\n0\r\n0\r\n0\r\nooooooooo\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n합계\r\n①\r\n8,830 2 16,630 3\r\n04\r\n0\r\n상한액 초과금\r\n(5)\r\n0\r\n요양기관 종류\r\n[V] 의원급·보건기관\r\n[\r\n]병원급\r\n사업자등록번호\r\n603-95-29501\r\n[\r\n상호\r\n]종합병원\r\n[\r\n]상급종합병원\r\n더으뜸정형외과",
+      "position": 22520,
+      "length": 1250,
+      "hash": "78358bc234cb5cde0c12903790d6aeb4",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\r\n7",
+      "position": 20408,
+      "length": 7,
+      "hash": "7cabb2aa9e8dcdf7db17fa43c7b90cdc",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목\r\n질병군(DRG) 번호\r\n병실\r\n환자구분\r\n정형외과",
+      "position": 19383,
+      "length": 33,
+      "hash": "d7fb3bd625594025b1fea37721bfe077",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호: 780917",
+      "position": 9268,
+      "length": 12,
+      "hash": "a083c373f87269631e3ab3fe4b56ccd3",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "주민등록번호: 780917-1018938",
+      "position": 9266,
+      "length": 22,
+      "hash": "682488f9adb9b05dd9f0160080dc22ab",
+      "frequency": 1,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별 남",
+      "position": 5587,
+      "length": 4,
+      "hash": "23bd365288eab351d4355e0b925f6378",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호 780917",
+      "position": 5558,
+      "length": 11,
+      "hash": "ed90d43059f860d9b483f8976e1f4210",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "주민등록번호 780917-1018938",
+      "position": 5556,
+      "length": 21,
+      "hash": "d32071cc3d0e438ba36e17702e03ce68",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    },
+    {
+      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
+      "match": "대전화 010-7218-1936\r\n증번호 80548664261\r\n조합명칭\r\n수진자\r\n장복규\r\n주민등록번호 780917-1018938\r\n나이 47세\r\n성별 남\r\n주 소\r\n경기도 파주시 광탄면 혜음로 1401",
+      "position": 5504,
+      "length": 114,
+      "hash": "ee14e632164db3d175140b373f738792",
+      "frequency": 2,
+      "firstSeen": "2025-12-06T01:33:47.157Z"
+    }
+  ],
+  "statistics": {
+    "documentsProcessed": 1,
+    "averageCleaningRate": 13.101954343116951,
+    "lastUpdated": "2025-12-06T01:33:47.157Z"
+  },
+  "createdAt": "2025-12-06T01:33:47.157Z"
+}

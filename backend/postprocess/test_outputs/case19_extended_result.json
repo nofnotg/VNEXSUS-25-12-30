@@ -1,0 +1,97 @@
+{
+  "caseNumber": 19,
+  "processedAt": "2025-12-06T01:33:45.649Z",
+  "duration": 65,
+  "inputLength": 86670,
+  "fullResult": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "Case19",
+        "processedAt": "2025-12-06T01:33:45.649Z"
+      },
+      "medicalRecords": [
+        {
+          "date": "2024-09-05",
+          "hospital": "미상 병원",
+          "diagnosis": "미확인",
+          "content": "2024년 09월 05일 년월일\n암센터\n진료구분\n□ 1. 입원 V 2. 외래\n전원사유\n환자 및 보호자의 요청으로 전원\n병실부족으로 전원\n기타:\n연고지 관계로 전원\n보전적 치료 위해서 전원\n환자상태 및 진료의견"
+        },
+        {
+          "date": "2024-09-10",
+          "hospital": "미상 병원",
+          "diagnosis": "미확인",
+          "content": "2024-09-10 PANCREAS MRI:\nSeveral cystic lesions without solid portion in the whole pancreas (the largest: 1.3 cm).\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature."
+        },
+        {
+          "date": "2025-03-31",
+          "hospital": "미상 병원",
+          "diagnosis": "미확인",
+          "content": "2025-03-31 PANCREAS MRI:\nSeveral cystic lesions in the whole pancreas.\nIncreased size of the largest cystic lesion at the pancreas head, now 1.9 cm.\n--> Internal subacute hemorrhage.\n-> Also suspected small solid portions (Srs 11, Img 42).\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature."
+        },
+        {
+          "date": "2025-06-10",
+          "hospital": "병원",
+          "diagnosis": "미확인",
+          "content": "2025-06-10 CT Biliary & Pancreas;\nSlightly Increased size of the largest cystic lesion at the pancreas head (1.9 cm -> 2.7 cm).\n--> Internal hemorrhage.\n--> Suspected enhanced small solid portions.\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature.\n수술 권유함. 귀원에서 진료원합니다.\n2025년 06월 12 일\n담당의사: 김재선\n김치인선 면허번호: 제 28116 호\n요양취급기관기호:\n11100494\n温觉\n병원S\n명\n칭:\n고려"
+        }
+      ]
+    },
+    "pipeline": {
+      "dateBlocks": [],
+      "organizedData": [
+        {
+          "date": "2024-09-05",
+          "hospital": "미상 병원",
+          "rawText": "2024년 09월 05일 년월일\n암센터\n진료구분\n□ 1. 입원 V 2. 외래\n전원사유\n환자 및 보호자의 요청으로 전원\n병실부족으로 전원\n기타:\n연고지 관계로 전원\n보전적 치료 위해서 전원\n환자상태 및 진료의견",
+          "keywordMatches": [
+            "암",
+            "입원"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-09-10",
+          "hospital": "미상 병원",
+          "rawText": "2024-09-10 PANCREAS MRI:\nSeveral cystic lesions without solid portion in the whole pancreas (the largest: 1.3 cm).\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature.",
+          "keywordMatches": [
+            "MRI"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-31",
+          "hospital": "미상 병원",
+          "rawText": "2025-03-31 PANCREAS MRI:\nSeveral cystic lesions in the whole pancreas.\nIncreased size of the largest cystic lesion at the pancreas head, now 1.9 cm.\n--> Internal subacute hemorrhage.\n-> Also suspected small solid portions (Srs 11, Img 42).\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature.",
+          "keywordMatches": [
+            "MRI"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-06-10",
+          "hospital": "병원",
+          "rawText": "2025-06-10 CT Biliary & Pancreas;\nSlightly Increased size of the largest cystic lesion at the pancreas head (1.9 cm -> 2.7 cm).\n--> Internal hemorrhage.\n--> Suspected enhanced small solid portions.\nMain p-duct dilatation upto 6 mm.\n--> DDx. Mixed type IPMN, with worrisome feature.\n수술 권유함. 귀원에서 진료원합니다.\n2025년 06월 12 일\n담당의사: 김재선\n김치인선 면허번호: 제 28116 호\n요양취급기관기호:\n11100494\n温觉\n병원S\n명\n칭:\n고려",
+          "keywordMatches": [
+            "수술",
+            "CT"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ]
+    },
+    "statistics": {
+      "dateBlocks": 0,
+      "organizedRecords": 4,
+      "confidence": 0
+    }
+  }
+}

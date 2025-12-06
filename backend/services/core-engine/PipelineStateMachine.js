@@ -33,7 +33,7 @@ export default class PipelineStateMachine {
             enableDynamicTimeout: options.enableDynamicTimeout !== false,
             ...options
         };
-        
+
         // 동적 타임아웃 설정
         this.timeoutConfig = {
             baseTimeout: this.options.timeoutMs,
@@ -43,7 +43,7 @@ export default class PipelineStateMachine {
             loadMultiplier: 1.3,
             retryMultiplier: 0.8
         };
-        
+
         // 처리 복잡도 가중치
         this.complexityWeights = {
             textLength: 0.3,
@@ -57,7 +57,7 @@ export default class PipelineStateMachine {
         this.states = {
             INIT: 'INIT',
             INGEST: 'INGEST',
-            ANCHOR: 'ANCHOR', 
+            ANCHOR: 'ANCHOR',
             NORMALIZE: 'NORMALIZE',
             TIMELINE: 'TIMELINE',
             RULES: 'RULES',
@@ -69,7 +69,7 @@ export default class PipelineStateMachine {
             ERROR: 'ERROR',
             COMPLETE: 'COMPLETE'
         };
-        
+
         // 품질 게이트 설정
         this.qualityGates = {
             draft: {
@@ -91,11 +91,12 @@ export default class PipelineStateMachine {
                 skipOptionalSteps: false
             }
         };
-        
+
         // 컴포넌트 초기화
+        // TextIngestor와 AnchorDetector는 static 메서드만 제공하므로 클래스 참조만 저장
         this.components = {
-            textIngestor: new TextIngestor(options.textIngestor),
-            anchorDetector: new AnchorDetector(options.anchorDetector),
+            textIngestor: TextIngestor,
+            anchorDetector: AnchorDetector,
             entityNormalizer: new EntityNormalizer(options.entityNormalizer),
             timelineAssembler: new TimelineAssembler(options.timelineAssembler),
             diseaseRuleEngine: new DiseaseRuleEngine(options.diseaseRuleEngine),
@@ -104,7 +105,7 @@ export default class PipelineStateMachine {
             reportSynthesizer: new ReportSynthesizer(options.reportSynthesizer),
             evidenceBinder: new EvidenceBinder(options.evidenceBinder)
         };
-        
+
         // 상태 전환 맵
         this.stateTransitions = {
             INIT: 'INGEST',
@@ -119,11 +120,11 @@ export default class PipelineStateMachine {
             SYNTHESIZE: 'OUTPUT',
             OUTPUT: 'COMPLETE'
         };
-        
+
         // 실행 컨텍스트 초기화
         this.resetExecutionContext();
-        
-        logService.info('PipelineStateMachine initialized', { 
+
+        logService.info('PipelineStateMachine initialized', {
             qualityGate: this.options.qualityGate,
             components: Object.keys(this.components).length
         });
@@ -158,10 +159,10 @@ export default class PipelineStateMachine {
         try {
             this.resetExecutionContext();
             this.executionContext.startTime = Date.now();
-            
+
             // 1. 입력 검증
             await this.validateInput(input);
-            
+
             // 2. 캐시 확인
             if (this.options.enableCaching) {
                 const cachedResult = await this.checkCache(input);
@@ -170,34 +171,34 @@ export default class PipelineStateMachine {
                     return cachedResult;
                 }
             }
-            
+
             // 3. 품질 게이트 설정 적용
             const qualityGateConfig = this.qualityGates[this.options.qualityGate];
-            
+
             // 4. 파이프라인 실행
             const result = await this.runPipeline(input, qualityGateConfig);
-            
+
             // 5. 품질 검증
             await this.validateQuality(result, qualityGateConfig);
-            
+
             // 6. 캐시 저장
             if (this.options.enableCaching && result) {
                 await this.saveToCache(input, result);
             }
-            
+
             // 7. 실행 컨텍스트 완료
             this.executionContext.endTime = Date.now();
             this.executionContext.processingTimeMs = this.executionContext.endTime - this.executionContext.startTime;
             this.executionContext.finalResult = result;
             this.executionContext.currentState = this.states.COMPLETE;
-            
+
             logService.info('Pipeline execution completed successfully', {
                 processingTime: this.executionContext.processingTimeMs,
                 qualityGate: this.options.qualityGate,
                 statesExecuted: this.executionContext.stateHistory.length,
                 retryCount: this.executionContext.retryCount
             });
-            
+
             return {
                 ...result,
                 executionMetadata: {
@@ -210,19 +211,19 @@ export default class PipelineStateMachine {
                     qualityMetrics: this.executionContext.qualityMetrics
                 }
             };
-            
+
         } catch (error) {
-            logService.error('Pipeline execution failed', { 
+            logService.error('Pipeline execution failed', {
                 error: error.message,
                 currentState: this.executionContext.currentState,
                 processingTime: Date.now() - (this.executionContext.startTime || Date.now())
             });
-            
+
             // 폴백 처리
             if (this.options.enableFallback && !this.executionContext.fallbackUsed) {
                 return await this.handleFallback(input, error);
             }
-            
+
             throw error;
         }
     }
@@ -233,27 +234,27 @@ export default class PipelineStateMachine {
     async runPipeline(input, qualityGateConfig, retryCount = 0) {
         let currentData = { ...input };
         const requiredComponents = qualityGateConfig.requiredComponents;
-        
+
         // 동적 타임아웃 계산
         const dynamicTimeout = this.calculateDynamicTimeout(input, qualityGateConfig, retryCount);
-        
+
         if (this.options.enableDetailedLogging) {
-            logger.info('Pipeline timeout calculated', {
+            logService.info('Pipeline timeout calculated', {
                 originalTimeout: qualityGateConfig.maxProcessingTime,
                 dynamicTimeout,
                 retryCount,
                 complexityFactors: this.calculateProcessingComplexity(input)
             });
         }
-        
+
         // 타임아웃 설정
         const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error(`Pipeline execution timeout (${dynamicTimeout}ms)`)), 
+            setTimeout(() => reject(new Error(`Pipeline execution timeout (${dynamicTimeout}ms)`)),
                 dynamicTimeout);
         });
-        
+
         const pipelinePromise = this.executePipelineSteps(currentData, requiredComponents);
-        
+
         return await Promise.race([pipelinePromise, timeoutPromise]);
     }
 
@@ -263,9 +264,9 @@ export default class PipelineStateMachine {
     async executePipelineSteps(currentData, requiredComponents) {
         // 병렬 처리 가능한 단계들을 그룹화
         const parallelGroups = this.getParallelExecutionGroups(requiredComponents);
-        
+
         let processedData = currentData;
-        
+
         for (const group of parallelGroups) {
             if (group.length === 1) {
                 // 단일 단계 실행
@@ -274,61 +275,61 @@ export default class PipelineStateMachine {
                 // 병렬 실행 가능한 단계들
                 processedData = await this.executeParallelStates(group, processedData);
             }
-            
+
             // 메모리 최적화 - 각 그룹 완료 후 중간 정리
             if (global.gc && process.memoryUsage().heapUsed > 100 * 1024 * 1024) { // 100MB 초과시
                 global.gc();
             }
         }
-        
+
         return processedData;
     }
-    
+
     /**
      * 병렬 실행 그룹 생성
      */
     getParallelExecutionGroups(requiredComponents) {
         const groups = [];
-        
+
         // 순차 실행이 필요한 단계들
         const sequentialStages = ['INGEST', 'ANCHOR', 'NORMALIZE'];
         const analysisStages = ['TIMELINE', 'RULES', 'DISCLOSURE']; // 병렬 처리 가능
         const finalStages = ['SCORE', 'EVIDENCE', 'SYNTHESIZE'];
-        
+
         // 순차 단계들 추가
         sequentialStages.forEach(stage => {
             if (requiredComponents.includes(stage)) {
                 groups.push([stage]);
             }
         });
-        
+
         // 분석 단계들을 병렬 그룹으로 추가
         const parallelAnalysis = analysisStages.filter(stage => requiredComponents.includes(stage));
         if (parallelAnalysis.length > 0) {
             groups.push(parallelAnalysis);
         }
-        
+
         // 최종 단계들 추가
         finalStages.forEach(stage => {
             if (requiredComponents.includes(stage)) {
                 groups.push([stage]);
             }
         });
-        
+
         return groups;
     }
-    
+
     /**
      * 병렬 상태 실행
      */
     async executeParallelStates(states, inputData) {
         const promises = states.map(state => this.executeState(state, inputData));
         const results = await Promise.allSettled(promises);
-        
+
         // 결과 병합 및 에러 처리
         let mergedData = { ...inputData };
         const errors = [];
-        
+
         results.forEach((result, index) => {
             if (result.status === 'fulfilled') {
                 // 성공한 결과를 병합
@@ -340,13 +341,13 @@ export default class PipelineStateMachine {
                 });
             }
         });
-        
+
         // 일부 실패가 있어도 계속 진행 (품질 게이트에서 최종 판단)
         if (errors.length > 0) {
-            logger.warn('Some parallel states failed', { errors });
+            logService.warn('Some parallel states failed', { errors });
             this.executionContext.errors.push(...errors);
         }
-        
+
         return mergedData;
     }
 
@@ -356,51 +357,76 @@ export default class PipelineStateMachine {
     async executeState(stateName, inputData) {
         const stateStartTime = Date.now();
         this.executionContext.currentState = stateName;
-        
+
         try {
             let result;
-            
+
             switch (stateName) {
                 case 'INGEST':
-                    result = await this.components.textIngestor.ingestText(inputData);
+                    // TextIngestor.process는 static 메서드
+                    const textSegments = await this.components.textIngestor.process(inputData.text || inputData.textSegments);
+                    result = { ...inputData, textSegments };
                     break;
-                    
+
                 case 'ANCHOR':
-                    result = await this.components.anchorDetector.detectAnchors(inputData);
+                    // AnchorDetector.detect는 static 메서드
+                    const anchors = await this.components.anchorDetector.detect(inputData.textSegments || []);
+                    result = { ...inputData, anchors };
                     break;
-                    
+
                 case 'NORMALIZE':
-                    result = await this.components.entityNormalizer.normalizeEntities(inputData);
+                    // EntityNormalizer.normalize는 instance 메서드
+                    const normalized = await this.components.entityNormalizer.normalize(
+                        inputData.textSegments || [],
+                        inputData.anchors || []
+                    );
+                    result = { ...inputData, entities: normalized.entities, ...normalized };
                     break;
-                    
+
                 case 'TIMELINE':
-                    result = await this.components.timelineAssembler.assembleTimeline(inputData);
+                    const timelineResult = await this.components.timelineAssembler.assemble(
+                        inputData.anchors || [],
+                        inputData.entities || []
+                    );
+                    result = { ...inputData, timeline: timelineResult.timeline, ...timelineResult };
                     break;
-                    
+
                 case 'RULES':
-                    result = await this.components.diseaseRuleEngine.executeRules(inputData);
+                    const ruleResult = await this.components.diseaseRuleEngine.executeRules(
+                        inputData.timeline || [],
+                        inputData.entities || []
+                    );
+                    result = { ...inputData, ruleResults: ruleResult.ruleResults, ...ruleResult };
                     break;
-                    
+
                 case 'DISCLOSURE':
-                    result = await this.components.disclosureAnalyzer.analyzeDisclosure(inputData);
+                    const disclosureResult = await this.components.disclosureAnalyzer.analyzeDisclosure(
+                        inputData.ruleResults || [],
+                        inputData.entities || [],
+                        inputData.timeline || [],
+                        inputData.contractInfo,
+                        inputData.claimSpec
+                    );
+                    result = { ...inputData, disclosureAnalysis: disclosureResult };
                     break;
-                    
+
                 case 'SCORE':
-                    result = await this.components.confidenceScorer.calculateConfidence(inputData);
+                    const scoreResult = await this.components.confidenceScorer.calculateConfidenceScore(inputData);
+                    result = { ...inputData, confidenceScore: scoreResult };
                     break;
-                    
+
                 case 'EVIDENCE':
                     result = await this.components.evidenceBinder.bindEvidence(inputData);
                     break;
-                    
+
                 case 'SYNTHESIZE':
                     result = await this.components.reportSynthesizer.synthesizeReport(inputData);
                     break;
-                    
+
                 default:
                     throw new Error(`Unknown state: ${stateName}`);
             }
-            
+
             // 상태 실행 기록
             const stateExecutionTime = Date.now() - stateStartTime;
             this.executionContext.stateHistory.push({
@@ -409,26 +435,26 @@ export default class PipelineStateMachine {
                 success: true,
                 timestamp: new Date().toISOString()
             });
-            
+
             // 중간 결과 저장
             this.executionContext.intermediateResults[stateName] = {
                 executionTime: stateExecutionTime,
                 dataSize: this.calculateDataSize(result),
                 timestamp: new Date().toISOString()
             };
-            
+
             if (this.options.enableDetailedLogging) {
-                logger.debug(`State ${stateName} completed`, {
+                logService.debug(`State ${stateName} completed`, {
                     executionTime: stateExecutionTime,
                     dataSize: this.calculateDataSize(result)
                 });
             }
-            
+
             return result;
-            
+
         } catch (error) {
             const stateExecutionTime = Date.now() - stateStartTime;
-            
+
             // 에러 기록
             this.executionContext.stateHistory.push({
                 state: stateName,
@@ -437,25 +463,25 @@ export default class PipelineStateMachine {
                 error: error.message,
                 timestamp: new Date().toISOString()
             });
-            
+
             this.executionContext.errors.push({
                 state: stateName,
                 error: error.message,
                 timestamp: new Date().toISOString()
             });
-            
-            logger.error(`State ${stateName} failed`, {
+
+            logService.error(`State ${stateName} failed`, {
                 error: error.message,
                 executionTime: stateExecutionTime
             });
-            
+
             // 재시도 로직
             if (this.executionContext.retryCount < this.options.maxRetries) {
                 this.executionContext.retryCount++;
-                logger.info(`Retrying state ${stateName} (attempt ${this.executionContext.retryCount})`);
+                logService.info(`Retrying state ${stateName} (attempt ${this.executionContext.retryCount})`);
                 return await this.executeState(stateName, inputData);
             }
-            
+
             throw error;
         }
     }
@@ -467,27 +493,27 @@ export default class PipelineStateMachine {
         if (!input) {
             throw new Error('Input data is required');
         }
-        
+
         if (!input.text && !input.textSegments) {
             throw new Error('Text or textSegments is required');
         }
-        
+
         if (input.text && typeof input.text !== 'string') {
             throw new Error('Text must be a string');
         }
-        
+
         if (input.textSegments && !Array.isArray(input.textSegments)) {
             throw new Error('TextSegments must be an array');
         }
-        
+
         // 텍스트 길이 제한 확인
-        const textLength = input.text ? input.text.length : 
+        const textLength = input.text ? input.text.length :
             input.textSegments.reduce((sum, segment) => sum + (segment.text || '').length, 0);
-            
+
         if (textLength > 100000) { // 100KB 제한
             throw new Error('Input text is too large (max 100KB)');
         }
-        
+
         if (textLength === 0) {
             throw new Error('Input text is empty');
         }
@@ -503,49 +529,49 @@ export default class PipelineStateMachine {
             processingTime: this.executionContext.processingTimeMs,
             qualityGatePassed: false
         };
-        
+
         // 전체 신뢰도 계산
         if (result.entities && result.entities.length > 0) {
-            const totalConfidence = result.entities.reduce((sum, entity) => 
+            const totalConfidence = result.entities.reduce((sum, entity) =>
                 sum + (entity.confidence || 0), 0
             );
             qualityMetrics.overallConfidence = totalConfidence / result.entities.length;
         }
-        
+
         // 보고서 항목 수 계산
         if (result.skeletonJson && result.skeletonJson.reportItems) {
             qualityMetrics.reportItemCount = result.skeletonJson.reportItems.length;
         }
-        
+
         // 품질 게이트 검증
         const minConfidenceMet = qualityMetrics.overallConfidence >= qualityGateConfig.minConfidence;
         const maxTimeMet = qualityMetrics.processingTime <= qualityGateConfig.maxProcessingTime;
         const minItemsMet = qualityMetrics.reportItemCount >= 1; // 최소 1개 항목
-        
+
         qualityMetrics.qualityGatePassed = minConfidenceMet && maxTimeMet && minItemsMet;
-        
+
         // 품질 메트릭 저장
         this.executionContext.qualityMetrics = qualityMetrics;
-        
+
         if (!qualityMetrics.qualityGatePassed) {
             const issues = [];
             if (!minConfidenceMet) issues.push(`신뢰도 부족 (${qualityMetrics.overallConfidence.toFixed(2)} < ${qualityGateConfig.minConfidence})`);
             if (!maxTimeMet) issues.push(`처리 시간 초과 (${qualityMetrics.processingTime}ms > ${qualityGateConfig.maxProcessingTime}ms)`);
             if (!minItemsMet) issues.push(`보고서 항목 부족 (${qualityMetrics.reportItemCount} < 1)`);
-            
-            logger.warn('Quality gate validation failed', {
+
+            logService.warn('Quality gate validation failed', {
                 qualityGate: this.options.qualityGate,
                 issues,
                 metrics: qualityMetrics
             });
-            
+
             // 엄격한 품질 게이트에서만 실패 처리
             if (this.options.qualityGate === 'rigorous') {
                 throw new Error(`Quality gate failed: ${issues.join(', ')}`);
             }
         }
-        
-        logger.info('Quality validation completed', {
+
+        logService.info('Quality validation completed', {
             qualityGate: this.options.qualityGate,
             passed: qualityMetrics.qualityGatePassed,
             metrics: qualityMetrics
@@ -559,13 +585,13 @@ export default class PipelineStateMachine {
         try {
             // 캐시 키 생성
             this.executionContext.cacheKey = this.generateCacheKey(input);
-            
+
             // 실제 캐시 구현은 별도 캐시 서비스에서 처리
             // 여기서는 인터페이스만 정의
             return null; // 캐시 미스
-            
+
         } catch (error) {
-            logger.warn('Cache check failed', { error: error.message });
+            logService.warn('Cache check failed', { error: error.message });
             return null;
         }
     }
@@ -578,16 +604,16 @@ export default class PipelineStateMachine {
             if (!this.executionContext.cacheKey) {
                 this.executionContext.cacheKey = this.generateCacheKey(input);
             }
-            
+
             // 실제 캐시 구현은 별도 캐시 서비스에서 처리
             // 여기서는 인터페이스만 정의
-            
-            logger.debug('Result saved to cache', { 
-                cacheKey: this.executionContext.cacheKey 
+
+            logService.debug('Result saved to cache', {
+                cacheKey: this.executionContext.cacheKey
             });
-            
+
         } catch (error) {
-            logger.warn('Cache save failed', { error: error.message });
+            logService.warn('Cache save failed', { error: error.message });
         }
     }
 
@@ -597,10 +623,10 @@ export default class PipelineStateMachine {
     async handleFallback(input, originalError) {
         try {
             this.executionContext.fallbackUsed = true;
-            logger.info('Executing fallback pipeline', { 
-                originalError: originalError.message 
+            logService.info('Executing fallback pipeline', {
+                originalError: originalError.message
             });
-            
+
             // 간단한 폴백 파이프라인 (draft 품질 게이트 사용)
             const fallbackOptions = {
                 ...this.options,
@@ -608,10 +634,10 @@ export default class PipelineStateMachine {
                 maxRetries: 0,
                 enableCaching: false
             };
-            
+
             const fallbackPipeline = new PipelineStateMachine(fallbackOptions);
             const fallbackResult = await fallbackPipeline.execute(input);
-            
+
             // 폴백 결과에 메타데이터 추가
             return {
                 ...fallbackResult,
@@ -622,13 +648,13 @@ export default class PipelineStateMachine {
                     fallbackReason: 'Original pipeline failed'
                 }
             };
-            
+
         } catch (fallbackError) {
-            logger.error('Fallback pipeline also failed', { 
+            logService.error('Fallback pipeline also failed', {
                 fallbackError: fallbackError.message,
                 originalError: originalError.message
             });
-            
+
             // 최종 폴백: 기본 응답 생성
             return this.generateMinimalFallbackResponse(input, originalError, fallbackError);
         }
@@ -682,7 +708,7 @@ export default class PipelineStateMachine {
             qualityGate: this.options.qualityGate,
             version: '1.0.0'
         };
-        
+
         return crypto.createHash('sha256')
             .update(JSON.stringify(keyData))
             .digest('hex');
@@ -702,7 +728,7 @@ export default class PipelineStateMachine {
     getExecutionStatus() {
         return {
             currentState: this.executionContext.currentState,
-            processingTimeMs: this.executionContext.startTime ? 
+            processingTimeMs: this.executionContext.startTime ?
                 Date.now() - this.executionContext.startTime : 0,
             stateHistory: this.executionContext.stateHistory,
             retryCount: this.executionContext.retryCount,
@@ -715,12 +741,12 @@ export default class PipelineStateMachine {
      * 파이프라인 중단
      */
     async abort() {
-        logger.info('Pipeline execution aborted', {
+        logService.info('Pipeline execution aborted', {
             currentState: this.executionContext.currentState,
-            processingTime: this.executionContext.startTime ? 
+            processingTime: this.executionContext.startTime ?
                 Date.now() - this.executionContext.startTime : 0
         });
-        
+
         this.executionContext.currentState = this.states.ERROR;
         this.executionContext.errors.push({
             state: this.executionContext.currentState,
@@ -734,7 +760,7 @@ export default class PipelineStateMachine {
      */
     async healthCheck() {
         const componentHealth = {};
-        
+
         // 각 컴포넌트의 헬스 체크
         for (const [name, component] of Object.entries(this.components)) {
             try {
@@ -744,13 +770,13 @@ export default class PipelineStateMachine {
                     componentHealth[name] = { status: 'unknown' };
                 }
             } catch (error) {
-                componentHealth[name] = { 
-                    status: 'error', 
-                    error: error.message 
+                componentHealth[name] = {
+                    status: 'error',
+                    error: error.message
                 };
             }
         }
-        
+
         return {
             status: 'healthy',
             component: 'PipelineStateMachine',
@@ -816,7 +842,7 @@ export default class PipelineStateMachine {
         }
 
         const complexity = this.calculateProcessingComplexity(input);
-        
+
         // 복잡도 점수 계산
         let complexityScore = 0;
         for (const [key, weight] of Object.entries(this.complexityWeights)) {
@@ -826,29 +852,29 @@ export default class PipelineStateMachine {
         // 시스템 부하 계산
         const memoryUsage = process.memoryUsage();
         const memoryLoadFactor = memoryUsage.heapUsed / memoryUsage.heapTotal;
-        
+
         // 기본 타임아웃에서 시작
         let dynamicTimeout = qualityGateConfig.maxProcessingTime;
-        
+
         // 복잡도에 따른 조정
         if (complexityScore > 2) {
             dynamicTimeout *= this.timeoutConfig.complexityMultiplier;
         }
-        
+
         // 시스템 부하에 따른 조정
         if (memoryLoadFactor > 0.7) {
             dynamicTimeout *= this.timeoutConfig.loadMultiplier;
         }
-        
+
         // 재시도 횟수에 따른 조정 (재시도 시 더 짧은 타임아웃)
         if (retryCount > 0) {
             dynamicTimeout *= Math.pow(this.timeoutConfig.retryMultiplier, retryCount);
         }
-        
+
         // 최소/최대 타임아웃 제한
         dynamicTimeout = Math.max(this.timeoutConfig.minTimeout, dynamicTimeout);
         dynamicTimeout = Math.min(this.timeoutConfig.maxTimeout, dynamicTimeout);
-        
+
         return Math.round(dynamicTimeout);
     }
 }

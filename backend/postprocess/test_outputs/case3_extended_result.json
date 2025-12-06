@@ -1,640 +1,517 @@
 {
   "caseNumber": 3,
-  "timestamp": "2025-08-17T13:28:27.751Z",
-  "detailedResult": {
-    "caseNumber": 3,
-    "hasReportFile": true,
-    "processingTime": 12,
-    "success": true,
-    "validation": {
-      "hasPatientInfo": true,
-      "hasValidName": true,
-      "hasMedicalRecords": true,
-      "hasInsuranceInfo": true,
-      "noNaNValues": false,
-      "processingSuccess": true,
-      "overallScore": 0.8333333333333334
-    },
-    "patientInfo": {
-      "patientName": "김민아",
-      "birthDate": "1991-06-24",
-      "registrationNumber": "10916445"
-    },
-    "medicalRecordsCount": 61,
-    "insuranceInfoCount": 5,
-    "hospitalizationCount": 3,
-    "testResultsCount": 0,
-    "nanIssues": {
-      "hasNaN": true,
-      "locations": [
-        ".progressReport"
-      ]
-    },
-    "memoryUsage": {
-      "rss": 46563328,
-      "heapTotal": 10518528,
-      "heapUsed": 7216120,
-      "external": 1815551,
-      "arrayBuffers": 10515
-    }
-  },
+  "processedAt": "2025-12-06T01:33:44.856Z",
+  "duration": 8,
+  "inputLength": 21564,
   "fullResult": {
     "success": true,
     "normalizedReport": {
       "header": {
-        "patientName": "김민아",
-        "birthDate": "1991-06-24",
-        "registrationNumber": "10916445"
+        "patientName": "Case3",
+        "processedAt": "2025-12-06T01:33:44.856Z"
       },
-      "insuranceConditions": [
-        {
-          "conditionNumber": 1,
-          "company": ", 7) 위탁여부, 8)기타 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인) 2025-03-18 21:02:26 3. 타사 삼성생명. - 미청구 4. 진입. 사무직. 상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다. 답변일자 : 2025.3.19 빈경환 답변장소 : 답변자 : 김민아 김오민아 피("
-        },
-        {
-          "conditionNumber": 2,
-          "productName": "무배당 현대해상굿앤굿스타종합"
-        },
-        {
-          "conditionNumber": 3,
-          "company": "고 일시 2024.12.13. 장소 이대목동병원 사고내용 사고접수번호 2503206478 천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0) 사고접수일 [손해사정 결과 및 고객 확인(동의) 내용 ] 2025.03.17 금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과, 2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동"
-        },
-        {
-          "conditionNumber": 4,
-          "company": "고와 관련하여"
-        },
-        {
-          "conditionNumber": 5,
-          "company": "발급일 2025-03-21 매수 22 발급자 황재호 첨부한 사본은 의무기록 원본과 같음을 증명합니다. ENTER *상기용도 이외에는 이 사본을 사용할 수 없으며, 사용용도 또는 사용기간이 완료 된 후 즉시 파본, 폐기하여야 합니다. * 검사결과가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 외래초진 작성과: 신경과 (2024-12-17) Chief Complaint 1. 신생두통 Present Illness 12/7 음주 평소 주량이 있는 데, 이상하게 그날 빨리 취했음. 12/8 수면 중 극심한 두통에 깨어났음? 이미 깼을 때 두통 강도가 매우 심하고 구토함. 평소 mo hx, 가볍다. 구역/구토도 없음. 평소 생활이 불규칙한 데, 두통이 불규칙한 생활에 방해되지 않을 정도이다. 2일 정도 심해서 외부에서 꾸준히 약물 오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 김병수 김병수 외래경과 작성과: 신경과 (2025-01-13) 소견 및 계획 Subjective information tch는 없었으나 카페인도 완전히 끊어버리고 현재는 tightening Ha만 daily로 남아있음. Objective information tcd+ cta: distal aa. vasoconstriction? NEX: MSE alert CNE ok Motor 5/5 Sensory ok Gait ok Vital Signs BP: 102 59 mmHg PR: 68/min Ht: 155 cm Assessment Unusual severe Hac vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 Plan mr확인-rcvs 가능성 배제 필요 외래경과 작성과 신경과 (2025-02-03) 소견 및 계획 Subjective information 평소 건망증이 좀 심한 편임. 두통/어지럼은 거의 없고 경쾌. Objective information mra vs. cta: s/o reversibliity 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 작성자 김병수 김범수 2/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Vital Signs BP: 121 52 mmHg PR: 71/min Ht: 155 cm Assessment Plan Unusual severe Ha c vomiting - -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 MRI-MVNT의심소견 -> ns협진; 3월 말 ted fu 외래초진 작성과 신경외과 (2025-02-04) Chief Complaint 1. headache Present Illness 두통으로 신경과 내원하여 검사한 MRI상 MVNT Lt T 로 의뢰됨 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Vital sign Ht: 155 cm Wt: 47 kg BP: 100 68 mmHg PR: 107/min Past History 부정맥 알러지 정보 무 Physical Examination 특이사항 없음 Assessment Uncertain behavior brain tumor, supratentorial {D43.0} 작성자 김병수 김범수 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 3/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Care Plan ASM add후 경과관찰 특수 환자 평가 (※ 신생아, 소아, 산모, 정신질환자) 미해당 외래경과 작성과 신경외과 (2025-03-04) 소견 및 계획 Subjective information Headache imporved Objective information near total relief 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 Vital Signs BP: 106 74 mmHg PR: 107/min Ht: 155 cm Assessment Uncertain behavior brain tumor, supratentorial {D43.0} Plan medication 작성자 김영구 기여고 작성자 김영구 응급초진 작성과 응급의학과 (2024-12-13) 응급실 도착시각: 2024-12-13 00:42 SBP: 145 (mmHg) DBP: 87 (mmHg) PR: 59 (회/min) RR: 20 (회/min) BT: 36.1 (C) 의식상태: alert 내원경로: 직접내원 내원방법: 기타자동차 내원사유: 질병 사고종류: 중증도: 3 Chief Complaint 1. dizziness- 1일전 23:00(2024-12-12 23:00:00) 소견 및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임신가능성 없다고 함. -by pt 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) PHx 현재 통증 정도 무 Hypertension denied Diabetus mellitus denied Tuberculosis denied Hepatitis denied ALLERGY 없음 음식 ▶증상: 혈관부종(angioedema), 호흡곤란 ▶ 비고: [음식] 갑각류 ▶ 보고일: 2024-12-13 ROS or PE m/s alert NN/D(+/-/+), headache (-) side weakness(-), visual dimness(-) ear fullness(-) tinnitus(-) otalgia(-) extremity motor : all G5, sensory intact full eyeball motion without nystagmus Assessment Dizziness {R42} Plan w/u 특수 환자 평가 학대 또는 자살 환자 학대와 방임이 의심되어 사회사업과 평가의 필요 미해당 학대 의심 신체 상환 미해당 자살이 의심되어 사회사업과 평가의 필요성 미해당 자살 의심 신체 상환 미해당 응급경과 작성과: 응급의학과 (2024-12-13) S <전문의 기록> Dizziness CS: alert 신경학적 이상: nystagmus : ear sx : - 작성자 이희승 이희승/ 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 5/7 출력자: 황재호 (2025-03-21 오후 3:06:23 A # Dizziness P work up EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 이제원 이제원 응급실 퇴실기록 작성과 응급의학과 (2024-12-13) 퇴실진단명 : [주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 : 2024-12-13 검사명 : Total calcium/검체명: BLD(Serum)> *검사결과 :8.5 *검사명 : Platelet/검체명: BLD(PB)> * 검사결과 :262 * 검사명 : Glucose/검체명: BLD(Serum)> * 검사결과 :118 * 검사명 : BUN/검체명: BLD(Serum)> 검사결과 :6 * 검사명 :Total cholesterol/검체명: BLD(Serum)> * 검사결과 : 154 * 검사명 : Total Protein/검체명: BLD(Serum)> 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 6/7 출력자: 황재호 (2025-03-21 오후 3:06:23 * * * EUMC 이대목동병원 MOKDONG 검사결과 : 7.2 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 검사명: Albumin/검체명: BLD(Serum)> * 검사결과 : 4.1 * 검사명 : AST/검체명: BLD(Serum)> * * * * * 검사결과 :20 검사명:ALT/검체명: BLD(Serum)> 검사결과 :11 검사명: Creatinine/검체명: BLD(Serum)> 검사결과 :0.65 검사명 : WBC/검체명: BLD(PB)> * 검사결과 : 6.84 * 검사명 : RBC/검체명: BLD(PB)> * 검사결과 : 4.39 검사명:Hemoglobin/검체명: BLD(PB)> 검사결과 : 12.8 * 검사명:Hematocrit/검체명: BLD(PB)> * 검사결과 : 39.1 * 검사명 :Phosphorus/검체명: BLD(Serum)> * 검사결과 : 3.6 통증 사정 (통증 점수 1점 이상이면 기입) 현재 통증 정도 무 퇴실결과> 귀가 UNIVERSITY MEDICAL 작성자 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 7/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02) 임상진단명: Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17) 임상진단명: Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명 : 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 MR Sequence : RELCBF_LOCAL_ep2d_perf_p2_MoC_new RELCBV_LOCAL_ep2d_perf_p2_MoC_new TTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE DWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA 5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha | SWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm CE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS TRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE Clinical information: thunderclap headache, R/O RCVS. Contrast: used. Imaging technique at the header information. Brain MRI, DWI, PWI : No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere, cerebellum, brainstem, ventricle, extraaxial space). No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography: No evidence of venous thrombosis in the large intracranial venosinus system. [Conclusion] Brain MRI, DWI, PWI: No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography : No evidence of venous thrombosis in the large intracranial venosinus system. 기능검사결과 진료과/병동(의뢰처) : 신경과 (외래) (의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19) 임상진단명: 판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임상소견 및 병력: R/O RCVS 검사명: TCD(ROUTINE) -SNR (Transcranial Doppler Sonograghy) Exam Date : 2025-01-13 Patient ID: 10916445 Sex: F Age: 33 Name : 김민아 Location: NR-OPD TCD TEST CC R -56 0.86 77 0.95 79 0.97 81 0.94 78 0.92 73 0.98 BP Risk Factor HTN DM mmHg PR Smoking Family Hx L -61 0.88 77 1.03 78 0.93 76 0.83 75 1.00 75 0.98 61 0.97 51 1.03 -48 0.94 -48 0.96 2M 2M 26 1.20 29 0.77 -47 1.07 TCD comment Findings 첨부한 사본은 의무기록 원본과 같음을 증명합니다. -57 0.83 -56 0.92 -49 1.01 -50 0.99 3/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Interpretation 검사자 송현정 판독의 장윤경 최종 판독의 장윤경 UNIVERSITY MEDIC 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKOONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name Gender Age D.O.B Technician TCD Exam Data: EUMC KIMMIN A Female 33 1991/06/24 TCD ID Exam Date Exam Type Technician 10916445 2025/01/13 Routine Exam (In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit) Vossol Depth Peak Dias RI LOPTH 50 32 7 0.79 Mean 15 PI 1.67 LSIPHON 68 86 34 0.61 LICA 40 -79 -33 0.59 -48 51 1.03 0.96 RICA Vessel Depth Peak ROPTH 50 29 RSIPHON 66 100 41 40 -78 Dias RI 7 0.76 Mean Pl 14 1.56 0.59 61 0.97 -33 0.58 -48 0.94 LMCA 50 124 51 0.59 75 0.98 RMCA 50 121 50 0.59 73 0.98 LMCA 53 124 50 0.60 75 1.00 RMCA 53 126 54 0.57 78 0.92 LMCA 56 118 55 0.54 76 0.83 RMCA 56 132 56 0.58 81 0.94 LMCA 59 127 54 0.57 78 0.93 RMCA 59 131 54 0.59 79 0.97 LMCA 62 130 51 0.61 77 1.03 RMCA 62 126 53 0.58 77 0.95 LACA 70 -97 -43 0.55 -61 0.88 RACA 70 -89 -40 0.55 -56 0.86 LPCA 64 44 LVERT 60 -83 BASILAR 80 -82 BASILAR 90 -90 BASILAR 100 -89 22 0.51 29 0.77 RPCA 64 46 15 0.67 26 1.20 -34 0.59 -50 -32 0.60 -49 0.99 RVERT 60 -81 -31 0.62 -47 1.07 1.01 -39 0.57 -56 0.92 -42 0.54 -57 0.83 TCD Conclusion: 첨부한 사본은 의무기록 원본과 같음을 증명합니다. Signature: Report Date: 2025/01/13 1/4 5/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name KIM MIN A TCD ID 10916445"
-        }
-      ],
-      "insuranceHistory": [
-        {
-          "period": "[보험 가입 3개월 이내]",
-          "company": ", 7) 위탁여부, 8)기타 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인) 2025-03-18 21:02:26 3. 타사 삼성생명. - 미청구 4. 진입. 사무직. 상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다. 답변일자 : 2025.3.19 빈경환 답변장소 : 답변자 : 김민아 김오민아 피("
-        },
-        {
-          "period": "[보험 가입 3개월 이내]"
-        },
-        {
-          "period": "[보험 가입 3개월 이내]",
-          "company": "고 일시 2024.12.13. 장소 이대목동병원 사고내용 사고접수번호 2503206478 천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0) 사고접수일 [손해사정 결과 및 고객 확인(동의) 내용 ] 2025.03.17 금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과, 2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동"
-        },
-        {
-          "period": "[보험 가입 3개월 이내]",
-          "company": "고와 관련하여"
-        },
-        {
-          "period": "[보험 가입 3개월 이내]",
-          "company": "발급일 2025-03-21 매수 22 발급자 황재호 첨부한 사본은 의무기록 원본과 같음을 증명합니다. ENTER *상기용도 이외에는 이 사본을 사용할 수 없으며, 사용용도 또는 사용기간이 완료 된 후 즉시 파본, 폐기하여야 합니다. * 검사결과가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 외래초진 작성과: 신경과 (2024-12-17) Chief Complaint 1. 신생두통 Present Illness 12/7 음주 평소 주량이 있는 데, 이상하게 그날 빨리 취했음. 12/8 수면 중 극심한 두통에 깨어났음? 이미 깼을 때 두통 강도가 매우 심하고 구토함. 평소 mo hx, 가볍다. 구역/구토도 없음. 평소 생활이 불규칙한 데, 두통이 불규칙한 생활에 방해되지 않을 정도이다. 2일 정도 심해서 외부에서 꾸준히 약물 오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 김병수 김병수 외래경과 작성과: 신경과 (2025-01-13) 소견 및 계획 Subjective information tch는 없었으나 카페인도 완전히 끊어버리고 현재는 tightening Ha만 daily로 남아있음. Objective information tcd+ cta: distal aa. vasoconstriction? NEX: MSE alert CNE ok Motor 5/5 Sensory ok Gait ok Vital Signs BP: 102 59 mmHg PR: 68/min Ht: 155 cm Assessment Unusual severe Hac vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 Plan mr확인-rcvs 가능성 배제 필요 외래경과 작성과 신경과 (2025-02-03) 소견 및 계획 Subjective information 평소 건망증이 좀 심한 편임. 두통/어지럼은 거의 없고 경쾌. Objective information mra vs. cta: s/o reversibliity 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 작성자 김병수 김범수 2/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Vital Signs BP: 121 52 mmHg PR: 71/min Ht: 155 cm Assessment Plan Unusual severe Ha c vomiting - -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 MRI-MVNT의심소견 -> ns협진; 3월 말 ted fu 외래초진 작성과 신경외과 (2025-02-04) Chief Complaint 1. headache Present Illness 두통으로 신경과 내원하여 검사한 MRI상 MVNT Lt T 로 의뢰됨 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Vital sign Ht: 155 cm Wt: 47 kg BP: 100 68 mmHg PR: 107/min Past History 부정맥 알러지 정보 무 Physical Examination 특이사항 없음 Assessment Uncertain behavior brain tumor, supratentorial {D43.0} 작성자 김병수 김범수 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 3/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Care Plan ASM add후 경과관찰 특수 환자 평가 (※ 신생아, 소아, 산모, 정신질환자) 미해당 외래경과 작성과 신경외과 (2025-03-04) 소견 및 계획 Subjective information Headache imporved Objective information near total relief 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 Vital Signs BP: 106 74 mmHg PR: 107/min Ht: 155 cm Assessment Uncertain behavior brain tumor, supratentorial {D43.0} Plan medication 작성자 김영구 기여고 작성자 김영구 응급초진 작성과 응급의학과 (2024-12-13) 응급실 도착시각: 2024-12-13 00:42 SBP: 145 (mmHg) DBP: 87 (mmHg) PR: 59 (회/min) RR: 20 (회/min) BT: 36.1 (C) 의식상태: alert 내원경로: 직접내원 내원방법: 기타자동차 내원사유: 질병 사고종류: 중증도: 3 Chief Complaint 1. dizziness- 1일전 23:00(2024-12-12 23:00:00) 소견 및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임신가능성 없다고 함. -by pt 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) PHx 현재 통증 정도 무 Hypertension denied Diabetus mellitus denied Tuberculosis denied Hepatitis denied ALLERGY 없음 음식 ▶증상: 혈관부종(angioedema), 호흡곤란 ▶ 비고: [음식] 갑각류 ▶ 보고일: 2024-12-13 ROS or PE m/s alert NN/D(+/-/+), headache (-) side weakness(-), visual dimness(-) ear fullness(-) tinnitus(-) otalgia(-) extremity motor : all G5, sensory intact full eyeball motion without nystagmus Assessment Dizziness {R42} Plan w/u 특수 환자 평가 학대 또는 자살 환자 학대와 방임이 의심되어 사회사업과 평가의 필요 미해당 학대 의심 신체 상환 미해당 자살이 의심되어 사회사업과 평가의 필요성 미해당 자살 의심 신체 상환 미해당 응급경과 작성과: 응급의학과 (2024-12-13) S <전문의 기록> Dizziness CS: alert 신경학적 이상: nystagmus : ear sx : - 작성자 이희승 이희승/ 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 5/7 출력자: 황재호 (2025-03-21 오후 3:06:23 A # Dizziness P work up EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 이제원 이제원 응급실 퇴실기록 작성과 응급의학과 (2024-12-13) 퇴실진단명 : [주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 : 2024-12-13 검사명 : Total calcium/검체명: BLD(Serum)> *검사결과 :8.5 *검사명 : Platelet/검체명: BLD(PB)> * 검사결과 :262 * 검사명 : Glucose/검체명: BLD(Serum)> * 검사결과 :118 * 검사명 : BUN/검체명: BLD(Serum)> 검사결과 :6 * 검사명 :Total cholesterol/검체명: BLD(Serum)> * 검사결과 : 154 * 검사명 : Total Protein/검체명: BLD(Serum)> 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 6/7 출력자: 황재호 (2025-03-21 오후 3:06:23 * * * EUMC 이대목동병원 MOKDONG 검사결과 : 7.2 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 검사명: Albumin/검체명: BLD(Serum)> * 검사결과 : 4.1 * 검사명 : AST/검체명: BLD(Serum)> * * * * * 검사결과 :20 검사명:ALT/검체명: BLD(Serum)> 검사결과 :11 검사명: Creatinine/검체명: BLD(Serum)> 검사결과 :0.65 검사명 : WBC/검체명: BLD(PB)> * 검사결과 : 6.84 * 검사명 : RBC/검체명: BLD(PB)> * 검사결과 : 4.39 검사명:Hemoglobin/검체명: BLD(PB)> 검사결과 : 12.8 * 검사명:Hematocrit/검체명: BLD(PB)> * 검사결과 : 39.1 * 검사명 :Phosphorus/검체명: BLD(Serum)> * 검사결과 : 3.6 통증 사정 (통증 점수 1점 이상이면 기입) 현재 통증 정도 무 퇴실결과> 귀가 UNIVERSITY MEDICAL 작성자 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 7/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02) 임상진단명: Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17) 임상진단명: Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명 : 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 MR Sequence : RELCBF_LOCAL_ep2d_perf_p2_MoC_new RELCBV_LOCAL_ep2d_perf_p2_MoC_new TTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE DWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA 5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha | SWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm CE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS TRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE Clinical information: thunderclap headache, R/O RCVS. Contrast: used. Imaging technique at the header information. Brain MRI, DWI, PWI : No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere, cerebellum, brainstem, ventricle, extraaxial space). No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography: No evidence of venous thrombosis in the large intracranial venosinus system. [Conclusion] Brain MRI, DWI, PWI: No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography : No evidence of venous thrombosis in the large intracranial venosinus system. 기능검사결과 진료과/병동(의뢰처) : 신경과 (외래) (의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19) 임상진단명: 판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임상소견 및 병력: R/O RCVS 검사명: TCD(ROUTINE) -SNR (Transcranial Doppler Sonograghy) Exam Date : 2025-01-13 Patient ID: 10916445 Sex: F Age: 33 Name : 김민아 Location: NR-OPD TCD TEST CC R -56 0.86 77 0.95 79 0.97 81 0.94 78 0.92 73 0.98 BP Risk Factor HTN DM mmHg PR Smoking Family Hx L -61 0.88 77 1.03 78 0.93 76 0.83 75 1.00 75 0.98 61 0.97 51 1.03 -48 0.94 -48 0.96 2M 2M 26 1.20 29 0.77 -47 1.07 TCD comment Findings 첨부한 사본은 의무기록 원본과 같음을 증명합니다. -57 0.83 -56 0.92 -49 1.01 -50 0.99 3/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Interpretation 검사자 송현정 판독의 장윤경 최종 판독의 장윤경 UNIVERSITY MEDIC 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKOONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name Gender Age D.O.B Technician TCD Exam Data: EUMC KIMMIN A Female 33 1991/06/24 TCD ID Exam Date Exam Type Technician 10916445 2025/01/13 Routine Exam (In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit) Vossol Depth Peak Dias RI LOPTH 50 32 7 0.79 Mean 15 PI 1.67 LSIPHON 68 86 34 0.61 LICA 40 -79 -33 0.59 -48 51 1.03 0.96 RICA Vessel Depth Peak ROPTH 50 29 RSIPHON 66 100 41 40 -78 Dias RI 7 0.76 Mean Pl 14 1.56 0.59 61 0.97 -33 0.58 -48 0.94 LMCA 50 124 51 0.59 75 0.98 RMCA 50 121 50 0.59 73 0.98 LMCA 53 124 50 0.60 75 1.00 RMCA 53 126 54 0.57 78 0.92 LMCA 56 118 55 0.54 76 0.83 RMCA 56 132 56 0.58 81 0.94 LMCA 59 127 54 0.57 78 0.93 RMCA 59 131 54 0.59 79 0.97 LMCA 62 130 51 0.61 77 1.03 RMCA 62 126 53 0.58 77 0.95 LACA 70 -97 -43 0.55 -61 0.88 RACA 70 -89 -40 0.55 -56 0.86 LPCA 64 44 LVERT 60 -83 BASILAR 80 -82 BASILAR 90 -90 BASILAR 100 -89 22 0.51 29 0.77 RPCA 64 46 15 0.67 26 1.20 -34 0.59 -50 -32 0.60 -49 0.99 RVERT 60 -81 -31 0.62 -47 1.07 1.01 -39 0.57 -56 0.92 -42 0.54 -57 0.83 TCD Conclusion: 첨부한 사본은 의무기록 원본과 같음을 증명합니다. Signature: Report Date: 2025/01/13 1/4 5/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name KIM MIN A TCD ID 10916445"
-        }
-      ],
       "medicalRecords": [
         {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)",
-          "icdCode": "D43.0",
-          "notes": "1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)"
-        },
-        {
-          "date": "",
-          "hospital": "사고내용 사고접수번호",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "MOKDONG 성명: 김민아 /33세 생년월일: 1991-06-24\n영상검사결과\n진료과/병동 (의뢰처) : 신경과 (외래)"
         },
         {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "적정성 검토 결과,",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========",
-          "reason": "정기 진료",
-          "diagnosis": "필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========",
-          "notes": ", 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf =========="
-        },
-        {
-          "date": "",
-          "hospital": "&약국별 기본진료내역 정보주체 : 김민아 열람대상기간 :",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "VENO SAG CE\nClinic",
           "diagnosis": "미확인",
-          "prescription": "조제정보 병·의원&약국별 기본진료내역 정보주체 : 김민아 열람대상기간 :",
-          "notes": ""
+          "content": "MOKDONO 성명 : 김민아 /33세 생년월일: 1991-06-24\nMR Sequence :\nRELCBF_LOCAL_ep2d_perf_p2_MoC_new\nRELCBV_LOCAL_ep2d_perf_p2_MoC_new\nTTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE\nDWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA\n5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha |\nSWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm\nCE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS\nTRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE\nClinical information: thunderclap headache, R/O RCVS.\nContrast: used.\nImaging technique at the header information.\nBrain MRI, DWI, PWI :\nNo acute infarction in the brain on DWI.\nFocal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area.\n-> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular\nspace, neuroglial cyst, etc.\nNo significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere,\ncerebellum, brainstem, ventricle, extraaxial space).\nNo acute infarction in the brain on DWI.\nNo significant perfusion abnormality in the brain.\nBrain MRA, neck MRA :\nNo significant steno-occlusion or aneurysm in the intracranial and neck arteries.\nMR venography:\nNo evidence of venous thrombosis in the large intracranial venosinus system.\n[Conclusion]\nBrain MRI, DWI, PWI:\nNo acute infarction in the brain on DWI.\nFocal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area.\n-> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular\nspace, neuroglial cyst, etc.\nNo acute infarction in the brain on DWI.\nNo significant perfusion abnormality in the brain.\nBrain MRA, neck MRA :\nNo significant steno-occlusion or aneurysm in the intracranial and neck arteries.\nMR venography :\nNo evidence of venous thrombosis in the large intracranial venosinus system.\n기능검사결과\n진료과/병동(의뢰처) : 신경과 (외래)"
         },
         {
-          "date": "",
-          "hospital": "안과 외래 AHO01 1 27,120 19,020 8,100 다래끼 5",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "MOKDONG 성명: 김민아 /33세 생년월일: 1991-06-24\n임상소견 및 병력:\nR/O RCVS\n검사명:\nTCD(ROUTINE) -SNR\n(Transcranial Doppler Sonograghy)\nExam Date :"
         },
         {
-          "date": "",
-          "hospital": "안과 외래 AHOO1 (양방)콩 78,610 다래끼 56,010 22,600 (양방)급 8",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "생년월일: 1991-06-24\nInterpretation\n검사자\n송현정\n판독의\n장윤경\n최종 판독의\n장윤경\nUNIVERSITY MEDIC\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n4/14"
         },
         {
-          "date": "",
-          "hospital": "이비인 후과 외래 AH605 성비감염 성 외이도 염 1 25,540 17,940 7,600",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "MOKOONG 성명: 김민아 /33세 생년월일: 1991-06-24\nVelica\nName\nGender\nAge\nD.O.B\nTechnician\nTCD Exam Data:\nEUMC\nKIMMIN A\nFemale\n33"
         },
         {
-          "date": "",
-          "hospital": "과 외래 AM501 층을 동반 한경주간 1 31,960 22,460 9,500 판장애 태평양온누리 11",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "1991/06/24\nTCD ID\nExam Date\nExam Type\nTechnician\n10916445"
         },
         {
-          "date": "",
-          "hospital": "&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 빈경 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6",
-          "reason": "정기 진료",
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6"
+          "content": "생년월일: 1991-06-24\nVelica\nName KIM MIN A TCD ID 10916445"
         },
         {
-          "date": "",
-          "hospital": "피부과 외래 AL039 세불명의 연조직염 1 19,360 13,560 5,800 13",
-          "reason": "정기 진료",
+          "date": "2020-03-20",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "열람대상기간 : 2020-03-20~2025-03-19\n전체 다운로드 ↓\n진료시작일"
         },
         {
-          "date": "",
-          "hospital": "과 외래 AM501 층을 동반 한 경주간 판장애 29,200 20,500 8,700 17",
-          "reason": "정기 진료",
+          "date": "2024-11-22",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2024.11.22.\n김민아"
         },
         {
-          "date": "",
-          "hospital": "(양방)신 경뿌리' 31,340 21,940 9,400 한 경추간 판장애 (양방)기 의료법인명지 타바이러 19",
-          "reason": "정기 진료",
+          "date": "2024-12-13",
+          "hospital": "장소\n이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2024.12.13.\n장소\n이대목동병원\n사고내용\n사고접수번호 2503206478\n천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)\n사고접수일\n[손해사정 결과 및 고객 확인(동의) 내용 ]"
         },
         {
-          "date": "",
-          "hospital": "재활의 학과 외래 AZ115 스질환에 1 62,650 31,350 31,300 대한특수 선별검사 (양방)기 의료법인명지 20",
-          "reason": "정기 진료",
+          "date": "2024-12-13",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2024-12-13\n병·의원&약국\n이화여자3 EUMC 이대목동병원"
         },
         {
-          "date": "",
-          "hospital": "재활의 학과 타바이러 외래 AZ115 스질환에 1 22,490 11,290 11,200 대한 특수 선별검사 21",
-          "reason": "정기 진료",
+          "date": "2024-12-17",
+          "hospital": "Clinic",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "(의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02)\n임상진단명:\nMigraine\n임상소견 및 병력:\nR/O RCVS\n검사명:\nCT 3D Brain Perfusion Stroke+ CTA (Neck) (C)\n[Finding]\nPerfusion brain angiography CT;\nClinical information:\nR/O RCVS\nFindings;\nSame as conclusion.\n[Conclusion]\n1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion.\n2. Otherwise, no definite evidence of significant stenosis/aneurysm.\n3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image.\n4. No definite remarkable finding on perfusion map.\n영상검사결과\n진료과/병동 (의뢰처) : 신경과 (외래)"
         },
         {
-          "date": "",
-          "hospital": "과 (양방)신 경뿌리병 외래 AM501 증을 동반 한경주간 1 18,630 13,130 5,500 판장애 22",
-          "reason": "정기 진료",
+          "date": "2024-12-17",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "(의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19)\n임상진단명:\n판독의 : 김은희, 김은희\nMigraine\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n2/14"
         },
         {
-          "date": "",
-          "hospital": "(양방)신 경뿌리병 외래 AM501 층을 동반 한경주간 판장애 1 28,630 20,130 8,500 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경",
-          "reason": "정기 진료",
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경"
+          "content": "(의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17)\n임상진단명:\nReversible cerebral vasoconstriction syndrome\n임상소견 및 병력:\nFLAIR CE 7, Rec TCHS, R/O RCVS\n검사명:\nMRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C)\n[Finding]\nRequest name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C)\n판독의 : 변성환, 변성환, 변성환\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n1/14"
         },
         {
-          "date": "",
-          "hospital": "외래 AM771 (양방)외 측상과염 1 10,710 7,510 3,200 25",
-          "reason": "정기 진료",
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2025-01-13\nPatient ID: 10916445\nSex: F Age: 33\nName :\n김민아\nLocation:\nNR-OPD\nTCD TEST\nCC\nR\n-56 0.86\n77\n0.95\n79\n0.97\n81\n0.94\n78\n0.92\n73\n0.98\nBP\nRisk Factor HTN\nDM\nmmHg PR\nSmoking Family Hx\nL\n-61\n0.88\n77\n1.03\n78\n0.93\n76\n0.83\n75\n1.00\n75 0.98\n61\n0.97\n51\n1.03\n-48\n0.94\n-48\n0.96\n2M\n2M\n26\n1.20\n29\n0.77\n-47 1.07\nTCD comment\nFindings\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n-57\n0.83\n-56\n0.92\n-49\n1.01\n-50\n0.99\n3/14"
         },
         {
-          "date": "",
-          "hospital": "외래 AM771 (양방)외 측상과염 10,710 7,510 3,200 26",
-          "reason": "정기 진료",
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2025/01/13\nRoutine Exam\n(In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit)\nVossol Depth Peak Dias RI\nLOPTH\n50\n32\n7 0.79\nMean\n15\nPI\n1.67\nLSIPHON\n68\n86\n34\n0.61\nLICA\n40\n-79\n-33\n0.59 -48\n51 1.03\n0.96\nRICA\nVessel Depth Peak\nROPTH 50 29\nRSIPHON 66 100 41\n40 -78\nDias RI\n7 0.76\nMean\nPl\n14\n1.56\n0.59 61\n0.97\n-33 0.58 -48\n0.94\nLMCA\n50\n124\n51\n0.59 75\n0.98\nRMCA\n50\n121 50 0.59 73\n0.98\nLMCA\n53\n124\n50\n0.60 75\n1.00\nRMCA\n53\n126 54\n0.57 78\n0.92\nLMCA\n56\n118\n55\n0.54 76\n0.83\nRMCA\n56\n132\n56\n0.58 81\n0.94\nLMCA\n59\n127\n54\n0.57 78\n0.93\nRMCA\n59\n131\n54\n0.59 79\n0.97\nLMCA\n62\n130\n51\n0.61 77\n1.03\nRMCA\n62\n126\n53\n0.58 77\n0.95\nLACA\n70 -97\n-43\n0.55 -61\n0.88\nRACA\n70\n-89\n-40\n0.55 -56\n0.86\nLPCA 64 44\nLVERT 60 -83\nBASILAR 80 -82\nBASILAR 90\n-90\nBASILAR 100 -89\n22\n0.51\n29\n0.77\nRPCA\n64\n46\n15 0.67 26\n1.20\n-34 0.59 -50\n-32 0.60 -49\n0.99\nRVERT\n60\n-81\n-31 0.62 -47\n1.07\n1.01\n-39 0.57 -56\n0.92\n-42 0.54 -57\n0.83\nTCD Conclusion:\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\nSignature:"
         },
         {
-          "date": "",
-          "hospital": "외래 AM771 과 (양방)외 측상과염 1 10,710 7,510 3,200 27",
-          "reason": "정기 진료",
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "Report Date: 2025/01/13\n1/4\n5/14"
         },
         {
-          "date": "",
-          "hospital": "외래 AM771 과 (양방)외 측상과염 1 38,360 26,860 11,500 (양방)상",
-          "reason": "정기 진료",
+          "date": "2025-01-15",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상\n좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견,\n뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견\n현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등\n해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것\n으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다.\n본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의\n내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다.\n본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서\n착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다.\n보험금 지급 요청 계좌\n■ 은행명:\n■계좌번호:\n■예금주:\n20 25 년\n3월\n28 일\n확인자\n김민아\n현대해상화재보험㈜귀중\n고객센터 1588-5656www.hi.co.kr\n(인))민서명)"
         },
         {
-          "date": "",
-          "hospital": "내과 외래 AJ069 세불명의 급성 상기 도감염 1 17,320 12,220 5,100 (양방)상 30",
-          "reason": "정기 진료",
+          "date": "2025-03-17",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2025.03.17\n금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과,"
         },
         {
-          "date": "",
-          "hospital": "과 경뿌리병 외래 AM501 층을 동반 1 28,050 19,650 8,400 한경주간 판장애 32",
-          "reason": "정기 진료",
+          "date": "2025-03-18",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "빈경환 2025-03-18 21:02:26\n문답서(일반)\n피(보험, 공제)자 인적사항\n성 명\n김민아.\n생년월일\n연락처\n010-9089-5533.\n직 업\n주 소\n아래의 질문사항은 금번 신청한 청구 건(발병일/ 사고일:\n년 월\n일)\n에 대하여 사실관계를 확인하고자 질문사항에 대하여 답변자 본인의 자유로운 의사에\n의해 사실대로 문답합니다.\n질문사항\n1) 피보험자 근황(거주지, 직장 등), 2)보험가입경위, 3)청약서 작성(고지사항),\n증권수령 및 약관전달(중요내용설명) 여부 등, 4) 발병(사고) 및 치료경위, 5)과거\n병력, 6) 타 보험사, 7) 위탁여부, 8)기타\n1. 진단경위\n24. 12. 13일 이대목동 EK 방문\n빈경환\nKidny\n두통이 심하고 구조 동반하여 내원.\nNS 진료후 CT. MRI 등 정밀검사 결과.\nD43.0 진단.\nBX등 불가하여 영상 판독으로 진다.\n기왕력 관련 종이질환X.\n심평은 진료내역으로 대처\n기고지 C. LSpine 치료력.\n부정해? 고지\n답변자\n:\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD."
         },
         {
-          "date": "",
-          "hospital": "과 경뿌리병 외래 AM501 층을 동반 한경추간 판장애 1 10,490 7,390 3,100 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ㆍ진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. . 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34",
-          "reason": "정기 진료",
+          "date": "2025-03-18",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34"
+          "content": "(인) 2025-03-18 21:02:26\n3. 타사\n삼성생명.\n-\n미청구\n4. 진입.\n사무직.\n상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다.\n답변일자 :"
         },
         {
-          "date": "",
-          "hospital": "외래 AM501 층을 동반 38,500 27,000 11,500 과 한 경주간 판장애",
-          "reason": "정기 진료",
+          "date": "2025-03-19",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "2025.3.19\n빈경환\n답변장소\n:\n답변자\n:\n김민아\n김오민아\n피(보험, 공제)자와의 관계\n:\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. ========== 파일: i??i?´i?￢i ?e²°e³¼ i??e?´e￢¸_e¹e?¼i??.pdf ========== 손해사정 확인서(인 / 재물)\nHiLife\n고객(피보험자)\n성명(법인명) 김민아\n주민(사업자)번호 주소\n연락처\n010-9089-5533\n, 401호\n피보험자와의 관계 본인\n○ 보험계약\n계약번호\n보험기간\n피보험자(물)\nL024 57371589\n상품명\n무배당 현대해상굿앤굿스타종합보험"
         },
         {
-          "date": "",
-          "hospital": "안과 외래 AH193 기타 질환 에서의 각 막염 및 각 1 20,930 14,730 6,200 (양방)달 리 분류된 37",
-          "reason": "정기 진료",
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": "질환 에서의 각 막염 및 각 1 20,930 14,730 6,200 (양방)달 리 분류된 37"
+          "content": "출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원"
         },
         {
-          "date": "",
-          "hospital": "안과 외래 AH101 성 아토피 결막염 1 33,380 20,080 13,300 (양방)급 39",
-          "reason": "정기 진료",
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원"
         },
         {
-          "date": "",
-          "hospital": "과 외래 AM6594 윤활막염 1 24,500 17,200 7,300 및 힘줄윤 활막염, 손 41",
-          "reason": "정기 진료",
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원\nMOKDONG 성명: 김민아\n/33세"
         },
         {
-          "date": "",
-          "hospital": "과 세불명의 외래 AM6594 윤활막염 1 14,710 10,310 4,400 및 힘줄윤 활막염, 손 (양방)상 세불명의 43",
-          "reason": "정기 진료",
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원"
         },
         {
-          "date": "",
-          "hospital": "외래 AM6594 윤활막염 1 및 힘줄윤 활막염, 33,550 23,550 10,000 44",
-          "reason": "정기 진료",
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원\nMOKDONG 성명: 김민아 /33세"
         },
         {
-          "date": "",
-          "hospital": "&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ?진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경",
-          "reason": "정기 진료",
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경"
+          "content": "2025-03-28 14:06:50\nCH\n해오름손해사정(주)\nSUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n문답서\n피보험자\n총 0부\n(표지제외)"
         },
         {
-          "date": "",
-          "hospital": "과 외래 AM6594 윤활막염 1 힘줄 32,940 23,140 9,800 활막염, 손 46",
-          "reason": "정기 진료",
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ========== 2025-03-28 14:06:50\nCH\n해오름손해사정(주)\nPREERAN SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n심평원 진료내역\n피보험자\n총 0 부\n(표지제외)"
         },
         {
-          "date": "",
-          "hospital": "피부과 외래 AL219 세불명의 1 14,790 지루피부 염 10,390 4,400 48",
-          "reason": "정기 진료",
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
+          "content": "빈경환 2025-03-28 14:06:41\n세부진료정보\n처방조제정보\n병·의원&약국별 기본진료내역\n정보주체 : 김민아"
         },
         {
-          "date": "",
-          "hospital": "피부과 외래 AL219 (양방)상 세불명의 지루피부 염 1 16,970 11,970 5,000 50",
-          "reason": "정기 진료",
+          "date": "2091-11-22",
+          "hospital": "미상 병원",
           "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "이비인 후과 외래 AJ060 성 후두인 1 두염 16,480 11,580 4,900 > 52",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "의 기타 및 외래 ASO138 여러 부분 의 열린상 처 1 19,190 13,490 5,700 (양방)귀 의 기타 및 54",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": "및 외래 ASO138 여러 부분 의 열린상 처 1 19,190 13,490 5,700 (양방)귀 의 기타 및 54"
-        },
-        {
-          "date": "",
-          "hospital": "의 열린상 처 이지약국 일반의 외래 ASO138 여러 부분 의 열린상 처 (양방)귀 의 기타 및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": "및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56"
-        },
-        {
-          "date": "",
-          "hospital": "세불명의 내과 외래 AJ304 20,170 알레르기 비염 14,170 6,000 (양방)상 세불명의 58",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "피부과 외래 AL239 인의 알레 16,140 11,340 4,800 르기성 접 촉피부염 (양방)기 60",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "이비인 후과 외래 AH6088 타 외이도 염 1 16,140 11,340 4,800",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ㆍ진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf ==========",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf =========="
-        },
-        {
-          "date": "",
-          "hospital": "의무기록사본 총 0부 (표지제외) 빈경환 의무기록사본증명서 등록번호",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "2025-01-07",
-          "hospital": "미확인 의료기관",
-          "visitDate": "2025-01-07",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": "가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호:"
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "prescription": "오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (",
-          "diagnosis": "미확인",
-          "prescription": "받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (",
-          "notes": "및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 ("
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONO 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 검사결과 : 7.2 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": "7.2 등록번호:"
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 :",
-          "notes": "및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 :"
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (",
-          "notes": "및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 ("
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONO 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "정기 진료",
-          "diagnosis": "판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKOONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "MOKDONG 등록번호:",
-          "reason": "정기 진료",
-          "diagnosis": "미확인",
-          "notes": ""
-        }
-      ],
-      "hospitalizationRecords": [
-        {
-          "date": "",
-          "hospital": "&약국 이화여자대학교의과대학부속목동 병원 진단과 응급의학과 입원/외래 입원 주상병코드 AR42 빈경",
-          "reason": "응급실 내원",
-          "diagnosis": "과 응급의학과 입원/외래 입원 주상병코드 AR42 빈경",
-          "admissionPeriod": "undefined ~ undefined",
-          "surgeryInfo": null,
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "(양방)어 AR42 지럼증 및 1 어지럼 650,480 515,810 134,670 2",
-          "reason": "응급실 내원",
-          "diagnosis": "미확인",
-          "admissionPeriod": "undefined ~ undefined",
-          "surgeryInfo": null,
-          "notes": ""
-        },
-        {
-          "date": "",
-          "hospital": "미확인 의료기관",
-          "reason": "이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 :",
-          "diagnosis": "[주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 :",
-          "admissionPeriod": "undefined ~ undefined",
-          "surgeryInfo": null,
-          "notes": "○검체검사 * 검사일자 :"
-        }
-      ],
-      "insuranceClaims": [
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "diagnosis": "경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "diagnosis": "적정성 검토 결과,",
-          "paymentDate": null,
-          "amount": null,
-          "notes": ""
-        },
-        {
-          "date": "",
-          "company": "현대해상",
-          "diagnosis": "필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========",
-          "paymentDate": null,
-          "amount": null,
-          "notes": ", 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf =========="
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56"
-        },
-        {
-          "date": "",
-          "company": "미확인 보험사",
-          "paymentDate": null,
-          "amount": null,
-          "notes": "가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf =========="
+          "content": "2091.11.22.\n계약자\n김민아\n수익자\n김민아\n보험사고\n일시"
         }
       ]
     },
-    "progressReport": "NaN\n의료 경과보고서\nMedical Progress Report\n생성일: 2025.08.17\nNaN\n\n■ 환자 정보 (Patient Information)\nNaN\n환자명: 김민아\n생년월일: 1991.06.24 (만 34세)\n등록번호: 10916445\n성별: 여성\n\n■ 보험 가입 조건 (Insurance Conditions)\nNaN\n1. , 7) 위탁여부, 8)기타 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인) 2025-03-18 21:02:26 3. 타사 삼성생명. - 미청구 4. 진입. 사무직. 상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다. 답변일자 : 2025.3.19 빈경환 답변장소 : 답변자 : 김민아 김오민아 피(\n   가입일: 미확인\n   상품명: 미확인 상품\n   담보내용: 미확인 담보\n   상태: 유효\n\n2. 미확인 보험사\n   가입일: 미확인\n   상품명: 무배당 현대해상굿앤굿스타종합\n   담보내용: 미확인 담보\n   상태: 유효\n\n3. 고 일시 2024.12.13. 장소 이대목동병원 사고내용 사고접수번호 2503206478 천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0) 사고접수일 [손해사정 결과 및 고객 확인(동의) 내용 ] 2025.03.17 금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과, 2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동\n   가입일: 미확인\n   상품명: 미확인 상품\n   담보내용: 미확인 담보\n   상태: 유효\n\n4. 고와 관련하여\n   가입일: 미확인\n   상품명: 미확인 상품\n   담보내용: 미확인 담보\n   상태: 유효\n\n5. 발급일 2025-03-21 매수 22 발급자 황재호 첨부한 사본은 의무기록 원본과 같음을 증명합니다. ENTER *상기용도 이외에는 이 사본을 사용할 수 없으며, 사용용도 또는 사용기간이 완료 된 후 즉시 파본, 폐기하여야 합니다. * 검사결과가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 외래초진 작성과: 신경과 (2024-12-17) Chief Complaint 1. 신생두통 Present Illness 12/7 음주 평소 주량이 있는 데, 이상하게 그날 빨리 취했음. 12/8 수면 중 극심한 두통에 깨어났음? 이미 깼을 때 두통 강도가 매우 심하고 구토함. 평소 mo hx, 가볍다. 구역/구토도 없음. 평소 생활이 불규칙한 데, 두통이 불규칙한 생활에 방해되지 않을 정도이다. 2일 정도 심해서 외부에서 꾸준히 약물 오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 김병수 김병수 외래경과 작성과: 신경과 (2025-01-13) 소견 및 계획 Subjective information tch는 없었으나 카페인도 완전히 끊어버리고 현재는 tightening Ha만 daily로 남아있음. Objective information tcd+ cta: distal aa. vasoconstriction? NEX: MSE alert CNE ok Motor 5/5 Sensory ok Gait ok Vital Signs BP: 102 59 mmHg PR: 68/min Ht: 155 cm Assessment Unusual severe Hac vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 Plan mr확인-rcvs 가능성 배제 필요 외래경과 작성과 신경과 (2025-02-03) 소견 및 계획 Subjective information 평소 건망증이 좀 심한 편임. 두통/어지럼은 거의 없고 경쾌. Objective information mra vs. cta: s/o reversibliity 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 작성자 김병수 김범수 2/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Vital Signs BP: 121 52 mmHg PR: 71/min Ht: 155 cm Assessment Plan Unusual severe Ha c vomiting - -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 MRI-MVNT의심소견 -> ns협진; 3월 말 ted fu 외래초진 작성과 신경외과 (2025-02-04) Chief Complaint 1. headache Present Illness 두통으로 신경과 내원하여 검사한 MRI상 MVNT Lt T 로 의뢰됨 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Vital sign Ht: 155 cm Wt: 47 kg BP: 100 68 mmHg PR: 107/min Past History 부정맥 알러지 정보 무 Physical Examination 특이사항 없음 Assessment Uncertain behavior brain tumor, supratentorial {D43.0} 작성자 김병수 김범수 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 3/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Care Plan ASM add후 경과관찰 특수 환자 평가 (※ 신생아, 소아, 산모, 정신질환자) 미해당 외래경과 작성과 신경외과 (2025-03-04) 소견 및 계획 Subjective information Headache imporved Objective information near total relief 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 Vital Signs BP: 106 74 mmHg PR: 107/min Ht: 155 cm Assessment Uncertain behavior brain tumor, supratentorial {D43.0} Plan medication 작성자 김영구 기여고 작성자 김영구 응급초진 작성과 응급의학과 (2024-12-13) 응급실 도착시각: 2024-12-13 00:42 SBP: 145 (mmHg) DBP: 87 (mmHg) PR: 59 (회/min) RR: 20 (회/min) BT: 36.1 (C) 의식상태: alert 내원경로: 직접내원 내원방법: 기타자동차 내원사유: 질병 사고종류: 중증도: 3 Chief Complaint 1. dizziness- 1일전 23:00(2024-12-12 23:00:00) 소견 및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임신가능성 없다고 함. -by pt 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) PHx 현재 통증 정도 무 Hypertension denied Diabetus mellitus denied Tuberculosis denied Hepatitis denied ALLERGY 없음 음식 ▶증상: 혈관부종(angioedema), 호흡곤란 ▶ 비고: [음식] 갑각류 ▶ 보고일: 2024-12-13 ROS or PE m/s alert NN/D(+/-/+), headache (-) side weakness(-), visual dimness(-) ear fullness(-) tinnitus(-) otalgia(-) extremity motor : all G5, sensory intact full eyeball motion without nystagmus Assessment Dizziness {R42} Plan w/u 특수 환자 평가 학대 또는 자살 환자 학대와 방임이 의심되어 사회사업과 평가의 필요 미해당 학대 의심 신체 상환 미해당 자살이 의심되어 사회사업과 평가의 필요성 미해당 자살 의심 신체 상환 미해당 응급경과 작성과: 응급의학과 (2024-12-13) S <전문의 기록> Dizziness CS: alert 신경학적 이상: nystagmus : ear sx : - 작성자 이희승 이희승/ 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 5/7 출력자: 황재호 (2025-03-21 오후 3:06:23 A # Dizziness P work up EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 이제원 이제원 응급실 퇴실기록 작성과 응급의학과 (2024-12-13) 퇴실진단명 : [주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 : 2024-12-13 검사명 : Total calcium/검체명: BLD(Serum)> *검사결과 :8.5 *검사명 : Platelet/검체명: BLD(PB)> * 검사결과 :262 * 검사명 : Glucose/검체명: BLD(Serum)> * 검사결과 :118 * 검사명 : BUN/검체명: BLD(Serum)> 검사결과 :6 * 검사명 :Total cholesterol/검체명: BLD(Serum)> * 검사결과 : 154 * 검사명 : Total Protein/검체명: BLD(Serum)> 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 6/7 출력자: 황재호 (2025-03-21 오후 3:06:23 * * * EUMC 이대목동병원 MOKDONG 검사결과 : 7.2 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 검사명: Albumin/검체명: BLD(Serum)> * 검사결과 : 4.1 * 검사명 : AST/검체명: BLD(Serum)> * * * * * 검사결과 :20 검사명:ALT/검체명: BLD(Serum)> 검사결과 :11 검사명: Creatinine/검체명: BLD(Serum)> 검사결과 :0.65 검사명 : WBC/검체명: BLD(PB)> * 검사결과 : 6.84 * 검사명 : RBC/검체명: BLD(PB)> * 검사결과 : 4.39 검사명:Hemoglobin/검체명: BLD(PB)> 검사결과 : 12.8 * 검사명:Hematocrit/검체명: BLD(PB)> * 검사결과 : 39.1 * 검사명 :Phosphorus/검체명: BLD(Serum)> * 검사결과 : 3.6 통증 사정 (통증 점수 1점 이상이면 기입) 현재 통증 정도 무 퇴실결과> 귀가 UNIVERSITY MEDICAL 작성자 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 7/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02) 임상진단명: Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17) 임상진단명: Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명 : 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 MR Sequence : RELCBF_LOCAL_ep2d_perf_p2_MoC_new RELCBV_LOCAL_ep2d_perf_p2_MoC_new TTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE DWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA 5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha | SWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm CE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS TRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE Clinical information: thunderclap headache, R/O RCVS. Contrast: used. Imaging technique at the header information. Brain MRI, DWI, PWI : No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere, cerebellum, brainstem, ventricle, extraaxial space). No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography: No evidence of venous thrombosis in the large intracranial venosinus system. [Conclusion] Brain MRI, DWI, PWI: No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography : No evidence of venous thrombosis in the large intracranial venosinus system. 기능검사결과 진료과/병동(의뢰처) : 신경과 (외래) (의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19) 임상진단명: 판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임상소견 및 병력: R/O RCVS 검사명: TCD(ROUTINE) -SNR (Transcranial Doppler Sonograghy) Exam Date : 2025-01-13 Patient ID: 10916445 Sex: F Age: 33 Name : 김민아 Location: NR-OPD TCD TEST CC R -56 0.86 77 0.95 79 0.97 81 0.94 78 0.92 73 0.98 BP Risk Factor HTN DM mmHg PR Smoking Family Hx L -61 0.88 77 1.03 78 0.93 76 0.83 75 1.00 75 0.98 61 0.97 51 1.03 -48 0.94 -48 0.96 2M 2M 26 1.20 29 0.77 -47 1.07 TCD comment Findings 첨부한 사본은 의무기록 원본과 같음을 증명합니다. -57 0.83 -56 0.92 -49 1.01 -50 0.99 3/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Interpretation 검사자 송현정 판독의 장윤경 최종 판독의 장윤경 UNIVERSITY MEDIC 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKOONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name Gender Age D.O.B Technician TCD Exam Data: EUMC KIMMIN A Female 33 1991/06/24 TCD ID Exam Date Exam Type Technician 10916445 2025/01/13 Routine Exam (In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit) Vossol Depth Peak Dias RI LOPTH 50 32 7 0.79 Mean 15 PI 1.67 LSIPHON 68 86 34 0.61 LICA 40 -79 -33 0.59 -48 51 1.03 0.96 RICA Vessel Depth Peak ROPTH 50 29 RSIPHON 66 100 41 40 -78 Dias RI 7 0.76 Mean Pl 14 1.56 0.59 61 0.97 -33 0.58 -48 0.94 LMCA 50 124 51 0.59 75 0.98 RMCA 50 121 50 0.59 73 0.98 LMCA 53 124 50 0.60 75 1.00 RMCA 53 126 54 0.57 78 0.92 LMCA 56 118 55 0.54 76 0.83 RMCA 56 132 56 0.58 81 0.94 LMCA 59 127 54 0.57 78 0.93 RMCA 59 131 54 0.59 79 0.97 LMCA 62 130 51 0.61 77 1.03 RMCA 62 126 53 0.58 77 0.95 LACA 70 -97 -43 0.55 -61 0.88 RACA 70 -89 -40 0.55 -56 0.86 LPCA 64 44 LVERT 60 -83 BASILAR 80 -82 BASILAR 90 -90 BASILAR 100 -89 22 0.51 29 0.77 RPCA 64 46 15 0.67 26 1.20 -34 0.59 -50 -32 0.60 -49 0.99 RVERT 60 -81 -31 0.62 -47 1.07 1.01 -39 0.57 -56 0.92 -42 0.54 -57 0.83 TCD Conclusion: 첨부한 사본은 의무기록 원본과 같음을 증명합니다. Signature: Report Date: 2025/01/13 1/4 5/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name KIM MIN A TCD ID 10916445\n   가입일: 미확인\n   상품명: 미확인 상품\n   담보내용: 미확인 담보\n   상태: 유효\n\n■ 보험 가입 이력 (Insurance History)\nNaN\n[보험 가입 3개월 이내]\n미확인 , 7) 위탁여부, 8)기타 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인) 2025-03-18 21:02:26 3. 타사 삼성생명. - 미청구 4. 진입. 사무직. 상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다. 답변일자 : 2025.3.19 빈경환 답변장소 : 답변자 : 김민아 김오민아 피( 가입 (미확인)\n\n[보험 가입 3개월 이내]\n미확인 미확인 보험사 가입 (미확인)\n\n[보험 가입 3개월 이내]\n미확인 고 일시 2024.12.13. 장소 이대목동병원 사고내용 사고접수번호 2503206478 천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0) 사고접수일 [손해사정 결과 및 고객 확인(동의) 내용 ] 2025.03.17 금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과, 2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 가입 (미확인)\n\n[보험 가입 3개월 이내]\n미확인 고와 관련하여 가입 (미확인)\n\n[보험 가입 3개월 이내]\n미확인 발급일 2025-03-21 매수 22 발급자 황재호 첨부한 사본은 의무기록 원본과 같음을 증명합니다. ENTER *상기용도 이외에는 이 사본을 사용할 수 없으며, 사용용도 또는 사용기간이 완료 된 후 즉시 파본, 폐기하여야 합니다. * 검사결과가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 외래초진 작성과: 신경과 (2024-12-17) Chief Complaint 1. 신생두통 Present Illness 12/7 음주 평소 주량이 있는 데, 이상하게 그날 빨리 취했음. 12/8 수면 중 극심한 두통에 깨어났음? 이미 깼을 때 두통 강도가 매우 심하고 구토함. 평소 mo hx, 가볍다. 구역/구토도 없음. 평소 생활이 불규칙한 데, 두통이 불규칙한 생활에 방해되지 않을 정도이다. 2일 정도 심해서 외부에서 꾸준히 약물 오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 김병수 김병수 외래경과 작성과: 신경과 (2025-01-13) 소견 및 계획 Subjective information tch는 없었으나 카페인도 완전히 끊어버리고 현재는 tightening Ha만 daily로 남아있음. Objective information tcd+ cta: distal aa. vasoconstriction? NEX: MSE alert CNE ok Motor 5/5 Sensory ok Gait ok Vital Signs BP: 102 59 mmHg PR: 68/min Ht: 155 cm Assessment Unusual severe Hac vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 Plan mr확인-rcvs 가능성 배제 필요 외래경과 작성과 신경과 (2025-02-03) 소견 및 계획 Subjective information 평소 건망증이 좀 심한 편임. 두통/어지럼은 거의 없고 경쾌. Objective information mra vs. cta: s/o reversibliity 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 작성자 김병수 김범수 2/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Vital Signs BP: 121 52 mmHg PR: 71/min Ht: 155 cm Assessment Plan Unusual severe Ha c vomiting - -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod caf withdrawal Ha -이번 두통이후로는 중단, 보통 2일 이상 끊으면 강하게 두통 MRI-MVNT의심소견 -> ns협진; 3월 말 ted fu 외래초진 작성과 신경외과 (2025-02-04) Chief Complaint 1. headache Present Illness 두통으로 신경과 내원하여 검사한 MRI상 MVNT Lt T 로 의뢰됨 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Vital sign Ht: 155 cm Wt: 47 kg BP: 100 68 mmHg PR: 107/min Past History 부정맥 알러지 정보 무 Physical Examination 특이사항 없음 Assessment Uncertain behavior brain tumor, supratentorial {D43.0} 작성자 김병수 김범수 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 3/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Care Plan ASM add후 경과관찰 특수 환자 평가 (※ 신생아, 소아, 산모, 정신질환자) 미해당 외래경과 작성과 신경외과 (2025-03-04) 소견 및 계획 Subjective information Headache imporved Objective information near total relief 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 Vital Signs BP: 106 74 mmHg PR: 107/min Ht: 155 cm Assessment Uncertain behavior brain tumor, supratentorial {D43.0} Plan medication 작성자 김영구 기여고 작성자 김영구 응급초진 작성과 응급의학과 (2024-12-13) 응급실 도착시각: 2024-12-13 00:42 SBP: 145 (mmHg) DBP: 87 (mmHg) PR: 59 (회/min) RR: 20 (회/min) BT: 36.1 (C) 의식상태: alert 내원경로: 직접내원 내원방법: 기타자동차 내원사유: 질병 사고종류: 중증도: 3 Chief Complaint 1. dizziness- 1일전 23:00(2024-12-12 23:00:00) 소견 및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임신가능성 없다고 함. -by pt 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) PHx 현재 통증 정도 무 Hypertension denied Diabetus mellitus denied Tuberculosis denied Hepatitis denied ALLERGY 없음 음식 ▶증상: 혈관부종(angioedema), 호흡곤란 ▶ 비고: [음식] 갑각류 ▶ 보고일: 2024-12-13 ROS or PE m/s alert NN/D(+/-/+), headache (-) side weakness(-), visual dimness(-) ear fullness(-) tinnitus(-) otalgia(-) extremity motor : all G5, sensory intact full eyeball motion without nystagmus Assessment Dizziness {R42} Plan w/u 특수 환자 평가 학대 또는 자살 환자 학대와 방임이 의심되어 사회사업과 평가의 필요 미해당 학대 의심 신체 상환 미해당 자살이 의심되어 사회사업과 평가의 필요성 미해당 자살 의심 신체 상환 미해당 응급경과 작성과: 응급의학과 (2024-12-13) S <전문의 기록> Dizziness CS: alert 신경학적 이상: nystagmus : ear sx : - 작성자 이희승 이희승/ 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 5/7 출력자: 황재호 (2025-03-21 오후 3:06:23 A # Dizziness P work up EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 작성자 이제원 이제원 응급실 퇴실기록 작성과 응급의학과 (2024-12-13) 퇴실진단명 : [주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 : 2024-12-13 검사명 : Total calcium/검체명: BLD(Serum)> *검사결과 :8.5 *검사명 : Platelet/검체명: BLD(PB)> * 검사결과 :262 * 검사명 : Glucose/검체명: BLD(Serum)> * 검사결과 :118 * 검사명 : BUN/검체명: BLD(Serum)> 검사결과 :6 * 검사명 :Total cholesterol/검체명: BLD(Serum)> * 검사결과 : 154 * 검사명 : Total Protein/검체명: BLD(Serum)> 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 6/7 출력자: 황재호 (2025-03-21 오후 3:06:23 * * * EUMC 이대목동병원 MOKDONG 검사결과 : 7.2 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 검사명: Albumin/검체명: BLD(Serum)> * 검사결과 : 4.1 * 검사명 : AST/검체명: BLD(Serum)> * * * * * 검사결과 :20 검사명:ALT/검체명: BLD(Serum)> 검사결과 :11 검사명: Creatinine/검체명: BLD(Serum)> 검사결과 :0.65 검사명 : WBC/검체명: BLD(PB)> * 검사결과 : 6.84 * 검사명 : RBC/검체명: BLD(PB)> * 검사결과 : 4.39 검사명:Hemoglobin/검체명: BLD(PB)> 검사결과 : 12.8 * 검사명:Hematocrit/검체명: BLD(PB)> * 검사결과 : 39.1 * 검사명 :Phosphorus/검체명: BLD(Serum)> * 검사결과 : 3.6 통증 사정 (통증 점수 1점 이상이면 기입) 현재 통증 정도 무 퇴실결과> 귀가 UNIVERSITY MEDICAL 작성자 이제원 이제원 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 7/7 출력자: 황재호 (2025-03-21 오후 3:06:23 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02) 임상진단명: Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17) 임상진단명: Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONO 등록번호: 10916445 성명 : 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 MR Sequence : RELCBF_LOCAL_ep2d_perf_p2_MoC_new RELCBV_LOCAL_ep2d_perf_p2_MoC_new TTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE DWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA 5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha | SWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm CE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS TRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE Clinical information: thunderclap headache, R/O RCVS. Contrast: used. Imaging technique at the header information. Brain MRI, DWI, PWI : No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere, cerebellum, brainstem, ventricle, extraaxial space). No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography: No evidence of venous thrombosis in the large intracranial venosinus system. [Conclusion] Brain MRI, DWI, PWI: No acute infarction in the brain on DWI. Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area. -> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space, neuroglial cyst, etc. No acute infarction in the brain on DWI. No significant perfusion abnormality in the brain. Brain MRA, neck MRA : No significant steno-occlusion or aneurysm in the intracranial and neck arteries. MR venography : No evidence of venous thrombosis in the large intracranial venosinus system. 기능검사결과 진료과/병동(의뢰처) : 신경과 (외래) (의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19) 임상진단명: 판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 임상소견 및 병력: R/O RCVS 검사명: TCD(ROUTINE) -SNR (Transcranial Doppler Sonograghy) Exam Date : 2025-01-13 Patient ID: 10916445 Sex: F Age: 33 Name : 김민아 Location: NR-OPD TCD TEST CC R -56 0.86 77 0.95 79 0.97 81 0.94 78 0.92 73 0.98 BP Risk Factor HTN DM mmHg PR Smoking Family Hx L -61 0.88 77 1.03 78 0.93 76 0.83 75 1.00 75 0.98 61 0.97 51 1.03 -48 0.94 -48 0.96 2M 2M 26 1.20 29 0.77 -47 1.07 TCD comment Findings 첨부한 사본은 의무기록 원본과 같음을 증명합니다. -57 0.83 -56 0.92 -49 1.01 -50 0.99 3/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Interpretation 검사자 송현정 판독의 장윤경 최종 판독의 장윤경 UNIVERSITY MEDIC 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/14 출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKOONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name Gender Age D.O.B Technician TCD Exam Data: EUMC KIMMIN A Female 33 1991/06/24 TCD ID Exam Date Exam Type Technician 10916445 2025/01/13 Routine Exam (In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit) Vossol Depth Peak Dias RI LOPTH 50 32 7 0.79 Mean 15 PI 1.67 LSIPHON 68 86 34 0.61 LICA 40 -79 -33 0.59 -48 51 1.03 0.96 RICA Vessel Depth Peak ROPTH 50 29 RSIPHON 66 100 41 40 -78 Dias RI 7 0.76 Mean Pl 14 1.56 0.59 61 0.97 -33 0.58 -48 0.94 LMCA 50 124 51 0.59 75 0.98 RMCA 50 121 50 0.59 73 0.98 LMCA 53 124 50 0.60 75 1.00 RMCA 53 126 54 0.57 78 0.92 LMCA 56 118 55 0.54 76 0.83 RMCA 56 132 56 0.58 81 0.94 LMCA 59 127 54 0.57 78 0.93 RMCA 59 131 54 0.59 79 0.97 LMCA 62 130 51 0.61 77 1.03 RMCA 62 126 53 0.58 77 0.95 LACA 70 -97 -43 0.55 -61 0.88 RACA 70 -89 -40 0.55 -56 0.86 LPCA 64 44 LVERT 60 -83 BASILAR 80 -82 BASILAR 90 -90 BASILAR 100 -89 22 0.51 29 0.77 RPCA 64 46 15 0.67 26 1.20 -34 0.59 -50 -32 0.60 -49 0.99 RVERT 60 -81 -31 0.62 -47 1.07 1.01 -39 0.57 -56 0.92 -42 0.54 -57 0.83 TCD Conclusion: 첨부한 사본은 의무기록 원본과 같음을 증명합니다. Signature: Report Date: 2025/01/13 1/4 5/14 출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원 MOKDONG 등록번호: 10916445 성명: 김민아 성별/나이 : 여/33세 생년월일: 1991-06-24 Velica Name KIM MIN A TCD ID 10916445 가입 (미확인)\n\n■ 진료 기록 (Medical Records)\nNaN\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인) (D43.0)\n특이사항: 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)\n중증도: 경미\n\n[미확인] 사고내용 사고접수번호\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 적정성 검토 결과,\n중증도: 경미\n\n[미확인] 에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상 좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========\n특이사항: , 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========\n중증도: 위중\n\n[미확인] &약국별 기본진료내역 정보주체 : 김민아 열람대상기간 :\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n처방: 조제정보 병·의원&약국별 기본진료내역 정보주체 : 김민아 열람대상기간 :\n중증도: 경미\n\n[미확인] 안과 외래 AHO01 1 27,120 19,020 8,100 다래끼 5\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 안과 외래 AHOO1 (양방)콩 78,610 다래끼 56,010 22,600 (양방)급 8\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 이비인 후과 외래 AH605 성비감염 성 외이도 염 1 25,540 17,940 7,600\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 외래 AM501 층을 동반 한경주간 1 31,960 22,460 9,500 판장애 태평양온누리 11\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] &약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 빈경 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6\n중증도: 경미\n\n[미확인] 피부과 외래 AL039 세불명의 연조직염 1 19,360 13,560 5,800 13\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 외래 AM501 층을 동반 한 경주간 판장애 29,200 20,500 8,700 17\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] (양방)신 경뿌리' 31,340 21,940 9,400 한 경추간 판장애 (양방)기 의료법인명지 타바이러 19\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 재활의 학과 외래 AZ115 스질환에 1 62,650 31,350 31,300 대한특수 선별검사 (양방)기 의료법인명지 20\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 재활의 학과 타바이러 외래 AZ115 스질환에 1 22,490 11,290 11,200 대한 특수 선별검사 21\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 (양방)신 경뿌리병 외래 AM501 증을 동반 한경주간 1 18,630 13,130 5,500 판장애 22\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] (양방)신 경뿌리병 외래 AM501 층을 동반 한경주간 판장애 1 28,630 20,130 8,500 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경\n중증도: 경미\n\n[미확인] 외래 AM771 (양방)외 측상과염 1 10,710 7,510 3,200 25\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 외래 AM771 (양방)외 측상과염 10,710 7,510 3,200 26\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 외래 AM771 과 (양방)외 측상과염 1 10,710 7,510 3,200 27\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 외래 AM771 과 (양방)외 측상과염 1 38,360 26,860 11,500 (양방)상\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 내과 외래 AJ069 세불명의 급성 상기 도감염 1 17,320 12,220 5,100 (양방)상 30\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 경뿌리병 외래 AM501 층을 동반 1 28,050 19,650 8,400 한경주간 판장애 32\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 경뿌리병 외래 AM501 층을 동반 한경추간 판장애 1 10,490 7,390 3,100 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ㆍ진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. . 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34\n중증도: 경미\n\n[미확인] 외래 AM501 층을 동반 38,500 27,000 11,500 과 한 경주간 판장애\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 안과 외래 AH193 기타 질환 에서의 각 막염 및 각 1 20,930 14,730 6,200 (양방)달 리 분류된 37\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 질환 에서의 각 막염 및 각 1 20,930 14,730 6,200 (양방)달 리 분류된 37\n중증도: 경미\n\n[미확인] 안과 외래 AH101 성 아토피 결막염 1 33,380 20,080 13,300 (양방)급 39\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 외래 AM6594 윤활막염 1 24,500 17,200 7,300 및 힘줄윤 활막염, 손 41\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 과 세불명의 외래 AM6594 윤활막염 1 14,710 10,310 4,400 및 힘줄윤 활막염, 손 (양방)상 세불명의 43\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 외래 AM6594 윤활막염 1 및 힘줄윤 활막염, 33,550 23,550 10,000 44\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] &약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ?진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경\n중증도: 경미\n\n[미확인] 과 외래 AM6594 윤활막염 1 힘줄 32,940 23,140 9,800 활막염, 손 46\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 피부과 외래 AL219 세불명의 1 14,790 지루피부 염 10,390 4,400 48\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 피부과 외래 AL219 (양방)상 세불명의 지루피부 염 1 16,970 11,970 5,000 50\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 이비인 후과 외래 AJ060 성 후두인 1 두염 16,480 11,580 4,900 > 52\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 의 기타 및 외래 ASO138 여러 부분 의 열린상 처 1 19,190 13,490 5,700 (양방)귀 의 기타 및 54\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 및 외래 ASO138 여러 부분 의 열린상 처 1 19,190 13,490 5,700 (양방)귀 의 기타 및 54\n중증도: 경미\n\n[미확인] 의 열린상 처 이지약국 일반의 외래 ASO138 여러 부분 의 열린상 처 (양방)귀 의 기타 및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56\n중증도: 경미\n\n[미확인] 세불명의 내과 외래 AJ304 20,170 알레르기 비염 14,170 6,000 (양방)상 세불명의 58\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 피부과 외래 AL239 인의 알레 16,140 11,340 4,800 르기성 접 촉피부염 (양방)기 60\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 이비인 후과 외래 AH6088 타 외이도 염 1 16,140 11,340 4,800\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] &약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. ㆍ진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. ?이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf ==========\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf ==========\n중증도: 경미\n\n[미확인] 의무기록사본 총 0부 (표지제외) 빈경환 의무기록사본증명서 등록번호\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[2025.01.07] 미확인 의료기관\n내원일: 2025.01.07\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 가 나오지 않은 것은 사본발급 되지 않습니다. 이화여자대학교 의과대학부속 목동병원장의 (07985) 서울특별시 양천구 안양천로 1071 EUMC 이대목동병원 MOKDONG EUMC 이대목동병원 MOKDONG 등록번호:\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n처방: 오나전히 호전은 안되서 판피린 사용 ->확 시원해지는 느낌? 일시적으로 이후 mild dz+ Ha이 계속 지속된다.... 통증 사정 (통증 점수 1점 이상이면 위치, 양상, 기간, 빈도 기입) 현재 통증 정도 무 기능평가 거동 독립적 Past History Allergic disease no Physical Examination physical examination ns vital sign BP 115 72 Ht 155 cm PR 110 Wt 47 kg neurologic examination abnormal Assessment Unusual severe Ha c vomiting -> NDPH -clear onset: 12/8 sleep-awakening -residual mild Ha + dz -ed visit: 12/13 창백한 느낌으로 방문 UNIVERSITY MEDICAL -mo hx: pm, 평소 불규칙해도 간헐적 두통, mod Care Plan plan 이차두통 강력 의심. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/7 출력자: 황재호 (\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (\n진단명: 미확인\n처방: 받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (\n특이사항: 및 계획 PL 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 4/7 출력자 : 황재호 (\n중증도: 경미\n\n[미확인] MOKDONO 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 검사결과 : 7.2 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n특이사항: 7.2 등록번호:\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 :\n특이사항: 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 :\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (\n특이사항: 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (\n중증도: 경미\n\n[미확인] MOKDONO 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 판독의 : 김은희, 김은희 Migraine 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 2/14 출력자: 황재호 (\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKOONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n[미확인] MOKDONG 등록번호:\n내원일: 미확인\n내원사유: 정기 진료\n진단명: 미확인\n중증도: 경미\n\n■ 입원 기록 (Hospitalization Records)\nNaN\n[미확인] &약국 이화여자대학교의과대학부속목동 병원 진단과 응급의학과 입원/외래 입원 주상병코드 AR42 빈경\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 과 응급의학과 입원/외래 입원 주상병코드 AR42 빈경\n입원기간: undefined ~ undefined\n\n[미확인] (양방)어 AR42 지럼증 및 1 어지럼 650,480 515,810 134,670 2\n내원일: 미확인\n내원사유: 응급실 내원\n진단명: 미확인\n입원기간: undefined ~ undefined\n\n[미확인] 미확인 의료기관\n내원일: 미확인\n내원사유: 이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 :\n진단명: [주]Dizziness [부] Headache 내원사유 및 응급실 경과 상환 기저질환 없는 자로 12/7 음주 후에 어지러움과 두통, 소화가 잘 안되는 증상이 있어 경과관찰 하던 중 증상이 지속 되어 1일전 local 내원하여 약 처방받아 복용하였으나 어지러움이 지속되어 응급실 내원함. 임신가능성 없다고 함. -by pt 치료결과 및 향후계획 응급실 검사에서 특이점은 보이지 않습니다. supportive care plan 입니다. 최근 과로하는 경향 있다고 합니다. (밤샘 작업 등...) 생활 style 조절 권유하였습니다. PO 처방 퇴원 합니다. 검사결과 ○검체검사 * 검사일자 :\n입원기간: undefined ~ undefined\n특이사항: ○검체검사 * 검사일자 :\n\n■ 보험 청구 이력 (Insurance Claims)\nNaN\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)\n지급일: 미확인\n상태: 처리 중\n특이사항: 1. 진단경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인)\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 적정성 검토 결과,\n지급일: 미확인\n상태: 처리 중\n\n[미확인] 현대해상\n청구일: 미확인\n진단명: 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========\n지급일: 미확인\n상태: 처리 중\n특이사항: , 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 1/6\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 2/6 빈경\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 3/6 빈경 외래 코드 TOOO 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)신 경뿌리병 34\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 4/6 빈경\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 및 1 11,940 8,440 3,500 23,090 16,190 6,900 본 자료는 병·의원&약국에서 청구한 요양급여비용 명세서를 기준으로 작성된 자료입니다. . 진료비에는 국민건강보험법 제41조의4에 따른 선별급여 관련 금액이 포함되어 있지 않습니다. 이에 본 자료를 단순 참고가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 5/6 빈경 ㅇㄱㅁㄱㄱ TOOO 외래 코드 일수(건강보험 적용분) 혜택받은 금액| (진료비) (양방)귀 의 기타 및 56\n\n[미확인] 미확인 보험사\n청구일: 미확인\n진단명: 미확인\n지급일: 미확인\n상태: 처리 중\n특이사항: 가 아닌 증빙자료로 사용할 수 없으며, 이용에 관한 책임은 이용자에게 있습니다. 6/6 빈경 ========== 파일: i?´e? eªⓒe??e³?i??.pdf ==========\n\n■ 종합 소견 (Summary)\nNaN\n총 진료 기록: 64건\n진료 기간: 미확인 ~ 미확인\n주요 진단명: 경위 24. 12. 13일 이대목동 EK 방문 빈경환 Kidny 두통이 심하고 구조 동반하여 내원. NS 진료후 CT. MRI 등 정밀검사 결과. D43.0 진단. BX등 불가하여 영상 판독으로 진다. 기왕력 관련 종이질환X. 심평은 진료내역으로 대처 기고지 C. LSpine 치료력. 부정해? 고지 답변자 : SUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. (인), 적정성 검토 결과,, 필요 소견, 뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견 현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등 해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것 으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다. 본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의 내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다. 본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서 착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다. 보험금 지급 요청 계좌 ■ 은행명: ■계좌번호: ■예금주: 20 25 년 3월 28 일 확인자 김민아 현대해상화재보험㈜귀중 고객센터 1588-5656www.hi.co.kr (인))민서명) H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ==========, Migraine 임상소견 및 병력: R/O RCVS 검사명: CT 3D Brain Perfusion Stroke+ CTA (Neck) (C) [Finding] Perfusion brain angiography CT; Clinical information: R/O RCVS Findings; Same as conclusion. [Conclusion] 1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion. 2. Otherwise, no definite evidence of significant stenosis/aneurysm. 3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image. 4. No definite remarkable finding on perfusion map. 영상검사결과 진료과/병동 (의뢰처) : 신경과 (외래) (의뢰일 :, Reversible cerebral vasoconstriction syndrome 임상소견 및 병력: FLAIR CE 7, Rec TCHS, R/O RCVS 검사명: MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) [Finding] Request name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C) 판독의 : 변성환, 변성환, 변성환 첨부한 사본은 의무기록 원본과 같음을 증명합니다. 1/14 출력자 : 황재호 (\n주요 소견:\n  - 총 3회 입원 이력\n  - 총 9건 보험 청구 이력\n\nNaN\n보고서 생성 완료 - 2025. 8. 17. 오후 10:28:27\nNaN",
-    "reportMetadata": {
-      "generatedAt": "2025-08-17T13:28:27.747Z",
-      "format": "text",
-      "totalSections": 10,
-      "recordCount": 83
+    "pipeline": {
+      "dateBlocks": [],
+      "organizedData": [
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "MOKDONG 성명: 김민아 /33세 생년월일: 1991-06-24\n영상검사결과\n진료과/병동 (의뢰처) : 신경과 (외래)",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "VENO SAG CE\nClinic",
+          "rawText": "MOKDONO 성명 : 김민아 /33세 생년월일: 1991-06-24\nMR Sequence :\nRELCBF_LOCAL_ep2d_perf_p2_MoC_new\nRELCBV_LOCAL_ep2d_perf_p2_MoC_new\nTTP ep2d_perf_p2_MOC_new | RELMTT_LOCAL_ep2d_perf_p2_MoC_new | RESOLVE DWI TRA_TRACEW | RESOLVE\nDWI TRA_ADC | 3D TOF MRA 64ch | VENO flow_pc3d_sag 1mm_MSUM | T1_mprage_SAG_p2 0.5mm MPR_TRA\n5mm | T1_mprage_SAG_p2 0.5mm_MPR_SAG | T2 TSE TRA | FLAIR TRA | SWI3D TRA_Mag | SWI3D TRA_Pha |\nSWI3D TRA SWI | SWI3D TRA_SWI_mIP | CA Angio 3D COR POST venous | T1_mprage_SAG_FS 0.5mm\nCE_MPR_TRA | T1_mprage_SAG_FS 0.5mm CE_MPR_COR | T1_mprage_SAG_FS 0.5mm CE_MPR_SAG | FLAIR FS\nTRA CE | COR | SAG | VENO SAG | VENO COR | NECK ANGIO | VENO SAG CE\nClinical information: thunderclap headache, R/O RCVS.\nContrast: used.\nImaging technique at the header information.\nBrain MRI, DWI, PWI :\nNo acute infarction in the brain on DWI.\nFocal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area.\n-> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular\nspace, neuroglial cyst, etc.\nNo significant old infarction, atrophy, hydrocephalus or hemorrhage in the brain(cerebral hemisphere,\ncerebellum, brainstem, ventricle, extraaxial space).\nNo acute infarction in the brain on DWI.\nNo significant perfusion abnormality in the brain.\nBrain MRA, neck MRA :\nNo significant steno-occlusion or aneurysm in the intracranial and neck arteries.\nMR venography:\nNo evidence of venous thrombosis in the large intracranial venosinus system.\n[Conclusion]\nBrain MRI, DWI, PWI:\nNo acute infarction in the brain on DWI.\nFocal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area.\n-> DDx. benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular\nspace, neuroglial cyst, etc.\nNo acute infarction in the brain on DWI.\nNo significant perfusion abnormality in the brain.\nBrain MRA, neck MRA :\nNo significant steno-occlusion or aneurysm in the intracranial and neck arteries.\nMR venography :\nNo evidence of venous thrombosis in the large intracranial venosinus system.\n기능검사결과\n진료과/병동(의뢰처) : 신경과 (외래)",
+          "keywordMatches": [
+            "MRI"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "MOKDONG 성명: 김민아 /33세 생년월일: 1991-06-24\n임상소견 및 병력:\nR/O RCVS\n검사명:\nTCD(ROUTINE) -SNR\n(Transcranial Doppler Sonograghy)\nExam Date :",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "생년월일: 1991-06-24\nInterpretation\n검사자\n송현정\n판독의\n장윤경\n최종 판독의\n장윤경\nUNIVERSITY MEDIC\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n4/14",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "MOKOONG 성명: 김민아 /33세 생년월일: 1991-06-24\nVelica\nName\nGender\nAge\nD.O.B\nTechnician\nTCD Exam Data:\nEUMC\nKIMMIN A\nFemale\n33",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "1991/06/24\nTCD ID\nExam Date\nExam Type\nTechnician\n10916445",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "1991-06-24",
+          "hospital": "미상 병원",
+          "rawText": "생년월일: 1991-06-24\nVelica\nName KIM MIN A TCD ID 10916445",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2020-03-20",
+          "hospital": "미상 병원",
+          "rawText": "열람대상기간 : 2020-03-20~2025-03-19\n전체 다운로드 ↓\n진료시작일",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-11-22",
+          "hospital": "미상 병원",
+          "rawText": "2024.11.22.\n김민아",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-12-13",
+          "hospital": "장소\n이대목동병원",
+          "rawText": "2024.12.13.\n장소\n이대목동병원\n사고내용\n사고접수번호 2503206478\n천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)\n사고접수일\n[손해사정 결과 및 고객 확인(동의) 내용 ]",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-12-13",
+          "hospital": "이대목동병원",
+          "rawText": "2024-12-13\n병·의원&약국\n이화여자3 EUMC 이대목동병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-12-17",
+          "hospital": "Clinic",
+          "rawText": "(의뢰일: 2024-12-17 / 검사일: 2024-12-31/ 판독일: 2025-01-02)\n임상진단명:\nMigraine\n임상소견 및 병력:\nR/O RCVS\n검사명:\nCT 3D Brain Perfusion Stroke+ CTA (Neck) (C)\n[Finding]\nPerfusion brain angiography CT;\nClinical information:\nR/O RCVS\nFindings;\nSame as conclusion.\n[Conclusion]\n1. Focal atherosclerotic vascular calcification in the right subclavian artery proximal portion.\n2. Otherwise, no definite evidence of significant stenosis/aneurysm.\n3. No definite evidence of abnormal attenuation in the brain parenchyma on precontrast image.\n4. No definite remarkable finding on perfusion map.\n영상검사결과\n진료과/병동 (의뢰처) : 신경과 (외래)",
+          "keywordMatches": [
+            "CT",
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2024-12-17",
+          "hospital": "미상 병원",
+          "rawText": "(의뢰일: 2024-12-177 검사일: 2025-01-13 / 판독일시: / 결과보고일시: 2025-01-13 15:19)\n임상진단명:\n판독의 : 김은희, 김은희\nMigraine\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n2/14",
+          "keywordMatches": [
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
+          "rawText": "(의뢰일 : 2025-01-13 / 검사일 : 2025-01-15/ 판독일: 2025-01-17)\n임상진단명:\nReversible cerebral vasoconstriction syndrome\n임상소견 및 병력:\nFLAIR CE 7, Rec TCHS, R/O RCVS\n검사명:\nMRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C)\n[Finding]\nRequest name : MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI-(C)\n판독의 : 변성환, 변성환, 변성환\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n1/14",
+          "keywordMatches": [
+            "MRI",
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
+          "rawText": "2025-01-13\nPatient ID: 10916445\nSex: F Age: 33\nName :\n김민아\nLocation:\nNR-OPD\nTCD TEST\nCC\nR\n-56 0.86\n77\n0.95\n79\n0.97\n81\n0.94\n78\n0.92\n73\n0.98\nBP\nRisk Factor HTN\nDM\nmmHg PR\nSmoking Family Hx\nL\n-61\n0.88\n77\n1.03\n78\n0.93\n76\n0.83\n75\n1.00\n75 0.98\n61\n0.97\n51\n1.03\n-48\n0.94\n-48\n0.96\n2M\n2M\n26\n1.20\n29\n0.77\n-47 1.07\nTCD comment\nFindings\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\n-57\n0.83\n-56\n0.92\n-49\n1.01\n-50\n0.99\n3/14",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": true,
+          "excludedMatches": [
+            "OPD"
+          ]
+        },
+        {
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
+          "rawText": "2025/01/13\nRoutine Exam\n(In the report. the unit of Peak/Mean/Dias is cm/s(kHz). Depth's unit is mm, others have no unit)\nVossol Depth Peak Dias RI\nLOPTH\n50\n32\n7 0.79\nMean\n15\nPI\n1.67\nLSIPHON\n68\n86\n34\n0.61\nLICA\n40\n-79\n-33\n0.59 -48\n51 1.03\n0.96\nRICA\nVessel Depth Peak\nROPTH 50 29\nRSIPHON 66 100 41\n40 -78\nDias RI\n7 0.76\nMean\nPl\n14\n1.56\n0.59 61\n0.97\n-33 0.58 -48\n0.94\nLMCA\n50\n124\n51\n0.59 75\n0.98\nRMCA\n50\n121 50 0.59 73\n0.98\nLMCA\n53\n124\n50\n0.60 75\n1.00\nRMCA\n53\n126 54\n0.57 78\n0.92\nLMCA\n56\n118\n55\n0.54 76\n0.83\nRMCA\n56\n132\n56\n0.58 81\n0.94\nLMCA\n59\n127\n54\n0.57 78\n0.93\nRMCA\n59\n131\n54\n0.59 79\n0.97\nLMCA\n62\n130\n51\n0.61 77\n1.03\nRMCA\n62\n126\n53\n0.58 77\n0.95\nLACA\n70 -97\n-43\n0.55 -61\n0.88\nRACA\n70\n-89\n-40\n0.55 -56\n0.86\nLPCA 64 44\nLVERT 60 -83\nBASILAR 80 -82\nBASILAR 90\n-90\nBASILAR 100 -89\n22\n0.51\n29\n0.77\nRPCA\n64\n46\n15 0.67 26\n1.20\n-34 0.59 -50\n-32 0.60 -49\n0.99\nRVERT\n60\n-81\n-31 0.62 -47\n1.07\n1.01\n-39 0.57 -56\n0.92\n-42 0.54 -57\n0.83\nTCD Conclusion:\n첨부한 사본은 의무기록 원본과 같음을 증명합니다.\nSignature:",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-01-13",
+          "hospital": "미상 병원",
+          "rawText": "Report Date: 2025/01/13\n1/4\n5/14",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-01-15",
+          "hospital": "이대목동병원",
+          "rawText": "2025.01.15. 이대목동병원에서 시행한 Brain MRI, DWI, PWI / Brain MRA/MR Venography 상\n좌측 측두엽 영역 다발 초점의 결절로 양성 병변 또는 신경계 낭종 등 감별 진단 필요 소견,\n뇌내 뚜렷한 기능적 이상 없이 다양한 질환과의 감별 진단 필요 소견\n현재 조직검사 미 시행 및 진단서 상 임상적 추정 진단 등\n해당 내용 종합하여 금번 청구병명은 동 보험 약관상 '암'의 진단 기준에 부합하는 검사 결과 기반되지 않는 것\n으로 확인되어, 금번 청구보험금 보상하지 않는 손해에 해당하는 것으로 안내드리며, 이에 동의 및 확인합니다.\n본인은 상기 보험계약 및 보험사고와 관련하여 보험금 청구의 손해사정 결과(주요사항 및 상호 합의\n내용 등 포함)에 동의하며, 향후 동의한 사안에 대하여 이의를 제기하지 않을 것을 확약합니다.\n본 손해사정 결과에 대해 상세히 안내 받았으며, 본 확인 및 서명(인감 날인)은 진정한 의사표시로서\n착오나 이해관계자의 사기 또는 강박 등이 없이 평온한 상태에서 본인이 직접 확인 및 서명합니다.\n보험금 지급 요청 계좌\n■ 은행명:\n■계좌번호:\n■예금주:\n20 25 년\n3월\n28 일\n확인자\n김민아\n현대해상화재보험㈜귀중\n고객센터 1588-5656www.hi.co.kr\n(인))민서명)",
+          "keywordMatches": [
+            "조직검사",
+            "MRI",
+            "암",
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-17",
+          "hospital": "미상 병원",
+          "rawText": "2025.03.17\n금번 청구병명인 '천막상 뇌의 행동양식 불명 또는 미상의 신생물(D43.0)' 진단 적정성 검토 결과,",
+          "keywordMatches": [
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-18",
+          "hospital": "미상 병원",
+          "rawText": "빈경환 2025-03-18 21:02:26\n문답서(일반)\n피(보험, 공제)자 인적사항\n성 명\n김민아.\n생년월일\n연락처\n010-9089-5533.\n직 업\n주 소\n아래의 질문사항은 금번 신청한 청구 건(발병일/ 사고일:\n년 월\n일)\n에 대하여 사실관계를 확인하고자 질문사항에 대하여 답변자 본인의 자유로운 의사에\n의해 사실대로 문답합니다.\n질문사항\n1) 피보험자 근황(거주지, 직장 등), 2)보험가입경위, 3)청약서 작성(고지사항),\n증권수령 및 약관전달(중요내용설명) 여부 등, 4) 발병(사고) 및 치료경위, 5)과거\n병력, 6) 타 보험사, 7) 위탁여부, 8)기타\n1. 진단경위\n24. 12. 13일 이대목동 EK 방문\n빈경환\nKidny\n두통이 심하고 구조 동반하여 내원.\nNS 진료후 CT. MRI 등 정밀검사 결과.\nD43.0 진단.\nBX등 불가하여 영상 판독으로 진다.\n기왕력 관련 종이질환X.\n심평은 진료내역으로 대처\n기고지 C. LSpine 치료력.\n부정해? 고지\n답변자\n:\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.",
+          "keywordMatches": [
+            "MRI",
+            "CT",
+            "진단"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-18",
+          "hospital": "미상 병원",
+          "rawText": "(인) 2025-03-18 21:02:26\n3. 타사\n삼성생명.\n-\n미청구\n4. 진입.\n사무직.\n상기의 내용은 신의 성실에 입각하여 사실대로 기재하였음을 확인하며 아래에 서명 및 날인 합니다.\n답변일자 :",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-19",
+          "hospital": "미상 병원",
+          "rawText": "2025.3.19\n빈경환\n답변장소\n:\n답변자\n:\n김민아\n김오민아\n피(보험, 공제)자와의 관계\n:\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD. ========== 파일: i??i?´i?￢i ?e²°e³¼ i??e?´e￢¸_e¹e?¼i??.pdf ========== 손해사정 확인서(인 / 재물)\nHiLife\n고객(피보험자)\n성명(법인명) 김민아\n주민(사업자)번호 주소\n연락처\n010-9089-5533\n, 401호\n피보험자와의 관계 본인\n○ 보험계약\n계약번호\n보험기간\n피보험자(물)\nL024 57371589\n상품명\n무배당 현대해상굿앤굿스타종합보험",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
+          "rawText": "출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
+          "rawText": "출력자: 황재호 (2025-03-21 오후 3:06:3 EUMC 이대목동병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
+          "rawText": "출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원\nMOKDONG 성명: 김민아\n/33세",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
+          "rawText": "출력자 : 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-21",
+          "hospital": "이대목동병원",
+          "rawText": "출력자: 황재호 (2025-03-21 오후 3:06:37 EUMC 이대목동병원\nMOKDONG 성명: 김민아 /33세",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
+          "rawText": "2025-03-28 14:06:50\nCH\n해오름손해사정(주)\nSUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n문답서\n피보험자\n총 0부\n(표지제외)",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
+          "rawText": "H 현대해상화재보험 ========== 파일: i?￢i??i??i§?e￡?e?´i?­.pdf ========== 2025-03-28 14:06:50\nCH\n해오름손해사정(주)\nPREERAN SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n심평원 진료내역\n피보험자\n총 0 부\n(표지제외)",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-03-28",
+          "hospital": "미상 병원",
+          "rawText": "빈경환 2025-03-28 14:06:41\n세부진료정보\n처방조제정보\n병·의원&약국별 기본진료내역\n정보주체 : 김민아",
+          "keywordMatches": [
+            "처방"
+          ],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2091-11-22",
+          "hospital": "미상 병원",
+          "rawText": "2091.11.22.\n계약자\n김민아\n수익자\n김민아\n보험사고\n일시",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ]
     },
     "statistics": {
-      "originalLength": 21564,
-      "processedLength": 19968,
-      "recordsFound": 64,
-      "insuranceCount": 5,
-      "timelineEvents": 64
-    },
-    "processingTime": 1755437307747
+      "dateBlocks": 0,
+      "organizedRecords": 31,
+      "confidence": 0
+    }
   }
 }

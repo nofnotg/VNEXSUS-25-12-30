@@ -1,0 +1,1110 @@
+{
+  "timestamp": "2025-11-30T13:36:42.176Z",
+  "stages": [
+    {
+      "stage": "upload",
+      "success": false,
+      "jobId": "f01f5026-c241-4432-a866-8000b168ef4b",
+      "data": {
+        "jobId": "f01f5026-c241-4432-a866-8000b168ef4b",
+        "message": "파일 분석 작업이 시작되었습니다.",
+        "status": "processing",
+        "statusUrl": "/api/ocr/status/f01f5026-c241-4432-a866-8000b168ef4b",
+        "resultUrl": "/api/ocr/result/f01f5026-c241-4432-a866-8000b168ef4b"
+      }
+    },
+    {
+      "stage": "status_check",
+      "success": true,
+      "attempts": 0,
+      "finalStatus": "completed",
+      "data": {
+        "jobId": "f01f5026-c241-4432-a866-8000b168ef4b",
+        "status": "completed",
+        "filesTotal": 1,
+        "filesProcessed": 1,
+        "startTime": "2025-11-30T13:36:42.299Z",
+        "startedAt": "2025-11-30T13:36:42.312Z",
+        "completedAt": "2025-11-30T13:36:42.323Z",
+        "elapsedTime": "2초"
+      }
+    },
+    {
+      "stage": "result",
+      "success": true,
+      "textLength": 602,
+      "recordCount": 0,
+      "data": {
+        "jobId": "f01f5026-c241-4432-a866-8000b168ef4b",
+        "status": "completed",
+        "completedAt": "2025-11-30T13:36:42.323Z",
+        "elapsedTime": "0초",
+        "fileCount": 1,
+        "results": {
+          "file_1": {
+            "filename": "test-medical-record.txt",
+            "fileSize": 1096,
+            "mimeType": "text/plain",
+            "pageCount": 1,
+            "isScannedPdf": false,
+            "processingSteps": [
+              "text_file_read"
+            ],
+            "textSource": "direct_text",
+            "ocrSource": "text_file",
+            "mergedText": "진료기록부\r\n\r\n환자명: 김철수\r\n주민등록번호: 850315-1******\r\n진료일자: 2024년 11월 15일\r\n\r\n주호소: 복통 및 구토\r\n\r\n현병력:\r\n환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다.\r\n통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다.\r\n구토 3회 있었으며, 발열(38.5도)이 동반되었습니다.\r\n\r\n과거력:\r\n- 2020년: 고혈압 진단 (현재 약물 복용 중)\r\n- 2018년: 당뇨병 진단 (인슐린 치료 중)\r\n\r\n신체검사:\r\n- 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체온 38.5도\r\n- 복부: 우하복부 압통 및 반발통 양성, 장음 감소\r\n\r\n검사 소견:\r\n- 혈액검사: WBC 15,000/μL (증가), CRP 8.5 mg/dL (증가)\r\n- 복부 CT: 충수돌기 비후 및 주변 염증 소견\r\n\r\n진단: 급성 충수염 (Acute Appendicitis, K35.8)\r\n\r\n치료 계획:\r\n1. 응급 충수절제술 시행 예정\r\n2. 항생제 투여 (Ceftriaxone 2g IV q24h)\r\n3. 금식 및 수액 요법\r\n\r\n담당의사: 홍길동\r\n면허번호: 123456\r\n",
+            "textLength": 601,
+            "processingTime": "0.01초",
+            "processedAt": "2025-11-30T13:36:42.319Z"
+          }
+        }
+      }
+    },
+    {
+      "stage": "investigator_view",
+      "success": true,
+      "episodeCount": 1,
+      "timelineCount": 1,
+      "data": {
+        "success": true,
+        "data": {
+          "claimInfo": {
+            "totalDiagnoses": 6,
+            "totalProcedures": 2,
+            "primaryDiagnosis": "급성 충수염 acute appendicitis k35",
+            "analysisDate": "2025-11-30T13:36:44.527Z"
+          },
+          "disputeInfo": {
+            "score": 0,
+            "phase": "analysis",
+            "role": "investigator"
+          },
+          "keyEpisodes": [
+            {
+              "episodeId": "EP_1764509804526_wnsqkve31",
+              "dateRange": "2024-11-14",
+              "mainDiagnosis": "K35.8/Acute Appendicitis(K35.8/Acute Appendicitis(급성 충수염))",
+              "eventCount": 1
+            }
+          ],
+          "episodes": [
+            {
+              "episodeId": "EP_1764509804526_wnsqkve31",
+              "dateRange": "2024-11-14",
+              "startDate": "2024-11-14",
+              "endDate": "2024-11-14",
+              "mainDiagnosis": "K35.8/Acute Appendicitis(K35.8/Acute Appendicitis(급성 충수염))",
+              "mainHospital": null,
+              "eventCount": 1,
+              "summary": "[2024-11-14] K35.8/Acute Appendicitis(K35.8/Acute Appendicitis(급성 충수염)), 통증, E11/Type 2 Diabetes Mellitus(제2형 당뇨병)\n  ● 시술: 충수절제술, 요법\n  ● 검사:  활력징후 혈압 14090 mmhg 맥박 88회분 호흡수 18회분 체온 38, wbc 15000l 증가 crp 8, 급성 충수염 acute appendicitis k35, 혈액검사, ct, 신체검사",
+              "events": [
+                {
+                  "id": "event_anchor_visit_seg_0_0_74",
+                  "date": "2024-11-14",
+                  "type": "visit",
+                  "anchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "entities": [
+                    {
+                      "type": "diagnosis",
+                      "originalText": "급성 충수염 (Acute Appendicitis, K35",
+                      "startIndex": 415,
+                      "endIndex": 450,
+                      "segmentId": "seg_0_0",
+                      "context": "), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응",
+                      "normalizedText": "K35.8/Acute Appendicitis(급성 충수염)",
+                      "standardTerm": "급성 충수염 acute appendicitis k35",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89,
+                      "formattedText": "K35.8/Acute Appendicitis(급성 충수염)"
+                    },
+                    {
+                      "type": "diagnosis",
+                      "originalText": "통증",
+                      "startIndex": 102,
+                      "endIndex": 104,
+                      "segmentId": "seg_0_0",
+                      "context": "주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다. 구",
+                      "normalizedText": "통증",
+                      "standardTerm": "통증",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89,
+                      "formattedText": "통증"
+                    },
+                    {
+                      "type": "diagnosis",
+                      "originalText": "당뇨병",
+                      "startIndex": 226,
+                      "endIndex": 229,
+                      "segmentId": "seg_0_0",
+                      "context": "되었습니다. 과거력: - 2020년: 고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박",
+                      "normalizedText": "E11/Type 2 Diabetes Mellitus(제2형 당뇨병)",
+                      "standardTerm": "제2형 당뇨병",
+                      "mappingConfidence": 0.9,
+                      "aliases": [
+                        "당뇨"
+                      ],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 1,
+                      "formattedText": "E11/Type 2 Diabetes Mellitus(제2형 당뇨병)"
+                    },
+                    {
+                      "type": "diagnosis",
+                      "originalText": "염증",
+                      "startIndex": 409,
+                      "endIndex": 411,
+                      "segmentId": "seg_0_0",
+                      "context": "/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획",
+                      "normalizedText": "염증",
+                      "standardTerm": "염증",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89,
+                      "formattedText": "염증"
+                    },
+                    {
+                      "type": "diagnosis",
+                      "originalText": "충수염",
+                      "startIndex": 422,
+                      "endIndex": 425,
+                      "segmentId": "seg_0_0",
+                      "context": "8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응급 충수절제술",
+                      "normalizedText": "K35.8/Acute Appendicitis(급성 충수염)",
+                      "standardTerm": "충수염",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89,
+                      "formattedText": "K35.8/Acute Appendicitis(급성 충수염)"
+                    },
+                    {
+                      "type": "procedure",
+                      "originalText": "충수절제술",
+                      "startIndex": 467,
+                      "endIndex": 472,
+                      "segmentId": "seg_0_0",
+                      "context": ": 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응급 충수절제술 시행 예정 2. 항생제 투여 (Ceftriaxone 2g IV q24h) 3.",
+                      "normalizedText": "충수절제술",
+                      "standardTerm": "충수절제술",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "procedure",
+                      "originalText": "요법",
+                      "startIndex": 525,
+                      "endIndex": 527,
+                      "segmentId": "seg_0_0",
+                      "context": "예정 2. 항생제 투여 (Ceftriaxone 2g IV q24h) 3. 금식 및 수액 요법 담당의사: 홍길동 면허번호: 123456",
+                      "normalizedText": "요법",
+                      "standardTerm": "요법",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "anatomy",
+                      "originalText": "복부",
+                      "startIndex": 99,
+                      "endIndex": 101,
+                      "segmentId": "seg_0_0",
+                      "context": "5일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다",
+                      "normalizedText": "복부",
+                      "standardTerm": "복부",
+                      "mappingConfidence": 0.5,
+                      "aliases": [
+                        "배"
+                      ],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "- 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체온 38",
+                      "startIndex": 246,
+                      "endIndex": 300,
+                      "segmentId": "seg_0_0",
+                      "context": "고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체",
+                      "normalizedText": " 활력징후 혈압 14090 mmhg 맥박 88회분 호흡수 18회분 체온 38",
+                      "standardTerm": " 활력징후 혈압 14090 mmhg 맥박 88회분 호흡수 18회분 체온 38",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "WBC 15,000/L (증가), CRP 8",
+                      "startIndex": 345,
+                      "endIndex": 373,
+                      "segmentId": "seg_0_0",
+                      "context": "체온 38.5도 - 복부: 우하복부 압통 및 반발통 양성, 장음 감소 검사 소견: - 혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT:",
+                      "normalizedText": "wbc 15000l 증가 crp 8",
+                      "standardTerm": "wbc 15000l 증가 crp 8",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "급성 충수염 (Acute Appendicitis, K35",
+                      "startIndex": 415,
+                      "endIndex": 450,
+                      "segmentId": "seg_0_0",
+                      "context": "), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응",
+                      "normalizedText": "급성 충수염 acute appendicitis k35",
+                      "standardTerm": "급성 충수염 acute appendicitis k35",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "혈액검사",
+                      "startIndex": 343,
+                      "endIndex": 347,
+                      "segmentId": "seg_0_0",
+                      "context": ", 체온 38.5도 - 복부: 우하복부 압통 및 반발통 양성, 장음 감소 검사 소견: - 혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 C",
+                      "normalizedText": "혈액검사",
+                      "standardTerm": "혈액검사",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "CT",
+                      "startIndex": 392,
+                      "endIndex": 394,
+                      "segmentId": "seg_0_0",
+                      "context": "혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendici",
+                      "normalizedText": "ct",
+                      "standardTerm": "ct",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    },
+                    {
+                      "type": "test",
+                      "originalText": "신체검사",
+                      "startIndex": 244,
+                      "endIndex": 248,
+                      "segmentId": "seg_0_0",
+                      "context": "년: 고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분,",
+                      "normalizedText": "신체검사",
+                      "standardTerm": "신체검사",
+                      "mappingConfidence": 0.5,
+                      "aliases": [],
+                      "linkedAnchor": {
+                        "id": "anchor_visit_seg_0_0_74",
+                        "type": "visit",
+                        "date": "2024-11-14",
+                        "normalizedDate": "2024-11-14",
+                        "originalDate": "2024년 11월 14일",
+                        "sourceId": "seg_0_0",
+                        "segmentId": "seg_0_0",
+                        "position": 74,
+                        "startIndex": 74,
+                        "proximityScore": 0.5,
+                        "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                        "confidence": 0.7
+                      },
+                      "temporalContext": {
+                        "date": "2024-11-14",
+                        "type": "visit",
+                        "confidence": 0.7
+                      },
+                      "confidence": 0.89
+                    }
+                  ],
+                  "confidence": 0.8173000000000001,
+                  "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                  "metadata": {
+                    "source": "anchor-based",
+                    "entityCount": 20
+                  }
+                }
+              ]
+            }
+          ],
+          "timeline": [
+            {
+              "id": "event_anchor_visit_seg_0_0_74",
+              "date": "2024-11-14",
+              "type": "visit",
+              "anchor": {
+                "id": "anchor_visit_seg_0_0_74",
+                "type": "visit",
+                "date": "2024-11-14",
+                "normalizedDate": "2024-11-14",
+                "originalDate": "2024년 11월 14일",
+                "sourceId": "seg_0_0",
+                "segmentId": "seg_0_0",
+                "position": 74,
+                "startIndex": 74,
+                "proximityScore": 0.5,
+                "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                "confidence": 0.7
+              },
+              "entities": [
+                {
+                  "type": "diagnosis",
+                  "originalText": "급성 충수염 (Acute Appendicitis, K35",
+                  "startIndex": 415,
+                  "endIndex": 450,
+                  "segmentId": "seg_0_0",
+                  "context": "), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응",
+                  "normalizedText": "K35.8/Acute Appendicitis(급성 충수염)",
+                  "standardTerm": "급성 충수염 acute appendicitis k35",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89,
+                  "formattedText": "K35.8/Acute Appendicitis(급성 충수염)"
+                },
+                {
+                  "type": "diagnosis",
+                  "originalText": "통증",
+                  "startIndex": 102,
+                  "endIndex": 104,
+                  "segmentId": "seg_0_0",
+                  "context": "주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다. 구",
+                  "normalizedText": "통증",
+                  "standardTerm": "통증",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89,
+                  "formattedText": "통증"
+                },
+                {
+                  "type": "diagnosis",
+                  "originalText": "당뇨병",
+                  "startIndex": 226,
+                  "endIndex": 229,
+                  "segmentId": "seg_0_0",
+                  "context": "되었습니다. 과거력: - 2020년: 고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박",
+                  "normalizedText": "E11/Type 2 Diabetes Mellitus(제2형 당뇨병)",
+                  "standardTerm": "제2형 당뇨병",
+                  "mappingConfidence": 0.9,
+                  "aliases": [
+                    "당뇨"
+                  ],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 1,
+                  "formattedText": "E11/Type 2 Diabetes Mellitus(제2형 당뇨병)"
+                },
+                {
+                  "type": "diagnosis",
+                  "originalText": "염증",
+                  "startIndex": 409,
+                  "endIndex": 411,
+                  "segmentId": "seg_0_0",
+                  "context": "/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획",
+                  "normalizedText": "염증",
+                  "standardTerm": "염증",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89,
+                  "formattedText": "염증"
+                },
+                {
+                  "type": "diagnosis",
+                  "originalText": "충수염",
+                  "startIndex": 422,
+                  "endIndex": 425,
+                  "segmentId": "seg_0_0",
+                  "context": "8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응급 충수절제술",
+                  "normalizedText": "K35.8/Acute Appendicitis(급성 충수염)",
+                  "standardTerm": "충수염",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89,
+                  "formattedText": "K35.8/Acute Appendicitis(급성 충수염)"
+                },
+                {
+                  "type": "procedure",
+                  "originalText": "충수절제술",
+                  "startIndex": 467,
+                  "endIndex": 472,
+                  "segmentId": "seg_0_0",
+                  "context": ": 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응급 충수절제술 시행 예정 2. 항생제 투여 (Ceftriaxone 2g IV q24h) 3.",
+                  "normalizedText": "충수절제술",
+                  "standardTerm": "충수절제술",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "procedure",
+                  "originalText": "요법",
+                  "startIndex": 525,
+                  "endIndex": 527,
+                  "segmentId": "seg_0_0",
+                  "context": "예정 2. 항생제 투여 (Ceftriaxone 2g IV q24h) 3. 금식 및 수액 요법 담당의사: 홍길동 면허번호: 123456",
+                  "normalizedText": "요법",
+                  "standardTerm": "요법",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "anatomy",
+                  "originalText": "복부",
+                  "startIndex": 99,
+                  "endIndex": 101,
+                  "segmentId": "seg_0_0",
+                  "context": "5일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다",
+                  "normalizedText": "복부",
+                  "standardTerm": "복부",
+                  "mappingConfidence": 0.5,
+                  "aliases": [
+                    "배"
+                  ],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "- 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체온 38",
+                  "startIndex": 246,
+                  "endIndex": 300,
+                  "segmentId": "seg_0_0",
+                  "context": "고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체",
+                  "normalizedText": " 활력징후 혈압 14090 mmhg 맥박 88회분 호흡수 18회분 체온 38",
+                  "standardTerm": " 활력징후 혈압 14090 mmhg 맥박 88회분 호흡수 18회분 체온 38",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "WBC 15,000/L (증가), CRP 8",
+                  "startIndex": 345,
+                  "endIndex": 373,
+                  "segmentId": "seg_0_0",
+                  "context": "체온 38.5도 - 복부: 우하복부 압통 및 반발통 양성, 장음 감소 검사 소견: - 혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT:",
+                  "normalizedText": "wbc 15000l 증가 crp 8",
+                  "standardTerm": "wbc 15000l 증가 crp 8",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "급성 충수염 (Acute Appendicitis, K35",
+                  "startIndex": 415,
+                  "endIndex": 450,
+                  "segmentId": "seg_0_0",
+                  "context": "), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendicitis, K35.8) 치료 계획: 1. 응",
+                  "normalizedText": "급성 충수염 acute appendicitis k35",
+                  "standardTerm": "급성 충수염 acute appendicitis k35",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "혈액검사",
+                  "startIndex": 343,
+                  "endIndex": 347,
+                  "segmentId": "seg_0_0",
+                  "context": ", 체온 38.5도 - 복부: 우하복부 압통 및 반발통 양성, 장음 감소 검사 소견: - 혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 C",
+                  "normalizedText": "혈액검사",
+                  "standardTerm": "혈액검사",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "CT",
+                  "startIndex": 392,
+                  "endIndex": 394,
+                  "segmentId": "seg_0_0",
+                  "context": "혈액검사: WBC 15,000/L (증가), CRP 8.5 mg/dL (증가) - 복부 CT: 충수돌기 비후 및 주변 염증 소견 진단: 급성 충수염 (Acute Appendici",
+                  "normalizedText": "ct",
+                  "standardTerm": "ct",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                },
+                {
+                  "type": "test",
+                  "originalText": "신체검사",
+                  "startIndex": 244,
+                  "endIndex": 248,
+                  "segmentId": "seg_0_0",
+                  "context": "년: 고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분,",
+                  "normalizedText": "신체검사",
+                  "standardTerm": "신체검사",
+                  "mappingConfidence": 0.5,
+                  "aliases": [],
+                  "linkedAnchor": {
+                    "id": "anchor_visit_seg_0_0_74",
+                    "type": "visit",
+                    "date": "2024-11-14",
+                    "normalizedDate": "2024-11-14",
+                    "originalDate": "2024년 11월 14일",
+                    "sourceId": "seg_0_0",
+                    "segmentId": "seg_0_0",
+                    "position": 74,
+                    "startIndex": 74,
+                    "proximityScore": 0.5,
+                    "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+                    "confidence": 0.7
+                  },
+                  "temporalContext": {
+                    "date": "2024-11-14",
+                    "type": "visit",
+                    "confidence": 0.7
+                  },
+                  "confidence": 0.89
+                }
+              ],
+              "confidence": 0.8173000000000001,
+              "context": "50315-1 진료일자: 2024년 11월 15일 주호소: 복통 및 구토 현병력: 환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다. 통증은 지",
+              "metadata": {
+                "source": "anchor-based",
+                "entityCount": 20
+              }
+            }
+          ],
+          "generationHints": []
+        },
+        "parsedRecords": [
+          {
+            "date": "2024-11-14",
+            "hospital": "미상 병원",
+            "rawText": "환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다.\n통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다.\n구토 3회 있었으며, 발열(38.5도)이 동반되었습니다.\n과거력:\n- 2020년: 고혈압 진단 (현재 약물 복용 중)\n- 2018년: 당뇨병 진단 (인슐린 치료 중)\n신체검사:\n- 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체온 38.5도\n- 복부: 우하복부 압통 및 반발통 양성, 장음 감소\n검사 소견:\n- 혈액검사: WBC 15,000/μL (증가), CRP 8.5 mg/dL (증가)\n- 복부 CT: 충수돌기 비후 및 주변 염증 소견\n진단: 급성 충수염 (Acute Appendicitis, K35.8)\n치료 계획:\n1. 응급 충수절제술 시행 예정\n2. 항생제 투여 (Ceftriaxone 2g IV q24h)\n3. 금식 및 수액 요법\n담당의사: 홍길동\n면허번호: 123456",
+            "translatedText": "환자는 2024년 11월 14일 저녁부터 시작된 우하복부 통증을 주소로 내원하였습니다.\n통증은 지속적이며 움직일 때 악화되는 양상을 보였습니다.\n구토 3회 있었으며, 발열(38.5도)이 동반되었습니다.\n과거력:\n- 2020년: 고혈압 진단 (현재 약물 복용 중)\n- 2018년: 당뇨병 진단 (인슐린 치료 중)\n신체검사:\n- 활력징후: 혈압 140/90 mmHg, 맥박 88회/분, 호흡수 18회/분, 체온 38.5도\n- 복부: 우하복부 압통 및 반발통 양성, 장음 감소\n검사 소견:\n- 혈액검사: WBC 15,000/μL (증가), CRP 8.5 mg/dL (증가)\n- 복부 CT: 충수돌기 비후 및 주변 염증 소견\n진단: 급성 충수염 (Acute Appendicitis (충수염(맹장염)), K35.8)\n치료 계획:\n1. 응급 충수절제술 시행 예정\n2. 항생제 투여 (Ceftriaxone 2g IV q24h)\n3. 금식 및 수액 요법\n담당의사: 홍길동\n면허번호: 123456",
+            "keywordMatches": [
+              "CT",
+              "진단"
+            ],
+            "mappedTerms": [
+              "Appendicitis->충수염(맹장염)"
+            ],
+            "shouldExclude": false,
+            "excludedMatches": []
+          }
+        ]
+      }
+    },
+    {
+      "stage": "quality_check",
+      "success": true,
+      "score": 1,
+      "checks": {
+        "hasEpisodes": true,
+        "hasTimeline": true,
+        "hasClaimInfo": true,
+        "hasDisputeInfo": true,
+        "textExtracted": true,
+        "recordsParsed": true
+      }
+    }
+  ],
+  "overallSuccess": false
+}

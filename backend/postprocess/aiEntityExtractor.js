@@ -6,6 +6,7 @@
  */
 
 import OpenAI from 'openai';
+import codeExtractor from './codeExtractor.js';
 
 class AIEntityExtractor {
   constructor() {
@@ -34,7 +35,7 @@ class AIEntityExtractor {
       console.warn('⚠️ null 또는 undefined 입력');
       return this.createEmptyResult();
     }
-    
+
     // 문자열이 아닌 경우 문자열로 변환
     if (typeof text !== 'string') {
       console.log(`   - 문자열이 아닌 타입 감지: ${typeof text}, 변환 시도`);
@@ -52,12 +53,17 @@ class AIEntityExtractor {
     }
 
     try {
+      // 1. Regex 기반 코드 선추출 (Hybrid 방식)
+      const preExtractedCodes = codeExtractor.extractCodes(text);
+      console.log(`   - 선추출된 코드: ${preExtractedCodes.length}개 (${preExtractedCodes.map(c => c.code).join(', ')})`);
+
       // Rate Limit 안전 대기
       await this.safeDelay();
-      
-      const extractedData = await this.callOpenAIExtraction(text);
+
+      // 2. AI 추출 (코드 힌트 제공)
+      const extractedData = await this.callOpenAIExtraction(text, preExtractedCodes);
       const processedResult = this.processAIResponse(extractedData);
-      
+
       console.log('✅ AI 엔티티 추출 완료:', {
         hospitals: processedResult.hospitals.length,
         diagnoses: processedResult.diagnoses.length,
@@ -75,9 +81,9 @@ class AIEntityExtractor {
   /**
    * 🎯 OpenAI GPT-3.5-turbo 호출
    */
-  async callOpenAIExtraction(text) {
-    const prompt = this.buildExtractionPrompt(text);
-    
+  async callOpenAIExtraction(text, preExtractedCodes = []) {
+    const prompt = this.buildExtractionPrompt(text, preExtractedCodes);
+
     const openai = this.getOpenAIClient();
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -102,16 +108,26 @@ class AIEntityExtractor {
   /**
    * 📝 정교한 추출 프롬프트 구성
    */
-  buildExtractionPrompt(text) {
+  buildExtractionPrompt(text, preExtractedCodes = []) {
+    let hintSection = "";
+    if (preExtractedCodes.length > 0) {
+      const uniqueCodes = [...new Set(preExtractedCodes.map(c => c.code))];
+      hintSection = `
+=== 힌트 (반드시 참고) ===
+텍스트에서 다음 ICD/KCD 코드가 발견되었습니다. 진단명 추출 시 이 코드들을 반드시 포함하세요:
+${uniqueCodes.join(', ')}
+`;
+    }
+
     return `
 다음 의료 문서에서 정확한 정보를 추출하여 JSON 형태로 반환해주세요:
 
 === 의료 문서 텍스트 ===
 ${text.substring(0, 6000)} ${text.length > 6000 ? '...(텍스트 축약됨)' : ''}
-
+${hintSection}
 === 추출 요구사항 ===
 1. **병원명**: 정확한 병원/의원/클리닉 이름 (약칭 제외)
-2. **진단명**: ICD 코드 포함 진단명 또는 의학적 진단
+2. **진단명**: ICD 코드 포함 진단명 또는 의학적 진단 (발견된 코드가 있다면 반드시 매핑)
 3. **의료진**: 담당의사, 전문의 이름
 4. **치료내용**: 수술, 검사, 처방, 시술 등
 5. **방문일자**: YYYY-MM-DD 형식의 정확한 날짜
@@ -158,7 +174,7 @@ ${text.substring(0, 6000)} ${text.length > 6000 ? '...(텍스트 축약됨)' : '
 
       // 통계 계산
       const stats = this.calculateStatistics(normalized);
-      
+
       return {
         ...normalized,
         summary: `병원 ${stats.uniqueHospitals}개, 진단 ${stats.uniqueDiagnoses}개, 방문 ${stats.totalVisits}회`,
@@ -267,7 +283,7 @@ ${text.substring(0, 6000)} ${text.length > 6000 ? '...(텍스트 축약됨)' : '
    */
   normalizeDate(dateStr) {
     if (!dateStr) return null;
-    
+
     // YYYY-MM-DD 형식 확인
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (dateRegex.test(dateStr)) {

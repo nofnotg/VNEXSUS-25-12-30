@@ -23,12 +23,18 @@ const nodeProcess = spawn('node', ['app.js'], {
   cwd: path.join(__dirname, 'backend'),
   // ANOMALY 경고는 표준 에러(stderr)로 출력되므로, stdio 설정 커스터마이징
   stdio: ['inherit', 'inherit', 'pipe'], // stdin과 stdout은 그대로, stderr만 별도 처리
-  env: { 
+  env: {
     ...process.env,
     NODE_ENV: 'production',
     SKIP_PDF_TESTS: 'true',
     // 디버그 경고 레벨 조정 (심각한 에러만 표시)
-    NODE_DEBUG_LEVEL: 'error'
+    NODE_DEBUG_LEVEL: 'error',
+    // 올바른 Google Cloud 서비스 계정 키 경로 설정
+    GOOGLE_APPLICATION_CREDENTIALS: 'C:\\VisionKeys\\medreport-assistant-e4e428ceaad0.json',
+    // Feature Flags
+    ENABLE_INVESTIGATOR_VIEW: 'true',
+    USE_CORE_ENGINE: 'true',
+    ENABLE_PROGRESSIVE_RAG: 'true'
   }
 });
 
@@ -59,4 +65,4 @@ process.on('SIGINT', () => {
   nodeProcess.kill('SIGINT');
   errorStream.end();
   process.exit(0);
-}); 
+});

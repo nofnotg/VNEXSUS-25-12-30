@@ -16,7 +16,7 @@ import path from 'path';
 import os from 'os';
 
 // 진행 중인 작업 추적을 위한 메모리 저장소
-const jobStore = {};
+export const jobStore = {};
 
 // 임시 디렉토리 경로
 const TEMP_DIR = process.env.TEMP_DIR || '../temp';
@@ -31,16 +31,16 @@ export const uploadPdfs = async (req, res) => {
     console.log('=== 업로드 요청 시작 ===');
     console.log('파일 수:', req.files ? req.files.length : 0);
     console.log('요청 헤더:', req.headers);
-    
+
     logService.info(`업로드 요청 시작 - 파일 수: ${req.files ? req.files.length : 0}`);
-    
+
     // CORS 헤더 추가
     res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
     res.header('Access-Control-Allow-Credentials', 'true');
-    
+
     // 파일이 없는 경우 에러 반환
     if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: '업로드할 파일이 없습니다.',
         status: 'error',
         code: 'NO_FILES'
@@ -50,7 +50,7 @@ export const uploadPdfs = async (req, res) => {
     // 최대 파일 수 제한 확인
     const maxFiles = parseInt(process.env.MAX_FILES) || 8;
     if (req.files.length > maxFiles) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: `최대 ${maxFiles}개의 파일만 업로드할 수 있습니다.`,
         status: 'error',
         code: 'TOO_MANY_FILES',
@@ -63,7 +63,7 @@ export const uploadPdfs = async (req, res) => {
     const allowedMimeTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'text/plain'];
     const invalidFiles = req.files.filter(file => !allowedMimeTypes.includes(file.mimetype));
     if (invalidFiles.length > 0) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'PDF, PNG, JPG, JPEG, TXT 파일만 업로드 가능합니다.',
         status: 'error',
         code: 'INVALID_FILE_TYPE',
@@ -97,7 +97,7 @@ export const uploadPdfs = async (req, res) => {
     // 작업 ID 생성 및 상태 초기화
     const jobId = uuidv4();
     const files = req.files;
-    
+
     // 작업 상태 초기화
     jobStore[jobId] = {
       status: 'processing',
@@ -108,8 +108,8 @@ export const uploadPdfs = async (req, res) => {
     };
 
     // 비동기 처리 시작 (응답은 먼저 보냄)
-    res.status(202).json({ 
-      jobId, 
+    res.status(202).json({
+      jobId,
       message: '파일 분석 작업이 시작되었습니다.',
       status: 'processing',
       statusUrl: `/api/ocr/status/${jobId}`,
@@ -126,12 +126,12 @@ export const uploadPdfs = async (req, res) => {
         jobStore[jobId].errorDetail = error.message;
       }
     });
-    
+
   } catch (error) {
     logService.error(`업로드 처리 중 오류: ${error.message}`);
     logService.error(`오류 스택: ${error.stack}`);
-    res.status(500).json({ 
-      error: '파일 업로드 중 서버 오류: ' + error.message, 
+    res.status(500).json({
+      error: '파일 업로드 중 서버 오류: ' + error.message,
       status: 'error',
       code: 'SERVER_ERROR'
     });
@@ -146,15 +146,15 @@ export const uploadPdfs = async (req, res) => {
 export const getStatus = (req, res) => {
   try {
     const { jobId } = req.params;
-    
+
     if (!jobId || !jobStore[jobId]) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         error: '존재하지 않는 작업 ID입니다.',
         status: 'error',
         code: 'JOB_NOT_FOUND'
       });
     }
-    
+
     // 상태 정보만 반환 (결과 데이터 제외)
     const { results, ...statusInfo } = jobStore[jobId];
     res.json({
@@ -164,7 +164,7 @@ export const getStatus = (req, res) => {
     });
   } catch (error) {
     logService.error(`상태 확인 중 오류: ${error.message}`);
-    res.status(500).json({ 
+    res.status(500).json({
       error: '상태 확인 중 오류가 발생했습니다.',
       status: 'error',
       code: 'STATUS_ERROR',
@@ -181,29 +181,29 @@ export const getStatus = (req, res) => {
 export const getResult = (req, res) => {
   try {
     const { jobId } = req.params;
-    
+
     if (!jobId || !jobStore[jobId]) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         error: '존재하지 않는 작업 ID입니다.',
         status: 'error',
         code: 'JOB_NOT_FOUND'
       });
     }
-    
+
     const job = jobStore[jobId];
-    
+
     if (job.status !== 'completed') {
-      return res.status(202).json({ 
+      return res.status(202).json({
         message: '처리 중입니다. 나중에 다시 시도해주세요.',
         status: job.status,
         progress: `${job.filesProcessed}/${job.filesTotal}`,
         elapsedTime: getElapsedTime(job.startTime)
       });
     }
-    
+
     // 형식 타입 체크 (JSON 또는 텍스트)
     const format = req.query.format || 'json';
-    
+
     if (format === 'text') {
       // 텍스트 형식으로 반환
       let allText = '';
@@ -211,14 +211,14 @@ export const getResult = (req, res) => {
         allText += `\n\n========== 파일: ${fileData.filename} ==========\n\n`;
         allText += fileData.mergedText;
       });
-      
+
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       res.setHeader('Content-Disposition', `attachment; filename="ocr-result-${jobId}.txt"`);
       return res.send(allText);
     }
-    
+
     // 기본 JSON 반환
-    res.json({ 
+    res.json({
       jobId,
       status: 'completed',
       completedAt: job.completedAt,
@@ -228,7 +228,7 @@ export const getResult = (req, res) => {
     });
   } catch (error) {
     logService.error(`결과 조회 중 오류: ${error.message}`);
-    res.status(500).json({ 
+    res.status(500).json({
       error: '결과 조회 중 오류가 발생했습니다.',
       status: 'error',
       code: 'RESULT_ERROR',
@@ -248,7 +248,7 @@ export const getOcrStatus = async (req, res) => {
     const visionStatus = await visionService.getServiceStatus();
     // const textractStatus = await textractService.getServiceStatus();
     const textractStatus = { success: false, message: 'Textract 비활성화' };
-    
+
     res.json({
       services: {
         vision: visionStatus,
@@ -278,46 +278,46 @@ export const getOcrStatus = async (req, res) => {
 async function processFiles(jobId, files) {
   try {
     logService.info(`파일 처리 시작 (총 ${files.length}개 파일)`, { jobId });
-    
+
     // OCR 설정 로깅
     const useTextract = process.env.USE_TEXTRACT === 'true';
     const useVision = process.env.USE_VISION !== 'false';
     const enableVisionOcr = process.env.ENABLE_VISION_OCR === 'true';
-    
+
     // 작업 데이터 초기화
     const jobData = jobStore[jobId];
     jobData.status = 'processing';
     jobData.filesTotal = files.length;
     jobData.filesProcessed = 0;
     jobData.startedAt = new Date().toISOString();
-    
+
     // 임시 디렉토리 확인 및 생성
     const tempDir = path.resolve(TEMP_DIR);
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir, { recursive: true });
     }
-    
+
     // 각 파일 처리
     for (let i = 0; i < files.length; i++) {
       const fileStartTime = new Date();
       const file = files[i];
-      const fileId = `file_${i+1}`;
+      const fileId = `file_${i + 1}`;
       let tempFilePath = null;
-      
+
       try {
-        logService.info(`파일 처리 중: ${file.originalname} (${i+1}/${files.length})`, { 
-          jobId, 
+        logService.info(`파일 처리 중: ${file.originalname} (${i + 1}/${files.length})`, {
+          jobId,
           fileSize: `${(file.size / 1024).toFixed(2)} KB`,
           mimeType: file.mimetype
         });
-        
+
         // 1. 임시 파일로 저장
         tempFilePath = path.join(tempDir, `${uuidv4()}_${file.originalname}`);
         fs.writeFileSync(tempFilePath, file.buffer);
-        
+
         // 2. 파일 형식에 따른 처리
         let processorResult;
-        
+
         if (file.mimetype === 'application/pdf') {
           // PDF 파일 처리
           const processorOptions = {
@@ -327,9 +327,9 @@ async function processFiles(jobId, files) {
             cleanupTemp: true,
             fileName: path.basename(tempFilePath)
           };
-          
+
           processorResult = await pdfProcessor.processPdf(file.buffer, processorOptions);
-          
+
           if (!processorResult.success) {
             throw new Error(processorResult.error || 'PDF 처리에 실패했습니다.');
           }
@@ -337,7 +337,7 @@ async function processFiles(jobId, files) {
           // 이미지 파일 처리 (Vision API 사용)
           try {
             const ocrResult = await visionService.extractTextFromImage(file.buffer);
-            
+
             processorResult = {
               success: true,
               text: ocrResult.text || '',
@@ -356,7 +356,7 @@ async function processFiles(jobId, files) {
           // 텍스트 파일 처리 (직접 읽기)
           try {
             const textContent = file.buffer.toString('utf-8');
-            
+
             processorResult = {
               success: true,
               text: textContent,
@@ -374,11 +374,11 @@ async function processFiles(jobId, files) {
         } else {
           throw new Error(`지원되지 않는 파일 형식입니다: ${file.mimetype}`);
         }
-        
+
         // 3. 결과 저장
         const fileEndTime = new Date();
         const fileProcessingTime = (fileEndTime - fileStartTime) / 1000;
-        
+
         jobData.results[fileId] = {
           filename: file.originalname,
           fileSize: file.size,
@@ -393,28 +393,28 @@ async function processFiles(jobId, files) {
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           processedAt: new Date().toISOString()
         };
-        
-        logService.info(`파일 처리 완료: ${file.originalname}`, { 
-          jobId, 
+
+        logService.info(`파일 처리 완료: ${file.originalname}`, {
+          jobId,
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           textSource: processorResult.textSource,
           textLength: processorResult.textLength || 0
         });
-        
+
         // 4. 진행 상황 업데이트
         jobData.filesProcessed++;
-        
+
       } catch (fileError) {
         // 개별 파일 처리 실패 시 오류 기록하고 다음 파일로 진행
         const fileEndTime = new Date();
         const fileProcessingTime = (fileEndTime - fileStartTime) / 1000;
-        
-        logService.error(`파일 처리 실패: ${files[i].originalname} - ${fileError.message}`, { 
-          jobId, 
+
+        logService.error(`파일 처리 실패: ${files[i].originalname} - ${fileError.message}`, {
+          jobId,
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           error: fileError.stack
         });
-        
+
         // 에러 유형에 따른 사용자 친화적인 메시지
         let userErrorMessage = fileError.message;
         if (fileError.message.includes('stream must have data')) {
@@ -424,8 +424,8 @@ async function processFiles(jobId, files) {
         } else if (fileError.message.includes('xfa form') || fileError.message.includes('XFA')) {
           userErrorMessage = 'XFA 기반 PDF 양식은 지원되지 않습니다.';
         }
-        
-        jobData.results[`file_${i+1}`] = {
+
+        jobData.results[`file_${i + 1}`] = {
           filename: files[i].originalname,
           fileSize: files[i].size,
           mimeType: files[i].mimetype,
@@ -435,7 +435,7 @@ async function processFiles(jobId, files) {
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           processedAt: new Date().toISOString()
         };
-        
+
         // 임시 파일 정리
         if (tempFilePath && fs.existsSync(tempFilePath)) {
           try {
@@ -445,30 +445,30 @@ async function processFiles(jobId, files) {
             logService.error(`임시 파일 삭제 실패: ${unlinkError.message}`, { jobId });
           }
         }
-        
+
         jobData.filesProcessed++;
       }
     }
-    
+
     // 모든 파일 처리 완료
     jobData.status = 'completed';
     jobData.completedAt = new Date().toISOString();
-    
-    logService.info(`모든 PDF 처리 완료 (${files.length}개 파일)`, { 
-      jobId, 
-      elapsedTime: getElapsedTime(jobData.startTime, jobData.completedAt) 
+
+    logService.info(`모든 PDF 처리 완료 (${files.length}개 파일)`, {
+      jobId,
+      elapsedTime: getElapsedTime(jobData.startTime, jobData.completedAt)
     });
-    
+
   } catch (error) {
     // 전체 처리 실패 시
     logService.error(`PDF 처리 중 오류 발생`, { jobId, error: error.message, stack: error.stack });
-    
+
     if (jobStore[jobId]) {
       jobStore[jobId].status = 'failed';
       jobStore[jobId].error = error.message;
       jobStore[jobId].completedAt = new Date().toISOString();
     }
-    
+
     throw error;
   }
 }
@@ -481,7 +481,7 @@ async function processFiles(jobId, files) {
 function isScannablePdf(filename) {
   const lowerFilename = filename.toLowerCase();
   const scanKeywords = ['scan', '스캔', 'scanned', '스캔본', '진단서', '소견서', '처방전', '검사결과'];
-  
+
   return scanKeywords.some(keyword => lowerFilename.includes(keyword));
 }
 
@@ -495,11 +495,11 @@ function getElapsedTime(startTime, endTime) {
   const start = new Date(startTime);
   const end = endTime ? new Date(endTime) : new Date();
   const diff = Math.round((end - start) / 1000); // 초 단위
-  
+
   const hours = Math.floor(diff / 3600);
   const minutes = Math.floor((diff % 3600) / 60);
   const seconds = diff % 60;
-  
+
   if (hours > 0) {
     return `${hours}시간 ${minutes}분 ${seconds}초`;
   } else if (minutes > 0) {

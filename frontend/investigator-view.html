@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigator View - VNEXSUS</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕵️</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="src/components/InvestigatorView/InvestigatorView.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Components ---
+
+        const EpisodeList = ({ episodes, selectedId, onSelect }) => {
+            if (!episodes || episodes.length === 0) {
+                return <div className="p-4 text-secondary">No episodes found.</div>;
+            }
+
+            return (
+                <div className="episode-list">
+                    {episodes.map(episode => (
+                        <div
+                            key={episode.id}
+                            className={`episode-item ${selectedId === episode.id ? 'selected' : ''}`}
+                            onClick={() => onSelect(episode.id)}
+                        >
+                            <div className="episode-date">
+                                {episode.startDate} {episode.endDate ? ` - ${episode.endDate}` : ''}
+                            </div>
+                            <div className="episode-title">
+                                {episode.primaryDiagnosis || 'Unknown Diagnosis'}
+                            </div>
+                            <div className="episode-hospital">
+                                {episode.hospitals ? episode.hospitals.join(', ') : 'Unknown Hospital'}
+                            </div>
+
+                            {episode.tags && episode.tags.length > 0 && (
+                                <div className="episode-tags">
+                                    {episode.tags.map((tag, index) => (
+                                        <span key={index} className={`tag ${tag.type === 'dispute' ? 'dispute' : ''}`}>
+                                            {tag.label}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        const TimelinePanel = ({ events, selectedEpisodeId }) => {
+            const filteredEvents = selectedEpisodeId
+                ? events.filter(e => e.episodeId === selectedEpisodeId)
+                : events;
+
+            const sortedEvents = [...filteredEvents].sort((a, b) =>
+                new Date(a.date) - new Date(b.date)
+            );
+
+            if (!sortedEvents || sortedEvents.length === 0) {
+                return (
+                    <div className="timeline-panel">
+                        <div className="text-center p-5 text-secondary">
+                            No events to display for this selection.
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="timeline-panel">
+                    <div className="timeline-container">
+                        {sortedEvents.map((event, index) => (
+                            <div key={event.id || index} className="timeline-event">
+                                <div className="event-marker"></div>
+                                <div className="event-card">
+                                    <div className="event-header">
+                                        <span className="event-date">{event.date}</span>
+                                        <span className="event-type">{event.type}</span>
+                                    </div>
+                                    <div className="event-content">
+                                        <h3>{event.summary}</h3>
+                                        <div className="event-details">
+                                            {event.details}
+                                        </div>
+                                        {event.hospital && (
+                                            <div className="mt-2 small text-secondary">
+                                                🏥 {event.hospital}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const ClaimSummaryPanel = ({ claimInfo, disputeInfo }) => {
+            return (
+                <div className="claim-summary-panel">
+                    {disputeInfo && (
+                        <div className="summary-section">
+                            <h3>Dispute Analysis</h3>
+                            <div className="score-card">
+                                <span className="score-value">
+                                    {disputeInfo.importanceScore ? Math.round(disputeInfo.importanceScore * 100) : 0}
+                                </span>
+                                <span className="score-label">Importance Score</span>
+                            </div>
+
+                            <div className="info-grid">
+                                <div className="info-item">
+                                    <label>Phase</label>
+                                    <span>{disputeInfo.phase || 'N/A'}</span>
+                                </div>
+                                <div className="info-item">
+                                    <label>Role</label>
+                                    <span>{disputeInfo.role || 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {claimInfo && (
+                        <div className="summary-section">
+                            <h3>Claim Information</h3>
+                            <div className="info-grid">
+                                <div className="info-item">
+                                    <label>Patient Name</label>
+                                    <span>{claimInfo.patientName || 'Unknown'}</span>
+                                </div>
+                                <div className="info-item">
+                                    <label>Claim ID</label>
+                                    <span>{claimInfo.claimId || 'N/A'}</span>
+                                </div>
+                                <div className="info-item">
+                                    <label>Policy Number</label>
+                                    <span>{claimInfo.policyNumber || 'N/A'}</span>
+                                </div>
+                                <div className="info-item">
+                                    <label>Contract Date</label>
+                                    <span>{claimInfo.contractDate || 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="summary-section">
+                        <h3>Actions</h3>
+                        <div className="d-grid gap-2">
+                            <button className="btn btn-primary w-100 mb-2">Generate Report</button>
+                            <button className="btn btn-outline-secondary w-100">Flag for Review</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const ReportEditor = ({ initialContent, onSave, isSaving, lastSaved }) => {
+            const [content, setContent] = useState(initialContent || '');
+            const [isDirty, setIsDirty] = useState(false);
+
+            useEffect(() => {
+                setContent(initialContent || '');
+            }, [initialContent]);
+
+            const handleChange = (e) => {
+                setContent(e.target.value);
+                setIsDirty(true);
+            };
+
+            const handleSaveClick = () => {
+                onSave(content);
+                setIsDirty(false);
+            };
+
+            // Auto-save every 30 seconds if dirty
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    if (isDirty && !isSaving) {
+                        handleSaveClick();
+                    }
+                }, 30000);
+                return () => clearInterval(interval);
+            }, [isDirty, isSaving, content]);
+
+            return (
+                <div className="card mt-3 shadow-sm">
+                    <div className="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 className="mb-0 text-primary">
+                            <i className="bi bi-file-text me-2"></i>Investigation Report
+                        </h5>
+                        <div className="d-flex align-items-center">
+                            <span className="text-muted small me-3">
+                                {isSaving ? 'Saving...' : lastSaved ? `Saved: ${new Date(lastSaved).toLocaleTimeString()}` : ''}
+                            </span>
+                            <button
+                                className="btn btn-sm btn-primary"
+                                onClick={handleSaveClick}
+                                disabled={!isDirty || isSaving}
+                            >
+                                <i className="bi bi-save me-1"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                    <div className="card-body p-0">
+                        <textarea
+                            className="form-control border-0 p-3"
+                            value={content}
+                            onChange={handleChange}
+                            placeholder="Write your investigation report here..."
+                            style={{ height: '400px', resize: 'vertical', fontSize: '1rem', lineHeight: '1.6' }}
+                        />
+                    </div>
+                </div>
+            );
+        };
+
+        const InvestigatorLayout = () => {
+            // Get Job ID from URL query param
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('jobId');
+
+            const [loading, setLoading] = useState(true);
+            const [data, setData] = useState(null);
+            const [selectedEpisodeId, setSelectedEpisodeId] = useState(null);
+            const [error, setError] = useState(null);
+
+            // Report State
+            const [reportContent, setReportContent] = useState('');
+            const [isSaving, setIsSaving] = useState(false);
+            const [lastSaved, setLastSaved] = useState(null);
+
+            useEffect(() => {
+                const fetchData = async () => {
+                    if (!jobId) {
+                        setError('No Job ID provided in URL');
+                        setLoading(false);
+                        return;
+                    }
+
+                    try {
+                        setLoading(true);
+                        const response = await fetch(`/api/ocr/investigator-view/${jobId}`);
+                        const result = await response.json();
+
+                        if (result.success) {
+                            setData(result.data);
+                            if (result.data.episodes && result.data.episodes.length > 0) {
+                                setSelectedEpisodeId(result.data.episodes[0].id);
+                            }
+                            // Initialize report content
+                            setReportContent(result.data.reportContent || '');
+                            setLastSaved(result.data.lastModified || null);
+                        } else {
+                            setError(result.error || 'Failed to load data');
+                        }
+                    } catch (err) {
+                        setError('Network error: ' + err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+
+                fetchData();
+            }, [jobId]);
+
+            const handleSaveReport = async (newContent) => {
+                try {
+                    setIsSaving(true);
+                    const response = await fetch(`/api/ocr/investigator-view/${jobId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ data: { reportContent: newContent } })
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        setLastSaved(result.lastModified || new Date().toISOString());
+                        setReportContent(newContent); // Update local state
+                    } else {
+                        console.error('Save failed:', result.error);
+                        alert('Failed to save report: ' + result.error);
+                    }
+                } catch (err) {
+                    console.error('Save error:', err);
+                    alert('Error saving report: ' + err.message);
+                } finally {
+                    setIsSaving(false);
+                }
+            };
+
+            if (loading) {
+                return (
+                    <div className="loading-overlay">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (error) {
+                return (
+                    <div className="container mt-5">
+                        <div className="alert alert-danger shadow-sm">
+                            <h4 className="alert-heading"><i className="bi bi-exclamation-triangle-fill me-2"></i>Error Loading Investigator View</h4>
+                            <p>{error}</p>
+                            <hr />
+                            <p className="mb-0 small">Please ensure a valid jobId is provided in the URL (e.g., ?jobId=...)</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (!data) {
+                return <div>No data available</div>;
+            }
+
+            return (
+                <div className="investigator-layout">
+                    <header className="investigator-header">
+                        <div className="header-title">
+                            <h1><i className="bi bi-clipboard-pulse me-2"></i>Investigator View</h1>
+                        </div>
+                        <div className="header-controls">
+                            <button className="btn btn-sm btn-light"><i className="bi bi-download me-1"></i> Export Report</button>
+                            <button className="btn btn-sm btn-outline-light"><i className="bi bi-gear me-1"></i> Settings</button>
+                        </div>
+                    </header>
+
+                    <aside className="episode-sidebar">
+                        <div className="sidebar-header">
+                            Episodes ({data.episodes ? data.episodes.length : 0})
+                        </div>
+                        <EpisodeList
+                            episodes={data.episodes || []}
+                            selectedId={selectedEpisodeId}
+                            onSelect={setSelectedEpisodeId}
+                        />
+                    </aside>
+
+                    <main className="timeline-panel d-flex flex-column gap-3">
+                        <div className="flex-grow-1" style={{ minHeight: '300px' }}>
+                            <TimelinePanel
+                                events={data.timeline || []}
+                                selectedEpisodeId={selectedEpisodeId}
+                            />
+                        </div>
+                        <div className="report-section">
+                            <ReportEditor
+                                initialContent={reportContent}
+                                onSave={handleSaveReport}
+                                isSaving={isSaving}
+                                lastSaved={lastSaved}
+                            />
+                        </div>
+                    </main>
+
+                    <aside className="claim-summary-panel">
+                        <ClaimSummaryPanel
+                            claimInfo={data.claimInfo}
+                            disputeInfo={data.disputeInfo}
+                        />
+                    </aside>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<InvestigatorLayout />);
+    </script>
+</body>
+
+</html>

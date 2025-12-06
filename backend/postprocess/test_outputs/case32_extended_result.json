@@ -1,0 +1,42 @@
+{
+  "caseNumber": 32,
+  "processedAt": "2025-12-06T01:33:46.238Z",
+  "duration": 331,
+  "inputLength": 186272,
+  "fullResult": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "Case32",
+        "processedAt": "2025-12-06T01:33:46.238Z"
+      },
+      "medicalRecords": [
+        {
+          "date": "2025-10-31",
+          "hospital": "더블유여성병원",
+          "diagnosis": "미확인",
+          "content": "========== 파일: ëë¸ì ì¬ì±ë³ì.pdf ========== 2025-10-31 16:33:31\n해오름손해사정(주)\nHANSUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n더블유여성병원"
+        }
+      ]
+    },
+    "pipeline": {
+      "dateBlocks": [],
+      "organizedData": [
+        {
+          "date": "2025-10-31",
+          "hospital": "더블유여성병원",
+          "rawText": "========== 파일: ëë¸ì ì¬ì±ë³ì.pdf ========== 2025-10-31 16:33:31\n해오름손해사정(주)\nHANSUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n더블유여성병원",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ]
+    },
+    "statistics": {
+      "dateBlocks": 0,
+      "organizedRecords": 1,
+      "confidence": 0
+    }
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "coreEngineUsed": true,
+  "reportMetadata": {
+    "reportId": "RPT_1764497832035_qso8h44sh",
+    "generatedAt": "2025-11-30T10:17:12.035Z",
+    "version": "1.0.0",
+    "processingTimeMs": 6,
+    "qualityScore": 0.5183598579234973,
+    "confidenceLevel": "medium",
+    "statistics": {
+      "totalItems": 10,
+      "primaryDiagnoses": 1,
+      "procedures": 2,
+      "medications": 3,
+      "timelineEvents": 0,
+      "disclosureItems": 0
+    }
+  },
+  "patientInfo": {
+    "patientId": null,
+    "reportDate": null,
+    "reportType": null
+  },
+  "clinicalSummary": {
+    "primaryDiagnoses": [
+      {
+        "code": null,
+        "description": "당뇨병",
+        "confidence": 0.97,
+        "dateIdentified": null,
+        "severity": null,
+        "status": "active",
+        "evidence": [],
+        "sourceLocation": null
+      }
+    ],
+    "secondaryDiagnoses": [
+      {
+        "code": null,
+        "description": "당뇨병",
+        "confidence": 0.97,
+        "dateIdentified": null,
+        "severity": null,
+        "status": "active",
+        "evidence": [],
+        "sourceLocation": null
+      },
+      {
+        "code": null,
+        "description": "급성 충수염 acute appendicitis k35",
+        "confidence": 0.75,
+        "dateIdentified": null,
+        "severity": null,
+        "status": "active",
+        "evidence": [],
+        "sourceLocation": null
+      },
+      {
+        "code": null,
+        "description": "현병",
+        "confidence": 0.75,
+        "dateIdentified": null,
+        "severity": null,
+        "status": "active",
+        "evidence": [],
+        "sourceLocation": null
+      }
+    ],
+    "procedures": [
+      {
+        "code": null,
+        "description": "충수절제술",
+        "confidence": 0.75,
+        "datePerformed": null,
+        "provider": null,
+        "location": null,
+        "outcome": null,
+        "complications": [],
+        "evidence": [],
+        "sourceLocation": null
+      },
+      {
+        "code": null,
+        "description": "요법",
+        "confidence": 0.75,
+        "datePerformed": null,
+        "provider": null,
+        "location": null,
+        "outcome": null,
+        "complications": [],
+        "evidence": [],
+        "sourceLocation": null
+      }
+    ],
+    "medications": [
+      {
+        "name": "예정",
+        "genericName": null,
+        "dosage": null,
+        "frequency": null,
+        "route": null,
+        "startDate": null,
+        "endDate": null,
+        "indication": null,
+        "prescriber": null,
+        "confidence": 0.75,
+        "evidence": [],
+        "sourceLocation": null
+      },
+      {
+        "name": "3회",
+        "genericName": null,
+        "dosage": null,
+        "frequency": null,
+        "route": null,
+        "startDate": null,
+        "endDate": null,
+        "indication": null,
+        "prescriber": null,
+        "confidence": 0.75,
+        "evidence": [],
+        "sourceLocation": null
+      },
+      {
+        "name": "88회",
+        "genericName": null,
+        "dosage": null,
+        "frequency": null,
+        "route": null,
+        "startDate": null,
+        "endDate": null,
+        "indication": null,
+        "prescriber": null,
+        "confidence": 0.75,
+        "evidence": [],
+        "sourceLocation": null
+      }
+    ],
+    "keyFindings": [
+      {
+        "type": "high_confidence_entity",
+        "description": "당뇨병",
+        "entityType": "diagnosis",
+        "confidence": 0.97,
+        "context": "되었습니다. 과거력: - 2020년: 고혈압 진단 (현재 약물 복용 중) - 2018년: 당뇨병 진단 (인슐린 치료 중) 신체검사: - 활력징후: 혈압 140/90 mmHg, 맥박"
+      }
+    ]
+  },
+  "timeline": {
+    "events": [],
+    "keyDates": [],
+    "episodeOfCare": []
+  },
+  "riskAssessment": {
+    "disclosureItems": [],
+    "riskLevel": "unknown",
+    "recommendations": []
+  },
+  "qualityMetrics": {
+    "dataCompleteness": 0.34725333333333336,
+    "confidenceScore": 0.5183598579234973,
+    "uncertaintyLevel": "minimal",
+    "validationResults": [
+      {
+        "component": "entityExtraction",
+        "score": 0.9709999999999999,
+        "status": "passed"
+      },
+      {
+        "component": "temporalAccuracy",
+        "score": 0.3,
+        "status": "failed"
+      },
+      {
+        "component": "contextualRelevance",
+        "score": 0.5066666666666666,
+        "status": "warning"
+      },
+      {
+        "component": "dataCompleteness",
+        "score": 0.34725333333333336,
+        "status": "failed"
+      },
+      {
+        "component": "sourceReliability",
+        "score": 0.15688524590163933,
+        "status": "failed"
+      },
+      {
+        "component": "crossValidation",
+        "score": 0.46499999999999997,
+        "status": "failed"
+      }
+    ]
+  },
+  "evidenceBase": {
+    "sourceDocuments": [
+      {
+        "section": "unknown",
+        "segmentCount": 1,
+        "totalLength": 550,
+        "confidence": 0.5,
+        "averageConfidence": 0.5,
+        "averageLength": 550
+      }
+    ],
+    "extractedEntities": {
+      "diagnosis": {
+        "count": 6,
+        "averageConfidence": 0.7866666666666666,
+        "highConfidenceCount": 1
+      },
+      "procedure": {
+        "count": 2,
+        "averageConfidence": 0.75,
+        "highConfidenceCount": 0
+      },
+      "medication": {
+        "count": 4,
+        "averageConfidence": 0.75,
+        "highConfidenceCount": 0
+      },
+      "anatomy": {
+        "count": 2,
+        "averageConfidence": 0.75,
+        "highConfidenceCount": 0
+      },
+      "test": {
+        "count": 6,
+        "averageConfidence": 0.75,
+        "highConfidenceCount": 0
+      }
+    },
+    "supportingEvidence": [
+      {
+        "type": "temporal_anchors",
+        "count": 0,
+        "description": "0개의 고신뢰도 시간적 앵커 식별"
+      },
+      {
+        "type": "rule_triggers",
+        "count": 0,
+        "description": "0개의 질병별 룰 트리거됨"
+      },
+      {
+        "type": "cross_validation",
+        "score": 0.46499999999999997,
+        "description": "교차 검증 점수: 46.5%"
+      }
+    ]
+  },
+  "investigatorView": {
+    "claimSummary": null,
+    "keyEpisodes": [],
+    "allEpisodes": [],
+    "generationHints": []
+  },
+  "executionMetadata": {
+    "processingTimeMs": 36,
+    "qualityGate": "standard",
+    "stateHistory": [
+      {
+        "state": "INGEST",
+        "executionTimeMs": 1,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.012Z"
+      },
+      {
+        "state": "ANCHOR",
+        "executionTimeMs": 1,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.013Z"
+      },
+      {
+        "state": "NORMALIZE",
+        "executionTimeMs": 6,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.020Z"
+      },
+      {
+        "state": "TIMELINE",
+        "executionTimeMs": 4,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.024Z"
+      },
+      {
+        "state": "RULES",
+        "executionTimeMs": 6,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.026Z"
+      },
+      {
+        "state": "SCORE",
+        "executionTimeMs": 5,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.031Z"
+      },
+      {
+        "state": "SYNTHESIZE",
+        "executionTimeMs": 9,
+        "success": true,
+        "timestamp": "2025-11-30T10:17:12.040Z"
+      }
+    ],
+    "retryCount": 0,
+    "cacheUsed": false,
+    "fallbackUsed": false,
+    "qualityMetrics": {
+      "overallConfidence": 0,
+      "reportItemCount": 0,
+      "processingTime": 0,
+      "qualityGatePassed": false
+    }
+  },
+  "timestamp": "2025-11-30T10:17:12.052Z"
+}

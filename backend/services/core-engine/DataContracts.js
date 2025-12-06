@@ -35,12 +35,12 @@ class BaseEntity {
 class Anchor extends BaseEntity {
     constructor(data = {}) {
         super({ ...data, type: 'anchor' });
-        
+
         // 필수 필드
         this.date = data.date || null; // Date 객체 또는 ISO 문자열
         this.dateString = data.dateString || ''; // 원본 날짜 문자열
         this.anchorType = data.anchorType || 'unknown'; // visit, admission, discharge, exam, surgery, etc.
-        
+
         // 선택적 필드
         this.normalizedDate = data.normalizedDate || null;
         this.proximityScore = data.proximityScore || 0;
@@ -48,7 +48,7 @@ class Anchor extends BaseEntity {
         this.textPosition = data.textPosition || { start: 0, end: 0 };
         this.isValidated = data.isValidated || false;
         this.validationErrors = data.validationErrors || [];
-        
+
         // 관련 정보
         this.relatedEntities = data.relatedEntities || [];
         this.temporalRelations = data.temporalRelations || [];
@@ -59,7 +59,7 @@ class Anchor extends BaseEntity {
      */
     validateDate() {
         const errors = [];
-        
+
         if (!this.date) {
             errors.push('날짜가 없습니다');
         } else {
@@ -69,7 +69,7 @@ class Anchor extends BaseEntity {
             } else {
                 const now = new Date();
                 const minDate = new Date('1900-01-01');
-                
+
                 if (date > now) {
                     errors.push('미래 날짜입니다');
                 }
@@ -78,10 +78,10 @@ class Anchor extends BaseEntity {
                 }
             }
         }
-        
+
         this.validationErrors = errors;
         this.isValidated = errors.length === 0;
-        
+
         return this.isValidated;
     }
 
@@ -137,23 +137,23 @@ class Anchor extends BaseEntity {
 class MedicalEntity extends BaseEntity {
     constructor(data = {}) {
         super({ ...data, type: data.type || 'medical_entity' });
-        
+
         // 필수 필드
         this.text = data.text || '';
         this.normalizedText = data.normalizedText || '';
         this.entityType = data.entityType || 'unknown'; // diagnosis, procedure, medication, anatomy, test
-        
+
         // 선택적 필드
         this.codes = data.codes || {}; // ICD-10, SNOMED, etc.
         this.category = data.category || '';
         this.severity = data.severity || null;
         this.status = data.status || 'active'; // active, inactive, resolved
         this.textPosition = data.textPosition || { start: 0, end: 0 };
-        
+
         // 시간적 연결
         this.anchors = data.anchors || [];
         this.temporalContext = data.temporalContext || null;
-        
+
         // 관계
         this.relatedEntities = data.relatedEntities || [];
         this.evidenceTexts = data.evidenceTexts || [];
@@ -169,9 +169,9 @@ class MedicalEntity extends BaseEntity {
             confidence,
             createdAt: new Date().toISOString()
         };
-        
+
         this.anchors.push(link);
-        
+
         // 양방향 연결
         if (!anchor.relatedEntities.find(e => e.entityId === this.id)) {
             anchor.relatedEntities.push({
@@ -193,7 +193,7 @@ class MedicalEntity extends BaseEntity {
             confidence,
             createdAt: new Date().toISOString()
         };
-        
+
         this.relatedEntities.push(relation);
     }
 
@@ -222,7 +222,7 @@ class MedicalEntity extends BaseEntity {
 class Diagnosis extends MedicalEntity {
     constructor(data = {}) {
         super({ ...data, type: 'diagnosis', entityType: 'diagnosis' });
-        
+
         this.diagnosisType = data.diagnosisType || 'primary'; // primary, secondary, differential
         this.icd10Code = data.icd10Code || '';
         this.snomedCode = data.snomedCode || '';
@@ -254,7 +254,7 @@ class Diagnosis extends MedicalEntity {
 class Procedure extends MedicalEntity {
     constructor(data = {}) {
         super({ ...data, type: 'procedure', entityType: 'procedure' });
-        
+
         this.procedureType = data.procedureType || 'unknown'; // surgery, diagnostic, therapeutic
         this.cptCode = data.cptCode || '';
         this.kcdCode = data.kcdCode || '';
@@ -284,7 +284,7 @@ class Procedure extends MedicalEntity {
 class Medication extends MedicalEntity {
     constructor(data = {}) {
         super({ ...data, type: 'medication', entityType: 'medication' });
-        
+
         this.genericName = data.genericName || '';
         this.brandName = data.brandName || '';
         this.dosage = data.dosage || '';
@@ -316,7 +316,7 @@ class Medication extends MedicalEntity {
 class Test extends MedicalEntity {
     constructor(data = {}) {
         super({ ...data, type: 'test', entityType: 'test' });
-        
+
         this.testType = data.testType || 'unknown'; // lab, imaging, pathology, function
         this.testName = data.testName || '';
         this.result = data.result || '';
@@ -346,14 +346,14 @@ class Test extends MedicalEntity {
 class TemporalEvent extends BaseEntity {
     constructor(data = {}) {
         super({ ...data, type: 'temporal_event' });
-        
+
         this.anchor = data.anchor || null; // Anchor 객체
         this.entities = data.entities || []; // MedicalEntity 배열
         this.eventType = data.eventType || 'unknown'; // visit, admission, procedure, etc.
         this.description = data.description || '';
         this.duration = data.duration || null; // 기간 (분 단위)
         this.location = data.location || '';
-        
+
         // 시간적 관계
         this.precedingEvents = data.precedingEvents || [];
         this.followingEvents = data.followingEvents || [];
@@ -366,7 +366,7 @@ class TemporalEvent extends BaseEntity {
     addEntity(entity) {
         if (!this.entities.find(e => e.id === entity.id)) {
             this.entities.push(entity);
-            
+
             // 엔티티에 이벤트 정보 추가
             if (entity.temporalContext) {
                 entity.temporalContext.eventId = this.id;
@@ -422,13 +422,13 @@ class TemporalEvent extends BaseEntity {
 class Timeline extends BaseEntity {
     constructor(data = {}) {
         super({ ...data, type: 'timeline' });
-        
+
         this.events = data.events || []; // TemporalEvent 배열
         this.startDate = data.startDate || null;
         this.endDate = data.endDate || null;
         this.totalDuration = data.totalDuration || null;
         this.eventCount = data.eventCount || 0;
-        
+
         // 타임라인 메타데이터
         this.patientId = data.patientId || '';
         this.timelineType = data.timelineType || 'medical'; // medical, treatment, diagnostic
@@ -461,12 +461,12 @@ class Timeline extends BaseEntity {
      */
     updateMetadata() {
         this.eventCount = this.events.length;
-        
+
         if (this.events.length > 0) {
             const dates = this.events
                 .filter(e => e.anchor && e.anchor.date)
                 .map(e => new Date(e.anchor.date));
-                
+
             if (dates.length > 0) {
                 this.startDate = new Date(Math.min(...dates));
                 this.endDate = new Date(Math.max(...dates));
@@ -480,32 +480,32 @@ class Timeline extends BaseEntity {
      */
     validate() {
         const errors = [];
-        
+
         // 이벤트 날짜 순서 검증
         for (let i = 1; i < this.events.length; i++) {
             const prevEvent = this.events[i - 1];
             const currEvent = this.events[i];
-            
+
             if (prevEvent.anchor && currEvent.anchor) {
                 const prevDate = new Date(prevEvent.anchor.date);
                 const currDate = new Date(currEvent.anchor.date);
-                
+
                 if (prevDate > currDate) {
                     errors.push(`이벤트 순서 오류: ${prevEvent.id} > ${currEvent.id}`);
                 }
             }
         }
-        
+
         // 중복 이벤트 검증
         const eventIds = this.events.map(e => e.id);
         const uniqueIds = [...new Set(eventIds)];
         if (eventIds.length !== uniqueIds.length) {
             errors.push('중복된 이벤트가 있습니다');
         }
-        
+
         this.validationErrors = errors;
         this.isValidated = errors.length === 0;
-        
+
         return this.isValidated;
     }
 
@@ -533,22 +533,22 @@ class PipelineData {
         // 원본 입력
         this.originalText = data.originalText || '';
         this.textSegments = data.textSegments || [];
-        
+
         // 처리된 데이터
         this.anchors = data.anchors || [];
         this.entities = data.entities || [];
         this.events = data.events || [];
         this.timeline = data.timeline || null;
-        
+
         // 분석 결과
         this.diseaseRules = data.diseaseRules || [];
         this.disclosureAnalysis = data.disclosureAnalysis || null;
         this.confidenceScores = data.confidenceScores || {};
         this.evidenceBindings = data.evidenceBindings || [];
-        
+
         // 최종 결과
         this.skeletonJson = data.skeletonJson || null;
-        
+
         // 메타데이터
         this.processingStage = data.processingStage || 'INIT';
         this.qualityGate = data.qualityGate || 'standard';
@@ -743,10 +743,10 @@ const ValidationUtils = {
         if (!(anchor instanceof Anchor)) {
             return { valid: false, errors: ['앵커 객체가 아닙니다'] };
         }
-        
-        return { 
-            valid: anchor.validateDate(), 
-            errors: anchor.validationErrors 
+
+        return {
+            valid: anchor.validateDate(),
+            errors: anchor.validationErrors
         };
     },
 
@@ -755,7 +755,7 @@ const ValidationUtils = {
      */
     validateEntity(entity) {
         const errors = [];
-        
+
         if (!(entity instanceof MedicalEntity)) {
             errors.push('의료 엔티티 객체가 아닙니다');
         } else {
@@ -769,7 +769,7 @@ const ValidationUtils = {
                 errors.push('신뢰도는 0과 1 사이여야 합니다');
             }
         }
-        
+
         return { valid: errors.length === 0, errors };
     },
 
@@ -780,13 +780,170 @@ const ValidationUtils = {
         if (!(timeline instanceof Timeline)) {
             return { valid: false, errors: ['타임라인 객체가 아닙니다'] };
         }
-        
-        return { 
-            valid: timeline.validate(), 
-            errors: timeline.validationErrors 
+
+        return {
+            valid: timeline.validate(),
+            errors: timeline.validationErrors
         };
     }
 };
+
+/**
+ * Master Plan Phase 1: Dispute Layer Classes
+ * 
+ * 목적:
+ * - 타임라인 이벤트/episode에 쟁점 관련 메타데이터 부여
+ * - 계약/청구 정보 구조 정의
+ * - 기존 코드와 완전히 독립적으로 작동 (optional 필드)
+ */
+
+/**
+ * DisputeTag - 쟁점 분석 메타데이터
+ * 
+ * 각 타임라인 이벤트/episode에 부여되는 쟁점 관련 정보
+ * - phase: 계약 기준 시점 (가입 전/대기기간/보장기간)
+ * - role: 청구 질환과의 관련성
+ * - dutyToDisclose: 고지의무 관련 여부
+ * - importanceScore: 사건 중요도 (0.0 ~ 1.0)
+ */
+class DisputeTag {
+    constructor(data = {}) {
+        // 계약 기준 시점
+        this.phase = data.phase || 'COVERED_PERIOD';
+        // PRE_CONTRACT: 가입 전
+        // WAITING_PERIOD: 대기기간
+        // COVERED_PERIOD: 보장기간
+
+        // 청구 질환과의 관련성
+        this.role = data.role || 'BACKGROUND';
+        // CLAIM_CORE: 청구 핵심 사건
+        // ETIOLOGY: 원인/선행 사건
+        // RISK_FACTOR: 위험 요인
+        // BACKGROUND: 배경 정보
+        // IRRELEVANT: 무관
+
+        // 고지의무 관련 여부
+        this.dutyToDisclose = data.dutyToDisclose || 'NONE';
+        // NONE: 해당 없음
+        // POTENTIAL: 잠재적 대상
+        // VIOLATION_CANDIDATE: 위반 후보
+
+        // 사건 중요도 (0.0 ~ 1.0)
+        this.importanceScore = data.importanceScore || 0.0;
+
+        // 판단 근거
+        this.reasons = data.reasons || [];
+
+        // 메타데이터
+        this.createdAt = data.createdAt || new Date().toISOString();
+    }
+
+    /**
+     * JSON 직렬화
+     */
+    toJSON() {
+        return {
+            phase: this.phase,
+            role: this.role,
+            dutyToDisclose: this.dutyToDisclose,
+            importanceScore: this.importanceScore,
+            reasons: this.reasons,
+            createdAt: this.createdAt
+        };
+    }
+}
+
+/**
+ * ContractInfo - 보험 계약 정보
+ * 
+ * 고지의무 및 쟁점 분석에 필요한 계약 정보
+ */
+class ContractInfo {
+    constructor(data = {}) {
+        // 보험사 정보
+        this.insurer = data.insurer || null;
+        this.productName = data.productName || null;
+        this.policyNumber = data.policyNumber || null;
+
+        // 계약 날짜
+        this.issueDate = data.issueDate || null; // 가입일 (ISO 문자열)
+        this.waitingPeriodDays = data.waitingPeriodDays || 0; // 대기기간 (일)
+        this.coverageStartDate = data.coverageStartDate || data.issueDate; // 보장 시작일
+
+        // 메타데이터
+        this.createdAt = data.createdAt || new Date().toISOString();
+    }
+
+    /**
+     * 대기기간 종료일 계산
+     */
+    getWaitingPeriodEndDate() {
+        if (!this.issueDate) return null;
+
+        const issueDate = new Date(this.issueDate);
+        const endDate = new Date(issueDate);
+        endDate.setDate(endDate.getDate() + this.waitingPeriodDays);
+
+        return endDate.toISOString();
+    }
+
+    /**
+     * JSON 직렬화
+     */
+    toJSON() {
+        return {
+            insurer: this.insurer,
+            productName: this.productName,
+            policyNumber: this.policyNumber,
+            issueDate: this.issueDate,
+            waitingPeriodDays: this.waitingPeriodDays,
+            coverageStartDate: this.coverageStartDate,
+            waitingPeriodEndDate: this.getWaitingPeriodEndDate(),
+            createdAt: this.createdAt
+        };
+    }
+}
+
+/**
+ * ClaimSpec - 청구 사건 정보
+ * 
+ * 현재 청구 중인 사건에 대한 정보
+ */
+class ClaimSpec {
+    constructor(data = {}) {
+        // 청구 식별 정보
+        this.claimId = data.claimId || null;
+        this.claimDate = data.claimDate || null; // 청구 사건 발생일 (ISO 문자열)
+        this.claimType = data.claimType || 'diagnosis'; // diagnosis, surgery, admission 등
+
+        // 청구 진단 정보
+        this.claimDiagnosisCodes = data.claimDiagnosisCodes || []; // KCD/ICD 코드 배열
+        this.claimDiagnosisNames = data.claimDiagnosisNames || []; // 진단명 배열
+        this.claimBodySystems = data.claimBodySystems || []; // 장기군 배열 ("breast", "cardio" 등)
+
+        // 청구 금액 (선택적)
+        this.claimAmount = data.claimAmount || null;
+
+        // 메타데이터
+        this.createdAt = data.createdAt || new Date().toISOString();
+    }
+
+    /**
+     * JSON 직렬화
+     */
+    toJSON() {
+        return {
+            claimId: this.claimId,
+            claimDate: this.claimDate,
+            claimType: this.claimType,
+            claimDiagnosisCodes: this.claimDiagnosisCodes,
+            claimDiagnosisNames: this.claimDiagnosisNames,
+            claimBodySystems: this.claimBodySystems,
+            claimAmount: this.claimAmount,
+            createdAt: this.createdAt
+        };
+    }
+}
 
 // ES 모듈 export
 export {
@@ -801,7 +958,12 @@ export {
     TemporalEvent,
     Timeline,
     PipelineData,
-    
+
+    // Master Plan Phase 1: Dispute Layer (NEW)
+    DisputeTag,
+    ContractInfo,
+    ClaimSpec,
+
     // 유틸리티들
     DataFactory,
     ValidationUtils

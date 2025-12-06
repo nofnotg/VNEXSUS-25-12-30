@@ -9,6 +9,11 @@ const __dirname = path.dirname(__filename);
 
 import { logService } from '../../utils/logger.js';
 
+// Master Plan Phase 1.2: Dispute Layer Integration (Feature Flag Protected)
+import { createDisputeTag, findIndexEvent } from './utils/DisputeScoringUtil.js';
+import { ContractInfo, ClaimSpec } from './DataContracts.js';
+
+
 export default class DisclosureAnalyzer {
     constructor(options = {}) {
         this.options = {
@@ -18,10 +23,10 @@ export default class DisclosureAnalyzer {
             enableDetailedAnalysis: options.enableDetailedAnalysis || true,
             ...options
         };
-        
+
         // 고지의무 대상 질환 및 시술 매핑
         this.disclosureMapping = this.initializeDisclosureMapping();
-        
+
         // 위험도 가중치
         this.riskWeights = {
             chronic: 0.9,      // 만성질환
@@ -31,7 +36,7 @@ export default class DisclosureAnalyzer {
             hospitalization: 0.7, // 입원
             emergency: 0.9     // 응급실
         };
-        
+
         logService.info('DisclosureAnalyzer initialized', { options: this.options });
     }
 
@@ -40,26 +45,67 @@ export default class DisclosureAnalyzer {
      * @param {Array} ruleResults - DiseaseRuleEngine 결과
      * @param {Array} entities - 정규화된 엔티티들
      * @param {Object} timeline - 타임라인 데이터
+     * @param {Object} contractInfo - 계약 정보 (optional, for DisputeTag)
+     * @param {Object} claimSpec - 청구 정보 (optional, for DisputeTag)
      * @returns {Object} 고지의무 분석 결과
      */
-    async analyzeDisclosure(ruleResults, entities, timeline) {
+    async analyzeDisclosure(ruleResults, entities, timeline, contractInfo = null, claimSpec = null) {
         try {
             const startTime = Date.now();
-            
+
             // 1. 고지의무 대상 항목 식별
             const disclosureItems = await this.identifyDisclosureItems(entities, timeline);
-            
+
             // 2. 위험도 평가
             const riskAssessment = await this.assessRisk(disclosureItems, ruleResults);
-            
+
             // 3. 고지 권고사항 생성
             const recommendations = await this.generateRecommendations(disclosureItems, riskAssessment);
-            
+
             // 4. 상세 분석 (옵션)
-            const detailedAnalysis = this.options.enableDetailedAnalysis ? 
+            const detailedAnalysis = this.options.enableDetailedAnalysis ?
                 await this.performDetailedAnalysis(disclosureItems, entities, timeline) : null;
-            
-            // 5. 결과 통합
+
+            // 5. Master Plan Phase 1.2: DisputeTag 생성 (Feature Flag)
+            if (process.env.ENABLE_DISPUTE_TAGGING === 'true' && contractInfo && claimSpec && timeline.events) {
+                try {
+                    logService.info('DisputeTag generation enabled', {
+                        contractInfo: !!contractInfo,
+                        claimSpec: !!claimSpec,
+                        eventCount: timeline.events.length
+                    });
+
+                    // Index event 찾기
+                    const timelineContext = {
+                        indexEventDate: claimSpec.claimDate || null
+                    };
+
+                    if (!timelineContext.indexEventDate) {
+                        const indexEvent = findIndexEvent(timeline.events, claimSpec);
+                        if (indexEvent) {
+                            timelineContext.indexEventDate = indexEvent.date || indexEvent.anchor?.date;
+                        }
+                    }
+
+                    // 각 타임라인 이벤트에 DisputeTag 추가
+                    for (const event of timeline.events) {
+                        if (!event.disputeTag) { // 이미 있으면 건너뛰기
+                            event.disputeTag = createDisputeTag(event, claimSpec, contractInfo, timelineContext);
+                        }
+                    }
+
+                    logService.info('DisputeTag generation completed', {
+                        taggedEvents: timeline.events.filter(e => e.disputeTag).length
+                    });
+                } catch (disputeError) {
+                    // DisputeTag 생성 실패는 전체 분석을 중단하지 않음
+                    logService.warn('DisputeTag generation failed', {
+                        error: disputeError.message
+                    });
+                }
+            }
+
+            // 6. 결과 통합
             const result = {
                 disclosureRequired: this.determineDisclosureRequirement(riskAssessment),
                 overallRiskScore: riskAssessment.overallRiskScore,
@@ -73,19 +119,21 @@ export default class DisclosureAnalyzer {
                     timestamp: new Date().toISOString(),
                     version: '1.0.0',
                     component: 'DisclosureAnalyzer',
-                    strictMode: this.options.strictMode
+                    strictMode: this.options.strictMode,
+                    disputeTaggingEnabled: process.env.ENABLE_DISPUTE_TAGGING === 'true'
                 }
             };
-            
+
             logService.info('Disclosure analysis completed', {
                 disclosureRequired: result.disclosureRequired,
                 riskScore: result.overallRiskScore,
                 itemCount: disclosureItems.length,
-                processingTime: result.processingTimeMs
+                processingTime: result.processingTimeMs,
+                disputeTaggingEnabled: result.metadata.disputeTaggingEnabled
             });
-            
+
             return result;
-            
+
         } catch (error) {
             logService.error('Disclosure analysis failed', { error: error.message });
             throw new Error(`DisclosureAnalyzer failed: ${error.message}`);
@@ -97,7 +145,7 @@ export default class DisclosureAnalyzer {
      */
     async identifyDisclosureItems(entities, timeline) {
         const disclosureItems = [];
-        
+
         // 진단 기반 고지의무 항목
         const diagnoses = entities.filter(e => e.type === 'diagnosis');
         for (const diagnosis of diagnoses) {
@@ -114,7 +162,7 @@ export default class DisclosureAnalyzer {
                 });
             }
         }
-        
+
         // 시술/수술 기반 고지의무 항목
         const procedures = entities.filter(e => e.type === 'procedure');
         for (const procedure of procedures) {
@@ -131,7 +179,7 @@ export default class DisclosureAnalyzer {
                 });
             }
         }
-        
+
         // 약물 기반 고지의무 항목
         const medications = entities.filter(e => e.type === 'medication');
         for (const medication of medications) {
@@ -148,7 +196,7 @@ export default class DisclosureAnalyzer {
                 });
             }
         }
-        
+
         // 입원/응급실 방문 기반 고지의무 항목
         const hospitalizations = this.identifyHospitalizations(timeline);
         for (const hospitalization of hospitalizations) {
@@ -167,7 +215,7 @@ export default class DisclosureAnalyzer {
                 category: 'hospitalization'
             });
         }
-        
+
         // 중복 제거 및 정렬
         return this.deduplicateAndSortItems(disclosureItems);
     }
@@ -178,25 +226,25 @@ export default class DisclosureAnalyzer {
     async assessRisk(disclosureItems, ruleResults) {
         const riskFactors = [];
         let totalRiskScore = 0;
-        
+
         // 개별 항목 위험도 계산
         for (const item of disclosureItems) {
             const itemRisk = this.calculateItemRisk(item);
             riskFactors.push(itemRisk);
             totalRiskScore += itemRisk.riskScore * itemRisk.weight;
         }
-        
+
         // 룰 결과 기반 위험도 조정
         const ruleRiskAdjustment = this.calculateRuleRiskAdjustment(ruleResults);
         totalRiskScore += ruleRiskAdjustment.adjustment;
-        
+
         // 시간적 패턴 기반 위험도 조정
         const temporalRiskAdjustment = this.calculateTemporalRiskAdjustment(disclosureItems);
         totalRiskScore += temporalRiskAdjustment.adjustment;
-        
+
         // 전체 위험도 정규화 (0-1 범위)
         const overallRiskScore = Math.min(Math.max(totalRiskScore, 0), 1);
-        
+
         return {
             overallRiskScore,
             riskLevel: this.determineRiskLevel(overallRiskScore),
@@ -219,7 +267,7 @@ export default class DisclosureAnalyzer {
      */
     async generateRecommendations(disclosureItems, riskAssessment) {
         const recommendations = [];
-        
+
         // 전체 고지 권고
         if (riskAssessment.overallRiskScore >= this.options.riskThreshold) {
             recommendations.push({
@@ -230,19 +278,19 @@ export default class DisclosureAnalyzer {
                 actionRequired: true
             });
         }
-        
+
         // 카테고리별 권고사항
         const categoryRecommendations = this.generateCategoryRecommendations(disclosureItems, riskAssessment);
         recommendations.push(...categoryRecommendations);
-        
+
         // 개별 항목별 권고사항
         const itemRecommendations = this.generateItemRecommendations(disclosureItems);
         recommendations.push(...itemRecommendations);
-        
+
         // 추가 검토 권고사항
         const reviewRecommendations = this.generateReviewRecommendations(riskAssessment);
         recommendations.push(...reviewRecommendations);
-        
+
         return this.prioritizeRecommendations(recommendations);
     }
 
@@ -271,63 +319,63 @@ export default class DisclosureAnalyzer {
                 '심근경색': { category: 'cardiovascular', severity: 'high', disclosureRequired: true },
                 '협심증': { category: 'cardiovascular', severity: 'high', disclosureRequired: true },
                 '부정맥': { category: 'cardiovascular', severity: 'medium', disclosureRequired: true },
-                
+
                 // 내분비계 질환
                 '당뇨병': { category: 'endocrine', severity: 'high', disclosureRequired: true },
                 '갑상선': { category: 'endocrine', severity: 'medium', disclosureRequired: true },
-                
+
                 // 호흡기계 질환
                 '천식': { category: 'respiratory', severity: 'medium', disclosureRequired: true },
                 '폐렴': { category: 'respiratory', severity: 'medium', disclosureRequired: true },
-                
+
                 // 소화기계 질환
                 '위궤양': { category: 'digestive', severity: 'medium', disclosureRequired: true },
                 '간염': { category: 'digestive', severity: 'high', disclosureRequired: true },
-                
+
                 // 신경계 질환
                 '뇌졸중': { category: 'neurological', severity: 'high', disclosureRequired: true },
                 '간질': { category: 'neurological', severity: 'high', disclosureRequired: true },
-                
+
                 // 정신과 질환
                 '우울증': { category: 'psychiatric', severity: 'medium', disclosureRequired: true },
                 '불안장애': { category: 'psychiatric', severity: 'medium', disclosureRequired: true },
-                
+
                 // 암
                 '암': { category: 'cancer', severity: 'high', disclosureRequired: true },
                 '종양': { category: 'cancer', severity: 'high', disclosureRequired: true }
             },
-            
+
             procedures: {
                 // 심혈관계 시술
                 '심장수술': { category: 'cardiovascular_surgery', severity: 'high', disclosureRequired: true },
                 '혈관성형술': { category: 'cardiovascular_surgery', severity: 'high', disclosureRequired: true },
                 '스텐트': { category: 'cardiovascular_surgery', severity: 'high', disclosureRequired: true },
-                
+
                 // 신경외과 시술
                 '뇌수술': { category: 'neurosurgery', severity: 'high', disclosureRequired: true },
-                
+
                 // 정형외과 시술
                 '관절수술': { category: 'orthopedic_surgery', severity: 'medium', disclosureRequired: true },
                 '척추수술': { category: 'orthopedic_surgery', severity: 'high', disclosureRequired: true },
-                
+
                 // 일반외과 시술
                 '복부수술': { category: 'general_surgery', severity: 'medium', disclosureRequired: true },
                 '담낭수술': { category: 'general_surgery', severity: 'medium', disclosureRequired: true }
             },
-            
+
             medications: {
                 // 심혈관계 약물
                 '혈압약': { category: 'cardiovascular_med', severity: 'high', disclosureRequired: true },
                 '항응고제': { category: 'cardiovascular_med', severity: 'high', disclosureRequired: true },
-                
+
                 // 내분비계 약물
                 '인슐린': { category: 'endocrine_med', severity: 'high', disclosureRequired: true },
                 '혈당강하제': { category: 'endocrine_med', severity: 'high', disclosureRequired: true },
-                
+
                 // 정신과 약물
                 '항우울제': { category: 'psychiatric_med', severity: 'medium', disclosureRequired: true },
                 '항불안제': { category: 'psychiatric_med', severity: 'medium', disclosureRequired: true },
-                
+
                 // 항암제
                 '항암제': { category: 'cancer_med', severity: 'high', disclosureRequired: true }
             }
@@ -339,7 +387,7 @@ export default class DisclosureAnalyzer {
      */
     getDisclosureInfoForDiagnosis(diagnosis) {
         const normalizedText = (diagnosis.standardTerm || diagnosis.normalizedText || '').toLowerCase();
-        
+
         for (const [key, info] of Object.entries(this.disclosureMapping.diagnoses)) {
             if (normalizedText.includes(key.toLowerCase()) || key.toLowerCase().includes(normalizedText)) {
                 return {
@@ -349,7 +397,7 @@ export default class DisclosureAnalyzer {
                 };
             }
         }
-        
+
         return null;
     }
 
@@ -358,7 +406,7 @@ export default class DisclosureAnalyzer {
      */
     getDisclosureInfoForProcedure(procedure) {
         const normalizedText = (procedure.standardTerm || procedure.normalizedText || '').toLowerCase();
-        
+
         for (const [key, info] of Object.entries(this.disclosureMapping.procedures)) {
             if (normalizedText.includes(key.toLowerCase()) || key.toLowerCase().includes(normalizedText)) {
                 return {
@@ -368,7 +416,7 @@ export default class DisclosureAnalyzer {
                 };
             }
         }
-        
+
         return null;
     }
 
@@ -377,7 +425,7 @@ export default class DisclosureAnalyzer {
      */
     getDisclosureInfoForMedication(medication) {
         const normalizedText = (medication.standardTerm || medication.normalizedText || '').toLowerCase();
-        
+
         for (const [key, info] of Object.entries(this.disclosureMapping.medications)) {
             if (normalizedText.includes(key.toLowerCase()) || key.toLowerCase().includes(normalizedText)) {
                 return {
@@ -387,7 +435,7 @@ export default class DisclosureAnalyzer {
                 };
             }
         }
-        
+
         return null;
     }
 
@@ -396,12 +444,12 @@ export default class DisclosureAnalyzer {
      */
     identifyHospitalizations(timeline) {
         const hospitalizations = [];
-        
+
         // 타임라인에서 입원/응급실 관련 이벤트 찾기
         if (timeline.events) {
             timeline.events.forEach(event => {
                 const eventText = (event.description || '').toLowerCase();
-                
+
                 if (eventText.includes('입원') || eventText.includes('병원') || eventText.includes('admission')) {
                     hospitalizations.push({
                         type: 'hospitalization',
@@ -418,7 +466,7 @@ export default class DisclosureAnalyzer {
                 }
             });
         }
-        
+
         return hospitalizations;
     }
 
@@ -427,18 +475,18 @@ export default class DisclosureAnalyzer {
      */
     deduplicateAndSortItems(items) {
         // 중복 제거 (같은 타입과 엔티티)
-        const uniqueItems = items.filter((item, index, self) => 
-            index === self.findIndex(i => 
-                i.type === item.type && 
+        const uniqueItems = items.filter((item, index, self) =>
+            index === self.findIndex(i =>
+                i.type === item.type &&
                 (i.entity.standardTerm || i.entity.normalizedText) === (item.entity.standardTerm || item.entity.normalizedText)
             )
         );
-        
+
         // 심각도와 신뢰도로 정렬
         return uniqueItems.sort((a, b) => {
             const severityOrder = { 'high': 3, 'medium': 2, 'low': 1 };
             const severityDiff = (severityOrder[b.severity] || 0) - (severityOrder[a.severity] || 0);
-            
+
             if (severityDiff !== 0) return severityDiff;
             return b.confidence - a.confidence;
         });
@@ -451,10 +499,10 @@ export default class DisclosureAnalyzer {
         const baseRisk = this.getBaseRiskForItem(item);
         const confidenceWeight = item.confidence || 0.5;
         const severityMultiplier = this.getSeverityMultiplier(item.severity);
-        
+
         const riskScore = baseRisk * confidenceWeight * severityMultiplier;
         const weight = this.getItemWeight(item);
-        
+
         return {
             itemId: item.id,
             itemType: item.type,
@@ -474,7 +522,7 @@ export default class DisclosureAnalyzer {
             medication: 0.5,
             hospitalization: 0.6
         };
-        
+
         return baseRisks[item.type] || 0.5;
     }
 
@@ -484,7 +532,7 @@ export default class DisclosureAnalyzer {
             medium: 1.0,
             low: 0.8
         };
-        
+
         return multipliers[severity] || 1.0;
     }
 
@@ -498,7 +546,7 @@ export default class DisclosureAnalyzer {
     calculateRuleRiskAdjustment(ruleResults) {
         let adjustment = 0;
         const factors = [];
-        
+
         ruleResults.forEach(result => {
             if (result.status === 'success' && result.actionResult) {
                 result.actionResult.actions.forEach(action => {
@@ -515,7 +563,7 @@ export default class DisclosureAnalyzer {
                 });
             }
         });
-        
+
         return { adjustment, factors };
     }
 
@@ -525,14 +573,14 @@ export default class DisclosureAnalyzer {
     calculateTemporalRiskAdjustment(disclosureItems) {
         let adjustment = 0;
         const factors = [];
-        
+
         // 최근 발생한 항목들에 대한 가중치 증가
         const now = new Date();
         disclosureItems.forEach(item => {
             if (item.entity.date) {
                 const itemDate = new Date(item.entity.date);
                 const daysDiff = (now - itemDate) / (1000 * 60 * 60 * 24);
-                
+
                 if (daysDiff <= 30) { // 최근 30일 이내
                     const recentAdjustment = 0.1;
                     adjustment += recentAdjustment;
@@ -545,7 +593,7 @@ export default class DisclosureAnalyzer {
                 }
             }
         });
-        
+
         return { adjustment, factors };
     }
 
@@ -555,7 +603,7 @@ export default class DisclosureAnalyzer {
     calculateCategoryRisk(riskFactors, category) {
         const categoryFactors = riskFactors.filter(f => f.category === category);
         if (categoryFactors.length === 0) return 0;
-        
+
         return categoryFactors.reduce((sum, factor) => sum + factor.riskScore * factor.weight, 0) / categoryFactors.length;
     }
 
@@ -576,7 +624,7 @@ export default class DisclosureAnalyzer {
         if (this.options.strictMode) {
             return riskAssessment.overallRiskScore > 0;
         }
-        
+
         return riskAssessment.overallRiskScore >= this.options.riskThreshold;
     }
 
@@ -585,13 +633,13 @@ export default class DisclosureAnalyzer {
      */
     generateCategoryRecommendations(disclosureItems, riskAssessment) {
         const recommendations = [];
-        
+
         Object.entries(riskAssessment.breakdown).forEach(([category, riskScore]) => {
             if (riskScore >= this.options.riskThreshold) {
-                const categoryItems = disclosureItems.filter(item => 
+                const categoryItems = disclosureItems.filter(item =>
                     item.category.includes(category.replace('Risk', ''))
                 );
-                
+
                 if (categoryItems.length > 0) {
                     recommendations.push({
                         type: 'category_disclosure',
@@ -605,7 +653,7 @@ export default class DisclosureAnalyzer {
                 }
             }
         });
-        
+
         return recommendations;
     }
 
@@ -614,7 +662,7 @@ export default class DisclosureAnalyzer {
      */
     generateItemRecommendations(disclosureItems) {
         const recommendations = [];
-        
+
         disclosureItems.forEach(item => {
             if (item.confidence >= this.options.confidenceThreshold && item.severity === 'high') {
                 recommendations.push({
@@ -632,7 +680,7 @@ export default class DisclosureAnalyzer {
                 });
             }
         });
-        
+
         return recommendations;
     }
 
@@ -641,7 +689,7 @@ export default class DisclosureAnalyzer {
      */
     generateReviewRecommendations(riskAssessment) {
         const recommendations = [];
-        
+
         if (riskAssessment.riskLevel === 'high') {
             recommendations.push({
                 type: 'additional_review',
@@ -654,7 +702,7 @@ export default class DisclosureAnalyzer {
                 actionRequired: false
             });
         }
-        
+
         return recommendations;
     }
 
@@ -663,15 +711,15 @@ export default class DisclosureAnalyzer {
      */
     prioritizeRecommendations(recommendations) {
         const priorityOrder = { 'high': 3, 'medium': 2, 'low': 1 };
-        
+
         return recommendations.sort((a, b) => {
             const priorityDiff = (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0);
             if (priorityDiff !== 0) return priorityDiff;
-            
+
             // 액션 필요 여부로 2차 정렬
             if (a.actionRequired && !b.actionRequired) return -1;
             if (!a.actionRequired && b.actionRequired) return 1;
-            
+
             return 0;
         });
     }
@@ -707,8 +755,8 @@ export default class DisclosureAnalyzer {
                 const daysDiff = (new Date() - new Date(item.entity.date)) / (1000 * 60 * 60 * 24);
                 return daysDiff <= 90;
             }).length,
-            chronicItems: disclosureItems.filter(item => 
-                item.disclosureInfo.category.includes('chronic') || 
+            chronicItems: disclosureItems.filter(item =>
+                item.disclosureInfo.category.includes('chronic') ||
                 ['cardiovascular', 'endocrine', 'psychiatric'].includes(item.disclosureInfo.category)
             ).length
         };
@@ -746,12 +794,12 @@ export default class DisclosureAnalyzer {
     analyzeItemCorrelations(disclosureItems) {
         // 항목 간 상관관계 분석 (간단한 구현)
         const correlations = [];
-        
+
         for (let i = 0; i < disclosureItems.length; i++) {
             for (let j = i + 1; j < disclosureItems.length; j++) {
                 const item1 = disclosureItems[i];
                 const item2 = disclosureItems[j];
-                
+
                 if (item1.disclosureInfo.category === item2.disclosureInfo.category) {
                     correlations.push({
                         item1: item1.id,
@@ -762,7 +810,7 @@ export default class DisclosureAnalyzer {
                 }
             }
         }
-        
+
         return correlations;
     }
 
@@ -770,12 +818,12 @@ export default class DisclosureAnalyzer {
         // 치료 패턴 분석
         const medications = entities.filter(e => e.type === 'medication');
         const procedures = entities.filter(e => e.type === 'procedure');
-        
+
         return {
             medicationCount: medications.length,
             procedureCount: procedures.length,
-            chronicMedications: medications.filter(med => 
-                ['혈압약', '인슐린', '항우울제'].some(chronic => 
+            chronicMedications: medications.filter(med =>
+                ['혈압약', '인슐린', '항우울제'].some(chronic =>
                     (med.standardTerm || med.normalizedText || '').toLowerCase().includes(chronic.toLowerCase())
                 )
             ).length

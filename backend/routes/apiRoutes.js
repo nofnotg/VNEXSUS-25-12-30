@@ -340,38 +340,10 @@ function applyRetainFiltering(text, retainKeywords) {
 
     // 유지 키워드가 하나라도 포함되어 있으면 유지
     return retainKeywords.some(keyword => line.includes(keyword));
-    temperature: 0.7
   });
 
-  const aiResponse = aiResult.report || aiResult.response || '응답을 생성할 수 없습니다.';
-
-  // 응답 저장
-  messages.push({ role: 'assistant', content: aiResponse });
-  fs.writeFileSync(sessionPath, JSON.stringify({
-    ...sessionData,
-    messages,
-    lastUpdated: new Date().toISOString()
-  }));
-
-  res.json({ success: true, response: aiResponse, messages });
-} catch (apiError) {
-  console.error('⚠️ GPT-4o-mini API 호출 오류:', apiError);
-
-  if (apiError.response) {
-    console.error('📊 응답 상태:', apiError.response.status);
-    console.error('📄 응답 데이터:', JSON.stringify(apiError.response.data));
-  }
-
-  return res.status(500).json({
-    success: false,
-    error: '채팅 응답 생성 중 API 오류: ' + apiError.message
-  });
+  return filteredLines.join('\n');
 }
-  } catch (error) {
-  console.error('채팅 오류:', error);
-  res.status(500).json({ success: false, error: error.message });
-}
-});
 
 /**
  * 테스트 문서 로드 API
@@ -493,52 +465,6 @@ router.get('/postprocess/filter', async (req, res) => {
     });
   }
 });
-
-/**
- * 소거키워드 필터링 적용 함수
- * @param {string} text 원본 텍스트
- * @param {Array} categories 소거 카테고리 목록
- * @returns {string} 필터링된 텍스트
- */
-function applyExcludeFiltering(text, categories) {
-  let filteredText = text;
-
-  // 각 카테고리별 키워드 처리
-  categories.forEach(category => {
-    if (category.keywords && Array.isArray(category.keywords)) {
-      category.keywords.forEach(keyword => {
-        // 정규식으로 키워드 교체
-        const regex = new RegExp(keyword, 'gi');
-        filteredText = filteredText.replace(regex, '[필터링됨]');
-      });
-    }
-  });
-
-  return filteredText;
-}
-
-/**
- * Retain 키워드 필터링 적용 함수
- * @param {string} text 원본 텍스트
- * @param {Array} retainKeywords 유지할 키워드 목록
- * @returns {string} 필터링된 텍스트
- */
-function applyRetainFiltering(text, retainKeywords) {
-  // 우선 소거키워드 필터링 된 텍스트 준비
-  const excludeFiltered = applyExcludeFiltering(text, []);
-
-  // 유지 키워드가 포함된 줄만 보존
-  const lines = excludeFiltered.split('\n');
-  const filteredLines = lines.filter(line => {
-    // 빈 줄은 유지
-    if (line.trim() === '') return true;
-
-    // 유지 키워드가 하나라도 포함되어 있으면 유지
-    return retainKeywords.some(keyword => line.includes(keyword));
-  });
-
-  return filteredLines.join('\n');
-}
 
 /**
  * 단순화된 보고서 생성 함수 (폴백용)

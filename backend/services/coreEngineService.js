@@ -18,6 +18,7 @@ import { globalLargeFileHandler } from './largeFileHandler.js';
 
 // 새로운 파이프라인 상태 머신 임포트
 import { PipelineStateMachine } from './core-engine/index.js';
+import preprocessor from '../postprocess/preprocessor.js';
 
 const logger = createLogger('CORE_ENGINE');
 
@@ -26,9 +27,10 @@ const logger = createLogger('CORE_ENGINE');
  */
 class CoreEngineService {
   constructor() {
-    this.isEnabled = process.env.USE_CORE_ENGINE === 'true';
+    // Feature Flag 기본값을 true로 설정 (명시적으로 'false'인 경우에만 비활성화)
+    this.isEnabled = process.env.USE_CORE_ENGINE !== 'false';
     this.logger = logger;
-    
+
     // 새로운 파이프라인 상태 머신 초기화
     this.pipelineStateMachine = new PipelineStateMachine({
       qualityGate: process.env.CORE_ENGINE_QUALITY_GATE || 'standard',
@@ -38,11 +40,15 @@ class CoreEngineService {
       enableFallback: process.env.CORE_ENGINE_ENABLE_FALLBACK !== 'false',
       enableDetailedLogging: process.env.CORE_ENGINE_DETAILED_LOGGING === 'true'
     });
-    
+
     // 런타임 환경변수 변경 감지
     this.checkRuntimeToggle();
-    
-    this.logger.info('코어 엔진 서비스 초기화', { 
+
+    if (!this.isEnabled) {
+      this.logger.warn('코어 엔진이 명시적으로 비활성화되었습니다 (USE_CORE_ENGINE=false)');
+    }
+
+    this.logger.info('코어 엔진 서비스 초기화', {
       enabled: this.isEnabled,
       nodeEnv: process.env.NODE_ENV,
       pipelineInitialized: !!this.pipelineStateMachine
@@ -95,10 +101,10 @@ class CoreEngineService {
       return { success: true, timestamp: new Date().toISOString() };
     } catch (error) {
       this.logger.error('파이프라인 중단 중 오류 발생', {}, error);
-      return { 
-        success: false, 
-        error: error.message, 
-        timestamp: new Date().toISOString() 
+      return {
+        success: false,
+        error: error.message,
+        timestamp: new Date().toISOString()
       };
     }
   }
@@ -115,8 +121,8 @@ class CoreEngineService {
   async analyze(input) {
     if (!this.isEnabled) {
       this.logger.debug('코어 엔진 비활성화됨, 분석 건너뜀');
-      return { 
-        coreEngineUsed: false, 
+      return {
+        coreEngineUsed: false,
         reason: 'Core engine disabled',
         timestamp: new Date().toISOString()
       };
@@ -124,7 +130,7 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('core-engine-analysis');
-      
+
       // 입력 검증
       if (!input) {
         throw new CoreEngineError('입력 데이터가 필요합니다', 'analyze', 'input-validation');
@@ -151,7 +157,7 @@ class CoreEngineService {
       // 대용량 파일 스트림 처리
       if (input.stream) {
         this.logger.info('대용량 파일 스트림 처리 시작');
-        
+
         try {
           const streamResult = await globalStreamOptimizer.processLargeFileStream(
             input.stream,
@@ -189,15 +195,15 @@ class CoreEngineService {
             totalChunks: streamResult.results.length,
             totalMB: (streamResult.metrics.totalBytes / 1024 / 1024).toFixed(2),
             processingTimeMs: streamResult.metrics.processingTime,
-            throughputMBps: ((streamResult.metrics.totalBytes / 1024 / 1024) / 
-                           (streamResult.metrics.processingTime / 1000)).toFixed(2)
+            throughputMBps: ((streamResult.metrics.totalBytes / 1024 / 1024) /
+              (streamResult.metrics.processingTime / 1000)).toFixed(2)
           });
 
         } catch (streamError) {
           this.logger.error('스트림 처리 중 오류 발생', {}, streamError);
           throw new CoreEngineError(
-            `스트림 처리 실패: ${streamError.message}`, 
-            'analyze', 
+            `스트림 처리 실패: ${streamError.message}`,
+            'analyze',
             'stream-processing'
           );
         }
@@ -206,7 +212,7 @@ class CoreEngineService {
       // 파일 경로 처리 (대용량 파일 핸들러 사용)
       if (input.filePath) {
         this.logger.info('파일 경로 처리 시작', { filePath: input.filePath });
-        
+
         try {
           const fileResult = await globalLargeFileHandler.processFile(
             input.filePath,
@@ -248,8 +254,8 @@ class CoreEngineService {
         } catch (fileError) {
           this.logger.error('파일 처리 중 오류 발생', {}, fileError);
           throw new CoreEngineError(
-            `파일 처리 실패: ${fileError.message}`, 
-            'analyze', 
+            `파일 처리 실패: ${fileError.message}`,
+            'analyze',
             'file-processing'
           );
         }
@@ -264,7 +270,7 @@ class CoreEngineService {
         // 텍스트를 스트림으로 변환하여 처리
         const { Readable } = require('stream');
         const textStream = Readable.from([Buffer.from(processedInput.text, 'utf8')]);
-        
+
         const streamResult = await globalStreamOptimizer.processLargeFileStream(
           textStream,
           async (chunk, metadata) => {
@@ -283,6 +289,25 @@ class CoreEngineService {
           processedInput.streamOptimized = true;
           processedInput.streamMetrics = streamResult.metrics;
         }
+      }
+
+      // 템플릿 매칭 및 전처리 실행 (Phase 4)
+      this.logger.info('템플릿 매칭 및 전처리 실행 중...');
+      try {
+        const preprocessedData = await preprocessor.run(processedInput.text, {
+          enableTemplateCache: true
+        });
+
+        processedInput.preprocessedData = preprocessedData;
+        processedInput.parsedRecords = preprocessedData; // 검증 스크립트 호환성
+
+        this.logger.info('전처리 완료', {
+          sectionCount: preprocessedData.length,
+          hospital: preprocessedData[0]?.hospital,
+          date: preprocessedData[0]?.date
+        });
+      } catch (preprocessError) {
+        this.logger.warn('전처리 중 오류 발생 (파이프라인은 계속 진행됨)', { error: preprocessError.message });
       }
 
       // 파이프라인 상태 머신 실행
@@ -316,14 +341,14 @@ class CoreEngineService {
 
     } catch (error) {
       this.logger.endPerformance('core-engine-analysis');
-      this.logger.coreEngine('analyze', 'error', { 
-        inputSize: input ? JSON.stringify(input).length : 0 
+      this.logger.coreEngine('analyze', 'error', {
+        inputSize: input ? JSON.stringify(input).length : 0
       }, error);
-      
+
       if (error instanceof CoreEngineError) {
         throw error;
       }
-      
+
       throw handleCoreEngineError('analyze', 'pipeline')(error);
     }
   }
@@ -332,12 +357,13 @@ class CoreEngineService {
    * 런타임 환경변수 변경 감지
    */
   checkRuntimeToggle() {
-    const currentSetting = process.env.USE_CORE_ENGINE === 'true';
+    // Feature Flag 기본값을 true로 설정 (명시적으로 'false'인 경우에만 비활성화)
+    const currentSetting = process.env.USE_CORE_ENGINE !== 'false';
     if (this.isEnabled !== currentSetting) {
       this.isEnabled = currentSetting;
-      this.logger.info('코어 엔진 런타임 토글 변경', { 
+      this.logger.info('코어 엔진 런타임 토글 변경', {
         previousState: !this.isEnabled,
-        currentState: this.isEnabled 
+        currentState: this.isEnabled
       });
     }
   }
@@ -367,7 +393,7 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('disclosure-analysis');
-      
+
       const {
         contractDate,
         records = [],
@@ -414,11 +440,11 @@ class CoreEngineService {
     } catch (error) {
       this.logger.endPerformance('disclosure-analysis');
       this.logger.coreEngine('analyzeDisclosure', 'error', { params }, error);
-      
+
       if (error instanceof CoreEngineError) {
         throw error;
       }
-      
+
       throw handleCoreEngineError('analyzeDisclosure', 'disclosure')(error);
     }
   }
@@ -436,27 +462,27 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('disease-rule-mapping');
-      
+
       this.logger.info('질환 규칙 매핑 시작', { recordCount: records.length });
-      
+
       const result = mapDiseaseRules(records);
-      
+
       const performanceData = this.logger.endPerformance('disease-rule-mapping', {
         inputRecords: records.length,
         outputRecords: result.length
       });
-      
+
       this.logger.coreEngine('mapDiseaseRules', 'success', {
         recordsProcessed: result.length,
         performance: performanceData
       });
-      
+
       return result;
 
     } catch (error) {
       this.logger.endPerformance('disease-rule-mapping');
       this.logger.coreEngine('mapDiseaseRules', 'error', { recordCount: records.length }, error);
-      
+
       // 실패 시 원본 레코드 반환 (폴백)
       this.logger.warn('질환 규칙 매핑 실패, 원본 레코드 반환', { error: error.message });
       return records;
@@ -476,34 +502,34 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('primary-metastasis-classification');
-      
+
       this.logger.info('원발/전이 분류 시작', { recordCount: records.length });
-      
+
       const result = classifyPrimaryMetastasis({ records });
-      
+
       const performanceData = this.logger.endPerformance('primary-metastasis-classification', {
         primary: result.primary,
         metastasisCount: result.metastasis.length
       });
-      
+
       this.logger.coreEngine('classifyPrimaryMetastasis', 'success', {
         primary: result.primary,
         metastasisCount: result.metastasis.length,
         performance: performanceData
       });
-      
+
       return result;
 
     } catch (error) {
       this.logger.endPerformance('primary-metastasis-classification');
       this.logger.coreEngine('classifyPrimaryMetastasis', 'error', { recordCount: records.length }, error);
-      
+
       const fallbackResult = {
         primary: '원발부위 미상',
         metastasis: [],
         classificationLine: '분류: ✅ 원발부위 미상 원발 + 전이 없음'
       };
-      
+
       this.logger.warn('원발/전이 분류 실패, 기본값 반환', { fallback: fallbackResult });
       return fallbackResult;
     }
@@ -525,7 +551,7 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('report-generation');
-      
+
       const {
         systemPrompt,
         userPrompt,
@@ -566,11 +592,11 @@ class CoreEngineService {
     } catch (error) {
       this.logger.endPerformance('report-generation');
       this.logger.coreEngine('generateReport', 'error', { params }, error);
-      
+
       if (error instanceof CoreEngineError) {
         throw error;
       }
-      
+
       throw handleCoreEngineError('generateReport', 'orchestrator')(error);
     }
   }
@@ -588,10 +614,10 @@ class CoreEngineService {
 
     try {
       this.logger.startPerformance('integrated-pipeline');
-      
+
       // 메모리 최적화 - 대용량 데이터 처리 전 메모리 체크
       globalMemoryOptimizer.checkMemoryUsage();
-      
+
       const {
         contractDate,
         records = [],
@@ -650,12 +676,12 @@ class CoreEngineService {
       let reportResult = null;
       if (systemPrompt && userPrompt) {
         // Progressive RAG 결과를 프롬프트에 통합
-        const enhancedSystemPrompt = ragEnhancedResult ? 
-          this.buildRAGEnhancedSystemPrompt(systemPrompt, ragEnhancedResult) : 
+        const enhancedSystemPrompt = ragEnhancedResult ?
+          this.buildRAGEnhancedSystemPrompt(systemPrompt, ragEnhancedResult) :
           systemPrompt;
-        
-        const enhancedUserPrompt = ragEnhancedResult ? 
-          this.buildRAGEnhancedUserPrompt(userPrompt, ragEnhancedResult) : 
+
+        const enhancedUserPrompt = ragEnhancedResult ?
+          this.buildRAGEnhancedUserPrompt(userPrompt, ragEnhancedResult) :
           userPrompt;
 
         reportResult = await this.generateReport({
@@ -697,7 +723,7 @@ class CoreEngineService {
     } catch (error) {
       this.logger.endPerformance('integrated-pipeline');
       this.logger.coreEngine('runIntegratedPipeline', 'error', { params }, error);
-      
+
       return {
         coreEngineUsed: true,
         error: error.message,
@@ -715,7 +741,7 @@ class CoreEngineService {
   validateSchema(data, schemaType = 'summary') {
     try {
       this.logger.debug('스키마 검증 시작', { schemaType, hasData: !!data });
-      
+
       const schemas = {
         full: FullReportSchema,
         summary: SummarySchema,
@@ -730,9 +756,9 @@ class CoreEngineService {
       }
 
       const result = validateStructure(data, schema);
-      
-      this.logger.debug('스키마 검증 완료', { 
-        schemaType, 
+
+      this.logger.debug('스키마 검증 완료', {
+        schemaType,
         isValid: result.isValid,
         errorCount: result.errors?.length || 0
       });
@@ -752,20 +778,20 @@ class CoreEngineService {
     try {
       // 런타임 환경변수 변경 확인
       this.checkRuntimeToggle();
-      
+
       // 파이프라인 상태 머신 헬스 체크
       let pipelineHealth = null;
       if (this.isEnabled && this.pipelineStateMachine) {
         try {
           pipelineHealth = this.pipelineStateMachine.healthCheck();
         } catch (error) {
-          pipelineHealth = { 
-            status: 'error', 
-            error: error.message 
+          pipelineHealth = {
+            status: 'error',
+            error: error.message
           };
         }
       }
-      
+
       const status = {
         enabled: this.isEnabled,
         status: 'healthy',
@@ -781,7 +807,7 @@ class CoreEngineService {
         timestamp: new Date().toISOString()
       };
 
-      this.logger.debug('헬스 체크 완료', { 
+      this.logger.debug('헬스 체크 완료', {
         enabled: this.isEnabled,
         pipelineEnabled: !!this.pipelineStateMachine
       });
@@ -807,13 +833,13 @@ class CoreEngineService {
     try {
       // Progressive RAG Manager 동적 로딩
       const { ProgressiveRAGManager } = await import('../rag/ProgressiveRAGManager.js');
-      
+
       // 싱글톤 인스턴스 가져오기
       const ragManager = ProgressiveRAGManager.getInstance();
-      
+
       // 의료 용어 추출
       const medicalTerms = this.extractMedicalTermsFromRecords(records);
-      
+
       // Progressive RAG 분석 수행
       const ragResults = await Promise.all([
         // 의료 용어 검색
@@ -821,13 +847,13 @@ class CoreEngineService {
           maxResults: ragOptions.maxResults || 10,
           confidenceThreshold: ragOptions.confidenceThreshold || 0.7
         }),
-        
+
         // ICD 코드 검색
         ragManager.searchICDCodes(medicalTerms, {
           maxResults: ragOptions.maxResults || 10,
           confidenceThreshold: ragOptions.confidenceThreshold || 0.7
         }),
-        
+
         // 의료 문서 분석
         ragManager.analyzeMedicalDocument(records.map(r => r.text || r.diagnosis || '').join('\n'), {
           includeContext: ragOptions.includeContext !== false,
@@ -856,7 +882,7 @@ class CoreEngineService {
    */
   extractMedicalTermsFromRecords(records) {
     const medicalTerms = new Set();
-    
+
     // 의료 용어 패턴 정의
     const medicalPatterns = [
       /([가-힣]+병|[가-힣]+증|[가-힣]+염)/g,  // 질병명 패턴
@@ -868,7 +894,7 @@ class CoreEngineService {
 
     records.forEach(record => {
       const text = record.text || record.diagnosis || record.treatment || '';
-      
+
       medicalPatterns.forEach(pattern => {
         const matches = text.match(pattern);
         if (matches) {

@@ -47,24 +47,24 @@ function getVisionConfig() {
 function getVisionClient() {
   // 실시간 Vision 설정 정보 가져오기
   const config = getVisionConfig();
-  
+
   // 새로운 서비스 계정 키 또는 API 키가 제공되었는지 확인
-  const shouldReinitialize = !visionClient || 
-                            (config.credentials !== lastCredentialsPath) || 
-                            (config.apiKey !== lastApiKey);
-                            
+  const shouldReinitialize = !visionClient ||
+    (config.credentials !== lastCredentialsPath) ||
+    (config.apiKey !== lastApiKey);
+
   // Vision OCR 활성화 여부 체크
   if (!config.isEnabled) {
     console.warn('Vision OCR이 비활성화되었습니다. 환경 변수 ENABLE_VISION_OCR=true 및 USE_VISION=true로 설정해주세요.');
     throw new Error('Vision OCR이 비활성화되었습니다. 환경 변수를 확인하세요.');
   }
-                            
+
   if (shouldReinitialize) {
     console.log('Vision 클라이언트를 초기화합니다...');
-    
+
     try {
       const options = {};
-      
+
       // 서비스 계정 키 파일 확인 (우선순위 1)
       if (config.credentials) {
         if (fs.existsSync(config.credentials)) {
@@ -73,41 +73,42 @@ function getVisionClient() {
           options.keyFilename = absolutePath;
           console.log(`서비스 계정 키 파일 사용: ${absolutePath}`);
         } else {
-          throw new Error(`서비스 계정 키 파일을 찾을 수 없습니다: ${config.credentials}`);
+          console.warn(`⚠️ 서비스 계정 키 파일을 찾을 수 없습니다: ${config.credentials}. API 키를 대신 사용합니다.`);
+          // 파일이 없으면 API 키 사용 시도
         }
       }
-      
+
       // API 키 확인 (우선순위 2)
       if (!options.keyFilename && config.apiKey) {
         options.key = config.apiKey;
         console.log('Vision API 키 사용');
       }
-      
+
       // 프로젝트 ID 설정 (선택사항)
       if (config.projectId) {
         options.projectId = config.projectId;
         console.log(`프로젝트 ID 설정: ${config.projectId}`);
       }
-      
+
       // 인증 방법 확인
       if (!options.keyFilename && !options.key) {
         throw new Error('인증 방법이 설정되지 않았습니다. 서비스 계정 키 파일 또는 API 키가 필요합니다.');
       }
-      
+
       // Vision 클라이언트 생성
       visionClient = new ImageAnnotatorClient(options);
-      
+
       // 현재 인증 정보 저장
       lastCredentialsPath = config.credentials;
       lastApiKey = config.apiKey;
-      
+
       console.log('✅ Vision 클라이언트 초기화 완료');
     } catch (error) {
       console.error(`❌ Vision 클라이언트 초기화 실패: ${error.message}`);
       throw new Error(`Vision 클라이언트 초기화 실패: ${error.message}`);
     }
   }
-  
+
   return visionClient;
 }
 
@@ -119,36 +120,36 @@ export function initializeVision() {
   try {
     // 실시간 Vision 설정 정보 가져오기
     const config = getVisionConfig();
-    
+
     if (!config.isEnabled) {
       console.warn('Vision OCR이 비활성화되었습니다. 환경 변수 ENABLE_VISION_OCR=true 및 USE_VISION=true로 설정해주세요.');
       return { success: false, error: 'Vision OCR이 비활성화되었습니다.' };
     }
-    
+
     // 필수 설정 체크
     if (!config.credentials && !config.apiKey) {
       console.error('Vision OCR 인증 정보가 설정되지 않았습니다. GOOGLE_APPLICATION_CREDENTIALS 또는 GOOGLE_CLOUD_VISION_API_KEY가 필요합니다.');
       return { success: false, error: '인증 정보가 설정되지 않았습니다.' };
     }
-    
+
     if (!config.bucket) {
       console.error('GCS 버킷이 설정되지 않았습니다. GCS_BUCKET_NAME 환경 변수가 필요합니다.');
       return { success: false, error: 'GCS 버킷이 설정되지 않았습니다.' };
     }
-    
+
     // 클라이언트 초기화 시도
     const client = getVisionClient();
-    
-    return { 
-      success: true, 
+
+    return {
+      success: true,
       config,
-      client 
+      client
     };
   } catch (error) {
     console.error(`Vision OCR 서비스 초기화 실패: ${error.message}`);
-    return { 
-      success: false, 
-      error: error.message 
+    return {
+      success: false,
+      error: error.message
     };
   }
 }
@@ -161,51 +162,51 @@ export function initializeVision() {
 export async function processPdfFile(pdfFilePath) {
   // 성능 측정 시작
   const perfData = logOcrStart(SERVICE_NAME, pdfFilePath);
-  
+
   try {
     // 실시간 Vision 설정 정보 가져오기
     const config = getVisionConfig();
-    
+
     // 1. Vision OCR 활성화 여부 확인
     if (!config.isEnabled) {
       throw new Error('Vision OCR이 비활성화되었습니다. 환경 변수를 확인하세요.');
     }
-    
+
     // 2. 버킷 설정 확인
     if (!config.bucket) {
       throw new Error('GCS 버킷이 설정되지 않았습니다. GCS_BUCKET_NAME 환경 변수를 확인하세요.');
     }
-    
+
     // 3. 인증 설정 확인
     if (!config.credentials && !config.apiKey) {
       throw new Error('Vision OCR 인증 정보가 설정되지 않았습니다. GOOGLE_APPLICATION_CREDENTIALS 또는 GOOGLE_CLOUD_VISION_API_KEY가 필요합니다.');
     }
-    
+
     // 4. PDF 파일 유효성 검사
     const pdfInfo = fileHelper.validatePdfFile(pdfFilePath);
     if (!pdfInfo.isValid) {
       throw new Error(`유효하지 않은 PDF 파일: ${pdfInfo.error}`);
     }
-    
+
     // 5. Vision 클라이언트 초기화 확인
     try {
       getVisionClient(); // 클라이언트가 초기화되었는지 확인
     } catch (clientError) {
       throw new Error(`Vision 클라이언트 초기화 실패: ${clientError.message}`);
     }
-    
+
     // 6. GCS에 PDF 업로드
     const gcsPdfPath = await gcsService.uploadPdfToGcs(pdfFilePath);
-    
+
     // 7. 결과가 저장될 GCS 경로 접두사 생성
     const outputPrefix = `ocr-results/${uuidv4()}`;
-    
+
     // 8. Vision OCR 비동기 작업 실행
     const ocrJob = await runAsyncBatchOcr(gcsPdfPath, outputPrefix);
-    
+
     // 9. OCR 결과 파싱
     const ocrResults = await parseOcrResults(outputPrefix);
-    
+
     // 10. 결과 반환 및 성능 측정 완료 로깅
     return logOcrComplete(perfData, ocrResults);
   } catch (error) {
@@ -224,25 +225,25 @@ async function runAsyncBatchOcr(gcsPdfPath, outputPrefix) {
   try {
     // 설정 정보 가져오기
     const config = getVisionConfig();
-    
+
     // Vision API 활성화 여부 확인
     if (!config.isEnabled) {
       throw new Error('Vision OCR이 비활성화되었습니다. 환경 변수를 확인하세요.');
     }
-    
+
     // Vision 클라이언트 가져오기
     const client = getVisionClient();
     if (!client) {
       throw new Error('Vision 클라이언트가 초기화되지 않았습니다.');
     }
-    
+
     // GCS 파일 경로를 gs:// URI 형식으로 변환
     const gcsSourceUri = gcsService.getGcsUri(gcsPdfPath);
     const gcsDestinationUri = gcsService.getGcsUri(`${outputPrefix}/`);
-    
+
     console.log(`OCR 소스 파일: ${gcsSourceUri}`);
     console.log(`OCR 결과 경로: ${gcsDestinationUri}`);
-    
+
     // 비동기 배치 OCR 요청 설정
     const request = {
       requests: [{
@@ -257,20 +258,20 @@ async function runAsyncBatchOcr(gcsPdfPath, outputPrefix) {
         }
       }]
     };
-    
+
     // 비동기 배치 OCR 요청 전송
     console.log('Vision API 비동기 배치 OCR 요청 전송 중...');
     const [operation] = await client.asyncBatchAnnotateFiles(request);
-    
+
     // 작업 ID 추출
     const operationId = operation.name.split('/').pop();
     console.log(`OCR 작업 ID: ${operationId}`);
-    
+
     // 비동기 작업 완료 대기
     console.log('OCR 작업 완료 대기 중...');
     const [result] = await operation.promise();
     console.log('OCR 작업 완료!');
-    
+
     return {
       operationId,
       outputPrefix,
@@ -291,42 +292,42 @@ async function parseOcrResults(outputPrefix) {
   try {
     // GCS에서 결과 파일 목록 조회
     const files = await gcsService.listGcsObjects(outputPrefix);
-    
+
     // JSON 결과 파일만 필터링
     const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-    
+
     if (jsonFiles.length === 0) {
       return { text: '', pages: [] };
     }
-    
+
     // 모든 JSON 파일 처리
     const pagesData = [];
     let completeText = '';
-    
+
     // 파일명 정렬 (페이지 순서 유지를 위해)
     jsonFiles.sort((a, b) => a.name.localeCompare(b.name));
-    
+
     // 각 JSON 파일 처리
     for (const jsonFile of jsonFiles) {
       // JSON 파일 다운로드 및 파싱
       const jsonData = await gcsService.downloadAndParseJson(jsonFile.name);
-      
+
       // 페이지 텍스트 추출
       if (jsonData.responses && jsonData.responses.length > 0) {
         for (const response of jsonData.responses) {
           if (response.fullTextAnnotation) {
             const pageText = response.fullTextAnnotation.text || '';
-            
+
             // 페이지 번호 추출 (파일 이름에서)
             const pageMatch = jsonFile.name.match(/(\d+)\.json$/);
             const pageNum = pageMatch ? parseInt(pageMatch[1], 10) : pagesData.length + 1;
-            
+
             // 페이지 데이터 추가
             pagesData.push({
               page: pageNum,
               text: pageText
             });
-            
+
             // 전체 텍스트에 추가
             if (pageText) {
               completeText += pageText + '\n\n';
@@ -335,10 +336,10 @@ async function parseOcrResults(outputPrefix) {
         }
       }
     }
-    
+
     // 페이지 순서대로 정렬
     pagesData.sort((a, b) => a.page - b.page);
-    
+
     return {
       text: completeText.trim(),
       pages: pagesData,
@@ -356,41 +357,41 @@ async function parseOcrResults(outputPrefix) {
  */
 export async function extractTextFromImage(imageBuffer) {
   const perfData = logOcrStart(SERVICE_NAME, 'image_buffer');
-  
+
   try {
     // 실시간 Vision 설정 정보 가져오기
     const config = getVisionConfig();
-    
+
     // Vision OCR 활성화 여부 확인
     if (!config.isEnabled) {
       throw new Error('Vision OCR이 비활성화되었습니다. 환경 변수를 확인하세요.');
     }
-    
+
     // 인증 설정 확인
     if (!config.credentials && !config.apiKey) {
       throw new Error('Vision OCR 인증 정보가 설정되지 않았습니다. GOOGLE_APPLICATION_CREDENTIALS 또는 GOOGLE_CLOUD_VISION_API_KEY가 필요합니다.');
     }
-    
+
     // Vision 클라이언트 초기화
     const client = getVisionClient();
-    
+
     console.log(`[${SERVICE_NAME}] 이미지 OCR 처리 시작`);
-    
+
     // 이미지에서 텍스트 감지
     const [result] = await client.textDetection({
       image: {
         content: imageBuffer
       }
     });
-    
+
     const detections = result.textAnnotations;
     let extractedText = '';
     let confidence = 0;
-    
+
     if (detections && detections.length > 0) {
       // 첫 번째 요소는 전체 텍스트
       extractedText = detections[0].description || '';
-      
+
       // 평균 신뢰도 계산
       if (detections.length > 1) {
         const confidenceSum = detections.slice(1).reduce((sum, detection) => {
@@ -401,14 +402,14 @@ export async function extractTextFromImage(imageBuffer) {
         confidence = 0.8; // 기본값
       }
     }
-    
+
     const result_data = {
       text: extractedText,
       confidence: confidence,
       textLength: extractedText.length,
       detectionCount: detections ? detections.length : 0
     };
-    
+
     // 성능 로깅
     if (perfData && perfData.startTime) {
       logOcrComplete(perfData, {
@@ -424,7 +425,7 @@ export async function extractTextFromImage(imageBuffer) {
     });
 
     return result_data;
-    
+
   } catch (error) {
     if (perfData && perfData.startTime) {
       logOcrError(perfData, error);

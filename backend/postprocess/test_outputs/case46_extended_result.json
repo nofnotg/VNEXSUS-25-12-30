@@ -1,0 +1,42 @@
+{
+  "caseNumber": 46,
+  "processedAt": "2025-12-06T01:33:47.419Z",
+  "duration": 32,
+  "inputLength": 74778,
+  "fullResult": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "Case46",
+        "processedAt": "2025-12-06T01:33:47.419Z"
+      },
+      "medicalRecords": [
+        {
+          "date": "2025-10-28",
+          "hospital": "미상 병원",
+          "diagnosis": "미확인",
+          "content": "========== 파일: ê³ ëêµ¬ë¡ë³ì.pdf ========== 2025-10-28 17:03:36\nCH\n18181\n해오름손해사정(주)\nERA SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n고"
+        }
+      ]
+    },
+    "pipeline": {
+      "dateBlocks": [],
+      "organizedData": [
+        {
+          "date": "2025-10-28",
+          "hospital": "미상 병원",
+          "rawText": "========== 파일: ê³ ëêµ¬ë¡ë³ì.pdf ========== 2025-10-28 17:03:36\nCH\n18181\n해오름손해사정(주)\nERA SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n고",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ]
+    },
+    "statistics": {
+      "dateBlocks": 0,
+      "organizedRecords": 1,
+      "confidence": 0
+    }
+  }
+}

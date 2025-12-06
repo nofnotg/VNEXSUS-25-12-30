@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 개발계획 검토 및 RAG 프롬프트 분석 리포트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #2a5298;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+
+        .status-complete {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f1f3f5;
+        }
+
+        .insight-box {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            margin: 15px 0;
+        }
+
+        ul,
+        ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .recommendation h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 VNEXSUS 개발계획 검토 및 RAG 프롬프트 분석</h1>
+            <p>Implementation Plan Compliance Review & Report Format Insights</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">생성일: 2025-11-30</p>
+        </header>
+
+        <div class="content">
+            <!-- Section 1: 개발계획 검토 -->
+            <div class="section">
+                <h2>📋 1. 개발계획안 적용 현황 검토</h2>
+
+                <h3>현재 Implementation Plan: Phase 5 - Privacy & Storage (T12)</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>계획 내용</th>
+                            <th>적용 상태</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>piiMasker.js</strong></td>
+                            <td>개인정보 마스킹 (주민번호, 전화번호, 이름)</td>
+                            <td><span class="status-badge status-missing">미구현</span></td>
+                            <td>파일 존재하지 않음</td>
+                        </tr>
+                        <tr>
+                            <td><strong>reportBuilder.js 수정</strong></td>
+                            <td>maskPII 옵션 추가</td>
+                            <td><span class="status-badge status-missing">미적용</span></td>
+                            <td>옵션 확인 필요</td>
+                        </tr>
+                        <tr>
+                            <td><strong>security_and_retention.md</strong></td>
+                            <td>보안 및 데이터 보존 정책 문서화</td>
+                            <td><span class="status-badge status-missing">미작성</span></td>
+                            <td>docs/ 디렉토리에 없음</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OCR 파이프라인</strong></td>
+                            <td>Google Vision API 통합</td>
+                            <td><span class="status-badge status-complete">✅ 완료</span></td>
+                            <td>GCS 연동 성공 확인</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <strong>⚠️ 중요 발견사항:</strong>
+                    <ul>
+                        <li>Implementation Plan은 Phase 5 (Privacy & Storage)에 있으나, <strong>실제 구현은 이루어지지 않음</strong></li>
+                        <li>현재 시스템은 OCR 파이프라인 수정에 집중되어 있으며, PII 마스킹 기능은 부재</li>
+                        <li>RAG 프롬프트 문서들은 <strong>고지의무 분석 및 손해사정 보고서 자동화</strong>에 초점</li>
+                        <li>Implementation Plan과 RAG 프롬프트 간 <strong>연결성 부족</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 2: RAG 프롬프트 분석 -->
+            <div class="section">
+                <h2>📚 2. RAG 프롬프트 문서 분석</h2>
+
+                <h3>2.1 문서 개요</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>📄 고지의무위반 프롬프트.txt</h4>
+                        <p><strong>목적:</strong> 보험 가입 전후 의무기록 분석 및 고지의무 위반 검토</p>
+                        <p><strong>핵심:</strong> 3개월/2년/5년 기준 자동 분류</p>
+                        <p><strong>라인 수:</strong> 389줄</p>
+                    </div>
+                    <div class="card">
+                        <h4>📄 고지의무위반 프롬프트2.txt</h4>
+                        <p><strong>목적:</strong> 동적 고지 기산점 v2.0 적용</p>
+                        <p><strong>핵심:</strong> 암 날짜 체계 (검사일/보고일/진단일/확진일/판독일)</p>
+                        <p><strong>라인 수:</strong> 177줄</p>
+                    </div>
+                    <div class="card">
+                        <h4>📄 손해사정 보고서 프롬프트.txt</h4>
+                        <p><strong>목적:</strong> 확장형 손해사정 보고서 자동 작성</p>
+                        <p><strong>핵심:</strong> 일자별 경과표 + 통원/입원 구분</p>
+                        <p><strong>라인 수:</strong> 2477줄</p>
+                    </div>
+                    <div class="card">
+                        <h4>📄 질환별 검사결과 적용규칙.txt</h4>
+                        <p><strong>목적:</strong> 질병군별 검사결과 반영 규칙</p>
+                        <p><strong>핵심:</strong> 협심증/AMI/부정맥/뇌혈관/암 별 검사 항목</p>
+                        <p><strong>라인 수:</strong> 87줄</p>
+                    </div>
+                    <div class="card">
+                        <h4>📄 최종보고용요약규칙.txt</h4>
+                        <p><strong>목적:</strong> 결재용 요약본 자동 생성</p>
+                        <p><strong>핵심:</strong> 핵심 정보만 함축 요약</p>
+                        <p><strong>라인 수:</strong> 75줄</p>
+                    </div>
+                </div>
+
+                <h3>2.2 보고서 양식 통합 분석</h3>
+
+                <div class="insight-box">
+                    <h4>🎯 핵심 보고서 양식 구조</h4>
+                    <p>5개 문서를 분석한 결과, 다음과 같은 <strong>2단 구조 보고서 시스템</strong>이 확립되어 있습니다:</p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>확장형 보고서</th>
+                            <th>결재용 요약본</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>내원일시</strong></td>
+                            <td>yyyy.mm.dd (상세)</td>
+                            <td>yyyy.mm.dd (간결)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>내원경위</strong></td>
+                            <td>외부 병원 진료의뢰 및 검사 경위 상세 요약</td>
+                            <td>핵심 사유만 1-2줄</td>
+                        </tr>
+                        <tr>
+                            <td><strong>진단병명</strong></td>
+                            <td>KCD-10 + 영문 원어 + 한글 병명 (복수 진단 모두)</td>
+                            <td>KCD-10 + 영문 + 한글 (주요 진단만)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>검사결과</strong></td>
+                            <td>검사명/시행일/보고일/결과/원어+한글 병기<br>질병군별 규칙 적용 (CT/MRI/Angio 등)</td>
+                            <td>핵심 검사만 요약<br>암: 조직검사 보고일 필수</td>
+                        </tr>
+                        <tr>
+                            <td><strong>암 조직검사</strong></td>
+                            <td>검사일/보고일/진단일/확진일/판독일/TNM/조직소견</td>
+                            <td>검사일/보고일/TNM (핵심만)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>치료내용</strong></td>
+                            <td>수술/약물/처치 등 상세</td>
+                            <td>주요 치료만</td>
+                        </tr>
+                        <tr>
+                            <td><strong>통원/입원기간</strong></td>
+                            <td>yyyy.mm.dd ~ yyyy.mm.dd / n회 통원, n일 입원 (구분)</td>
+                            <td>동일</td>
+                        </tr>
+                        <tr>
+                            <td><strong>과거병력</strong></td>
+                            <td>주요 질환 상세</td>
+                            <td>핵심 질환만</td>
+                        </tr>
+                        <tr>
+                            <td><strong>의사소견</strong></td>
+                            <td>의무기록상 확인된 주치의 소견 요약</td>
+                            <td>1줄 핵심 요약</td>
+                        </tr>
+                        <tr>
+                            <td><strong>고지의무 분석</strong></td>
+                            <td>[3개월/2년/5년 이내] 진료내역 구간별 요약</td>
+                            <td>위반 있음/없음 + 근거</td>
+                        </tr>
+                        <tr>
+                            <td><strong>분류 (암만)</strong></td>
+                            <td>✅ [원발 부위명] 원발 + [전이 부위명] 전이</td>
+                            <td>동일</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2.3 질병군별 검사결과 규칙</h3>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4>💓 협심증 (Angina)</h4>
+                        <ul>
+                            <li>Chest CT, Cardiac MRI</li>
+                            <li>Coronary CT-Angio, MRA</li>
+                            <li>Coronary angiography</li>
+                            <li><strong>필수:</strong> 협착 부위, 협착률(%), TIMI flow</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🫀 급성심근경색 (AMI)</h4>
+                        <ul>
+                            <li>협심증 검사 + 추가:</li>
+                            <li>Troponin, CK-MB 수치</li>
+                            <li>EKG (ST elevation 여부)</li>
+                            <li>PCI/스텐트, TIMI flow</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ 부정맥 (Arrhythmia)</h4>
+                        <ul>
+                            <li>EKG 리듬 형태</li>
+                            <li>24h Holter monitoring</li>
+                            <li><strong>필수:</strong> 부정맥 종류, 발생빈도</li>
+                            <li>평균/최고/최저 심박수</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🧠 뇌혈관질환</h4>
+                        <ul>
+                            <li>Brain CT/CTA/MRI/MRA</li>
+                            <li>뇌혈관조영술</li>
+                            <li><strong>필수:</strong> 병변 위치 (Lt MCA 등)</li>
+                            <li>허혈/출혈/폐색/범위</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎗️ 암 (Cancer)</h4>
+                        <ul>
+                            <li><strong>날짜 체계:</strong> 검사일/보고일/진단일/확진일/판독일</li>
+                            <li>조직검사 소견 (영문+한글)</li>
+                            <li>TNM 병기 (cTNM/pTNM)</li>
+                            <li>원발/전이 구분 필수</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏥 기타 질병</h4>
+                        <ul>
+                            <li>단순 혈액/소변 검사 생략</li>
+                            <li><strong>우선:</strong> CT/MRI/MRA/Angio</li>
+                            <li>정밀 영상검사 중심</li>
+                            <li>원어+한글 병기</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>2.4 고지의무 자동 분류 알고리즘</h3>
+
+                <div class="code-block">
+                    // 보험가입일 기준 동적 계산
+                    contract_date = "2025-01-30"
+
+                    // 3개월 이내 (90일)
+                    window_3m = contract_date - 90 days
+                    → 진단/의심소견/입원·수술·추가검사 필요 소견
+
+                    // 2년 이내 (730일)
+                    window_2y = contract_date - 730 days
+                    → 상해·질병으로 입원 또는 수술 이력
+
+                    // 5년 이내 (1825일)
+                    window_5y = contract_date - 1825 days
+                    → 암/협심증/AMI/간경화 진단·입원·수술 이력
+
+                    // 각 구간별 대표 진료일 선정
+                    - 중대도 우선: 암 > AMI > 뇌혈관 > 수술 > 입원
+                    - 동일 중대도: 가장 이른 날짜 (최초)
+                    - 출력: yyyy.mm.dd 형식
+                </div>
+            </div>
+
+            <!-- Section 3: 통합 전략 -->
+            <div class="section">
+                <h2>🔗 3. 시스템 통합 전략 및 권장사항</h2>
+
+                <h3>3.1 현재 시스템과 RAG 프롬프트 연결 방안</h3>
+
+                <div class="insight-box">
+                    <h4>💡 핵심 인사이트</h4>
+                    <p>RAG 프롬프트는 <strong>보고서 생성 로직</strong>에 집중되어 있으나, 현재 VNEXSUS 시스템은 <strong>OCR 파이프라인</strong>에만 구현되어
+                        있습니다. 다음 단계로 연결이 필요합니다:</p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>단계</th>
+                            <th>현재 상태</th>
+                            <th>RAG 프롬프트 요구사항</th>
+                            <th>통합 방안</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. OCR</strong></td>
+                            <td>✅ Google Vision API 연동 완료</td>
+                            <td>의무기록 텍스트 추출</td>
+                            <td>현재 구현 완료</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. 파싱</strong></td>
+                            <td>⚠️ 기본 텍스트 추출만</td>
+                            <td>검사명/날짜/결과 구조화 (JSON)</td>
+                            <td><strong>필요:</strong> NLP 기반 엔티티 추출</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. 분류</strong></td>
+                            <td>❌ 미구현</td>
+                            <td>보험가입일 기준 3/2/5년 자동 분류</td>
+                            <td><strong>필요:</strong> 날짜 계산 로직 구현</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. 보고서 생성</strong></td>
+                            <td>❌ 미구현</td>
+                            <td>확장형 + 요약본 2단 구조</td>
+                            <td><strong>필요:</strong> LLM API 통합 (GPT-4)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. PII 마스킹</strong></td>
+                            <td>❌ 미구현</td>
+                            <td>주민번호/전화번호/이름 마스킹</td>
+                            <td><strong>필요:</strong> piiMasker.js 구현</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3.2 구현 우선순위</h3>
+
+                <div class="grid">
+                    <div class="card" style="border-left: 4px solid #dc3545;">
+                        <h4>🔴 High Priority (즉시 구현)</h4>
+                        <ol>
+                            <li><strong>보험가입일 입력 UI</strong> 추가</li>
+                            <li><strong>날짜 기반 분류 로직</strong> (3/2/5년)</li>
+                            <li><strong>OpenAI API 통합</strong> (보고서 생성)</li>
+                            <li><strong>보고서 템플릿 구현</strong> (확장형 + 요약본)</li>
+                        </ol>
+                    </div>
+                    <div class="card" style="border-left: 4px solid #ffc107;">
+                        <h4>🟡 Medium Priority (단계적 구현)</h4>
+                        <ol>
+                            <li><strong>질병군별 검사 규칙</strong> 적용</li>
+                            <li><strong>암 날짜 체계</strong> 자동 추출</li>
+                            <li><strong>PII 마스킹</strong> 기능</li>
+                            <li><strong>PDF 출력</strong> 기능</li>
+                        </ol>
+                    </div>
+                    <div class="card" style="border-left: 4px solid #28a745;">
+                        <h4>🟢 Low Priority (향후 개선)</h4>
+                        <ol>
+                            <li><strong>Make.com 시나리오</strong> 통합</li>
+                            <li><strong>Google Docs 자동 저장</strong></li>
+                            <li><strong>다국어 지원</strong></li>
+                            <li><strong>보고서 버전 관리</strong></li>
+                        </ol>
+                    </div>
+                </div>
+
+                <h3>3.3 기술 스택 권장사항</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기능</th>
+                            <th>권장 기술</th>
+                            <th>이유</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LLM API</strong></td>
+                            <td>OpenAI GPT-4 Turbo</td>
+                            <td>한국어 의료 용어 이해도 우수, RAG 프롬프트와 호환성</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NLP 파싱</strong></td>
+                            <td>spaCy + Custom NER</td>
+                            <td>의료 엔티티 (날짜/검사명/진단명) 추출</td>
+                        </tr>
+                        <tr>
+                            <td><strong>날짜 계산</strong></td>
+                            <td>date-fns (JavaScript)</td>
+                            <td>간단한 날짜 연산, 타임존 처리</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PDF 생성</strong></td>
+                            <td>Puppeteer + HTML Template</td>
+                            <td>복잡한 보고서 레이아웃 지원</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PII 마스킹</strong></td>
+                            <td>정규식 + 룰 기반</td>
+                            <td>주민번호/전화번호 패턴 매칭</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Section 4: 실행 계획 -->
+            <div class="recommendation">
+                <h3>🚀 4. 실행 계획 (Action Plan)</h3>
+
+                <h4 style="color: white; margin-top: 20px;">Phase 1: 기반 구축 (1-2주)</h4>
+                <ul>
+                    <li>✅ OCR 파이프라인 완료 (현재 완료)</li>
+                    <li>⬜ 보험가입일 입력 필드 추가 (frontend/index.html)</li>
+                    <li>⬜ 날짜 계산 유틸리티 함수 작성 (backend/utils/dateCalculator.js)</li>
+                    <li>⬜ OpenAI API 연동 설정 (backend/services/llmService.js)</li>
+                </ul>
+
+                <h4 style="color: white; margin-top: 20px;">Phase 2: 보고서 생성 (2-3주)</h4>
+                <ul>
+                    <li>⬜ RAG 프롬프트를 시스템 프롬프트로 변환</li>
+                    <li>⬜ 보고서 생성 API 엔드포인트 구현 (POST /api/report/generate)</li>
+                    <li>⬜ 확장형 + 요약본 2단 구조 템플릿 작성</li>
+                    <li>⬜ 질병군별 검사 규칙 적용 로직</li>
+                </ul>
+
+                <h4 style="color: white; margin-top: 20px;">Phase 3: 고급 기능 (3-4주)</h4>
+                <ul>
+                    <li>⬜ PII 마스킹 구현 (piiMasker.js)</li>
+                    <li>⬜ PDF 출력 기능</li>
+                    <li>⬜ 보고서 히스토리 저장</li>
+                    <li>⬜ 사용자 피드백 반영 시스템</li>
+                </ul>
+            </div>
+
+            <!-- Section 5: 코드 예시 -->
+            <div class="section">
+                <h2>💻 5. 구현 예시 코드</h2>
+
+                <h3>5.1 날짜 계산 유틸리티</h3>
+                <div class="code-block">
+                    // backend/utils/dateCalculator.js
+                    import { subDays, parseISO, format } from 'date-fns';
+
+                    export function calculateDisclosureWindows(contractDate) {
+                    const contract = parseISO(contractDate);
+
+                    return {
+                    window_3m: {
+                    start: format(subDays(contract, 90), 'yyyy.MM.dd'),
+                    end: format(contract, 'yyyy.MM.dd'),
+                    label: '보험가입 3개월 이내'
+                    },
+                    window_2y: {
+                    start: format(subDays(contract, 730), 'yyyy.MM.dd'),
+                    end: format(contract, 'yyyy.MM.dd'),
+                    label: '보험가입 2년 이내'
+                    },
+                    window_5y: {
+                    start: format(subDays(contract, 1825), 'yyyy.MM.dd'),
+                    end: format(contract, 'yyyy.MM.dd'),
+                    label: '보험가입 5년 이내'
+                    }
+                    };
+                    }
+
+                    export function classifyRecordByWindow(recordDate, windows) {
+                    const record = parseISO(recordDate);
+                    const contract = parseISO(windows.window_3m.end);
+
+                    const daysDiff = Math.floor((contract - record) / (1000 * 60 * 60 * 24));
+
+                    if (daysDiff <= 90) return '3개월 이내' ; if (daysDiff <=730) return '2년 이내' ; if (daysDiff <=1825)
+                        return '5년 이내' ; return '고지의무 범위 외' ; } </div>
+
+                        <h3>5.2 보고서 생성 API</h3>
+                        <div class="code-block">
+                            // backend/routes/reportRoutes.js
+                            import express from 'express';
+                            import { generateReport } from '../services/reportGenerator.js';
+
+                            const router = express.Router();
+
+                            router.post('/generate', async (req, res) => {
+                            try {
+                            const {
+                            contractDate,
+                            ocrResults,
+                            patientInfo,
+                            productType = '3.2.5' // 기본값: 3개월, 2년, 5년
+                            } = req.body;
+
+                            // 1. 날짜 기반 분류
+                            const windows = calculateDisclosureWindows(contractDate);
+
+                            // 2. OCR 결과 파싱 및 분류
+                            const classifiedRecords = classifyMedicalRecords(ocrResults, windows);
+
+                            // 3. LLM API 호출 (보고서 생성)
+                            const report = await generateReport({
+                            contractDate,
+                            windows,
+                            classifiedRecords,
+                            patientInfo,
+                            productType
+                            });
+
+                            // 4. 응답
+                            res.json({
+                            success: true,
+                            report: {
+                            full: report.fullReport,
+                            summary: report.summaryReport
+                            },
+                            metadata: {
+                            generatedAt: new Date().toISOString(),
+                            contractDate,
+                            recordCount: ocrResults.length
+                            }
+                            });
+                            } catch (error) {
+                            res.status(500).json({ error: error.message });
+                            }
+                            });
+
+                            export default router;
+                        </div>
+
+                        <h3>5.3 PII 마스킹 구현</h3>
+                        <div class="code-block">
+                            // backend/postprocess/piiMasker.js
+                            export function maskAll(text) {
+                            let masked = text;
+
+                            // 주민등록번호: YYMMDD-*******
+                            masked = masked.replace(
+                            /(\d{6})-?(\d{7})/g,
+                            '$1-*******'
+                            );
+
+                            // 전화번호: 010-****-XXXX
+                            masked = masked.replace(
+                            /(01[0-9])-?(\d{3,4})-?(\d{4})/g,
+                            '$1-****-$3'
+                            );
+
+                            // 이름 마스킹 (3글자 이상): 홍*동
+                            masked = masked.replace(
+                            /([가-힣])([가-힣]+)([가-힣])/g,
+                            (match, first, middle, last) => {
+                            return first + '*'.repeat(middle.length) + last;
+                            }
+                            );
+
+                            return masked;
+                            }
+
+                            export function maskPatientInfo(patientInfo) {
+                            return {
+                            ...patientInfo,
+                            name: maskName(patientInfo.name),
+                            ssn: maskSSN(patientInfo.ssn),
+                            phone: maskPhone(patientInfo.phone)
+                            };
+                            }
+                        </div>
+                </div>
+
+                <!-- Section 6: 결론 -->
+                <div class="section">
+                    <h2>📊 6. 결론 및 요약</h2>
+
+                    <div class="insight-box">
+                        <h4>✅ 주요 발견사항</h4>
+                        <ol>
+                            <li><strong>Implementation Plan과 실제 구현 간 괴리</strong>: Phase 5 (Privacy & Storage)는 계획만 있고 구현
+                                없음</li>
+                            <li><strong>RAG 프롬프트는 매우 체계적</strong>: 5개 문서가 2단 구조 보고서 시스템을 명확히 정의</li>
+                            <li><strong>OCR 파이프라인은 완성</strong>: Google Vision API 연동 성공, GCS 업로드 정상 작동</li>
+                            <li><strong>다음 단계 명확</strong>: 보험가입일 기반 분류 → LLM 보고서 생성 → PII 마스킹</li>
+                        </ol>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ 주의사항</h4>
+                        <ul>
+                            <li>RAG 프롬프트는 <strong>Make.com 시나리오</strong>를 가정하고 작성됨 (현재 시스템과 다름)</li>
+                            <li>질병군별 검사 규칙은 <strong>의료 전문 지식</strong>이 필요하므로 검증 필요</li>
+                            <li>고지의무 기준은 <strong>보험 상품마다 다름</strong> (3.2.5, 3.1.5 등) - 동적 처리 필요</li>
+                            <li>PII 마스킹은 <strong>법적 요구사항</strong>이므로 우선순위 높음</li>
+                        </ul>
+                    </div>
+
+                    <h3>최종 권장사항</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>순위</th>
+                                <th>작업</th>
+                                <th>예상 기간</th>
+                                <th>중요도</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>보험가입일 입력 UI 및 날짜 계산 로직</td>
+                                <td>3-5일</td>
+                                <td>🔴 High</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>OpenAI API 통합 및 보고서 생성 엔드포인트</td>
+                                <td>1주</td>
+                                <td>🔴 High</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>RAG 프롬프트 → 시스템 프롬프트 변환</td>
+                                <td>2-3일</td>
+                                <td>🔴 High</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>PII 마스킹 구현 (piiMasker.js)</td>
+                                <td>3-4일</td>
+                                <td>🟡 Medium</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>질병군별 검사 규칙 적용</td>
+                                <td>1주</td>
+                                <td>🟡 Medium</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>PDF 출력 기능</td>
+                                <td>3-5일</td>
+                                <td>🟢 Low</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer>
+                <p><strong>VNEXSUS Development Team</strong></p>
+                <p>Generated: 2025-11-30 | OCR Pipeline: ✅ Operational | Next Phase: Report Generation</p>
+            </footer>
+        </div>
+</body>
+
+</html>

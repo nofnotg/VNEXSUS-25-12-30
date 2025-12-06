@@ -1,0 +1,57 @@
+{
+  "caseNumber": 28,
+  "processedAt": "2025-12-06T01:33:45.856Z",
+  "duration": 29,
+  "inputLength": 89733,
+  "fullResult": {
+    "success": true,
+    "normalizedReport": {
+      "header": {
+        "patientName": "Case28",
+        "processedAt": "2025-12-06T01:33:45.856Z"
+      },
+      "medicalRecords": [
+        {
+          "date": "2025-09-08",
+          "hospital": "미상 병원",
+          "diagnosis": "미확인",
+          "content": "2025년 09월 08일\n의무기록팀\n당\n정현진 (진관동)\n카톨릭"
+        },
+        {
+          "date": "2025-09-11",
+          "hospital": "은평성모병원",
+          "diagnosis": "미확인",
+          "content": "========== 파일: ìíì±ëª¨ë³ì.pdf ========== 2025-09-11 18:35:20\nCH\n시험(주)\n해오름손해사정(주)\nBEERAN SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n은평성모병원\n본은 상기 사용 용도 이외에는 사용할 수 없으며, 사용 용도로\n사용한 후에는 즉시 파본, 폐기 처리 하여야 합니다.\n* 의무기록팀 담당자 서명 또는 날인이 없는 것은 사본으로 인정되지 않습니다."
+        }
+      ]
+    },
+    "pipeline": {
+      "dateBlocks": [],
+      "organizedData": [
+        {
+          "date": "2025-09-08",
+          "hospital": "미상 병원",
+          "rawText": "2025년 09월 08일\n의무기록팀\n당\n정현진 (진관동)\n카톨릭",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        },
+        {
+          "date": "2025-09-11",
+          "hospital": "은평성모병원",
+          "rawText": "========== 파일: ìíì±ëª¨ë³ì.pdf ========== 2025-09-11 18:35:20\nCH\n시험(주)\n해오름손해사정(주)\nBEERAN SUNRISE SURVEYORS & CLAIM ADJUSTERS CO., LTD.\n은평성모병원\n본은 상기 사용 용도 이외에는 사용할 수 없으며, 사용 용도로\n사용한 후에는 즉시 파본, 폐기 처리 하여야 합니다.\n* 의무기록팀 담당자 서명 또는 날인이 없는 것은 사본으로 인정되지 않습니다.",
+          "keywordMatches": [],
+          "mappedTerms": [],
+          "shouldExclude": false,
+          "excludedMatches": []
+        }
+      ]
+    },
+    "statistics": {
+      "dateBlocks": 0,
+      "organizedRecords": 2,
+      "confidence": 0
+    }
+  }
+}

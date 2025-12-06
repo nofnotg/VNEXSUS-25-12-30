@@ -38,9 +38,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// dotenv 로드
+// dotenv 로드 (override: true로 시스템 환경변수보다 .env 우선)
 console.log('환경 변수를 로드합니다...');
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, '../.env'), override: true });
 
 // 필수 환경변수 검증
 const requiredEnvVars = [
@@ -50,20 +50,20 @@ const requiredEnvVars = [
 
 const visionRequired = process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION === 'true';
 if (visionRequired) {
-  requiredEnvVars.push({ 
-    name: 'GOOGLE_CLOUD_VISION_API_KEY', 
-    value: process.env.GOOGLE_CLOUD_VISION_API_KEY, 
+  requiredEnvVars.push({
+    name: 'GOOGLE_CLOUD_VISION_API_KEY',
+    value: process.env.GOOGLE_CLOUD_VISION_API_KEY,
     errorMsg: '환경변수 GOOGLE_CLOUD_VISION_API_KEY가 없습니다. Vision OCR을 사용할 수 없습니다.',
     isOptional: !!process.env.GOOGLE_APPLICATION_CREDENTIALS
   });
-  
+
   requiredEnvVars.push({
     name: 'GOOGLE_APPLICATION_CREDENTIALS',
     value: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     errorMsg: '환경변수 GOOGLE_APPLICATION_CREDENTIALS가 없습니다. Vision OCR을 사용할 수 없습니다.',
     isOptional: !!process.env.GOOGLE_CLOUD_VISION_API_KEY
   });
-  
+
   console.log(`Google Vision OCR이 활성화되었습니다. 관련 환경변수 확인 중...`);
   console.log(`- ENABLE_VISION_OCR: ${process.env.ENABLE_VISION_OCR}`);
   console.log(`- USE_VISION: ${process.env.USE_VISION}`);
@@ -116,7 +116,7 @@ Object.entries(envVars).forEach(([key, value]) => {
 if (process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION === 'true') {
   const hasCredentialsFile = process.env.GOOGLE_APPLICATION_CREDENTIALS && fs.existsSync(process.env.GOOGLE_APPLICATION_CREDENTIALS);
   const hasApiKey = !!process.env.GOOGLE_CLOUD_VISION_API_KEY;
-  
+
   if (!hasCredentialsFile && !hasApiKey) {
     console.error('⚠️ 경고: Vision API 인증 정보가 없습니다.');
     console.error('다음 중 하나를 .env 파일에 설정해주세요:');
@@ -143,22 +143,22 @@ function getTimestamp() {
   return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
 }
 
-console.log = function() {
+console.log = function () {
   const args = Array.from(arguments);
   originalLog.apply(console, [`[${getTimestamp()}]`, ...args]);
 };
 
-console.error = function() {
+console.error = function () {
   const args = Array.from(arguments);
   originalError.apply(console, [`[${getTimestamp()}][ERROR]`, ...args]);
 };
 
-console.warn = function() {
+console.warn = function () {
   const args = Array.from(arguments);
   originalWarn.apply(console, [`[${getTimestamp()}][WARN]`, ...args]);
 };
 
-console.info = function() {
+console.info = function () {
   const args = Array.from(arguments);
   originalInfo.apply(console, [`[${getTimestamp()}][INFO]`, ...args]);
 };
@@ -266,7 +266,7 @@ function initializeVisionOcr() {
     try {
       console.log('Vision OCR 서비스 초기화 중...');
       const visionStatus = visionService.initializeVision();
-      
+
       if (visionStatus.success) {
         console.log('✅ Vision OCR 서비스 초기화 완료!');
         return true;
@@ -291,42 +291,17 @@ app.listen(PORT, () => {
   console.log(`======================================`);
   console.log(`OCR 서버가 포트 ${PORT}에서 실행 중입니다.`);
   console.log(`http://localhost:${PORT}`);
-  
+
   // Vision OCR 서비스 초기화
   const visionOcrInitialized = initializeVisionOcr();
-  
+
   // 환경 변수 로드 확인
   console.log(`\n[환경 변수 설정 상태]`);
   console.log(`- NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
   console.log(`- OCR 설정:`);
-  console.log(`  - ENABLE_VISION_OCR: ${process.env.ENABLE_VISION_OCR}`);
-  console.log(`  - USE_VISION: ${process.env.USE_VISION}`);
-  console.log(`  - USE_TEXTRACT: ${process.env.USE_TEXTRACT}`);
-  console.log(`  - VISION OCR 초기화: ${visionOcrInitialized ? '✅ 성공' : '❌ 실패'}`);
-  console.log(`- API 키/인증 설정:`);
-  console.log(`  - GOOGLE_APPLICATION_CREDENTIALS 설정됨: ${!!process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
-  console.log(`  - GOOGLE_CLOUD_VISION_API_KEY 설정됨: ${!!process.env.GOOGLE_CLOUD_VISION_API_KEY}`);
-  console.log(`  - OPENAI_API_KEY 설정됨: ${!!process.env.OPENAI_API_KEY}`);
-  console.log(`  - GCS_BUCKET: ${process.env.GCS_BUCKET}`);
-  console.log(`- API 경로:`);
-  console.log(`  - 파일 업로드: POST http://localhost:${PORT}/api/ocr/upload`);
-  console.log(`  - 상태 확인: GET http://localhost:${PORT}/api/ocr/status/:jobId`);
-  console.log(`  - 결과 조회: GET http://localhost:${PORT}/api/ocr/result/:jobId`);
-  console.log(`======================================`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`\n[오류] 포트 ${PORT}가 이미 사용 중입니다!`);
-    console.error('다른 프로세스가 이 포트를 사용하고 있을 수 있습니다.');
-    console.error('해결 방법:');
-    console.error(`1. 다른 포트 사용: .env 파일에서 PORT 값을 변경하세요 (현재 ${PORT})`);
-    console.error(`2. 포트 강제 종료: 'npx kill-port ${PORT}' 명령어 실행 후 다시 시도`);
-    console.error(`3. 프로세스 수동 종료: 작업 관리자에서 해당 포트를 사용하는 Node.js 프로세스 종료\n`);
-  } else {
-    console.error(`\n[오류] 서버 시작 실패: ${err.message}\n`);
-  }
-  
-  // 서버 시작 실패 시 종료
-  process.exit(1);
+
+  // 서버 시작 완료 로그
+  console.log('✅ 서버 시작 완료');
 });
 
 // 예외 처리

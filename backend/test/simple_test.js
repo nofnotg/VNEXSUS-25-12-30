@@ -6,6 +6,7 @@
 import medicalEventModel from '../postprocess/medicalEventModel.js';
 import disclosureRulesEngine from '../postprocess/disclosureRulesEngine.js';
 import episodeClusterer from '../postprocess/episodeClusterer.js';
+import reportBuilder from '../postprocess/reportBuilder.js';
 
 console.log('🧪 VNEXSUS 통합 테스트 시작\n');
 console.log('='.repeat(60));
@@ -67,12 +68,22 @@ try {
         console.log(`  [Ep${i + 1}] ${ep.summary}`);
     });
 
+    // Step 4: Report Generation (T11 Verification)
+    console.log('\n📄 Step 4: Report Generation');
+
+    const reportResult = await reportBuilder.buildReport(events, patientInfo, {
+        questionMap: questionMap,
+        format: 'text'
+    });
+    console.log(`✅ 리포트 생성 완료: ${reportResult.results.text.filePath}`);
+
     // 결과
     console.log('\n✨ 테스트 결과');
     console.log('='.repeat(60));
     console.log(`이벤트 생성: ${events.length > 0 ? '✅' : '❌'}`);
     console.log(`Question 매칭: ${Object.keys(questionMap).length > 0 ? '✅' : '❌'}`);
     console.log(`Episode 생성: ${episodes.length > 0 ? '✅' : '❌'}`);
+    console.log(`리포트 생성: ${reportResult ? '✅' : '❌'}`);
     console.log('\n✅ 통합 테스트 성공!');
 
 } catch (error) {

@@ -1,4 +1,6 @@
 // AnchorDetector.js - 앵커(시간 기준점) 탐지 컴포넌트
+import { logService } from '../../utils/logger.js';
+
 export default class AnchorDetector {
   /**
    * 텍스트 세그먼트에서 앵커 탐지
@@ -8,7 +10,7 @@ export default class AnchorDetector {
   static async detect(segments) {
     try {
       const anchors = [];
-      
+
       for (const segment of segments) {
         const segmentAnchors = await this.detectInSegment(segment);
         anchors.push(...segmentAnchors);
@@ -16,8 +18,12 @@ export default class AnchorDetector {
 
       // 앵커 정렬 및 중복 제거
       const sortedAnchors = this.sortAndDeduplicateAnchors(anchors);
-      
-      console.log(`AnchorDetector: Found ${sortedAnchors.length} anchors from ${segments.length} segments`);
+
+      logService.info('Anchor detection completed', {
+        totalAnchors: sortedAnchors.length,
+        segmentCount: segments.length
+      });
+
       return sortedAnchors;
 
     } catch (error) {
@@ -114,6 +120,33 @@ export default class AnchorDetector {
       }
     }
 
+    // 6. 한국어 날짜 패턴 (YYYY년 MM월 DD일)
+    const koreanDatePattern = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/g;
+    let koreanMatch;
+
+    while ((koreanMatch = koreanDatePattern.exec(text)) !== null) {
+      const year = koreanMatch[1];
+      const month = koreanMatch[2];
+      const day = koreanMatch[3];
+      const dateString = `${year}년 ${month}월 ${day}일`;
+
+      // 주변 컨텍스트로 타입 결정
+      const context = text.substring(
+        Math.max(0, koreanMatch.index - 30),
+        Math.min(text.length, koreanMatch.index + 50)
+      );
+
+      let type = 'general';
+      if (/내원|외래/.test(context)) type = 'visit';
+      else if (/입원/.test(context)) type = 'admission';
+      else if (/퇴원/.test(context)) type = 'discharge';
+      else if (/검사/.test(context)) type = 'exam_performed';
+      else if (/수술|시술/.test(context)) type = 'surgery';
+      else if (/진료/.test(context)) type = 'visit';
+
+      anchors.push(this.createAnchor(type, dateString, segment, koreanMatch.index));
+    }
+
     return anchors;
   }
 
@@ -123,17 +156,21 @@ export default class AnchorDetector {
   static createAnchor(type, dateString, segment, position) {
     // 날짜 정규화
     const normalizedDate = this.normalizeDate(dateString);
-    
+
     // 근접도 점수 계산 (주변 컨텍스트 기반)
     const proximityScore = this.calculateProximityScore(segment.text, position, type);
-    
+
+
     return {
       id: `anchor_${type}_${segment.id}_${position}`,
       type,
       date: normalizedDate,
+      normalizedDate: normalizedDate, // TimelineAssembler expects this field
       originalDate: dateString,
       sourceId: segment.id,
+      segmentId: segment.id, // EntityNormalizer expects this field
       position,
+      startIndex: position, // EntityNormalizer expects this field
       proximityScore,
       context: this.extractContext(segment.text, position, 50),
       confidence: this.calculateConfidence(type, segment.text, position)
@@ -149,19 +186,28 @@ export default class AnchorDetector {
       const parts = dateString.split('-');
       return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
     }
-    
+
     // YYYY.MM.DD 형식
     if (/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(dateString)) {
       const parts = dateString.split('.');
       return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
     }
-    
+
     // YYYY/MM/DD 형식
     if (/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(dateString)) {
       const parts = dateString.split('/');
       return `${parts[0]}-${parts[1].padStart(2, '0')}-${parts[2].padStart(2, '0')}`;
     }
-    
+
+    // 한국어 형식: YYYY년 MM월 DD일
+    const koreanMatch = dateString.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (koreanMatch) {
+      const year = koreanMatch[1];
+      const month = koreanMatch[2];
+      const day = koreanMatch[3];
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+
     return dateString; // 정규화 실패시 원본 반환
   }
 
@@ -172,9 +218,9 @@ export default class AnchorDetector {
     const contextWindow = 30;
     const before = text.substring(Math.max(0, position - contextWindow), position);
     const after = text.substring(position, Math.min(text.length, position + contextWindow));
-    
+
     let score = 0.5; // 기본 점수
-    
+
     // 타입별 키워드 가중치
     const typeKeywords = {
       visit: ['내원', '외래', '방문'],
@@ -184,19 +230,19 @@ export default class AnchorDetector {
       exam_reported: ['판독', '보고', '결과'],
       surgery: ['수술', '시술', '처치']
     };
-    
+
     const keywords = typeKeywords[type] || [];
     for (const keyword of keywords) {
       if (before.includes(keyword) || after.includes(keyword)) {
         score += 0.2;
       }
     }
-    
+
     // 의료진/부서 언급시 가중치
     if (/의사|교수|과장|간호사|부서|과/.test(before + after)) {
       score += 0.1;
     }
-    
+
     return Math.min(1.0, score);
   }
 
@@ -205,18 +251,18 @@ export default class AnchorDetector {
    */
   static calculateConfidence(type, text, position) {
     let confidence = 0.7; // 기본 신뢰도
-    
+
     // 명확한 패턴일수록 높은 신뢰도
     const strongPatterns = {
       visit: /\d{4}-\d{2}-\d{2}\s+내원/,
       admission: /\d{4}-\d{2}-\d{2}\s+입원/,
       exam_performed: /\d{4}-\d{2}-\d{2}\s+(CT|MRI)/
     };
-    
+
     if (strongPatterns[type] && strongPatterns[type].test(text)) {
       confidence += 0.2;
     }
-    
+
     return Math.min(1.0, confidence);
   }
 
@@ -235,11 +281,11 @@ export default class AnchorDetector {
   static sortAndDeduplicateAnchors(anchors) {
     // 날짜순 정렬
     anchors.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
+
     // 중복 제거 (같은 날짜, 같은 타입)
     const deduped = [];
     const seen = new Set();
-    
+
     for (const anchor of anchors) {
       const key = `${anchor.date}_${anchor.type}`;
       if (!seen.has(key)) {
@@ -247,7 +293,7 @@ export default class AnchorDetector {
         deduped.push(anchor);
       } else {
         // 기존 앵커보다 신뢰도가 높으면 교체
-        const existingIndex = deduped.findIndex(a => 
+        const existingIndex = deduped.findIndex(a =>
           a.date === anchor.date && a.type === anchor.type
         );
         if (existingIndex >= 0 && anchor.confidence > deduped[existingIndex].confidence) {
@@ -255,7 +301,7 @@ export default class AnchorDetector {
         }
       }
     }
-    
+
     return deduped;
   }
 
@@ -264,12 +310,12 @@ export default class AnchorDetector {
    */
   static validateAnchors(anchors) {
     const warnings = [];
-    
+
     // 날짜 역전 체크
     for (let i = 1; i < anchors.length; i++) {
       const prev = anchors[i - 1];
       const curr = anchors[i];
-      
+
       if (new Date(curr.date) < new Date(prev.date)) {
         warnings.push({
           type: 'date_reversal',
@@ -278,7 +324,7 @@ export default class AnchorDetector {
         });
       }
     }
-    
+
     return warnings;
   }
 }

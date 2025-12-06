@@ -7,45 +7,10 @@
  * - 원문 재요약 경로 차단으로 정밀도 확보
  * 
  * Phase 1 - T02, T03
+ * Phase 4 - T08 (Code Preservation), T09 (Time Extraction)
  */
 
 import sourceSpanManager from './sourceSpanManager.js';
-
-
-/**
- * MedicalEvent 스키마
- * 
- * @typedef {Object} MedicalEvent
- * @property {string} id - 이벤트 고유 ID (evt_YYYY-MM-DD_NNNN)
- * @property {string} date - 날짜 (YYYY-MM-DD)
- * @property {string|null} time - 시간 (HH:MM) - 가능한 경우
- * @property {string|null} endDate - 종료 날짜 (입원 등)
- * @property {string} hospital - 병원명
- * @property {string|null} department - 진료과
- * @property {Object} diagnosis - 진단 정보
- * @property {string} diagnosis.name - 진단명 (한글)
- * @property {string|null} diagnosis.code - ICD/KCD 코드
- * @property {string|null} diagnosis.raw - 원문 진단명 (영어 등)
- * @property {string} eventType - 이벤트 유형 (진료/검사/수술/입원/처방)
- * @property {Array<Object>} procedures - 검사/시술 목록
- * @property {Array<Object>} treatments - 치료/처방 목록
- * @property {string|null} doctorOpinion - 의사 소견
- * @property {string} shortFact - 짧은 요약 (1-2줄)
- * @property {Object} flags - 플래그
- * @property {boolean} flags.preEnroll3M - 가입 전 3개월 이내
- * @property {boolean} flags.preEnroll5Y - 가입 전 5년 이내
- * @property {boolean} flags.postEnroll - 가입 후
- * @property {boolean} flags.disclosureRelevant - 고지의무 관련
- * @property {boolean} flags.claimRelated - 청구 관련
- * @property {Object|null} uw - Underwriting 정보 (Phase 2에서 추가)
- * @property {Object} sourceSpan - 원문 근거 (Phase 1 - T03에서 강제)
- * @property {number} sourceSpan.start - 시작 위치
- * @property {number} sourceSpan.end - 종료 위치
- * @property {string} sourceSpan.textPreview - 텍스트 미리보기
- * @property {string|null} rawText - 원문 텍스트 (전체)
- * @property {number} confidence - 신뢰도 (0.0-1.0)
- * @property {string} createdAt - 생성 시간 (ISO 8601)
- */
 
 class MedicalEventModel {
     constructor() {
@@ -54,12 +19,6 @@ class MedicalEventModel {
 
     /**
      * 날짜 블록과 엔티티로부터 이벤트 생성
-     * @param {Object} params
-     * @param {Array} params.dateBlocks - 날짜 블록 배열
-     * @param {Object} params.entities - AI 추출 엔티티
-     * @param {string} params.rawText - 원문 텍스트
-     * @param {Object} params.patientInfo - 환자 정보 (가입일 등)
-     * @returns {Array<MedicalEvent>} 이벤트 배열
      */
     buildEvents({ dateBlocks = [], entities = {}, rawText = '', patientInfo = {} }) {
         console.log('🏗️ MedicalEvent 생성 시작');
@@ -98,10 +57,6 @@ class MedicalEventModel {
 
     /**
      * 단일 날짜 블록으로부터 이벤트 생성
-     * @param {Object} block - 날짜 블록
-     * @param {string} rawText - 원문 텍스트
-     * @param {Object} patientInfo - 환자 정보
-     * @returns {MedicalEvent|null} 생성된 이벤트
      */
     createEventFromBlock(block, rawText, patientInfo) {
         if (!block || !block.date) {
@@ -115,7 +70,7 @@ class MedicalEventModel {
         const event = {
             id: eventId,
             date: this.normalizeDate(block.date),
-            time: block.time || null,
+            time: block.time || this.extractTime(block.rawText) || null, // Phase 4 - T09
             endDate: block.endDate || null,
             hospital: block.hospital || '병원명 미상',
             department: block.department || null,
@@ -148,54 +103,31 @@ class MedicalEventModel {
 
     /**
      * 이벤트 ID 생성
-     * @param {string} date - 날짜
-     * @param {number} counter - 카운터
-     * @returns {string} 이벤트 ID
      */
     generateEventId(date, counter) {
-        const normalizedDate = this.normalizeDate(date);
+        const cleanDate = date.replace(/-/g, '');
         const paddedCounter = String(counter).padStart(4, '0');
-        return `evt_${normalizedDate}_${paddedCounter}`;
+        return `evt_${cleanDate}_${paddedCounter}`;
     }
 
     /**
      * 날짜 정규화 (YYYY-MM-DD)
-     * @param {string} dateStr - 날짜 문자열
-     * @returns {string} 정규화된 날짜
      */
     normalizeDate(dateStr) {
-        if (!dateStr) return '날짜미상';
-
-        // 이미 YYYY-MM-DD 형식인 경우
+        // 이미 YYYY-MM-DD 형식이면 그대로 반환
         if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
             return dateStr;
         }
-
-        // 다른 형식 변환 시도
-        try {
-            const date = new Date(dateStr);
-            if (!isNaN(date.getTime())) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-        } catch (error) {
-            // 변환 실패
-        }
-
-        return dateStr; // 원본 반환
+        return dateStr; // 추가 정규화 로직 필요 시 구현
     }
 
     /**
      * 이벤트 유형 추론
-     * @param {Object} block - 날짜 블록
-     * @returns {string} 이벤트 유형
      */
     inferEventType(block) {
         const text = (block.rawText || '').toLowerCase();
 
-        if (text.includes('수술') || text.includes('operation') || text.includes('surgery')) {
+        if (text.includes('수술') || text.includes('surgery') || text.includes('op')) {
             return '수술';
         }
         if (text.includes('입원') || text.includes('admission') || text.includes('hospitalization')) {
@@ -213,8 +145,6 @@ class MedicalEventModel {
 
     /**
      * 짧은 요약 생성
-     * @param {Object} block - 날짜 블록
-     * @returns {string} 짧은 요약
      */
     generateShortFact(block) {
         const parts = [];
@@ -234,9 +164,6 @@ class MedicalEventModel {
 
     /**
      * 원문 근거 추출 (Phase 1 - T03 강화)
-     * @param {Object} block - 날짜 블록
-     * @param {string} rawText - 원문 텍스트
-     * @returns {Object} sourceSpan
      */
     extractSourceSpan(block, rawText) {
         // sourceSpanManager 사용 (Phase 1 - T03)
@@ -257,8 +184,6 @@ class MedicalEventModel {
 
     /**
      * 엔티티 정보로 이벤트 보강
-     * @param {Array<MedicalEvent>} events - 이벤트 배열
-     * @param {Object} entities - 엔티티 정보
      */
     enrichEventsWithEntities(events, entities) {
         if (!entities || !entities.diagnoses) {
@@ -279,8 +204,6 @@ class MedicalEventModel {
 
     /**
      * 가입일 기준 플래그 설정
-     * @param {Array<MedicalEvent>} events - 이벤트 배열
-     * @param {Object} patientInfo - 환자 정보
      */
     setEnrollmentFlags(events, patientInfo) {
         if (!patientInfo || !patientInfo.enrollmentDate) {
@@ -310,10 +233,7 @@ class MedicalEventModel {
     }
 
     /**
-     * 두 이벤트 병합 (코드 소실 방지)
-     * @param {MedicalEvent} event1 - 첫 번째 이벤트
-     * @param {MedicalEvent} event2 - 두 번째 이벤트
-     * @returns {MedicalEvent} 병합된 이벤트
+     * 두 이벤트 병합 (코드 소실 방지 강화 - Phase 4 T08)
      */
     mergeEvents(event1, event2) {
         // 날짜와 병원이 같은 경우에만 병합
@@ -322,14 +242,29 @@ class MedicalEventModel {
             return event1;
         }
 
-        // 진단 코드 보존 (우선순위: 코드가 있는 것)
+        // 1. 모든 코드 수집 (relatedCodes 활용)
+        const allCodes = new Set();
+        if (event1.diagnosis.code) allCodes.add(event1.diagnosis.code);
+        if (event2.diagnosis.code) allCodes.add(event2.diagnosis.code);
+        if (event1.relatedCodes) event1.relatedCodes.forEach(c => allCodes.add(c));
+        if (event2.relatedCodes) event2.relatedCodes.forEach(c => allCodes.add(c));
+
+        // 2. 가장 구체적인 코드를 대표 코드로 선정 (길이 우선)
+        const sortedCodes = Array.from(allCodes).sort((a, b) => b.length - a.length);
+        const primaryCode = sortedCodes.length > 0 ? sortedCodes[0] : null;
+
+        // 3. 진단명 병합 (긴 것 우선)
+        const name1 = event1.diagnosis.name || '';
+        const name2 = event2.diagnosis.name || '';
+        const primaryName = name1.length >= name2.length ? name1 : name2;
+
         const mergedDiagnosis = {
-            name: event1.diagnosis.name || event2.diagnosis.name,
-            code: event1.diagnosis.code || event2.diagnosis.code, // 코드 소실 방지
+            name: primaryName,
+            code: primaryCode,
             raw: event1.diagnosis.raw || event2.diagnosis.raw
         };
 
-        // 검사/치료 병합 (중복 제거)
+        // 4. 검사/치료 병합 (중복 제거)
         const mergedProcedures = [
             ...event1.procedures,
             ...event2.procedures
@@ -347,6 +282,7 @@ class MedicalEventModel {
         return {
             ...event1,
             diagnosis: mergedDiagnosis,
+            relatedCodes: Array.from(allCodes), // 모든 코드 보존
             procedures: mergedProcedures,
             treatments: mergedTreatments,
             shortFact: this.generateShortFact({
@@ -360,8 +296,6 @@ class MedicalEventModel {
 
     /**
      * 진단 코드 정규화
-     * @param {string} code - ICD/KCD 코드
-     * @returns {string} 정규화된 코드
      */
     normalizeDiagnosisCode(code) {
         if (!code) return null;
@@ -378,9 +312,38 @@ class MedicalEventModel {
     }
 
     /**
-     * 이벤트 배열을 날짜순으로 정렬
-     * @param {Array<MedicalEvent>} events - 이벤트 배열
-     * @returns {Array<MedicalEvent>} 정렬된 이벤트 배열
+     * 텍스트에서 시간 추출 (HH:MM 형식) - Phase 4 T09
+     */
+    extractTime(text) {
+        if (!text) return null;
+
+        // 1. HH:MM 형식 (예: 14:30)
+        const timeRegex1 = /\b([0-1]?[0-9]|2[0-3]):([0-5][0-9])\b/;
+        const match1 = text.match(timeRegex1);
+        if (match1) {
+            return `${match1[1].padStart(2, '0')}:${match1[2]}`;
+        }
+
+        // 2. HH시 MM분 형식 (예: 14시 30분, 2시 30분)
+        const timeRegex2 = /\b([0-1]?[0-9]|2[0-3])시\s*([0-5][0-9])분/;
+        const match2 = text.match(timeRegex2);
+        if (match2) {
+            return `${match2[1].padStart(2, '0')}:${match2[2]}`;
+        }
+
+        // 3. HH시 형식 (예: 14시) - 분은 00으로 처리
+        // \b는 한글 '시' 뒤에서 동작하지 않을 수 있으므로 공백이나 문장 끝을 확인
+        const timeRegex3 = /\b([0-1]?[0-9]|2[0-3])시(?=\s|$)/;
+        const match3 = text.match(timeRegex3);
+        if (match3) {
+            return `${match3[1].padStart(2, '0')}:00`;
+        }
+
+        return null;
+    }
+
+    /**
+     * 이벤트 배열을 날짜순으로 정렬 (시간 포함) - Phase 4 T09
      */
     sortEventsByDate(events) {
         return events.sort((a, b) => {
@@ -396,14 +359,16 @@ class MedicalEventModel {
                 return a.time.localeCompare(b.time);
             }
 
+            // 시간이 한쪽만 있는 경우, 시간이 없는 쪽을 뒤로 (unknown last)
+            if (a.time && !b.time) return -1; // a(time) < b(no time) -> a comes first
+            if (!a.time && b.time) return 1;  // a(no time) > b(time) -> a comes last
+
             return 0;
         });
     }
 
     /**
      * 이벤트 검증
-     * @param {MedicalEvent} event - 검증할 이벤트
-     * @returns {Object} 검증 결과
      */
     validateEvent(event) {
         const errors = [];
