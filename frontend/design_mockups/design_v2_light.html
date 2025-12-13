@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Light Premium</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient-start: #f8fafc;
+            --bg-gradient-end: #e2e8f0;
+            --surface: rgba(255, 255, 255, 0.7);
+            --primary: #2563eb;
+            --accent: #0891b2;
+            /* Darker Cyan for contrast on light */
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        .main-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            background: linear-gradient(to right, #2563eb, #0891b2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            background: transparent;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #cbd5e1;
+            color: var(--text-main);
+            border-radius: 10px;
+            padding: 0.75rem;
+        }
+
+        .form-control:focus {
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Report Styling */
+        .report-preview {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid white;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .date-badge-recent {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            border: 1px solid #fecaca;
+            box-shadow: 0 2px 5px rgba(220, 38, 38, 0.1);
+        }
+
+        .date-badge-5yr {
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            border: 1px solid #bfdbfe;
+            box-shadow: 0 2px 5px rgba(37, 99, 235, 0.1);
+        }
+
+        .report-section-title {
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .report-label {
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .text-highlight {
+            color: #0f172a;
+            font-weight: 600;
+            background: linear-gradient(120deg, transparent 0%, transparent 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+        }
+
+        .risk-card {
+            background: linear-gradient(135deg, #fff1f2 0%, #fff 100%);
+            border: 1px solid #fecdd3;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div class="text-muted small"><span
+                    class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2 rounded-pill">SYSTEM
+                    OPERATIONAL</span></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis"
+                    type="button" role="tab">ANALYSIS</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
+                    role="tab">INTELLIGENCE REPORT</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Analysis Tab -->
+            <div class="tab-pane fade show active" id="analysis" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-primary">Document Ingestion</h5>
+                            <div class="drop-zone mb-4">
+                                <div class="mb-3">
+                                    <span class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block">
+                                        <i class="bi bi-file-earmark-medical fs-1 text-primary"></i>
+                                    </span>
+                                </div>
+                                <h6 class="fw-bold text-dark">Upload Medical Records</h6>
+                                <p class="text-muted small">Drag & Drop or Click to Browse</p>
+                            </div>
+                            <div class="d-flex justify-content-end mt-auto">
+                                <button class="btn btn-primary w-100">
+                                    <i class="bi bi-lightning-charge-fill me-2"></i>INITIATE ANALYSIS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-primary">Case Metadata</h5>
+                            <div class="mb-4">
+                                <label class="form-label text-muted small fw-bold">PATIENT ID</label>
+                                <input type="text" class="form-control" placeholder="Enter Patient Name/ID">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted small fw-bold">NOTES</label>
+                                <textarea class="form-control" rows="4" placeholder="Additional context..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div class="tab-pane fade" id="report" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0 text-dark">INVESTIGATION RESULTS</h4>
+                    <div>
+                        <button class="btn btn-outline-dark btn-sm me-2 bg-white">EXPORT PDF</button>
+                        <button class="btn btn-primary btn-sm">REFRESH DATA</button>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <div class="report-section-title">01. MEDICAL HISTORY TIMELINE</div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-recent me-3">CRITICAL (3M)</span>
+                            <strong class="text-dark fs-5">2025.02.17</strong>
+                            <span class="text-muted ms-2 fw-medium">| Kangnam Sacred Heart Hospital</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Headache &
+                                Dizziness</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Other specified
+                                cerebrovascular diseases (I67.8)</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-5yr me-3">HISTORY (5Y)</span>
+                            <strong class="text-dark fs-5">2023.10.20</strong>
+                            <span class="text-muted ms-2 fw-medium">| Lee Ki-seop Clinic</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Routine Care</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Acute laryngitis
+                                (J04.0), Gastritis (K29.7)</span>
+                        </div>
+                    </div>
+
+                    <div class="report-section-title">02. RISK ASSESSMENT</div>
+                    <div class="risk-card">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <span class="bg-danger bg-opacity-10 p-2 rounded-circle d-inline-block">
+                                    <i class="bi bi-shield-exclamation text-danger fs-4"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <h6 class="text-danger fw-bold mb-1">DISCLOSURE VIOLATION DETECTED</h6>
+                                <p class="text-muted small mb-0">High probability of non-disclosure regarding
+                                    cerebrovascular diagnosis within 3 months of contract date (2025.03.01).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

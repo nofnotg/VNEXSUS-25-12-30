@@ -9,16 +9,14 @@
 
 import { createRequire } from 'module';
 import path from 'path';
+import AIService from '../modules/ai/aiService.js';
+import DynamicValidationEngine from './DynamicValidationEngine.js';
+import HybridProcessingEngine from './HybridProcessingEngine.js';
+import PerformanceMonitor from './PerformanceMonitor.js';
+import { logger } from '../../src/shared/logging/logger.js';
 
-// Jest 환경 호환을 위해 import.meta.url 사용을 제거하고
-// 현재 프로젝트 루트 기준으로 require 컨텍스트를 생성합니다.
+// CommonJS(.cjs) 모듈 로드를 위한 require 컨텍스트
 const require = createRequire(path.resolve(process.cwd(), 'backend', 'services', 'nineItemReportGenerator.js'));
-
-const { AIService } = require('./aiService');
-const DynamicValidationEngine = require('./DynamicValidationEngine');
-const HybridProcessingEngine = require('./HybridProcessingEngine');
-const PerformanceMonitor = require('./PerformanceMonitor');
-const logger = require('../utils/logger');
 
 class NineItemReportGenerator {
     constructor(options = {}) {
@@ -122,12 +120,14 @@ class NineItemReportGenerator {
      * @returns {Object} 9항목 보고서
      */
     async generateReport(dnaAnalysisResult, patientInfo = {}, options = {}) {
+        let taskId = null;
+        const startTime = Date.now();
         try {
-            logger.info('📄 Starting 9-item report generation');
+            logger.info({ message: '📄 Starting 9-item report generation' });
 
             // 성능 모니터링 시작
-            const taskId = `report_${Date.now()}_${patientInfo?.id || 'unknown'}`;
-            this.performanceMonitor.startTask(taskId, 'nine_item_report');
+            taskId = `report_${Date.now()}_${patientInfo?.id || 'unknown'}`;
+            // PerformanceMonitor에는 startTask가 없으므로 처리 시간 기반 기록 사용
 
             const { extracted_genes = [], causal_network = {} } = dnaAnalysisResult;
 
@@ -138,10 +138,20 @@ class NineItemReportGenerator {
                 patient: patientInfo
             }, options);
 
-            // 2. 각 항목별 정보 추출 (하이브리드 결과 사용)
+            // 2. 각 항목별 정보 추출 (하이브리드 결과 사용, 폴백 포함)
+            const fallbackRaw = hybridResult?.fallbackResult?.processedData?.raw;
+            const genesInput =
+                hybridResult?.processedData?.genes ??
+                fallbackRaw?.genes ??
+                extracted_genes;
+            const networkInput =
+                hybridResult?.processedData?.network ??
+                fallbackRaw?.network ??
+                causal_network;
+
             const nineItems = await this.extractNineItems(
-                hybridResult.processedData.genes || extracted_genes,
-                hybridResult.processedData.network || causal_network,
+                Array.isArray(genesInput) ? genesInput : extracted_genes,
+                typeof networkInput === 'object' && networkInput !== null ? networkInput : causal_network,
                 patientInfo
             );
 
@@ -181,23 +191,30 @@ class NineItemReportGenerator {
             };
 
             // 성능 모니터링 완료
-            this.performanceMonitor.completeTask(taskId, {
-                accuracy: {
-                    overall: validation.score,
-                    dynamicWeighting: validation.score,
-                    hybridStrategy: hybridResult.confidence * 100
-                }
+            await this.performanceMonitor.recordProcessing({
+                requestId: taskId,
+                processingTime: Date.now() - startTime,
+                dateProcessingTime: 0,
+                normalizationTime: 0,
+                processingMode: 'nine_item_report',
+                success: true
             });
 
-            logger.info(`✅ 9-item report generated successfully (Quality: ${validation.score}/100)`);
+            const qualityScore = Number(validation?.overallScore ?? validation?.score ?? 0);
+            logger.info({ message: `✅ 9-item report generated successfully (Quality: ${qualityScore}/100)` });
             return result;
 
         } catch (error) {
-            logger.error('❌ Error generating 9-item report:', error);
+            logger.error({ message: '❌ Error generating 9-item report', error: error?.message || String(error) });
 
             // 성능 모니터링 실패 기록
             if (taskId) {
-                this.performanceMonitor.failTask(taskId, error.message);
+                await this.performanceMonitor.recordErrorMetrics?.({
+                    requestId: taskId,
+                    error: error?.message || String(error),
+                    processingTime: Date.now() - startTime,
+                    stack: error?.stack || ''
+                });
             }
 
             return {
@@ -354,6 +371,9 @@ ${this.formatPastHistory(items.pastHistory)}
 ${this.formatDoctorOpinion(items.doctorOpinion)}
 
 ---
+${chronologicalProgress}
+
+---
 ## 고지의무 검토
 ${this.formatDisclosureObligationReview(items)}
 
@@ -482,9 +502,10 @@ ${conclusiveOpinion}
                     mapping = proc.icdMappings[parent];
                 }
                 if (mapping) {
-                    return `${mapping.korean}(${mapping.english}) (ICD: ${code})`;
+                    // 새 형식: [코드/영어-한글]
+                    return `[${code}/${mapping.english}-${mapping.korean}]`;
                 }
-                return `${enhanced} (ICD: ${code})`;
+                return `[${code}] ${enhanced}`;
             }
 
             return `${enhanced} (KCD-10 코드 확인 필요)`;
@@ -859,41 +880,75 @@ ${conclusiveOpinion}
     async generateChronologicalProgress(items) {
         const events = [];
 
-        // 내원일시 추가
-        if (items.visitDates && items.visitDates.length > 0) {
-            items.visitDates.forEach(visit => {
+        // 내원일시: VisitDateExtractor 구조 반영 (dates + details)
+        if (items.visitDates && Array.isArray(items.visitDates.details) && items.visitDates.details.length > 0) {
+            items.visitDates.details.forEach(visit => {
+                const date = visit.date || null;
+                if (date) {
+                    // 방문 사유는 문맥에서 일부 추출
+                    const reason = (visit.context || '').match(/(주증상|호소|내원경위|응급|통증|불편|증상)[:\s]*([^\n]+)/);
+                    events.push({
+                        date,
+                        content: `내원 - ${reason ? (reason[2] || '').trim() : '진료'}`,
+                        examinations: '',
+                        treatments: ''
+                    });
+                }
+            });
+        } else if (items.visitDates && Array.isArray(items.visitDates.dates) && items.visitDates.dates.length > 0) {
+            items.visitDates.dates.forEach(date => {
                 events.push({
-                    date: visit.date,
-                    content: `${visit.type || '내원'} - ${visit.reason || '진료'}`,
+                    date,
+                    content: '내원 - 진료',
                     examinations: '',
                     treatments: ''
                 });
             });
         }
 
-        // 검사 결과 추가
-        if (items.examinations && items.examinations.length > 0) {
-            items.examinations.forEach(exam => {
-                if (exam.date) {
+        // 검사 결과: ExaminationExtractor 구조 반영 (examinations[])
+        if (items.examinations && Array.isArray(items.examinations.examinations) && items.examinations.examinations.length > 0) {
+            items.examinations.examinations.forEach(exam => {
+                const text = exam.examination || '';
+                // 날짜 추출 (YYYY.MM.DD, YYYY-MM-DD, YYYY/MM/DD)
+                const dateMatch = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
+                const dateStr = dateMatch ? `${dateMatch[1]}-${String(dateMatch[2]).padStart(2, '0')}-${String(dateMatch[3]).padStart(2, '0')}` : null;
+
+                // 검사명 및 결과 간략화
+                let name = text.split('\n')[0].trim();
+                if (!name) name = '검사';
+                const result = exam.result || (text.match(/결과[:\s]*([^\n]+)/) ? text.match(/결과[:\s]*([^\n]+)/)[1].trim() : '');
+
+                if (dateStr) {
                     events.push({
-                        date: exam.date,
+                        date: dateStr,
                         content: '검사 시행',
-                        examinations: `${exam.name} - ${exam.result}`,
+                        examinations: result ? `${name} - ${result}` : `${name}`,
                         treatments: ''
                     });
                 }
             });
         }
 
-        // 치료 내용 추가
-        if (items.treatments && items.treatments.length > 0) {
-            items.treatments.forEach(treatment => {
-                if (treatment.date) {
+        // 치료 내용: TreatmentExtractor 구조 반영 (items[] 또는 details[])
+        if (items.treatments) {
+            const treatmentTexts = [];
+            if (Array.isArray(items.treatments.details)) {
+                items.treatments.details.forEach(t => treatmentTexts.push(t.treatment || t.description || t));
+            }
+            if (Array.isArray(items.treatments.items)) {
+                items.treatments.items.forEach(t => treatmentTexts.push(String(t)));
+            }
+
+            treatmentTexts.forEach(tText => {
+                const dateMatch = String(tText).match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
+                if (dateMatch) {
+                    const dateStr = `${dateMatch[1]}-${String(dateMatch[2]).padStart(2, '0')}-${String(dateMatch[3]).padStart(2, '0')}`;
                     events.push({
-                        date: treatment.date,
+                        date: dateStr,
                         content: '치료 시행',
                         examinations: '',
-                        treatments: treatment.description
+                        treatments: String(tText).replace(/\s*\d{4}[.\-\/]\d{1,2}[.\-\/]\d{1,2}\s*/g, '').trim()
                     });
                 }
             });
@@ -901,6 +956,8 @@ ${conclusiveOpinion}
 
         // 날짜순 정렬
         events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        logger.info(`📑 Chronological events collected: ${events.length}`);
 
         if (events.length === 0) {
             return `
@@ -922,54 +979,6 @@ ${conclusiveOpinion}
 | 일자 | 경과내용 | 주요검사 및 결과 | 치료내용 |
 |------|----------|------------------|----------|
 ${tableRows}`;
-    }
-
-    /**
-     * 일자별 경과표 생성
-     */
-    async generateChronologicalProgress(items) {
-        // 모든 항목에서 날짜 정보 추출
-        const events = [];
-
-        // 각 항목별로 날짜와 내용 추출
-        Object.entries(items).forEach(([category, itemData]) => {
-            if (itemData && itemData.summary) {
-                const dateMatches = itemData.summary.match(/(\d{4})[.-](\d{1,2})[.-](\d{1,2})/g);
-                if (dateMatches) {
-                    dateMatches.forEach(dateStr => {
-                        const normalizedDate = dateStr.replace(/-/g, '.');
-                        events.push({
-                            date: normalizedDate,
-                            category: category,
-                            content: itemData.summary,
-                            confidence: itemData.confidence
-                        });
-                    });
-                }
-            }
-        });
-
-        // 날짜순 정렬
-        events.sort((a, b) => {
-            const dateA = new Date(a.date.replace(/\./g, '-'));
-            const dateB = new Date(b.date.replace(/\./g, '-'));
-            return dateA - dateB;
-        });
-
-        if (events.length === 0) {
-            return '일자별 경과 정보 없음';
-        }
-
-        // 테이블 형태로 포맷팅
-        let table = '일자\t경과내용\t주요검사 및 결과\t치료내용\n';
-        table += '─'.repeat(80) + '\n';
-
-        events.forEach(event => {
-            const category = this.getCategoryKorean(event.category);
-            table += `${event.date}\t${category}\t${event.content.substring(0, 50)}...\t관련 치료\n`;
-        });
-
-        return table;
     }
 
     /**
@@ -1173,6 +1182,93 @@ ${itemsSummary}
 - 성공적 추출: ${successfulItems}/${totalItems}
 - 평균 신뢰도: ${(avgConfidence * 100).toFixed(1)}%
 - 완성도: ${((successfulItems / totalItems) * 100).toFixed(1)}%`;
+    }
+
+    formatDisclosureObligationReview(items) {
+        const reviewSections = [
+            '- 5년 이내: 질환 진단/수술/입원 여부',
+            '- 2년 이내: 입원/수술 여부',
+            '- 3개월 이내: 질병 의심·확정진단·추가검사·입원소견 여부'
+        ];
+
+        let disclosureViolation = '위반 없음';
+        let violationReason = '';
+
+        if (items.pastHistory && items.pastHistory.pastHistory) {
+            const pastHistoryItems = items.pastHistory.pastHistory;
+            const hasRecentHistory = pastHistoryItems.some(item => {
+                const content = (item.history || '').toLowerCase();
+                return content.includes('수술') || content.includes('입원') || content.includes('진단');
+            });
+
+            if (hasRecentHistory) {
+                disclosureViolation = '고지의무 위반';
+                violationReason = '\n(위반 시, 청구 질환과의 인과관계 설명 포함)';
+            }
+        }
+
+        return `${reviewSections.join('\n')}\n본 사안은 [${disclosureViolation}]으로 판단됨.${violationReason}`;
+    }
+
+    formatPrimaryCancerAssessment(items) {
+        const cancerKeywords = ['cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm', '암', '악성', '종양'];
+        const hasCancer = Object.values(items).some(itemData =>
+            itemData && itemData.summary &&
+            cancerKeywords.some(keyword =>
+                itemData.summary.toLowerCase().includes(keyword.toLowerCase())
+            )
+        );
+
+        if (!hasCancer) {
+            return '- 해당 없음 (암 관련 진단 확인되지 않음)';
+        }
+
+        const assessmentSections = [
+            '- 조직검사 소견: ○○ carcinoma, moderately differentiated',
+            '- 해부학적 위치: AV 6cm 직장부위 → 직장 원발암 기준 충족',
+            '- 림프절/타장기 소견: 전이 의심되나 원발 기준 부정하지 않음',
+            '최종 판정: [원발암 / 전이암]'
+        ];
+
+        if (items.examinations && items.examinations.examinations) {
+            const pathologyResults = items.examinations.examinations.filter(exam =>
+                (exam.examination || '').toLowerCase().includes('pathology') ||
+                (exam.examination || '').includes('조직검사') ||
+                (exam.examination || '').includes('TNM')
+            );
+
+            if (pathologyResults.length > 0) {
+                assessmentSections[0] = `- 조직검사 소견: ${pathologyResults[0].examination}`;
+            }
+        }
+
+        return assessmentSections.join('\n');
+    }
+
+    formatComprehensiveConclusion(items) {
+        const conclusionElements = [];
+
+        if (items.diagnoses && items.diagnoses.items && items.diagnoses.items.length > 0) {
+            conclusionElements.push(`진단명: ${items.diagnoses.items[0]}`);
+        }
+
+        if (items.treatments && items.treatments.items && items.treatments.items.length > 0) {
+            conclusionElements.push(`주요 치료: ${items.treatments.items[0]}`);
+        }
+
+        const disclosureStatus = this.formatDisclosureObligationReview(items).includes('위반 없음') ?
+            '고지의무 위반 없음' : '고지의무 위반 의심';
+        conclusionElements.push(disclosureStatus);
+
+        const paymentDecision = disclosureStatus.includes('위반 없음') ?
+            '보험약관상 지급 대상으로 판단됨' : '보험약관상 지급 검토 필요';
+
+        const conclusion = `
+${conclusionElements.join('\n')}
+\n${paymentDecision}
+[보험약관상 지급 판단 및 손해사정 의견 기재]`;
+
+        return conclusion;
     }
 }
 
@@ -1539,106 +1635,17 @@ class CorrelationExtractor {
 /**
  * 고지의무 검토 포맷팅
  */
-formatDisclosureObligationReview(items) {
-    const reviewSections = [
-        '- 5년 이내: 질환 진단/수술/입원 여부',
-        '- 2년 이내: 입원/수술 여부',
-        '- 3개월 이내: 질병 의심·확정진단·추가검사·입원소견 여부'
-    ];
-
-    // 과거력에서 고지의무 관련 정보 추출
-    let disclosureViolation = '위반 없음';
-    let violationReason = '';
-
-    if (items.pastHistory && items.pastHistory.pastHistory) {
-        const pastHistoryItems = items.pastHistory.pastHistory;
-        const hasRecentHistory = pastHistoryItems.some(item => {
-            const content = item.history.toLowerCase();
-            return content.includes('수술') || content.includes('입원') || content.includes('진단');
-        });
-
-        if (hasRecentHistory) {
-            disclosureViolation = '고지의무 위반';
-            violationReason = '\n(위반 시, 청구 질환과의 인과관계 설명 포함)';
-        }
-    }
-
-    return `${reviewSections.join('\n')}\n본 사안은 [${disclosureViolation}]으로 판단됨.${violationReason}`;
-}
+ 
 
 /**
  * 원발암/전이암 판정 포맷팅 (해당 시)
  */
-formatPrimaryCancerAssessment(items) {
-    // 암 관련 키워드 검색
-    const cancerKeywords = ['cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm', '암', '악성', '종양'];
-    const hasCancer = Object.values(items).some(itemData =>
-        itemData && itemData.summary &&
-        cancerKeywords.some(keyword =>
-            itemData.summary.toLowerCase().includes(keyword.toLowerCase())
-        )
-    );
-
-    if (!hasCancer) {
-        return '- 해당 없음 (암 관련 진단 확인되지 않음)';
-    }
-
-    const assessmentSections = [
-        '- 조직검사 소견: ○○ carcinoma, moderately differentiated',
-        '- 해부학적 위치: AV 6cm 직장부위 → 직장 원발암 기준 충족',
-        '- 림프절/타장기 소견: 전이 의심되나 원발 기준 부정하지 않음',
-        '최종 판정: [원발암 / 전이암]'
-    ];
-
-    // 실제 데이터에서 조직검사 정보 추출
-    if (items.examinations && items.examinations.examinations) {
-        const pathologyResults = items.examinations.examinations.filter(exam =>
-            exam.examination.toLowerCase().includes('pathology') ||
-            exam.examination.includes('조직검사') ||
-            exam.examination.includes('TNM')
-        );
-
-        if (pathologyResults.length > 0) {
-            assessmentSections[0] = `- 조직검사 소견: ${pathologyResults[0].examination}`;
-        }
-    }
-
-    return assessmentSections.join('\n');
-}
+ 
 
 /**
  * 종합 결론 포맷팅
  */
-formatComprehensiveConclusion(items) {
-    // 보험약관상 지급 판단 및 손해사정 의견
-    const conclusionElements = [];
-
-    // 진단명 기반 판단
-    if (items.diagnoses && items.diagnoses.items && items.diagnoses.items.length > 0) {
-        conclusionElements.push(`진단명: ${items.diagnoses.items[0]}`);
-    }
-
-    // 치료 내용 기반 판단
-    if (items.treatments && items.treatments.items && items.treatments.items.length > 0) {
-        conclusionElements.push(`주요 치료: ${items.treatments.items[0]}`);
-    }
-
-    // 고지의무 위반 여부
-    const disclosureStatus = this.formatDisclosureObligationReview(items).includes('위반 없음') ?
-        '고지의무 위반 없음' : '고지의무 위반 의심';
-    conclusionElements.push(disclosureStatus);
-
-    // 최종 지급 판단
-    const paymentDecision = disclosureStatus.includes('위반 없음') ?
-        '보험약관상 지급 대상으로 판단됨' : '보험약관상 지급 검토 필요';
-
-    const conclusion = `
-${conclusionElements.join('\n')}
-\n${paymentDecision}
-[보험약관상 지급 판단 및 손해사정 의견 기재]`;
-
-    return conclusion;
-}
+ 
 
 /**
  * 의사소견 추출기

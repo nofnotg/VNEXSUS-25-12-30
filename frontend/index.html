@@ -1,920 +1,520 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>메디아이(Medi AI) 문서분석시스템</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <title>VNEXSUS - Glass Intelligence</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="components/timelineStyles.css?v=1.0.10" rel="stylesheet">
+  <link href="components/reportContentStyles.css?v=1.0.10" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
-    /* 개발자 스튜디오 스타일 통합 - 고급 UI 요소 적용 */
-    
-    /* 전체 레이아웃 - 의료용 색상 팔레트 */
+    :root {
+      --bg-gradient-start: #f8fafc;
+      --bg-gradient-end: #e2e8f0;
+      --glass-surface: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.8);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+      --primary: #2563eb;
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
     body {
-      background: linear-gradient(135deg, #e8f4fd 0%, #f0f9ff 100%);
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
       min-height: 100vh;
-      font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-main);
+      padding-bottom: 4rem;
     }
-    
-    /* 메인 헤더 스타일 - 의료용 블루 (가독성 개선) */
-    .main-header {
-      background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-      color: #ffffff;
-      padding: 20px 0;
-      margin-bottom: 20px;
-      border-radius: 0 0 16px 16px;
-      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    }
-    
-    .main-header h1 {
-      color: #000000 !important;
-      font-weight: 700;
-    }
-    
-    .main-header p {
-      color: #000000 !important;
-      opacity: 0.95;
-    }
-    
-    /* 통합 대시보드 패널 - 의료용 그린 (가독성 개선) */
-    .integrated-dashboard-panel {
-      background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-      color: #ffffff;
-      border-radius: 12px;
-      padding: 25px;
-      margin: 20px 0;
-      box-shadow: 0 6px 16px rgba(4, 120, 87, 0.3);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    }
-    
-    .integrated-dashboard-panel h5 {
-      color: #ffffff !important;
-      font-weight: 600;
-    }
-    
-    /* 메트릭 카드 */
-    .metric-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
-      border: 1px solid rgba(14, 165, 233, 0.1);
-      border-radius: 12px;
-      padding: 24px;
-      margin: 12px 0;
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .metric-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
-      border-color: rgba(14, 165, 233, 0.2);
-    }
-    
-    /* 신뢰도 미터 */
-    .confidence-meter {
-      height: 20px;
-      background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.8) 100%);
-      border: 1px solid rgba(14, 165, 233, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 12px 0;
-      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.05);
-    }
-    
-    .confidence-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #0abde3);
-      transition: width 0.5s ease;
-    }
-    
-    /* 통합 상태 표시기 */
-    .integration-status {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: rgba(0,0,0,0.8);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 12px;
-    }
-    
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      padding: 2rem;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-    
 
-    
-    /* 파일 아이템 - transform 제거 */
-    .file-item {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid #e2e8f0;
-      transition: border-color 0.2s ease;
-    }
-    
-    .file-item:hover {
-      border-color: #c7d2fe;
-    }
-    
-    .file-item .btn-remove {
-      color: #ef4444;
-      cursor: pointer;
-      transition: all 0.2s;
-      padding: 5px;
-      border-radius: 50%;
-    }
-    
-    .file-item .btn-remove:hover {
-      background-color: #fef2f2;
-      color: #dc2626;
-    }
-    
-    /* 결과 컨테이너 - 그라데이션 제거 */
-    .result-container {
-      max-height: 500px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-      background: #ffffff;
-    }
-    .loading-spinner {
-      display: none;
-    }
-    .insurance-record {
-      background-color: #f8f9fa;
-      border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    .file-list-horizontal {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      overflow-x: auto;
-    }
-    .file-item-card {
-      min-width: 200px;
-      flex: 0 0 auto;
-    }
-    .collapsed-files {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-    #resultModalContent {
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    /* 시스템 타이틀 - 애니메이션 제거 */
-    .system-title {
-      text-align: center;
+    .glass-header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid white;
+      padding: 1.25rem 0;
       margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 3px solid #6366f1;
-      color: #1e293b;
-      font-weight: 700;
-      font-size: 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     }
-    
-    .system-title span {
-      color: #6366f1;
+
+    .brand-logo {
       font-weight: 800;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
     }
-    
-    /* 카드 스타일 - transform 제거 */
-    .card {
-      border: 1px solid rgba(14, 165, 233, 0.1);
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.08);
-      background: rgba(255, 255, 255, 0.95);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    .glass-card {
+      background: var(--glass-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       backdrop-filter: blur(10px);
+      box-shadow: var(--glass-shadow);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
-      border-color: rgba(14, 165, 233, 0.2);
+
+    .glass-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
     }
-    
-    .card-header {
-      background: #f8fafc;
-      border-bottom: 1px solid #e2e8f0;
-      border-radius: 16px 16px 0 0 !important;
-      padding: 1.25rem 1.5rem;
-    }
-    
+
     .card-body {
-      padding: 1.5rem;
-    }
-    
-    /* 버튼 스타일 - 복잡한 애니메이션 제거 */
-    .btn {
-      border-radius: 8px;
-      font-weight: 500;
-      padding: 0.75rem 1.5rem;
-      transition: all 0.3s ease;
-      border: none;
+      padding: 2rem;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .btn-lg {
-      padding: 0.75rem 2rem;
-      font-size: 1.1rem;
-    }
-    
-    .btn-primary {
-      background: #0ea5e9;
-      border-color: #0ea5e9;
-    }
-    
-    .btn-primary:hover {
-      background: #0284c7;
-      border-color: #0284c7;
-    }
-    
-    .btn-outline-info {
-      border: 2px solid #10b981;
-      color: #10b981;
-      background: transparent;
-    }
-    
-    .btn-outline-info:hover {
-      background: #10b981;
-      border-color: #10b981;
-      color: white;
-    }
-    
-    .btn-outline-primary {
-      border: 2px solid #0ea5e9;
-      color: #0ea5e9;
-      background: transparent;
-    }
-    
-    .btn-outline-primary:hover {
-      background: #0ea5e9;
-      border-color: #0ea5e9;
-      color: white;
-    }
-    
-    .btn-success {
-      background: #10b981;
-      border-color: #10b981;
-    }
-    
-    .btn-success:hover {
-      background: #059669;
-      border-color: #059669;
-    }
-    .status-container {
-      display: flex;
-      gap: 15px;
-    }
-    .status-left {
-      flex: 0 0 200px;
-    }
-    .status-right {
-      flex: 1;
-    }
-
-
-    /* 드롭존 개선 */
     .drop-zone {
-      border: 3px dashed #007bff;
-      border-radius: 15px;
+      border: 2px dashed rgba(37, 99, 235, 0.3);
+      border-radius: 16px;
       padding: 3rem 2rem;
       text-align: center;
-      background: linear-gradient(135deg, #f8f9ff 0%, #e6f3ff 100%);
+      background: rgba(255, 255, 255, 0.4);
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .drop-zone:hover {
-      border-color: #0056b3;
-      background: linear-gradient(135deg, #e6f3ff 0%, #cce7ff 100%);
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.05);
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,123,255,0.15);
     }
 
     .drop-zone.dragover {
-      border-color: #28a745;
-      background: linear-gradient(135deg, #f8fff8 0%, #e6ffe6 100%);
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
       transform: scale(1.02);
     }
 
-    .drop-zone-content {
-      pointer-events: none;
+    .btn-glass-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      transition: all 0.3s;
     }
 
-    /* 프로그레스 헤더 스타일 */
-    .progress-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .btn-glass-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      color: white;
     }
 
-    .progress-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    .btn-glass-primary:disabled {
+      background: #cbd5e1;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .nav-pills .nav-link {
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: all 0.3s;
+    }
+
+    .nav-pills .nav-link.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 700;
       color: white;
-      font-size: 1.5rem;
-      flex-shrink: 0;
+      margin-right: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .progress-info {
-      flex: 1;
+    .step-badge.risk {
+      background: linear-gradient(135deg, #ef4444, #f87171);
     }
 
-    .progress-info h6 {
-      font-weight: bold;
-      color: #495057;
-      margin-bottom: 0.25rem;
+    .glass-quote {
+      background: rgba(255, 255, 255, 0.5);
+      border-left: 4px solid;
+      padding: 1.25rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1.25rem 0;
+      font-style: italic;
+      font-weight: 500;
     }
 
-    .progress-percentage {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #007bff;
-      min-width: 60px;
-      text-align: right;
+    .glass-quote.risk {
+      border-color: var(--danger);
+      color: #991b1b;
     }
 
-    /* 상태 메시지 컨테이너 */
-    .status-message-container {
-      background: #f8f9fa;
-      border-radius: 10px;
-      padding: 1rem;
+    .status-pill {
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
     }
 
-    /* 카드 헤더 아이콘 색상 */
-    .card-header .text-primary { color: #007bff !important; }
-    .card-header .text-success { color: #28a745 !important; }
-    .card-header .text-warning { color: #ffc107 !important; }
-    .card-header .text-info { color: #17a2b8 !important; }
+    .status-pill.high {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
 
-    /* 프로그레스바 - 애니메이션 제거 */
-    .progress {
-      height: 12px;
-      border-radius: 10px;
-      background: #f1f5f9;
-    }
-    
-    .progress-bar {
-      background: #0ea5e9;
-      border-radius: 10px;
-      transition: width 0.3s ease;
-    }
-    
-    /* 리포트 컨텐츠 - 그라데이션 제거 */
     .report-content {
       white-space: pre-wrap;
       line-height: 1.7;
       padding: 25px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 16px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.3);
       margin-bottom: 25px;
       max-height: 600px;
       overflow-y: auto;
-      font-size: 16px;
-    }
-    
-    /* 스크롤바 스타일링 - 그라데이션 제거 */
-    .report-content::-webkit-scrollbar,
-    .result-container::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    .report-content::-webkit-scrollbar-track,
-    .result-container::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      border-radius: 10px;
-    }
-    
-    .report-content::-webkit-scrollbar-thumb,
-    .result-container::-webkit-scrollbar-thumb {
-      background: #6366f1;
-      border-radius: 10px;
-    }
-    
-    .report-content::-webkit-scrollbar-thumb:hover,
-    .result-container::-webkit-scrollbar-thumb:hover {
-      background: #5b21b6;
     }
 
+    .insurance-record {
+      transition: background 0.2s;
+    }
 
-    /* 개발 모드 관련 스타일 */
-    .dev-only {
-      display: none;
-    }
-    .dev-mode .dev-only {
-      display: flex;
-    }
-    body.dev-mode .dev-mode-option {
-      display: block !important;
-    }
-    
-    /* 문서 ID 표시 개선 스타일 */
-    .document-analysis-status {
-      padding: 0;
-    }
-    
-    .status-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      font-size: 16px;
-    }
-    
-    .status-details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    
-    .status-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    
-    .status-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .status-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1e293b;
-    }
-    
-    .status-value.processing {
-      color: #f59e0b;
-    }
-    
-    .status-unit {
-      font-size: 12px;
-      color: #64748b;
-      margin-left: 4px;
-    }
-    
-    /* 분리된 프로그레스바 스타일 */
-    .progress-section {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 16px;
-    }
-    
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      color: #374151;
-      font-size: 14px;
-    }
-    
-    .progress-percentage {
-      font-family: 'Courier New', monospace;
-      font-weight: 700;
-      color: #1e293b;
-      background: #ffffff;
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: 1px solid #e2e8f0;
-      font-size: 12px;
-    }
-    
-    .progress-ocr .progress-bar {
-      background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
-    }
-    
-    .progress-report .progress-bar {
-      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-    }
-    
-    .progress-status {
-      font-size: 12px;
-      color: #64748b;
-      font-weight: 500;
-    }
-    
-    .progress-status.processing {
-      color: #f59e0b;
-      font-weight: 600;
-    }
-    
-    .progress-status.completed {
-      color: #10b981;
-      font-weight: 600;
-    }
-    
-    .progress-status.error {
-      color: #ef4444;
-      font-weight: 600;
-    }
-    
-    /* 모달 - backdrop-filter 제거 */
-    .modal-content {
-      border-radius: 20px;
-      border: none;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      background: #ffffff;
-      overflow: hidden;
-    }
-    
-    .modal-header {
-      border-bottom: 1px solid #e5e7eb;
-      background: #6366f1;
-      color: white;
-      padding: 20px 25px;
-    }
-    
-    .modal-header .btn-close {
-      filter: brightness(0) invert(1);
-      opacity: 0.8;
-    }
-    
-    .modal-header .btn-close:hover {
-      opacity: 1;
-    }
-    
-    .modal-title {
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
-    
-    .modal-body {
-      padding: 25px;
-      background: #ffffff;
-    }
-    
-    .modal-footer {
-      border-top: 1px solid #e5e7eb;
-      background: #f8fafc;
-      padding: 20px 25px;
-    }
-    
-    /* 입력 필드 */
-    .form-control {
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 16px;
-      transition: border-color 0.2s ease;
-      background: #ffffff;
-    }
-    
-    .form-control:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-      outline: none;
-    }
-    
-    .form-control::placeholder {
-      color: #9ca3af;
+    .insurance-record:hover {
+      background: #f8fafc !important;
     }
   </style>
 </head>
+
 <body>
-  <!-- 통합 상태 표시기 -->
-  <div class="integration-status" id="integrationStatus">
-    🧬 v2.0.0 | 시스템 정상
+
+  <div class="glass-header">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+      <div class="d-flex gap-3">
+        <ul class="nav nav-pills" id="mainTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active btn-sm py-1 px-3" id="analysis-tab" data-bs-toggle="tab"
+              data-bs-target="#analysis" type="button" role="tab">Analysis</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link btn-sm py-1 px-3" id="report-tab" data-bs-toggle="tab" data-bs-target="#report"
+              type="button" role="tab">Report View</button>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <!-- 메인 헤더 -->
-  <div class="main-header">
-    <div class="container">
-      <h1 class="mb-0">🧬 메디아이(MediAI) 통합 분석 플랫폼</h1>
-      <p class="mb-0 mt-2">AI 기반 의료 문서 분석 시스템</p>
-    </div>
-  </div>
+  <div class="container">
+    <div class="tab-content" id="mainTabContent">
 
-  <div class="container mt-3">
-    <!-- 빠른 링크 -->
-    <div class="row mb-3">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header bg-light">
-            <h5 class="card-title mb-0">빠른 링크</h5>
-          </div>
+      <!-- ==================== ANALYSIS TAB ==================== -->
+      <div class="tab-pane fade show active" id="analysis" role="tabpanel">
+
+        <!-- File Upload Section -->
+        <div class="glass-card">
           <div class="card-body">
-            <a href="/report-template-preview.html" class="btn btn-outline-primary me-2">Report Template Preview</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 파일 업로드 섹션 -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header bg-primary text-white">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title mb-0">📄 의료문서 업로드 및 분석</h5>
-              <button id="view-raw-text-btn" class="btn btn-sm btn-light me-2 dev-mode-option" style="display: none;">상세분석보기</button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="drop-zone mb-3" id="dropZone">
-              <div class="drop-zone-content">
-                <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
-                <p class="mb-2 fw-bold">PDF 파일을 여기에 드래그 앤 드롭하거나 클릭하여 선택하세요</p>
-                <p class="text-muted">(최대 100개 파일, 총 100MB)</p>
-              </div>
-              <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none">
-            </div>
-            
-            <div id="fileListContainer" class="mt-3">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span id="fileCount" class="fw-bold text-primary">0개 파일 선택됨</span>
-                <button id="toggleFilesBtn" class="btn btn-sm btn-outline-primary" style="display: none;">펼치기/접기</button>
-              </div>
-              <div id="fileList" class="collapsed-files"></div>
-            </div>
-            
-            <div class="d-flex justify-content-between mt-3">
-              <button id="clearBtn" class="btn btn-outline-secondary">
-                <i class="fas fa-trash me-2"></i>모두 지우기
-              </button>
-              <button id="uploadBtn" class="btn btn-primary ms-2" disabled>
-                <i class="fas fa-play me-2"></i>분석 시작
-              </button>
-              <button id="viewResultsBtn" class="btn btn-outline-info" disabled>
-                <i class="fas fa-eye me-2"></i>상세 분석 보기
-              </button>
-            </div>
-
-            <!-- 상태 메시지 및 스피너 -->
-            <div class="mt-3">
-              <div id="statusContainer" class="status-message-container"></div>
-              <div id="statusSpinner" class="text-center mt-2" style="display: none;">
-                <div class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 class="fw-bold text-primary"><i class="bi bi-cloud-upload me-2"></i>Document Ingestion</h5>
+              <div class="d-flex align-items-center">
+                <button id="textReviewBtn" class="btn btn-outline-secondary btn-sm">
+                  <i class="bi bi-file-text me-1"></i>Text Review
+                </button>
               </div>
             </div>
 
-            <!-- OCR 진행률 -->
-            <div class="progress-section mt-3">
-              <div class="progress-label">
-                <span>문서 분석 진행률</span>
-                <span id="ocrProgressPercentage" class="progress-percentage">0%</span>
-              </div>
-              <div class="progress progress-ocr">
-                <div id="ocrProgressBar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%;"></div>
-              </div>
-              <div id="ocrProgressStatus" class="progress-status text-center mt-2">대기중</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 보험정보 입력 섹션 -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header bg-success text-white">
-            <h5 class="card-title mb-0">🏥 보험정보 입력</h5>
-          </div>
-          <div class="card-body">
-            <!-- 피보험자 정보 -->
-            <div class="row g-3 mb-4">
-              <div class="col-md-6">
-                <div class="d-flex align-items-center">
-                  <label class="form-label me-2" style="white-space: nowrap;">피보험자:</label>
-                  <input type="text" class="form-control" id="patientName" placeholder="피보험자 이름">
-                </div>
-              </div>
-              <div class="col-md-6">
-          </div>
-        </div>
-      </div>
-    </div>
-                <div class="d-flex align-items-center">
-                  <label class="form-label me-2" style="white-space: nowrap;">참고사항:</label>
-                  <input type="text" class="form-control" id="patientMemo" placeholder="참고사항">
-                </div>
-              </div>
-            </div>
-            
-            <hr class="my-3">
-            
-            <!-- 보험 정보 리스트 -->
-            <div id="insuranceRecords">
-              <div class="insurance-record" data-record-id="1">
-                <div class="row g-3 mb-2">
-                  <div class="col-md-6 d-flex align-items-center">
-                    <label class="form-label me-2" style="white-space: nowrap;">보험회사:</label>
-                    <select class="form-select insurance-company">
-                      <option value="">선택하세요</option>
-                    </select>
+            <div class="row mb-4">
+              <!-- Left: Upload Area (1/4 width) -->
+              <div class="col-md-3">
+                <div class="drop-zone h-100 d-flex flex-column justify-content-center text-center p-3" id="dropZone"
+                  style="min-height: 200px; border: 2px dashed var(--primary); border-radius: 12px; background: rgba(37, 99, 235, 0.05); transition: all 0.3s;">
+                  <div class="drop-zone-content">
+                    <i class="bi bi-cloud-arrow-up fs-1 text-primary mb-2"></i>
+                    <h6 class="fw-bold mb-1">파일 업로드</h6>
+                    <p class="text-muted small mb-0" style="font-size: 0.8rem;">클릭 또는 드래그</p>
                   </div>
-                  <div class="col-md-6 d-flex align-items-center">
-                    <label class="form-label me-2" style="white-space: nowrap;">가입일자:</label>
-                    <input type="hidden" class="insurance-date">
-                    <div class="d-flex">
-                      <select class="form-select me-1 insurance-date-year">
-                        <option value="">년</option>
-                      </select>
-                      <select class="form-select me-1 insurance-date-month">
-                        <option value="">월</option>
-                      </select>
-                      <select class="form-select insurance-date-day">
-                        <option value="">일</option>
-                      </select>
+                  <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none">
+                </div>
+              </div>
+
+              <!-- Right: File List (3/4 width) -->
+              <div class="col-md-9">
+                <div id="fileListContainer" class="h-100 border rounded-3 p-3 bg-white shadow-sm d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <span id="fileCount" class="fw-bold text-primary small"><i class="bi bi-files me-1"></i>0개 파일
+                      선택됨</span>
+                    <button id="clearBtn" class="btn btn-outline-danger btn-sm py-0 px-2" style="font-size: 0.75rem;">
+                      <i class="bi bi-trash me-1"></i>전체 삭제
+                    </button>
+                  </div>
+                  <div id="fileList" class="flex-grow-1" style="max-height: 150px; overflow-y: auto;">
+                    <div class="text-center text-muted py-4 small">
+                      <i class="bi bi-inbox fs-4 d-block mb-2 opacity-50"></i>
+                      업로드된 파일이 여기에 표시됩니다
                     </div>
                   </div>
                 </div>
-                <div class="row g-3 mb-2">
-                  <div class="col-md-6 d-flex align-items-center">
-                    <label class="form-label me-2" style="white-space: nowrap;">보험상품:</label>
-                    <input type="text" class="form-control insurance-product" placeholder="보험상품명">
-                  </div>
-                  <div class="col-md-4 d-flex align-items-center">
-                    <label class="form-label me-2" style="white-space: nowrap;">조회기간:</label>
-                    <select class="form-select insurance-period">
-                      <option value="all" selected>전기간</option>
-                      <option value="5">5년</option>
-                      <option value="4">4년</option>
-                      <option value="3">3년</option>
-                      <option value="2">2년</option>
-                      <option value="1">1년</option>
-                    </select>
-                  </div>
-                  <div class="col-md-2 d-flex align-items-center justify-content-end">
-                    <button class="btn btn-outline-warning reset-insurance" data-record-id="1" type="button">초기화</button>
-                  </div>
-                </div>
               </div>
             </div>
+
+            <!-- Button & Progress Bar Row - ALWAYS VISIBLE -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <!-- Progress Bar (Left) - Large and Visual -->
+              <div class="flex-grow-1 me-4" id="ocrProgressSection" style="display: flex; flex-direction: column;">
+                <div class="d-flex justify-content-between small fw-bold mb-1">
+                  <span id="ocrProgressStatus" class="text-primary">대기 중...</span>
+                  <span id="ocrProgressPercentage" class="text-primary">0%</span>
+                </div>
+                <div class="progress" style="height: 16px; border-radius: 8px; background: #e2e8f0;">
+                  <div id="ocrProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar"
+                    style="width: 0%; background: linear-gradient(90deg, #2563eb, #06b6d4); border-radius: 8px;"></div>
+                </div>
+              </div>
+
+              <!-- Status Container (Middle) -->
+              <div id="statusContainer" class="alert alert-light border-0 shadow-sm py-2 px-3 mb-0 me-3"
+                style="display:none;"></div>
+              <div id="statusSpinner" class="me-3" style="display: none;">
+                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+
+              <!-- Auto Generate Report Option -->
+              <div class="form-check me-3">
+                <input class="form-check-input" type="checkbox" id="autoGenerateReport">
+                <label class="form-check-label small" for="autoGenerateReport">보고서 자동생성</label>
+              </div>
+
+              <!-- Upload Button (Right) -->
+              <button id="uploadBtn" class="btn btn-glass-primary px-4" disabled>
+                <i class="bi bi-lightning-charge-fill me-2"></i>문서 분석 시작
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insurance Info Section (Minimal Style) -->
+        <div class="glass-card">
+          <div class="card-body">
+            <h5 class="fw-bold text-success mb-4"><i class="bi bi-shield-check me-2"></i>보험 정보</h5>
+
+            <!-- Patient Info Compact (No Birth Date) -->
+            <div class="d-flex align-items-end gap-3 mb-4 p-3 rounded-3"
+              style="background: #f8fafc; border: 1px solid #e2e8f0;">
+              <div style="flex: 1;">
+                <label class="form-label mb-1 small fw-bold text-muted">피보험자</label>
+                <input type="text" class="form-control form-control-sm" id="patientName" placeholder="피보험자 이름 입력">
+              </div>
+              <div style="flex: 2;">
+                <label class="form-label mb-1 small fw-bold text-muted">추가입력사항(쟁점사항 등)</label>
+                <input type="text" class="form-control form-control-sm" id="patientMemo"
+                  placeholder="예: 고지의무 위반 의심, 보험금 청구 사유 등">
+              </div>
+            </div>
+
+            <!-- Insurance Records (Minimal Row Style with Date Input) -->
+            <div id="insuranceRecords">
+              <div class="insurance-record d-flex align-items-center gap-2 p-2 mb-2 bg-white border rounded-2"
+                data-record-id="1">
+                <span class="d-flex align-items-center justify-content-center fw-bold text-primary"
+                  style="width: 28px; height: 28px; background: #f1f5f9; border-radius: 6px; flex-shrink: 0;">1</span>
+                <div class="d-flex flex-column" style="width: 130px; flex-shrink: 0;">
+                  <select class="form-select form-select-sm insurance-company">
+                    <option value="">가입보험사</option>
+                  </select>
+                </div>
+                <input type="text" class="form-control form-control-sm insurance-product flex-grow-1" placeholder="상품명">
+                <div class="d-flex align-items-center gap-1" style="flex-shrink: 0;">
+                  <label class="form-label mb-0 small text-muted" id="enrollmentLabel" style="white-space: nowrap;">가입일:</label>
+                  <input type="text" class="form-control form-control-sm insurance-date" style="width: 110px;"
+                    placeholder="20250101" inputmode="numeric" maxlength="10">
+                </div>
+                <select class="form-select form-select-sm insurance-period" style="width: 80px; flex-shrink: 0;">
+                  <option value="all" selected>전체</option>
+                  <option value="5">5년</option>
+                  <option value="3">3년</option>
+                </select>
+                <button class="btn btn-sm btn-outline-secondary reset-insurance" data-record-id="1"
+                  style="padding: 0.25rem 0.5rem; flex-shrink: 0;"><i class="bi bi-x"></i></button>
+              </div>
+            </div>
+
             <div class="d-flex justify-content-between mt-3">
-              <button id="addInsuranceBtn" class="btn btn-outline-secondary" type="button">보험 추가</button>
-              <button id="createSummaryBtn" class="btn btn-success" type="button">요약표 생성하기</button>
+              <button id="addInsuranceBtn" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus me-1"></i>보험
+                추가</button>
+              <button id="createSummaryBtn" class="btn btn-success btn-sm" disabled><i class="bi bi-table me-1"></i>요약표
+                생성</button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div id="timeline-section" class="mt-4 d-none">
-      <div class="card">
-        <div class="card-header bg-info text-white">
-          <div class="d-flex justify-content-between align-items-center">
-            <h5 id="timeline-title" class="card-title mb-0">병력사항 요약 경과표</h5>
-            <div class="btn-group dev-mode-option" style="display: none;">
-              <button id="view-raw-text-btn" class="btn btn-sm btn-light me-2">상세분석보기</button>
-              <button id="view-refined-text-btn" class="btn btn-sm btn-light">정제 데이터</button>
+        <!-- Summary Table Section (Hidden by default) -->
+        <div id="timeline-section" class="glass-card d-none">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 id="timeline-title" class="fw-bold text-info"><i class="bi bi-calendar-event me-2"></i>병력 타임라인</h5>
+              <div class="btn-group dev-mode-option" style="display: none;">
+                <button id="view-refined-text-btn" class="btn btn-sm btn-light">정제된 데이터</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th width="15%">날짜</th>
+                    <th width="25%">병원</th>
+                    <th width="30%">진단</th>
+                    <th width="30%">치료</th>
+                  </tr>
+                </thead>
+                <tbody id="timeline-body">
+                  <tr>
+                    <td colspan="4" class="text-center text-muted py-4">요약 데이터가 여기에 표시됩니다.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-              <thead class="table-light">
-                <tr>
-                  <th width="15%">진료일자</th>
-                  <th width="25%">진료기관</th>
-                  <th width="30%">진단명</th>
-                  <th width="30%">치료/처방</th>
-                </tr>
-              </thead>
-              <tbody id="timeline-body">
-                <tr>
-                  <td colspan="4" class="text-center">요약표 데이터가 여기에 표시됩니다.</td>
-                </tr>
-              </tbody>
-            </table>
+
+      </div>
+
+      <!-- ==================== REPORT TAB ==================== -->
+      <div class="tab-pane fade" id="report" role="tabpanel">
+
+        <!-- Summary Header -->
+        <div class="glass-card">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="text-primary fw-bold text-uppercase mb-1">Investigation Report</h6>
+              <h2 class="fw-bold mb-0">사건 분석 보고서</h2>
+            </div>
+            <div class="text-end">
+              <div class="status-pill high d-inline-flex align-items-center">
+                <i class="bi bi-stars me-2"></i>
+                AI 분석 완료
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- AI Report Generation Controls -->
+        <div id="ai-report-section" class="glass-card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 class="fw-bold text-primary"><i class="bi bi-robot me-2"></i>AI 보고서 생성</h5>
+            </div>
+
+            <div class="d-flex gap-2 mb-3">
+              <button id="generateAIReportBtn" class="btn btn-glass-primary">
+                <i class="bi bi-magic me-2"></i>보고서 생성
+              </button>
+              <button id="copyReportBtn" class="btn btn-outline-secondary" disabled>
+                <i class="bi bi-clipboard me-2"></i>복사
+              </button>
+            </div>
+
+            <!-- Report Progress -->
+            <div class="progress-section mt-3" id="reportProgressSection" style="display:none;">
+              <div class="d-flex justify-content-between small fw-bold text-muted">
+                <span>생성 진행률</span>
+                <span id="reportProgressPercentage">0%</span>
+              </div>
+              <div class="progress" style="height: 10px;">
+                <div id="reportProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;"></div>
+              </div>
+              <div id="reportProgressStatus" class="text-center small text-muted mt-1">대기 중...</div>
+            </div>
+
+            <!-- Report Content -->
+            <div id="ai-report-loading" class="text-center my-5 d-none">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">로딩 중...</span>
+              </div>
+              <p class="mt-2 text-muted">패턴 분석 및 보고서 생성 중...</p>
+            </div>
+
+            <div id="ai-report-content" class="report-content mt-4"></div>
+
+            <!-- Hidden Preview for Logic -->
+            <div class="d-none">
+              <div id="extracted-text-display"></div>
+            </div>
+          </div>
+          <h6 class="text-muted text-uppercase small fw-bold">신뢰도 점수</h6>
+          <h2 class="fw-bold text-primary mb-0">98.5%</h2>
         </div>
       </div>
     </div>
-
-
-
-    <!-- AI 보고서 생성 섹션 -->
-    <div id="ai-report-section" class="section">
-      <h2>AI 보고서 생성</h2>
-      <div class="section-content">
-        <div class="controls">
-          <button id="generateAIReportBtn" class="btn btn-primary">보고서 생성</button>
-          <button id="copyReportBtn" class="btn btn-outline-secondary ms-2" disabled>보고서복사</button>
-          <div class="form-check form-switch ms-3">
-            <input class="form-check-input" type="checkbox" id="auto-generate-toggle" checked>
-            <label class="form-check-label" for="auto-generate-toggle">자동 생성</label>
-          </div>
-          <div class="form-check form-switch ms-3 dev-only">
-            <input class="form-check-input" type="checkbox" id="dev-mode-toggle">
-            <label class="form-check-label" for="dev-mode-toggle">개발 모드</label>
-          </div>
-        </div>
-
-        <!-- 보고서 생성 진행률 -->
-        <div class="progress-section mt-3">
-          <div class="progress-label">
-            <span>보고서 생성 진행률</span>
-            <span id="reportProgressPercentage" class="progress-percentage">0%</span>
-          </div>
-          <div class="progress progress-report">
-            <div id="reportProgressBar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%;"></div>
-          </div>
-          <div id="reportProgressStatus" class="progress-status text-center mt-2">대기중</div>
-        </div>
-        <div class="preview-container mt-3">
-          <div class="text-preview">
-            <h5>추출된 텍스트 (미리보기)</h5>
-            <div id="extracted-text-display" class="extracted-text border p-3 bg-light">OCR 처리 대기중...</div>
-          </div>
-        </div>
-        <div id="ai-report-loading" class="text-center my-3 d-none">
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-          <p>AI 보고서 생성 중...</p>
-        </div>
-        <div id="ai-report-content" class="report-content mt-3"></div>
-      </div>
-    </div>
-
+  </div>
 
   </div>
-  
-  <!-- 결과 모달 -->
-  <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+  </div>
+  </div>
+
+  <!-- Result Modal (Hidden) -->
+  <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="resultsModalLabel">문서 추출 결과</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalCloseBtn"></button>
+          <h5 class="modal-title">분석 결과</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="modalCloseBtn"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
             <select id="resultType" class="form-select">
-              <option value="combined">전체 텍스트 (모든 파일)</option>
-              <option value="separated">파일별 텍스트</option>
-              <option value="json">JSON 원본</option>
-              <option value="filtered" class="dev-mode-option" style="display: none;">소거키워드 필터링 결과</option>
-              <option value="retained" class="dev-mode-option" style="display: none;">Retain 키워드 필터링 결과</option>
+              <option value="combined">통합 텍스트</option>
+              <option value="separated">분리된 텍스트</option>
+              <option value="json">JSON 데이터</option>
             </select>
           </div>
-          <div id="resultModalContent" class="result-container" tabindex="0">
-            <div class="text-muted">결과가 여기에 표시됩니다.</div>
+          <div id="resultModalContent" class="p-3 bg-light rounded" style="min-height:200px; white-space: pre-wrap;">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="copyTextBtn">텍스트복사</button>
+          <button type="button" class="btn btn-primary" id="copyTextBtn">텍스트 복사</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- 컴포넌트 파일들 (순서 중요) -->
-    <script>
-      // 전역 네임스페이스 초기화
-      window.VNEXSUSApp = window.VNEXSUSApp || {};
-    </script>
-    <script src="components/visualizationComponents.js?v=1.0.5"></script>
-    <script src="components/reportRenderer.js?v=1.0.5"></script>
-    
-    <!-- 메인 스크립트 파일들 -->
-    <script src="script.js?v=1.0.5"></script>
-    <script src="ai-report.js?v=1.0.5"></script>
+
+  <!-- Hidden buttons for logic compatibility -->
+  <button id="viewResultsBtn" class="d-none"></button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.VNEXSUSApp = window.VNEXSUSApp || {};
+  </script>
+  <script src="components/visualizationComponents.js?v=1.0.9"></script>
+  <script src="components/reportRenderer.js?v=1.0.9"></script>
+  <script src="script.js?v=1.0.10"></script>
+  <script src="dateInput.js?v=1.0.10" type="module"></script>
+  <script src="ai-report.js?v=1.0.10"></script>
 </body>
+
 </html>

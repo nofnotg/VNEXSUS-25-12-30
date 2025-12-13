@@ -27,7 +27,7 @@ export class AdvancedDateController {
 
     try {
       // API 요청 로깅
-      logApiRequest(req, traceId);
+      logApiRequest(traceId, req.method, (req as any).originalUrl ?? req.path ?? '');
 
       // 요청 본문 검증
       if (!req.body || typeof req.body !== 'object') {
@@ -88,8 +88,8 @@ export class AdvancedDateController {
         logger.info({
           event: 'api_success',
           traceId,
-          endpoint: '/api/advanced-date-analysis',
           metadata: {
+            endpoint: '/api/advanced-date-analysis',
             processingTime: Date.now() - startTime,
             extractedCount: result.data?.totalCount || 0,
             inputLength: req.body.text.length
@@ -102,9 +102,12 @@ export class AdvancedDateController {
         logger.warn({
           event: 'service_error',
           traceId,
-          endpoint: '/api/advanced-date-analysis',
-          error: result.error,
+          error: {
+            name: 'ServiceError',
+            message: String(result.error?.message ?? result.error?.code ?? 'Service error')
+          },
           metadata: {
+            endpoint: '/api/advanced-date-analysis',
             processingTime: Date.now() - startTime,
             inputLength: req.body.text.length
           }
@@ -121,20 +124,23 @@ export class AdvancedDateController {
       logger.error({
         event: 'controller_error',
         traceId,
-        endpoint: '/api/advanced-date-analysis',
-        error: (error as Error).message,
-        stack: (error as Error).stack,
+        error: {
+          name: (error as Error).name || 'Error',
+          message: (error as Error).message,
+          stack: (error as Error).stack
+        },
         metadata: {
+          endpoint: '/api/advanced-date-analysis',
           processingTime,
           inputLength: req.body?.text?.length || 0,
           safeInput: createSafeLogString(req.body?.text || '')
         }
       });
 
-      res.status(API_STATUS_CODES.INTERNAL_ERROR).json({
+      res.status(API_STATUS_CODES.INTERNAL_SERVER_ERROR).json({
         success: false,
         error: {
-          code: ERROR_CODES.INTERNAL_ERROR,
+          code: ERROR_CODES.INTERNAL_SERVER_ERROR,
           message: '서버 내부 오류가 발생했습니다'
         },
         metadata: {
@@ -154,7 +160,7 @@ export class AdvancedDateController {
     const startTime = Date.now();
 
     try {
-      logApiRequest(req, traceId);
+      logApiRequest(traceId, req.method, (req as any).originalUrl ?? req.path ?? '');
 
       // 배치 요청 검증
       if (!req.body || !Array.isArray(req.body.texts)) {
@@ -261,8 +267,8 @@ export class AdvancedDateController {
       logger.info({
         event: 'batch_api_success',
         traceId,
-        endpoint: '/api/advanced-date-analysis/batch',
         metadata: {
+          endpoint: '/api/advanced-date-analysis/batch',
           processingTime,
           totalItems: req.body.texts.length,
           successCount,
@@ -291,19 +297,22 @@ export class AdvancedDateController {
       logger.error({
         event: 'batch_controller_error',
         traceId,
-        endpoint: '/api/advanced-date-analysis/batch',
-        error: (error as Error).message,
-        stack: (error as Error).stack,
+        error: {
+          name: (error as Error).name || 'Error',
+          message: (error as Error).message,
+          stack: (error as Error).stack
+        },
         metadata: {
+          endpoint: '/api/advanced-date-analysis/batch',
           processingTime,
           batchSize: req.body?.texts?.length || 0
         }
       });
 
-      res.status(API_STATUS_CODES.INTERNAL_ERROR).json({
+      res.status(API_STATUS_CODES.INTERNAL_SERVER_ERROR).json({
         success: false,
         error: {
-          code: ERROR_CODES.INTERNAL_ERROR,
+          code: ERROR_CODES.INTERNAL_SERVER_ERROR,
           message: '배치 처리 중 서버 내부 오류가 발생했습니다'
         },
         metadata: {
@@ -327,7 +336,7 @@ export class AdvancedDateController {
       const testResult = await this.dateService.extractDates(
         { 
           text: '테스트 날짜: 2024-01-01',
-          options: { maxResults: 1 }
+          options: { includeAbsolute: true }
         },
         traceId
       );
@@ -357,8 +366,8 @@ export class AdvancedDateController {
       logger.info({
         event: 'health_check',
         traceId,
-        endpoint: '/api/advanced-date-analysis/health',
         metadata: {
+          endpoint: '/api/advanced-date-analysis/health',
           processingTime,
           isHealthy,
           testExtractedCount: testResult.data?.totalCount || 0
@@ -371,9 +380,11 @@ export class AdvancedDateController {
       logger.error({
         event: 'health_check_error',
         traceId,
-        endpoint: '/api/advanced-date-analysis/health',
-        error: (error as Error).message,
-        metadata: { processingTime }
+        error: {
+          name: (error as Error).name || 'Error',
+          message: (error as Error).message
+        },
+        metadata: { endpoint: '/api/advanced-date-analysis/health', processingTime }
       });
 
       res.status(API_STATUS_CODES.SERVICE_UNAVAILABLE).json({
@@ -400,16 +411,14 @@ export class AdvancedDateController {
   private getStatusCodeFromError(errorCode?: string): number {
     switch (errorCode) {
       case ERROR_CODES.VALIDATION_ERROR:
-        return API_STATUS_CODES.BAD_REQUEST;
+        return API_STATUS_CODES.VALIDATION_ERROR;
       case ERROR_CODES.PROCESSING_ERROR:
-        return API_STATUS_CODES.UNPROCESSABLE_ENTITY;
+        return API_STATUS_CODES.INTERNAL_SERVER_ERROR;
       case ERROR_CODES.TIMEOUT_ERROR:
-        return API_STATUS_CODES.REQUEST_TIMEOUT;
-      case ERROR_CODES.RATE_LIMIT_ERROR:
-        return API_STATUS_CODES.TOO_MANY_REQUESTS;
-      case ERROR_CODES.INTERNAL_ERROR:
+        return API_STATUS_CODES.TIMEOUT;
+      case ERROR_CODES.INTERNAL_SERVER_ERROR:
       default:
-        return API_STATUS_CODES.INTERNAL_ERROR;
+        return API_STATUS_CODES.INTERNAL_SERVER_ERROR;
     }
   }
 }

@@ -1,0 +1,1624 @@
+{
+  "timestamp": "2025-12-06T02:33:29.446Z",
+  "totalCases": 44,
+  "averageAccuracy": 29.7360619178801,
+  "successRate": 0,
+  "fieldStats": {
+    "dates": {
+      "expected": 449,
+      "found": 65,
+      "rate": 14.476614699331849
+    },
+    "hospitals": {
+      "expected": 132,
+      "found": 67,
+      "rate": 50.75757575757576
+    },
+    "icdCodes": {
+      "expected": 129,
+      "found": 24,
+      "rate": 18.6046511627907
+    },
+    "diagnoses": {
+      "expected": 200,
+      "found": 0,
+      "rate": 0
+    },
+    "treatments": {
+      "expected": 193,
+      "found": 0,
+      "rate": 0
+    },
+    "insurance": {
+      "expected": 52,
+      "found": 43,
+      "rate": 82.6923076923077
+    }
+  },
+  "details": [
+    {
+      "caseNumber": 1,
+      "accuracy": 19.42857142857143,
+      "fields": {
+        "dates": {
+          "expected": 14,
+          "found": 1,
+          "accuracy": 7.142857142857142
+        },
+        "hospitals": {
+          "expected": 5,
+          "found": 2,
+          "accuracy": 40
+        },
+        "icdCodes": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 2,
+      "accuracy": 25,
+      "fields": {
+        "dates": {
+          "expected": 9,
+          "found": 3,
+          "accuracy": 33.33333333333333
+        },
+        "hospitals": {
+          "expected": 3,
+          "found": 2,
+          "accuracy": 66.66666666666666
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 3,
+      "accuracy": 46,
+      "fields": {
+        "dates": {
+          "expected": 10,
+          "found": 3,
+          "accuracy": 30
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "diagnoses": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 5,
+      "accuracy": 27.22222222222222,
+      "fields": {
+        "dates": {
+          "expected": 9,
+          "found": 1,
+          "accuracy": 11.11111111111111
+        },
+        "hospitals": {
+          "expected": 3,
+          "found": 3,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 6,
+      "accuracy": 36.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 10,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 2,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 6,
+          "found": 2,
+          "accuracy": 33.33333333333333
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 7,
+      "accuracy": 19.444444444444443,
+      "fields": {
+        "dates": {
+          "expected": 18,
+          "found": 4,
+          "accuracy": 22.22222222222222
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 8,
+      "accuracy": 52.5,
+      "fields": {
+        "dates": {
+          "expected": 8,
+          "found": 1,
+          "accuracy": 12.5
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 0,
+          "found": 0,
+          "accuracy": 100
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 9,
+      "accuracy": 35.285714285714285,
+      "fields": {
+        "dates": {
+          "expected": 21,
+          "found": 1,
+          "accuracy": 4.761904761904762
+        },
+        "hospitals": {
+          "expected": 5,
+          "found": 4,
+          "accuracy": 80
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 2,
+          "accuracy": 66.66666666666666
+        },
+        "diagnoses": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 10,
+      "accuracy": 15,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 1,
+          "accuracy": 25
+        },
+        "icdCodes": {
+          "expected": 10,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 11,
+      "accuracy": 50.45454545454545,
+      "fields": {
+        "dates": {
+          "expected": 22,
+          "found": 6,
+          "accuracy": 27.27272727272727
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 3,
+          "accuracy": 75
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "diagnoses": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 12,
+      "accuracy": 46.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 6,
+          "found": 2,
+          "accuracy": 33.33333333333333
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 2,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 13,
+      "accuracy": 33,
+      "fields": {
+        "dates": {
+          "expected": 5,
+          "found": 2,
+          "accuracy": 40
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 3,
+          "accuracy": 75
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 14,
+      "accuracy": 40,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 2,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 2,
+          "accuracy": 50
+        },
+        "diagnoses": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 15,
+      "accuracy": 30,
+      "fields": {
+        "dates": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 16,
+      "accuracy": 46.96969696969697,
+      "fields": {
+        "dates": {
+          "expected": 11,
+          "found": 2,
+          "accuracy": 18.181818181818183
+        },
+        "hospitals": {
+          "expected": 3,
+          "found": 2,
+          "accuracy": 66.66666666666666
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 17,
+      "accuracy": 24.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 5,
+          "found": 2,
+          "accuracy": 40
+        },
+        "hospitals": {
+          "expected": 3,
+          "found": 1,
+          "accuracy": 33.33333333333333
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 18,
+      "accuracy": 38.57142857142857,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 3,
+          "accuracy": 42.857142857142854
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 2,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 19,
+      "accuracy": 28.999999999999996,
+      "fields": {
+        "dates": {
+          "expected": 20,
+          "found": 5,
+          "accuracy": 25
+        },
+        "hospitals": {
+          "expected": 5,
+          "found": 1,
+          "accuracy": 20
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 3,
+          "accuracy": 75
+        },
+        "diagnoses": {
+          "expected": 10,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 20,
+      "accuracy": 20,
+      "fields": {
+        "dates": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 21,
+      "accuracy": 30,
+      "fields": {
+        "dates": {
+          "expected": 12,
+          "found": 4,
+          "accuracy": 33.33333333333333
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 6,
+          "found": 1,
+          "accuracy": 16.666666666666664
+        },
+        "diagnoses": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 22,
+      "accuracy": 12.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 14,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 15,
+          "found": 2,
+          "accuracy": 13.333333333333334
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 1,
+          "accuracy": 25
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 12,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 23,
+      "accuracy": 35.714285714285715,
+      "fields": {
+        "dates": {
+          "expected": 14,
+          "found": 4,
+          "accuracy": 28.57142857142857
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 10,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 24,
+      "accuracy": 20,
+      "fields": {
+        "dates": {
+          "expected": 18,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 9,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 25,
+      "accuracy": 50,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 2,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 3,
+          "accuracy": 100
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 26,
+      "accuracy": 37.5,
+      "fields": {
+        "dates": {
+          "expected": 8,
+          "found": 1,
+          "accuracy": 12.5
+        },
+        "hospitals": {
+          "expected": 3,
+          "found": 3,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "diagnoses": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 27,
+      "accuracy": 28.999999999999996,
+      "fields": {
+        "dates": {
+          "expected": 15,
+          "found": 3,
+          "accuracy": 20
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 3,
+          "accuracy": 75
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 28,
+      "accuracy": 26.666666666666668,
+      "fields": {
+        "dates": {
+          "expected": 12,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 1,
+          "accuracy": 33.33333333333333
+        },
+        "diagnoses": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 29,
+      "accuracy": 62.857142857142854,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 1,
+          "accuracy": 14.285714285714285
+        },
+        "hospitals": {
+          "expected": 0,
+          "found": 0,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 0,
+          "found": 0,
+          "accuracy": 100
+        },
+        "treatments": {
+          "expected": 0,
+          "found": 0,
+          "accuracy": 100
+        },
+        "insurance": {
+          "expected": 0,
+          "found": 0,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 30,
+      "accuracy": 30,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 10,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 31,
+      "accuracy": 10,
+      "fields": {
+        "dates": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 32,
+      "accuracy": 32,
+      "fields": {
+        "dates": {
+          "expected": 11,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 5,
+          "found": 3,
+          "accuracy": 60
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "diagnoses": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 33,
+      "accuracy": 20.454545454545453,
+      "fields": {
+        "dates": {
+          "expected": 11,
+          "found": 3,
+          "accuracy": 27.27272727272727
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 1,
+          "accuracy": 25
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 34,
+      "accuracy": 28.999999999999996,
+      "fields": {
+        "dates": {
+          "expected": 15,
+          "found": 3,
+          "accuracy": 20
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 36,
+      "accuracy": 10,
+      "fields": {
+        "dates": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 37,
+      "accuracy": 20,
+      "fields": {
+        "dates": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 2,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 38,
+      "accuracy": 25,
+      "fields": {
+        "dates": {
+          "expected": 18,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 1,
+          "accuracy": 25
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 39,
+      "accuracy": 36.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 3,
+          "found": 1,
+          "accuracy": 33.33333333333333
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 40,
+      "accuracy": 10,
+      "fields": {
+        "dates": {
+          "expected": 7,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "icdCodes": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 2,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 41,
+      "accuracy": 18,
+      "fields": {
+        "dates": {
+          "expected": 11,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 5,
+          "found": 2,
+          "accuracy": 40
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 42,
+      "accuracy": 30,
+      "fields": {
+        "dates": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "hospitals": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 1,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 43,
+      "accuracy": 6.42857142857143,
+      "fields": {
+        "dates": {
+          "expected": 14,
+          "found": 1,
+          "accuracy": 7.142857142857142
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 12,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        }
+      }
+    },
+    {
+      "caseNumber": 44,
+      "accuracy": 20,
+      "fields": {
+        "dates": {
+          "expected": 8,
+          "found": 2,
+          "accuracy": 25
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 1,
+          "accuracy": 25
+        },
+        "icdCodes": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 4,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 8,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 45,
+      "accuracy": 28.888888888888893,
+      "fields": {
+        "dates": {
+          "expected": 9,
+          "found": 4,
+          "accuracy": 44.44444444444444
+        },
+        "hospitals": {
+          "expected": 2,
+          "found": 1,
+          "accuracy": 50
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "diagnoses": {
+          "expected": 5,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    },
+    {
+      "caseNumber": 46,
+      "accuracy": 41.666666666666664,
+      "fields": {
+        "dates": {
+          "expected": 12,
+          "found": 2,
+          "accuracy": 16.666666666666664
+        },
+        "hospitals": {
+          "expected": 4,
+          "found": 3,
+          "accuracy": 75
+        },
+        "icdCodes": {
+          "expected": 3,
+          "found": 2,
+          "accuracy": 66.66666666666666
+        },
+        "diagnoses": {
+          "expected": 6,
+          "found": 0,
+          "accuracy": 0
+        },
+        "treatments": {
+          "expected": 3,
+          "found": 0,
+          "accuracy": 0
+        },
+        "insurance": {
+          "expected": 1,
+          "found": 1,
+          "accuracy": 100
+        }
+      }
+    }
+  ]
+}

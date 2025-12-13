@@ -1,0 +1,67 @@
+{
+  "caseId": "TEST_CASE_001",
+  "timestamp": "2025-12-06T03:24:43.899Z",
+  "original": {
+    "fields": {
+      "hospitals": [
+        {
+          "name": "강북삼성"
+        }
+      ],
+      "diagnoses": [
+        {
+          "diagnosis": "위암"
+        }
+      ],
+      "dates": []
+    }
+  },
+  "corrected": {
+    "fields": {
+      "hospitals": [
+        {
+          "name": "강북삼성병원"
+        }
+      ],
+      "diagnoses": [
+        {
+          "diagnosis": "위암"
+        },
+        {
+          "diagnosis": "고혈압"
+        }
+      ],
+      "dates": [
+        {
+          "normalized": "2025-12-06"
+        }
+      ]
+    }
+  },
+  "diff": {
+    "hasChanges": true,
+    "changeCount": 3,
+    "changes": [
+      {
+        "type": "MODIFY",
+        "field": "hospital",
+        "before": "강북삼성",
+        "after": "강북삼성병원",
+        "reason": "병원명 오타 또는 오인식 수정"
+      },
+      {
+        "type": "ADD",
+        "field": "diagnosis",
+        "value": "고혈압",
+        "reason": "누락된 진단명 추가"
+      },
+      {
+        "type": "ADD",
+        "field": "date",
+        "value": "2025-12-06",
+        "reason": "누락된 날짜 추가"
+      }
+    ],
+    "analyzedAt": "2025-12-06T03:24:43.894Z"
+  }
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Modern Clean</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --accent: #3b82f6;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: #1e293b;
+        }
+
+        .main-header {
+            background: var(--surface);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            background: transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            border-color: transparent;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: var(--surface);
+            margin-bottom: 1.5rem;
+        }
+
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #f1f5f9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Report Styling */
+        .report-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .date-badge-recent {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .date-badge-5yr {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .report-section-title {
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .report-item {
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .report-label {
+            font-weight: 600;
+            color: #475569;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo">🧬 VNEXSUS</div>
+            <div class="text-muted small">v2.0.0 | System Operational</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis"
+                    type="button" role="tab">📄 문서 분석 (Analysis)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
+                    role="tab">📊 요약 및 보고서 (Report)</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Analysis Tab -->
+            <div class="tab-pane fade show active" id="analysis" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card p-4">
+                            <h5 class="fw-bold mb-4">파일 업로드</h5>
+                            <div class="drop-zone mb-4">
+                                <i class="bi bi-cloud-arrow-up-fill fs-1 text-primary mb-3"></i>
+                                <h6 class="fw-bold">드래그 앤 드롭 또는 클릭하여 업로드</h6>
+                                <p class="text-muted small">PDF, JPG, PNG (Max 100MB)</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary px-4">
+                                    <i class="bi bi-play-fill me-2"></i>분석 시작
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4">보험 정보</h5>
+                            <div class="mb-3">
+                                <label class="form-label text-muted small fw-bold">피보험자</label>
+                                <input type="text" class="form-control" placeholder="이름 입력">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted small fw-bold">메모</label>
+                                <textarea class="form-control" rows="3" placeholder="특이사항"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div class="tab-pane fade" id="report" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0">AI 조사 보고서</h4>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2"><i class="bi bi-printer"></i> 인쇄</button>
+                        <button class="btn btn-primary"><i class="bi bi-magic"></i> 보고서 재생성</button>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <div class="report-section-title">1. 병력 요약</div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-recent me-2">3개월 내</span>
+                            <strong class="text-dark">2025.02.17 (강남성심병원)</strong>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● 내원경위:</span> 두통 및 어지럼증 호소
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● 진단명:</span> 기타 명시된 뇌혈관질환 (I67.8)
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-5yr me-2">5년 내</span>
+                            <strong class="text-dark">2023.10.20 (이기섭의원)</strong>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● 내원경위:</span> 일상생활 질환 관리
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● 진단명:</span> 급성후두염 (J04.0), 상세불명의 위염 (K29.7)
+                        </div>
+                    </div>
+
+                    <div class="report-section-title">2. 리스크 평가</div>
+                    <div class="alert alert-warning border-0 bg-warning bg-opacity-10 text-warning-emphasis">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <strong>고지의무 위반 의심:</strong> 가입일(2025.03.01) 직전 3개월 내 뇌혈관질환 진단 이력이 확인됩니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

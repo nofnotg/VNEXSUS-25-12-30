@@ -1,8 +1,8 @@
-import { logger } from '../../shared/logging/logger.js';
-import { mask } from '../../shared/security/mask.js';
+import { logger } from '../../../shared/logging/logger';
+import { mask } from '../../../shared/security/mask';
 import type { CaseFileInfo, OcrResult } from '../types/index.ts';
-import * as pdfProcessor from '../../../backend/utils/pdfProcessor.js';
-import * as visionService from '../../../backend/services/visionService.js';
+import * as pdfProcessor from '../../../../backend/utils/pdfProcessor.js';
+import * as visionService from '../../../../backend/services/visionService.js';
 
 export async function runOcrOnFile(file: CaseFileInfo): Promise<OcrResult> {
   const start = Date.now();
@@ -12,9 +12,11 @@ export async function runOcrOnFile(file: CaseFileInfo): Promise<OcrResult> {
 
     logger.info({
       event: 'OCR_RUN_START',
-      caseId: mask(file.caseId),
-      fileName: mask(file.fileName),
-      useVision,
+      metadata: {
+        caseId: mask(file.caseId),
+        fileName: mask(file.fileName),
+        useVision,
+      },
     });
 
     const result = await pdfProcessor.processPdf(file.filePath, {
@@ -27,13 +29,15 @@ export async function runOcrOnFile(file: CaseFileInfo): Promise<OcrResult> {
     const end = Date.now();
     logger.info({
       event: 'OCR_RUN_COMPLETE',
-      caseId: mask(file.caseId),
-      fileName: mask(file.fileName),
-      durationMs: end - start,
-      textLength: result.textLength,
-      textSource: result.textSource,
-      isScannedPdf: result.isScannedPdf,
-      ocrSource: result.ocrSource,
+      metadata: {
+        caseId: mask(file.caseId),
+        fileName: mask(file.fileName),
+        durationMs: end - start,
+        textLength: result.textLength,
+        textSource: result.textSource,
+        isScannedPdf: result.isScannedPdf,
+        ocrSource: result.ocrSource,
+      },
     });
 
     return {
@@ -49,16 +53,18 @@ export async function runOcrOnFile(file: CaseFileInfo): Promise<OcrResult> {
       error: result.error,
     };
   } catch (error) {
+    const err = error as Error;
     logger.error({
       event: 'OCR_RUN_ERROR',
-      caseId: mask(file.caseId),
-      fileName: mask(file.fileName),
-      error: (error as Error).message,
+      error: { name: err.name, message: err.message, stack: err.stack },
+      metadata: {
+        caseId: mask(file.caseId),
+        fileName: mask(file.fileName),
+      },
     });
     return {
       success: false,
-      error: (error as Error).message,
+      error: err.message,
     };
   }
 }
-

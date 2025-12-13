@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 보험 정보 입력 디자인 제안</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-family: 'Outfit', sans-serif;
+            padding: 2rem;
+            color: var(--text-main);
+        }
+
+        .section-title {
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border-color: #e2e8f0;
+            padding: 0.6rem 0.8rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Proposal A: Card Style */
+        .insurance-card-a {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .insurance-card-a:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .insurance-card-a .card-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Proposal B: Minimal Style */
+        .insurance-row-b {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .insurance-row-b:hover {
+            background: #f8fafc;
+        }
+
+        .insurance-row-b .row-number {
+            background: #f1f5f9;
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Proposal C: Timeline Style */
+        .insurance-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .insurance-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 1rem;
+            bottom: 1rem;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .insurance-timeline-item {
+            position: relative;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            margin-left: 1rem;
+        }
+
+        .insurance-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .insurance-timeline-item .timeline-date {
+            position: absolute;
+            left: -5.5rem;
+            top: 1.1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: right;
+            width: 3.5rem;
+        }
+
+        .btn-glass-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="mb-2 fw-bold"><i class="bi bi-shield-check text-primary me-2"></i>보험 정보 입력 디자인 제안</h2>
+        <p class="text-muted mb-5">손해사정 보고서 생성을 위한 보험 정보 입력 UI 3가지 제안입니다. 각 디자인의 장단점을 비교하여 선택해주세요.</p>
+
+        <!-- ========== PROPOSAL A: Card Style ========== -->
+        <h4 class="section-title">제안 A: 카드 스타일 (Card Style)</h4>
+        <p class="section-subtitle">
+            <strong>특징:</strong> 각 보험 계약을 독립적인 카드로 표현. 시각적 구분이 명확하고 확장성이 좋음.<br>
+            <strong>장점:</strong> 여러 보험사 계약 관리에 용이, 드래그 앤 드롭 순서 변경 가능성<br>
+            <strong>필수 항목:</strong> 환자명, 보험사, 상품명, 가입일, 고지의무 기간
+        </p>
+        <div class="glass-card">
+            <!-- Patient Info -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label class="form-label">환자명 (피보험자)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" value="홍길동">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">생년월일</label>
+                    <input type="date" class="form-control" value="1985-03-15">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">비고 (메모)</label>
+                    <input type="text" class="form-control" placeholder="특이사항 입력">
+                </div>
+            </div>
+
+            <hr class="my-4 opacity-25">
+
+            <!-- Insurance Card 1 -->
+            <div class="insurance-card-a">
+                <span class="card-number">1</span>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">보험사</label>
+                        <select class="form-select">
+                            <option selected>삼성화재</option>
+                            <option>현대해상</option>
+                            <option>메리츠화재</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">상품명</label>
+                        <input type="text" class="form-control" value="무배당 알파Plus보장보험">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">가입일자</label>
+                        <input type="date" class="form-control" value="2020-05-15">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">고지의무 분석 기간</label>
+                        <select class="form-select">
+                            <option selected>전체 분석 (5년/1년/3개월)</option>
+                            <option>5년 이내 (중대질환)</option>
+                            <option>1년 이내 (일반)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">청구 사유</label>
+                        <input type="text" class="form-control" placeholder="예: 입원비, 수술비">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button class="btn btn-outline-danger btn-sm w-100"><i class="bi bi-trash me-1"></i>삭제</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-outline-primary w-100 py-2 mt-2" style="border-style: dashed;">
+                <i class="bi bi-plus-circle me-2"></i>보험 계약 추가
+            </button>
+        </div>
+
+        <!-- ========== PROPOSAL B: Minimal Row Style ========== -->
+        <h4 class="section-title">제안 B: 미니멀 스타일 (Minimal Row)</h4>
+        <p class="section-subtitle">
+            <strong>특징:</strong> 컴팩트한 행(Row) 기반 레이아웃. 많은 정보를 적은 공간에 표시.<br>
+            <strong>장점:</strong> 화면 공간 절약, 빠른 입력 가능, 스크롤 최소화<br>
+            <strong>필수 항목:</strong> 환자명, 보험사, 가입일, 분석 기간
+        </p>
+        <div class="glass-card">
+            <!-- Patient Info Compact -->
+            <div class="d-flex align-items-center gap-3 mb-4 p-3 bg-light rounded-3">
+                <div class="flex-grow-1">
+                    <label class="form-label mb-1 small">환자명</label>
+                    <input type="text" class="form-control form-control-sm" value="홍길동">
+                </div>
+                <div class="flex-grow-1">
+                    <label class="form-label mb-1 small">생년월일</label>
+                    <input type="date" class="form-control form-control-sm" value="1985-03-15">
+                </div>
+                <div class="flex-grow-1">
+                    <label class="form-label mb-1 small">비고</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="메모">
+                </div>
+            </div>
+
+            <!-- Insurance Rows -->
+            <div class="insurance-row-b">
+                <span class="row-number">1</span>
+                <select class="form-select form-select-sm" style="width: 150px;">
+                    <option>삼성화재</option>
+                </select>
+                <input type="text" class="form-control form-control-sm flex-grow-1" placeholder="상품명"
+                    value="무배당 알파Plus">
+                <input type="date" class="form-control form-control-sm" style="width: 140px;" value="2020-05-15">
+                <select class="form-select form-select-sm" style="width: 120px;">
+                    <option>전체</option>
+                    <option>5년</option>
+                    <option>1년</option>
+                </select>
+                <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-x"></i></button>
+            </div>
+
+            <div class="insurance-row-b">
+                <span class="row-number">2</span>
+                <select class="form-select form-select-sm" style="width: 150px;">
+                    <option>현대해상</option>
+                </select>
+                <input type="text" class="form-control form-control-sm flex-grow-1" placeholder="상품명" value="하이카자동차보험">
+                <input type="date" class="form-control form-control-sm" style="width: 140px;" value="2018-11-20">
+                <select class="form-select form-select-sm" style="width: 120px;">
+                    <option>전체</option>
+                </select>
+                <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-x"></i></button>
+            </div>
+
+            <button class="btn btn-sm btn-outline-primary mt-2"><i class="bi bi-plus me-1"></i>추가</button>
+        </div>
+
+        <!-- ========== PROPOSAL C: Timeline Style ========== -->
+        <h4 class="section-title">제안 C: 타임라인 스타일 (Timeline)</h4>
+        <p class="section-subtitle">
+            <strong>특징:</strong> 가입일 기준으로 시간순 정렬된 타임라인 형태. 고지의무 분석과 시각적으로 연결됨.<br>
+            <strong>장점:</strong> 보험 가입 이력을 직관적으로 파악, 보고서와 UI 일관성 유지<br>
+            <strong>필수 항목:</strong> 환자명, 보험사, 상품명, 가입일, 고지의무 기간, 분석 대상 여부
+        </p>
+        <div class="glass-card">
+            <!-- Patient Info -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-5">
+                    <label class="form-label">환자명 / 생년월일</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="홍길동">
+                        <input type="date" class="form-control" value="1985-03-15">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <label class="form-label">비고</label>
+                    <input type="text" class="form-control" placeholder="메모">
+                </div>
+            </div>
+
+            <hr class="my-4 opacity-25">
+
+            <div class="insurance-timeline" style="margin-left: 5rem;">
+                <!-- Timeline Item 1 -->
+                <div class="insurance-timeline-item">
+                    <span class="timeline-date">2020.05</span>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">보험사</label>
+                            <select class="form-select form-select-sm">
+                                <option selected>삼성화재</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">상품명</label>
+                            <input type="text" class="form-control form-control-sm" value="무배당 알파Plus보장보험">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">분석 기간</label>
+                            <select class="form-select form-select-sm">
+                                <option>전체</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" checked>
+                                <label class="form-check-label small text-muted">이 계약에 대해 고지의무 분석 실행</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="insurance-timeline-item">
+                    <span class="timeline-date">2018.11</span>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">보험사</label>
+                            <select class="form-select form-select-sm">
+                                <option selected>현대해상</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">상품명</label>
+                            <input type="text" class="form-control form-control-sm" value="하이카자동차보험">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">분석 기간</label>
+                            <select class="form-select form-select-sm">
+                                <option>5년</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox">
+                                <label class="form-check-label small text-muted">이 계약에 대해 고지의무 분석 실행</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <button class="btn btn-outline-primary"><i class="bi bi-plus-circle me-2"></i>보험 계약 추가</button>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
+        <h4 class="section-title mt-5">디자인 비교 요약</h4>
+        <div class="glass-card">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 20%;">항목</th>
+                        <th>제안 A: 카드</th>
+                        <th>제안 B: 미니멀</th>
+                        <th>제안 C: 타임라인</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">레이아웃</td>
+                        <td>독립 카드 형태</td>
+                        <td>컴팩트 행 형태</td>
+                        <td>시간순 타임라인</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">공간 효율</td>
+                        <td>중간</td>
+                        <td>높음 (가장 컴팩트)</td>
+                        <td>중간</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">입력 필드</td>
+                        <td>6개 (상세)</td>
+                        <td>4개 (필수만)</td>
+                        <td>5개 + 체크박스</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">시각적 특징</td>
+                        <td>번호 배지</td>
+                        <td>번호 배지</td>
+                        <td>날짜 기준 타임라인</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">적합한 경우</td>
+                        <td>다양한 보험 상세 관리</td>
+                        <td>빠른 다량 입력</td>
+                        <td>보고서와 UI 통일</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+{
+    "policies": [
+        {
+            "category": "CANCER",
+            "keywords": [
+                "암",
+                "악성신생물",
+                "C코드"
+            ],
+            "icd_prefixes": [
+                "C"
+            ],
+            "rules": {
+                "responsibility_exemption_days": 90,
+                "reduction_period_years": 1,
+                "reduction_rate": 0.5
+            },
+            "description": "암 진단 시 계약일로부터 90일간 보장 제외, 1년 미만 50% 감액"
+        },
+        {
+            "category": "BRAIN",
+            "keywords": [
+                "뇌졸중",
+                "뇌출혈",
+                "뇌경색",
+                "I6"
+            ],
+            "icd_prefixes": [
+                "I60",
+                "I61",
+                "I62",
+                "I63"
+            ],
+            "rules": {
+                "responsibility_exemption_days": 0,
+                "reduction_period_years": 1,
+                "reduction_rate": 0.5
+            },
+            "description": "뇌혈관질환 진단 시 면책기간 없음, 1년 미만 50% 감액"
+        },
+        {
+            "category": "HEART",
+            "keywords": [
+                "급성심근경색",
+                "허혈성심장질환",
+                "I2"
+            ],
+            "icd_prefixes": [
+                "I20",
+                "I21",
+                "I22",
+                "I23",
+                "I24",
+                "I25"
+            ],
+            "rules": {
+                "responsibility_exemption_days": 0,
+                "reduction_period_years": 1,
+                "reduction_rate": 0.5
+            },
+            "description": "허혈성심장질환 진단 시 면책기간 없음, 1년 미만 50% 감액"
+        }
+    ],
+    "disclosure_duty": {
+        "period_years": 5,
+        "check_windows": [
+            {
+                "label": "3개월 이내",
+                "days": 90,
+                "types": [
+                    "진단",
+                    "의심소견",
+                    "치료",
+                    "입원",
+                    "수술",
+                    "투약"
+                ]
+            },
+            {
+                "label": "1년 이내",
+                "days": 365,
+                "types": [
+                    "재검사",
+                    "추가검사"
+                ]
+            },
+            {
+                "label": "5년 이내",
+                "days": 1825,
+                "types": [
+                    "입원",
+                    "수술",
+                    "7일이상치료",
+                    "30일이상투약",
+                    "10대질병"
+                ]
+            }
+        ]
+    }
+}

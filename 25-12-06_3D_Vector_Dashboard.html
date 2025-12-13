@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 3D Vector Risk Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #1a1a1a; color: #fff; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        h1 { margin: 0; color: #3498db; }
+        .stats { display: flex; gap: 20px; }
+        .stat-card { background: #2c3e50; padding: 10px 20px; border-radius: 5px; text-align: center; }
+        .stat-val { font-size: 24px; font-weight: bold; }
+        .stat-label { font-size: 12px; color: #bdc3c7; }
+        #plot-container { width: 100%; height: 80vh; background: #000; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
+        .legend { margin-top: 20px; display: flex; gap: 20px; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 14px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VNEXSUS 3D Vector Risk Dashboard</h1>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-val" id="total-cases">132</div>
+                    <div class="stat-label">Total Cases</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="high-risk">7</div>
+                    <div class="stat-label">High Risk</div>
+                </div>
+            </div>
+        </header>
+
+        <div id="plot-container"></div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="dot" style="background: #e74c3c;"></div> Violation Risk</div>
+            <div class="legend-item"><div class="dot" style="background: #27ae60;"></div> Payment Target</div>
+            <div class="legend-item"><div class="dot" style="background: #f39c12;"></div> Exemption Target</div>
+            <div class="legend-item"><div class="dot" style="background: #95a5a6;"></div> General Review</div>
+        </div>
+    </div>
+
+    <script>
+        const data = [{"id":"Case1","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case2","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case2_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case3","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case4","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case5","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case6","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case7","x":10,"y":10,"z":9,"type":"PAYMENT_TARGET"},{"id":"Case8","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case9","x":10,"y":-5,"z":10,"type":"VIOLATION_RISK"},{"id":"Case10","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case11","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case12","x":3,"y":10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case13","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case14","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case14_vnexsus","x":3,"y":-10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case15","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case15_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case16","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case16_vnexsus","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case17","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case17_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case18","x":3,"y":0,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case18_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case19","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case19_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case20","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case20_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case21","x":3,"y":-5,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case21_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case22","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case22_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case23","x":10,"y":-5,"z":8,"type":"VIOLATION_RISK"},{"id":"Case23_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case24","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case24_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case25","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case25_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case26","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case26_vnexsus","x":10,"y":10,"z":3,"type":"PAYMENT_TARGET"},{"id":"Case27","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case27_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case28","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case28_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case29","x":3,"y":10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case29_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case30","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case30_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case31","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case31_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case32","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case33","x":3,"y":-5,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case33_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case34","x":10,"y":-10,"z":10,"type":"VIOLATION_RISK"},{"id":"Case34_vnexsus","x":10,"y":-10,"z":3,"type":"VIOLATION_RISK"},{"id":"Case36","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case36_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case37","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case37_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case38","x":10,"y":-10,"z":10,"type":"VIOLATION_RISK"},{"id":"Case38_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case39","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case39_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case40","x":3,"y":10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case40_vnexus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case41","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case41_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case42","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case42_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case43","x":3,"y":-5,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case43_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case44","x":10,"y":10,"z":8,"type":"PAYMENT_TARGET"},{"id":"Case44_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case45","x":9,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case45_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case46","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case46_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case1","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case2","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case2_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case1","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case2","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case2_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case3","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case4","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case5","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case6","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case7","x":10,"y":10,"z":9,"type":"PAYMENT_TARGET"},{"id":"Case8","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case9","x":10,"y":-5,"z":10,"type":"VIOLATION_RISK"},{"id":"Case10","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case11","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case12","x":3,"y":10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case13","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case14","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case14_vnexsus","x":3,"y":-10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case15","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case15_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case16","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case16_vnexsus","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case17","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case17_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case18","x":3,"y":0,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case18_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case19","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case19_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case20","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case20_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case21","x":3,"y":-5,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case21_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case22","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case22_vnexsus","x":3,"y":-10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case23","x":10,"y":-5,"z":8,"type":"VIOLATION_RISK"},{"id":"Case23_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case24","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case24_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case25","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case25_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case26","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case26_vnexsus","x":10,"y":10,"z":3,"type":"PAYMENT_TARGET"},{"id":"Case27","x":10,"y":10,"z":10,"type":"PAYMENT_TARGET"},{"id":"Case27_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case28","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case28_vnexsus","x":3,"y":-5,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case29","x":3,"y":10,"z":8,"type":"GENERAL_REVIEW"},{"id":"Case29_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case30","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case30_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case31","x":3,"y":10,"z":9,"type":"GENERAL_REVIEW"},{"id":"Case31_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"},{"id":"Case32","x":3,"y":10,"z":10,"type":"GENERAL_REVIEW"},{"id":"Case32_vnexsus","x":3,"y":10,"z":3,"type":"GENERAL_REVIEW"}];
+
+        function renderChart(data) {
+            const traces = {};
+            const colors = {
+                'VIOLATION_RISK': '#e74c3c',
+                'PAYMENT_TARGET': '#27ae60',
+                'EXEMPTION_TARGET': '#f39c12',
+                'GENERAL_REVIEW': '#95a5a6',
+                'N/A': '#333333'
+            };
+
+            data.forEach(item => {
+                if (!traces[item.type]) {
+                    traces[item.type] = {
+                        x: [], y: [], z: [],
+                        text: [],
+                        mode: 'markers',
+                        type: 'scatter3d',
+                        name: item.type,
+                        marker: { size: 8, color: colors[item.type] || '#fff', opacity: 0.8 }
+                    };
+                }
+                traces[item.type].x.push(item.x);
+                traces[item.type].y.push(item.y);
+                traces[item.type].z.push(item.z);
+                traces[item.type].text.push(`Case: ${item.id}<br>Type: ${item.type}<br>Coord: [${item.x}, ${item.y}, ${item.z}]`);
+            });
+
+            const layout = {
+                margin: { l: 0, r: 0, b: 0, t: 0 },
+                paper_bgcolor: '#000',
+                plot_bgcolor: '#000',
+                scene: {
+                    xaxis: { title: 'Severity (X)', range: [0, 10], gridcolor: '#444' },
+                    yaxis: { title: 'Temporal (Y)', range: [-10, 10], gridcolor: '#444' },
+                    zaxis: { title: 'Certainty (Z)', range: [0, 10], gridcolor: '#444' },
+                    camera: { eye: { x: 1.5, y: 1.5, z: 1.5 } }
+                },
+                legend: { x: 0, y: 1, font: { color: '#fff' } }
+            };
+
+            Plotly.newPlot('plot-container', Object.values(traces), layout);
+        }
+
+        renderChart(data);
+    </script>
+</body>
+</html>
+  

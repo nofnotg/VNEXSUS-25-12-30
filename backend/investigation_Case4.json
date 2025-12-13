@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "caseId": "Case4",
+    "generatedAt": "2025-12-06T04:15:33.668Z",
+    "investigator": "VNEXSUS AI Investigator"
+  },
+  "riskLevel": "HIGH",
+  "riskScore": 38,
+  "summary": "[Risk Level: HIGH] ⚠️ 고지의무 위반 의심: 가입 전 17건의 진료 기록 발견. 🏥 의료쇼핑 의심: 30일 내 2개 병원 방문. 📈 질환 진행성: 만성적 또는 진행성 패턴 확인됨.",
+  "details": {
+    "progressivity": {
+      "status": "PROGRESSIVE/CHRONIC",
+      "evidence": "Visited 4 times over NaN days. High frequency or long duration suggests chronic condition.",
+      "timeline": "2024-12-30 ~ 4051-46-16 (4 visits)"
+    },
+    "disclosure": {
+      "hasViolation": true,
+      "violationCount": 17,
+      "violations": [
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-25",
+          "type": "DIAGNOSIS",
+          "details": "병력 및, CARCINOMA, carcinoma",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-28",
+          "type": "DIAGNOSIS",
+          "details": "보고서",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-30",
+          "type": "DIAGNOSIS",
+          "details": "1. Ascending colon cancer, 1. Ascending colon cancer, cancer, cancer, Tumor",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-26",
+          "type": "DIAGNOSIS",
+          "details": "점막하종양이",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-26",
+          "type": "DIAGNOSIS",
+          "details": "점막하종양이",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-15",
+          "type": "DIAGNOSIS",
+          "details": "(A), 대장암, 노년골다공증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-19",
+          "type": "DIAGNOSIS",
+          "details": "합병증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-19",
+          "type": "DIAGNOSIS",
+          "details": "합병증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-19",
+          "type": "DIAGNOSIS",
+          "details": "상피하종양, 만성위축성위염",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-25",
+          "type": "DIAGNOSIS",
+          "details": "병력 및",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-26",
+          "type": "DIAGNOSIS",
+          "details": "CARCINOMA",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-11-26",
+          "type": "DIAGNOSIS",
+          "details": "(A), carcinoma, tumor, carcinoma",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-28",
+          "type": "DIAGNOSIS",
+          "details": "합병증, 관련질환",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-30",
+          "type": "DIAGNOSIS",
+          "details": "cancer",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-30",
+          "type": "DIAGNOSIS",
+          "details": "tumor",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-11",
+          "type": "DIAGNOSIS",
+          "details": "carcinoma",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2024-12-13",
+          "type": "DIAGNOSIS",
+          "details": "cancer",
+          "hospital": "Unknown Hospital"
+        }
+      ]
+    },
+    "doctorShopping": {
+      "isSuspicious": true,
+      "maxHospitals": 2,
+      "evidence": "Visited 2 different hospitals within 30 days."
+    }
+  }
+}

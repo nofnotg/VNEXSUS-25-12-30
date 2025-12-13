@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXIS 검증 보고서 및 2차 개선 PRD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+            margin: 3rem 0 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            font-weight: 700;
+            padding: 1.25rem;
+        }
+
+        .diff-added {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .diff-removed {
+            background-color: #fee2e2;
+            color: #991b1b;
+            text-decoration: line-through;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="fw-bold mb-2">VNEXIS 검증 보고서 및 2차 개선 PRD</h1>
+            <p class="opacity-75 mb-0">전체 46개 케이스 일괄 검증 결과 및 서비스 고도화 전략</p>
+            <div class="mt-3">
+                <span class="badge bg-light text-primary">Target: Batch Verification (46 Cases)</span>
+                <span class="badge bg-light text-primary">Phase: 2nd Improvement</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+
+        <!-- 1. 검증 개요 -->
+        <h2 class="section-title">1. 검증 개요 (Verification Overview)</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-primary">테스트 대상</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Input:</strong>
+                                <code>src/rag/case_sample/Case1 ~ Case46</code> (Total 46 Cases)
+                            </li>
+                            <li class="list-group-item"><strong>Target:</strong>
+                                <code>*_report.txt</code> (Expert Investigator Reports)
+                            </li>
+                            <li class="list-group-item"><strong>Engine:</strong> VNEXSUS Core Engine (v2.0)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 border-start">
+                        <h5 class="fw-bold text-primary">검증 목표</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">1. 대량 데이터(46건) 처리를 통한 시스템 안정성 검증</li>
+                            <li class="list-group-item">2. 현행 엔진과 전문가 보고서 간의 구조적 간극 정량화</li>
+                            <li class="list-group-item">3. 2차 고도화(RAG, Timeline) 필요성 실증</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 비교 분석 결과 -->
+        <h2 class="section-title">2. 비교 분석 결과 (Batch Verification Analysis)</h2>
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>전체 46개 케이스 일괄 검증 결과</span>
+                    <span class="badge bg-primary">Total Cases: 46</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4 text-center">
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded bg-light">
+                            <h3 class="text-success fw-bold">100%</h3>
+                            <div class="text-muted small">API Success Rate</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded bg-light">
+                            <h3 class="text-danger fw-bold">0.05</h3>
+                            <div class="text-muted small">Avg Similarity Score</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded bg-light">
+                            <h3 class="text-primary fw-bold">25s</h3>
+                            <div class="text-muted small">Avg Processing Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="fw-bold mt-4 mb-3">주요 발견 사항 (Key Findings)</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>분석 항목</th>
+                                <th>현상 (Current Status)</th>
+                                <th>원인 (Root Cause)</th>
+                                <th>개선 방향 (Action Item)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>구조적 차이</strong></td>
+                                <td>유사도 0.05 미만으로 매우 낮음</td>
+                                <td>단순 요약 vs 전문 조사 보고서 양식 차이</td>
+                                <td class="text-primary">전문 보고서 템플릿 적용 및 섹션별 생성</td>
+                            </tr>
+                            <tr>
+                                <td><strong>판단 로직</strong></td>
+                                <td>단순 사실 나열에 그침</td>
+                                <td>약관/규정 기반의 판단 엔진 부재</td>
+                                <td class="text-danger"><strong>Policy RAG</strong> 도입으로 판단 근거 확보</td>
+                            </tr>
+                            <tr>
+                                <td><strong>시계열 분석</strong></td>
+                                <td>파편화된 날짜 정보</td>
+                                <td>진료 기록의 시간적 재구성 로직 미흡</td>
+                                <td class="text-success"><strong>Medical Timeline</strong> 모듈 개발</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert alert-danger mt-3">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>결론:</strong> 46개 전수 검사 결과, 현재 엔진은 <strong>"데이터 추출"</strong> 단계에는 성공했으나, 조사관 수준의 <strong>"전문적
+                        판단 및 보고서 작성"</strong> 단계에는 도달하지 못했습니다. 아래 <strong>2차 개선 PRD</strong>의 실행이 시급합니다.
+                </div>
+
+                <div class="text-end mt-2">
+                    <a href="Batch_Verification_Report.html" class="btn btn-sm btn-outline-secondary" target="_blank">
+                        <i class="bi bi-file-earmark-bar-graph"></i> 상세 배치 리포트 보기
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 2차 개선 PRD -->
+        <h2 class="section-title">3. 2차 개선 PRD (2nd Improvement Plan)</h2>
+
+        <!-- Feature 1: Advanced RAG -->
+        <div class="card border-primary mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="bi bi-database-fill-gear me-2"></i>Feature 1: 약관 기반 RAG 시스템 (Policy RAG)
+            </div>
+            <div class="card-body">
+                <h6 class="fw-bold">Objective</h6>
+                <p>단순 요약을 넘어, 해당 보험 상품의 약관과 비교하여 <strong>지급/부지급 논리</strong>를 자동으로 생성합니다.</p>
+
+                <h6 class="fw-bold mt-3">Tasks</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <input type="checkbox" disabled> <strong>T-201:</strong> 보험 약관 DB 구축 (PDF 파싱 및 Vector DB 적재)
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" disabled> <strong>T-202:</strong> 고지의무 위반 판단 프롬프트 고도화 (인과관계 분석 추가)
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" disabled> <strong>T-203:</strong> 유사 판례 검색 시스템 연동
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature 2: Medical Timeline -->
+        <div class="card border-success mb-4">
+            <div class="card-header bg-success text-white">
+                <i class="bi bi-calendar-week me-2"></i>Feature 2: 메디컬 타임라인 (Medical Timeline)
+            </div>
+            <div class="card-body">
+                <h6 class="fw-bold">Objective</h6>
+                <p>흩어진 진료 기록을 <strong>시간 순서대로 재구성</strong>하여, 고지의무 위반 여부를 한눈에 파악할 수 있게 합니다.</p>
+
+                <h6 class="fw-bold mt-3">Tasks</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <input type="checkbox" disabled> <strong>T-204:</strong> 날짜 추출 및 정규화 모듈 개선 (YYYY.MM.DD 포맷 통일)
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" disabled> <strong>T-205:</strong> 타임라인 시각화 UI 개발 (Gantt Chart 형태)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. 상세 일정 (Schedule) -->
+        <h2 class="section-title">4. 상세 일정 (Schedule)</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="mermaid">
+                    gantt
+                    title 2nd Improvement Roadmap
+                    dateFormat YYYY-MM-DD
+                    axisFormat %m-%d
+
+                    section RAG System
+                    약관 DB 구축 :active, t1, 2025-12-07, 3d
+                    판단 로직 구현 :t2, after t1, 4d
+
+                    section Timeline
+                    날짜 정규화 :t3, 2025-12-07, 2d
+                    시각화 UI :t4, after t3, 3d
+
+                    section Integration
+                    통합 테스트 :t5, after t2, 3d
+                    배포 :t6, after t5, 1d
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+
+</html>

@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Batch Verification Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding: 20px; background: #f8fafc; }
+        .card { margin-bottom: 20px; border: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .status-success { color: #16a34a; font-weight: bold; }
+        .status-fail { color: #dc2626; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Batch Verification Report</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h3>45</h3>
+                    <div class="text-muted">Total Cases</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h3 class="text-success">45</h3>
+                    <div class="text-muted">Success</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h3 class="text-danger">0</h3>
+                    <div class="text-muted">Failed</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 text-center">
+                    <h3>25.84s</h3>
+                    <div class="text-muted">Avg Duration</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Status</th>
+                            <th>Duration</th>
+                            <th>Reference</th>
+                            <th>Similarity</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td>Case1</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.77s</td>
+                                <td>✅</td>
+                                <td>0.0340</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case2</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.47s</td>
+                                <td>✅</td>
+                                <td>0.0665</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case3</td>
+                                <td class="status-success">PASS</td>
+                                <td>12.99s</td>
+                                <td>✅</td>
+                                <td>0.0849</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case4</td>
+                                <td class="status-success">PASS</td>
+                                <td>15.02s</td>
+                                <td>❌</td>
+                                <td>0.0000</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case5</td>
+                                <td class="status-success">PASS</td>
+                                <td>19.47s</td>
+                                <td>✅</td>
+                                <td>0.0420</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case6</td>
+                                <td class="status-success">PASS</td>
+                                <td>20.13s</td>
+                                <td>✅</td>
+                                <td>0.0931</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case7</td>
+                                <td class="status-success">PASS</td>
+                                <td>30.39s</td>
+                                <td>✅</td>
+                                <td>0.0622</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case8</td>
+                                <td class="status-success">PASS</td>
+                                <td>53.38s</td>
+                                <td>✅</td>
+                                <td>0.0495</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case9</td>
+                                <td class="status-success">PASS</td>
+                                <td>58.35s</td>
+                                <td>✅</td>
+                                <td>0.0518</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case10</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.46s</td>
+                                <td>✅</td>
+                                <td>0.0538</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case11</td>
+                                <td class="status-success">PASS</td>
+                                <td>71.46s</td>
+                                <td>✅</td>
+                                <td>0.0451</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case12</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.16s</td>
+                                <td>✅</td>
+                                <td>0.0176</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case13</td>
+                                <td class="status-success">PASS</td>
+                                <td>24.50s</td>
+                                <td>✅</td>
+                                <td>0.0560</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case14</td>
+                                <td class="status-success">PASS</td>
+                                <td>13.16s</td>
+                                <td>✅</td>
+                                <td>0.0036</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case15</td>
+                                <td class="status-success">PASS</td>
+                                <td>5.80s</td>
+                                <td>✅</td>
+                                <td>0.0041</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case16</td>
+                                <td class="status-success">PASS</td>
+                                <td>14.57s</td>
+                                <td>✅</td>
+                                <td>0.0833</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case17</td>
+                                <td class="status-success">PASS</td>
+                                <td>13.10s</td>
+                                <td>✅</td>
+                                <td>0.0541</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case18</td>
+                                <td class="status-success">PASS</td>
+                                <td>19.66s</td>
+                                <td>✅</td>
+                                <td>0.0718</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case19</td>
+                                <td class="status-success">PASS</td>
+                                <td>18.86s</td>
+                                <td>✅</td>
+                                <td>0.0918</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case20</td>
+                                <td class="status-success">PASS</td>
+                                <td>52.58s</td>
+                                <td>✅</td>
+                                <td>0.0588</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case21</td>
+                                <td class="status-success">PASS</td>
+                                <td>52.11s</td>
+                                <td>✅</td>
+                                <td>0.0491</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case22</td>
+                                <td class="status-success">PASS</td>
+                                <td>88.20s</td>
+                                <td>✅</td>
+                                <td>0.0376</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case23</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.76s</td>
+                                <td>✅</td>
+                                <td>0.0682</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case24</td>
+                                <td class="status-success">PASS</td>
+                                <td>15.91s</td>
+                                <td>✅</td>
+                                <td>0.0568</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case25</td>
+                                <td class="status-success">PASS</td>
+                                <td>11.35s</td>
+                                <td>✅</td>
+                                <td>0.0685</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case26</td>
+                                <td class="status-success">PASS</td>
+                                <td>13.89s</td>
+                                <td>✅</td>
+                                <td>0.0632</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case27</td>
+                                <td class="status-success">PASS</td>
+                                <td>13.80s</td>
+                                <td>✅</td>
+                                <td>0.0032</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case28</td>
+                                <td class="status-success">PASS</td>
+                                <td>14.88s</td>
+                                <td>✅</td>
+                                <td>0.0712</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case29</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.20s</td>
+                                <td>✅</td>
+                                <td>0.0109</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case30</td>
+                                <td class="status-success">PASS</td>
+                                <td>17.49s</td>
+                                <td>✅</td>
+                                <td>0.0364</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case31</td>
+                                <td class="status-success">PASS</td>
+                                <td>56.01s</td>
+                                <td>✅</td>
+                                <td>0.0135</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case32</td>
+                                <td class="status-success">PASS</td>
+                                <td>23.76s</td>
+                                <td>✅</td>
+                                <td>0.0110</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case33</td>
+                                <td class="status-success">PASS</td>
+                                <td>19.33s</td>
+                                <td>✅</td>
+                                <td>0.0566</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case34</td>
+                                <td class="status-success">PASS</td>
+                                <td>39.34s</td>
+                                <td>✅</td>
+                                <td>0.0496</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case36</td>
+                                <td class="status-success">PASS</td>
+                                <td>53.81s</td>
+                                <td>✅</td>
+                                <td>0.0419</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case37</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.16s</td>
+                                <td>✅</td>
+                                <td>0.0811</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case38</td>
+                                <td class="status-success">PASS</td>
+                                <td>19.43s</td>
+                                <td>✅</td>
+                                <td>0.0307</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case39</td>
+                                <td class="status-success">PASS</td>
+                                <td>21.20s</td>
+                                <td>✅</td>
+                                <td>0.0318</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case40</td>
+                                <td class="status-success">PASS</td>
+                                <td>30.23s</td>
+                                <td>✅</td>
+                                <td>0.0491</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case41</td>
+                                <td class="status-success">PASS</td>
+                                <td>18.73s</td>
+                                <td>✅</td>
+                                <td>0.0568</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case42</td>
+                                <td class="status-success">PASS</td>
+                                <td>17.06s</td>
+                                <td>✅</td>
+                                <td>0.0779</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case43</td>
+                                <td class="status-success">PASS</td>
+                                <td>18.18s</td>
+                                <td>✅</td>
+                                <td>0.0671</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case44</td>
+                                <td class="status-success">PASS</td>
+                                <td>18.89s</td>
+                                <td>✅</td>
+                                <td>0.0640</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case45</td>
+                                <td class="status-success">PASS</td>
+                                <td>16.10s</td>
+                                <td>✅</td>
+                                <td>0.0599</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Case46</td>
+                                <td class="status-success">PASS</td>
+                                <td>24.55s</td>
+                                <td>✅</td>
+                                <td>0.0496</td>
+                                <td class="text-danger"></td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    

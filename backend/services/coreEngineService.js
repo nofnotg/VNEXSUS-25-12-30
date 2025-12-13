@@ -14,6 +14,8 @@ import { AppError, CoreEngineError, handleCoreEngineError } from '../middleware/
 
 import { globalMemoryOptimizer } from '../utils/memoryOptimizer.js';
 import { globalStreamOptimizer } from './streamProcessingOptimizer.js';
+import vectorEvaluationService from './VectorEvaluationService.js';
+import writerAgentService from './WriterAgentService.js';
 import { globalLargeFileHandler } from './largeFileHandler.js';
 
 // 새로운 파이프라인 상태 머신 임포트
@@ -118,6 +120,121 @@ class CoreEngineService {
    * @param {ReadableStream} input.stream - 대용량 파일 스트림 (선택사항)
    * @returns {Object} 분석 결과 (skeleton JSON 포함)
    */
+  /**
+   * 팩트 추출: 날짜 (YYYY-MM-DD)
+   * @param {string} text - 분석할 텍스트
+   * @returns {Array} 추출된 날짜 배열
+   */
+  extractDates(text) {
+    const dateRegex = /\b(20\d{2})[-.](0[1-9]|1[0-2])[-.](0[1-9]|[12]\d|3[01])\b/g;
+    const matches = text.match(dateRegex) || [];
+    // 중복 제거 및 정렬
+    return [...new Set(matches)].sort();
+  }
+
+  /**
+   * 팩트 추출: 병원명 (정규화)
+   * @param {string} text - 분석할 텍스트
+   * @returns {Array} 추출된 병원명 배열
+   */
+  extractHospitals(text) {
+    const hospitalRegex = /([가-힣]+(?:병원|의원|클리닉|센터))/g;
+    const matches = text.match(hospitalRegex) || [];
+
+    // 병원명 정규화 맵
+    const normalizationMap = {
+      "강남성심병원": "한림대학교 강남성심병원",
+      "성심병원": "한림대학교 강남성심병원",
+      "내당최내과": "내당최내과의원",
+      "이기섭의원": "이기섭의원"
+    };
+
+    const normalized = matches.map(name => normalizationMap[name] || name);
+    return [...new Set(normalized)].sort();
+  }
+
+  /**
+   * 정책 DB 로드 (Phase 2)
+   */
+  loadPolicyDatabase() {
+    if (this.policyDB) return this.policyDB;
+    try {
+      const policyPath = path.join(process.cwd(), 'backend/config/policyDatabase.json');
+      if (fs.existsSync(policyPath)) {
+        this.policyDB = JSON.parse(fs.readFileSync(policyPath, 'utf8'));
+        this.logger.info('정책 DB 로드 완료');
+      } else {
+        this.logger.warn('정책 DB 파일을 찾을 수 없습니다: ' + policyPath);
+        this.policyDB = { policies: [], disclosure_duty: {} };
+      }
+    } catch (e) {
+      this.logger.error('정책 DB 로드 실패', e);
+      this.policyDB = { policies: [], disclosure_duty: {} };
+    }
+    return this.policyDB;
+  }
+
+  /**
+   * D-Day 계산 (Phase 2)
+   * @param {string} targetDate - 대상 날짜 (YYYY-MM-DD)
+   * @param {string} baseDate - 기준 날짜 (계약일) (YYYY-MM-DD)
+   * @returns {number} 일수 차이 (target - base)
+   */
+  calculateDDay(targetDate, baseDate) {
+    if (!targetDate || !baseDate) return null;
+    const target = new Date(targetDate);
+    const base = new Date(baseDate);
+    const diffTime = target - base;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  /**
+   * 고지의무 위반 및 보장 면책 확인 (Phase 2)
+   * @param {Object} event - MedicalEvent 객체
+   * @param {string} contractDate - 계약일
+   * @returns {Object} 판단 결과 { isViolation, isExemption, reason }
+   */
+  checkJudgment(event, contractDate) {
+    const db = this.loadPolicyDatabase();
+    const dDay = this.calculateDDay(event.date, contractDate);
+
+    if (dDay === null) return { type: 'UNKNOWN', message: '날짜 정보 부족' };
+
+    // 1. 고지의무 위반 (계약 전 발생)
+    if (dDay < 0) {
+      // 5년 이내 체크 등 세부 로직은 여기서 확장
+      return {
+        type: 'VIOLATION_RISK',
+        message: `계약 전 ${Math.abs(dDay)}일 발생 (고지의무 위반 가능성)`,
+        dDay
+      };
+    }
+
+    // 2. 면책 기간 확인 (암 등)
+    // 이벤트 내용에서 질병 키워드 매칭
+    const contentStr = JSON.stringify(event.content || {});
+    for (const policy of db.policies) {
+      if (policy.keywords.some(k => contentStr.includes(k))) {
+        if (dDay <= policy.rules.responsibility_exemption_days) {
+          return {
+            type: 'EXEMPTION',
+            message: `${policy.category} 면책 기간 내 발생 (${dDay}일 경과, 기준: ${policy.rules.responsibility_exemption_days}일)`,
+            dDay
+          };
+        }
+      }
+    }
+
+    return { type: 'SAFE', message: `계약 후 ${dDay}일 경과`, dDay };
+  }
+
+  /**
+   * 새로운 코어 엔진 분석 메서드 (HybridNER 적용)
+   * @param {Object} input - 분석 입력 데이터
+   * @param {string} input.text - 분석할 텍스트
+   * @returns {Object} 분석 결과 (MedicalEvent 구조)
+   */
+
   async analyze(input) {
     if (!this.isEnabled) {
       this.logger.debug('코어 엔진 비활성화됨, 분석 건너뜀');
@@ -136,8 +253,8 @@ class CoreEngineService {
         throw new CoreEngineError('입력 데이터가 필요합니다', 'analyze', 'input-validation');
       }
 
-      if (!input.text && !input.textSegments && !input.stream) {
-        throw new CoreEngineError('텍스트, 텍스트 세그먼트 또는 스트림이 필요합니다', 'analyze', 'input-validation');
+      if (!input.text && !input.textSegments && !input.stream && !input.filePath) {
+        throw new CoreEngineError('텍스트, 텍스트 세그먼트, 스트림 또는 파일 경로가 필요합니다', 'analyze', 'input-validation');
       }
 
       this.logger.info('코어 엔진 분석 시작', {
@@ -294,15 +411,28 @@ class CoreEngineService {
       // 템플릿 매칭 및 전처리 실행 (Phase 4)
       this.logger.info('템플릿 매칭 및 전처리 실행 중...');
       try {
+        // 1. Regex Extraction (Phase 1 Logic Restoration)
+        const regexRecords = this.runRegexExtraction(processedInput.text);
+
+        // 2. Preprocessor (Template Matching)
         const preprocessedData = await preprocessor.run(processedInput.text, {
           enableTemplateCache: true
         });
 
         processedInput.preprocessedData = preprocessedData;
-        processedInput.parsedRecords = preprocessedData; // 검증 스크립트 호환성
+
+        // Merge Regex results with Preprocessor results
+        // Prioritize Regex for dates, but Preprocessor might have better structure.
+        if (preprocessedData.length > 0) {
+          // Merge both to ensure we don't miss anything
+          processedInput.parsedRecords = preprocessedData.concat(regexRecords);
+        } else {
+          processedInput.parsedRecords = regexRecords;
+          this.logger.info('전처리 결과 없음, Regex 추출 결과 사용', { count: regexRecords.length });
+        }
 
         this.logger.info('전처리 완료', {
-          sectionCount: preprocessedData.length,
+          sectionCount: processedInput.parsedRecords.length,
           hospital: preprocessedData[0]?.hospital,
           date: preprocessedData[0]?.date
         });
@@ -333,9 +463,52 @@ class CoreEngineService {
         performance: performanceData
       });
 
+      // 3D Vector Evaluation
+      let vectorResult = null;
+      let generatedReport = null;
+
+      let events = [];
+      if (result.skeletonJson && result.skeletonJson.reportItems) {
+        events = result.skeletonJson.reportItems.map(item => ({
+          date: item.date,
+          content: item.description || item.title
+        }));
+      } else if (result.parsedRecords && Array.isArray(result.parsedRecords)) {
+        // Fallback to parsedRecords (Phase 1 output)
+        events = result.parsedRecords.map(item => ({
+          date: item.date,
+          content: item.content || item.originalText || item.description || item.title || item.body || item.text || '내용 없음'
+        }));
+      } else if (result.timeline && Array.isArray(result.timeline.events)) {
+        // Fallback to timeline.events if available
+        events = result.timeline.events.map(item => ({
+          date: item.date,
+          content: item.content || item.description
+        }));
+      }
+
+      if (events.length > 0) {
+        // Use contract date from input or default
+        const contractDate = input.contractDate || '2024-01-01'; // Default or extracted
+        console.log('DEBUG: events length:', events.length);
+        if (events.length > 0) console.log('DEBUG: First event:', events[0]);
+        vectorResult = vectorEvaluationService.evaluate(events, contractDate);
+
+        // Phase 3: Writer Agent (Async Real LLM)
+        try {
+          generatedReport = await writerAgentService.generateReport(vectorResult, contractDate, events, processedInput.text);
+        } catch (err) {
+          console.error('Writer Agent Failed:', err);
+          generatedReport = "보고서 생성 실패";
+        }
+      }
+
       return {
         coreEngineUsed: true,
         ...result,
+        vectorEvaluation: vectorResult,
+        generatedReport: generatedReport,
+        events: events, // Expose Superset for Verification
         timestamp: new Date().toISOString()
       };
 
@@ -951,6 +1124,34 @@ ${ragResult.documentAnalysis?.summary || '분석 결과 없음'}
 `;
 
     return originalPrompt + ragInfo;
+  }
+
+  /**
+   * Regex based extraction (Phase 1 Logic)
+   * Enhanced for Superset Extraction (captures all dates)
+   */
+  runRegexExtraction(text) {
+    if (!text) return [];
+
+    const records = [];
+    const lines = text.split('\n');
+    // Enhanced Regex to capture YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD
+    const dateRegex = /(\d{4})[-./](\d{2})[-./](\d{2})/;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      const dateMatch = line.match(dateRegex);
+
+      if (dateMatch) {
+        records.push({
+          date: dateMatch[0].replace(/[./]/g, '-'), // Normalize to YYYY-MM-DD
+          content: line,
+          originalText: line,
+          source: 'regex'
+        });
+      }
+    }
+    return records;
   }
 }
 

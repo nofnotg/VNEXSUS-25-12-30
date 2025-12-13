@@ -726,4 +726,4 @@ class DynamicValidationEngine {
     }
 }
 
-module.exports = DynamicValidationEngine;
+export default DynamicValidationEngine;

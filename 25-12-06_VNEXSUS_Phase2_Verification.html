@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS Phase 2 검증 보고서</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .badge-phase {
+            font-size: 0.9em;
+            padding: 0.4em 0.8em;
+            border-radius: 20px;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="fw-bold mb-2">VNEXSUS Phase 2 검증 보고서</h1>
+                    <p class="text-muted mb-0">Feedback Loop (Human-in-the-Loop) 구현 결과</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-warning text-dark mb-2">Phase 2 Complete</span><br>
+                    <small class="text-muted">2025-12-06</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <!-- 1. 핵심 성과 -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">학습된 패턴</div>
+                    <div class="metric-value text-primary">2<small class="fs-6 text-muted">건</small></div>
+                    <div class="text-success fw-bold">오타 자동 학습 성공</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">프롬프트 최적화</div>
+                    <div class="metric-value text-success">Dynamic</div>
+                    <div class="text-muted">실시간 예시 주입</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">시스템 상태</div>
+                    <div class="metric-value text-info">Active</div>
+                    <div class="text-muted">자가 발전(Self-Improving)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Feedback Loop 메커니즘 -->
+        <div class="card mb-4">
+            <div class="card-header bg-white fw-bold">Feedback Loop 동작 원리</div>
+            <div class="card-body">
+                <div class="mermaid">
+                    sequenceDiagram
+                    participant User as 사용자 (Frontend)
+                    participant API as Correction API
+                    participant Diff as Diff Analyzer
+                    participant DB as Mistake DB
+                    participant AI as Prompt Engine
+
+                    User->>API: 1. 수정 데이터 전송 (강북삼성 -> 강북삼성병원)
+                    API->>Diff: 2. 차이 분석 (Original vs Corrected)
+                    Diff-->>API: 3. 패턴 발견 (MODIFY: Hospital)
+                    API->>DB: 4. 오답 노트 저장 ("강북삼성": "강북삼성병원")
+                    DB->>AI: 5. 다음 프롬프트 생성 시 '주의사항' 주입
+                    AI-->>User: 6. 향상된 결과 제공
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 검증 시나리오 결과 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-white fw-bold text-danger">Before Learning (학습 전)</div>
+                    <div class="card-body">
+                        <p class="mb-2"><strong>상황</strong>: AI가 병원명을 줄임말로 잘못 추출</p>
+                        <div class="alert alert-danger">
+                            <i class="bi bi-x-circle-fill me-2"></i>추출 결과: "강북삼성"
+                        </div>
+                        <p class="mb-2"><strong>사용자 행동</strong>: UI에서 "강북삼성병원"으로 수정 후 저장</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header bg-white fw-bold text-success">After Learning (학습 후)</div>
+                    <div class="card-body">
+                        <p class="mb-2"><strong>결과</strong>: 시스템이 오답 패턴을 인지하고 프롬프트 자동 수정</p>
+                        <div class="code-block">
+                            [System Prompt]<br>
+                            ...<br>
+                            ## 주의사항 (Auto-Generated)<br>
+                            - 병원명 오타 주의: '강북삼성' -> '강북삼성병원' 등으로 자동 수정하세요.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 구현된 모듈 상세 -->
+        <div class="card mb-4">
+            <div class="card-header bg-white fw-bold">Implemented Modules</div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CorrectionController.js</strong></td>
+                            <td>사용자 수정 요청 수신 및 저장 (API Endpoint)</td>
+                            <td><span class="badge bg-success">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DiffAnalyzer.js</strong></td>
+                            <td>AI 초안과 사용자 수정본 비교 분석 (ADD/MODIFY/DELETE)</td>
+                            <td><span class="badge bg-success">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>FeedbackLoop.js</strong></td>
+                            <td>오답 노트 관리 및 Dynamic Few-Shot 프롬프트 생성</td>
+                            <td><span class="badge bg-success">Verified</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 5. 향후 계획 -->
+        <div class="card border-primary">
+            <div class="card-header bg-primary text-white fw-bold d-flex justify-content-between">
+                <span>Next Step: Phase 3 (Graph-RAG)</span>
+                <span class="badge bg-white text-primary">Target: 90%</span>
+            </div>
+            <div class="card-body">
+                <p class="lead">단순 텍스트 추출을 넘어, <strong>의료 데이터의 관계(Relation)</strong>를 이해하는 지능형 시스템으로 진화합니다.</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>Entity
+                            Relation Map</strong>: [환자]-[방문]-[진단] 관계 구조화</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>Context
+                            Query</strong>: "이 진단이 언제 처음 나왔는가?"와 같은 문맥적 질문 해결</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+
+</html>

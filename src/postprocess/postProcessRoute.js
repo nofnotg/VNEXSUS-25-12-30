@@ -6,6 +6,9 @@
 
 import express from 'express';
 import reportController from '../controllers/reportController.js';
+import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../shared/logging/logger.js';
+import { validateReportRequest, validateReportResponse } from '../modules/reports/types/structuredOutput.js';
+import { ERRORS } from '../shared/constants/errors.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -37,37 +40,85 @@ const router = express.Router();
  * }
  */
 router.post('/report', async (req, res) => {
+  const start = Date.now();
   try {
-    const { jobId, parsedEvents, patientInfo, insuranceInfo, filterResult } = req.body;
-    
-    // 필수 필드 검증
-    if (!jobId || !parsedEvents || !Array.isArray(parsedEvents)) {
-      return res.status(400).json({
+    // 요청 로깅 (마스킹 적용)
+    logApiRequest(req, { route: '/api/postprocess/report' });
+
+    // Zod 스키마 기반 요청 검증
+    const parsed = validateReportRequest(req.body);
+    if (!parsed.success) {
+      logProcessingError('report_generation', new Error('request_schema_invalid'), {
+        issues: parsed.error.issues.map(i => ({ path: i.path, message: i.message, code: i.code })),
+        route: 'postprocess_report',
+      });
+      const duration = Date.now() - start;
+      logApiResponse(req, res, duration, { success: false, error: ERRORS.INVALID_REQUEST_SCHEMA.code });
+      return res.status(ERRORS.INVALID_REQUEST_SCHEMA.status).json({
         success: false,
-        error: '유효하지 않은 요청 데이터: jobId와 parsedEvents가 필요합니다.'
+        error: ERRORS.INVALID_REQUEST_SCHEMA.message,
+        details: parsed.error.issues.map(i => ({ path: i.path, message: i.message })),
       });
     }
-    
+
+    const { jobId, parsedEvents, patientInfo, insuranceInfo, filterResult, options } = parsed.data;
+
+    // 처리 시작 로깅
+    logProcessingStart('report_generation', {
+      jobId,
+      eventCount: parsedEvents.length,
+      minConfidence: options?.minConfidence,
+    });
+
     // 보고서 컨트롤러 호출
     const result = await reportController.generateReport({
       jobId,
       parsedEvents,
       patientInfo,
       insuranceInfo,
-      filterResult
+      filterResult,
+      options,
     });
-    
-    // 결과 반환
+
+    const duration = Date.now() - start;
+
+    // 응답 스키마 검증
+    const respParsed = validateReportResponse(result);
+    if (!respParsed.success) {
+      logProcessingError('report_generation', new Error('response_schema_invalid'), {
+        issues: respParsed.error.issues.map(i => ({ path: i.path, message: i.message, code: i.code })),
+        route: 'postprocess_report',
+      });
+      logApiResponse(req, res, duration, { success: false, error: ERRORS.INVALID_RESPONSE_SCHEMA.code });
+      return res.status(ERRORS.INVALID_RESPONSE_SCHEMA.status).json({
+        success: false,
+        error: ERRORS.INVALID_RESPONSE_SCHEMA.message,
+        details: respParsed.error.issues.map(i => ({ path: i.path, message: i.message })),
+      });
+    }
+
+    // 처리 완료 로깅
+    logProcessingComplete('report_generation', duration, {
+      success: result.success,
+      eventCount: result?.stats?.total ?? parsedEvents.length,
+      filtered: result?.stats?.filtered ?? 0,
+    });
+
+    // 결과 반환 및 응답 로깅
     if (result.success) {
+      logApiResponse(req, res, duration, { success: true, reportPath: result.reportPath });
       res.json(result);
     } else {
-      res.status(500).json(result);
+      logApiResponse(req, res, duration, { success: false, error: result.error || ERRORS.INTERNAL_ERROR.code });
+      res.status(result.error ? 500 : ERRORS.INTERNAL_ERROR.status).json(result.error ? result : { success: false, error: ERRORS.INTERNAL_ERROR.message });
     }
   } catch (error) {
-    console.error('보고서 생성 API 오류:', error);
-    res.status(500).json({
+    const duration = Date.now() - start;
+    logProcessingError('report_generation', error, { route: 'postprocess_report' });
+    logApiResponse(req, res, duration, { success: false, error: ERRORS.INTERNAL_ERROR.code });
+    res.status(ERRORS.INTERNAL_ERROR.status).json({
       success: false,
-      error: error.message || '보고서 생성 중 오류가 발생했습니다.'
+      error: error.message || ERRORS.INTERNAL_ERROR.message,
     });
   }
 });
@@ -79,7 +130,9 @@ router.post('/report', async (req, res) => {
  * 생성된 보고서 파일 다운로드
  */
 router.get('/report/:jobId/:filename', (req, res) => {
+  const start = Date.now();
   try {
+    logApiRequest(req, { route: '/api/postprocess/report/:jobId/:filename' });
     const { jobId, filename } = req.params;
     
     // 파일 경로 생성
@@ -87,27 +140,35 @@ router.get('/report/:jobId/:filename', (req, res) => {
     
     // 파일 존재 여부 확인
     if (!fs.existsSync(filepath)) {
-      return res.status(404).json({
+      const duration = Date.now() - start;
+      logApiResponse(req, res, duration, { success: false, error: ERRORS.REPORT_DOWNLOAD_NOT_FOUND.code });
+      return res.status(ERRORS.REPORT_DOWNLOAD_NOT_FOUND.status).json({
         success: false,
-        error: '요청한 보고서 파일을 찾을 수 없습니다.'
+        error: ERRORS.REPORT_DOWNLOAD_NOT_FOUND.message,
       });
     }
     
     // 파일 다운로드 응답
     res.download(filepath, filename, (err) => {
+      const duration = Date.now() - start;
       if (err) {
-        console.error('파일 다운로드 오류:', err);
-        res.status(500).json({
+        logProcessingError('report_download', err, { jobId, filename });
+        logApiResponse(req, res, duration, { success: false, error: ERRORS.REPORT_DOWNLOAD_ERROR.code });
+        res.status(ERRORS.REPORT_DOWNLOAD_ERROR.status).json({
           success: false,
-          error: '파일 다운로드 중 오류가 발생했습니다.'
+          error: ERRORS.REPORT_DOWNLOAD_ERROR.message,
         });
+      } else {
+        logApiResponse(req, res, duration, { success: true, filename });
       }
     });
   } catch (error) {
-    console.error('보고서 다운로드 API 오류:', error);
-    res.status(500).json({
+    const duration = Date.now() - start;
+    logProcessingError('report_download', error, { route: 'postprocess_report_download' });
+    logApiResponse(req, res, duration, { success: false, error: ERRORS.INTERNAL_ERROR.code });
+    res.status(ERRORS.INTERNAL_ERROR.status).json({
       success: false,
-      error: error.message || '보고서 다운로드 중 오류가 발생했습니다.'
+      error: error.message || ERRORS.INTERNAL_ERROR.message,
     });
   }
 });

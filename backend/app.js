@@ -28,6 +28,7 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import ragRoutes from './routes/ragRoutes.js';
 import enhancedReportRoutes from './routes/enhancedReportRoute.js';
 import reportTemplateRoutes from './routes/reportTemplateRoutes.js';
+import reasoningRoutes from './routes/reasoningRoutes.js';
 import * as visionService from './services/visionService.js';
 
 // PDF 테스트 비활성화 (pdf-parse 모듈의 테스트 코드가 특정 PDF 파일을 찾지 못하는 문제 해결)
@@ -164,7 +165,7 @@ console.info = function () {
 };
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 
 // CORS 설정
 app.use(cors({
@@ -196,7 +197,7 @@ app.use('/config', express.static(path.join(__dirname, '../src/config')));
 
 // 임시 보고서 파일 접근 경로 설정
 app.use('/reports', express.static(path.join(__dirname, '../temp/reports')));
-app.use('/reports', express.static(path.join(__dirname, './temp/reports')));
+app.use('/reports', express.static(path.join(process.cwd(), 'temp', 'reports')));
 
 // /reports 접근 시 인덱스로 리다이렉트(디렉토리 루트 접근 편의성 개선)
 app.get('/reports', (req, res) => {
@@ -230,6 +231,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/rag', ragRoutes);
 app.use('/api/enhanced-report', enhancedReportRoutes);
 app.use('/api/report-template', reportTemplateRoutes);
+app.use('/api/reasoning', reasoningRoutes);
 app.use('/api', router);
 
 // API 상태 확인 라우트 추가

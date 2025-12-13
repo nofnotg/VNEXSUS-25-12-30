@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { logger } from '../../shared/logging/logger.js';
-import { mask } from '../../shared/security/mask.js';
-import type { CaseEvaluation, CaseFileInfo, Metrics, OcrResult } from '../types/index.ts';
-import { listCaseDirectories, classifyCaseFiles } from '../service/classifier.ts';
-import { runOcrOnFile } from '../service/ocrRunner.ts';
-import * as pdfProcessor from '../../../backend/utils/pdfProcessor.js';
-import { computeMetrics, compareKeyInfo } from '../service/metrics.ts';
+import { logger } from '../../../shared/logging/logger';
+import { mask } from '../../../shared/security/mask';
+import type { CaseEvaluation, CaseFileInfo, Metrics, OcrResult } from '../types';
+import { listCaseDirectories, classifyCaseFiles } from '../service/classifier';
+import { runOcrOnFile } from '../service/ocrRunner';
+import * as pdfProcessor from '../../../../backend/utils/pdfProcessor.js';
+import { computeMetrics, compareKeyInfo } from '../service/metrics';
 
 export interface RunOptions {
   rootDir?: string;
@@ -40,9 +40,14 @@ export async function evaluateCase(caseDir: string, outDir: string): Promise<Cas
       const ki = compareKeyInfo(originalText, generatedText);
       metrics[file.filePath] = { ...m, keyInfoAccuracy: ki };
     } catch (error) {
-      const msg = (error as Error).message;
+      const err = error as Error;
+      const msg = err.message;
       errors.push(msg);
-      logger.error({ event: 'CASE_FILE_ERROR', caseId: mask(caseId), fileName: mask(file.fileName), error: msg });
+      logger.error({
+        event: 'CASE_FILE_ERROR',
+        error: { name: err.name, message: err.message, stack: err.stack },
+        metadata: { caseId: mask(caseId), fileName: mask(file.fileName) }
+      });
     }
   }
 
@@ -84,7 +89,7 @@ export async function evaluateCase(caseDir: string, outDir: string): Promise<Cas
   fs.writeFileSync(path.join(caseOut, 'evaluation.json'), JSON.stringify(evaluation, null, 2), 'utf-8');
   fs.writeFileSync(path.join(caseOut, 'README.md'), buildCaseMarkdown(evaluation), 'utf-8');
 
-  logger.info({ event: 'CASE_EVALUATED', caseId: mask(caseId), outDir: caseOut });
+  logger.info({ event: 'CASE_EVALUATED', metadata: { caseId: mask(caseId), outDir: caseOut } });
   return evaluation;
 }
 
@@ -93,12 +98,12 @@ export async function runBatch(options: RunOptions = {}): Promise<void> {
   const outDir = options.outDir || path.join(process.cwd(), 'reports', 'evaluation');
   fs.mkdirSync(outDir, { recursive: true });
 
-  logger.info({ event: 'BATCH_START', rootDir, outDir });
+  logger.info({ event: 'BATCH_START', metadata: { rootDir, outDir } });
   const caseDirs = listCaseDirectories(rootDir);
   for (const dir of caseDirs) {
     await evaluateCase(dir, outDir);
   }
-  logger.info({ event: 'BATCH_COMPLETE', count: caseDirs.length });
+  logger.info({ event: 'BATCH_COMPLETE', metadata: { count: caseDirs.length } });
 }
 
 function buildCaseMarkdown(ev: CaseEvaluation): string {
@@ -114,4 +119,3 @@ function buildCaseMarkdown(ev: CaseEvaluation): string {
     `## 흔한 오류\n` +
     `${ev.summary.commonErrors.length > 0 ? ev.summary.commonErrors.map(e => `- ${e}`).join('\n') : '- 없음'}\n`;
 }
-

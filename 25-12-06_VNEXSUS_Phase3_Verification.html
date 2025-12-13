@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS Phase 3 검증 보고서</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .chat-bubble {
+            background: #e2e8f0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            display: inline-block;
+            max-width: 80%;
+        }
+
+        .chat-bubble.ai {
+            background: #2563eb;
+            color: white;
+            float: right;
+            text-align: right;
+        }
+
+        .chat-container {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 12px;
+            height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="fw-bold mb-2">VNEXSUS Phase 3 검증 보고서</h1>
+                    <p class="text-muted mb-0">Graph-RAG (Context-Aware Reasoning) 구현 결과</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-primary mb-2">Phase 3 Complete</span><br>
+                    <small class="text-muted">2025-12-06</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <!-- 1. 핵심 성과 -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">질의 응답 성공률</div>
+                    <div class="metric-value text-primary">92%</div>
+                    <div>
+                        <span class="badge bg-success"><i class="bi bi-check-circle"></i> Target(90%) 달성</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">총 질의 건수</div>
+                    <div class="metric-value">90<small class="fs-6 text-muted">건</small></div>
+                    <div class="text-muted">45개 케이스 × 2개 질문</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">지식 그래프 노드</div>
+                    <div class="metric-value text-info">30K+</div>
+                    <small class="text-muted">평균 600+ Nodes/Case</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Graph-RAG 구조 -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card h-100">
+                    <div class="card-header bg-white fw-bold">Entity Relation Map 구조</div>
+                    <div class="card-body">
+                        <div class="mermaid">
+                            graph LR
+                            P[Patient] -->|HAS_VISIT| V1[Visit: 2024-01-15]
+                            P -->|HAS_VISIT| V2[Visit: 2024-02-20]
+                            V1 -->|AT_HOSPITAL| H1[Hospital: 서울아산병원]
+                            V1 -->|DIAGNOSED_WITH| D1[Diagnosis: 위암]
+                            V2 -->|AT_HOSPITAL| H1
+                            V2 -->|TREATED_WITH| T1[Treatment: 항암치료]
+                            D1 -.->|ICD Code| I1[C16]
+                            style P fill:#f9f,stroke:#333,stroke-width:2px
+                            style V1 fill:#bbf,stroke:#333,stroke-width:2px
+                            style V2 fill:#bbf,stroke:#333,stroke-width:2px
+                            style D1 fill:#bfb,stroke:#333,stroke-width:2px
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white fw-bold">질의 유형별 성능</div>
+                    <div class="card-body">
+                        <canvas id="queryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 실제 질의 응답 예시 -->
+        <div class="card mb-4">
+            <div class="card-header bg-white fw-bold">Context Query Engine 동작 예시</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3">Case 1: 최초 진단일 추론</h6>
+                        <div class="chat-container">
+                            <div class="chat-bubble">"Other specified cerebrovascular diseases"의 최초 진단일은 언제인가요?</div>
+                            <div class="chat-bubble ai">
+                                <i class="bi bi-robot me-2"></i>
+                                2025년 2월 18일입니다.<br>
+                                <small class="text-white-50">(근거: Visit_12 노드와 연결됨)</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3">Case 4: 병원 방문 이력 요약</h6>
+                        <div class="chat-container">
+                            <div class="chat-bubble">"서울성모병원" 방문 이력은 어떻게 되나요?</div>
+                            <div class="chat-bubble ai">
+                                <i class="bi bi-robot me-2"></i>
+                                총 31회 방문했습니다.<br>
+                                주요 진단: Ascending colon cancer 등
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 향후 계획 -->
+        <div class="card border-primary">
+            <div class="card-header bg-primary text-white fw-bold d-flex justify-content-between">
+                <span>Next Step: Phase 4 (Precision Engineering)</span>
+                <span class="badge bg-white text-primary">Target: 95%</span>
+            </div>
+            <div class="card-body">
+                <p class="lead">마지막 5%의 정확도(Long Tail)를 잡기 위해 <strong>Multi-Model Ensemble</strong>을 도입합니다.</p>
+                <div class="d-flex gap-3 mt-3">
+                    <div class="border rounded p-3 flex-fill">
+                        <div class="fw-bold text-primary mb-2">1. Multi-Model Voting</div>
+                        <small>Gemini와 GPT-4의 결과를 비교하여 일치하는 경우만 채택</small>
+                    </div>
+                    <div class="border rounded p-3 flex-fill">
+                        <div class="fw-bold text-primary mb-2">2. OCR Pre-processing</div>
+                        <small>이미지 전처리를 통해 OCR 인식률 극대화</small>
+                    </div>
+                    <div class="border rounded p-3 flex-fill">
+                        <div class="fw-bold text-primary mb-2">3. Template Matching</div>
+                        <small>반복되는 양식(표, 박스)에 대한 구조적 추출</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+
+        const ctx = document.getElementById('queryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['최초 진단일 (Timeline)', '방문 이력 (History)', '실패/미발견'],
+                datasets: [{
+                    data: [42, 41, 7], // 테스트 결과 기반 (성공 83건, 실패 7건)
+                    backgroundColor: ['#2563eb', '#16a34a', '#e2e8f0']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

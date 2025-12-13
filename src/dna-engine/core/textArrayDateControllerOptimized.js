@@ -360,9 +360,9 @@ export class TextArrayDateControllerOptimized {
     this.cacheStats.misses++;
     
     const datePatterns = [
-      /\d{4}[-.]/\d{1,2}[-.]/\d{1,2}/,
+      /\d{4}[-.]\d{1,2}[-.]\d{1,2}/,
       /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/,
-      /\d{1,2}[-.]/\d{1,2}[-.]/\d{4}/,
+      /\d{1,2}[-.]\d{1,2}[-.]\d{4}/,
       /\d{1,2}월\s*\d{1,2}일/
     ];
     

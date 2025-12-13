@@ -20,7 +20,7 @@ class NestedDateResolver {
         /(\d{4})\.(\d{1,2})\.(\d{1,2})/g,
         /(\d{1,2})\/(\d{1,2})\/(\d{4})/g
       ],
-      
+
       // 상대 날짜 패턴
       relative: [
         /(금일|오늘|당일)/g,
@@ -31,7 +31,7 @@ class NestedDateResolver {
         /(\d+)개월\s*(전|후|뒤)/g,
         /(\d+)년\s*(전|후|뒤)/g
       ],
-      
+
       // 기간 패턴
       duration: [
         /(\d{4})년\s*(\d{1,2})월부터/g,
@@ -41,7 +41,7 @@ class NestedDateResolver {
         /(\d+)개월간/g,
         /(\d+)년간/g
       ],
-      
+
       // 모호한 표현
       ambiguous: [
         /(최근|근래)/g,
@@ -51,7 +51,7 @@ class NestedDateResolver {
         /(평소|평상시)/g
       ]
     };
-    
+
     // 의료 맥락별 시간 해석
     this.medicalTimeContext = {
       diagnosis: {
@@ -75,7 +75,7 @@ class NestedDateResolver {
         defaultDuration: 'variable'
       }
     };
-    
+
     // 시간 우선순위 규칙
     this.priorityRules = {
       // 가장 구체적인 날짜가 최우선
@@ -87,7 +87,7 @@ class NestedDateResolver {
         'relative_general': 40,   // "최근"
         'ambiguous': 20
       },
-      
+
       // 의료 맥락별 우선순위
       medical_context: {
         'diagnosis': 90,
@@ -97,7 +97,7 @@ class NestedDateResolver {
         'general': 50
       }
     };
-    
+
     // 처리 통계
     this.stats = {
       totalProcessed: 0,
@@ -116,34 +116,34 @@ class NestedDateResolver {
    */
   async resolveNestedDates(text, context = {}) {
     const startTime = Date.now();
-    
+
     try {
       console.log('📅 중첩 날짜 해결 시작...');
-      
+
       // 1. 모든 날짜 표현 추출
       const dateExpressions = this.extractDateExpressions(text);
       console.log(`📝 날짜 표현 ${dateExpressions.length}개 추출`);
-      
+
       // 2. 각 표현을 정규화
       const normalizedDates = this.normalizeDateExpressions(dateExpressions, context);
       console.log(`🔄 정규화된 날짜 ${normalizedDates.length}개`);
-      
+
       // 3. 시간적 관계 분석
       const temporalRelations = this.analyzeTemporalRelations(normalizedDates, text);
       console.log(`🔗 시간적 관계 ${temporalRelations.length}개 발견`);
-      
+
       // 4. 모호성 해결
       const resolvedDates = this.resolveAmbiguity(normalizedDates, temporalRelations, context);
       console.log(`✅ 모호성 해결 완료`);
-      
+
       // 5. 시간 계층 구축
       const timeHierarchy = this.buildTimeHierarchy(resolvedDates, temporalRelations);
-      
+
       // 6. 의료 컨텍스트 적용
       const medicalTimeline = this.applyMedicalContext(timeHierarchy, text, context);
-      
+
       const processingTime = Date.now() - startTime;
-      
+
       const result = {
         success: true,
         processingTime,
@@ -169,10 +169,10 @@ class NestedDateResolver {
         },
         stats: this.updateStats(processingTime, resolvedDates.length)
       };
-      
+
       console.log(`✅ 중첩 날짜 해결 완료 (${processingTime}ms)`);
       return result;
-      
+
     } catch (error) {
       console.error('❌ 중첩 날짜 해결 실패:', error);
       return {
@@ -189,7 +189,7 @@ class NestedDateResolver {
   extractDateExpressions(text) {
     const expressions = [];
     let expressionId = 0;
-    
+
     // 각 패턴별로 매칭
     Object.entries(this.datePatterns).forEach(([category, patterns]) => {
       patterns.forEach(pattern => {
@@ -207,7 +207,7 @@ class NestedDateResolver {
         }
       });
     });
-    
+
     // 위치순으로 정렬
     return expressions.sort((a, b) => a.startIndex - b.startIndex);
   }
@@ -217,12 +217,12 @@ class NestedDateResolver {
    */
   normalizeDateExpressions(expressions, context) {
     const referenceDate = context.referenceDate || new Date();
-    
+
     return expressions.map(expr => {
       let normalizedDate = null;
       let dateType = 'unknown';
       let precision = 'day';
-      
+
       try {
         switch (expr.category) {
           case 'absolute':
@@ -230,19 +230,19 @@ class NestedDateResolver {
             dateType = 'absolute';
             precision = this.determinePrecision(expr.text);
             break;
-            
+
           case 'relative':
             normalizedDate = this.parseRelativeDate(expr.match, referenceDate);
             dateType = 'relative';
             precision = 'day';
             break;
-            
+
           case 'duration':
             normalizedDate = this.parseDuration(expr.match, referenceDate);
             dateType = 'duration';
             precision = this.determineDurationPrecision(expr.text);
             break;
-            
+
           case 'ambiguous':
             normalizedDate = this.parseAmbiguousDate(expr.match, referenceDate, context);
             dateType = 'ambiguous';
@@ -252,7 +252,7 @@ class NestedDateResolver {
       } catch (error) {
         console.warn(`날짜 파싱 실패: ${expr.text}`, error);
       }
-      
+
       return {
         ...expr,
         normalized: {
@@ -270,13 +270,13 @@ class NestedDateResolver {
    */
   analyzeTemporalRelations(normalizedDates, text) {
     const relations = [];
-    
+
     // 순차적 관계 분석
     for (let i = 0; i < normalizedDates.length - 1; i++) {
       for (let j = i + 1; j < normalizedDates.length; j++) {
         const date1 = normalizedDates[i];
         const date2 = normalizedDates[j];
-        
+
         if (date1.normalized.date && date2.normalized.date) {
           const relation = this.determineTemporalRelation(date1, date2, text);
           if (relation) {
@@ -285,7 +285,7 @@ class NestedDateResolver {
         }
       }
     }
-    
+
     return relations;
   }
 
@@ -304,7 +304,7 @@ class NestedDateResolver {
             resolutionMethod: 'contextual'
           };
         }
-        
+
         // 관계 기반 해결
         const relationalDate = this.resolveFromRelations(dateExpr, temporalRelations);
         if (relationalDate) {
@@ -315,7 +315,7 @@ class NestedDateResolver {
           };
         }
       }
-      
+
       return {
         ...dateExpr,
         resolved: dateExpr.normalized,
@@ -333,12 +333,12 @@ class NestedDateResolver {
       clusters: [],
       conflicts: []
     };
-    
+
     // 시간순 정렬
     const sortedDates = resolvedDates
       .filter(d => d.resolved.date)
       .sort((a, b) => new Date(a.resolved.date) - new Date(b.resolved.date));
-    
+
     // 타임라인 구성
     hierarchy.timeline = sortedDates.map((dateExpr, index) => ({
       position: index,
@@ -346,17 +346,17 @@ class NestedDateResolver {
       expression: dateExpr.text,
       precision: dateExpr.resolved.precision,
       confidence: dateExpr.resolved.confidence,
-      relations: temporalRelations.filter(r => 
+      relations: temporalRelations.filter(r =>
         r.date1Id === dateExpr.id || r.date2Id === dateExpr.id
       )
     }));
-    
+
     // 시간 클러스터 생성 (비슷한 시기)
     hierarchy.clusters = this.createTimeClusters(sortedDates);
-    
+
     // 충돌 감지
     hierarchy.conflicts = this.detectTimeConflicts(temporalRelations);
-    
+
     return hierarchy;
   }
 
@@ -365,13 +365,13 @@ class NestedDateResolver {
    */
   applyMedicalContext(timeHierarchy, text, context) {
     const medicalEvents = this.identifyMedicalEvents(text);
-    
+
     return {
       medicalTimeline: timeHierarchy.timeline.map(timePoint => {
-        const relatedEvents = medicalEvents.filter(event => 
+        const relatedEvents = medicalEvents.filter(event =>
           this.isTemporallyRelated(timePoint, event)
         );
-        
+
         return {
           ...timePoint,
           medicalEvents: relatedEvents,
@@ -379,11 +379,11 @@ class NestedDateResolver {
           clinicalSignificance: this.calculateClinicalSignificance(timePoint, relatedEvents)
         };
       }),
-      
+
       eventSequence: this.constructEventSequence(timeHierarchy.timeline, medicalEvents),
-      
+
       treatmentHistory: this.extractTreatmentHistory(timeHierarchy.timeline, text),
-      
+
       diseaseProgression: this.analyzeDiseaseProgression(timeHierarchy.timeline, medicalEvents)
     };
   }
@@ -405,23 +405,23 @@ class NestedDateResolver {
   parseRelativeDate(match, referenceDate) {
     const text = match[0];
     const refDate = new Date(referenceDate);
-    
+
     if (text.includes('금일') || text.includes('오늘')) {
       return refDate.toISOString().split('T')[0];
     }
-    
+
     if (text.includes('어제')) {
       refDate.setDate(refDate.getDate() - 1);
       return refDate.toISOString().split('T')[0];
     }
-    
+
     // 숫자 기반 상대 날짜
     const numMatch = text.match(/(\d+)(일|주|개월|년)\s*(전|후)/);
     if (numMatch) {
       const num = parseInt(numMatch[1]);
       const unit = numMatch[2];
       const direction = numMatch[3] === '전' ? -1 : 1;
-      
+
       switch (unit) {
         case '일':
           refDate.setDate(refDate.getDate() + (num * direction));
@@ -436,10 +436,10 @@ class NestedDateResolver {
           refDate.setFullYear(refDate.getFullYear() + (num * direction));
           break;
       }
-      
+
       return refDate.toISOString().split('T')[0];
     }
-    
+
     return null;
   }
 
@@ -451,18 +451,18 @@ class NestedDateResolver {
   parseAmbiguousDate(match, referenceDate, context) {
     const text = match[0];
     const refDate = new Date(referenceDate);
-    
+
     // 컨텍스트 기반 추정
     if (text.includes('최근')) {
       refDate.setMonth(refDate.getMonth() - 1); // 1개월 전으로 추정
       return refDate.toISOString().split('T')[0];
     }
-    
+
     if (text.includes('과거')) {
       refDate.setFullYear(refDate.getFullYear() - 1); // 1년 전으로 추정
       return refDate.toISOString().split('T')[0];
     }
-    
+
     return null;
   }
 
@@ -473,7 +473,7 @@ class NestedDateResolver {
       duration: 0.75,
       ambiguous: 0.4
     };
-    
+
     return confidenceMap[category] || 0.5;
   }
 
@@ -487,10 +487,10 @@ class NestedDateResolver {
   determineTemporalRelation(date1, date2, text) {
     const d1 = new Date(date1.normalized.date);
     const d2 = new Date(date2.normalized.date);
-    
+
     let relationType = 'unknown';
     let confidence = 0.5;
-    
+
     if (d1 < d2) {
       relationType = 'before';
       confidence = 0.8;
@@ -501,7 +501,7 @@ class NestedDateResolver {
       relationType = 'simultaneous';
       confidence = 0.9;
     }
-    
+
     return {
       id: `rel_${date1.id}_${date2.id}`,
       date1Id: date1.id,
@@ -525,9 +525,9 @@ class NestedDateResolver {
   createTimeClusters(sortedDates) {
     const clusters = [];
     const threshold = 7; // 7일 이내는 같은 클러스터
-    
+
     let currentCluster = [];
-    
+
     for (let i = 0; i < sortedDates.length; i++) {
       if (currentCluster.length === 0) {
         currentCluster.push(sortedDates[i]);
@@ -535,7 +535,7 @@ class NestedDateResolver {
         const lastDate = new Date(currentCluster[currentCluster.length - 1].resolved.date);
         const currentDate = new Date(sortedDates[i].resolved.date);
         const daysDiff = (currentDate - lastDate) / (1000 * 60 * 60 * 24);
-        
+
         if (daysDiff <= threshold) {
           currentCluster.push(sortedDates[i]);
         } else {
@@ -544,11 +544,11 @@ class NestedDateResolver {
         }
       }
     }
-    
+
     if (currentCluster.length > 0) {
       clusters.push(currentCluster);
     }
-    
+
     return clusters;
   }
 
@@ -562,7 +562,7 @@ class NestedDateResolver {
       '진단', '처방', '검사', '수술', '치료', '복용', '투약',
       '증상', '소견', '결과', '관찰', '추적'
     ];
-    
+
     medicalKeywords.forEach(keyword => {
       const regex = new RegExp(`[^.]*${keyword}[^.]*`, 'gi');
       let match;
@@ -574,7 +574,7 @@ class NestedDateResolver {
         });
       }
     });
-    
+
     return events;
   }
 
@@ -585,47 +585,47 @@ class NestedDateResolver {
 
   determineMedicalContext(events) {
     if (events.length === 0) return 'general';
-    
+
     const eventTypes = events.map(e => e.type);
-    
+
     if (eventTypes.includes('진단')) return 'diagnosis';
     if (eventTypes.includes('처방') || eventTypes.includes('복용')) return 'medication';
     if (eventTypes.includes('검사')) return 'examination';
     if (eventTypes.includes('증상')) return 'symptom';
-    
+
     return 'general';
   }
 
   calculateClinicalSignificance(timePoint, events) {
     let significance = 0.5;
-    
+
     if (events.length > 0) {
       significance += events.length * 0.1;
     }
-    
+
     if (timePoint.precision === 'day') {
       significance += 0.2;
     }
-    
+
     return Math.min(significance, 1.0);
   }
 
   constructEventSequence(timeline, events) {
     return timeline.map(timePoint => ({
       date: timePoint.date,
-      events: events.filter(event => 
+      events: events.filter(event =>
         this.isTemporallyRelated(timePoint, event)
       )
     }));
   }
 
   extractTreatmentHistory(timeline, text) {
-    const treatments = timeline.filter(point => 
-      point.medicalContext === 'medication' || 
-      (point.text && point.text.includes('치료')) || 
+    const treatments = timeline.filter(point =>
+      point.medicalContext === 'medication' ||
+      (point.text && point.text.includes('치료')) ||
       (point.text && point.text.includes('처방'))
     );
-    
+
     return treatments.map(treatment => ({
       date: treatment.date,
       treatment: treatment.expression,
@@ -634,10 +634,10 @@ class NestedDateResolver {
   }
 
   analyzeDiseaseProgression(timeline, events) {
-    const progressionEvents = events.filter(event => 
+    const progressionEvents = events.filter(event =>
       ['진단', '증상', '치료', '검사'].includes(event.type)
     );
-    
+
     return {
       stages: progressionEvents.map((event, index) => ({
         stage: index + 1,
@@ -651,10 +651,10 @@ class NestedDateResolver {
 
   countAmbiguousResolved(original, resolved) {
     const originalAmbiguous = original.filter(d => d.category === 'ambiguous').length;
-    const resolvedAmbiguous = resolved.filter(d => 
+    const resolvedAmbiguous = resolved.filter(d =>
       d.resolutionMethod === 'contextual' || d.resolutionMethod === 'relational'
     ).length;
-    
+
     return { original: originalAmbiguous, resolved: resolvedAmbiguous };
   }
 
@@ -665,11 +665,11 @@ class NestedDateResolver {
 
   calculateConfidenceScore(resolvedDates) {
     if (resolvedDates.length === 0) return 0;
-    
-    const totalConfidence = resolvedDates.reduce((sum, date) => 
+
+    const totalConfidence = resolvedDates.reduce((sum, date) =>
       sum + (date.resolved.confidence || 0), 0
     );
-    
+
     return totalConfidence / resolvedDates.length;
   }
 
@@ -677,10 +677,10 @@ class NestedDateResolver {
     this.stats.totalProcessed++;
     this.stats.resolvedDates += resolvedCount;
     this.stats.averageResolutionTime = (
-      (this.stats.averageResolutionTime * (this.stats.totalProcessed - 1) + processingTime) / 
+      (this.stats.averageResolutionTime * (this.stats.totalProcessed - 1) + processingTime) /
       this.stats.totalProcessed
     );
-    
+
     return { ...this.stats };
   }
 
@@ -688,15 +688,15 @@ class NestedDateResolver {
     // 텍스트에서 두 날짜 사이의 관계를 나타내는 증거 찾기
     const start = Math.min(date1.startIndex, date2.startIndex);
     const end = Math.max(date1.endIndex, date2.endIndex);
-    
+
     return text.substring(Math.max(0, start - 50), Math.min(text.length, end + 50));
   }
 
   calculateNormalizationConfidence(normalizedDate, category) {
     if (!normalizedDate) return 0;
-    
+
     const baseConfidence = this.calculatePatternConfidence(category, '');
-    
+
     // 정규화 성공 시 보너스
     return Math.min(baseConfidence + 0.1, 1.0);
   }
@@ -710,4 +710,4 @@ class NestedDateResolver {
   }
 }
 
-module.exports = { NestedDateResolver };
+export { NestedDateResolver };

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Professional Insight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            /* Blue 800 */
+            --primary-light: #3b82f6;
+            /* Blue 500 */
+            --accent: #0ea5e9;
+            /* Sky 500 */
+            --bg-light: #f1f5f9;
+            /* Slate 100 */
+            --surface: #ffffff;
+            --text-main: #334155;
+            /* Slate 700 */
+            --border: #e2e8f0;
+            /* Slate 200 */
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* Header */
+        .header-strip {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Cards - Clean but with soft shadow */
+        .pro-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            background: var(--surface);
+            margin-bottom: 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .pro-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #f8fafc, white);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        /* Insight Elements - Polished */
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-right: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .quote-box-pro {
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(to right, #f0f9ff, white);
+            padding: 1.25rem;
+            font-style: italic;
+            color: #0369a1;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            border: 1px solid #e0f2fe;
+            border-left-width: 4px;
+        }
+
+        .quote-box-pro.risk {
+            border-left-color: #ef4444;
+            background: linear-gradient(to right, #fef2f2, white);
+            color: #991b1b;
+            border-color: #fee2e2;
+            border-left-width: 4px;
+        }
+
+        /* Timeline - Professional */
+        .timeline-pro {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-pro::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .timeline-node {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-node::after {
+            content: '';
+            position: absolute;
+            left: -1.95rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 3px solid var(--primary-light);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 3px #eff6ff;
+        }
+
+        .timeline-node.risk::after {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px #fef2f2;
+        }
+
+        /* Badges */
+        .risk-tag {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-high {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .tag-med {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        /* Action Button */
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: #1e3a8a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-strip">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div>
+                <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">
+                    <i class="bi bi-person-circle me-1"></i> Investigator Mode
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <!-- Case Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="pro-card border-0">
+                    <div class="card-body d-flex justify-content-between align-items-center p-4">
+                        <div>
+                            <h6 class="text-uppercase text-muted fw-bold small mb-1">Investigation Report</h6>
+                            <h2 class="fw-bold mb-0 text-dark">Case #2025-VNX-001</h2>
+                        </div>
+                        <div class="text-end">
+                            <span class="tag-high risk-tag fs-6">Risk Level: HIGH</span>
+                            <div class="small text-muted mt-1">Confidence: 98.5%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left Column: Reasoning -->
+            <div class="col-lg-8">
+                <h5 class="fw-bold text-dark mb-3">Reasoning Analysis</h5>
+
+                <!-- Scenario 1 -->
+                <div class="pro-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="step-circle">1</span>
+                            <span>Disclosure Violation</span>
+                        </div>
+                        <span class="tag-high risk-tag">Detected</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quote-box-pro risk">
+                            "Patient diagnosed with Cerebrovascular Disease (I67.8) 12 days prior to contract. This is a
+                            direct violation of the 3-month disclosure rule."
+                        </div>
+
+                        <div class="timeline-pro mt-4">
+                            <div class="timeline-node risk">
+                                <div class="d-flex justify-content-between">
+                                    <strong>2025.02.17 (D-12)</strong>
+                                    <span class="text-danger fw-bold small">Critical Event</span>
+                                </div>
+                                <div class="text-muted small">Kangnam Sacred Heart Hospital | Diagnosis: I67.8</div>
+                            </div>
+                            <div class="timeline-node">
+                                <strong>2025.03.01 (D-Day)</strong>
+                                <div class="text-muted small">Insurance Contract Date</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario 2 -->
+                <div class="pro-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <span class="step-circle">2</span>
+                            <span>Doctor Shopping Pattern</span>
+                        </div>
+                        <span class="tag-med risk-tag">Warning</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quote-box-pro">
+                            "Visited 3 different clinics for 'Gastritis' within 2 weeks. While not critical, the pattern
+                            suggests potential shopping behavior."
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Summary -->
+            <div class="col-lg-4">
+                <h5 class="fw-bold text-dark mb-3">Case Summary</h5>
+
+                <div class="pro-card">
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <h6 class="text-muted small fw-bold">DOCUMENTS</h6>
+                                <h3 class="fw-bold text-primary">15</h3>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h6 class="text-muted small fw-bold">EVENTS</h6>
+                                <h3 class="fw-bold text-dark">42</h3>
+                            </div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="mt-3">
+                            <h6 class="fw-bold small mb-3">VERIFICATION CHECKLIST</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-2 small">
+                                <span>ICD Code Validation</span>
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2 small">
+                                <span>Hospital DB Match</span>
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center small">
+                                <span>Date Consistency</span>
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-action py-3">
+                        <i class="bi bi-file-earmark-pdf-fill me-2"></i>Download Final Report
+                    </button>
+                    <button class="btn btn-outline-secondary py-2">
+                        View Raw Data
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

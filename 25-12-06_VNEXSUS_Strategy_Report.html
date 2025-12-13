@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 정확도 향상 및 대응 체계 구축 전략</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #1e3a5f;
+            --secondary-color: #2c5282;
+            --accent-color: #0ea5e9;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .strategy-box {
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            background-color: white;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .badge-custom {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.5em 0.8em;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+        }
+
+        .insight-card .text-muted {
+            color: #94a3b8 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">VNEXSUS 전략 리포트</h1>
+            <p class="lead opacity-90">정확도 향상 및 지속 가능한 대응 체계(Response System) 구축 방안</p>
+            <div class="mt-4">
+                <span class="badge bg-white text-primary me-2">Status: Critical Analysis</span>
+                <span class="badge bg-info text-white me-2">Target: 90% Accuracy</span>
+                <span class="badge bg-warning text-dark">Current: 29.7%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <!-- 1. 현황 분석 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-3 border-start border-4 border-primary ps-3">1. 현황 정밀 분석</h2>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center d-flex flex-column justify-content-center">
+                        <div class="metric-label">현재 평균 정확도</div>
+                        <div class="metric-value text-danger">29.7%</div>
+                        <p class="text-muted mt-2">목표치(90%) 대비 <span class="text-danger fw-bold">-60.3%p</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card h-100">
+                    <div class="card-header">필드별 추출 정확도 분석</div>
+                    <div class="card-body">
+                        <canvas id="accuracyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 문제점 진단 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">🚨 핵심 병목 구간 (Critical Bottlenecks)</div>
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-4 border-end">
+                                <h5 class="text-danger fw-bold"><i class="bi bi-calendar-x me-2"></i>날짜/기간 인식 실패 (14.5%)
+                                </h5>
+                                <p class="text-muted small">다양한 날짜 형식(YYYY.MM.DD, YYYY-MM-DD)과 기간 표현("3일간", "입원 기간")을
+                                    정규화하지 못해 시계열 분석이 붕괴됨.</p>
+                            </div>
+                            <div class="col-md-4 border-end">
+                                <h5 class="text-danger fw-bold"><i class="bi bi-activity me-2"></i>의료 엔티티 매칭 실패 (0~18%)
+                                </h5>
+                                <p class="text-muted small">ICD 코드, 진단명, 치료내용이 텍스트에는 존재하나, 구조화된 데이터로 추출되지 않음. 단순 정규식의
+                                    한계.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 class="text-warning fw-bold"><i class="bi bi-hospital me-2"></i>병원명 인식 불안정 (50.8%)
+                                </h5>
+                                <p class="text-muted small">"강북삼성" vs "강북삼성병원" 등 표기 변형에 대한 대응 부족. OCR 오인식(노이즈) 처리 미흡.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 대응 체계 구축 전략 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-3 border-start border-4 border-success ps-3">2. 대응 체계(Response System) 구축 전략</h2>
+                <p class="text-muted mb-4">단순한 코드 수정을 넘어, 시스템이 스스로 진화하는 <strong>"Data Flywheel"</strong> 구조를 제안합니다.</p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="strategy-box">
+                    <h4 class="text-primary fw-bold">Phase 1: 즉각적 대응 (Rule-Based 강화)</h4>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Enhanced Regex
+                                Engine</strong>: 날짜/기간 패턴 라이브러리 50종 이상으로 확장</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Fuzzy
+                                Matching</strong>: 병원명/진단명 매칭 시 Levenshtein Distance 알고리즘 적용 (오타 허용)</li>
+                        <li class="mb-2"><i
+                                class="bi bi-check-circle-fill text-success me-2"></i><strong>Post-Processing
+                                Logic</strong>: AI 출력 결과의 포맷 강제화 (JSON Schema Validation)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="strategy-box" style="border-left-color: #8b5cf6;">
+                    <h4 style="color: #7c3aed;" class="fw-bold">Phase 2: 지속적 진화 (Human-in-the-Loop)</h4>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2"><i class="bi bi-arrow-repeat text-primary me-2"></i><strong>Feedback Loop
+                                UI</strong>: 사용자가 보고서를 수정하면, 그 수정 내역(Diff)을 DB에 저장</li>
+                        <li class="mb-2"><i class="bi bi-database-add text-primary me-2"></i><strong>Dynamic
+                                Dictionary</strong>: 사용자 수정 데이터에서 새로운 병원명/진단명을 추출하여 사전에 자동 등록</li>
+                        <li class="mb-2"><i class="bi bi-robot text-primary me-2"></i><strong>Few-Shot
+                                Learning</strong>: 축적된 수정 데이터를 프롬프트의 예시(Example)로 동적 주입</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 새로운 인사이트 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-3 border-start border-4 border-warning ps-3">3. New Insight: Medical Knowledge Graph</h2>
+            </div>
+            <div class="col-12">
+                <div class="card insight-card">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="fw-bold mb-3">텍스트 추출을 넘어, "관계"를 이해하라</h3>
+                                <p class="mb-4">현재 시스템은 텍스트를 "추출(Extract)"하는 데 집중하고 있습니다. 하지만 진정한 정확도는 <strong>"문맥적
+                                        연결(Contextual Linking)"</strong>에서 나옵니다.</p>
+                                <div class="d-flex gap-3">
+                                    <div class="badge-custom bg-dark text-info border border-info">환자</div>
+                                    <i class="bi bi-arrow-right text-white align-self-center"></i>
+                                    <div class="badge-custom bg-dark text-warning border border-warning">방문(Visit)</div>
+                                    <i class="bi bi-arrow-right text-white align-self-center"></i>
+                                    <div class="badge-custom bg-dark text-success border border-success">진단(Diagnosis)
+                                    </div>
+                                    <i class="bi bi-arrow-right text-white align-self-center"></i>
+                                    <div class="badge-custom bg-dark text-danger border border-danger">처방(Treatment)
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-muted small">
+                                    제안: <strong>Graph-RAG (Graph Retrieval-Augmented Generation)</strong> 도입.<br>
+                                    단순 텍스트 검색이 아니라, "2023년에 A병원에서 고혈압 진단을 받은 환자가 2024년에 처방받은 약"과 같은 구조적 질의가 가능하도록 데이터
+                                    구조를 그래프 형태로 고도화해야 합니다.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="bi bi-share-fill" style="font-size: 8rem; opacity: 0.2;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 아키텍처 다이어그램 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">제안 시스템 아키텍처 (Continuous Improvement Loop)</div>
+                    <div class="card-body text-center">
+                        <div class="mermaid">
+                            graph LR
+                            A[📄 원본 문서] --> B(OCR & Text Extraction)
+                            B --> C{AI Analysis Engine}
+                            C -->|Draft| D[📝 초안 보고서]
+                            D --> E[👤 사용자 검토/수정]
+                            E -->|Final| F[✅ 최종 보고서]
+                            E -->|Feedback Data| G[(학습 데이터 저장소)]
+                            G --> H[🔄 패턴/사전 자동 업데이트]
+                            H -->|Update Knowledge| C
+                            style C fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+                            style G fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+                            style H fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Mermaid 초기화
+        mermaid.initialize({ startOnLoad: true });
+
+        // 차트 데이터 설정
+        const ctx = document.getElementById('accuracyChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['보험정보', '병원명', 'ICD 코드', '날짜', '진단명', '치료내용'],
+                datasets: [{
+                    label: '현재 추출 정확도 (%)',
+                    data: [82.7, 50.8, 18.6, 14.5, 0.5, 0.5], // 0%는 시각화를 위해 0.5로 보정
+                    backgroundColor: [
+                        '#10b981', // 보험정보 (높음)
+                        '#f59e0b', // 병원명 (중간)
+                        '#ef4444', // ICD (낮음)
+                        '#ef4444', // 날짜 (낮음)
+                        '#ef4444', // 진단명 (낮음)
+                        '#ef4444'  // 치료내용 (낮음)
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#f1f5f9' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

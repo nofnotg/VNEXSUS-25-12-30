@@ -120,12 +120,16 @@ class PostProcessingManager {
       
       // 5단계: 최종 보고서 생성
       console.log('\n=== 5단계: 최종 보고서 생성 ===');
+      const requestedFormat = options.reportFormat || 'json';
+      const normalizedFormat = requestedFormat === 'txt' ? 'text' : requestedFormat;
+
       const finalReport = await this.reportBuilder.buildReport(
         organizedData,
         options.patientInfo || {},
         {
-          format: options.reportFormat || 'json',
-          includeRawText: options.includeRawText || false
+          format: normalizedFormat,
+          includeRawText: options.includeRawText || false,
+          title: options.reportTitle || options.title
         }
       );
       

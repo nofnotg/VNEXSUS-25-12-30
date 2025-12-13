@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { logger } from '../../shared/logging/logger.js';
-import { mask } from '../../shared/security/mask.js';
+import { logger } from '../../../shared/logging/logger';
+import { mask } from '../../../shared/security/mask';
 import type { CaseFileInfo, CaseFileType } from '../types/index.ts';
 
 const REPORT_KEYWORDS = [
@@ -28,7 +28,7 @@ function classifyByName(fileName: string): CaseFileType {
 
 export function listCaseDirectories(rootDir: string): string[] {
   if (!fs.existsSync(rootDir)) {
-    logger.error({ event: 'CASE_DIR_MISSING', rootDir });
+    logger.error({ event: 'CASE_DIR_MISSING', error: { name: 'CASE_DIR_MISSING', message: `Missing directory: ${rootDir}` }, metadata: { rootDir } });
     return [];
   }
   const entries = fs.readdirSync(rootDir, { withFileTypes: true });
@@ -51,15 +51,16 @@ export function classifyCaseFiles(caseDir: string): CaseFileInfo[] {
 
   logger.info({
     event: 'CASE_FILE_CLASSIFIED',
-    caseId: mask(caseId),
-    counts: {
-      total: results.length,
-      actualReport: results.filter(r => r.type === 'actual_report').length,
-      medical: results.filter(r => r.type === 'medical_doc').length,
-      other: results.filter(r => r.type === 'other').length,
+    metadata: {
+      caseId: mask(caseId),
+      counts: {
+        total: results.length,
+        actualReport: results.filter(r => r.type === 'actual_report').length,
+        medical: results.filter(r => r.type === 'medical_doc').length,
+        other: results.filter(r => r.type === 'other').length,
+      }
     }
   });
 
   return results;
 }
-

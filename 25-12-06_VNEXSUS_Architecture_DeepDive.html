@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS Hybrid Architecture Deep Dive</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+        }
+
+        .architecture-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .module-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary-color);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .llm-highlight {
+            border-left-color: var(--accent-color);
+            background-color: #fff5f5;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            background: var(--secondary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #c7254e;
+        }
+
+        .mermaid {
+            text-align: center;
+        }
+    </style>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>VNEXSUS Hybrid Architecture & LLM Integration</h1>
+            <p>규칙 기반의 정밀함과 LLM의 추론 능력을 결합한 하이브리드 의료 심사 시스템</p>
+        </header>
+
+        <section>
+            <h2>1. 아키텍처 개요 (System Architecture)</h2>
+            <p>VNEXSUS는 <strong>"Fact Extraction (사실 추출)"</strong>과 <strong>"Judgment (판단)"</strong>, 그리고
+                <strong>"Narrative (서술)"</strong>의 3단계 파이프라인으로 구성됩니다. LLM은 마지막 단계인 '서술'과 복잡한 문맥 해석에 집중적으로 사용되어
+                환각(Hallucination)을 최소화합니다.</p>
+
+            <div class="architecture-diagram">
+                <div class="mermaid">
+                    graph TD
+                    Input[의료 기록 (PDF/Image)] --> OCR[OCR & Text Extraction]
+                    OCR --> Phase1[Phase 1: Fact Extraction]
+
+                    subgraph "Core Engine Pipeline"
+                    Phase1 -- "Regex/HybridNER" --> Facts[구조화된 사실 데이터]
+                    Facts --> Phase2[Phase 2: 3D Vector Evaluation]
+                    Phase2 -- "Severity/Time/Certainty" --> Vector[3D 벡터 & 리스크 판정]
+
+                    Vector --> Phase3[Phase 3: Writer Agent (LLM)]
+                    Facts --> Phase3
+
+                    Phase3 -- "Prompting" --> LLM[OpenAI GPT-4o-mini]
+                    LLM --> Report[최종 심사 보고서]
+                    end
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 주요 모듈 및 LLM 활용 (Modules & LLM Usage)</h2>
+
+            <div class="module-card">
+                <h3>Phase 1: Fact Extraction (사실 추출)</h3>
+                <p><strong>역할:</strong> 비정형 텍스트에서 날짜, 진단명, 병원명 등 핵심 엔티티를 추출합니다.</p>
+                <p><strong>기술:</strong> <code>Regex</code> (정규식), <code>HybridNER</code> (규칙 기반 개체명 인식)</p>
+                <p><strong>LLM 활용:</strong> 없음 (정확성 보장을 위해 규칙 기반 처리)</p>
+            </div>
+
+            <div class="module-card">
+                <h3>Phase 2: 3D Vector Evaluation (판단)</h3>
+                <p><strong>역할:</strong> 추출된 사실을 바탕으로 리스크를 수학적으로 계산합니다.</p>
+                <p><strong>기술:</strong> <code>VectorEvaluationService.js</code></p>
+                <p><strong>로직:</strong></p>
+                <ul>
+                    <li><strong>X축 (중증도):</strong> 질병의 심각도 (암=10, 감기=1)</li>
+                    <li><strong>Y축 (시계열):</strong> 계약일 기준 발생 시점 (-5=계약전, +10=보장기간)</li>
+                    <li><strong>Z축 (확실성):</strong> 진단의 의학적 근거 (조직검사=10, 증상호소=2)</li>
+                </ul>
+                <p><strong>LLM 활용:</strong> 없음 (일관된 판단을 위해 알고리즘 처리)</p>
+            </div>
+
+            <div class="module-card llm-highlight">
+                <h3>Phase 3: Writer Agent (서술 & 보고서 작성)</h3>
+                <p><strong>역할:</strong> 판단 결과(Vector)와 사실 데이터(Facts)를 종합하여 사람이 읽기 쉬운 심사 보고서를 작성합니다.</p>
+                <p><strong>기술:</strong> <code>WriterAgentService.js</code> -> <code>MedicalAnalysisService.js</code> ->
+                    <code>OpenAI API</code></p>
+                <p><strong>LLM 활용 (핵심):</strong></p>
+                <ul>
+                    <li><strong>입력 (Prompt):</strong> 3D 벡터 결과, 핵심 이벤트, 계약 정보, 심사 가이드라인</li>
+                    <li><strong>작업:</strong> "이 건이 왜 고지의무 위반 위험인지 설명하라", "약관에 의거하여 지급 사유를 서술하라"</li>
+                    <li><strong>출력:</strong> 논리적이고 설득력 있는 심사 의견서</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 검증 이슈 및 개선 계획 (Verification Status)</h2>
+            <div class="module-card" style="border-left-color: #e74c3c;">
+                <h3>⚠️ 현재 검증의 한계 (Current Limitation)</h3>
+                <p>사용자님께서 지적하신 대로, <strong>현재의 검증(Verify Script)은 LLM을 직접 호출하지 않고 '템플릿(Template)'을 사용하여
+                        진행되었습니다.</strong></p>
+                <ul>
+                    <li><strong>이유:</strong> 초기 개발 속도를 위해 정해진 문구를 조합하는 방식을 사용했습니다.</li>
+                    <li><strong>문제점:</strong> 실제 LLM의 문맥 파악 능력이나 유연한 서술 능력이 반영되지 않아, 복잡한 케이스에서 정확도가 떨어지거나 기계적인 답변만
+                        생성됩니다.</li>
+                </ul>
+            </div>
+
+            <div class="module-card" style="border-left-color: #27ae60;">
+                <h3>🚀 개선 계획 (Improvement Plan)</h3>
+                <p>즉시 <strong>Real LLM Integration</strong>을 수행하겠습니다.</p>
+                <ol>
+                    <li><strong>WriterAgentService 수정:</strong> 템플릿 방식을 제거하고, <code>MedicalAnalysisService.js</code>의
+                        <code>performAIAnalysis</code> 메서드를 호출하도록 변경합니다.</li>
+                    <li><strong>프롬프트 최적화:</strong> 3D 벡터 좌표와 리스크 타입(VIOLATION_RISK 등)을 프롬프트에 명시적으로 포함하여 LLM이 이를 근거로 글을
+                        쓰도록 지시합니다.</li>
+                    <li><strong>재검증:</strong> 실제 LLM이 생성한 보고서를 바탕으로 46개 케이스를 다시 검증합니다.</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

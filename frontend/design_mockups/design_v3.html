@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Medical Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d9488;
+            /* Teal 600 */
+            --primary-dark: #0f766e;
+            /* Teal 700 */
+            --bg-light: #f0fdfa;
+            /* Teal 50 */
+            --surface: #ffffff;
+            --text-main: #134e4a;
+            /* Teal 900 */
+            --border: #ccfbf1;
+            /* Teal 100 */
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-main);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-right: 1px solid var(--border);
+            padding: 2rem;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+        }
+
+        .brand-logo {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-pills .nav-link {
+            color: #64748b;
+            font-weight: 500;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.2);
+        }
+
+        .nav-pills .nav-link:hover:not(.active) {
+            background-color: #f0fdfa;
+            color: var(--primary);
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            background: var(--surface);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .drop-zone {
+            border: 2px dashed #99f6e4;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #f0fdfa;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--primary);
+            background: #ccfbf1;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Report Styling */
+        .report-container {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .report-header-strip {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .report-body {
+            padding: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-hospital {
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .diagnosis-tag {
+            display: inline-block;
+            background: #f0fdfa;
+            color: var(--primary-dark);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid #ccfbf1;
+        }
+
+        .risk-alert {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #be123c;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="brand-logo">
+            <i class="bi bi-hospital me-2"></i> VNEXSUS
+        </div>
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="v-pills-analysis-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-analysis" type="button" role="tab"><i class="bi bi-file-text me-2"></i>문서
+                분석</button>
+            <button class="nav-link" id="v-pills-report-tab" data-bs-toggle="pill" data-bs-target="#v-pills-report"
+                type="button" role="tab"><i class="bi bi-bar-chart-steps me-2"></i>조사 보고서</button>
+            <button class="nav-link" id="v-pills-settings-tab" type="button"><i class="bi bi-gear me-2"></i>설정</button>
+        </div>
+        <div class="mt-auto pt-4 border-top">
+            <div class="d-flex align-items-center">
+                <div class="bg-light rounded-circle p-2 me-2">
+                    <i class="bi bi-person text-muted"></i>
+                </div>
+                <div>
+                    <div class="small fw-bold">Investigator</div>
+                    <div class="small text-muted">Online</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="tab-content" id="v-pills-tabContent">
+            <!-- Analysis Tab -->
+            <div class="tab-pane fade show active" id="v-pills-analysis" role="tabpanel">
+                <h4 class="fw-bold mb-4">새로운 분석 시작</h4>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">의료 기록 업로드</div>
+                            <div class="card-body">
+                                <div class="drop-zone mb-3">
+                                    <i class="bi bi-cloud-upload fs-2 text-primary mb-2"></i>
+                                    <p class="mb-0 fw-bold">의료 기록 파일 업로드</p>
+                                    <small class="text-muted">지원 형식: PDF, JPG, PNG</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted small">0개 파일 선택됨</span>
+                                    <button class="btn btn-primary">분석 실행</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">환자 정보</div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted">환자명</label>
+                                    <input type="text" class="form-control form-control-sm">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted">차트 번호</label>
+                                    <input type="text" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div class="tab-pane fade" id="v-pills-report" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0">조사 결과 보고서</h4>
+                    <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-download me-1"></i> 다운로드</button>
+                </div>
+
+                <div class="report-container">
+                    <div class="report-header-strip">
+                        CASE ID: 2025-VNX-001 | RISK LEVEL: HIGH
+                    </div>
+                    <div class="report-body">
+                        <h5 class="fw-bold mb-4 text-secondary">진료 이력 타임라인</h5>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">2025.02.17 (3개월 내)</div>
+                            <div class="timeline-hospital">강남성심병원 | 신경외과</div>
+                            <div class="mt-2">
+                                <span class="diagnosis-tag">기타 명시된 뇌혈관질환 (I67.8)</span>
+                                <span class="diagnosis-tag">상세불명의 두개내출혈 (I62.9)</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="border-color: #94a3b8;"></div>
+                            <div class="timeline-date text-secondary">2023.10.20 (5년 내)</div>
+                            <div class="timeline-hospital">이기섭의원 | 내과</div>
+                            <div class="mt-2">
+                                <span class="diagnosis-tag text-secondary border-secondary bg-light">급성후두염
+                                    (J04.0)</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-alert">
+                            <strong><i class="bi bi-exclamation-circle-fill me-2"></i>조사관 주의 요망</strong>
+                            <p class="mb-0 mt-1 small">가입 전 3개월 이내 중대 질환(뇌혈관) 진단 이력이 있어 고지의무 위반 가능성이 매우 높습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

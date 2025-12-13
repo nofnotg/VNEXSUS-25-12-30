@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Glass Intelligence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient-start: #f8fafc;
+            --bg-gradient-end: #e2e8f0;
+            --glass-surface: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+            --primary: #2563eb;
+            /* Blue 600 */
+            --accent: #06b6d4;
+            /* Cyan 500 */
+            --danger: #ef4444;
+            --warning: #f59e0b;
+
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            padding-bottom: 4rem;
+        }
+
+        /* Glass Header */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid white;
+            padding: 1.25rem 0;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Hybrid Elements: Step Numbers & Quotes */
+        .step-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            margin-right: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-badge.risk {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+        }
+
+        .step-badge.warn {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        .glass-quote {
+            background: rgba(255, 255, 255, 0.5);
+            border-left: 4px solid;
+            padding: 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.25rem 0;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .glass-quote.risk {
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        .glass-quote.warn {
+            border-color: var(--warning);
+            color: #92400e;
+        }
+
+        /* Timeline */
+        .timeline-glass {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-glass::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-event {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.45rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .timeline-dot.risk {
+            border-color: var(--danger);
+        }
+
+        /* Badges */
+        .status-pill {
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-pill.high {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        /* Buttons */
+        .btn-glass-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-glass-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div class="d-flex gap-3">
+                <button class="btn btn-sm btn-light rounded-pill px-3 fw-bold text-muted">Analysis</button>
+                <button class="btn btn-sm btn-primary rounded-pill px-3 fw-bold">Report View</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Summary Header -->
+        <div class="glass-card">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-primary fw-bold text-uppercase mb-1">Investigation Report</h6>
+                    <h2 class="fw-bold mb-0">Case #2025-VNX-001</h2>
+                </div>
+                <div class="text-end">
+                    <div class="status-pill high d-inline-flex align-items-center">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        RISK LEVEL: HIGH
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left: Reasoning Stream -->
+            <div class="col-lg-7">
+                <h5 class="fw-bold text-muted mb-3 ps-2">AI Reasoning Stream</h5>
+
+                <!-- Card 1 -->
+                <div class="glass-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="step-badge risk">1</div>
+                            <h5 class="fw-bold mb-0 text-dark">Disclosure Violation Detected</h5>
+                        </div>
+
+                        <div class="glass-quote risk">
+                            "Patient diagnosed with Cerebrovascular Disease (I67.8) 12 days prior to contract. This
+                            violates the 3-month mandatory disclosure rule."
+                        </div>
+
+                        <div class="timeline-glass mt-4">
+                            <div class="timeline-event">
+                                <div class="timeline-dot risk"></div>
+                                <div class="d-flex justify-content-between">
+                                    <strong>2025.02.17 (D-12)</strong>
+                                    <span class="badge bg-danger bg-opacity-10 text-danger">Critical Event</span>
+                                </div>
+                                <div class="text-muted small mt-1">Kangnam Sacred Heart Hospital | Diagnosis: I67.8
+                                </div>
+                            </div>
+                            <div class="timeline-event">
+                                <div class="timeline-dot"></div>
+                                <strong>2025.03.01 (Contract Date)</strong>
+                                <div class="text-muted small mt-1">Policy: Health Premium Plus</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="step-badge warn">2</div>
+                            <h5 class="fw-bold mb-0 text-dark">Shopping Behavior Warning</h5>
+                        </div>
+                        <div class="glass-quote warn">
+                            "Visited 3 different clinics for 'Gastritis' within 2 weeks. Pattern suggests potential
+                            doctor shopping behavior."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Metrics & Actions -->
+            <div class="col-lg-5">
+                <h5 class="fw-bold text-muted mb-3 ps-2">Case Metrics</h5>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="glass-card text-center mb-0 h-100">
+                            <div class="card-body py-4">
+                                <h6 class="text-muted text-uppercase small fw-bold">Documents</h6>
+                                <h2 class="fw-bold text-primary mb-0">15</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="glass-card text-center mb-0 h-100">
+                            <div class="card-body py-4">
+                                <h6 class="text-muted text-uppercase small fw-bold">Events</h6>
+                                <h2 class="fw-bold text-dark mb-0">42</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card mt-3">
+                    <div class="card-body">
+                        <h6 class="fw-bold mb-3">Verification Status</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">ICD Code Match</span>
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Hospital DB</span>
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-muted">Date Logic</span>
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-glass-primary w-100 py-3 mt-2">
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i>Generate Final Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

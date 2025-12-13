@@ -14,6 +14,85 @@ import PostProcessingManager from '../postprocess/index.js';
 const router = express.Router();
 
 /**
+ * POST /api/postprocess
+ * 메인 앱에서 사용하는 간소화된 요약표 생성 엔드포인트
+ * (기존 프론트엔드 계약 유지용 래퍼)
+ */
+router.post('/', async (req, res) => {
+  try {
+    const { ocrText, ocrResults, patientInfo = {}, options = {} } = req.body;
+
+    let mergedText = typeof ocrText === 'string' ? ocrText : '';
+    if (!mergedText && Array.isArray(ocrResults)) {
+      mergedText = ocrResults.filter(Boolean).join('\n\n');
+    }
+
+    if (!mergedText || mergedText.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'OCR 텍스트가 필요합니다.',
+        code: 'MISSING_OCR_TEXT'
+      });
+    }
+
+    console.log('📱 메인 앱 간소화 후처리 요청:', {
+      textLength: mergedText.length,
+      options: Object.keys(options)
+    });
+
+    const result = await PostProcessingManager.processForMainApp(mergedText, {
+      ...options,
+      patientInfo
+    });
+
+    const finalReport = result.finalReport || {};
+    const textResult = finalReport.results?.text;
+    const jsonResult = finalReport.results?.json;
+
+    const downloadUrl = textResult?.downloadUrl || jsonResult?.downloadUrl || null;
+
+    const preview = Array.isArray(result.organizedData)
+      ? result.organizedData.map(item => ({
+          date: item.date || '',
+          hospital: item.hospital || '',
+          diagnosis: Array.isArray(item.diagnosis)
+            ? item.diagnosis
+            : item.diag
+            ? Array.isArray(item.diag)
+              ? item.diag
+              : [item.diag]
+            : [],
+          treatment: Array.isArray(item.treatment)
+            ? item.treatment
+            : item.treat
+            ? Array.isArray(item.treat)
+              ? item.treat
+              : [item.treat]
+            : []
+        }))
+      : [];
+
+    res.json({
+      success: true,
+      report: {
+        downloadUrl,
+        preview
+      },
+      data: result,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('❌ 메인 앱 간소화 후처리 오류:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      code: 'MAIN_APP_LEGACY_POSTPROCESS_ERROR',
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
+/**
  * POST /api/postprocess/process
  * 메인 후처리 파이프라인 실행
  */

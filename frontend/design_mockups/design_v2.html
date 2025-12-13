@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Dark Premium</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --primary: #3b82f6;
+            --accent: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        .main-header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .brand-logo {
+            font-weight: 700;
+            background: linear-gradient(to right, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main);
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            background: transparent;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--accent);
+            background: rgba(6, 182, 212, 0.05);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .form-control {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+            color: white;
+        }
+
+        /* Report Styling */
+        .report-preview {
+            background: rgba(30, 41, 59, 0.4);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .date-badge-recent {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .date-badge-5yr {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .report-section-title {
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .report-label {
+            color: var(--text-muted);
+            margin-right: 0.5rem;
+        }
+
+        .text-highlight {
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div class="text-muted small"><span
+                    class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25">OPERATIONAL</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis"
+                    type="button" role="tab">ANALYSIS</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
+                    role="tab">INTELLIGENCE REPORT</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Analysis Tab -->
+            <div class="tab-pane fade show active" id="analysis" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-white">Document Ingestion</h5>
+                            <div class="drop-zone mb-4">
+                                <i class="bi bi-file-earmark-medical fs-1 text-info mb-3"></i>
+                                <h6 class="fw-bold text-white">Upload Medical Records</h6>
+                                <p class="text-muted small">Drag & Drop or Click to Browse</p>
+                            </div>
+                            <div class="d-flex justify-content-end mt-auto">
+                                <button class="btn btn-primary w-100">
+                                    <i class="bi bi-lightning-charge-fill me-2"></i>INITIATE ANALYSIS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-white">Case Metadata</h5>
+                            <div class="mb-4">
+                                <label class="form-label text-info small fw-bold">PATIENT ID</label>
+                                <input type="text" class="form-control" placeholder="Enter Patient Name/ID">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-info small fw-bold">NOTES</label>
+                                <textarea class="form-control" rows="4" placeholder="Additional context..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div class="tab-pane fade" id="report" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0 text-white">INVESTIGATION RESULTS</h4>
+                    <div>
+                        <button class="btn btn-outline-light btn-sm me-2">EXPORT PDF</button>
+                        <button class="btn btn-primary btn-sm">REFRESH DATA</button>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <div class="report-section-title">01. MEDICAL HISTORY TIMELINE</div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-recent me-3">CRITICAL (3M)</span>
+                            <strong class="text-white fs-5">2025.02.17</strong>
+                            <span class="text-muted ms-2">| Kangnam Sacred Heart Hospital</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Headache &
+                                Dizziness</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Other specified
+                                cerebrovascular diseases (I67.8)</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-5yr me-3">HISTORY (5Y)</span>
+                            <strong class="text-white fs-5">2023.10.20</strong>
+                            <span class="text-muted ms-2">| Lee Ki-seop Clinic</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Routine Care</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Acute laryngitis
+                                (J04.0), Gastritis (K29.7)</span>
+                        </div>
+                    </div>
+
+                    <div class="report-section-title">02. RISK ASSESSMENT</div>
+                    <div class="p-3 rounded"
+                        style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <div class="d-flex">
+                            <i class="bi bi-shield-exclamation text-danger fs-4 me-3"></i>
+                            <div>
+                                <h6 class="text-danger fw-bold mb-1">DISCLOSURE VIOLATION DETECTED</h6>
+                                <p class="text-muted small mb-0">High probability of non-disclosure regarding
+                                    cerebrovascular diagnosis within 3 months of contract date (2025.03.01).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

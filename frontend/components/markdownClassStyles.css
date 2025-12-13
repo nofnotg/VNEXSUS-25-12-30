@@ -1,0 +1,116 @@
+/* Additional styles for markdownToHtml output classes */
+
+/* Date Header - 날짜 헤더 강조 */
+.date-header {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white !important;
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+/* Content Block - 내용 블록 카드 */
+.content-block {
+    background: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    line-height: 1.8;
+}
+
+.content-block:empty {
+    display: none;
+}
+
+/* Section Header - 섹션 제목 */
+.section-header {
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* Section Divider - 섹션 구분선 */
+.section-divider {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #3b82f6, #06b6d4, transparent);
+    margin: 2.5rem 0;
+    border-radius: 2px;
+}
+
+/* Period Marker - 기간 마커 (3개월/5년) */
+.period-marker {
+    font-style: normal !important;
+    font-weight: 600;
+    font-size: 0.85em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin: 0 4px;
+}
+
+.period-marker.critical {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* Data List - 데이터 리스트 */
+.data-list {
+    background: rgba(248, 250, 252, 0.95);
+    border-left: 4px solid #2563eb;
+    padding: 1rem 1.5rem !important;
+    margin: 0.75rem 0 1.5rem 0 !important;
+    border-radius: 0 12px 12px 0;
+    list-style: none !important;
+}
+
+.data-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed rgba(203, 213, 225, 0.7);
+}
+
+.data-list li:last-child {
+    border-bottom: none;
+}
+
+/* Report Table - 보고서 테이블 */
+.report-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-table th {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.report-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background: white;
+}
+
+.report-table tr:last-child td {
+    border-bottom: none;
+}
+
+.report-table tr:hover td {
+    background: #f8fafc;
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS v2.0 개발 계획 및 PRD (v2 - 95% Target)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 2.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+            margin: 3rem 0 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            font-weight: 700;
+            padding: 1.25rem;
+        }
+
+        .table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feasibility-high {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .feasibility-mid {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .feasibility-low {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .accuracy-badge {
+            font-size: 1.5rem;
+            font-weight: 800;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="fw-bold mb-2">VNEXSUS v2.0 개발 계획서 (PRD v2)</h1>
+                    <p class="opacity-75 mb-0">정확도 <strong>95%</strong> 달성을 위한 4단계 고도화 전략</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-warning text-dark mb-2">Updated: 2025-12-06</span><br>
+                    <span class="badge bg-light text-dark">Version 2.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+
+        <!-- 1. 개발 방향성 -->
+        <h2 class="section-title">1. 개발 방향성 (Development Direction)</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h4 class="fw-bold text-primary mb-3">기존 시스템 고도화 (Enhancement)</h4>
+                        <p>Node.js 백엔드와 Vision OCR 파이프라인은 유지하되, 정확도가 낮은 추출 모듈을 <strong>4단계에 걸쳐 점진적으로 교체/보강</strong>합니다.
+                        </p>
+                        <table class="table table-sm mt-3">
+                            <thead>
+                                <tr>
+                                    <th>구분</th>
+                                    <th>항목</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-success">유지</span></td>
+                                    <td>Node.js 서버, PDF 업로드, Vision OCR 연동, 기본 UI</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-warning text-dark">교체</span></td>
+                                    <td>단순 정규식 → Hybrid Extractor (Regex + Fuzzy + LLM)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-primary">신규</span></td>
+                                    <td>Feedback Loop, Knowledge Graph, Multi-Model Ensemble</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-5 border-start">
+                        <h5 class="text-center text-muted mb-3">Target Accuracy by Phase</h5>
+                        <div class="d-flex justify-content-around text-center">
+                            <div><span class="accuracy-badge bg-light text-secondary">29.7%</span><br><small
+                                    class="text-muted">현재</small></div>
+                            <div><span class="accuracy-badge bg-info text-white">60%</span><br><small
+                                    class="text-muted">Phase 1</small></div>
+                            <div><span class="accuracy-badge bg-warning text-dark">80%</span><br><small
+                                    class="text-muted">Phase 2</small></div>
+                            <div><span class="accuracy-badge bg-success text-white">90%</span><br><small
+                                    class="text-muted">Phase 3</small></div>
+                            <div><span class="accuracy-badge bg-primary text-white">95%</span><br><small
+                                    class="text-muted">Phase 4</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 로드맵 -->
+        <h2 class="section-title">2. 단계별 상세 계획 (Roadmap)</h2>
+        <div class="card">
+            <div class="card-header">Project Timeline (4 Phases)</div>
+            <div class="card-body">
+                <div class="mermaid">
+                    gantt
+                    title VNEXSUS v2.0 Accuracy Improvement Roadmap
+                    dateFormat YYYY-MM-DD
+                    axisFormat %m-%d
+
+                    section Phase 1: Rule-Based (60%)
+                    정규식 엔진 고도화 :active, p1_1, 2025-12-06, 2d
+                    Fuzzy Matching 도입 :p1_2, after p1_1, 2d
+                    JSON Schema 검증 :p1_3, after p1_2, 1d
+
+                    section Phase 2: Feedback Loop (80%)
+                    수정 내역 저장 API :p2_1, after p1_3, 2d
+                    Diff 분석 및 사전 업데이트 :p2_2, after p2_1, 3d
+                    Few-Shot 프롬프트 동적 생성 :p2_3, after p2_2, 2d
+
+                    section Phase 3: Graph-RAG (90%)
+                    Entity Relation Map :p3_1, after p2_3, 3d
+                    Context Query Engine :p3_2, after p3_1, 3d
+
+                    section Phase 4: Precision (95%)
+                    Multi-Model Ensemble :p4_1, after p3_2, 3d
+                    Cross-Validation Layer :p4_2, after p4_1, 2d
+                    Confidence Scoring :p4_3, after p4_2, 2d
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Phase별 상세 Task -->
+        <h2 class="section-title">3. 상세 업무 분장 (Task Breakdown)</h2>
+
+        <!-- Phase 1 -->
+        <div class="card border-info mb-4">
+            <div class="card-header bg-info text-white d-flex justify-content-between">
+                <span><i class="bi bi-1-circle-fill me-2"></i>Phase 1: Rule-Based Precision</span>
+                <div><span class="badge bg-light text-info me-2">목표: 60%</span><span
+                        class="badge bg-white text-success">구현 난이도: 낮음</span></div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>구현 가능성</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-101</td>
+                            <td><strong>Advanced Regex</strong></td>
+                            <td>날짜/기간 패턴 50종+ 정규식 라이브러리</td>
+                            <td class="feasibility-high">✅ 높음 (1~2일)</td>
+                        </tr>
+                        <tr>
+                            <td>T-102</td>
+                            <td><strong>Fuzzy Matcher</strong></td>
+                            <td>Levenshtein 알고리즘 (병원명/진단명 오타 허용)</td>
+                            <td class="feasibility-high">✅ 높음 (npm: fast-levenshtein)</td>
+                        </tr>
+                        <tr>
+                            <td>T-103</td>
+                            <td><strong>Output Parser</strong></td>
+                            <td>AI 출력 JSON Schema 검증 및 재시도 로직</td>
+                            <td class="feasibility-high">✅ 높음 (Zod 라이브러리)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="card border-warning mb-4">
+            <div class="card-header bg-warning text-dark d-flex justify-content-between">
+                <span><i class="bi bi-2-circle-fill me-2"></i>Phase 2: Feedback Loop</span>
+                <div><span class="badge bg-dark text-warning me-2">목표: 80%</span><span
+                        class="badge bg-light text-warning">구현 난이도: 중간</span></div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>구현 가능성</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-201</td>
+                            <td><strong>Correction API</strong></td>
+                            <td>사용자 수정 데이터를 백엔드에 저장하는 API</td>
+                            <td class="feasibility-high">✅ 높음 (Express + JSON File)</td>
+                        </tr>
+                        <tr>
+                            <td>T-202</td>
+                            <td><strong>Diff Analyzer</strong></td>
+                            <td>AI 초안 vs 사용자 수정본 비교 분석</td>
+                            <td class="feasibility-mid">⚠️ 중간 (diff-match-patch)</td>
+                        </tr>
+                        <tr>
+                            <td>T-203</td>
+                            <td><strong>Dynamic Few-Shot</strong></td>
+                            <td>오답 노트를 다음 AI 프롬프트에 자동 주입</td>
+                            <td class="feasibility-mid">⚠️ 중간 (프롬프트 엔지니어링)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="card border-success mb-4">
+            <div class="card-header bg-success text-white d-flex justify-content-between">
+                <span><i class="bi bi-3-circle-fill me-2"></i>Phase 3: Graph-RAG</span>
+                <div><span class="badge bg-light text-success me-2">목표: 90%</span><span
+                        class="badge bg-white text-danger">구현 난이도: 높음</span></div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>구현 가능성</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-301</td>
+                            <td><strong>Entity Relation Map</strong></td>
+                            <td>[환자]-[방문]-[진단]-[처방] 관계 그래프 생성</td>
+                            <td class="feasibility-mid">⚠️ 중간 (JSON Graph 구조)</td>
+                        </tr>
+                        <tr>
+                            <td>T-302</td>
+                            <td><strong>Context Query</strong></td>
+                            <td>문맥 기반 질의 응답 (RAG 통합)</td>
+                            <td class="feasibility-low">❌ 높음 (LangChain 통합 필요)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Phase 4 (NEW - 95% Target) -->
+        <div class="card border-primary mb-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between">
+                <span><i class="bi bi-4-circle-fill me-2"></i>Phase 4: Precision Engineering (95% Target) <span
+                        class="badge bg-warning text-dark ms-2">NEW</span></span>
+                <div><span class="badge bg-light text-primary me-2">목표: 95%</span><span
+                        class="badge bg-white text-danger">구현 난이도: 높음</span></div>
+            </div>
+            <div class="card-body">
+                <div class="insight-box mb-4">
+                    <h5 class="fw-bold text-primary mb-2"><i class="bi bi-lightbulb-fill me-2"></i>95% 달성을 위한 핵심 인사이트
+                    </h5>
+                    <p class="mb-0">90%에서 95%로의 점프는 "Long Tail" 문제입니다. 흔한 케이스는 이미 처리되고, <strong>드물고 복잡한 예외 케이스</strong>가
+                        남습니다. 이를 해결하려면 <strong>다중 검증(Multi-Validation)</strong>과 <strong>신뢰도 기반 분기(Confidence
+                            Routing)</strong>가 필요합니다.</p>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>구현 가능성</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-401</td>
+                            <td><strong>Multi-Model Ensemble</strong></td>
+                            <td>2~3개의 LLM(예: Gemini + GPT-4)에게 동시에 추출을 요청하고, 결과를 비교(Voting)하여 일치하면 채택, 불일치하면 Human
+                                Review 플래그</td>
+                            <td class="feasibility-mid">⚠️ 중간 (API 비용 증가)</td>
+                        </tr>
+                        <tr>
+                            <td>T-402</td>
+                            <td><strong>Cross-Validation Layer</strong></td>
+                            <td>추출된 병원명을 <strong>건강보험심사평가원 DB</strong>와 대조, ICD 코드를 <strong>WHO ICD-10 DB</strong>와 대조하여
+                                실제로 존재하는 값인지 검증</td>
+                            <td class="feasibility-high">✅ 높음 (공공 API 활용)</td>
+                        </tr>
+                        <tr>
+                            <td>T-403</td>
+                            <td><strong>Confidence Scoring</strong></td>
+                            <td>각 추출 필드에 대해 AI가 0~100% 신뢰도를 부여하고, 80% 미만인 필드는 UI에서 노란색 하이라이트로 표시 → 사용자 검토 유도</td>
+                            <td class="feasibility-high">✅ 높음 (프롬프트 수정)</td>
+                        </tr>
+                        <tr>
+                            <td>T-404</td>
+                            <td><strong>OCR Pre-Processing</strong></td>
+                            <td>이미지 전처리(노이즈 제거, 기울기 보정, 대비 향상)로 OCR 품질 개선 → 추출 정확도의 근본적 개선</td>
+                            <td class="feasibility-mid">⚠️ 중간 (Sharp/Jimp 라이브러리)</td>
+                        </tr>
+                        <tr>
+                            <td>T-405</td>
+                            <td><strong>Template Matching</strong></td>
+                            <td>반복적으로 등장하는 보험사 양식(예: DB손해보험, 삼성화재)을 템플릿화하여 구조적 추출 (Regex보다 정확)</td>
+                            <td class="feasibility-high">✅ 높음 (케이스 누적 필요)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. 구현 가능성 분석 -->
+        <h2 class="section-title">4. 구현 가능성 분석 (Feasibility Matrix)</h2>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Phase</th>
+                            <th>목표 정확도</th>
+                            <th>예상 소요 시간</th>
+                            <th>의존성/리스크</th>
+                            <th>구현 가능성</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Phase 1</strong></td>
+                            <td>60%</td>
+                            <td>~5일</td>
+                            <td>없음 (독립적)</td>
+                            <td class="feasibility-high">✅ 매우 높음</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 2</strong></td>
+                            <td>80%</td>
+                            <td>~7일</td>
+                            <td>사용자 수정 데이터 축적 필요 (Cold Start)</td>
+                            <td class="feasibility-mid">⚠️ 중간</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 3</strong></td>
+                            <td>90%</td>
+                            <td>~6일</td>
+                            <td>LangChain/RAG 통합 복잡도</td>
+                            <td class="feasibility-mid">⚠️ 중간</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phase 4</strong></td>
+                            <td>95%</td>
+                            <td>~7일</td>
+                            <td>Multi-Model API 비용, 공공 DB 연동</td>
+                            <td class="feasibility-mid">⚠️ 중간 (비용 고려)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info mt-3 mb-0">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <strong>총 예상 소요 시간:</strong> 약 25일 (4~5주) |
+                    <strong>권장 우선순위:</strong> Phase 1 → Phase 4 (T-402, T-403) → Phase 2 → Phase 3
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 결론 및 권장 사항 -->
+        <h2 class="section-title">5. 결론 및 권장 사항</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-success"><i class="bi bi-check-circle-fill me-2"></i>즉시 구현 권장 (Quick
+                            Wins)</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">T-101: 정규식 패턴 확장 (2일)</li>
+                            <li class="list-group-item">T-102: Fuzzy Matching (1일)</li>
+                            <li class="list-group-item">T-403: Confidence Scoring (1일)</li>
+                            <li class="list-group-item">T-402: ICD/병원 DB 교차 검증 (2일)</li>
+                        </ul>
+                        <p class="text-muted mt-2 mb-0"><small>예상 효과: 29.7% → <strong>65~70%</strong> (1주일 내)</small>
+                        </p>
+                    </div>
+                    <div class="col-md-6 border-start">
+                        <h5 class="fw-bold text-warning"><i class="bi bi-exclamation-triangle-fill me-2"></i>주의가 필요한 항목
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">T-401: Multi-Model Ensemble → API 비용 증가 (Gemini + GPT-4)</li>
+                            <li class="list-group-item">T-302: Context Query (RAG) → 복잡한 통합 필요</li>
+                            <li class="list-group-item">Phase 2: 사용자 수정 데이터 "Cold Start" 문제</li>
+                        </ul>
+                        <p class="text-muted mt-2 mb-0"><small>이 항목들은 Phase 1/4 Quick Wins 이후 순차적으로 진행 권장</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+
+</html>

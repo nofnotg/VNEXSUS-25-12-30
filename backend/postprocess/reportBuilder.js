@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ReportBuilder Module (Minimal Restored Version)
  * 
  * 역할:
@@ -12,7 +12,7 @@ import path from 'path';
 
 class ReportBuilder {
   constructor() {
-    this.reportsDir = path.join(process.cwd(), 'reports');
+    this.reportsDir = path.join(process.cwd(), 'temp', 'reports');
     this.publicReportsDir = '/reports';
   }
 

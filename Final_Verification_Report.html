@@ -1,0 +1,3690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>VNEXSUS Final Verification Report</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 20px; background: #f4f6f9; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px; margin-bottom: 30px; }
+    h2 { color: #34495e; margin-top: 40px; margin-bottom: 15px; border-left: 5px solid #3498db; padding-left: 10px; }
+    
+    /* Summary Cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .card { background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e1e4e8; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    .card h3 { margin: 0 0 10px; color: #7f8c8d; font-size: 14px; text-transform: uppercase; }
+    .card .value { font-size: 28px; font-weight: 700; color: #2c3e50; }
+    .card.highlight .value { color: #3498db; }
+
+    /* Main Table */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+    th { background: #f8f9fa; padding: 12px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #ddd; }
+    td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: middle; }
+    tr:hover { background: #f8f9fa; }
+    
+    /* Status Badges */
+    .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .badge-pass { background: #e8f5e9; color: #2e7d32; }
+    .badge-review { background: #fff3e0; color: #ef6c00; }
+    .badge-fail { background: #ffebee; color: #c62828; }
+
+    /* Vector Badges */
+    .vec-badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 11px; color: white; }
+    .vec-violation { background-color: #e74c3c; }
+    .vec-payment { background-color: #27ae60; }
+    .vec-exemption { background-color: #f39c12; }
+    .vec-general { background-color: #95a5a6; }
+
+    /* Details Section */
+    details { margin-bottom: 10px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+    summary { padding: 15px; cursor: pointer; background: #fcfcfc; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+    summary:hover { background: #f5f5f5; }
+    .details-content { padding: 20px; border-top: 1px solid #eee; background: #fff; }
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .metric-box { background: #f8f9fa; padding: 15px; border-radius: 6px; }
+    .metric-label { font-size: 12px; color: #777; margin-bottom: 5px; }
+    .metric-val { font-size: 16px; font-weight: 600; }
+
+    /* Progress Bar */
+    .progress-bar { background: #eee; height: 8px; border-radius: 4px; overflow: hidden; width: 100px; display: inline-block; vertical-align: middle; margin-right: 10px; }
+    .progress-fill { height: 100%; background: #3498db; }
+    .score-text { font-weight: bold; font-size: 12px; }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>VNEXSUS Final Verification Report</h1>
+    
+    <div class="summary-grid">
+      <div class="card">
+        <h3>Total Cases</h3>
+        <div class="value">78</div>
+      </div>
+      <div class="card highlight">
+        <h3>Avg Inclusion Score</h3>
+        <div class="value">0%</div>
+      </div>
+      <div class="card">
+        <h3>Avg Date Accuracy</h3>
+        <div class="value">0%</div>
+      </div>
+      <div class="card">
+        <h3>Avg Noise Score</h3>
+        <div class="value">0</div>
+      </div>
+    </div>
+
+    <h2>1. Summary Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Status</th>
+          <th>Inclusion (Superset)</th>
+          <th>Date Accuracy</th>
+          <th>Noise Score</th>
+          <th>Vector Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+            <tr>
+              <td><strong>Case1</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case2</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case2_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case3</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case4</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case5</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case6</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case7</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case8</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case9</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-violation">VIOLATION_RISK</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case10</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case11</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case12</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case13</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case14</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case14_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case15</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case15_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case16</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case16_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case17</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case17_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case18</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case18_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case19</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case19_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case20</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case20_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case21</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case21_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case22</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case22_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case23</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-violation">VIOLATION_RISK</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case23_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case24</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case24_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case25</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case25_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case26</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case26_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case27</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case27_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case28</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case28_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case29</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case29_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case30</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case30_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case31</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case31_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case32</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case32_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case33</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case33_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case34</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-violation">VIOLATION_RISK</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case34_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-violation">VIOLATION_RISK</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case36</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case36_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case37</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case37_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case38</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-violation">VIOLATION_RISK</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case38_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case39</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case39_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case40</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case40_vnexus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case41</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case41_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case42</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case42_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case43</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case43_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case44</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case44_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case45</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case45_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case46</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-payment">PAYMENT_TARGET</span></td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case46_vnexsus</strong></td>
+              <td><span class="badge badge-fail">PASS</span></td>
+              <td>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <span class="score-text">0%</span>
+              </td>
+              <td>0%</td>
+              <td>0</td>
+              <td><span class="vec-badge vec-general">GENERAL_REVIEW</span></td>
+            </tr>
+          
+      </tbody>
+    </table>
+
+    <h2>2. Detailed Analysis per Case</h2>
+    <p style="color: #666; margin-bottom: 20px;">Click on a case to view detailed metrics and vector analysis.</p>
+    
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case1</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case2</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case2_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case3</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case4</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case5</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case6</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case7</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case8</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case9</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, -5, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, -5, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">VIOLATION_RISK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case10</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case11</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case12</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case13</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case14</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case14_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case15</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case15_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case16</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case16_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case17</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case17_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case18</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 0, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 0, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case18_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case19</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case19_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case20</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case20_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case21</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case21_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case22</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case22_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case23</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, -5, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, -5, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">VIOLATION_RISK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case23_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case24</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case24_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case25</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case25_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case26</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case26_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case27</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case27_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case28</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case28_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case29</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case29_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case30</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case30_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case31</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case31_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case32</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case32_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case33</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case33_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case34</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, -10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, -10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">VIOLATION_RISK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case34_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">VIOLATION_RISK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case36</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case36_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case37</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case37_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case38</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, -10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, -10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">VIOLATION_RISK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case38_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case39</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 9]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 9]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case39_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case40</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case40_vnexus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case41</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case41_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case42</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case42_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case43</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case43_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, -5, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, -5, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case44</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 8]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 8]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case44_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case45</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [9, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[9, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case45_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case46</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [10, 10, 10]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[10, 10, 10]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">PAYMENT_TARGET</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+      <details>
+        <summary>
+          <span>📂 <strong>Case46_vnexsus</strong> Analysis</span>
+          <span style="font-size: 12px; color: #888;">Inclusion: 0% | Vector: [3, 10, 3]</span>
+        </summary>
+        <div class="details-content">
+          <div class="details-grid">
+            <div>
+              <h4>📊 Verification Metrics</h4>
+              <div class="metric-box">
+                <div class="metric-label">Inclusion Score (Superset Coverage)</div>
+                <div class="metric-val" style="color: #e74c3c">0%</div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">Percentage of generated facts found in the source Superset.</p>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Date Accuracy</div>
+                <div class="metric-val">0%</div>
+              </div>
+            </div>
+            <div>
+              <h4>📐 3D Vector Analysis</h4>
+              <div class="metric-box">
+                <div class="metric-label">Vector Coordinates (X, Y, Z)</div>
+                <div class="metric-val">[3, 10, 3]</div>
+              </div>
+              <div class="metric-box" style="margin-top: 10px;">
+                <div class="metric-label">Classification</div>
+                <div class="metric-val">GENERAL_REVIEW</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    
+
+  </div>
+</body>
+</html>

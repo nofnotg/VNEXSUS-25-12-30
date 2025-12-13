@@ -1,5 +1,5 @@
-import { logger } from '../../shared/logging/logger.js';
-import { MEDICAL_KEYWORDS } from '../../shared/constants/medical.js';
+import { logger } from '../../../shared/logging/logger';
+import { MEDICAL_KEYWORDS } from '../../../shared/constants/medical';
 import type { KeyInfoExtraction, Metrics } from '../types/index.ts';
 
 // 날짜 패턴(ocrParser의 로직과 유사한 범용 패턴)
@@ -47,7 +47,12 @@ export function extractKeyInfo(text: string): KeyInfoExtraction {
   const allTerms = new Set<string>();
   const lower = text.toLowerCase();
   // 간단한 포함 검색(한국어는 소문자 개념이 적어 원문 그대로도 사용)
-  for (const kw of MEDICAL_KEYWORDS.DISEASES.concat(MEDICAL_KEYWORDS.SYMPTOMS).concat(MEDICAL_KEYWORDS.TREATMENTS)) {
+  const allMedicalKeywords: readonly string[] = [
+    ...MEDICAL_KEYWORDS.DISEASES,
+    ...MEDICAL_KEYWORDS.SYMPTOMS,
+    ...MEDICAL_KEYWORDS.TREATMENTS,
+  ].map(String);
+  for (const kw of allMedicalKeywords) {
     if (text.includes(kw)) allTerms.add(kw);
   }
   return { amounts, dates, hospitals, medicalTerms: Array.from(allTerms) };
@@ -85,7 +90,8 @@ export function computeMetrics(originalText: string, generatedText: string): Met
       tableImageRecognition: tableImg,
     };
   } catch (error) {
-    logger.error({ event: 'METRIC_COMPUTE_ERROR', error: (error as Error).message });
+    const err = error as Error;
+    logger.error({ event: 'METRIC_COMPUTE_ERROR', error: { name: err.name, message: err.message, stack: err.stack } });
     return {};
   }
 }
@@ -116,4 +122,3 @@ export function compareKeyInfo(originalText: string, generatedText: string): Met
     medicalTermRecall: medPR.recall,
   };
 }
-

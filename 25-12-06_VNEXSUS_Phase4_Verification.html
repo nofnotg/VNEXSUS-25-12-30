@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS Phase 4 검증 보고서</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #ef4444;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+
+        .metric-label {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .risk-badge {
+            font-size: 0.9em;
+            padding: 0.4em 0.8em;
+            border-radius: 20px;
+        }
+
+        .timeline-item {
+            border-left: 2px solid #e2e8f0;
+            padding-left: 20px;
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 0;
+        }
+
+        .timeline-item.risk::before {
+            background: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="fw-bold mb-2">VNEXSUS Phase 4 검증 보고서</h1>
+                    <p class="text-muted mb-0">Investigator AI (Reasoning Engine) 구현 결과</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-danger mb-2">Phase 4 Complete</span><br>
+                    <small class="text-muted">2025-12-06</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <!-- 1. 핵심 성과 -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">위험 탐지 성공률</div>
+                    <div class="metric-value text-danger">100%</div>
+                    <div>
+                        <span class="badge bg-success">3/3 시나리오 검증</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">추론 엔진 상태</div>
+                    <div class="metric-value text-primary">Active</div>
+                    <div class="text-muted">Reasoning Engine v1.0</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card metric-card">
+                    <div class="metric-label">자동 생성 보고서</div>
+                    <div class="metric-value">Structured</div>
+                    <small class="text-muted">JSON / Markdown / HTML</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 시나리오별 검증 결과 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4 class="fw-bold mb-3">Investigation Scenarios</h4>
+            </div>
+
+            <!-- Case 1: Disclosure Violation -->
+            <div class="col-md-4">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white fw-bold">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Case 1: 고지의무 위반
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Risk Level: HIGH</h5>
+                        <p class="text-muted small">가입일(2025-03-01) 직전 다수 진료 기록 발견</p>
+                        <hr>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2 text-danger"><strong>⚠️ 위반 의심: 13건</strong></li>
+                            <li class="mb-1">2025-02-18: Other specified cerebrovascular diseases</li>
+                            <li class="mb-1">2025-02-17: 어지럼증 (신경외과)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 9: Doctor Shopping -->
+            <div class="col-md-4">
+                <div class="card h-100 border-warning">
+                    <div class="card-header bg-warning text-dark fw-bold">
+                        <i class="bi bi-hospital-fill me-2"></i>Case 9: 의료쇼핑
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Risk Level: HIGH</h5>
+                        <p class="text-muted small">단기간 내 비정상적인 다수 병원 방문</p>
+                        <hr>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2 text-danger"><strong>🏥 30일 내 35개 병원 방문</strong></li>
+                            <li class="mb-1">주요 진단: 고지혈증, 유방암</li>
+                            <li class="mb-1">패턴: 동일 상병으로 병원 반복 교체</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 4: Progressivity -->
+            <div class="col-md-4">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white fw-bold">
+                        <i class="bi bi-graph-up-arrow me-2"></i>Case 4: 질환 진행성
+                    </div>
+                    <div class="card-body">
+                        <h5 class="fw-bold">Risk Level: HIGH</h5>
+                        <p class="text-muted small">지속적인 치료 및 악화 소견</p>
+                        <hr>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2 text-primary"><strong>📈 만성/진행성 확인</strong></li>
+                            <li class="mb-1">진단: Ascending colon cancer</li>
+                            <li class="mb-1">기간: 2024-11 ~ 지속</li>
+                            <li class="mb-1">특이사항: 수술 및 항암 치료 기록</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 구현된 모듈 상세 -->
+        <div class="card mb-4">
+            <div class="card-header bg-white fw-bold">Implemented Modules</div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ReasoningEngine.js</strong></td>
+                            <td>복합 추론 (진행성, 고지의무, 의료쇼핑) 수행</td>
+                            <td><span class="badge bg-success">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>InvestigationReporter.js</strong></td>
+                            <td>추론 결과를 바탕으로 리스크 평가 및 보고서 생성</td>
+                            <td><span class="badge bg-success">Verified</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. 최종 결론 -->
+        <div class="card bg-dark text-white">
+            <div class="card-body p-4 text-center">
+                <h4 class="fw-bold">Mission Accomplished</h4>
+                <p class="mb-0">
+                    VNEXSUS는 이제 단순한 추출 도구가 아닙니다.<br>
+                    데이터의 맥락을 이해하고, 위험을 감지하며, 조사관처럼 사고하는 <strong>Investigator AI</strong>입니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

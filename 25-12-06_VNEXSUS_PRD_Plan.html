@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS v2.0 개발 계획 및 PRD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --success: #16a34a;
+            --warning: #ca8a04;
+            --danger: #dc2626;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+            margin: 3rem 0 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #f1f5f9;
+            font-weight: 700;
+            padding: 1.25rem;
+        }
+
+        .badge-phase {
+            font-size: 0.9em;
+            padding: 0.5em 0.8em;
+        }
+
+        .table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="fw-bold mb-2">VNEXSUS v2.0 개발 계획서 (PRD)</h1>
+                    <p class="text-muted mb-0">정확도 90% 달성을 위한 시스템 고도화 및 대응 체계 구축</p>
+                </div>
+                <div class="text-end">
+                    <span class="badge bg-primary mb-2">Project: Accuracy Jump</span><br>
+                    <small class="text-muted">Last Updated: 2025-12-06</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+
+        <!-- 1. 개요 및 개발 방향 -->
+        <h2 class="section-title">1. 개발 방향성 (Development Direction)</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4 class="fw-bold text-primary">Q. 새로 개발하는 것인가? 현재 시스템을 고도화하는 것인가?</h4>
+                        <p class="lead fw-bold mt-3">A. "현재 시스템(Node.js Backend)을 기반으로 한 고도화(Enhancement)" 입니다.</p>
+                        <p>기존의 OCR 파이프라인과 웹 서버 구조는 유지하되, <strong>정확도가 낮은 모듈을 전면 교체/보강</strong>하는 하이브리드 전략을 취합니다.</p>
+                        <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item"><i
+                                    class="bi bi-check-circle-fill text-success me-2"></i><strong>유지 (Keep)</strong>:
+                                Node.js 서버, PDF 업로드, 기본 UI, Vision OCR 연동</li>
+                            <li class="list-group-item"><i class="bi bi-arrow-repeat text-warning me-2"></i><strong>교체
+                                    (Replace)</strong>: 단순 정규식 추출기 → <strong>Hybrid Extractor (Regex + Fuzzy +
+                                    LLM)</strong></li>
+                            <li class="list-group-item"><i
+                                    class="bi bi-plus-circle-fill text-primary me-2"></i><strong>신규 (New)</strong>:
+                                Feedback Loop (사용자 수정 학습), Knowledge Graph (관계 분석)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 text-center border-start">
+                        <div class="p-3">
+                            <h5 class="text-muted mb-3">Target Architecture</h5>
+                            <div class="mermaid">
+                                graph TD
+                                Old[기존 Legacy] -->|Refactor| Base[Core Platform]
+                                Base -->|Add| Mod1[Hybrid Extractor]
+                                Base -->|Add| Mod2[Feedback Loop]
+                                Base -->|Add| Mod3[Graph Engine]
+                                style Old fill:#f1f5f9,stroke:#94a3b8
+                                style Base fill:#dbeafe,stroke:#2563eb
+                                style Mod1 fill:#dcfce7,stroke:#16a34a
+                                style Mod2 fill:#fef9c3,stroke:#ca8a04
+                                style Mod3 fill:#f3e8ff,stroke:#9333ea
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 상세 로드맵 -->
+        <h2 class="section-title">2. 단계별 상세 계획 (Roadmap)</h2>
+        <div class="card">
+            <div class="card-header">Project Timeline</div>
+            <div class="card-body">
+                <div class="mermaid">
+                    gantt
+                    title VNEXSUS v2.0 Accuracy Improvement Roadmap
+                    dateFormat YYYY-MM-DD
+                    axisFormat %m-%d
+
+                    section Phase 1: 즉시 대응 (Rule-Based)
+                    정규식 엔진 고도화 (날짜/기간) :active, p1_1, 2025-12-06, 2d
+                    Fuzzy Matching (병원명/진단명) :p1_2, after p1_1, 2d
+                    JSON Schema 검증 도입 :p1_3, after p1_2, 1d
+
+                    section Phase 2: 피드백 루프 (System)
+                    수정 내역 저장 API 개발 :p2_1, after p1_3, 2d
+                    Diff 분석 및 사전 자동 업데이트 :p2_2, after p2_1, 3d
+                    Few-Shot 프롬프트 동적 생성 :p2_3, after p2_2, 2d
+
+                    section Phase 3: 지능형 분석 (AI)
+                    Graph-RAG 설계 및 PoC :p3_1, after p2_3, 4d
+                    문맥 기반 추론 엔진 통합 :p3_2, after p3_1, 3d
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Task Breakdown -->
+        <h2 class="section-title">3. 상세 업무 분장 (Task Breakdown)</h2>
+
+        <!-- Phase 1 -->
+        <div class="card border-primary mb-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between">
+                <span>Phase 1: Rule-Based Precision (목표: 정확도 60% 달성)</span>
+                <span class="badge bg-white text-primary">Priority: High</span>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="15%">ID</th>
+                            <th width="30%">Task Name</th>
+                            <th>Description</th>
+                            <th width="15%">Tech Stack</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TASK-101</td>
+                            <td><strong>Advanced Regex Engine</strong></td>
+                            <td>날짜(YYYY.MM.DD, YYYY-MM-DD), 기간(3일간, 입원기간) 등 50개 이상의 패턴을 처리하는 중앙화된 정규식 라이브러리 구축</td>
+                            <td><span class="badge bg-secondary">RegExp</span></td>
+                        </tr>
+                        <tr>
+                            <td>TASK-102</td>
+                            <td><strong>Fuzzy Matcher</strong></td>
+                            <td>'강북삼성'='강북삼성병원'과 같이 유사 텍스트를 매칭하는 Levenshtein Distance 알고리즘 구현 (병원명/진단명)</td>
+                            <td><span class="badge bg-secondary">fast-levenshtein</span></td>
+                        </tr>
+                        <tr>
+                            <td>TASK-103</td>
+                            <td><strong>Prompt Hardening</strong></td>
+                            <td>AI가 생성하는 JSON의 구조를 강제하고, 실패 시 재시도하는 로직 추가 (Output Parser 강화)</td>
+                            <td><span class="badge bg-secondary">Zod / JSON Schema</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="card border-warning mb-4">
+            <div class="card-header bg-warning text-dark d-flex justify-content-between">
+                <span>Phase 2: Feedback Loop (목표: 정확도 80% 달성)</span>
+                <span class="badge bg-dark text-warning">Priority: Medium</span>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="15%">ID</th>
+                            <th width="30%">Task Name</th>
+                            <th>Description</th>
+                            <th width="15%">Tech Stack</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TASK-201</td>
+                            <td><strong>Correction API</strong></td>
+                            <td>사용자가 프론트엔드에서 수정한 데이터를 백엔드로 전송하고 저장하는 API 개발</td>
+                            <td><span class="badge bg-secondary">Express / File DB</span></td>
+                        </tr>
+                        <tr>
+                            <td>TASK-202</td>
+                            <td><strong>Diff Analyzer</strong></td>
+                            <td>AI 초안과 사용자 수정본을 비교(Diff)하여, AI가 틀린 부분(병원명 오타, 누락된 날짜)을 분석</td>
+                            <td><span class="badge bg-secondary">diff-match-patch</span></td>
+                        </tr>
+                        <tr>
+                            <td>TASK-203</td>
+                            <td><strong>Dynamic Few-Shot</strong></td>
+                            <td>분석된 오답 노트를 다음번 AI 프롬프트의 "주의사항(Example)"으로 자동 추가하여 반복 실수 방지</td>
+                            <td><span class="badge bg-secondary">Prompt Eng.</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="card border-success mb-4">
+            <div class="card-header bg-success text-white d-flex justify-content-between">
+                <span>Phase 3: Graph Intelligence (목표: 정확도 90%+ 달성)</span>
+                <span class="badge bg-white text-success">Priority: Future</span>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="15%">ID</th>
+                            <th width="30%">Task Name</th>
+                            <th>Description</th>
+                            <th width="15%">Tech Stack</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TASK-301</td>
+                            <td><strong>Entity Relation Map</strong></td>
+                            <td>텍스트에서 [환자]-[방문]-[진단]-[처방]의 관계를 추출하여 그래프 구조(JSON Graph)로 변환</td>
+                            <td><span class="badge bg-secondary">Graph Theory</span></td>
+                        </tr>
+                        <tr>
+                            <td>TASK-302</td>
+                            <td><strong>Context Query</strong></td>
+                            <td>"이 진단이 언제 처음 나왔는가?"와 같은 문맥적 질문에 대해 그래프를 탐색하여 답변 생성</td>
+                            <td><span class="badge bg-secondary">RAG</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+</body>
+
+</html>

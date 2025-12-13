@@ -7,7 +7,7 @@
  * 3. 의료-보험 도메인 특화 이벤트 추출
  */
 
-import { MedicalGeneExtractor } from '../../backend/services/core-engine/enhanced/geneExtractor.cjs';
+import MedicalGeneExtractor from '../dna-engine/core/geneExtractor.cjs';
 import { SmartChunk } from './smartChunker';
 
 export interface MedicalEvent {

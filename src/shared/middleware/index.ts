@@ -140,8 +140,11 @@ export const errorHandlingMiddleware = (
   logger.error({
     event: 'unhandled_error',
     traceId,
-    error: error.message,
-    stack: error.stack,
+    error: {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    },
     metadata: {
       method: req.method,
       endpoint: req.path,

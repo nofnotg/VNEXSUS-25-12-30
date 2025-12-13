@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 심층 분석 및 전략 보고서</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background: var(--bg);
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 700;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .metric-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .analysis-point {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="fw-bold display-5 mb-3">VNEXSUS 심층 분석 및 전략 보고서</h1>
+            <p class="lead opacity-75">"왜 수많은 개선에도 불구하고 유사도는 0.05에 머물러 있는가?"</p>
+            <div class="mt-4">
+                <span class="badge bg-danger me-2">Critical Analysis</span>
+                <span class="badge bg-primary">Strategic Pivot</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+
+        <!-- 1. 현상 진단 -->
+        <h2 class="fw-bold mb-4"><i class="bi bi-search me-2"></i>1. 현상 진단 (The Reality)</h2>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="metric-box">
+                    <div class="metric-value text-danger">0.05</div>
+                    <div class="text-muted fw-bold">현재 평균 유사도</div>
+                    <small class="text-secondary">Target: Expert Report</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-box">
+                    <div class="metric-value text-warning">Prompt</div>
+                    <div class="text-muted fw-bold">현재 주도 방식</div>
+                    <small class="text-secondary">LLM 의존도 과다</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="metric-box">
+                    <div class="metric-value text-success">100%</div>
+                    <div class="text-muted fw-bold">API 안정성</div>
+                    <small class="text-secondary">인프라는 준비됨</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 원인 분석 -->
+        <div class="card">
+            <div class="card-header text-danger">
+                <i class="bi bi-exclamation-octagon-fill me-2"></i>2. 근본 원인 분석 (Root Cause Analysis)
+            </div>
+            <div class="card-body p-4">
+                <div class="analysis-point">
+                    <h4 class="fw-bold text-dark">원인 1: "연산"을 "생성"에 맡기고 있다 (Calculation via Generation)</h4>
+                    <p>현재 시스템은 LLM에게 <strong>"날짜를 계산해라", "횟수를 세어라", "기간을 분류해라"</strong>라고 <strong>프롬프트(자연어)</strong>로
+                        지시하고 있습니다.</p>
+                    <p>LLM은 언어 모델이지 계산기가 아닙니다. 텍스트가 길어지면 <strong>"2023년 5월"을 "2024년 5월"로 착각하거나, 10번 방문을 "수회 방문"으로 퉁치는
+                            경향</strong>이 있습니다. 조사관 보고서는 정확한 날짜와 숫자가 생명인데, 이를 확률적 모델인 LLM에게 전적으로 의존하는 구조적 모순이 있습니다.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h4 class="fw-bold text-dark">원인 2: "사실(Fact)"과 "판단(Judgment)"의 혼재</h4>
+                    <p>현재 프롬프트는 <strong>[데이터 추출] -> [사실 관계 정리] -> [약관 적용] -> [보고서 작성]</strong>을 한 번의 호흡(One-Shot)으로 처리하려
+                        합니다.</p>
+                    <p>이는 마치 신입 사원에게 <strong>"수천 장의 진료기록을 읽고 바로 완벽한 판결문을 써와라"</strong>고 하는 것과 같습니다. 중간 단계인 <strong>"엑셀
+                            정리(구조화)"</strong> 과정이 생략되어 있어, 최종 결과물의 정합성이 떨어질 수밖에 없습니다.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h4 class="fw-bold text-dark">원인 3: 구조적 데이터베이스의 부재</h4>
+                    <p><code>Case1.txt</code>에서 추출된 정보가 <strong>DB나 JSON 객체로 완벽하게 구조화되어 저장되지 않고</strong>, 바로 텍스트 요약으로
+                        증발해 버립니다.</p>
+                    <p>타임라인을 시각화하거나, 특정 기간의 고지의무를 기계적으로 필터링하려면 <strong>"Text"가 아닌 "Data"</strong>가 필요합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 전략적 전환 -->
+        <h2 class="fw-bold mb-4 mt-5"><i class="bi bi-sign-turn-right-fill me-2"></i>3. 전략적 전환 (Strategic Pivot)</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card h-100 border-danger">
+                    <div class="card-header bg-danger text-white">
+                        AS-IS: Prompt-Driven (현재)
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mermaid">
+                            graph TD
+                            A[Raw Text] --> B[LLM Prompt]
+                            B --> C{LLM "Black Box"}
+                            C -->|Extraction?| D
+                            C -->|Calculation?| D
+                            C -->|Writing?| D
+                            D[Low Accuracy Report]
+                        </div>
+                        <p class="mt-3 text-muted">모든 부하가 LLM에 집중됨. 통제 불가능.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white">
+                        TO-BE: Architecture-Driven (제안)
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mermaid">
+                            graph TD
+                            A[Raw Text] --> B[Code Extraction Engine]
+                            B --> C[Structured DB (JSON)]
+                            C --> D[Rule Engine (JS/Python)]
+                            D -->|Calculated Facts| E[LLM Writer]
+                            E --> F[High Accuracy Report]
+                        </div>
+                        <p class="mt-3 text-muted">LLM은 "작가" 역할만 수행. "팩트"는 코드가 책임짐.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 구체적 실행 방안 -->
+        <h2 class="fw-bold mb-4 mt-5"><i class="bi bi-tools me-2"></i>4. 구체적 실행 방안 (Action Plan)</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 20%">영역</th>
+                                <th style="width: 40%">현재 방식 (Problem)</th>
+                                <th style="width: 40%">개선 방식 (Solution)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>데이터 추출</strong></td>
+                                <td>LLM에게 "날짜 찾아줘"라고 부탁함</td>
+                                <td><strong>Regex/NLP 엔진</strong>으로 날짜/병원명 강제 추출 후 JSON화</td>
+                            </tr>
+                            <tr>
+                                <td><strong>논리 연산</strong></td>
+                                <td>LLM에게 "3개월 전인지 계산해봐"라고 함</td>
+                                <td><strong>JavaScript 날짜 라이브러리</strong>로 D-Day, 기간 정확히 계산</td>
+                            </tr>
+                            <tr>
+                                <td><strong>판단 근거</strong></td>
+                                <td>LLM의 일반 상식에 의존</td>
+                                <td><strong>Policy RAG</strong>에서 찾은 약관 조항을 LLM에게 "참고 자료"로 주입</td>
+                            </tr>
+                            <tr>
+                                <td><strong>보고서 작성</strong></td>
+                                <td>"알아서 잘 써줘" (Hallucination 위험)</td>
+                                <td><strong>"이 팩트(JSON)를 문장으로만 바꿔줘"</strong> (Strict Writing)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 결론 -->
+        <div class="alert alert-primary mt-4 p-4">
+            <h4 class="fw-bold"><i class="bi bi-lightbulb-fill me-2"></i>결론 (Conclusion)</h4>
+            <p class="mb-0">
+                유사도가 낮은 이유는 <strong>"능력 부족"이 아니라 "역할 배분 실패"</strong>입니다.<br>
+                LLM을 <strong>"전지전능한 해결사"</strong>가 아닌 <strong>"유능한 비서(Writer)"</strong>로 재정의하고,<br>
+                핵심 논리와 계산은 <strong>"견고한 코드(Engine)"</strong>가 담당하는 <strong>하이브리드 아키텍처</strong>로 전환해야 합니다.
+            </p>
+        </div>
+
+    </div>
+
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+
+</html>

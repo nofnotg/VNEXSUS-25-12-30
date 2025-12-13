@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Midnight Blue</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1e1b4b;
+            /* Indigo 950 */
+            --surface-dark: #312e81;
+            /* Indigo 900 */
+            --primary: #6366f1;
+            /* Indigo 500 */
+            --accent: #818cf8;
+            /* Indigo 400 */
+            --text-main: #e0e7ff;
+            /* Indigo 50 */
+            --text-muted: #a5b4fc;
+            /* Indigo 200 */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        .main-header {
+            background: rgba(30, 27, 75, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .brand-logo {
+            font-weight: 700;
+            color: white;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: #c7d2fe;
+            border-bottom: 2px solid #c7d2fe;
+            background: transparent;
+            text-shadow: 0 0 10px rgba(199, 210, 254, 0.3);
+        }
+
+        .card {
+            background: rgba(49, 46, 129, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(165, 180, 252, 0.3);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(49, 46, 129, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .drop-zone:hover {
+            border-color: var(--accent);
+            background: rgba(49, 46, 129, 0.5);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+        }
+
+        .form-control {
+            background: rgba(30, 27, 75, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 10px;
+            padding: 0.75rem;
+        }
+
+        .form-control:focus {
+            background: rgba(30, 27, 75, 0.8);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+            color: white;
+        }
+
+        /* Report Styling */
+        .report-preview {
+            background: rgba(30, 27, 75, 0.4);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .date-badge-recent {
+            background: rgba(244, 63, 94, 0.2);
+            color: #fda4af;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .date-badge-5yr {
+            background: rgba(99, 102, 241, 0.2);
+            color: #c7d2fe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .report-section-title {
+            font-weight: 600;
+            color: #c7d2fe;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-item {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .report-label {
+            color: var(--text-muted);
+            margin-right: 0.5rem;
+        }
+
+        .text-highlight {
+            color: white;
+            font-weight: 500;
+        }
+
+        .risk-card {
+            background: rgba(225, 29, 72, 0.1);
+            border: 1px solid rgba(225, 29, 72, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div class="text-muted small"><span
+                    class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-25 px-3 py-2 rounded-pill">SYSTEM
+                    OPERATIONAL</span></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis"
+                    type="button" role="tab">ANALYSIS</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button"
+                    role="tab">INTELLIGENCE REPORT</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Analysis Tab -->
+            <div class="tab-pane fade show active" id="analysis" role="tabpanel">
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-white">Document Ingestion</h5>
+                            <div class="drop-zone mb-4">
+                                <div class="mb-3">
+                                    <span class="bg-white bg-opacity-10 p-3 rounded-circle d-inline-block">
+                                        <i class="bi bi-file-earmark-medical fs-1 text-white"></i>
+                                    </span>
+                                </div>
+                                <h6 class="fw-bold text-white">Upload Medical Records</h6>
+                                <p class="text-muted small">Drag & Drop or Click to Browse</p>
+                            </div>
+                            <div class="d-flex justify-content-end mt-auto">
+                                <button class="btn btn-primary w-100">
+                                    <i class="bi bi-lightning-charge-fill me-2"></i>INITIATE ANALYSIS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-4 h-100">
+                            <h5 class="fw-bold mb-4 text-white">Case Metadata</h5>
+                            <div class="mb-4">
+                                <label class="form-label text-muted small fw-bold">PATIENT ID</label>
+                                <input type="text" class="form-control" placeholder="Enter Patient Name/ID">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted small fw-bold">NOTES</label>
+                                <textarea class="form-control" rows="4" placeholder="Additional context..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Tab -->
+            <div class="tab-pane fade" id="report" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold m-0 text-white">INVESTIGATION RESULTS</h4>
+                    <div>
+                        <button class="btn btn-outline-light btn-sm me-2">EXPORT PDF</button>
+                        <button class="btn btn-primary btn-sm">REFRESH DATA</button>
+                    </div>
+                </div>
+
+                <div class="report-preview">
+                    <div class="report-section-title">01. MEDICAL HISTORY TIMELINE</div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-recent me-3">CRITICAL (3M)</span>
+                            <strong class="text-white fs-5">2025.02.17</strong>
+                            <span class="text-muted ms-2 fw-medium">| Kangnam Sacred Heart Hospital</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Headache &
+                                Dizziness</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Other specified
+                                cerebrovascular diseases (I67.8)</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="date-badge-5yr me-3">HISTORY (5Y)</span>
+                            <strong class="text-white fs-5">2023.10.20</strong>
+                            <span class="text-muted ms-2 fw-medium">| Lee Ki-seop Clinic</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● REASON:</span> <span class="text-highlight">Routine Care</span>
+                        </div>
+                        <div class="report-item">
+                            <span class="report-label">● DIAGNOSIS:</span> <span class="text-highlight">Acute laryngitis
+                                (J04.0), Gastritis (K29.7)</span>
+                        </div>
+                    </div>
+
+                    <div class="report-section-title">02. RISK ASSESSMENT</div>
+                    <div class="risk-card">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="bi bi-shield-exclamation text-danger fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-danger fw-bold mb-1">DISCLOSURE VIOLATION DETECTED</h6>
+                                <p class="text-muted small mb-0">High probability of non-disclosure regarding
+                                    cerebrovascular diagnosis within 3 months of contract date (2025.03.01).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

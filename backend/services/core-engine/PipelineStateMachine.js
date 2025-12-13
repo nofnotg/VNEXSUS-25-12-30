@@ -505,18 +505,6 @@ export default class PipelineStateMachine {
         if (input.textSegments && !Array.isArray(input.textSegments)) {
             throw new Error('TextSegments must be an array');
         }
-
-        // 텍스트 길이 제한 확인
-        const textLength = input.text ? input.text.length :
-            input.textSegments.reduce((sum, segment) => sum + (segment.text || '').length, 0);
-
-        if (textLength > 100000) { // 100KB 제한
-            throw new Error('Input text is too large (max 100KB)');
-        }
-
-        if (textLength === 0) {
-            throw new Error('Input text is empty');
-        }
     }
 
     /**

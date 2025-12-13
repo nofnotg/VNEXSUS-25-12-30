@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "caseId": "Case1",
+    "generatedAt": "2025-12-06T04:15:33.457Z",
+    "investigator": "VNEXSUS AI Investigator"
+  },
+  "riskLevel": "HIGH",
+  "riskScore": 29,
+  "summary": "[Risk Level: HIGH] ⚠️ 고지의무 위반 의심: 가입 전 13건의 진료 기록 발견. 🏥 의료쇼핑 의심: 30일 내 4개 병원 방문.",
+  "details": {
+    "progressivity": {
+      "timeline": "undefined ~ undefined (undefined visits)"
+    },
+    "disclosure": {
+      "hasViolation": true,
+      "violationCount": 13,
+      "violations": [
+        {
+          "period": "3_MONTHS",
+          "date": "2025-01-08",
+          "type": "DIAGNOSIS",
+          "details": "(양방)기타 다발성 합병증을 동반한, (양방)기타 다발성 합병증을 동반한",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-01-08",
+          "type": "DIAGNOSIS",
+          "details": "합병증, 합병증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-17",
+          "type": "DIAGNOSIS",
+          "details": "현기증 NOS, 현기증 NOS, 의료보험증, 현기증, 어지럼증, 어지럼증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-17",
+          "type": "DIAGNOSIS",
+          "details": "어지럼증",
+          "hospital": "신경외과"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-17",
+          "type": "DIAGNOSIS",
+          "details": "Cancer",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-17",
+          "type": "DIAGNOSIS",
+          "details": "Cancer, 어지럼증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-17",
+          "type": "DIAGNOSIS",
+          "details": "혈액암, 만성폐질환, 만성간담췌질환, 만성신장질환, 갑상선질환, 고지혈증, 심장질환, 혈전증, 위장관질환, 고지혈증",
+          "hospital": "재활병원"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-18",
+          "type": "DIAGNOSIS",
+          "details": "Other specified cerebrovascular diseases, Other specified cerebrovascular diseases, 어지럼증",
+          "hospital": "신경외과"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-18",
+          "type": "DIAGNOSIS",
+          "details": "어지럼증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-18",
+          "type": "DIAGNOSIS",
+          "details": "어지럼증",
+          "hospital": "Unknown Hospital"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-18",
+          "type": "DIAGNOSIS",
+          "details": "어지럼증, 어지럼증",
+          "hospital": "강남성심병원"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-21",
+          "type": "DIAGNOSIS",
+          "details": "어지럼증, 어지럼증",
+          "hospital": "강남성심병원"
+        },
+        {
+          "period": "3_MONTHS",
+          "date": "2025-02-21",
+          "type": "DIAGNOSIS",
+          "details": "합병증",
+          "hospital": "한림대학교강남성심병원"
+        }
+      ]
+    },
+    "doctorShopping": {
+      "isSuspicious": true,
+      "maxHospitals": 4,
+      "evidence": "Visited 4 different hospitals within 30 days."
+    }
+  }
+}

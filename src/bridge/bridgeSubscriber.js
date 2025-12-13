@@ -6,18 +6,21 @@
 
 import path from 'path';
 import fs from 'fs';
+import { logger } from '../shared/logging/logger.js';
+import { maskObject } from '../shared/security/mask.js';
+import { BRIDGE_EVENTS } from '../shared/constants/logging.js';
 
 // GCP 프로젝트 ID 설정
 const projectId = process.env.GCP_PROJECT_ID || 'medreport-vision-ocr';
-console.log(`🔧 GCP 프로젝트 ID: ${projectId}`);
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_PROJECT_ID, projectId });
 
 // 시작 로그
-console.log('📨 PubSub Bridge Subscriber (테스트 모드) 초기화 중...');
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_INIT, mode: 'test' });
 
 // outputs 디렉토리 확인 및 생성
 const outputDir = path.resolve(process.cwd(), 'outputs');
 if (!fs.existsSync(outputDir)) {
-  console.log(`📂 outputs 디렉토리 생성: ${outputDir}`);
+  logger.info({ event: BRIDGE_EVENTS.INIT_OUTPUT_DIR_CREATED, outputDir });
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
@@ -43,52 +46,47 @@ const testMessage = {
       enrollmentDate: '2022-01-01'
     }
   })),
-  ack: () => console.log('메시지 처리 완료 (ack)')
+  ack: () => logger.info({ event: BRIDGE_EVENTS.MESSAGE_ACK, msg: '메시지 처리 완료' })
 };
 
 // 샘플 엑셀 파일 생성 함수 (실제로는 생성하지 않음)
 function createSampleReport() {
   const reportPath = path.join(outputDir, 'sample_report.xlsx');
-  console.log(`📊 샘플 보고서 생성 완료: ${reportPath}`);
+  logger.info({ event: BRIDGE_EVENTS.SAMPLE_REPORT_CREATED, reportPath });
   return reportPath;
 }
 
-console.log('📨 테스트 모드로 실행 중...');
-console.log('5초 후 가짜 메시지를 처리합니다...');
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_TEST_MODE, message: '테스트 모드로 실행 중' });
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_TEST_MESSAGE_SCHEDULE, delayMs: 5000 });
 
 // 5초 후 가짜 메시지 처리
 setTimeout(async () => {
   try {
-    console.log(`📨 OCR JSON → Parser: ${testMessage.id}`);
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_TEST_MSG_RECEIVE, id: testMessage.id });
     const payload = JSON.parse(testMessage.data.toString());
     
     // 처리 단계 로깅
-    console.log('1. 메시지 수신됨: ', payload.jobId);
-    console.log('2. OCR 텍스트 길이: ', payload.ocrText.length);
-    console.log('3. 환자 정보: ', payload.patientInfo);
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_MSG_RECEIVED, jobId: payload.jobId });
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_OCR_TEXT_LENGTH, length: payload.ocrText.length });
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_PATIENT_INFO, patientInfo: maskObject(payload.patientInfo) });
     
     // 샘플 보고서 생성 (가짜)
-    const reportPath = createSampleReport();
+    createSampleReport();
     
     // 처리 완료
     testMessage.ack();
     
     // 이제 실제 Pub/Sub 구독을 시작할 수 있다는 안내
-    console.log('\n📢 테스트 모드 실행 완료');
-    console.log('실제 Google Cloud Pub/Sub 연결을 위해서는:');
-    console.log(`1. GCP 프로젝트 ID 설정: process.env.GOOGLE_CLOUD_PROJECT="${projectId}"`);
-    console.log('2. 인증 정보 설정: process.env.GOOGLE_APPLICATION_CREDENTIALS="path/to/keyfile.json"');
-    console.log('3. Pub/Sub 토픽 및 구독 생성:');
-    console.log(`   gcloud pubsub topics create ocr-result --project=${projectId}`);
-    console.log(`   gcloud pubsub subscriptions create ocr-result-sub --topic=ocr-result --project=${projectId}`);
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_TEST_MODE_COMPLETE });
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_PUBSUB_SETUP_HINT, projectId, steps: ['set GOOGLE_CLOUD_PROJECT', 'set GOOGLE_APPLICATION_CREDENTIALS', 'create topic ocr-result', 'create subscription ocr-result-sub'] });
     
   } catch (error) {
-    console.error('❌ 메시지 처리 중 오류:', error);
+    logger.error({ event: BRIDGE_EVENTS.BRIDGE_MESSAGE_PROCESS_ERROR, message: error?.message });
   }
 }, 5000);
 
 // 종료 처리
 process.on('SIGINT', () => {
-  console.log('👋 브릿지 구독자 종료 중...');
+  logger.info({ event: BRIDGE_EVENTS.BRIDGE_SHUTDOWN, message: '브릿지 구독자 종료 중' });
   process.exit(0);
 }); 

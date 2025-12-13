@@ -7,11 +7,11 @@
  * 3. 멀티 패널 UI를 위한 단계별 결과 제공
  */
 
-import { SmartChunker, SmartChunk, ChunkingConfig } from './smartChunker.js';
-import { HybridNER, MedicalEvent, NERResult } from './hybridNER.js';
-import { TimelineEngine, TimelineAnalysis, TimelineConfig } from './timelineEngine.js';
-import TextFilter from '../lib/textFilter.js';
-import { MedicalGeneExtractor } from '../dna-engine/core/geneExtractor.cjs';
+import { SmartChunker, SmartChunk, ChunkingConfig } from './smartChunker';
+import { HybridNER, MedicalEvent, NERResult } from './hybridNER';
+import { TimelineEngine, TimelineAnalysis, TimelineConfig } from './timelineEngine';
+import TextFilter from '../lib/textFilter';
+import MedicalGeneExtractor from '../dna-engine/core/geneExtractor.cjs';
 
 export interface ProcessingConfig {
   mode: 'FAST' | 'BALANCED' | 'THOROUGH';

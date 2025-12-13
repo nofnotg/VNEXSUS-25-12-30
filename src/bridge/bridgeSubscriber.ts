@@ -1,43 +1,55 @@
-import {PubSub} from '@google-cloud/pubsub';
-import {handleOcrResult} from '../modules/ocrParser';
+import { PubSub } from '@google-cloud/pubsub';
+import { handleOcrResult } from '../modules/ocrParser';
+import { logger, logProcessingStart, logProcessingSuccess, logProcessingError } from '../shared/logging/logger';
+import { BRIDGE_EVENTS } from '../shared/constants/logging';
+import { maskObject } from '../shared/security/mask';
 
 // 시작 로그
-console.log('📨  PubSub Bridge Subscriber 초기화 중...');
-console.log('📨  Google Cloud 설정:');
-console.log('- GCP_PROJECT_ID:', process.env.GCP_PROJECT_ID || 'medreport-vision-ocr');
-console.log('- GOOGLE_APPLICATION_CREDENTIALS:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_INIT, metadata: { mode: 'pubsub' } });
+logger.info({ event: BRIDGE_EVENTS.BRIDGE_CLOUD_SETTINGS,
+  metadata: {
+    projectId: process.env.GCP_PROJECT_ID || 'medreport-vision-ocr',
+    credentials: Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+  }
+});
 
 // PubSub 설정
 const subId = process.env.PUBSUB_SUB_ID ?? 'ocr-result-sub';
 const projectId = process.env.GCP_PROJECT_ID || 'medreport-vision-ocr';
 
 try {
-  console.log('📨  PubSub 클라이언트 초기화 중...');
-  const pubsub = new PubSub({projectId});
-  console.log('📨  PubSub 클라이언트 초기화 완료');
-  
-  console.log(`📨  서브스크립션 '${subId}' 연결 중...`);
+  logger.info({ event: BRIDGE_EVENTS.PUBSUB_CLIENT_INIT_START });
+  const pubsub = new PubSub({ projectId });
+  logger.info({ event: BRIDGE_EVENTS.PUBSUB_CLIENT_INIT_COMPLETE });
+
+  logger.info({ event: BRIDGE_EVENTS.PUBSUB_SUBSCRIPTION_CONNECTING, metadata: { subId } });
   const sub = pubsub.subscription(subId);
+
+  logger.info({ event: BRIDGE_EVENTS.PUBSUB_SUBSCRIPTION_CONNECTED, metadata: { subId } });
+  logger.info({ event: BRIDGE_EVENTS.PUBSUB_WAITING_MESSAGES, metadata: { hint: 'Ctrl+C to exit' } });
   
-  console.log(`📨  Sub connected: ${subId}`);
-  console.log('메시지 수신 대기 중... Ctrl+C로 종료');
-  
-  sub.on('message', async m => {
-    console.log('📨  OCR JSON → Parser', m.id);
+  sub.on('message', async (m) => {
+    logger.info({ event: BRIDGE_EVENTS.BRIDGE_MSG_RECEIVED, metadata: { id: m.id } });
+    const t0 = Date.now();
     try {
-      await handleOcrResult(JSON.parse(m.data.toString()));
-      console.log('📨  메시지 처리 완료:', m.id);
+      const payload = JSON.parse(m.data.toString());
+      const inputSize = Buffer.byteLength(m.data);
+      logProcessingStart(m.id, 'ocr_result_handle', inputSize);
+      await handleOcrResult(payload);
+      logProcessingSuccess(m.id, 'ocr_result_handle', Date.now() - t0);
+      logger.info({ event: BRIDGE_EVENTS.MESSAGE_ACK, metadata: { id: m.id } });
     } catch (err) {
-      console.error('📨  메시지 처리 오류:', err);
+      logProcessingError(m.id, 'ocr_result_handle', err as Error, Date.now() - t0);
     } finally {
       m.ack();
     }
   });
   
   sub.on('error', (err) => {
-    console.error('📨  PubSub 에러:', err);
+    const e = err as Error;
+    logger.error({ event: BRIDGE_EVENTS.PUBSUB_SUBSCRIPTION_ERROR, error: { name: e.name, message: e.message, stack: e.stack } });
   });
 } catch (err) {
-  console.error('📨  PubSub 초기화 오류:', err);
-  console.error('📨  상세 오류 정보:', JSON.stringify(err, null, 2));
+  const e = err as Error;
+  logger.error({ event: BRIDGE_EVENTS.PUBSUB_INIT_ERROR, error: { name: e.name, message: e.message, stack: e.stack } });
 }

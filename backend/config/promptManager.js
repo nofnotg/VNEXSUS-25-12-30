@@ -15,7 +15,7 @@ class PromptManager {
     this.promptsPath = path.join(__dirname, '../config/prompts');
     this.ensureDirectoryExists();
     this.activeVersion = this.loadActiveVersion();
-    
+
     // 기본 프롬프트가 없다면 생성
     this.initializeDefaultPrompts();
   }
@@ -37,8 +37,8 @@ class PromptManager {
       return data;
     } catch (error) {
       // 기본값 반환
-      const defaultVersion = { 
-        version: 'default', 
+      const defaultVersion = {
+        version: 'default',
         timestamp: Date.now(),
         description: '시스템 기본 프롬프트'
       };
@@ -50,7 +50,7 @@ class PromptManager {
   // 기본 프롬프트 초기화
   initializeDefaultPrompts() {
     const defaultPromptFile = path.join(this.promptsPath, 'dna-sequencing-default.json');
-    
+
     if (!fs.existsSync(defaultPromptFile)) {
       const defaultPrompt = {
         version: 'default',
@@ -72,7 +72,7 @@ OCR로 추출된 손상된 의료 텍스트를 완벽하게 복원하고, 보험
 **핵심 의료 약어**: {{MEDICAL_ABBREVIATIONS}}
 
 ## 🧾 진단 표기 규칙(필수)
-- 모든 진단명은 한국어병명(영문명) (ICD: CODE) 형식으로 표기
+- 모든 진단명은 [CODE/영문명-한글명] 형식으로 표기 (예: [C16/Malignant neoplasm of stomach-위암])
 - 코드가 불명확하면 "KCD-10 코드 확인 필요" 명시
 
 ## 📋 손해사정 전문 보고서 양식 (필수 준수)
@@ -81,7 +81,7 @@ OCR로 추출된 손상된 의료 텍스트를 완벽하게 복원하고, 보험
   "피보험자_기본정보": "성명, 주민등록번호, 생년월일, 보험 가입일, 청구 사고일 등 기본 정보",
   "사고_발생_경위": "최초 증상 발현 시점, 내원 경위, 사고 상황의 객관적 기술 (보험 가입일과의 시간적 관계 명시)",
   "초기_증상_및_진료": "최초 증상 호소 내용, 초진 병원명, 진료 일자, 초기 검사 및 처치 내용",
-  "진단_및_검사결과": "확정 진단명: 한국어병명(영문명) (ICD: CODE), 주요 검사 결과, 영상 소견, 조직검사 결과 등 객관적 의학적 근거",
+  \"진단_및_검사결과\": \"확정 진단명: [CODE/영문명-한글명], 주요 검사 결과, 영상 소견, 조직검사 결과 등 객관적 의학적 근거\",
   "치료_경과": "시계열 순서로 정리된 치료 과정 - 통원/입원 기간, 시술/수술 내용, 투약 이력, 치료 반응",
   "현재_상태": "최근 진료 상황, 현재 증상 정도, 기능 상태, 완치/호전/악화 등 객관적 상태",
   "의료비_지출현황": "총 의료비 금액, 본인부담금, 보험급여 현황, 주요 고액 의료행위 내역",
@@ -96,7 +96,7 @@ OCR로 추출된 손상된 의료 텍스트를 완벽하게 복원하고, 보험
 - **고지의무 관련 사실** - 가입 전 치료 이력과 현재 청구 질병의 의학적 연관성을 객관적으로 기술
 - **정보 부족시 명시** - 확인되지 않은 내용은 "의료기록상 확인 불가" 또는 "추가 자료 필요"로 명시
 - **의료진 권한 존중** - 진단, 예후, 치료방향 등은 의료진 소견을 인용하여 기술`,
-        
+
         userTemplate: `🚨 긴급 손해사정 의료문서 분석 미션
 
 다음은 보험 청구와 관련된 의료 기록입니다.
@@ -114,7 +114,7 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
 6. **객관적 사실 기반**: 의료 기록에 명시된 사실만 기술, 추측 금지
 
 지금 즉시 손해사정 전문 의료문서 분석을 시작하세요!`,
-        
+
         parameters: {
           temperature: 0.1,
           max_tokens: 4000,
@@ -131,7 +131,7 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
   getPrompt(type = 'dna-sequencing', version = null) {
     const targetVersion = version || this.activeVersion.version;
     const promptFile = path.join(this.promptsPath, `${type}-${targetVersion}.json`);
-    
+
     try {
       const promptData = JSON.parse(fs.readFileSync(promptFile, 'utf8'));
       console.log(`📋 프롬프트 로드: ${type}-${targetVersion}`);
@@ -152,13 +152,13 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
   savePrompt(type, promptData, version = null) {
     const newVersion = version || `v${Date.now()}`;
     const promptFile = path.join(this.promptsPath, `${type}-${newVersion}.json`);
-    
+
     const saveData = {
       ...promptData,
       version: newVersion,
       savedAt: new Date().toISOString()
     };
-    
+
     fs.writeFileSync(promptFile, JSON.stringify(saveData, null, 2));
     console.log(`💾 새 프롬프트 저장: ${type}-${newVersion}`);
     return newVersion;
@@ -180,10 +180,10 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
         activatedAt: new Date().toISOString(),
         activatedBy: 'dev-studio'
       };
-      
+
       const versionFile = path.join(this.promptsPath, 'active-version.json');
       fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2));
-      
+
       this.activeVersion = versionData;
       console.log(`🚀 프롬프트 버전 활성화: ${version}`);
       return true;
@@ -203,7 +203,7 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
           const version = file.replace(`${type}-`, '').replace('.json', '');
           const filePath = path.join(this.promptsPath, file);
           const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-          
+
           return {
             version,
             description: data.description || '',
@@ -223,24 +223,24 @@ OCR로 추출된 손상된 텍스트를 완벽하게 복원하고, 손해사정 
   // 프롬프트에 변수 치환
   buildPrompt(extractedText, knowledgeBase, customPrompt = null) {
     const promptConfig = customPrompt || this.getPrompt('dna-sequencing');
-    
+
     // 의료 약어 문자열 생성
-    const medicalAbbreviations = knowledgeBase && knowledgeBase.abbreviations ? 
+    const medicalAbbreviations = knowledgeBase && knowledgeBase.abbreviations ?
       Object.entries(knowledgeBase.abbreviations)
         .slice(0, 20)
         .map(([abbr, meaning]) => `${abbr}(${meaning})`)
-        .join(', ') : 
+        .join(', ') :
       'BP(혈압), HR(심박수), CT(컴퓨터단층촬영), MRI(자기공명영상)';
 
     // 변수 치환
     const systemPrompt = promptConfig.systemTemplate
       .replace('{{MEDICAL_ABBREVIATIONS}}', medicalAbbreviations);
-    
+
     const userPrompt = promptConfig.userTemplate
       .replace('{{EXTRACTED_TEXT}}', extractedText || '');
 
-    return { 
-      systemPrompt, 
+    return {
+      systemPrompt,
       userPrompt,
       parameters: promptConfig.parameters || {
         temperature: 0.1,

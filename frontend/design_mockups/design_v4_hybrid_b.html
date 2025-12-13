@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - Operational Intel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            /* Slate 900 */
+            --accent: #0ea5e9;
+            /* Sky 500 */
+            --bg-light: #f8fafc;
+            /* Slate 50 */
+            --surface: #ffffff;
+            --text-main: #334155;
+            /* Slate 700 */
+            --border: #e2e8f0;
+            /* Slate 200 */
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-main);
+        }
+
+        /* Header Strip (Verification Style but polished) */
+        .header-strip {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            background: var(--surface);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Insight Elements on Light Theme */
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .quote-box {
+            border-left: 4px solid var(--accent);
+            background: #f0f9ff;
+            /* Sky 50 */
+            padding: 1rem;
+            font-style: italic;
+            color: #0369a1;
+            /* Sky 700 */
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Verification Elements */
+        .risk-badge {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-high {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .badge-med {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .badge-safe {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Tab Interface */
+        .nav-pills .nav-link {
+            color: #64748b;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Timeline Compact */
+        .timeline-compact {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-compact::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .timeline-point {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-point::after {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-point.risk::after {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-strip">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+            <div>
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#">Analysis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <!-- Case Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card bg-white border-0">
+                    <div class="card-body d-flex justify-content-between align-items-center p-4">
+                        <div>
+                            <h2 class="fw-bold mb-1">Case #2025-VNX-001</h2>
+                            <p class="text-muted mb-0">Patient: Kim Chul-soo | Status: <span
+                                    class="text-primary fw-bold">Investigation Complete</span></p>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge-high risk-badge fs-6 px-3 py-2">Risk Level: HIGH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left Column: Scenarios (Insight Style) -->
+            <div class="col-lg-8">
+                <h5 class="fw-bold text-secondary mb-3">Reasoning Scenarios</h5>
+
+                <!-- Scenario 1 -->
+                <div class="card border-start border-4 border-danger">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="step-number bg-danger">1</div>
+                                <h5 class="fw-bold mb-0">Disclosure Violation</h5>
+                            </div>
+                            <span class="badge-high risk-badge">Detected</span>
+                        </div>
+
+                        <div class="quote-box border-danger text-danger bg-danger bg-opacity-10">
+                            "Patient diagnosed with Cerebrovascular Disease (I67.8) 12 days prior to contract. This is a
+                            direct violation of the 3-month disclosure rule."
+                        </div>
+
+                        <div class="timeline-compact mt-4">
+                            <div class="timeline-point risk">
+                                <strong>2025.02.17 (D-12)</strong> - Kangnam Sacred Heart Hospital
+                                <div class="text-muted small">Diagnosis: Other specified cerebrovascular diseases</div>
+                            </div>
+                            <div class="timeline-point">
+                                <strong>2025.03.01 (D-Day)</strong> - Insurance Contract Date
+                                <div class="text-muted small">Policy: Health Premium Plus</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario 2 -->
+                <div class="card border-start border-4 border-warning">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="step-number bg-warning">2</div>
+                                <h5 class="fw-bold mb-0">Doctor Shopping</h5>
+                            </div>
+                            <span class="badge-med risk-badge">Warning</span>
+                        </div>
+                        <div class="quote-box border-warning text-warning bg-warning bg-opacity-10">
+                            "Visited 3 different clinics for 'Gastritis' within 2 weeks. While not critical, the pattern
+                            suggests potential shopping behavior."
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Summary Metrics (Verification Style) -->
+            <div class="col-lg-4">
+                <h5 class="fw-bold text-secondary mb-3">Summary Metrics</h5>
+
+                <div class="card">
+                    <div class="card-body text-center py-4">
+                        <h6 class="text-muted text-uppercase small fw-bold">Total Documents</h6>
+                        <h2 class="fw-bold text-primary mb-0">15</h2>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body text-center py-4">
+                        <h6 class="text-muted text-uppercase small fw-bold">Medical Events</h6>
+                        <h2 class="fw-bold text-dark mb-0">42</h2>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-white fw-bold">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>Verification Status
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                ICD Code Validation
+                                <i class="bi bi-check-lg text-success"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hospital DB Match
+                                <i class="bi bi-check-lg text-success"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Date Consistency
+                                <i class="bi bi-check-lg text-success"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary fw-bold py-3">
+                        <i class="bi bi-file-earmark-pdf-fill me-2"></i>Generate Final Report
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
