@@ -1,0 +1,4629 @@
+{
+  "ts": "2025-12-25T12-23-50-148Z",
+  "outDir": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z",
+  "startIndex": 1,
+  "endIndex": 46,
+  "caseIndices": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "processed": [
+    {
+      "ok": true,
+      "caseIndex": 1,
+      "caseName": "고영란",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case1.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case1_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\고영란",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "더자인병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 13953,
+        "report": 0,
+        "merged": 13953
+      },
+      "effectiveLengths": {
+        "merged": 11364,
+        "vnexsus": 7722
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 729
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 233,
+      "coverage": {
+        "items": {
+          "total": 33,
+          "rawTextLength": 13953
+        },
+        "sourceSpan": {
+          "total": 33,
+          "withSpan": 33,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 729,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 2,
+      "caseName": "곽동인",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case2.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case2_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\곽동인",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "일산백병원.pdf",
+          "일산차병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 12690,
+        "report": 0,
+        "merged": 12690
+      },
+      "effectiveLengths": {
+        "merged": 10401,
+        "vnexsus": 4213
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 688
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 55,
+      "coverage": {
+        "items": {
+          "total": 23,
+          "rawTextLength": 12690
+        },
+        "sourceSpan": {
+          "total": 23,
+          "withSpan": 17,
+          "withoutSpan": 6,
+          "rate": 0.7391304347826086,
+          "ratePercent": "73.9",
+          "missingSpans": [
+            {
+              "eventId": "item_1",
+              "date": "1967-12-18",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_15",
+              "date": "2025-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_16",
+              "date": "2025-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_17",
+              "date": "2025-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_18",
+              "date": "2025-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_19",
+              "date": "2025-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 688,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 3,
+      "caseName": "권광덕",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case3.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case3_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\권광덕",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "건국대병원(권광덕).pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 85303,
+        "report": 0,
+        "merged": 85303
+      },
+      "effectiveLengths": {
+        "merged": 71213,
+        "vnexsus": 52572
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 4309
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 923,
+      "coverage": {
+        "items": {
+          "total": 371,
+          "rawTextLength": 85303
+        },
+        "sourceSpan": {
+          "total": 371,
+          "withSpan": 313,
+          "withoutSpan": 58,
+          "rate": 0.8436657681940701,
+          "ratePercent": "84.4",
+          "missingSpans": [
+            {
+              "eventId": "item_2",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_3",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_6",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_10",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_16",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_19",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_22",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_23",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_24",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_26",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_27",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_28",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_29",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_30",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_31",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_32",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_33",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_35",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_37",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_38",
+              "date": "1955-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_46",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_50",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_51",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_54",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_56",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_59",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_61",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_62",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_64",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_66",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_67",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_68",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_75",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_92",
+              "date": "2010-10-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_96",
+              "date": "2010-10-19",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_149",
+              "date": "2024-02-13",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_154",
+              "date": "2024-07-22",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_156",
+              "date": "2024-07-22",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_163",
+              "date": "2024-07-22",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_167",
+              "date": "2024-07-22",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_168",
+              "date": "2024-07-22",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_171",
+              "date": "2024-07-23",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_172",
+              "date": "2024-07-23",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_186",
+              "date": "2024-07-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_188",
+              "date": "2024-07-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_192",
+              "date": "2024-07-27",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_195",
+              "date": "2024-07-27",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_205",
+              "date": "2024-08-21",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_207",
+              "date": "2024-08-21",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_217",
+              "date": "2024-08-25",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_220",
+              "date": "2024-08-25",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_226",
+              "date": "2024-09-05",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_235",
+              "date": "2024-09-19",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_245",
+              "date": "2024-09-23",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_248",
+              "date": "2024-09-23",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_260",
+              "date": "2024-10-11",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_262",
+              "date": "2024-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_263",
+              "date": "2024-10-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 4309,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 4,
+      "caseName": "김동아",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case4.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case4_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김동아",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "해븐리병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 34511,
+        "report": 0,
+        "merged": 34511
+      },
+      "effectiveLengths": {
+        "merged": 28014,
+        "vnexsus": 23840
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2734
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 720,
+      "coverage": {
+        "items": {
+          "total": 124,
+          "rawTextLength": 34511
+        },
+        "sourceSpan": {
+          "total": 124,
+          "withSpan": 124,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 2734,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 5,
+      "caseName": "김상민",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case5.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case5_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김상민",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "고대구로병원.pdf",
+          "광화문 KMI.pdf",
+          "국립암센터.pdf",
+          "동국대일산병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 81589,
+        "report": 0,
+        "merged": 81589
+      },
+      "effectiveLengths": {
+        "merged": 66454,
+        "vnexsus": 1212
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 4068
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 106,
+      "coverage": {
+        "items": {
+          "total": 4,
+          "rawTextLength": 81589
+        },
+        "sourceSpan": {
+          "total": 4,
+          "withSpan": 4,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 4068,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 6,
+      "caseName": "김소원",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case6.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case6_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김소원",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "반듯한정형외과의원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 56332,
+        "report": 0,
+        "merged": 56332
+      },
+      "effectiveLengths": {
+        "merged": 45389,
+        "vnexsus": 50053
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3661
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 252,
+      "coverage": {
+        "items": {
+          "total": 275,
+          "rawTextLength": 56332
+        },
+        "sourceSpan": {
+          "total": 275,
+          "withSpan": 274,
+          "withoutSpan": 1,
+          "rate": 0.9963636363636363,
+          "ratePercent": "99.6",
+          "missingSpans": [
+            {
+              "eventId": "item_273",
+              "date": "2025-09-18",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 3661,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 7,
+      "caseName": "김영래",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case7.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case7_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김영래",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "가천대길병원.pdf",
+          "고양신세계안과.pdf",
+          "더하다한방병원_입퇴원확인서.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 73340,
+        "report": 0,
+        "merged": 73340
+      },
+      "effectiveLengths": {
+        "merged": 59304,
+        "vnexsus": 51869
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 7891
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 266,
+      "coverage": {
+        "items": {
+          "total": 137,
+          "rawTextLength": 73340
+        },
+        "sourceSpan": {
+          "total": 137,
+          "withSpan": 131,
+          "withoutSpan": 6,
+          "rate": 0.9562043795620438,
+          "ratePercent": "95.6",
+          "missingSpans": [
+            {
+              "eventId": "item_13",
+              "date": "2021-02-02",
+              "hospital": "치과의원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_29",
+              "date": "2023-11-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_63",
+              "date": "2023-12-08",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_65",
+              "date": "2023-12-29",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_79",
+              "date": "2024-01-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_82",
+              "date": "2024-12-16",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 7891,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 8,
+      "caseName": "김영만",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case8.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case8_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김영만",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "기분좋은연세365의원.pdf",
+          "본서부병원_간호기록지.pdf",
+          "본서부병원.pdf",
+          "응암서울정형외과.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 135053,
+        "report": 0,
+        "merged": 135053
+      },
+      "effectiveLengths": {
+        "merged": 110627,
+        "vnexsus": 469
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 10299
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 70,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 135053
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 10299,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 9,
+      "caseName": "김영숙",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case9.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case9_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김영숙",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "간호정보조사.pdf",
+          "검사결과.pdf",
+          "영상판독.pdf",
+          "초진,경과.pdf",
+          "퇴원요약.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 39008,
+        "report": 0,
+        "merged": 39008
+      },
+      "effectiveLengths": {
+        "merged": 32173,
+        "vnexsus": 30664
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1668
+        },
+        "scannedPdfCount": 5,
+        "ocrSourceCounts": {
+          "vision": 5
+        },
+        "blocksSourceCounts": {
+          "ocr": 5
+        }
+      },
+      "postprocessMs": 412,
+      "coverage": {
+        "items": {
+          "total": 145,
+          "rawTextLength": 39008
+        },
+        "sourceSpan": {
+          "total": 145,
+          "withSpan": 145,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 1668,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 10,
+      "caseName": "김종렬",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case10.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case10_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김종렬",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "강북삼성병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 45941,
+        "report": 0,
+        "merged": 45941
+      },
+      "effectiveLengths": {
+        "merged": 38388,
+        "vnexsus": 18324
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1981
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 222,
+      "coverage": {
+        "items": {
+          "total": 128,
+          "rawTextLength": 45941
+        },
+        "sourceSpan": {
+          "total": 128,
+          "withSpan": 124,
+          "withoutSpan": 4,
+          "rate": 0.96875,
+          "ratePercent": "96.9",
+          "missingSpans": [
+            {
+              "eventId": "item_46",
+              "date": "2025-01-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_47",
+              "date": "2025-01-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_48",
+              "date": "2025-01-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_49",
+              "date": "2025-01-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 1981,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 11,
+      "caseName": "김진희",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case11.txt",
+      "reportOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case11_report.txt",
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case11_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\김진희",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "강동경희대병원.pdf",
+          "동국대일산병원.pdf"
+        ],
+        "excludedReports": [
+          "타사 자문회신원.pdf"
+        ]
+      },
+      "lengths": {
+        "sample": 10137,
+        "report": 2922,
+        "merged": 10137
+      },
+      "effectiveLengths": {
+        "merged": 8391,
+        "vnexsus": 402
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 492
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 32,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 10137
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 492,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 12,
+      "caseName": "농협손해보험 김미화 (수술비 고지의무 위반)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case12.txt",
+      "reportOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case12_report.txt",
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case12_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\농협손해보험 김미화 (수술비 고지의무 위반)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "삼성서울병원.pdf",
+          "에스엠영상의학과.pdf",
+          "sm영상의학과.pdf"
+        ],
+        "excludedReports": [
+          "문답서.pdf"
+        ]
+      },
+      "lengths": {
+        "sample": 30697,
+        "report": 944,
+        "merged": 30697
+      },
+      "effectiveLengths": {
+        "merged": 25493,
+        "vnexsus": 7743
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1711
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 103,
+      "coverage": {
+        "items": {
+          "total": 27,
+          "rawTextLength": 30697
+        },
+        "sourceSpan": {
+          "total": 27,
+          "withSpan": 27,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 1711,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 13,
+      "caseName": "농협손해보험 김인화(후유장해)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case13.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case13_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\농협손해보험 김인화(후유장해)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "농협손해보험_김인화_후유장해__merged.txt"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 13308,
+        "report": 0,
+        "merged": 13308
+      },
+      "effectiveLengths": {
+        "merged": 10935,
+        "vnexsus": 12999
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 624
+        },
+        "scannedPdfCount": 0,
+        "ocrSourceCounts": {
+          "offline_ocr": 1
+        },
+        "blocksSourceCounts": {
+          "offline_ocr": 1
+        }
+      },
+      "postprocessMs": 107,
+      "coverage": {
+        "items": {
+          "total": 120,
+          "rawTextLength": 13308
+        },
+        "sourceSpan": {
+          "total": 120,
+          "withSpan": 120,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 624,
+          "blocksWithBbox": 624,
+          "pagesWithBbox": 37,
+          "matchedItems": 120,
+          "matchRate": 1,
+          "matchRatePercent": "100.0",
+          "matchedPages": 7,
+          "sampleMatches": [
+            {
+              "itemIndex": 1,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 2,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 2,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 3,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 4,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 5,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 6,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 7,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 8,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 9,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 10,
+              "date": "2021-03-24",
+              "hospital": "미상 병원",
+              "blockPage": 14,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 14,
+      "caseName": "농협손해보험 김태현",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case14.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case14_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\농협손해보험 김태현",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "더바른내과의원.pdf",
+          "신촌세브란스병원.pdf",
+          "smile.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 113923,
+        "report": 0,
+        "merged": 113923
+      },
+      "effectiveLengths": {
+        "merged": 91926,
+        "vnexsus": 407
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 7522
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 130,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 113923
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 7522,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 15,
+      "caseName": "농협손해보험 석향숙(허혈성심장질환)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case15.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case15_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\농협손해보험 석향숙(허혈성심장질환)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "김윤호서울외과.pdf",
+          "명지병원.pdf",
+          "심평원 진료내역.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 54800,
+        "report": 0,
+        "merged": 54800
+      },
+      "effectiveLengths": {
+        "merged": 44544,
+        "vnexsus": 7247
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 5027
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 234,
+      "coverage": {
+        "items": {
+          "total": 78,
+          "rawTextLength": 54800
+        },
+        "sourceSpan": {
+          "total": 78,
+          "withSpan": 78,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 5027,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 16,
+      "caseName": "농협손해보험 이광욱(고지의무 위반,심질환)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case16.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case16_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\농협손해보험 이광욱(고지의무 위반,심질환)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "농협손해보험_이광욱_고지의무_위반_심질환__merged.txt"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 6065,
+        "report": 0,
+        "merged": 6065
+      },
+      "effectiveLengths": {
+        "merged": 4860,
+        "vnexsus": 5400
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 251
+        },
+        "scannedPdfCount": 0,
+        "ocrSourceCounts": {
+          "offline_ocr": 1
+        },
+        "blocksSourceCounts": {
+          "offline_ocr": 1
+        }
+      },
+      "postprocessMs": 58,
+      "coverage": {
+        "items": {
+          "total": 23,
+          "rawTextLength": 6065
+        },
+        "sourceSpan": {
+          "total": 23,
+          "withSpan": 23,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 251,
+          "blocksWithBbox": 251,
+          "pagesWithBbox": 14,
+          "matchedItems": 23,
+          "matchRate": 1,
+          "matchRatePercent": "100.0",
+          "matchedPages": 3,
+          "sampleMatches": [
+            {
+              "itemIndex": 1,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 2,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 2,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 3,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 4,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 5,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 6,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 7,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 8,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 9,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 10,
+              "date": "2024-10-08",
+              "hospital": "미상 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 7,
+                "xMax": 1,
+                "yMax": 8,
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 17,
+      "caseName": "박다정",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case17.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case17_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\박다정",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "고대안암병원.pdf",
+          "지축라움산부인과의원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 28788,
+        "report": 0,
+        "merged": 28788
+      },
+      "effectiveLengths": {
+        "merged": 23507,
+        "vnexsus": 486
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2237
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 28,
+      "coverage": {
+        "items": {
+          "total": 2,
+          "rawTextLength": 28788
+        },
+        "sourceSpan": {
+          "total": 2,
+          "withSpan": 2,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 2237,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 18,
+      "caseName": "박송자",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case18.txt",
+      "reportOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case18_report.txt",
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case18_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\박송자",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "강북삼성병원.pdf",
+          "김원중내과의원.pdf"
+        ],
+        "excludedReports": [
+          "문답서.pdf",
+          "손해사정서교부동의서.pdf"
+        ]
+      },
+      "lengths": {
+        "sample": 64041,
+        "report": 906,
+        "merged": 64041
+      },
+      "effectiveLengths": {
+        "merged": 53242,
+        "vnexsus": 1204
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3694
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 115,
+      "coverage": {
+        "items": {
+          "total": 6,
+          "rawTextLength": 64041
+        },
+        "sourceSpan": {
+          "total": 6,
+          "withSpan": 4,
+          "withoutSpan": 2,
+          "rate": 0.6666666666666666,
+          "ratePercent": "66.7",
+          "missingSpans": [
+            {
+              "eventId": "item_1",
+              "date": "2025-01-17",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_2",
+              "date": "2025-01-17",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 3694,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 19,
+      "caseName": "박현미",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case19.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case19_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\박현미",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "서울아산병원.pdf",
+          "이레미즈외과.pdf",
+          "청약 전 검진.pdf",
+          "휴내과의원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 40976,
+        "report": 0,
+        "merged": 40976
+      },
+      "effectiveLengths": {
+        "merged": 33589,
+        "vnexsus": 404
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2229
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 40,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 40976
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 2229,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 20,
+      "caseName": "박혜경",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case20.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case20_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\박혜경",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "은평성모병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 82975,
+        "report": 0,
+        "merged": 82975
+      },
+      "effectiveLengths": {
+        "merged": 69173,
+        "vnexsus": 535
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 5299
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 92,
+      "coverage": {
+        "items": {
+          "total": 2,
+          "rawTextLength": 82975
+        },
+        "sourceSpan": {
+          "total": 2,
+          "withSpan": 2,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 5299,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 21,
+      "caseName": "서문정숙",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case21.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case21_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\서문정숙",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "더자인병원.pdf",
+          "에스앰영상의학과.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 13577,
+        "report": 0,
+        "merged": 13577
+      },
+      "effectiveLengths": {
+        "merged": 11196,
+        "vnexsus": 11989
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 895
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 157,
+      "coverage": {
+        "items": {
+          "total": 67,
+          "rawTextLength": 13577
+        },
+        "sourceSpan": {
+          "total": 67,
+          "withSpan": 66,
+          "withoutSpan": 1,
+          "rate": 0.9850746268656716,
+          "ratePercent": "98.5",
+          "missingSpans": [
+            {
+              "eventId": "item_57",
+              "date": "2025-10-19",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 895,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 22,
+      "caseName": "송금숙",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case22.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case22_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\송금숙",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "우리들병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 11067,
+        "report": 0,
+        "merged": 11067
+      },
+      "effectiveLengths": {
+        "merged": 9238,
+        "vnexsus": 3877
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 379
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 95,
+      "coverage": {
+        "items": {
+          "total": 6,
+          "rawTextLength": 11067
+        },
+        "sourceSpan": {
+          "total": 6,
+          "withSpan": 6,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 379,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 23,
+      "caseName": "악사손해보험 배성은",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case23.txt",
+      "reportOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case23_report.txt",
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case23_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\악사손해보험 배성은",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "서울가정의학과의원.pdf",
+          "세란병원.pdf"
+        ],
+        "excludedReports": [
+          "문답서.pdf"
+        ]
+      },
+      "lengths": {
+        "sample": 85293,
+        "report": 952,
+        "merged": 85293
+      },
+      "effectiveLengths": {
+        "merged": 67857,
+        "vnexsus": 394
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 7341
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 74,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 85293
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 7341,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 24,
+      "caseName": "엄장열",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case24.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case24_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\엄장열",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "이지신경외과.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 29270,
+        "report": 0,
+        "merged": 29270
+      },
+      "effectiveLengths": {
+        "merged": 23589,
+        "vnexsus": 20785
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2954
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 224,
+      "coverage": {
+        "items": {
+          "total": 187,
+          "rawTextLength": 29270
+        },
+        "sourceSpan": {
+          "total": 187,
+          "withSpan": 171,
+          "withoutSpan": 16,
+          "rate": 0.9144385026737968,
+          "ratePercent": "91.4",
+          "missingSpans": [
+            {
+              "eventId": "item_15",
+              "date": "2025-07-18",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_21",
+              "date": "2025-07-19",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_33",
+              "date": "2025-07-21",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_41",
+              "date": "2025-07-23",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_57",
+              "date": "2025-07-30",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_63",
+              "date": "2025-07-31",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_64",
+              "date": "2025-07-31",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_87",
+              "date": "2025-08-08",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_107",
+              "date": "2025-08-12",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_115",
+              "date": "2025-08-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_116",
+              "date": "2025-08-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_123",
+              "date": "2025-08-18",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_130",
+              "date": "2025-08-19",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_137",
+              "date": "2025-08-21",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_146",
+              "date": "2025-08-25",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_160",
+              "date": "2025-09-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 2954,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 25,
+      "caseName": "염막여",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case25.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case25_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\염막여",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "더블유여성병원.pdf",
+          "신촌세브란스병원.pdf",
+          "에덴병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 171540,
+        "report": 0,
+        "merged": 171540
+      },
+      "effectiveLengths": {
+        "merged": 139932,
+        "vnexsus": 404
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 11666
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 552,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 171540
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 11666,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 26,
+      "caseName": "윤동현",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case26.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case26_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\윤동현",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "마포리더스내과.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 7430,
+        "report": 0,
+        "merged": 7430
+      },
+      "effectiveLengths": {
+        "merged": 5866,
+        "vnexsus": 3722
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 588
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 1,
+          "none": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1,
+          "none": 1
+        }
+      },
+      "postprocessMs": 58,
+      "coverage": {
+        "items": {
+          "total": 13,
+          "rawTextLength": 7430
+        },
+        "sourceSpan": {
+          "total": 13,
+          "withSpan": 13,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 588,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 27,
+      "caseName": "윤희정",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case27.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case27_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\윤희정",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "일산병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 48852,
+        "report": 0,
+        "merged": 48852
+      },
+      "effectiveLengths": {
+        "merged": 40875,
+        "vnexsus": 18359
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2999
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 170,
+      "coverage": {
+        "items": {
+          "total": 157,
+          "rawTextLength": 48852
+        },
+        "sourceSpan": {
+          "total": 157,
+          "withSpan": 140,
+          "withoutSpan": 17,
+          "rate": 0.89171974522293,
+          "ratePercent": "89.2",
+          "missingSpans": [
+            {
+              "eventId": "item_2",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_3",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_4",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_5",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_6",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_7",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_8",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_9",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_10",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_11",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_12",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_13",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_14",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_15",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_16",
+              "date": "1970-03-24",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_24",
+              "date": "2018-02-28",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_36",
+              "date": "2021-09-07",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 2999,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 28,
+      "caseName": "이광욱",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case28.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case28_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\이광욱",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "신촌세브란스병원(이광욱).pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 100253,
+        "report": 0,
+        "merged": 100253
+      },
+      "effectiveLengths": {
+        "merged": 82598,
+        "vnexsus": 10439
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 7339
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 209,
+      "coverage": {
+        "items": {
+          "total": 43,
+          "rawTextLength": 100253
+        },
+        "sourceSpan": {
+          "total": 43,
+          "withSpan": 42,
+          "withoutSpan": 1,
+          "rate": 0.9767441860465116,
+          "ratePercent": "97.7",
+          "missingSpans": [
+            {
+              "eventId": "item_19",
+              "date": "2024-10-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 7339,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 29,
+      "caseName": "이금홍",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case29.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case29_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\이금홍",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "동국대 기타.pdf",
+          "동국대 청구건.pdf",
+          "연세바른가정의학과.pdf",
+          "운정와이즈병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 143128,
+        "report": 0,
+        "merged": 143128
+      },
+      "effectiveLengths": {
+        "merged": 119495,
+        "vnexsus": 308
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 9676
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 1009,
+      "coverage": {
+        "items": {
+          "total": 0,
+          "rawTextLength": 143128
+        },
+        "sourceSpan": {
+          "total": 0,
+          "withSpan": 0,
+          "withoutSpan": 0,
+          "rate": 0,
+          "ratePercent": "0.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 9676,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 30,
+      "caseName": "이영재",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case30.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case30_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\이영재",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "누가재활의학과.pdf",
+          "서울척탑병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 7543,
+        "report": 0,
+        "merged": 7543
+      },
+      "effectiveLengths": {
+        "merged": 6253,
+        "vnexsus": 7144
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 332
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 83,
+      "coverage": {
+        "items": {
+          "total": 59,
+          "rawTextLength": 7543
+        },
+        "sourceSpan": {
+          "total": 59,
+          "withSpan": 59,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 332,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 31,
+      "caseName": "이영희",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case31.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case31_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\이영희",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "간호정보.pdf",
+          "병리검사.pdf",
+          "수술기록.pdf",
+          "영상검사.pdf",
+          "외래(가입 전).pdf",
+          "외래(가입후).pdf",
+          "입퇴원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 99739,
+        "report": 0,
+        "merged": 99739
+      },
+      "effectiveLengths": {
+        "merged": 83222,
+        "vnexsus": 26652
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3132
+        },
+        "scannedPdfCount": 7,
+        "ocrSourceCounts": {
+          "vision": 7
+        },
+        "blocksSourceCounts": {
+          "ocr": 7
+        }
+      },
+      "postprocessMs": 250,
+      "coverage": {
+        "items": {
+          "total": 150,
+          "rawTextLength": 99739
+        },
+        "sourceSpan": {
+          "total": 150,
+          "withSpan": 150,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 3132,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 32,
+      "caseName": "이정희",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case32.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case32_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\이정희",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "이정희_merged.txt"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 32156,
+        "report": 0,
+        "merged": 32156
+      },
+      "effectiveLengths": {
+        "merged": 24116,
+        "vnexsus": 19591
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1987
+        },
+        "scannedPdfCount": 0,
+        "ocrSourceCounts": {
+          "offline_ocr": 1
+        },
+        "blocksSourceCounts": {
+          "offline_ocr": 1
+        }
+      },
+      "postprocessMs": 158,
+      "coverage": {
+        "items": {
+          "total": 161,
+          "rawTextLength": 32156
+        },
+        "sourceSpan": {
+          "total": 161,
+          "withSpan": 161,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 1987,
+          "blocksWithBbox": 1987,
+          "pagesWithBbox": 120,
+          "matchedItems": 149,
+          "matchRate": 0.9254658385093167,
+          "matchRatePercent": "92.5",
+          "matchedPages": 18,
+          "sampleMatches": [
+            {
+              "itemIndex": 13,
+              "date": "2020-07-21",
+              "hospital": "미상 병원",
+              "blockPage": 163,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 3,
+                "xMax": 1,
+                "yMax": 4,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 14,
+              "date": "2020-07-21",
+              "hospital": "미상 병원",
+              "blockPage": 163,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 3,
+                "xMax": 1,
+                "yMax": 4,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 15,
+              "date": "2020-07-21",
+              "hospital": "미상 병원",
+              "blockPage": 163,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 3,
+                "xMax": 1,
+                "yMax": 4,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 16,
+              "date": "2020-07-21",
+              "hospital": "미상 병원",
+              "blockPage": 163,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 3,
+                "xMax": 1,
+                "yMax": 4,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 17,
+              "date": "2021-05-22",
+              "hospital": "미상 병원",
+              "blockPage": 215,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 92,
+                "xMax": 1,
+                "yMax": 93,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 18,
+              "date": "2021-05-22",
+              "hospital": "밝은연세안과\n의원",
+              "blockPage": 215,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 92,
+                "xMax": 1,
+                "yMax": 93,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 19,
+              "date": "2021-06-22",
+              "hospital": "서울대학교치\n과병원",
+              "blockPage": 215,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 78,
+                "xMax": 1,
+                "yMax": 79,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 20,
+              "date": "2021-06-22",
+              "hospital": "미상 병원",
+              "blockPage": 215,
+              "blockScore": 2,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 91,
+                "xMax": 1,
+                "yMax": 92,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 21,
+              "date": "2021-07-24",
+              "hospital": "선한치과의원",
+              "blockPage": 215,
+              "blockScore": 3,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 49,
+                "xMax": 1,
+                "yMax": 50,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 22,
+              "date": "2021-07-24",
+              "hospital": "미상 병원",
+              "blockPage": 215,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 49,
+                "xMax": 1,
+                "yMax": 50,
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 33,
+      "caseName": "장동현",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case33.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case33_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\장동현",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "명지병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 50212,
+        "report": 0,
+        "merged": 50212
+      },
+      "effectiveLengths": {
+        "merged": 41394,
+        "vnexsus": 35633
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 4232
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 232,
+      "coverage": {
+        "items": {
+          "total": 341,
+          "rawTextLength": 50212
+        },
+        "sourceSpan": {
+          "total": 341,
+          "withSpan": 317,
+          "withoutSpan": 24,
+          "rate": 0.9296187683284457,
+          "ratePercent": "93.0",
+          "missingSpans": [
+            {
+              "eventId": "item_24",
+              "date": "2024-04-25",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_37",
+              "date": "2024-04-30",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_42",
+              "date": "2024-05-01",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_46",
+              "date": "2024-05-29",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_47",
+              "date": "2024-06-26",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_49",
+              "date": "2024-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_50",
+              "date": "2024-07-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_76",
+              "date": "2024-08-07",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_77",
+              "date": "2024-10-04",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_94",
+              "date": "2024-10-04",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_145",
+              "date": "2024-10-04",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_163",
+              "date": "2024-10-04",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_164",
+              "date": "2025-01-03",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_171",
+              "date": "2025-04-09",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_224",
+              "date": "2025-04-15",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_245",
+              "date": "2025-04-15",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_256",
+              "date": "2025-05-14",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_292",
+              "date": "2025-09-09",
+              "hospital": "출력자 홍석영\n작성의\n조석철\n원본대조필\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_315",
+              "date": "2025-09-09",
+              "hospital": "작성의 이지현\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_321",
+              "date": "2025-09-09",
+              "hospital": "출력자 홍석영\n작성의 조윤형\n원본대조필\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_322",
+              "date": "2025-09-09",
+              "hospital": "작성의 김진호\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_325",
+              "date": "2025-09-09",
+              "hospital": "출력자 홍석영\n작성의 조윤형\n원본대조필\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_330",
+              "date": "2025-09-09",
+              "hospital": "출력자홍석영\n담당교수 조윤형\n원본대조필\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_340",
+              "date": "2025-09-09",
+              "hospital": "작성의 조윤형\n명지병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 4232,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 34,
+      "caseName": "장복규",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case34.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case34_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\장복규",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "더으뜸정형외과.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 38414,
+        "report": 0,
+        "merged": 38414
+      },
+      "effectiveLengths": {
+        "merged": 30571,
+        "vnexsus": 26845
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3370
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 238,
+      "coverage": {
+        "items": {
+          "total": 153,
+          "rawTextLength": 38414
+        },
+        "sourceSpan": {
+          "total": 153,
+          "withSpan": 153,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 3370,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 35,
+      "caseName": "장우진",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case35.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case35_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\장우진",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "우신향병원.pdf",
+          "은평성모병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 22559,
+        "report": 0,
+        "merged": 22559
+      },
+      "effectiveLengths": {
+        "merged": 18783,
+        "vnexsus": 5957
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1096
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 271,
+      "coverage": {
+        "items": {
+          "total": 31,
+          "rawTextLength": 22559
+        },
+        "sourceSpan": {
+          "total": 31,
+          "withSpan": 31,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 1096,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 36,
+      "caseName": "장유찬",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case36.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case36_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\장유찬",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "장유찬_merged.txt"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 17561,
+        "report": 0,
+        "merged": 17561
+      },
+      "effectiveLengths": {
+        "merged": 13895,
+        "vnexsus": 14459
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 530
+        },
+        "scannedPdfCount": 0,
+        "ocrSourceCounts": {
+          "offline_ocr": 1
+        },
+        "blocksSourceCounts": {
+          "offline_ocr": 1
+        }
+      },
+      "postprocessMs": 195,
+      "coverage": {
+        "items": {
+          "total": 45,
+          "rawTextLength": 17561
+        },
+        "sourceSpan": {
+          "total": 45,
+          "withSpan": 45,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 530,
+          "blocksWithBbox": 530,
+          "pagesWithBbox": 41,
+          "matchedItems": 6,
+          "matchRate": 0.13333333333333333,
+          "matchRatePercent": "13.3",
+          "matchedPages": 4,
+          "sampleMatches": [
+            {
+              "itemIndex": 1,
+              "date": "2023-07-06",
+              "hospital": "타병원 진료내역 확인 및 병원",
+              "blockPage": 2,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 3,
+                "xMax": 1,
+                "yMax": 4,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 2,
+              "date": "2024-07-01",
+              "hospital": "미상 병원",
+              "blockPage": 34,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 5,
+                "xMax": 1,
+                "yMax": 6,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 3,
+              "date": "2025-01-10",
+              "hospital": "종합병원",
+              "blockPage": 7,
+              "blockScore": 2,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 1,
+                "xMax": 1,
+                "yMax": 2,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 4,
+              "date": "2025-02-13",
+              "hospital": "미상 병원",
+              "blockPage": 1,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 5,
+              "date": "2025-02-13",
+              "hospital": "미상 병원",
+              "blockPage": 1,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 8,
+                "xMax": 1,
+                "yMax": 9,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 6,
+              "date": "2030-02-07",
+              "hospital": "보건의료원",
+              "blockPage": 7,
+              "blockScore": 1,
+              "bbox": {
+                "xMin": 0,
+                "yMin": 1,
+                "xMax": 1,
+                "yMax": 2,
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 37,
+      "caseName": "정진덕",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case37.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case37_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\정진덕",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "강북삼성병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 6254,
+        "report": 0,
+        "merged": 6254
+      },
+      "effectiveLengths": {
+        "merged": 5218,
+        "vnexsus": 5086
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 358
+        },
+        "scannedPdfCount": 1,
+        "ocrSourceCounts": {
+          "vision": 1
+        },
+        "blocksSourceCounts": {
+          "ocr": 1
+        }
+      },
+      "postprocessMs": 65,
+      "coverage": {
+        "items": {
+          "total": 29,
+          "rawTextLength": 6254
+        },
+        "sourceSpan": {
+          "total": 29,
+          "withSpan": 26,
+          "withoutSpan": 3,
+          "rate": 0.896551724137931,
+          "ratePercent": "89.7",
+          "missingSpans": [
+            {
+              "eventId": "item_6",
+              "date": "2025-04-15",
+              "hospital": "무\n강북삼성병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_11",
+              "date": "2025-04-23",
+              "hospital": "환자성명 정진덕\n주민번호\n신경외과\n강북삼성병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_14",
+              "date": "2025-04-29",
+              "hospital": "환자성명 정진덕\n주민번호\n신경과\n강북삼성병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 358,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 38,
+      "caseName": "조수남",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case38.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case38_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\조수남",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "고지의무 입퇴원.pdf",
+          "동국대일산 기타.pdf",
+          "청구건 입퇴원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 67957,
+        "report": 0,
+        "merged": 67957
+      },
+      "effectiveLengths": {
+        "merged": 56260,
+        "vnexsus": 36814
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2795
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 3
+        }
+      },
+      "postprocessMs": 371,
+      "coverage": {
+        "items": {
+          "total": 174,
+          "rawTextLength": 67957
+        },
+        "sourceSpan": {
+          "total": 174,
+          "withSpan": 174,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 2795,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 39,
+      "caseName": "최순곤",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case39.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case39_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\최순곤",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "김안과병원.pdf",
+          "신촌세브란스.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 33644,
+        "report": 0,
+        "merged": 33644
+      },
+      "effectiveLengths": {
+        "merged": 27465,
+        "vnexsus": 20890
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 1967
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 197,
+      "coverage": {
+        "items": {
+          "total": 68,
+          "rawTextLength": 33644
+        },
+        "sourceSpan": {
+          "total": 68,
+          "withSpan": 59,
+          "withoutSpan": 9,
+          "rate": 0.8676470588235294,
+          "ratePercent": "86.8",
+          "missingSpans": [
+            {
+              "eventId": "item_39",
+              "date": "2025-09-02",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_43",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_49",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_51",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_54",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_56",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_59",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_61",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            },
+            {
+              "eventId": "item_64",
+              "date": "2025-09-10",
+              "hospital": "미상 병원",
+              "reason": "Anchor 매칭 실패"
+            }
+          ]
+        },
+        "coordinates": {
+          "blocksTotal": 1967,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 40,
+      "caseName": "최양문",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case40.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case40_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\최양문",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "서울아산(고지의무위반).tif",
+          "서울아산병원(전체).tif",
+          "서울아산병원(전체2).tif"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 936,
+        "report": 0,
+        "merged": 936
+      },
+      "effectiveLengths": {
+        "merged": 790,
+        "vnexsus": 1168
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision_image": 3
+        },
+        "blocksSourceCounts": {
+          "synthetic_image": 3
+        }
+      },
+      "postprocessMs": 29,
+      "coverage": {
+        "items": {
+          "total": 6,
+          "rawTextLength": 936
+        },
+        "sourceSpan": {
+          "total": 6,
+          "withSpan": 6,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 3,
+          "blocksWithBbox": 3,
+          "pagesWithBbox": 1,
+          "matchedItems": 5,
+          "matchRate": 0.8333333333333334,
+          "matchRatePercent": "83.3",
+          "matchedPages": 1,
+          "sampleMatches": [
+            {
+              "itemIndex": 1,
+              "date": "2024-07-14",
+              "hospital": "미상 병원",
+              "blockPage": 1,
+              "blockScore": 2,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 2,
+              "date": "2024-07-14",
+              "hospital": "서울아산병원",
+              "blockPage": 1,
+              "blockScore": 3,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 3,
+              "date": "2024-07-14",
+              "hospital": "미상 병원",
+              "blockPage": 1,
+              "blockScore": 1,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 5,
+              "date": "2025-03-25",
+              "hospital": "서울아산병원",
+              "blockPage": 1,
+              "blockScore": 3,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 1,
+                "height": 1
+              }
+            },
+            {
+              "itemIndex": 6,
+              "date": "2025-03-25",
+              "hospital": "서울아산병원",
+              "blockPage": 1,
+              "blockScore": 3,
+              "bbox": {
+                "x": 0,
+                "y": 0,
+                "width": 1,
+                "height": 1
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 41,
+      "caseName": "함종성",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case41.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case41_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\함종성",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "동국대일산병원.pdf",
+          "일산21세기병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 49110,
+        "report": 0,
+        "merged": 49110
+      },
+      "effectiveLengths": {
+        "merged": 40380,
+        "vnexsus": 6557
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 2119
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 88,
+      "coverage": {
+        "items": {
+          "total": 54,
+          "rawTextLength": 49110
+        },
+        "sourceSpan": {
+          "total": 54,
+          "withSpan": 54,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 2119,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 42,
+      "caseName": "현대해상 김민아(뇌 양성종양)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case42.txt",
+      "reportOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case42_report.txt",
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case42_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\현대해상 김민아(뇌 양성종양)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "심평원진료내역.pdf",
+          "이대목동병원.pdf",
+          "현대 김민아 수임.pdf"
+        ],
+        "excludedReports": [
+          "문답서.pdf"
+        ]
+      },
+      "lengths": {
+        "sample": 67227,
+        "report": 863,
+        "merged": 67227
+      },
+      "effectiveLengths": {
+        "merged": 54107,
+        "vnexsus": 584
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 5399
+        },
+        "scannedPdfCount": 3,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 3,
+          "synthetic_pdf_parse": 1
+        }
+      },
+      "postprocessMs": 69,
+      "coverage": {
+        "items": {
+          "total": 4,
+          "rawTextLength": 67227
+        },
+        "sourceSpan": {
+          "total": 4,
+          "withSpan": 4,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 5399,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 43,
+      "caseName": "현대해상 양재진(편도암)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case43.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case43_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\현대해상 양재진(편도암)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "건이비인후과.pdf",
+          "사당연세365의원.pdf",
+          "서울성모병원.pdf",
+          "심평원 진료내역.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 142048,
+        "report": 0,
+        "merged": 142048
+      },
+      "effectiveLengths": {
+        "merged": 116793,
+        "vnexsus": 406
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 11332
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 129,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 142048
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 11332,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 44,
+      "caseName": "현대해상 조윤아(태아보험, 엄마(이주희)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case44.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case44_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\현대해상 조윤아(태아보험, 엄마(이주희)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "은평성모(이주희).pdf",
+          "은평성모(조윤아).pdf",
+          "report.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 81427,
+        "report": 0,
+        "merged": 81427
+      },
+      "effectiveLengths": {
+        "merged": 66574,
+        "vnexsus": 525
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 6002
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 3
+        },
+        "blocksSourceCounts": {
+          "ocr": 2,
+          "synthetic_pdf_parse": 1
+        }
+      },
+      "postprocessMs": 42,
+      "coverage": {
+        "items": {
+          "total": 2,
+          "rawTextLength": 81427
+        },
+        "sourceSpan": {
+          "total": 2,
+          "withSpan": 2,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 6002,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 45,
+      "caseName": "홍영규",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case45.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case45_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\홍영규",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "고대구로병원.pdf",
+          "이대서울병원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 67674,
+        "report": 0,
+        "merged": 67674
+      },
+      "effectiveLengths": {
+        "merged": 55310,
+        "vnexsus": 402
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 6268
+        },
+        "scannedPdfCount": 2,
+        "ocrSourceCounts": {
+          "vision": 2
+        },
+        "blocksSourceCounts": {
+          "ocr": 2
+        }
+      },
+      "postprocessMs": 56,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 67674
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 6268,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    },
+    {
+      "ok": true,
+      "caseIndex": 46,
+      "caseName": "axa손해보험 김명희(뇌혈관질환)",
+      "sampleOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case46.txt",
+      "reportOut": null,
+      "vnexsusOut": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case46_vnexsus.txt",
+      "rawDir": "C:\\VNEXSUS_12-07\\sample_pdf\\axa손해보험 김명희(뇌혈관질환)",
+      "reason": null,
+      "warnings": [],
+      "chosen": {
+        "includedFiles": [
+          "강남성심병원.pdf",
+          "내당최내과의원.pdf",
+          "심평원 진료내역.pdf",
+          "이기섭의원.pdf"
+        ],
+        "excludedReports": []
+      },
+      "lengths": {
+        "sample": 38720,
+        "report": 0,
+        "merged": 38720
+      },
+      "effectiveLengths": {
+        "merged": 31288,
+        "vnexsus": 404
+      },
+      "ocr": {
+        "sample": null,
+        "report": null,
+        "blocks": {
+          "total": 3009
+        },
+        "scannedPdfCount": 4,
+        "ocrSourceCounts": {
+          "vision": 4
+        },
+        "blocksSourceCounts": {
+          "ocr": 4
+        }
+      },
+      "postprocessMs": 54,
+      "coverage": {
+        "items": {
+          "total": 1,
+          "rawTextLength": 38720
+        },
+        "sourceSpan": {
+          "total": 1,
+          "withSpan": 1,
+          "withoutSpan": 0,
+          "rate": 1,
+          "ratePercent": "100.0",
+          "missingSpans": []
+        },
+        "coordinates": {
+          "blocksTotal": 3009,
+          "blocksWithBbox": 0,
+          "pagesWithBbox": 0,
+          "matchedItems": 0,
+          "matchRate": 0,
+          "matchRatePercent": "0.0",
+          "matchedPages": 0,
+          "sampleMatches": []
+        }
+      }
+    }
+  ]
+}

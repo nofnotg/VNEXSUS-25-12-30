@@ -1,0 +1,2352 @@
+{
+  "summary": {
+    "matched": 45,
+    "passCount": 0,
+    "passRate": 0,
+    "avgCombinedScore": 0.05282616781715567,
+    "avgLabelScore": 0.06591886608015639,
+    "avgJaccard": 0.022276538536820656,
+    "avgDateMatchRate": 0.12135161135161134,
+    "avgIcdMatchRate": 0.1111111111111111,
+    "avgHospitalMatchRate": 0.044444444444444446
+  },
+  "skips": {
+    "noReport": 1,
+    "missingFiles": 0,
+    "emptyReport": 0,
+    "emptyVnexsus": 0
+  },
+  "rows": [
+    {
+      "caseIndex": 1,
+      "caseName": "고영란",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case1_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case1_vnexsus.txt",
+      "combinedScore": 0.00962171052631579,
+      "labelScore": 0,
+      "jaccard": 0.032072368421052634,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2019-09-27",
+            "2019-11-15",
+            "2020-03-14",
+            "2020-10-28",
+            "2023-09-27",
+            "2023-10-20",
+            "2024-01-27",
+            "2024-04-11",
+            "2024-06-27",
+            "2024-08-14",
+            "2024-09-27",
+            "2025-02-17",
+            "2025-02-18",
+            "2025-03-07"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "E11.78",
+            "H10.3",
+            "I62.9",
+            "I66.8",
+            "I67.8",
+            "J04.0",
+            "J30.4",
+            "K29.7"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "강남성심병원",
+            "내과의원및이깁서의원",
+            "두통및어지럼증증상을주소로강남성심병원",
+            "이기섭의원",
+            "일자사고경위병원",
+            "치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1823,
+      "vnexsusEffectiveLen": 7722,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 2,
+      "caseName": "곽동인",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case2_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case2_vnexsus.txt",
+      "combinedScore": 0.006724137931034483,
+      "labelScore": 0,
+      "jaccard": 0.022413793103448276,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2019-03-23",
+            "2019-04-09",
+            "2023-08-07",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2024-04-23",
+            "2025-02-04",
+            "2025-02-12"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D13.4",
+            "D18.02"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "03서울대학교직장부속의원",
+            "55삼성서울병원",
+            "보험초회보험료납입전동일질환으로삼성서울병원",
+            "삼성서울병원",
+            "서울대학교직장부속의원",
+            "에스엠영상의학과의원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1179,
+      "vnexsusEffectiveLen": 4213,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 3,
+      "caseName": "권광덕",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case3_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case3_vnexsus.txt",
+      "combinedScore": 0.05153751537515375,
+      "labelScore": 0.06666666666666667,
+      "jaccard": 0.016236162361623615,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-08-22"
+          ],
+          "missing": [
+            "2019-11-22",
+            "2020-03-20",
+            "2021-09-02",
+            "2023-11-22",
+            "2024-11-22",
+            "2024-12-13",
+            "2025-01-15",
+            "2025-03-04",
+            "2025-03-19"
+          ],
+          "matchRate": 0.1
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D43.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "13부터이대목동병원",
+            "이대목동병원",
+            "일자사고경위병원",
+            "치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1339,
+      "vnexsusEffectiveLen": 52572,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 4,
+      "caseName": "김동아",
+      "status": "SKIPPED",
+      "skipReason": "no_report"
+    },
+    {
+      "caseIndex": 5,
+      "caseName": "김상민",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case5_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case5_vnexsus.txt",
+      "combinedScore": 0.009455587392550143,
+      "labelScore": 0,
+      "jaccard": 0.03151862464183381,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2018-05-10",
+            "2020-01-17",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-01-24",
+            "2024-05-30",
+            "2024-12-12",
+            "2024-12-27",
+            "2024-12-31"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I20.88",
+            "I25.1",
+            "R07.4"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "12간헐적흉통을주소로굿웰스의원",
+            "27신촌세브란스병원",
+            "30동신병원",
+            "31신촌세브란스병원",
+            "굿웰스의원",
+            "신촌세브란스병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1321,
+      "vnexsusEffectiveLen": 1212,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 6,
+      "caseName": "김소원",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case6_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case6_vnexsus.txt",
+      "combinedScore": 0.10955037919826652,
+      "labelScore": 0.15,
+      "jaccard": 0.015167930660888408,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-02-19",
+            "2025-02-26",
+            "2025-03-10"
+          ],
+          "missing": [
+            "2018-07-26",
+            "2020-03-10",
+            "2021-01-26",
+            "2023-04-26",
+            "2023-04-28",
+            "2023-07-26",
+            "2025-02-05"
+          ],
+          "matchRate": 0.3
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D34",
+            "I20",
+            "I20.1",
+            "I25",
+            "I25.1",
+            "N63"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "05명지병원",
+            "김윤호서울외과의원",
+            "명지병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1163,
+      "vnexsusEffectiveLen": 50053,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 7,
+      "caseName": "김영래",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case7_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case7_vnexsus.txt",
+      "combinedScore": 0.0280693307655272,
+      "labelScore": 0.03225806451612903,
+      "jaccard": 0.0182956186807896,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-12-17"
+          ],
+          "missing": [
+            "2020-02-14",
+            "2023-02-17",
+            "2023-02-18",
+            "2024-02-01",
+            "2024-02-17",
+            "2024-08-28",
+            "2024-11-04",
+            "2024-12-02",
+            "2024-12-04",
+            "2024-12-09",
+            "2024-12-26",
+            "2024-12-27",
+            "2025-01-02",
+            "2025-01-15",
+            "2025-01-20",
+            "2025-02-11",
+            "2025-02-13"
+          ],
+          "matchRate": 0.05555555555555555
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C09.9",
+            "D10.5",
+            "J06.0",
+            "J20.9",
+            "J30.4",
+            "L04.0",
+            "M54.56"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "경유및치료병원",
+            "모병원",
+            "서울성모병원",
+            "소견으로제일이비인후과경유진료의뢰하서울성모병원",
+            "일자사고경위병원",
+            "진단적정성관련서울성모병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1900,
+      "vnexsusEffectiveLen": 51869,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 8,
+      "caseName": "김영만",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case8_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case8_vnexsus.txt",
+      "combinedScore": 0.0022900763358778622,
+      "labelScore": 0,
+      "jaccard": 0.007633587786259542,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2019-10-08",
+            "2022-10-08",
+            "2024-07-08",
+            "2024-07-16",
+            "2024-09-12",
+            "2024-10-01",
+            "2024-10-08",
+            "2025-03-26"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "01신촌세브란스병원",
+            "신촌세브란스병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1464,
+      "vnexsusEffectiveLen": 469,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 9,
+      "caseName": "김영숙",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case9_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case9_vnexsus.txt",
+      "combinedScore": 0.1060200668896321,
+      "labelScore": 0.14285714285714285,
+      "jaccard": 0.020066889632107024,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2023-03-23",
+            "2024-02-26",
+            "2024-10-05",
+            "2024-10-07",
+            "2024-10-10"
+          ],
+          "missing": [
+            "2019-02-26",
+            "2019-12-21",
+            "2022-07-17",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-19",
+            "2024-08-02",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-11",
+            "2024-10-30",
+            "2024-10-31",
+            "2024-11-01",
+            "2024-11-06"
+          ],
+          "matchRate": 0.23809523809523808
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D05.00",
+            "D05.10",
+            "I67.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "02양지병원",
+            "02이대서울병원",
+            "27최초진단받고진료의뢰하대림성모병원",
+            "대림성모병원",
+            "양지병원",
+            "유방센터",
+            "이대서울병원",
+            "일자사고경위병원",
+            "증진센터",
+            "타병원",
+            "피보험자는대림성모병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1844,
+      "vnexsusEffectiveLen": 30664,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 10,
+      "caseName": "김종렬",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case10_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case10_vnexsus.txt",
+      "combinedScore": 0.0049320943531093635,
+      "labelScore": 0,
+      "jaccard": 0.016440314510364547,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2024-04-18",
+            "2024-05-01",
+            "2024-10-22",
+            "2024-10-23",
+            "2024-12-20",
+            "2025-11-10",
+            "2054-11-10"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I46.0",
+            "P00.9",
+            "P03.4",
+            "P05.1",
+            "P22.8",
+            "P90",
+            "R06.8",
+            "R09.8",
+            "Z38.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "10여년전치료받은사실병원",
+            "22은평성모병원",
+            "계약자면담시확인한심평원진료내역및치료병원",
+            "병원",
+            "은평성모병원",
+            "일자사고경위병원",
+            "종합병원",
+            "청구병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2029,
+      "vnexsusEffectiveLen": 18324,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 11,
+      "caseName": "김진희",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case11_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case11_vnexsus.txt",
+      "combinedScore": 0.006569343065693431,
+      "labelScore": 0,
+      "jaccard": 0.021897810218978103,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "1987-08-31",
+            "2025-10-27",
+            "2025-10-28"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C44",
+            "C49",
+            "D48.5"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "건국대학교병원",
+            "동국대일산병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2390,
+      "vnexsusEffectiveLen": 402,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 12,
+      "caseName": "농협손해보험 김미화 (수술비 고지의무 위반)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case12_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case12_vnexsus.txt",
+      "combinedScore": 0.18821585903083698,
+      "labelScore": 0.25,
+      "jaccard": 0.04405286343612335,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-04-07"
+          ],
+          "missing": [
+            "2025-03-10",
+            "2025-03-11"
+          ],
+          "matchRate": 0.3333333333333333
+        },
+        "icds": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "이후병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 743,
+      "vnexsusEffectiveLen": 7743,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 13,
+      "caseName": "농협손해보험 김인화(후유장해)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case13_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case13_vnexsus.txt",
+      "combinedScore": 0.18301781737193762,
+      "labelScore": 0.25,
+      "jaccard": 0.026726057906458798,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2021-03-24",
+            "2021-07-30",
+            "2025-03-13"
+          ],
+          "missing": [
+            "2024-04-12",
+            "2024-11-04"
+          ],
+          "matchRate": 0.6
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M51.1",
+            "S33.50"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "관련치료병원",
+            "누가재활의학과의원",
+            "서울바른병원",
+            "일자사고경위병원",
+            "장해진단병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1047,
+      "vnexsusEffectiveLen": 12999,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 14,
+      "caseName": "농협손해보험 김태현",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case14_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case14_vnexsus.txt",
+      "combinedScore": 0.006569343065693431,
+      "labelScore": 0,
+      "jaccard": 0.021897810218978103,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2018-07-26",
+            "2021-01-26",
+            "2023-04-26",
+            "2023-07-26",
+            "2025-02-05",
+            "2025-02-19",
+            "2025-02-26"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D34",
+            "I20.1",
+            "I25.1",
+            "N63"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "김윤호서울외과의원",
+            "명지병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 556,
+      "vnexsusEffectiveLen": 407,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 15,
+      "caseName": "농협손해보험 석향숙(허혈성심장질환)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case15_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case15_vnexsus.txt",
+      "combinedScore": 0.0011131725417439704,
+      "labelScore": 0,
+      "jaccard": 0.0037105751391465678,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2025-02-25",
+            "2025-05-26",
+            "2025-06-07",
+            "2025-06-16",
+            "2025-06-20",
+            "2025-06-24",
+            "2025-06-27",
+            "2053-02-25"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C50.11",
+            "R59.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "더자인병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 479,
+      "vnexsusEffectiveLen": 7247,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 16,
+      "caseName": "농협손해보험 이광욱(고지의무 위반,심질환)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case16_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case16_vnexsus.txt",
+      "combinedScore": 0.007972027972027972,
+      "labelScore": 0,
+      "jaccard": 0.026573426573426574,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2024-11-25",
+            "2025-02-23",
+            "2025-08-21",
+            "2025-09-10",
+            "2025-09-11",
+            "2025-09-19",
+            "2025-09-25",
+            "2025-09-29",
+            "2025-09-30",
+            "2025-11-25"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C20"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "사고내용동보험가입후일산차병원",
+            "일산백병원",
+            "일산차병원",
+            "일자사고경위병원",
+            "직장암소견으로일산백병원",
+            "청약일이후검진목적으로일산차병원검진센터"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 873,
+      "vnexsusEffectiveLen": 5400,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 17,
+      "caseName": "박다정",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case17_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case17_vnexsus.txt",
+      "combinedScore": 0.0038585209003215433,
+      "labelScore": 0,
+      "jaccard": 0.012861736334405145,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2025-08-12",
+            "2025-08-14",
+            "2025-08-19",
+            "2030-08-12",
+            "2045-08-12"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I63.9",
+            "S33.50"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "14자택인근해븐리병원",
+            "검토결과청약전일산효자한의원",
+            "기타병원",
+            "병원",
+            "치료병원",
+            "해븐리병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1560,
+      "vnexsusEffectiveLen": 486,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 18,
+      "caseName": "박송자",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case18_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case18_vnexsus.txt",
+      "combinedScore": 0.18868078175895764,
+      "labelScore": 0.25,
+      "jaccard": 0.04560260586319218,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-03-13"
+          ],
+          "missing": [
+            "2025-02-18"
+          ],
+          "matchRate": 0.5
+        },
+        "icds": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "병원",
+            "코로나로청구성심병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 708,
+      "vnexsusEffectiveLen": 1204,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 19,
+      "caseName": "박현미",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case19_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case19_vnexsus.txt",
+      "combinedScore": 0.02621212121212121,
+      "labelScore": 0.030303030303030304,
+      "jaccard": 0.016666666666666666,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-10-17"
+          ],
+          "missing": [
+            "2020-10-17",
+            "2024-04-09",
+            "2024-06-17",
+            "2024-07-09",
+            "2024-08-29",
+            "2024-09-05",
+            "2024-09-10",
+            "2024-10-07",
+            "2025-03-31",
+            "2025-06-10",
+            "2025-06-12",
+            "2025-06-16",
+            "2025-07-09",
+            "2025-08-03",
+            "2025-08-05",
+            "2025-08-12",
+            "2025-08-17",
+            "2025-09-29",
+            "2025-10-03"
+          ],
+          "matchRate": 0.05
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C25.9",
+            "D13.6",
+            "K86.8"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "09광화문kmi에서종합검진상췌장이상소견으로고대구로병원",
+            "고대구로병원",
+            "구대구로병원",
+            "국립암센터",
+            "동국대일산병원",
+            "및고대구로병원",
+            "수술필요소견으로국립암센터",
+            "일자사고경위병원",
+            "증가되어진료의뢰하국립암센터",
+            "피보험자동보험가입일이후인국립암센터"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2741,
+      "vnexsusEffectiveLen": 404,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 20,
+      "caseName": "박혜경",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case20_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case20_vnexsus.txt",
+      "combinedScore": 0.1052863436123348,
+      "labelScore": 0.14285714285714285,
+      "jaccard": 0.01762114537444934,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-09-11"
+          ],
+          "missing": [
+            "2025-01-02"
+          ],
+          "matchRate": 0.5
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M65.91",
+            "M65.95"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "과의원",
+            "반듯한정형외과의원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 798,
+      "vnexsusEffectiveLen": 535,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 21,
+      "caseName": "서문정숙",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case21_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case21_vnexsus.txt",
+      "combinedScore": 0.006628652886671418,
+      "labelScore": 0,
+      "jaccard": 0.022095509622238062,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2023-10-16",
+            "2023-11-09",
+            "2023-11-24",
+            "2023-11-27",
+            "2023-11-29",
+            "2023-11-30",
+            "2023-12-01",
+            "2023-12-21",
+            "2024-00-24",
+            "2024-01-24",
+            "2025-09-08",
+            "2025-09-18"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "H25.91",
+            "H33.0",
+            "H33.02",
+            "H35.9",
+            "H40.0",
+            "J14"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "24교통사고로발생한좌안시력저하증상으로가천대길병원",
+            "30가천대길병원",
+            "3주전부터좌안시력저하및타병원",
+            "가천대길병원",
+            "과의원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2326,
+      "vnexsusEffectiveLen": 11989,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 22,
+      "caseName": "송금숙",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case22_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case22_vnexsus.txt",
+      "combinedScore": 0.011357702349869452,
+      "labelScore": 0,
+      "jaccard": 0.037859007832898174,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2019-08-16",
+            "2021-08-16",
+            "2024-05-06",
+            "2024-05-16",
+            "2024-08-16",
+            "2024-11-22",
+            "2025-03-04",
+            "2025-07-24",
+            "2025-07-25",
+            "2025-08-12",
+            "2025-08-18",
+            "2025-08-19",
+            "2025-08-26",
+            "2025-10-02"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M17.0",
+            "M65.87",
+            "S93.5"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "12본서부병원",
+            "365의원",
+            "금번청구병명관련청구병원",
+            "김학수정형외과의원",
+            "동보험고지대상에해당하는진료이력없는것으로확인되고치료병원",
+            "동신병원",
+            "라온정형외과신경외과의원",
+            "바로척마취통증의학과의원",
+            "바른정형외과의원",
+            "밝은내일재활의학과의원",
+            "병원에지인이근무중으로본서부병원",
+            "본서부병원",
+            "새서울정형외과의원",
+            "심화되어타병원",
+            "연세정형외과의원",
+            "외과의원",
+            "은평본정형외과의원",
+            "은평성모정형외과의원",
+            "의무위반사항가능성이있는기분좋은연세365의원및응암서울정형외과의원",
+            "일자사고경위병원",
+            "피보험자본서부병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2239,
+      "vnexsusEffectiveLen": 3877,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 23,
+      "caseName": "악사손해보험 배성은",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case23_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case23_vnexsus.txt",
+      "combinedScore": 0.13385416666666666,
+      "labelScore": 0.16666666666666666,
+      "jaccard": 0.057291666666666664,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-04-21"
+          ],
+          "missing": [
+            "2025-03-25"
+          ],
+          "matchRate": 0.5
+        },
+        "icds": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "24년부터치매안심센터",
+            "세란병원",
+            "종로구치매센터",
+            "홍제동대설병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 760,
+      "vnexsusEffectiveLen": 394,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 24,
+      "caseName": "엄장열",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case24_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case24_vnexsus.txt",
+      "combinedScore": 0.15586372847011146,
+      "labelScore": 0.20833333333333334,
+      "jaccard": 0.03343465045592705,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-04",
+            "2025-09-24",
+            "2025-09-25"
+          ],
+          "missing": [
+            "2022-08-24",
+            "2022-08-26",
+            "2022-09-02",
+            "2022-09-06",
+            "2022-10-24",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-15",
+            "2025-09-17",
+            "2025-10-24",
+            "2026-01-15"
+          ],
+          "matchRate": 0.2777777777777778
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C16.20"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "06강북삼성병원",
+            "2022년강북삼성병원",
+            "강북삼성병원",
+            "일자사고경위병원",
+            "치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1732,
+      "vnexsusEffectiveLen": 20785,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 25,
+      "caseName": "염막여",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case25_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case25_vnexsus.txt",
+      "combinedScore": 0.0012448132780082987,
+      "labelScore": 0,
+      "jaccard": 0.004149377593360996,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2020-08-28",
+            "2025-08-18",
+            "2025-09-12",
+            "2025-09-19",
+            "2025-09-30",
+            "2025-10-02",
+            "2025-10-15"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C49.6",
+            "D48.5"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "강동경희대병원",
+            "동국대일산병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1545,
+      "vnexsusEffectiveLen": 404,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 26,
+      "caseName": "윤동현",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case26_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case26_vnexsus.txt",
+      "combinedScore": 0.006538461538461538,
+      "labelScore": 0,
+      "jaccard": 0.021794871794871794,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2020-10-28",
+            "2024-03-25",
+            "2024-03-27",
+            "2025-05-06",
+            "2025-05-22",
+            "2025-10-01",
+            "2025-10-04",
+            "2025-10-28"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D25.9",
+            "N84.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "01고대안암병원",
+            "06지축라움산부인과의원",
+            "22은평성모병원",
+            "고대안암병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 778,
+      "vnexsusEffectiveLen": 3722,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 27,
+      "caseName": "윤희정",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case27_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case27_vnexsus.txt",
+      "combinedScore": 0.007559055118110235,
+      "labelScore": 0,
+      "jaccard": 0.025196850393700787,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2024-10-23",
+            "2025-09-08",
+            "2025-09-09",
+            "2025-09-10",
+            "2025-09-16",
+            "2025-09-18"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C73"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "19휴내과의원",
+            "23서울아산병원",
+            "면담시서울아산병원",
+            "서울아산병원",
+            "위해중앙대광명병원",
+            "일자사고경위병원",
+            "치료병원",
+            "타병원",
+            "피보험자동보험가입후시행한검진결과갑상선이상소견으로서울아산병원",
+            "휴내과의원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2177,
+      "vnexsusEffectiveLen": 18359,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 28,
+      "caseName": "이광욱",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case28_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case28_vnexsus.txt",
+      "combinedScore": 0.0066772655007949116,
+      "labelScore": 0,
+      "jaccard": 0.022257551669316374,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2018-10-18",
+            "2020-08-26",
+            "2020-10-18",
+            "2022-08-28",
+            "2022-10-04",
+            "2023-07-18",
+            "2023-10-18",
+            "2025-07-03",
+            "2025-08-04",
+            "2025-08-06",
+            "2025-08-12",
+            "2025-08-14"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C34.99",
+            "D13.5"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "04신촌세브란스병원",
+            "28신촌세브란스병원",
+            "은평성모병원",
+            "일자사고경위병원",
+            "폐렴치료후경과관찰중폐암소견으로은평성모병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1447,
+      "vnexsusEffectiveLen": 10439,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 29,
+      "caseName": "이금홍",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case29_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case29_vnexsus.txt",
+      "combinedScore": 0,
+      "labelScore": 0,
+      "jaccard": 0,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2020-10-15",
+            "2024-08-13",
+            "2024-09-04",
+            "2025-08-13",
+            "2025-09-26",
+            "2025-09-29",
+            "2025-10-15"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I67.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2573,
+      "vnexsusEffectiveLen": 308,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 30,
+      "caseName": "이영재",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case30_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case30_vnexsus.txt",
+      "combinedScore": 0.004883720930232558,
+      "labelScore": 0,
+      "jaccard": 0.01627906976744186,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-03-12",
+            "2025-03-23",
+            "2025-03-24",
+            "2025-04-11",
+            "2025-04-22",
+            "2025-09-09"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M511",
+            "M512"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "금번우리들병원",
+            "우리들병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 831,
+      "vnexsusEffectiveLen": 7144,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 31,
+      "caseName": "이영희",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case31_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case31_vnexsus.txt",
+      "combinedScore": 0.23805031446540878,
+      "labelScore": 0.3333333333333333,
+      "jaccard": 0.015723270440251572,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-07-18",
+            "2025-09-02"
+          ],
+          "missing": [
+            "2015-03-27"
+          ],
+          "matchRate": 0.6666666666666666
+        },
+        "icds": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "이지신경외과의원",
+            "일자사고경위병원",
+            "피보험자는좌측견관절통증을주소로이지신경외과의원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 636,
+      "vnexsusEffectiveLen": 26652,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 32,
+      "caseName": "이정희",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case32_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case32_vnexsus.txt",
+      "combinedScore": 0.04045454545454545,
+      "labelScore": 0.05,
+      "jaccard": 0.01818181818181818,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-12-24"
+          ],
+          "missing": [
+            "2014-12-24",
+            "2016-06-07",
+            "2016-06-14",
+            "2020-10-22",
+            "2025-07-22",
+            "2025-07-29",
+            "2025-09-04",
+            "2025-09-05",
+            "2025-09-17",
+            "2025-09-29"
+          ],
+          "matchRate": 0.09090909090909091
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C53.9",
+            "D27.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "22w여성병원",
+            "w여성병원",
+            "수술적치료위해진료의뢰하신촌세브란스병원",
+            "에덴병원",
+            "으로화순전남병원",
+            "일자사고경위병원",
+            "화순전남대병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1085,
+      "vnexsusEffectiveLen": 19591,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 33,
+      "caseName": "장동현",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case33_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case33_vnexsus.txt",
+      "combinedScore": 0.03911311053984576,
+      "labelScore": 0.05,
+      "jaccard": 0.013710368466152529,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-04-22"
+          ],
+          "missing": [
+            "2021-01-23",
+            "2023-01-23",
+            "2023-10-16",
+            "2023-10-23",
+            "2023-10-26",
+            "2024-01-23",
+            "2025-01-23",
+            "2025-08-27",
+            "2025-08-28",
+            "2034-01-23"
+          ],
+          "matchRate": 0.09090909090909091
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I10",
+            "K76.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "병의원",
+            "상복부통증및흑변으로서울아산병원",
+            "서울아산병원",
+            "직장주변병원",
+            "피보험자거주지주변필수탐문병원",
+            "해당병원",
+            "확인후치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2279,
+      "vnexsusEffectiveLen": 35633,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 34,
+      "caseName": "장복규",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case34_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case34_vnexsus.txt",
+      "combinedScore": 0.03811965811965811,
+      "labelScore": 0.047619047619047616,
+      "jaccard": 0.015954415954415956,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-09-05"
+          ],
+          "missing": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2020-09-02",
+            "2024-01-19",
+            "2024-01-26",
+            "2025-06-07",
+            "2025-06-12",
+            "2025-06-24",
+            "2025-07-02",
+            "2025-08-10",
+            "2025-08-11",
+            "2025-08-14"
+          ],
+          "matchRate": 0.06666666666666667
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C73",
+            "C77",
+            "C77.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "02일산병원",
+            "일산병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1593,
+      "vnexsusEffectiveLen": 26845,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 35,
+      "caseName": "장우진",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case35_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case35_vnexsus.txt",
+      "combinedScore": 0.007474518686296716,
+      "labelScore": 0,
+      "jaccard": 0.02491506228765572,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2023-08-21",
+            "2023-10-04",
+            "2023-10-10",
+            "2023-11-21",
+            "2024-02-19",
+            "2024-11-21",
+            "2025-05-01",
+            "2025-06-17",
+            "2025-06-18",
+            "2025-06-23",
+            "2025-08-18",
+            "2025-08-19",
+            "2025-08-26",
+            "2025-09-02",
+            "2043-11-21"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C61",
+            "E11.9",
+            "E78.9",
+            "I10",
+            "K21.9",
+            "N40.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "18동국대일산병원",
+            "동국대일산병원",
+            "동보험가입3개월이내연세바른가정의학과의원",
+            "병의원",
+            "에서시행한검사상psa상승소견으로진료의뢰받고동국대일산병원",
+            "직장주변병원",
+            "피보험자거주지주변필수탐문병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2445,
+      "vnexsusEffectiveLen": 5957,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 36,
+      "caseName": "장유찬",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case36_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case36_vnexsus.txt",
+      "combinedScore": 0.006739409499358151,
+      "labelScore": 0,
+      "jaccard": 0.022464698331193838,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2021-06-02",
+            "2023-01-15",
+            "2023-01-16",
+            "2023-01-17",
+            "2025-06-24"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M25.48",
+            "S83.21"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "과일치하는치료병원",
+            "근거상계백병원",
+            "누가재활의학과의원",
+            "삼성화재상계백병원",
+            "상계백병원",
+            "서울척탑병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 983,
+      "vnexsusEffectiveLen": 14459,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 37,
+      "caseName": "정진덕",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case37_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case37_vnexsus.txt",
+      "combinedScore": 0.00384,
+      "labelScore": 0,
+      "jaccard": 0.0128,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2021-06-02",
+            "2023-01-15",
+            "2023-01-16",
+            "2023-01-17",
+            "2025-06-24"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M25.48",
+            "S83.21"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "과일치하는치료병원",
+            "근거상계백병원",
+            "누가재활의학과의원",
+            "삼성화재상계백병원",
+            "상계백병원",
+            "서울척탑병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 983,
+      "vnexsusEffectiveLen": 5086,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 38,
+      "caseName": "조수남",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case38_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case38_vnexsus.txt",
+      "combinedScore": 0.004665071770334928,
+      "labelScore": 0,
+      "jaccard": 0.01555023923444976,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2010-06-01",
+            "2019-10-21",
+            "2023-09-11",
+            "2024-07-21",
+            "2024-08-30",
+            "2024-09-11",
+            "2024-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-08-03",
+            "2025-08-05",
+            "2025-08-20",
+            "2025-08-21",
+            "2025-08-24",
+            "2025-09-02",
+            "2025-10-21",
+            "2054-10-21",
+            "2058-06-01"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C54.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "11이대목동병원",
+            "21이대목동병원",
+            "병의원",
+            "이대목동병원",
+            "직장주변병원",
+            "청구내용피보험자2015년이대목동병원",
+            "피보험자거주지주변필수탐문병원",
+            "확인후치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2052,
+      "vnexsusEffectiveLen": 36814,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 39,
+      "caseName": "최순곤",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case39_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case39_vnexsus.txt",
+      "combinedScore": 0.003925707049387927,
+      "labelScore": 0,
+      "jaccard": 0.013085690164626424,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2016-09-12",
+            "2024-04-23",
+            "2024-04-25"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I21.9",
+            "Z95.5"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "금번청구병명진단적정성검토관련명지병원",
+            "명지병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 896,
+      "vnexsusEffectiveLen": 20890,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 40,
+      "caseName": "최양문",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case40_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case40_vnexsus.txt",
+      "combinedScore": 0.002893890675241158,
+      "labelScore": 0,
+      "jaccard": 0.00964630225080386,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2020-09-12",
+            "2024-01-16",
+            "2025-08-19",
+            "2025-08-29",
+            "2025-08-30",
+            "2025-09-11",
+            "2025-09-18"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I83.9"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "금번청구사항과관련하여심평원진료내역및치료병원",
+            "일자사고경위병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 833,
+      "vnexsusEffectiveLen": 1168,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 41,
+      "caseName": "함종성",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case41_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case41_vnexsus.txt",
+      "combinedScore": 0.039827890556045895,
+      "labelScore": 0.045454545454545456,
+      "jaccard": 0.02669902912621359,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-09-22"
+          ],
+          "missing": [
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-20",
+            "2021-05-24",
+            "2024-04-20",
+            "2024-04-22",
+            "2024-04-24",
+            "2025-01-03",
+            "2025-07-11",
+            "2025-09-02"
+          ],
+          "matchRate": 0.09090909090909091
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "M43.16",
+            "S32"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "02한림병원",
+            "03힘찬병원",
+            "24엘리베이터바닥에서미끄러져넘어지며요추부수상후은평성모병원",
+            "우신향병원",
+            "은평성모병원",
+            "일자사고경위병원",
+            "피보험자진술및치료병원",
+            "한림병원",
+            "후통증지속되어직접119신고후은평성모병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1660,
+      "vnexsusEffectiveLen": 6557,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 42,
+      "caseName": "현대해상 김민아(뇌 양성종양)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case42_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case42_vnexsus.txt",
+      "combinedScore": 0.5540816326530611,
+      "labelScore": 0.75,
+      "jaccard": 0.09693877551020408,
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-03-18",
+            "2025-03-19",
+            "2025-03-28"
+          ],
+          "missing": [],
+          "matchRate": 1
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D43.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [],
+          "matchRate": 1
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 685,
+      "vnexsusEffectiveLen": 584,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 43,
+      "caseName": "현대해상 양재진(편도암)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case43_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case43_vnexsus.txt",
+      "combinedScore": 0.004261363636363636,
+      "labelScore": 0,
+      "jaccard": 0.014204545454545454,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2018-12-04",
+            "2020-09-10",
+            "2021-08-16",
+            "2021-08-17",
+            "2021-08-23",
+            "2022-10-28",
+            "2022-12-15",
+            "2022-12-16",
+            "2022-12-19",
+            "2023-12-04",
+            "2024-12-17",
+            "2024-12-26",
+            "2025-01-03",
+            "2043-12-04"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "D05.1",
+            "D17.1",
+            "N20.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "17우측유방하부통증을주소로동국대일산병원",
+            "고지의무위반점검과거력조사및과거력병원",
+            "기지급병원",
+            "대일산병원",
+            "동국대일산병원",
+            "병의원",
+            "외부병원",
+            "직장주변병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2794,
+      "vnexsusEffectiveLen": 406,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 44,
+      "caseName": "현대해상 조윤아(태아보험, 엄마(이주희)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case44_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case44_vnexsus.txt",
+      "combinedScore": 0.004477611940298507,
+      "labelScore": 0,
+      "jaccard": 0.014925373134328358,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2020-09-09",
+            "2024-06-03",
+            "2024-07-31",
+            "2024-09-03",
+            "2025-08-25",
+            "2025-08-26",
+            "2025-08-29",
+            "2054-09-03"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "I60",
+            "I63.9",
+            "I69"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "25우측편마비증상을주소로119통해신촌세브란스병원",
+            "김안과병원",
+            "및치료병원",
+            "병의원",
+            "신촌세브란스병원",
+            "직장주변병원",
+            "치료병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 1882,
+      "vnexsusEffectiveLen": 525,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 45,
+      "caseName": "홍영규",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case45_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case45_vnexsus.txt",
+      "combinedScore": 0.004249291784702549,
+      "labelScore": 0,
+      "jaccard": 0.014164305949008499,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2022-02-28",
+            "2022-03-02",
+            "2024-04-21",
+            "2024-07-30",
+            "2025-04-11",
+            "2025-04-21",
+            "2025-09-02",
+            "2025-09-04"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "E78.5",
+            "I10",
+            "I20.0"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "02흉통을주소로119통해동국대일산병원",
+            "으로119통해동국대일산병원",
+            "일자사고경위병원",
+            "청구병원및기고지병원",
+            "피보험자청구병원및기고지병원에한하여의무기록발급동의서제한위임하여관련병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2094,
+      "vnexsusEffectiveLen": 402,
+      "inputOk": true
+    },
+    {
+      "caseIndex": 46,
+      "caseName": "axa손해보험 김명희(뇌혈관질환)",
+      "status": "EVALUATED",
+      "reportPath": "C:\\VNEXSUS_12-07\\src\\rag\\case_sample\\Case46_report.txt",
+      "vnexsusPath": "C:\\VNEXSUS_12-07\\reports\\VNEXSUS_Report\\2025-12-25T12-23-50-148Z\\Case46_vnexsus.txt",
+      "combinedScore": 0.004699738903394255,
+      "labelScore": 0,
+      "jaccard": 0.015665796344647518,
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missing": [
+            "2018-08-10",
+            "2021-08-10",
+            "2022-09-27",
+            "2022-10-06",
+            "2023-08-10",
+            "2025-05-20",
+            "2025-07-31",
+            "2025-08-01",
+            "2025-09-07",
+            "2025-09-08",
+            "2025-09-11",
+            "2025-09-16"
+          ],
+          "matchRate": 0
+        },
+        "icds": {
+          "matched": [],
+          "missing": [
+            "C67.9",
+            "N40.8",
+            "R31.1"
+          ],
+          "matchRate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missing": [
+            "06이대서울병원",
+            "07건강검진간혈뇨소견으로부민병원",
+            "31부민병원",
+            "건강검진간소변검사상이상소견으로부민병원경유고대구로병원",
+            "고대구로병원",
+            "및기타병원",
+            "이대서울병원",
+            "일자사고경위병원",
+            "진료의뢰하고대구로병원",
+            "피보험자는개인정보와관련하여상당히민감한반응으로청구병원"
+          ],
+          "matchRate": 0
+        }
+      },
+      "hasMissing": true,
+      "reportEffectiveLen": 2297,
+      "vnexsusEffectiveLen": 404,
+      "inputOk": true
+    }
+  ]
+}
