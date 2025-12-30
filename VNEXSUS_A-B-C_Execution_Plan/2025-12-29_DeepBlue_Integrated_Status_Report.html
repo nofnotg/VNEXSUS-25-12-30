@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2025-12-29 종합 개발상황·남은공정 리포트 · VNEXSUS</title>
+  <style>
+    :root {
+      --bg:#0a0f1d; --panel:#0b1220; --card:#0d1628; --text:#e5e7eb; --muted:#94a3b8; --accent:#60a5fa;
+      --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; --border:#1f2937; --blue:#1e3a8a;
+    }
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",Arial,sans-serif;background:radial-gradient(1400px 900px at 6% -10%, #081028 0%, #0b1b3d 40%, #0a0f1d 100%);color:var(--text)}
+    .container{max-width:1280px;margin:36px auto;padding:0 20px}
+    .header{position:sticky;top:0;z-index:10;background:linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));border:1px solid var(--border);border-radius:12px;padding:12px;backdrop-filter:blur(4px)}
+    .row{display:grid;grid-template-columns:1fr;gap:16px}
+    @media (min-width:1024px){.row{grid-template-columns:1fr 1fr}}
+    h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
+    h2{margin:0 0 10px;font-size:18px;color:var(--accent)}
+    h3{margin:12px 0 8px;font-size:16px;color:#cbd5e1}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)}
+    .kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+    .label{font-size:12px;color:var(--muted)}
+    .value{margin-top:6px;font-size:18px;font-weight:700}
+    .value.ok{color:var(--ok)} .value.warn{color:var(--warn)} .value.bad{color:var(--bad)}
+    .progress{width:100%;height:10px;background:rgba(148,163,184,0.18);border-radius:6px;overflow:hidden;margin:8px 0}
+    .fill{height:100%;background:linear-gradient(90deg,#60a5fa,#22c55e);transition:width .3s ease}
+    .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--border)}
+    .status-in_progress{background:rgba(96,165,250,0.15);color:#93c5fd}
+    .status-pending{background:rgba(245,158,11,0.15);color:#fbbf24}
+    .status-blocked{background:rgba(239,68,68,0.15);color:#fca5a5}
+    .status-not_applied{background:rgba(148,163,184,0.15);color:#cbd5e1}
+    .status-completed{background:rgba(34,197,94,0.15);color:#86efac}
+    .group-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--border);border-radius:14px;padding:16px}
+    .task{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:rgba(11,18,32,0.55)}
+    .task+.task{margin-top:10px}
+    .task-title{font-weight:700}
+    .reason{font-size:12px;color:var(--muted)}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
+    th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left;font-size:13px;color:var(--text);vertical-align:top}
+    th{background:#0f1a30}
+    .num{text-align:right}
+    .footer{margin-top:24px;color:var(--muted);font-size:12px;text-align:right}
+    .mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+    .link{color:#93c5fd;text-decoration:none}
+    .link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="header">
+      <h1>종합 개발상황·남은공정 리포트</h1>
+      <div class="meta">
+        <span id="generatedAt"></span>
+        <span>문서 모드: 오프라인</span>
+      </div>
+      <div class="mini">
+        <span id="miniOverall" class="badge status-in_progress">진행 0% · 잔여 100%</span>
+        <span id="miniCounts" class="badge">완료 0 · 진행 0 · 대기 0</span>
+      </div>
+      <div class="mini">
+        <a class="link" href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/25-12-28_Progress_Rate_Report.html">25-12-28 공정율 리포트</a>
+        <a class="link" href="file:///c:/VNEXSUS_12-07/docs/PRD_OCR_Coordinate_MedicalEvent_Extraction_and_NineItemWeight_Report_2025-12-27.md">PRD(2025-12-27)</a>
+        <a class="link" href="file:///c:/VNEXSUS_12-07/docs/TASKS_OCR_Coordinate_MedicalEvent_Extraction_and_NineItemWeight_Report_2025-12-27.md">Tasks(2025-12-27)</a>
+        <a class="link" href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_Execution_Roadmap.md">로드맵</a>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <h2>진행·잔여 공정율</h2>
+      <div class="progress" aria-label="진행 공정율"><div id="executedFill" class="fill" style="width:0%"></div></div>
+      <div class="progress" aria-label="잔여 공정율"><div id="remainingFill" class="fill" style="width:100%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div>
+      <div class="mini"><span id="executedPct" class="badge status-in_progress">진행 0%</span><span id="remainingPct" class="badge">잔여 100%</span></div>
+      <div class="kpi">
+        <div class="card"><div class="label">완료</div><div id="kpiCompleted" class="value ok">0</div></div>
+        <div class="card"><div class="label">진행 중</div><div id="kpiInProgress" class="value">0</div></div>
+        <div class="card"><div class="label">대기</div><div id="kpiPending" class="value warn">0</div></div>
+        <div class="card"><div class="label">좌표 케이스(총계)</div><div id="kpiCoordTotals" class="value">0</div></div>
+        <div class="card"><div class="label">우선순위 가중 평균</div><div id="kpiWeighted" class="value">0%</div></div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <h2>현재 개발상황 요약</h2>
+      <div class="row">
+        <div class="group-card">
+          <h3>완료</h3>
+          <div class="task"><div><div class="task-title">Preprocessor 신뢰도 점수 도입</div><div class="reason">품질·메타 출력</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">HospitalTemplateCache 테스트 가드</div><div class="reason">비동기 로깅 문제 방지</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">CoreEngineService 전처리 통합</div><div class="reason">필터 기반 정규화</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">NineItemReportGenerator 하이브리드 처리</div><div class="reason">동적 검증·통계</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">EnhancedDateBinder NaNGuard</div><div class="reason">날짜 유효성 강화</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">OfflineCoordAnalyzer 좌표·테이블·라벨</div><div class="reason">헤더/푸터 구획</div></div><div><span class="badge status-completed">completed</span></div></div>
+          <div class="task"><div><div class="task-title">개발상태 리포트·차트 구성</div><div class="reason">오프라인 HTML 출력</div></div><div><span class="badge status-completed">completed</span></div></div>
+        </div>
+        <div class="group-card">
+          <h3>진행·대기</h3>
+          <div class="task"><div><div class="task-title">좌표 DateBinder 통합</div><div class="reason">앵커·매칭 튜닝</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">헤더/푸터·테이블 제외</div><div class="reason">비내용 영역 오탐 제거</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">결과 형식 표준화 100%</div><div class="reason">CSV·HTML 동기화</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">설명가능성 메타데이터</div><div class="reason">출처·룰·질문ID</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">o1-mini API 준수</div><div class="reason">메시지 포맷·토큰</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">9항목 가중치 계산·메타 출력</div><div class="reason">DynamicValidation 연계</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">“전체” 행 파서 보강</div><div class="reason">진행률 요약 정확화</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">Case4 리포트 생성·적재</div><div class="reason">E2E 포함</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">zod 계약 스키마 정의·검증</div><div class="reason">유효성 전역 가드</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">좌표/테이블 처리 성능 튜닝</div><div class="reason">윈도우·Tol 조정</div></div><div><span class="badge status-pending">pending</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>좌표 기반 후처리·보고서 생성 핵심 로직</h2>
+      <div class="row">
+        <div class="group-card">
+          <h3>파이프라인</h3>
+          <div class="task"><div><div class="task-title">OfflineCoordAnalyzer → EnhancedDateBinder → DateOrganizer → NineItemReportGenerator</div><div class="reason">좌표 컨텍스트 주입·가중치 산출</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">sourceSpan 첨부·앵커 융합</div><div class="reason">날짜/병원/진단/ICD</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">템플릿 엔진 규칙 우선</div><div class="reason">날짜 표준화·중복 억제</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+        </div>
+        <div class="group-card">
+          <h3>수용기준(요약)</h3>
+          <div class="task"><div><div class="task-title">날짜-이벤트 바인딩 정확도 ≥ 90%</div><div class="reason">좌표·테이블 컨텍스트</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">가입일 3개월/5년 필터 · NaN 0건</div><div class="reason">전역 유효성 가드</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">9항목 가중치·근거 신호 메타</div><div class="reason">0–1 스코어</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">JSON+HTML 포맷·스키마 버전 고정</div><div class="reason">표준화·재현성</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>고도화 문서 흡수 계획</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>대상 문서</th><th>흡수 방식</th><th>현 상태</th><th>링크</th></tr></thead>
+          <tbody>
+            <tr><td>PRD(2025-12-27)</td><td>좌표 날짜분류·가중치 요구 반영</td><td>진행</td><td><a class="link" href="file:///c:/VNEXSUS_12-07/docs/PRD_OCR_Coordinate_MedicalEvent_Extraction_and_NineItemWeight_Report_2025-12-27.md">열기</a></td></tr>
+            <tr><td>Tasks(2025-12-27)</td><td>즉시/단기/중기 항목 정렬</td><td>진행</td><td><a class="link" href="file:///c:/VNEXSUS_12-07/docs/TASKS_OCR_Coordinate_MedicalEvent_Extraction_and_NineItemWeight_Report_2025-12-27.md">열기</a></td></tr>
+            <tr><td>25-12-28 공정율 리포트</td><td>KPI·좌표 케이스 통계 반영</td><td>진행</td><td><a class="link" href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/25-12-28_Progress_Rate_Report.html">열기</a></td></tr>
+            <tr><td>로드맵</td><td>Phase A→B→C 목표 매핑</td><td>진행</td><td><a class="link" href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_Execution_Roadmap.md">열기</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footer">오프라인 리포트 · 로컬 참조 링크 포함 · DeepBlue 스타일</div>
+  </div>
+
+  <script>
+    const now = new Date();
+    const z = n => String(n).padStart(2,'0');
+    document.getElementById('generatedAt').textContent = `${now.getFullYear()}-${z(now.getMonth()+1)}-${z(now.getDate())} ${z(now.getHours())}:${z(now.getMinutes())}`;
+
+    const data = {
+      completed: 7,
+      inProgress: 4,
+      pending: 8,
+      executedPct: 46.7,
+      coordTotals: 31 + 32,
+      weightedAvg: 46.7
+    };
+
+    document.getElementById('miniOverall').textContent = `진행 ${data.executedPct}% · 잔여 ${Math.round((100 - data.executedPct)*10)/10}%`;
+    document.getElementById('miniCounts').textContent = `완료 ${data.completed} · 진행 ${data.inProgress} · 대기 ${data.pending}`;
+    document.getElementById('executedFill').style.width = `${data.executedPct}%`;
+    document.getElementById('remainingFill').style.width = `${Math.round((100 - data.executedPct)*10)/10}%`;
+    document.getElementById('executedPct').textContent = `진행 ${data.executedPct}%`;
+    document.getElementById('remainingPct').textContent = `잔여 ${Math.round((100 - data.executedPct)*10)/10}%`;
+    document.getElementById('kpiCompleted').textContent = String(data.completed);
+    document.getElementById('kpiInProgress').textContent = String(data.inProgress);
+    document.getElementById('kpiPending').textContent = String(data.pending);
+    document.getElementById('kpiCoordTotals').textContent = String(data.coordTotals);
+    document.getElementById('kpiWeighted').textContent = `${data.weightedAvg}%`;
+  </script>
+</body>
+</html>

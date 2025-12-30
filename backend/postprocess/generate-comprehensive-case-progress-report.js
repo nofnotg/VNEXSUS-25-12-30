@@ -6,6 +6,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { execSync } from "node:child_process";
 
 // Helper: convert absolute path to file URL for dynamic imports
 const pathToFileURL = (p) => new URL(`file://${path.resolve(p)}`);
@@ -346,6 +347,34 @@ function computePlanProgress() {
     statusMap[taskKey] = { status, foundCount, total: files.length, files };
   }
 
+  // Additional explicit check: Hospital normalization SSOT integration
+  const hospFile = path.resolve("backend/postprocess/hospitalTemplateCache.js");
+  const utilsFile = path.resolve("src/shared/utils/medicalText.js");
+  const testFile = path.resolve("tests/unit/hospitalTemplateCache.normalization.test.js");
+  const fileContains = (p, re) => {
+    try {
+      if (!fs.existsSync(p)) return false;
+      const s = fs.readFileSync(p, "utf-8");
+      return re.test(s);
+    } catch {
+      return false;
+    }
+  };
+  const ssotChecks = [
+    fs.existsSync(hospFile),
+    fs.existsSync(utilsFile),
+    fs.existsSync(testFile),
+    fileContains(hospFile, /from\s+['"].*src\/shared\/utils\/medicalText\.js['"]/),
+    fileContains(hospFile, /normalizeHospitalName\s+as\s+sharedNormalizeHospitalName|sharedNormalizeHospitalName\(/),
+  ];
+  const ssotFound = ssotChecks.filter(Boolean).length;
+  statusMap.hospitalNormalizationSSOT = {
+    status: ssotFound >= 4 ? "completed" : ssotFound >= 2 ? "in_progress" : "not_started",
+    foundCount: ssotFound,
+    total: ssotChecks.length,
+    files: ["backend/postprocess/hospitalTemplateCache.js", "src/shared/utils/medicalText.js", "tests/unit/hospitalTemplateCache.normalization.test.js"],
+  };
+
   const statuses = Object.values(statusMap);
   const total = statuses.length;
   const completed = statuses.filter((s) => s.status === "completed").length;
@@ -354,6 +383,17 @@ function computePlanProgress() {
   const completionRate = ((completed + 0.5 * inProgress) / total) * 100;
 
   return { statusMap, total, completed, inProgress, notStarted, completionRate };
+}
+
+function buildProgressLog(planProgress, diagnosisSamples) {
+  const now = new Date().toISOString();
+  const items = [];
+  const ssot = planProgress.statusMap.hospitalNormalizationSSOT;
+  const ssotLine = `[${now}] 병원명 정규화 SSOT 통합: ${ssot?.status ?? 'not_available'} (${ssot?.foundCount ?? 0}/${ssot?.total ?? 0})`;
+  items.push(ssotLine);
+  items.push(`[${now}] 공정율 리포트 스키마 업데이트: 병원 SSOT 항목 반영`);
+  items.push(`[${now}] 진단 샘플 수집: ${Array.isArray(diagnosisSamples) ? diagnosisSamples.length : 0}건`);
+  return items;
 }
 
 /** Try to parse external comprehensive progress HTML report to enrich summary */
@@ -418,6 +458,7 @@ function renderHTML({ title, overall, caseSummaries, caseIssuesAgg, planProgress
         contextAwarenessImprovement: "컨텍스트 인식 개선",
         expertValidationSystem: "전문가 검증 시스템",
         ensembleModels: "다중 모델 앙상블 적용",
+        hospitalNormalizationSSOT: "병원명 정규화 SSOT 통합",
       };
       const statusClass = info.status === "completed" ? "ok" : info.status === "in_progress" ? "warn" : "bad";
       return `<tr>
@@ -448,6 +489,14 @@ function renderHTML({ title, overall, caseSummaries, caseIssuesAgg, planProgress
     <tr><td>Nested Parentheses</td><td>${issues.nestedParentheses}</td></tr>
     <tr><td>Normalization Difference</td><td>${issues.normalizationDiff}</td></tr>
     <tr><td>ICD Format Issue</td><td>${issues.icdFormatIssue}</td></tr>
+  `;
+
+  const progressLog = buildProgressLog(planProgress, diagnosisSamples);
+  const progressLogHtml = `
+    <div class="section">
+      <h2>작업 로그</h2>
+      <ul>${progressLog.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>
   `;
 
   const planSummary = `
@@ -535,6 +584,7 @@ function renderHTML({ title, overall, caseSummaries, caseIssuesAgg, planProgress
       </div>
 
       ${planSummary}
+      ${progressLogHtml}
 
       <div class="section">
         <h2>개선안 제안</h2>
@@ -626,7 +676,7 @@ async function main() {
   const externalSummary = parseExternalProgressReport();
 
   const html = renderHTML({
-    title: "종합 케이스 진행/개선 리포트",
+    title: "VNEXSUS 앱 개발상태 · 개선목록 · 공정율 리포트",
     overall: { totalCases: cases.length, successCases, avgMs, sourceCounts },
     caseSummaries,
     caseIssuesAgg: aggIssues,
@@ -654,6 +704,18 @@ async function main() {
     logger.info({ event: "evidence_copied", count: normalizedPathsToCopy.length });
   } catch (err) {
     logger.warn({ event: "evidence_copy_failed", message: String(err) });
+  }
+  try {
+    execSync("node backend/tools/offlineCoordAnalyzer.js", { stdio: "pipe" });
+    logger.info({ event: "offline_coord_analysis_updated" });
+  } catch (err) {
+    logger.warn({ event: "offline_coord_analysis_failed", message: String(err) });
+  }
+  try {
+    execSync("node scripts/generate_app_dev_status_report.js", { stdio: "pipe" });
+    logger.info({ event: "app_progress_report_updated" });
+  } catch (err) {
+    logger.warn({ event: "app_progress_report_update_failed", message: String(err) });
   }
   return outPathReports;
 }

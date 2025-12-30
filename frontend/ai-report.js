@@ -447,8 +447,8 @@
       }
 
       const hospital = event.hospital || '';
-      const diagnosis = Array.isArray(event.diagnosis) ? event.diagnosis.join(', ') : (event.diagnosis || '');
-      const treatment = Array.isArray(event.treatment) ? event.treatment.join(', ') : (event.treatment || '');
+      const diagnosis = Array.isArray(event.diagnosis) ? Array.from(new Set(event.diagnosis.map(String))).join(', ') : (event.diagnosis || '');
+      const treatment = Array.isArray(event.treatment) ? Array.from(new Set(event.treatment.map(String))).join(', ') : (event.treatment || '');
       const displayDate = String(event.date).replace(/-/g, '.');
 
       html += `

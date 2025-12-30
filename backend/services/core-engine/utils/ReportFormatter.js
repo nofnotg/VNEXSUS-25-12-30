@@ -14,7 +14,7 @@ export class ReportFormatter {
             timeline: "진료 이력 타임라인",
             summary: "진료 내역 요약",
             claimEvents: "청구 관련 진료 내역",
-            patientInfo: "환자 기본정보",
+            patientInfo: "피보험자 기본정보",
             insuranceInfo: "보험 조건",
             medicalHistory: "의료 경과 기록"
         };
@@ -34,7 +34,7 @@ export class ReportFormatter {
      * @returns {string} 포맷팅된 항목
      */
     formatField(label, value) {
-        return `●${label}: ${value}`;
+        return `${label}: ${value}`;
     }
 
     /**

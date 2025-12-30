@@ -1,30 +1,48 @@
 
 import { jest } from '@jest/globals';
-import * as ocrController from '../../controllers/ocrController.js';
-import { logService } from '../../utils/logger.js';
-import pdfProcessor from '../../utils/pdfProcessor.js';
-import CoreEngineService from '../../services/coreEngineService.js';
 
-// Mock dependencies
-jest.mock('../../utils/logger.js', () => ({
+let ocrController;
+let pdfProcessor;
+let CoreEngineService;
+let mockAnalyze;
+
+// Set up ESM-friendly mocks before importing the module under test
+await jest.unstable_mockModule('../../utils/logger.js', () => ({
     logService: {
         info: jest.fn(),
         error: jest.fn(),
         warn: jest.fn(),
-    },
+    }
 }));
 
-jest.mock('../../utils/pdfProcessor.js', () => ({
-    processPdf: jest.fn(),
+await jest.unstable_mockModule('../../utils/pdfProcessor.js', () => {
+    const processPdf = jest.fn();
+    return {
+        default: { processPdf },
+        processPdf
+    };
+});
+
+// CoreEngineService default export is a class; mock to allow constructor usage
+mockAnalyze = jest.fn();
+await jest.unstable_mockModule('../../services/coreEngineService.js', () => ({
+    default: jest.fn().mockImplementation(() => ({
+        analyze: mockAnalyze
+    }))
 }));
 
-jest.mock('../../services/coreEngineService.js');
-jest.mock('../../services/visionService.js', () => ({
+await jest.unstable_mockModule('../../services/visionService.js', () => ({
     extractTextFromImage: jest.fn(),
-    getServiceStatus: jest.fn().mockResolvedValue({ available: true }),
+    getServiceStatus: jest.fn().mockResolvedValue({ available: true })
 }));
-jest.mock('../../services/ocrMerger.js', () => ({}));
-jest.mock('../../utils/fileHelper.js', () => ({}));
+
+await jest.unstable_mockModule('../../services/ocrMerger.js', () => ({}));
+await jest.unstable_mockModule('../../utils/fileHelper.js', () => ({}));
+
+// Dynamically import the module under test and mocked deps
+({ default: pdfProcessor } = await import('../../utils/pdfProcessor.js'));
+({ default: CoreEngineService } = await import('../../services/coreEngineService.js'));
+ocrController = await import('../../controllers/ocrController.js');
 
 describe('ocrController - getInvestigatorView', () => {
     let req, res;
@@ -140,10 +158,48 @@ describe('ocrController - getInvestigatorView', () => {
         expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ code: 'JOB_NOT_FOUND' }));
     });
 
-    it('should return 202 if job is still processing', async () => {
-        // Manually inject a processing job if possible, or simulate one.
-        // Since we can't inject, we'll skip this or rely on the fact that we can't easily pause processing in this setup.
-        // However, we can mock pdfProcessor to hang, but that blocks the event loop potentially.
-        // Let's skip this specific case for now as it requires more complex async control.
+    it('should return 202 with progress during processing', async () => {
+        const file = {
+            originalname: 'processing.pdf',
+            mimetype: 'application/pdf',
+            size: 1024,
+            buffer: Buffer.from('x'),
+        };
+        req.files = [file];
+
+        pdfProcessor.processPdf.mockImplementation(
+            () =>
+                new Promise((resolve) =>
+                    setTimeout(
+                        () =>
+                            resolve({
+                                success: true,
+                                text: 'text',
+                                pageCount: 1,
+                                steps: ['text_extraction'],
+                                textSource: 'pdf_parse',
+                            }),
+                        300
+                    )
+                )
+        );
+
+        await ocrController.uploadPdfs(req, res);
+        const jobId = res.json.mock.calls[0][0].jobId;
+
+        const viewReq = { params: { jobId } };
+        const viewRes = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn(),
+        };
+
+        await ocrController.getInvestigatorView(viewReq, viewRes);
+
+        expect(viewRes.status).toHaveBeenCalledWith(202);
+        const payload = viewRes.json.mock.calls[0][0];
+        expect(payload.status).toBe('processing');
+        expect(typeof payload.progress).toBe('string');
+        expect(payload.progress.startsWith('0/')).toBe(true);
+        expect(typeof payload.elapsedTime).toBe('string');
     });
 });

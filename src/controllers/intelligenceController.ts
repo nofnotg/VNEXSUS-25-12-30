@@ -13,6 +13,7 @@ import { AdaptiveProcessor, ProcessingConfig, ProcessingContext } from '../intel
 import reportController from './reportController';
 import path from 'path';
 import fs from 'fs/promises';
+import { logger } from '../shared/logging/logger';
 
 export interface IntelligenceRequest {
   rawText: string;
@@ -141,7 +142,11 @@ class IntelligenceController {
     const jobId = request.jobId || this.generateJobId();
     
     try {
-      console.log(`🧠 Intelligence Controller: 문서 처리 시작 (jobId=${jobId})`);
+      logger.info({
+        event: 'intelligence_document_process_start',
+        message: 'Document processing started',
+        metadata: { jobId }
+      });
       
       // 입력 검증
       this.validateRequest(request);
@@ -168,7 +173,12 @@ class IntelligenceController {
       
       const totalTime = Date.now() - startTime;
       
-      console.log(`✅ Intelligence Controller: 처리 완료 (${totalTime}ms, strategy=${bridgeResult.source})`);
+      logger.info({
+        event: 'intelligence_document_process_complete',
+        message: 'Document processing completed',
+        processingTime: totalTime,
+        metadata: { jobId, strategy: bridgeResult.source }
+      });
       
       return {
         success: true,
@@ -190,7 +200,16 @@ class IntelligenceController {
       };
       
     } catch (error: any) {
-      console.error(`❌ Intelligence Controller: 처리 실패 (jobId=${jobId})`, error);
+      logger.error({
+        event: 'intelligence_document_process_error',
+        message: 'Document processing failed',
+        metadata: { jobId },
+        error: {
+          name: error?.name || 'Error',
+          message: error?.message || String(error),
+          stack: error?.stack
+        }
+      });
       
       return {
         success: false,
@@ -289,7 +308,11 @@ class IntelligenceController {
       res.json(response);
       
     } catch (error: any) {
-      console.error('Document handler error:', error);
+      logger.error({
+        event: 'intelligence_document_handler_error',
+        message: 'Document handler error',
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       res.status(500).json({
         success: false,
         error: error.message || '문서 처리 중 오류가 발생했습니다.'
@@ -307,7 +330,11 @@ class IntelligenceController {
       res.json(status);
       
     } catch (error: any) {
-      console.error('Status handler error:', error);
+      logger.error({
+        event: 'intelligence_status_handler_error',
+        message: 'Status handler error',
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       res.status(500).json({
         success: false,
         error: error.message || '상태 조회 중 오류가 발생했습니다.'
@@ -327,7 +354,11 @@ class IntelligenceController {
       });
       
     } catch (error: any) {
-      console.error('Stats handler error:', error);
+      logger.error({
+        event: 'intelligence_stats_handler_error',
+        message: 'Stats handler error',
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       res.status(500).json({
         success: false,
         error: error.message || '통계 조회 중 오류가 발생했습니다.'
@@ -349,7 +380,11 @@ class IntelligenceController {
       });
       
     } catch (error: any) {
-      console.error('Config handler error:', error);
+      logger.error({
+        event: 'intelligence_config_handler_error',
+        message: 'Config handler error',
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       res.status(500).json({
         success: false,
         error: error.message || '설정 업데이트 중 오류가 발생했습니다.'
@@ -486,7 +521,15 @@ class IntelligenceController {
         });
         standardReport = reportResult;
       } catch (error) {
-        console.warn('Legacy report generation failed:', error);
+        logger.warn({
+          event: 'intelligence_legacy_report_generate_warn',
+          message: 'Legacy report generation failed',
+          error: {
+            name: (error as any)?.name || 'Error',
+            message: (error as any)?.message || String(error),
+            stack: (error as any)?.stack
+          }
+        });
       }
     }
     
@@ -539,10 +582,23 @@ class IntelligenceController {
         );
       }
       
-      console.log(`📁 Output files generated: ${outputDir}`);
+      logger.info({
+        event: 'intelligence_output_files_generated',
+        message: 'Output files generated',
+        metadata: { jobId, outputDir }
+      });
       
     } catch (error) {
-      console.warn('Failed to generate output files:', error);
+      logger.warn({
+        event: 'intelligence_output_files_generate_warn',
+        message: 'Failed to generate output files',
+        metadata: { jobId, outputDir },
+        error: {
+          name: (error as any)?.name || 'Error',
+          message: (error as any)?.message || String(error),
+          stack: (error as any)?.stack
+        }
+      });
     }
   }
 

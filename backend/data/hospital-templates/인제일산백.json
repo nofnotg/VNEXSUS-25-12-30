@@ -1,0 +1,39 @@
+{
+  "hospitalId": "인제일산백",
+  "hospitalName": "인제일산백",
+  "patterns": [
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이 : M",
+      "position": 3516,
+      "length": 9,
+      "hash": "ef39eed9da01d4b8f5f4d7482811fc9e",
+      "frequency": 8,
+      "firstSeen": "2025-12-21T12:56:39.330Z"
+    },
+    {
+      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
+      "match": "의무기록사본 증명서\n행\nUlo\n.000\n자\n번\n0조\n번\n록\n급\n발\n매\n2025-31350\n: 곽동인\n: 02455739\n도\n: 보험회사(방문신청)\n4\n매\n※ 첨부한 사본은 전자서명이 완료된 의무기록 원본과 틀림이\n없음",
+      "position": 116,
+      "length": 121,
+      "hash": "c42a40d980ccc6552a943b96053b6433",
+      "frequency": 2,
+      "firstSeen": "2025-12-21T12:56:39.330Z"
+    },
+    {
+      "pattern": "(?:대학교|대학|의과대학).*?병원.*?(?:병원장|원장)",
+      "match": "대학교일산백병원\nINJE UNIVERSITY ILSAN PAIK HOSPITAL\n의무기록사본 증명서\n행\nUlo\n.000\n자\n번\n0조\n번\n록\n급\n발\n매\n2025-31350\n: 곽동인\n: 02455739\n도\n: 보험회사(방문신청)\n4\n매\n※ 첨부한 사본은 전자서명이 완료된 의무기록 원본과 틀림이\n없음을 증명합니다.\n※담당자 날인이 없는 것은 사본으로 인정되지 않습니다.\n2025 년 10 월 21 일\n사본 담당자\n김수연\n인제대학교 일산백병원장",
+      "position": 71,
+      "length": 246,
+      "hash": "9ab420b775128d9a0ed994d270fe8f28",
+      "frequency": 2,
+      "firstSeen": "2025-12-21T12:56:39.330Z"
+    }
+  ],
+  "statistics": {
+    "documentsProcessed": 2,
+    "averageCleaningRate": 8.938751544174838,
+    "lastUpdated": "2025-12-21T13:33:00.795Z"
+  },
+  "createdAt": "2025-12-21T12:56:39.330Z"
+}

@@ -15,6 +15,13 @@ import postProcessorDefault from '../postprocess/index.js';
 const ROOT = process.cwd();
 const DEFAULT_RAW_DIR = path.join(ROOT, 'src', 'rag', 'case_sample_raw');
 const DEFAULT_OUT_DIR = path.join(ROOT, 'src', 'rag', 'case_sample');
+const OCR_OVERRIDE_DIR = (() => {
+  const raw = process.env.OCR_OVERRIDE_DIR;
+  if (typeof raw === 'string' && raw.length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return null;
+})();
 
 function ensureDir(dirPath) {
   if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true });
@@ -80,6 +87,10 @@ async function buildTextReport(mergedText, caseIndex, postProcessorImpl, options
   return final.filePath;
 }
 
+function sanitizeName(s) {
+  return String(s || '').replace(/[^\w\-가-힣]/g, '_');
+}
+
 /**
  * Generate VNEXSUS case report from raw case directory.
  * Designed to be safely reused by CLI and API without altering existing pipeline behavior.
@@ -104,14 +115,50 @@ export async function generateFromRawCase(caseDir, caseIndex, options = {}) {
   const postProcessorImpl = options?.overrides?.postProcessor || postProcessorDefault;
 
   ensureDir(outDir);
-  const pdfs = collectPdfFiles(caseDir, excludePatterns);
-  if (pdfs.length === 0) {
-    logService.warn(`[caseReportService] ${path.basename(caseDir)} no pdf files after filter`);
-    return { success: false };
+  const caseName = path.basename(caseDir);
+
+  let mergedText = '';
+  let blocksOut = null;
+
+  const overrideRoot = OCR_OVERRIDE_DIR && fs.existsSync(OCR_OVERRIDE_DIR) ? OCR_OVERRIDE_DIR : null;
+  const candidateDirs = overrideRoot ? [path.join(overrideRoot, `Case${caseIndex}`), path.join(overrideRoot, sanitizeName(caseName)), overrideRoot] : [];
+  const overrideCaseDir = candidateDirs.find(p => p && fs.existsSync(p)) || overrideRoot;
+
+  if (overrideCaseDir) {
+    const reportJson = fs.existsSync(path.join(overrideCaseDir, `Case${caseIndex}_report.json`))
+      ? path.join(overrideCaseDir, `Case${caseIndex}_report.json`)
+      : path.join(overrideCaseDir, `${sanitizeName(caseName)}_report.json`);
+    const reportTxt = fs.existsSync(path.join(overrideCaseDir, `Case${caseIndex}_report.txt`))
+      ? path.join(overrideCaseDir, `Case${caseIndex}_report.txt`)
+      : path.join(overrideCaseDir, `${sanitizeName(caseName)}_report.txt`);
+    if (fs.existsSync(reportJson) && fs.existsSync(reportTxt)) {
+      try {
+        const inject = JSON.parse(fs.readFileSync(reportJson, 'utf-8'));
+        mergedText = fs.readFileSync(reportTxt, 'utf-8');
+        const blocks = Array.isArray(inject?.blocks) ? inject.blocks : [];
+        if (blocks.length > 0) {
+          blocksOut = path.join(outDir, `Case${caseIndex}_blocks.json`);
+          fs.writeFileSync(blocksOut, JSON.stringify({ caseIndex, blocks }, null, 2), 'utf8');
+        } else {
+          blocksOut = null;
+        }
+        logService.info(`[caseReportService] using offline OCR artifacts for Case${caseIndex}`, { dir: overrideCaseDir, hasBlocks: blocks.length > 0 });
+      } catch (e) {
+        logService.warn(`[caseReportService] offline OCR artifacts load failed for Case${caseIndex}: ${e.message}`);
+      }
+    }
   }
 
-  const texts = await ocrAllPdfs(pdfs, useVision, pdfProcessorImpl);
-  const mergedText = texts.join('\n\n');
+  if (!mergedText) {
+    const pdfs = collectPdfFiles(caseDir, excludePatterns);
+    if (pdfs.length === 0) {
+      logService.warn(`[caseReportService] ${path.basename(caseDir)} no pdf files after filter`);
+      return { success: false };
+    }
+    const texts = await ocrAllPdfs(pdfs, useVision, pdfProcessorImpl);
+    mergedText = texts.join('\n\n');
+  }
+
   if (mergedText.length === 0) {
     logService.warn(`[caseReportService] ${path.basename(caseDir)} merged text empty`);
     return { success: false };
@@ -150,4 +197,3 @@ export async function generateFromRawCase(caseDir, caseIndex, options = {}) {
 export default {
   generateFromRawCase
 };
-

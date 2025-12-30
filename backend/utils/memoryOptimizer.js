@@ -132,8 +132,10 @@ class MemoryOptimizer {
         this.memoryHistory = new RingBuffer(this.options.historySize);
         this.peakMemoryUsage = 0;
         
-        // 메모리 모니터링 시작
-        this.startMemoryMonitoring();
+        // 메모리 모니터링 시작 (테스트 환경에서는 비활성화)
+        if (this.options.monitorInterval > 0 && process.env.NODE_ENV !== 'test') {
+            this.startMemoryMonitoring();
+        }
         
         logger.info('MemoryOptimizer initialized', this.options);
     }
@@ -142,6 +144,9 @@ class MemoryOptimizer {
      * 메모리 모니터링 시작
      */
     startMemoryMonitoring() {
+        if (this.options.monitorInterval <= 0) {
+            return;
+        }
         this.monitoringInterval = setInterval(() => {
             this.checkMemoryUsage();
             this.detectMemoryLeaks();
@@ -741,23 +746,26 @@ class MemoryOptimizer {
     }
 }
 
-// 전역 메모리 최적화기 인스턴스 (더 현실적인 설정으로 조정)
+// 전역 메모리 최적화기 인스턴스 (테스트 환경에서는 모니터링 비활성화)
+const isTestEnv = process.env.NODE_ENV === 'test';
 const globalMemoryOptimizer = new MemoryOptimizer({
-    maxMemoryUsage: 2 * 1024 * 1024 * 1024, // 2GB로 증가
-    gcThreshold: 0.85, // 85%로 조정
-    monitorInterval: 60000, // 1분으로 증가하여 빈번한 체크 방지
-    historySize: 20 // 히스토리 크기 증가
+    maxMemoryUsage: 2 * 1024 * 1024 * 1024,
+    gcThreshold: 0.85,
+    monitorInterval: isTestEnv ? 0 : 60000,
+    historySize: 20
 });
 
 // 프로세스 종료 시 정리
-process.on('exit', () => {
-    globalMemoryOptimizer.destroy();
-});
-
-process.on('SIGINT', () => {
-    globalMemoryOptimizer.destroy();
-    process.exit(0);
-});
+if (!isTestEnv) {
+    process.on('exit', () => {
+        globalMemoryOptimizer.destroy();
+    });
+    
+    process.on('SIGINT', () => {
+        globalMemoryOptimizer.destroy();
+        process.exit(0);
+    });
+}
 
 export {
     MemoryOptimizer,

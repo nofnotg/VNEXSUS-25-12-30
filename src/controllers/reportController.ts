@@ -8,6 +8,7 @@ import m5ReportModule from '../modules/m5-report/index.js';
 import path from 'path';
 import { reportMaker } from '../lib/reportMaker.js';
 import fs from 'fs/promises';
+import { logger } from '../shared/logging/logger.js';
 
 class ReportController {
   private static instance: ReportController;
@@ -30,7 +31,11 @@ class ReportController {
    */
   public async generateReport(data: any): Promise<any> {
     try {
-      console.log(`보고서 컨트롤러: 보고서 생성 시작 (jobId=${data.jobId})`);
+      logger.info({
+        event: 'report_generate_start',
+        message: 'Report generation started',
+        metadata: { jobId: data.jobId }
+      });
       
       // 의료 시계열 데이터 생성
       const timelineData = {
@@ -53,14 +58,28 @@ class ReportController {
       );
       
       if (result.success) {
-        console.log(`보고서 컨트롤러: 보고서 생성 성공 (${result.reportPath})`);
+        logger.info({
+          event: 'report_generate_success',
+          message: 'Report generation succeeded',
+          metadata: { jobId: data.jobId, reportPath: result.reportPath }
+        });
       } else {
-        console.error(`보고서 컨트롤러: 보고서 생성 실패 (${result.error})`);
+        logger.error({
+          event: 'report_generate_failed',
+          message: 'Report generation failed',
+          metadata: { jobId: data.jobId },
+          error: { name: 'Error', message: result.error || 'unknown_error' }
+        });
       }
       
       return result;
     } catch (error: any) {
-      console.error('보고서 컨트롤러: 오류 발생', error);
+      logger.error({
+        event: 'report_generate_error',
+        message: 'Report generation error',
+        metadata: { jobId: data?.jobId },
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       return {
         success: false,
         error: error.message || '알 수 없는 오류'
@@ -78,7 +97,12 @@ class ReportController {
       const fileContent = await fs.readFile(absolutePath, 'utf-8');
       return JSON.parse(fileContent);
     } catch (error: any) {
-      console.error(`타임라인 JSON 파일 로드 실패: ${error.message}`);
+      logger.error({
+        event: 'report_timeline_json_load_error',
+        message: 'Failed to load timeline JSON',
+        metadata: { filePath },
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       throw new Error(`타임라인 JSON 파일 로드 실패: ${error.message}`);
     }
   }
@@ -96,7 +120,11 @@ class ReportController {
       });
       res.json({url: url.reportPath});
     } catch (error: any) {
-      console.error('보고서 생성 실패:', error);
+      logger.error({
+        event: 'report_handler_error',
+        message: 'Report handler error',
+        error: { name: error?.name || 'Error', message: error?.message || String(error), stack: error?.stack }
+      });
       res.status(500).json({
         success: false,
         error: error.message || '보고서 생성 중 오류가 발생했습니다.'

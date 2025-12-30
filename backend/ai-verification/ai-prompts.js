@@ -542,29 +542,28 @@ export class AIPromptManager {
    * 모델별 API 설정 생성
    */
   getModelAPIConfig(model, systemPrompt, userPrompt) {
-    const baseConfig = {
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt }
-      ]
-    };
-    
     if (model === 'gpt-4o-mini') {
       return {
-        ...baseConfig,
         model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
         temperature: 0.1,
         max_tokens: 4096,
         response_format: { type: 'json_object' }
       };
-    } else if (model === 'o1-mini') {
+    }
+    if (model === 'o1-mini') {
+      const merged = `${systemPrompt}\n\n${userPrompt}`;
       return {
-        ...baseConfig,
         model: 'o1-mini',
+        messages: [
+          { role: 'user', content: merged }
+        ],
         max_completion_tokens: 8192
       };
     }
-    
     throw new Error(`지원하지 않는 모델: ${model}`);
   }
 

@@ -1,0 +1,650 @@
+<!doctype html>
+  <html lang="ko"><head><meta charset="utf-8" />
+  <title>케이스 재처리 리포트 (2025-12-29T13-11-03-340Z)</title>
+  <style>
+  body{font-family:system-ui,Segoe UI,Arial;padding:20px;color:#222}
+  code{background:#f6f6f6;padding:2px 4px;border-radius:4px}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid #ddd;padding:8px;vertical-align:top}
+  th{background:#f4f4f4}
+  .muted{color:#666}
+  .ok{color:#0a7}
+  .bad{color:#c33}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{border:1px solid #eee;border-radius:10px;padding:12px;background:#fff}
+  .bar{height:10px;border-radius:6px;background:#eee;overflow:hidden}
+  .bar>span{display:block;height:100%;background:#2563eb}
+  .bar.red>span{background:#dc2626}
+  .kpi{display:flex;gap:14px;flex-wrap:wrap}
+  .kpi>div{border:1px solid #eee;border-radius:10px;padding:10px 12px;background:#fff;min-width:220px}
+  .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace}
+  </style>
+  </head><body>
+  <h1>케이스 재처리 리포트</h1>
+  <p>출력 디렉토리: <code>C:\VNEXSUS_12-07\reports\VNEXSUS_Report\2025-12-29T13-11-03-340Z</code></p>
+  <h2>처리 범위</h2>
+  <ul>
+    <li>시작: Case1</li>
+    <li>끝: Case49</li>
+    <li>총 입력 디렉토리: 50</li>
+    <li>성공 케이스: 27</li>
+    <li>병렬 처리: 6개</li>
+  </ul>
+  <h2>요약 지표</h2>
+  <div class="kpi">
+    <div><div class="muted">Vision OCR</div><div><span class="ok">활성</span></div></div>
+    <div><div class="muted">후처리 평균(ms)</div><div>6868</div></div>
+    <div><div class="muted">후처리 P95(ms)</div><div>14058</div></div>
+    <div><div class="muted">Subset PassRate</div><div>0.0%</div></div>
+  </div>
+  <h2>유효성 검사</h2>
+  <p>이슈 수: 0</p>
+  <table><thead><tr><th>Case</th><th>이슈 유형</th><th>파일</th></tr></thead><tbody>
+    
+  </tbody></table>
+  <h2>입력 리포트 ⊆ VNEXSUS 검증 (동일 케이스)</h2>
+  <ul>
+    <li>검증 쌍 수: 25</li>
+    <li>완전 포함(pass) 수: 0 (통과율 0.0%)</li>
+    <li>평균 날짜/ICD/병원 매칭률: 32.5% / 23.2% / 17.5%</li>
+    <li>평균 LabelScore: 23.8% · 평균 Jaccard: 3.0% · 평균 Combined: 17.6%</li>
+    <li>스킵 사유: 리포트없음 2 · 파일없음 0 · 리포트빈값 0 · VNEXSUS빈값 0</li>
+  </ul>
+  <table><thead><tr><th>Case</th><th>상태</th><th>ReportLen</th><th>VNEXSUSLen</th><th>LabelScore</th><th>Jaccard</th><th>Combined</th><th>날짜</th><th>ICD</th><th>병원</th><th>Pass</th></tr></thead><tbody>
+    <tr><td>Case1</td><td>EVALUATED</td><td>1823</td><td>405</td><td>3.6%</td><td>1.7%</td><td>3.0%</td><td>0.0%</td><td>0.0%</td><td>16.7%</td><td>❌</td></tr><tr><td>Case2</td><td>EVALUATED</td><td>1179</td><td>3781</td><td>18.8%</td><td>2.5%</td><td>13.9%</td><td>22.2%</td><td>0.0%</td><td>20.0%</td><td>❌</td></tr><tr><td>Case3</td><td>EVALUATED</td><td>1339</td><td>6805</td><td>46.7%</td><td>8.2%</td><td>35.1%</td><td>50.0%</td><td>100.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case4</td><td>SKIPPED (no_report)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>❌</td></tr><tr><td>Case5</td><td>EVALUATED</td><td>1321</td><td>9607</td><td>17.6%</td><td>2.5%</td><td>13.1%</td><td>22.2%</td><td>0.0%</td><td>20.0%</td><td>❌</td></tr><tr><td>Case6</td><td>EVALUATED</td><td>1163</td><td>7580</td><td>26.7%</td><td>1.5%</td><td>19.1%</td><td>40.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case7</td><td>EVALUATED</td><td>1900</td><td>407</td><td>0.0%</td><td>2.5%</td><td>0.7%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case8</td><td>EVALUATED</td><td>1464</td><td>16833</td><td>60.0%</td><td>2.4%</td><td>42.7%</td><td>62.5%</td><td>100.0%</td><td>50.0%</td><td>❌</td></tr><tr><td>Case9</td><td>EVALUATED</td><td>1844</td><td>407</td><td>3.0%</td><td>2.4%</td><td>2.8%</td><td>0.0%</td><td>0.0%</td><td>11.1%</td><td>❌</td></tr><tr><td>Case10</td><td>EVALUATED</td><td>2029</td><td>455</td><td>4.5%</td><td>1.6%</td><td>3.7%</td><td>14.3%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case11</td><td>EVALUATED</td><td>2232</td><td>449</td><td>3.3%</td><td>2.3%</td><td>3.0%</td><td>0.0%</td><td>100.0%</td><td>12.5%</td><td>❌</td></tr><tr><td>Case12</td><td>EVALUATED</td><td>1225</td><td>4314</td><td>53.3%</td><td>4.5%</td><td>38.7%</td><td>100.0%</td><td>0.0%</td><td>28.6%</td><td>❌</td></tr><tr><td>Case13</td><td>EVALUATED</td><td>1047</td><td>4207</td><td>25.0%</td><td>6.2%</td><td>19.4%</td><td>40.0%</td><td>0.0%</td><td>20.0%</td><td>❌</td></tr><tr><td>Case14</td><td>EVALUATED</td><td>556</td><td>409</td><td>0.0%</td><td>2.1%</td><td>0.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case15</td><td>EVALUATED</td><td>479</td><td>7156</td><td>54.5%</td><td>2.7%</td><td>39.0%</td><td>62.5%</td><td>0.0%</td><td>100.0%</td><td>❌</td></tr><tr><td>Case16</td><td>EVALUATED</td><td>873</td><td>4217</td><td>31.3%</td><td>3.3%</td><td>22.9%</td><td>40.0%</td><td>100.0%</td><td>16.7%</td><td>❌</td></tr><tr><td>Case17</td><td>EVALUATED</td><td>1560</td><td>23816</td><td>25.0%</td><td>2.2%</td><td>18.1%</td><td>60.0%</td><td>0.0%</td><td>11.1%</td><td>❌</td></tr><tr><td>Case18</td><td>EVALUATED</td><td>1356</td><td>5839</td><td>46.2%</td><td>3.8%</td><td>33.4%</td><td>71.4%</td><td>0.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case19</td><td>EVALUATED</td><td>2741</td><td>1213</td><td>14.7%</td><td>5.8%</td><td>12.0%</td><td>25.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case20</td><td>EVALUATED</td><td>798</td><td>49367</td><td>83.3%</td><td>1.8%</td><td>58.9%</td><td>100.0%</td><td>100.0%</td><td>50.0%</td><td>❌</td></tr><tr><td>Case21</td><td>EVALUATED</td><td>2326</td><td>50072</td><td>57.1%</td><td>4.5%</td><td>41.3%</td><td>58.3%</td><td>80.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case22</td><td>EVALUATED</td><td>2239</td><td>6070</td><td>15.8%</td><td>3.2%</td><td>12.0%</td><td>35.7%</td><td>0.0%</td><td>4.8%</td><td>❌</td></tr><tr><td>Case32</td><td>EVALUATED</td><td>1085</td><td>19592</td><td>5.3%</td><td>1.8%</td><td>4.2%</td><td>9.1%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case36</td><td>EVALUATED</td><td>983</td><td>14033</td><td>0.0%</td><td>2.0%</td><td>0.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case42</td><td>EVALUATED</td><td>899</td><td>8247</td><td>0.0%</td><td>2.5%</td><td>0.8%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case44</td><td>EVALUATED</td><td>1882</td><td>6374</td><td>0.0%</td><td>0.7%</td><td>0.2%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case49</td><td>SKIPPED (no_report)</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>❌</td></tr>
+  </tbody></table>
+  <h2>정확도/포함도 정의</h2>
+  <ul>
+    <li>LabelScore: (매칭된 날짜+ICD+병원) / (Report에 등장한 전체 날짜+ICD+병원)</li>
+    <li>Jaccard: Report 텍스트 vs VNEXSUS 텍스트 토큰 집합 유사도</li>
+    <li>정확도(Accuracy): 0.7 × LabelScore + 0.3 × Jaccard (베이스라인 매칭된 케이스만 산출)</li>
+    <li>포함도(Inclusion): 베이스라인 매칭에서 PassRate (Report ⊆ VNEXSUS의 통과율)</li>
+  </ul>
+  <h2>Top/Bottom (품질)</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="muted">Top 5</div>
+      <table><thead><tr><th>Case</th><th>품질</th><th>정확도</th><th>커버리지</th></tr></thead><tbody>
+        <tr><td>Case8</td><td>58.6</td><td>42.7</td><td>100.0</td></tr><tr><td>Case3</td><td>57.7</td><td>35.1</td><td>100.0</td></tr><tr><td>Case15</td><td>57.7</td><td>39.0</td><td>96.3</td></tr><tr><td>Case18</td><td>54.7</td><td>33.4</td><td>96.9</td></tr><tr><td>Case12</td><td>53.2</td><td>38.7</td><td>97.8</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <div class="muted">Bottom 5</div>
+      <table><thead><tr><th>Case</th><th>품질</th><th>정확도</th><th>커버리지</th></tr></thead><tbody>
+        <tr><td>Case36</td><td>23.4</td><td>1.1</td><td>65.5</td></tr><tr><td>Case1</td><td>29.2</td><td>0.1</td><td>60.0</td></tr><tr><td>Case42</td><td>31.8</td><td>1.1</td><td>89.3</td></tr><tr><td>Case9</td><td>35.1</td><td>0.2</td><td>100.0</td></tr><tr><td>Case10</td><td>35.3</td><td>0.7</td><td>100.0</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <h2>처리 매니페스트 (케이스별 점수)</h2>
+  <table><thead><tr>
+    <th>Case</th><th>Raw Dir</th><th>상태</th>
+    <th>정확도</th><th>포함도</th><th>혁신성</th><th>가능성</th><th>위험성</th>
+    <th>커버리지</th><th>좌표</th><th>OCR Blocks</th><th>후처리</th><th>원문 길이</th><th>강점/약점</th>
+  </tr></thead><tbody>
+    <tr>
+        <td>Case1</td>
+        <td>고영란</td>
+        <td><span class="ok">OK</span></td>
+        <td>0.1%</td>
+        <td>0.0%</td>
+        <td>20.0%</td>
+        <td>70.8%</td>
+        <td>69.9%</td>
+        <td><div class="bar"><span style="width:60.0%"></span></div><div class="muted">60.0%</div></td>
+        <td>0.0</td>
+        <td>0</td>
+        <td>2246ms</td>
+        <td>40,502</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case25</div>
+        <div class="muted">라벨/유사도: 0.0% · 0.4%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 원문 길이 40,502자 · 후처리 2246ms</div>
+        <div class="muted">약점: 좌표 매칭 0.0% · OCR 블록 0 · 정확도 0.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case2</td>
+        <td>곽동인</td>
+        <td><span class="ok">OK</span></td>
+        <td>13.9%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>94.7%</td>
+        <td>43.1%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>1372</td>
+        <td>1516ms</td>
+        <td>22,898</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case2</div>
+        <div class="muted">라벨/유사도: 18.8% · 2.5%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 22,898자 · 후처리 1516ms</div>
+        <div class="muted">약점: 정확도 13.9% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case3</td>
+        <td>권광덕</td>
+        <td><span class="ok">OK</span></td>
+        <td>35.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>84.5%</td>
+        <td>32.4%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>1539</td>
+        <td>3437ms</td>
+        <td>21,564</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case3</div>
+        <div class="muted">라벨/유사도: 46.7% · 8.2%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 21,564자</div>
+        <div class="muted">약점: 정확도 35.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case4</td>
+        <td>김동아</td>
+        <td><span class="ok">OK</span></td>
+        <td>6.5%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>76.8%</td>
+        <td>46.8%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>3019</td>
+        <td>4917ms</td>
+        <td>57,343</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case14</div>
+        <div class="muted">라벨/유사도: 8.3% · 2.2%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 57,343자</div>
+        <div class="muted">약점: 정확도 6.5% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case5</td>
+        <td>김상민</td>
+        <td><span class="ok">OK</span></td>
+        <td>9.9%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>80.7%</td>
+        <td>46.7%</td>
+        <td><div class="bar"><span style="width:96.7%"></span></div><div class="muted">96.7%</div></td>
+        <td>91.8</td>
+        <td>2397</td>
+        <td>3862ms</td>
+        <td>29,843</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case7</div>
+        <div class="muted">라벨/유사도: 12.9% · 3.0%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 91.8% · 원문 길이 29,843자</div>
+        <div class="muted">약점: 정확도 9.9% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case6</td>
+        <td>김소원</td>
+        <td><span class="ok">OK</span></td>
+        <td>19.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>75.2%</td>
+        <td>40.4%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>5698</td>
+        <td>5213ms</td>
+        <td>60,630</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case6</div>
+        <div class="muted">라벨/유사도: 26.7% · 1.5%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 60,630자</div>
+        <div class="muted">약점: 정확도 19.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case7</td>
+        <td>김영래</td>
+        <td><span class="ok">OK</span></td>
+        <td>0.6%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>72.7%</td>
+        <td>49.7%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>13554</td>
+        <td>5696ms</td>
+        <td>155,776</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case27</div>
+        <div class="muted">라벨/유사도: 0.0% · 2.0%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 155,776자</div>
+        <div class="muted">약점: 정확도 0.6% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case8</td>
+        <td>김영만</td>
+        <td><span class="ok">OK</span></td>
+        <td>42.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>71.8%</td>
+        <td>28.6%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>10787</td>
+        <td>5859ms</td>
+        <td>148,119</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case8</div>
+        <div class="muted">라벨/유사도: 60.0% · 2.4%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 148,119자</div>
+        <div class="muted">약점: 정확도 42.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case9</td>
+        <td>김영숙</td>
+        <td><span class="ok">OK</span></td>
+        <td>0.2%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>50.0%</td>
+        <td>49.9%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>13172</td>
+        <td>10864ms</td>
+        <td>220,101</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case26</div>
+        <div class="muted">라벨/유사도: 0.0% · 0.6%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 220,101자</div>
+        <div class="muted">약점: 후처리 10864ms · 정확도 0.2% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case10</td>
+        <td>김종렬</td>
+        <td><span class="ok">OK</span></td>
+        <td>0.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>50.0%</td>
+        <td>49.7%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>6977</td>
+        <td>10012ms</td>
+        <td>88,611</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case23</div>
+        <div class="muted">라벨/유사도: 0.0% · 2.2%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 88,611자</div>
+        <div class="muted">약점: 후처리 10012ms · 정확도 0.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case11</td>
+        <td>김진희</td>
+        <td><span class="ok">OK</span></td>
+        <td>3.9%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>51.0%</td>
+        <td>48.1%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>11489</td>
+        <td>9803ms</td>
+        <td>182,368</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case24</div>
+        <div class="muted">라벨/유사도: 4.3% · 2.8%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 182,368자</div>
+        <div class="muted">약점: 후처리 9803ms · 정확도 3.9% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case12</td>
+        <td>농협손해보험 김미화 (수술비 고지의무 위반)</td>
+        <td><span class="ok">OK</span></td>
+        <td>38.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>56.5%</td>
+        <td>31.7%</td>
+        <td><div class="bar"><span style="width:97.8%"></span></div><div class="muted">97.8%</div></td>
+        <td>94.6</td>
+        <td>6015</td>
+        <td>8551ms</td>
+        <td>63,642</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case12</div>
+        <div class="muted">라벨/유사도: 53.3% · 4.5%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 94.6% · 원문 길이 63,642자</div>
+        <div class="muted">약점: 후처리 8551ms · 정확도 38.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case13</td>
+        <td>농협손해보험 김인화(후유장해)</td>
+        <td><span class="ok">OK</span></td>
+        <td>19.4%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>46.1%</td>
+        <td>49.5%</td>
+        <td><div class="bar"><span style="width:81.7%"></span></div><div class="muted">81.7%</div></td>
+        <td>66.7</td>
+        <td>3971</td>
+        <td>8992ms</td>
+        <td>73,863</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case13</div>
+        <div class="muted">라벨/유사도: 25.0% · 6.2%</div>
+        <div class="muted">강점: SourceSpan 91.7% · 좌표 매칭 66.7% · 원문 길이 73,863자</div>
+        <div class="muted">약점: 후처리 8992ms · 정확도 19.4% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case14</td>
+        <td>농협손해보험 김태현</td>
+        <td><span class="ok">OK</span></td>
+        <td>0.8%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>88.9%</td>
+        <td>49.6%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>4736</td>
+        <td>2614ms</td>
+        <td>50,676</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case28</div>
+        <div class="muted">라벨/유사도: 0.0% · 2.7%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 50,676자</div>
+        <div class="muted">약점: 정확도 0.8% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case15</td>
+        <td>농협손해보험 석향숙(허혈성심장질환)</td>
+        <td><span class="ok">OK</span></td>
+        <td>39.0%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>80.3%</td>
+        <td>32.4%</td>
+        <td><div class="bar"><span style="width:96.3%"></span></div><div class="muted">96.3%</div></td>
+        <td>90.6</td>
+        <td>896</td>
+        <td>3881ms</td>
+        <td>14,782</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case15</div>
+        <div class="muted">라벨/유사도: 54.5% · 2.7%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 90.6% · 원문 길이 14,782자</div>
+        <div class="muted">약점: 정확도 39.0% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case16</td>
+        <td>농협손해보험 이광욱(고지의무 위반,심질환)</td>
+        <td><span class="ok">OK</span></td>
+        <td>12.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>87.8%</td>
+        <td>44.0%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>773</td>
+        <td>2811ms</td>
+        <td>13,477</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case20</div>
+        <div class="muted">라벨/유사도: 16.7% · 1.3%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 13,477자</div>
+        <div class="muted">약점: 정확도 12.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case17</td>
+        <td>박다정</td>
+        <td><span class="ok">OK</span></td>
+        <td>18.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>81.5%</td>
+        <td>41.1%</td>
+        <td><div class="bar"><span style="width:99.7%"></span></div><div class="muted">99.7%</div></td>
+        <td>99.2</td>
+        <td>3246</td>
+        <td>3985ms</td>
+        <td>37,758</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case17</div>
+        <div class="muted">라벨/유사도: 25.0% · 2.2%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 99.2% · 원문 길이 37,758자</div>
+        <div class="muted">약점: 정확도 18.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case18</td>
+        <td>박송자</td>
+        <td><span class="ok">OK</span></td>
+        <td>33.4%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>77.2%</td>
+        <td>34.8%</td>
+        <td><div class="bar"><span style="width:96.9%"></span></div><div class="muted">96.9%</div></td>
+        <td>92.3</td>
+        <td>1891</td>
+        <td>4532ms</td>
+        <td>27,522</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case18</div>
+        <div class="muted">라벨/유사도: 46.2% · 3.8%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 92.3% · 원문 길이 27,522자</div>
+        <div class="muted">약점: 정확도 33.4% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case19</td>
+        <td>박현미</td>
+        <td><span class="ok">OK</span></td>
+        <td>3.3%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>78.7%</td>
+        <td>48.3%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>5075</td>
+        <td>4549ms</td>
+        <td>86,670</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case11</div>
+        <div class="muted">라벨/유사도: 3.3% · 3.2%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 86,670자</div>
+        <div class="muted">약점: 정확도 3.3% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case20</td>
+        <td>박혜경</td>
+        <td><span class="ok">OK</span></td>
+        <td>10.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>78.5%</td>
+        <td>44.7%</td>
+        <td><div class="bar"><span style="width:100.0%"></span></div><div class="muted">100.0%</div></td>
+        <td>100.0</td>
+        <td>4370</td>
+        <td>4586ms</td>
+        <td>59,985</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case1</div>
+        <div class="muted">라벨/유사도: 14.3% · 2.3%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 100.0% · 원문 길이 59,985자</div>
+        <div class="muted">약점: 정확도 10.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case21</td>
+        <td>서문정숙</td>
+        <td><span class="ok">OK</span></td>
+        <td>6.9%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>55.7%</td>
+        <td>48.3%</td>
+        <td><div class="bar"><span style="width:96.4%"></span></div><div class="muted">96.4%</div></td>
+        <td>91.0</td>
+        <td>8523</td>
+        <td>8570ms</td>
+        <td>82,027</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case19</div>
+        <div class="muted">라벨/유사도: 8.8% · 2.5%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 91.0% · 원문 길이 82,027자</div>
+        <div class="muted">약점: 후처리 8570ms · 정확도 6.9% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case22</td>
+        <td>송금숙</td>
+        <td><span class="ok">OK</span></td>
+        <td>31.2%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>49.7%</td>
+        <td>34.7%</td>
+        <td><div class="bar"><span style="width:99.4%"></span></div><div class="muted">99.4%</div></td>
+        <td>98.4</td>
+        <td>11269</td>
+        <td>11556ms</td>
+        <td>145,968</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case16</div>
+        <div class="muted">라벨/유사도: 43.8% · 1.9%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 98.4% · 원문 길이 145,968자</div>
+        <div class="muted">약점: 후처리 11556ms · 정확도 31.2% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case32</td>
+        <td>이정희</td>
+        <td><span class="ok">OK</span></td>
+        <td>13.2%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>48.5%</td>
+        <td>44.9%</td>
+        <td><div class="bar"><span style="width:97.0%"></span></div><div class="muted">97.0%</div></td>
+        <td>92.5</td>
+        <td>1987</td>
+        <td>13492ms</td>
+        <td>32,156</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case5</div>
+        <div class="muted">라벨/유사도: 17.6% · 2.7%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 92.5% · 원문 길이 32,156자</div>
+        <div class="muted">약점: 후처리 13492ms · 정확도 13.2% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case36</td>
+        <td>장유찬</td>
+        <td><span class="ok">OK</span></td>
+        <td>1.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>32.7%</td>
+        <td>66.7%</td>
+        <td><div class="bar"><span style="width:65.5%"></span></div><div class="muted">65.5%</div></td>
+        <td>13.6</td>
+        <td>530</td>
+        <td>14058ms</td>
+        <td>17,561</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case22</div>
+        <div class="muted">라벨/유사도: 0.0% · 3.7%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 원문 길이 17,561자</div>
+        <div class="muted">약점: 좌표 매칭 13.6% · 후처리 14058ms · 정확도 1.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case42</td>
+        <td>현대해상 김민아(뇌 양성종양)</td>
+        <td><span class="ok">OK</span></td>
+        <td>1.1%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>44.7%</td>
+        <td>54.8%</td>
+        <td><div class="bar"><span style="width:89.3%"></span></div><div class="muted">89.3%</div></td>
+        <td>73.3</td>
+        <td>545</td>
+        <td>14308ms</td>
+        <td>15,717</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case21</div>
+        <div class="muted">라벨/유사도: 0.0% · 3.6%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 73.3% · 원문 길이 15,717자</div>
+        <div class="muted">약점: 후처리 14308ms · 정확도 1.1% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case44</td>
+        <td>현대해상 조윤아(태아보험, 엄마(이주희)</td>
+        <td><span class="ok">OK</span></td>
+        <td>6.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>51.0%</td>
+        <td>48.5%</td>
+        <td><div class="bar"><span style="width:96.3%"></span></div><div class="muted">96.3%</div></td>
+        <td>90.8</td>
+        <td>551</td>
+        <td>9462ms</td>
+        <td>5,405</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case10</div>
+        <div class="muted">라벨/유사도: 9.1% · 1.0%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 90.8% · 원문 길이 5,405자</div>
+        <div class="muted">약점: 후처리 9462ms · 정확도 6.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr><tr>
+        <td>Case49</td>
+        <td>KB손해보험 김태형(안정형 협심증)</td>
+        <td><span class="ok">OK</span></td>
+        <td>13.7%</td>
+        <td>0.0%</td>
+        <td>100.0%</td>
+        <td>68.4%</td>
+        <td>45.5%</td>
+        <td><div class="bar"><span style="width:95.2%"></span></div><div class="muted">95.2%</div></td>
+        <td>88.1</td>
+        <td>989</td>
+        <td>6052ms</td>
+        <td>11,598</td>
+        <td><details><summary class="muted">보기</summary>
+        <div class="muted">Baseline 매칭: Case9</div>
+        <div class="muted">라벨/유사도: 18.2% · 3.4%</div>
+        <div class="muted">강점: SourceSpan 100.0% · 좌표 매칭 88.1% · 원문 길이 11,598자</div>
+        <div class="muted">약점: 정확도 13.7% · 포함도 0.0%</div>
+      </details></td>
+      </tr>
+  </tbody></table>
+  <h2>46개 Report ⊆ VNEXSUS 대응(베이스라인 CaseX_report.txt)</h2>
+  <ul>
+    <li>베이스라인 리포트 수: 45</li>
+    <li>매칭 산출 수: 27</li>
+    <li>완전 포함(pass) 수: 0 (통과율 0.0%)</li>
+    <li>평균 날짜/ICD/병원 매칭률: 29.0% / 22.7% / 11.8%</li>
+    <li>평균 LabelScore: 19.0% · 평균 Jaccard: 2.8%</li>
+  </ul>
+  <table><thead><tr><th>Baseline</th><th>Matched</th><th>LabelScore</th><th>Jaccard</th><th>날짜</th><th>ICD</th><th>병원</th><th>Pass</th></tr></thead><tbody>
+    <tr><td>Case1</td><td>Case20 (박혜경)</td><td>14.3%</td><td>2.3%</td><td>21.4%</td><td>12.5%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case2</td><td>Case2 (곽동인)</td><td>18.8%</td><td>2.5%</td><td>22.2%</td><td>0.0%</td><td>20.0%</td><td>❌</td></tr><tr><td>Case3</td><td>Case3 (권광덕)</td><td>46.7%</td><td>8.2%</td><td>50.0%</td><td>100.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case5</td><td>Case32 (이정희)</td><td>17.6%</td><td>2.7%</td><td>33.3%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case6</td><td>Case6 (김소원)</td><td>26.7%</td><td>1.5%</td><td>40.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case7</td><td>Case5 (김상민)</td><td>12.9%</td><td>3.0%</td><td>22.2%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case8</td><td>Case8 (김영만)</td><td>60.0%</td><td>2.4%</td><td>62.5%</td><td>100.0%</td><td>50.0%</td><td>❌</td></tr><tr><td>Case9</td><td>Case49 (KB손해보험 김태형(안정형 협심증))</td><td>18.2%</td><td>3.4%</td><td>28.6%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case10</td><td>Case44 (현대해상 조윤아(태아보험, 엄마(이주희))</td><td>9.1%</td><td>1.0%</td><td>14.3%</td><td>0.0%</td><td>14.3%</td><td>❌</td></tr><tr><td>Case11</td><td>Case19 (박현미)</td><td>3.3%</td><td>3.2%</td><td>4.5%</td><td>100.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case12</td><td>Case12 (농협손해보험 김미화 (수술비 고지의무 위반))</td><td>53.3%</td><td>4.5%</td><td>100.0%</td><td>0.0%</td><td>28.6%</td><td>❌</td></tr><tr><td>Case13</td><td>Case13 (농협손해보험 김인화(후유장해))</td><td>25.0%</td><td>6.2%</td><td>40.0%</td><td>0.0%</td><td>20.0%</td><td>❌</td></tr><tr><td>Case14</td><td>Case4 (김동아)</td><td>8.3%</td><td>2.2%</td><td>14.3%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case15</td><td>Case15 (농협손해보험 석향숙(허혈성심장질환))</td><td>54.5%</td><td>2.7%</td><td>62.5%</td><td>0.0%</td><td>100.0%</td><td>❌</td></tr><tr><td>Case16</td><td>Case22 (송금숙)</td><td>43.8%</td><td>1.9%</td><td>70.0%</td><td>100.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case17</td><td>Case17 (박다정)</td><td>25.0%</td><td>2.2%</td><td>60.0%</td><td>0.0%</td><td>11.1%</td><td>❌</td></tr><tr><td>Case18</td><td>Case18 (박송자)</td><td>46.2%</td><td>3.8%</td><td>71.4%</td><td>0.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case19</td><td>Case21 (서문정숙)</td><td>8.8%</td><td>2.5%</td><td>15.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case20</td><td>Case16 (농협손해보험 이광욱(고지의무 위반,심질환))</td><td>16.7%</td><td>1.3%</td><td>50.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case21</td><td>Case42 (현대해상 김민아(뇌 양성종양))</td><td>0.0%</td><td>3.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case22</td><td>Case36 (장유찬)</td><td>0.0%</td><td>3.7%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case23</td><td>Case10 (김종렬)</td><td>0.0%</td><td>2.2%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case24</td><td>Case11 (김진희)</td><td>4.3%</td><td>2.8%</td><td>0.0%</td><td>0.0%</td><td>25.0%</td><td>❌</td></tr><tr><td>Case25</td><td>Case1 (고영란)</td><td>0.0%</td><td>0.4%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case26</td><td>Case9 (김영숙)</td><td>0.0%</td><td>0.6%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case27</td><td>Case7 (김영래)</td><td>0.0%</td><td>2.0%</td><td>0.0%</td><td>100.0%</td><td>0.0%</td><td>❌</td></tr><tr><td>Case28</td><td>Case14 (농협손해보험 김태현)</td><td>0.0%</td><td>2.7%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>❌</td></tr>
+  </tbody></table>
+  <h2>개발 현황 평가</h2>
+  <ul>
+    <li>Vision OCR 가용성: 활성 (환경변수 필요)</li>
+    <li>빈 파일 방지 임계치: 32자</li>
+    <li>성능 측정: 후처리 평균 6868ms · P95 14058ms</li>
+  </ul>
+  <h2>개선 제안</h2>
+  <ul>
+    <li>OCR 블록 텍스트 정규화(공백/줄바꿈) 후 anchor 매칭 안정화</li>
+    <li>event 단위(날짜/병원/진단)별 bbox 후보 다중 선택 및 합성</li>
+    <li>Report ⊆ VNEXSUS 실패 케이스의 누락 Top-N 자동 집계</li>
+    <li>문서별 OCR 재시도 및 백오프 추가</li>
+  </ul>
+  </body></html>

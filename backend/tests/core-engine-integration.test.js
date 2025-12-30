@@ -1,7 +1,5 @@
-// core-engine-integration.test.js - 코어 엔진 통합 테스트
-
-const CoreEngineService = require('../services/coreEngineService');
-const { DataContracts } = require('../services/core-engine');
+import { CoreEngineService } from '../services/coreEngineService.js';
+import { DataContracts } from '../services/core-engine/index.js';
 
 describe('Core Engine Integration Tests', () => {
     let coreEngineService;

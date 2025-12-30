@@ -51,14 +51,14 @@ export class ReportGenerator {
         const lines = [];
 
         if (format === 'html') {
-            lines.push('<h2>1. 환자 기본정보</h2>');
+            lines.push('<h2>1. 피보험자 기본정보</h2>');
             lines.push('<div class="patient-info">');
-            lines.push(`<p><strong>피보험자(환자) 이름:</strong> ${patientInfo.name || '미상'}</p>`);
+            lines.push(`<p><strong>피보험자 이름:</strong> ${patientInfo.name || '미상'}</p>`);
             lines.push(`<p><strong>생년월일:</strong> ${patientInfo.birthDate || '미상'}</p>`);
             lines.push('</div>');
         } else {
-            lines.push('1. 환자 기본정보\n');
-            lines.push(`피보험자(환자) 이름: ${patientInfo.name || '미상'}`);
+            lines.push('1. 피보험자 기본정보\n');
+            lines.push(`피보험자 이름: ${patientInfo.name || '미상'}`);
             lines.push(`생년월일: ${patientInfo.birthDate || '미상'}`);
         }
 
@@ -176,31 +176,31 @@ export class ReportGenerator {
             }
 
             // 상세 정보
-            lines.push('<ul class="episode-details">');
-            lines.push(`<li><strong>●내원일:</strong> ${episode.startDate}</li>`);
+            lines.push('<div class="episode-details" style="white-space: pre-line">');
+            lines.push(`<p><strong>내원일</strong> ${episode.startDate}</p>`);
 
             // 내원경위
             if (episode.reason) {
-                lines.push(`<li><strong>●내원경위:</strong> ${episode.reason}</li>`);
+                lines.push(`<p><strong>내원경위</strong> ${episode.reason}</p>`);
             }
 
             // 진단명 (ICD 코드 표준 형식 적용)
             const diagnosis = this.formatDiagnoses(episode);
-            lines.push(`<li><strong>●진단명:</strong> ${diagnosis}</li>`);
+            lines.push(`<p><strong>진단명</strong> ${diagnosis}</p>`);
 
             // 통원기간
             if (episode.dateRange) {
                 const period = `${episode.startDate} ~ ${episode.endDate || episode.startDate} / ${episode.eventCount || 1}회 통원`;
-                lines.push(`<li><strong>●통원기간:</strong> ${period}</li>`);
+                lines.push(`<p><strong>통원기간</strong> ${period}</p>`);
             }
 
             // 치료내용
             const treatment = this.formatTreatment(episode);
             if (treatment) {
-                lines.push(`<li><strong>●치료내용:</strong> ${treatment}</li>`);
+                lines.push(`<p><strong>치료내용</strong> ${treatment}</p>`);
             }
 
-            lines.push('</ul>');
+            lines.push('</div>');
             lines.push('</div>');
         } else {
             // Plain text 형식

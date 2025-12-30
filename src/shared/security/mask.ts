@@ -201,8 +201,10 @@ export const maskByLevel = (input: string, level: 'low' | 'medium' | 'high'): st
     
     case 'high':
       // 모든 민감 데이터 토큰화
-      const { tokenized } = tokenize(input);
-      return tokenized;
+      {
+        const { tokenized } = tokenize(input);
+        return tokenized;
+      }
     
     default:
       return input;

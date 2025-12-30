@@ -9,6 +9,7 @@
 
 import { createRequire } from 'module';
 import path from 'path';
+import fs from 'fs';
 import AIService from '../modules/ai/aiService.js';
 import DynamicValidationEngine from './DynamicValidationEngine.js';
 import HybridProcessingEngine from './HybridProcessingEngine.js';
@@ -24,6 +25,9 @@ class NineItemReportGenerator {
             useEnhancedExtractors: options.useEnhancedExtractors ?? false,
             enableNaNGuard: options.enableNaNGuard ?? true,
             debug: options.debug ?? false,
+            timelineSummaryLimit: options.timelineSummaryLimit ?? 2,
+            timelineLabelStyle: options.timelineLabelStyle ?? 'bracket', // 'bracket' | 'none' | 'emoji'
+            timelineSeparatorStyle: options.timelineSeparatorStyle ?? 'line',
             ...options
         };
 
@@ -149,10 +153,13 @@ class NineItemReportGenerator {
                 fallbackRaw?.network ??
                 causal_network;
 
+            // 환자정보 정규화(키 호환성 확보)
+            const patientNormalized = this.normalizePatientInfo(patientInfo);
+
             const nineItems = await this.extractNineItems(
                 Array.isArray(genesInput) ? genesInput : extracted_genes,
                 typeof networkInput === 'object' && networkInput !== null ? networkInput : causal_network,
-                patientInfo
+                patientNormalized
             );
 
             // 2. 보고서 템플릿 적용
@@ -166,6 +173,7 @@ class NineItemReportGenerator {
                 dates: this.extractDates(extracted_genes)
             };
             const validation = this.dynamicValidator.validateWithDynamicWeights(nineItems, rawData);
+            const weightsResult = this.calculateItemWeights(nineItems, patientNormalized, rawData);
 
             // 4. 최종 결과 구성
             const result = {
@@ -177,7 +185,8 @@ class NineItemReportGenerator {
                         strategy: hybridResult.strategy,
                         confidence: hybridResult.confidence,
                         processingTime: hybridResult.metadata?.processingTime
-                    }
+                    },
+                    itemWeights: weightsResult.weights
                 },
                 nineItems,
                 validation,
@@ -186,7 +195,10 @@ class NineItemReportGenerator {
                     confidence: hybridResult.confidence,
                     performanceStats: this.hybridEngine.getPerformanceStats()
                 },
-                statistics: this.generateStatistics(extracted_genes, nineItems),
+                statistics: {
+                    ...this.generateStatistics(extracted_genes, nineItems),
+                    overallWeightedConfidence: weightsResult.overall
+                },
                 performanceMetrics: this.performanceMonitor.getCurrentMetrics()
             };
 
@@ -223,6 +235,26 @@ class NineItemReportGenerator {
                 partialResults: {}
             };
         }
+    }
+
+    /**
+     * 환자정보 정규화 (키 스키마 통일)
+     */
+    normalizePatientInfo(patientInfo) {
+        const p = patientInfo || {};
+        const enrollment =
+            p.insurance_enrollment_date ||
+            p.insuranceJoinDate ||
+            p.enrollmentDate ||
+            (Array.isArray(p.insurance)
+                ? (p.insurance.find(i => i?.start_date)?.start_date || null)
+                : null);
+
+        return {
+            ...p,
+            insurance_enrollment_date: enrollment,
+            insurance_company: p.insurance_company || p.insuranceCompany || (Array.isArray(p.insurance) ? p.insurance[0]?.company : undefined),
+        };
     }
 
     /**
@@ -314,7 +346,18 @@ class NineItemReportGenerator {
             throw new Error(`Template '${templateType}' not found`);
         }
 
-        const content = await template(nineItems, options);
+        let content = await template(nineItems, options);
+        try {
+            const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.cjs');
+            const proc = new EnhancedMedicalTermProcessor();
+            const processed = proc.processComprehensive(content, {
+                processICD: options?.enableTermProcessing !== false,
+                enhanceTerms: options?.enableTranslationEnhancement !== false,
+                filterContext: false,
+                includeStatistics: false
+            });
+            content = processed.processedText || content;
+        } catch (_) {}
 
         return {
             content,
@@ -478,7 +521,7 @@ ${conclusiveOpinion}
             return '- 해당 정보 없음';
         }
 
-        const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.js');
+        const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.cjs');
         const proc = new EnhancedMedicalTermProcessor();
 
         const normalizeCode = (code) => {
@@ -488,7 +531,10 @@ ${conclusiveOpinion}
             return code;
         };
 
-        return items.items.map((raw) => {
+        const seen = new Set();
+        const lines = [];
+
+        for (const raw of items.items) {
             const text = String(raw || '').trim();
             const icd = (text.match(/([A-Z]\d{2,3}(?:\.[0-9A-Z]{1,2})?)/) || [])[1];
             const code = normalizeCode(icd);
@@ -502,14 +548,32 @@ ${conclusiveOpinion}
                     mapping = proc.icdMappings[parent];
                 }
                 if (mapping) {
-                    // 새 형식: [코드/영어-한글]
-                    return `[${code}/${mapping.english}-${mapping.korean}]`;
+                    const line = `[${code}/${mapping.english}-${mapping.korean}]`;
+                    const key = line.toLowerCase();
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        lines.push(line);
+                    }
+                    continue;
                 }
-                return `[${code}] ${enhanced}`;
+                const line = `[${code}] ${enhanced}`;
+                const key = line.toLowerCase();
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    lines.push(line);
+                }
+                continue;
             }
 
-            return `${enhanced} (KCD-10 코드 확인 필요)`;
-        }).join('\n');
+            const line = `${enhanced} (KCD-10 코드 확인 필요)`;
+            const key = line.toLowerCase();
+            if (!seen.has(key)) {
+                seen.add(key);
+                lines.push(line);
+            }
+        }
+
+        return lines.join('\n');
     }
 
     /**
@@ -880,6 +944,45 @@ ${conclusiveOpinion}
     async generateChronologicalProgress(items) {
         const events = [];
 
+        const normalizeDate = (y, m, d) => {
+            let year = Number(y);
+            if (String(y).length === 2) {
+                year = year >= 50 ? 1900 + year : 2000 + year;
+            }
+            const mm = String(m).padStart(2, '0');
+            const dd = String(d).padStart(2, '0');
+            return `${year}-${mm}-${dd}`;
+        };
+
+        const extractDates = (text) => {
+            if (!text) return [];
+            const s = String(text);
+            const found = [];
+            const patterns = [
+                { re: /(\d{2,4})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*(\d{1,2})/g, map: (m) => normalizeDate(m[1], m[2], m[3]) },
+                { re: /(\d{1,2})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*(\d{2,4})/g, map: (m) => normalizeDate(m[3], m[1], m[2]) },
+                { re: /(\d{2,4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일?/g, map: (m) => normalizeDate(m[1], m[2], m[3]) },
+                { re: /(\d{2,4})\s*[.\-\/]\s*(\d{1,2})(?!\s*[.\-\/]\s*\d)/g, map: (m) => normalizeDate(m[1], m[2], 1) }
+            ];
+            for (const p of patterns) {
+                let m;
+                while ((m = p.re.exec(s)) !== null) {
+                    found.push(p.map(m));
+                }
+            }
+            return Array.from(new Set(found));
+        };
+
+        const stripDateTokens = (text) => {
+            const s = String(text);
+            const res = s
+                .replace(/(\d{2,4})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*(\d{1,2})/g, '')
+                .replace(/(\d{1,2})\s*[.\-\/]\s*(\d{1,2})\s*[.\-\/]\s*(\d{2,4})/g, '')
+                .replace(/(\d{2,4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일?/g, '')
+                .replace(/(\d{2,4})\s*[.\-\/]\s*(\d{1,2})(?!\s*[.\-\/]\s*\d)/g, '');
+            return res.trim();
+        };
+
         // 내원일시: VisitDateExtractor 구조 반영 (dates + details)
         if (items.visitDates && Array.isArray(items.visitDates.details) && items.visitDates.details.length > 0) {
             items.visitDates.details.forEach(visit => {
@@ -889,6 +992,7 @@ ${conclusiveOpinion}
                     const reason = (visit.context || '').match(/(주증상|호소|내원경위|응급|통증|불편|증상)[:\s]*([^\n]+)/);
                     events.push({
                         date,
+                        type: 'visit',
                         content: `내원 - ${reason ? (reason[2] || '').trim() : '진료'}`,
                         examinations: '',
                         treatments: ''
@@ -899,6 +1003,7 @@ ${conclusiveOpinion}
             items.visitDates.dates.forEach(date => {
                 events.push({
                     date,
+                    type: 'visit',
                     content: '내원 - 진료',
                     examinations: '',
                     treatments: ''
@@ -910,20 +1015,21 @@ ${conclusiveOpinion}
         if (items.examinations && Array.isArray(items.examinations.examinations) && items.examinations.examinations.length > 0) {
             items.examinations.examinations.forEach(exam => {
                 const text = exam.examination || '';
-                // 날짜 추출 (YYYY.MM.DD, YYYY-MM-DD, YYYY/MM/DD)
-                const dateMatch = text.match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-                const dateStr = dateMatch ? `${dateMatch[1]}-${String(dateMatch[2]).padStart(2, '0')}-${String(dateMatch[3]).padStart(2, '0')}` : null;
+                // 날짜 추출 (YYYY.MM.DD, YY.MM.DD, YYYY-MM-DD, YYYY/MM/DD)
+                const [dateStr] = extractDates(text);
 
                 // 검사명 및 결과 간략화
                 let name = text.split('\n')[0].trim();
                 if (!name) name = '검사';
                 const result = exam.result || (text.match(/결과[:\s]*([^\n]+)/) ? text.match(/결과[:\s]*([^\n]+)/)[1].trim() : '');
+                const findings = exam.findings || (text.match(/소견[:\s]*([^\n]+)/) ? text.match(/소견[:\s]*([^\n]+)/)[1].trim() : '');
 
                 if (dateStr) {
                     events.push({
                         date: dateStr,
+                        type: 'exam',
                         content: '검사 시행',
-                        examinations: result ? `${name} - ${result}` : `${name}`,
+                        examinations: [name, result ? `결과: ${result}` : '', findings ? `소견: ${findings}` : ''].filter(Boolean).join(' / '),
                         treatments: ''
                     });
                 }
@@ -941,44 +1047,145 @@ ${conclusiveOpinion}
             }
 
             treatmentTexts.forEach(tText => {
-                const dateMatch = String(tText).match(/(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})/);
-                if (dateMatch) {
-                    const dateStr = `${dateMatch[1]}-${String(dateMatch[2]).padStart(2, '0')}-${String(dateMatch[3]).padStart(2, '0')}`;
+                const [dateStr] = extractDates(String(tText));
+                if (dateStr) {
                     events.push({
                         date: dateStr,
+                        type: 'treatment',
                         content: '치료 시행',
                         examinations: '',
-                        treatments: String(tText).replace(/\s*\d{4}[.\-\/]\d{1,2}[.\-\/]\d{1,2}\s*/g, '').trim()
+                        treatments: stripDateTokens(tText)
                     });
                 }
             });
         }
 
-        // 날짜순 정렬
-        events.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-        logger.info(`📑 Chronological events collected: ${events.length}`);
-
-        if (events.length === 0) {
-            return `
-📑 일자별 경과표
-
-| 일자 | 경과내용 | 주요검사 및 결과 | 치료내용 |
-|------|----------|------------------|----------|
-| - | 기록된 경과 없음 | - | - |`;
+        // 입원기간: 시작/종료 이벤트로 변환
+        if (items.admissionPeriods && Array.isArray(items.admissionPeriods.admissions)) {
+            items.admissionPeriods.admissions.forEach(adm => {
+                const dates = extractDates(adm.content);
+                if (dates.length >= 1) {
+                    events.push({
+                        date: dates[0],
+                        type: 'admission_start',
+                        content: '입원 시작',
+                        examinations: '',
+                        treatments: ''
+                    });
+                }
+                if (dates.length >= 2) {
+                    events.push({
+                        date: dates[dates.length - 1],
+                        type: 'discharge',
+                        content: '퇴원',
+                        examinations: '',
+                        treatments: ''
+                    });
+                }
+            });
         }
 
-        const tableRows = events.map(event => {
-            const dateStr = new Date(event.date).toLocaleDateString('ko-KR');
-            return `| ${dateStr} | ${event.content} | ${event.examinations || '-'} | ${event.treatments || '-'} |`;
-        }).join('\n');
+        // 통원기간: 각 날짜를 방문 이벤트로 변환
+        if (items.outpatientPeriods && Array.isArray(items.outpatientPeriods.outpatient)) {
+            items.outpatientPeriods.outpatient.forEach(op => {
+                const dates = extractDates(op.content);
+                dates.forEach(d => {
+                    events.push({
+                        date: d,
+                        type: 'outpatient',
+                        content: '통원 방문',
+                        examinations: '',
+                        treatments: ''
+                    });
+                });
+            });
+        }
 
-        return `
-📑 일자별 경과표
+        const unique = [];
+        const seen = new Set();
+        for (const e of events) {
+            const key = `${e.date}|${e.content}|${e.examinations}|${e.treatments}`;
+            if (!seen.has(key)) {
+                unique.push(e);
+                seen.add(key);
+            }
+        }
+        unique.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-| 일자 | 경과내용 | 주요검사 및 결과 | 치료내용 |
-|------|----------|------------------|----------|
-${tableRows}`;
+        logger.info(`📑 Chronological events collected: ${unique.length}`);
+
+        if (unique.length === 0) {
+            return `📑 날짜별 의료 이벤트\n- 기록된 경과 없음`;
+        }
+
+        const grouped = unique.reduce((acc, ev) => {
+            const key = ev.date;
+            if (!acc[key]) acc[key] = [];
+            acc[key].push(ev);
+            return acc;
+        }, {});
+
+        const formatKR = (iso) => {
+            const dt = new Date(iso);
+            const y = dt.getFullYear();
+            const m = String(dt.getMonth() + 1).padStart(2, '0');
+            const d = String(dt.getDate()).padStart(2, '0');
+            return `${y}.${m}.${d}`;
+        };
+
+        const label = (name) => {
+            if (this.options.timelineLabelStyle === 'emoji') {
+                const map = { 내원: '🏥', 검사: '🧪', 치료: '💊', 입원: '🛏️', 퇴원: '🚪', 통원: '🚶' };
+                const emoji = map[name] || '';
+                return emoji ? `${emoji} ${name}` : name;
+            }
+            if (this.options.timelineLabelStyle === 'none') {
+                return name;
+            }
+            return `[${name}]`;
+        };
+
+        const summarize = (arr, limit = this.options.timelineSummaryLimit, unit = '건') => {
+            if (!arr || arr.length === 0) return '';
+            const head = arr.slice(0, limit).join('; ');
+            const rest = arr.length - limit;
+            return rest > 0 ? `${head}; 외 ${rest}${unit}` : head;
+        };
+
+        const sep = this.options.timelineSeparatorStyle === 'line' ? '\n────────────────────────────────' : '';
+        const blocks = Object.keys(grouped).sort((a, b) => new Date(a) - new Date(b)).map(dateKey => {
+            const list = grouped[dateKey];
+            const header = `▶ ${formatKR(dateKey)}`;
+            const visits = Array.from(new Set(list.filter(e => e.type === 'visit').map(e => e.content.replace(/^내원\s*-\s*/, '').trim()))).filter(Boolean);
+            const exams = Array.from(new Set(list.filter(e => e.type === 'exam' && e.examinations).map(e => e.examinations))).filter(Boolean);
+            const treatments = Array.from(new Set(list.filter(e => e.type === 'treatment' && e.treatments).map(e => e.treatments))).filter(Boolean);
+            const admissionStart = list.some(e => e.type === 'admission_start');
+            const discharge = list.some(e => e.type === 'discharge');
+            const outpatientCount = list.filter(e => e.type === 'outpatient').length;
+
+            const parts = [];
+            if (visits.length > 0) parts.push(`${label('내원')} ${visits.length}건: ${summarize(visits)}`);
+            if (admissionStart) parts.push(`${label('입원')} 시작`);
+            if (exams.length > 0) parts.push(`${label('검사')} ${exams.length}건: ${summarize(exams)}`);
+            if (treatments.length > 0) parts.push(`${label('치료')} ${treatments.length}건: ${summarize(treatments)}`);
+            if (discharge) parts.push(`${label('입원')} 퇴원`);
+            if (outpatientCount > 0) parts.push(`${label('통원')} ${outpatientCount}회`);
+
+            if (this.options.timelineLabelStyle === 'compact') {
+                const compactParts = [];
+                if (visits.length > 0) compactParts.push(`내원 ${visits.length}건`);
+                if (exams.length > 0) compactParts.push(`검사 ${exams.length}건`);
+                if (treatments.length > 0) compactParts.push(`치료 ${treatments.length}건`);
+                if (admissionStart) compactParts.push(`입원 시작`);
+                if (discharge) compactParts.push(`퇴원`);
+                if (outpatientCount > 0) compactParts.push(`통원 ${outpatientCount}회`);
+                const compactLine = compactParts.join(' · ');
+                return `${header}\n- ${compactLine}${sep}`;
+            }
+            return `${header}\n${parts.join(' · ')}${sep}`;
+        }).join('\n\n');
+
+        return `📑 날짜별 의료 이벤트\n\n${blocks}`;
     }
 
     /**
@@ -1053,18 +1260,44 @@ ${tableRows}`;
             .map(([key, value]) => `${key}: ${value.summary || '정보 없음'}`)
             .join('\n');
 
-        return `
-9항목 의료기록 분석 결과를 바탕으로 손해사정 관점의 종합의견을 작성해주세요.
+        const ragDir = path.resolve(process.cwd(), 'src', 'rag');
+        const files = [
+            '고지의무위반 프롬프트.txt',
+            '고지의무위반 프롬프트2.txt',
+            '손해사정 보고서 프롬프트.txt',
+            '손해사정보고서 자동작성용 AI 프롬프트)질환별 검사결과 적용교칙 통합버전.txt',
+            '손해사정보고서_최종보고용요약규칙.txt'
+        ];
+        const guidelines = [];
+        for (const f of files) {
+            try {
+                const p = path.join(ragDir, f);
+                if (fs.existsSync(p)) {
+                    const txt = fs.readFileSync(p, 'utf-8');
+                    if (txt && txt.trim().length > 0) {
+                        guidelines.push(txt.trim());
+                    }
+                }
+            } catch {
+            }
+        }
+        const guidelineText = guidelines.join('\n\n');
 
-분석 결과:
+        return `
+9항목 의료기록 분석 결과를 바탕으로 손해사정 관점의 종합의견을 작성하세요.
+
+분석 결과(요약):
 ${itemsSummary}
 
+가이드라인:
+${guidelineText}
+
 작성 원칙:
-1. 객관적 사실만 기술, 추측 금지
-2. 의학적 인과관계의 명확한 근거 제시
-3. 보험가입 전후 상황의 객관적 비교
-4. 향후 치료 경과 및 예후 전망
-5. 손해사정 시 특별 고려사항
+- 원문의 문맥을 보존하고 과도한 세그먼트나 재구성을 피할 것
+- 객관적 사실만 기술, 추측 금지
+- 의학적 인과관계의 명확한 근거 제시
+- 보험가입 전후 상황의 객관적 비교 포함
+- ICD 코드·영문표기(한글 병기)를 강제하여 표준화
 
 길이: 200-300자 내외
 톤: 전문적, 객관적, 명확
@@ -1086,6 +1319,56 @@ ${itemsSummary}
         if (confidenceValues.length === 0) return 0;
 
         return confidenceValues.reduce((sum, conf) => sum + conf, 0) / confidenceValues.length;
+    }
+
+    calculateItemWeights(items, patientInfo, rawData) {
+        const keys = Object.keys(items || {});
+        const weights = {};
+        let sum = 0;
+        let count = 0;
+        const enroll = patientInfo?.insuranceJoinDate || patientInfo?.insuranceEnrollmentDate || '';
+        const enrollMs = enroll ? new Date(enroll).getTime() : NaN;
+        const clamp01 = n => {
+            const x = Number(n);
+            if (!Number.isFinite(x)) return 0;
+            if (x < 0) return 0;
+            if (x > 1) return 1;
+            return x;
+        };
+        for (const key of keys) {
+            const item = items[key] || {};
+            const conf = clamp01(item.confidence || 0);
+            const detailsLen =
+                Array.isArray(item.details) ? item.details.length :
+                Array.isArray(item.items) ? item.items.length :
+                Array.isArray(item.examinations) ? item.examinations.length :
+                Array.isArray(item.outpatient) ? item.outpatient.length :
+                Array.isArray(item.admissions) ? item.admissions.length : 0;
+            const presence = detailsLen > 0 ? 1 : (item.summary ? 0.5 : 0);
+            let dateProx = 0.2;
+            const datesArr = Array.isArray(item.dates) ? item.dates : [];
+            if (Number.isFinite(enrollMs) && datesArr.length > 0) {
+                let s = 0;
+                let n = 0;
+                for (const d of datesArr) {
+                    const ms = new Date(d).getTime();
+                    if (Number.isFinite(ms)) {
+                        const diffDays = Math.abs(ms - enrollMs) / (1000 * 60 * 60 * 24);
+                        const p = clamp01(1 - (diffDays / (365 * 5)));
+                        s += p;
+                        n += 1;
+                    }
+                }
+                dateProx = n ? s / n : 0.2;
+            }
+            const weight = clamp01(conf * 0.6 + presence * 0.2 + dateProx * 0.2);
+            const w = Number(weight.toFixed(4));
+            weights[key] = w;
+            sum += w;
+            count += 1;
+        }
+        const overall = count ? Number((sum / count).toFixed(4)) : 0;
+        return { weights, overall };
     }
 
     /**
@@ -1432,6 +1715,14 @@ class DiagnosisExtractor {
     async extract(genes, causalNetwork, patientInfo) {
         const diagnoses = [];
         const diagnosisKeywords = ['진단', '병명', '질환', '소견', 'Dx', 'diagnosis'];
+        const icdPattern = /\b([A-Z]\d{2,3}(?:\.[0-9A-Z]{1,2})?)\b/;
+        const medicalTerms = [
+            'cancer', 'carcinoma', 'malignant', 'tumor', 'neoplasm',
+            'diabetes', 'hypertension', 'obesity', 'cholecystitis',
+            'gastritis', 'pneumonia', 'stroke', 'myocardial infarction',
+            'hepatitis', 'renal failure', 'nephropathy', 'neuropathy',
+            '암', '종양', '악성', '당뇨', '고혈압', '비만', '담낭염', '위염', '폐렴', '뇌졸중', '심근경색'
+        ];
 
         genes.forEach(gene => {
             const content = gene.content || gene.raw_text || '';
@@ -1445,6 +1736,26 @@ class DiagnosisExtractor {
                     });
                 }
             });
+
+            // ICD 코드 기반 진단 추출
+            const icdMatch = content.match(icdPattern);
+            if (icdMatch) {
+                diagnoses.push({
+                    diagnosis: content,
+                    keyword: 'icd',
+                    confidence: Math.max(gene.confidence || 0.8, 0.85)
+                });
+            }
+
+            // 의학 용어 기반 진단 추출(영문/한글)
+            const lower = content.toLowerCase();
+            if (medicalTerms.some(term => lower.includes(term))) {
+                diagnoses.push({
+                    diagnosis: content,
+                    keyword: 'medical_term',
+                    confidence: Math.max(gene.confidence || 0.8, 0.82)
+                });
+            }
 
             // 의료 앵커 확인
             if (gene.anchors && gene.anchors.medical) {

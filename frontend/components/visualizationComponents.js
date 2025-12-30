@@ -395,6 +395,14 @@ if (!window.VNEXSUSApp.VisualizationComponents) {
     applyResponsiveLayout(container) {
         const style = document.createElement('style');
         style.textContent = `
+            .medical-report-container {
+                overflow-y: auto;
+                max-height: 80vh;
+                font-size: 1.06rem;
+                line-height: 1.7;
+                word-break: break-word;
+                padding: 8px;
+            }
             @media (max-width: 768px) {
                 .timeline-card {
                     margin: 8px 0 !important;

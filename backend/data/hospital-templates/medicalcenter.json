@@ -4,12 +4,930 @@
   "patterns": [
     {
       "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\n571002",
+      "position": 72504,
+      "length": 11,
+      "hash": "3bfef5b9b467f23096bd1a456795f884",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "주민등록번호\n571002-1037847",
+      "position": 72502,
+      "length": 21,
+      "hash": "73b2f624cac5789d5e2d6361f11736a1",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별 남",
+      "position": 71954,
+      "length": 4,
+      "hash": "23bd365288eab351d4355e0b925f6378",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "주민등록번호\n571002\n1037847\n집도의\n안종호\nOp time\n시작시간: 14:07\n망막 수술 기록지\n수술일\n2023-10-16\nSIDE\n☐ OD\nVOS\n☐ Both\nAssist\n홍진영/한혜주\n종료시간: 16:03\n진단명\nERM MH ☐ VH ☐ VO PDR ☐ RRD IOL dislocation Others (RD\n)\n백내장\n✓ Senile cataract ☐ Pseudophakia Daphakia ☐ none ☐ Others (\n)\nPPV\nPPV+Phaco c PCL 2nd IOL fixation ☐ Encircling ☐ Buckling\n수술명\n☐ Others (\n)\n마취\n✓ Topical\nPin-point ☐ Nadbath ✓ Retrobulbar ☐ 0.5% Intracameral lidocaine\nOp procedure\n5% povidone Conjuntival irrigation\nPhaco was done\nIOL inseration\nVitrectomy\n☐ none in the bag ☐ in the sulcus scleral fixation\n236 25G ☐ Total ☐ partial ☐ Others(\n)\nMembrane peeling\nILM peeling\n☐ No stain ☐ 0.125% ICG ☐070 □트리암시놀론 □Others(\n☐ No stain 0.125% ICG ☑☐☐ Others(\n✓ Endolaser\nmWx\nshots\n✓ Cryo\nRetinotomy\nFluid air exchange\nPFCL use\n✓ Tamponade\nVitreal injection\n☐ post capsulotomy\nDropped IOL removal\nDK line\n☑BSS Air ✓ C3F8\nSF6 Silicone oil 5500 /\ncc)\n주사제:\n✓ Conjunctival suture\n✓ 8-0 vicryl\nIOL fixation\n✓ clear corneal wound suture\n10-0 polyprolene\nmaterial\n10-0 nylon\n힐론\n✓ BSS plus 500ml ☐ Iris retractor\nOthers(\n)\n)\n)\n\nNote\nL) nadbeth, Retrobulbar Ane\n-> core vitrectomy -> MQ inj -> MP\npphvit-> F-A-E> Laser->cryo\nBSS tamponade\n-> Conj suture 1site\nLens Mark\nSAĐOẠT 114.50\nSN 15543619 072\n의사서명: 안종호\n고양\n신세계\n안과인\n\n통원확인서\n발행번호: 00000006783\n병록번호: 0000021163\n주민번호: 571002-1037847",
+      "position": 70546,
+      "length": 1305,
+      "hash": "86b347f878086ab7ae9e3e16cc366d91",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-10-15\n안과",
+      "position": 70239,
+      "length": 43,
+      "hash": "62006b036793e7272ff82f4ff37e740b",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-10-13\n안과",
+      "position": 69734,
+      "length": 43,
+      "hash": "76a145d646fdc09309163b42fd05f103",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-09-30\n안과",
+      "position": 69155,
+      "length": 43,
+      "hash": "34aec1701036079e5201a920fa611568",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험 유형\n초재진구분\n보조유형\n지원구분\n2025-09-18\n안과",
+      "position": 68665,
+      "length": 44,
+      "hash": "c0ae8e1ee7dcc33d0ea95867cac41009",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-09-08\n안과",
+      "position": 68201,
+      "length": 43,
+      "hash": "84ba52dd884a5fd30635018a3a8e6757",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-08-27\n안과",
+      "position": 67732,
+      "length": 43,
+      "hash": "1bc172de251b4b43da3a8efa016392f3",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-08-11\n안과",
+      "position": 67269,
+      "length": 43,
+      "hash": "60f5da0250ecb4838e296fb265e9018e",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-07-29\n안과",
+      "position": 66798,
+      "length": 43,
+      "hash": "305bc22dac2ba727be6f7ca64fb2583a",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-07-17\n안과",
+      "position": 66334,
+      "length": 43,
+      "hash": "1323df09faaceefc4d9f31b5df83894f",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-07-01\n안과",
+      "position": 65866,
+      "length": 22,
+      "hash": "fa57c8c397f24cb7ed99ce51217c2d60",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-06-20\n안과",
+      "position": 65393,
+      "length": 43,
+      "hash": "d31b8b07b5263902ec8ddf3ae6497fa1",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-06-14\n안과",
+      "position": 64924,
+      "length": 43,
+      "hash": "99609fa5d5184844c98938f8eda6ec94",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-06-04\n안과",
+      "position": 64460,
+      "length": 43,
+      "hash": "852bd900836823dc218601b512b35af2",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-05-27\n안과",
+      "position": 63990,
+      "length": 22,
+      "hash": "3b2240784848e7612510f63dc702460c",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-05-15\n안과",
+      "position": 63532,
+      "length": 43,
+      "hash": "ca82b87201a71bbcc6b431e29d94822b",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-05-09\n안과",
+      "position": 63064,
+      "length": 43,
+      "hash": "ff4002d06eda12cefc3d0c042d7f82d2",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-04-26\n안과",
+      "position": 62578,
+      "length": 43,
+      "hash": "c9ea353504d9e7940b5005ef56b2d0e4",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-04-15\n안과",
+      "position": 62091,
+      "length": 22,
+      "hash": "149bc0b79b3eb187bd5daa488b4d001e",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-04-03\n안과",
+      "position": 61620,
+      "length": 22,
+      "hash": "fbd329e218726cb7545e29f02d7ef5d5",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2025-03-27\n안과",
+      "position": 61138,
+      "length": 17,
+      "hash": "ddd7aafeedfb562f247b8e0c8f8eecce",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-03-18\n안과",
+      "position": 60669,
+      "length": 43,
+      "hash": "559c39e239e9a61af81484ff3300b15a",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-03-12\n안과",
+      "position": 60210,
+      "length": 43,
+      "hash": "f2e1700955190b9c50a190a3b1a1321e",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-03-04\n안과",
+      "position": 59722,
+      "length": 22,
+      "hash": "5ca4f65c48adb3bfb7d385a35a739c26",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-02-25\n안과",
+      "position": 59256,
+      "length": 43,
+      "hash": "dace532912c5d49c2fdab9d630dc6831",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2025-02-18\n안과",
+      "position": 58786,
+      "length": 22,
+      "hash": "73080877dffe44b15db1c7d56d4e99b1",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-02-11\n안과",
+      "position": 58304,
+      "length": 43,
+      "hash": "1b5812b5993c5d039657a750285c8196",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2025-01-31\n안과",
+      "position": 57814,
+      "length": 17,
+      "hash": "b7c1419d14d859a0174b21a11e38c2ed",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-01-20\n안과",
+      "position": 57342,
+      "length": 43,
+      "hash": "5ca76380e1069e4ebf75fbff1a2cf41e",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2025-01-11\n안과",
+      "position": 56892,
+      "length": 43,
+      "hash": "9de7c2bc82cfb31743f9feab7b410237",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2025-01-06\n안과",
+      "position": 56387,
+      "length": 17,
+      "hash": "ef93218f77d6cab891af57a545972b6d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2024-12-31\n안과",
+      "position": 55890,
+      "length": 17,
+      "hash": "8216cd56fa06a7cf58ba79c3ee30816d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-12-24\n안과",
+      "position": 55394,
+      "length": 43,
+      "hash": "6af8e788331db5f570402cc4308eaf65",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n안과",
+      "position": 54908,
+      "length": 6,
+      "hash": "d71b9161020f2e2581538cec7842370b",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.705Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-12-05\n안과",
+      "position": 54425,
+      "length": 43,
+      "hash": "ade50c0c080ead6a8968d08b85d9b1c7",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-11-26\n안과",
+      "position": 53944,
+      "length": 43,
+      "hash": "b71de764ca1798bc916f1383cbb6599a",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-11-19\n안과",
+      "position": 53467,
+      "length": 43,
+      "hash": "f4647db3001b6adb59224bdd10254d7f",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2024-11-15\n안과",
+      "position": 53209,
+      "length": 17,
+      "hash": "05685a48d9a165a6f9b2501d4b17c45a",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-11-11\n안과",
+      "position": 52752,
+      "length": 43,
+      "hash": "b2c3f8934dd97740a3cbe4330288e177",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-11-01\n안과",
+      "position": 52274,
+      "length": 22,
+      "hash": "6174a68c3b1a44bcd5429f066539bd8f",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-10-25\n안과",
+      "position": 51821,
+      "length": 43,
+      "hash": "843c1718fc8631bb45771ce55c75f328",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-10-07\n안과",
+      "position": 51347,
+      "length": 22,
+      "hash": "8728e28a175b1f007b37619d7870264d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-10-02\n안과",
+      "position": 50887,
+      "length": 43,
+      "hash": "83b97932fb999b69fea66691166db5f6",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-09-26\n안과",
+      "position": 50417,
+      "length": 22,
+      "hash": "08d79c90bd6f65d1bb7b2d1d77d0f9c7",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-09-13\n안과",
+      "position": 49954,
+      "length": 43,
+      "hash": "89257433aefc8a567957957e25ab9187",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-09-04\n안과",
+      "position": 49466,
+      "length": 22,
+      "hash": "a9017df408b41c09e7e953f3ef9e4dbb",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-08-27\n안과",
+      "position": 49001,
+      "length": 43,
+      "hash": "54c1e63304f16eddbff3cd9022108a13",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-08-22\n안과",
+      "position": 48526,
+      "length": 22,
+      "hash": "9fe0f3f01e77ee0405f3cb25c9ecf6d3",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-08-12\n안과",
+      "position": 48055,
+      "length": 43,
+      "hash": "16c28c1664b403834a0c9f84960d90af",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-08-05\n안과",
+      "position": 47587,
+      "length": 22,
+      "hash": "e6d9c9854ae72a19837da7993c9bf953",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-07-29\n안과",
+      "position": 47119,
+      "length": 22,
+      "hash": "7b6bfb7455abacc8191b98866240fd3c",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-07-22\n안과",
+      "position": 46655,
+      "length": 43,
+      "hash": "5192d487ef18dcd81096abc753954299",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-07-16\n안과",
+      "position": 46156,
+      "length": 22,
+      "hash": "8e8bdb4dd89afa6b208c2c5fdb6c5215",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-07-08\n안과",
+      "position": 45708,
+      "length": 43,
+      "hash": "0e7fd5c8f6d1032b9909a867d178efaa",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-07-01\n안과",
+      "position": 45289,
+      "length": 22,
+      "hash": "1791b338b2e74913f958b205fe504c83",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-06-19\n안과",
+      "position": 44854,
+      "length": 43,
+      "hash": "81f5ccdef79470e5b78cb436538c245b",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-06-11\n안과",
+      "position": 44434,
+      "length": 43,
+      "hash": "089a0b45f3889f988ba46d9eca66a195",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구뿐\n보조유형\n지원구분\n2024-06-04\n안과",
+      "position": 44018,
+      "length": 43,
+      "hash": "67c94e8335018117c3a99caee9865ce4",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-05-27\n안과",
+      "position": 43597,
+      "length": 43,
+      "hash": "2fcac6bc7680b381b8c1959b1711d265",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-05-16\n안과",
+      "position": 43182,
+      "length": 43,
+      "hash": "6a58e7fed59c89c94373216022130fb2",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-05-09\n안과",
+      "position": 42758,
+      "length": 43,
+      "hash": "1c857918891558e6843944ab26047004",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-04-30\n안과",
+      "position": 42341,
+      "length": 43,
+      "hash": "a6e9ce8fc37d72cc5476727cfe9f9e0d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-04-22\n안과",
+      "position": 41917,
+      "length": 22,
+      "hash": "4ff8554e9ee0e020f50339d0b1a667bc",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구뿐\n보조유형\n지원구분\n2024-04-15\n안과",
+      "position": 41512,
+      "length": 43,
+      "hash": "907898b9e1b4e24e4dbd39da9bb0ce07",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-04-08\n안과",
+      "position": 41102,
+      "length": 43,
+      "hash": "02952e082a230927ef5440a9cc6356d4",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-04-02\n안과",
+      "position": 40699,
+      "length": 43,
+      "hash": "301b5a974b6a147b3bf0d7ab8ee527ca",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-03-26\n안과",
+      "position": 40292,
+      "length": 43,
+      "hash": "68244abece80c1604ed18d13f3ef2ac0",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-03-18\n안과",
+      "position": 39880,
+      "length": 43,
+      "hash": "dd7fb7b5b1d6957a352672537b04620b",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-03-12\n안과",
+      "position": 39472,
+      "length": 43,
+      "hash": "0b5f1b32f74a5e68d88018933aee0d8c",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-03-05\n안과",
+      "position": 39061,
+      "length": 22,
+      "hash": "f7c122013549e01e121554ab89544d5d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-02-26\n안과",
+      "position": 38626,
+      "length": 43,
+      "hash": "64e4ab387edce8aef3b5d545aa7d6287",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-02-19\n안과",
+      "position": 38210,
+      "length": 22,
+      "hash": "eaf624f8f905167433422ac2b9027d75",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-02-13\n안과",
+      "position": 37814,
+      "length": 43,
+      "hash": "5d51423917c206a3d8058aa2afe0f17a",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2024-02-05\n안과",
+      "position": 37403,
+      "length": 22,
+      "hash": "93d553334ac49f86292c3b526b26aa39",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-01-29\n안과",
+      "position": 37000,
+      "length": 43,
+      "hash": "3d035d98c92e6e6658fc66dc69cf8e39",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-01-22\n안과",
+      "position": 36635,
+      "length": 43,
+      "hash": "4daa1d8dc140a856ccef7a2f0cf87373",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-01-15\n안과",
+      "position": 36271,
+      "length": 43,
+      "hash": "37ce13477c4ea1be767b3028ab5f1718",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-01-11\n안과",
+      "position": 36083,
+      "length": 43,
+      "hash": "43274be30bcb8f88284a26b21ab9d40e",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2024-01-08\n안과",
+      "position": 35720,
+      "length": 43,
+      "hash": "a09efd61a74beeb291afbf447b01437d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2023-12-21\n안과",
+      "position": 35433,
+      "length": 43,
+      "hash": "2d6465639ab3ffb3f868eb4cd88d8858",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2023-12-14\n안과",
+      "position": 35201,
+      "length": 43,
+      "hash": "28c16519d1f3bf347878efbee56fae02",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2023-11-27\n안과",
+      "position": 34782,
+      "length": 43,
+      "hash": "3a15bf4717e0b554ebc60e9a357a5a6c",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n2023-11-09\n안과",
+      "position": 34291,
+      "length": 22,
+      "hash": "cee5a6dda68a4f311180a0f95c505fa0",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2023-10-26\n안과",
+      "position": 33842,
+      "length": 43,
+      "hash": "b94a5e5e14d1b56d2ba36d173ef35b32",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험 유형\n초재진구분\n보조유형\n지원구분\n2023-10-19\n안과",
+      "position": 33474,
+      "length": 44,
+      "hash": "aa6f0e4672c9acce34beb67dff1eca08",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n진료의사\n보험유형\n초재진구분\n보조유형\n지원구분\n2023-10-17\n안과",
+      "position": 33112,
+      "length": 43,
+      "hash": "d5c6cb959c186ecacada94d217250cc7",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\n2023-10-16\n안과",
+      "position": 31581,
+      "length": 17,
+      "hash": "b4c1d3163eaad2950c39368591a76d36",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
+      "match": "대전화:\n01064492246\n주소:\n요양기관기호:\n전화번호:\n팩스번호:\n담당의사:\n발행일자: 2025년 10월 15\n41381700\n031-8076-9999\n031-8076-9990\n경기도 고양시 덕양구 오부자로 99",
+      "position": 31401,
+      "length": 122,
+      "hash": "3f417dff769d733355d2b3ce8859739d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별:\n김영래\n25375\n1957-10-02 / 남",
+      "position": 31371,
+      "length": 28,
+      "hash": "cbd15d0f506c9afff0328a277f1ef80d",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이: (남",
+      "position": 30179,
+      "length": 9,
+      "hash": "a2134a9d3a6c1b1fe9421d190bccc29f",
+      "frequency": 34,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이 : (남",
+      "position": 29350,
+      "length": 10,
+      "hash": "8696b9414f978b9d4c8224b88de698b8",
+      "frequency": 58,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과:안과",
+      "position": 27928,
+      "length": 6,
+      "hash": "90224af9f4fa189b05c44a428177299e",
+      "frequency": 14,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이 : ( 남",
+      "position": 25227,
+      "length": 11,
+      "hash": "bd1988be489ca5aabfc38fee1315bc1a",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과/병동(의뢰처) : 안과",
+      "position": 23056,
+      "length": 16,
+      "hash": "a52274357f644088f8cadfeca9a30dda",
+      "frequency": 34,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이 :( 남",
+      "position": 16632,
+      "length": 10,
+      "hash": "b31c8357eae56e4dcdd6a47a2a5d46df",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과/병동 (의뢰처) : 안과",
+      "position": 4228,
+      "length": 17,
+      "hash": "5b5e99eb180857a34063822753512410",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
+      "match": "인천 남동구 남동대로 774",
+      "position": 252,
+      "length": 15,
+      "hash": "32fdf0adbf41c19949e70253fc340dbb",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "571002-1******",
+      "position": 189,
+      "length": 14,
+      "hash": "74b91c62d5a506f680873dd16d039aa9",
+      "frequency": 2,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호\n43620665",
+      "position": 119,
+      "length": 13,
+      "hash": "da3293de9c84b1dfdc9e9218933f7fdf",
+      "frequency": 1,
+      "firstSeen": "2025-12-26T00:39:36.706Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
       "match": "등록번호\r\n571002",
       "position": 81153,
       "length": 12,
       "hash": "92dddc8318a854c8b06c39223fd53159",
-      "frequency": 14,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 2,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -17,17 +935,8 @@
       "position": 81151,
       "length": 22,
       "hash": "9ab1deb5689893170d404bcdfa359e66",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별 남",
-      "position": 80556,
-      "length": 4,
-      "hash": "23bd365288eab351d4355e0b925f6378",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -35,8 +944,8 @@
       "position": 78974,
       "length": 1469,
       "hash": "c5de5def303467057338420099475798",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -44,8 +953,8 @@
       "position": 78616,
       "length": 50,
       "hash": "181741a70ed58c0d513389abf97b9332",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -53,8 +962,8 @@
       "position": 78036,
       "length": 50,
       "hash": "598e6c846ca0a665ea2dab33f099fbe0",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -62,8 +971,8 @@
       "position": 77368,
       "length": 50,
       "hash": "d7efa464869322fa1caf95b490bf0f7b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -71,8 +980,8 @@
       "position": 76799,
       "length": 51,
       "hash": "b28ff1d96030a48dfc8ca09d2622ccb8",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -80,8 +989,8 @@
       "position": 76261,
       "length": 50,
       "hash": "28436ec8dc1a55a4664345b326660c56",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -89,8 +998,8 @@
       "position": 75717,
       "length": 50,
       "hash": "8073bc40139f60bc65b0f3a69bd04a93",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -98,8 +1007,8 @@
       "position": 75181,
       "length": 50,
       "hash": "44bad0e4ba7bbbd439618fb1579ef3bf",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -107,8 +1016,8 @@
       "position": 74634,
       "length": 50,
       "hash": "9a9b5cb93d9e85794af0baadfa029801",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -116,8 +1025,8 @@
       "position": 74095,
       "length": 50,
       "hash": "a4fa6d2d7b02a2c078917633bcabb329",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -125,8 +1034,8 @@
       "position": 73551,
       "length": 25,
       "hash": "d76683ea2dbc9156a5e2f0f30dbf45e9",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -134,8 +1043,8 @@
       "position": 73005,
       "length": 50,
       "hash": "855777d47ee9332037ed0e73fae12a5e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -143,8 +1052,8 @@
       "position": 72460,
       "length": 50,
       "hash": "971fb27e205808316d0381aa2396bc2b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -152,8 +1061,8 @@
       "position": 71923,
       "length": 50,
       "hash": "32989c37e8c29c633c61d43ed67c4c51",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -161,8 +1070,8 @@
       "position": 71378,
       "length": 25,
       "hash": "ebc6ef1a2d9f422e442e40ba40c4073b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -170,8 +1079,8 @@
       "position": 70846,
       "length": 50,
       "hash": "2cece16847a6e7d99d2dd45309dafbe2",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -179,8 +1088,8 @@
       "position": 70302,
       "length": 50,
       "hash": "bb5431071f8d9a68053378129ece2719",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -188,8 +1097,8 @@
       "position": 69740,
       "length": 50,
       "hash": "21796c7a66c6454866fd205626f841c5",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -197,8 +1106,8 @@
       "position": 69177,
       "length": 25,
       "hash": "2c836ec095ed84975fb200555681ea29",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -206,8 +1115,8 @@
       "position": 68630,
       "length": 25,
       "hash": "930e04e96313312fb6738623e0ac6e06",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -215,8 +1124,8 @@
       "position": 68076,
       "length": 19,
       "hash": "8c3618e9470666ce423422c246f258cd",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -224,8 +1133,8 @@
       "position": 67529,
       "length": 50,
       "hash": "f2793be56ae86b87d77f3c3d85849e3f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -233,8 +1142,8 @@
       "position": 66997,
       "length": 50,
       "hash": "28f8e8a118345dff94b90b23fe9ef33f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -242,8 +1151,8 @@
       "position": 66433,
       "length": 25,
       "hash": "e6294b130bc7efa84cec340764ff4e4f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -251,8 +1160,8 @@
       "position": 65894,
       "length": 50,
       "hash": "cc5a77f818e7d20e457dca7467a298c0",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -260,8 +1169,8 @@
       "position": 65348,
       "length": 25,
       "hash": "7b8102a08832c498c90aa7c9cb59b155",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -269,8 +1178,8 @@
       "position": 64793,
       "length": 50,
       "hash": "839ac43d03ad8a6bc030ff744e2ca341",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -278,8 +1187,8 @@
       "position": 64226,
       "length": 19,
       "hash": "8dd47dc2ef6c4700938e2f6eb771617e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -287,8 +1196,8 @@
       "position": 63680,
       "length": 50,
       "hash": "f5abc1006bc8ae711e7cfc6b8c5046b8",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -296,8 +1205,8 @@
       "position": 63155,
       "length": 50,
       "hash": "2594bfe48f8d3420cde31a0b0a33c219",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -305,8 +1214,8 @@
       "position": 62576,
       "length": 19,
       "hash": "9bde275283710c205771a40ef61c1129",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -314,8 +1223,8 @@
       "position": 62002,
       "length": 19,
       "hash": "cedbd01f3183193536b2fc0527461a2a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -323,8 +1232,8 @@
       "position": 61430,
       "length": 50,
       "hash": "a425213612006e0897dc080672cac02e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -332,8 +1241,8 @@
       "position": 60872,
       "length": 7,
       "hash": "ecabd630dcea045393e3311f77148438",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -341,8 +1250,8 @@
       "position": 60314,
       "length": 50,
       "hash": "72a7fc64df369247034bed7a5a0bf158",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -350,8 +1259,8 @@
       "position": 59757,
       "length": 50,
       "hash": "eab61be30b5e018f0070697039b3df7f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -359,8 +1268,8 @@
       "position": 59205,
       "length": 50,
       "hash": "9abe2aaf0ba9027ce3be35fe9b1fcc75",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -368,8 +1277,8 @@
       "position": 58912,
       "length": 19,
       "hash": "0bee5acb56794344e800d4f11402aff1",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -377,8 +1286,8 @@
       "position": 58383,
       "length": 50,
       "hash": "c2e30424b26b6fd0ece02960bc5f986e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -386,8 +1295,8 @@
       "position": 57828,
       "length": 25,
       "hash": "52d3e8fb1c1d936bb781f82368f9ffdd",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -395,8 +1304,8 @@
       "position": 57305,
       "length": 50,
       "hash": "0fe2283fb313c848fcdb877c62799e05",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -404,8 +1313,8 @@
       "position": 56756,
       "length": 25,
       "hash": "1f8da8abbfd68a1b1aa67c62193ecbd3",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -413,8 +1322,8 @@
       "position": 56224,
       "length": 50,
       "hash": "33e9368ae2773489d352ba74bfbb1f9f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -422,8 +1331,8 @@
       "position": 55680,
       "length": 25,
       "hash": "04cf35181845c66c56eec11e22c84848",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -431,8 +1340,8 @@
       "position": 55144,
       "length": 50,
       "hash": "47830d13d216423565326340983828e8",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -440,8 +1349,8 @@
       "position": 54581,
       "length": 25,
       "hash": "d66897db9eb0236465e1745052826c1e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -449,8 +1358,8 @@
       "position": 54042,
       "length": 50,
       "hash": "a70cea446f03e86c5665d9b37d7b378c",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.909Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -458,8 +1367,8 @@
       "position": 53493,
       "length": 25,
       "hash": "3295b894b68a5e7897fd46ea77d6d320",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -467,8 +1376,8 @@
       "position": 52945,
       "length": 50,
       "hash": "128f54ac007162d165b0d8fa58977771",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -476,8 +1385,8 @@
       "position": 52405,
       "length": 25,
       "hash": "5b7d183993176cce356e63b33143fd5a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -485,8 +1394,8 @@
       "position": 51861,
       "length": 25,
       "hash": "3a970e2a3a8679cb58f706e3f18ebc5e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -494,8 +1403,8 @@
       "position": 51324,
       "length": 50,
       "hash": "7d3c50f574b46e32088bc033cbae4694",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -503,8 +1412,8 @@
       "position": 50751,
       "length": 25,
       "hash": "a01f0b39fef33c6f60694e0366a7fa1c",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -512,8 +1421,8 @@
       "position": 50231,
       "length": 50,
       "hash": "ce026f61e836606649476d5948345711",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -521,8 +1430,8 @@
       "position": 49744,
       "length": 25,
       "hash": "6f40a446cc1bc6857c9243d85f16ffbf",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -530,8 +1439,8 @@
       "position": 49242,
       "length": 50,
       "hash": "8dc9d77ab03ff86b898acf32a7bdbe2f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -539,8 +1448,8 @@
       "position": 48753,
       "length": 50,
       "hash": "5b3c6d4fd9b60f2072a1286095a410d6",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -548,8 +1457,8 @@
       "position": 48270,
       "length": 50,
       "hash": "9005a3df7a7204edfcff0d2838b45c6e",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -557,8 +1466,8 @@
       "position": 47780,
       "length": 50,
       "hash": "128cf1947e58cc0b8233aab111d36a48",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -566,8 +1475,8 @@
       "position": 47300,
       "length": 50,
       "hash": "bfde755637241ecfdbb0c555311e4ff7",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -575,8 +1484,8 @@
       "position": 46807,
       "length": 50,
       "hash": "1c2ae1e5b3e241205b3f9b689e4d1f5b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -584,8 +1493,8 @@
       "position": 46322,
       "length": 50,
       "hash": "e0cafd9192aded94ecffeefe5cdff241",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -593,8 +1502,8 @@
       "position": 45828,
       "length": 25,
       "hash": "53286cd573c9c0b018706bf2c6d3cf7d",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -602,8 +1511,8 @@
       "position": 45357,
       "length": 50,
       "hash": "2f6b023b2cf1f0c7a76a21bfc69da511",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -611,8 +1520,8 @@
       "position": 44877,
       "length": 50,
       "hash": "c536d85c168f43217eff3fada1867815",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -620,8 +1529,8 @@
       "position": 44408,
       "length": 50,
       "hash": "1ced569d6af34c841ca4d837a19e1725",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -629,8 +1538,8 @@
       "position": 43935,
       "length": 50,
       "hash": "0e2a92350ac133c0b3f5c175df1f1306",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -638,8 +1547,8 @@
       "position": 43454,
       "length": 50,
       "hash": "079cdc8660bca169a9225c98ead3f04d",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -647,8 +1556,8 @@
       "position": 42978,
       "length": 50,
       "hash": "391c1dda9a99802b5463c2b5bb383f8b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -656,8 +1565,8 @@
       "position": 42500,
       "length": 25,
       "hash": "ad1d3a9107f3e1d33bbff2b9565fbca4",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -665,8 +1574,8 @@
       "position": 41994,
       "length": 50,
       "hash": "2315724258950ba268f849305cf66cbb",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -674,8 +1583,8 @@
       "position": 41511,
       "length": 25,
       "hash": "ad942592889810453f16af8a9a7b8dd5",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -683,8 +1592,8 @@
       "position": 41051,
       "length": 50,
       "hash": "329f79c765bd873119cf6e9374640d6d",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -692,8 +1601,8 @@
       "position": 40572,
       "length": 25,
       "hash": "9ca1c22b3cb80c1b121b67b3cede5941",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -701,8 +1610,8 @@
       "position": 40105,
       "length": 50,
       "hash": "8a3be02c5152687d9815d68069d2f42f",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -710,8 +1619,8 @@
       "position": 39678,
       "length": 50,
       "hash": "4b95345c1b1ab60dffe7231477c3bfcd",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -719,8 +1628,8 @@
       "position": 39253,
       "length": 50,
       "hash": "45401ee007968a0449c4f9ec20c518eb",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -728,8 +1637,8 @@
       "position": 39037,
       "length": 50,
       "hash": "d24e00cdf973fc33dfb4336e1f032712",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -737,8 +1646,8 @@
       "position": 38613,
       "length": 50,
       "hash": "e989638b88b4afdc2af0b18415fc6d99",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -746,8 +1655,8 @@
       "position": 38277,
       "length": 50,
       "hash": "c0bd1c1cd35ce9d4030c398d5be1ee4b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -755,8 +1664,8 @@
       "position": 38004,
       "length": 50,
       "hash": "e182dad38b2719416e5b6649685b5209",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -764,8 +1673,8 @@
       "position": 37521,
       "length": 50,
       "hash": "d787e51029e4bc1ad0db916119df4d17",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -773,8 +1682,8 @@
       "position": 36956,
       "length": 25,
       "hash": "53e27f819b7c81dbe74e54d3fcc8b364",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -782,8 +1691,8 @@
       "position": 36439,
       "length": 50,
       "hash": "857300ed3dad96bbbd70144a0b111418",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -791,8 +1700,8 @@
       "position": 36012,
       "length": 51,
       "hash": "1097d2c4b8c05a28dad9fdb48112ce46",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -800,8 +1709,8 @@
       "position": 35593,
       "length": 50,
       "hash": "c61bb1504372c8dbace4e4f1afc52b4a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -809,8 +1718,8 @@
       "position": 33871,
       "length": 19,
       "hash": "0410204a102f83c6a06a3cbe6df7d01c",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -818,8 +1727,8 @@
       "position": 33677,
       "length": 133,
       "hash": "ad5bdcd4b5cc100a9f8a73080d10ff60",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -827,89 +1736,8 @@
       "position": 33643,
       "length": 31,
       "hash": "300b3756be70f8997b8802566c236e69",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별/나이: (남",
-      "position": 32332,
-      "length": 9,
-      "hash": "a2134a9d3a6c1b1fe9421d190bccc29f",
-      "frequency": 119,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별/나이 : (남",
-      "position": 31450,
-      "length": 10,
-      "hash": "8696b9414f978b9d4c8224b88de698b8",
-      "frequency": 203,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과:안과",
-      "position": 29948,
-      "length": 6,
-      "hash": "90224af9f4fa189b05c44a428177299e",
-      "frequency": 49,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별/나이 : ( 남",
-      "position": 27093,
-      "length": 11,
-      "hash": "bd1988be489ca5aabfc38fee1315bc1a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과/병동(의뢰처) : 안과",
-      "position": 24733,
-      "length": 16,
-      "hash": "a52274357f644088f8cadfeca9a30dda",
-      "frequency": 119,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별/나이 :( 남",
-      "position": 17876,
-      "length": 10,
-      "hash": "b31c8357eae56e4dcdd6a47a2a5d46df",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과/병동 (의뢰처) : 안과",
-      "position": 4447,
-      "length": 17,
-      "hash": "5b5e99eb180857a34063822753512410",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
-      "match": "인천 남동구 남동대로 774",
-      "position": 277,
-      "length": 15,
-      "hash": "32fdf0adbf41c19949e70253fc340dbb",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
-    },
-    {
-      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
-      "match": "571002-1******",
-      "position": 210,
-      "length": 14,
-      "hash": "74b91c62d5a506f680873dd16d039aa9",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -917,14 +1745,14 @@
       "position": 129,
       "length": 14,
       "hash": "f49b22413b912c36048028dcc4efb48c",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:44.910Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-26T06:05:51.402Z"
     }
   ],
   "statistics": {
-    "documentsProcessed": 7,
-    "averageCleaningRate": 7.4290799595265105,
-    "lastUpdated": "2025-12-07T04:47:30.079Z"
+    "documentsProcessed": 2,
+    "averageCleaningRate": 7.413890151145007,
+    "lastUpdated": "2025-12-26T06:05:51.402Z"
   },
-  "createdAt": "2025-12-06T14:06:44.909Z"
+  "createdAt": "2025-12-26T00:39:36.705Z"
 }

@@ -228,7 +228,7 @@ if (!window.VNEXSUSApp.ReportRenderer) {
                 font-weight: 600;
                 border-bottom: 2px solid #e9ecef;
                 padding-bottom: 8px;
-            ">환자 정보</h2>
+            ">피보험자 정보</h2>
             
             <div class="patient-details" style="
                 display: grid;
@@ -236,7 +236,7 @@ if (!window.VNEXSUSApp.ReportRenderer) {
                 gap: 16px;
             ">
                 ${patientInfo.name ? `<div class="detail-item">
-                    <strong>이름:</strong> ${patientInfo.name}
+                    <strong>피보험자 이름:</strong> ${patientInfo.name}
                 </div>` : ''}
                 
                 ${patientInfo.birthDate ? `<div class="detail-item">

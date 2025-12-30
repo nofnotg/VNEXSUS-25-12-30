@@ -9,8 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // 환경 변수
 const GCP_PROJECT_ID = process.env.GCP_PROJECT_ID || 'medreport-vision-ocr';
-// GCS_BUCKET_NAME을 직접 설정
-const GCS_BUCKET = 'medreport-vision-ocr-bucket';
+const GCS_BUCKET = process.env.GCS_BUCKET_NAME || process.env.GCS_BUCKET || 'medreport-vision-ocr-bucket';
 const GCS_UPLOAD_PREFIX = process.env.GCS_UPLOAD_PREFIX || 'temp-uploads/';
 
 // GCS 버킷 이름 검증
@@ -219,7 +218,25 @@ export async function downloadAndParseJson(gcsPath) {
     
     // JSON 파일 읽기 및 파싱
     const jsonContent = fs.readFileSync(tempFilePath, 'utf8');
-    const parsedJson = JSON.parse(jsonContent);
+    let parsedJson;
+    try {
+      parsedJson = JSON.parse(jsonContent);
+    } catch (e) {
+      const sIdx = jsonContent.indexOf('{');
+      const eIdx = jsonContent.lastIndexOf('}');
+      const slice = sIdx >= 0 && eIdx > sIdx ? jsonContent.slice(sIdx, eIdx + 1) : jsonContent;
+      try {
+        parsedJson = JSON.parse(slice);
+      } catch (e2) {
+        const compact = slice.trim();
+        if (compact.includes('}{')) {
+          const arr = `[${compact.replace(/}\s*{/g, '},{')}]`;
+          parsedJson = JSON.parse(arr);
+        } else {
+          throw e2;
+        }
+      }
+    }
     
     // 임시 파일 삭제
     fs.unlinkSync(tempFilePath);

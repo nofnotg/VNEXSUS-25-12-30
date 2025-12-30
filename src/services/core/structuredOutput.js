@@ -31,7 +31,18 @@ export function validateStructure(obj, schema) {
   for (const k of schema.required) {
     if (!(k in obj)) return { ok: false, error: `missing:${k}` };
     const t = schema.types[k];
-    if (t && typeof obj[k] !== t) return { ok: false, error: `type:${k}` };
+    if (!t) continue;
+    if (t === "array") {
+      if (!Array.isArray(obj[k])) return { ok: false, error: `type:${k}` };
+      continue;
+    }
+    if (t === "object") {
+      if (obj[k] === null || typeof obj[k] !== "object" || Array.isArray(obj[k])) {
+        return { ok: false, error: `type:${k}` };
+      }
+      continue;
+    }
+    if (typeof obj[k] !== t) return { ok: false, error: `type:${k}` };
   }
   return { ok: true };
 }

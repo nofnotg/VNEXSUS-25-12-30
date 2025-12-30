@@ -66,7 +66,7 @@ export class ProgressiveRAGSystem {
       await this.loadKCDGuidelines();
 
       // 자동 저장 시작
-      if (this.config.autoSave.enabled) {
+      if (this.config.autoSave.enabled && process.env.NODE_ENV !== 'test' && !process.env.JEST_WORKER_ID) {
         this.startAutoSave();
       }
 
@@ -406,6 +406,9 @@ export class ProgressiveRAGSystem {
    * 자동 저장 시작
    */
   startAutoSave() {
+    if (process.env.NODE_ENV === 'test' || process.env.JEST_WORKER_ID) {
+      return;
+    }
     if (this.autoSaveTimer) {
       clearInterval(this.autoSaveTimer);
     }

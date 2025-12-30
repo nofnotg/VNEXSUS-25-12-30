@@ -831,7 +831,7 @@
                 
                 <div class="mt-3">
                     <h6>📋 AI 생성 보고서</h6>
-                    <div class="bg-light p-3 rounded" style="max-height: 400px; overflow-y: auto; white-space: pre-wrap;">${result.reportText}</div>
+                    <div class="bg-light p-3 rounded" style="max-height: 400px; overflow-y: auto; white-space: pre-wrap;">${(result.report && result.report.content) ? result.report.content : (result.reportText || '')}</div>
                 </div>
             `;
         }

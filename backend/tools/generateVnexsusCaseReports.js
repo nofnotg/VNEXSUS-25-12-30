@@ -17,6 +17,28 @@ try {
   const defaultEnv = path.join(ROOT, '.env');
   const envPath = fs.existsSync(secureEnv) ? secureEnv : defaultEnv;
   dotenv.config({ path: envPath });
+  for (const [k, raw] of Object.entries(process.env)) {
+    if (typeof raw !== 'string') continue;
+    const replaced = raw.replace(/\$\{([A-Z0-9_]+)\}/g, (_m, name) => (process.env[name] ?? _m));
+    if (replaced !== raw) process.env[k] = replaced;
+  }
+  const cred = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  if (typeof cred === 'string' && /\$\{[A-Z0-9_]+\}/.test(cred)) {
+    delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  }
+  const embeddedCred = path.join(ROOT, 'backend', 'config', 'gcp-service-account-key.json');
+  const resolvedCred = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  if ((!resolvedCred || (typeof resolvedCred === 'string' && !fs.existsSync(resolvedCred))) && fs.existsSync(embeddedCred)) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = embeddedCred;
+  }
+  const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  const hasCredFile = typeof credPath === 'string' && credPath.length > 0 && fs.existsSync(credPath);
+  const hasApiKey = typeof process.env.GOOGLE_CLOUD_VISION_API_KEY === 'string' && process.env.GOOGLE_CLOUD_VISION_API_KEY.length > 0;
+  const allowVision = process.env.USE_VISION !== 'false';
+  if (allowVision && (hasCredFile || hasApiKey)) {
+    if (process.env.ENABLE_VISION_OCR !== 'true') process.env.ENABLE_VISION_OCR = 'true';
+    if (process.env.USE_VISION !== 'true') process.env.USE_VISION = 'true';
+  }
 } catch {
   // ignore env load errors; script can still proceed with process.env
 }

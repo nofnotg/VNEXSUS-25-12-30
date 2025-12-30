@@ -2,11 +2,10 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
+import { describe, test, expect } from '@jest/globals';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-console.log('🔗 VNEXSUS 코어 엔진 통합 테스트 시작\n');
 
 // 통합 테스트 시나리오들
 const integrationTests = [
@@ -266,7 +265,13 @@ async function runIntegrationTests() {
   };
 }
 
-// 테스트 실행
-runIntegrationTests().catch(console.error);
+describe('Core engine integration scenarios', () => {
+  test('runs integration scenarios without throwing', async () => {
+    const result = await runIntegrationTests();
+    expect(result).toBeDefined();
+    expect(typeof result.total).toBe('number');
+    expect(result.total).toBeGreaterThan(0);
+  });
+});
 
 export { runIntegrationTests };

@@ -3,7 +3,7 @@
  * 프로젝트 규칙: console.* 금지, 로거 유틸만 허용
  */
 
-import { LOG_LEVELS, LOG_EVENTS } from '../constants/medical';
+import { LOG_EVENTS } from '../constants/medical';
 import { mask } from '../security/mask';
 
 interface LogEntry {
@@ -124,19 +124,15 @@ class Logger {
     
     switch (entry.level) {
       case 'error':
-        // eslint-disable-next-line no-console
         console.error(output);
         break;
       case 'warn':
-        // eslint-disable-next-line no-console
         console.warn(output);
         break;
       case 'debug':
-        // eslint-disable-next-line no-console
         console.debug(output);
         break;
       default:
-        // eslint-disable-next-line no-console
         console.log(output);
     }
   }

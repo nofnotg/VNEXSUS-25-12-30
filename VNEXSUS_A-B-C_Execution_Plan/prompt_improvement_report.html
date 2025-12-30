@@ -1,0 +1,1232 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8" />
+  <title>VNEXSUS 프롬프트 개선 보고서</title>
+  <style>
+  body{font-family:system-ui,Segoe UI,Arial;padding:20px;color:#222;background:#fafafa}
+  code{background:#f2f2f2;padding:2px 4px;border-radius:4px}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid #ddd;padding:8px;vertical-align:top}
+  th{background:#f4f4f4}
+  .kpi{display:flex;gap:12px;flex-wrap:wrap}
+  .kpi>div{border:1px solid #eee;border-radius:10px;padding:10px 12px;background:#fff;min-width:220px}
+  .muted{color:#666}
+  .card{border:1px solid #eee;border-radius:10px;padding:12px;background:#fff;margin-top:12px}
+  .bar{height:8px;border-radius:6px;background:#eee;overflow:hidden}
+  .bar>span{display:block;height:100%;background:#9333ea}
+  </style></head><body>
+  <h1>VNEXSUS 프롬프트 개선 보고서</h1>
+  <div class="kpi">
+    <div><div class="muted">생성 시각</div><div>2025-12-25T03:22:46.851Z</div></div>
+    <div><div class="muted">검토 프롬프트 수</div><div>133</div></div>
+    <div><div class="muted">평균 구조 점수</div><div>51%</div></div>
+    <div><div class="muted">평균 상관 점수</div><div>38%</div></div>
+    <div><div class="muted">평균 날짜규칙</div><div>33%</div></div>
+    <div><div class="muted">평균 중복억제</div><div>5%</div></div>
+    <div><div class="muted">평균 포맷</div><div>24%</div></div>
+  </div>
+  <div class="card">
+    <h2>프롬프트별 상세</h2>
+    <table>
+      <thead><tr>
+        <th>파일명</th><th>구조</th><th>상관</th><th>날짜규칙</th><th>중복억제</th><th>포맷</th><th>종합</th><th>권고</th>
+      </tr></thead>
+      <tbody><tr>
+      <td>Case1.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:47%"></span></div><div>47%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case10.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:46%"></span></div><div>46%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case10_report.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case11.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case11_report.txt</td>
+      <td><div class="bar"><span style="width:68%"></span></div><div>68%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:27%"></span></div><div>27%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case12.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:52%"></span></div><div>52%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case12_report.txt</td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case13.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:63%"></span></div><div>63%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li></ul></td>
+    </tr><tr>
+      <td>Case13_report.txt</td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:12%"></span></div><div>12%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case14.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:52%"></span></div><div>52%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case14_report.txt</td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case14_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:10%"></span></div><div>10%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:16%"></span></div><div>16%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case15.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:49%"></span></div><div>49%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case15_report.txt</td>
+      <td><div class="bar"><span style="width:24%"></span></div><div>24%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case15_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case16.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:46%"></span></div><div>46%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case16_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case16_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case17.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case17_report.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case17_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:2%"></span></div><div>2%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case18.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:48%"></span></div><div>48%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case18_report.txt</td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case18_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:4%"></span></div><div>4%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case19.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:55%"></span></div><div>55%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case19_report.txt</td>
+      <td><div class="bar"><span style="width:48%"></span></div><div>48%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:30%"></span></div><div>30%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case19_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case1_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case2.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case20.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case20_report.txt</td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case20_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:1%"></span></div><div>1%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case21.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:46%"></span></div><div>46%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case21_report.txt</td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case21_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:16%"></span></div><div>16%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case22.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:55%"></span></div><div>55%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li></ul></td>
+    </tr><tr>
+      <td>Case22_report.txt</td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:30%"></span></div><div>30%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case22_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case23.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case23_report.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case23_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case24.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:42%"></span></div><div>42%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case24_report.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:27%"></span></div><div>27%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case24_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case25.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case25_report.txt</td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case25_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:6%"></span></div><div>6%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case26.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:48%"></span></div><div>48%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case26_report.txt</td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:16%"></span></div><div>16%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case26_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case27.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:48%"></span></div><div>48%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case27_report.txt</td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case27_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:6%"></span></div><div>6%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case28.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:58%"></span></div><div>58%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case28_report.txt</td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:27%"></span></div><div>27%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case28_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case29.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:39%"></span></div><div>39%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case29_report.txt</td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:9%"></span></div><div>9%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case29_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case2_report.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case2_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:10%"></span></div><div>10%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case3.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:37%"></span></div><div>37%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case30.txt</td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case30_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:10%"></span></div><div>10%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case30_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case31.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:40%"></span></div><div>40%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case31_report.txt</td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case31_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case32.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:58%"></span></div><div>58%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case32_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case32_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:12%"></span></div><div>12%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case33.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case33_report.txt</td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case33_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:28%"></span></div><div>28%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case34.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:52%"></span></div><div>52%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case34_report.txt</td>
+      <td><div class="bar"><span style="width:28%"></span></div><div>28%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case34_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case35_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case36.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case36_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:7%"></span></div><div>7%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case36_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:30%"></span></div><div>30%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case37.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:28%"></span></div><div>28%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case37_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:7%"></span></div><div>7%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case37_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:6%"></span></div><div>6%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case38.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case38_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case38_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case39.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case39_report.txt</td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:11%"></span></div><div>11%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case39_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case3_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case4.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:60%"></span></div><div>60%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case40.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:42%"></span></div><div>42%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case40_report.txt</td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case40_vnexus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:16%"></span></div><div>16%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case41.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case41_report.txt</td>
+      <td><div class="bar"><span style="width:35%"></span></div><div>35%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case41_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case42.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case42_report.txt</td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:11%"></span></div><div>11%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case42_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case43.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:49%"></span></div><div>49%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case43_report.txt</td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:28%"></span></div><div>28%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case43_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case44.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:47%"></span></div><div>47%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case44_report.txt</td>
+      <td><div class="bar"><span style="width:13%"></span></div><div>13%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case44_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:8%"></span></div><div>8%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case45.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:45%"></span></div><div>45%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case45_report.txt</td>
+      <td><div class="bar"><span style="width:40%"></span></div><div>40%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:24%"></span></div><div>24%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case45_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:20%"></span></div><div>20%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case46.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:55%"></span></div><div>55%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case46_report.txt</td>
+      <td><div class="bar"><span style="width:53%"></span></div><div>53%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case46_vnexsus.txt</td>
+      <td><div class="bar"><span style="width:5%"></span></div><div>5%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case5.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:54%"></span></div><div>54%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case5_report.txt</td>
+      <td><div class="bar"><span style="width:30%"></span></div><div>30%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:22%"></span></div><div>22%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case6.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:52%"></span></div><div>52%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case6_report.txt</td>
+      <td><div class="bar"><span style="width:23%"></span></div><div>23%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:15%"></span></div><div>15%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case7.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:53%"></span></div><div>53%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case7_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case8.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:17%"></span></div><div>17%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case8_report.txt</td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:18%"></span></div><div>18%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case9.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:56%"></span></div><div>56%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:33%"></span></div><div>33%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:58%"></span></div><div>58%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Case9_report.txt</td>
+      <td><div class="bar"><span style="width:53%"></span></div><div>53%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:27%"></span></div><div>27%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>gpt4대화.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:94%"></span></div><div>94%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:67%"></span></div><div>67%</div></td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:86%"></span></div><div>86%</div></td>
+      <td><ul></ul></td>
+    </tr><tr>
+      <td>ocr이후 로직구현 고민txt.txt</td>
+      <td><div class="bar"><span style="width:55%"></span></div><div>55%</div></td>
+      <td><div class="bar"><span style="width:19%"></span></div><div>19%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:26%"></span></div><div>26%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>의료-보험 통합 시계열 모듈.txt</td>
+      <td><div class="bar"><span style="width:63%"></span></div><div>63%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>의료-보험 통합 시계열 모듈4.txt</td>
+      <td><div class="bar"><span style="width:63%"></span></div><div>63%</div></td>
+      <td><div class="bar"><span style="width:38%"></span></div><div>38%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>Report_Sample.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:29%"></span></div><div>29%</div></td>
+      <td><div class="bar"><span style="width:46%"></span></div><div>46%</div></td>
+      <td><ul><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>고지의무위반 프롬프트.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:54%"></span></div><div>54%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>고지의무위반 프롬프트2.txt</td>
+      <td><div class="bar"><span style="width:78%"></span></div><div>78%</div></td>
+      <td><div class="bar"><span style="width:44%"></span></div><div>44%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:57%"></span></div><div>57%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>손해사정 보고서 프롬프트.txt</td>
+      <td><div class="bar"><span style="width:100%"></span></div><div>100%</div></td>
+      <td><div class="bar"><span style="width:69%"></span></div><div>69%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:67%"></span></div><div>67%</div></td>
+      <td><ul><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>손해사정보고서 자동작성용 AI 프롬프트)질환별 검사결과 적용교칙 통합버전.txt</td>
+      <td><div class="bar"><span style="width:83%"></span></div><div>83%</div></td>
+      <td><div class="bar"><span style="width:31%"></span></div><div>31%</div></td>
+      <td><div class="bar"><span style="width:71%"></span></div><div>71%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:43%"></span></div><div>43%</div></td>
+      <td><div class="bar"><span style="width:46%"></span></div><div>46%</div></td>
+      <td><ul><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr><tr>
+      <td>손해사정보고서_최종보고용요약규칙.txt</td>
+      <td><div class="bar"><span style="width:50%"></span></div><div>50%</div></td>
+      <td><div class="bar"><span style="width:25%"></span></div><div>25%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:0%"></span></div><div>0%</div></td>
+      <td><div class="bar"><span style="width:14%"></span></div><div>14%</div></td>
+      <td><div class="bar"><span style="width:21%"></span></div><div>21%</div></td>
+      <td><ul><li>항목 번호/리스트로 9~10개 구조를 고정</li><li>가입일 기준 3/2/5년 윈도우 명시</li><li>의료 이벤트-날짜-병원 타임라인 연계 강화</li><li>중복 경고/중복 항목 출력 억제 규칙 추가</li><li>YYYY.MM.DD 날짜 표준과 표/소제목 포맷 추가</li></ul></td>
+    </tr></tbody>
+    </table>
+  </div>
+  </body></html>

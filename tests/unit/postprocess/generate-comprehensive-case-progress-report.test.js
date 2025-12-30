@@ -1,7 +1,8 @@
 /* Jest unit test: verify comprehensive case progress report generation */
-const fs = require("fs");
-const path = require("path");
-const { execSync } = require("child_process");
+import { describe, it, expect } from '@jest/globals';
+import fs from 'node:fs';
+import path from 'node:path';
+import { execSync } from 'node:child_process';
 
 describe("Comprehensive Case Progress Report", () => {
   const outPath = path.resolve("temp/reports/Comprehensive_Case_Progress_Report.html");
@@ -21,4 +22,3 @@ describe("Comprehensive Case Progress Report", () => {
     expect(html).toContain("<h2>개선계획 기준 공정율</h2>");
   });
 });
-

@@ -171,8 +171,11 @@ class MedicalDocumentNormalizer {
     // 줄바꿈 정규화
     processed = processed.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     
-    // 중복 공백 제거
-    processed = processed.replace(/\s+/g, ' ');
+    // 공백 정규화(줄바꿈은 유지)
+    processed = processed
+      .split('\n')
+      .map(line => line.replace(/[ \t]+/g, ' ').trim())
+      .join('\n');
     
     // 특수 문자 정규화
     processed = processed.replace(/[：]/g, ':');
@@ -475,33 +478,39 @@ class MedicalDocumentNormalizer {
     }
     
     // 병원명 추출
-    const hospitalMatch = section.match(this.sectionPatterns.medicalRecord.hospital);
-    if (hospitalMatch) {
-      record.hospital = hospitalMatch[0].replace(/(?:병원|의원|클리닉|센터)\s*[:：]?\s*/, '').trim();
+    {
+      const m = section.match(/(?:병원|의원|클리닉|센터)\s*[:：]?\s*([^\n]+)/i);
+      if (m) {
+        record.hospital = m[1].trim();
+      }
     }
     
     // 진단명 추출
-    const diagnosisMatch = section.match(this.sectionPatterns.medicalRecord.diagnosis);
-    if (diagnosisMatch) {
-      record.diagnosis = diagnosisMatch[0].replace(/(?:진단명|진단)\s*[:：]?\s*/, '').trim();
-      
-      // ICD-10 코드 추출
-      const icdMatch = record.diagnosis.match(this.medicalCodes.icd10);
-      if (icdMatch) {
-        record.icdCode = icdMatch[0];
+    {
+      const m = section.match(/(?:진단명|진단)\s*[:：]?\s*([^\n]+)/i);
+      if (m) {
+        record.diagnosis = m[1].trim();
+        const icdMatch = record.diagnosis.match(this.medicalCodes.icd10);
+        if (icdMatch) {
+          record.icdCode = icdMatch[0];
+        }
       }
     }
     
     // 처방 추출
-    const prescriptionMatch = section.match(this.sectionPatterns.medicalRecord.prescription);
-    if (prescriptionMatch) {
-      record.prescription = prescriptionMatch[0].replace(/(?:처방|투약|약물)\s*[:：]?\s*/, '').trim();
+    {
+      const m = section.match(/(?:처방|투약|약물)\s*[:：]?\s*([^\n]+)/i);
+      if (m) {
+        record.prescription = m[1].trim();
+      }
     }
     
     // 증상 추출
-    const symptomsMatch = section.match(this.sectionPatterns.medicalRecord.symptoms);
-    if (symptomsMatch) {
-      record.symptoms = symptomsMatch[0].replace(/(?:증상|주소|호소)\s*[:：]?\s*/, '').trim();
+    {
+      const m = section.match(/(?:증상|주소|호소)\s*[:：]?\s*([^\n]+)/i);
+      if (m) {
+        record.symptoms = m[1].trim();
+      }
     }
     
     // 입원 정보 확인

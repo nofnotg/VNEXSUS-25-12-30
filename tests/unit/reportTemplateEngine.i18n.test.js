@@ -1,7 +1,11 @@
-const { spawnSync } = require('child_process');
-const path = require('path');
+import { describe, test, expect } from '@jest/globals';
+import { spawnSync } from 'node:child_process';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 function runRunner(locale) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
   const runnerPath = path.join(__dirname, '../../scripts/esm-engine-runner.mjs');
   const result = spawnSync('node', [runnerPath, locale], {
     encoding: 'utf-8',

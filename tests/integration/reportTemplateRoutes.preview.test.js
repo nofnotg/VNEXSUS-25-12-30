@@ -1,8 +1,8 @@
 import request from 'supertest';
 import express from 'express';
+import { describe, test, expect, beforeAll, jest } from '@jest/globals';
 // Mock the ESM ReportTemplateEngine to avoid import.meta issues in Jest
-jest.mock('../../backend/postprocess/reportTemplateEngine.js', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../backend/postprocess/reportTemplateEngine.js', () => ({
   default: class MockEngine {
     createHtmlTemplate(data, options = {}) {
       const locale = options.locale ?? 'ko';
@@ -20,7 +20,7 @@ jest.mock('../../backend/postprocess/reportTemplateEngine.js', () => ({
     }
   }
 }));
-import reportTemplateRoutes from '../../backend/routes/reportTemplateRoutes.js';
+const reportTemplateRoutes = (await import('../../backend/routes/reportTemplateRoutes.js')).default;
 
 describe('GET /api/report-template/basic', () => {
   let app;

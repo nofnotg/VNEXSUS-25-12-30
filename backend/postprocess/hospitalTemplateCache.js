@@ -11,6 +11,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
+import { normalizeHospitalName as sharedNormalizeHospitalName } from '../../src/shared/utils/medicalText.js';
 
 class HospitalTemplateCache {
   constructor() {
@@ -52,7 +53,9 @@ class HospitalTemplateCache {
       /발급매수.*?\d+.*?매/gs
     ];
     
-    this.init();
+    if (process.env.NODE_ENV !== 'test') {
+      this.init();
+    }
   }
 
   /**
@@ -100,7 +103,7 @@ class HospitalTemplateCache {
     for (const pattern of this.hospitalPatterns) {
       const matches = [...text.matchAll(pattern)];
       hospitals.push(...matches.map(match => ({
-        name: match[1] || match[0],
+        name: match[0],
         fullMatch: match[0],
         position: match.index
       })));
@@ -129,11 +132,7 @@ class HospitalTemplateCache {
    * @returns {string} 정규화된 병원명
    */
   normalizeHospitalName(hospitalName) {
-    return hospitalName
-      .replace(/\s+/g, '')
-      .replace(/대학교|대학|의과대학/g, '')
-      .replace(/병원|의료원|센터|클리닉/g, '')
-      .toLowerCase();
+    return sharedNormalizeHospitalName(hospitalName);
   }
 
   /**

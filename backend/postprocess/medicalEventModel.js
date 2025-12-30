@@ -17,10 +17,110 @@ class MedicalEventModel {
         this.eventCounter = 0;
     }
 
+    labelEventsFromText(events, reportText) {
+        const dates = new Set(this.extractDates(reportText));
+        const codes = new Set(this.extractICDCodes(reportText));
+        const hospitals = new Set(this.extractHospitals(reportText).map(h => this.normalizeHospitalName(h)));
+        events.forEach(e => {
+            const dOk = !!e.date && dates.has(e.date);
+            const c = e.diagnosis && e.diagnosis.code ? this.normalizeDiagnosisCode(e.diagnosis.code) : null;
+            const cOk = !!c && (codes.has(c) || Array.from(codes).some(v => c.startsWith(v) || v.startsWith(c)));
+            const h = e.hospital || '';
+            const nh = this.normalizeHospitalName(h);
+            const hOk = !!h && (hospitals.has(nh) || Array.from(hospitals).some(v => v.endsWith(nh) || nh.endsWith(v)));
+            const total = (e.date ? 1 : 0) + (c ? 1 : 0) + (h ? 1 : 0);
+            const matched = (dOk ? 1 : 0) + (cOk ? 1 : 0) + (hOk ? 1 : 0);
+            const score = total > 0 ? matched / total : 1;
+            e.labels = { dateInReport: dOk, icdInReport: cOk, hospitalInReport: hOk, labelScore: score };
+            const hasCoord = !!(e.sourceSpan && (e.sourceSpan.bounds || e.sourceSpan.blockIndex !== undefined));
+            e.flags = { ...(e.flags || {}), spatialUncertain: !hasCoord };
+        });
+        return events;
+    }
+
+    extractDates(text) {
+        if (!text) return [];
+        const out = new Set();
+        const p1 = /(\d{4})[.\-](\d{1,2})[.\-](\d{1,2})/g;
+        const p2 = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/g;
+        const p3 = /(\d{1,2})\/(\d{1,2})\/(\d{4})/g;
+        let m;
+        while ((m = p1.exec(text)) !== null) out.add(`${m[1]}-${String(m[2]).padStart(2, '0')}-${String(m[3]).padStart(2, '0')}`);
+        while ((m = p2.exec(text)) !== null) out.add(`${m[1]}-${String(m[2]).padStart(2, '0')}-${String(m[3]).padStart(2, '0')}`);
+        while ((m = p3.exec(text)) !== null) out.add(`${m[3]}-${String(m[1]).padStart(2, '0')}-${String(m[2]).padStart(2, '0')}`);
+        return Array.from(out).sort();
+    }
+
+    extractICDCodes(text) {
+        if (!text) return [];
+        const set = new Set();
+        const re = /\b([A-Z]\d{2,3}(?:\.\d{1,2})?)\b/g;
+        let m;
+        while ((m = re.exec(text)) !== null) set.add(m[1].toUpperCase());
+        return Array.from(set).sort();
+    }
+
+    extractHospitals(text) {
+        if (!text) return [];
+        const set = new Set();
+        const lines = text.split('\n');
+        const kw = ['병원', '의원', '클리닉', '센터', '한의원', '치과'];
+        lines.forEach(line => {
+            kw.forEach(k => {
+                if (line.includes(k)) {
+                    const m = line.match(/([가-힣a-zA-Z0-9\s]+(?:병원|의원|클리닉|센터|한의원|치과))/);
+                    if (m) set.add(m[1]);
+                }
+            });
+        });
+        return Array.from(set).sort();
+    }
+
+    normalizeHospitalName(name) {
+        if (!name) return '';
+        return name.replace(/[^가-힣a-zA-Z]/g, '').replace(/의료재단|재단법인|학교법인/g, '').toLowerCase();
+    }
+
+    _parseDateToISO(d) {
+        if (!d) return null;
+        if (d instanceof Date) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const da = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${da}`;
+        }
+        const s = String(d).trim();
+        let m = s.match(/^\s*(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*$/);
+        if (m) {
+            const dt = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+            return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+        }
+        m = s.match(/^\s*(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})\s*$/);
+        if (m) {
+            const dt = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+            return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+        }
+        m = s.match(/^\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*$/);
+        if (m) {
+            const dt = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+            return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+        }
+        m = s.match(/^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/);
+        if (m) {
+            const dt = new Date(Number(m[3]), Number(m[1]) - 1, Number(m[2]));
+            return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+        }
+        const dt = new Date(s);
+        if (Number.isFinite(dt.getTime())) {
+            return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+        }
+        return null;
+    }
+
     /**
      * 날짜 블록과 엔티티로부터 이벤트 생성
      */
-    buildEvents({ dateBlocks = [], entities = {}, rawText = '', patientInfo = {} }) {
+    buildEvents({ dateBlocks = [], entities = {}, rawText = '', patientInfo = {}, coordinateBlocks = [] }) {
         console.log('🏗️ MedicalEvent 생성 시작');
         console.log(`   - 날짜 블록: ${dateBlocks.length}개`);
         console.log(`   - 원문 길이: ${rawText.length}자`);
@@ -30,7 +130,7 @@ class MedicalEventModel {
 
         // 날짜 블록 기반 이벤트 생성
         dateBlocks.forEach((block, index) => {
-            const event = this.createEventFromBlock(block, rawText, patientInfo);
+            const event = this.createEventFromBlock(block, rawText, patientInfo, coordinateBlocks);
             if (event) {
                 events.push(event);
             }
@@ -52,13 +152,14 @@ class MedicalEventModel {
         }
 
         console.log(`✅ 총 ${events.length}개 이벤트 생성 완료`);
+        this.labelEventsFromText(events, rawText);
         return events;
     }
 
     /**
      * 단일 날짜 블록으로부터 이벤트 생성
      */
-    createEventFromBlock(block, rawText, patientInfo) {
+    createEventFromBlock(block, rawText, patientInfo, coordinateBlocks = []) {
         if (!block || !block.date) {
             return null;
         }
@@ -92,7 +193,7 @@ class MedicalEventModel {
                 claimRelated: false
             },
             uw: null, // Phase 2에서 추가
-            sourceSpan: this.extractSourceSpan(block, rawText),
+            sourceSpan: this.extractSourceSpan(block, rawText, coordinateBlocks),
             rawText: block.rawText || null,
             confidence: block.confidence || 0.8,
             createdAt: new Date().toISOString()
@@ -114,11 +215,8 @@ class MedicalEventModel {
      * 날짜 정규화 (YYYY-MM-DD)
      */
     normalizeDate(dateStr) {
-        // 이미 YYYY-MM-DD 형식이면 그대로 반환
-        if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
-            return dateStr;
-        }
-        return dateStr; // 추가 정규화 로직 필요 시 구현
+        const iso = this._parseDateToISO(dateStr);
+        return iso || String(dateStr);
     }
 
     /**
@@ -165,7 +263,7 @@ class MedicalEventModel {
     /**
      * 원문 근거 추출 (Phase 1 - T03 강화)
      */
-    extractSourceSpan(block, rawText) {
+    extractSourceSpan(block, rawText, allBlocks = []) {
         // sourceSpanManager 사용 (Phase 1 - T03)
         // 임시 이벤트 객체 생성 (anchor 수집용)
         const tempEvent = {
@@ -179,7 +277,7 @@ class MedicalEventModel {
             procedures: block.procedures || []
         };
 
-        return sourceSpanManager.attachSourceSpan(tempEvent, rawText, block);
+        return sourceSpanManager.attachSourceSpan(tempEvent, rawText, block, allBlocks);
     }
 
     /**
@@ -236,11 +334,11 @@ class MedicalEventModel {
      * 두 이벤트 병합 (코드 소실 방지 강화 - Phase 4 T08)
      */
     mergeEvents(event1, event2) {
-        // 날짜와 병원이 같은 경우에만 병합
-        if (event1.date !== event2.date || event1.hospital !== event2.hospital) {
-            console.warn('⚠️ 병합 불가: 날짜 또는 병원이 다름');
-            return event1;
-        }
+      // 날짜와 병원이 같은 경우에만 병합
+      if (event1.date !== event2.date || event1.hospital !== event2.hospital) {
+        console.warn('⚠️ 병합 불가: 날짜 또는 병원이 다름');
+        return event1;
+      }
 
         // 1. 모든 코드 수집 (relatedCodes 활용)
         const allCodes = new Set();
@@ -272,26 +370,42 @@ class MedicalEventModel {
             index === self.findIndex(p => p.name === proc.name)
         );
 
-        const mergedTreatments = [
-            ...event1.treatments,
-            ...event2.treatments
-        ].filter((treat, index, self) =>
+        const t1 = Array.isArray(event1.treatments) ? event1.treatments : [];
+        const t2 = Array.isArray(event2.treatments) ? event2.treatments : [];
+        const mergedTreatments = [...t1, ...t2].filter((treat, index, self) =>
             index === self.findIndex(t => t.name === treat.name)
         );
 
-        return {
-            ...event1,
-            diagnosis: mergedDiagnosis,
-            relatedCodes: Array.from(allCodes), // 모든 코드 보존
-            procedures: mergedProcedures,
-            treatments: mergedTreatments,
-            shortFact: this.generateShortFact({
-                hospital: event1.hospital,
-                diagnosis: mergedDiagnosis.name,
-                procedures: mergedProcedures
-            }),
-            confidence: Math.max(event1.confidence, event2.confidence)
-        };
+      return {
+        ...event1,
+        diagnosis: mergedDiagnosis,
+        relatedCodes: Array.from(allCodes), // 모든 코드 보존
+        procedures: mergedProcedures,
+        treatments: mergedTreatments,
+        shortFact: this.generateShortFact({
+          hospital: event1.hospital,
+          diagnosis: mergedDiagnosis.name,
+          procedures: mergedProcedures
+        }),
+        confidence: Math.max(event1.confidence, event2.confidence)
+      };
+    }
+
+    unifyDuplicateEvents(events) {
+        const byKey = new Map();
+        const norm = (s) => String(s || '').trim().toLowerCase();
+        for (const ev of Array.isArray(events) ? events : []) {
+            const k = norm(ev.date) + '|' + norm(ev.hospital);
+            const ex = byKey.get(k);
+            if (!ex) {
+                byKey.set(k, ev);
+            } else {
+                const merged = this.mergeEvents(ex, ev);
+                byKey.set(k, merged);
+            }
+        }
+        const out = Array.from(byKey.values());
+        return this.sortEventsByDate(out);
     }
 
     /**

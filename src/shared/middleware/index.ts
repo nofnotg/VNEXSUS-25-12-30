@@ -71,7 +71,7 @@ export const requestValidationMiddleware = (req: Request, res: Response, next: N
   const traceId = req.headers['x-trace-id'] as string || uuidv4();
   
   // Trace ID를 요청 객체에 추가
-  (req as any).traceId = traceId;
+  (req as Request & { traceId?: string }).traceId = traceId;
 
   // Content-Type 검증 (POST 요청의 경우)
   if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
@@ -135,7 +135,8 @@ export const errorHandlingMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const traceId = (req as any).traceId || uuidv4();
+  void next;
+  const traceId = (req as Request & { traceId?: string }).traceId || uuidv4();
 
   logger.error({
     event: 'unhandled_error',
@@ -219,7 +220,7 @@ export const securityHeadersMiddleware = (req: Request, res: Response, next: Nex
  * 요청 로깅 미들웨어
  */
 export const requestLoggingMiddleware = (req: Request, res: Response, next: NextFunction): void => {
-  const traceId = (req as any).traceId || uuidv4();
+  const traceId = (req as Request & { traceId?: string }).traceId || uuidv4();
   const startTime = Date.now();
 
   // 응답 완료 시 로깅

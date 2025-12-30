@@ -1,0 +1,30 @@
+{
+  "hospitalId": "상급종합병원",
+  "hospitalName": "상급종합병원",
+  "patterns": [
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "600809-1******",
+      "position": 4724,
+      "length": 14,
+      "hash": "4c471ae745096ad2d47cd1c343d3e10d",
+      "frequency": 3,
+      "firstSeen": "2025-12-29T13:11:34.505Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호600809",
+      "position": 24,
+      "length": 10,
+      "hash": "19ca173e196165e86955af12ae61c04f",
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:34.505Z"
+    }
+  ],
+  "statistics": {
+    "documentsProcessed": 1,
+    "averageCleaningRate": 0.44835316433867906,
+    "lastUpdated": "2025-12-29T13:11:34.505Z"
+  },
+  "createdAt": "2025-12-29T13:11:34.505Z"
+}

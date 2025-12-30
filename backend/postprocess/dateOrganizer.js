@@ -1,3 +1,5 @@
+import { logService } from '../utils/logger.js';
+
 /**
  * DateOrganizer Module
  * 
@@ -8,6 +10,61 @@
  */
 
 class DateOrganizer {
+  _parseDateToTime(d) {
+    if (!d) return Number.NaN;
+    if (d instanceof Date) {
+      const t = d.getTime();
+      return Number.isFinite(t) ? t : Number.NaN;
+    }
+    const s = String(d).trim();
+    let m = s.match(/^\s*(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일\s*$/);
+    if (m) {
+      const y = Number(m[1]);
+      const mo = Number(m[2]);
+      const da = Number(m[3]);
+      const dt = new Date(y, mo - 1, da).getTime();
+      return Number.isFinite(dt) ? dt : Number.NaN;
+    }
+    m = s.match(/^\s*(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})\s*$/);
+    if (m) {
+      const y = Number(m[1]);
+      const mo = Number(m[2]);
+      const da = Number(m[3]);
+      const dt = new Date(y, mo - 1, da).getTime();
+      return Number.isFinite(dt) ? dt : Number.NaN;
+    }
+    m = s.match(/^\s*(\d{4})-(\d{1,2})-(\d{1,2})\s*$/);
+    if (m) {
+      const y = Number(m[1]);
+      const mo = Number(m[2]);
+      const da = Number(m[3]);
+      const dt = new Date(y, mo - 1, da).getTime();
+      return Number.isFinite(dt) ? dt : Number.NaN;
+    }
+    m = s.match(/^\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s*$/);
+    if (m) {
+      const mo = Number(m[1]);
+      const da = Number(m[2]);
+      const y = Number(m[3]);
+      const dt = new Date(y, mo - 1, da).getTime();
+      return Number.isFinite(dt) ? dt : Number.NaN;
+    }
+    const dt = new Date(s).getTime();
+    return Number.isFinite(dt) ? dt : Number.NaN;
+  }
+  _isValidDateString(d) {
+    const t = this._parseDateToTime(d);
+    return Number.isFinite(t);
+  }
+  _normalizeDateISO(d) {
+    const t = this._parseDateToTime(d);
+    if (!Number.isFinite(t)) return null;
+    const dt = new Date(t);
+    const y = dt.getFullYear();
+    const m = String(dt.getMonth() + 1).padStart(2, '0');
+    const da = String(dt.getDate()).padStart(2, '0');
+    return `${y}-${m}-${da}`;
+  }
   /**
    * 전처리된 의료 데이터를 날짜별로 정렬 및 필터링
    * @param {Array} preprocessedData Preprocessor에서 반환된 데이터 배열
@@ -22,15 +79,19 @@ class DateOrganizer {
         periodType: 'all',         // 기간 타입: 'all', '3month', '5year'
         sortDirection: 'asc',      // 정렬 방향: 'asc'(오름차순), 'desc'(내림차순)
         groupByDate: false,        // 날짜별 그룹화 여부
+        excludeNoise: true,
         ...options
       };
 
-      // 날짜가 없는 항목 필터링
-      let filteredData = preprocessedData.filter(item => item.date);
+      if (opts.excludeNoise) {
+        preprocessedData = preprocessedData.filter(item => !item.shouldExclude);
+      }
 
-      // 날짜 형식이 없거나 유효하지 않은 날짜가 있는 경우
+      let filteredData = preprocessedData.filter(item => item?.date && this._isValidDateString(item.date));
+
       if (filteredData.length < preprocessedData.length) {
-        console.warn(`${preprocessedData.length - filteredData.length}개 항목이 날짜 정보 없음으로 제외됨`);
+        const excludedCount = preprocessedData.length - filteredData.length;
+        logService.warn(`${excludedCount}개 항목이 날짜 정보 없음/무효로 제외됨`);
       }
 
       // 기간 필터링 (가입일 기준)
@@ -58,19 +119,24 @@ class DateOrganizer {
         // 필터링 적용
         if (filterStartDate) {
           filteredData = filteredData.filter(item => {
-            const itemDate = new Date(item.date);
-            return itemDate >= filterStartDate && itemDate <= enrollmentDate;
+            const itemTime = this._parseDateToTime(item.date);
+            const startTime = filterStartDate.getTime();
+            const endTime = enrollmentDate.getTime();
+            return Number.isFinite(itemTime) && itemTime >= startTime && itemTime <= endTime;
           });
         }
         
-        console.log(`기간 필터링 적용: ${opts.periodType}, 가입일 ${opts.enrollmentDate} 기준 ${filteredData.length}개 항목 남음`);
+        logService.info(`기간 필터링 적용: ${opts.periodType}, 가입일 ${opts.enrollmentDate} 기준 ${filteredData.length}개 항목 남음`);
       }
 
       // 날짜순 정렬
       filteredData.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return opts.sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
+        const ta = this._parseDateToTime(a.date);
+        const tb = this._parseDateToTime(b.date);
+        if (!Number.isFinite(ta) && !Number.isFinite(tb)) return 0;
+        if (!Number.isFinite(ta)) return 1;
+        if (!Number.isFinite(tb)) return -1;
+        return opts.sortDirection === 'asc' ? ta - tb : tb - ta;
       });
 
       // 날짜별 그룹화
@@ -80,7 +146,7 @@ class DateOrganizer {
 
       return filteredData;
     } catch (error) {
-      console.error('날짜 정렬 및 필터링 중 오류 발생:', error);
+      logService.error('날짜 정렬 및 필터링 중 오류 발생:', error);
       throw new Error(`날짜 정렬 실패: ${error.message}`);
     }
   }
@@ -93,11 +159,13 @@ class DateOrganizer {
    */
   calculatePeriod(startDate, endDate) {
     try {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+      const startTime = this._parseDateToTime(startDate);
+      const endTime = this._parseDateToTime(endDate);
+      const start = new Date(startTime);
+      const end = new Date(endTime);
       
       // 유효한 날짜 검사
-      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      if (!Number.isFinite(startTime) || !Number.isFinite(endTime)) {
         throw new Error('유효하지 않은 날짜 형식');
       }
       
@@ -107,7 +175,7 @@ class DateOrganizer {
       }
       
       // 밀리초 단위 차이 계산
-      const diffTime = Math.abs(end - start);
+      const diffTime = Math.abs(endTime - startTime);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       
       // 월 차이 계산
@@ -131,7 +199,7 @@ class DateOrganizer {
           : `${months}개월`
       };
     } catch (error) {
-      console.error('기간 계산 중 오류 발생:', error);
+      logService.error('기간 계산 중 오류 발생:', error);
       throw new Error(`기간 계산 실패: ${error.message}`);
     }
   }
@@ -147,7 +215,8 @@ class DateOrganizer {
     
     // 날짜별로 그룹화
     data.forEach(item => {
-      const date = item.date;
+      const date = this._normalizeDateISO(item.date);
+      if (!date) return;
       
       if (!groups[date]) {
         groups[date] = {
@@ -167,9 +236,12 @@ class DateOrganizer {
     
     // 객체를 배열로 변환
     return Object.values(groups).sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateA - dateB;
+      const ta = this._parseDateToTime(a.date);
+      const tb = this._parseDateToTime(b.date);
+      if (!Number.isFinite(ta) && !Number.isFinite(tb)) return 0;
+      if (!Number.isFinite(ta)) return 1;
+      if (!Number.isFinite(tb)) return -1;
+      return ta - tb;
     });
   }
 
@@ -182,10 +254,11 @@ class DateOrganizer {
    */
   analyzePeriodDistribution(data, referenceDate, options = {}) {
     try {
-      const refDate = new Date(referenceDate);
+      const refTime = this._parseDateToTime(referenceDate);
+      const refDate = new Date(refTime);
       
       // 유효한 날짜 검사
-      if (isNaN(refDate.getTime())) {
+      if (!Number.isFinite(refTime)) {
         throw new Error('유효하지 않은 기준 날짜');
       }
       
@@ -199,17 +272,17 @@ class DateOrganizer {
       
       // 필터링된 데이터 카운트
       const last3MonthsCount = data.filter(item => {
-        const itemDate = new Date(item.date);
-        return itemDate >= threeMonthsAgo && itemDate <= refDate;
+        const t = this._parseDateToTime(item.date);
+        return Number.isFinite(t) && t >= threeMonthsAgo.getTime() && t <= refDate.getTime();
       }).length;
       
       const last5YearsCount = data.filter(item => {
-        const itemDate = new Date(item.date);
-        return itemDate >= fiveYearsAgo && itemDate <= refDate;
+        const t = this._parseDateToTime(item.date);
+        return Number.isFinite(t) && t >= fiveYearsAgo.getTime() && t <= refDate.getTime();
       }).length;
       
       // 전체 항목 수
-      const totalCount = data.length;
+      const totalCount = data.filter(item => this._isValidDateString(item.date)).length;
       
       return {
         total: totalCount,
@@ -227,7 +300,7 @@ class DateOrganizer {
         }
       };
     } catch (error) {
-      console.error('기간 분포 분석 중 오류 발생:', error);
+      logService.error('기간 분포 분석 중 오류 발생:', error);
       throw new Error(`기간 분포 분석 실패: ${error.message}`);
     }
   }

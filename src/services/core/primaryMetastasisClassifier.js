@@ -7,9 +7,9 @@ const PRIMARY_HINTS = [
 ];
 
 const METS_HINTS = [
-  { site: "림프절", keys: ["pelvic ln","paraaortic ln","lymph node","림프절"] },
-  { site: "복막",   keys: ["peritoneal seeding","복막"] },
   { site: "간",     keys: ["liver met","간"] },
+  { site: "복막",   keys: ["peritoneal seeding","복막"] },
+  { site: "림프절", keys: ["pelvic ln","paraaortic ln","lymph node","림프절"] },
   { site: "뼈",     keys: ["bone met","골"] }
 ];
 

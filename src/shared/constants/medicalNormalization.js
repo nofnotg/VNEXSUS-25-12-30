@@ -29,7 +29,21 @@ const DEFAULT_HOSPITAL_STOPWORDS = [
   '진료',
   '진료일',
   '내원',
-  '경과'
+  '경과',
+  '사고경위 병원',
+  '일자 사고경위 병원',
+  '일자사고경위병원',
+  '치료병원',
+  '검사병원',
+  '직장 주변 병원',
+  '청구병원',
+  '기지급 병원',
+  '기 고지 병원',
+  '진료기록 및 수술병원',
+  '탐문병원',
+  '탐 의원',
+  '탐의원',
+  '해당 병원'
 ];
 
 // Canonical map: observed noisy variants -> canonical hospital name
@@ -76,7 +90,28 @@ const DEFAULT_HOSPITAL_CANONICAL_MAP = new Map([
   // Kyung Hee Univ. Medical Center
   ['경희의료원', '경희의료원'],
   // Catholic Univ. St. Vincent
-  ['성빈센트병원', '성빈센트병원']
+  ['성빈센트병원', '성빈센트병원'],
+  // Boramae
+  ['서울특별시 보라매병원', '보라매병원'],
+  ['서울특별시보라매병원', '보라매병원'],
+  ['서울대학교병원운영 서울특별시보라매병원', '보라매병원'],
+  ['보라매병원', '보라매병원'],
+  // Ilsan Paik
+  ['인제대학교 일산백병원', '일산백병원'],
+  ['인제대학교일산백병원', '일산백병원'],
+  ['일산백병원', '일산백병원'],
+  // Ilsan CHA
+  ['차의과학대학교 일산차병원', '일산차병원'],
+  ['일산차병원', '일산차병원'],
+  // Gachon Gil
+  ['가천의대 길병원', '가천대길병원'],
+  ['가천의과대학교 길병원', '가천대길병원'],
+  ['가천대 길병원', '가천대길병원'],
+  ['가천대길병원', '가천대길병원'],
+  // National Cancer Center
+  ['국립암센터', '국립암센터'],
+  ['National Cancer Center Korea', '국립암센터'],
+  ['National Cancer Center', '국립암센터']
 ]);
 
 // Diagnosis synonyms: raw text tokens -> normalized keywords

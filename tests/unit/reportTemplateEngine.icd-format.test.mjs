@@ -1,6 +1,4 @@
-// Unit test: ReportTemplateEngine ICD formatting in HTML
-// ESM test; can be executed with node or vitest
-import assert from 'assert';
+import { describe, test, expect } from '@jest/globals';
 import ReportTemplateEngine from '../../backend/postprocess/reportTemplateEngine.js';
 
 const engine = new ReportTemplateEngine();
@@ -14,12 +12,11 @@ const sampleData = {
   ],
 };
 
-const html = engine.createHtmlTemplate(sampleData, { locale: 'ko' });
-
-// Expect bolded and normalized codes; no label "ICD" remains in rendered code
-assert(html.includes('<strong class="icd-code">I20.9</strong>'), 'I20.9 should be bold without ICD label');
-assert(html.includes('<strong class="icd-code">R07.4</strong>'), 'R07.4 should be bold without ICD label');
-assert(!/\(\s*ICD\s*:\s*/.test(html), 'ICD label should be removed from display');
-
-console.log('ReportTemplateEngine ICD formatting tests passed.');
-
+describe('ReportTemplateEngine ICD formatting', () => {
+  test('bolds and normalizes ICD codes in HTML', () => {
+    const html = engine.createHtmlTemplate(sampleData, { locale: 'ko' });
+    expect(html).toContain('<strong class="icd-code">I20.9</strong>');
+    expect(html).toContain('<strong class="icd-code">R07.4</strong>');
+    expect(/\(\s*ICD\s*:\s*/.test(html)).toBe(false);
+  });
+});

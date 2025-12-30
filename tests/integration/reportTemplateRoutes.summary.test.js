@@ -2,9 +2,9 @@ import request from 'supertest';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { describe, test, expect, beforeAll, afterAll, jest } from '@jest/globals';
 // Mock the ESM ReportTemplateEngine to avoid import.meta issues in Jest
-jest.mock('../../backend/postprocess/reportTemplateEngine.js', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../backend/postprocess/reportTemplateEngine.js', () => ({
   default: class MockEngine {
     createHtmlTemplate() { return '<!DOCTYPE html><html lang="ko"><body>Mock</body></html>'; }
     createTextTemplate() { return 'Generated at: 2024-01-01'; }
@@ -12,7 +12,7 @@ jest.mock('../../backend/postprocess/reportTemplateEngine.js', () => ({
     createMarkdownTemplate() { return '# Mock Report'; }
   }
 }));
-import reportTemplateRoutes from '../../backend/routes/reportTemplateRoutes.js';
+const reportTemplateRoutes = (await import('../../backend/routes/reportTemplateRoutes.js')).default;
 
 describe('GET /api/report-template/summary', () => {
   let app;

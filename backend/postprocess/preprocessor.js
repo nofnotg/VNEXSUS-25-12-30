@@ -10,6 +10,7 @@
 
 import dictionaryManager from './dictionaryManager.js';
 import hospitalTemplateCache from './hospitalTemplateCache.js';
+function clamp01(n){const x=Number(n);if(!Number.isFinite(x))return 0;return Math.max(0,Math.min(1,x))}
 
 class Preprocessor {
   constructor() {
@@ -108,30 +109,26 @@ class Preprocessor {
    * @private
    */
   _processSection(sectionText, options) {
-    // 날짜 추출
     const dates = this._extractDates(sectionText);
     const extractedDate = dates.length > 0 ? dates[0] : null;
-    
-    // 병원명 추출
     const hospitalName = this._extractHospitalName(sectionText);
-    
-    // 키워드 확인
     const { matches: keywordMatches } = dictionaryManager.checkRequiredKeywords(sectionText);
-    
-    // 제외 키워드 확인
     const { shouldExclude, excludedMatches } = dictionaryManager.checkExcludedKeywords(sectionText);
-    
-    // 의료 용어 번역 (옵션에 따라)
     let translatedText = sectionText;
     let mappedTerms = [];
-    
     if (options.translateTerms) {
       const translationResult = dictionaryManager.translateMedicalTerms(sectionText);
       translatedText = translationResult.translatedText;
       mappedTerms = translationResult.mappedTerms;
     }
-    
-    // 결과 객체 구성
+    const confidence = this._scoreSection({
+      text: sectionText,
+      hasDate: !!extractedDate,
+      hasHospital: !!hospitalName,
+      keywordMatches,
+      mappedTerms,
+      shouldExclude
+    });
     return {
       date: extractedDate,
       hospital: hospitalName || '미상 병원',
@@ -140,7 +137,8 @@ class Preprocessor {
       keywordMatches,
       mappedTerms,
       shouldExclude,
-      excludedMatches
+      excludedMatches,
+      confidence
     };
   }
 
@@ -276,6 +274,20 @@ class Preprocessor {
     }
     
     return null;
+  }
+  _scoreSection(info){
+    const len=typeof info.text==='string'?info.text.length:0;
+    let s=0;
+    s+=info.hasDate?0.2:0;
+    s+=info.hasHospital?0.2:0;
+    const km=Array.isArray(info.keywordMatches)?info.keywordMatches.length:0;
+    const mt=Array.isArray(info.mappedTerms)?info.mappedTerms.length:0;
+    s+=0.3*clamp01(km/5);
+    s+=0.2*clamp01(mt/5);
+    const lenNorm=len<=2000?clamp01(len/400):clamp01(1-(Math.max(0,len-2000)/6000));
+    s+=0.1*lenNorm;
+    if(info.shouldExclude)s-=0.2;
+    return clamp01(s);
   }
 
   /**

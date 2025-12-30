@@ -124,7 +124,15 @@ class EnhancedMedicalTermProcessor {
       'S06.0': { korean: '뇌진탕', english: 'Concussion' },
       'S72.0': { korean: '대퇴골 경부 골절', english: 'Fracture of neck of femur' },
       'S82.6': { korean: '발목 골절', english: 'Fracture of lateral malleolus' },
-      'T14.9': { korean: '손상, 상세불명', english: 'Injury, unspecified' }
+      'T14.9': { korean: '손상, 상세불명', english: 'Injury, unspecified' },
+      'N18': { korean: '만성 신장질환', english: 'Chronic kidney disease' },
+      'K21': { korean: '위식도 역류질환', english: 'Gastro-oesophageal reflux disease' },
+      'N39.0': { korean: '요로감염', english: 'Urinary tract infection, site not specified' },
+      'M06': { korean: '류마티스 관절염', english: 'Rheumatoid arthritis' },
+      'M32': { korean: '전신 홍반 루푸스', english: 'Systemic lupus erythematosus' },
+      'I48': { korean: '심방세동 및 심방조동', english: 'Atrial fibrillation and flutter' },
+      'I47.2': { korean: '심실빈맥', english: 'Ventricular tachycardia' },
+      'I50': { korean: '심부전', english: 'Heart failure' }
     };
 
     // 의료용어 영어-한글 매핑

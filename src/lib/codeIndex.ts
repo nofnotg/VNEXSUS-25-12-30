@@ -187,7 +187,7 @@ class DiseaseCodeIndex {
   private async decompressZstd(compressedData: ArrayBuffer): Promise<string> {
     // 실제 구현에서는 zstd-codec 라이브러리를 사용해야 함
     try {
-      // @ts-ignore - zstd 관련 코드는 실제 구현 시 적용 필요
+      // @ts-expect-error - zstd 관련 코드는 실제 구현 시 적용 필요
       const { ZstdCodec } = await import('zstd-codec');
       return new Promise((resolve, reject) => {
         ZstdCodec.run(zstd => {
@@ -303,7 +303,7 @@ class DiseaseCodeIndex {
       
       // Zstandard 압축 해제
       return new Promise((resolve, reject) => {
-        // @ts-ignore
+        // @ts-expect-error - ZstdCodec는 런타임 로드되는 외부 의존성
         ZstdCodec.run((zstd: any) => {
           try {
             // 디코더 생성

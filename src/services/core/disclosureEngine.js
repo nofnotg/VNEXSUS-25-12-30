@@ -8,9 +8,19 @@ export function computeDisclosure({ contractDate, disclosureWindows = ["3m","2y"
   const KW_2Y = ["입원", "수술"];
   const KW_5Y = ["암", "협심증", "심근경색", "간경화"];
 
-  const norm = s => (s || "").toLowerCase();
+  const norm = s => (s || "").toLowerCase().replace(/\s+/g, "");
   const hasAny = (text, kws) => kws.some(k => norm(text).includes(norm(k)));
-  const linkedToClaim = (text) => norm(text).includes(norm(claimDiagnosis));
+  const claimTerms = (() => {
+    const base = norm(claimDiagnosis);
+    const terms = [];
+    if (base) terms.push(base);
+    if (base.endsWith("암") && base.length > 1) terms.push(base.slice(0, -1));
+    return Array.from(new Set(terms)).filter(Boolean);
+  })();
+  const linkedToClaim = (text) => {
+    const t = norm(text);
+    return claimTerms.some(term => term && t.includes(term));
+  };
 
   const taggedRecords = records.map(r => {
     const dRec = new Date(r.date);
@@ -32,9 +42,14 @@ export function computeDisclosure({ contractDate, disclosureWindows = ["3m","2y"
       if (w === "5y" && hasAny(t, KW_5Y)) { evidence.push(evi); status = "해당"; }
     }
 
-    if (status === "해당" && evidence.some(e => e.linkage_to_claim)) status = "위반의심";
+    if (w === "5y" && status === "해당" && evidence.some(e => e.linkage_to_claim)) status = "위반의심";
     return { window: w, status, evidence };
   });
 
-  return { windows: windowReport, taggedRecords };
+  const hasViolation = windowReport.some(w => w.status === "위반의심");
+  const windows = hasViolation
+    ? windowReport.map(w => (w.window === "3m" && w.status === "해당" ? { ...w, status: "위반의심" } : w))
+    : windowReport;
+
+  return { windows, taggedRecords };
 }

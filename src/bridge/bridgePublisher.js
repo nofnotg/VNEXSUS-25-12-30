@@ -9,6 +9,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import { logger } from '../shared/logging/logger.js';
 
 // 환경 변수 설정
 dotenv.config();
@@ -35,11 +36,12 @@ async function publishMessage(data) {
     
     // 메시지 발행
     const messageId = await pubsub.topic(topicName).publish(dataBuffer);
-    console.log(`메시지 발행 성공: ${messageId}`);
+    logger.info({ event: 'bridge_publish_success', metadata: { messageId } });
     
     return messageId;
   } catch (error) {
-    console.error('메시지 발행 실패:', error);
+    const e = error instanceof Error ? error : new Error(String(error));
+    logger.error({ event: 'bridge_publish_error', error: { name: e.name, message: e.message, stack: e.stack } });
     throw error;
   }
 }
@@ -52,7 +54,7 @@ function loadTestOcrText() {
   
   // 파일 존재 확인
   if (!fs.existsSync(testFilePath)) {
-    console.error(`테스트 파일을 찾을 수 없습니다: ${testFilePath}`);
+    logger.warn({ event: 'bridge_test_file_missing', metadata: { testFilePath } });
     
     // 샘플 OCR 텍스트 반환
     return `
@@ -91,17 +93,19 @@ async function publishTestMessage() {
     }
   };
   
-  console.log('테스트 메시지 발행 중...');
+  logger.info({ event: 'bridge_test_publish_start' });
   await publishMessage(message);
 }
 
 // 테스트 메시지 발행 실행
 if (process.argv[2] === '--publish') {
-  console.log('테스트 모드: 메시지 발행 시작');
-  publishTestMessage().catch(console.error);
+  logger.info({ event: 'bridge_test_mode_start' });
+  publishTestMessage().catch((error) => {
+    const e = error instanceof Error ? error : new Error(String(error));
+    logger.error({ event: 'bridge_test_mode_error', error: { name: e.name, message: e.message, stack: e.stack } });
+  });
 } else {
-  console.log('사용법: node bridgePublisher.js --publish');
-  console.log('Pub/Sub 메시지를 발행하려면 --publish 옵션을 사용하세요.');
+  logger.info({ event: 'bridge_publisher_usage', message: 'Usage: node bridgePublisher.js --publish' });
 }
 
-export { publishMessage }; 
+export { publishMessage };

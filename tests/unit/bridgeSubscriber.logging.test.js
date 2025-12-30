@@ -4,7 +4,7 @@ import { describe, it, expect, jest } from '@jest/globals';
 jest.useFakeTimers();
 
 // Mock logger to capture structured logs
-jest.mock('../../src/shared/logging/logger.js', () => {
+await jest.unstable_mockModule('../../src/shared/logging/logger.js', () => {
   const info = jest.fn();
   const error = jest.fn();
   return {
@@ -49,4 +49,3 @@ describe('Bridge Subscriber Logging (JS test mode)', () => {
     );
   });
 });
-

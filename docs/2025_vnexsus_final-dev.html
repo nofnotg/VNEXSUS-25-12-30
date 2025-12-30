@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>2025 VNEXSUS Final Dev Master Plan</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg:#0f1220; --panel:#161a2e; --card:#1e2442; --text:#e4e8ff; --muted:#9aa3c7;
+      --accent:#65c3ff; --accent2:#7af0c4; --danger:#ff7b9c; --ok:#84ff7a; --warn:#ffd66b;
+      --border:#2b3358;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0c1020,#0f1220 40%,#121631);color:var(--text);font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{position:sticky;top:0;background:rgba(15,18,32,.8);backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--border);z-index:9}
+    .bar{max-width:1200px;margin:0 auto;display:flex;gap:12px;align-items:center;padding:10px 16px}
+    h1{font-size:18px;margin:0}
+    .container{max-width:1200px;margin:24px auto;padding:0 16px}
+    .grid{display:grid;gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+    .chip{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;margin-right:6px}
+    .section-title{display:flex;align-items:center;gap:8px;margin:0 0 8px}
+    .muted{color:var(--muted)}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .danger{color:var(--danger)}
+    .progress{position:relative;height:10px;background:#0c1024;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+    .progress > span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
+    .progress-label{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text);opacity:.85}
+    .list{display:grid;gap:8px}
+    .list a{display:flex;justify-content:space-between;border:1px solid var(--border);padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04)}
+    .kbd{font:12px/1 mono;background:#0b0e19;border:1px solid var(--border);border-radius:6px;padding:2px 6px;color:#cfd6ff}
+    .timeline{position:relative;padding-left:20px}
+    .timeline::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
+    .tl-item{position:relative;margin:10px 0 10px 0}
+    .tl-item::before{content:"";position:absolute;left:-4px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(101,195,255,.15)}
+    .kbdrow{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{padding:2px 8px;border-radius:999px;background:rgba(122,240,196,.1);border:1px solid rgba(122,240,196,.35);color:#bfffe9;font:12px/1.8 system-ui}
+    .ref{font-size:12px}
+    .footer{opacity:.8;margin:24px 0 60px}
+    .search{display:flex;gap:8px}
+    input[type="text"]{background:#0b0e19;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px;width:100%}
+    button{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#081022;border:0;border-radius:10px;padding:10px 14px;font-weight:600}
+    .code{font:12px/1.6 ui-monospace,Menlo,Consolas;background:#0b0e19;border:1px solid var(--border);border-radius:10px;padding:10px;overflow:auto}
+    @media (max-width:960px){.grid.cols-3{grid-template-columns:1fr}.grid.cols-2{grid-template-columns:1fr}}
+    .progress.small{height:8px}
+    .task{margin:10px 0 14px}
+    .task-row{display:flex;justify-content:space-between;align-items:center;margin:4px 0}
+    .group-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .badge{padding:2px 8px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.05);color:var(--muted);font-size:12px}
+  </style>
+  <meta name="robots" content="noindex,nofollow" />
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <h1>2025 VNEXSUS Final Dev Master Plan</h1>
+      <span class="chip">좌표기반 날짜앵커</span>
+      <span class="chip">타임라인·정합성</span>
+      <span class="chip">사용자 시각모방</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid cols-3">
+      <div class="panel">
+        <h2 class="section-title">앱 목표</h2>
+        <p>OCR 추출 좌표정보를 활용하여 문서 내 <b>의료 이벤트 날짜를 완벽히 캐치</b>하고, 이벤트 내용을 해당 날짜에 <b>정확히 귀속</b>시키는 로직을 완성. 사용자 시각을 모방한 <b>좌표·배치·블록 기반 대응 시스템</b>으로 타임라인 정확도를 고도화.</p>
+        <div class="kbdrow">
+          <span class="pill">Vision Blocks</span><span class="pill">Bounding Box</span><span class="pill">Date Anchoring</span><span class="pill">Source Span</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="section-title">현재 공정율</h2>
+        <div class="progress" aria-label="progress" data-progress="72"><span></span><div class="progress-label">72%</div></div>
+        <p class="muted">파이프라인·후처리·타임라인 구성 모듈은 운영 수준. 좌표-날짜앵커 통합 정밀도 향상이 남은 핵심 과제.</p>
+        <div class="kbdrow"><span class="kbd">Pipeline</span><span class="ok">Stable</span><span class="kbd">Anchoring</span><span class="warn">Improve</span><span class="kbd">Vision</span><span class="ok">Ready</span></div>
+      </div>
+      <div class="panel">
+        <h2 class="section-title">빠른 실행</h2>
+        <div class="search">
+          <input id="q" type="text" placeholder="문서 목록 검색 (예: Progress, Report, Plan)" />
+          <button onclick="filterDocs()">검색</button>
+        </div>
+        <p class="muted">문서 목록에서 키워드로 필터링할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">코드 기반 현황 요약</h2>
+      <div class="list">
+        <div>
+          <b>Vision 좌표 추출</b> — 블록 텍스트와 bbox(xMin,yMin,xMax,yMax) 산출, 페이지·blockIndex 포함
+          <div class="ref">
+            코드: <a href="file:///c:/VNEXSUS_12-07/backend/services/visionService.js#L644-L688">visionService.js: extractBlocksFromJson</a>,
+            <a href="file:///c:/VNEXSUS_12-07/backend/services/visionService.js#L515-L524">parseOcrResults: block 정렬</a>
+          </div>
+        </div>
+        <div>
+          <b>PDF 처리</b> — pdf-parse 결과 부족 시 OCR로 전환, blocks 전달. 텍스트 기반 synthetic blocks 보강
+          <div class="ref">
+            코드: <a href="file:///c:/VNEXSUS_12-07/backend/utils/pdfProcessor.js#L568-L589">pdfProcessor.js: buildSyntheticBlocksFromText</a>
+          </div>
+        </div>
+        <div>
+          <b>SourceSpan 증거</b> — 이벤트에 date/hospital/diagnosis anchor로 원문 위치 첨부, blocks와 교차
+          <div class="ref">
+            코드: <a href="file:///c:/VNEXSUS_12-07/backend/postprocess/sourceSpanManager.js#L119-L171">sourceSpanManager.js: findPositionInText</a>
+          </div>
+        </div>
+        <div>
+          <b>타임라인 구성</b> — 날짜 추출·정렬·그룹화, 가입일 구간 필터
+          <div class="ref">
+            코드: <a href="file:///c:/VNEXSUS_12-07/backend/postprocess/dateOrganizer.js#L1-L54">dateOrganizer.js: 다양한 날짜 형식 파싱</a>,
+            <a href="file:///c:/VNEXSUS_12-07/backend/routes/mcp-processing.js#L371-L387">mcp-processing.js: extractDates</a>
+          </div>
+        </div>
+        <div>
+          <b>좌표 섹션 통계</b> — 페이지별 header/footer 비율 계산(사용자 시각 모방 지표)
+          <div class="ref">
+            코드: <a href="file:///c:/VNEXSUS_12-07/backend/postprocess/index.js#L28-L70">postprocess/index.js: computeSectionRatios</a>,
+            <a href="file:///c:/VNEXSUS_12-07/backend/postprocess/index.js#L225-L241">medicalEvents 앵커 포맷</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">문서 취합(2025-12-26 이후 갱신)</h2>
+      <p class="muted">아래는 최신 수정 순으로 대표 문서 링크입니다. 상세는 검색으로 필터링하세요.</p>
+      <div id="docs" class="list">
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/2025-12-29_DeepBlue_Integrated_Status_Report.html"><span>DeepBlue Integrated Status Report (2025-12-29)</span><span class="muted">Execution</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/25-12-28_Progress_Rate_Report.html"><span>Progress Rate Report (2025-12-28)</span><span class="muted">Progress</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_System_Architecture_Report.html"><span>System Architecture Report</span><span class="muted">Architecture</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/PROGRESS_DASHBOARD.html"><span>Progress Dashboard</span><span class="muted">Dashboard</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_앱_상태_분석_리포트.html"><span>앱 상태 분석 리포트</span><span class="muted">App</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/통합파이프라인_상세분석_최종리포트_v3.html"><span>통합파이프라인 상세분석 v3</span><span class="muted">Pipeline</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/후처리로직_고도화_분석보고서.html"><span>후처리 로직 고도화</span><span class="muted">Postprocess</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/comprehensive_analysis_report.html"><span>Comprehensive Analysis Report</span><span class="muted">Analysis</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_Improvement_Tasks.md"><span>VNEXSUS Improvement Tasks</span><span class="muted">Tasks</span></a>
+        <a href="file:///c:/VNEXSUS_12-07/VNEXSUS_단계별_개발계획_및_테스트전략.md"><span>단계별 개발계획·테스트 전략</span><span class="muted">Plan</span></a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">최종 개발 계획(좌표앵커·타임라인·시각모방)</h2>
+      <div class="grid cols-2">
+        <div>
+          <h3>Phase A · 좌표-날짜 앵커 정밀화</h3>
+          <ul>
+            <li>Blocks→Date Anchor 매핑 스코어링 개선: 날짜 근접성+키워드 일치+bbox 밀집도</li>
+            <li>이벤트 SourceSpan에 bbox(page,xMin,yMin,xMax,yMax) 필수 첨부</li>
+            <li>중복 날짜·다중 블록 충돌 시 우선규칙: 상단 헤더 제외, 본문 중앙 가중</li>
+            <li>엣지케이스: 한국어 날짜(년월일), 점·슬래시 표기, 월/일만 기재, 도표 내 날짜</li>
+            <li>AC: dateMatchRate≥95%, 병원/진단 anchor 미스≤5%</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Phase B · 사용자 시각 모방</h3>
+          <ul>
+            <li>computeSectionRatios 기반 header/footer 감지로 표/서식 라인 제외</li>
+            <li>좌표 히트맵(빈도/신뢰도) 생성하여 본문 중심 가중치 적용</li>
+            <li>블록 군집화: 동일 날짜 근접 bbox 클러스터→단일 이벤트로 병합</li>
+            <li>AC: 표/각주로 인한 잘못된 귀속률≤3%, 클러스터링 재현성 시뮬레이션 통과</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Phase C · 타임라인 일관성</h3>
+          <ul>
+            <li>DateOrganizer로 오름차순 정렬+가입일 구간 필터(3개월/5년)</li>
+            <li>중복 이벤트 통합(unifyDuplicateEvents), ICD/병원 Canonical 매핑</li>
+            <li>AC: 타임라인 정렬 오류 0건, 구간 필터 정확도≥99%</li>
+          </ul>
+        </div>
+        <div>
+          <h3>QA · 측정·리스크</h3>
+          <ul>
+            <li>ReportSubsetValidator로 date/hospital/ICD 서브셋 매칭율 산출</li>
+            <li>리스크: OCR 품질 저하, 좌표 왜곡, 도표 영역 혼입 → Vision Image Fallback·표 영역 마스킹</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">세부 공정율 · 개선 항목(Tasks)</h2>
+      <p class="muted">task 단위로 묶어 각 항목의 공정율을 명시합니다.</p>
+      <div class="grid cols-2">
+        <div class="panel">
+          <div class="group-head"><h3>좌표-날짜 앵커</h3><span class="badge">Group 70%</span></div>
+          <div class="progress small" data-progress="70"><span></span><div class="progress-label">70%</div></div>
+          <div class="task"><div class="task-row"><span>앵커 매핑 스코어링 개선</span><span>65%</span></div><div class="progress small" data-progress="65"><span></span><div class="progress-label">65%</div></div></div>
+          <div class="task"><div class="task-row"><span>SourceSpan bbox 첨부율 향상</span><span>75%</span></div><div class="progress small" data-progress="75"><span></span><div class="progress-label">75%</div></div></div>
+          <div class="task"><div class="task-row"><span>다중 블록 충돌 우선규칙</span><span>60%</span></div><div class="progress small" data-progress="60"><span></span><div class="progress-label">60%</div></div></div>
+          <div class="task"><div class="task-row"><span>한국어/혼합 날짜 정규화 확장</span><span>80%</span></div><div class="progress small" data-progress="80"><span></span><div class="progress-label">80%</div></div></div>
+        </div>
+        <div class="panel">
+          <div class="group-head"><h3>사용자 시각 모방</h3><span class="badge">Group 62%</span></div>
+          <div class="progress small" data-progress="62"><span></span><div class="progress-label">62%</div></div>
+          <div class="task"><div class="task-row"><span>header/footer 감지 정밀도 개선</span><span>70%</span></div><div class="progress small" data-progress="70"><span></span><div class="progress-label">70%</div></div></div>
+          <div class="task"><div class="task-row"><span>좌표 히트맵 가중치 적용</span><span>55%</span></div><div class="progress small" data-progress="55"><span></span><div class="progress-label">55%</div></div></div>
+          <div class="task"><div class="task-row"><span>bbox 근접 클러스터 병합</span><span>60%</span></div><div class="progress small" data-progress="60"><span></span><div class="progress-label">60%</div></div></div>
+        </div>
+        <div class="panel">
+          <div class="group-head"><h3>타임라인 일관성</h3><span class="badge">Group 87%</span></div>
+          <div class="progress small" data-progress="87"><span></span><div class="progress-label">87%</div></div>
+          <div class="task"><div class="task-row"><span>오름차순 정렬/가입일 구간 필터</span><span>95%</span></div><div class="progress small" data-progress="95"><span></span><div class="progress-label">95%</div></div></div>
+          <div class="task"><div class="task-row"><span>중복 이벤트 통합</span><span>85%</span></div><div class="progress small" data-progress="85"><span></span><div class="progress-label">85%</div></div></div>
+          <div class="task"><div class="task-row"><span>ICD/병원 Canonical 매핑</span><span>80%</span></div><div class="progress small" data-progress="80"><span></span><div class="progress-label">80%</div></div></div>
+        </div>
+        <div class="panel">
+          <div class="group-head"><h3>QA/품질·리스크</h3><span class="badge">Group 60%</span></div>
+          <div class="progress small" data-progress="60"><span></span><div class="progress-label">60%</div></div>
+          <div class="task"><div class="task-row"><span>Subset Validator 통합 지표</span><span>70%</span></div><div class="progress small" data-progress="70"><span></span><div class="progress-label">70%</div></div></div>
+          <div class="task"><div class="task-row"><span>OCR 품질 저하 대응(이미지 Fallback·표 마스킹)</span><span>50%</span></div><div class="progress small" data-progress="50"><span></span><div class="progress-label">50%</div></div></div>
+          <div class="task"><div class="task-row"><span>핫 경로 성능 모니터링·튜닝</span><span>60%</span></div><div class="progress small" data-progress="60"><span></span><div class="progress-label">60%</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">타임라인 샘플(좌표 기반 귀속)</h2>
+      <div class="timeline">
+        <div class="tl-item"><b>2024-03-07</b> · 외래 · <span class="muted">세브란스병원</span> — 경추 MRI, NDI 검사</div>
+        <div class="tl-item"><b>2024-04-09</b> · 입원 · <span class="muted">은평성모병원</span> — 수술 계획·마취평가</div>
+        <div class="tl-item"><b>2024-04-11</b> · 수술 · <span class="muted">은평성모병원</span> — ACDF(C5-6), KCD S13.4</div>
+      </div>
+      <p class="muted">실데이터는 OCR blocks 좌표에 따라 이벤트가 날짜 블록으로 귀속됩니다.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">운영 체크리스트</h2>
+      <ul>
+        <li>Vision OCR 활성화 및 blocks 전달 경로 점검</li>
+        <li>SourceSpanManager로 모든 이벤트에 anchor·textPreview 첨부</li>
+        <li>DateOrganizer로 정렬·구간 필터 통과</li>
+        <li>Subset Validator로 date/hospital/ICD 매칭율 로그</li>
+      </ul>
+      <div class="code">좌표 처리 경로:
+Vision → extractBlocksFromJson → pdfProcessor.result.blocks → PostProcessingManager(options.coordinateBlocks) → medicalEventModel.buildEvents → sourceSpanManager.attach → 타임라인·리포트</div>
+    </section>
+
+    <section class="footer muted">
+      <div>문서 필터 도움말: Progress, Report, Plan, Pipeline, App, Postprocess 등 키워드를 시도하세요.</div>
+    </section>
+  </main>
+
+  <script>
+    function filterDocs(){
+      const q=document.getElementById('q').value.trim().toLowerCase();
+      const rows=[...document.querySelectorAll('#docs a')];
+      rows.forEach(a=>{
+        const t=(a.textContent||'').toLowerCase();
+        a.style.display = !q || t.includes(q) ? '' : 'none';
+      });
+    }
+    (function(){
+      const bars=[...document.querySelectorAll('.progress')];
+      bars.forEach(el=>{
+        const v=Number(el.getAttribute('data-progress'));
+        if(Number.isFinite(v)){
+          const pct=Math.max(0,Math.min(100,v));
+          const s=el.querySelector('span');
+          const lab=el.querySelector('.progress-label');
+          if(s) s.style.width=pct+'%';
+          if(lab) lab.textContent=pct+'%';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

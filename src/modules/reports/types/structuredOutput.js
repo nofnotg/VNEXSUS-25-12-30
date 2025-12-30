@@ -114,6 +114,58 @@ export const ReportResponseSchema = z.object({
 
 export const validateReportResponse = (resp) => ReportResponseSchema.safeParse(resp);
 
+export const MedicalEventSchema = z.object({
+  id: z.string().min(1),
+  date: IsoDateString,
+  hospital: z.string().optional(),
+  eventType: z.string().min(1),
+  description: z.string().optional(),
+  diagnosis: z
+    .object({
+      name: z.string().optional(),
+      code: z.string().optional(),
+    })
+    .optional(),
+  procedures: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        code: z.string().optional(),
+      })
+    )
+    .optional(),
+  medications: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        dose: z.string().optional(),
+      })
+    )
+    .optional(),
+  anchors: z
+    .object({
+      position: z
+        .object({
+          page: z.number().int().positive().optional(),
+          xMin: z.number().optional(),
+          yMin: z.number().optional(),
+          xMax: z.number().optional(),
+          yMax: z.number().optional(),
+        })
+        .optional(),
+      sourceSpan: z
+        .object({
+          blockIndex: z.number().int().nonnegative().optional(),
+        })
+        .optional(),
+      confidence: z.number().min(0).max(1).optional(),
+    })
+    .optional(),
+  confidence: z.number().min(0).max(1),
+  tags: z.array(z.string()).optional(),
+  payload: z.record(z.any()).optional(),
+});
+
 export default {
   TimelineEventSchema,
   TimelineSchema,
@@ -123,4 +175,5 @@ export default {
   validateReportRequest,
   ReportResponseSchema,
   validateReportResponse,
+  MedicalEventSchema,
 };

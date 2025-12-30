@@ -197,11 +197,13 @@ export const maskByLevel = (text, level = 'medium') => {
       
     case 'high':
       // 강화된 마스킹 (모든 숫자와 특수문자 일부 마스킹)
-      let highMasked = mask(text);
-      highMasked = highMasked.replace(/\d{3,}/g, (match) => 
-        match.substring(0, 1) + '*'.repeat(match.length - 1)
-      );
-      return highMasked;
+      {
+        let highMasked = mask(text);
+        highMasked = highMasked.replace(/\d{3,}/g, (match) =>
+          match.substring(0, 1) + '*'.repeat(match.length - 1)
+        );
+        return highMasked;
+      }
       
     default:
       return mask(text);

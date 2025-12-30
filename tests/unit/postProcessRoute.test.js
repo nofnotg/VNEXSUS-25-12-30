@@ -1,12 +1,8 @@
 import express from 'express';
 import request from 'supertest';
+import { describe, test, expect, jest } from '@jest/globals';
 
-// Router under test
-import router from '../../src/postprocess/postProcessRoute.js';
-
-// Mock reportController to avoid running heavy logic
-jest.mock('../../src/controllers/reportController.js', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../src/controllers/reportController.js', () => ({
   default: {
     generateReport: jest.fn(async () => ({
       success: true,
@@ -15,6 +11,8 @@ jest.mock('../../src/controllers/reportController.js', () => ({
     })),
   },
 }));
+
+const router = (await import('../../src/postprocess/postProcessRoute.js')).default;
 
 describe('POST /api/postprocess/report', () => {
   const app = express();

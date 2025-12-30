@@ -1,76 +1,70 @@
 import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 
-// Dynamic control for timeline validation result
 let mockValidateTimelineResult = { success: true };
 
-jest.mock('../../src/modules/reports/types/structuredOutput.js', () => ({
+await jest.unstable_mockModule('../../src/modules/reports/types/structuredOutput.js', () => ({
   validateTimeline: () => mockValidateTimelineResult,
 }));
 
-jest.mock('../../src/shared/logging/logger.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
-    logger: {
-      info: jest.fn(),
-      error: jest.fn(),
-      logProcessingError: jest.fn(),
-    },
-    logProcessingStart: jest.fn(),
-    logProcessingComplete: jest.fn(),
+await jest.unstable_mockModule('../../src/shared/logging/logger.js', () => ({
+  logger: {
+    info: jest.fn(),
+    error: jest.fn(),
     logProcessingError: jest.fn(),
-    logBusinessEvent: jest.fn(),
-  };
-});
+  },
+  logProcessingStart: jest.fn(),
+  logProcessingComplete: jest.fn(),
+  logProcessingError: jest.fn(),
+  logBusinessEvent: jest.fn(),
+}));
 
-jest.mock('../../src/lib/periodFilter.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
+await jest.unstable_mockModule(
+  '../../src/lib/periodFilter.js',
+  () => ({
     periodFilter: {
       filter: jest.fn(),
     },
-  };
-}, { virtual: true });
+  }),
+  { virtual: true }
+);
 
-jest.mock('../../src/lib/eventGrouper.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
+await jest.unstable_mockModule(
+  '../../src/lib/eventGrouper.js',
+  () => ({
     eventGrouper: {
       createTimeline: jest.fn(),
     },
-  };
-}, { virtual: true });
+  }),
+  { virtual: true }
+);
 
-jest.mock('../../src/lib/reportMaker.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
+await jest.unstable_mockModule(
+  '../../src/lib/reportMaker.js',
+  () => ({
     reportMaker: {
       createReport: jest.fn(),
     },
-  };
-}, { virtual: true });
+  }),
+  { virtual: true }
+);
 
-jest.mock('../../src/shared/utils/vectorMeta.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
-    buildVectorMeta: jest.fn(() => ({ projection3D: [0.1, 0.2, 0.3] })),
-    quantizeWeights: jest.fn((w) => w),
-  };
-});
+await jest.unstable_mockModule('../../src/shared/utils/vectorMeta.js', () => ({
+  buildVectorMeta: jest.fn(() => ({ projection3D: [0.1, 0.2, 0.3] })),
+  quantizeWeights: jest.fn((w) => w),
+}));
 
-jest.mock('../../src/shared/utils/datasetClassifier.js', () => {
-  const { jest } = require('@jest/globals');
-  return {
-    classifyDataset: jest.fn(() => 'SAMPLE'),
-  };
-});
+await jest.unstable_mockModule('../../src/shared/utils/datasetClassifier.js', () => ({
+  classifyDataset: jest.fn(() => 'SAMPLE'),
+}));
 
-import { ERRORS } from '../../src/shared/constants/errors.js';
-import reportController from '../../src/controllers/reportController.js';
-import { periodFilter } from '../../src/lib/periodFilter.js';
-import { eventGrouper } from '../../src/lib/eventGrouper.js';
-import { reportMaker } from '../../src/lib/reportMaker.js';
-import { logProcessingStart, logProcessingComplete, logBusinessEvent } from '../../src/shared/logging/logger.js';
-import { logger } from '../../src/shared/logging/logger.js';
+const { ERRORS } = await import('../../src/shared/constants/errors.js');
+const reportController = (await import('../../src/controllers/reportController.js')).default;
+const { periodFilter } = await import('../../src/lib/periodFilter.js');
+const { eventGrouper } = await import('../../src/lib/eventGrouper.js');
+const { reportMaker } = await import('../../src/lib/reportMaker.js');
+const { logProcessingStart, logProcessingComplete, logBusinessEvent, logger } = await import(
+  '../../src/shared/logging/logger.js'
+);
 
 describe('Report Controller Logging', () => {
   const parsedEvents = [

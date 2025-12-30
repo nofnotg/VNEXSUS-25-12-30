@@ -1,7 +1,6 @@
-// core-engine-simple.test.js - 코어 엔진 단순 테스트
-
-const { 
-  PipelineStateMachine, 
+// core-engine-simple.test.js - 코어 엔진 단순 테스트 (ESM)
+import {
+  PipelineStateMachine,
   DataContracts,
   TextIngestor,
   AnchorDetector,
@@ -12,7 +11,7 @@ const {
   ConfidenceScorer,
   ReportSynthesizer,
   EvidenceBinder
-} = require('../services/core-engine');
+} from '../services/core-engine/index.js';
 
 describe('Core Engine Components Tests', () => {
   

@@ -1,0 +1,173 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8" />
+  <meta http-equiv="refresh" content="15" />
+  <title>VNEXSUS 실시간 개선·개발 현황</title>
+  <style>
+  :root{--bg:#0f172a;--fg:#111827;--card:#ffffff;--muted:#6b7280;--accent:#2563eb;--ok:#10b981;--bad:#ef4444}
+  body{font-family:system-ui,Segoe UI,Arial;margin:0;background:linear-gradient(135deg,#0ea5e9,#6366f1)}
+  .wrap{max-width:1200px;margin:24px auto;background:#fff;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.25);overflow:hidden}
+  .hd{background:linear-gradient(135deg,#0ea5e9,#22c55e);color:#fff;padding:20px}
+  .hd h1{margin:0;font-size:22px}
+  .meta{font-size:12px;opacity:.95;margin-top:6px}
+  .ct{padding:18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .metric{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}
+  .metric-title{font-size:12px;color:#374151}
+  .metric-value{font-size:22px;font-weight:700;color:#111827;margin-top:4px}
+  .metric-hint{font-size:12px;color:#6b7280;margin-top:4px}
+  .section{margin-top:16px}
+  .section h2{font-size:16px;margin:0 0 8px 0;color:#111827}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:#f9fafb;border:1px solid #e5e7eb;color:#374151;padding:6px 10px;border-radius:999px;font-size:12px}
+  .bar{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#22c55e);width:0%}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left;font-size:12px;vertical-align:top}
+  .muted{color:#6b7280}
+  .ok{color:#10b981}
+  .bad{color:#ef4444}
+  .footer{padding:12px;color:#374151;font-size:12px}
+  </style></head><body>
+  <div class="wrap">
+    <div class="hd">
+      <h1>VNEXSUS 실시간 개선·개발 현황</h1>
+      <div class="meta">생성 시각: 2025-12-28T11:12:20.795Z · 출력 디렉토리: C:\VNEXSUS_12-07\reports\VNEXSUS_Report\2025-12-28T11-12-00-335Z</div>
+    </div>
+    <div class="ct">
+      <div class="grid">
+        <div class="metric"><div class="metric-title">총 케이스</div><div class="metric-value">12</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">성공 케이스</div><div class="metric-value">12</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">가중 통과율</div><div class="metric-value">0.0%</div><div class="metric-hint">combinedScore 기반</div></div>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="metric"><div class="metric-title">정확도(평균)</div><div class="metric-value">13.8%</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">커버리지(평균)</div><div class="metric-value">96.2%</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">베이스라인 통과율</div><div class="metric-value">0.0%</div><div class="metric-hint"></div></div>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="metric"><div class="metric-title">후처리 평균</div><div class="metric-value">4965ms</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">후처리 P95</div><div class="metric-value">8473ms</div><div class="metric-hint"></div></div>
+        <div class="metric"><div class="metric-title">검증 쌍</div><div class="metric-value">11</div><div class="metric-hint"></div></div>
+      </div>
+      <div class="section">
+        <h2>실패·경고 원인</h2>
+        <div class="chips"><div class="chip">ok:12</div></div>
+        <div class="chips" style="margin-top:8px"><div class="chip">offline_blocks_missing_bbox:1</div></div>
+      </div>
+      <div class="section">
+        <h2>개발 태스크 진행</h2>
+        <div class="grid">
+          <div class="metric"><div class="metric-title">전체 태스크</div><div class="metric-value">28</div><div class="metric-hint"></div></div>
+          <div class="metric"><div class="metric-title">완료</div><div class="metric-value">0</div><div class="metric-hint"></div></div>
+          <div class="metric"><div class="metric-title">대기</div><div class="metric-value">28</div><div class="metric-hint"></div></div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>케이스별 상태</h2>
+        <table><thead><tr><th>Case</th><th>상태</th><th>SourceSpan</th><th>좌표매칭</th><th>블록</th><th>후처리</th><th>원문길이</th></tr></thead><tbody>
+          <tr>
+      <td>Case1</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>0.0%</td>
+      <td>0</td>
+      <td>4332ms</td>
+      <td>29,984</td>
+    </tr><tr>
+      <td>Case2</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>1372</td>
+      <td>4431ms</td>
+      <td>17,854</td>
+    </tr><tr>
+      <td>Case3</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>1539</td>
+      <td>1857ms</td>
+      <td>16,198</td>
+    </tr><tr>
+      <td>Case4</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>3019</td>
+      <td>1307ms</td>
+      <td>44,831</td>
+    </tr><tr>
+      <td>Case5</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>91.8%</td>
+      <td>2397</td>
+      <td>2918ms</td>
+      <td>22,206</td>
+    </tr><tr>
+      <td>Case6</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>5698</td>
+      <td>4586ms</td>
+      <td>44,607</td>
+    </tr><tr>
+      <td>Case7</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>13554</td>
+      <td>5204ms</td>
+      <td>116,838</td>
+    </tr><tr>
+      <td>Case8</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>10787</td>
+      <td>4649ms</td>
+      <td>111,933</td>
+    </tr><tr>
+      <td>Case9</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>13172</td>
+      <td>8191ms</td>
+      <td>170,794</td>
+    </tr><tr>
+      <td>Case10</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>6977</td>
+      <td>7820ms</td>
+      <td>66,675</td>
+    </tr><tr>
+      <td>Case11</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>100.0%</td>
+      <td>11489</td>
+      <td>8473ms</td>
+      <td>140,179</td>
+    </tr><tr>
+      <td>Case12</td>
+      <td><span class="ok">OK</span></td>
+      <td>100.0%</td>
+      <td>94.6%</td>
+      <td>6015</td>
+      <td>5814ms</td>
+      <td>46,734</td>
+    </tr>
+        </tbody></table>
+      </div>
+      <div class="section">
+        <h2>디자인 가이드</h2>
+        <div class="muted">그라디언트 헤더·카드 그리드·칩·프로그레스 바를 적용해 가독성과 시인성을 강화</div>
+      </div>
+    </div>
+    <div class="footer">이 문서는 변경 시 15초 간격으로 자동 새로고침되며, 최신 결과로 재생성하여 반영</div>
+  </div>
+  </body></html>

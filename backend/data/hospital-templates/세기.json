@@ -1,0 +1,57 @@
+{
+  "hospitalId": "세기",
+  "hospitalName": "세기",
+  "patterns": [
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이: M",
+      "position": 9063,
+      "length": 8,
+      "hash": "91b5419fed8f2874b3b7aad384cabf0e",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:05:39.965Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별/나이 : M",
+      "position": 9027,
+      "length": 9,
+      "hash": "ef39eed9da01d4b8f5f4d7482811fc9e",
+      "frequency": 24,
+      "firstSeen": "2025-12-24T12:05:39.965Z"
+    },
+    {
+      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
+      "match": "730523-1******",
+      "position": 8486,
+      "length": 14,
+      "hash": "bb8069c4eacdded4c0b943295d32fd88",
+      "frequency": 12,
+      "firstSeen": "2025-12-24T12:05:39.965Z"
+    },
+    {
+      "pattern": "상기\\s*용도\\s*외.*?사용.*?수\\s*없으며.*?파본.*?폐기",
+      "match": "상기 용도 외 에는 이 사본을 사용할 수 없으며 사용용도 또는 사용기간이 완료된\n후 즉시 파본, 폐기",
+      "position": 339,
+      "length": 56,
+      "hash": "9b39a5381fcf6d5eb730b7d297124d26",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:05:39.965Z"
+    },
+    {
+      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
+      "match": "의무기록사본\n총 0 부\n(표지제외)\n빈경환\n\nILSAN 21CENTURY HOSPITAL\nSPINE&JOINT\n의무기록사본증명서\n환자번호\n22001122\n발행번호\n2025-09-22-36-2\n환자명\n함종성\n발행일\n발행매수\n2025-09-22\n용 도\n보험회사 제출용\n10장\n(표지포함)\n첨부한 사본 의무기록 원본과 틀림없음",
+      "position": 91,
+      "length": 179,
+      "hash": "47a347b9e00393aef7bab14879efcb84",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:05:39.965Z"
+    }
+  ],
+  "statistics": {
+    "documentsProcessed": 3,
+    "averageCleaningRate": 3.70962903709629,
+    "lastUpdated": "2025-12-24T17:43:01.293Z"
+  },
+  "createdAt": "2025-12-24T12:05:39.965Z"
+}

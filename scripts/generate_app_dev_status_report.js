@@ -9,6 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, '..');
 const reportsDir = path.resolve(root, 'reports');
+const appProgressOut = path.resolve(root, 'VNEXSUS_A-B-C_Execution_Plan', 'app_progress_report.html');
 
 function readFileSafe(p) {
   try {
@@ -189,7 +190,7 @@ async function main() {
   }
 
   ensureDir(reportsDir);
-  const outPath = path.resolve(reportsDir, 'app_development_status_report.html');
+  ensureDir(path.dirname(appProgressOut));
 
   const nowStr = new Date().toLocaleString('ko-KR', { hour12: false });
 
@@ -232,35 +233,48 @@ async function main() {
   <title>앱 개발 상태 종합 리포트</title>
   <style>
     :root {
-      --green: #27ae60; --yellow: #f1c40f; --red: #e74c3c; --blue: #3498db;
-      --bg: #f8f9fa; --text: #2c3e50; --card: #ffffff; --muted: #7f8c8d;
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #0b1220;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --border: #1f2937;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --blue: #60a5fa;
     }
+    html, body { height: 100%; }
     * { box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-radius: 12px; padding: 24px; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      margin: 0;
+      background: radial-gradient(1200px 800px at 10% 0%, #0a0f1d 0%, #0f172a 40%, #0b1220 100%);
+      color: var(--text);
+    }
+    a { color: #93c5fd; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1200px; margin: 48px auto; padding: 0 20px; }
+    .header { background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03); }
     .header h1 { margin: 0 0 8px 0; }
-    .meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.9rem; opacity: 0.9; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
-    .card { background: var(--card); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 16px; }
-    .card h2 { margin: 0 0 12px 0; font-size: 1.2rem; }
+    .meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.9rem; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
+    @media (min-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03); }
+    .card h2 { margin: 0 0 12px 0; font-size: 1.05rem; color: var(--accent); }
+    .card h3 { margin: 18px 0 10px; font-size: 0.95rem; color: #cbd5e1; }
     .table-wrapper { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 10px; border-bottom: 1px solid #e5e7eb; text-align: left; }
-    th { background: #f0f3f8; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: rgba(11,18,32,0.5); }
+    th, td { padding: 10px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { background: rgba(10,15,29,0.8); color: #cbd5e1; font-weight: 600; }
     .num { text-align: right; }
     .status-pill { display: inline-block; color: #fff; padding: 4px 10px; border-radius: 999px; font-size: 0.85rem; }
-    .progress { position: relative; height: 10px; background: #e9ecef; border-radius: 6px; overflow: hidden; }
+    .progress { position: relative; height: 10px; background: rgba(148,163,184,0.18); border-radius: 6px; overflow: hidden; }
     .progress-fill { height: 100%; transition: width .4s ease; }
     .progress-text { margin-left: 8px; font-size: 0.9rem; color: var(--muted); }
     .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
     .footer { color: var(--muted); font-size: 0.85rem; margin-top: 16px; }
-    @media (prefers-color-scheme: dark) {
-      body { background: #121212; color: #eaeaea; }
-      .card { background: #1e1e1e; }
-      th { background: #242424; }
-      .header { box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-    }
   </style>
   <!-- Inline Chart.js for single-file distribution -->
   <script>/* Chart.js inline */\n${chartJs.replace(/<\/(script)>/gi, '<\\/$1>')}</script>
@@ -349,8 +363,15 @@ async function main() {
       if (window.Chart && ctx1) {
         new Chart(ctx1, {
           type: 'bar',
-          data: { labels, datasets: [{ label: '진행률(%)', data: progress, backgroundColor: labels.map((_, i) => '#3498db') }] },
-          options: { responsive: true, plugins: { legend: { display: false }, tooltip: { enabled: true } }, scales: { y: { beginAtZero: true, max: 100 } } }
+          data: { labels, datasets: [{ label: '진행률(%)', data: progress, backgroundColor: labels.map(() => '#60a5fa') }] },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false }, tooltip: { enabled: true } },
+            scales: {
+              y: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.15)' } },
+              x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+            },
+          }
         });
       }
       const statusCounts = modules.reduce((acc, m) => { acc[m.status] = (acc[m.status]||0)+1; return acc; }, {});
@@ -361,7 +382,7 @@ async function main() {
         new Chart(ctx2, {
           type: 'doughnut',
           data: { labels: statusLabels.map(l => ({completed:'완료',in_progress:'진행 중',on_hold:'보류',delayed:'지연'}[l]||l)), datasets: [{ data: statusLabels.map(l => statusCounts[l]), backgroundColor: statusColors }] },
-          options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+          options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } } }
         });
       }
     })();
@@ -369,12 +390,11 @@ async function main() {
 </body>
 </html>`;
 
-  fs.writeFileSync(outPath, html, 'utf-8');
-  console.log(`Report generated: ${outPath}`);
+  fs.writeFileSync(appProgressOut, html, 'utf-8');
+  console.log(`Report generated: ${appProgressOut}`);
 }
 
 main().catch(err => {
   console.error('Failed to generate report:', err);
   process.exitCode = 1;
 });
-

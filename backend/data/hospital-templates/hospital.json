@@ -1,195 +1,24 @@
 {
-  "hospitalId": "hospital",
-  "hospitalName": "hospital",
+  "hospitalId": "HOSPITAL",
+  "hospitalName": "HOSPITAL",
   "patterns": [
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호: 600809",
-      "position": 21145,
-      "length": 12,
-      "hash": "1d828af86b91e05d27f2b6975fa791f6",
-      "frequency": 171,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호: 2455470",
-      "position": 21128,
-      "length": 13,
-      "hash": "16ab180555038982360530f556785463",
-      "frequency": 171,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의\r\n주호소\r\n이병완\r\n주호소\r\n기간\r\nPl\r\nnewly detected diabetes\r\n과거력\r\n당뇨병 유\r\n무 진단 년도\r\n기간\r\n진단 당시 나이 세\r\n고혈압\r\nNo\r\nYes\r\n관상동맥질환\r\nNo\r\nYes\r\n뇌혈관질환\r\nNo\r\nYes\r\n종양\r\nNo\r\nYes\r\n간염\r\nNo\r\nYes\r\n수술력\r\nNo\r\nYes\r\n약물부작용\r\nNo\r\nYes\r\n기타 질환\r\n음주력\r\nNo\r\nYes\r\nQuit\r\n흡연력\r\nNo\r\nCurrent smoker\r\nPYRS\r\n√ Ex-smoker\r\n년전\r\nquit\r\nPYRS\r\nCurrent medication\r\nPul.Tbc\r\nNo\r\nYes\r\nDrug Allergy\r\nNo\r\n**\r\nYes ? Yes 선택시 구체적인 항생제 계열도 선택해주세요.\r\nPenicillin\r\nOther\r\n알레르기\r\nNo\r\nYes\r\n가족력\r\n당뇨\r\nNo\r\nYes\r\n심장혈관질환\r\nNo\r\nYes\r\n뇌혈관질환\r\nNo\r\nYes\r\n기타\r\nNo\r\nYes\r\nROS\r\nWeight loss\r\nNo\r\nYes\r\nBP(S) 125 mmHg\r\n신체계측\r\n전자서명자: 이병완\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\nBP(D) 87 mmHg\r\nSulfonamide\r\nCephalosporin\r\n외래초진기록\r\n2025-01-14\r\n1/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125****남/64세\r\n환자명: 김태형\r\nPhysical Exam\r\n외래초진기록\r\n2025-01-14\r\n신장\r\n162.5cm\r\n체중 63.2Kg\r\nIBW\r\n%\r\nBMI 24\r\n허리 둘레 93.0cm\r\nWHR\r\n엉덩이 둘레 97.0cm\r\n체중 변화\r\n증\r\n감\r\n20세 체중\r\n최소체중\r\nKg\r\n최대체중\r\nKg\r\n기타\r\nGeneral appearance\r\nnormal abnormal\r\nSkin\r\nnormal\r\nabnormal\r\nHEENT\r\nnormal\r\nabnormal\r\nNeck\r\nnormal\r\nabnormal\r\nChest/lung\r\nnormal\r\nabnormal\r\nHeart\r\nnormal\r\nabnormal\r\nAbdomen\r\nnormal\r\nabnormal\r\nBack and extremity\r\nnormal\r\nabnormal\r\nImpression\r\nT2D\r\nPlan\r\nMMT\r\n향후치료계획\r\nOHAS\r\n기록자명\r\n이병완(의사",
-      "position": 20461,
-      "length": 1159,
-      "hash": "50c9c632ca09fd18e6205ed758ac45f2",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과\r\n내분비내과",
-      "position": 20449,
-      "length": 10,
-      "hash": "c76e879520037d80fd4fdcb09bb0cecc",
-      "frequency": 162,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과\r\n심장내과",
-      "position": 19995,
-      "length": 9,
-      "hash": "1f25dc5100c07d6ac54fd291a24b3559",
-      "frequency": 108,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의)\r\nOperator 2 (시술선택의, 협진주치의)\r\nAssisstant\r\nPuncture site\r\nReview\r\n진인태\r\nUnder local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm)\r\nLt. RA c 6Fr sheath -> PAD+Coban\r\nRCA C JR 5-4\r\nMinimal LN of PRCA\r\nLCA c JL 5-4\r\nTubular ecc. 50% LN of MLAD c moderate milking\r\n[FFR at LAD]\r\nXBG 6-3.5\r\nPressure wire\r\nBaseline 0.94 94/100mmHg\r\nAdenosine 0.93 93/100mmHg\r\nSigmart: 0.93 93/100mmHg\r\nContrast visipaque 110cc\r\nConclusion\r\nRecommend\r\nconcor 1.25mg qd, livalo 2mg qd\r\n일주일 뒤 외래\r\n전자서명자: 윤나영\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n1/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명 : 김태형\r\n기록자명\r\n이재준\r\n전자서명자: 윤나영\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\nCoronary angiography (Right\r\ndominant)\r\n2/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명 : 김태형\r\nCoronary angiography note\r\n검사 Date\r\n2024-12-31\r\nPre-procedural diagnosis\r\nTypical angina;\r\nCoronary angiography\r\nUnder local anesthesia (lidocaine 2%, 1cc, subcutaneous, left forearm)\r\nLt. RA c 6Fr sheath\r\nRCA C JR 5-4\r\n-\r\nMinimal LN of PRCA\r\nLCA C JL 5-4\r\nPAD+Coban\r\nTubular ecc. 50% LN of mLAD c moderate milking\r\n[FFR at LAD]\r\nXBG 6-3.5\r\nPressure wire\r\nBaseline 0.94 94/100mmHg\r\nAdenosine 0.93 93/100mmHg\r\nSigmart: 0.93 93/100mmHg\r\nContrast visipaque 90cc\r\n시술과정 중 특이사항\r\nComment\r\nContrast\r\nVisipaque 320 lodixanol 652mg/ml -\r\nScanlux 300 iodixanol 612mg/ml →\r\nBlood loss\r\nNo\r\nYes\r\n조영제 알러지\r\nNo\r\nYes\r\n피부 상태 이상\r\nNo\r\nYes\r\nConclusions\r\na. Clinical diagnosis\r\nb. Anatomical diagnosis\r\nStable Angina ; CCS class\r\nNormal & minimal dz.\r\n시술 후 계획\r\nRecommendation\r\n1VD\r\n2VD\r\n3VD\r\nLt main disease\r\nTotal occlusion\r\n? acute\r\nchronic\r\nRCA\r\nLAD LCX\r\n1. Close monitor for puncture site\r\n2. Close monitor for development of chest pain\r\nOperator 1 (입원주치의)\r\nOperator 2 (시술선택의, 협진주치의)\r\nAssisstant\r\n영상의학과\r\n홍성진\r\n박규태\r\n원종윤\r\n<약어 설명>\r\nACS : acute coronary syndrone\r\nACT activated coagulation time\r\nAf atril fibrillation\r\nAPC: atrial premature complex\r\n전자서명자: 박규태\r\nECG electrocardigram\r\nECGs electrocardigram\r\n:\r\nEIA: external iliac artery\r\nFr: french\r\n1/2\r\np-dLCx proximal-distal left circumflex artery\r\nPLAD: proximal left ascending artery\r\npLCx proximal left circumflex artery\r\np-mRCA proximal-mid right coronary artery\r\n출력일: 2025-01-21\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명: 김태형\r\nCoronary angiography note\r\nAVB atrio-ventricular block\r\nIIA internal iliac artery\r\nBAL: balloon\r\nJL Judkins left\r\nBCL: basic cycle length\r\nCAG: coronary angiography\r\nC-angio coronary angiography\r\nCAOD coronary artery occlusive disease\r\nCTI: cavo-tricuspid isthmus\r\nCV cardioversion\r\ndLAD: distal left ascending artery\r\ndLCx: distal left circumflex artery\r\ndLM: distal left main\r\ndRCA distal right coronary artery\r\nDS: diameter stenosis\r\necc eccentric\r\nJLG: Judkins left guiding\r\nJR: Judkins right\r\nJRG: Judkins right guding\r\nPRCA proximal right coronary artery\r\nR/S residual stenosis\r\nRAP right atrial pacing\r\nRBBB right bundle branch block\r\nRI: ramus intermedius\r\nRIPV: right inferior pulmonary vein\r\nRVP: rapid ventricular pacing\r\nSA stable angina\r\nSFA superficial femoral artery\r\nSH side hole\r\nLBBB: left bundle branch block\r\nLCA: left coronary artery\r\nLIPV: left inferior pulmonary vein\r\nLSPV left superior pulmonary vein\r\nm-dRCA: mid-distal right coronary artery\r\nMLAD: mid left ascending artery\r\nMLD minimal lumen diameter\r\nNC: non-compliance\r\nSVEST single ventricular extra stimulus test\r\nUA: unstable angina\r\nXBG extra backup guiding\r\n전자서명자: 박규태\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n2/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명: 김태형\r\n외래재진기록\r\n2025-01-09\r\n진료과\r\n심장내과\r\n주치의\r\n홍성진\r\nBP(S)\r\nBP(D)\r\nHR\r\n146 mmHg\r\n83mmHg\r\n82/min\r\nSubjective\r\nObjective\r\nAssessment\r\nLAD MILKING 2024-12-31\r\nconcor 1.25mg qd, livalo 2mg qd\r\nPlan\r\nHbA1c 9.5\r\n진단명\r\n구분\r\n확진\r\n주진단\r\n확진\r\nStable angina pectoris\r\n기타진단\r\n기타진단 확진\r\n확진\r\nTypical angina\r\nCoronary artery disease (1 vessel disease)\r\n기록자명\r\n홍성진(의사",
-      "position": 16368,
-      "length": 3938,
-      "hash": "5ed58480888bb04660af3d5b5025de31",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의사명\r\n홍성진\r\n<약어 설명>\r\nCAOD coronary artery obstructive disease\r\nRFCA radio-frequency catheter ablation\r\nDCMP dilated cardiomyopathy\r\nHCMP hypertrophic cardiomyopathy\r\nNSTEMI non-ST elevation myocardial infarction\r\nPAF paroxysmal atrial fibrillation\r\nC-angio : coronary angiogram\r\nA.fib: atrial fibrillation\r\nEPS electrophysiologic studies\r\n전자서명자: 홍성진\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\nRHD rheumatic heart disease\r\nNSVT: non-sustained ventricular tachycardia\r\nA-flutter : atrial flutter\r\n1/2\r\n출력일: 2025-01-21\r\n퇴원요약\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125****남/64세\r\n환자명 : 김태형\r\nCTO chronic total occlusion\r\n전자서명자: 홍성진\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n퇴원요약\r\n2/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125****남/64세\r\n환자명: 김태형\r\n입원일자\r\n2024-12-31\r\n입원과\r\n심장내과\r\n주호소\r\n현재질병상태\r\n입원주치의 홍성진\r\nFor Coronary angiography\r\n상기 64세 남환 typical angina symptom으로 금일 Coronary\r\nangiography 시행위해 입원함.\r\n과거력\r\nHypertension No\r\nYes\r\nPul. Tbc\r\nNo\r\nYes\r\nDM\r\nNo\r\nYes\r\nHepatitis\r\nNo\r\nYes\r\nSmoking\r\nNo\r\nYes 10년전 금연\r\n금연교육 시행 계획함\r\nAlcohol\r\nNo\r\nYes\r\nAllergy\r\nDrug\r\nNo\r\nYes\r\n항생제\r\n진통제\r\n조영제\r\n| 기타\r\nFood 및 기타\r\nNo\r\nYes\r\nHypercholesterolemia\r\nCardiac disease\r\nNo\r\nNo\r\nOld CVA\r\nNo\r\nㅇㅇㅇ\r\nYes\r\nYes\r\nYes\r\n말초동맥 및 경동맥 질환\r\nNo\r\nYes\r\nCoronary artery bypass graft No\r\nYes\r\nOthers\r\n신체조사\r\nGeneral appearance\r\n이상소견 없음\r\nSkin\r\nHEENT\r\nNeck\r\nChest/lung\r\nHeart\r\nAbdomen\r\nBack and extremity\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 없음\r\n이상소견 있음\r\n이상소견 있음\r\n이상소견 있음\r\n이상소견 있음\r\n이상소견 있음\r\n이상소견 있음\r\nㅇ이상소견 있음\r\n)이상소견 있음\r\nothers (Physical Exam)\r\n전자서명자: 홍성진\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n입원기록\r\n1/3\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명 : 김태형\r\n감염성질환 초기평가\r\n1. 증상 및 기간\r\n입원기록\r\n발열\r\n기간\r\n일전\r\n|호흡기증상\r\n기간\r\n일전\r\n|소화기증상\r\n기간\r\n일전\r\n|해당없음 (미상환자 포함)\r\n2. 최근 1달 이내 방문한 나라\r\n) 해당없음\r\n없음 ㅇ있음\r\n3. 최근 1달 이내 국내 신종감염병 위험지역 또는 병원 방문\r\n없음 있음\r\n4. 밀접 접촉자\r\n|해당없음\r\n아니오\r\n예\r\n5. 신종 감염병 의심환자\r\n아니오 예\r\n추정진단 Typical angina\r\n계획\r\nCoronary angiography\r\n퇴원계획\r\n퇴원 후 치료식이 여부\r\nN\r\n추후 관리 계획\r\n|가정간호사업소\r\n호스피스\r\n타 병원 전원\r\n외래\r\n사회 복지서비스 연계 필요성\r\n? N ? Y\r\n기타 퇴원시 요구사항\r\n치료계획\r\n+\r\nProblem\r\nGoal\r\n목표일\r\n수정목표일\r\n계획일\r\n부\r\nangina\r\nCoronary angiography\r\n2025-01-01\r\n2024-12-31\r\ncomplication 없이 퇴원한다.\r\n기록자명 진인태(의사",
-      "position": 11869,
-      "length": 2159,
-      "hash": "9d8d7f87be9f01485e76f52f620b2875",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의 홍성진\r\n퇴원정보\r\n퇴원일자\r\n2024-12-31\r\n퇴원과 심장내과\r\n퇴원주치의 홍성진\r\n최종진단명(*)\r\n순서\r\n한국질병\r\n구분\r\n확진\r\n진단명\r\n1 주진단\r\n확진\r\nStable angina pectoris\r\n분류번호\r\n120.88\r\n2\r\n기타진단 확진\r\nCoronary artery disease (1 vessel disease)\r\n125.1\r\n3\r\n기타진단 확진\r\nDiabetes mellitus type 2 with dyslipidemia\r\nE11.68\r\n4\r\n기타진단 확진\r\nDyslipidemia\r\nE78.8\r\n5\r\n기타진단 확진\r\nDiastolic heart failure\r\n150.08\r\n투여된 약물 중 잔류효과로 퇴원 후 주의가 필요한 약물\r\n없음 ㅇ있음\r\n시술 및 처치명\r\n수술/처치명\r\nCoronary Angiography\r\n수술/처치코드\r\nImplantable Medical Device 사용 여부 No Yes\r\n치료결과 (*)\r\n완쾌\r\n경쾌\r\n) 48시간이내 사망\r\n퇴원형태\r\n퇴원지시후\r\n호전안됨 ㅇ 진단뿐\r\n48시간이후 사망\r\n타병원전원\r\n'가망없는 퇴원\r\n)자의 퇴원\r\n탈원\r\n향후 치료계획\r\n외래 추후관리\r\n재입원\r\n없음\r\n기타\r\n담당 전공의사",
-      "position": 11241,
-      "length": 605,
-      "hash": "dddbeb307c55844bee111d695b19b5fd",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의\r\n홍성진\r\nSBP\r\n131 mmHg\r\nDBP 90mmHg\r\n맥박 107회/분\r\n주호소 및 현재질병상태\r\n가슴이 조이듯이 아프다.\r\n식은땀이 엄청많이/\r\n1년전부터\r\n걸어가다가/\r\n숨이찰 때/\r\n과거력 (others)\r\n당뇨의심된다 들음/\r\n고혈압 (-)\r\n신체검진 (others)\r\nsmoking- 10년전 끊음/1갑씩 피웠다\r\n외래초진기록\r\n2024-12-27\r\n추정진단\r\n계획\r\ntypical angina\r\n다음주 화요일/\r\n검사합병증 설명드림/\r\n과거력\r\n고혈압\r\nNo\r\nYes\r\n당뇨병\r\nNo\r\nYes\r\n고지혈증\r\nNo\r\nYes\r\n가족력[급사 포함]\r\nNo\r\nYes\r\nPul.Tbc\r\nNo\r\nYes\r\n간염\r\nNo\r\nYes\r\n**\r\nDrug Allergy\r\nNo\r\nYes\r\n?Yes 선택시 구체적인 항생제 계열도 선택해주세요.\r\nPenicillin\r\nSulfonamide\r\n? Cephalosporin\r\nOther\r\n알레르기\r\nNo\r\nYes\r\n흡연력\r\n담배를 피운 적이 없다\r\n예전에는 피웠으나 끊었다 (하루1\r\n현재 피우고 있다 (하루\r\n갑씩 10년전 끊기\r\n전까지)\r\n갑씩\r\n년째)\r\n음주\r\n스트레스\r\n'아니오\r\n흉통, 가슴답답함\r\n없음\r\n있음 특별한 유발 요인 없이 때때로\r\n5분\r\nㆍ전혀 마시지 않는다 '가끔 마신다 ㅇ자주 마신다 (일주일에 0.5\r\n예\r\n회 1\r\n병)\r\n한 달에 한두 번\r\n평지를 급히 걷거나 언덕길 혹시 계단 2~3층 이상을 오르면 숨이차다.\r\n있음 불안하거나 신경 쓸 때\r\n호흡곤란\r\n없음\r\n있음\r\n부정맥(두근거림)\r\n없음\r\n3분\r\n한 달에 한두 번\r\n실신\r\n없음 ㅇ있음\r\n언제 쓰러졌습니까?\r\n전자서명자: 홍성진\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n1/2\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125****남/64세\r\n환자명: 김태형\r\n기타 [예) 외부병원 진단소견]\r\n없음\r\n쓰러졌을 때의 상황을 기억하고 있습니까? ㅇ아니오\r\n있음\r\n예\r\n복용약\r\n없음\r\n있음\r\n신체검진\r\nGeneral appearance\r\nnormal\r\nabnormal\r\nSkin\r\nnormal\r\nabnormal\r\nHEENT\r\nnormal\r\nNeck\r\nnormal\r\nChest/lung\r\nnormal\r\nHeart\r\nnormal\r\nAbdomen\r\nnormal\r\n00000\r\nabnormal\r\nabnormal\r\nabnormal\r\nabnormal\r\nBack and extremity\r\nnormal\r\nabnormal\r\nabnormal\r\n기록자명 홍성진(의사",
-      "position": 7140,
-      "length": 1266,
-      "hash": "2a94e280b1315e66273a371dc8895677",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "(?:대학교|대학|의과대학).*?병원.*?(?:병원장|원장)",
-      "match": "대학교\r\n연세대학교 의과대학 학과대학\r\n세브란스병원\r\n병원장",
-      "position": 7008,
-      "length": 33,
-      "hash": "99ba43a4cd5d83a18162332b5c5fc972",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "발급매수.*?\\d+.*?매",
-      "match": "발급매수:\r\n19 매",
-      "position": 6837,
-      "length": 11,
-      "hash": "6ef3d3a6bc3f526269cf69980d2d4f48",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호:\r\n2455470",
-      "position": 6797,
-      "length": 14,
-      "hash": "cf26eaa82263409aabc6cbb9e81422c9",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
-      "match": "600809-1******",
-      "position": 5122,
-      "length": 14,
-      "hash": "4c471ae745096ad2d47cd1c343d3e10d",
-      "frequency": 27,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호 600809",
-      "position": 1036,
-      "length": 11,
-      "hash": "f8927ef3adae7f2077c264f0379b8c51",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "발급일.*?\\d{4}[-./]\\d{1,2}[-./]\\d{1,2}",
-      "match": "발급일\r\n2024-12-12",
-      "position": 544,
-      "length": 15,
-      "hash": "61b1ab38640ddfa516d849b363dbd3c1",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
-      "match": "서울특별시 서대문구 연희로33",
-      "position": 287,
-      "length": 16,
-      "hash": "4eb5465bb585023f5d91fb721858b158",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호\r\n600809",
-      "position": 258,
-      "length": 12,
-      "hash": "e192507cee786bb31b2a463ef4cbf463",
-      "frequency": 18,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
-      "match": "주민등록번호\r\n600809-1253918",
-      "position": 256,
-      "length": 22,
-      "hash": "bb01b48be5e545637d26ada9ad1fa626",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
-      "match": "주민등록번호: 600809-125**** 남/64세\r\n환자명: 김태형\r\n진료의뢰서\r\n보험자기호\r\n보험자명칭\r\n의료보험증번호\r\n(세대관리번호)\r\n26010479500\r\n보험자성명\r\n김태형\r\n주민등록번호\r\n600809-1253918",
-      "position": 115,
-      "length": 127,
-      "hash": "dc4ce9fdfbb1577e9aa043a57ae313e1",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
-    {
-      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
-      "match": "의무기록사본/진료의뢰서\r\n피보험자 : 김태형\r\n빈경환\r\n\r\n등록번호: 2455470\r\n주민등록번호: 600809-125**** 남/64세\r\n환자명: 김태형\r\n진료의뢰서\r\n보험자기호\r\n보험자명칭\r\n의료보험증번호\r\n(세대관리번호)\r\n26010479500\r\n보험자성명\r\n김태형\r\n주민등록번호\r\n600809-1253918\r\n수진지성명\r\n김태형\r\n주민등록번호\r\n600809-1253918\r\n수진자주소\r\n서울특별시 서대문구 연희로33길 11-3 301호 (연희동)\r\n상병\r\n상세불명의 흉통\r\n분류기호\r\nR074\r\n진료기간\r\n환자상태및\r\n진료소\r\n2024-12-12\r\n2024-12-12\r\n진료구분\r\nо입원\r\n⊙외래\r\n특이질환 과거력 없는 환자로 간헐적으로 발생하는 흉통 및 흉부 답답함으로 귀병원에서 진료 및 검사\r\n원하여 문의드리오니 고진선처 바랍니다. 감사합니다.\r\n898-9\r\n진료실4\r\n1960-08-09\r\nM3/홍성진\r\nM/B4\r\n2455470 김태형\r\n발급일\r\n2024-12-12\r\n담당의사\r\n박은찬\r\n(서명 또는 날인) 면허번호\r\n88041\r\n요양기관지정번호\r\n13309650\r\n명 칭 굿웰스의원\r\n주: 1. 이 진료의뢰서는 1차진료후 2차진료를 받고자 하는 경우 1차 진료담당의사로부터 요양급여\r\n기준에 따라 무상으로 교부됩니다.\r\n2. 의사의 탈급일부터 7일(공휴일 제외)이내에 사용하여야 합니다.\r\n3. 환자상태 및 진료소견란에는 현증, 검사, 투약 등 주요진료내용을 구체적으로 기재하기 바라며\r\n여백 부족시에는 뒷면을 활용하기 바랍니다.\r\n작성자: 권진영\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n진료의뢰서\r\n1/1\r\n출력일: 2025-01-21\r\n출력자: 조예은\r\n원본대조필\r\n\r\n========== 파일: e??i? e³?i?? e²i§?(24e??).pdf ==========\r\n\r\n**\r\n수검자 성명\r\n김태형\r\n검진일\r\n2024.05.30\r\n판정\r\n정상A\r\n일반 질환의심\r\n일반건강검진 결과통보서\r\n주민등록번호 600809-1******\r\n검진장소\r\n내원\r\n출장\r\n건강검진 종합소견\r\n정상B\r\n고혈압ㆍ당뇨병 질환의심\r\n김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다.\r\n*\r\n생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오.\r\n김태형 님은 다음 사항에 대한 관리가 필요합니다.\r\n의심 질환: 신장질환, 당뇨병\r\n확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함.\r\n유질환자\r\n※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원\r\n(종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에\r\n대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다.\r\n* 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용기준 및 방법에 관한\r\n세부사항에 따라 본인부담 면제(의료급여수급권자는 의료급여법에 따라 가능)\r\n유질환:\r\n해당사항없음\r\n생활습관 관리\r\n|위험음주상태입니다. 절주 또는 금주가 필요합니다. 신체활동량이 부족합니다. 운동을 생활화하십시오. 일주일에 2일\r\n이상 신체 각 부위를 모두 포함하여 근력 운동을 수행하십시오.\r\n*\r\n*\r\n기타\r\n혈색소과다 금연및흡연시충분한수분섭취요함.* 이상지질혈증관리 저지방식이요법요함.\r\n이 결과통보서는 근로자의 채용기관이 요구하는 \"채용신체검사서\" 로 대체될 수 있음.\r\n\r\n*\r\n혈액검사 결과는 검진기관별로 검사방법 등에 따라 정상A, 정상 B, 질환의심 기준 수치가 다를 수 있습니다.\r\n구분\r\n목표질환\r\n검사항목\r\n결과 (참고치)\r\n키 (cm) 및 몸무게(kg)\r\n160.2 63.8\r\n저체중\r\n정상\r\n과체중\r\n비만\r\n비만/복부비만\r\n체질량지수(kg/m²)\r\n허리둘레 (cm)\r\n24.9\r\n(18.5미만)\r\n(18.5-24.9)\r\n(25-29.9)\r\n(30이상)\r\n88.0\r\n정상\r\n계측검사\r\n시각이상\r\n시력(좌우)\r\n0.8/1.0\r\n교정\r\n청각이상\r\n청력(좌우)\r\n1 / 1\r\n정상\r\n질환의심 (40dB 이상)\r\n정상\r\n유질환자\r\n고혈압\r\n105/75\r\nmmHg\r\n고혈압 전단계(수축기 120-139 또는 이완기 80-89)\r\n(수축기/이완기)\r\n□ 고혈압의심(140 이상\r\n또는 90 이상)\r\n남 13.0~16.5\r\n□ 정상\r\n기타\r\n빈혈 등\r\n혈색소(g/dL)\r\n19.2\r\n여 12.0~15.5\r\n□ 빈혈 의심\r\n□ 정상\r\n유질환자\r\n당뇨병\r\n공복혈당(mg/dL)\r\n153\r\n100.0미만\r\n□\r\n공복혈당장애 의심\r\n■ 당뇨병 의심\r\n총콜레스테롤(mg/dL)\r\n203\r\n200.0 미만\r\n정상\r\n고콜레스테롤혈증 의심\r\n고밀도 콜레스테롤(mg/dL)\r\n41\r\n60.0이상\r\n이상지질혈증\r\n■ 고중성지방혈증 의심\r\n혈액검사\r\n중성지방(mg/dL)\r\n187\r\n150.0미만\r\n낮은 HDL 콜레스테롤 의심\r\n|저밀도 콜레스트롤(mg/dL)\r\n125\r\n130.0미만\r\n□ 유질환자\r\n혈청크레아티닌(mg/dL)\r\n1\r\n1.5이하\r\n■ 정상\r\n신장질환\r\n신사구체여과율(e-GFR)\r\n79\r\n60.0이상\r\n신장기능 이상 의심\r\n(mL/min/1.73m²)\r\n|AST(SGOT)(IU/L)\r\n26\r\n40.0이하\r\n정상\r\n간장질환\r\n[ALT(SGPT)(IU/L)\r\n12\r\n35.0이하\r\n간기능 이상 의심\r\n남 63.0이하\r\n|감마지티피(X-GTP)(IU/L)\r\n32\r\n여 35.0이하\r\n요검사\r\n요단백\r\n정상\r\n경계\r\n영상\r\n흉부촬영\r\n정상\r\n비활동성 폐결핵\r\n질환의심:\r\n단백뇨 의심\r\n기타:\r\n검사\r\n과거병력\r\n무\r\n약물치료\r\n무\r\n진찰\r\n금연필요\r\n절주 필요\r\n신체활동 필요\r\n근력운동 필요\r\n(문진)\r\n생활습관\r\n담당 의사와 상담하십시오.\r\n실시대상자 여부\r\n결과\r\n표면항원\r\n일반\r\n정밀(\r\nB형간염\r\n해당\r\n비해당\r\n표면항체\r\n일반\r\n정밀(\r\n)\r\n)\r\n□ 항체있음\r\n□ 항체없음\r\nB형 간염 보유자 의심 □판정 보류\r\n우울증상이 없음( 0~4점)\r\n가벼운 우울증상(5~9점)\r\n우울증\r\n해당\r\n비해당\r\n□ 중간 정도 우울증 의심(10~19점)\r\n특이소견 없음(0~5점)\r\n□ 심한 우울증 의심 (20~~27점)\r\n인지기능장애\r\n해당\r\n비해당\r\n□ 인지기능 저하 의심(6점 이상)\r\n측정부위\r\nT-점수\r\n골밀도 검사\r\n해당\r\n비해당\r\n정상\r\n골감소증\r\n골다공증\r\n노인신체기능검사\r\n해당\r\n비해당\r\n정상\r\n신체기능저하\r\n낙상\r\n정상\r\n낙상 고위험자\r\n일상생활 수행능력\r\n정상\r\n노인기능평가\r\n해당\r\n비해당\r\n(문진)\r\n예방접종\r\n배뇨장애\r\n? 일상생활 도움 필요\r\n인플루엔자 접종 필요\r\n폐렴구균 접종 필요\r\n접종 필요 없음\r\n정상\r\n배뇨장애 의심\r\n\r\n귀하의 건강검진결과를 위와 같이 통보합니다.\r\n2025년01월24일\r\n판정일\r\n20240605\r\n검진의사: 면허(자격)번호\r\n113887\r\n성명\r\n심원용\r\n의료법인동신의료재단 동신병원 (요양기관기호 11100982 )\r\n※본 건강검진결과통보서는 상급병원에서 요양급여(진료가 필요하다는 건강검진종합소견이 있는 경우 요양급여의뢰서(진료의뢰서)로 갈음됩니다.\r\n본 자료는 개인정보보호법에 관한법률에 의거 엄격히 개인의 비밀이 유지되어야하며, 발급목적 외\r\n타 업무의 증빙자료로 사용되어 발생되는 모든 책임은 본인에게 있으며 공단에는 일체 이의를 제기할\r\n수 없습니다.\r\n국민건강보험공단 이사장 직인 보험공단\r\n\r\n========== 파일: e??i? e³?i?? e²i§?_i??i??e²i§?(24e??).pdf ==========\r\n\r\n2024 년도 위암 검진 결과 내 역\r\n발급번호: WGK01-17377-02854-14972-75827\r\nKOR\r\nwww.nhis.or.kr/.\r\n성\r\n명\r\n김태형\r\n주민번호\r\n600809-1******\r\n검사항목\r\n결\r\n과 [병형(부위)]\r\n판정\r\n1 이상소견없음()\r\n위장조영\r\n판독소견\r\n2\r\n2024.05.30\r\n3\r\n1\r\n정상\r\n위내시경\r\n관찰소견\r\n23\r\n조직진단\r\n권고사항\r\n위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사 받으시기 바랍니다.\r\n검진일\r\n판정일\r\n판정의사\r\n검진기관\r\n면허번호\r\n판정의 사명\r\n검진기관기호\r\n검진기관명\r\n2024년 06월 05일\r\n113887\r\n심원용\r\n11100982\r\n의료법인동신의료재단 동신병원\r\n※(건강보험가입자) 건강검진 결과통보서상 상급종합병원에서의 요양급여가 필요하다는 의사 소견이 기재된\r\n경우, 요양급여의뢰서(진료의뢰서)로 갈음되며 본 통보서를 활용하여 상급종합병원에서 진료를 받으실 수\r\n있습니다.\r\n※(의료급여수급권자) 건강검진 결과 이상소견이 발견되어 진료담당의사가 검진결과서에 추가 진료가 필요\r\n하다는 의사소견을 기재한 경우 동 검진결과서를 의료급여의뢰서로 갈음하여 검진을 실시한 의료급여기관\r\n에서 진료를 받으실 수 있습니다. 그 이외의 의료급여가 필요한 경우에는 「의료급여법 시행규칙」제3조의\r\n의료급여절차에 따라 진료를 받으셔야 하며, 선택의료급여기관 적용 대상자는 본인이 선택한 의료급여기관\r\n에서 먼저 진료를 받으셔야 합니다.\r\n※ 위암은 우리나라 암 발생률 1위로 정기검진을 통해 조기 발견이 가능하며, 조기 발견된 경우 내시경적 치료\r\n또는 수술적 치료로 완치 가능한 암입니다.\r\n※ 위암은 40세이상에서 급격하게 증가하므로 특별한 증상이 없더라도 40세이상 남녀 모두 2년 마다 위내시경\r\n또는 위장조영검사를 받을 것을 권고하고 있습니다. 위장조영검사에 이상이 있는 경우에는\r\n다음연도 1. 31. 일까지 위내시경검사를 통해 위암 발생 여부를 확인할 수 있습니다.\r\n※ 위암검진 결과가 이상소견이 없더라도 복통, 속쓰림 등의 증상이 있을 경우 의사와 상담이 필요하고,\r\n검사결과 이상소견없음 이외의 판정을 받은 경우 권고사항에 따라 조치를 취하시기 바랍니다.\r\n※ 위암 산정특례자로 등록된 수검자는 산정특례 종료일까지 위암검진을 유예할 수 있습니다.\r\n※ 위암으로 진단받은 사람 중 관련 요건(건강보험료, 국가 암검진 수검 여부 등)을 갖춘 사람은 암환자\r\n의료비 지원사업의 대상이 될 수 있습니다. (상세 내용은 관할 보건소 문의)\r\n2025년 01월 24일\r\n국민건강보험공단 이사장 직인분 ㅎ\r\n국민건강보험공단\r\n\r\n2024 년도 대장암 검진 결과내역\r\n?KOR\r\nwww.nhis.or.kr/\r\n국민건강보험공단\r\n발급번호:\r\n성 명\r\n김태형\r\n주민번호\r\n검사항목\r\n결 과\r\n600809-1******\r\n판정\r\n검사방법\r\n정량검사\r\n분변잠혈검사\r\n결과\r\n음성\r\n2024.05.30\r\n검사수치\r\n11 ng/ml (기준치:\r\n100 ng/ml)\r\n1\r\n대장내시경\r\n잠혈반응 없음\r\n2\r\n검사\r\n관찰소견\r\n3\r\n기타\r\n조직진단\r\n권고사항\r\n분변잠혈반응 검사 결과 음성 대변에서 혈액이 검출되지 않음 입니다. 이러한 경우 대장에 아무런 이상이 없\r\n을 가능성이 높으나 경우에 따라 대장에 병변 염증, 용종, 암 등이 있는 경우에도 정상으로 나올 수 있습니다\r\n.\r\n그러므로 최근 의심되는 증상 체중감소, 대변 굵기의 변화, 혈변 등 이 있으면 의료기관을 방문하시어 진료\r\n상담을 받으시기 바랍니다.\r\n2024년 06월 05일\r\n113887\r\n검진일\r\n2024년 05월 30일\r\n판정일\r\n판정의사\r\n면허번호\r\n판정의 사명\r\n검진기관기호\r\n검진기관\r\n검진기관명\r\n심원용\r\n11100982\r\n의료법인동신의료재단 동신병원\r\n※(건강보험가입자) 건강검진 결과통보서상 상급종합병원에서의 요양급여가 필요하다는 의사 소견이 기재된\r\n경우, 요양급여의뢰서(진료의뢰서)로 갈음되며 본 통보서를 활용하여 상급종합병원에서 진료를 받으실 수\r\n있습니다.\r\n※(의료급여수급권자) 건강검진 결과 이상소견이 발견되어 진료담당의사가 검진결과서에 추가 진료가 필요\r\n하다는 의사소견을 기재한 경우 동 검진결과서를 의료급여의뢰서로 갈음하여 검진을 실시한 의료급여기관\r\n에서 진료를 받으실 수 있습니다. 그 이외의 의료급여가 필요한 경우에는 의료급여법 시행규칙제3조의\r\n의료급여절차에 따라 진료를 받으셔야 하며, 선택의료급여기관 적용 대상자는 본인이 선택한 의료급여기관\r\n에서 먼저 진료를 받으셔야 합니다.\r\n※ 최근 발생이 급격히 증가하고 있는 대장암은 정기검진을 통해 조기 발견이 가능하며, 조기 발견된 경우\r\n내시경적 치료 또는 수술적 치료로 완치 가능한 암입니다.\r\n※ 대장암은 50세이상에서 급격하게 증가하므로 특별한 증상이 없더라도 50세이상 남녀 모두 매년 분변잠혈\r\n검사를 받도록 권고하고 있습니다. 분변잠혈검사에 이상이 있는 경우에는 다음연도 1. 31일 까지\r\n대장내시경검사를 통해 대장암 발생 여부를 확인할 수 있습니다.\r\n※ 대장암 산정특례자 및 「암검진 실시기준」에 따른 대장내시경 검사를 받은 수검자는 대장암검진을 유예\r\n할 수 있습니다.\r\n※ 분변잠혈검사만으로 모든 대장 질환을 판별할 수 없으므로 분변잠혈검사가 음성이라 하더라도 의심되는\r\n증상(체중감소, 대변 굵기의 변화, 혈변 등)이 있으면 의사와 상담이 필요하고, 검사 결과 이상소견없음\r\n이외의 판정을 받은 경우 권고사항에 따라 조치를 취하시기 바랍니다.\r\n※ 대장암으로 진단받은 사람 중 관련 요건(건강보험료, 국가 암검진 수검 여부 등)을 갖춘 사람은 암환자\r\n의료비 지원사업의 대상이 될 수 있습니다. (상세 내용은 관할 보건소 문의)\r\n2025년 01월 24일\r\n보험공단\r\n국민건강보험공단 이사장 직인 항의\r\n\r\n========== 파일: i? i´?i?¸e¸?e?i?¤e³?i??.pdf ==========\r\n\r\n2025-01-22 14:04:33\r\nCH\r\n해오름손해사정(주)\r\nSUNRISE SURVEYORS & CLAIMS ADJUSTERS CO., LTD.\r\n신촌세브란스병원\r\n의무기록사본\r\n피보험자 : 김태형\r\n빈경환\r\n\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n발행번호:\r\n2025-8328\r\n등록번호:\r\n2455470\r\n환자성명: 김태형\r\n용도:\r\n보험회사제출\r\n발급매수:\r\n19 매\r\n의무기록 사본 증명서\r\nNSEL UNIVERSI\r\n이 사본은 의무기록 원본과 틀림이 없음",
-      "position": 67,
-      "length": 6832,
-      "hash": "aff1003a94360135db282300043f336d",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:39.461Z"
-    },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
       "match": "진료과\r\n(양방)기\r\n49 2022-05-13 의료재단 새빛 목코드 입원 AH2580\r\n안과",
       "position": 141861,
       "length": 51,
       "hash": "13183704abc1e34c5dd0e51b0247bd23",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\r\n심장내과",
+      "position": 135494,
+      "length": 9,
+      "hash": "1f25dc5100c07d6ac54fd291a24b3559",
+      "frequency": 10,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -197,8 +26,8 @@
       "position": 135437,
       "length": 12,
       "hash": "aff67b65fc7d77fe1a7fac6b6969a1d7",
-      "frequency": 1107,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 123,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -206,8 +35,8 @@
       "position": 135420,
       "length": 13,
       "hash": "a7d1b38a24f679e97721b905f21ba229",
-      "frequency": 1116,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 124,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -215,8 +44,17 @@
       "position": 134557,
       "length": 1417,
       "hash": "6a0920c9a399583230cfd9f5c461c615",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과\r\n내분비내과",
+      "position": 134545,
+      "length": 10,
+      "hash": "c76e879520037d80fd4fdcb09bb0cecc",
+      "frequency": 17,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -224,8 +62,8 @@
       "position": 131902,
       "length": 1921,
       "hash": "e4244d1c374598b038da18d4df0c963e",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -233,8 +71,8 @@
       "position": 129147,
       "length": 1321,
       "hash": "c6cbad88fe5162c49ba99e6d0c9f1159",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -242,8 +80,8 @@
       "position": 126504,
       "length": 1307,
       "hash": "64fbd0224f37cfd9d58cdc9705745324",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -251,8 +89,8 @@
       "position": 125158,
       "length": 607,
       "hash": "58ff7fc6d2acf25eafed5893255684a8",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -260,8 +98,8 @@
       "position": 124208,
       "length": 511,
       "hash": "dac3079fb702dd670204f45ef8d9a920",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -269,8 +107,8 @@
       "position": 122315,
       "length": 549,
       "hash": "313ee07862b2b92769c65584ab1bbe1a",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -278,8 +116,8 @@
       "position": 120149,
       "length": 2164,
       "hash": "68869f260a82517ffcbf6ab96829cbed",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -287,8 +125,8 @@
       "position": 119433,
       "length": 971,
       "hash": "35d9d8d60bb248e81b413b93ca2248a1",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -296,8 +134,8 @@
       "position": 115957,
       "length": 2166,
       "hash": "277b852ab382efb12ad5251de1f882ed",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -305,8 +143,8 @@
       "position": 113433,
       "length": 495,
       "hash": "7f1891447b509b9a6be2365f253bcf53",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -314,8 +152,8 @@
       "position": 104512,
       "length": 8919,
       "hash": "1a5c71441057ed5e67d550f9c9019d85",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -323,8 +161,8 @@
       "position": 103469,
       "length": 8,
       "hash": "91b5419fed8f2874b3b7aad384cabf0e",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -332,8 +170,8 @@
       "position": 103186,
       "length": 1496,
       "hash": "281cdc6e1636abcf8ba0b890c017a193",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -341,8 +179,8 @@
       "position": 102504,
       "length": 1713,
       "hash": "c009ead1e7e351ecba91b850b1f0d434",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -350,8 +188,8 @@
       "position": 96917,
       "length": 2838,
       "hash": "d955f9199a7f86f67f1675e9ac7d54f0",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -359,8 +197,8 @@
       "position": 96907,
       "length": 171,
       "hash": "5c3dece32c318f81b6af0275fafd9c9d",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -368,8 +206,8 @@
       "position": 90681,
       "length": 211,
       "hash": "8dc07c1db989353abb0d6cc740ea7ab1",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -377,8 +215,8 @@
       "position": 87114,
       "length": 3548,
       "hash": "66c0579f2010ca57fc65d71c15c60d6e",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -386,8 +224,8 @@
       "position": 84983,
       "length": 397,
       "hash": "86a5e63f406152fd74a85f324f44ce91",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -395,8 +233,8 @@
       "position": 84639,
       "length": 342,
       "hash": "f9628aec6c7844023a0d412527ee58e7",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -404,8 +242,8 @@
       "position": 83987,
       "length": 773,
       "hash": "4e33ea1add795d89f3aa3c46dded67d3",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.893Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -413,8 +251,8 @@
       "position": 79433,
       "length": 995,
       "hash": "67ba697a724158e23307b66ce087c9aa",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -422,8 +260,8 @@
       "position": 74745,
       "length": 5242,
       "hash": "7385909d199c3500214564232a7df1d6",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -431,8 +269,8 @@
       "position": 74739,
       "length": 18,
       "hash": "21451e835b99125f1598452676582599",
-      "frequency": 27,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 3,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -440,8 +278,8 @@
       "position": 73819,
       "length": 13,
       "hash": "f0ca53440feb88c19f49f05901c4c7dc",
-      "frequency": 36,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 4,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -449,8 +287,8 @@
       "position": 73028,
       "length": 842,
       "hash": "9c8585fc1b4964e4e942c7ad3f44e863",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -458,8 +296,8 @@
       "position": 72067,
       "length": 15954,
       "hash": "643c88fa1ef755a823dfeb022ae626c3",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -467,8 +305,8 @@
       "position": 71243,
       "length": 965,
       "hash": "ad8524436082b95c63c6487dfa6498c7",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -476,8 +314,8 @@
       "position": 68120,
       "length": 19,
       "hash": "30b9f4e6289c86b828de8e965367d3c3",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -485,8 +323,8 @@
       "position": 64375,
       "length": 7208,
       "hash": "68445aec2e8daa7e8959850f2f50bba1",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -494,8 +332,8 @@
       "position": 63209,
       "length": 1057,
       "hash": "ef2fafa66923fc3dafa69418013ed002",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -503,8 +341,8 @@
       "position": 63199,
       "length": 1240,
       "hash": "25b51eee0466e127af28f55cc3a04c49",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -512,8 +350,8 @@
       "position": 61565,
       "length": 1088,
       "hash": "4f6ffd6f0c7da36b1eb2c3dfd462f74b",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -521,8 +359,8 @@
       "position": 60635,
       "length": 761,
       "hash": "cf89a6571a7bb7a6b26dd63602c6b960",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -530,8 +368,8 @@
       "position": 59184,
       "length": 1276,
       "hash": "14a598115c5b096fadbd497ddf08650e",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -539,8 +377,8 @@
       "position": 59174,
       "length": 1459,
       "hash": "536632c27b090afc4911529f1c67b0b8",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -548,8 +386,8 @@
       "position": 55407,
       "length": 3583,
       "hash": "0dc4d100804460222ce2205ada8efe3b",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -557,8 +395,8 @@
       "position": 45067,
       "length": 5254,
       "hash": "eaf2897ada675203087fd6bbf1fad610",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -566,8 +404,8 @@
       "position": 41240,
       "length": 1544,
       "hash": "2cb2e1ff3ae2d1e481d85ce535d5f7f0",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -575,8 +413,8 @@
       "position": 39338,
       "length": 1129,
       "hash": "8e7e72de1679950767254dfe8e8b0e0f",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -584,8 +422,8 @@
       "position": 39328,
       "length": 1910,
       "hash": "53fc79e2cbd0ab2e7b70b957f9b38380",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -593,8 +431,8 @@
       "position": 37471,
       "length": 1459,
       "hash": "93dab10dd1060b03ab7fa71e1b5d7a74",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -602,8 +440,8 @@
       "position": 31818,
       "length": 640,
       "hash": "a64a1bbea67223b999d16ee07e617c00",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주치의.*?(?:교수|전문의|의사)",
@@ -611,8 +449,8 @@
       "position": 27974,
       "length": 3825,
       "hash": "b482a4a358b61dc927400164a7101d67",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "발급매수.*?\\d+.*?매",
@@ -620,8 +458,8 @@
       "position": 27658,
       "length": 25,
       "hash": "24fe876d6c61d3f6e0a0c6550628a581",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -629,8 +467,8 @@
       "position": 27618,
       "length": 11,
       "hash": "3273df05718c7a88b2cdf435b0efb3bb",
-      "frequency": 15,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
@@ -638,8 +476,8 @@
       "position": 27546,
       "length": 173,
       "hash": "cfa5bd1568c1f19ad43c2ebf6e32e7ec",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -647,8 +485,8 @@
       "position": 27095,
       "length": 14,
       "hash": "48e6063cf9d6762726b80a32a520a2ce",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -656,8 +494,8 @@
       "position": 27073,
       "length": 14,
       "hash": "10ba4c1fd85c6f39f1c5d5b4aa595125",
-      "frequency": 45,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 5,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -665,8 +503,8 @@
       "position": 9933,
       "length": 11,
       "hash": "2574f6170039aecf5a6f08dc52df52db",
-      "frequency": 18,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 2,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -674,8 +512,8 @@
       "position": 9931,
       "length": 16949,
       "hash": "820cc3be679a3c6f0c91011e57865062",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "발급일.*?\\d{4}[-./]\\d{1,2}[-./]\\d{1,2}",
@@ -683,8 +521,8 @@
       "position": 8087,
       "length": 1654,
       "hash": "752ff95d2f06bf6a03f09709b0b1d173",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "발급자.*?(?:서명|날인)",
@@ -692,8 +530,8 @@
       "position": 6273,
       "length": 2631,
       "hash": "2a2f28db65471e2b53528f64392daa54",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -701,8 +539,8 @@
       "position": 1688,
       "length": 4919,
       "hash": "56f61e10ade6994fa9a74dc1f340927b",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "발급자.*?(?:서명|날인)",
@@ -710,8 +548,8 @@
       "position": 36,
       "length": 5020,
       "hash": "d82e711a94aeeb74eccf9580bca69950",
-      "frequency": 9,
-      "firstSeen": "2025-12-06T14:06:40.476Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:06.894Z"
     },
     {
       "pattern": "주민등록번호.*?\\d{6}-\\d{7}|\\d{6}-\\d\\*{6}",
@@ -719,8 +557,8 @@
       "position": 26322,
       "length": 14,
       "hash": "0f4db363fa7e1c33292a0870af538f10",
-      "frequency": 126,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 18,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -728,8 +566,8 @@
       "position": 26315,
       "length": 13,
       "hash": "811abffc8cc3fae3509ab884d6d0b7a2",
-      "frequency": 126,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 18,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -737,8 +575,8 @@
       "position": 26287,
       "length": 153,
       "hash": "ce0591a0bfcd7391027fe346ea87b901",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -746,8 +584,8 @@
       "position": 26088,
       "length": 18,
       "hash": "5a6086a5cf4a19e3956c891c6ccb79e1",
-      "frequency": 21,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 3,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -755,8 +593,8 @@
       "position": 25208,
       "length": 10,
       "hash": "cf209d0ed774e959b4e4e7e1c205d58b",
-      "frequency": 14,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 2,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -764,8 +602,8 @@
       "position": 24626,
       "length": 527,
       "hash": "95178f50767ea104d08a72d783e1ae0c",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -773,8 +611,8 @@
       "position": 24600,
       "length": 24,
       "hash": "44358a9c2f72f04466d4b5016121b2a1",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -782,8 +620,8 @@
       "position": 23328,
       "length": 1228,
       "hash": "98f36b4af9937a2a61f3cf5d75e9281b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -791,8 +629,8 @@
       "position": 22986,
       "length": 9,
       "hash": "66d52bb57dfd12e20fe4578ffc8991fb",
-      "frequency": 140,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 20,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
@@ -800,8 +638,8 @@
       "position": 18934,
       "length": 4327,
       "hash": "94107e8be8d6d6598874d654a42ff1fb",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -809,8 +647,8 @@
       "position": 18342,
       "length": 12,
       "hash": "167303304aef87972e7880c55ed3ff5f",
-      "frequency": 28,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 4,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -818,8 +656,8 @@
       "position": 15724,
       "length": 12,
       "hash": "e4aa4846d2c4b041e97e197dfb9f318b",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -827,8 +665,8 @@
       "position": 6447,
       "length": 9616,
       "hash": "ebe0d6449a9119d4eeed4b7abb38b6d3",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "성별.*?(?:남|여|M|F)",
@@ -836,8 +674,8 @@
       "position": 6436,
       "length": 54,
       "hash": "fa2217898f26cb546801576269824622",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -845,8 +683,8 @@
       "position": 5600,
       "length": 15,
       "hash": "b0ff33d1baf7a59ca5fc795f258133b8",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
@@ -854,8 +692,8 @@
       "position": 5486,
       "length": 154,
       "hash": "4176b6a865c097afde352137cb57d4e9",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
@@ -863,8 +701,8 @@
       "position": 5479,
       "length": 291,
       "hash": "1e9befd0934aa59128309e87fb826355",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -872,8 +710,8 @@
       "position": 2720,
       "length": 11,
       "hash": "8667e09d61346d7f057d7dc2e9978d2a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     },
     {
       "pattern": "등록번호.*?\\d+",
@@ -881,212 +719,14 @@
       "position": 173,
       "length": 12,
       "hash": "c1cda30fbc072a4677f432cda0fd6a06",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:43.746Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호\r\n202500589",
-      "position": 31706,
-      "length": 15,
-      "hash": "4fe48a028589ceddccf850735ee8f936",
-      "frequency": 133,
-      "firstSeen": "2025-12-06T14:06:47.213Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호 128",
-      "position": 12409,
-      "length": 8,
-      "hash": "6deaa595f56b6d739e01daedd6b562aa",
-      "frequency": 14,
-      "firstSeen": "2025-12-06T14:06:47.213Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호 970103",
-      "position": 10701,
-      "length": 11,
-      "hash": "324c43570ff6743b89de7f9a81478315",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:47.213Z"
-    },
-    {
-      "pattern": "TEL.*?FAX.*?(?:\\d{2,3}-\\d{3,4}-\\d{4})",
-      "match": "TEL.031)903-1177 FAX.031)908-1178\r\n원본대조필 9\r\n2025-07-18 : /충격파 좌측 삼각근 1 :F(1000): 4 (20mm) R2 (1400): 1.4/VAS(7)/PT-\r\n2025-07-19 /충격파 좌측 삼각근 2 :F(1000): 6 (20mm) R2 (1400): 1.4 /VAS(6)/PT\r\n2025-07-19 : 약 부작용 없음\r\n2025-07-21 /충격파 좌측 삼각근 3 :F(1000): 10 (20mm) R2 (1400): 2/VAS(6)/PT/다음에 F[30mm]\r\n:6\r\n2025-07-23 /충격파 좌측 삼각근 4 :F(1000): 4 (30mm) R2 (1400): 2/VAS(5)/PT\r\n2025-07-29 : /충격파 좌측 삼각근 5 :F(1000): 6 (30mm) R2 (1400): 2/VAS(5)/PT\r\n2025-07-30 /충격파 좌측 삼각근 6 :F(1000): 6 (30mm) R2 (1400): 2/VAS(5)/PT\r\n2025-07-31: /충격파 좌측 삼각근 7 :F(1000): 8 (30mm) R2 (1400): 2/VAS(4)/PT/다음에 R4:2\r\n2025-08-04 : /충격파 좌측 삼각근 8 :F(1000): 8 (30mm) R4 (1400): 2/VAS(4)/PT\r\n2025-08-07 : /충격파 좌측 삼각근 9 :F(1000): 8 (30mm) R4 (1400): 2 /VAS(4)/PT\r\n2025-08-08 /충격파 좌측 삼각근 10 :F(1000): 8 (30mm) R4 (1400): 2/VAS(4)/PT\r\n2025-08-11 : 견부도수 1:Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-08-11 : 왼쪽어깨가 빠질 것 같은 느낌. 복싱을 하고 난 이후에 특히 안 좋아진 느낌\r\n2025-08-11 : eccentric abduction 시에 crepitation 발생\r\n2025-08-12 : 견부도수 2:Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-08-14 : 견부도수 3:Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-08-18 : 견부도수 4 :Supraspinatus. Deltoid release EX/VAS(4)/PT 약없이\r\n2025-08-19 견부도수 5: Supraspinatus. Deltoid release EX/VAS(4)/PT 약없이\r\n2025-08-21 : 견부도수 6 :Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-08-21 : 누운 자세에선 어깨 충돌 발생하지 않음\r\n2025-08-21 : 선 자세에서도 scaption 각도에선 거의 발생하지 않음\r\n2025-08-25 견부도수 7: Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-08-25 : 일시적일 수 있으나 어깨충돌 호전 / 추후에도 운동 치료를 주력\r\n2025-08-26 견부도수 8 :Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-09-01: 견부도수 9: Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-09-02 견부도수 10 :Supraspinatus. Deltoid release EX/VAS(4)/PT\r\n2025-07-18\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 초진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호 202507 18-00044\r\nSlip\r\n청구코드\r\nItem\r\nDos\r\nDay\r\nDev\r\nG3301\r\n견관절 1매\r\n2\r\n1\r\nEZ776\r\nMMO15\r\n(비급여) DITI (6)적외선체열진단\r\n표층열치료(심층열동시)\r\n1\r\n1\r\n1\r\n1\r\nMM080\r\n간섭파전류치료\r\n1\r\n1\r\nMM020\r\n심층열치료 [1일당]\r\n1\r\ne4\r\n644802230\r\npans\r\n(비급여) ESWT 12만\r\n태극아세클로페낙정\r\n(비급여) 판시자임정\r\n1\r\n1\r\n2\r\n3\r\n2\r\n3\r\n22\r\nPage 1 of 5\r\n\r\nad\r\nAssurance\r\n649802520\r\n에페신정\r\nChart\r\n(비급여) 통원확인서(병명기재)\r\n2025-07-19\r\n31\r\n2\r\n21\r\n2\r\n사업장기호\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\n20250719-00012\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\ne4\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) ESWT 12만\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\nAssurance\r\n2025-07-21\r\n사업장기호 100000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\n20250721-00030\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\ne4\r\n644802230\r\npans\r\n649802520\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) ESWT 12만\r\n-\r\n태극아세클로페낙정\r\n(비급여) 판시자임정\r\n333\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n2\r\n22\r\n2\r\n222\r\n에페신정\r\n사업장기호\r\nAssurance\r\n00000000000\r\n2025-07-23\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\ne4\r\nAssurance\r\n사업장기호\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) ESWT 12만\r\n2025-07-29\r\n00000000000\r\n-\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\ne4\r\n(비급여) ESWT - 12만\r\nAssurance\r\n2025-07-30\r\n사업장기호 100000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n처방전교부번호\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\ne4\r\n644802230\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) ESWT 12만\r\n-\r\n태극아세클로페낙정\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n2\r\n3\r\n2\r\nPage 2 of 5\r\n\r\npans\r\n(비급여) 판시자임정\r\nChart\r\n649802520\r\n에페신정\r\n|22\r\n33\r\n22\r\nAssurance\r\n2025-07-31\r\n사업장기호 100000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\n표층열치료(심층열동시)\r\nMM080\r\n간섭파전류치료\r\nMM020\r\n심층열치료 [1일당]\r\ne4\r\n(비급여) ESWT\r\n-\r\n12만\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\nAssurance\r\n2025-08-04\r\n사업장기호 100000000000\r\n보험구분 보험외래\r\n조합명칭\r\n증번호\r\n81163453518\r\n초재진구분\r\n재진\r\n등록구분\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\n간섭파전류치료\r\nMM020\r\n표층열치료(심층열동시)\r\n심층열치료 [1일당]\r\ne4\r\n(비급여) ESWT\r\n-\r\n12만\r\n644802230\r\n태극아세클로페낙정\r\npans\r\n649802520\r\n(비급여) 판시자임정\r\n에페신정\r\n222\r\n진료구분\r\n구분없음\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n4\r\n4\r\n4\r\n222\r\nAssurance\r\n2025-08-07\r\n사업장기호 100000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n처방전교부번호\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\nMM080\r\nMM020\r\ne4\r\n644802230\r\npans\r\n649802520\r\n표층열치료(심층열동시)\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) ESWT - 12만\r\n태극아세클로페낙정\r\n(비급여) 판시자임정\r\n에페신정\r\n22\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n2\r\n4\r\n4\r\n4\r\n222\r\nAssurance\r\n2025-08-08\r\n사업장기호 100000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nPresent IIIness\r\n충격파 오늘까지\r\nSlip\r\n청구코드\r\nMMO15\r\nItem\r\n표층열치료(심층열동시)\r\nMM080\r\n간섭파전류치료\r\nMM020\r\n심층열치료 [1일당]\r\ne4\r\n(비급여) ESWT\r\n12만\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n사업장기호\r\nAssurance\r\n00000000000\r\n2025-08-11\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nDos\r\nDay\r\nDev\r\nPage 3 of 5\r\n\r\nChart\r\nMMO15\r\n표층열치료(심층열동시)\r\nMM080\r\n간섭파전류치료\r\nMM020\r\n심층열치료 [1일당]\r\nd8\r\nT1\r\n644802230\r\npans\r\n(비급여) 도수치료- ** 8만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n태극아세클로페낙정\r\n1\r\n(비급여) 판시자임정\r\n649802520\r\n에페신정\r\n1\r\n1\r\n1\r\n1\r\n1\r\n222\r\n4\r\n4\r\n4\r\n222\r\n사업장기호\r\nAssurance\r\n00000000000\r\n2025-08-12\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분 구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMMO15\r\n표층열치료(심층열동시)\r\nMM080\r\nMM020\r\nd16\r\nT1\r\nAssurance\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) **최원석 물리치료 팀장\r\n2025-08-14\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n사업장기호\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMM015\r\n표층열치료(심층열동시)\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\nMM080\r\nMM020\r\nd16\r\nT1\r\n644802230\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n태극아세클로페낙정\r\npans\r\n649802520\r\n(비급여) 판시자임정\r\n에페신정\r\n222\r\n4\r\n4\r\n4\r\n222\r\nAssurance\r\n2025-08-18\r\n사업장기호 00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n처방전교부번호\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\nPresent IIIness\r\n약없이\r\nSlip\r\n청구코드\r\nItem\r\nd16\r\nT1\r\nMM085\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n재활저출력레이저치료 [1일\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\nAssurance\r\n2025-08-19\r\n사업장기호 00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nDos\r\nDay\r\nDev\r\nd16\r\nT1\r\n⭑⭑\r\nMM085\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) 최원석 물리치료 팀장\r\n재활저출력레이저치료 [1일\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\nPage 4 of 5\r\n\r\nChart\r\nAssurance\r\n2025-08-21\r\n사업장기호\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nd16\r\nT1\r\nMM085\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n재활저출력레이저치료 [1일\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\nAssurance\r\n2025-08-25\r\n사업장기호\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMM015\r\n적외선치료(사-102와 동시\r\nMM080\r\nMM020\r\nAssurance\r\nd16\r\nT1\r\n간섭파전류치료\r\n심층열치료 [1일당]\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n2025-08-26\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n사업장기호\r\n00000000000\r\n조합명칭\r\n증번호\r\n81163453518\r\n보험구분 보험외래\r\n초재진구분\r\n재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\nSlip\r\n청구코드\r\nItem\r\nMM085\r\nd16\r\nT1\r\nAssurance\r\n재활저출력레이저치료 [1일\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n2025-09-01\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n사업장기호 100000000000\r\n보험구분 보험외래\r\n조합명칭\r\n증번호\r\n81163453518\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n처방전교부번호\r\n20250901-00006\r\nSlip\r\n청구코드\r\nItem\r\nMM085\r\nd16\r\nT1\r\nAssurance\r\n재활저출력레이저치료 [1일\r\n(비급여) 도수치료- ** 16만원\r\n(비급여) ** 최원석 물리치료 팀장\r\n2025-09-02\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n1\r\n1\r\n1\r\n사업장기호 00000000000\r\n보험구분 보험외래\r\n처방전교부번호\r\n조합명칭\r\n증번호\r\n81163453518\r\n초재진구분 재진\r\n등록구분\r\n진료구분\r\n구분없음\r\n20250902-00008\r\n-영수증,내역서,확인서\r\nPresent IIIness\r\nSlip\r\n청구코드\r\nMM085\r\nd16\r\nT1\r\nItem\r\n재활저출력레이저치료 [1일\r\nDos\r\nDay\r\nDev\r\n1\r\n1\r\n1\r\n(비급여) ** 최원석 물리치료 팀장\r\n1\r\n1\r\n(비급여) 도수치료-** 16만원\r\nPage 5 of 5\r\n\r\nInfra Red Imaging System\r\nChartNo\r\nName\r\nDepartment\r\n202500589\r\n엄장열\r\nGeneral medicine\r\nGender\r\nM\r\nAge\r\nRef. Dr.\r\n28\r\nMedicore. Co.\r\nDate 20250718 Time: 115028\r\nDate: 20250922 Time:14095\r\nData: 20250718 Time: 11510\r\nDate 20250822\r\nTime:14:0953\r\nDate :20250718 Time:11515\"\r\nDate 20250718 Time: 115206\r\nDate: 20250718 Time: 115205\r\nonn\r\nMedicore Hospital\r\nTel:02-2056-2600",
-      "position": 653,
-      "length": 7906,
-      "hash": "310f7c317658487b337679ac6d9af83a",
-      "frequency": 7,
-      "firstSeen": "2025-12-06T14:06:47.213Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호: 590320",
-      "position": 35861,
-      "length": 12,
-      "hash": "3312f9bb9044c0e64a78968c8b01103a",
-      "frequency": 162,
-      "firstSeen": "2025-12-06T14:06:52.031Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호: 7947376",
-      "position": 35844,
-      "length": 13,
-      "hash": "d7e24e1e76427bd9deb3dae006ec5b03",
-      "frequency": 168,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의사명\r\n김영대\r\n퇴원요약\r\n<약어 설명>\r\nA.fib atrial fibrillation\r\nACE angiotensin converting enzyme\r\n:\r\nARB angiotensin receptor blocker\r\n:\r\nAta: Ataxia\r\nBP blood pressure\r\nGP: glycoprotein\r\nHb: hemoglobin\r\nHBA1c haemoglobin A1c\r\nOGTT Oral glucose tolerance test\r\nPAOD peripheral arterial occlusive disease\r\nPRBC packed red blood cells\r\nHMG-CoA 3-hydroxy-3-methyglutaryl-coenzyme A\r\nHTN hypertension\r\nICH intracerebral hematoma\r\nCABG coronary artery bypass graft\r\nCAOD coronary artery obstructive disease\r\nCCB calcium channel blocker\r\nCHF congestive heart failure\r\nCom Commands\r\nCT computed tomography\r\nCVA cerebrovascular accident\r\nDM diabetes mellitus\r\nDys: Dysarthria\r\nExt Extinction\r\nFAC Facial palsy\r\nFac femoral arterial cannulation\r\nGaz gaze\r\nIVH intraventricular hemorrhage\r\nLDL low-density lipoprotein\r\nLan: Language\r\nLEx lower extremity\r\nPTCA percutaneous transluminal coronary angioplasty\r\npys: pack years\r\nQue : questions\r\nSAH: subarachnoid hemorrhage\r\nSen: sensory\r\nSGOT serum glutamic oxaloacetic transaminase\r\nSGPT serum glutamic pyruvic transaminase\r\nLMWH low molecular weight heparin\r\nLOC: level of consciousness\r\nMAO monoamine oxidase\r\nMI myocardial infarction\r\nMot Motor\r\nTIA transient ischemic attack\r\nt-PA tissue plasminogen activator\r\nUEx upper extremity\r\nUK Urokinase\r\nMRI magnetic resonance imaging Vis visual impairment service\r\nNIHSS national institute of health stroke scale\r\n전자서명자: 김영대\r\n9/9\r\n출력일: 2025-09-10\r\n출력자: 김재영\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n원본대조필\r\n\r\n등록번호: 7947376\r\n주민등록번호: 590320-102**** 남/66세\r\n환자명 : 최순곤\r\n입원일자\r\n2025-08-25\r\n입원과\r\n신경과\r\n입원주치의\r\n김영대\r\n주호소\r\nRt.side weakness\r\n발병일시\r\n2025-08-25 07:50\r\nClear onset\r\n2025-08-25 07:50\r\nUnclear onset\r\nLast normal time\r\nDetection time\r\n입원경로\r\n응급실 내원 경로\r\n응급실 도착시간\r\nER OOPD\r\n구급차 ㅇ 도보\r\n개인 차량\r\n헬기\r\n2025-08-25 08:26\r\nStroke Unit 입실\r\n○ No\r\nYes\r\n과거력\r\nHypertension\r\nNo\r\nYes\r\nUnknown\r\n기간\r\nyears\r\nDM\r\nNo\r\nYes\r\nUnknown 기간\r\nyears\r\nCardiac disease\r\nUnknown\r\n✓ No\r\nYes\r\nCoronary Stent/ PTCA ☐ CABG\r\nAngiographically confirmed CAD\r\nMI ☐ Unstable angina\r\nValvular replacement\r\nRheumatic heart disease ☐ Atrial fibrillation\r\nSick sinus syndrome\r\nPacemaker insertion\r\nCHF ☐ Uncertain\r\nCNS disorder\r\nNo\r\nYes\r\nPAOD\r\nNo\r\nYes\r\nDyslipidemia\r\nNo\r\nYes\r\n(Dyslipidemia: fasting T.cholesterol 2 240mg/dl, or LDL-cholesterol > 160mg/dl,\r\nTriglyceride ≥ 150mg/dl or 고지혈증으로 medication 하는 경우)\r\nOld CVA\r\n☑ No Yes\r\nhemorrhagic\r\nPul. Tbc\r\nNo\r\nYes\r\nHepatitis\r\nNo\r\nYes\r\nCancer\r\n☑ No\r\nYes\r\nActive\r\nESRD\r\nOthers\r\n자가약 목록\r\nInactive\r\nUnknown\r\nischemic\r\nTIA\r\nunspecified\r\n☐ Unknown\r\n☐ Metastasis\r\n(* Active 는 6개월 이내 진단, 재발, 또는 현재 치료 진행 중, inoperable, 또는 metastasis.\r\nbenign cancer 예를 들어 pituitary tumor, meningioma, basal cell carcinoma 는 제외함)\r\n☑ No ☐ Yes\r\nUnknown\r\n전자서명자: 김영대\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n☐ HD\r\nPD\r\nkidney transplantation status\r\n입원기록\r\n1/8\r\n출력일: 2025-09-10\r\n출력자: 김재영\r\n원본대조필\r\n\r\n등록번호: 7947376\r\n주민등록번호: 590320-102****남/66세\r\n환자명 : 최순곤\r\nAlcohol\r\nSmoking history\r\nNo\r\nYes\r\n)확인불가 (환자와 의사",
-      "position": 15236,
-      "length": 2912,
-      "hash": "f0a21cd2b92566ecfec150b8ef1c037f",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의 김영대\r\n퇴원일자 2025-08-29\r\n퇴원과 신경과\r\n퇴원주치의 김영대\r\n최종진단명(*)\r\n순서\r\n구분\r\n확진\r\n진단명\r\n한국질병\r\n분류번호\r\n1 주진단\r\n확진\r\nMiddle cerebral artery infarction, left\r\n163.9\r\n2 기타진단\r\n확진\r\nGastric ulcer, unspecified\r\nK25.91\r\n3\r\n기타진단 확진\r\nDyslipidemia\r\nE78.8\r\n4\r\n기타진단\r\n확진\r\nMild depressive episode\r\nF32.0\r\n5\r\n기타진단\r\n확진\r\nAttention deficit disorder\r\nF90.0\r\n과거진단명\r\nGastric ulcer, unspecified;\r\n과거진단코드\r\nK25.91;\r\nRisk factors (입원 중 새로 발견된 Risk factors 포함)\r\nHypertension\r\n퇴원요약\r\nNo Yes (진단 ○ 입원 전 ) 입원 후 ) ○ Unknown\r\nDM\r\nNo\r\nCardiac disease ☑ No.:\r\n(Resting BP가 2회 이상 systolic 140 또는 diastolic 90 이상이거나 고혈압제제를 복용중인 경우)\r\n(Resting BP definition 입원 48시간 이후, neurologically stable한 시기의 BP)\r\n(24시간 생활혈압 측정에서 systolic 130 또는 diastolic 80 이상인 경우)\r\nYes (진단 ○ 입원전 ㅇ 입원 후) ○ Unknown\r\n(fasting glucose 2 126 mg/dl, or OGTT 2hr glucose 2200, or HBA1c26.5%,\r\nor oral hypoglycemic agent나 insulin으로 치료중인 경우)\r\nYes\r\nCoronary Stent/ PTCA\r\nUnknown\r\nCABG\r\nMI ☐ Unstable angina\r\nValvular replacement\r\nPAOD\r\nNo\r\nDyslipidemia\r\nNo\r\nMetabolic syndrome\r\nOld CVA\r\nAngiographically confirmed CAD\r\nRheumatic heart disease ☐ Atrial fibrillation ☐ Sick sinus syndrome\r\nPacemaker insertion\r\nCHF ☐ Uncertain\r\nYes (진단 입원전 입원 후 ) ○ Unknown\r\nYes (진단 ㆍ입원전 ○ 입원후) ○ Unknown\r\n(fasting T. cholesterol > 240 mg/dl, or LDL-cholesterol 2160 mg/dl,\r\nTriglyceride 2150 mg/dl, or 고지혈증으로 medication중인 경우)\r\nNo\r\nYes\r\n✓ No\r\n☐ Yes\r\nUnknown\r\nhemorrhagic\r\nischemic\r\nTIA\r\n☐ unspecified\r\n전자서명자: 김영대\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n1/9\r\n출력일: 2025-09-10\r\n출력자: 김재영\r\n원본대조필\r\n\r\n등록번호: 7947376\r\n주민등록번호: 590320-102****남/66세\r\n환자명 : 최순곤\r\nCancer\r\n☑No\r\nYes\r\nActive ☐ Inactive\r\nMetastasis\r\n☐ Unknown\r\n(*Active 는 6개월 이내 진단, 재발, 또는 현재 치료 진행 중, inoperable, 또는 metastasis.\r\nbenign cancer 예를 들어 pituitary tumor, meningioma, basal cell carcinoma 는 제외함)\r\nESRD\r\n✓ No\r\n☐ Yes\r\n☐ Unknown\r\nHD\r\nPD\r\nkidney transplantation status\r\nSmoking history\r\n)확인불가 (환자와 의사",
-      "position": 5489,
-      "length": 1831,
-      "hash": "2c65a4bcb0951034a6bb8e6fe5ef920a",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호 : 590320",
-      "position": 5151,
-      "length": 13,
-      "hash": "83283f21df7caa2ffa2d3317ed6914c8",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "주치의.*?(?:교수|전문의|의사)",
-      "match": "주치의\r\n일반\r\n응급실 내원경로\r\n내원\r\nOPD\r\nTransfer in\r\n주호소\r\nMental change\r\n주호소\r\nPHX\r\nuncheckable\r\nHiBP\r\nNo Yes\r\nDM\r\nNo\r\nYes\r\nPul.Tbc\r\nNo\r\nYes\r\nHepatitis\r\nNo\r\nYes\r\nOther medication\r\nNo Yes\r\nOperation\r\nNo\r\nYes\r\nAllergy Drug\r\nNo\r\nYes\r\n항생제\r\n진통제\r\n조영제\r\n기타\r\nFood 및 기타\r\nNo\r\nYes\r\n기간\r\n발현 시기\r\n2025-08-25 07:50\r\nOthers\r\nFHX\r\nnot checked\r\n☐ No Yes\r\n© not needed ☐ No ☐ Yes\r\n-\r\n☐ LNMP\r\nPregnancy 가능성\r\nPl\r\n상환 MDD, dyslipidemia 과거력 있는 분으로 금일 발생한 mental change 주소로 응급\r\n실 내원함.\r\nlast normal time: 8/24 23:30pm\r\ndetect time: 7:50\r\n금일 7:50분경 화장실 다녀오면서 motor aphagia, Rt side weakness 확인되어 보호자\r\n119 신고\r\n119 도착시 mental drowsy - confusion\r\n응급실 내원시 TPP -/-/-pain response +\r\nmotor\r\nupper G1/G5\r\nlower G3/G5\r\npulpil reflex +\r\n\r\nGeneral Sx\r\nFever\r\n(-) O (+)\r\nChill\r\n(-) O(+)\r\n전자서명자: 김지훈\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n1/2\r\n출력일: 2025-09-10\r\n출력자: 김재영\r\n원본대조필\r\n\r\n등록번호: 7947376\r\n주민등록번호: 590320-102****남/66세\r\n환자명 : 최순곤\r\n응급진료기록\r\n2025-08-25\r\nHeadache\r\nDizziness\r\nAbdominal pain\r\nChest pain\r\nDyspnea\r\n\r\nothers\r\n(-) O(+)\r\n(+)\r\n(-)\r\n(+)\r\n(-) O (+)\r\n(-) O (+)\r\n\r\n\r\n\r\nVital sign\r\nBP(S)\r\n137 mmHg\r\n측정불가\r\nBP(D)\r\n62 mmHg\r\n측정불가\r\nPR\r\n55회/분\r\n|측정불가\r\nRR\r\n18 l/min\r\n측정불가\r\nBT\r\n36.7°C\r\n측정불가\r\nO2Sat\r\n95.0%\r\n|측정불가\r\nGeneral appearance\r\nAppearance\r\nmental status\r\nOthers\r\nImpression RSW\r\nacute\r\nchronic not ill\r\nother\r\nalert drowsy Ostupor semicoma\r\nmental change\r\nPlan\r\nBEST\r\ncoma\r\n기록자명 공영주(간호사)\r\n<약어 설명>\r\nBP(D) blood pressure(diastolic)\r\nBP(S) blood pressure(systolic)\r\nBT body temperature\r\nCVA costovertebral angle\r\nD.O.E dyspnea on exercise\r\nDM diabetes mellitus\r\nDT Direct tenderness\r\nEOM extraocular movement\r\nEx.: extremity\r\nFHX family history\r\nFTN finger to nose\r\nHEENT: head, ear, eye, nose and throat\r\nHIBP hypertension\r\nHTS heel to shin\r\nLNMP last normal menstrual period\r\nLOM limitation of motion\r\nLt.: left\r\nP/Ex physical examination\r\nPHX past history\r\nPl present illness\r\nPLR Pupillary Light Reflex\r\nPR Pulse rate\r\nPul. Tbc Pulmonary tuberculosis\r\nR.O.S Review of systems\r\nRAM: rapid alternating movment\r\nRR respiratory rate\r\nRT Rebound tenderness\r\nRt. right\r\nVFD visual field defect\r\nWt: Weight\r\n전자서명자 : 김지훈\r\n세브란스병원\r\nSEVERANCE HOSPITAL\r\n2/2\r\n출력일: 2025-09-10\r\n출력자: 김재영\r\n원본대조필\r\n\r\n등록번호: 7947376\r\n|주민등록번호 : 590320-102****남/66세\r\n환자명 : 최순곤\r\n응급실 도착시간 2025-08-25 08:26\r\nComment\r\nStroke\r\n전문의",
-      "position": 3011,
-      "length": 2226,
-      "hash": "a4ec1df4a5a1e583ad5b3984dfb92a3b",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
-      "match": "의무기록 사본 증명서\r\n이 사본은 의무기록 원본과 틀림이 없음",
-      "position": 2699,
-      "length": 34,
-      "hash": "eea7c0f377c9b23cb1b5b4ca1ac0e917",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "발급매수.*?\\d+.*?매",
-      "match": "발급매수:\r\n보험회사제출\r\n28 매",
-      "position": 2678,
-      "length": 19,
-      "hash": "0544db7cc7234b59ebf2793a80495103",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별: M",
-      "position": 1858,
-      "length": 5,
-      "hash": "3fe38e52b3bc74fe939f3100a9f41702",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호: 0050744688",
-      "position": 1827,
-      "length": 16,
-      "hash": "8147e417e03210a658e4cdb26aef06d6",
-      "frequency": 12,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
-      "match": "진료과목: 안과",
-      "position": 664,
-      "length": 8,
-      "hash": "ba0cf54eaf7d326e6522b6d31f99391a",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
-      "match": "서울특별시 마포구 희우정로 105",
-      "position": 429,
-      "length": 18,
-      "hash": "13af873e139edf41fe27a78bd5d4b20c",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호 590320",
-      "position": 389,
-      "length": 11,
-      "hash": "511e000ef6df12bc1955d7ae810c461d",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "성별.*?(?:남|여|M|F)",
-      "match": "성별: 남",
-      "position": 278,
-      "length": 5,
-      "hash": "6bb9478320019c19b9bc0f9115faf4b0",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호:\r\n환자성명: 최순곤\r\n환자성별: 남\r\n환자나이: 66",
-      "position": 258,
-      "length": 35,
-      "hash": "641e1acf4c2da6b78de61fdb28c6dbaf",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "발급매수.*?\\d+.*?매",
-      "match": "발급매수:\r\n3\r\n매",
-      "position": 108,
-      "length": 11,
-      "hash": "2b5eddc5ec77c5e30f403f565cb5760f",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "등록번호.*?\\d+",
-      "match": "등록번호:\r\n0050744688",
-      "position": 62,
-      "length": 17,
-      "hash": "35f15c60656d05683cf77ecca52fa319",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
-    },
-    {
-      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
-      "match": "의무기록사본증명서\r\n등록번호:\r\n0050744688\r\n환자명:\r\n최순곤\r\n용 도:\r\n보험회사 제출용\r\n발급매수:\r\n3\r\n매\r\n발행번호:\r\n2025-07799\r\n첨부한 사본은 의무기록 원본과 틀림이 없음",
-      "position": 51,
-      "length": 112,
-      "hash": "28a6e98612242dc2b2254118af0d0e33",
-      "frequency": 6,
-      "firstSeen": "2025-12-06T14:06:52.032Z"
+      "frequency": 1,
+      "firstSeen": "2025-12-29T13:11:20.935Z"
     }
   ],
   "statistics": {
-    "documentsProcessed": 38,
-    "averageCleaningRate": 53.16029138752051,
-    "lastUpdated": "2025-12-07T04:53:35.302Z"
+    "documentsProcessed": 2,
+    "averageCleaningRate": 73.90011739878493,
+    "lastUpdated": "2025-12-29T13:11:20.935Z"
   },
-  "createdAt": "2025-12-06T14:06:39.461Z"
+  "createdAt": "2025-12-29T13:11:06.893Z"
 }

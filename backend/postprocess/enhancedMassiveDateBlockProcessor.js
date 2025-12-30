@@ -431,7 +431,10 @@ class EnhancedMassiveDateBlockProcessor {
       textCoverage: originalText.length > 0 ? 
         blocks.reduce((sum, block) => sum + (block.content ? block.content.length : 0), 0) / originalText.length : 0,
       averageBlocksPerDate: dateGroups.length > 0 ? 
-        dateGroups.reduce((sum, group) => sum + group.blocks.length, 0) / dateGroups.length : 0
+        dateGroups.reduce((sum, group) => {
+          const count = typeof group.blockCount === 'number' ? group.blockCount : (Array.isArray(group.blocks) ? group.blocks.length : 0);
+          return sum + count;
+        }, 0) / dateGroups.length : 0
     };
   }
 

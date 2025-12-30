@@ -191,9 +191,15 @@ class TestEnvironmentManager {
    */
   cleanupTempFiles() {
     try {
-      if (fs.existsSync(this.config.tempDir)) {
-        fs.rmSync(this.config.tempDir, { recursive: true, force: true });
-      }
+      const ROOT = process.cwd();
+      const protectedDirs = [
+        path.join(ROOT, 'sample_pdf'),
+        path.join(ROOT, 'reports', 'prepared_coordinate_cases')
+      ].map(d => path.resolve(d));
+      const target = path.resolve(this.config.tempDir);
+      const isProtected = protectedDirs.some(d => target === d || target.startsWith(d + path.sep));
+      if (isProtected) return;
+      if (fs.existsSync(target)) fs.rmSync(target, { recursive: true, force: true });
     } catch (error) {
       console.warn('임시 파일 정리 중 오류:', error.message);
     }

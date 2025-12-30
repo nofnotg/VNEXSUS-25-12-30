@@ -1,11 +1,10 @@
 import { describe, it, expect, jest } from '@jest/globals';
+import { EventEmitter } from 'node:events';
 
 // Mock bridgeSubscriber as an EventEmitter-like object
-jest.mock('../../src/bridge/bridgeSubscriber', () => {
-  const { EventEmitter } = require('events');
+await jest.unstable_mockModule('../../src/bridge/bridgeSubscriber', () => {
   const emitter = new EventEmitter();
   return {
-    __esModule: true,
     default: {
       connect: jest.fn().mockResolvedValue(true),
       disconnect: jest.fn(),
@@ -17,16 +16,14 @@ jest.mock('../../src/bridge/bridgeSubscriber', () => {
 });
 
 // Mock reportController to control success/failure
-jest.mock('../../src/controllers/reportController', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../src/controllers/reportController', () => ({
   default: {
     generateReport: jest.fn(),
   },
 }));
 
 // Mock logger utils to capture calls without console noise
-jest.mock('../../src/shared/logging/logger.js', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../src/shared/logging/logger.js', () => ({
   logger: {
     info: jest.fn(),
     warn: jest.fn(),
@@ -40,8 +37,7 @@ jest.mock('../../src/shared/logging/logger.js', () => ({
 }));
 
 // Mock errors constants to avoid real imports
-jest.mock('../../src/shared/constants/errors.js', () => ({
-  __esModule: true,
+await jest.unstable_mockModule('../../src/shared/constants/errors.js', () => ({
   ERRORS: {
     INTERNAL_ERROR: { code: 'INTERNAL_ERROR', message: '내부 오류', status: 500 },
   },
@@ -96,4 +92,3 @@ describe('index event flow logging', () => {
     expect(logging.logger.error).toHaveBeenCalledWith(expect.objectContaining({ event: 'report_generation_failed', jobId: 'job-2' }));
   });
 });
-

@@ -1,323 +1,178 @@
 /**
- * Large File Handler Tests (CommonJS)
- * Tests for file processing strategies and performance optimization
+ * Large File Handler Tests (CJS with ESM module under test)
+ * 
+ * 현재 LargeFileHandler API에 맞춘 검증:
+ * - 처리 전략 선택(memory/stream/chunked)
+ * - 파일 형식 지원 및 에러 처리
+ * - 진행률 이벤트
+ * - 재시도/병렬 처리/리소스 정리
  */
 
-const fs = require('fs-extra');
+const { describe, it, beforeEach, afterEach, beforeAll, expect } = require('@jest/globals');
+const fs = require('fs');
 const path = require('path');
 
-// Mock the dependencies
-const mockLargeFileHandler = {
-  processFile: jest.fn(),
-  processMultipleFiles: jest.fn(),
-  getStatistics: jest.fn(),
-  clearCache: jest.fn(),
-  destroy: jest.fn()
-};
+let LargeFileHandler;
 
-// Mock the module
-jest.mock('../services/largeFileHandler.js', () => ({
-  LargeFileHandler: jest.fn().mockImplementation(() => mockLargeFileHandler),
-  globalLargeFileHandler: mockLargeFileHandler
-}));
+beforeAll(async () => {
+  const mod = await import('../services/largeFileHandler.js');
+  LargeFileHandler = mod.LargeFileHandler;
+});
 
 describe('LargeFileHandler', () => {
-  let tempDir;
-  let testFiles;
-
-  beforeAll(async () => {
-    tempDir = path.join(process.cwd(), 'temp-test-files');
-    await fs.ensureDir(tempDir);
-    
-    // Create test files
-    testFiles = {
-      small: path.join(tempDir, 'small.txt'),
-      medium: path.join(tempDir, 'medium.txt'),
-      large: path.join(tempDir, 'large.txt'),
-      json: path.join(tempDir, 'data.json'),
-      csv: path.join(tempDir, 'data.csv')
-    };
-
-    await fs.writeFile(testFiles.small, 'A'.repeat(1024)); // 1KB
-    await fs.writeFile(testFiles.medium, 'B'.repeat(100 * 1024)); // 100KB
-    await fs.writeFile(testFiles.large, 'C'.repeat(1024 * 1024)); // 1MB
-    await fs.writeFile(testFiles.json, JSON.stringify({ data: 'test' }));
-    await fs.writeFile(testFiles.csv, 'id,name\n1,test');
-  });
-
-  afterAll(async () => {
-    await fs.remove(tempDir);
-  });
+  let handler;
+  let testDataDir;
+  const processingFn = (content) => {
+    if (Buffer.isBuffer(content)) {
+      return content.toString('utf8');
+    }
+    return String(content);
+  };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  describe('File Processing Strategy Selection', () => {
-    test('should use in-memory strategy for small files', async () => {
-      const mockResult = {
-        content: 'A'.repeat(1024),
-        strategy: 'in-memory',
-        metrics: {
-          fileSize: 1024,
-          processingTime: 10,
-          memoryUsage: 2048
-        }
-      };
-
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.small);
-
-      expect(result.strategy).toBe('in-memory');
-      expect(result.metrics.fileSize).toBe(1024);
-      expect(mockLargeFileHandler.processFile).toHaveBeenCalledWith(testFiles.small);
+    handler = new LargeFileHandler({
+      smallFileThreshold: 1024,
+      largeFileThreshold: 5120,
+      enableProgressTracking: true
     });
 
-    test('should use stream strategy for medium files', async () => {
-      const mockResult = {
-        content: 'B'.repeat(100 * 1024),
-        strategy: 'stream',
-        metrics: {
-          fileSize: 100 * 1024,
-          processingTime: 50,
-          memoryUsage: 50 * 1024
-        }
-      };
+    testDataDir = path.join(__dirname, 'test-data');
+    if (!fs.existsSync(testDataDir)) {
+      fs.mkdirSync(testDataDir, { recursive: true });
+    }
+  });
 
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
+  afterEach(async () => {
+    await handler.destroy();
+    if (fs.existsSync(testDataDir)) {
+      fs.rmSync(testDataDir, { recursive: true, force: true });
+    }
+  });
 
-      const result = await mockLargeFileHandler.processFile(testFiles.medium);
+  describe('Processing strategy', () => {
+    it('uses memory for small files', async () => {
+      const p = path.join(testDataDir, 'small.txt');
+      const content = 'Small file content';
+      fs.writeFileSync(p, content);
 
+      const result = await handler.processFile(p, processingFn);
+      expect(result.success).toBe(true);
+      expect(result.strategy).toBe('memory');
+      expect(result.fileInfo.size).toBe(content.length);
+      expect(result.result).toBe(content);
+    });
+
+    it('uses stream for medium files', async () => {
+      const p = path.join(testDataDir, 'medium.txt');
+      const content = 'Medium file content\n'.repeat(100);
+      fs.writeFileSync(p, content);
+
+      const result = await handler.processFile(p, processingFn);
+      expect(result.success).toBe(true);
       expect(result.strategy).toBe('stream');
-      expect(result.metrics.fileSize).toBe(100 * 1024);
+      expect(result.fileInfo.size).toBe(content.length);
+      expect(Array.isArray(result.result)).toBe(true);
+      expect(result.result.join('')).toBe(content);
+      expect(result.streamMetrics).toBeDefined();
     });
 
-    test('should use chunks strategy for large files', async () => {
-      const mockResult = {
-        content: 'C'.repeat(1024 * 1024),
-        strategy: 'chunks',
-        metrics: {
-          fileSize: 1024 * 1024,
-          processingTime: 200,
-          memoryUsage: 100 * 1024,
-          chunks: 16
-        }
-      };
+    it('uses chunked for large files', async () => {
+      const p = path.join(testDataDir, 'large.txt');
+      const content = 'Large file content line\n'.repeat(300);
+      fs.writeFileSync(p, content);
 
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.large);
-
-      expect(result.strategy).toBe('chunks');
-      expect(result.metrics.chunks).toBeGreaterThan(1);
+      const result = await handler.processFile(p, processingFn, { chunkSize: 1024 });
+      expect(result.success).toBe(true);
+      expect(result.strategy).toBe('chunked');
+      expect(result.fileInfo.size).toBe(content.length);
+      expect(Array.isArray(result.result)).toBe(true);
+      expect(result.result.join('').length).toBeGreaterThan(0);
     });
   });
 
-  describe('File Format Support', () => {
-    test('should process text files', async () => {
-      const mockResult = {
-        content: 'A'.repeat(1024),
-        format: 'txt',
-        strategy: 'in-memory'
-      };
-
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.small);
-
-      expect(result.format).toBe('txt');
+  describe('File format support', () => {
+    it('processes txt files', async () => {
+      const p = path.join(testDataDir, 'test.txt');
+      const content = 'Text file content';
+      fs.writeFileSync(p, content);
+      const result = await handler.processFile(p, processingFn);
+      expect(result.success).toBe(true);
+      expect(result.fileInfo.extension).toBe('txt');
+      expect(typeof result.result === 'string').toBe(true);
     });
 
-    test('should process JSON files', async () => {
-      const mockResult = {
-        content: '{"data":"test"}',
-        format: 'json',
-        strategy: 'in-memory'
-      };
-
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.json);
-
-      expect(result.format).toBe('json');
+    it('processes json files', async () => {
+      const p = path.join(testDataDir, 'test.json');
+      const content = JSON.stringify({ a: 1 });
+      fs.writeFileSync(p, content);
+      const result = await handler.processFile(p, processingFn);
+      expect(result.success).toBe(true);
+      expect(result.fileInfo.extension).toBe('json');
     });
 
-    test('should process CSV files', async () => {
-      const mockResult = {
-        content: 'id,name\n1,test',
-        format: 'csv',
-        strategy: 'in-memory'
-      };
-
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.csv);
-
-      expect(result.format).toBe('csv');
-    });
-
-    test('should handle unsupported file formats', async () => {
-      const unsupportedFile = path.join(tempDir, 'test.xyz');
-
-      mockLargeFileHandler.processFile.mockRejectedValue(
-        new Error('Unsupported file format: .xyz')
-      );
-
-      await expect(mockLargeFileHandler.processFile(unsupportedFile))
-        .rejects.toThrow('Unsupported file format: .xyz');
+    it('rejects unsupported formats', async () => {
+      const p = path.join(testDataDir, 'test.exe');
+      fs.writeFileSync(p, Buffer.from([0x4D, 0x5A]));
+      await expect(handler.processFile(p, processingFn)).rejects.toThrow('Unsupported file format');
     });
   });
 
-  describe('Progress Tracking', () => {
-    test('should emit progress updates', async () => {
-      const progressUpdates = [];
-      const mockResult = {
-        content: 'test',
-        progress: 100,
-        metrics: { processingTime: 100 }
+  describe('Progress tracking', () => {
+    it('emits progress events up to 100%', async () => {
+      const p = path.join(testDataDir, 'progress.txt');
+      const content = 'Line\n'.repeat(400);
+      fs.writeFileSync(p, content);
+      const updates = [];
+      handler.on('progress', (info) => updates.push(info));
+      const result = await handler.processFile(p, processingFn);
+      expect(result.success).toBe(true);
+      expect(updates.length).toBeGreaterThan(0);
+      const last = updates[updates.length - 1];
+      expect(Math.round(last.progress)).toBe(100);
+    });
+  });
+
+  describe('Error recovery', () => {
+    it('retries on transient read errors', async () => {
+      const p = path.join(testDataDir, 'retry.txt');
+      const content = 'Retry test content';
+      fs.writeFileSync(p, content);
+      const originalReadFile = fs.promises.readFile;
+      let attempts = 0;
+      fs.promises.readFile = async (fp, enc) => {
+        attempts++;
+        if (attempts === 1) throw new Error('Temporary error');
+        return originalReadFile(fp, enc);
       };
-
-      mockLargeFileHandler.processFile.mockImplementation((filePath, options) => {
-        if (options && options.onProgress) {
-          options.onProgress(25);
-          options.onProgress(50);
-          options.onProgress(75);
-          options.onProgress(100);
-        }
-        return Promise.resolve(mockResult);
-      });
-
-      await mockLargeFileHandler.processFile(testFiles.small, {
-        onProgress: (progress) => progressUpdates.push(progress)
-      });
-
-      expect(progressUpdates).toEqual([25, 50, 75, 100]);
+      const result = await handler.processFile(p, processingFn, { maxRetries: 2, retryDelay: 50 });
+      fs.promises.readFile = originalReadFile;
+      expect(result.success).toBe(true);
+      expect(attempts).toBe(2);
+      expect(result.result).toBe(content);
     });
   });
 
-  describe('Error Recovery', () => {
-    test('should handle non-existent files', async () => {
-      const nonExistentFile = path.join(tempDir, 'does-not-exist.txt');
-
-      mockLargeFileHandler.processFile.mockRejectedValue(
-        new Error('File not found')
-      );
-
-      await expect(mockLargeFileHandler.processFile(nonExistentFile))
-        .rejects.toThrow('File not found');
-    });
-
-    test('should handle files without read permissions', async () => {
-      const restrictedFile = path.join(tempDir, 'restricted.txt');
-      await fs.writeFile(restrictedFile, 'test');
-
-      mockLargeFileHandler.processFile.mockRejectedValue(
-        new Error('Permission denied')
-      );
-
-      await expect(mockLargeFileHandler.processFile(restrictedFile))
-        .rejects.toThrow('Permission denied');
+  describe('Batch processing', () => {
+    it('processes multiple files concurrently', async () => {
+      const files = [];
+      for (let i = 0; i < 4; i++) {
+        const p = path.join(testDataDir, `parallel-${i}.txt`);
+        fs.writeFileSync(p, `Parallel ${i}`);
+        files.push(p);
+      }
+      const results = await handler.processMultipleFiles(files, processingFn, { maxConcurrency: 2 });
+      expect(results.length).toBe(4);
+      results.forEach(r => expect(r.success).toBe(true));
     });
   });
 
-  describe('Performance Metrics', () => {
-    test('should collect processing time metrics', async () => {
-      const mockResult = {
-        content: 'test',
-        metrics: {
-          processingTime: 150,
-          throughput: 6826.67,
-          memoryUsage: 2048
-        }
-      };
-
-      mockLargeFileHandler.processFile.mockResolvedValue(mockResult);
-
-      const result = await mockLargeFileHandler.processFile(testFiles.small);
-
-      expect(result.metrics.processingTime).toBeGreaterThan(0);
-      expect(result.metrics.throughput).toBeGreaterThan(0);
-    });
-
-    test('should provide overall statistics', async () => {
-      const mockStats = {
-        totalFiles: 5,
-        totalSize: 1125 * 1024,
-        totalTime: 500,
-        averageThroughput: 2304,
-        strategies: {
-          'in-memory': 2,
-          'stream': 2,
-          'chunks': 1
-        }
-      };
-
-      mockLargeFileHandler.getStatistics.mockReturnValue(mockStats);
-
-      const stats = mockLargeFileHandler.getStatistics();
-
-      expect(stats.totalFiles).toBeGreaterThan(0);
-      expect(stats.strategies).toBeDefined();
-    });
-  });
-
-  describe('Parallel Processing', () => {
-    test('should process multiple files concurrently', async () => {
-      const files = [testFiles.small, testFiles.medium, testFiles.large];
-      const mockResults = files.map((file, index) => ({
-        file,
-        content: `content-${index}`,
-        strategy: index === 0 ? 'in-memory' : index === 1 ? 'stream' : 'chunks'
-      }));
-
-      mockLargeFileHandler.processMultipleFiles.mockResolvedValue(mockResults);
-
-      const results = await mockLargeFileHandler.processMultipleFiles(files, {
-        concurrency: 2
-      });
-
-      expect(results).toHaveLength(3);
-      expect(results[0].strategy).toBe('in-memory');
-      expect(results[1].strategy).toBe('stream');
-      expect(results[2].strategy).toBe('chunks');
-    });
-
-    test('should limit concurrent file processing', async () => {
-      const files = Array.from({ length: 10 }, (_, i) => 
-        path.join(tempDir, `file-${i}.txt`)
-      );
-
-      const mockResults = files.map((file, index) => ({
-        file,
-        content: `content-${index}`,
-        concurrentSlot: index % 3
-      }));
-
-      mockLargeFileHandler.processMultipleFiles.mockResolvedValue(mockResults);
-
-      const results = await mockLargeFileHandler.processMultipleFiles(files, {
-        concurrency: 3
-      });
-
-      expect(results).toHaveLength(10);
-      // Verify that no more than 3 files were processed simultaneously
-      const concurrentSlots = new Set(results.map(r => r.concurrentSlot));
-      expect(concurrentSlots.size).toBeLessThanOrEqual(3);
-    });
-  });
-
-  describe('Resource Cleanup', () => {
-    test('should clean up resources after processing', async () => {
-      await mockLargeFileHandler.clearCache();
-      expect(mockLargeFileHandler.clearCache).toHaveBeenCalled();
-    });
-
-    test('should destroy handler instance properly', async () => {
-      await mockLargeFileHandler.destroy();
-      expect(mockLargeFileHandler.destroy).toHaveBeenCalled();
+  describe('Resource cleanup', () => {
+    it('cleans active jobs on destroy', async () => {
+      const p = path.join(testDataDir, 'cleanup.txt');
+      fs.writeFileSync(p, 'Cleanup content');
+      await handler.processFile(p, processingFn);
+      await handler.destroy();
+      expect(handler.getActiveJobs()).toHaveLength(0);
     });
   });
 });
-
-console.log('✅ Large File Handler tests completed successfully');

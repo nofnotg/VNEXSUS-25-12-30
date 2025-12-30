@@ -438,6 +438,15 @@
           showPopup('필수입력사항 [피보험자 이름/보험회사/가입일]을 입력하고 진행하세요');
         }
       });
+      autoGenerateInput.addEventListener('click', () => {
+        const enabled = autoGenerateInput.checked;
+        if (enabled) {
+          toggleRequiredIndicators(true);
+          showPopup('필수입력사항 [피보험자 이름/보험회사/가입일]을 입력하고 진행하세요');
+        } else {
+          toggleRequiredIndicators(false);
+        }
+      });
       toggleRequiredIndicators(autoGenerateInput.checked);
     }
   }
@@ -1447,6 +1456,8 @@
     const progressBar = document.getElementById('reportProgressBar');
     const progressPercentage = document.getElementById('reportProgressPercentage');
     const progressStatus = document.getElementById('reportProgressStatus');
+    const headerPill = document.querySelector('.status-pill');
+    const aiLoading = document.getElementById('ai-report-loading');
 
     if (progressSection) {
       progressSection.style.display = 'block';
@@ -1464,6 +1475,36 @@
 
     if (progressStatus && status) {
       progressStatus.textContent = status;
+    }
+
+    if (headerPill) {
+      if (percent > 0 && percent < 100) {
+        headerPill.innerHTML = '<i class="bi bi-stars me-2"></i>보고서 생성 중...';
+      } else if (percent === 100) {
+        headerPill.innerHTML = '<i class="bi bi-stars me-2"></i>AI 분석 완료';
+      }
+      if (typeof status === 'string' && status.includes('실패')) {
+        headerPill.innerHTML = '<i class="bi bi-exclamation-triangle me-2"></i>생성 실패';
+      }
+    }
+
+    if (progressBar) {
+      progressBar.classList.remove('bg-success', 'bg-warning', 'bg-danger');
+      if (typeof status === 'string' && status.includes('실패')) {
+        progressBar.classList.add('bg-danger');
+      } else if (percent > 0 && percent < 100) {
+        progressBar.classList.add('bg-warning');
+      } else if (percent === 100) {
+        progressBar.classList.add('bg-success');
+      }
+    }
+
+    if (aiLoading) {
+      if (percent > 0 && percent < 100) {
+        aiLoading.classList.remove('d-none');
+      } else {
+        aiLoading.classList.add('d-none');
+      }
     }
   }
 
@@ -1539,9 +1580,14 @@
       const ocrTexts = Object.values(resultData.results).map(item => item.mergedText || item.text || item.rawText || '');
       const extractedText = ocrTexts.join('\n\n');
 
-      // API 요청 시작
-      createSummaryBtn.disabled = true;
-      updateReportProgress(10, "요약표 생성 시작");
+    // API 요청 시작
+    createSummaryBtn.disabled = true;
+    updateReportProgress(10, "요약표 생성 시작");
+    const reportTabBtnInit = document.getElementById('report-tab');
+    if (reportTabBtnInit) {
+      const reportTabInit = new bootstrap.Tab(reportTabBtnInit);
+      reportTabInit.show();
+    }
 
       console.log('AI 요약표 생성 요청 시작');
       console.log('API_URL:', API_URL);
@@ -1559,14 +1605,24 @@
           text: extractedText,
           patientInfo: {
             name: patientName,
-            dob: patientInfo.memo, // 메모 필드에 있는 생년월일 정보 활용
+            dob: patientInfo.memo,
             enrollmentDate: enrollmentDate,
+            insuranceJoinDate: enrollmentDate,
+            insuranceCompany: (insuranceData[0]?.company || ''),
             insurance: insuranceData.map(ins => ({
               company: ins.company,
               product: ins.product,
               start_date: ins.enrollmentDate,
               period: ins.period || 'all'
             }))
+          },
+          options: {
+            useNineItem: true,
+            template: 'standard',
+            enableTranslationEnhancement: true,
+            enableTermProcessing: true,
+            timelineLabelStyle: 'bracket',
+            timelineSummaryLimit: 2
           }
         })
       });

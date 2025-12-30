@@ -86,6 +86,56 @@ class EnhancedReportTemplateEngine {
     };
   }
 
+  sanitizeText(s) {
+    const src = String(s ?? '');
+    const filtered = src
+      .replace(/KCD-10\s*코드\s*확인\s*필요/gi, '')
+      .replace(/KCD-10\s*경고[^\n]*/gi, '')
+      .replace(/ICD-10\s*코드\s*확인\s*필요[^\n]*/gi, '')
+      .split('\n')
+      .filter(line => !/소득공제|영수증|세부내역서|발급을\s*금합니다|이학요법|건강증진|의약품\s*구입비용/i.test(line))
+      .map(l => l.replace(/\s{2,}/g, ' ').trim())
+      .filter(l => l.length > 0)
+      .join('\n')
+      .trim();
+    return filtered;
+  }
+
+  normalizeDateKR(d) {
+    const s = String(d || '').trim();
+    if (!s) return '';
+    const m1 = s.match(/^(\d{4})[.\-\/\s]+(\d{1,2})[.\-\/\s]+(\d{1,2})/);
+    if (m1) {
+      const yy = m1[1];
+      const mm = m1[2].padStart(2, '0');
+      const dd = m1[3].padStart(2, '0');
+      return `${yy}.${mm}.${dd}`;
+    }
+    const m2 = s.match(/^(\d{4})(\d{2})(\d{2})$/);
+    if (m2) {
+      const yy = m2[1];
+      const mm = m2[2];
+      const dd = m2[3];
+      return `${yy}.${mm}.${dd}`;
+    }
+    return s;
+  }
+
+  dedupeTestResults(tests) {
+    if (!Array.isArray(tests)) return [];
+    const seen = new Set();
+    const out = [];
+    for (const t of tests) {
+      const name = String(t?.name || '').toLowerCase().replace(/\s+/g, ' ').trim();
+      const date = this.normalizeDateKR(t?.date || '');
+      const key = `${name}|${date}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(t);
+    }
+    return out;
+  }
+
   /**
    * 향상된 보고서 생성
    * @param {Object} normalizedData 정규화된 의료 데이터
@@ -179,22 +229,22 @@ class EnhancedReportTemplateEngine {
         // 진단명 처리
         if (record.diagnosis) {
           const result = this.medicalTermProcessor.processComprehensive(record.diagnosis);
-          processedRecord.diagnosis = result.processedText;
+          processedRecord.diagnosis = this.sanitizeText(result.processedText);
         }
 
         // 치료 내용 처리
         if (record.treatment) {
           const result = this.medicalTermProcessor.processComprehensive(record.treatment);
-          processedRecord.treatment = result.processedText;
+          processedRecord.treatment = this.sanitizeText(result.processedText);
         }
 
         // 검사 결과 처리
         if (record.testResults) {
-          processedRecord.testResults = record.testResults.map(test => {
+          processedRecord.testResults = this.dedupeTestResults(record.testResults).map(test => {
             const processedTest = { ...test };
             if (test.result) {
               const result = this.medicalTermProcessor.processComprehensive(test.result);
-              processedTest.result = result.processedText;
+              processedTest.result = this.sanitizeText(result.processedText);
             }
             return processedTest;
           });
@@ -328,9 +378,8 @@ class EnhancedReportTemplateEngine {
     return testResults.map(test => {
       const enhancedTest = { ...test };
 
-      // 필수 검사 여부 확인
-      const isRequiredTest = rule.requiredTests.some(required => 
-        test.name?.toLowerCase().includes(required.toLowerCase())
+      const isRequiredTest = rule.requiredTests.some(required =>
+        String(test.name || '').toLowerCase().includes(required.toLowerCase())
       );
 
       if (isRequiredTest) {
@@ -338,13 +387,29 @@ class EnhancedReportTemplateEngine {
         enhancedTest.diseaseRelevance = rule.disease;
       }
 
-      // 추가 정보 필요 여부 확인
-      enhancedTest.additionalInfoNeeded = rule.additionalInfo.filter(info => 
-        !test.result?.toLowerCase().includes(info.toLowerCase())
+      enhancedTest.additionalInfoNeeded = rule.additionalInfo.filter(info =>
+        !String(test.result || '').toLowerCase().includes(info.toLowerCase())
       );
 
       return enhancedTest;
     });
+  }
+
+  dedupeMultilineText(s) {
+    const src = String(s ?? '');
+    if (!src.trim()) return '';
+    const seen = new Set();
+    const lines = src.split('\n')
+      .map(l => this.sanitizeText(l))
+      .map(l => l.replace(/\s+/g, ' ').trim())
+      .filter(l => l.length > 0)
+      .filter(l => {
+        const key = l.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    return lines.join('\n');
   }
 
   /**
@@ -376,14 +441,14 @@ class EnhancedReportTemplateEngine {
     if (data.medicalRecords && data.medicalRecords.length > 0) {
       const primaryRecord = data.medicalRecords[0];
 
-      medicalHistory.visitDate = primaryRecord.date;
+      medicalHistory.visitDate = this.normalizeDateKR(primaryRecord.date);
       medicalHistory.visitReason = primaryRecord.reason || '진료';
       medicalHistory.diagnosis = primaryRecord.diagnosis;
       medicalHistory.testResults = this.formatTestResults(primaryRecord.testResults, enhancedResults);
-      medicalHistory.treatment = primaryRecord.treatment;
+      medicalHistory.treatment = this.dedupeMultilineText(primaryRecord.treatment);
       medicalHistory.treatmentPeriod = this.calculateTreatmentPeriod(data.medicalRecords);
       medicalHistory.pastHistory = this.extractPastHistory(data.medicalRecords);
-      medicalHistory.doctorOpinion = primaryRecord.doctorOpinion || '';
+      medicalHistory.doctorOpinion = this.dedupeMultilineText(primaryRecord.doctorOpinion || '');
 
       // 암의 경우 수술 후 조직검사 결과 추가
       if (this.isCancerCase(primaryRecord.diagnosis)) {
@@ -403,11 +468,14 @@ class EnhancedReportTemplateEngine {
   formatTestResults(testResults, enhancedResults) {
     if (!testResults) return '';
 
-    return testResults.map(test => {
+    const list = this.dedupeTestResults(testResults);
+    return list.map(test => {
       let formatted = `${test.name}`;
-      if (test.date) formatted += `, ${test.date}`;
-      if (test.reportDate) formatted += ` (보고일: ${test.reportDate})`;
-      if (test.result) formatted += `, ${test.result}`;
+      const d = this.normalizeDateKR(test.date);
+      const rd = this.normalizeDateKR(test.reportDate);
+      if (d) formatted += `, ${d}`;
+      if (rd) formatted += ` (보고일: ${rd})`;
+      if (test.result) formatted += `, ${this.sanitizeText(test.result)}`;
       
       return formatted;
     }).join('\n');
@@ -429,9 +497,11 @@ class EnhancedReportTemplateEngine {
 
     return surgicalTests.map(test => {
       let formatted = `${test.name}`;
-      if (test.date) formatted += `, 검사일: ${test.date}`;
-      if (test.reportDate) formatted += `, 보고일: ${test.reportDate}`;
-      if (test.pathologyFindings) formatted += `, 조직검사 소견: ${test.pathologyFindings}`;
+      const d = this.normalizeDateKR(test.date);
+      const rd = this.normalizeDateKR(test.reportDate);
+      if (d) formatted += `, 검사일: ${d}`;
+      if (rd) formatted += `, 보고일: ${rd}`;
+      if (test.pathologyFindings) formatted += `, 조직검사 소견: ${this.sanitizeText(test.pathologyFindings)}`;
       if (test.tnmStage) formatted += `, 병기: ${test.tnmStage}`;
       
       return formatted;
@@ -771,11 +841,7 @@ class EnhancedReportTemplateEngine {
       .join('');
 
     // 날짜 포맷(YYYY-MM-DD → YYYY.MM.DD)
-    const formatDateKR = (d) => {
-      if (!d) return '';
-      const m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/);
-      return m ? `${m[1]}.${m[2]}.${m[3]}` : String(d);
-    };
+    const formatDateKR = (d) => this.normalizeDateKR(d);
 
     // 의료명 한글/영문 병기 보장
     const ensureBilingual = (text) => {
@@ -851,8 +917,33 @@ class EnhancedReportTemplateEngine {
       const enhanced = disclosureReview?.enhancedAnalysis || {};
       const parts = [];
       if (basic?.summary) parts.push(`<p>${esc(basic.summary)}</p>`);
-      if (enhanced?.riskAssessment) parts.push(`<p><strong>Risk Assessment:</strong> ${esc(enhanced.riskAssessment)}</p>`);
-      if (enhanced?.recommendations) parts.push(`<p><strong>Recommendations:</strong> ${esc(enhanced.recommendations.join ? enhanced.recommendations.join(', ') : String(enhanced.recommendations))}</p>`);
+      if (enhanced?.riskAssessment) {
+        const ra = enhanced.riskAssessment;
+        const overall = String(ra?.overallRisk || '').toUpperCase();
+        const three = ra?.summary?.threeMonthsCount ?? 0;
+        const two = ra?.summary?.twoYearsCount ?? 0;
+        const five = ra?.summary?.fiveYearsCount ?? 0;
+        const critical = ra?.summary?.criticalFindings ?? 0;
+        const text = [
+          `전체 위험도: ${overall}`,
+          `3개월: ${three}건`,
+          `2년: ${two}건`,
+          `5년: ${five}건`,
+          `중대 발견: ${critical}건`
+        ].join(' · ');
+        parts.push(`<p><strong>Risk Assessment:</strong> ${esc(text)}</p>`);
+      }
+      if (enhanced?.recommendations) {
+        const recs = Array.isArray(enhanced.recommendations)
+          ? enhanced.recommendations.map(r => {
+              const pri = String(r.priority || '').toUpperCase();
+              const msg = r.message || '';
+              const act = r.action ? ` — ${r.action}` : '';
+              return `[${pri}] ${msg}${act}`;
+            }).join(', ')
+          : String(enhanced.recommendations);
+        parts.push(`<p><strong>Recommendations:</strong> ${esc(recs)}</p>`);
+      }
       if (enhanced?.detailedReport) parts.push(`<pre class="mono">${esc(enhanced.detailedReport)}</pre>`);
       return parts.length ? `<section><h2>고지의무 검토</h2>${parts.join('\n')}</section>` : '';
     };

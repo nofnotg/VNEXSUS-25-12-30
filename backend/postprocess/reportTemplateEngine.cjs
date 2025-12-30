@@ -251,7 +251,102 @@ class ReportTemplateEngine {
    * @private
    */
   _buildTextReport(templateData, options) {
+    const style = options && options.style ? String(options.style) : 'sample';
+    const includeClaimAmounts = options && options.includeClaimAmounts === true;
     let report = [];
+    if (style === 'sample') {
+      const fmtDate = (d) => this._formatDate(d, options.dateFormat);
+      report.push(`피보험자(#환자)이름: ${templateData.patientInfo.name ?? ''}`);
+      report.push(`생년월일: ${fmtDate(templateData.patientInfo.birthDate) ?? ''}`);
+      report.push('');
+      if (templateData.insuranceConditions.length > 0) {
+        templateData.insuranceConditions.forEach((condition, index) => {
+          report.push(`${index + 1}.조건`);
+          report.push(`가입보험사: ${condition.company}`);
+          report.push(`가입일(#보장개시일 등): ${condition.joinDate}`);
+          report.push(`상품명: ${condition.productName}`);
+          report.push(`청구사항(#특약사항, 담보사항 등): ${condition.coverage}`);
+          report.push('');
+        });
+      }
+      if (templateData.insuranceHistory.length > 0) {
+        templateData.insuranceHistory.forEach((history) => {
+          report.push(`[보험 가입 ${history.period}]`);
+          report.push(`${history.date}`);
+          report.push(`${history.company}`);
+          report.push(`가입일: ${history.joinDate}`);
+          report.push('');
+        });
+      }
+      if (templateData.medicalRecords.length > 0) {
+        templateData.medicalRecords.forEach((record) => {
+          report.push('[진료 기록]');
+          report.push(`${record.date}`);
+          report.push(`${record.hospital}`);
+          report.push(`내원일: ${record.visitDate}`);
+          report.push(`내원경위: ${record.reason}`);
+          report.push(`진단명: ${record.diagnosis}${record.icdCode ? ` (${record.icdCode})` : ''}`);
+          if (record.prescription && record.prescription !== '처방 없음') {
+            report.push(`처방내용: ${record.prescription}`);
+          }
+          report.push('기타:');
+          if (record.notes) {
+            String(record.notes)
+              .split(/\r?\n/)
+              .filter((l) => l.trim().length > 0)
+              .forEach((l) => report.push(`- ${l.trim()}`));
+          }
+          report.push('');
+        });
+      }
+      if (templateData.hospitalizationRecords.length > 0) {
+        templateData.hospitalizationRecords.forEach((record) => {
+          report.push('[입원 기록]');
+          report.push(`${record.date}`);
+          report.push(`${record.hospital}`);
+          report.push(`내원일: ${record.visitDate}`);
+          report.push(`내원경위: ${record.reason}`);
+          report.push(`진단명: ${record.diagnosis}`);
+          report.push(`입원기간: ${record.admissionPeriod}${record.duration ? ` (${record.duration})` : ''}`);
+          if (record.surgeryInfo) {
+            const s = record.surgeryInfo;
+            report.push(`수술내용: ${s.name}${s.code ? ` (${s.code})` : ''}${s.date ? `, ${s.date}` : ''}`);
+          }
+          report.push('기타:');
+          if (record.notes) {
+            String(record.notes)
+              .split(/\r?\n/)
+              .filter((l) => l.trim().length > 0)
+              .forEach((l) => report.push(`- ${l.trim()}`));
+          }
+          report.push('');
+        });
+      }
+      if (templateData.insuranceClaims.length > 0) {
+        templateData.insuranceClaims.forEach((claim) => {
+          report.push('[보험 청구]');
+          report.push(`${claim.date}`);
+          report.push(`${claim.company}`);
+          report.push(`청구일: ${claim.claimDate}`);
+          report.push(`진단명: ${claim.diagnosis}`);
+          if (claim.paymentDate) {
+            report.push(`지급일: ${claim.paymentDate}`);
+          }
+          if (includeClaimAmounts && claim.amount) {
+            report.push(`지급금액: ${claim.amount}`);
+          }
+          report.push('기타:');
+          if (claim.notes) {
+            String(claim.notes)
+              .split(/\r?\n/)
+              .filter((l) => l.trim().length > 0)
+              .forEach((l) => report.push(`- ${l.trim()}`));
+          }
+          report.push('');
+        });
+      }
+      return report.join('\n');
+    }
     
     // 헤더
     report.push('='.repeat(80));
@@ -373,7 +468,7 @@ class ReportTemplateEngine {
         if (claim.paymentDate) {
           report.push(`지급일: ${claim.paymentDate}`);
         }
-        if (claim.amount) {
+        if (includeClaimAmounts && claim.amount) {
           report.push(`지급금액: ${claim.amount}`);
         }
         report.push(`상태: ${claim.status}`);

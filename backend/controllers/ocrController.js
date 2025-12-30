@@ -7,10 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 import * as pdfAnalyzer from '../services/pdfAnalyzer.js';
 // import * as textractService from '../services/textractService.js';
 import * as visionService from '../services/visionService.js';
+import * as gcsService from '../services/gcsService.js';
 import * as ocrMerger from '../services/ocrMerger.js';
 import * as fileHelper from '../utils/fileHelper.js';
 import { logService } from '../utils/logger.js';
 import pdfProcessor from '../utils/pdfProcessor.js';
+import coreEngineService from '../services/coreEngineService.js';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
@@ -138,6 +140,56 @@ export const uploadPdfs = async (req, res) => {
   }
 };
 
+export const getInvestigatorView = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    if (!jobId || !jobStore[jobId]) {
+      return res.status(404).json({
+        error: '존재하지 않는 작업 ID입니다.',
+        status: 'error',
+        code: 'JOB_NOT_FOUND'
+      });
+    }
+    const job = jobStore[jobId];
+    if (job.status !== 'completed') {
+      return res.status(202).json({
+        message: '처리 중입니다. 나중에 다시 시도해주세요.',
+        status: job.status,
+        progress: `${job.filesProcessed}/${job.filesTotal}`,
+        elapsedTime: getElapsedTime(job.startTime)
+      });
+    }
+    const texts = Object.values(job.results || {})
+      .map(r => r.mergedText || '')
+      .filter(t => t && t.length > 0);
+    const combinedText = texts.join('\n\n');
+    const coreEngine = typeof coreEngineService === 'function' ? new coreEngineService() : coreEngineService;
+    const analyzeResult = await coreEngine.analyze({
+      text: combinedText,
+      options: { jobId }
+    });
+    const view = analyzeResult?.skeletonJson?.investigatorView;
+    if (!view) {
+      return res.status(200).json({
+        success: true,
+        data: null
+      });
+    }
+    return res.json({
+      success: true,
+      data: view
+    });
+  } catch (error) {
+    logService.error(`조사자 뷰 생성 중 오류: ${error.message}`);
+    return res.status(500).json({
+      error: '조사자 뷰 생성 중 오류가 발생했습니다.',
+      status: 'error',
+      code: 'INVESTIGATOR_VIEW_ERROR',
+      message: error.message
+    });
+  }
+};
+
 /**
  * OCR 작업 상태 확인 컨트롤러
  * @param {Object} req - Express 요청 객체
@@ -248,17 +300,25 @@ export const getOcrStatus = async (req, res) => {
     const visionStatus = await visionService.getServiceStatus();
     // const textractStatus = await textractService.getServiceStatus();
     const textractStatus = { success: false, message: 'Textract 비활성화' };
+    const localEnabled = process.env.ENABLE_LOCAL_OCR !== 'false';
 
     res.json({
       services: {
         vision: visionStatus,
-        textract: textractStatus
+        textract: textractStatus,
+        local: {
+          service: 'LOCAL_TESSERACT',
+          available: localEnabled,
+          enabled: localEnabled,
+          lang: process.env.LOCAL_OCR_LANG || 'kor+eng'
+        }
       },
       activeServices: [
         ...(visionStatus.available ? ['vision'] : []),
-        ...(textractStatus.available ? ['textract'] : [])
+        ...(textractStatus.available ? ['textract'] : []),
+        ...(localEnabled ? ['local_tesseract'] : [])
       ],
-      canProcessFiles: visionStatus.available || textractStatus.available
+      canProcessFiles: visionStatus.available || textractStatus.available || localEnabled
     });
   } catch (error) {
     logService.error(`OCR 서비스 상태 확인 중 오류: ${error.message}`);
@@ -280,9 +340,10 @@ async function processFiles(jobId, files) {
     logService.info(`파일 처리 시작 (총 ${files.length}개 파일)`, { jobId });
 
     // OCR 설정 로깅
-    const useTextract = process.env.USE_TEXTRACT === 'true';
-    const useVision = process.env.USE_VISION !== 'false';
-    const enableVisionOcr = process.env.ENABLE_VISION_OCR === 'true';
+    const offlineMode = process.env.OFFLINE_MODE === 'true';
+    const useTextract = !offlineMode && process.env.USE_TEXTRACT === 'true';
+    const useVision = !offlineMode && process.env.USE_VISION !== 'false';
+    const enableVisionOcr = !offlineMode && process.env.ENABLE_VISION_OCR === 'true';
 
     // 작업 데이터 초기화
     const jobData = jobStore[jobId];
@@ -334,21 +395,44 @@ async function processFiles(jobId, files) {
             throw new Error(processorResult.error || 'PDF 처리에 실패했습니다.');
           }
         } else if (file.mimetype.startsWith('image/')) {
-          // 이미지 파일 처리 (Vision API 사용)
           try {
-            const ocrResult = await visionService.extractTextFromImage(file.buffer);
-
-            processorResult = {
-              success: true,
-              text: ocrResult.text || '',
-              textLength: ocrResult.text ? ocrResult.text.length : 0,
-              pageCount: 1,
-              isScannedPdf: false,
-              textSource: 'vision_ocr',
-              ocrSource: 'google_vision',
-              steps: ['image_upload', 'vision_ocr'],
-              confidence: ocrResult.confidence || 0
-            };
+            if (useVision && enableVisionOcr) {
+              const ocrResult = await visionService.extractTextFromImage(file.buffer);
+              processorResult = {
+                success: true,
+                text: ocrResult.text || '',
+                textLength: ocrResult.text ? ocrResult.text.length : 0,
+                pageCount: 1,
+                isScannedPdf: false,
+                textSource: 'vision_ocr',
+                ocrSource: 'google_vision',
+                steps: ['image_upload', 'vision_ocr'],
+                confidence: ocrResult.confidence || 0
+              };
+            } else {
+              const { createWorker } = await import('tesseract.js');
+              const worker = await createWorker();
+              try {
+                const langRaw = typeof process.env.LOCAL_OCR_LANG === 'string' && process.env.LOCAL_OCR_LANG.trim().length > 0 ? process.env.LOCAL_OCR_LANG.trim() : 'kor+eng';
+                await worker.loadLanguage(langRaw);
+                await worker.initialize(langRaw);
+                const rec = await worker.recognize(file.buffer);
+                const text = (typeof rec?.data?.text === 'string' ? rec.data.text : '').trim();
+                processorResult = {
+                  success: true,
+                  text,
+                  textLength: text.length,
+                  pageCount: 1,
+                  isScannedPdf: false,
+                  textSource: 'local_ocr',
+                  ocrSource: 'local_tesseract_image',
+                  steps: ['image_upload', 'local_tesseract_ocr'],
+                  confidence: typeof rec?.data?.confidence === 'number' ? rec.data.confidence : 0
+                };
+              } finally {
+                await worker.terminate();
+              }
+            }
           } catch (error) {
             throw new Error(`이미지 OCR 처리에 실패했습니다: ${error.message}`);
           }
@@ -390,6 +474,8 @@ async function processFiles(jobId, files) {
           ocrSource: processorResult.ocrSource,
           mergedText: processorResult.text || '',
           textLength: processorResult.textLength || 0,
+          ocrRawFiles: processorResult.ocrRawFiles || [],
+          ocrRawPrefix: processorResult.ocrRawPrefix || null,
           processingTime: `${fileProcessingTime.toFixed(2)}초`,
           processedAt: new Date().toISOString()
         };
@@ -509,9 +595,86 @@ function getElapsedTime(startTime, endTime) {
   }
 }
 
+export const getRawFiles = (req, res) => {
+  try {
+    const { jobId } = req.params;
+    if (!jobId || !jobStore[jobId]) {
+      return res.status(404).json({
+        error: '존재하지 않는 작업 ID입니다.',
+        status: 'error',
+        code: 'JOB_NOT_FOUND'
+      });
+    }
+    const job = jobStore[jobId];
+    const files = Object.entries(job.results || {}).map(([fileId, fileData]) => ({
+      fileId,
+      filename: fileData.filename,
+      rawFiles: fileData.ocrRawFiles || [],
+      rawPrefix: fileData.ocrRawPrefix || null
+    }));
+    res.json({ jobId, files });
+  } catch (error) {
+    res.status(500).json({
+      error: '원시 파일 목록 조회 중 오류가 발생했습니다.',
+      status: 'error',
+      code: 'RAW_LIST_ERROR',
+      message: error.message
+    });
+  }
+};
+
+export const getRawContent = async (req, res) => {
+  try {
+    const filePath = req.query.path;
+    if (!filePath) {
+      return res.status(400).json({
+        error: 'path 쿼리 파라미터가 필요합니다.',
+        status: 'error',
+        code: 'MISSING_PATH'
+      });
+    }
+    const json = await gcsService.downloadAndParseJson(filePath);
+    res.json(json);
+  } catch (error) {
+    res.status(500).json({
+      error: '원시 파일 조회 중 오류가 발생했습니다.',
+      status: 'error',
+      code: 'RAW_FETCH_ERROR',
+      message: error.message
+    });
+  }
+};
+
+export const getRawBlocks = async (req, res) => {
+  try {
+    const filePath = req.query.path;
+    if (!filePath) {
+      return res.status(400).json({
+        error: 'path 쿼리 파라미터가 필요합니다.',
+        status: 'error',
+        code: 'MISSING_PATH'
+      });
+    }
+    const json = await gcsService.downloadAndParseJson(filePath);
+    const blocks = visionService.extractBlocksFromJson(json);
+    res.json({ count: blocks.length, blocks });
+  } catch (error) {
+    res.status(500).json({
+      error: '블록 조회 중 오류가 발생했습니다.',
+      status: 'error',
+      code: 'BLOCKS_FETCH_ERROR',
+      message: error.message
+    });
+  }
+};
+
 export default {
   uploadPdfs,
   getStatus,
   getResult,
-  getOcrStatus
+  getOcrStatus,
+  getInvestigatorView,
+  getRawFiles,
+  getRawContent,
+  getRawBlocks
 };

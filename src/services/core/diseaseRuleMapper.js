@@ -17,7 +17,7 @@ function inferGroup(text) {
 function pickExam(text) {
   const t = (text || "").toLowerCase();
   const exams = [
-    "chest ct","cardiac mri","coronary ct-angio","mra","angiography","brain ct","cta","mri","biopsy","ekg","holter","bone scan","pet-ct","trus"
+    "chest ct","cardiac mri","coronary ct-angio","mra","angiography","brain ct","cta","mri","trus","biopsy","ekg","holter","bone scan","pet-ct"
   ];
   const hit = exams.find(e => t.includes(e));
   return hit || "unspecified";
@@ -35,7 +35,10 @@ export function mapDiseaseRules(records = []) {
 
     if (grp === "협심증") normalized.metrics = { stenosis: /(\d{2,3})\s*%/.exec(result)?.[1], timi: /timi\s*([0-3])/i.exec(result)?.[1] };
     if (grp === "AMI") normalized.metrics = { troponin: /troponin[^\d]*([\d.]+)/i.exec(result)?.[1], ckmb: /ck-?mb[^\d]*([\d.]+)/i.exec(result)?.[1], ekg_st: /(st\s*(elevation|depression))/i.test(result) };
-    if (grp === "부정맥") normalized.metrics = { rhythm: /(sinus|af|vt|svt|avblock)/i.exec(result)?.[1], holter_freq: /(\d+)\s*episodes?/i.exec(result)?.[1] };
+    if (grp === "부정맥") {
+      const rhythm = /(sinus|af|vt|svt|avblock)/i.exec(result)?.[1];
+      normalized.metrics = { rhythm: typeof rhythm === "string" ? rhythm.toLowerCase() : rhythm, holter_freq: /(\d+)\s*episodes?/i.exec(result)?.[1] };
+    }
     if (grp === "뇌혈관") normalized.site = /(lt|rt)?\s*(mca|ica|aca|pca)/i.exec(result)?.[0];
     if (grp === "암") normalized.metrics = { tnm: /(t\d+[a-b]?n\d+[a-b]?m[0-1x])\b/i.exec(result)?.[1] };
 

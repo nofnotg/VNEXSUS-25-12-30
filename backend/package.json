@@ -7,10 +7,10 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:stream": "jest --testPathPattern=\"streamProcessingOptimizer|largeFileHandler|fileProcessingService\"",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
+    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch --runInBand",
+    "test:coverage": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage --runInBand",
+    "test:stream": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --testPathPattern=\"streamProcessingOptimizer|largeFileHandler|fileProcessingService\" --runInBand",
     "test:vision": "node test-vision.js",
     "check:env": "node -e \"console.log('Backend Environment:', {NODE_ENV: process.env.NODE_ENV, PORT: process.env.PORT, VISION_ENABLED: process.env.ENABLE_VISION_OCR})\""
   },
@@ -31,6 +31,7 @@
     "pdf-parse": "^1.1.1",
     "pdf2pic": "^3.2.0",
     "sharp": "^0.34.3",
+    "tesseract.js": "^6.0.0",
     "uuid": "^11.1.0",
     "zod": "^3.25.76"
   },

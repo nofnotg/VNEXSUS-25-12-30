@@ -33,6 +33,25 @@ describe('medicalText.normalizeHospital', () => {
     expect(normalizeHospitalName('한림강남성심병원')).toBe('강남성심병원');
     expect(normalizeHospitalName('가톨릭서울성모병원')).toBe('서울성모병원');
   });
+
+  test('boramae, ilsan, gil, ncc canonicalization and stopwords', () => {
+    const b1 = extractHospitalNormalized('서울특별시 보라매병원 외래');
+    const b2 = extractHospitalNormalized('서울대학교병원운영 서울특별시보라매병원 내원');
+    const i1 = extractHospitalNormalized('인제대학교 일산백병원 방문');
+    const c1 = extractHospitalNormalized('차의과학대학교 일산차병원 내원');
+    const g1 = extractHospitalNormalized('가천의대 길병원 외래');
+    const n1 = extractHospitalNormalized('국립암센터 진료');
+    const sw1 = extractHospitalNormalized('사고경위 병원');
+    const sw2 = extractHospitalNormalized('일자사고경위병원');
+    expect(b1).toBe('보라매병원');
+    expect(b2).toBe('보라매병원');
+    expect(i1).toBe('일산백병원');
+    expect(c1).toBe('일산차병원');
+    expect(g1).toBe('가천대길병원');
+    expect(n1).toBe('국립암센터');
+    expect(sw1).toBeUndefined();
+    expect(sw2).toBeUndefined();
+  });
 });
 
 describe('medicalText.normalizeDiagnosisLine', () => {

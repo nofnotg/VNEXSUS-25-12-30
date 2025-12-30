@@ -347,10 +347,12 @@
                   </select>
                 </div>
                 <input type="text" class="form-control form-control-sm insurance-product flex-grow-1" placeholder="상품명">
-                <div class="d-flex align-items-center gap-1" style="flex-shrink: 0;">
-                  <label class="form-label mb-0 small text-muted" id="enrollmentLabel" style="white-space: nowrap;">가입일:</label>
-                  <input type="text" class="form-control form-control-sm insurance-date" style="width: 110px;"
+                <div class="d-flex align-items-center gap-2" style="flex-shrink: 0;">
+                  <label class="form-label mb-0 text-muted" id="enrollmentLabel" style="white-space: nowrap; font-weight: 700; font-size: 0.95rem;">가입일:</label>
+                  <input type="text" class="form-control form-control-sm insurance-date" style="width: 120px; font-weight: 700; font-size: 0.95rem; background: #fffbe6; border: 1px solid #f0ad4e;"
                     placeholder="20250101" inputmode="numeric" maxlength="10">
+                  <span class="rounded-circle d-inline-flex align-items-center justify-content-center" title="가입일 기준 3개월 내 이벤트" style="width: 26px; height: 26px; background: #dc3545; color: #fff; font-weight: 700; font-size: 0.75rem;">3m</span>
+                  <span class="rounded-circle d-inline-flex align-items-center justify-content-center" title="가입일 기준 5년 내 이벤트" style="width: 26px; height: 26px; background: #fd7e14; color: #fff; font-weight: 700; font-size: 0.75rem;">5y</span>
                 </div>
                 <select class="form-select form-select-sm insurance-period" style="width: 80px; flex-shrink: 0;">
                   <option value="all" selected>전체</option>
@@ -457,7 +459,7 @@
               <p class="mt-2 text-muted">패턴 분석 및 보고서 생성 중...</p>
             </div>
 
-            <div id="ai-report-content" class="report-content mt-4"></div>
+            <div id="ai-report-content" class="report-content mt-4" style="max-width: 900px; margin: 0 auto; font-size: 1.06rem; line-height: 1.7; word-break: break-word; white-space: pre-line;"></div>
 
             <!-- Hidden Preview for Logic -->
             <div class="d-none">

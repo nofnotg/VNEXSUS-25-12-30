@@ -1,5 +1,5 @@
 // Jest 테스트 환경 설정
-// Note: Avoid ESM imports here; rely on global jest provided by Jest.
+import { jest } from '@jest/globals';
 
 // 환경 변수 설정
 process.env.NODE_ENV = 'test';

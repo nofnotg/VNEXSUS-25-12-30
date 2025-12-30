@@ -41,6 +41,8 @@ const GenerateRequestSchema = z.object({
       enableTranslationEnhancement: z.boolean().optional(),
       enableTermProcessing: z.boolean().optional(),
       skipLLM: z.boolean().optional(),
+      timelineSummaryLimit: z.number().optional(),
+      timelineLabelStyle: z.enum(['bracket', 'emoji', 'none']).optional(),
     })
     .optional(),
 });
@@ -143,7 +145,11 @@ router.post('/generate', async (req, res) => {
     if (options.useNineItem) {
       try {
         const { default: NineItemReportGenerator } = await import('../services/nineItemReportGenerator.js');
-        const generator = new NineItemReportGenerator();
+        const generator = new NineItemReportGenerator({
+          timelineSummaryLimit: options.timelineSummaryLimit,
+          timelineLabelStyle: options.timelineLabelStyle,
+          useEnhancedExtractors: true
+        });
         const geneSegments = (extractedText || '')
           .split(/\r?\n\r?\n|\r?\n/)
           .map((s) => ({ type: 'text_segment', content: s.trim(), confidence: 0.5 }));

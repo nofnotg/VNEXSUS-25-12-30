@@ -1,0 +1,102 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8" />
+    <title>VNEXSUS A-B-C Execution Plan (2025-12-26T05-52-50-399Z)</title>
+    <style>
+    body{font-family:system-ui,Segoe UI,Arial;padding:20px;color:#222;background:#fafafa}
+    code{background:#f2f2f2;padding:2px 4px;border-radius:4px}
+    table{border-collapse:collapse;width:100%}
+    th,td{border:1px solid #ddd;padding:8px;vertical-align:top}
+    th{background:#f4f4f4}
+    .kpi{display:flex;gap:12px;flex-wrap:wrap}
+    .kpi>div{border:1px solid #eee;border-radius:10px;padding:10px 12px;background:#fff;min-width:220px}
+    .ok{color:#0a7}
+    .bad{color:#c33}
+    .muted{color:#666}
+    .card{border:1px solid #eee;border-radius:10px;padding:12px;background:#fff;margin-top:12px}
+    .bar{height:10px;border-radius:6px;background:#eee;overflow:hidden}
+    .bar>span{display:block;height:100%;background:#2563eb}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    </style></head><body>
+    <h1>VNEXSUS A-B-C Execution Plan</h1>
+    <div class="kpi">
+      <div><div class="muted">생성 시각</div><div>2025-12-26T05-52-50-399Z</div></div>
+      <div><div class="muted">입력 디렉토리</div><div><code>c:\VNEXSUS_12-07\sample_pdf</code></div></div>
+      <div><div class="muted">출력 리포트</div><div><code>C:\VNEXSUS_12-07\backend\reports\VNEXSUS_Report\2025-12-26T05-52-50-399Z</code></div></div>
+      <div><div class="muted">총 케이스</div><div>36</div></div>
+      <div><div class="muted">성공 케이스</div><div>4</div></div>
+      <div><div class="muted">병렬 처리</div><div>4</div></div>
+    </div>
+
+    <h2>A. 업로드 → OCR → 텍스트 추출</h2>
+    <ul>
+      <li>Vision OCR: <span class="bad">비활성</span></li>
+      <li>Local OCR 기본 최대 페이지: 10</li>
+      <li>OCR 소스 분포: none:92</li>
+    </ul>
+
+    <h2>B. 후처리 → VNEXSUS 보고서 생성</h2>
+    <ul>
+      <li>후처리 평균(ms): 440</li>
+      <li>후처리 P95(ms): 910</li>
+      <li>실패/경고 원인 Top: merged_too_short:32 · merged_too_short(effective=0<32):32 · postprocess_skipped_empty_text:32 · vnexsus_missing:32 · ok:4</li>
+    </ul>
+
+    <h2>C. 검증 → 수치화 리포팅</h2>
+    <ul>
+      <li>동일 케이스 검증(Report ⊆ VNEXSUS): 0쌍 · pass 0.0%</li>
+      <li>베이스라인 46개 매칭: 0쌍 · pass 0.0%</li>
+      <li>유효성 검사 이슈: 64건</li>
+    </ul>
+
+    <div class="card">
+      <div class="muted">앱 가능성 종합 평가</div>
+      <div>가능성: <strong>보통</strong> · 점수 47.2%</div>
+      <div class="grid">
+        <div class="card">
+          <div class="muted">정확도(평균)</div>
+          <div><div class="bar"><span style="width:0.0%"></span></div></div>
+          <div>0.0%</div>
+        </div>
+        <div class="card">
+          <div class="muted">커버리지(평균)</div>
+          <div><div class="bar"><span style="width:90.6%"></span></div></div>
+          <div>90.6%</div>
+        </div>
+        <div class="card">
+          <div class="muted">후처리 성능(정규화)</div>
+          <div><div class="bar"><span style="width:100.0%"></span></div></div>
+          <div>100.0%</div>
+        </div>
+        <div class="card">
+          <div class="muted">베이스라인 통과율</div>
+          <div><div class="bar"><span style="width:0.0%"></span></div></div>
+          <div>0.0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="muted">인사이트</div>
+      <ul>
+        <li>입력 커버리지 개선이 정확도와 통과율을 동시 향상</li>
+        <li>OCR 페이지 샘플링·워커 재사용으로 처리시간 단축 기대</li>
+        <li>병원명·날짜 정규화 강화를 통한 라벨 매칭 안정화</li>
+        <li>검증 후보 스크리닝으로 교차 검증 비용 대폭 절감</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="muted">발전 방향</div>
+      <ul>
+        <li>Vision 이미지 폴백 상시 활성 및 자격증명 정비</li>
+        <li>보고서 성격 문서 포함 정책 조정으로 최소 길이 확보</li>
+        <li>라벨링 사전 구축: 날짜/ICD/병원 표준화 테이블 확장</li>
+        <li>후처리 파이프라인 병렬화·캐시로 평균 처리시간 50%↓</li>
+        <li>검증 스크리닝: 빠른 유사도 근사로 후보 70% 축소</li>
+      </ul>
+    </div>
+
+    <h2>파이프라인 상태(케이스별)</h2>
+    <table><thead><tr><th>Case</th><th>상태</th><th>원인</th><th>mergedLen</th><th>vnexsusLen</th><th>OCR blocks</th></tr></thead><tbody>
+    <tr><td>Case1</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case2</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case3</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case4</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case5</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case6</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case7</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case8</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case9</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case10</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case11</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case12</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case13</td><td><span class="ok">OK</span></td><td>-</td><td>10935</td><td>12999</td><td>624</td></tr><tr><td>Case14</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case15</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case16</td><td><span class="ok">OK</span></td><td>-</td><td>4860</td><td>5400</td><td>251</td></tr><tr><td>Case17</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case18</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case19</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case20</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case21</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case22</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case23</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case24</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case25</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case26</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case27</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case28</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case29</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case30</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case31</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case32</td><td><span class="ok">OK</span></td><td>-</td><td>24116</td><td>19591</td><td>1987</td></tr><tr><td>Case33</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case34</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case35</td><td><span class="bad">FAIL</span></td><td>merged_too_short</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Case36</td><td><span class="ok">OK</span></td><td>-</td><td>13895</td><td>14459</td><td>530</td></tr>
+    </tbody></table>
+    </body></html>

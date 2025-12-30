@@ -73,9 +73,12 @@ try {
 
     const reportResult = await reportBuilder.buildReport(events, patientInfo, {
         questionMap: questionMap,
-        format: 'text'
+        format: 'all'
     });
     console.log(`✅ 리포트 생성 완료: ${reportResult.results.text.filePath}`);
+    if (reportResult.results.json?.filePath) {
+        console.log(`✅ JSON 리포트 생성 완료: ${reportResult.results.json.filePath}`);
+    }
 
     // 결과
     console.log('\n✨ 테스트 결과');

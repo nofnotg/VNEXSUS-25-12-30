@@ -94,7 +94,7 @@ class ReportController {
       }
       
       // 3. 보고서 생성
-      const reportPath = await reportMaker.createReport(
+      const created = await reportMaker.createReport(
         timeline,
         filteredResult,
         {
@@ -104,6 +104,7 @@ class ReportController {
           format: options.format || 'excel'
         }
       );
+      const reportPath = typeof created === 'string' ? created : created?.reportPath;
 
       logBusinessEvent(REPORT_EVENTS.REPORT_PATH_READY, { reportPath, traceId: options.traceId });
 

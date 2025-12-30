@@ -19,6 +19,27 @@ class WriterAgentService {
         }
 
         try {
+            const offline = process.env.OFFLINE_MODE === 'true' || process.env.ENABLE_LLM === 'false';
+            if (offline) {
+                const lines = [];
+                lines.push(`# 심사 보고서 (오프라인 모드)`);
+                lines.push(`- 계약일: ${contractDate || '미지정'}`);
+                lines.push(`- 벡터 유형: ${vectorResult.vectorType}`);
+                if (Array.isArray(events) && events.length > 0) {
+                    lines.push(`\n## 의료 타임라인`);
+                    for (let i = 0; i < Math.min(events.length, 20); i++) {
+                        const e = events[i];
+                        const d = e?.date || '날짜 미상';
+                        const c = (e?.content || '').replace(/\s+/g, ' ').trim();
+                        lines.push(`- ${d}: ${c.length > 0 ? c : '내용 없음'}`);
+                    }
+                }
+                lines.push(`\n## 시스템 판단 요약`);
+                lines.push(`- 본 문서는 오프라인 환경에서 자동 생성되었습니다.`);
+                lines.push(`- 외부 LLM 호출 없이 규칙 기반 결과를 요약합니다.`);
+                return lines.join('\n');
+            }
+
             // Load Knowledge Base
             const knowledgeBase = await loadEnhancedMedicalKnowledgeBase();
 

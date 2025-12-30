@@ -1,0 +1,235 @@
+{
+  "tasks": [
+    {
+      "id": "t-block-aggregate",
+      "name": "페이지별 블록 집계 및 텍스트 연결",
+      "desc": "OCR 블록을 페이지 단위로 연결",
+      "status": "doing",
+      "progress": 75,
+      "priority": 1,
+      "category": "Tasks",
+      "updatedAt": "2025-12-28T10:46:12.879Z",
+      "links": []
+    },
+    {
+      "id": "t-labeling",
+      "name": "좌표 기반 라벨링",
+      "desc": "테이블/헤더/푸터 규칙 라벨링",
+      "status": "doing",
+      "progress": 60,
+      "priority": 2,
+      "category": "PRD",
+      "updatedAt": "2025-12-28T10:46:12.879Z",
+      "links": [
+        {
+          "label": "offlineCoordAnalyzer.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/tools/offlineCoordAnalyzer.js"
+        },
+        {
+          "label": "offline_coord_analysis.html",
+          "href": "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-04-46-823Z/offline_coord_analysis.html"
+        }
+      ]
+    },
+    {
+      "id": "t-report-recall",
+      "name": "보고서 리콜 개선",
+      "desc": "A/B/C 품질 기준 반영",
+      "status": "doing",
+      "progress": 60,
+      "priority": 3,
+      "category": "PRD",
+      "updatedAt": "2025-12-28T10:46:12.879Z",
+      "links": [
+        {
+          "label": "VNEXSUS_PRD_A-B-C.md",
+          "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_PRD_A-B-C.md"
+        }
+      ]
+    },
+    {
+      "id": "t-cost-opt",
+      "name": "비용 최적화",
+      "desc": "오프라인 OCR 배치·캐시",
+      "status": "doing",
+      "progress": 65,
+      "priority": 4,
+      "category": "Roadmap",
+      "updatedAt": "2025-12-28T10:52:09.107Z",
+      "links": [
+        {
+          "label": "visionService.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/services/visionService.js"
+        },
+        {
+          "label": "배치 재처리 report.html",
+          "href": "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-46-12-879Z/report.html"
+        }
+      ]
+    },
+    {
+      "id": "t-investigator-api",
+      "name": "Investigator View API 안정화",
+      "desc": "API 경로/응답 일관성",
+      "status": "done",
+      "progress": 100,
+      "priority": 5,
+      "category": "Tasks",
+      "updatedAt": "2025-12-27T00:00:00.000Z",
+      "completedAt": "2025-12-27T00:00:00.000Z",
+      "links": [
+        {
+          "label": "ocrController.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/controllers/ocrController.js"
+        }
+      ]
+    },
+    {
+      "id": "t-memory-optimizer",
+      "name": "Memory Optimizer 테스트 모드",
+      "desc": "테스트 중 모니터링 중지",
+      "status": "done",
+      "progress": 100,
+      "priority": 6,
+      "category": "Tasks",
+      "updatedAt": "2025-12-27T00:00:00.000Z",
+      "completedAt": "2025-12-27T00:00:00.000Z",
+      "links": [
+        {
+          "label": "memoryOptimizer.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/utils/memoryOptimizer.js"
+        }
+      ]
+    },
+    {
+      "id": "t-progress-tracking",
+      "name": "대용량 스트림 진행률 수정",
+      "desc": "this 컨텍스트 및 재시도 상한",
+      "status": "done",
+      "progress": 100,
+      "priority": 7,
+      "category": "Tasks",
+      "updatedAt": "2025-12-27T00:00:00.000Z",
+      "completedAt": "2025-12-27T00:00:00.000Z",
+      "links": [
+        {
+          "label": "largeFileHandler.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/services/largeFileHandler.js"
+        }
+      ]
+    },
+    {
+      "id": "t-vision-parser",
+      "name": "OCR 좌표 추출 파서 안정화",
+      "desc": "GCS·Vision 연동 검증",
+      "status": "done",
+      "progress": 100,
+      "priority": 8,
+      "category": "PRD",
+      "updatedAt": "2025-12-27T00:00:00.000Z",
+      "completedAt": "2025-12-27T00:00:00.000Z",
+      "links": [
+        {
+          "label": "visionService.js",
+          "href": "file:///c:/VNEXSUS_12-07/backend/services/visionService.js"
+        }
+      ]
+    },
+    {
+      "id": "t-report-ui-compact",
+      "name": "상단 고정필드 간략화",
+      "desc": "헤더 축소 및 요약 배지 추가",
+      "status": "done",
+      "progress": 100,
+      "priority": 9,
+      "category": "Tasks",
+      "updatedAt": "2025-12-28T00:00:00.000Z",
+      "completedAt": "2025-12-28T00:00:00.000Z",
+      "links": [
+        {
+          "label": "25-12-28_Progress_Rate_Report.html",
+          "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/25-12-28_Progress_Rate_Report.html"
+        }
+      ]
+    },
+    {
+      "id": "t-offline-sync",
+      "name": "오프라인 백업·온라인 동기화",
+      "desc": "JSON/HTML 스냅샷 및 서버 자동 동기화",
+      "status": "done",
+      "progress": 100,
+      "priority": 9,
+      "category": "Tasks",
+      "updatedAt": "2025-12-28T00:00:00.000Z",
+      "completedAt": "2025-12-28T00:00:00.000Z",
+      "links": [
+        {
+          "label": "sync_data.json",
+          "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/sync_data.json"
+        }
+      ]
+    },
+    {
+      "id": "t-prepared-cases",
+      "name": "좌표 케이스 표준화",
+      "desc": "좌표 포함·텍스트만 케이스 분류 및 manifest 생성",
+      "status": "done",
+      "progress": 100,
+      "priority": 1,
+      "category": "Tasks",
+      "updatedAt": "2025-12-28T10:52:09.107Z",
+      "links": [
+        {
+          "label": "prepared manifest",
+          "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/manifest.json"
+        },
+        {
+          "label": "coords 폴더",
+          "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/coords"
+        },
+        {
+          "label": "text_only 폴더",
+          "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/text_only"
+        }
+      ],
+      "totals": { "coords": 31, "textOnly": 32 }
+    }
+  ],
+  "history": [
+    {
+      "date": "2025-12-28T00:00:00.000Z",
+      "summary": "헤더 간소화·자동 동기화·좌표 라벨링/리콜 개선 진행",
+      "changes": [
+        { "id": "t-labeling", "progress": 55 },
+        { "id": "t-report-recall", "progress": 50 },
+        { "id": "t-block-aggregate", "progress": 70 },
+        { "id": "t-cost-opt", "progress": 40 },
+        { "id": "t-report-ui-compact", "progress": 100 },
+        { "id": "t-offline-sync", "progress": 100 }
+      ]
+    },
+    {
+      "date": "2025-12-28T10:46:12.879Z",
+      "summary": "오프라인 좌표 재처리 및 품질 분석 반영",
+      "changes": [
+        { "id": "t-labeling", "progress": 60 },
+        { "id": "t-report-recall", "progress": 60 },
+        { "id": "t-block-aggregate", "progress": 75 },
+        { "id": "t-cost-opt", "progress": 50 }
+      ]
+    },
+    {
+      "date": "2025-12-28T10:52:09.107Z",
+      "summary": "좌표 케이스 표준화 완료 및 비용 최적화 진도 반영",
+      "changes": [
+        { "id": "t-cost-opt", "progress": 65 },
+        { "id": "t-prepared-cases", "progress": 100 }
+      ],
+      "preparedCases": {
+        "coords": 31,
+        "textOnly": 32,
+        "manifest": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/manifest.json"
+      }
+    }
+  ]
+}

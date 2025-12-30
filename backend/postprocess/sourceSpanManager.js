@@ -1,61 +1,69 @@
-/**
- * SourceSpan Manager (Phase 1 - T03)
- * 
- * 목적:
- * - 모든 의료 이벤트에 원문 근거 위치 추적
- * - 감사/분쟁 대응을 위한 정확한 원문 참조
- * - UI 하이라이트/점프 기능 지원
- * 
- * 목표: sourceSpan 첨부율 95%+
- */
+import { normalizeHospitalName } from '../../src/shared/utils/medicalText.js';
+import { HOSPITAL_CANONICAL_MAP, DIAGNOSIS_SYNONYMS } from '../../src/shared/constants/medicalNormalization.js';
 
 class SourceSpanManager {
     constructor() {
         this.missingSpans = []; // 누락된 sourceSpan 추적
     }
 
-    /**
-     * 이벤트에 sourceSpan 첨부 (강화된 버전)
-     * @param {Object} event - MedicalEvent 객체
-     * @param {string} rawText - 전체 원문 텍스트
-     * @param {Object} block - 날짜 블록 (선택)
-     * @returns {Object} sourceSpan
-     */
-    attachSourceSpan(event, rawText, block = null) {
+    attachSourceSpan(event, rawText, block = null, allBlocks = null) {
         if (!rawText || rawText.length === 0) {
             return this.createEmptySpan('원문 없음');
         }
-
-        // Anchor 키워드 수집
         const anchorTerms = this.collectAnchorTerms(event, block);
-
         if (anchorTerms.length === 0) {
             return this.createEmptySpan('Anchor 키워드 없음');
         }
-
-        // 원문에서 위치 찾기
-        const position = this.findPositionInText(rawText, anchorTerms, event.date);
-
+        const position = this.findPositionInText(rawText, anchorTerms, event.date, block, allBlocks);
         if (!position) {
-            this.missingSpans.push({
-                eventId: event.id,
-                date: event.date,
-                hospital: event.hospital,
-                reason: 'Anchor 매칭 실패'
-            });
+            this.missingSpans.push({ eventId: event.id, date: event.date, hospital: event.hospital, reason: 'Anchor 매칭 실패' });
             return this.createEmptySpan('위치 찾기 실패');
         }
-
-        // TextPreview 생성
         const textPreview = this.generateTextPreview(rawText, position.start, position.end);
-
-        return {
-            start: position.start,
-            end: position.end,
-            textPreview,
-            anchorTerms, // 매칭에 사용된 키워드
-            confidence: position.confidence || 0.8
-        };
+        const out = { start: position.start, end: position.end, textPreview, anchorTerms, confidence: position.confidence || 0.8 };
+        if (position.matchedBlock && typeof position.matchedBlock === 'object') {
+            const mb = position.matchedBlock;
+            if (Number.isFinite(mb.page)) out.page = Number(mb.page);
+            if (mb.blockIndex !== undefined) out.blockIndex = mb.blockIndex;
+            if (mb.bbox && typeof mb.bbox === 'object') {
+                const bb = mb.bbox;
+                const xMin = Number(bb.xMin);
+                const yMin = Number(bb.yMin);
+                const xMax = Number(bb.xMax);
+                const yMax = Number(bb.yMax);
+                const width = Number(bb.width);
+                const height = Number(bb.height);
+                const bounds = {};
+                if (Number.isFinite(xMin)) bounds.xMin = xMin;
+                if (Number.isFinite(yMin)) bounds.yMin = yMin;
+                if (Number.isFinite(xMax)) bounds.xMax = xMax;
+                if (Number.isFinite(yMax)) bounds.yMax = yMax;
+                if (Number.isFinite(width)) bounds.width = width;
+                if (Number.isFinite(height)) bounds.height = height;
+                if (Object.keys(bounds).length > 0) out.bounds = bounds;
+            }
+        } else if (block && typeof block === 'object') {
+            if (Number.isFinite(block.page)) out.page = Number(block.page);
+            if (block.blockIndex !== undefined) out.blockIndex = block.blockIndex;
+            if (block.bbox && typeof block.bbox === 'object') {
+                const bb = block.bbox;
+                const xMin = Number(bb.xMin);
+                const yMin = Number(bb.yMin);
+                const xMax = Number(bb.xMax);
+                const yMax = Number(bb.yMax);
+                const width = Number(bb.width);
+                const height = Number(bb.height);
+                const bounds = {};
+                if (Number.isFinite(xMin)) bounds.xMin = xMin;
+                if (Number.isFinite(yMin)) bounds.yMin = yMin;
+                if (Number.isFinite(xMax)) bounds.xMax = xMax;
+                if (Number.isFinite(yMax)) bounds.yMax = yMax;
+                if (Number.isFinite(width)) bounds.width = width;
+                if (Number.isFinite(height)) bounds.height = height;
+                if (Object.keys(bounds).length > 0) out.bounds = bounds;
+            }
+        }
+        return out;
     }
 
     /**
@@ -84,24 +92,51 @@ class SourceSpanManager {
 
         // 2. 병원명
         if (event.hospital && event.hospital !== '병원명 미상') {
-            terms.push(event.hospital);
-            // 병원명 축약형 (예: "삼성서울병원" -> "삼성서울")
-            const shortName = event.hospital.replace(/병원|의원|클리닉|센터|한의원|치과/g, '');
-            if (shortName !== event.hospital) {
+            const hospRaw = String(event.hospital);
+            terms.push(hospRaw);
+            const shortName = hospRaw.replace(/병원|의원|클리닉|센터|한의원|치과/g, '');
+            if (shortName !== hospRaw) {
                 terms.push(shortName);
+            }
+            const norm = normalizeHospitalName(hospRaw);
+            if (norm && norm !== hospRaw) {
+                terms.push(norm);
+            }
+            const mapped = HOSPITAL_CANONICAL_MAP.get(hospRaw) || HOSPITAL_CANONICAL_MAP.get(norm) || HOSPITAL_CANONICAL_MAP.get(shortName);
+            if (mapped && mapped !== hospRaw && mapped !== norm) {
+                terms.push(mapped);
+                const mappedShort = mapped.replace(/병원|의원|클리닉|센터|한의원|치과/g, '');
+                if (mappedShort !== mapped) {
+                    terms.push(mappedShort);
+                }
             }
         }
 
         // 3. 진단명
         if (event.diagnosis && event.diagnosis.name) {
-            terms.push(event.diagnosis.name);
+            const dn = String(event.diagnosis.name);
+            terms.push(dn);
+            const syn = DIAGNOSIS_SYNONYMS.get(dn);
+            if (syn && syn !== dn) {
+                terms.push(syn);
+            }
         }
 
         // 4. ICD 코드
         if (event.diagnosis && event.diagnosis.code) {
-            terms.push(event.diagnosis.code);
-            // 점 없는 버전도 추가 (R07.4 -> R074)
-            terms.push(event.diagnosis.code.replace(/\./g, ''));
+            const raw = String(event.diagnosis.code).toUpperCase();
+            terms.push(raw);
+            const dotless = raw.replace(/\./g, '');
+            if (dotless !== raw) {
+                terms.push(dotless);
+            }
+            const m = dotless.match(/^([A-Z])([0-9]{2})([0-9]{1,2})$/);
+            if (m) {
+                const dotted = `${m[1]}${m[2]}.${m[3]}`;
+                if (dotted !== raw) {
+                    terms.push(dotted);
+                }
+            }
         }
 
         // 5. 검사/시술
@@ -124,53 +159,151 @@ class SourceSpanManager {
         return [...new Set(terms)].filter(t => t && t.length > 0);
     }
 
-    /**
-     * 원문에서 위치 찾기 (Anchor 기반)
-     * @param {string} rawText - 원문
-     * @param {Array<string>} anchorTerms - Anchor 키워드
-     * @param {string} date - 날짜 (우선순위 높음)
-     * @returns {Object|null} {start, end, confidence}
-     */
-    findPositionInText(rawText, anchorTerms, date) {
-        // 전략 1: 날짜를 먼저 찾고, 그 주변에서 다른 키워드 찾기
-        const datePositions = this.findAllOccurrences(rawText, date);
-
+    findPositionInText(rawText, anchorTerms, date, block = null, allBlocks = null) {
+        const terms = (anchorTerms || []).filter(t => typeof t === 'string' && t.trim().length >= 2);
+        let bestFromBlocks = null;
+        if (Array.isArray(allBlocks) && allBlocks.length > 0) {
+            let bestScore = 0;
+            for (const b of allBlocks) {
+                const bt = String(b?.text || '').replace(/\s+/g, ' ');
+                if (!bt) continue;
+                let s = 0;
+                if (typeof date === 'string' && date && bt.includes(date)) s += 2;
+                const iso = this.normalizeDateToIso(date);
+                if (iso && iso !== date && bt.includes(iso)) s += 1;
+                for (const term of terms) {
+                    const t = term.replace(/\s+/g, ' ');
+                    if (t && t !== date && bt.includes(t)) s += 1;
+                }
+                if (s > bestScore) { bestScore = s; bestFromBlocks = { block: b, score: s }; }
+            }
+        }
+        if (bestFromBlocks && bestFromBlocks.block && typeof bestFromBlocks.block.text === 'string') {
+            const snippet = bestFromBlocks.block.text.slice(0, 200);
+            const pos = rawText.indexOf(snippet);
+            if (pos !== -1) {
+                const start = Math.max(0, pos - 400);
+                const end = Math.min(rawText.length, pos + Math.max(200, snippet.length) + 400);
+                return { start, end, confidence: Math.min(0.98, 0.6 + Math.min(1, bestFromBlocks.score) * 0.3), matchedBlock: bestFromBlocks.block };
+            }
+        }
+        const datePositions = this.findAllDateOccurrences(rawText, date);
         if (datePositions.length === 0) {
-            // 날짜를 못 찾으면 다른 anchor로 시도
             return this.findByOtherAnchors(rawText, anchorTerms);
         }
-
-        // 각 날짜 위치에서 다른 anchor 매칭 점수 계산
         let bestMatch = null;
         let bestScore = 0;
-
-        datePositions.forEach(datePos => {
-            // 날짜 주변 ±500자 범위에서 검색
-            const windowStart = Math.max(0, datePos - 500);
-            const windowEnd = Math.min(rawText.length, datePos + 500);
+        for (const datePos of datePositions) {
+            const windowSize = (Array.isArray(allBlocks) && allBlocks.length > 0) ? 1200 : 500;
+            const windowStart = Math.max(0, datePos - windowSize);
+            const windowEnd = Math.min(rawText.length, datePos + windowSize);
             const window = rawText.substring(windowStart, windowEnd);
-
-            // 이 윈도우에서 매칭되는 anchor 개수 계산
+            const windowNorm = window.replace(/\s+/g, ' ');
             let matchCount = 0;
-            anchorTerms.forEach(term => {
-                if (term !== date && window.includes(term)) {
-                    matchCount++;
-                }
-            });
-
-            const score = matchCount / (anchorTerms.length - 1); // 날짜 제외
-
+            for (const term of terms) {
+                const t = term.replace(/\s+/g, ' ');
+                if (t && t !== date && windowNorm.includes(t)) matchCount += 1;
+            }
+            const score = matchCount / Math.max(1, (terms.length));
             if (score > bestScore) {
                 bestScore = score;
-                bestMatch = {
-                    start: windowStart,
-                    end: windowEnd,
-                    confidence: Math.min(0.95, 0.5 + score * 0.5) // 0.5 ~ 0.95
-                };
+                bestMatch = { start: windowStart, end: windowEnd, confidence: Math.min(0.95, 0.5 + score * 0.5) };
             }
-        });
-
+        }
         return bestMatch;
+    }
+
+    findAllDateOccurrences(text, date) {
+        if (typeof text !== 'string' || typeof date !== 'string') return [];
+        const input = date.trim();
+        if (!input || input === '날짜미상') return [];
+
+        const iso = this.normalizeDateToIso(input) || input;
+        const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (!m) {
+            const direct = this.findAllOccurrences(text, input);
+            if (iso !== input) {
+                const alt = this.findAllOccurrences(text, iso);
+                return Array.from(new Set([...direct, ...alt])).sort((a, b) => a - b);
+            }
+            return direct;
+        }
+
+        const year = m[1];
+        const month = String(Number(m[2]));
+        const day = String(Number(m[3]));
+
+        const patterns = [
+            new RegExp(`${year}\\s*[./\\-]\\s*0?${month}\\s*[./\\-]\\s*0?${day}`, 'g'),
+            new RegExp(`${year}[./\\-]\\s*0?${month}[./\\-]\\s*0?${day}`, 'g'),
+            new RegExp(`${year}\\s*년\\s*0?${month}\\s*월\\s*0?${day}\\s*일`, 'g'),
+            new RegExp(`0?${month}[./\\-]\\s*0?${day}`, 'g'),
+            new RegExp(`0?${month}\\s*월\\s*0?${day}\\s*일`, 'g'),
+        ];
+
+        const positions = new Set();
+        for (const re of patterns) {
+            re.lastIndex = 0;
+            let match = re.exec(text);
+            while (match) {
+                positions.add(match.index);
+                match = re.exec(text);
+            }
+        }
+
+        if (iso !== input) {
+            const direct = this.findAllOccurrences(text, input);
+            for (const p of direct) positions.add(p);
+        }
+
+        return Array.from(positions).sort((a, b) => a - b);
+    }
+
+    normalizeDateToIso(raw) {
+        if (typeof raw !== 'string') return null;
+        const s = raw.trim();
+        if (!s) return null;
+        if (s === '날짜미상') return null;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+
+        const matchers = [
+            s.match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/),
+            s.match(/^(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일$/),
+            s.match(/^(\d{8})$/),
+            s.match(/^(\d{2})[./-](\d{1,2})[./-](\d{1,2})$/),
+        ].filter(Boolean);
+
+        const m = matchers[0];
+        if (!m) return null;
+
+        let year;
+        let month;
+        let day;
+
+        if (m[0] && /^\d{8}$/.test(m[0])) {
+            year = Number(m[0].slice(0, 4));
+            month = Number(m[0].slice(4, 6));
+            day = Number(m[0].slice(6, 8));
+        } else if (m.length >= 4) {
+            const y = Number(m[1]);
+            if (m[1].length === 2) {
+                year = y <= 69 ? 2000 + y : 1900 + y;
+            } else {
+                year = y;
+            }
+            month = Number(m[2]);
+            day = Number(m[3]);
+        } else {
+            return null;
+        }
+
+        if (!Number.isFinite(year) || !Number.isFinite(month) || !Number.isFinite(day)) return null;
+        if (month < 1 || month > 12) return null;
+        if (day < 1 || day > 31) return null;
+
+        const mm = String(month).padStart(2, '0');
+        const dd = String(day).padStart(2, '0');
+        return `${year}-${mm}-${dd}`;
     }
 
     /**

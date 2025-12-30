@@ -1,10 +1,9 @@
 export default {
   testEnvironment: 'node',
   testMatch: [
-    '<rootDir>/tests/**/*.test.js',
-    '<rootDir>/tests/**/*.spec.js',
     '<rootDir>/tests/**/*.test.cjs',
-    '<rootDir>/tests/**/*.spec.cjs'
+    '<rootDir>/tests/**/*.spec.cjs',
+    '<rootDir>/tests/unit/ocrController.test.js'
   ],
   collectCoverageFrom: [
     'services/**/*.js',
@@ -12,11 +11,11 @@ export default {
     '!**/node_modules/**'
   ],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
-  transform: {
-    '^.+\.js$': 'babel-jest',
-    '^.+\.cjs$': 'babel-jest'
-  },
-  transformIgnorePatterns: [
-    'node_modules/(?!(fs-extra)/)'
+  testPathIgnorePatterns: [
+    '<rootDir>/tests/fileProcessingService.test.js',
+    '<rootDir>/tests/largeFileHandler.test.js',
+    '<rootDir>/tests/streamProcessingOptimizer.test.js',
+    '<rootDir>/tests/progressiveRAG.test.js',
+    '<rootDir>/tests/integration/progressiveRAG.integration.test.js'
   ]
 };

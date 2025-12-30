@@ -85,13 +85,14 @@ class LargeFileHandler extends EventEmitter {
         this.ensureDirectoryExists(this.options.tempDirectory);
         
         // 스트림 최적화기 이벤트 리스너
-        globalStreamOptimizer.on('metrics', (metrics) => {
+        this._onOptimizerMetrics = (metrics) => {
             this.emit('streamMetrics', metrics);
-        });
-        
-        globalStreamOptimizer.on('optimization', (data) => {
+        };
+        this._onOptimizerOptimization = (data) => {
             this.emit('streamOptimization', data);
-        });
+        };
+        globalStreamOptimizer.on('metrics', this._onOptimizerMetrics);
+        globalStreamOptimizer.on('optimization', this._onOptimizerOptimization);
         
         logger.info('Large File Handler initialized', {
             smallFileThreshold: `${(this.options.smallFileThreshold / 1024 / 1024).toFixed(1)}MB`,
@@ -210,10 +211,11 @@ class LargeFileHandler extends EventEmitter {
             });
             
             // 오류 복구 시도
-            if (this.options.enableErrorRecovery && options.retryCount < this.options.maxRetries) {
+            const currentRetry = typeof options.retryCount === 'number' ? options.retryCount : 0;
+            if (this.options.enableErrorRecovery && currentRetry < this.options.maxRetries) {
                 logger.info('Attempting error recovery', {
                     jobId,
-                    retryCount: options.retryCount + 1,
+                    retryCount: currentRetry + 1,
                     maxRetries: this.options.maxRetries
                 });
                 
@@ -221,7 +223,7 @@ class LargeFileHandler extends EventEmitter {
                 
                 return this.processFile(filePath, processingFunction, {
                     ...options,
-                    retryCount: (options.retryCount || 0) + 1
+                    retryCount: currentRetry + 1
                 });
             }
             
@@ -337,12 +339,13 @@ class LargeFileHandler extends EventEmitter {
         
         // 진행률 추적을 위한 변환 스트림
         let processedBytes = 0;
+        const handler = this;
         const progressStream = new Transform({
             transform(chunk, encoding, callback) {
                 processedBytes += chunk.length;
                 
-                if (this.options.enableProgressTracking) {
-                    this.updateProgress(jobId, processedBytes);
+                if (handler.options.enableProgressTracking) {
+                    handler.updateProgress(jobId, processedBytes);
                 }
                 
                 callback(null, chunk);
@@ -387,6 +390,7 @@ class LargeFileHandler extends EventEmitter {
         
         let currentChunk = 0;
         let processedBytes = 0;
+        const handler = this;
         
         const chunkProcessor = new Transform({
             objectMode: true,
@@ -396,8 +400,8 @@ class LargeFileHandler extends EventEmitter {
                     processedBytes += chunk.length;
                     
                     // 진행률 업데이트
-                    if (this.options.enableProgressTracking) {
-                        this.updateProgress(jobId, processedBytes, fileInfo.size);
+                    if (handler.options.enableProgressTracking) {
+                        handler.updateProgress(jobId, processedBytes, fileInfo.size);
                     }
                     
                     const chunkResult = await processingFunction(chunk, {
@@ -653,6 +657,16 @@ class LargeFileHandler extends EventEmitter {
         this.activeJobs.clear();
         this.progressTrackers.clear();
         this.resultCache.clear();
+        
+        // 스트림 최적화기 이벤트 리스너 해제
+        if (this._onOptimizerMetrics) {
+            globalStreamOptimizer.off('metrics', this._onOptimizerMetrics);
+            this._onOptimizerMetrics = undefined;
+        }
+        if (this._onOptimizerOptimization) {
+            globalStreamOptimizer.off('optimization', this._onOptimizerOptimization);
+            this._onOptimizerOptimization = undefined;
+        }
         
         logger.info('Large File Handler destroyed');
     }

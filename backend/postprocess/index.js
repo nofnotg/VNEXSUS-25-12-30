@@ -15,6 +15,59 @@ import preprocessor from './preprocessor.js';
 import reportBuilder from './reportBuilder.js';
 import aiEntityExtractor from './aiEntityExtractor.js';
 import EnhancedEntityExtractor from './enhancedEntityExtractor.js';
+import medicalEventModel from './medicalEventModel.js';
+import { MedicalEventSchema } from '../../src/modules/reports/types/structuredOutput.js';
+import fs from 'fs';
+import ReportSubsetValidator from '../eval/report_subset_validator.js';
+
+function clamp01(n) {
+  const x = Number(n);
+  if (!Number.isFinite(x)) return 0;
+  return Math.max(0, Math.min(1, x));
+}
+function computeSectionRatios(blocks, top = 0.05, bottom = 0.95) {
+  const byPage = new Map();
+  for (const b of Array.isArray(blocks) ? blocks : []) {
+    const page = Number(b?.page);
+    const bb = b?.bbox || {};
+    if (!Number.isFinite(page) || page <= 0) continue;
+    const cur = byPage.get(page) || { page, widthMax: 0, heightMax: 0, blocks: [] };
+    const xMax = Number(bb?.xMax);
+    const yMax = Number(bb?.yMax);
+    if (Number.isFinite(xMax) && xMax > cur.widthMax) cur.widthMax = xMax;
+    if (Number.isFinite(yMax) && yMax > cur.heightMax) cur.heightMax = yMax;
+    cur.blocks.push(b);
+    byPage.set(page, cur);
+  }
+  const pages = [...byPage.values()].sort((a, b) => a.page - b.page);
+  const normalized = [];
+  for (const p of pages) {
+    const w = p.widthMax > 0 ? p.widthMax : 1;
+    const h = p.heightMax > 0 ? p.heightMax : 1;
+    for (const b of p.blocks) {
+      const bb = b?.bbox || {};
+      const nxMin = clamp01(bb.xMin / w);
+      const nyMin = clamp01(bb.yMin / h);
+      const nxMax = clamp01(bb.xMax / w);
+      const nyMax = clamp01(bb.yMax / h);
+      normalized.push({
+        page: Number(b.page),
+        blockIndex: Number(b.blockIndex),
+        bboxNorm: { xMin: nxMin, yMin: nyMin, xMax: nxMax, yMax: nyMax }
+      });
+    }
+  }
+  const total = normalized.length;
+  let headerCount = 0;
+  let footerCount = 0;
+  for (const n of normalized) {
+    if (Number.isFinite(n?.bboxNorm?.yMin) && n.bboxNorm.yMin < top) headerCount += 1;
+    if (Number.isFinite(n?.bboxNorm?.yMax) && n.bboxNorm.yMax > bottom) footerCount += 1;
+  }
+  const headerRatio = total > 0 ? headerCount / total : 0;
+  const footerRatio = total > 0 ? footerCount / total : 0;
+  return { headerCount, footerCount, headerRatio, footerRatio, total };
+}
 
 class PostProcessingManager {
   constructor() {
@@ -95,7 +148,8 @@ class PostProcessingManager {
         enrollmentDate: options.enrollmentDate || new Date().toISOString().split('T')[0],
         periodType: options.period || 'all',
         sortDirection: options.sortDirection || 'asc',
-        groupByDate: options.groupByDate || false
+        groupByDate: options.groupByDate || false,
+        excludeNoise: options.excludeNoise !== false
       });
       
       // 4단계: AI 기반 엔티티 추출 (선택적)
@@ -123,6 +177,81 @@ class PostProcessingManager {
       const requestedFormat = options.reportFormat || 'json';
       const normalizedFormat = requestedFormat === 'txt' ? 'text' : requestedFormat;
 
+      const rawEvents = medicalEventModel.buildEvents({
+        dateBlocks: combinedData,
+        entities: aiExtractedData || {},
+        rawText: ocrText,
+        patientInfo: options.patientInfo || {},
+        coordinateBlocks: Array.isArray(options.coordinateBlocks) ? options.coordinateBlocks : []
+      });
+      const medicalEvents = [];
+      for (const evt of rawEvents) {
+        const transformed = {
+          id: evt.id,
+          date: evt.date,
+          hospital: evt.hospital,
+          eventType: evt.eventType || '진료',
+          description: evt.shortFact || '',
+          diagnosis:
+            evt.diagnosis && (typeof evt.diagnosis.name === 'string' || typeof evt.diagnosis.code === 'string')
+              ? {
+                  name: typeof evt.diagnosis.name === 'string' ? evt.diagnosis.name : undefined,
+                  code: typeof evt.diagnosis.code === 'string' ? evt.diagnosis.code : undefined
+                }
+              : undefined,
+          procedures: Array.isArray(evt.procedures)
+            ? evt.procedures
+                .map(p =>
+                  typeof p === 'string'
+                    ? { name: p }
+                    : {
+                        name: typeof p.name === 'string' ? p.name : undefined,
+                        code: typeof p.code === 'string' ? p.code : undefined
+                      }
+                )
+                .filter(x => typeof x.name === 'string' && x.name.length > 0)
+            : undefined,
+          medications: Array.isArray(evt.treatments)
+            ? evt.treatments
+                .map(t =>
+                  typeof t === 'string'
+                    ? { name: t }
+                    : {
+                        name: typeof t.name === 'string' ? t.name : undefined,
+                        dose: typeof t.dose === 'string' ? t.dose : undefined
+                      }
+                )
+                .filter(x => typeof x.name === 'string' && x.name.length > 0)
+            : undefined,
+          anchors: evt.sourceSpan
+            ? (() => {
+                const b = evt.sourceSpan.bounds || {};
+                const pos = {};
+                if (Number.isFinite(evt.sourceSpan.page)) pos.page = evt.sourceSpan.page;
+                if (Number.isFinite(b.xMin)) pos.xMin = b.xMin;
+                if (Number.isFinite(b.yMin)) pos.yMin = b.yMin;
+                if (Number.isFinite(b.xMax)) pos.xMax = b.xMax;
+                if (Number.isFinite(b.yMax)) pos.yMax = b.yMax;
+                const hasPos = Object.keys(pos).length > 0;
+                return {
+                  position: hasPos ? pos : undefined,
+                  sourceSpan:
+                    evt.sourceSpan.blockIndex !== undefined ? { blockIndex: evt.sourceSpan.blockIndex } : undefined,
+                  confidence: typeof evt.sourceSpan.confidence === 'number' ? evt.sourceSpan.confidence : undefined
+                };
+              })()
+            : undefined,
+          confidence: typeof evt.confidence === 'number' ? Math.max(0, Math.min(1, evt.confidence)) : 0.8,
+          tags: evt.tags,
+          payload: evt.payload
+        };
+        const parsed = MedicalEventSchema.safeParse(transformed);
+        if (parsed.success) {
+          medicalEvents.push(parsed.data);
+        }
+      }
+      const unifiedMedicalEvents = medicalEventModel.unifyDuplicateEvents(medicalEvents);
+
       const finalReport = await this.reportBuilder.buildReport(
         organizedData,
         options.patientInfo || {},
@@ -132,6 +261,39 @@ class PostProcessingManager {
           title: options.reportTitle || options.title
         }
       );
+      let reportText = '';
+      try {
+        if (finalReport?.results?.text?.filePath && fs.existsSync(finalReport.results.text.filePath)) {
+          reportText = fs.readFileSync(finalReport.results.text.filePath, 'utf-8');
+        } else if (finalReport?.results?.json?.data?.items) {
+          reportText = finalReport.results.json.data.items.map(i => `${i.date} | ${i.hospital} | ${i.content || ''}`).join('\n');
+        }
+      } catch {}
+      const vnexsusText = unifiedMedicalEvents.map(e => {
+        const code = e?.diagnosis?.code ? ` ${e.diagnosis.code}` : '';
+        return `${e.date || ''} ${e.hospital || ''}${code} ${e.description || ''}`;
+      }).join('\n');
+      let subsetValidation = null;
+      try {
+        const validator = new ReportSubsetValidator();
+        const res = validator.validateCase('inline', reportText, vnexsusText);
+        subsetValidation = {
+          dateMatchRate: res.matching?.dates?.matchRate || 0,
+          icdMatchRate: res.matching?.icds?.matchRate || 0,
+          hospitalMatchRate: res.matching?.hospitals?.matchRate || 0,
+          missing: {
+            dates: res.matching?.dates?.missing || [],
+            icds: res.matching?.icds?.missing || [],
+            hospitals: res.matching?.hospitals?.missing || []
+          }
+        };
+      } catch {}
+      let coordinateSections = null;
+      if (Array.isArray(options.coordinateBlocks) && options.coordinateBlocks.length > 0) {
+        try {
+          coordinateSections = computeSectionRatios(options.coordinateBlocks);
+        } catch {}
+      }
       
       // 처리 통계 업데이트
       const processingTime = Date.now() - startTime;
@@ -147,7 +309,10 @@ class PostProcessingManager {
           preprocessedData,
           organizedData,
           aiExtractedData,
-          finalReport
+          medicalEvents: unifiedMedicalEvents,
+          finalReport,
+          reportSubsetValidation: subsetValidation,
+          coordinateSections
         },
         statistics: {
           originalTextLength: ocrText.length,

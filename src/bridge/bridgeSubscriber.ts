@@ -2,7 +2,6 @@ import { PubSub } from '@google-cloud/pubsub';
 import { handleOcrResult } from '../modules/ocrParser';
 import { logger, logProcessingStart, logProcessingSuccess, logProcessingError } from '../shared/logging/logger';
 import { BRIDGE_EVENTS } from '../shared/constants/logging';
-import { maskObject } from '../shared/security/mask';
 
 // 시작 로그
 logger.info({ event: BRIDGE_EVENTS.BRIDGE_INIT, metadata: { mode: 'pubsub' } });

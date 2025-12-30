@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>25-12-28 공정율 종합 리포트 · VNEXSUS</title>
+  <style>
+    :root {
+      --bg:#0a0f1d; --panel:#0b1220; --card:#0d1628; --text:#e5e7eb; --muted:#94a3b8; --accent:#60a5fa;
+      --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; --border:#1f2937; --blue:#1e3a8a;
+    }
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",Arial,sans-serif;background:radial-gradient(1400px 900px at 5% 0%, #081028 0%, #0b1b3d 40%, #0a0f1d 100%);color:var(--text)}
+    .container{max-width:1280px;margin:36px auto;padding:0 20px}
+    .header{position:sticky;top:0;z-index:10;background:linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));border:1px solid var(--border);border-radius:12px;padding:10px;backdrop-filter:blur(4px)}
+    .row{display:grid;grid-template-columns:1fr;gap:16px}
+    @media (min-width:1024px){.row{grid-template-columns:1fr 1fr}}
+    h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
+    h2{margin:0 0 10px;font-size:18px;color:var(--accent)}
+    h3{margin:12px 0 8px;font-size:16px;color:#cbd5e1}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)}
+    .kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+    .label{font-size:12px;color:var(--muted)}
+    .value{margin-top:6px;font-size:18px;font-weight:700}
+    .value.ok{color:var(--ok)} .value.warn{color:var(--warn)} .value.bad{color:var(--bad)}
+    .progress{width:100%;height:10px;background:rgba(148,163,184,0.18);border-radius:6px;overflow:hidden;margin:8px 0}
+    .fill{height:100%;background:linear-gradient(90deg,#60a5fa,#22c55e);transition:width .3s ease}
+    .badge{display:inline-block;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--border)}
+    .status-in_progress{background:rgba(96,165,250,0.15);color:#93c5fd}
+    .status-pending{background:rgba(245,158,11,0.15);color:#fbbf24}
+    .status-blocked{background:rgba(239,68,68,0.15);color:#fca5a5}
+    .status-not_applied{background:rgba(148,163,184,0.15);color:#cbd5e1}
+    .status-completed{background:rgba(34,197,94,0.15);color:#86efac}
+    .group-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid var(--border);border-radius:14px;padding:16px}
+    .task{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;background:rgba(11,18,32,0.55)}
+    .task+.task{margin-top:10px}
+    .task-title{font-weight:700}
+    .reason{font-size:12px;color:var(--muted)}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
+    th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left;font-size:13px;color:var(--text);vertical-align:top}
+    th{background:#0f1a30}
+    .num{text-align:right}
+    .footer{margin-top:24px;color:var(--muted);font-size:12px;text-align:right}
+    .controls{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .button{appearance:none;border:1px solid var(--border);background:#0f1a30;color:#cbd5e1;border-radius:8px;padding:8px 12px;font-size:12px;cursor:pointer}
+    .button:hover{filter:brightness(1.1)}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center}
+    .modal-inner{width:min(800px,92vw);background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px}
+    textarea{width:100%;height:240px;border:1px solid var(--border);border-radius:8px;background:#0f1a30;color:#e5e7eb;padding:10px}
+    .link{color:#93c5fd;text-decoration:none}
+    .link:hover{text-decoration:underline}
+    .mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="header">
+      <h1>공정율 종합 리포트</h1>
+      <div class="meta">
+        <span id="generatedAt"></span>
+        <span>문서 모드: 오프라인</span>
+      </div>
+      <div class="mini">
+        <span id="miniOverall" class="badge status-in_progress">진행 0% · 잔여 100%</span>
+        <span id="miniCounts" class="badge">진행 중 0 · 완료 0</span>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <div class="controls">
+        <button class="button" id="btnImport">데이터 불러오기</button>
+        <button class="button" id="btnEdit">데이터 편집</button>
+        <button class="button" id="btnExportJson">JSON 스냅샷</button>
+        <button class="button" id="btnExportHtml">HTML 스냅샷</button>
+        <input type="file" id="fileInput" accept="application/json" style="display:none">
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <h2>진행·잔여 공정율</h2>
+      <div class="progress" aria-label="진행 공정율"><div id="executedFill" class="fill" style="width:0%"></div></div>
+      <div class="progress" aria-label="잔여 공정율"><div id="remainingFill" class="fill" style="width:100%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div>
+      <div class="mini"><span id="executedPct" class="badge status-in_progress">진행 0%</span><span id="remainingPct" class="badge">잔여 100%</span></div>
+      <div class="kpi">
+        <div class="card"><div class="label">진행 중</div><div id="kpiInProgress" class="value ok">0</div></div>
+        <div class="card"><div class="label">대기</div><div id="kpiPending" class="value warn">0</div></div>
+        <div class="card"><div class="label">미반영</div><div id="kpiNotApplied" class="value">0</div></div>
+        <div class="card"><div class="label">완료</div><div id="kpiCompleted" class="value ok">0</div></div>
+        <div class="card"><div class="label">우선순위 가중 평균</div><div id="kpiWeighted" class="value">0%</div></div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:12px">
+      <h2>핵심 상태 및 원인</h2>
+      <div class="task">
+        <div>
+          <div class="task-title">날짜 매칭 실패율 높음</div>
+          <div class="reason">원인: OCR 좌표 기반 날짜 바인딩 부족</div>
+          <div class="reason">이유: 헤더/푸터·테이블 영역 분리 미흡, 페이지 전개 시 범위 유실</div>
+        </div>
+        <div><span class="badge status-blocked">blocked</span></div>
+      </div>
+      <div class="task">
+        <div>
+          <div class="task-title">report ⊆ vnexsus 보장 부재</div>
+          <div class="reason">원인: Teacher/Validator 루프 미완성</div>
+          <div class="reason">이유: 이벤트 라벨링 및 매칭 규칙 스키마화 지연</div>
+        </div>
+        <div><span class="badge status-pending">pending</span></div>
+      </div>
+      <div class="task">
+        <div>
+          <div class="task-title">고위험 이벤트 Core 노출 미보장</div>
+          <div class="reason">원인: 절대규칙 레이어 미적용</div>
+          <div class="reason">이유: 코드·키워드 집합 초기화 전</div>
+        </div>
+        <div><span class="badge status-pending">pending</span></div>
+      </div>
+    </section>
+    <section class="panel" style="margin-top:18px">
+      <h2>문서 인벤토리 및 공정율</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>문서</th><th>유형</th><th>상태</th><th>공정율</th><th>원인</th><th>이유</th><th>링크</th>
+          </tr></thead>
+          <tbody id="docTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>개발 그룹(우선 정렬)</h2>
+      <div id="groups" class="row"></div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>고도화 PRD: OCR 좌표 기반 날짜 분류 엔진</h2>
+      <div class="row">
+        <div class="group-card">
+          <h3>제품 요구사항</h3>
+          <div class="task"><div><div class="task-title">좌표 앵커 기반 DateBinder</div><div class="reason">원인: 문단·표·헤더/푸터 구획 인식 필요</div><div class="reason">이유: 바운딩박스와 텍스트 토큰 연결</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">페이지 전개·멀티페이지 구간 결합</div><div class="reason">원인: 페이지 경계에서 날짜-이벤트 분리</div><div class="reason">이유: 흐름 기반 윈도우로 문맥 연결</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">헤더/푸터·테이블 감지 및 제외</div><div class="reason">원인: 비내용 영역에 날짜 출현</div><div class="reason">이유: 오탐 제거로 정밀도 향상</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">의료용어·ICD·병원 정규화</div><div class="reason">원인: 도메인 용어 다양성</div><div class="reason">이유: 사전·룰·스코어링 연계</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">report ⊆ vnexsus Validator 연동</div><div class="reason">원인: 누락 이벤트 자동 탐지</div><div class="reason">이유: 튜닝 루프로 recall 개선</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">고위험 절대규칙 레이어</div><div class="reason">원인: 핵심 이벤트 누락 방지</div><div class="reason">이유: Core 레이어 상시 포함</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">Episode 클러스터링</div><div class="reason">원인: 반복·기간 요약 필요</div><div class="reason">이유: 조사자 시각 문장 생성</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">Self-confidence·안전모드</div><div class="reason">원인: 불확실 케이스 방어</div><div class="reason">이유: 출력 경로 전환</div></div><div><span class="badge status-pending">pending</span></div></div>
+          <div class="task"><div><div class="task-title">설명가능성 메타데이터</div><div class="reason">원인: 출처·룰·질문ID 추적</div><div class="reason">이유: 조사자 검증 지원</div></div><div><span class="badge status-in_progress">in progress</span></div></div>
+          <div class="task"><div><div class="task-title">성능·비용 최적화</div><div class="reason">원인: 오프라인 배치·캐시</div><div class="reason">이유: 처리시간·비용 절감</div></div><div><span class="badge status-pending">pending</span></div></div>
+        </div>
+        <div class="group-card">
+          <h3>Tasks</h3>
+          <div id="prdTasks"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>미반영 목록</h2>
+      <div id="notApplied"></div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>완료 목록</h2>
+      <div id="completed"></div>
+    </section>
+
+    <section class="panel" style="margin-top:18px">
+      <h2>고도화 버전 흡수 계획</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>대상 문서</th><th>흡수 방식</th><th>현 상태</th><th>비고</th></tr></thead>
+          <tbody id="absorbTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footer">오프라인 리포트 · 수동 업데이트 가능 · 로컬스토리지에 저장</div>
+  </div>
+
+  <div class="modal" id="editModal">
+    <div class="modal-inner">
+      <h3>데이터 편집</h3>
+      <textarea id="editArea"></textarea>
+      <div class="controls">
+        <button class="button" id="btnSave">저장</button>
+        <button class="button" id="btnClose">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const now = new Date();
+    const z = n => String(n).padStart(2,'0');
+    document.getElementById('generatedAt').textContent = `${now.getFullYear()}-${z(now.getMonth()+1)}-${z(now.getDate())} ${z(now.getHours())}:${z(now.getMinutes())}`;
+    const statusOrder = { in_progress:5, pending:4, blocked:3, not_applied:2, completed:1 };
+
+    const initial = {
+      docs: [
+        { name: "00_README.md", type: "개요", status: "completed", progress: 100, cause: "패키지 개요 확정", reason: "A/B/C 목표·구성 명시", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/00_README.md" },
+        { name: "VNEXSUS_Architecture_Review.md", type: "아키텍처 리뷰", status: "completed", progress: 100, cause: "현 구조 정리", reason: "강·약점 평가 포함", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_Architecture_Review.md" },
+        { name: "VNEXSUS_Execution_Roadmap.md", type: "로드맵", status: "completed", progress: 100, cause: "Phase·목표 정의", reason: "A/B/C 단계 연결", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_Execution_Roadmap.md" },
+        { name: "VNEXSUS_PRD_A-B-C.md", type: "PRD", status: "in_progress", progress: 70, cause: "품질 목표·기능 요구 반영", reason: "Teacher/Validator·절대규칙 대기", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_PRD_A-B-C.md" },
+        { name: "T01_SSOT_Event_Model.md", type: "Task", status: "pending", progress: 0, cause: "스키마 확정 필요", reason: "후처리 전면 의존 전환", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T01_SSOT_Event_Model.md" },
+        { name: "T02_Report_Subset_Validator_v1.md", type: "Task", status: "in_progress", progress: 40, cause: "파서·매칭 구현 진행", reason: "누락 리포트 생성 대기", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T02_Report_Subset_Validator_v1.md" },
+        { name: "T03_Event_Labeling_Stats.md", type: "Task", status: "pending", progress: 0, cause: "Validator 확장 대기", reason: "labelInReport 스키마 추가", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T03_Event_Labeling_Stats.md" },
+        { name: "T04_Base_Scoring_Function.md", type: "Task", status: "pending", progress: 0, cause: "feature 선택 대기", reason: "severity·기간·organSystem", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T04_Base_Scoring_Function.md" },
+        { name: "T05_Critical_Risk_Rules.md", type: "Task", status: "pending", progress: 0, cause: "코드·키워드 세트 초기화 필요", reason: "Core 레이어 포함 규칙", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T05_Critical_Risk_Rules.md" },
+        { name: "T06_Question_Map_and_Rule_Engine.md", type: "Task", status: "pending", progress: 0, cause: "Question Map 정의 대기", reason: "룰 엔진 연동", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T06_Question_Map_and_Rule_Engine.md" },
+        { name: "T07_Episode_Clustering.md", type: "Task", status: "pending", progress: 0, cause: "클러스터 기준 합의 필요", reason: "Episode 요약 로직", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T07_Episode_Clustering.md" },
+        { name: "T08_Report_Template_and_Sections.md", type: "Task", status: "pending", progress: 0, cause: "섹션·템플릿 정의", reason: "포맷터 구현", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T08_Report_Template_and_Sections.md" },
+        { name: "T09_Self_Confidence_and_Safe_Mode.md", type: "Task", status: "pending", progress: 0, cause: "지표·규칙 설계", reason: "안전모드 출력 경로", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/tasks/T09_Self_Confidence_and_Safe_Mode.md" },
+        { name: "index.html", type: "현황 대시보드", status: "completed", progress: 100, cause: "지표 시각화", reason: "실시간 메트릭 표시", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/index.html" },
+        { name: "report.html", type: "파이프라인 리포트", status: "in_progress", progress: 60, cause: "성능·검증 지표 수집", reason: "앱 가능성 평가 포함", href: "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/report.html" },
+        { name: "prompt_improvement_report.html", type: "프롬프트 개선", status: "in_progress", progress: 40, cause: "구조·상관·날짜규칙 개선", reason: "권고 목록 반영 필요", href: "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-46-12-879Z/prompt_improvement_report.html" },
+        { name: "validation_report.html", type: "검증보고서", status: "in_progress", progress: 60, cause: "베이스라인 매칭 반영", reason: "좌표 기반 바인딩 개선 진행", href: "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-46-12-879Z/validation_report.html" }
+      ],
+      groups: [
+        {
+          name: "파이프라인 안정화·검증",
+          tasks: [
+            { title: "룰 기반 전처리 통합", status: "in_progress", progress: 65, cause: "모듈 의존 조정", reason: "전처리 결과 표준화" },
+            { title: "NaN·유효성 가드 강화", status: "pending", progress: 40, cause: "입력 포맷 불안정", reason: "스키마 검증 추가" },
+            { title: "결과 형식 표준화", status: "in_progress", progress: 55, cause: "리포트 포맷 불일치", reason: "CSV·HTML 동기화" }
+          ]
+        },
+        {
+          name: "좌표→의료 이벤트 추출",
+          tasks: [
+            { title: "좌표 DateBinder 통합", status: "in_progress", progress: 50, cause: "좌표 품질 변동", reason: "앵커·매칭 튜닝" },
+            { title: "키워드 매칭 강화", status: "pending", progress: 30, cause: "도메인 용어 다양성", reason: "사전 업데이트" }
+          ]
+        },
+        {
+          name: "보고서·모니터링",
+          tasks: [
+            { title: "공정율 템플릿 복구", status: "completed", progress: 100, cause: "UI 롤백", reason: "딥블루 디자인" },
+            { title: "Static Reports Server", status: "completed", progress: 100, cause: "표시 오류 대응", reason: "정적 라우팅" }
+          ]
+        }
+      ],
+      syncTasks: [
+        { id:"t-block-aggregate", name:"페이지별 블록 집계 및 텍스트 연결", status:"doing", progress:60, priority:1 },
+        { id:"t-labeling", name:"좌표 기반 라벨링", status:"doing", progress:45, priority:2 },
+        { id:"t-report-recall", name:"보고서 리콜 개선", status:"doing", progress:40, priority:3 },
+        { id:"t-cost-opt", name:"비용 최적화", status:"doing", progress:35, priority:4 },
+        { id:"t-investigator-api", name:"Investigator View API 안정화", status:"done", progress:100, priority:5 },
+        { id:"t-memory-optimizer", name:"Memory Optimizer 테스트 모드", status:"done", progress:100, priority:6 },
+        { id:"t-progress-tracking", name:"대용량 스트림 진행률 수정", status:"done", progress:100, priority:7 },
+        { id:"t-vision-parser", name:"OCR 좌표 추출 파서 안정화", status:"done", progress:100, priority:8 }
+      ],
+      absorb: [
+        { doc:"VNEXSUS_PRD_A-B-C.md", mode:"PRD 기반으로 흡수", state:"in_progress", note:"좌표 날짜분류 요구 추가" },
+        { doc:"validation_report.html", mode:"검증 지표로 흡수", state:"blocked", note:"날짜·ICD·병원 지표 반영" },
+        { doc:"prompt_improvement_report.html", mode:"프롬프트 권고 흡수", state:"in_progress", note:"날짜규칙·중복억제 적용" },
+        { doc:"report.html", mode:"파이프라인 통계 흡수", state:"in_progress", note:"성능·가능성 점수 반영" }
+      ],
+      tasks: [
+        { "id": "t-block-aggregate", "name": "페이지별 블록 집계 및 텍스트 연결", "desc": "OCR 블록을 페이지 단위로 연결", "status": "doing", "progress": 75, "priority": 1, "category": "Tasks", "updatedAt": "2025-12-28T10:46:12.879Z", "links": [] },
+        { "id": "t-labeling", "name": "좌표 기반 라벨링", "desc": "테이블/헤더/푸터 규칙 라벨링", "status": "doing", "progress": 60, "priority": 2, "category": "PRD", "updatedAt": "2025-12-28T10:46:12.879Z", "links": [ { "label": "offlineCoordAnalyzer.js", "href": "file:///c:/VNEXSUS_12-07/backend/tools/offlineCoordAnalyzer.js" }, { "label": "offline_coord_analysis.html", "href": "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-04-46-823Z/offline_coord_analysis.html" } ] },
+        { "id": "t-report-recall", "name": "보고서 리콜 개선", "desc": "A/B/C 품질 기준 반영", "status": "doing", "progress": 60, "priority": 3, "category": "PRD", "updatedAt": "2025-12-28T10:46:12.879Z", "links": [ { "label": "VNEXSUS_PRD_A-B-C.md", "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/VNEXSUS_PRD_A-B-C.md" } ] },
+        { "id": "t-cost-opt", "name": "비용 최적화", "desc": "오프라인 OCR 배치·캐시", "status": "doing", "progress": 65, "priority": 4, "category": "Roadmap", "updatedAt": "2025-12-28T10:52:09.107Z", "links": [ { "label": "visionService.js", "href": "file:///c:/VNEXSUS_12-07/backend/services/visionService.js" }, { "label": "배치 재처리 report.html", "href": "file:///c:/VNEXSUS_12-07/reports/VNEXSUS_Report/2025-12-28T10-46-12-879Z/report.html" } ] },
+        { "id": "t-investigator-api", "name": "Investigator View API 안정화", "desc": "API 경로/응답 일관성", "status": "done", "progress": 100, "priority": 5, "category": "Tasks", "updatedAt": "2025-12-27T00:00:00.000Z", "completedAt": "2025-12-27T00:00:00.000Z", "links": [ { "label": "ocrController.js", "href": "file:///c:/VNEXSUS_12-07/backend/controllers/ocrController.js" } ] },
+        { "id": "t-memory-optimizer", "name": "Memory Optimizer 테스트 모드", "desc": "테스트 중 모니터링 중지", "status": "done", "progress": 100, "priority": 6, "category": "Tasks", "updatedAt": "2025-12-27T00:00:00.000Z", "completedAt": "2025-12-27T00:00:00.000Z", "links": [ { "label": "memoryOptimizer.js", "href": "file:///c:/VNEXSUS_12-07/backend/utils/memoryOptimizer.js" } ] },
+        { "id": "t-progress-tracking", "name": "대용량 스트림 진행률 수정", "desc": "this 컨텍스트 및 재시도 상한", "status": "done", "progress": 100, "priority": 7, "category": "Tasks", "updatedAt": "2025-12-27T00:00:00.000Z", "completedAt": "2025-12-27T00:00:00.000Z", "links": [ { "label": "largeFileHandler.js", "href": "file:///c:/VNEXSUS_12-07/backend/services/largeFileHandler.js" } ] },
+        { "id": "t-vision-parser", "name": "OCR 좌표 추출 파서 안정화", "desc": "GCS·Vision 연동 검증", "status": "done", "progress": 100, "priority": 8, "category": "PRD", "updatedAt": "2025-12-27T00:00:00.000Z", "completedAt": "2025-12-27T00:00:00.000Z", "links": [ { "label": "visionService.js", "href": "file:///c:/VNEXSUS_12-07/backend/services/visionService.js" } ] },
+        { "id": "t-report-ui-compact", "name": "상단 고정필드 간략화", "desc": "헤더 축소 및 요약 배지 추가", "status": "done", "progress": 100, "priority": 9, "category": "Tasks", "updatedAt": "2025-12-28T00:00:00.000Z", "completedAt": "2025-12-28T00:00:00.000Z", "links": [ { "label": "25-12-28_Progress_Rate_Report.html", "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/25-12-28_Progress_Rate_Report.html" } ] },
+        { "id": "t-offline-sync", "name": "오프라인 백업·온라인 동기화", "desc": "JSON/HTML 스냅샷 및 서버 자동 동기화", "status": "done", "progress": 100, "priority": 9, "category": "Tasks", "updatedAt": "2025-12-28T00:00:00.000Z", "completedAt": "2025-12-28T00:00:00.000Z", "links": [ { "label": "sync_data.json", "href": "file:///c:/VNEXSUS_12-07/VNEXSUS_A-B-C_Execution_Plan/sync_data.json" } ] },
+        { "id": "t-prepared-cases", "name": "좌표 케이스 표준화", "desc": "좌표 포함·텍스트만 케이스 분류 및 manifest 생성", "status": "done", "progress": 100, "priority": 1, "category": "Tasks", "updatedAt": "2025-12-28T10:52:09.107Z", "links": [ { "label": "prepared manifest", "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/manifest.json" }, { "label": "coords 폴더", "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/coords" }, { "label": "text_only 폴더", "href": "file:///c:/VNEXSUS_12-07/reports/prepared_coordinate_cases/2025-12-28T10-52-07-642Z/text_only" } ], "totals": { "coords": 31, "textOnly": 32 } }
+      ]
+    };
+
+    const persistKey = "vnexsusProgressData";
+    const readLocal = () => {
+      try { const s = localStorage.getItem(persistKey); return s ? JSON.parse(s) : null; } catch { return null; }
+    };
+    const writeLocal = d => { try { localStorage.setItem(persistKey, JSON.stringify(d)); } catch {} };
+
+    const state = readLocal() || initial;
+    const tasksList = (state.tasks && state.tasks.length) ? state.tasks : (state.syncTasks || []);
+    const totalMax = tasksList.length * 100;
+    const sumProgress = tasksList.reduce((a,t)=>a+(t.progress||0),0);
+    const executed = totalMax ? Math.round(sumProgress / totalMax * 100) : 0;
+    const remaining = totalMax ? Math.max(0, 100 - executed) : 100;
+    const cntStatus = s => tasksList.filter(t=>t.status===s).length;
+    document.getElementById('executedFill').style.width = `${executed}%`;
+    const remainingFillEl = document.getElementById('remainingFill');
+    if (remainingFillEl) remainingFillEl.style.width = `${remaining}%`;
+    document.getElementById('executedPct').textContent = `진행 ${executed}%`;
+    document.getElementById('remainingPct').textContent = `잔여 ${remaining}%`;
+    document.getElementById('kpiInProgress').textContent = cntStatus('doing');
+    document.getElementById('kpiPending').textContent = cntStatus('pending');
+    document.getElementById('kpiNotApplied').textContent = cntStatus('not_applied');
+    document.getElementById('kpiCompleted').textContent = cntStatus('done');
+    const weightedDen = tasksList.reduce((a,t)=>a+((9-(t.priority||9))||0),0) || 1;
+    const weightedNum = tasksList.reduce((a,t)=>a+((t.progress||0)*((9-(t.priority||9))||0)),0);
+    const weighted = Math.round(weightedNum / weightedDen);
+    document.getElementById('kpiWeighted').textContent = `${weighted}%`;
+    const miniOverallEl = document.getElementById('miniOverall');
+    if (miniOverallEl) miniOverallEl.textContent = `진행 ${executed}% · 잔여 ${remaining}%`;
+    const miniCountsEl = document.getElementById('miniCounts');
+    if (miniCountsEl) miniCountsEl.textContent = `진행 중 ${cntStatus('doing')} · 완료 ${cntStatus('done')}`;
+
+    const docTbody = document.getElementById('docTable');
+    const docsData = Array.isArray(state.docs) ? state.docs : initial.docs;
+    docsData.forEach(d => {
+      const tr = document.createElement('tr');
+      const pct = `<div class="progress"><div class="fill" style="width:${d.progress}%"></div></div><div class="badge">${d.progress}%</div>`;
+      tr.innerHTML = `<td>${d.name}</td><td>${d.type}</td><td><span class="badge status-${d.status}">${d.status.replace('_',' ')}</span></td><td>${pct}</td><td>${d.cause}</td><td>${d.reason}</td><td><a class="link" href="${d.href}">열기</a></td>`;
+      docTbody.appendChild(tr);
+    });
+
+    const groupsEl = document.getElementById('groups');
+    const groupsData = Array.isArray(state.groups) ? state.groups : initial.groups;
+    const groupScore = g => {
+      const s = g.tasks.reduce((acc,t)=>acc+statusOrder[t.status],0);
+      const allDone = g.tasks.every(t=>t.status==='completed');
+      return allDone ? -999 : s;
+    };
+    const orderedGroups = [...groupsData].sort((a,b)=>groupScore(b)-groupScore(a));
+    orderedGroups.forEach(g => {
+      const gp = Math.round(g.tasks.reduce((a,t)=>a+t.progress,0)/g.tasks.length);
+      const card = document.createElement('div');
+      card.className = 'group-card';
+      const title = document.createElement('div');
+      title.innerHTML = `<h3>${g.name}</h3><div class="progress"><div class="fill" style="width:${gp}%"></div></div><div class="badge">${gp}%</div>`;
+      card.appendChild(title);
+      const list = document.createElement('div');
+      g.tasks.sort((a,b)=>statusOrder[b.status]-statusOrder[a.status] || b.progress - a.progress).forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'task';
+        const left = document.createElement('div');
+        left.innerHTML = `<div class="task-title">${t.title}</div><div class="progress"><div class="fill" style="width:${t.progress}%"></div></div><div class="reason">원인: ${t.cause}</div><div class="reason">이유: ${t.reason}</div>`;
+        const right = document.createElement('div');
+        right.innerHTML = `<span class="badge status-${t.status}">${t.status.replace('_',' ')}</span>`;
+        item.appendChild(left);
+        item.appendChild(right);
+        list.appendChild(item);
+      });
+      card.appendChild(list);
+      groupsEl.appendChild(card);
+    });
+
+    const prdTasksEl = document.getElementById('prdTasks');
+    const prdTasks = [
+      { title:"좌표 앵커 탐지", progress:55, status:"in_progress", cause:"레이아웃 다양성", reason:"표·문단·헤더/푸터 분류" },
+      { title:"DateBinder 윈도우 결합", progress:40, status:"pending", cause:"경계 이슈", reason:"멀티페이지 연결" },
+      { title:"테이블 제외·정규화", progress:50, status:"in_progress", cause:"테이블 내 날짜 혼입", reason:"셀 범위 판단" },
+      { title:"의료용어·ICD 정규화", progress:30, status:"pending", cause:"사전 스케일", reason:"룰·스코어 연계" },
+      { title:"Validator 통합", progress:35, status:"pending", cause:"누락 탐지 연계", reason:"리콜 튜닝" },
+      { title:"Critical Risk 룰", progress:25, status:"pending", cause:"절대규칙 정의", reason:"Core 상시 포함" },
+      { title:"Episode 요약", progress:20, status:"pending", cause:"클러스터 기준", reason:"기간·횟수 요약" },
+      { title:"Self-confidence", progress:15, status:"pending", cause:"지표 정의", reason:"안전모드 전환" },
+      { title:"설명가능성 메타", progress:45, status:"in_progress", cause:"출처·룰·질문ID", reason:"검증 지원" },
+      { title:"성능·비용", progress:35, status:"pending", cause:"배치·캐시", reason:"오프라인 최적화" }
+    ];
+    prdTasks.forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'task';
+      item.innerHTML = `<div><div class="task-title">${t.title}</div><div class="progress"><div class="fill" style="width:${t.progress}%"></div></div><div class="reason">원인: ${t.cause}</div><div class="reason">이유: ${t.reason}</div></div><div><span class="badge status-${t.status}">${t.status.replace('_',' ')}</span></div>`;
+      prdTasksEl.appendChild(item);
+    });
+
+    const renderList = (elId, tasks) => {
+      const wrap = document.getElementById(elId);
+      if (!tasks.length) { wrap.innerHTML = `<div class="reason">항목 없음</div>`; return; }
+      const frag = document.createElement('div');
+      tasks.forEach(t => {
+        const item = document.createElement('div');
+        item.className = 'task';
+        item.innerHTML = `<div><div class="task-title">${t.title}</div><div class="progress"><div class="fill" style="width:${t.progress}%"></div></div><div class="reason">원인: ${t.cause}</div><div class="reason">이유: ${t.reason}</div></div><div><span class="badge status-${t.status}">${t.status.replace('_',' ')}</span></div>`;
+        frag.appendChild(item);
+      });
+      wrap.appendChild(frag);
+    };
+    const allGroupTasks = groupsData.flatMap(g => g.tasks);
+    renderList('notApplied', allGroupTasks.filter(t => t.status==='not_applied'));
+    renderList('completed', allGroupTasks.filter(t => t.status==='completed'));
+
+    const absorbTbody = document.getElementById('absorbTable');
+    const absorbData = Array.isArray(state.absorb) ? state.absorb : initial.absorb;
+    absorbData.forEach(a => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${a.doc}</td><td>${a.mode}</td><td><span class="badge status-${a.state}">${a.state.replace('_',' ')}</span></td><td>${a.note}</td>`;
+      absorbTbody.appendChild(tr);
+    });
+
+    const fileInput = document.getElementById('fileInput');
+    document.getElementById('btnImport').addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async e => {
+      const f = e.target.files?.[0];
+      if (!f) return;
+      const txt = await f.text();
+      try {
+        const parsed = JSON.parse(txt);
+        writeLocal(parsed);
+        location.reload();
+      } catch {}
+    });
+    const modal = document.getElementById('editModal');
+    const editArea = document.getElementById('editArea');
+    document.getElementById('btnEdit').addEventListener('click', () => {
+      editArea.value = JSON.stringify(state, null, 2);
+      modal.style.display = 'flex';
+    });
+    document.getElementById('btnClose').addEventListener('click', () => modal.style.display = 'none');
+    document.getElementById('btnSave').addEventListener('click', () => {
+      try {
+        const parsed = JSON.parse(editArea.value);
+        writeLocal(parsed);
+        modal.style.display = 'none';
+        location.reload();
+      } catch {}
+    });
+    const downloadFile = (name, content, type) => {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+    document.getElementById('btnExportJson').addEventListener('click', () => {
+      const d = new Date(); const yy = String(d.getFullYear()).slice(2); const mm = String(d.getMonth()+1).padStart(2,'0'); const dd = String(d.getDate()).padStart(2,'0');
+      downloadFile(`${yy}-${mm}-${dd}_sync_data.json`, JSON.stringify(state, null, 2), "application/json");
+    });
+    document.getElementById('btnExportHtml').addEventListener('click', () => {
+      const d = new Date(); const yy = String(d.getFullYear()).slice(2); const mm = String(d.getMonth()+1).padStart(2,'0'); const dd = String(d.getDate()).padStart(2,'0');
+      const html = "<!doctype html>\n" + document.documentElement.outerHTML;
+      downloadFile(`${yy}-${mm}-${dd}_Progress_Rate_Report.html`, html, "text/html");
+    });
+    // 오프라인 모드: 서버 동기화 기능 제거
+  </script>
+</body>
+</html>

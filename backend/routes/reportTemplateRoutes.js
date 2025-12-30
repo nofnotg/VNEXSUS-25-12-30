@@ -18,11 +18,15 @@ router.get('/basic', async (req, res) => {
     const QuerySchema = z.object({
       locale: z.enum(['ko', 'en']).optional(),
       format: z.enum(['html', 'text', 'json', 'markdown']).optional(),
+      phase: z.enum(['A', 'B', 'C']).optional(),
+      includeAmounts: z.union([z.literal('true'), z.literal('false')]).optional(),
     });
 
     const parsed = QuerySchema.safeParse(req.query);
     const locale = parsed.success ? (parsed.data.locale ?? 'ko') : 'ko';
     const format = parsed.success ? (parsed.data.format ?? 'html') : 'html';
+    const phase = parsed.success ? parsed.data.phase : undefined;
+    const includeClaimAmounts = parsed.success ? parsed.data.includeAmounts === 'true' : false;
 
     const sampleData = {
       header: { title: '의료 경과보고서', subtitle: 'Medical Progress Report' },
@@ -39,29 +43,30 @@ router.get('/basic', async (req, res) => {
     };
 
     const engine = new ReportTemplateEngine();
+    const normalized = typeof engine.normalizeData === 'function' ? engine.normalizeData(sampleData) : sampleData;
 
     let payload = '';
     switch (format) {
       case 'json':
-        payload = engine.createJsonTemplate(sampleData, { locale });
+        payload = engine.createJsonTemplate(normalized, { locale, includeClaimAmounts, phase });
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         break;
       case 'markdown':
-        payload = engine.createMarkdownTemplate(sampleData, { locale });
+        payload = engine.createMarkdownTemplate(normalized, { locale, includeClaimAmounts, phase });
         res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
         break;
       case 'text':
-        payload = engine.createTextTemplate(sampleData, { locale });
+        payload = engine.createTextTemplate(normalized, { locale, includeClaimAmounts, phase });
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         break;
       case 'html':
       default:
-        payload = engine.createHtmlTemplate(sampleData, { locale });
+        payload = engine.createHtmlTemplate(normalized, { locale, includeClaimAmounts, phase });
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
     }
 
     res.status(200).send(payload);
-    logger.logApiResponse(req, res, Date.now() - startedAt, { locale, format });
+    logger.logApiResponse(req, res, Date.now() - startedAt, { locale, format, phase, includeClaimAmounts });
   } catch (error) {
     logger.logProcessingError('report-template-basic', error, { query: maskObject(req.query) });
     res.status(500).json({ success: false, message: 'report_generation_failed' });

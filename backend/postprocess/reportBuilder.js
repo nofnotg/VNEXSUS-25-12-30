@@ -9,6 +9,7 @@
 
 import fs from 'fs/promises';
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 class ReportBuilder {
   constructor() {
@@ -27,7 +28,7 @@ class ReportBuilder {
     try {
       await this._ensureReportDirectory();
 
-      const reportId = `report_${Date.now()}`;
+      const reportId = `report_${Date.now()}_${uuidv4().slice(0, 8)}`;
       const baseFilename = `${reportId}_${patientInfo.name || 'unknown'}`;
 
       // 데이터 준비 (null-safe)
@@ -106,7 +107,11 @@ class ReportBuilder {
         rawText: item.rawText || '',
         keywordMatches: item.keywordMatches || [],
         isWithin3Months,
-        isWithin5Years
+        isWithin5Years,
+        labelScore: item.labels?.labelScore ?? null,
+        dateInReport: item.labels?.dateInReport ?? false,
+        icdInReport: item.labels?.icdInReport ?? false,
+        hospitalInReport: item.labels?.hospitalInReport ?? false
       };
     });
 
@@ -183,6 +188,10 @@ class ReportBuilder {
         content: item.content,
         isWithin3Months: item.isWithin3Months,
         isWithin5Years: item.isWithin5Years,
+        labelScore: item.labelScore,
+        dateInReport: item.dateInReport,
+        icdInReport: item.icdInReport,
+        hospitalInReport: item.hospitalInReport,
         rawText: options.includeRawText ? item.rawText : undefined
       }))
     };

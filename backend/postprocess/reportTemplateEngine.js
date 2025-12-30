@@ -330,21 +330,28 @@ class ReportTemplateEngine {
     const formatIcdInText = (text) => {
       if (typeof text !== 'string' || text.length === 0) return text || '';
       let s = text;
+      const canonicalize = (code) => {
+        const raw = String(code).replace(/\s+/g, '');
+        if (/^[A-Z][0-9]{2}[0-9A-Z]{1,2}$/.test(raw)) {
+          return `${raw.slice(0, 3)}.${raw.slice(3)}`;
+        }
+        if (/^[A-Z][0-9]{3}$/.test(raw)) {
+          return `${raw.slice(0, 3)}.${raw.slice(3)}`;
+        }
+        return raw;
+      };
       // 1) Fix stray dot outside ICD parentheses: ((ICD: I20).9) -> [I20.9]
       s = s.replace(/\(\s*ICD\s*:\s*([A-Z])\s*([0-9]{2})\s*\)\s*\.+\s*([0-9A-Z]{1,2})/g,
-        (_m, L, M, m) => `<strong class="icd-code">[${L}${M}.${m}]</strong>`);
+        (_m, L, M, m) => `<strong class="icd-code">${L}${M}.${m}</strong>`);
       // 2) Replace (ICD: CODE) with formatted code
       s = s.replace(/\(\s*ICD\s*:\s*([A-Z]\s*[0-9]{2}(?:\s*[0-9A-Z]{1,2})?)\s*\)/g,
         (_m, code) => {
-          const raw = String(code).replace(/\s+/g, '');
-          if (/^[A-Z][0-9]{2}[0-9A-Z]{1,2}$/.test(raw)) {
-            return `<strong class="icd-code">[${raw.slice(0, 3)}.${raw.slice(3)}]</strong>`;
-          }
-          return `<strong class="icd-code">[${raw}]</strong>`;
+          const canonical = canonicalize(code);
+          return `<strong class="icd-code">${canonical}</strong>`;
         });
       // 3) Replace standalone ICD forms
       s = s.replace(/ICD\s*코드\s*[:\s]?\s*([A-Z]\s*[0-9]{2}(?:\s*[0-9A-Z]{1,2})?)/g,
-        (_m, code) => `<strong class="icd-code">[${String(code).replace(/\s+/g, '')}]</strong>`);
+        (_m, code) => `<strong class="icd-code">${canonicalize(code)}</strong>`);
       return s;
     };
     return `
@@ -454,8 +461,8 @@ class ReportTemplateEngine {
             <div class="timeline-item ${item.isWithin3Months ? 'period-3m' : item.isWithin5Years ? 'period-5y' : ''}">
                 <div class="date-block">📅 ${item.date}</div>
                 <p><span class="item-label">병원명</span> ${item.hospital || 'N/A'}</p>
-                <p><span class="item-label">내원경위</span> ${item.event || item.visitReason || 'N/A'}</p>
-                <p><span class="item-label">진단명</span> ${formatIcdInText(item.diagnosis || item.details || '')}</p>
+                <p><span class="item-label">내원경위</span> ${formatIcdInText(item.event || item.visitReason || 'N/A')}</p>
+                <p><span class="item-label">진단명</span> ${formatIcdInText(item.diagnosis || item.details || item.event || '')}</p>
                 ${item.treatment ? `<p><span class="item-label">치료내용</span> ${item.treatment}</p>` : ''}
             </div>
         `).join('')}

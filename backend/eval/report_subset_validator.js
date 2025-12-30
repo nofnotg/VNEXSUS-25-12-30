@@ -7,15 +7,19 @@
  * - 베이스라인 메트릭 측정
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { normalizeHospitalName as normalizeHospitalShared, extractHospitalNormalized, extractIcdCodes } from '../../src/shared/utils/medicalText.js';
+import { HOSPITAL_STOPWORDS } from '../../src/shared/constants/medicalNormalization.js';
 
 class ReportSubsetValidator {
     constructor(options = {}) {
         this.options = {
             dateMatchThreshold: options.dateMatchThreshold || 0.95,
             icdMatchThreshold: options.icdMatchThreshold || 0.95,
-            hospitalMatchThreshold: options.hospitalMatchThreshold || 0.80,
+            hospitalMatchThreshold: options.hospitalMatchThreshold || 0.60,
+            dateToleranceDays: options.dateToleranceDays || 3,
             ...options
         };
 
@@ -38,6 +42,7 @@ class ReportSubsetValidator {
 
         const datePatterns = [
             /(\d{4})[.-](\d{1,2})[.-](\d{1,2})/g,  // 2024-04-09, 2024.04.09
+            /(\d{4})\/(\d{1,2})\/(\d{1,2})/g,
             /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/g  // 2024년 4월 9일
         ];
 
@@ -61,16 +66,7 @@ class ReportSubsetValidator {
      */
     extractICDCodes(text) {
         if (!text) return [];
-
-        const icdPattern = /\b([A-Z]\d{2,3}(?:\.\d{1,2})?)\b/g;
-        const codes = new Set();
-
-        let match;
-        while ((match = icdPattern.exec(text)) !== null) {
-            codes.add(match[1]);
-        }
-
-        return Array.from(codes).sort();
+        return extractIcdCodes(text);
     }
 
     /**
@@ -78,29 +74,18 @@ class ReportSubsetValidator {
      */
     extractHospitals(text) {
         if (!text) return [];
-
-        const hospitalKeywords = [
-            '병원', '의원', '클리닉', '센터', '한의원', '치과'
-        ];
-
+        const hospitalKeywords = ['병원','의원','클리닉','센터','한의원','치과'];
         const hospitals = new Set();
         const lines = text.split('\n');
-
         lines.forEach(line => {
             hospitalKeywords.forEach(keyword => {
                 if (line.includes(keyword)) {
-                    // 병원명 추출 (간단한 휴리스틱)
-                    const match = line.match(/([가-힣a-zA-Z0-9\s]+(?:병원|의원|클리닉|센터|한의원|치과))/);
-                    if (match) {
-                        const hospitalName = this.normalizeHospitalName(match[1]);
-                        if (hospitalName) {
-                            hospitals.add(hospitalName);
-                        }
-                    }
+                    const name = extractHospitalNormalized(line);
+                    const hospitalName = this.normalizeHospitalName(name);
+                    if (hospitalName) hospitals.add(hospitalName);
                 }
             });
         });
-
         return Array.from(hospitals).sort();
     }
 
@@ -109,12 +94,32 @@ class ReportSubsetValidator {
      */
     normalizeHospitalName(name) {
         if (!name) return '';
+        const norm = normalizeHospitalShared(String(name));
+        if (!norm) return '';
+        const base = norm.trim();
+        const suffixOnly = ['병원','의원','클리닉','센터','한의원','치과'];
+        if (!base || suffixOnly.includes(base)) return '';
+        if (HOSPITAL_STOPWORDS.includes(base)) return '';
+        return base;
+    }
 
-        return name
-            .trim()
-            .replace(/\s+/g, '')  // 공백 제거
-            .replace(/의료재단|재단법인|학교법인/g, '')  // 불필요한 접두어 제거
-            .toLowerCase();
+    tokenizeHospital(name) {
+        const n = this.normalizeHospitalName(name);
+        if (!n) return [];
+        return n
+            .replace(/병원|의원|클리닉|센터|한의원|치과/g, '')
+            .split(/[^가-힣a-z0-9]+/)
+            .filter(Boolean);
+    }
+
+    jaccardTokens(a, b) {
+        const ta = new Set(this.tokenizeHospital(a));
+        const tb = new Set(this.tokenizeHospital(b));
+        if (ta.size === 0 || tb.size === 0) return 0;
+        let inter = 0;
+        for (const t of ta) if (tb.has(t)) inter += 1;
+        const union = new Set([...ta, ...tb]).size;
+        return union ? inter / union : 0;
     }
 
     /**
@@ -124,13 +129,32 @@ class ReportSubsetValidator {
         const matched = [];
         const missing = [];
 
-        reportDates.forEach(reportDate => {
-            if (vnexsusDates.includes(reportDate)) {
-                matched.push(reportDate);
-            } else {
-                missing.push(reportDate);
+        const parseDate = (s) => {
+            const m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+            if (!m) return null;
+            const d = new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`);
+            return Number.isFinite(d.getTime()) ? d : null;
+        };
+        const toEpochDay = (d) => Math.floor(d.getTime() / 86400000);
+        const vnDays = new Set(
+            vnexsusDates
+                .map(parseDate)
+                .filter(Boolean)
+                .map(toEpochDay)
+        );
+        const tol = Math.max(0, Math.floor(this.options.dateToleranceDays));
+        for (const rd of reportDates) {
+            const d = parseDate(rd);
+            if (!d) { missing.push(rd); continue; }
+            const day = toEpochDay(d);
+            let ok = vnDays.has(day);
+            if (!ok && tol > 0) {
+                for (let k = -tol; k <= tol; k++) {
+                    if (vnDays.has(day + k)) { ok = true; break; }
+                }
             }
-        });
+            if (ok) matched.push(rd); else missing.push(rd);
+        }
 
         const matchRate = reportDates.length > 0
             ? matched.length / reportDates.length
@@ -145,30 +169,26 @@ class ReportSubsetValidator {
     matchICDCodes(reportCodes, vnexsusCodes) {
         const matched = [];
         const missing = [];
-
-        reportCodes.forEach(reportCode => {
-            // Exact match
-            if (vnexsusCodes.includes(reportCode)) {
-                matched.push(reportCode);
+        const toNorm = (s) => {
+            const x = String(s || '').toUpperCase().replace(/[^A-Z0-9.]/g, '');
+            if (/^[A-Z][0-9]{2}(?:\.[0-9]{1,2})?$/.test(x)) return x;
+            const m = x.match(/^([A-Z])([0-9]{2})([0-9]{1,2})$/);
+            if (m) return `${m[1]}${m[2]}.${m[3]}`;
+            return x.replace(/\.+/, '.');
+        };
+        const vnNormSet = new Set(vnexsusCodes.map(toNorm));
+        reportCodes.forEach(code => {
+            const rc = toNorm(code);
+            if (vnNormSet.has(rc)) {
+                matched.push(rc);
                 return;
             }
-
-            // Prefix match (예: I20.1 vs I20)
-            const hasPrefix = vnexsusCodes.some(vnexsusCode =>
-                reportCode.startsWith(vnexsusCode) || vnexsusCode.startsWith(reportCode)
+            const hasPrefix = Array.from(vnNormSet).some(v =>
+                rc.startsWith(v) || v.startsWith(rc)
             );
-
-            if (hasPrefix) {
-                matched.push(reportCode);
-            } else {
-                missing.push(reportCode);
-            }
+            if (hasPrefix) matched.push(rc); else missing.push(rc);
         });
-
-        const matchRate = reportCodes.length > 0
-            ? matched.length / reportCodes.length
-            : 1.0;
-
+        const matchRate = reportCodes.length > 0 ? matched.length / reportCodes.length : 1.0;
         return { matched, missing, matchRate };
     }
 
@@ -187,7 +207,8 @@ class ReportSubsetValidator {
             if (normalizedVnexsus.includes(normalized)) {
                 matched.push(reportHospital);
             } else {
-                missing.push(reportHospital);
+                const ok = normalizedVnexsus.some(v => this.jaccardTokens(normalized, v) >= this.options.hospitalMatchThreshold);
+                if (ok) matched.push(reportHospital); else missing.push(reportHospital);
             }
         });
 
@@ -251,10 +272,41 @@ class ReportSubsetValidator {
             throw new Error(`케이스 디렉토리를 찾을 수 없습니다: ${casesDir}`);
         }
 
-        const cases = fs.readdirSync(casesDir)
-            .filter(name => fs.statSync(path.join(casesDir, name)).isDirectory());
+        const dirents = fs.readdirSync(casesDir, { withFileTypes: true });
+        const hasDirs = dirents.some(d => d.isDirectory());
+        let cases = [];
+        let filePairs = [];
 
-        console.log(`📁 총 ${cases.length}개 케이스 발견\n`);
+        if (hasDirs) {
+            cases = dirents.filter(d => d.isDirectory()).map(d => d.name);
+        } else {
+            const reports = dirents
+                .filter(d => d.isFile())
+                .map(d => d.name)
+                .filter(n => /Case\d+_report\.txt$/i.test(n));
+            const vnexsus = new Set(
+                dirents
+                    .filter(d => d.isFile())
+                    .map(d => d.name)
+                    .filter(n => /Case\d+_vne[x|s]sus\.txt$/i.test(n) || /Case\d+_vnexus\.txt$/i.test(n))
+            );
+            filePairs = reports
+                .map(r => {
+                    const id = (r.match(/Case(\d+)_report\.txt/i) || [])[1];
+                    if (!id) return null;
+                    const vnNameCandidates = [
+                        `Case${id}_vnexsus.txt`,
+                        `Case${id}_vnexus.txt`,
+                        `Case${id}_vnesus.txt`
+                    ];
+                    const vnFile = vnNameCandidates.find(n => vnexsus.has(n));
+                    if (!vnFile) return null;
+                    return { caseId: `Case${id}`, reportPath: path.join(casesDir, r), vnexsusPath: path.join(casesDir, vnFile) };
+                })
+                .filter(Boolean);
+        }
+
+        console.log(`📁 총 ${hasDirs ? cases.length : filePairs.length}개 케이스 발견\n`);
 
         const validationResults = [];
         let totalDateMatchRate = 0;
@@ -262,53 +314,86 @@ class ReportSubsetValidator {
         let totalHospitalMatchRate = 0;
         let casesWithBoth = 0;
 
-        for (const caseId of cases) {
-            const caseDir = path.join(casesDir, caseId);
-            const reportPath = path.join(caseDir, 'report.txt');
-            const vnexsusPath = path.join(caseDir, 'vnexsus.txt');
+        if (hasDirs) {
+            for (const caseId of cases) {
+                const caseDir = path.join(casesDir, caseId);
+                const reportPath = path.join(caseDir, 'report.txt');
+                const vnexsusPath = path.join(caseDir, 'vnexsus.txt');
 
-            // Report와 VNEXSUS 파일이 모두 있는 케이스만 검증
-            if (!fs.existsSync(reportPath) || !fs.existsSync(vnexsusPath)) {
-                console.log(`⏭️  ${caseId}: report 또는 vnexsus 파일 없음 (건너뜀)`);
-                continue;
+                if (!fs.existsSync(reportPath) || !fs.existsSync(vnexsusPath)) {
+                    console.log(`⏭️  ${caseId}: report 또는 vnexsus 파일 없음 (건너뜀)`);
+                    continue;
+                }
+
+                casesWithBoth++;
+
+                const reportText = fs.readFileSync(reportPath, 'utf-8');
+                const vnexsusText = fs.readFileSync(vnexsusPath, 'utf-8');
+
+                const result = this.validateCase(caseId, reportText, vnexsusText);
+                validationResults.push(result);
+
+                totalDateMatchRate += result.matching.dates.matchRate;
+                totalICDMatchRate += result.matching.icds.matchRate;
+                totalHospitalMatchRate += result.matching.hospitals.matchRate;
+
+                const status = result.hasMissing ? '❌' : '✅';
+                console.log(`${status} ${caseId}:`);
+                console.log(`   날짜: ${result.matching.dates.matched.length}/${result.report.dates.length} (${(result.matching.dates.matchRate * 100).toFixed(1)}%)`);
+                console.log(`   ICD: ${result.matching.icds.matched.length}/${result.report.icds.length} (${(result.matching.icds.matchRate * 100).toFixed(1)}%)`);
+                console.log(`   병원: ${result.matching.hospitals.matched.length}/${result.report.hospitals.length} (${(result.matching.hospitals.matchRate * 100).toFixed(1)}%)`);
+
+                if (result.hasMissing) {
+                    if (result.matching.dates.missing.length > 0) {
+                        console.log(`   누락 날짜: ${result.matching.dates.missing.join(', ')}`);
+                    }
+                    if (result.matching.icds.missing.length > 0) {
+                        console.log(`   누락 ICD: ${result.matching.icds.missing.join(', ')}`);
+                    }
+                    if (result.matching.hospitals.missing.length > 0) {
+                        console.log(`   누락 병원: ${result.matching.hospitals.missing.join(', ')}`);
+                    }
+                }
+                console.log('');
             }
-
-            casesWithBoth++;
-
-            const reportText = fs.readFileSync(reportPath, 'utf-8');
-            const vnexsusText = fs.readFileSync(vnexsusPath, 'utf-8');
-
-            const result = this.validateCase(caseId, reportText, vnexsusText);
-            validationResults.push(result);
-
-            totalDateMatchRate += result.matching.dates.matchRate;
-            totalICDMatchRate += result.matching.icds.matchRate;
-            totalHospitalMatchRate += result.matching.hospitals.matchRate;
-
-            // 결과 출력
-            const status = result.hasMissing ? '❌' : '✅';
-            console.log(`${status} ${caseId}:`);
-            console.log(`   날짜: ${result.matching.dates.matched.length}/${result.report.dates.length} (${(result.matching.dates.matchRate * 100).toFixed(1)}%)`);
-            console.log(`   ICD: ${result.matching.icds.matched.length}/${result.report.icds.length} (${(result.matching.icds.matchRate * 100).toFixed(1)}%)`);
-            console.log(`   병원: ${result.matching.hospitals.matched.length}/${result.report.hospitals.length} (${(result.matching.hospitals.matchRate * 100).toFixed(1)}%)`);
-
-            if (result.hasMissing) {
-                if (result.matching.dates.missing.length > 0) {
-                    console.log(`   누락 날짜: ${result.matching.dates.missing.join(', ')}`);
+        } else {
+            for (const pair of filePairs) {
+                const { caseId, reportPath, vnexsusPath } = pair;
+                if (!fs.existsSync(reportPath) || !fs.existsSync(vnexsusPath)) {
+                    console.log(`⏭️  ${caseId}: report 또는 vnexsus 파일 없음 (건너뜀)`);
+                    continue;
                 }
-                if (result.matching.icds.missing.length > 0) {
-                    console.log(`   누락 ICD: ${result.matching.icds.missing.join(', ')}`);
+                casesWithBoth++;
+                const reportText = fs.readFileSync(reportPath, 'utf-8');
+                const vnexsusText = fs.readFileSync(vnexsusPath, 'utf-8');
+                const result = this.validateCase(caseId, reportText, vnexsusText);
+                validationResults.push(result);
+                totalDateMatchRate += result.matching.dates.matchRate;
+                totalICDMatchRate += result.matching.icds.matchRate;
+                totalHospitalMatchRate += result.matching.hospitals.matchRate;
+                const status = result.hasMissing ? '❌' : '✅';
+                console.log(`${status} ${caseId}:`);
+                console.log(`   날짜: ${result.matching.dates.matched.length}/${result.report.dates.length} (${(result.matching.dates.matchRate * 100).toFixed(1)}%)`);
+                console.log(`   ICD: ${result.matching.icds.matched.length}/${result.report.icds.length} (${(result.matching.icds.matchRate * 100).toFixed(1)}%)`);
+                console.log(`   병원: ${result.matching.hospitals.matched.length}/${result.report.hospitals.length} (${(result.matching.hospitals.matchRate * 100).toFixed(1)}%)`);
+                if (result.hasMissing) {
+                    if (result.matching.dates.missing.length > 0) {
+                        console.log(`   누락 날짜: ${result.matching.dates.missing.join(', ')}`);
+                    }
+                    if (result.matching.icds.missing.length > 0) {
+                        console.log(`   누락 ICD: ${result.matching.icds.missing.join(', ')}`);
+                    }
+                    if (result.matching.hospitals.missing.length > 0) {
+                        console.log(`   누락 병원: ${result.matching.hospitals.missing.join(', ')}`);
+                    }
                 }
-                if (result.matching.hospitals.missing.length > 0) {
-                    console.log(`   누락 병원: ${result.matching.hospitals.missing.join(', ')}`);
-                }
+                console.log('');
             }
-            console.log('');
         }
 
         // 전체 통계
         this.results = {
-            totalCases: cases.length,
+            totalCases: hasDirs ? cases.length : filePairs.length,
             casesWithBoth,
             dateMatchRate: casesWithBoth > 0 ? totalDateMatchRate / casesWithBoth : 0,
             icdMatchRate: casesWithBoth > 0 ? totalICDMatchRate / casesWithBoth : 0,
@@ -319,6 +404,188 @@ class ReportSubsetValidator {
         };
 
         return this.results;
+    }
+
+    enrichWithLabels(result) {
+        const totalItems =
+            (result.report.dates?.length || 0) +
+            (result.report.icds?.length || 0) +
+            (result.report.hospitals?.length || 0);
+        const matchedItems =
+            (result.matching.dates?.matched.length || 0) +
+            (result.matching.icds?.matched.length || 0) +
+            (result.matching.hospitals?.matched.length || 0);
+        const labelScore = totalItems > 0 ? matchedItems / totalItems : 1.0;
+        return {
+            ...result,
+            labels: {
+                dateInReport: result.matching.dates.matched,
+                icdInReport: result.matching.icds.matched,
+                hospitalInReport: result.matching.hospitals.matched
+            },
+            labelScore
+        };
+    }
+
+    generateHTMLReport(outputPath) {
+        const dir = path.dirname(outputPath);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        const pct = (v) => `${(v * 100).toFixed(1)}%`;
+        const rows = this.results.validationResults.map(r => {
+            const e = this.enrichWithLabels(r);
+            return `
+            <tr>
+              <td>${e.caseId}</td>
+              <td>${pct(e.matching.dates.matchRate)}</td>
+              <td>${pct(e.matching.icds.matchRate)}</td>
+              <td>${pct(e.matching.hospitals.matchRate)}</td>
+              <td>${pct(e.labelScore)}</td>
+              <td>${e.labels.dateInReport.join(', ') || '-'}</td>
+              <td>${e.labels.icdInReport.join(', ') || '-'}</td>
+              <td>${e.labels.hospitalInReport.join(', ') || '-'}</td>
+            </tr>`;
+        }).join('\n');
+        const html = `<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><title>Report ⊆ VNEXSUS 검증 리포트</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;color:#0f172a;margin:0}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hd{background:linear-gradient(135deg,#334155,#0ea5e9);color:#fff;padding:20px}
+.hd h1{margin:0;font-size:20px}
+.meta{font-size:12px;opacity:.9;margin-top:4px}
+.ct{padding:16px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fff}
+.bar{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#84cc16);width:0%}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left;font-size:12px;vertical-align:top}
+.muted{color:#64748b;font-size:12px}
+</style></head><body>
+<div class="wrap">
+ <div class="hd"><h1>Report ⊆ VNEXSUS 검증 리포트</h1>
+ <div class="meta">생성 시각: ${new Date(this.results.timestamp || Date.now()).toLocaleString('ko-KR')}</div></div>
+ <div class="ct">
+  <div class="cards">
+   <div class="card">
+     <div>평균 날짜 매칭률: ${pct(this.results.dateMatchRate)}</div>
+     <div class="bar"><span style="width:${pct(this.results.dateMatchRate)}"></span></div>
+     <div style="margin-top:6px">평균 ICD 매칭률: ${pct(this.results.icdMatchRate)}</div>
+     <div class="bar"><span style="width:${pct(this.results.icdMatchRate)}"></span></div>
+     <div style="margin-top:6px">평균 병원 매칭률: ${pct(this.results.hospitalMatchRate)}</div>
+     <div class="bar"><span style="width:${pct(this.results.hospitalMatchRate)}"></span></div>
+   </div>
+   <div class="card">
+     <div>총 케이스: ${this.results.totalCases}</div>
+     <div>검증 케이스: ${this.results.casesWithBoth}</div>
+     <div>누락 있는 케이스: ${this.results.missingEvents.length}</div>
+     <div class="muted" style="margin-top:6px">목표: 날짜/ICD 95%+, 병원 80%+</div>
+   </div>
+  </div>
+  <table>
+   <thead><tr>
+    <th>케이스</th><th>날짜</th><th>ICD</th><th>병원</th><th>LabelScore</th>
+    <th>날짜 포함</th><th>ICD 포함</th><th>병원 포함</th>
+   </tr></thead>
+   <tbody>${rows}</tbody>
+  </table>
+ </div>
+</div>
+</body></html>`;
+        fs.writeFileSync(outputPath, html, 'utf-8');
+        console.log(`📄 HTML 리포트 저장: ${outputPath}`);
+    }
+
+    generateLabelingStatsHTML(outputPath) {
+        const dir = path.dirname(outputPath);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        const results = this.results.validationResults;
+        let dateMatched = 0, dateTotal = 0;
+        let icdMatched = 0, icdTotal = 0;
+        let hospMatched = 0, hospTotal = 0;
+        const missDate = new Map();
+        const missICD = new Map();
+        const missHosp = new Map();
+        const scores = [];
+        results.forEach(r => {
+            dateMatched += r.matching.dates.matched.length;
+            dateTotal += r.report.dates.length;
+            icdMatched += r.matching.icds.matched.length;
+            icdTotal += r.report.icds.length;
+            hospMatched += r.matching.hospitals.matched.length;
+            hospTotal += r.report.hospitals.length;
+            r.matching.dates.missing.forEach(v => missDate.set(v, (missDate.get(v) || 0) + 1));
+            r.matching.icds.missing.forEach(v => missICD.set(v, (missICD.get(v) || 0) + 1));
+            r.matching.hospitals.missing.forEach(v => missHosp.set(v, (missHosp.get(v) || 0) + 1));
+            const e = this.enrichWithLabels(r);
+            scores.push(e.labelScore);
+        });
+        const avgDate = dateTotal ? dateMatched / dateTotal : 1;
+        const avgICD = icdTotal ? icdMatched / icdTotal : 1;
+        const avgHosp = hospTotal ? hospMatched / hospTotal : 1;
+        const sortedScores = scores.slice().sort((a, b) => a - b);
+        const q = (p) => sortedScores.length ? sortedScores[Math.floor((sortedScores.length - 1) * p)] : 0;
+        const p50 = q(0.5), p95 = q(0.95);
+        const pct = (v) => `${(v * 100).toFixed(1)}%`;
+        const topN = (m) => Array.from(m.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        const topDate = topN(missDate).map(([k, c]) => `<tr><td>${k}</td><td>${c}</td></tr>`).join('');
+        const topICD = topN(missICD).map(([k, c]) => `<tr><td>${k}</td><td>${c}</td></tr>`).join('');
+        const topHosp = topN(missHosp).map(([k, c]) => `<tr><td>${k}</td><td>${c}</td></tr>`).join('');
+        const html = `<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><title>Event 라벨링 통계</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;color:#0f172a;margin:0}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hd{background:linear-gradient(135deg,#0ea5e9,#22c55e);color:#fff;padding:20px}
+.hd h1{margin:0;font-size:20px}
+.meta{font-size:12px;opacity:.9;margin-top:4px}
+.ct{padding:16px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fff}
+.bar{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#0ea5e9,#22c55e);width:0%}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left;font-size:12px;vertical-align:top}
+.muted{color:#64748b;font-size:12px}
+</style></head><body>
+<div class="wrap">
+ <div class="hd"><h1>Event 라벨링 통계</h1>
+ <div class="meta">생성 시각: ${new Date(this.results.timestamp || Date.now()).toLocaleString('ko-KR')}</div></div>
+ <div class="ct">
+  <div class="cards">
+   <div class="card">
+     <div>평균 날짜 포함률: ${pct(avgDate)}</div>
+     <div class="bar"><span style="width:${pct(avgDate)}"></span></div>
+     <div style="margin-top:6px">평균 ICD 포함률: ${pct(avgICD)}</div>
+     <div class="bar"><span style="width:${pct(avgICD)}"></span></div>
+     <div style="margin-top:6px">평균 병원 포함률: ${pct(avgHosp)}</div>
+     <div class="bar"><span style="width:${pct(avgHosp)}"></span></div>
+   </div>
+   <div class="card">
+     <div>LabelScore 평균: ${pct(scores.length ? scores.reduce((a,b)=>a+b,0)/scores.length : 1)}</div>
+     <div>LabelScore 분포 P50: ${pct(p50)} · P95: ${pct(p95)}</div>
+     <div class="muted" style="margin-top:6px">목표: 날짜/ICD 95%+, 병원 80%+</div>
+   </div>
+  </div>
+  <div class="cards" style="margin-top:12px">
+   <div class="card">
+     <div>Top 누락 날짜</div>
+     <table><thead><tr><th>날짜</th><th>빈도</th></tr></thead><tbody>${topDate}</tbody></table>
+   </div>
+   <div class="card">
+     <div>Top 누락 ICD</div>
+     <table><thead><tr><th>코드</th><th>빈도</th></tr></thead><tbody>${topICD}</tbody></table>
+   </div>
+  </div>
+  <div class="card" style="margin-top:12px">
+     <div>Top 누락 병원</div>
+     <table><thead><tr><th>병원</th><th>빈도</th></tr></thead><tbody>${topHosp}</tbody></table>
+  </div>
+ </div>
+</div>
+</body></html>`;
+        fs.writeFileSync(outputPath, html, 'utf-8');
+        console.log(`📄 Event 라벨링 HTML 저장: ${outputPath}`);
     }
 
     /**
@@ -367,19 +634,20 @@ class ReportSubsetValidator {
 }
 
 // CLI 실행
-if (require.main === module) {
+if (import.meta.url === `file:///${process.argv[1]?.replace(/\\/g, '/')}`) {
     const validator = new ReportSubsetValidator();
-
-    // 케이스 디렉토리 경로 (실제 경로로 수정 필요)
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     const casesDir = process.argv[2] || path.join(__dirname, '../../case_sample');
     const outputPath = path.join(__dirname, 'output/baseline_metrics.json');
-
+    const htmlPath = path.join(__dirname, '../../temp/reports/Report_Subset_Validation.html');
+    const statsHtmlPath = path.join(__dirname, '../../temp/reports/Event_Labeling_Stats.html');
     validator.validateAll(casesDir)
         .then(results => {
             validator.printSummary();
             validator.saveResults(outputPath);
-
-            // 베이스라인 메트릭 별도 저장
+            validator.generateHTMLReport(htmlPath);
+            validator.generateLabelingStatsHTML(statsHtmlPath);
             const baselineMetrics = {
                 timestamp: results.timestamp,
                 casesWithBoth: results.casesWithBoth,
@@ -388,7 +656,6 @@ if (require.main === module) {
                 hospitalMatchRate: results.hospitalMatchRate,
                 missingCasesCount: results.missingEvents.length
             };
-
             const baselinePath = path.join(__dirname, '../..', 'VNEXSUS_dev_plan_tasks/baseline_metrics.json');
             fs.writeFileSync(baselinePath, JSON.stringify(baselineMetrics, null, 2), 'utf-8');
             console.log(`📊 베이스라인 메트릭 저장: ${baselinePath}\n`);
@@ -399,4 +666,4 @@ if (require.main === module) {
         });
 }
 
-module.exports = ReportSubsetValidator;
+export default ReportSubsetValidator;

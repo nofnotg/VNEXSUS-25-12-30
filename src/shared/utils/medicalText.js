@@ -110,7 +110,7 @@ const diagnosisCues = [/추정진단/, /진단명/, /상병명/, /Impression/i, 
 // Accept broader ICD10 tokens, including common misformats like "I20).9", "E1168", "R074"
 const icdCandidatePattern = /\b[A-Z][0-9]{2}(?:\.[0-9]{1,2}|\)[\. ]?[0-9]{1,2}|[0-9]{1,2})\b/;
 
-function normalizeIcdCode(raw) {
+export function normalizeIcdCode(raw) {
   if (!raw) return undefined;
   const cleaned = String(raw).replace(/[^A-Za-z0-9.]/g, "");
   // Already canonical: Letter + 2 digits + optional . + 1-2 digits
@@ -126,6 +126,17 @@ function normalizeIcdCode(raw) {
   // Fallback to best-effort: remove stray ')' and ensure single dot
   const fallback = cleaned.replace(/\.+/, ".");
   return fallback;
+}
+
+export function extractIcdCodes(text) {
+  if (!text) return [];
+  const codes = new Set();
+  const matches = String(text).match(new RegExp(icdCandidatePattern, 'g')) || [];
+  for (const m of matches) {
+    const norm = normalizeIcdCode(m);
+    if (norm) codes.add(norm.toUpperCase());
+  }
+  return Array.from(codes).sort();
 }
 
 export function normalizeDiagnosisLine(line) {

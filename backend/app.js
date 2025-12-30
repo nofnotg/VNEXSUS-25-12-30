@@ -191,6 +191,11 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 // 정적 파일 제공 (프론트엔드)
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// 루트 경로에서 인덱스 파일 제공 (명시적 라우팅 보강)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
 // 설정 파일 접근 경로 설정 
 app.use('/config', express.static(path.join(__dirname, 'public/config')));
 app.use('/config', express.static(path.join(__dirname, '../src/config')));
@@ -198,10 +203,60 @@ app.use('/config', express.static(path.join(__dirname, '../src/config')));
 // 임시 보고서 파일 접근 경로 설정
 app.use('/reports', express.static(path.join(__dirname, '../temp/reports')));
 app.use('/reports', express.static(path.join(process.cwd(), 'temp', 'reports')));
+app.use('/reports', express.static(path.join(__dirname, '../reports')));
+app.use('/reports', express.static(path.join(process.cwd(), 'reports')));
 
 // /reports 접근 시 인덱스로 리다이렉트(디렉토리 루트 접근 편의성 개선)
-app.get('/reports', (req, res) => {
-  res.redirect('/reports/index.html');
+  app.get('/reports', (req, res) => {
+    res.redirect('/reports/index.html');
+  });
+
+// 개발 환경용 서버 재시작 엔드포인트를 라우트 등록보다 먼저 선언하여 /api 라우터에 가로채지지 않도록 함
+app.post('/api/admin/restart', (req, res) => {
+  if (process.env.NODE_ENV !== 'development') {
+    return res.status(403).json({ success: false });
+  }
+  if (mainServer) {
+    mainServer.close(() => {
+      mainServer = app.listen(PORT, onListen);
+      res.json({ success: true, restarted: true });
+    });
+  } else {
+    mainServer = app.listen(PORT, onListen);
+    res.json({ success: true, restarted: true, coldStart: true });
+  }
+});
+
+app.get('/api/admin/rtv1-status', (req, res) => {
+  try {
+    const pendingPath1 = path.join(process.cwd(), 'temp', 'rtv1', 'RTV1_PENDING.json');
+    const pendingPath2 = path.join(__dirname, '..', 'temp', 'rtv1', 'RTV1_PENDING.json');
+    const pendingPath = fs.existsSync(pendingPath1) ? pendingPath1 : pendingPath2;
+    const exists = fs.existsSync(pendingPath);
+    let body = {
+      success: true,
+      pending: false,
+      title: 'real time validation-v1',
+      plannedCases: 46,
+      message: 'RTV1 계획 없음'
+    };
+    if (exists) {
+      const raw = fs.readFileSync(pendingPath, 'utf-8');
+      const json = JSON.parse(raw);
+      body = {
+        success: true,
+        pending: true,
+        title: json.title || 'real time validation-v1',
+        plannedCases: json.plannedCases || 46,
+        createdAt: json.createdAt,
+        note: json.note,
+        message: 'RTV1 진행 대기 중'
+      };
+    }
+    res.json(body);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err && err.message ? err.message : String(err) });
+  }
 });
 
 // API 라우트 설정 (전체 활성화)
@@ -235,23 +290,37 @@ app.use('/api/reasoning', reasoningRoutes);
 app.use('/api', router);
 
 // API 상태 확인 라우트 추가
-app.get('/api/status', (req, res) => {
-  res.json({
-    success: true,
-    status: 'healthy',
-    message: 'VNEXSUS OCR 서비스가 정상적으로 작동 중입니다.',
-    timestamp: new Date().toISOString(),
-    services: {
-      ocr: 'active',
-      vision: process.env.ENABLE_VISION_OCR === 'true' ? 'active' : 'inactive'
-    }
+  app.get('/api/status', (req, res) => {
+    res.json({
+      success: true,
+      status: 'healthy',
+      message: 'VNEXSUS OCR 서비스가 정상적으로 작동 중입니다.',
+      timestamp: new Date().toISOString(),
+      services: {
+        ocr: 'active',
+        vision: process.env.ENABLE_VISION_OCR === 'true' ? 'active' : 'inactive'
+      }
+    });
   });
+
+// 개발 환경용 서버 재시작 엔드포인트 (404 핸들러보다 상단에 위치)
+app.post('/api/admin/restart', (req, res) => {
+  if (process.env.NODE_ENV !== 'development') {
+    return res.status(403).json({ success: false });
+  }
+  if (mainServer) {
+    mainServer.close(() => {
+      mainServer = app.listen(PORT, onListen);
+      res.json({ success: true, restarted: true });
+    });
+  } else {
+    mainServer = app.listen(PORT, onListen);
+    res.json({ success: true, restarted: true, coldStart: true });
+  }
 });
 
 // 기본 라우트 (프론트엔드 인덱스 페이지)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
+// (중복 제거됨)
 
 // 404 처리
 app.use((req, res) => {
@@ -288,23 +357,18 @@ function initializeVisionOcr() {
   }
 }
 
-// 서버 시작
-app.listen(PORT, () => {
+let mainServer;
+const onListen = () => {
   console.log(`======================================`);
   console.log(`OCR 서버가 포트 ${PORT}에서 실행 중입니다.`);
   console.log(`http://localhost:${PORT}`);
-
-  // Vision OCR 서비스 초기화
   const visionOcrInitialized = initializeVisionOcr();
-
-  // 환경 변수 로드 확인
   console.log(`\n[환경 변수 설정 상태]`);
   console.log(`- NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
   console.log(`- OCR 설정:`);
-
-  // 서버 시작 완료 로그
   console.log('✅ 서버 시작 완료');
-});
+};
+mainServer = app.listen(PORT, onListen);
 
 // 예외 처리
 process.on('uncaughtException', (err) => {

@@ -143,13 +143,13 @@ router.get('/test', (req, res) => {
 });
 
 // 단순화된 업로드 라우트 - 디버깅용
-router.post('/upload', upload.array('files', 8), (req, res, next) => {
-  console.log('=== 미들웨어 체인 진입 ===');
-  console.log('파일 수:', req.files ? req.files.length : 0);
-  next();
-}, uploadErrorHandler, ocrController.uploadPdfs);
+router.post('/upload', upload.array('files', 8), uploadErrorHandler, ocrController.uploadPdfs);
 router.get('/status/:jobId', ocrController.getStatus);
 router.get('/result/:jobId', ocrController.getResult);
 router.get('/service-status', ocrController.getOcrStatus);
+router.get('/investigator-view/:jobId', ocrController.getInvestigatorView);
+router.get('/raw/:jobId', ocrController.getRawFiles);
+router.get('/raw-content', ocrController.getRawContent);
+router.get('/blocks', ocrController.getRawBlocks);
 
 export default router;

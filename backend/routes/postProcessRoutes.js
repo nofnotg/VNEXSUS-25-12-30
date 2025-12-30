@@ -35,14 +35,10 @@ router.post('/', async (req, res) => {
       });
     }
 
-    console.log('📱 메인 앱 간소화 후처리 요청:', {
-      textLength: mergedText.length,
-      options: Object.keys(options)
-    });
-
     const result = await PostProcessingManager.processForMainApp(mergedText, {
       ...options,
-      patientInfo
+      patientInfo,
+      abcPhase: typeof req.query.phase === 'string' ? req.query.phase : options.abcPhase
     });
 
     const finalReport = result.finalReport || {};

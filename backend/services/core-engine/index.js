@@ -1,6 +1,4 @@
 // core-engine/index.js - 코어엔진 컴포넌트 인덱스
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 import TextIngestor from './TextIngestor.js';
 import AnchorDetector from './AnchorDetector.js';
 import EntityNormalizer from './EntityNormalizer.js';

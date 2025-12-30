@@ -33,6 +33,7 @@ const logger = createLogger('STREAM_OPTIMIZER');
 class StreamProcessingOptimizer extends EventEmitter {
     constructor(options = {}) {
         super();
+        this.setMaxListeners(50);
         
         this.options = {
             // 기본 청크 크기 설정
@@ -99,11 +100,17 @@ class StreamProcessingOptimizer extends EventEmitter {
         this.poolCleanupInterval = setInterval(() => {
             this.cleanupStreamPool();
         }, this.options.streamIdleTimeout);
+        if (typeof this.poolCleanupInterval?.unref === 'function') {
+            this.poolCleanupInterval.unref();
+        }
         
         // 메모리 모니터링
         this.memoryMonitorInterval = setInterval(() => {
             this.monitorMemoryUsage();
         }, 10000); // 10초마다
+        if (typeof this.memoryMonitorInterval?.unref === 'function') {
+            this.memoryMonitorInterval.unref();
+        }
         
         logger.info('Stream Processing Optimizer initialized', {
             options: this.options,
@@ -751,6 +758,9 @@ class StreamProcessingOptimizer extends EventEmitter {
         this.metricsInterval = setInterval(() => {
             this.collectMetrics();
         }, this.options.metricsInterval);
+        if (typeof this.metricsInterval?.unref === 'function') {
+            this.metricsInterval.unref();
+        }
         
         logger.debug('Metrics collection started', {
             interval: this.options.metricsInterval

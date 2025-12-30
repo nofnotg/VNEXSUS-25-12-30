@@ -1,11 +1,102 @@
 {
   "hospitalId": "김안과",
   "hospitalName": "김안과",
-  "patterns": [],
+  "patterns": [
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별: M",
+      "position": 1649,
+      "length": 5,
+      "hash": "3fe38e52b3bc74fe939f3100a9f41702",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호: 0050744688",
+      "position": 1620,
+      "length": 16,
+      "hash": "8147e417e03210a658e4cdb26aef06d6",
+      "frequency": 6,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "진료과.*?(?:내과|외과|정형외과|신경외과|이비인후과|안과|피부과)",
+      "match": "진료과목: 안과",
+      "position": 550,
+      "length": 8,
+      "hash": "ba0cf54eaf7d326e6522b6d31f99391a",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "(?:서울|부산|대구|광주|대전|울산|인천).*?(?:구|시).*?(?:로|길)\\s*\\d+",
+      "match": "서울특별시 마포구 희우정로 105",
+      "position": 337,
+      "length": 18,
+      "hash": "13af873e139edf41fe27a78bd5d4b20c",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호 590320",
+      "position": 304,
+      "length": 11,
+      "hash": "511e000ef6df12bc1955d7ae810c461d",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "성별.*?(?:남|여|M|F)",
+      "match": "성별: 남",
+      "position": 205,
+      "length": 5,
+      "hash": "6bb9478320019c19b9bc0f9115faf4b0",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호:\n환자성명: 최순곤\n환자성별: 남\n환자나이: 66",
+      "position": 187,
+      "length": 32,
+      "hash": "9dbfca9ed780ccbaa41ec640422e25e3",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "발급매수.*?\\d+.*?매",
+      "match": "발급매수:\n3\n매",
+      "position": 50,
+      "length": 9,
+      "hash": "0e371bdd0dec292657534798f63a0608",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "등록번호.*?\\d+",
+      "match": "등록번호:\n0050744688",
+      "position": 10,
+      "length": 16,
+      "hash": "e8b02d217d1376dd3edbc52ef055554a",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    },
+    {
+      "pattern": "의무기록\\s*사본.*?증명.*?원본과\\s*틀림이?\\s*없음",
+      "match": "의무기록사본증명서\n등록번호:\n0050744688\n환자명:\n최순곤\n용 도:\n보험회사 제출용\n발급매수:\n3\n매\n발행번호:\n2025-07799\n첨부한 사본은 의무기록 원본과 틀림이 없음",
+      "position": 0,
+      "length": 100,
+      "hash": "8f107d846a6b3eaa0696487ea4ccf841",
+      "frequency": 3,
+      "firstSeen": "2025-12-24T12:04:55.755Z"
+    }
+  ],
   "statistics": {
-    "documentsProcessed": 6,
-    "averageCleaningRate": 0,
-    "lastUpdated": "2025-12-07T02:48:30.572Z"
+    "documentsProcessed": 3,
+    "averageCleaningRate": 10.678733031674208,
+    "lastUpdated": "2025-12-25T10:21:24.000Z"
   },
-  "createdAt": "2025-12-06T14:06:52.199Z"
+  "createdAt": "2025-12-24T12:04:55.755Z"
 }

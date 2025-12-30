@@ -10,6 +10,19 @@ import { v4 as uuidv4 } from 'uuid';
 
 // 기본 임시 디렉토리 경로
 const defaultTempDir = process.env.TEMP_DIR || path.join(os.tmpdir(), 'pdf-ocr');
+const ROOT = process.cwd();
+const protectedDirs = [
+  path.join(ROOT, 'sample_pdf'),
+  path.join(ROOT, 'reports', 'prepared_coordinate_cases')
+].map(d => path.resolve(d));
+const isProtectedPath = (p) => {
+  try {
+    const target = path.resolve(p);
+    return protectedDirs.some(d => target === d || target.startsWith(d + path.sep));
+  } catch {
+    return false;
+  }
+};
 
 // 임시 파일 추적 (메모리에 저장)
 const tempFiles = new Set();
@@ -75,6 +88,7 @@ export const saveTempFile = (buffer, extension = 'tmp', tempDir = defaultTempDir
  */
 export const removeFile = (filePath) => {
   try {
+    if (isProtectedPath(filePath)) return false;
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
       console.log(`파일 삭제됨: ${filePath}`);
@@ -97,6 +111,7 @@ export const removeFile = (filePath) => {
  */
 export const cleanTempDir = (tempDir = defaultTempDir) => {
   try {
+    if (isProtectedPath(tempDir)) return -1;
     if (!fs.existsSync(tempDir)) {
       return 0;
     }
@@ -107,6 +122,7 @@ export const cleanTempDir = (tempDir = defaultTempDir) => {
     for (const file of files) {
       const filePath = path.join(tempDir, file);
       if (fs.statSync(filePath).isFile()) {
+        if (isProtectedPath(filePath)) continue;
         fs.unlinkSync(filePath);
         tempFiles.delete(filePath);
         removedCount++;
@@ -129,6 +145,7 @@ export const cleanTempDir = (tempDir = defaultTempDir) => {
  */
 export const cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) => {
   try {
+    if (isProtectedPath(tempDir)) return -1;
     if (!fs.existsSync(tempDir)) {
       return 0;
     }
@@ -145,6 +162,7 @@ export const cleanOldTempFiles = (maxAgeMinutes = 60, tempDir = defaultTempDir) 
         const fileAge = now - stats.mtimeMs;
         
         if (fileAge > maxAgeMs) {
+          if (isProtectedPath(filePath)) continue;
           fs.unlinkSync(filePath);
           tempFiles.delete(filePath);
           removedCount++;
@@ -170,6 +188,7 @@ export const cleanAllTrackedFiles = () => {
   for (const filePath of tempFiles) {
     try {
       if (fs.existsSync(filePath)) {
+        if (isProtectedPath(filePath)) continue;
         fs.unlinkSync(filePath);
         removedCount++;
       }

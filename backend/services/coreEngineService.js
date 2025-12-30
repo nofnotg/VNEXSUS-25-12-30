@@ -1,9 +1,6 @@
 // coreEngineService.js - 코어 엔진 서비스 래퍼
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 import { computeDisclosure } from '../../src/services/core/disclosureEngine.js';
 import { mapDiseaseRules } from '../../src/services/core/diseaseRuleMapper.js';
 import { classifyPrimaryMetastasis } from '../../src/services/core/primaryMetastasisClassifier.js';
@@ -419,13 +416,23 @@ class CoreEngineService {
           enableTemplateCache: true
         });
 
-        processedInput.preprocessedData = preprocessedData;
+        const minConfidence =
+          typeof input.options?.minPreprocessConfidence === 'number'
+            ? input.options.minPreprocessConfidence
+            : (parseFloat(process.env.CORE_ENGINE_MIN_PREPROCESS_CONFIDENCE) || 0.3);
+        const filteredPreprocessed =
+          Array.isArray(preprocessedData)
+            ? preprocessedData.filter(
+                (item) => Number(item?.confidence) >= minConfidence && item?.shouldExclude !== true
+              )
+            : [];
+        processedInput.preprocessedData = filteredPreprocessed;
 
         // Merge Regex results with Preprocessor results
         // Prioritize Regex for dates, but Preprocessor might have better structure.
-        if (preprocessedData.length > 0) {
+        if (filteredPreprocessed.length > 0) {
           // Merge both to ensure we don't miss anything
-          processedInput.parsedRecords = preprocessedData.concat(regexRecords);
+          processedInput.parsedRecords = filteredPreprocessed.concat(regexRecords);
         } else {
           processedInput.parsedRecords = regexRecords;
           this.logger.info('전처리 결과 없음, Regex 추출 결과 사용', { count: regexRecords.length });
@@ -433,8 +440,11 @@ class CoreEngineService {
 
         this.logger.info('전처리 완료', {
           sectionCount: processedInput.parsedRecords.length,
-          hospital: preprocessedData[0]?.hospital,
-          date: preprocessedData[0]?.date
+          hospital: filteredPreprocessed[0]?.hospital,
+          date: filteredPreprocessed[0]?.date,
+          preprocessedCount: Array.isArray(preprocessedData) ? preprocessedData.length : 0,
+          filteredCount: filteredPreprocessed.length,
+          minConfidence
         });
       } catch (preprocessError) {
         this.logger.warn('전처리 중 오류 발생 (파이프라인은 계속 진행됨)', { error: preprocessError.message });
@@ -1135,16 +1145,28 @@ ${ragResult.documentAnalysis?.summary || '분석 결과 없음'}
 
     const records = [];
     const lines = text.split('\n');
-    // Enhanced Regex to capture YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD
-    const dateRegex = /(\d{4})[-./](\d{2})[-./](\d{2})/;
+    const isoRegex = /(\d{4})[-./](\d{2})[-./](\d{2})/;
+    const krRegex = /(\d{4})\s*년\s*(\d{1,2})\s*월\s*(\d{1,2})\s*일/;
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      const dateMatch = line.match(dateRegex);
+      let normalized = null;
+      const iso = line.match(isoRegex);
+      if (iso) {
+        normalized = iso[0].replace(/[./]/g, '-');
+      } else {
+        const kr = line.match(krRegex);
+        if (kr) {
+          const y = kr[1];
+          const m = String(kr[2]).padStart(2, '0');
+          const d = String(kr[3]).padStart(2, '0');
+          normalized = `${y}-${m}-${d}`;
+        }
+      }
 
-      if (dateMatch) {
+      if (normalized) {
         records.push({
-          date: dateMatch[0].replace(/[./]/g, '-'), // Normalize to YYYY-MM-DD
+          date: normalized,
           content: line,
           originalText: line,
           source: 'regex'
@@ -1158,4 +1180,5 @@ ${ragResult.documentAnalysis?.summary || '분석 결과 없음'}
 // 싱글톤 인스턴스 생성
 const coreEngineService = new CoreEngineService();
 
+export { CoreEngineService };
 export default coreEngineService;
