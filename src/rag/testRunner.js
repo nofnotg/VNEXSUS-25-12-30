@@ -192,9 +192,16 @@ class TestEnvironmentManager {
   cleanupTempFiles() {
     try {
       const ROOT = process.cwd();
+      const REPORTS_PDF_ROOT = (() => {
+        const raw = process.env.REPORTS_PDF_ROOT;
+        if (typeof raw === 'string' && raw.trim().length > 0) {
+          return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+        }
+        return 'C:\\VNEXSUS_reports_pdf';
+      })();
       const protectedDirs = [
-        path.join(ROOT, 'sample_pdf'),
-        path.join(ROOT, 'reports', 'prepared_coordinate_cases')
+        path.join(REPORTS_PDF_ROOT, 'sample_pdf'),
+        path.join(REPORTS_PDF_ROOT, 'prepared_coordinate_cases')
       ].map(d => path.resolve(d));
       const target = path.resolve(this.config.tempDir);
       const isProtected = protectedDirs.some(d => target === d || target.startsWith(d + path.sep));

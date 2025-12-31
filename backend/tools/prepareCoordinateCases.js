@@ -186,9 +186,16 @@ function writeCaseTextOnly(outRoot, item) {
 
 function main() {
   const ROOT = process.cwd();
-  const offlineRoot = path.join(ROOT, 'reports', 'offline_ocr_samples');
-  const batchBase = path.join(ROOT, 'backend', 'reports', 'VNEXSUS_Report');
-  const outRoot = path.join(ROOT, 'reports', 'prepared_coordinate_cases', ts());
+  const REPORTS_PDF_ROOT = (() => {
+    const raw = process.env.REPORTS_PDF_ROOT;
+    if (typeof raw === 'string' && raw.trim().length > 0) {
+      return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+    }
+    return 'C:\\VNEXSUS_reports_pdf';
+  })();
+  const offlineRoot = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
+  const batchBase = path.join(REPORTS_PDF_ROOT, 'VNEXSUS_Report');
+  const outRoot = path.join(REPORTS_PDF_ROOT, 'prepared_coordinate_cases', ts());
   ensureDir(path.join(outRoot, 'coords'));
   ensureDir(path.join(outRoot, 'text_only'));
 

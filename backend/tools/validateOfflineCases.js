@@ -4,7 +4,14 @@ import url from 'url';
 import ReportSubsetValidator from '../eval/report_subset_validator.js';
 
 const ROOT = process.cwd();
-const OFFLINE_BASE = path.join(ROOT, 'reports', 'offline_ocr_samples');
+const REPORTS_PDF_ROOT = (() => {
+  const raw = process.env.REPORTS_PDF_ROOT;
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return 'C:\\VNEXSUS_reports_pdf';
+})();
+const OFFLINE_BASE = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
 const CASE_SAMPLE_DIR = path.join(ROOT, 'src', 'rag', 'case_sample');
 
 function pickLatestDir() {

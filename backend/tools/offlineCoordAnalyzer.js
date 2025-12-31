@@ -2,8 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { pathToFileURL } from 'url';
 const ROOT = process.cwd();
-const REPORTS_DIR = path.join(ROOT, 'reports', 'VNEXSUS_Report');
-const OFFLINE_SAMPLES_DIR = path.join(ROOT, 'reports', 'offline_ocr_samples');
+const REPORTS_PDF_ROOT = (() => {
+  const raw = process.env.REPORTS_PDF_ROOT;
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return 'C:\\VNEXSUS_reports_pdf';
+})();
+const REPORTS_DIR = path.join(REPORTS_PDF_ROOT, 'VNEXSUS_Report');
+const OFFLINE_SAMPLES_DIR = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
 function readJson(fp) {
   try {
     if (!fs.existsSync(fp)) return null;
@@ -34,8 +41,8 @@ function listLatestReportDir() {
     return null;
   };
   const backendReports = path.join(ROOT, 'backend', 'reports', 'VNEXSUS_Report');
-  const backendOffline = path.join(ROOT, 'backend', 'reports', 'offline_ocr_samples');
-  const rootOffline = path.join(ROOT, 'reports', 'offline_ocr_samples');
+  const backendOffline = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
+  const rootOffline = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
   return (
     pickLatestWithArtifacts(REPORTS_DIR) ||
     pickLatestWithArtifacts(backendReports) ||

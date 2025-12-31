@@ -46,7 +46,14 @@ try {
 } catch {
 }
 const TS = new Date().toISOString().replace(/[:.]/g, '-');
-const DEFAULT_SAMPLE_PDF_DIR = path.join(ROOT, 'sample_pdf');
+const REPORTS_PDF_ROOT = (() => {
+  const raw = process.env.REPORTS_PDF_ROOT;
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return 'C:\\VNEXSUS_reports_pdf';
+})();
+const DEFAULT_SAMPLE_PDF_DIR = path.join(REPORTS_PDF_ROOT, 'sample_pdf');
 const DEFAULT_RAW_DIR = path.join(ROOT, 'src', 'rag', 'case_sample_raw');
 const CASE_SAMPLE_DIR = path.join(ROOT, 'src', 'rag', 'case_sample');
 
@@ -63,7 +70,7 @@ const INPUT_DIR = inputCandidate
   : (fs.existsSync(DEFAULT_SAMPLE_PDF_DIR) ? DEFAULT_SAMPLE_PDF_DIR : DEFAULT_RAW_DIR);
 
 const MODE = path.basename(INPUT_DIR).toLowerCase() === 'sample_pdf' ? 'sample_pdf' : 'case_sample_raw';
-const OUT_ROOT = path.join(ROOT, 'reports', MODE === 'sample_pdf' ? 'VNEXSUS_Report' : 'case_sample_reprocessed', TS);
+const OUT_ROOT = path.join(REPORTS_PDF_ROOT, MODE === 'sample_pdf' ? 'VNEXSUS_Report' : 'case_sample_reprocessed', TS);
 const OUT_CASE_DIR = OUT_ROOT;
 const MIN_TEXT_LENGTH = Number(process.env.MIN_TEXT_LENGTH || 32);
 const DOC_TEXT_LENGTH_MIN = Number(process.env.DOC_TEXT_LENGTH_MIN || 32);
@@ -93,7 +100,7 @@ function listDirs(p) {
   return fs.readdirSync(p, { withFileTypes: true }).filter(d => d.isDirectory()).map(d => path.join(p, d.name));
 }
 function pickLatestPreparedCoords() {
-  const base = path.join(ROOT, 'reports', 'prepared_coordinate_cases');
+  const base = path.join(REPORTS_PDF_ROOT, 'prepared_coordinate_cases');
   if (!fs.existsSync(base)) return null;
   const stamps = listDirs(base);
   if (!stamps.length) return null;

@@ -11,9 +11,16 @@ import { v4 as uuidv4 } from 'uuid';
 // 기본 임시 디렉토리 경로
 const defaultTempDir = process.env.TEMP_DIR || path.join(os.tmpdir(), 'pdf-ocr');
 const ROOT = process.cwd();
+const REPORTS_PDF_ROOT = (() => {
+  const raw = process.env.REPORTS_PDF_ROOT;
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return 'C:\\VNEXSUS_reports_pdf';
+})();
 const protectedDirs = [
-  path.join(ROOT, 'sample_pdf'),
-  path.join(ROOT, 'reports', 'prepared_coordinate_cases')
+  path.join(REPORTS_PDF_ROOT, 'sample_pdf'),
+  path.join(REPORTS_PDF_ROOT, 'prepared_coordinate_cases')
 ].map(d => path.resolve(d));
 const isProtectedPath = (p) => {
   try {

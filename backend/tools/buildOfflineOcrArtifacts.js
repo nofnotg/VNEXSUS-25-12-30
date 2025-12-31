@@ -6,8 +6,15 @@ import { logService } from '../utils/logger.js';
 import * as visionService from '../services/visionService.js';
 
 const ROOT = process.cwd();
-const SAMPLE_DIR = path.join(ROOT, 'sample_pdf');
-const OUT_ROOT = path.join(ROOT, 'reports', 'offline_ocr_samples');
+const REPORTS_PDF_ROOT = (() => {
+  const raw = process.env.REPORTS_PDF_ROOT;
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    return path.isAbsolute(raw) ? raw : path.join(ROOT, raw);
+  }
+  return 'C:\\VNEXSUS_reports_pdf';
+})();
+const SAMPLE_DIR = path.join(REPORTS_PDF_ROOT, 'sample_pdf');
+const OUT_ROOT = path.join(REPORTS_PDF_ROOT, 'offline_ocr_samples');
 const CASE_SAMPLE_DIR = path.join(ROOT, 'src', 'rag', 'case_sample');
 const DEFAULT_RAW_DIR = path.join(ROOT, 'src', 'rag', 'case_sample_raw');
 const parseCliArg = (prefix) => {
