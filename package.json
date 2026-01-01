@@ -26,7 +26,18 @@
     "report:csv": "node src/scripts/generateComparisonCsv.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-case-comparison.csv",
     "report:html": "node src/scripts/cliGenerateComparisonHtml.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-case-comparison.html --title \"Outpatient Episodes Comparison\"",
     "report:all": "npm run report:csv && npm run report:html",
-    "report:summary": "node src/scripts/cliGenerateSummary.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-summary.json"
+    "report:summary": "node src/scripts/cliGenerateSummary.js --input results/outpatient-episodes-case-comparison.json --output reports/outpatient-episodes-summary.json",
+    "ten:batch": "node --loader ts-node/esm scripts/batch-run-ten-report.ts \"C:\\\\VNEXSUS_reports_pdf\" \"outputs/ten-report\"",
+    "ten:metrics": "node --loader ts-node/esm scripts/compute-metrics.ts \"outputs/ten-report\"",
+    "ten:golden": "node --loader ts-node/esm scripts/save-golden.ts \"outputs/ten-report\"",
+    "ten:golden:diff": "node --loader ts-node/esm scripts/compare-with-golden.ts \"outputs/ten-report\"",
+    "ten:all": "npm run ten:batch && npm run ten:metrics && npm run ten:golden && npm run ten:golden:diff",
+    "ten:sweep": "node --loader ts-node/esm scripts/param-sweep.ts \"C:\\\\VNEXSUS_reports_pdf\" \"outputs/sweep\""
+    ,
+    "ten:orchestrate": "node --loader ts-node/esm scripts/orchestrate-all.ts",
+    "ten:auto-flag": "node --loader ts-node/esm scripts/auto-flag-ten.ts",
+    "progress:gen": "node --loader ts-node/esm scripts/generate-progress-html.ts",
+    "realtime:llm": "node --loader ts-node/esm scripts/realtime-ocr-llm-and-compare.ts \"realtime_ocr\""
   },
   "dependencies": {
     "@google-cloud/pubsub": "^4.7.2",
@@ -61,7 +72,8 @@
     "eslint": "^9.39.1",
     "jest": "^30.2.0",
     "supertest": "^7.1.4",
-    "typescript": "^5.9.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.1"
   }
 }

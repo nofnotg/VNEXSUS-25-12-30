@@ -9,6 +9,8 @@ import path from 'path';
 import { reportMaker } from '../lib/reportMaker.js';
 import fs from 'fs/promises';
 import { logger } from '../shared/logging/logger.js';
+import { runMedicalEventReport } from '../modules/medical-events/service/pipelineAdapter';
+import { FEATURE_FLAGS } from '../shared/constants/featureFlags';
 
 class ReportController {
   private static instance: ReportController;
@@ -114,11 +116,26 @@ class ReportController {
    */
   public async reportHandler(req: any, res: any): Promise<void> {
     try {
-      const timeline = await this.getTimelineJSON(req.query.file);
-      const url = await reportMaker.createReport(timeline, undefined, {
-        outputPath: path.resolve(process.cwd(), 'outputs')
-      });
-      res.json({url: url.reportPath});
+      const useTenParam = String(req.query.tenItemReport || '').toLowerCase();
+      const useTen = useTenParam ? useTenParam === 'true' : FEATURE_FLAGS.tenItemReport;
+      if (!useTen) {
+        const timeline = await this.getTimelineJSON(req.query.file);
+        const url = await reportMaker.createReport(timeline, undefined, {
+          outputPath: path.resolve(process.cwd(), 'outputs')
+        });
+        res.json({url: url.reportPath});
+        return;
+      }
+      const bindPath = String(req.query.bind || '');
+      const abs = path.resolve(process.cwd(), bindPath);
+      const content = await fs.readFile(abs, 'utf-8');
+      const bind = JSON.parse(content);
+      const outDir = path.resolve(process.cwd(), 'outputs', 'ten-report');
+      const result = runMedicalEventReport(bind, { outputPath: outDir });
+      const mdPath = path.join(outDir, 'report.md');
+      const htmlPath = path.join(outDir, 'report.html');
+      const jsonPath = path.join(outDir, 'report.json');
+      res.json({ success: true, paths: { markdown: mdPath, html: htmlPath, json: jsonPath }, meta: { events: result.events.length } });
     } catch (error: any) {
       logger.error({
         event: 'report_handler_error',
