@@ -76,7 +76,7 @@ function getVisionConfig() {
   } catch {
   }
   return {
-    isEnabled: process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION !== 'false',
+    isEnabled: process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION === 'true',
     credentials: credentialsResolved,
     apiKey: apiKeyEnv,
     bucket: bucketFromEnv || 'medreport-vision-ocr-bucket',
@@ -618,7 +618,7 @@ export async function extractTextFromImage(imageBuffer) {
  */
 export async function getServiceStatus() {
   try {
-    const ENABLED = process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION !== 'false';
+    const ENABLED = process.env.ENABLE_VISION_OCR === 'true' && process.env.USE_VISION === 'true';
     const config = getVisionConfig();
     const credPath = config.credentials;
     const hasCredFile = typeof credPath === 'string' && credPath.length > 0 && fs.existsSync(credPath);

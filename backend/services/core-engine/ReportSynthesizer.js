@@ -378,16 +378,18 @@ export default class ReportSynthesizer {
 
         // 이벤트 정리 및 구조화
         skeletonReport.timeline.events = timeline.events
-            .filter(event => event.confidence >= 0.6)
             .map(event => {
+                const uncertaintyMeta = this.computeUncertaintyMeta(event, analysisResults.confidenceScore);
                 const mappedEvent = {
                     date: event.date,
                     type: event.type,
                     description: event.description,
                     entities: event.entities || [],
-                    confidence: event.confidence,
+                    confidence: this.format2(event.confidence || 0),
                     importance: event.importance || 'medium',
-                    evidence: event.evidence || []
+                    evidence: event.evidence || [],
+                    uncertaintyMeta,
+                    reviewFlags: this.computeReviewFlags({ ...event, uncertaintyMeta })
                 };
 
                 // Master Plan Phase 1.2: DisputeTag 포함 (optional)
@@ -405,6 +407,7 @@ export default class ReportSynthesizer {
 
         // 진료 에피소드 구성
         skeletonReport.timeline.episodeOfCare = this.constructEpisodesOfCare(timeline);
+        skeletonReport.timelineSections = this.classifyTimelineEvents(skeletonReport.timeline.events);
     }
 
 
@@ -501,10 +504,10 @@ export default class ReportSynthesizer {
                 category: item.category,
                 description: item.description,
                 riskLevel: item.riskLevel,
-                confidence: item.confidence,
+                confidence: this.format2(item.confidence || 0),
                 evidence: item.evidence || [],
                 recommendations: item.recommendations || [],
-                impactScore: item.impactScore || 0
+                impactScore: this.format2(item.impactScore || 0)
             }))
             .sort((a, b) => (b.impactScore || 0) - (a.impactScore || 0))
             .slice(0, 8); // 최대 8개 고지의무 항목
@@ -535,8 +538,8 @@ export default class ReportSynthesizer {
         }
 
         skeletonReport.qualityMetrics = {
-            dataCompleteness: confidenceScore.componentScores?.dataCompleteness?.score || 0,
-            confidenceScore: confidenceScore.overallConfidenceScore || 0,
+            dataCompleteness: this.format2(confidenceScore.componentScores?.dataCompleteness?.score || 0),
+            confidenceScore: this.format2(confidenceScore.overallConfidenceScore || 0),
             uncertaintyLevel: confidenceScore.uncertaintyAnalysis?.uncertaintyLevel || 'unknown',
             validationResults: this.summarizeValidationResults(confidenceScore)
         };
@@ -552,7 +555,7 @@ export default class ReportSynthesizer {
             Object.entries(confidenceScore.componentScores).forEach(([component, result]) => {
                 validationResults.push({
                     component,
-                    score: result.score,
+                    score: this.format2(result.score),
                     status: result.score >= 0.7 ? 'passed' : result.score >= 0.5 ? 'warning' : 'failed'
                 });
             });
@@ -947,6 +950,112 @@ export default class ReportSynthesizer {
         return 'very_low';
     }
 
+    format2(x) {
+        const n = typeof x === 'number' ? x : Number(x || 0);
+        return Math.round(n * 100) / 100;
+    }
+    classifyTimelineEvents(events) {
+        const A = [];
+        const B = [];
+        const review = [];
+        const aThRaw = process?.env?.TIMELINE_A_THRESHOLD;
+        const aTh = Number.isFinite(Number(aThRaw)) ? Number(aThRaw) : 0.65;
+        const cHumanRaw = process?.env?.REVIEW_C_HUMAN;
+        const cHuman = Number.isFinite(Number(cHumanRaw)) ? Number(cHumanRaw) : 0.35;
+        const compRaw = process?.env?.REVIEW_COMPETITION_THRESHOLD;
+        const compTh = Number.isFinite(Number(compRaw)) ? Number(compRaw) : 0.7;
+        for (const e of events || []) {
+            const c = typeof e.confidence === 'number' ? e.confidence : Number(e.confidence || 0);
+            const hasUnknownType = !e.type || e.type === 'unknown';
+            const missingDate = !e.date;
+            const competition = Number(e?.binding?.competition ?? NaN);
+            const highCompetition = Number.isFinite(competition) && competition >= compTh;
+            const needsHumanReview = c <= cHuman || hasUnknownType || missingDate || highCompetition;
+            if (needsHumanReview) {
+                review.push(e);
+                continue;
+            }
+            if (c >= aTh) {
+                A.push(e);
+            } else {
+                B.push(e);
+            }
+        }
+        return { A, B, review };
+    }
+    computeReviewFlags(event) {
+        const uLRaw = process?.env?.REVIEW_U_LLM;
+        const cLRaw = process?.env?.REVIEW_C_LLM;
+        const uHRaw = process?.env?.REVIEW_U_HUMAN;
+        const cHRaw = process?.env?.REVIEW_C_HUMAN;
+        const compRaw = process?.env?.REVIEW_COMPETITION_THRESHOLD;
+        const U_LLM = Number.isFinite(Number(uLRaw)) ? Number(uLRaw) : 0.65;
+        const C_LLM = Number.isFinite(Number(cLRaw)) ? Number(cLRaw) : 0.50;
+        const U_HUMAN = Number.isFinite(Number(uHRaw)) ? Number(uHRaw) : 0.80;
+        const C_HUMAN = Number.isFinite(Number(cHRaw)) ? Number(cHRaw) : 0.35;
+        const COMP_TH = Number.isFinite(Number(compRaw)) ? Number(compRaw) : 0.70;
+        const c = Number(event?.confidence || 0);
+        const u = Number(event?.uncertaintyMeta?.score || 0);
+        const competition = Number(event?.binding?.competition ?? NaN);
+        const highCompetition = Number.isFinite(competition) && competition >= COMP_TH;
+        const reasons = [];
+        if (!event?.type || event.type === 'unknown') reasons.push('UNKNOWN_EVENT_TYPE');
+        if (!event?.date) reasons.push('MISSING_DATE');
+        if (c <= C_HUMAN) reasons.push('LOW_CONFIDENCE');
+        if (u >= U_HUMAN) reasons.push('HIGH_UNCERTAINTY');
+        if (highCompetition) reasons.push('HIGH_COMPETITION_BINDING');
+        const needsHumanReview = c <= C_HUMAN || u >= U_HUMAN || highCompetition || reasons.length > 0;
+        const needsLLMReview = c <= C_LLM || u >= U_LLM || highCompetition;
+        return {
+            needsLLMReview,
+            needsHumanReview,
+            reasons
+        };
+    }
+    computeUncertaintyMeta(event, confidenceScore) {
+        const wBindRaw = process?.env?.UNC_WEIGHT_BINDING;
+        const wStructRaw = process?.env?.UNC_WEIGHT_STRUCT;
+        const wOcrRaw = process?.env?.UNC_WEIGHT_OCR;
+        const wBinding = Number.isFinite(Number(wBindRaw)) ? Number(wBindRaw) : 0.4;
+        const wStruct = Number.isFinite(Number(wStructRaw)) ? Number(wStructRaw) : 0.3;
+        const wOcr = Number.isFinite(Number(wOcrRaw)) ? Number(wOcrRaw) : 0.3;
+        const comp = Number(event?.binding?.competition ?? 0);
+        const missingDate = !event?.date ? 1 : 0;
+        const unknownType = !event?.type || event.type === 'unknown' ? 1 : 0;
+        const srcReliability = Number(confidenceScore?.componentScores?.sourceReliability?.score ?? 1);
+        const ocrLow = Math.max(0, 1 - srcReliability);
+        const eventFactors = [
+            { key: 'binding_competition', value: this._clamp01(comp), weight: wBinding },
+            { key: 'missing_date', value: missingDate, weight: wStruct },
+            { key: 'unknown_type', value: unknownType, weight: wStruct },
+            { key: 'low_source_quality', value: this._clamp01(ocrLow), weight: wOcr }
+        ];
+        let eventSum = 0;
+        for (const f of eventFactors) eventSum += (Number(f.value) || 0) * (Number(f.weight) || 0);
+        const eventScore = this._clamp01(eventSum);
+        const ua = confidenceScore?.uncertaintyAnalysis;
+        const globalScore = this._clamp01(Number(ua?.totalUncertainty || 0));
+        const gwRaw = process?.env?.UNC_GLOBAL_WEIGHT;
+        const gw = Number.isFinite(Number(gwRaw)) ? Number(gwRaw) : 0.5;
+        const combinedScore = this._clamp01(gw * globalScore + (1 - gw) * eventScore);
+        return {
+            score: this.format2(combinedScore),
+            factors: eventFactors,
+            global: {
+                total: this.format2(globalScore),
+                level: ua?.uncertaintyLevel || 'unknown',
+                factors: ua?.uncertaintyFactors || {}
+            },
+            components: confidenceScore?.componentScores || undefined
+        };
+    }
+    _clamp01(x) {
+        const n = Number.isFinite(Number(x)) ? Number(x) : 0;
+        if (n < 0) return 0;
+        if (n > 1) return 1;
+        return n;
+    }
+
     deduplicateAndPrioritizeFindings(findings) {
         // 중복 제거 (설명 기준)
         const uniqueFindings = findings.filter((finding, index, array) =>
@@ -1215,6 +1324,7 @@ export default class ReportSynthesizer {
                     events: ep.events
                 })),
                 timeline: filteredEvents,
+                timelineSections: this.classifyTimelineEvents(skeletonReport.timeline.events),
                 generationHints: this.generateInvestigatorHints(analysisResults, enhancedEpisodes)
             };
 

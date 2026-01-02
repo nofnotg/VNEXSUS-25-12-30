@@ -23,6 +23,9 @@ class DateAnchoringOptimizer {
             maxDateRange: options.maxDateRange || 365 * 10, // 10년
             ...options
         };
+        const envMarginRaw = process?.env?.DATE_ANCHOR_MARGIN_NORM;
+        const envMargin = Number(envMarginRaw);
+        this.marginNorm = options.marginNorm ?? (Number.isFinite(envMargin) ? envMargin : 0.15);
 
         // 날짜 패턴 정의
         this.datePatterns = {
@@ -462,18 +465,19 @@ class DateAnchoringOptimizer {
             
             // 충돌 해결 및 최적화
             const optimizedAnchors = this._resolveAnchorConflicts(qualityAnchors);
+            const diagnosedAnchors = this._injectBindingDiagnostics(optimizedAnchors);
             
             // 데이터에 앵커 적용
-            const anchoredData = this._applyAnchorsToData(preprocessedData.normalized, optimizedAnchors);
+            const anchoredData = this._applyAnchorsToData(preprocessedData.normalized, diagnosedAnchors);
 
             return {
                 data: anchoredData,
-                anchors: optimizedAnchors,
+                anchors: diagnosedAnchors,
                 strategies: anchoringStrategies,
                 totalAnchors: anchors.length,
                 qualityAnchors: qualityAnchors.length,
-                finalAnchors: optimizedAnchors.length,
-                confidence: this._calculateAnchoringConfidence(optimizedAnchors)
+                finalAnchors: diagnosedAnchors.length,
+                confidence: this._calculateAnchoringConfidence(diagnosedAnchors)
             };
 
         } catch (error) {
@@ -1070,6 +1074,49 @@ class DateAnchoringOptimizer {
     _calculateAnchoringConfidence(anchors) {
         // 앵커링 신뢰도 계산 로직
         return anchors.length > 0 ? 0.85 : 0;
+    }
+    _injectBindingDiagnostics(anchors) {
+        if (!Array.isArray(anchors) || anchors.length === 0) return anchors;
+        const byDate = new Map();
+        for (const a of anchors) {
+            const k = a.date || `__${a.id}`;
+            if (!byDate.has(k)) byDate.set(k, []);
+            byDate.get(k).push(a);
+        }
+        for (const [_k, group] of byDate.entries()) {
+            group.sort((x, y) => (y.confidence || 0) - (x.confidence || 0));
+            for (let i = 0; i < group.length; i++) {
+                const a = group[i];
+                const top1 = Number(a.confidence || 0);
+                const top2 = Number(group[i === 0 ? 1 : 0]?.confidence || 0);
+                const margin = Math.max(0, top1 - top2);
+                const competition = 1 - this._clamp01(this.marginNorm > 0 ? margin / this.marginNorm : 1);
+                const p1 = typeof a.position === 'number' ? a.position : (a.position?.index ?? 0);
+                const p2 = typeof group[i === 0 ? 1 : 0]?.position === 'number'
+                    ? group[i === 0 ? 1 : 0].position
+                    : (group[i === 0 ? 1 : 0]?.position?.index ?? p1);
+                const dist = Math.abs(Number(p1) - Number(p2));
+                const distance_norm = this._clamp01(dist / 1000);
+                const role_hint = a.type || 'unknown';
+                const layout_zone_penalty = 0;
+                a.binding = {
+                    score_top1: top1,
+                    score_top2: top2,
+                    margin,
+                    competition,
+                    distance_norm,
+                    role_hint,
+                    layout_zone_penalty
+                };
+            }
+        }
+        return anchors;
+    }
+    _clamp01(x) {
+        const n = Number.isFinite(x) ? x : 0;
+        if (n < 0) return 0;
+        if (n > 1) return 1;
+        return n;
     }
 
     _validateTimeOrder(anchors) {

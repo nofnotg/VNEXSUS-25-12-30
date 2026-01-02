@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { loadBindInputFromFile } from "../src/modules/medical-events/service/preparedOcrLoader";
 import { runMedicalEventReport } from "../src/modules/medical-events/service/pipelineAdapter";
+import { TAG_SYNONYMS } from "../src/shared/constants/tagSynonyms";
 
 const safeExists = (p: string) => {
   try {
@@ -118,26 +119,6 @@ const generateLLMContinuous = async (caseId: string, ocrText: string, structured
     const out = sanitizeLLMContent(final.choices?.[0]?.message?.content || "");
     return out;
   }
-  if (googleKey) {
-    const { GoogleGenerativeAI } = await import("@google/generative-ai");
-    const genAI = new GoogleGenerativeAI(googleKey);
-    const model = genAI.getGenerativeModel({ model: process.env.GOOGLE_GENAI_MODEL || "gemini-1.5-flash" });
-    const prepInput = [
-      { text: prep.sys },
-      { text: prep.usr },
-    ];
-    const prepRes = await model.generateContent(prepInput as any);
-    const preprocessed = String(prepRes.response?.text?.() || prepRes.response?.candidates?.[0]?.content?.parts?.map((p: any) => p?.text || "").join("\n") || "");
-    const rep = continuousReportPrompt();
-    const repInput = [
-      { text: "손해사정 보고서 전문가. 일관된 형식의 고품질 보고서를 생성한다." },
-      { text: `구조화 데이터:\n${JSON.stringify(structuredEvents).slice(0, 10000)}\n\n전처리 응답:\n${preprocessed.slice(0, 6000)}` },
-      { text: rep.usr },
-    ];
-    const final = await model.generateContent(repInput as any);
-    const out = sanitizeLLMContent(String(final.response?.text?.() || final.response?.candidates?.[0]?.content?.parts?.map((p: any) => p?.text || "").join("\n") || ""));
-    return out;
-  }
   return `LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정\n\n사전 요약:\n- 이벤트 수: ${structuredEvents.length}\n- 샘플 텍스트: ${ocrText.slice(0, 400)}...`;
 };
 
@@ -194,6 +175,43 @@ const dateJaccard = (a: string, b: string) => {
   const uni = new Set<string>([...sa, ...sb]).size;
   return uni > 0 ? inter / uni : 0;
 };
+const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const EVENT_SYNS = [
+  ...TAG_SYNONYMS.admission,
+  ...TAG_SYNONYMS.surgery,
+  ...TAG_SYNONYMS.imaging,
+  ...TAG_SYNONYMS.exam
+];
+const eventDatesFromText = (s: string) => {
+  const out = new Set<string>();
+  const txt = String(s || "");
+  if (!txt) return out;
+  const reKw = new RegExp(EVENT_SYNS.map(escapeRegex).join("|"), "gi");
+  let m: RegExpExecArray | null;
+  while ((m = reKw.exec(txt)) !== null) {
+    const i = m.index;
+    const w = txt.slice(i - 160 < 0 ? 0 : i - 160, i + 160);
+    const ds = datesFromText(w);
+    for (const d of ds) out.add(d);
+  }
+  return out;
+};
+const jaccardSets = (a: Set<string>, b: Set<string>) => {
+  if (a.size === 0 && b.size === 0) return 1;
+  const inter = [...a].filter(x => b.has(x)).length;
+  const uni = new Set<string>([...a, ...b]).size;
+  return uni > 0 ? inter / uni : 0;
+};
+const isISODate = (d: string) => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ""));
+const appEventDatesFromEvents = (events: any[]) => {
+  const out = new Set<string>();
+  for (const e of events || []) {
+    const t = e?.meta?.tags || [];
+    const ok = t.includes("입원") || t.includes("수술") || t.includes("영상검사") || t.includes("검사");
+    if (ok && isISODate(String(e?.date || ""))) out.add(String(e.date));
+  }
+  return out;
+};
 const isoDateRate = (events: any[]) => {
   const isISO = (d: string) => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ""));
   const dates = events.map(e => e.date).filter(Boolean);
@@ -243,7 +261,20 @@ const main = async () => {
   const inDir = path.resolve(process.cwd(), process.argv[2] || "realtime_ocr");
   const outDir = path.resolve(process.cwd(), process.argv[3] || "outputs/realtime-llm");
   const offlineDir = path.resolve(process.cwd(), "offline/reports");
-  const iterationLabel = String(process.argv[4] || process.env.ITER_LABEL || "검증 1차");
+  const baseDateStr = String(process.env.REPORT_BASE_DATE || "2026-01-01");
+  const dateStr = baseDateStr;
+  const outFile = path.resolve(offlineDir, `${dateStr}-realtime-llm-comparison.html`);
+  let iterationLabel = "";
+  let iterIndex = 1;
+  if (safeExists(outFile)) {
+    const prev = readText(outFile);
+    const reOld = new RegExp(`data-tab-id="iter_${dateStr}"`, "g");
+    const reNew = new RegExp(`data-tab-id="iter_${dateStr}_[0-9]+"`, "g");
+    const nOld = (prev.match(reOld) || []).length;
+    const nNew = (prev.match(reNew) || []).length;
+    iterIndex = nOld + nNew + 1;
+  }
+  iterationLabel = `검증 ${iterIndex}차`;
   ensureDir(outDir);
   ensureDir(offlineDir);
   let files = listFiles(inDir);
@@ -275,7 +306,13 @@ const main = async () => {
       const lengthDiff = Math.abs((baseline || "").length - llm.length);
       const simLLMvsBase = Number((jaccard(llm, baseline) * 100).toFixed(1));
       const simAPPvsBase = Number((jaccard(appMd, baseline) * 100).toFixed(1));
-      const dateMatchAPPvsBase = Number((dateJaccard(appMd, baseline) * 100).toFixed(1));
+      const dateMatchAPPvsBase = (() => {
+        const appDates = appEventDatesFromEvents(events || []);
+        const baseEventDates = eventDatesFromText(baseline);
+        const baseSet = baseEventDates.size ? baseEventDates : datesFromText(baseline);
+        const d = appDates.size ? jaccardSets(appDates, baseSet) : dateJaccard(appMd, baseline);
+        return Number((d * 100).toFixed(1));
+      })();
       const dateRate = isoDateRate(events || []);
       const tags = tagTop(events || [], 5);
       const missingPastCount = (events || []).filter(e => !(Array.isArray(e.slots?.pastHistory) && e.slots!.pastHistory!.length > 0)).length;
@@ -325,7 +362,6 @@ const main = async () => {
       });
     }
   }
-  const dateStr = today();
   const avgDateIso = results.length ? Number((results.reduce((s, r) => s + (r.dateValidPct || 0), 0) / results.length).toFixed(1)) : 0;
   const avgMissingPast = results.length ? Number((results.reduce((s, r) => s + (r.missingPastPct || 0), 0) / results.length).toFixed(1)) : 0;
   const avgMissingOpinion = results.length ? Number((results.reduce((s, r) => s + (r.missingOpinionPct || 0), 0) / results.length).toFixed(1)) : 0;
@@ -334,12 +370,11 @@ const main = async () => {
     r.qualityComposite = compositeQuality(r);
     r.qualityBand = bandOf(r.qualityComposite);
   }
-  const bandTop = results.filter(r => r.qualityBand === "top").sort((a, b) => (b.qualityComposite || 0) - (a.qualityComposite || 0));
-  const bandMid = results.filter(r => r.qualityBand === "mid").sort((a, b) => (b.qualityComposite || 0) - (a.qualityComposite || 0));
-  const bandBottom = results.filter(r => r.qualityBand === "bottom").sort((a, b) => (b.qualityComposite || 0) - (a.qualityComposite || 0));
-  const top = bandTop.slice(0, Math.min(3, bandTop.length));
-  const mid = bandMid.slice(0, Math.min(3, bandMid.length));
-  const bottom = bandBottom.slice(0, Math.min(3, bandBottom.length));
+  const sorted = results.slice().sort((a, b) => (b.qualityComposite || 0) - (a.qualityComposite || 0));
+  const top = sorted.slice(0, Math.min(3, sorted.length));
+  const bottom = sorted.slice(Math.max(0, sorted.length - 3));
+  const midStart = Math.max(0, Math.floor(sorted.length / 2) - 1);
+  const mid = sorted.slice(midStart, Math.min(midStart + 3, sorted.length));
   const makeCard = (r: any) => `<div class="card">
 <div class="metric"><div class="label">Case</div><div class="v">${r.caseId}</div></div>
 <div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">${r.quality}</div></div>
@@ -378,7 +413,13 @@ const main = async () => {
       const baseline = baselinePath ? readText(baselinePath) : "";
       r.llmLen = llm.length;
       r.simLLMvsBase = Number((jaccard(llm, baseline) * 100).toFixed(1));
-      r.dateMatchLLMvsBase = Number((dateJaccard(llm, baseline) * 100).toFixed(1));
+      {
+        const llmDates = eventDatesFromText(llm);
+        const baseEventDates = eventDatesFromText(baseline);
+        const baseSet = baseEventDates.size ? baseEventDates : datesFromText(baseline);
+        const d = llmDates.size ? jaccardSets(llmDates, baseSet) : dateJaccard(llm, baseline);
+        r.dateMatchLLMvsBase = Number((d * 100).toFixed(1));
+      }
       r.llmSnippet = llm.slice(0, 2000);
     } catch (err: any) {
       const outCase = cached.outCase;
@@ -390,8 +431,9 @@ const main = async () => {
       r.llmSnippet = llm.slice(0, 2000);
     }
   }
-  const tabNavBtn = `<button class="tab-btn active" data-tab-id="iter_${dateStr}">${iterationLabel}</button>`;
-  const tabPane = `<div class="tab-pane active" id="iter_${dateStr}">
+  const tabKey = `iter_${dateStr}_${iterIndex}`;
+  const tabNavBtn = `<button class="tab-btn active" data-tab-id="${tabKey}">${iterationLabel}</button>`;
+  const tabPane = `<div class="tab-pane active" id="${tabKey}">
 <div class="sub">
   <h2>분석 요약 및 원인</h2>
   <div class="metrics">
@@ -404,35 +446,105 @@ const main = async () => {
     - 유의어/태그 기반 슬롯 보강 적용 상태에서 품질 점수별 케이스 검증을 수행합니다.
   </div>
   <div style="margin-top:10px;font-size:13px;color:#8ec9f0">
-    - 품질 밴드(절대 구간): 상(0.75~1.00), 중(0.50~0.749), 하(0.00~0.49)<br/>
-    - 밴드 분포: 상 ${bandTop.length}건 · 중 ${bandMid.length}건 · 하 ${bandBottom.length}건<br/>
+    - 상대평가 기반 선정: 상·중·하 각 3개 케이스를 선정하여 검증함<br/>
     - 복합 품질(Composite) = wDate*날짜일치(App↔Baseline) + wContent*내용유사도(App↔Baseline) + wMeta*메타점수<br/>
     - 가중치 기본값: wDate=0.7, wContent=0.2, wMeta=0.1 (환경변수 QW_DATE/QW_CONTENT/QW_META로 조정 가능)
   </div>
 </div>
 <div class="sub" style="padding-top:8px">
   <div class="tabs" data-scope="quality">
-    <button class="tab-btn active" data-quality-id="top_${dateStr}">상(Top)</button>
-    <button class="tab-btn" data-quality-id="mid_${dateStr}">중(Mid)</button>
-    <button class="tab-btn" data-quality-id="bottom_${dateStr}">하(Bottom)</button>
+    <button class="tab-btn active" data-quality-id="top_${dateStr}_${iterIndex}">상(Top)</button>
+    <button class="tab-btn" data-quality-id="mid_${dateStr}_${iterIndex}">중(Mid)</button>
+    <button class="tab-btn" data-quality-id="bottom_${dateStr}_${iterIndex}">하(Bottom)</button>
   </div>
-  <div class="quality-pane active" id="quality_top_${dateStr}">
+  <div class="quality-pane active" id="quality_top_${dateStr}_${iterIndex}">
     <div class="section"><h2>품질 점수 높은 케이스(3)</h2><div class="grid">${top.map(makeCard).join("")}</div></div>
   </div>
-  <div class="quality-pane" id="quality_mid_${dateStr}">
+  <div class="quality-pane" id="quality_mid_${dateStr}_${iterIndex}">
     <div class="section"><h2>품질 점수 중간 케이스(3)</h2><div class="grid">${mid.map(makeCard).join("")}</div></div>
   </div>
-  <div class="quality-pane" id="quality_bottom_${dateStr}">
+  <div class="quality-pane" id="quality_bottom_${dateStr}_${iterIndex}">
     <div class="section"><h2>품질 점수 낮은 케이스(3)</h2><div class="grid">${bottom.map(makeCard).join("")}</div></div>
   </div>
 </div>
 </div>`;
-  const outFile = path.resolve(offlineDir, `${dateStr}-realtime-llm-comparison.html`);
   let html: string;
   if (safeExists(outFile)) {
     const prev = readText(outFile);
-    if (prev.includes("<!-- tabs:nav:start -->") && prev.includes("<!-- tabs:nav:end -->") && prev.includes("<!-- tabs:content:start -->") && prev.includes("<!-- tabs:content:end -->")) {
-      html = prev.replace("<!-- tabs:nav:end -->", `${tabNavBtn}\n<!-- tabs:nav:end -->`).replace("<!-- tabs:content:end -->", `${tabPane}\n<!-- tabs:content:end -->`);
+    const hasMarkers = prev.includes("<!-- tabs:nav:start -->") && prev.includes("<!-- tabs:nav:end -->") && prev.includes("<!-- tabs:content:start -->") && prev.includes("<!-- tabs:content:end -->");
+    if (hasMarkers) {
+      const extract = (s: string) => {
+        const out: string[] = [];
+        const startMarker = "<!-- tabs:content:start -->";
+        const endMarker = "<!-- tabs:content:end -->";
+        const iStart = s.indexOf(startMarker);
+        const iEnd = s.indexOf(endMarker);
+        if (iStart < 0 || iEnd < 0 || iEnd <= iStart) return out;
+        const block = s.slice(iStart + startMarker.length, iEnd);
+        const re = /<div class="tab-pane(?:\s+active)?"[^>]*\bid="([^"]+)"[^>]*>/g;
+        const matches = Array.from(block.matchAll(re)).map(m => ({ idx: m.index ?? 0, raw: m[0] }));
+        for (let i = 0; i < matches.length; i++) {
+          const a = matches[i];
+          const b = matches[i + 1];
+          const start = a.idx;
+          const end = b ? b.idx : block.length;
+          let pane = block.slice(start, end).trim();
+          if (pane.length === 0) continue;
+          if (!pane.endsWith("</div>")) pane += "\n</div>";
+          out.push(pane);
+        }
+        return out;
+      };
+      const normalizePaneHtml = (s: string) => {
+        let x = s;
+        x = x.replace(/id="iter_\d{4}-\d{2}-\d{2}_[0-9]+"/g, 'id="iter_DATE_IDX"');
+        x = x.replace(/id="iter_\d{4}-\d{2}-\d{2}"/g, 'id="iter_DATE_IDX"');
+        x = x.replace(/data-quality-id="(top|mid|bottom)_\d{4}-\d{2}-\d{2}_[0-9]+"/g, (_m, g1) => `data-quality-id="${g1}_DATE_IDX"`);
+        x = x.replace(/id="quality_(top|mid|bottom)_\d{4}-\d{2}-\d{2}_[0-9]+"/g, (_m, g1) => `id="quality_${g1}_DATE_IDX"`);
+        x = x.replace(/class="tab-pane\s+active"/g, 'class="tab-pane"');
+        x = x.replace(/class="quality-pane\s+active"/g, 'class="quality-pane"');
+        return x;
+      };
+      const retarget = (s: string, idx: number, active: boolean) => {
+        let x = s;
+        x = x.replace(/id="iter_\d{4}-\d{2}-\d{2}_[0-9]+"/g, `id="iter_${dateStr}_${idx}"`);
+        x = x.replace(/id="iter_\d{4}-\d{2}-\d{2}"/g, `id="iter_${dateStr}_${idx}"`);
+        x = x.replace(/data-quality-id="(top|mid|bottom)_\d{4}-\d{2}-\d{2}_[0-9]+"/g, (_m, g1) => `data-quality-id="${g1}_${dateStr}_${idx}"`);
+        x = x.replace(/id="quality_(top|mid|bottom)_\d{4}-\d{2}-\d{2}_[0-9]+"/g, (_m, g1) => `id="quality_${g1}_${dateStr}_${idx}"`);
+        x = x.replace(/class="tab-pane\s+active"/g, 'class="tab-pane"');
+        if (active) x = x.replace(/class="tab-pane"/, 'class="tab-pane active"');
+        return x;
+      };
+      const prevPanes = extract(prev);
+      const panes: string[] = [];
+      const seen = new Set<string>();
+      for (const p of prevPanes) {
+        const k = normalizePaneHtml(p);
+        if (!seen.has(k)) {
+          seen.add(k);
+          panes.push(p);
+        }
+      }
+      const firstOnly = panes.length ? [panes[0]] : [];
+      {
+        const kNew = normalizePaneHtml(tabPane);
+        if (!seen.has(kNew)) {
+          seen.add(kNew);
+          panes.push(tabPane);
+        }
+      }
+      const combined = [...firstOnly, panes[panes.length - 1]];
+      const navBuilt: string[] = [];
+      const paneBuilt: string[] = [];
+      for (let i = 0; i < combined.length; i++) {
+        const idx = i + 1;
+        const active = i === combined.length - 1;
+        navBuilt.push(`<button class="tab-btn${active ? " active" : ""}" data-tab-id="iter_${dateStr}_${idx}">검증 ${idx}차</button>`);
+        paneBuilt.push(retarget(combined[i], idx, active));
+      }
+      const navAll = navBuilt.join("");
+      const paneAll = paneBuilt.join("");
+      html = prev.replace(/<!-- tabs:nav:start -->[\s\S]*?<!-- tabs:nav:end -->/g, `<!-- tabs:nav:start -->${navAll}<!-- tabs:nav:end -->`).replace(/<!-- tabs:content:start -->[\s\S]*?<!-- tabs:content:end -->/g, `<!-- tabs:content:start -->${paneAll}<!-- tabs:content:end -->`);
     } else {
       html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>실시간 OCR LLM 보고서 비교 - ${dateStr}</title>
 <style>:root{--deep:#0b1f3a;--c1:#14355f;--c2:#215e9b;--acc:#18a0fb;--txt:#e6eef7;--mut:#a8b6c6}
@@ -564,6 +676,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div></body></html>`;
   }
   writeText(outFile, html);
+  // 별도 요약 문서 생성 중단
   console.log(outFile);
 };
 

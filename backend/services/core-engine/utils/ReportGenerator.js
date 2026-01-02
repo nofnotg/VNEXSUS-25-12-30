@@ -38,6 +38,11 @@ export class ReportGenerator {
         // 3. 진료 이력 타임라인
         sections.push(this.generateTimeline(investigatorView, contractDate, format));
 
+        // 4. 타임라인 섹션 분류
+        if (investigatorView.timelineSections) {
+            sections.push(this.generateTimelineSections(investigatorView.timelineSections, format));
+        }
+
         // 4. 진료 내역 요약
         sections.push(this.generateSummary(investigatorView, format));
 
@@ -62,6 +67,58 @@ export class ReportGenerator {
             lines.push(`생년월일: ${patientInfo.birthDate || '미상'}`);
         }
 
+        return lines.join('\n');
+    }
+
+    generateTimelineSections(timelineSections, format) {
+        const lines = [];
+        const title = '타임라인 섹션 분류';
+        if (format === 'html') {
+            lines.push(`<h2>4. ${title}</h2>`);
+            lines.push('<div class="timeline">');
+            lines.push('<h3>A 섹션</h3>');
+            lines.push(this.renderEventList(timelineSections.A, format));
+            lines.push('<h3>B 섹션</h3>');
+            lines.push(this.renderEventList(timelineSections.B, format));
+            lines.push('<h3>확인요망</h3>');
+            lines.push(this.renderEventList(timelineSections.review, format, true));
+            lines.push('</div>');
+        } else {
+            lines.push(`4. ${title}\n`);
+            lines.push('A 섹션');
+            lines.push(this.renderEventList(timelineSections.A, format));
+            lines.push('');
+            lines.push('B 섹션');
+            lines.push(this.renderEventList(timelineSections.B, format));
+            lines.push('');
+            lines.push('확인요망');
+            lines.push(this.renderEventList(timelineSections.review, format, true));
+        }
+        return lines.join('\n');
+    }
+    renderEventList(events = [], format, includeReasons = false) {
+        if (!events || events.length === 0) {
+            return format === 'html' ? '<p>항목 없음</p>' : '항목 없음';
+        }
+        const lines = [];
+        for (const e of events) {
+            const date = e.date || '미상';
+            const type = e.type || '미상';
+            const c = typeof e.confidence === 'number' ? e.confidence : Number(e.confidence || 0);
+            const conf = (Math.round(c * 100) / 100).toFixed(2);
+            const item = `${date} / ${type} / 신뢰도 ${conf}`;
+            if (format === 'html') {
+                lines.push(`<p>${item}</p>`);
+                if (includeReasons && e.reviewFlags?.reasons?.length) {
+                    lines.push(`<ul>${e.reviewFlags.reasons.map(r => `<li>${r}</li>`).join('')}</ul>`);
+                }
+            } else {
+                lines.push(item);
+                if (includeReasons && e.reviewFlags?.reasons?.length) {
+                    lines.push(` - 이유: ${e.reviewFlags.reasons.join(', ')}`);
+                }
+            }
+        }
         return lines.join('\n');
     }
 
