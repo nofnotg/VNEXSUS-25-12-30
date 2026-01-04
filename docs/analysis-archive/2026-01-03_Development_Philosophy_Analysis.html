@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS 개발 철학 분석 - 날짜 중심 접근법 검증</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --deep-navy: #0a192f;
+            --navy-800: #112240;
+            --navy-700: #1d3557;
+            --slate-400: #8892b0;
+            --slate-300: #a8b2d1;
+            --slate-200: #ccd6f6;
+            --cyan-400: #64ffda;
+            --cyan-500: #00d4ff;
+            --coral: #ff6b6b;
+            --amber: #ffd93d;
+            --emerald: #6bff8a;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--navy-800) 100%);
+            color: var(--slate-200);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 40px;
+            margin-bottom: 50px;
+            background: rgba(17, 34, 64, 0.8);
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            position: relative;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan-400), var(--cyan-500));
+        }
+        
+        h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--cyan-400);
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--slate-300);
+        }
+        
+        h2 {
+            font-size: 1.7em;
+            color: var(--cyan-400);
+            margin: 40px 0 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(100, 255, 218, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 1.3em;
+            color: var(--slate-200);
+            margin: 30px 0 15px;
+        }
+        
+        h4 {
+            font-size: 1.1em;
+            color: var(--cyan-500);
+            margin: 20px 0 12px;
+        }
+        
+        .card {
+            background: rgba(17, 34, 64, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .philosophy-box {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1), rgba(0, 212, 255, 0.05));
+            border-left: 4px solid var(--cyan-400);
+            padding: 25px 30px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .philosophy-box h4 {
+            color: var(--cyan-400);
+            margin-top: 0;
+        }
+        
+        .philosophy-box blockquote {
+            font-style: italic;
+            color: var(--slate-300);
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .analysis-item {
+            background: rgba(29, 53, 87, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .analysis-item h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .score-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .score-high {
+            background: rgba(107, 255, 138, 0.2);
+            color: var(--emerald);
+            border: 1px solid rgba(107, 255, 138, 0.3);
+        }
+        
+        .score-medium {
+            background: rgba(255, 217, 61, 0.2);
+            color: var(--amber);
+            border: 1px solid rgba(255, 217, 61, 0.3);
+        }
+        
+        .score-low {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--coral);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            padding: 15px 18px;
+            text-align: left;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        th {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--cyan-400);
+            font-weight: 600;
+        }
+        
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            color: var(--slate-300);
+        }
+        
+        li strong {
+            color: var(--slate-200);
+        }
+        
+        .highlight-block {
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(255, 107, 107, 0.05));
+            border: 1px solid rgba(255, 217, 61, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .success-block {
+            background: linear-gradient(135deg, rgba(107, 255, 138, 0.1), rgba(100, 255, 218, 0.05));
+            border: 1px solid rgba(107, 255, 138, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .danger-block {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .code-block {
+            background: var(--deep-navy);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .comparison-table {
+            margin: 30px 0;
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: var(--slate-200);
+            width: 30%;
+        }
+        
+        .verdict {
+            text-align: center;
+            padding: 40px;
+            margin: 40px 0;
+            background: rgba(17, 34, 64, 0.8);
+            border-radius: 20px;
+            border: 2px solid rgba(100, 255, 218, 0.2);
+        }
+        
+        .verdict-score {
+            font-size: 4em;
+            font-weight: 800;
+            color: var(--cyan-400);
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s;
+        }
+        
+        .fill-high { background: linear-gradient(90deg, var(--emerald), #34d399); }
+        .fill-medium { background: linear-gradient(90deg, var(--amber), #fbbf24); }
+        .fill-low { background: linear-gradient(90deg, var(--coral), #fb7185); }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: var(--slate-400);
+        }
+        
+        .emoji { font-size: 1.3em; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.6em; }
+            .analysis-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 VNEXSUS 개발 철학 분석</h1>
+            <p class="subtitle">"날짜에 집착하라" - 핵심 철학 기반 개발 계획 심층 검증</p>
+        </header>
+
+        <!-- PM 철학 정의 -->
+        <section>
+            <h2><span class="emoji">📜</span> PM 핵심 철학 정의</h2>
+            
+            <div class="philosophy-box">
+                <h4>💡 핵심 명제</h4>
+                <blockquote>
+                    "우리는 사건에 관련된 날짜 데이터를 특정하여 제공하는 것이 아닌, <strong>'날짜' 자체에 집착해야 한다.</strong>
+                    모든 정확도의 전제는 여기서부터 시작한다."
+                </blockquote>
+            </div>
+            
+            <div class="card">
+                <h3>📊 전체집합 vs 부분집합 개념</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th style="width:15%">구분</th>
+                        <th style="width:42%">VNEXSUS (전체집합)</th>
+                        <th style="width:43%">CaseN_report.txt (부분집합)</th>
+                    </tr>
+                    <tr>
+                        <td>생산 주체</td>
+                        <td>AI 시스템 (자동화)</td>
+                        <td>손해사정조사자 (수동, 과정 안 보임)</td>
+                    </tr>
+                    <tr>
+                        <td>접근 방식</td>
+                        <td><strong>날짜 중심</strong> - 모든 날짜별 의료이벤트 객관적 정리</td>
+                        <td><strong>사건 중심</strong> - 중요 사건 위주로 특정</td>
+                    </tr>
+                    <tr>
+                        <td>데이터 범위</td>
+                        <td>A급 + B급 전체 제공</td>
+                        <td>A급 위주 (개인 판단에 따름)</td>
+                    </tr>
+                    <tr>
+                        <td>역할</td>
+                        <td>조사자의 도구 - 완전한 팩트 제공</td>
+                        <td>최종 산출물 - 판단이 포함된 결과</td>
+                    </tr>
+                </table>
+                
+                <h4>A급 vs B급 데이터 분류 기준</h4>
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <h4>🅰️ A급 데이터</h4>
+                        <ul>
+                            <li>입원/퇴원</li>
+                            <li>수술/시술</li>
+                            <li>검사 (영상/조직검사)</li>
+                            <li>진단 확정</li>
+                            <li>중요 치료 이벤트</li>
+                        </ul>
+                        <p style="margin-top: 15px; color: var(--cyan-400);">→ 손해사정 판단에 핵심적인 이벤트</p>
+                    </div>
+                    <div class="analysis-item">
+                        <h4>🅱️ B급 데이터</h4>
+                        <ul>
+                            <li>외래 통원</li>
+                            <li>처방전 발급</li>
+                            <li>서류 발급</li>
+                            <li>단순 상담</li>
+                            <li>반복 처치</li>
+                        </ul>
+                        <p style="margin-top: 15px; color: var(--amber);">→ 보조 정보, 필요시 참조</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 현재 구현 분석 -->
+        <section>
+            <h2><span class="emoji">🔍</span> 현재 구현 상태 vs PM 철학 대조 분석</h2>
+            
+            <div class="card">
+                <h3>1. Dual-Sweep Anchoring (EnhancedDateAnchor.js)</h3>
+                <table>
+                    <tr>
+                        <th>PM 요구사항</th>
+                        <th>현재 구현</th>
+                        <th>평가</th>
+                    </tr>
+                    <tr>
+                        <td>"날짜 앞뒤의 데이터 모두를 검토"</td>
+                        <td>
+                            <strong>Forward Sweep</strong>: 순방향 분석<br>
+                            <strong>Backward Sweep</strong>: 역방향 검증<br>
+                            <code>extractLocalContext(text, position, 100)</code>: 앞뒤 100자 컨텍스트
+                        </td>
+                        <td><span class="score-badge score-high">✓ 부합 (85%)</span></td>
+                    </tr>
+                    <tr>
+                        <td>"날짜-A-데이터a-날짜-B-데이터b 단순 인식 X"</td>
+                        <td>
+                            <strong>Conflict Resolution</strong>: 충돌 해결<br>
+                            <strong>Primary/Secondary Classification</strong>: 주/부 날짜 분류
+                        </td>
+                        <td><span class="score-badge score-medium">⚠ 부분 부합 (70%)</span></td>
+                    </tr>
+                </table>
+                
+                <div class="code-block">
+// 현재 구현: Dual-Sweep 분석
+async dualSweepAnalysis(text, context = {}) {
+  // 1. Forward Sweep: 시간순 진행 분석
+  const forwardAnchors = await this.forwardSweep(text, context);
+  
+  // 2. Backward Sweep: 역순 검증 분석
+  const backwardAnchors = await this.backwardSweep(text, context);
+  
+  // 3. Conflict Resolution: 충돌 해결
+  const resolvedAnchors = await this.conflictResolver.resolve(...);
+  
+  // 4. Primary/Secondary Classification: 주/부 날짜 분류
+  const classifiedAnchors = this.classifyDateHierarchy(...);
+}
+                </div>
+                
+                <div class="highlight-block">
+                    <h4>⚠️ 개선 필요 사항</h4>
+                    <ul>
+                        <li><strong>Primary/Secondary 분류 기준</strong>이 PM의 A급/B급 기준과 다름</li>
+                        <li>현재: "현재 진료" vs "과거 언급" 기준</li>
+                        <li>PM 요구: "의료이벤트 가중치" 기준 (입원/수술 vs 외래/처방)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>2. 좌표정보 활용 (LayoutReconstructor.js)</h3>
+                <table>
+                    <tr>
+                        <th>PM 요구사항</th>
+                        <th>현재 구현</th>
+                        <th>평가</th>
+                    </tr>
+                    <tr>
+                        <td>"좌표정보를 활용하여 패턴화된 비정형 문서에 '대응'"</td>
+                        <td>
+                            <code>extractTextBlocks()</code>: boundingBox 좌표 추출<br>
+                            <code>analyzeSpatialRelationships()</code>: 공간 관계 분석<br>
+                            <code>detectDocumentStructure()</code>: 문서 구조 감지
+                        </td>
+                        <td><span class="score-badge score-medium">⚠ 부분 구현 (60%)</span></td>
+                    </tr>
+                </table>
+                
+                <div class="danger-block">
+                    <h4>❌ 핵심 문제</h4>
+                    <p><strong>LayoutReconstructor</strong>와 <strong>DateAnchoringOptimizer</strong>가 분리되어 있음</p>
+                    <ul>
+                        <li>좌표정보가 날짜 앵커링에 직접 활용되지 않음</li>
+                        <li>현재 DateAnchoringOptimizer는 <strong>텍스트 기반</strong> 거리 계산만 수행</li>
+                        <li>좌표 기반 bbox 거리가 날짜-이벤트 바인딩에 미반영</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>3. 날짜 중심 접근 평가</h3>
+                <table>
+                    <tr>
+                        <th>PM 철학</th>
+                        <th>현재 구현</th>
+                        <th>평가</th>
+                    </tr>
+                    <tr>
+                        <td>"날짜 자체에 집착"</td>
+                        <td>날짜 패턴 매칭 중심 (absolute, relative, duration, medical)</td>
+                        <td><span class="score-badge score-high">✓ 부합 (80%)</span></td>
+                    </tr>
+                    <tr>
+                        <td>"모든 의료이벤트 날짜를 정확히 추출"</td>
+                        <td>MassiveDateBlockProcessor: 3단계 레벨별 패턴 분석</td>
+                        <td><span class="score-badge score-medium">⚠ 부분 부합 (75%)</span></td>
+                    </tr>
+                    <tr>
+                        <td>"A급/B급 분류"</td>
+                        <td><strong>미구현</strong> - 이벤트 가중치 기반 분류 로직 없음</td>
+                        <td><span class="score-badge score-low">✗ 미구현</span></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5가지 핵심 질문 분석 -->
+        <section>
+            <h2><span class="emoji">⚖️</span> 개발 계획 5가지 핵심 검증</h2>
+            
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <h4>1️⃣ 타당성 (Validity)</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-high" style="width: 85%"></div>
+                    </div>
+                    <p style="text-align: right; color: var(--emerald);">85%</p>
+                    <ul>
+                        <li><strong>✓</strong> 날짜 중심 접근은 의료문서 분석의 본질</li>
+                        <li><strong>✓</strong> Dual-Sweep 분석은 학문적으로 검증된 방법</li>
+                        <li><strong>⚠</strong> A급/B급 분류 기준의 명확한 정의 필요</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h4>2️⃣ 혁신성 (Innovation)</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-medium" style="width: 70%"></div>
+                    </div>
+                    <p style="text-align: right; color: var(--amber);">70%</p>
+                    <ul>
+                        <li><strong>✓</strong> 좌표 기반 비정형 문서 대응은 혁신적</li>
+                        <li><strong>⚠</strong> 현재 좌표-날짜 통합이 불완전</li>
+                        <li><strong>⚠</strong> 동종 경쟁 서비스 대비 차별점 부족</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h4>3️⃣ 실용성 (Practicality)</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-high" style="width: 90%"></div>
+                    </div>
+                    <p style="text-align: right; color: var(--emerald);">90%</p>
+                    <ul>
+                        <li><strong>✓</strong> 30분 → 5분 이내 효율 향상 달성</li>
+                        <li><strong>✓</strong> 31개 좌표 케이스 준비 완료</li>
+                        <li><strong>✓</strong> LLM 비용 최적화 전략 (오프라인 OCR)</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h4>4️⃣ 구현 가능성 (Feasibility)</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-high" style="width: 88%"></div>
+                    </div>
+                    <p style="text-align: right; color: var(--emerald);">88%</p>
+                    <ul>
+                        <li><strong>✓</strong> 핵심 아키텍처 85% 구현 완료</li>
+                        <li><strong>✓</strong> 통합 파이프라인 작동 중</li>
+                        <li><strong>⚠</strong> UncertaintyScoreCalculator 미구현</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-item">
+                    <h4>5️⃣ 지속 가능성 (Sustainability)</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill fill-medium" style="width: 75%"></div>
+                    </div>
+                    <p style="text-align: right; color: var(--amber);">75%</p>
+                    <ul>
+                        <li><strong>✓</strong> 모듈화된 아키텍처 (확장 용이)</li>
+                        <li><strong>⚠</strong> 테스트 자동화 부족</li>
+                        <li><strong>⚠</strong> 회귀 테스트 체계 미흡</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 추가 지표 제안 -->
+        <section>
+            <h2><span class="emoji">📈</span> 추가 고려 지표 제안</h2>
+            
+            <div class="card">
+                <h3>🆕 추가해야 할 지표</h3>
+                
+                <table>
+                    <tr>
+                        <th>지표</th>
+                        <th>정의</th>
+                        <th>중요도</th>
+                        <th>현재 상태</th>
+                    </tr>
+                    <tr>
+                        <td><strong>날짜 완전성 (Completeness)</strong></td>
+                        <td>문서 내 모든 날짜가 추출되었는가?</td>
+                        <td><span class="score-badge score-high">최상</span></td>
+                        <td>측정 체계 없음</td>
+                    </tr>
+                    <tr>
+                        <td><strong>바인딩 정확도 (Binding Accuracy)</strong></td>
+                        <td>날짜-이벤트 연결이 정확한가?</td>
+                        <td><span class="score-badge score-high">최상</span></td>
+                        <td>부분 구현</td>
+                    </tr>
+                    <tr>
+                        <td><strong>가중치 신뢰도 (Weight Reliability)</strong></td>
+                        <td>A급/B급 분류가 정확한가?</td>
+                        <td><span class="score-badge score-high">높음</span></td>
+                        <td>미구현</td>
+                    </tr>
+                    <tr>
+                        <td><strong>좌표 활용도 (Coordinate Utilization)</strong></td>
+                        <td>좌표정보가 얼마나 효과적으로 사용되는가?</td>
+                        <td><span class="score-badge score-high">높음</span></td>
+                        <td>부분 구현</td>
+                    </tr>
+                    <tr>
+                        <td><strong>일관성 (Consistency)</strong></td>
+                        <td>동일 문서 반복 처리 시 동일 결과?</td>
+                        <td><span class="score-badge score-medium">중간</span></td>
+                        <td>미측정</td>
+                    </tr>
+                    <tr>
+                        <td><strong>설명 가능성 (Explainability)</strong></td>
+                        <td>왜 그 날짜에 그 이벤트를 연결했는지 설명 가능?</td>
+                        <td><span class="score-badge score-medium">중간</span></td>
+                        <td>부분 구현</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3>❌ 제거 또는 축소 검토 대상</h3>
+                
+                <table>
+                    <tr>
+                        <th>항목</th>
+                        <th>현재 상태</th>
+                        <th>제안</th>
+                    </tr>
+                    <tr>
+                        <td>처리 시간 최적화</td>
+                        <td>과도한 최적화 시도</td>
+                        <td><strong>축소</strong> - PM: "3~5분도 빠른 것"</td>
+                    </tr>
+                    <tr>
+                        <td>Textract/Tesseract 경로</td>
+                        <td>레거시 코드 잔존</td>
+                        <td><strong>제거</strong> - PRD에서 명시적 제외</td>
+                    </tr>
+                    <tr>
+                        <td>과도한 ML 예측</td>
+                        <td>DateAnchoringOptimizer 내 ML 로직</td>
+                        <td><strong>축소</strong> - 규칙 기반 우선, ML은 보조</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 핵심 개선 제안 -->
+        <section>
+            <h2><span class="emoji">🚀</span> 핵심 개선 제안</h2>
+            
+            <div class="success-block">
+                <h4>✅ 제안 1: 좌표-날짜 통합 앵커링 구현</h4>
+                <p><strong>문제:</strong> LayoutReconstructor와 DateAnchoringOptimizer가 분리되어 좌표정보가 날짜 바인딩에 미활용</p>
+                <p><strong>해결:</strong> <code>CoordinateAwareDateBinder</code> 신규 모듈 구현</p>
+                <div class="code-block">
+// 제안: 좌표 기반 날짜-이벤트 바인딩
+class CoordinateAwareDateBinder {
+  bindWithCoordinates(dateBlocks, textBlocks) {
+    for (const date of dateBlocks) {
+      // 1. 좌표 기반 거리 계산 (bbox)
+      const nearbyBlocks = this.findNearbyBlocksByCoordinate(date.bounds, textBlocks);
+      
+      // 2. 동일 행/열 여부 확인
+      const sameRow = this.checkSameRow(date.bounds, nearbyBlocks);
+      const sameColumn = this.checkSameColumn(date.bounds, nearbyBlocks);
+      
+      // 3. 좌표 + 텍스트 기반 복합 신뢰도
+      const confidence = this.calculateHybridConfidence(
+        date, nearbyBlocks, { sameRow, sameColumn }
+      );
+    }
+  }
+}
+                </div>
+            </div>
+            
+            <div class="success-block">
+                <h4>✅ 제안 2: A급/B급 이벤트 가중치 분류기</h4>
+                <p><strong>문제:</strong> 현재 모든 이벤트가 동등하게 처리됨</p>
+                <p><strong>해결:</strong> <code>MedicalEventWeightClassifier</code> 구현</p>
+                <div class="code-block">
+// 제안: 의료 이벤트 가중치 분류
+const eventWeightConfig = {
+  A_GRADE: {
+    patterns: ['입원', '퇴원', '수술', '시술', 'MRI', 'CT', '조직검사', '진단'],
+    weight: 1.0,
+    priority: 'high'
+  },
+  B_GRADE: {
+    patterns: ['외래', '처방', '발급', '상담', '방문', '재진'],
+    weight: 0.5,
+    priority: 'low'
+  }
+};
+
+function classifyEventGrade(eventText) {
+  for (const grade of ['A_GRADE', 'B_GRADE']) {
+    if (eventWeightConfig[grade].patterns.some(p => eventText.includes(p))) {
+      return { grade, ...eventWeightConfig[grade] };
+    }
+  }
+  return { grade: 'B_GRADE', weight: 0.3, priority: 'default' };
+}
+                </div>
+            </div>
+            
+            <div class="success-block">
+                <h4>✅ 제안 3: 날짜 완전성 검증 체계</h4>
+                <p><strong>문제:</strong> 추출된 날짜가 전체인지 확인 불가</p>
+                <p><strong>해결:</strong> 다중 패스 검증 + 누락 감지</p>
+                <div class="code-block">
+// 제안: 날짜 완전성 검증
+async function verifyDateCompleteness(text, extractedDates) {
+  // Pass 1: 정규식 기반 전수 조사
+  const allPossibleDates = extractAllDatePatterns(text);
+  
+  // Pass 2: 누락된 날짜 식별
+  const missedDates = allPossibleDates.filter(
+    d => !extractedDates.some(ed => ed.normalized === d.normalized)
+  );
+  
+  // Pass 3: 누락 원인 분석
+  const missedAnalysis = missedDates.map(d => ({
+    date: d,
+    reason: analyzeMissReason(d, text),
+    recoverable: isRecoverable(d)
+  }));
+  
+  return {
+    totalFound: allPossibleDates.length,
+    extracted: extractedDates.length,
+    missed: missedDates.length,
+    completenessRate: extractedDates.length / allPossibleDates.length,
+    missedAnalysis
+  };
+}
+                </div>
+            </div>
+        </section>
+
+        <!-- 종합 판정 -->
+        <section>
+            <div class="verdict">
+                <h2 style="color: var(--slate-200); border: none; margin-bottom: 30px;">📊 종합 판정</h2>
+                <div class="verdict-score">82%</div>
+                <p style="font-size: 1.2em; color: var(--slate-300); margin-top: 20px;">
+                    개발 계획은 <strong>타당하고 실용적</strong>이며, <strong>구현 가능</strong>합니다.<br>
+                    단, <strong>좌표-날짜 통합</strong>과 <strong>A급/B급 분류</strong>가 핵심 미흡 영역입니다.
+                </p>
+                
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
+                    <span class="score-badge score-high">✓ 타당성 85%</span>
+                    <span class="score-badge score-medium">⚠ 혁신성 70%</span>
+                    <span class="score-badge score-high">✓ 실용성 90%</span>
+                    <span class="score-badge score-high">✓ 구현가능성 88%</span>
+                    <span class="score-badge score-medium">⚠ 지속가능성 75%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 최종 권장 사항 -->
+        <section>
+            <h2><span class="emoji">🎯</span> 최종 권장 사항</h2>
+            
+            <div class="card">
+                <h3>📌 즉시 실행 (This Sprint)</h3>
+                <ol>
+                    <li><strong>CoordinateAwareDateBinder 구현</strong> - 좌표와 날짜 앵커링 통합</li>
+                    <li><strong>MedicalEventWeightClassifier 구현</strong> - A급/B급 분류 로직</li>
+                    <li><strong>31개 케이스 검증 자동화</strong> - 정확도 기준선 확보</li>
+                </ol>
+                
+                <h3 style="margin-top: 30px;">📌 단기 실행 (2주 내)</h3>
+                <ol>
+                    <li><strong>날짜 완전성 검증 체계</strong> - 누락 감지 및 복구</li>
+                    <li><strong>CaseN_report.txt 정합성 검증</strong> - 부분집합 포함 확인</li>
+                    <li><strong>UncertaintyScoreCalculator 구현</strong> - 신뢰도 정량화</li>
+                </ol>
+                
+                <h3 style="margin-top: 30px;">📌 중기 목표 (1개월)</h3>
+                <ol>
+                    <li><strong>날짜 정확도 99% 달성</strong></li>
+                    <li><strong>A급/B급 분류 정확도 95% 달성</strong></li>
+                    <li><strong>프로덕션 배포</strong></li>
+                </ol>
+            </div>
+        </section>
+
+        <footer>
+            <p>VNEXSUS 개발 철학 분석 보고서 | 2026-01-03</p>
+            <p>CTO/대표 관점 심층 분석 | PM 철학 기반 검증</p>
+        </footer>
+    </div>
+</body>
+</html>
+

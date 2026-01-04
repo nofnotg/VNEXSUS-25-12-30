@@ -1,0 +1,767 @@
+{
+  "meta": {
+    "timestamp": "2026-01-03T14:34:31.073Z",
+    "duration": 5166,
+    "config": {
+      "coordinateCasesDir": "C:\\VNEXSUS_reports_pdf\\offline_ocr_samples\\offline_ocr_samples\\2025-12-26T06-20-25-463Z",
+      "groundTruthDir": "C:\\VNEXSUS_12-07\\documents\\fixtures",
+      "outputDir": "C:\\VNEXSUS_12-07\\validation-results",
+      "maxCases": 31
+    }
+  },
+  "discovery": {
+    "totalCases": 23,
+    "casesWithGroundTruth": 12,
+    "loadedCases": 12
+  },
+  "summary": {
+    "totalCases": 12,
+    "avgScore": 18.84,
+    "maxScore": 69.7,
+    "minScore": 0,
+    "gradeDistribution": {
+      "상": 0,
+      "중": 1,
+      "하": 11
+    },
+    "relativeTiers": {
+      "high": [
+        {
+          "caseId": "Case3",
+          "score": 69.7,
+          "grade": "중"
+        },
+        {
+          "caseId": "Case1",
+          "score": 43.64,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case2",
+          "score": 43.64,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case9",
+          "score": 27.27,
+          "grade": "하"
+        }
+      ],
+      "medium": [
+        {
+          "caseId": "Case11",
+          "score": 20.78,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case7",
+          "score": 11.16,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case10",
+          "score": 9.92,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case4",
+          "score": 0,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case5",
+          "score": 0,
+          "grade": "하"
+        }
+      ],
+      "low": [
+        {
+          "caseId": "Case6",
+          "score": 0,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case8",
+          "score": 0,
+          "grade": "하"
+        },
+        {
+          "caseId": "Case12",
+          "score": 0,
+          "grade": "하"
+        }
+      ]
+    }
+  },
+  "sampledCases": {
+    "high": [
+      {
+        "caseId": "Case3",
+        "score": 69.7,
+        "grade": "중"
+      },
+      {
+        "caseId": "Case2",
+        "score": 43.64,
+        "grade": "하"
+      },
+      {
+        "caseId": "Case9",
+        "score": 27.27,
+        "grade": "하"
+      }
+    ],
+    "medium": [
+      {
+        "caseId": "Case11",
+        "score": 20.78,
+        "grade": "하"
+      },
+      {
+        "caseId": "Case10",
+        "score": 9.92,
+        "grade": "하"
+      },
+      {
+        "caseId": "Case5",
+        "score": 0,
+        "grade": "하"
+      }
+    ],
+    "low": [
+      {
+        "caseId": "Case6",
+        "score": 0,
+        "grade": "하"
+      },
+      {
+        "caseId": "Case8",
+        "score": 0,
+        "grade": "하"
+      },
+      {
+        "caseId": "Case12",
+        "score": 0,
+        "grade": "하"
+      }
+    ]
+  },
+  "results": [
+    {
+      "caseId": "Case3",
+      "score": 69.7,
+      "grade": "중",
+      "details": {
+        "dateAccuracy": {
+          "score": 58.33,
+          "appCount": 55,
+          "gtCount": 12,
+          "matched": 7,
+          "missingDates": [
+            "2021.09.02",
+            "2091.09.02",
+            "2019.11.22",
+            "2023.11.22",
+            "2024.08.22"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 100,
+          "appCount": 20,
+          "gtCount": 2,
+          "matched": 2,
+          "missingCodes": [],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.950Z"
+    },
+    {
+      "caseId": "Case1",
+      "score": 43.64,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 60,
+          "appCount": 75,
+          "gtCount": 15,
+          "matched": 9,
+          "missingDates": [
+            "2024.09.27",
+            "2057.09.27",
+            "2019.09.27",
+            "2020.10.28",
+            "2023.09.27",
+            "2024.06.27"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 29,
+          "gtCount": 8,
+          "matched": 0,
+          "missingCodes": [
+            "I67.8",
+            "E11.78",
+            "J04.0",
+            "K29.7",
+            "J30.4",
+            "H10.3",
+            "I62.9",
+            "I66.8"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.792Z"
+    },
+    {
+      "caseId": "Case2",
+      "score": 43.64,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 60,
+          "appCount": 25,
+          "gtCount": 10,
+          "matched": 6,
+          "missingDates": [
+            "2088.04.09",
+            "2019.04.09",
+            "2024.01.09",
+            "2024.04.03"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 13,
+          "gtCount": 2,
+          "matched": 0,
+          "missingCodes": [
+            "D13.4",
+            "D18.02"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.934Z"
+    },
+    {
+      "caseId": "Case9",
+      "score": 27.27,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 181,
+          "gtCount": 9,
+          "matched": 0,
+          "missingDates": [
+            "2024.10.08",
+            "2054.10.08",
+            "2019.10.08",
+            "2022.10.08",
+            "2024.07.08",
+            "2024.07.16",
+            "2024.10.01",
+            "2024.09.12",
+            "2025.03.26"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 100,
+          "appCount": 64,
+          "gtCount": 0,
+          "matched": 0,
+          "missingCodes": [],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:31.030Z"
+    },
+    {
+      "caseId": "Case11",
+      "score": 20.78,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 28.57,
+          "appCount": 232,
+          "gtCount": 7,
+          "matched": 2,
+          "missingDates": [
+            "2024.05.01",
+            "2054.11.10",
+            "2025.11.10",
+            "2024.12.20",
+            "2024.04.18"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 75,
+          "gtCount": 10,
+          "matched": 0,
+          "missingCodes": [
+            "L02",
+            "P22.8",
+            "I46.0",
+            "P00.9",
+            "P03.4",
+            "P05.1",
+            "P90",
+            "R06.8",
+            "R09.8",
+            "Z38.0"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:31.060Z"
+    },
+    {
+      "caseId": "Case7",
+      "score": 11.16,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 9.09,
+          "appCount": 58,
+          "gtCount": 11,
+          "matched": 1,
+          "missingDates": [
+            "2023.07.26",
+            "2054.07.26",
+            "2018.07.26",
+            "2021.01.26",
+            "2023.04.26",
+            "2025.02.19",
+            "2025.02.26",
+            "2020.03.10",
+            "2025.03.10",
+            "2023.04.28"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 16.67,
+          "appCount": 123,
+          "gtCount": 6,
+          "matched": 1,
+          "missingCodes": [
+            "N63",
+            "D34",
+            "I20.1",
+            "I25.1",
+            "I25"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.993Z"
+    },
+    {
+      "caseId": "Case10",
+      "score": 9.92,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 13.64,
+          "appCount": 70,
+          "gtCount": 22,
+          "matched": 3,
+          "missingDates": [
+            "2024.02.26",
+            "2069.02.26",
+            "2024.10.31",
+            "2019.02.26",
+            "2023.03.23",
+            "2023.12.26",
+            "2023.12.29",
+            "2024.02.19",
+            "2022.07.17",
+            "2024.01.02"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 19,
+          "gtCount": 3,
+          "matched": 0,
+          "missingCodes": [
+            "D05.00",
+            "D05.10",
+            "I67.1"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:31.040Z"
+    },
+    {
+      "caseId": "Case4",
+      "score": 0,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 49,
+          "gtCount": 8,
+          "matched": 0,
+          "missingDates": [
+            "2024.03.27",
+            "2082.03.27",
+            "2025.03.27",
+            "2025.02.19",
+            "2025.02.18",
+            "2025.02.20",
+            "2019.03.01",
+            "2024.03.31"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 19,
+          "gtCount": 2,
+          "matched": 0,
+          "missingCodes": [
+            "K70.3",
+            "K74.69"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.958Z"
+    },
+    {
+      "caseId": "Case5",
+      "score": 0,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 59,
+          "gtCount": 7,
+          "matched": 0,
+          "missingDates": [
+            "2021.03.24",
+            "2069.03.24",
+            "2021.07.30",
+            "2058.07.30",
+            "2024.04.12",
+            "2024.11.04",
+            "2025.03.13"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 21,
+          "gtCount": 2,
+          "matched": 0,
+          "missingCodes": [
+            "S33.50",
+            "M51.1"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.962Z"
+    },
+    {
+      "caseId": "Case6",
+      "score": 0,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 54,
+          "gtCount": 10,
+          "matched": 0,
+          "missingDates": [
+            "2023.05.10",
+            "2070.05.10",
+            "2024.12.31",
+            "2018.05.10",
+            "2023.02.10",
+            "2024.12.12",
+            "2024.12.27",
+            "2024.05.30",
+            "2020.01.17",
+            "2024.01.24"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 42,
+          "gtCount": 3,
+          "matched": 0,
+          "missingCodes": [
+            "I20.88",
+            "R07.4",
+            "I25.1"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:30.970Z"
+    },
+    {
+      "caseId": "Case8",
+      "score": 0,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 98,
+          "gtCount": 20,
+          "matched": 0,
+          "missingDates": [
+            "2023.02.17",
+            "2043.02.17",
+            "2025.02.17",
+            "2024.12.02",
+            "2023.02.18",
+            "2024.02.01",
+            "2024.02.17",
+            "2024.08.28",
+            "2024.11.04",
+            "2024.12.04"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 82,
+          "gtCount": 8,
+          "matched": 0,
+          "missingCodes": [
+            "L02",
+            "C09.9",
+            "J06.0",
+            "J20.9",
+            "J30.4",
+            "M54.56",
+            "D10.5",
+            "L04.0"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:31.005Z"
+    },
+    {
+      "caseId": "Case12",
+      "score": 0,
+      "grade": "하",
+      "details": {
+        "dateAccuracy": {
+          "score": 0,
+          "appCount": 40,
+          "gtCount": 24,
+          "matched": 0,
+          "missingDates": [
+            "2023.02.28",
+            "2051.02.28",
+            "2024.07.26",
+            "2051.07.26",
+            "2024.09.13",
+            "2024.10.21",
+            "2024.11.05",
+            "2024.10.28",
+            "2024.11.01",
+            "2024.10.12"
+          ],
+          "weight": 0.4
+        },
+        "diagnosisAccuracy": {
+          "score": 0,
+          "appCount": 122,
+          "gtCount": 1,
+          "matched": 0,
+          "missingCodes": [
+            "C23"
+          ],
+          "weight": 0.15
+        },
+        "unmeasured": {
+          "eventBinding": {
+            "note": "향후 구현 예정",
+            "weight": 0.3
+          },
+          "treatmentAccuracy": {
+            "note": "향후 구현 예정",
+            "weight": 0.1
+          },
+          "hospitalInfo": {
+            "note": "향후 구현 예정",
+            "weight": 0.05
+          }
+        }
+      },
+      "timestamp": "2026-01-03T14:34:31.064Z"
+    }
+  ]
+}

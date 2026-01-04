@@ -429,6 +429,15 @@ const main = async () => {
       r.llmMdPath = path.join(outCase, "llm_report.md");
       r.llmLen = llm.length;
       r.llmSnippet = llm.slice(0, 2000);
+      const baselinePath = findBaseline(r.caseId);
+      const baseline = baselinePath ? readText(baselinePath) : "";
+      {
+        const llmDates = eventDatesFromText(llm);
+        const baseEventDates = eventDatesFromText(baseline);
+        const baseSet = baseEventDates.size ? baseEventDates : datesFromText(baseline);
+        const d = llmDates.size ? jaccardSets(llmDates, baseSet) : dateJaccard(llm, baseline);
+        r.dateMatchLLMvsBase = Number((d * 100).toFixed(1));
+      }
     }
   }
   const tabKey = `iter_${dateStr}_${iterIndex}`;
