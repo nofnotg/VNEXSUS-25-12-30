@@ -91,7 +91,25 @@ const continuousReportPrompt = () => {
 const generateLLMContinuous = async (caseId: string, ocrText: string, structuredEvents: any[], patientInfo?: any) => {
   const openaiKey = process.env.OPENAI_API_KEY;
   const googleKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+  const useGemini = process.env.USE_GEMINI === "true";
   const prep = continuousPreprocessPrompt(patientInfo ?? {}, ocrText);
+
+  if (useGemini && googleKey) {
+    const { GoogleGenerativeAI } = await import("@google/generative-ai");
+    const genAI = new GoogleGenerativeAI(googleKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prepPrompt = `${prep.sys}\n\n${prep.usr}`;
+    const prepRes = await model.generateContent(prepPrompt);
+    const preprocessed = prepRes.response.text() || "";
+
+    const rep = continuousReportPrompt();
+    const repPrompt = `손해사정 보고서 전문가. 일관된 형식의 고품질 보고서를 생성한다.\n\n구조화 데이터:\n${JSON.stringify(structuredEvents).slice(0, 10000)}\n\n전처리 응답:\n${preprocessed.slice(0, 6000)}\n\n${rep.usr}`;
+    const final = await model.generateContent(repPrompt);
+    const out = sanitizeLLMContent(final.response.text() || "");
+    return out;
+  }
+
   if (openaiKey) {
     const { default: OpenAI } = await import("openai");
     const client = new OpenAI({ apiKey: openaiKey });
