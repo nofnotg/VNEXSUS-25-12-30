@@ -7,7 +7,7 @@ import express from 'express';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import MedicalDocumentNormalizer from '../postprocess/medicalDocumentNormalizer.js';
+import HybridMedicalNormalizer from '../postprocess/hybridMedicalNormalizer.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const EnhancedMedicalTermProcessor = require('../postprocess/enhancedMedicalTermProcessor.cjs');
@@ -67,9 +67,9 @@ router.post('/generate-enhanced-report', async (req, res) => {
         
         // OCR 결과 파일 읽기
         const ocrResults = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
-        
-        // 개선된 의료 문서 정규화기 초기화
-        const normalizer = new MedicalDocumentNormalizer();
+
+        // Hybrid 의료 문서 정규화기 초기화
+        const normalizer = new HybridMedicalNormalizer();
         
         // 의료용어 처리기 초기화
         const medicalTermProcessor = new EnhancedMedicalTermProcessor();

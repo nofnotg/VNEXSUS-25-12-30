@@ -8,12 +8,10 @@
  * 4. 엔드-투-엔드 파이프라인 구축
  */
 
-import massiveDateBlockProcessor from './massiveDateBlockProcessor.js';
 import EnhancedMassiveDateBlockProcessor from './enhancedMassiveDateBlockProcessor.js';
 import DateOrganizer from './dateOrganizer.js';
 import preprocessor from './preprocessor.js';
 import reportBuilder from './reportBuilder.js';
-import aiEntityExtractor from './aiEntityExtractor.js';
 import EnhancedEntityExtractor from './enhancedEntityExtractor.js';
 import medicalEventModel from './medicalEventModel.js';
 import { MedicalEventSchema } from '../../src/modules/reports/types/structuredOutput.js';
@@ -71,12 +69,10 @@ function computeSectionRatios(blocks, top = 0.05, bottom = 0.95) {
 
 class PostProcessingManager {
   constructor() {
-    this.massiveDateProcessor = massiveDateBlockProcessor;
     this.enhancedMassiveDateProcessor = new EnhancedMassiveDateBlockProcessor();
     this.dateOrganizer = new DateOrganizer();
     this.preprocessor = preprocessor;
     this.reportBuilder = reportBuilder;
-    this.aiEntityExtractor = aiEntityExtractor;
     this.enhancedEntityExtractor = new EnhancedEntityExtractor();
     
     // 처리 통계
@@ -349,12 +345,24 @@ class PostProcessingManager {
   async getDebugInfo(ocrText, options = {}) {
     try {
       console.log('🔧 개발자 스튜디오 디버깅 정보 생성...');
-      
-      // 거대 날짜 블록 분석 정보
-      const massiveDateAnalysis = await this.massiveDateProcessor.processMassiveDateBlocks(ocrText, {
+
+      // Enhanced 거대 날짜 블록 분석 정보
+      const enhancedDateResult = await this.enhancedMassiveDateProcessor.processEnhancedDateBlocks(ocrText, {
         includeAll: true,
         minConfidence: 0.1
       });
+
+      // 기존 형식과 호환성을 위한 변환
+      const massiveDateAnalysis = {
+        dateBlocks: enhancedDateResult.blocks || [],
+        structuredGroups: enhancedDateResult.timeline?.dateGroups || [],
+        processedSize: enhancedDateResult.processedSize || 0,
+        statistics: {
+          averageConfidence: enhancedDateResult.qualityMetrics?.avgConfidence || 0,
+          filteringRate: enhancedDateResult.qualityMetrics?.completeness ?
+            (1 - enhancedDateResult.qualityMetrics.completeness) * 100 : 0
+        }
+      };
       
       // 전처리 분석 정보
       const preprocessAnalysis = await this.preprocessor.run(ocrText, {
