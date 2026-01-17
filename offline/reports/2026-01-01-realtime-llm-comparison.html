@@ -1,0 +1,2805 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>실시간 OCR LLM 보고서 비교 - 2026-01-01</title>
+<style>:root{--deep:#0b1f3a;--c1:#14355f;--c2:#215e9b;--acc:#18a0fb;--txt:#e6eef7;--mut:#a8b6c6}
+html,body{background:var(--deep);color:var(--txt);margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:24px}
+.hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px;margin-bottom:18px}
+.title{font-size:24px;font-weight:700}.date{font-size:13px;color:#8ec9f0}
+.sub{margin:14px 0 22px 0;padding:12px;border-radius:10px;background:linear-gradient(180deg,#0f2646,#133558)}
+.sub h2{margin:0 0 8px 0;font-size:16px}
+.sub .metrics{display:flex;gap:18px;flex-wrap:wrap}
+.sub .m{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:6px 10px;border-radius:999px}
+.sub .m .k{color:#8ec9f0;font-size:12px}
+.sub .m .v{font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:linear-gradient(180deg,#102a4a,var(--c1));border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.4);padding:14px}
+.metric{display:flex;justify-content:space-between;margin:4px 0}.metric .label{color:#a8b6c6;font-size:12px}.metric .v{font-size:16px}
+.mono{background:rgba(255,255,255,.06);border-radius:8px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;white-space:pre-wrap;max-height:320px;overflow:auto}
+.pill{display:inline-block;padding:3px 8px;border-radius:999px;background:rgba(24,160,251,.18);border:1px solid rgba(24,160,251,.35);font-size:12px}
+a{color:#8ec9f0;text-decoration:none}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab-btn{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e6eef7;cursor:pointer}
+.tab-btn.active{background:rgba(24,160,251,.25);border-color:rgba(24,160,251,.45)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+.quality-pane{display:none}
+.quality-pane.active{display:block}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var nav = document.getElementById('tab-nav');
+  var panes = document.querySelectorAll('.tab-pane');
+  nav.addEventListener('click', function(e){
+    var btn = e.target;
+    if (!btn || !(btn instanceof HTMLElement) || !btn.classList.contains('tab-btn')) return;
+    var id = btn.getAttribute('data-tab-id');
+    document.querySelectorAll('#tab-nav .tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    panes.forEach(function(p){ p.classList.remove('active'); });
+    var pane = document.getElementById(String(id));
+    if (pane) pane.classList.add('active');
+  });
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if (!t || !(t instanceof HTMLElement)) return;
+    var parent = t.parentElement;
+    if (t.classList.contains('tab-btn') && parent && parent.getAttribute('data-scope') === 'quality') {
+      var container = t.closest('.tab-pane');
+      parent.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      t.classList.add('active');
+      if (container) {
+        container.querySelectorAll('.quality-pane').forEach(function(p){ p.classList.remove('active'); });
+        var qid = t.getAttribute('data-quality-id');
+        var target = container.querySelector('#quality_' + qid);
+        if (target) target.classList.add('active');
+      }
+    }
+  });
+});
+</script>
+</head><body><div class="wrap">
+<div class="hdr"><div class="title">실시간 OCR LLM 보고서 비교</div><div class="date">작성일: 2026-01-01</div></div>
+<div id="tab-nav" class="tabs"><!-- tabs:nav:start --><button class="tab-btn" data-tab-id="iter_2026-01-01_1">검증 1차</button><button class="tab-btn active" data-tab-id="iter_2026-01-01_2">검증 2차</button><!-- tabs:nav:end --></div>
+<div id="tab-container"><!-- tabs:content:start --><div class="tab-pane" id="iter_2026-01-01_1">
+<div class="sub">
+  <h2>분석 요약 및 원인</h2>
+  <div class="metrics">
+    <div class="m"><div class="k">평균 표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+    <div class="m"><div class="k">평균 과거력 미기재율 (Past History Missing%)</div><div class="v">99%</div></div>
+    <div class="m"><div class="k">평균 의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">97.1%</div></div>
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:#a8b6c6">
+    - 날짜 중심 바인딩 반경(radius=0.08)과 최대 증거(maxEvidence=5) 설정 영향으로 서술 섹션 누락 가능성이 있습니다.<br/>
+    - 유의어/태그 기반 슬롯 보강 적용 상태에서 품질 점수별 케이스 검증을 수행합니다.
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:#8ec9f0">
+    - 상대평가 기반 선정: 상·중·하 각 3개 케이스를 선정하여 검증함<br/>
+    - 복합 품질(Composite) = wDate*날짜일치(App↔Baseline) + wContent*내용유사도(App↔Baseline) + wMeta*메타점수<br/>
+    - 가중치 기본값: wDate=0.7, wContent=0.2, wMeta=0.1 (환경변수 QW_DATE/QW_CONTENT/QW_META로 조정 가능)
+  </div>
+</div>
+<div class="sub" style="padding-top:8px">
+  <div class="tabs" data-scope="quality">
+    <button class="tab-btn active" data-quality-id="top_2026-01-01_1">상(Top)</button>
+    <button class="tab-btn" data-quality-id="mid_2026-01-01_1">중(Mid)</button>
+    <button class="tab-btn" data-quality-id="bottom_2026-01-01_1">하(Bottom)</button>
+  </div>
+  <div class="quality-pane active" id="quality_top_2026-01-01_1">
+    <div class="section"><h2>품질 점수 높은 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.627</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.063</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:36, 검사:13, 영상검사:12, 의사소견:3, 과거력:1</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">98.1%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">94.2%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: 일반건강검진 결과통보서
+수검자 성명김태형주민등록번호600809-1******
+검진일2024.05.30검진장소
+■내원□출장
+건강검진 종합소견
+판정 -□정상A■정상B
+■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자
+◆김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다.
+* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오.
+◆김태형님은 다음 사항에 대한 관리가 필요합니다.
+▷ 의심 질환:신장질환,당뇨병
+** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함.
+※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원
+(종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에
+대...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 과거력
+10. 의사소견: 의사소견
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: "일반건강검진 결과통보서"
+"수검자 성명김태형주민등록번호600809-1******"
+"검진일2024.05.30검진장소"
+"■내원□출장"
+"건강검진 종합소견"
+"판정 -□정상A■정상B"
+"■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자"
+"◆김태형님은 일반건강검진 그 외 이상지질혈증
+"* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오."
+"◆김태형님은 다음 사항에 대한 관리가 필요합니다."
+"▷ 의심 질환:신장질환
+"** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함."
+"※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원
+"(종합병원
+"대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다."
+"* 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+  <div class="quality-pane" id="quality_mid_2026-01-01_1">
+    <div class="section"><h2>품질 점수 중간 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.627</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.063</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:36, 검사:13, 영상검사:12, 의사소견:3, 과거력:1</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">98.1%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">94.2%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: 일반건강검진 결과통보서
+수검자 성명김태형주민등록번호600809-1******
+검진일2024.05.30검진장소
+■내원□출장
+건강검진 종합소견
+판정 -□정상A■정상B
+■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자
+◆김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다.
+* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오.
+◆김태형님은 다음 사항에 대한 관리가 필요합니다.
+▷ 의심 질환:신장질환,당뇨병
+** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함.
+※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원
+(종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에
+대...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 과거력
+10. 의사소견: 의사소견
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: "일반건강검진 결과통보서"
+"수검자 성명김태형주민등록번호600809-1******"
+"검진일2024.05.30검진장소"
+"■내원□출장"
+"건강검진 종합소견"
+"판정 -□정상A■정상B"
+"■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자"
+"◆김태형님은 일반건강검진 그 외 이상지질혈증
+"* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오."
+"◆김태형님은 다음 사항에 대한 관리가 필요합니다."
+"▷ 의심 질환:신장질환
+"** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함."
+"※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원
+"(종합병원
+"대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다."
+"* 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+  <div class="quality-pane" id="quality_bottom_2026-01-01_1">
+    <div class="section"><h2>품질 점수 낮은 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.627</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.063</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:36, 검사:13, 영상검사:12, 의사소견:3, 과거력:1</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">98.1%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">94.2%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: 일반건강검진 결과통보서
+수검자 성명김태형주민등록번호600809-1******
+검진일2024.05.30검진장소
+■내원□출장
+건강검진 종합소견
+판정 -□정상A■정상B
+■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자
+◆김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다.
+* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오.
+◆김태형님은 다음 사항에 대한 관리가 필요합니다.
+▷ 의심 질환:신장질환,당뇨병
+** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함.
+※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원
+(종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에
+대...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 과거력
+10. 의사소견: 의사소견
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-test-single/KB손해보험_김태형_안정형_협심증__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: "일반건강검진 결과통보서"
+"수검자 성명김태형주민등록번호600809-1******"
+"검진일2024.05.30검진장소"
+"■내원□출장"
+"건강검진 종합소견"
+"판정 -□정상A■정상B"
+"■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자"
+"◆김태형님은 일반건강검진 그 외 이상지질혈증
+"* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오."
+"◆김태형님은 다음 사항에 대한 관리가 필요합니다."
+"▷ 의심 질환:신장질환
+"** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함."
+"※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원
+"(종합병원
+"대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다."
+"* 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+</div>
+</div><div class="tab-pane active" id="iter_2026-01-01_2">
+<div class="sub">
+  <h2>분석 요약 및 원인</h2>
+  <div class="metrics">
+    <div class="m"><div class="k">평균 표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+    <div class="m"><div class="k">평균 과거력 미기재율 (Past History Missing%)</div><div class="v">99.9%</div></div>
+    <div class="m"><div class="k">평균 의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">99.6%</div></div>
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:#a8b6c6">
+    - 날짜 중심 바인딩 반경(radius=0.08)과 최대 증거(maxEvidence=5) 설정 영향으로 서술 섹션 누락 가능성이 있습니다.<br/>
+    - 유의어/태그 기반 슬롯 보강 적용 상태에서 품질 점수별 케이스 검증을 수행합니다.
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:#8ec9f0">
+    - 상대평가 기반 선정: 상·중·하 각 3개 케이스를 선정하여 검증함<br/>
+    - 복합 품질(Composite) = wDate*날짜일치(App↔Baseline) + wContent*내용유사도(App↔Baseline) + wMeta*메타점수<br/>
+    - 가중치 기본값: wDate=0.7, wContent=0.2, wMeta=0.1 (환경변수 QW_DATE/QW_CONTENT/QW_META로 조정 가능)
+  </div>
+</div>
+<div class="sub" style="padding-top:8px">
+  <div class="tabs" data-scope="quality">
+    <button class="tab-btn active" data-quality-id="top_2026-01-01_2">상(Top)</button>
+    <button class="tab-btn" data-quality-id="mid_2026-01-01_2">중(Mid)</button>
+    <button class="tab-btn" data-quality-id="bottom_2026-01-01_2">하(Bottom)</button>
+  </div>
+  <div class="quality-pane active" id="quality_top_2026-01-01_2">
+    <div class="section"><h2>품질 점수 높은 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">현대해상_조윤아_태아보험__엄마_이주희__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.646</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.065</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">38</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:38</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_조윤아_태아보험__엄마_이주희__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_조윤아_태아보험__엄마_이주희__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 38
+- 샘플 텍스트: 2025-1-202:27PM
+기본진료정보
+순번진료시작일병·의원&약국진단과
+입원/
+외래
+주상병
+코드
+주상병명
+내원
+일수
+총진료비
+(건강보험적용분)
+건강보험등
+혜택받은금액
+내가낸의료비
+(진료비)
+1/6
+·본자료는병·의원&약국에서청구한요양급여비용명세서를기준으로작성된자료입니다.
+·진료비에는국민건강보험법제41조의4에따른선별급여관련금액이포함되어있지않습니다.
+·이에본자료를단순참고가아닌증빙자료로사용할수없으며,이용에관한책임은이용자에게있습니다.
+12024-04-18
+가톨릭대학교
+은평성모병원
+산부인
+과
+외래AZ3489
+(양방)기
+타정상임
+신의관리,
+상세불명
+의임신기
+186,91060,91026,000
+22024-04-06
+은혜산부인과
+의원
+산부인
+과
+외래AZ3480
+(양방)기
+타정상임
+신의관리,
+임신22주
+미만
+115,3401...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.01.20
+1. 내원일시: 2025.01.20
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.18
+1. 내원일시: 2024.04.18
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.06
+1. 내원일시: 2024.04.06
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.05
+1. 내원일시: 2024.04.05
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.23
+1. 내원일시: 2024.03.23
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.11
+1. 내원일시: 2024.03.11
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.12.06
+1. 내원일시: 2023.12.06
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.09.15
+1. 내원일시: 2023.09.15
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.09.11
+1. 내원일시: 2023.09.11
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.06.19
+1. 내원일시: 2023.06.19
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.24
+1. 내원일시: 2023.05.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.19
+1. 내원일시: 2023.05.19
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.15
+1. 내원일시: 2023.05.15
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. </div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.627</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.063</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:36, 검사:13, 영상검사:12, 의사소견:3, 과거력:1</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">98.1%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">94.2%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/KB손해보험_김태형_안정형_협심증__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/KB손해보험_김태형_안정형_협심증__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: 일반건강검진 결과통보서
+수검자 성명김태형주민등록번호600809-1******
+검진일2024.05.30검진장소
+■내원□출장
+건강검진 종합소견
+판정 -□정상A■정상B
+■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자
+◆김태형님은 일반건강검진 그 외 이상지질혈증,우울증검사를 받으셨습니다.
+* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오.
+◆김태형님은 다음 사항에 대한 관리가 필요합니다.
+▷ 의심 질환:신장질환,당뇨병
+** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함.
+※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원, 상급종합병원 제외), 폐결핵이 의심되는 분은 병·의원
+(종합병원, 상급종합병원 포함)에서 검진받은 연도의 다음연도 1월 31일까지 본인부담 없이 해당 질환에
+대...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 과거력
+10. 의사소견: 의사소견
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 검진
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 소견
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">이정희_offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.626</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.063</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">72</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v">입원:54</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/이정희_offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/이정희_offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 72
+- 샘플 텍스트: 사고사항
+사고조사 배당확인서
+☎
+H.P
+콜센터 1588-5656
+발행일:2025.02.27/ 발행자:수도권-서울(강북)-본사-[인+배상+재물]()
+www.hi.co.kr
+문서번호:CLPS0201P
+손사법인해오름손해사정(주)손사지점수도권-서울(강북)-본사-[인+배상+재물]
+지정조사자빈경환위임일시2025-02-27
+배당지점수도권-서울(강북)-본사-[인+배상+재물]배당조사자빈경환
+배당일시2025-02-27배당확인일시
+사고번호2502A03763위임사건유형인보험_일반조사 LEVEL II사고난이도보통
+사고일시2024-11-11청구기준일시2024-11-11접수일시2025-02-24
+사고유형질병사고구분질병사고원인질병
+사고장소서울 강북구 인수봉로 (수유동)
+사고내용[진단금] 직장암(C20)
+[보험업법 위반 신고]
+손해사정업...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.02.27
+1. 내원일시: 2025.02.27
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.11.11
+1. 내원일시: 2024.11.11
+2. 내원경위: 미기재
+3. 진단병명: S020
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.02.24
+1. 내원일시: 2025.02.24
+2. 내원경위: 미기재
+3. 진단병명: S020
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.02
+1. 내원일시: 2024.09.02
+2. 내원경위: 미기재
+3. 진단병명: P320
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2020.07.21
+1. 내원일시: 2020.07.21
+2. 내원경위: 미기재
+3. 진단병명: P320
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.08.07
+1. 내원일시: 2024.08.07
+2. 내원경위: 미기재
+3. 진단병명: P320
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.04.08
+1. 내원일시: 2025.04.08
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.12.27
+1. 내원일시: 2024.12.27
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.12.19
+1. 내원일시: 2024.12.19
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.12.12
+1. 내원일시: 2024.12.12
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.11.08
+1. 내원일시: 2024.11.08
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.11.05
+1. 내원일시: 2024.11.05
+2. 내원경위: 미기재
+3. 진단병명: 진단
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.10.28
+1. 내원일시: 2024.10.28
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+  <div class="quality-pane" id="quality_mid_2026-01-01_2">
+    <div class="section"><h2>품질 점수 중간 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">현대해상_김민아_뇌_양성종양__offline_ocr</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.571</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.057</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">7</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_김민아_뇌_양성종양__offline_ocr/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_김민아_뇌_양성종양__offline_ocr/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 7
+- 샘플 텍스트: 사고사항
+사고조사 배당확인서
+☎
+H.P
+콜센터 1588-5656
+발행일:2025.03.17/ 발행자:수도권-서울(강북)-본사-[인+배상+재물]()
+www.hi.co.kr
+문서번호:CLPS0201P
+손사법인해오름손해사정(주)손사지점수도권-서울(강북)-본사-[인+배상+재물]
+지정조사자고영희위임일시2025-03-17
+배당지점수도권-서울(강북)-본사-[인+배상+재물]배당조사자고영희
+배당일시배당확인일시
+사고번호2503206478위임사건유형인보험_일반조사 LEVEL II사고난이도보통
+사고일시2024-12-13청구기준일시2024-12-13접수일시2025-03-06
+사고유형질병사고구분질병사고원인질병
+사고장소079-32서울 양천구 국회대로 (신월동)
+사고내용[진단금] 뇌암
+[보험업법 위반 신고]
+손해사정업무중 당사직원이 부...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.03.17
+1. 내원일시: 2025.03.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.12.13
+1. 내원일시: 2024.12.13
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.03.06
+1. 내원일시: 2025.03.06
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.02
+1. 내원일시: 2024.09.02
+2. 내원경위: 미기재
+3. 진단병명: P320
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2020.07.21
+1. 내원일시: 2020.07.21
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.08.07
+1. 내원일시: 2024.08.07
+2. 내원경위: 미기재
+3. 진단병명: P320
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.04.17
+1. 내원일시: 2025.04.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">KB손해보험_김태형_안정형_협심증__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">52</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/KB손해보험_김태형_안정형_협심증__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/KB손해보험_김태형_안정형_협심증__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 52
+- 샘플 텍스트: "일반건강검진 결과통보서"
+"수검자 성명김태형주민등록번호600809-1******"
+"검진일2024.05.30검진장소"
+"■내원□출장"
+"건강검진 종합소견"
+"판정 -□정상A■정상B"
+"■일반 질환의심■고혈압ᆞ당뇨병 질환의심□유질환자"
+"◆김태형님은 일반건강검진 그 외 이상지질혈증
+"* 생활습관평가는 생활습관평가 결과지와 처방전을 참고하십시오."
+"◆김태형님은 다음 사항에 대한 관리가 필요합니다."
+"▷ 의심 질환:신장질환
+"** 확진검사(당뇨)를 받으시기 바랍니다.** 신장질환의심에 관한 진료요함."
+"※ 고혈압·당뇨병이 의심되는 분은 병·의원(종합병원
+"(종합병원
+"대한 진찰 및 검사*가 가능하니 꼭 받으시기 바랍니다."
+"* 국민건강보험법 시행령 제19조제1항 [별표2] 제3호 타목 및 요양급여의 적용...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2024.05.30
+1. 내원일시: 2024.05.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.01.24
+1. 내원일시: 2025.01.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.05
+1. 내원일시: 2024.06.05
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.24
+1. 내원일시: 2024.09.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.12
+1. 내원일시: 2024.09.12
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.06.17
+1. 내원일시: 2024.06.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.16
+1. 내원일시: 2024.05.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.05.08
+1. 내원일시: 2024.05.08
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.30
+1. 내원일시: 2024.04.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.23
+1. 내원일시: 2024.04.23
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.16
+1. 내원일시: 2024.04.16
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.28
+1. 내원일시: 2024.03.28
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.14
+1. 내원일시: 2024.03.14
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">농협손해보험_김인화_후유장해__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">4</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/농협손해보험_김인화_후유장해__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/농협손해보험_김인화_후유장해__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 4
+- 샘플 텍스트: "증권번호 :"
+"[보험관련사항]"
+"우편물수령지자택"
+"[계약기본정보]"
+"구분우편번호주소"
+"자택08339(08339)서울특별시 구로구 서해안로34가길 47 202호 (개봉동
+"직장06234(06234)서울특별시 강남구 테헤란로8길 21 화인빌딩3층 (역삼동)"
+"기타"
+"구분(고객역할)성명실명번호계약자와의 관계"
+"만기수익자"
+"목적물소유자"
+"발행일자 :"
+"2025년04월01일"
+"319-0890-2749-71"
+"계약내용조회"
+"002001 /"
+"■                            ■"
+"■                            ■"
+"15시28분"
+"발급자 :"
+"백선경"
+"상품명"
+"(무) NH가성비굿건강보험[1종:해지환"
+"급금미지급형II]2104"
+"보험기간"
+...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.04.01
+1. 내원일시: 2025.04.01
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2021.07.30
+1. 내원일시: 2021.07.30
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.03.10
+1. 내원일시: 2025.03.10
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2021.03.24
+1. 내원일시: 2021.03.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+  <div class="quality-pane" id="quality_bottom_2026-01-01_2">
+    <div class="section"><h2>품질 점수 낮은 케이스(3)</h2><div class="grid"><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">장유찬_blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">13</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/장유찬_blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/장유찬_blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 13
+- 샘플 텍스트: "수 임 확 정 서"
+"수       신 :"
+"참       조 :"
+"제       목 :"
+"수임 확정"
+"1. 귀사/귀하의 일익 번창하심을 기원합니다."
+"2. 당사는 KB손해보험으로부터 아래와 같은 내용의 조사(확인) 업무를 의뢰받아 수임이 확정되었음을 안내드립니다."
+"장기보상1부  전문1센터  김원희"
+"접수번호2025-0211027015위임차수001위임확정일자2025-02-13"
+"위임부서장기보상1부  전문1센터위임담당자김원희"
+"의뢰사항고지의무위반"
+"의뢰내용"
+"가입일자 : 23.07.06"
+"상품명1 : (무)KB손보 실손의료비보장보험(23.01) (증권번호 : 20233949468)"
+"상품명2 : KB 금쪽같은 자녀보험Plus(무배당)(23.07) (증권번호 : 20233949692)...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.02.13
+1. 내원일시: 2025.02.13
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.07.06
+1. 내원일시: 2023.07.06
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.02.11
+1. 내원일시: 2025.02.11
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.02.07
+1. 내원일시: 2025.02.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.01.10
+1. 내원일시: 2025.01.10
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2026.01.10
+1. 내원일시: 2026.01.10
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.02.07
+1. 내원일시: 1130.02.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.03.07
+1. 내원일시: 1130.03.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.04.07
+1. 내원일시: 1130.04.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.05.07
+1. 내원일시: 1130.05.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.07.01
+1. 내원일시: 2024.07.01
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.06.07
+1. 내원일시: 1130.06.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 1130.07.07
+1. 내원일시: 1130.07.07
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">현대해상_김민아_뇌_양성종양__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">7</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_김민아_뇌_양성종양__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_김민아_뇌_양성종양__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 7
+- 샘플 텍스트: "사고사항"
+"사고조사 배당확인서"
+"☎"
+"H.P"
+"콜센터 1588-5656"
+"발행일:2025.03.17/ 발행자:수도권-서울(강북)-본사-[인+배상+재물]()"
+"www.hi.co.kr"
+"문서번호:CLPS0201P"
+"손사법인해오름손해사정(주)손사지점수도권-서울(강북)-본사-[인+배상+재물]"
+"지정조사자고영희위임일시2025-03-17"
+"배당지점수도권-서울(강북)-본사-[인+배상+재물]배당조사자고영희"
+"배당일시배당확인일시"
+"사고번호2503206478위임사건유형인보험_일반조사 LEVEL II사고난이도보통"
+"사고일시2024-12-13청구기준일시2024-12-13접수일시2025-03-06"
+"사고유형질병사고구분질병사고원인질병"
+"사고장소079-32서울 양천구 국회대로 (신월동)"
+"사고내용[진단금...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.03.17
+1. 내원일시: 2025.03.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.12.13
+1. 내원일시: 2024.12.13
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.03.06
+1. 내원일시: 2025.03.06
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.09.02
+1. 내원일시: 2024.09.02
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2020.07.21
+1. 내원일시: 2020.07.21
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.08.07
+1. 내원일시: 2024.08.07
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2025.04.17
+1. 내원일시: 2025.04.17
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div><div class="card">
+<div class="metric"><div class="label">Case</div><div class="v">현대해상_조윤아_태아보험__엄마_이주희__blocks</div></div>
+<div class="metric"><div class="label">품질 점수 (Quality Score)</div><div class="v">0.546</div></div>
+<div class="metric"><div class="label">복합 품질 (Composite)</div><div class="v">0.055</div></div>
+<div class="metric"><div class="label">이벤트 수 (Event Count)</div><div class="v">38</div></div>
+<div class="metric"><div class="label">표준 날짜 형식 비율 (Date ISO%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">상위 태그 (Top Tags)</div><div class="v"></div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">내용 유사도 (Content Jaccard) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) LLM↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">날짜 일치율 (Date Match) App↔Baseline</div><div class="v">0%</div></div>
+<div class="metric"><div class="label">길이 차이 (Length Diff)</div><div class="v">31</div></div>
+<div class="metric"><div class="label">과거력 미기재율 (Past History Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">의사소견 미기재율 (Doctor Opinion Missing%)</div><div class="v">100%</div></div>
+<div class="metric"><div class="label">LLM Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_조윤아_태아보험__엄마_이주희__blocks/llm_report.md">llm_report.md</a></div></div>
+<div class="metric"><div class="label">App Report</div><div class="v"><a href="file:////home/user/VNEXSUS-25-12-30/outputs/validation-full/현대해상_조윤아_태아보험__엄마_이주희__blocks/app_report.md">app_report.md</a></div></div>
+<div class="metric"><div class="label">Baseline</div><div class="v"><a href="file:///N/A">baseline</a></div></div>
+<div class="pill">LLM 요약</div>
+<div class="mono">LLM 비활성화: OPENAI_API_KEY/GOOGLE_API_KEY 미설정
+
+사전 요약:
+- 이벤트 수: 38
+- 샘플 텍스트: "2025-1-202:27PM"
+"기본진료정보"
+"순번진료시작일병·의원&약국진단과"
+"입원/"
+"외래"
+"주상병"
+"코드"
+"주상병명"
+"내원"
+"일수"
+"총진료비"
+"(건강보험적용분)"
+"건강보험등"
+"혜택받은금액"
+"내가낸의료비"
+"(진료비)"
+"1/6"
+"·본자료는병·의원&약국에서청구한요양급여비용명세서를기준으로작성된자료입니다."
+"·진료비에는국민건강보험법제41조의4에따른선별급여관련금액이포함되어있지않습니다."
+"·이에본자료를단순참고가아닌증빙자료로사용할수없으며
+"12024-04-18"
+"가톨릭대학교"
+"은평성모병원"
+"산부인"
+"과"
+"외래AZ3489"
+"(양방)기"
+"타정상임"
+"신의관리
+"상세불명"
+"의임신기"
+"186
+"22024-04-06"
+"은혜산부인과"
+"의원"
+"산부인"
+"과"
+"외래AZ348...</div>
+<div class="pill">App 보고서(MD) 일부</div>
+<div class="mono">### 2025.01.20
+1. 내원일시: 2025.01.20
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.18
+1. 내원일시: 2024.04.18
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.06
+1. 내원일시: 2024.04.06
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.04.05
+1. 내원일시: 2024.04.05
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.23
+1. 내원일시: 2024.03.23
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2024.03.11
+1. 내원일시: 2024.03.11
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.12.06
+1. 내원일시: 2023.12.06
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.09.15
+1. 내원일시: 2023.09.15
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.09.11
+1. 내원일시: 2023.09.11
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.06.19
+1. 내원일시: 2023.06.19
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.24
+1. 내원일시: 2023.05.24
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.19
+1. 내원일시: 2023.05.19
+2. 내원경위: 미기재
+3. 진단병명: 미기재
+4. 검사결과: 미기재
+5. 수술 후 조직검사: 미기재
+6. 치료내용: 미기재
+7. 통원기간: 미기재
+8. 입원기간: 미기재
+9. 과거병력: 미기재
+10. 의사소견: 미기재
+---
+### 2023.05.15
+1. 내원일시: 2023.05.15
+2. 내원경위: 미기재
+3. 진단병명:</div>
+<div class="pill">Baseline 일부</div>
+<div class="mono"></div>
+</div></div></div>
+  </div>
+</div>
+</div><!-- tabs:content:end --></div>
+</div></body></html>
