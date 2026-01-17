@@ -103,6 +103,9 @@
   let hybridAIAccuracy = 92.3;
   let systemStatus = 'active';
 
+  // Phase 2-5: Low-value Info
+  let lowValueToggleHandler = null;
+
   // 이벤트 리스너
   document.addEventListener('DOMContentLoaded', initApp);
 
@@ -124,7 +127,79 @@
     loadInsurerOptions();
     initializeInsuranceDateSelectors();
     initializeRealTimeMonitoring();
+    initializeLowValueInfoSection(); // Phase 2-5
   }
+
+  // Phase 2-5: Low-value Info Section 초기화
+  function initializeLowValueInfoSection() {
+    const toggleBtn = document.getElementById('low-value-toggle-btn');
+    const toggleIcon = document.getElementById('low-value-toggle-icon');
+    const content = document.getElementById('low-value-content');
+
+    if (toggleBtn && content) {
+      lowValueToggleHandler = () => {
+        const isVisible = content.style.display !== 'none';
+
+        if (isVisible) {
+          content.style.display = 'none';
+          toggleIcon.classList.remove('expanded');
+        } else {
+          content.style.display = 'block';
+          toggleIcon.classList.add('expanded');
+        }
+      };
+
+      toggleBtn.addEventListener('click', lowValueToggleHandler);
+      debugLog('✅ Low-value Info Section 초기화 완료');
+    }
+  }
+
+  // Phase 2-5: 저가치 정보 렌더링
+  function renderLowValueInfo(lowValueItems) {
+    const section = document.getElementById('low-value-info-section');
+    const itemsContainer = document.getElementById('low-value-items');
+    const countSpan = document.getElementById('low-value-count');
+
+    if (!section || !itemsContainer || !lowValueItems) {
+      return;
+    }
+
+    if (lowValueItems.length === 0) {
+      section.style.display = 'none';
+      return;
+    }
+
+    // 개수 업데이트
+    countSpan.textContent = lowValueItems.length;
+
+    // 아이템 렌더링
+    itemsContainer.innerHTML = lowValueItems.map((item, index) => `
+      <div class="low-value-item">
+        <div class="d-flex justify-content-between align-items-start">
+          <div style="flex: 1;">
+            <span class="item-label">${item.label || `항목 ${index + 1}`}:</span>
+            <span class="ms-2">${item.content || item.value || '내용 없음'}</span>
+          </div>
+          <span class="item-weight" title="연관성 가중치">
+            ${(item.weight || item.relevanceScore || 0).toFixed(3)}
+          </span>
+        </div>
+        ${item.source ? `
+          <div class="mt-1 small text-muted">
+            <i class="bi bi-file-earmark-text me-1"></i>
+            출처: 페이지 ${item.source.page || '?'}, 좌표 (${item.source.coordinates || '?'})
+          </div>
+        ` : ''}
+      </div>
+    `).join('');
+
+    // 섹션 표시
+    section.style.display = 'block';
+    debugLog(`📋 저가치 정보 ${lowValueItems.length}개 렌더링 완료`);
+  }
+
+  // 전역 스코프에 노출
+  window.VNEXSUSApp.renderLowValueInfo = renderLowValueInfo;
 
   // 처리 품질 계산 함수
   function calculateProcessingQuality(results) {
