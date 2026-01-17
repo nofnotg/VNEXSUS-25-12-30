@@ -1,11 +1,14 @@
 /**
  * AI Service Integration Layer
- * 
+ *
  * 기존 AIService와 새로운 GPT4oMiniEnhancedService를 통합하는 어댑터
  * A/B 테스트, 폴백 처리, 성능 모니터링 기능 포함
+ *
+ * Phase 2-2: Gemini Flash 통합 (복잡도 기반 라우팅)
  */
 
 import { GPT4oMiniEnhancedService } from './gpt4oMiniEnhancedService.js';
+import { GeminiFlashService } from './geminiFlashService.js';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -13,10 +16,20 @@ export class AIServiceIntegration {
   constructor(existingAIService, options = {}) {
     // 기존 AIService 인스턴스
     this.existingAIService = existingAIService;
-    
+
     // 새로운 Enhanced Service
     this.enhancedService = new GPT4oMiniEnhancedService();
-    
+
+    // Gemini Flash Service (Phase 2-2)
+    this.geminiFlashService = null;
+    try {
+      this.geminiFlashService = new GeminiFlashService(options.gemini || {});
+      console.log('✅ Gemini Flash Service 초기화 완료');
+    } catch (error) {
+      console.warn('⚠️ Gemini Flash Service 초기화 실패:', error.message);
+      console.warn('   복잡도 기반 라우팅이 비활성화됩니다.');
+    }
+
     // 통합 설정
     this.config = {
       enableEnhanced: options.enableEnhanced ?? true,
@@ -24,26 +37,38 @@ export class AIServiceIntegration {
       enhancedRatio: options.enhancedRatio ?? 0.3, // 30% 트래픽을 Enhanced로
       enableFallback: options.enableFallback ?? true,
       enableMetrics: options.enableMetrics ?? true,
-      logDirectory: options.logDirectory || './logs/ai-integration'
+      logDirectory: options.logDirectory || './logs/ai-integration',
+
+      // Phase 2-2: 복잡도 기반 라우팅 설정
+      enableComplexityRouting: options.enableComplexityRouting ?? true,
+      complexityThresholds: {
+        simple: 30,   // 0-30: Gemini Flash
+        medium: 60,   // 30-60: GPT-4o Mini
+        complex: 100  // 60-100: GPT-4o Mini Enhanced
+      }
     };
-    
+
     // 폴백 설정
     if (this.config.enableFallback) {
       this.enhancedService.setFallbackService(this.existingAIService);
     }
-    
+
     // 성능 추적
     this.performanceTracker = {
       totalRequests: 0,
       enhancedRequests: 0,
+      geminiRequests: 0,
       fallbackRequests: 0,
-      successRate: { enhanced: 0, existing: 0 },
-      averageTime: { enhanced: 0, existing: 0 },
-      tokenSavings: 0
+      successRate: { enhanced: 0, existing: 0, gemini: 0 },
+      averageTime: { enhanced: 0, existing: 0, gemini: 0 },
+      tokenSavings: 0,
+      costSavings: 0 // Gemini로 인한 비용 절감
     };
-    
+
     console.log('🔧 AI Service Integration 초기화 완료');
     console.log(`  - Enhanced 활성화: ${this.config.enableEnhanced}`);
+    console.log(`  - Gemini Flash: ${this.geminiFlashService ? '활성화' : '비활성화'}`);
+    console.log(`  - 복잡도 라우팅: ${this.config.enableComplexityRouting ? '활성화' : '비활성화'}`);
     console.log(`  - A/B 테스트: ${this.config.enableABTest}`);
     console.log(`  - Enhanced 비율: ${(this.config.enhancedRatio * 100).toFixed(1)}%`);
   }
@@ -51,6 +76,7 @@ export class AIServiceIntegration {
   /**
    * 통합된 의료 보고서 생성 인터페이스
    * 기존 AIService와 완전 호환
+   * Phase 2-2: 복잡도 기반 라우팅 포함
    * @param {Object} inputData - 입력 데이터
    * @param {Object} options - 생성 옵션
    * @returns {Promise<Object>} 생성된 보고서
@@ -58,33 +84,131 @@ export class AIServiceIntegration {
   async generateMedicalReport(inputData, options = {}) {
     this.performanceTracker.totalRequests++;
     const startTime = Date.now();
-    
+
     try {
-      // 서비스 선택 로직
-      const useEnhanced = this.shouldUseEnhancedService(options);
-      
+      // Phase 2-2: 복잡도 기반 서비스 선택
+      const serviceSelection = this.selectServiceByComplexity(inputData, options);
+      console.log(`📊 서비스 선택: ${serviceSelection.service} (복잡도: ${serviceSelection.complexity})`);
+
       let result;
-      if (useEnhanced) {
-        console.log('🚀 GPT-4o Mini Enhanced Service 사용');
-        result = await this.executeEnhancedService(inputData, options, startTime);
-      } else {
-        console.log('🔄 기존 AI Service 사용');
-        result = await this.executeExistingService(inputData, options, startTime);
+      switch (serviceSelection.service) {
+        case 'gemini':
+          console.log('⚡ Gemini Flash Service 사용 (간단한 케이스)');
+          result = await this.executeGeminiService(inputData, options, startTime);
+          break;
+
+        case 'enhanced':
+          console.log('🚀 GPT-4o Mini Enhanced Service 사용 (복잡한 케이스)');
+          result = await this.executeEnhancedService(inputData, options, startTime);
+          break;
+
+        case 'existing':
+        default:
+          console.log('🔄 기존 AI Service 사용');
+          result = await this.executeExistingService(inputData, options, startTime);
+          break;
       }
-      
+
       // 성능 메트릭 수집
-      await this.collectIntegrationMetrics(result, useEnhanced, startTime);
-      
+      await this.collectIntegrationMetrics(result, serviceSelection.service, startTime);
+
       return result;
-      
+
     } catch (error) {
       console.error('❌ AI Service Integration 오류:', error);
-      
+
       // 최종 폴백 처리
       if (this.config.enableFallback) {
         return await this.executeFinalFallback(inputData, options, error, startTime);
       }
-      
+
+      throw error;
+    }
+  }
+
+  /**
+   * Phase 2-2: 복잡도 기반 서비스 선택
+   * @param {Object} inputData - 입력 데이터
+   * @param {Object} options - 옵션
+   * @returns {Object} { service: 'gemini'|'enhanced'|'existing', complexity: string, score: number }
+   */
+  selectServiceByComplexity(inputData, options) {
+    // 강제 지정된 경우
+    if (options.forceService) {
+      return {
+        service: options.forceService,
+        complexity: 'forced',
+        score: 0,
+        reason: 'User forced service selection'
+      };
+    }
+
+    // 복잡도 라우팅 비활성화 시
+    if (!this.config.enableComplexityRouting || !this.geminiFlashService) {
+      return {
+        service: this.shouldUseEnhancedService(options) ? 'enhanced' : 'existing',
+        complexity: 'default',
+        score: 0,
+        reason: 'Complexity routing disabled or Gemini unavailable'
+      };
+    }
+
+    // 복잡도 분석
+    const analysis = this.geminiFlashService.analyzeComplexity(inputData);
+
+    // 복잡도에 따른 서비스 선택
+    let selectedService;
+    if (analysis.score < this.config.complexityThresholds.simple) {
+      selectedService = 'gemini';  // 간단 → Gemini Flash (저렴)
+    } else if (analysis.score < this.config.complexityThresholds.medium) {
+      selectedService = 'enhanced';  // 보통 → GPT-4o Mini
+    } else {
+      selectedService = 'enhanced';  // 복잡 → GPT-4o Mini Enhanced
+    }
+
+    return {
+      service: selectedService,
+      complexity: analysis.complexity,
+      score: analysis.score,
+      reasons: analysis.reasons,
+      metrics: analysis.metrics
+    };
+  }
+
+  /**
+   * Phase 2-2: Gemini Service 실행
+   * @param {Object} inputData - 입력 데이터
+   * @param {Object} options - 옵션
+   * @param {number} startTime - 시작 시간
+   * @returns {Promise<Object>} 결과
+   */
+  async executeGeminiService(inputData, options, startTime) {
+    this.performanceTracker.geminiRequests++;
+
+    try {
+      const result = await this.geminiFlashService.generateMedicalReport(inputData, options);
+
+      // Gemini 성공 메트릭 업데이트
+      this.updateSuccessMetrics('gemini', startTime);
+
+      // 비용 절감 계산 (Gemini는 GPT-4o Mini 대비 약 70% 저렴)
+      const estimatedCostSaving = 0.7; // 70% 절감
+      this.performanceTracker.costSavings =
+        (this.performanceTracker.costSavings * (this.performanceTracker.geminiRequests - 1) +
+          estimatedCostSaving) / this.performanceTracker.geminiRequests;
+
+      // 결과에 통합 메타데이터 추가
+      return this.enrichResultWithIntegrationMetadata(result, 'gemini');
+
+    } catch (error) {
+      console.error('Gemini Service 실행 오류:', error);
+
+      // Gemini 실패 시 Enhanced로 폴백
+      if (this.config.enableFallback) {
+        console.warn('⚠️ Gemini 실패, Enhanced 서비스로 폴백');
+        return await this.executeEnhancedService(inputData, options, startTime);
+      }
+
       throw error;
     }
   }
@@ -323,31 +447,33 @@ ${options.focusAreas ? `중점 분석 영역: ${options.focusAreas.join(', ')}` 
   }
 
   /**
-   * 통합 메트릭 수집
+   * 통합 메트릭 수집 (Phase 2-2: Gemini 지원)
    * @param {Object} result - 처리 결과
-   * @param {boolean} usedEnhanced - Enhanced 사용 여부
+   * @param {string} serviceUsed - 'gemini'|'enhanced'|'existing'
    * @param {number} startTime - 시작 시간
    */
-  async collectIntegrationMetrics(result, usedEnhanced, startTime) {
+  async collectIntegrationMetrics(result, serviceUsed, startTime) {
     if (!this.config.enableMetrics) return;
-    
+
     const metrics = {
       timestamp: new Date().toISOString(),
-      serviceUsed: usedEnhanced ? 'enhanced' : 'existing',
+      serviceUsed: serviceUsed,
       processingTime: Date.now() - startTime,
       success: result.success,
       tokenSavings: result.metadata?.tokenUsage?.savingsPercent || 0,
       contextRetention: result.metadata?.contextRetention || 0,
-      requestId: this.performanceTracker.totalRequests
+      requestId: this.performanceTracker.totalRequests,
+      // Phase 2-2: 복잡도 정보 추가
+      complexityAnalysis: result.metadata?.complexityAnalysis || null
     };
-    
+
     // 토큰 절약 누적
-    if (usedEnhanced && metrics.tokenSavings > 0) {
-      this.performanceTracker.tokenSavings = 
-        (this.performanceTracker.tokenSavings * (this.performanceTracker.enhancedRequests - 1) + 
-         metrics.tokenSavings) / this.performanceTracker.enhancedRequests;
+    if (serviceUsed === 'enhanced' && metrics.tokenSavings > 0) {
+      this.performanceTracker.tokenSavings =
+        (this.performanceTracker.tokenSavings * (this.performanceTracker.enhancedRequests - 1) +
+          metrics.tokenSavings) / this.performanceTracker.enhancedRequests;
     }
-    
+
     // 메트릭 로깅
     await this.logIntegrationMetrics(metrics);
   }

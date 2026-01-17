@@ -203,6 +203,45 @@
     .insurance-record:hover {
       background: #f8fafc !important;
     }
+
+    /* Phase 2-5: Low-value Info Styles */
+    #low-value-toggle-btn:hover {
+      background: #e8f4f8 !important;
+    }
+
+    #low-value-toggle-icon.expanded {
+      transform: rotate(90deg);
+    }
+
+    .low-value-item {
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: #fafafa;
+      border-left: 3px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .low-value-item:hover {
+      background: #f1f5f9;
+      border-left-color: #94a3b8;
+      transform: translateX(2px);
+    }
+
+    .low-value-item .item-label {
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .low-value-item .item-weight {
+      float: right;
+      padding: 0.1rem 0.4rem;
+      background: #e2e8f0;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: #475569;
+    }
   </style>
 </head>
 
@@ -398,6 +437,28 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <!-- Phase 2-5: Low-value Info Collapsible Section -->
+            <div id="low-value-info-section" class="mt-4" style="display: none;">
+              <div class="border rounded-3 overflow-hidden" style="background: rgba(255, 255, 255, 0.5);">
+                <button id="low-value-toggle-btn" class="btn w-100 text-start d-flex align-items-center p-3"
+                        style="background: #f8fafc; border: none; transition: all 0.3s;">
+                  <i id="low-value-toggle-icon" class="bi bi-chevron-right me-2" style="transition: transform 0.3s; font-weight: bold;"></i>
+                  <span class="fw-bold" style="flex: 1;">
+                    <i class="bi bi-info-circle me-2 text-muted"></i>
+                    저가치 정보 (<span id="low-value-count">0</span>개 항목)
+                  </span>
+                  <span class="badge bg-secondary small">접기/펴기</span>
+                </button>
+                <div id="low-value-content" class="p-3" style="display: none; background: #fffbf0; border-top: 1px solid #e8e8e8;">
+                  <div class="alert alert-warning border-0 mb-3" style="background: rgba(255, 193, 7, 0.1);">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <small>아래 정보는 주요 의료 이벤트와의 연관성이 낮게 평가되었으나, 단서로서 가치가 있을 수 있어 제공됩니다.</small>
+                  </div>
+                  <div id="low-value-items"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
