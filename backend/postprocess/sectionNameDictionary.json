@@ -1,0 +1,257 @@
+{
+  "sectionNames": {
+    "diagnosis": {
+      "standardName": "진단병명",
+      "variants": [
+        "진단명",
+        "진단",
+        "병명",
+        "상병명",
+        "주진단",
+        "주상병",
+        "Diagnosis",
+        "DX",
+        "진단병명(상병명)",
+        "질병명"
+      ],
+      "regex": "(?:진단|병명|상병|DX|Diagnosis)(?:명)?",
+      "priority": 1
+    },
+    "treatment": {
+      "standardName": "치료내용",
+      "variants": [
+        "치료",
+        "F-U",
+        "F/U",
+        "Follow-up",
+        "경과",
+        "처치",
+        "치료방법",
+        "Tx",
+        "Treatment",
+        "Management",
+        "처방",
+        "치료 및 처치",
+        "시행내용"
+      ],
+      "regex": "(?:치료|F[-/]?U|Follow[-\\s]?up|경과|처치|Tx|Treatment)(?:내용|방법)?",
+      "priority": 2
+    },
+    "pastHistory": {
+      "standardName": "과거병력",
+      "variants": [
+        "기왕력",
+        "과거력",
+        "과거 병력",
+        "과거 질환력",
+        "PMH",
+        "Past Medical History",
+        "Hx",
+        "History",
+        "기왕증",
+        "기존 질환"
+      ],
+      "regex": "(?:과거|기왕|PMH|Past|History)(?:병력|력|증)?",
+      "priority": 3
+    },
+    "examination": {
+      "standardName": "검사결과",
+      "variants": [
+        "검사",
+        "Lab",
+        "Laboratory",
+        "검사소견",
+        "검사 결과",
+        "검사치",
+        "검사항목",
+        "진단검사",
+        "임상검사",
+        "영상검사",
+        "Study"
+      ],
+      "regex": "(?:검사|Lab(?:oratory)?|Study)(?:결과|소견|치)?",
+      "priority": 4
+    },
+    "surgery": {
+      "standardName": "수술",
+      "variants": [
+        "수술명",
+        "수술내용",
+        "Op",
+        "Operation",
+        "Sx",
+        "Surgery",
+        "Procedure",
+        "시술",
+        "수술 및 시술",
+        "OP name"
+      ],
+      "regex": "(?:수술|Op(?:eration)?|Sx|Surgery|Procedure|시술)(?:명|내용)?",
+      "priority": 5
+    },
+    "medication": {
+      "standardName": "투약",
+      "variants": [
+        "처방",
+        "약물",
+        "복용약",
+        "Medication",
+        "Medicine",
+        "Rx",
+        "Drug",
+        "처방약",
+        "투약내용",
+        "약제"
+      ],
+      "regex": "(?:투약|처방|약물|Medication|Medicine|Rx|Drug)(?:내용)?",
+      "priority": 6
+    },
+    "clinicalCourse": {
+      "standardName": "임상경과",
+      "variants": [
+        "경과",
+        "경과기록",
+        "Course",
+        "Clinical Course",
+        "Progress",
+        "진료경과",
+        "병의 경과",
+        "CC",
+        "경과 관찰"
+      ],
+      "regex": "(?:임상)?(?:경과|Course|Progress)(?:기록|관찰)?",
+      "priority": 7
+    },
+    "chiefComplaint": {
+      "standardName": "주호소",
+      "variants": [
+        "주증상",
+        "호소",
+        "CC",
+        "Chief Complaint",
+        "Complaint",
+        "증상",
+        "주소",
+        "c/c"
+      ],
+      "regex": "(?:주)?(?:호소|증상|주소|CC|Chief\\s?Complaint)",
+      "priority": 8
+    },
+    "admission": {
+      "standardName": "입원",
+      "variants": [
+        "입원일",
+        "입원기록",
+        "Admission",
+        "ADM",
+        "Admit",
+        "입원날짜",
+        "입원 일시",
+        "입실"
+      ],
+      "regex": "(?:입원|Admission|ADM|Admit|입실)(?:일|기록|날짜|일시)?",
+      "priority": 9
+    },
+    "discharge": {
+      "standardName": "퇴원",
+      "variants": [
+        "퇴원일",
+        "퇴원기록",
+        "Discharge",
+        "D/C",
+        "퇴원날짜",
+        "퇴원 일시",
+        "퇴실"
+      ],
+      "regex": "(?:퇴원|Discharge|D[/]?C|퇴실)(?:일|기록|날짜|일시)?",
+      "priority": 10
+    },
+    "doctorOpinion": {
+      "standardName": "의사소견",
+      "variants": [
+        "소견",
+        "진료소견",
+        "의견",
+        "Opinion",
+        "Impression",
+        "Assessment",
+        "Plan",
+        "A&P",
+        "의학적 소견"
+      ],
+      "regex": "(?:의사)?(?:소견|의견|Opinion|Impression|Assessment|Plan)",
+      "priority": 11
+    },
+    "vitalSigns": {
+      "standardName": "활력징후",
+      "variants": [
+        "V/S",
+        "Vital Signs",
+        "VS",
+        "활력 징후",
+        "생체징후",
+        "혈압/맥박/체온",
+        "BP/HR/BT"
+      ],
+      "regex": "(?:활력|생체|Vital)(?:\\s)?(?:징후|Signs)?",
+      "priority": 12
+    },
+    "physicalExam": {
+      "standardName": "신체검사",
+      "variants": [
+        "P/E",
+        "Physical Examination",
+        "PE",
+        "신체 검진",
+        "진찰소견",
+        "이학적 검사"
+      ],
+      "regex": "(?:신체|Physical)(?:\\s)?(?:검사|검진|Examination|진찰)?",
+      "priority": 13
+    },
+    "familyHistory": {
+      "standardName": "가족력",
+      "variants": [
+        "FH",
+        "Family History",
+        "가족병력",
+        "가족 질환력",
+        "FHx"
+      ],
+      "regex": "(?:가족|Family)(?:력|병력|History)?",
+      "priority": 14
+    },
+    "socialHistory": {
+      "standardName": "사회력",
+      "variants": [
+        "SH",
+        "Social History",
+        "흡연력",
+        "음주력",
+        "직업력"
+      ],
+      "regex": "(?:사회|Social)(?:력|History)?",
+      "priority": 15
+    }
+  },
+
+  "matchingRules": {
+    "description": "항목명 매칭 규칙",
+    "strategy": "우선순위 기반 정규식 매칭",
+    "caseInsensitive": true,
+    "fuzzyMatch": true,
+    "fuzzyThreshold": 0.85
+  },
+
+  "customMappings": {
+    "description": "특정 병원별 커스텀 매핑 (필요 시 추가)",
+    "examples": {
+      "서울대병원": {
+        "진단병명(상병명)": "diagnosis"
+      },
+      "삼성서울병원": {
+        "F-U": "treatment"
+      }
+    }
+  }
+}
