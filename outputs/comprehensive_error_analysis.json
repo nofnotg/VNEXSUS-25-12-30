@@ -1,0 +1,728 @@
+{
+  "summary": {
+    "total_cases": 13,
+    "total_baseline": 118,
+    "total_ocr": 656,
+    "total_matched": 75,
+    "total_missed": 43,
+    "total_extra": 581,
+    "average_accuracy": 61.74603174603174
+  },
+  "cases": [
+    {
+      "case_name": "Case1",
+      "baseline_count": 14,
+      "ocr_count": 89,
+      "matched": 10,
+      "ocr_missed": 4,
+      "ocr_extra": 79,
+      "accuracy": 71.42857142857143,
+      "missing_contexts": [
+        {
+          "date": "2019-09-27",
+          "original": "2019.09.27",
+          "line_num": 4,
+          "context": "2019.09.27"
+        },
+        {
+          "date": "2023-09-27",
+          "original": "2023.09.27",
+          "line_num": 28,
+          "context": "2023.09.27"
+        },
+        {
+          "date": "2024-06-27",
+          "original": "2024.06.27",
+          "line_num": 32,
+          "context": "2024.06.27"
+        },
+        {
+          "date": "2024-09-27",
+          "original": "2024.09.27",
+          "line_num": 35,
+          "context": "2024.09.27 무배당 AXA 나를지켜주는건강보험(갱신형)2407 가입 AXA 손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case2",
+      "baseline_count": 9,
+      "ocr_count": 26,
+      "matched": 7,
+      "ocr_missed": 2,
+      "ocr_extra": 19,
+      "accuracy": 77.77777777777779,
+      "missing_contexts": [
+        {
+          "date": "2019-04-09",
+          "original": "2019.04.09",
+          "line_num": 15,
+          "context": "2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험"
+        },
+        {
+          "date": "2024-01-09",
+          "original": "2024.01.09",
+          "line_num": 16,
+          "context": "2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case3",
+      "baseline_count": 10,
+      "ocr_count": 55,
+      "matched": 6,
+      "ocr_missed": 4,
+      "ocr_extra": 49,
+      "accuracy": 60.0,
+      "missing_contexts": [
+        {
+          "date": "2019-11-22",
+          "original": "2019.11.22",
+          "line_num": 4,
+          "context": "2019.11.22"
+        },
+        {
+          "date": "2021-09-02",
+          "original": "2021.09.02",
+          "line_num": 8,
+          "context": "2021.09.02 무배당굿앤굿어린이스타종합보험(Hi2201) 가입 현대해상"
+        },
+        {
+          "date": "2023-11-22",
+          "original": "2023.11.22",
+          "line_num": 10,
+          "context": "2023.11.22"
+        },
+        {
+          "date": "2024-08-22",
+          "original": "2024.08.22",
+          "line_num": 13,
+          "context": "2024.08.22"
+        }
+      ]
+    },
+    {
+      "case_name": "Case5",
+      "baseline_count": 9,
+      "ocr_count": 61,
+      "matched": 4,
+      "ocr_missed": 5,
+      "ocr_extra": 57,
+      "accuracy": 44.44444444444444,
+      "missing_contexts": [
+        {
+          "date": "2018-05-10",
+          "original": "2018.05.10",
+          "line_num": 3,
+          "context": "2018.05.10"
+        },
+        {
+          "date": "2020-01-17",
+          "original": "2020.01.17",
+          "line_num": 50,
+          "context": "심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청"
+        },
+        {
+          "date": "2023-02-10",
+          "original": "2023.02.10",
+          "line_num": 7,
+          "context": "2023.02.10"
+        },
+        {
+          "date": "2023-05-10",
+          "original": "2023.05.10",
+          "line_num": 11,
+          "context": "2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험"
+        },
+        {
+          "date": "2024-01-24",
+          "original": "2024.01.24",
+          "line_num": 62,
+          "context": "피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대"
+        }
+      ]
+    },
+    {
+      "case_name": "Case6",
+      "baseline_count": 10,
+      "ocr_count": 58,
+      "matched": 7,
+      "ocr_missed": 3,
+      "ocr_extra": 51,
+      "accuracy": 70.0,
+      "missing_contexts": [
+        {
+          "date": "2018-07-26",
+          "original": "2018.07.26",
+          "line_num": 4,
+          "context": "2018.07.26 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험"
+        },
+        {
+          "date": "2023-04-26",
+          "original": "2023.04.26",
+          "line_num": 15,
+          "context": "2023.04.26 (무) NH 헤아림 355 건강보험 가입 3 개월 이내 NH 농협손해보험"
+        },
+        {
+          "date": "2023-07-26",
+          "original": "2023.07.26",
+          "line_num": 16,
+          "context": "2023.07.26 (무) NH 헤아림 355 건강보험 가입 NH 농협손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case8",
+      "baseline_count": 9,
+      "ocr_count": 102,
+      "matched": 6,
+      "ocr_missed": 3,
+      "ocr_extra": 96,
+      "accuracy": 66.66666666666666,
+      "missing_contexts": [
+        {
+          "date": "2019-10-08",
+          "original": "2019.10.08",
+          "line_num": 4,
+          "context": "2019.10.08 (무)간편가입헤아림실손의료비보험 2404 가입 5 년 이내 NH 농협손해보험"
+        },
+        {
+          "date": "2022-10-08",
+          "original": "2022.10.08",
+          "line_num": 5,
+          "context": "2022.10.08 (무) 간편가입헤아림실손의료비보험 2404 가입 2 년 이내 NH 농협손해보험"
+        },
+        {
+          "date": "2024-07-08",
+          "original": "2024.07.08",
+          "line_num": 6,
+          "context": "2024.07.08 (무) 간편가입헤아림실손의료비보험 2404 가입 3 개월 이내 NH 농협손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case10",
+      "baseline_count": 7,
+      "ocr_count": 70,
+      "matched": 4,
+      "ocr_missed": 3,
+      "ocr_extra": 66,
+      "accuracy": 57.14285714285714,
+      "missing_contexts": [
+        {
+          "date": "2024-05-01",
+          "original": "2024.05.01",
+          "line_num": 7,
+          "context": "보 험 기 간 ① 2024.05.01 ~ 2054.11.10"
+        },
+        {
+          "date": "2025-11-10",
+          "original": "2025.11.10",
+          "line_num": 8,
+          "context": "② 2024.05.01 ~ 2025.11.10"
+        },
+        {
+          "date": "2054-11-10",
+          "original": "2054.11.10",
+          "line_num": 7,
+          "context": "보 험 기 간 ① 2024.05.01 ~ 2054.11.10"
+        }
+      ]
+    },
+    {
+      "case_name": "Case12",
+      "baseline_count": 6,
+      "ocr_count": 41,
+      "matched": 4,
+      "ocr_missed": 2,
+      "ocr_extra": 37,
+      "accuracy": 66.66666666666666,
+      "missing_contexts": [
+        {
+          "date": "2024-03-27",
+          "original": "2024.03.27",
+          "line_num": 4,
+          "context": "2024.03.27 KB 5.10.10 플러스 건강보험(무배당)(24.03) 가입 ㈜KB 손해보험"
+        },
+        {
+          "date": "2025-02-18",
+          "original": "2025.02.18",
+          "line_num": 6,
+          "context": "2025.02.18"
+        }
+      ]
+    },
+    {
+      "case_name": "Case14",
+      "baseline_count": 7,
+      "ocr_count": 13,
+      "matched": 4,
+      "ocr_missed": 3,
+      "ocr_extra": 9,
+      "accuracy": 57.14285714285714,
+      "missing_contexts": [
+        {
+          "date": "2018-07-26",
+          "original": "2018.07.26",
+          "line_num": 4,
+          "context": "2018.07.26 (무) NH헤아림355건강보험 가입 5년 이내 NH농협손해보험"
+        },
+        {
+          "date": "2023-04-26",
+          "original": "2023.04.26",
+          "line_num": 16,
+          "context": "2023.04.26 (무) NH헤아림355건강보험 가입 3개월 이내 NH농협손해보험"
+        },
+        {
+          "date": "2023-07-26",
+          "original": "2023.07.26",
+          "line_num": 17,
+          "context": "2023.07.26 (무) NH헤아림355건강보험 가입 NH농협손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case15",
+      "baseline_count": 8,
+      "ocr_count": 11,
+      "matched": 4,
+      "ocr_missed": 4,
+      "ocr_extra": 7,
+      "accuracy": 50.0,
+      "missing_contexts": [
+        {
+          "date": "2025-02-25",
+          "original": "2025.02.25",
+          "line_num": 2,
+          "context": "2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험"
+        },
+        {
+          "date": "2025-05-26",
+          "original": "2025.05.26",
+          "line_num": 3,
+          "context": "2025.05.26|나에게 맞춘 초경증 간편건강보험2407"
+        },
+        {
+          "date": "2025-06-27",
+          "original": "2025.06.27",
+          "line_num": 12,
+          "context": "2025.06.16 ~ 2025.06.27|"
+        },
+        {
+          "date": "2053-02-25",
+          "original": "2053.02.25",
+          "line_num": 2,
+          "context": "2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case16",
+      "baseline_count": 10,
+      "ocr_count": 16,
+      "matched": 7,
+      "ocr_missed": 3,
+      "ocr_extra": 9,
+      "accuracy": 70.0,
+      "missing_contexts": [
+        {
+          "date": "2024-11-25",
+          "original": "2024.11.25",
+          "line_num": 30,
+          "context": "2024.11.25 무)AXA올인원종합보험 가입 AXA손해보험"
+        },
+        {
+          "date": "2025-02-23",
+          "original": "2025.02.23",
+          "line_num": 32,
+          "context": "2025.02.23 암 보장 개시일 AXA손해보험"
+        },
+        {
+          "date": "2025-11-25",
+          "original": "2025.11.25",
+          "line_num": 60,
+          "context": "2025.11.25 무)AXA올인원종합보험 가입 1년 경과시점 AXA손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case17",
+      "baseline_count": 5,
+      "ocr_count": 12,
+      "matched": 2,
+      "ocr_missed": 3,
+      "ocr_extra": 10,
+      "accuracy": 40.0,
+      "missing_contexts": [
+        {
+          "date": "2025-08-12",
+          "original": "2025.08.12",
+          "line_num": 52,
+          "context": "2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험"
+        },
+        {
+          "date": "2030-08-12",
+          "original": "2030.08.12",
+          "line_num": 52,
+          "context": "2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험"
+        },
+        {
+          "date": "2045-08-12",
+          "original": "2045.08.12",
+          "line_num": 53,
+          "context": "2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험"
+        }
+      ]
+    },
+    {
+      "case_name": "Case22",
+      "baseline_count": 14,
+      "ocr_count": 102,
+      "matched": 10,
+      "ocr_missed": 4,
+      "ocr_extra": 92,
+      "accuracy": 71.42857142857143,
+      "missing_contexts": [
+        {
+          "date": "2019-08-16",
+          "original": "2019.08.16",
+          "line_num": 25,
+          "context": "2019.08.16"
+        },
+        {
+          "date": "2021-08-16",
+          "original": "2021.08.16",
+          "line_num": 27,
+          "context": "2021.08.16"
+        },
+        {
+          "date": "2024-05-16",
+          "original": "2024.05.16",
+          "line_num": 39,
+          "context": "2024.05.16"
+        },
+        {
+          "date": "2024-08-16",
+          "original": "2024.08.16",
+          "line_num": 41,
+          "context": "2024.08.16 KB 3.3.5 슬기로운 간편실속종합건강보험Plus(무배당)(24.05)_2"
+        }
+      ]
+    }
+  ],
+  "missing_contexts": [
+    {
+      "case": "Case1",
+      "date": "2019-09-27",
+      "original": "2019.09.27",
+      "line_num": 4,
+      "context": "2019.09.27"
+    },
+    {
+      "case": "Case1",
+      "date": "2023-09-27",
+      "original": "2023.09.27",
+      "line_num": 28,
+      "context": "2023.09.27"
+    },
+    {
+      "case": "Case1",
+      "date": "2024-06-27",
+      "original": "2024.06.27",
+      "line_num": 32,
+      "context": "2024.06.27"
+    },
+    {
+      "case": "Case1",
+      "date": "2024-09-27",
+      "original": "2024.09.27",
+      "line_num": 35,
+      "context": "2024.09.27 무배당 AXA 나를지켜주는건강보험(갱신형)2407 가입 AXA 손해보험"
+    },
+    {
+      "case": "Case2",
+      "date": "2019-04-09",
+      "original": "2019.04.09",
+      "line_num": 15,
+      "context": "2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case2",
+      "date": "2024-01-09",
+      "original": "2024.01.09",
+      "line_num": 16,
+      "context": "2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case3",
+      "date": "2019-11-22",
+      "original": "2019.11.22",
+      "line_num": 4,
+      "context": "2019.11.22"
+    },
+    {
+      "case": "Case3",
+      "date": "2021-09-02",
+      "original": "2021.09.02",
+      "line_num": 8,
+      "context": "2021.09.02 무배당굿앤굿어린이스타종합보험(Hi2201) 가입 현대해상"
+    },
+    {
+      "case": "Case3",
+      "date": "2023-11-22",
+      "original": "2023.11.22",
+      "line_num": 10,
+      "context": "2023.11.22"
+    },
+    {
+      "case": "Case3",
+      "date": "2024-08-22",
+      "original": "2024.08.22",
+      "line_num": 13,
+      "context": "2024.08.22"
+    },
+    {
+      "case": "Case5",
+      "date": "2018-05-10",
+      "original": "2018.05.10",
+      "line_num": 3,
+      "context": "2018.05.10"
+    },
+    {
+      "case": "Case5",
+      "date": "2020-01-17",
+      "original": "2020.01.17",
+      "line_num": 50,
+      "context": "심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청"
+    },
+    {
+      "case": "Case5",
+      "date": "2023-02-10",
+      "original": "2023.02.10",
+      "line_num": 7,
+      "context": "2023.02.10"
+    },
+    {
+      "case": "Case5",
+      "date": "2023-05-10",
+      "original": "2023.05.10",
+      "line_num": 11,
+      "context": "2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험"
+    },
+    {
+      "case": "Case5",
+      "date": "2024-01-24",
+      "original": "2024.01.24",
+      "line_num": 62,
+      "context": "피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대"
+    },
+    {
+      "case": "Case6",
+      "date": "2018-07-26",
+      "original": "2018.07.26",
+      "line_num": 4,
+      "context": "2018.07.26 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case6",
+      "date": "2023-04-26",
+      "original": "2023.04.26",
+      "line_num": 15,
+      "context": "2023.04.26 (무) NH 헤아림 355 건강보험 가입 3 개월 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case6",
+      "date": "2023-07-26",
+      "original": "2023.07.26",
+      "line_num": 16,
+      "context": "2023.07.26 (무) NH 헤아림 355 건강보험 가입 NH 농협손해보험"
+    },
+    {
+      "case": "Case8",
+      "date": "2019-10-08",
+      "original": "2019.10.08",
+      "line_num": 4,
+      "context": "2019.10.08 (무)간편가입헤아림실손의료비보험 2404 가입 5 년 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case8",
+      "date": "2022-10-08",
+      "original": "2022.10.08",
+      "line_num": 5,
+      "context": "2022.10.08 (무) 간편가입헤아림실손의료비보험 2404 가입 2 년 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case8",
+      "date": "2024-07-08",
+      "original": "2024.07.08",
+      "line_num": 6,
+      "context": "2024.07.08 (무) 간편가입헤아림실손의료비보험 2404 가입 3 개월 이내 NH 농협손해보험"
+    },
+    {
+      "case": "Case10",
+      "date": "2024-05-01",
+      "original": "2024.05.01",
+      "line_num": 7,
+      "context": "보 험 기 간 ① 2024.05.01 ~ 2054.11.10"
+    },
+    {
+      "case": "Case10",
+      "date": "2025-11-10",
+      "original": "2025.11.10",
+      "line_num": 8,
+      "context": "② 2024.05.01 ~ 2025.11.10"
+    },
+    {
+      "case": "Case10",
+      "date": "2054-11-10",
+      "original": "2054.11.10",
+      "line_num": 7,
+      "context": "보 험 기 간 ① 2024.05.01 ~ 2054.11.10"
+    },
+    {
+      "case": "Case12",
+      "date": "2024-03-27",
+      "original": "2024.03.27",
+      "line_num": 4,
+      "context": "2024.03.27 KB 5.10.10 플러스 건강보험(무배당)(24.03) 가입 ㈜KB 손해보험"
+    },
+    {
+      "case": "Case12",
+      "date": "2025-02-18",
+      "original": "2025.02.18",
+      "line_num": 6,
+      "context": "2025.02.18"
+    },
+    {
+      "case": "Case14",
+      "date": "2018-07-26",
+      "original": "2018.07.26",
+      "line_num": 4,
+      "context": "2018.07.26 (무) NH헤아림355건강보험 가입 5년 이내 NH농협손해보험"
+    },
+    {
+      "case": "Case14",
+      "date": "2023-04-26",
+      "original": "2023.04.26",
+      "line_num": 16,
+      "context": "2023.04.26 (무) NH헤아림355건강보험 가입 3개월 이내 NH농협손해보험"
+    },
+    {
+      "case": "Case14",
+      "date": "2023-07-26",
+      "original": "2023.07.26",
+      "line_num": 17,
+      "context": "2023.07.26 (무) NH헤아림355건강보험 가입 NH농협손해보험"
+    },
+    {
+      "case": "Case15",
+      "date": "2025-02-25",
+      "original": "2025.02.25",
+      "line_num": 2,
+      "context": "2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험"
+    },
+    {
+      "case": "Case15",
+      "date": "2025-05-26",
+      "original": "2025.05.26",
+      "line_num": 3,
+      "context": "2025.05.26|나에게 맞춘 초경증 간편건강보험2407"
+    },
+    {
+      "case": "Case15",
+      "date": "2025-06-27",
+      "original": "2025.06.27",
+      "line_num": 12,
+      "context": "2025.06.16 ~ 2025.06.27|"
+    },
+    {
+      "case": "Case15",
+      "date": "2053-02-25",
+      "original": "2053.02.25",
+      "line_num": 2,
+      "context": "2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험"
+    },
+    {
+      "case": "Case16",
+      "date": "2024-11-25",
+      "original": "2024.11.25",
+      "line_num": 30,
+      "context": "2024.11.25 무)AXA올인원종합보험 가입 AXA손해보험"
+    },
+    {
+      "case": "Case16",
+      "date": "2025-02-23",
+      "original": "2025.02.23",
+      "line_num": 32,
+      "context": "2025.02.23 암 보장 개시일 AXA손해보험"
+    },
+    {
+      "case": "Case16",
+      "date": "2025-11-25",
+      "original": "2025.11.25",
+      "line_num": 60,
+      "context": "2025.11.25 무)AXA올인원종합보험 가입 1년 경과시점 AXA손해보험"
+    },
+    {
+      "case": "Case17",
+      "date": "2025-08-12",
+      "original": "2025.08.12",
+      "line_num": 52,
+      "context": "2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험"
+    },
+    {
+      "case": "Case17",
+      "date": "2030-08-12",
+      "original": "2030.08.12",
+      "line_num": 52,
+      "context": "2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험"
+    },
+    {
+      "case": "Case17",
+      "date": "2045-08-12",
+      "original": "2045.08.12",
+      "line_num": 53,
+      "context": "2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험"
+    },
+    {
+      "case": "Case22",
+      "date": "2019-08-16",
+      "original": "2019.08.16",
+      "line_num": 25,
+      "context": "2019.08.16"
+    },
+    {
+      "case": "Case22",
+      "date": "2021-08-16",
+      "original": "2021.08.16",
+      "line_num": 27,
+      "context": "2021.08.16"
+    },
+    {
+      "case": "Case22",
+      "date": "2024-05-16",
+      "original": "2024.05.16",
+      "line_num": 39,
+      "context": "2024.05.16"
+    },
+    {
+      "case": "Case22",
+      "date": "2024-08-16",
+      "original": "2024.08.16",
+      "line_num": 41,
+      "context": "2024.08.16 KB 3.3.5 슬기로운 간편실속종합건강보험Plus(무배당)(24.05)_2"
+    }
+  ],
+  "patterns": {
+    "keyword_frequency": {
+      "가입": 16,
+      "보험": 27,
+      "~": 11,
+      "①": 2,
+      "②": 1
+    },
+    "future_dates_count": 4,
+    "past_dates_count": 20
+  }
+}
