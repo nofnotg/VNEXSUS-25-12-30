@@ -181,7 +181,7 @@ def normalize_date_format(date_str: str) -> str:
     match = re.match(r'^(\d{4})/(\d{1,2})/(\d{1,2})$', date_str)
     if match:
         year, month, day = match.groups()
-        return f"{year}-{month.zfill(2))-{day.zfill(2)}"
+        return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
 
     return date_str
 
