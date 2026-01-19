@@ -36,7 +36,10 @@
     "ten:orchestrate": "node --loader ts-node/esm scripts/orchestrate-all.ts",
     "ten:auto-flag": "node --loader ts-node/esm scripts/auto-flag-ten.ts",
     "progress:gen": "node --loader ts-node/esm scripts/generate-progress-html.ts",
-    "realtime:llm": "node --loader ts-node/esm scripts/realtime-ocr-llm-and-compare.ts \"realtime_ocr\""
+    "realtime:llm": "node --loader ts-node/esm scripts/realtime-ocr-llm-and-compare.ts \"realtime_ocr\"",
+    "vision:verify": "node --loader ts-node/esm scripts/verify-pipeline.ts",
+    "vision:test": "node --loader ts-node/esm scripts/test-vision-llm-pipeline.ts",
+    "vision:guide": "cat docs/VISION-LLM-USER-GUIDE.md"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^4.7.2",
