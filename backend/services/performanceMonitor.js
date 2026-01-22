@@ -29,4 +29,6 @@ class PerformanceMonitor {
   }
 }
 
+// Export both named and default exports for compatibility
+export { PerformanceMonitor };
 export default new PerformanceMonitor();

@@ -19,4 +19,5 @@ export class MedicalDocumentNormalizer {
   }
 }
 
-export default new MedicalDocumentNormalizer();
+// Export class as default for inheritance
+export default MedicalDocumentNormalizer;
