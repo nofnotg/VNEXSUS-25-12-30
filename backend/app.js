@@ -218,11 +218,11 @@ app.post('/api/admin/restart', (req, res) => {
   }
   if (mainServer) {
     mainServer.close(() => {
-      mainServer = app.listen(PORT, onListen);
+      mainServer = app.listen(PORT, '0.0.0.0', onListen);
       res.json({ success: true, restarted: true });
     });
   } else {
-    mainServer = app.listen(PORT, onListen);
+    mainServer = app.listen(PORT, '0.0.0.0', onListen);
     res.json({ success: true, restarted: true, coldStart: true });
   }
 });
@@ -310,11 +310,11 @@ app.post('/api/admin/restart', (req, res) => {
   }
   if (mainServer) {
     mainServer.close(() => {
-      mainServer = app.listen(PORT, onListen);
+      mainServer = app.listen(PORT, '0.0.0.0', onListen);
       res.json({ success: true, restarted: true });
     });
   } else {
-    mainServer = app.listen(PORT, onListen);
+    mainServer = app.listen(PORT, '0.0.0.0', onListen);
     res.json({ success: true, restarted: true, coldStart: true });
   }
 });
@@ -362,13 +362,14 @@ const onListen = () => {
   console.log(`======================================`);
   console.log(`OCR 서버가 포트 ${PORT}에서 실행 중입니다.`);
   console.log(`http://localhost:${PORT}`);
+  console.log(`외부 접속 가능 (0.0.0.0:${PORT})`);
   const visionOcrInitialized = initializeVisionOcr();
   console.log(`\n[환경 변수 설정 상태]`);
   console.log(`- NODE_ENV: ${process.env.NODE_ENV || 'development'}`);
   console.log(`- OCR 설정:`);
   console.log('✅ 서버 시작 완료');
 };
-mainServer = app.listen(PORT, onListen);
+mainServer = app.listen(PORT, '0.0.0.0', onListen);
 
 // 예외 처리
 process.on('uncaughtException', (err) => {
@@ -386,7 +387,8 @@ devCaseApp.use(express.static(path.join(__dirname, '../frontend'), { index: fals
 devCaseApp.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dev-case-manager.html'));
 });
-devCaseApp.listen(DEV_CASE_PORT, () => {
+devCaseApp.listen(DEV_CASE_PORT, '0.0.0.0', () => {
   console.log(`Dev Case Manager 서버가 포트 ${DEV_CASE_PORT}에서 실행 중입니다.`);
   console.log(`http://localhost:${DEV_CASE_PORT}`);
+  console.log(`외부 접속 가능 (0.0.0.0:${DEV_CASE_PORT})`);
 });
