@@ -1,118 +1,193 @@
-# VNEXSUS - 보험 손해사정 자동화 시스템
+# VNEXSUS - 의료 문서 OCR 및 고지의무 분석 시스템
 
 ## 📋 프로젝트 개요
 
-VNEXSUS는 보험 손해사정 업무를 자동화하는 AI 기반 시스템입니다. 피보험자의 의무기록을 분석하여 고지의무 위반 여부를 판단하고, 전문적인 손해사정보고서를 자동으로 생성합니다.
+VNEXSUS는 보험 손해사정 업무를 위한 AI 기반 의료 문서 분석 시스템입니다. Google Cloud Vision OCR을 활용하여 피보험자의 의무기록을 추출하고, 고지의무 위반 여부를 분석합니다.
 
-### 🎯 주요 기능
+**현재 상태**: 개발 진행 중 (약 70-75% 완성)
 
-- **고지의무 자동 분석**: 보험가입일 기준 3개월/2년/5년 이내 진료기록 자동 분류
-- **AI 기반 위험도 평가**: 질병별 특화된 알고리즘으로 정확한 위험도 산출
-- **자동 보고서 생성**: 확장형 보고서와 요약본을 동시 생성
-- **Make.com 연동**: 완전 자동화된 워크플로우로 Google Docs/PDF 생성
-- **실시간 처리**: 웹 인터페이스를 통한 즉시 분석 및 결과 제공
+### 🎯 핵심 기능
+
+- **의료 문서 OCR**: Google Cloud Vision API 기반 텍스트 추출
+- **날짜별 이벤트 파싱**: 의료 기록을 날짜 중심으로 구조화
+- **고지의무 분석**: 보험가입일 기준 3개월/2년/5년 이내 진료기록 분류
+- **타임라인 시각화**: Investigator View를 통한 에피소드 타임라인 표시
+- **웹 인터페이스**: 파일 업로드 및 실시간 결과 조회
+
+### 🚧 개발 중인 기능
+
+- DNA 시퀀싱 시스템 (의료 이벤트 인과관계 분석)
+- 자동 보고서 생성 엔진 고도화
+- A-B-C 실행 계획 기반 시스템 개선
+
+---
 
 ## 🏗️ 시스템 아키텍처
 
 ```
-Frontend (HTML/JS) → Backend (Node.js) → AI Analysis → Make.com → Google Workspace
-     ↓                    ↓                  ↓           ↓            ↓
-  파일 업로드         의무기록 처리      고지의무 분석    자동화 워크플로우   보고서 생성
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   프론트엔드   │────→│   백엔드 서버   │────→│  Google Cloud │
+│ (웹 인터페이스)│     │  (Node.js)   │     │  Vision API  │
+└─────────────┘     └──────────────┘     └─────────────┘
+                           │
+                           ↓
+                    ┌──────────────┐
+                    │  분석 엔진     │
+                    │ - OCR 파싱    │
+                    │ - 고지의무     │
+                    │ - DNA 시퀀싱   │
+                    └──────────────┘
 ```
 
-### 📁 프로젝트 구조
+---
+
+## 📁 프로젝트 구조
 
 ```
-VNEXSUS_Bin/
-├── frontend/                 # 웹 프론트엔드
-│   ├── index.html           # 메인 페이지
-│   ├── upload.html          # 파일 업로드 페이지
-│   ├── report.html          # 보고서 조회 페이지
-│   └── assets/              # CSS, JS, 이미지
-├── backend/                 # Node.js 백엔드
-│   ├── server.js            # 메인 서버
-│   ├── routes/              # API 라우트
-│   └── postprocess/         # 분석 엔진
-│       ├── disclosureAnalysisEngine.cjs      # 고지의무 분석
-│       └── enhancedReportTemplateEngine.cjs  # 보고서 생성
-├── automation/              # Make.com 자동화
-│   ├── makecom-scenario-blueprint.json       # 시나리오 블루프린트
-│   ├── webhook-test-payload.json            # 테스트 페이로드
-│   └── makecom-setup-guide.md               # 설정 가이드
-└── test/                    # 테스트 파일
-    ├── testDisclosureIntegration.cjs         # 통합 테스트
-    ├── testWebhookIntegration.cjs           # Webhook 테스트
-    └── testEndToEndWorkflow.cjs             # E2E 테스트
+VNEXSUS-25-12-30/
+├── backend/                          # Node.js 백엔드
+│   ├── app.js                       # 메인 애플리케이션
+│   ├── routes/                      # API 라우트 (28개)
+│   ├── services/                    # 비즈니스 로직 (28개)
+│   ├── postprocess/                 # 후처리 엔진
+│   │   ├── disclosureAnalysisEngine.cjs
+│   │   ├── enhancedReportTemplateEngine.cjs
+│   │   └── dateBlockProcessor.js
+│   └── uploads/                     # 임시 파일 저장
+│
+├── frontend/                         # 웹 프론트엔드
+│   ├── index.html                   # 메인 페이지
+│   ├── hybrid-interface.html        # 파일 업로드 인터페이스
+│   ├── investigator-view.html       # 에피소드 타임라인 뷰
+│   ├── dev-case-manager.html        # 개발용 케이스 관리자
+│   └── ... (20개 HTML 페이지)
+│
+├── src/                              # 추가 소스 코드
+│   ├── routes/
+│   └── services/
+│
+├── test/                             # 테스트 파일
+│   └── data/                        # 테스트 데이터
+│
+├── .trae/                            # 개발 문서
+│   ├── documents/                   # 기술 문서
+│   └── rules/
+│
+├── VNEXSUS_A-B-C_Execution_Plan/    # A-B-C 실행 계획
+├── VNEXSUS_dev_plan_tasks/          # 개발 태스크
+│
+├── .env                              # 환경변수
+├── .env.example                      # 환경변수 템플릿
+├── windows-setup.bat                 # Windows 설정 스크립트
+├── start-server.bat                  # 서버 시작 스크립트
+└── PROJECT_STATUS.md                 # 📌 프로젝트 현황 문서
 ```
 
-## 🚀 설치 및 실행
+---
 
-### 1. 환경 요구사항
+## 🚀 빠른 시작 가이드
 
-- Node.js 18.0 이상
-- npm 또는 yarn
-- OpenAI API 키
-- Google Workspace 계정 (Make.com 연동용)
+### 1. 필수 요구사항
 
-### 2. 설치
+- **Node.js**: 18.0 이상
+- **Google Cloud Vision API 키** 또는 서비스 계정 JSON
+- **OpenAI API 키** (선택사항)
+
+### 2. 설치 (Windows)
+
+```powershell
+# 1. 저장소 클론
+git clone https://github.com/nofnotg/VNEXSUS-25-12-30.git
+cd VNEXSUS-25-12-30
+
+# 2. 작업 브랜치 체크아웃
+git checkout claude/medical-ocr-event-pipeline-dnReg
+
+# 3. 자동 환경 설정 (관리자 권한 필요)
+windows-setup.bat
+```
+
+**자동 설정 내용**:
+- Node.js 버전 확인
+- .env 파일 생성
+- 필수 폴더 생성
+- npm 패키지 설치
+- 방화벽 규칙 추가
+
+### 3. 환경 변수 설정
+
+`.env` 파일을 열어 다음 항목을 설정:
 
 ```bash
-# 저장소 클론
-git clone <repository-url>
-cd VNEXSUS_Bin
+# Google Cloud Vision OCR (필수)
+GOOGLE_CLOUD_VISION_API_KEY=your-api-key
+# 또는
+GOOGLE_APPLICATION_CREDENTIALS=./credentials/service-account.json
 
-# 의존성 설치
-npm install
+GCS_BUCKET_NAME=medreport-vision-ocr-bucket
+GCP_PROJECT_ID=medreport-vision-ocr
 
-# 환경변수 설정
-cp .env.example .env
-# .env 파일에 OpenAI API 키 등 설정
+# OpenAI API (선택)
+OPENAI_API_KEY=your-openai-api-key
+OPENAI_MODEL=gpt-4o-mini
+
+# 서버 설정
+PORT=3030
+NODE_ENV=development
 ```
 
-### 3. 실행
+### 4. 서버 실행
 
 ```bash
-# 백엔드 서버 시작
+# 방법 1: 배치 파일 사용 (권장)
+start-server.bat
+
+# 방법 2: 직접 실행
 cd backend
 npm start
-
-# 프론트엔드 서버 시작 (새 터미널)
-cd frontend
-npx http-server -p 8080 -c-1
 ```
 
-### 4. 접속
+### 5. 브라우저 접속
 
-- 프론트엔드: http://localhost:8080
-- 백엔드 API: http://localhost:3000
+- **메인 애플리케이션**: http://localhost:3030
+- **파일 업로드**: http://localhost:3030/hybrid-interface.html
+- **Dev Case Manager**: http://localhost:8088
 
-## 🔧 Make.com 자동화 설정
+---
 
-### 1. 시나리오 가져오기
+## 🔧 주요 API 엔드포인트
 
-1. Make.com 계정 로그인
-2. 새 시나리오 생성 → "Import Blueprint" 선택
-3. `automation/makecom-scenario-blueprint.json` 파일 업로드
+### OCR 처리
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/ocr/upload` | POST | 파일 업로드 및 OCR 처리 시작 |
+| `/api/ocr/status/:jobId` | GET | 작업 진행 상태 확인 |
+| `/api/ocr/result/:jobId` | GET | OCR 결과 조회 |
 
-### 2. 연결 설정
+### Investigator View
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/ocr/investigator-view/:jobId` | GET | 타임라인 데이터 조회 |
+| `/api/ocr/investigator-view/:jobId` | POST | 편집된 데이터 저장 |
 
-- **OpenAI API**: GPT-4 모델 사용을 위한 API 키 설정
-- **Google Docs**: 문서 생성 권한
-- **Google Drive**: 파일 내보내기 및 공유 권한
+### 분석 엔진
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/core-engine/*` | POST | 고지의무 분석 |
+| `/api/enhanced-core/*` | POST | 향상된 분석 |
+| `/api/dna-report/*` | POST | DNA 시퀀싱 보고서 |
 
-### 3. 상세 설정
-
-`automation/makecom-setup-guide.md` 파일을 참조하여 각 모듈을 설정하세요.
+---
 
 ## 📊 고지의무 분석 알고리즘
 
 ### 기간별 분류 기준
 
 | 기간 | 대상 키워드 | 분석 목적 |
-|------|-------------|-----------||
-| **3개월 이내** | 의심, 진단, 확정, 새로운, 질병, 입원, 필요, 소견, 수술, 추가검사, 재검사, 정밀검사, 조직검사 | 최근 진단 및 검사 이력 |
+|------|-------------|-----------|
+| **3개월 이내** | 의심, 진단, 확정, 새로운, 질병, 입원, 필요, 소견, 수술 | 최근 진단 및 검사 이력 |
 | **2년 이내** | 입원, 수술, 상해, 질병, 치료, 시술, 처치 | 중요 치료 이력 |
-| **5년 이내** | 암, 협심증, 급성심근경색, 심근경색, 간경화, 뇌경색, 뇌출혈, 뇌혈관, 중대질병, 악성종양 | 중대질병 이력 |
+| **5년 이내** | 암, 협심증, 급성심근경색, 간경화, 뇌경색, 뇌출혈, 중대질병 | 중대질병 이력 |
 
 ### 위험도 평가
 
@@ -120,333 +195,133 @@ npx http-server -p 8080 -c-1
 - **Medium**: 만성질환 또는 수술 이력
 - **Low**: 경미한 질환 또는 가입 후 발생
 
-## 🧪 테스트
-
-### 단위 테스트
-
-```bash
-# 고지의무 분석 엔진 테스트
-node test/testDisclosureIntegration.cjs
-
-# Webhook 통합 테스트
-node test/testWebhookIntegration.cjs
-
-# End-to-End 워크플로우 테스트
-node test/testEndToEndWorkflow.cjs
-```
-
-### 테스트 시나리오
-
-1. **위암 사례 - 고위험**: 보험가입 전 암 진단 이력
-2. **당뇨병 사례 - 중위험**: 만성질환 관리 이력
-3. **단순 외상 사례 - 저위험**: 가입 후 발생한 외상
-
-## 📈 사용 통계
-
-- **처리 속도**: 평균 30초 이내 분석 완료
-- **정확도**: 고지의무 분류 95% 이상
-- **자동화율**: 수동 작업 대비 80% 시간 단축
-
-## 🔒 보안 고려사항
-
-- **데이터 암호화**: 전송 중 HTTPS 강제 사용
-- **API 키 관리**: 환경변수를 통한 안전한 키 관리
-- **접근 제어**: 인증된 사용자만 시스템 접근 가능
-- **로그 관리**: 민감 정보 로깅 방지
-
-## 🛠️ 개발 가이드
-
-### 코드 구조
-
-- **Frontend**: 바닐라 JavaScript + Bootstrap
-- **Backend**: Node.js + Express
-- **AI Engine**: OpenAI GPT-4 API
-- **Automation**: Make.com 시나리오
-
-### 주요 클래스
-
-- `DisclosureAnalysisEngine`: 고지의무 분석 핵심 로직
-- `EnhancedReportTemplateEngine`: 보고서 생성 및 템플릿 관리
-- `WebhookIntegrationTest`: 자동화 워크플로우 테스트
-
-### 확장 가능성
-
-- **다국어 지원**: 국제 보험사 대응
-- **추가 보험 상품**: 생명보험, 연금보험 등
-- **AI 모델 업그레이드**: 더 정확한 분석을 위한 모델 개선
-- **모바일 앱**: 스마트폰을 통한 현장 업무 지원
-
-## 📞 지원 및 문의
-
-- **기술 지원**: tech-support@vnexsus.com
-- **사용자 가이드**: docs.vnexsus.com
-- **버그 리포트**: GitHub Issues
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 LICENSE 파일을 참조하세요.
-
 ---
 
-**VNEXSUS** - 보험 업계의 디지털 혁신을 선도합니다. 🚀
-
-## 🚨 시스템 보호 및 안정성
-
-이 시스템은 파일 업로드부터 OCR 처리까지의 핵심 기능이 안정적으로 동작하도록 설계되었습니다.
-**새로운 환경에서 사용하거나 설정을 변경하기 전에 반드시 다음 문서들을 확인하세요:**
-
-- 📖 **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - 배포 및 환경 설정 가이드
-- 🔧 **환경 검증**: `npm run validate:env` - 시스템 설정 검증
-- 🛡️ **설정 보호**: `npm run protect:check` - 핵심 파일 변경 감지
-
-### 빠른 시작
-```bash
-# 1. 환경 설정 검증
-npm run validate:env
-
-# 2. 설정 파일 보호 초기화
-npm run protect:init
-
-# 3. 서버 시작
-npm run start:backend    # 백엔드 (포트 3030)
-npm run start:frontend   # 프론트엔드 (포트 8080)
-```
-
-## 주요 기능
-
-- 의료 이벤트 데이터를 엑셀 보고서로 생성
-- 필터링된 이벤트의 별도 시트 제공
-- 태그별, 병원별 통계 정보 제공
-- 보험 가입일 기준 하이라이트 표시
-- 이벤트 시간순 정렬 및 표시
-
-## 구성 모듈
-
-### 1. src/lib/reportMaker.ts
-
-보고서 생성의 핵심 기능을 담당하는 모듈입니다. ExcelJS를 사용하여 엑셀 파일을 생성합니다.
-
-- `createReport(timeline, filterResult?, options?)`: 타임라인에서 엑셀 보고서를 생성하는 메인 함수
-- 여러 시트 포맷팅 함수들 (전체 이벤트, 필터링된 이벤트, 통계)
-- 날짜, 태그, 신뢰도 등의 포맷팅 유틸리티
-
-### 2. src/modules/m5-report/index.ts
-
-M5 모듈 인터페이스를 구현한 래퍼 모듈로, reportMaker를 활용하여 표준화된 인터페이스를 제공합니다.
-
-- `generateReport(timelineData, filterResult?, outputPath?)`: 보고서 생성 함수
-
-## 사용 방법
-
-### 1. 기본 사용법
-
-```typescript
-import m5ReportModule from './modules/m5-report/index.js';
-import eventGrouper from './lib/eventGrouper.js';
-import periodFilter from './lib/periodFilter.js';
-import { PeriodPreset } from './lib/periodFilter.js';
-
-// 1. 타임라인 데이터 준비
-const timeline = eventGrouper.groupEvents(events);
-
-// 2. 필터 적용 (선택 사항)
-const filterOptions = {
-  periodPreset: PeriodPreset.OneYear,
-  referenceDate: '2023-12-31',
-  minConfidence: 0.8
-};
-const filterResult = periodFilter.filterTimeline(timeline, filterOptions);
-
-// 3. 보고서 생성
-const result = await m5ReportModule.generateReport(
-  timeline,
-  filterResult,
-  './reports'  // 출력 디렉토리
-);
-
-console.log(`보고서 생성: ${result.success ? '성공' : '실패'}`);
-console.log(`경로: ${result.reportPath}`);
-```
-
-### 2. 커맨드라인 사용법
-
-```bash
-# 샘플 데이터로 보고서 생성
-node dist/scripts/generate-report.js src/scripts/sample-events.json ./reports
-```
-
-## 구현된 기능
-
-1. **전체 이벤트 시트**: 모든 의료 이벤트를 날짜순으로 정렬하여 표시
-2. **필터링된 이벤트 시트**: 필터 조건에 맞는 이벤트만 표시
-3. **통계 시트**: 태그별, 카테고리별 통계 정보 제공
-4. **환자 정보 시트**: 환자 기본 정보 및 보험 정보 표시
-5. **하이라이트 기능**: 보험 가입일 이전 이벤트는 빨간색으로 강조 표시
-
-## 설치 및 빌드
-
-```bash
-# 의존성 설치
-npm install
-
-# 빌드
-npm run build
-
-# 테스트 실행
-npm test
-```
-
-## 의존성
-
-- ExcelJS: 엑셀 파일 생성
-- UUID: 파일명 생성
-- fs/promises: 파일 시스템 작업 
-
-## AI 모듈 사용하기
-
-이 프로젝트는 의료 텍스트 분석 및 타임라인 생성을 위한 AI 통합 모듈을 제공합니다.
-
-### 환경 설정
-
-먼저 다음 환경 변수를 `.env` 파일에 설정해야 합니다:
-
-```bash
-# Anthropic API (Claude AI)
-ANTHROPIC_API_KEY=your_anthropic_api_key
-
-# OpenAI (옵션)
-OPENAI_API_KEY=your_openai_api_key
-
-# Azure OpenAI (옵션)
-AZURE_OPENAI_API_KEY=your_azure_openai_api_key
-AZURE_OPENAI_ENDPOINT=your_azure_endpoint
-AZURE_OPENAI_DEPLOYMENT=your_deployment_name
-```
+## 🧪 테스트
 
 ### 테스트 실행
 
-AI 기능을 테스트하려면 다음 명령어를 실행하세요:
-
 ```bash
-# AI 타임라인 생성 테스트
-npm run test:ai:timeline
+# 환경변수 검증
+npm run check:env
 
-# AI 분석기 테스트
-npm run test:ai:analyzer
+# Vision OCR 테스트
+npm run test:vision
+
+# 스트림 테스트
+npm run test:stream
 ```
 
-### 코드에서 사용하기
+---
 
-예시 코드:
+## 🛠️ 기술 스택
 
-```javascript
-import AIService from '../backend/modules/ai/aiService.js';
+### Backend
+- **Runtime**: Node.js 18+
+- **Framework**: Express 5.1.0
+- **OCR**: Google Cloud Vision API 5.3.2
+- **AI**: OpenAI GPT-4o-mini
 
-// AI 서비스 인스턴스 생성
-const aiService = new AIService({
-  defaultProvider: 'anthropic',
-  defaultModel: 'claude-3-haiku-20240307'
-});
+### Frontend
+- **UI**: 순수 HTML/CSS/JavaScript (프레임워크 없음)
+- **스타일**: Inline CSS + External Stylesheets
 
-// 챗 기반 응답 생성
-const response = await aiService.chat([
-  { role: 'system', content: '당신은 의료 텍스트 전문가입니다.' },
-  { role: 'user', content: '다음 의료 기록을 분석해주세요: ' + medicalText }
-]);
+### 데이터 저장
+- **파일 기반**: JSON 파일로 결과 저장
+- **캐싱**: node-cache (메모리 캐시)
 
-console.log(response.content); // AI 응답 내용
+---
 
-// 타임라인 생성 (간편한 방법)
-const timelineResponse = await aiService.generateTimeline(medicalText);
+## 📖 주요 문서
+
+| 문서 | 설명 |
+|------|------|
+| **[PROJECT_STATUS.md](./PROJECT_STATUS.md)** | 📌 프로젝트 현황 및 완성도 |
+| [SESSION_CONTEXT_2026-01-24.md](./SESSION_CONTEXT_2026-01-24.md) | 개발 세션 컨텍스트 |
+| [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) | API 상세 문서 |
+| [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) | 배포 가이드 |
+| [QUICK_START_GUIDE.md](./QUICK_START_GUIDE.md) | 빠른 시작 가이드 |
+
+---
+
+## 🔒 보안 고려사항
+
+### API 키 관리
+- ❌ 절대 하드코딩 금지
+- ✅ 환경변수 사용
+- ✅ .env 파일은 .gitignore에 포함
+
+### 파일 업로드 보안
+- ✅ 파일 크기 제한: 200MB
+- ✅ 파일 타입 검증: PDF, PNG, JPG만 허용
+- ✅ 파일명 새니타이징
+
+---
+
+## 🐛 문제 해결 (Troubleshooting)
+
+### 문제 1: 서버가 시작되지 않음
+```
+❌ 필수 환경변수가 누락되었습니다: GCS_BUCKET_NAME
+
+해결: .env 파일에 GCS_BUCKET_NAME 추가
 ```
 
-### 사용 가능한 모델
-
-기본 모델은 `claude-3-haiku-20240307`이며, 다음 모델을 사용할 수 있습니다:
-
-- **Claude AI**: `claude-3-opus-20240229`, `claude-3-sonnet-20240229`, `claude-3-haiku-20240307`
-- **OpenAI**: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo` 
-
-# 메디아이(Medi AI) 문서분석시스템
-
-의료 문서 OCR 및 분석 시스템
-
-## 기능
-
-- PDF 및 이미지 파일에서 텍스트 추출 (OCR)
-- 추출된 텍스트에서 의료 이벤트 및 타임라인 생성
-- 보험 정보에 기반한 요약표 생성
-- GPT-4 Turbo를 활용한 의료 보고서 생성 및 AI 채팅 기능
-
-## 설치 및 실행 방법
-
-### 필수 요구사항
-
-- Node.js 16 이상
-- npm 또는 yarn
-- Google Cloud Vision API 키 또는 서비스 계정 (OCR 기능 사용 시)
-- OpenAI API 키 (GPT-4 Turbo 보고서 생성 기능 사용 시)
-
-### 환경 변수 설정
-
-`.env` 파일을 생성하고 다음과 같이 설정:
-
+### 문제 2: OCR 처리 실패
 ```
-# OCR 관련 설정
-ENABLE_VISION_OCR=true
-USE_VISION=true
-USE_TEXTRACT=false
+❌ Vision OCR API 인증 실패
 
-# Google Cloud 설정
-GCS_BUCKET_NAME=medreport-vision-ocr-bucket
-GCP_PROJECT_ID=medreport-vision-ocr
-GOOGLE_APPLICATION_CREDENTIALS=경로/키파일.json
-GOOGLE_CLOUD_VISION_API_KEY=your-api-key
-
-# 서버 설정
-PORT=8888
-
-# AI 서비스
-OPENAI_API_KEY=your-openai-api-key
+해결:
+1. GOOGLE_CLOUD_VISION_API_KEY 확인
+2. 또는 GOOGLE_APPLICATION_CREDENTIALS 경로 확인
 ```
 
-### 설치 및 실행
+### 문제 3: 포트 충돌
+```
+❌ Error: listen EADDRINUSE :::3030
 
-```bash
-# 의존성 설치
-npm install
-
-# 개발 서버 실행
-npm run dev
-
-# 또는 배포용 빌드 및 실행
-npm run build
-npm start
+해결 (Windows):
+netstat -ano | findstr :3030
+taskkill /PID <PID> /F
 ```
 
-## AI 보고서 생성 및 채팅 기능
+---
 
-메디아이 시스템은 이제 OpenAI의 GPT-4 Turbo를 활용한 자동 의료 보고서 생성 및 상호작용 기능을 제공합니다.
+## 📝 개발 로드맵
 
-### 주요 기능
+### ✅ 완료된 기능
+- Google Cloud Vision OCR 통합
+- 날짜별 이벤트 파싱
+- 고지의무 분석 엔진 (기본)
+- 웹 인터페이스 구축
+- Investigator View (기본)
 
-1. **자동 의료 보고서 생성**
-   - OCR로 추출된 텍스트를 분석하여 구조화된 의료 보고서 생성
-   - 타임라인 이벤트를 기반으로 중요 의료 정보 요약
-   - 보험 가입일 기준으로 3개월/5년 이내 주요 이벤트 강조
+### 🚧 진행 중
+- DNA 시퀀싱 시스템 고도화
+- 보고서 생성 엔진 완성
+- A-B-C 실행 계획 구현
 
-2. **AI 채팅 상호작용**
-   - 생성된 보고서에 대해 질문하고 추가 정보 요청 가능
-   - 의료 용어 설명 및 이해하기 쉬운 해석 제공
-   - 보고서 내용에 대한 추가 분석 및 통찰 요청 가능
+### 📅 계획 중
+- 데이터베이스 통합 (PostgreSQL)
+- 인증/권한 시스템
+- 성능 최적화
+- 프로덕션 배포
 
-### 사용 방법
+---
 
-1. 문서를 업로드하고 OCR 처리를 완료합니다.
-2. 보험 정보를 입력하고 요약표를 생성합니다.
-3. "AI 보고서 생성" 섹션에서 "보고서 생성하기" 버튼을 클릭합니다.
-4. 보고서가 생성되면 하단의 채팅 기능을 통해 추가 질문을 할 수 있습니다.
+## 📞 지원 및 문의
 
-## 라이선스
+- **버그 리포트**: GitHub Issues
+- **문서**: 프로젝트 루트의 마크다운 파일 참조
 
-[MIT License](LICENSE)
+---
+
+## 📄 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.
+
+---
+
+**VNEXSUS** - 의료 문서 분석의 새로운 기준 🚀
+
+> **참고**: 이 프로젝트는 현재 활발히 개발 중입니다. 프로덕션 환경에서 사용하기 전에 충분한 테스트를 수행하세요.

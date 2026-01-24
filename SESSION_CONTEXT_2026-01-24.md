@@ -32,7 +32,7 @@
 
 ## 🏗️ 현재 앱 개발 상태 및 수준
 
-### 전체 완성도: **약 85-90%** (프로덕션 준비 단계)
+### 전체 완성도: **약 70-75%** (개발 진행 중)
 
 ### 시스템 개요
 **VNEXSUS**는 보험 손해사정 업무를 자동화하는 AI 기반 의료 OCR 및 분석 시스템입니다.
@@ -41,9 +41,8 @@
 - ✅ **의료 문서 OCR**: Google Cloud Vision API 기반 텍스트 추출
 - ✅ **AI 기반 분석**: OpenAI, Google Gemini, Anthropic Claude 통합
 - ✅ **고지의무 분석**: 보험가입일 기준 3개월/2년/5년 분류
-- ✅ **자동 보고서 생성**: 확장형/요약형 보고서 동시 생성
+- 🚧 **자동 보고서 생성**: 확장형/요약형 보고서 엔진 개발 중
 - ✅ **Investigator View**: 에피소드 타임라인 시각화 및 편집
-- ✅ **Make.com 연동**: Google Docs/PDF 자동 생성 워크플로우
 - ✅ **실시간 웹 인터페이스**: 파일 업로드 → 분석 → 결과 조회
 
 ---
@@ -92,10 +91,6 @@ VNEXSUS-25-12-30/
 │   ├── routes/
 │   │   └── advancedDateRoutes.js
 │   └── services/
-│
-├── automation/                       # Make.com 자동화 워크플로우
-│   ├── makecom-scenario-blueprint.json
-│   └── makecom-setup-guide.md
 │
 ├── test/                             # 테스트 파일
 │   └── data/                        # 테스트 데이터
@@ -571,10 +566,8 @@ start-server.bat
 - ✅ 인텔리전트 라우팅
 
 #### Phase 5: 자동화 워크플로우
-- ✅ Make.com 시나리오 블루프린트
-- ✅ Webhook 통합
-- ✅ Google Docs 자동 생성
-- ✅ PDF 내보내기
+- ❌ Make.com 연동 (초기 고려사항, 미구현)
+- 🚧 보고서 자동 생성 엔진 개발 중
 
 #### Phase 6: 개발 도구
 - ✅ Dev Case Manager (포트 8088)
