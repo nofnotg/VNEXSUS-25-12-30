@@ -687,8 +687,108 @@ export function extractBlocksFromJson(json) {
   return out;
 }
 
+/**
+ * 이미지 버퍼를 처리하여 텍스트 추출 (simple-server.js 호환 형식)
+ * @param {Buffer} imageBuffer - 이미지 파일 버퍼
+ * @returns {Promise<Object>} - { success, extractedText, confidence, metadata }
+ */
+export async function processImageBuffer(imageBuffer) {
+  try {
+    const result = await extractTextFromImage(imageBuffer);
+    return {
+      success: true,
+      extractedText: result.text || '',
+      confidence: result.confidence,
+      metadata: {
+        textLength: result.textLength,
+        detectionCount: result.detectionCount
+      }
+    };
+  } catch (error) {
+    console.error('[VISION-OCR] processImageBuffer 실패:', error.message);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+}
+
+/**
+ * PDF 버퍼를 처리하여 텍스트 추출 (simple-server.js 호환 형식)
+ * @param {Buffer} pdfBuffer - PDF 파일 버퍼
+ * @param {Object} options - 추가 옵션 { fileName, mimeType }
+ * @returns {Promise<Object>} - { success, extractedText, metadata }
+ */
+export async function processDocumentBuffer(pdfBuffer, options = {}) {
+  let tempFilePath = null;
+
+  try {
+    // 1. 임시 디렉토리 생성
+    const tempDir = path.join(process.cwd(), 'temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+
+    // 2. 임시 파일 저장
+    const fileName = options.fileName || `pdf-${uuidv4()}.pdf`;
+    const safeName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_');
+    tempFilePath = path.join(tempDir, `temp-${uuidv4()}-${safeName}`);
+    fs.writeFileSync(tempFilePath, pdfBuffer);
+
+    console.log(`[VISION-OCR] PDF 버퍼를 임시 파일로 저장: ${tempFilePath}`);
+
+    // 3. 페이지 수 확인 (pdf-parse 사용)
+    const pdfParse = (await import('pdf-parse')).default;
+    const pdfData = await pdfParse(pdfBuffer);
+    const pageCount = pdfData.numpages;
+
+    console.log(`[VISION-OCR] PDF 페이지 수: ${pageCount}`);
+
+    // 4. processPdfFileViaImages 호출
+    const result = await processPdfFileViaImages(tempFilePath, {
+      pageCount,
+      ...options
+    });
+
+    // 5. 결과 확인 및 형식 변환
+    if (result.success === false) {
+      throw new Error(result.error || 'PDF OCR 처리 실패');
+    }
+
+    return {
+      success: true,
+      extractedText: result.text || '',
+      metadata: {
+        pageCount: result.pageCount || pageCount,
+        renderMethod: result.renderMethod,
+        pages: result.pages,
+        fileName: options.fileName
+      }
+    };
+
+  } catch (error) {
+    console.error('[VISION-OCR] processDocumentBuffer 실패:', error.message);
+    return {
+      success: false,
+      error: error.message
+    };
+  } finally {
+    // 6. 임시 파일 삭제
+    if (tempFilePath && fs.existsSync(tempFilePath)) {
+      try {
+        fs.unlinkSync(tempFilePath);
+        console.log(`[VISION-OCR] 임시 파일 삭제: ${tempFilePath}`);
+      } catch (e) {
+        console.warn(`[VISION-OCR] 임시 파일 삭제 실패: ${tempFilePath}`, e.message);
+      }
+    }
+  }
+}
+
 export default {
   processPdfFile,
   extractTextFromImage,
+  processImageBuffer,
+  processDocumentBuffer,
   getServiceStatus
 };
