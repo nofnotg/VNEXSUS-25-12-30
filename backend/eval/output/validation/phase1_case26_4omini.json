@@ -1,0 +1,147 @@
+{
+  "caseNum": 26,
+  "model": "gpt-4o-mini",
+  "processingTime": 19675,
+  "tokens": {
+    "prompt_tokens": 19496,
+    "completion_tokens": 996,
+    "total_tokens": 20492,
+    "prompt_tokens_details": {
+      "cached_tokens": 19456,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.003522,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-10-30",
+      "time": "15:37",
+      "hospital": "고려대학교 안암병원",
+      "department": "산부인과"
+    },
+    "chiefComplaint": {
+      "summary": "huge myoma",
+      "referralSource": null,
+      "onsetDate": "2025-07-01",
+      "duration": "3개월",
+      "details": "12cm, 6cm, 5cm 크기의 자궁근종으로 수술을 위해 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "D25.9",
+        "nameKr": "자궁 평활근종",
+        "nameEn": "Uterine leiomyoma",
+        "date": "2025-10-02",
+        "isPrimary": true,
+        "hospital": "고려대학교 안암병원"
+      },
+      {
+        "code": "D25.0",
+        "nameKr": "내막 폴립",
+        "nameEn": "Endometrial polyp",
+        "date": "2025-10-02",
+        "isPrimary": false,
+        "hospital": "고려대학교 안암병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈액검사",
+        "nameEn": "Blood test",
+        "date": "2025-09-05",
+        "result": "정상",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "심전도",
+        "nameEn": "Electrocardiogram",
+        "date": "2025-09-13",
+        "result": "정상",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-10-02",
+      "reportDate": "2025-10-14",
+      "finding": "자궁 평활근종 및 내막 폴립",
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "자궁근종 절제술",
+        "date": "2025-10-02",
+        "duration": "3일",
+        "details": "da Vinci 수술로 자궁근종 및 내막 폴립 제거.",
+        "hospital": "고려대학교 안암병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-07-11",
+      "endDate": "2025-10-21",
+      "totalVisits": 6,
+      "hospitals": [
+        "고려대학교 안암병원"
+      ],
+      "summary": "자궁근종 및 관련 증상으로 6회 통원 치료."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-10-01",
+      "endDate": "2025-10-04",
+      "totalDays": 3,
+      "hospital": "고려대학교 안암병원",
+      "department": "산부인과",
+      "reason": "자궁근종 제거 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "특이 질환 없음",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "정상",
+        "hospital": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "수술 후 경과 양호.",
+      "prognosis": "좋음",
+      "recommendations": "정기적인 추적 관찰 필요.",
+      "limitations": "수술 후 2주간 무리한 활동 자제."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "자궁근종 제거 수술 후 회복 중.",
+      "keyFindings": [
+        "자궁근종 및 내막 폴립 확인",
+        "수술 후 경과 양호"
+      ],
+      "recommendations": "정기적인 외래 진료 필요."
+    }
+  }
+}

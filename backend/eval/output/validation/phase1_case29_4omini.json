@@ -1,0 +1,163 @@
+{
+  "caseNum": 29,
+  "model": "gpt-4o-mini",
+  "processingTime": 20257,
+  "tokens": {
+    "prompt_tokens": 9316,
+    "completion_tokens": 1125,
+    "total_tokens": 10441,
+    "prompt_tokens_details": {
+      "cached_tokens": 9216,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0020724,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-08-17",
+      "time": "06:59",
+      "hospital": "더자인병원",
+      "department": "IM"
+    },
+    "chiefComplaint": {
+      "summary": "diarrhea, nausea, vomiting",
+      "referralSource": "null",
+      "onsetDate": "2024-08-17",
+      "duration": "2 days",
+      "details": "Symptoms began after eating kimbap on the evening of August 17."
+    },
+    "diagnoses": [
+      {
+        "code": "A02.0",
+        "nameKr": "살모넬라 장염",
+        "nameEn": "Salmonellosis",
+        "date": "2024-08-17",
+        "isPrimary": true,
+        "hospital": "더자인병원"
+      },
+      {
+        "code": "K52.9",
+        "nameKr": "상세불명 기원의 위장염 및 결장염",
+        "nameEn": "Gastroenteritis and colitis, unspecified",
+        "date": "2024-08-17",
+        "isPrimary": false,
+        "hospital": "더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CBC & Diff",
+        "nameEn": "Complete Blood Count & Differential",
+        "date": "2024-08-17",
+        "result": "WBC 11.7, Hemoglobin 13.1, Hematocrit 40.9",
+        "finding": "Elevated WBC count",
+        "normalRange": "WBC: 4.6-10.2, Hemoglobin: 12.0-16.5, Hematocrit: 38.0-47.0",
+        "isAbnormal": true
+      },
+      {
+        "name": "CRP",
+        "nameEn": "C-Reactive Protein",
+        "date": "2024-08-17",
+        "result": "23.96",
+        "finding": "Elevated CRP",
+        "normalRange": "0-0.5",
+        "isAbnormal": true
+      },
+      {
+        "name": "Stool PCR",
+        "nameEn": "Stool Polymerase Chain Reaction",
+        "date": "2024-08-17",
+        "result": "Salmonellosis",
+        "finding": "Positive for Salmonella",
+        "normalRange": "null",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "null",
+      "testDate": "null",
+      "reportDate": "null",
+      "finding": "null",
+      "stageTNM": "null",
+      "stageOverall": "null",
+      "histology": "null",
+      "margin": "null"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Antibiotics",
+        "date": "2024-08-17",
+        "duration": "7 days",
+        "details": "Antibiotic treatment for Salmonellosis.",
+        "hospital": "더자인병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "null",
+      "endDate": "null",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "null"
+    },
+    "admissionPeriod": {
+      "startDate": "2024-08-17",
+      "endDate": "2024-08-24",
+      "totalDays": 7,
+      "hospital": "더자인병원",
+      "department": "IM",
+      "reason": "Salmonellosis with gastrointestinal symptoms"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "null",
+        "treatment": "null",
+        "currentStatus": "controlled",
+        "hospital": "null",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": "null",
+        "treatment": "null",
+        "currentStatus": "controlled",
+        "hospital": "null",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Patient diagnosed with Salmonellosis requiring hospitalization and treatment.",
+      "prognosis": "Good, expected recovery with treatment.",
+      "recommendations": "Continue antibiotics and monitor symptoms.",
+      "limitations": "Avoid solid foods until symptoms resolve."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "null",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "Patient hospitalized for Salmonellosis with gastrointestinal symptoms.",
+      "keyFindings": [
+        "Elevated WBC and CRP indicating infection.",
+        "Positive stool PCR for Salmonella."
+      ],
+      "recommendations": "Continue monitoring and follow-up after discharge."
+    }
+  }
+}

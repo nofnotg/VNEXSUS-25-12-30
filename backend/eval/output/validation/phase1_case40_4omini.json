@@ -1,0 +1,155 @@
+{
+  "caseNum": 40,
+  "model": "gpt-4o-mini",
+  "processingTime": 21975,
+  "tokens": {
+    "prompt_tokens": 28444,
+    "completion_tokens": 1090,
+    "total_tokens": 29534,
+    "prompt_tokens_details": {
+      "cached_tokens": 27648,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0049206,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-19",
+      "time": "15:14",
+      "hospital": "더으뜸정형외과",
+      "department": "정형외과"
+    },
+    "chiefComplaint": {
+      "summary": "다리 무겁고 피로, 붓고 쥐나고 저리다.",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "하지정맥류 수술 3번 했었다. 우측만."
+    },
+    "diagnoses": [
+      {
+        "code": "I83.9",
+        "nameKr": "하지정맥류",
+        "nameEn": "Varicose veins",
+        "date": "2025-08-19",
+        "isPrimary": true,
+        "hospital": "더으뜸정형외과"
+      },
+      {
+        "code": "Z480",
+        "nameKr": "외과적 드레싱 및 봉합의 처치",
+        "nameEn": "Surgical dressing and suture",
+        "date": "2025-09-02",
+        "isPrimary": false,
+        "hospital": "더으뜸정형외과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈관-사지혈관 도플러 초음파(하지정맥류)",
+        "nameEn": "Doppler ultrasound of lower extremity veins",
+        "date": "2025-08-19",
+        "result": "Rt GSV reflux: 4초이상, Rt SSV reflux: 4초이상.",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "일반혈액검사(CBC)",
+        "nameEn": "Complete Blood Count",
+        "date": "2025-08-29",
+        "result": "정상",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "복재정맥폐쇄술",
+        "date": "2025-08-29",
+        "duration": null,
+        "details": "시아노아크릴레이를 이용한 복재정맥폐쇄술 시행.",
+        "hospital": "더으뜸정형외과"
+      },
+      {
+        "type": "약물",
+        "name": "세파로캡슐",
+        "date": "2025-09-06",
+        "duration": null,
+        "details": "세파로캡슐 처방.",
+        "hospital": "더으뜸정형외과"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-08-19",
+      "endDate": "2025-09-19",
+      "totalVisits": 10,
+      "hospitals": [
+        "더으뜸정형외과"
+      ],
+      "summary": "총 10회 통원 치료."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-29",
+      "endDate": "2025-08-30",
+      "totalDays": 1,
+      "hospital": "더으뜸정형외과",
+      "department": "정형외과",
+      "reason": "복재정맥폐쇄술 시행"
+    },
+    "pastHistory": [
+      {
+        "condition": "하지정맥류",
+        "code": "I83.9",
+        "diagnosisDate": "20년 전",
+        "treatment": "하지정맥류 수술 3회",
+        "currentStatus": "재발",
+        "hospital": "세브란스",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "재수술의 한계에 대해 설명함.",
+      "prognosis": "상태 개선 가능성 있음.",
+      "recommendations": "지속적인 관리 필요.",
+      "limitations": "일상생활에서의 활동 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "하지정맥류로 인한 재수술 필요.",
+      "keyFindings": [
+        "하지정맥류 진단",
+        "수술 후 회복 필요"
+      ],
+      "recommendations": "지속적인 치료 및 관리 필요."
+    }
+  }
+}

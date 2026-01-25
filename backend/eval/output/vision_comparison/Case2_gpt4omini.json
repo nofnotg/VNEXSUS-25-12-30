@@ -1,0 +1,39 @@
+{
+  "caseId": "Case2",
+  "patientName": "김미화",
+  "model": "gpt-4o-mini",
+  "success": true,
+  "ocrResult": {
+    "processingTime": 337706,
+    "textLength": 16215,
+    "pageResults": [
+      {
+        "file": "sm영상의학과.pdf",
+        "pageCount": 10,
+        "textLength": 5167
+      },
+      {
+        "file": "문답서.pdf",
+        "pageCount": 3,
+        "textLength": 471
+      },
+      {
+        "file": "삼성서울병원.pdf",
+        "pageCount": 10,
+        "textLength": 5423
+      },
+      {
+        "file": "에스엠영상의학과.pdf",
+        "pageCount": 10,
+        "textLength": 5070
+      }
+    ],
+    "tokenUsage": 0
+  },
+  "reportResult": {
+    "processingTime": 22516,
+    "reportLength": 2489
+  },
+  "totalProcessingTime": 360222,
+  "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: 김미화\n생년월일: 1987-10-26  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: NH농협손해보험  \n가입일(보장개시일 등): 2024-04-09\n상품명: 헤아림355건강보험  \n청구사항(특약사항, 담보사항 등): 간담도계의 혈관종 관련 수술비 청구\n\n### 3. 상세 의료 이력 및 분석\n\n#### 2019-03-23\n- **병원명**: SM영상의학과  \n- **내원일**: 2019-03-23  \n- **상병명**: [D134/Liver benign neoplasm-간의 양성 신생물], [D1802/Biliary vascular tumor-간담도계의 혈관종]\n- **경과기록**: C/C - epigastric discomfort and pain for evaluation of liver mass. No DM(Diabetes Mellitus), No HBP. PHX: appendectomy state. - **처방내역**: 복부 CT(컴퓨터 단층촬영) 검사 시행. #### 2020-06-20\n- **병원명**: SM영상의학과  \n- **내원일**: 2020-06-20  \n- **상병명**: [D134/Liver benign neoplasm-간의 양성 신생물], [D1802/Biliary vascular tumor-간담도계의 혈관종]\n- **경과기록**: C/C - right flank pain. Previous exam - liver hemangioma. No DM(Diabetes Mellitus), No HBP. PHX: appendectomy state. - **처방내역**: 복부 CT(컴퓨터 단층촬영) 검사 시행. #### 2020-08-11\n- **병원명**: SM영상의학과  \n- **내원일**: 2020-08-11  \n- **상병명**: [R1039/Abdominal pain-상세불명의 하복부통증]\n- **경과기록**: Right inguinal area pain. Recent pain occurrence. - **처방내역**: CT(컴퓨터 단층촬영) 결과 설명. #### 2021-07-09\n- **병원명**: SM영상의학과  \n- **내원일**: 2021-07-09  \n- **상병명**: [D134/Liver benign neoplasm-간의 양성 신생물], [D802/Biliary vascular tumor-간동맥의 혈관종]\n- **경과기록**: C/C - dyspepsia. Previous exam - Liver hemangioma, 6.7cm, right lobe. Increased size(cm), compared with previous CT(컴퓨터 단층촬영, 2019.3.23). No DM(Diabetes Mellitus), No HBP. PHX: appendectomy state. - **처방내역**: 복부 CT(컴퓨터 단층촬영) 검사 시행. #### 2022-07-19\n- **병원명**: SM영상의학과  \n- **내원일**: 2022-07-19  \n- **상병명**: [D802/Biliary vascular tumor-간동맥의 혈관종]\n- **경과기록**: Right lobe hepatic hemangioma. 크기가 조금씩 증가. CT(컴퓨터 단층촬영) recommend. - **처방내역**: 복부 검사 시행. #### 2023-08-07\n- **병원명**: SM영상의학과  \n- **내원일**: 2023-08-07  \n- **상병명**: [D802/Biliary vascular tumor-간동맥의 혈관종], [N832/Ascites-기타 및 상세불명의 복수상]\n- **경과기록**: Right lower abdominal pain. 일주일 전부터 통증이 심해짐. Giant hepatic hemangioma. 크기가 약간씩 증가. Dynamic CT(컴퓨터 단층촬영) recommended. - **처방내역**: 복부 검사 시행. #### 2025-02-05\n- **병원명**: 삼성서울병원  \n- **내원일**: 2025-02-05  \n- **상병명**: [D1802/Biliary vascular tumor-간담도계의 혈관종]\n- **경과기록**: Laparoscopic right hemihepatectomy. - **처방내역**: 수술 시행. ### 통원 통계\n- **SM영상의학과**: 2019.03.23 ~ 2023.08.07 / 6회 통원  \n- **삼성서울병원**: 2025.02.05 / 1회 통원  \n\n### 기고지사항\n- 2019-03-23 진단된 간의 양성 신생물 및 간담도계의 혈관종은 보험 가입 전 기고지사항으로 분류됩니다. - 이후 진단된 간동맥의 혈관종은 보험 가입 후 발생한 질병으로 신규 발생으로 분류됩니다. ### 결론\n김미화 환자는 2019년부터 간의 양성 신생물 및 간담도계의 혈관종으로 진료를 받아왔으며, 2024년 NH농협손해보험에 가입 후 2025년 수술을 받았습니다. 보험 청구는 수술비와 관련된 사항으로 진행됩니다."
+}

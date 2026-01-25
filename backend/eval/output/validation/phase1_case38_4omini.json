@@ -1,0 +1,164 @@
+{
+  "caseNum": 38,
+  "model": "gpt-4o-mini",
+  "processingTime": 26640,
+  "tokens": {
+    "prompt_tokens": 48104,
+    "completion_tokens": 1314,
+    "total_tokens": 49418,
+    "prompt_tokens_details": {
+      "cached_tokens": 47232,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.008003999999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-03",
+      "time": null,
+      "hospital": "EUMC 이대목동병원",
+      "department": "부인종양OG"
+    },
+    "chiefComplaint": {
+      "summary": "상환 유방암으로 본원 f.u 하는 환자로 복강 내 mass 소견으로 내원함.",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "복강 내 mass 소견으로 baseline study 위해 입원함."
+    },
+    "diagnoses": [
+      {
+        "code": "C54.1",
+        "nameKr": "Endometrial cancer unknown stage",
+        "nameEn": "Endometrial cancer unknown stage",
+        "date": "2025-08-20",
+        "isPrimary": true,
+        "hospital": "EUMC 이대목동병원"
+      },
+      {
+        "code": "D25.9",
+        "nameKr": "Myoma of uterus",
+        "nameEn": "Myoma of uterus",
+        "date": null,
+        "isPrimary": false,
+        "hospital": null
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Abdomen/Pelvis",
+        "nameEn": "CT Abdomen/Pelvis",
+        "date": "2025-08-03",
+        "result": "Multiple uterine myomas, some calcified; Distended endometrial cavity due to endometrial mass, probably endometrial carcinoma.",
+        "finding": "Large amount of ascites (+), probably peritoneal seeding.",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "MRI Pelvis",
+        "nameEn": "MRI Pelvis",
+        "date": "2025-08-03",
+        "result": "Multiple uterine myomas, some calcified; 4cm, heterogeneous, diffusion-restricting, solid mass in the endometrial cavity, c/w endometrial carcinoma.",
+        "finding": "Large amount of ascites (+).",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "PET-CT",
+        "nameEn": "PET-CT",
+        "date": "2025-08-05",
+        "result": "Focal hypermetabolic mass in uterus; suggestive of malignancy.",
+        "finding": "Large amount of ascites with mild hypermetabolic peritoneal thickening.",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Uterine endometrium, dilatation, curettage and biopsy",
+      "testDate": "2025-07-18",
+      "reportDate": "2025-07-22",
+      "finding": "Two tiny fragments of atypical glandular lesion with extensive bloody materials; Carcinoma is suspected.",
+      "stageTNM": "pT3a",
+      "stageOverall": "Stage IIIC",
+      "histology": "Endometrioid carcinoma, FIGO histologic grade 2",
+      "margin": "Negative exocervical resection margin"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "TAH BSO BPLND PALND",
+        "date": "2025-08-21",
+        "duration": null,
+        "details": "Endometrial cancer staging operation (laparotomy)",
+        "hospital": "EUMC 이대목동병원"
+      },
+      {
+        "type": "항암화학요법",
+        "name": "TC-Jemperli",
+        "date": "2025-09-01",
+        "duration": null,
+        "details": "1st chemotherapy",
+        "hospital": "EUMC 이대목동병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-08-06",
+      "endDate": null,
+      "totalVisits": 1,
+      "hospitals": [
+        "EUMC 이대목동병원"
+      ],
+      "summary": "Follow-up after surgery and chemotherapy."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-03",
+      "endDate": "2025-08-05",
+      "totalDays": 3,
+      "hospital": "EUMC 이대목동병원",
+      "department": "부인종양OG",
+      "reason": "Baseline study for endometrial cancer."
+    },
+    "pastHistory": [
+      {
+        "condition": "Breast cancer",
+        "code": "C50.4",
+        "diagnosisDate": "2015-04-02",
+        "treatment": "Left modified radical mastectomy",
+        "currentStatus": "Stable",
+        "hospital": "EUMC 이대목동병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 Endometrial cancer로 진단되었으며, 수술 후 항암치료가 필요함.",
+      "prognosis": "예후는 치료에 따라 다름.",
+      "recommendations": "정기적인 추적 관찰 및 추가 치료 필요.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 Endometrial cancer로 진단되어 수술 및 항암치료를 받음.",
+      "keyFindings": [
+        "Endometrial cancer IIIC2 진단",
+        "수술 후 항암치료 예정"
+      ],
+      "recommendations": "정기적인 추적 관찰 및 치료 계획에 따라 진행."
+    }
+  }
+}

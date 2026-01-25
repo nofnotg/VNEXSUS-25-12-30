@@ -1,0 +1,145 @@
+{
+  "caseNum": 37,
+  "model": "gpt-4o-mini",
+  "processingTime": 21716,
+  "tokens": {
+    "prompt_tokens": 6020,
+    "completion_tokens": 1064,
+    "total_tokens": 7084,
+    "prompt_tokens_details": {
+      "cached_tokens": 5888,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0015413999999999998,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-06-24",
+      "time": "08:58",
+      "hospital": "누가재활의학과",
+      "department": "재활의학과"
+    },
+    "chiefComplaint": {
+      "summary": "양측 무릎 통증",
+      "referralSource": "서울척탑병원",
+      "onsetDate": "2023-01-15",
+      "duration": "정보 없음",
+      "details": "축구하다가 넘어지면서 양측 무릎을 바닥에 부딪히며 뚝하는 소리가 나며 걷기 힘들어"
+    },
+    "diagnoses": [
+      {
+        "code": "S8321",
+        "nameKr": "외측반달 연골의 찢김[양측]",
+        "nameEn": "Lateral meniscus tear - Bilateral",
+        "date": "2023-01-15",
+        "isPrimary": true,
+        "hospital": "서울척탑병원"
+      },
+      {
+        "code": "M2548",
+        "nameKr": "관절의 삼출액, 기타 부분[양측]",
+        "nameEn": "Joint effusion, other - Bilateral",
+        "date": "2023-01-15",
+        "isPrimary": false,
+        "hospital": "서울척탑병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "방사선 검사",
+        "nameEn": "X-ray",
+        "date": "2023-01-17",
+        "result": "양측 외측 반월상 연골판 파열과 삼출액",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "MRI 검사",
+        "nameEn": "MRI",
+        "date": "2023-01-16",
+        "result": "Displaced tear, LM body",
+        "finding": "posterolateroinferior displacement of the torn meniscal substance",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2023-01-17",
+      "reportDate": "정보 없음",
+      "finding": "정보 없음",
+      "stageTNM": "정보 없음",
+      "stageOverall": "정보 없음",
+      "histology": "정보 없음",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "양측 무릎 관절경적 연골판 절제술",
+        "date": "2023-01-17",
+        "duration": "정보 없음",
+        "details": "양측 무릎의 외측 반월상 연골판 파열에 대한 수술",
+        "hospital": "서울척탑병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "정보 없음",
+      "endDate": "정보 없음",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "정보 없음"
+    },
+    "admissionPeriod": {
+      "startDate": "2023-01-17",
+      "endDate": "2023-01-18",
+      "totalDays": 1,
+      "hospital": "서울척탑병원",
+      "department": "정보 없음",
+      "reason": "무릎 통증 및 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "기왕증",
+        "code": "정보 없음",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "양측 무릎 관절의 외측 반월상 연골판 파열로 인한 후유장애",
+      "prognosis": "정보 없음",
+      "recommendations": "정보 없음",
+      "limitations": "정보 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "정보 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "양측 무릎의 외측 반월상 연골판 파열 진단 및 수술",
+      "keyFindings": [
+        "양측 무릎의 외측 반월상 연골판 파열",
+        "관절 삼출액"
+      ],
+      "recommendations": "후속 치료 및 재활 필요"
+    }
+  }
+}

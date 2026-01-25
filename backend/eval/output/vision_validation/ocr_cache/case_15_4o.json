@@ -1,0 +1,107 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "time": null,
+      "hospital": "의료법인자인의료재단더자인병원",
+      "department": "내원"
+    },
+    "chiefComplaint": {
+      "summary": "건강검진 결과 이상지질혈증 및 고혈압 의심",
+      "onsetDate": null,
+      "duration": null,
+      "details": "고혈압 및 당뇨병 이상지질활동 질환의심, 유질환자"
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "고혈압 의심",
+        "date": "2025-06-07",
+        "isPrimary": true,
+        "hospital": "의료법인자인의료재단더자인병원"
+      },
+      {
+        "code": null,
+        "nameKr": "이상지질혈증 의심",
+        "date": "2025-06-07",
+        "isPrimary": false,
+        "hospital": "의료법인자인의료재단더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈압",
+        "date": "2025-06-07",
+        "result": "140/85 mmHg",
+        "finding": "고혈압 전단계",
+        "isAbnormal": true
+      },
+      {
+        "name": "공복혈당",
+        "date": "2025-06-07",
+        "result": "128 mg/dL",
+        "finding": "공복혈당장애 의심",
+        "isAbnormal": true
+      },
+      {
+        "name": "총콜레스테롤",
+        "date": "2025-06-07",
+        "result": "비해당",
+        "finding": "이상지질혈증 의심",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": null,
+    "treatments": [
+      {
+        "type": "생활습관 관리",
+        "name": "운동 및 식이요법",
+        "date": "2025-06-07",
+        "duration": null,
+        "details": "주 5회 이상 신체 활동 권장"
+      }
+    ],
+    "outpatientPeriod": null,
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "흡연",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": "금연 필요",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "고혈압 및 이상지질혈증 관리 필요",
+      "prognosis": "적극적 개선 노력 필요",
+      "recommendations": "운동 및 식이요법 지속, 주기적 검진 필요"
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-06-07"
+    ],
+    "kcdCodes": [],
+    "hospitals": [
+      "의료법인자인의료재단더자인병원"
+    ],
+    "examinations": [
+      "혈압",
+      "공복혈당",
+      "총콜레스테롤"
+    ],
+    "treatments": [
+      "운동 및 식이요법"
+    ],
+    "diagnoses": [
+      "고혈압 의심",
+      "이상지질혈증 의심"
+    ]
+  },
+  "timestamp": "2026-01-25T09:42:41.483Z",
+  "cached": true
+}

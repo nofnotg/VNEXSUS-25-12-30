@@ -1,0 +1,224 @@
+{
+  "caseId": "Case11",
+  "caseNum": 11,
+  "patientName": "허전권",
+  "model": "gpt-4o-mini",
+  "totalPages": 134,
+  "processedAt": "2026-01-25T10:52:56.433Z",
+  "processingTime": 192553,
+  "cost": 0.7236,
+  "usage": {
+    "prompt_tokens": 4936606,
+    "completion_tokens": 839,
+    "total_tokens": 4937445,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "허전권",
+      "birthDate": "1951-01-01",
+      "gender": "M"
+    },
+    "visitDate": {
+      "date": "2024-10-21",
+      "hospital": "삼성서울병원",
+      "department": "소화기내과"
+    },
+    "chiefComplaint": {
+      "summary": "GB cancer with metastases",
+      "onsetDate": null,
+      "details": "Gallbladder cancer with liver, lung, lymph nodes metastases."
+    },
+    "diagnoses": [
+      {
+        "code": "C23",
+        "nameKr": "담낭암",
+        "date": "2024-10-21",
+        "isPrimary": true,
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "EUS-FNA",
+        "date": "2024-12-24",
+        "result": "Positive for malignant cells.",
+        "hospital": "삼성서울병원"
+      },
+      {
+        "name": "CT",
+        "date": "2024-12-24",
+        "result": "Suggestive of GB cancer with multiple metastases.",
+        "hospital": "삼성서울병원"
+      },
+      {
+        "name": "MRI",
+        "date": "2024-10-23",
+        "result": "R/O GB cancer with multiple metastases.",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Chemotherapy",
+        "date": "2024-10-21",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Gabapentin",
+        "dosage": "100mg",
+        "period": "2024-12-27"
+      },
+      {
+        "name": "Celecoxib",
+        "dosage": "200mg",
+        "period": "2024-12-27"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "삼성서울병원",
+        "admissionDate": "2024-10-21",
+        "dischargeDate": "2024-11-05",
+        "reason": "R/O GB cancer"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "ERCP",
+        "date": "2024-10-28",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "Progression of GB cancer with multiple metastases.",
+      "followUpDate": "2024-12-27"
+    },
+    "extractedDates": [
+      {
+        "date": "2024-10-21",
+        "context": "Admission for GB cancer.",
+        "type": "입원일"
+      },
+      {
+        "date": "2024-10-28",
+        "context": "ERCP performed.",
+        "type": "수술일"
+      },
+      {
+        "date": "2024-12-24",
+        "context": "CT scan performed.",
+        "type": "검사일"
+      },
+      {
+        "date": "2024-12-26",
+        "context": "Liver biopsy performed.",
+        "type": "검사일"
+      },
+      {
+        "date": "2024-12-27",
+        "context": "Follow-up appointment.",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "삼성서울병원"
+    ],
+    "rawTextSummary": "Patient diagnosed with gallbladder cancer with metastases to liver and lymph nodes. Underwent ERCP and chemotherapy. Follow-up appointments scheduled."
+  },
+  "groundTruth": "\r\n \r\n나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2023.02.28 무배당 AXA 간편고지건강보험(갱신형)2301 가입 AXA 손해보험\r\n주식회사 \r\n2024.07.26 무배당 AXA 간편종합보험(갱신형)2404 가입 AXA 손해보험\r\n주식회사 \r\n2024.09.13 \r\n[청구사항] \r\n내 원 일 : 2024.09.13 \r\n내원경위 : 검진 시 시행한 간담도 초음파 검사 상 담낭암 소\r\n견으로 치료 위해 입원 \r\n진 단 명 : 담낭암 \r\n입원기간 : 2024.10.21 ~ 2024.11.05 / 16 일 입원 \r\n치료내용 : 2024.10.28 ERCP \r\n2024.11.01 ERCP \r\n검사결과 : 복부 CT(검사일 : 2024.10.12)(보고일 : 2024.10.14) \r\n: 담낭 암 가능성(probably GB cancer) \r\n: 담낭에서 여러개의 암이 있을 가능성, 담낭관 침\r\n범 \r\n: 간문, 위-간 인대 및 대동맥 주변 영역 여러개의 \r\n전이성 림프절 소견 등 \r\n췌장 MRI(검사일 : 2024.10.23)(보고일 : 2024.10.24)\r\n: 담낭암 및 다발성 전이 의심 \r\n: 다발성 림프절 전이 \r\n: 간 양쪽 엽 다발성 작은 전이 병변 \r\n: 췌장 내 총담관 전이 가능성 \r\n2024.10.25 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) \r\n外 암 보장 개시일 이전 '암'에 대한 확정 진단 사\r\n료될 조직검사 내용 없음. \r\n강북삼성병원 \r\n2024.10.24 무배당 AXA 간편종합보험(갱신형)2404 암 보장 개시일 AXA 손해보험\r\n주식회사 \r\n2024.11.18 \r\n[청구사항] \r\n초 진 일 : 2024.11.18 \r\n내원경위 : 2024.11.18 강북삼성병원에서 담낭암 진단 후 진료\r\n의뢰 하 내원 \r\n2024.11.26 강북삼성병원 검사 결과 지참 하 내원 \r\n진 단 명 : 담낭암(C23) \r\n입원기간 : 2024.12.23 ~ 2024.12.27 / 5 일 입원 \r\n2025.01.14 ~ 입원 중 \r\n검사결과 : Liver Bx(검사일 : 2024.12.26)(보고일 : 2024.12.30) \r\n삼성서울병원 \r\n: Liver, right (S5) ADENOCARCINOMA \r\n핵의학검사(F-18 FDG)(검사일 : 2024.12.24)(보고일 : \r\n2024.12.26) \r\n: 다발성 림프절, 간, 뼈 전이를 동반한 담낭암 - 좌\r\n측 1 번 늑골 및 흉추 5 번 골전이 소견 \r\n과거병력 : 2023 년 양쪽 어깨, 왼쪽 무릎 골절 수술 \r\n기타사항 : 타 병원(강북삼성병원) 검사 결과 \r\n2024.10.12 복부 CT \r\n2024.10.23 췌장 MRI \r\n2024.10.25 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) \r\n外 암 보장 개시일 이전 '암'에 대한 확정 진단 사\r\n료될 조직검사 내용 없음.(강북삼성 서류 누락 내용\r\n없음) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자 동 보험 가입 후 강북삼성병원에서 시행한 건강검진 상 담낭암 의심 소\r\n견으로 강북삼성병원 및 삼성서울병원에서 정밀 검사 결과 '담낭암(C23)' 진단 후 \r\n관련 보험금 청구함. \r\n직업 \r\n직무 \r\n종교인(1 급) \r\n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.21 ~ 2025.01.21) 열람 검토 결\r\n과 기 고지사항 外 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n4. 손해사정결과\r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n암 진단 적정성 및 고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자 동 보험 가입 후 강북삼성병원에서 시행한 건강검진 상 담낭암 의심 소견으로 강북\r\n삼성병원 및 삼성서울병원에서 정밀 검사 결과 '담낭암(C23)' 진단 후 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n치료병원 의무기록 및 피보험자 면담 시 확인한 심평원 진료내역(2020.01.21 ~ 2025.01.21) 열\r\n람 검토 결과 기 고지사항 外 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n4. 금번 청구 관련하여\r\n2024.07.26 무배당 AXA 간편종합보험(갱신형)2404 가입 \r\n2024.10.14 강북삼성병원 복부 CT 담낭 암 가능성(probably GB cancer), 담낭에서 여러개의 암\r\n이 있을 가능성, 담낭관 침범, 간문, 위-간 인대 및 대동맥 주변 영역 여러개의 전이성 림프절 \r\n소견 등 \r\n2024.10.23 강북삼성병원 췌장 MRI 담낭암 및 다발성 전이 의심, 다발성 림프절 전이, 간 양쪽 \r\n엽 다발성 작은 전이 병변, 췌장 내 총담관 전이 가능성 소견 \r\n2024.10.24 무배당 AXA 간편종합보험(갱신형)2404 암 보장 개시일 \r\n2024.10.25 강북삼성병원 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) 外 암 보장 개시일 이전 '암'에 대한 확정 진\r\n단 사료될 조직검사 내용 없음. \r\n상기 내용 종합하여 볼 때, 동 보험 암 보장 개시일 이내 강북삼성병원에서 복부 CT 및 췌장\r\nMRI 등 시행 하였으나 동 보험 약관상 '암'의 진단 근거인 조직검사 미 시행 하였으며, \r\n삼성서울병원 의무기록 면밀 검토 결과 조직검사 최초 시행은 Liver Bx(검사일 : 2024.12.26)로 \r\n해당 검사 결과 Liver, right (S5) ADENOCARCINOMA 소견 확인되며, \r\n핵의학검사(F-18 FDG)(검사일 : 2024.12.24)(보고일 : 2024.12.26) 다발성 림프절, 간, 뼈 전이를 \r\n동반한 담낭암 - 좌측 1 번 늑골 및 흉추 5 번 골전이 소견 확인됨. \r\n5. 손해사정 결론\r\n금번 청구 병명인 '담낭암(C23)'은 동 보험 암 보장 개시일 이후 최초 확정 진단 받은 '암'에 해\r\n당할 것으로 판단되며 고액암 진단 적정 관련 흉추 5 번 골 전이에 대한 원발암은 담낭암으로 \r\n확인되는 바, \r\n귀사 심사 기준에 의거하여 검토 후 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 AXA 손해보험주식회사에서 최종 판단해 주시기 바랍니다.",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2024-10-21",
+        "2024-11-05",
+        "2024-10-28",
+        "2024-10-23",
+        "2024-12-27",
+        "2024-12-26",
+        "2024-12-24"
+      ],
+      "missed": [
+        "2023-02-28",
+        "2024-07-26",
+        "2024-09-13",
+        "2024-11-01",
+        "2024-10-12",
+        "2024-10-14",
+        "2024-10-24",
+        "2024-10-25",
+        "2024-11-18",
+        "2024-11-26",
+        "2024-12-23",
+        "2025-01-14",
+        "2024-12-30",
+        "2020-01-21",
+        "2025-01-21"
+      ],
+      "extra": [],
+      "rate": 32
+    },
+    "kcdCodes": {
+      "matched": [
+        "C23"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "hospitals": {
+      "matched": [
+        "삼성서울병원"
+      ],
+      "missed": [
+        "강북삼성병원",
+        "삼성병원",
+        "치료병원"
+      ],
+      "extra": [],
+      "rate": 25
+    },
+    "examinations": {
+      "matched": [
+        "CT",
+        "MRI"
+      ],
+      "missed": [
+        "초음파",
+        "조직검사",
+        "PET"
+      ],
+      "extra": [],
+      "rate": 40
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "수술",
+        "치료",
+        "치료내용",
+        "치료병원"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

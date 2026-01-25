@@ -1,0 +1,171 @@
+{
+  "caseId": "Case13",
+  "caseNum": 13,
+  "patientName": "김인화",
+  "model": "gpt-4o-mini",
+  "totalPages": 46,
+  "processedAt": "2026-01-25T10:56:11.995Z",
+  "processingTime": 131425,
+  "cost": 0.2484,
+  "usage": {
+    "prompt_tokens": 1695126,
+    "completion_tokens": 607,
+    "total_tokens": 1695733,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "김인화",
+      "birthDate": "1969-06-16",
+      "gender": "여"
+    },
+    "visitDate": {
+      "date": "2024-04-12",
+      "hospital": "서울바른병원",
+      "department": "신경과"
+    },
+    "chiefComplaint": {
+      "summary": "요추의 통증 및 하지 방사통",
+      "onsetDate": "2024-04-12",
+      "details": "L-spine MRI: HNP at L4-5"
+    },
+    "diagnoses": [
+      {
+        "code": "G55.1",
+        "nameKr": "신경근병증",
+        "date": "2024-04-12",
+        "isPrimary": true,
+        "hospital": "서울바른병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "L-spine MRI",
+        "date": "2024-04-12",
+        "result": "디스크 돌출 및 관절 비후",
+        "hospital": "서울바른병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "치료",
+        "date": "2024-04-12",
+        "hospital": "서울바른병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "진통제",
+        "dosage": "적정량",
+        "period": "필요시"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "서울바른병원",
+        "admissionDate": "2024-04-12",
+        "dischargeDate": null,
+        "reason": "요추 통증"
+      }
+    ],
+    "surgeries": [],
+    "prognosis": {
+      "summary": "요추의 상태가 개선될 것으로 예상됨",
+      "followUpDate": "2024-05-07"
+    },
+    "extractedDates": [
+      {
+        "date": "2024-04-12",
+        "context": "환자 방문일",
+        "type": "진료일"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "추적 관찰일",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "서울바른병원"
+    ],
+    "rawTextSummary": "김인화 환자는 2024년 4월 12일 서울바른병원에서 요추의 통증 및 하지 방사통으로 내원하였으며, L-spine MRI에서 HNP at L4-5로 진단받았다."
+  },
+  "groundTruth": "\r\n1. 사고 및 손해조사 내용\r\n일자 사고경위 병원/기관\r\n2021.03.24 (무) NH 가성비굿건강보험[1 종:해지환급금미지급형Ⅱ]2101 가입 NH 농협손해보험 \r\n2021.07.30 (무) NH 가성비굿건강보험[1 종:해지환급금미지급형Ⅱ]2104 가입 NH 농협손해보험 \r\n2024.04.12 상해사고 발생일 NH 농협손해보험 \r\n2024.04.12 \r\n내 원 일 : 2024.04.12 \r\n내원경위 : 2 년 전 넘어지며 요통 발생 후 최근 빗길에 넘어지\r\n며 좌측 요추부 통증 호소하여 내원 \r\n통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원 \r\n치료내용 : 신경차단술 및 도수치료, 물리치료 시행 \r\n검사결과 : L-spine MRI \r\n요추 4-5 번 추간판 팽윤 소견 \r\n요추 5-천추 1 번간 추간판 섬유륜 파열 및 추간판 \r\n돌출 소견 \r\n서울바른병원 \r\n2025.03.13 \r\n[청구사항] \r\n초 진 일 : 2025.03.13 \r\n내원경위 : 후유장해 진단 목적으로 내원 \r\n진 단 명 : 요추의 염좌 및 긴장(S33.50) \r\n신경뿌리병증을 동반한 요추 및 기타 추간판장애\r\n(M51.1) \r\n통원기간 : 2025.03.13 / 1 회 통원 \r\n검사결과 : 요추 X-ray \r\n근전도검사 \r\n의사소견 : 약간의 신경장애(지급률 10%) \r\n누가재활의학과의원 \r\n \r\n \r\n2. 손해사정 시 적용된 관계 법규 및 약관 \r\n면부책 \r\n검토 \r\n[후유장해 적정성 여부]\r\n금번 청구사항인 추간판탈출증으로 인한 약간의 신경장해(지급률 10%) 관련 치료병원 및 \r\n장해진단병원 의무기록 피보험자 면담 시 주장하는 사고 경위 등을 종합할 때 동 보험 보\r\n장 기간 중 발생한 사고에 대한 다툼은 없을 것으로 판단되며, \r\n서울바른병원에서 시행한 요추 MRI 검사 상 요추 5-천추 1 번간 추간판 섬유륜 파열 소견으\r\n로 후유장해 진단 받은 것으로 확인됨. \r\n금번 청구 후유장해 적정성 판단을 위한 제 3 의료기관을 통한 의료자문 시행 등에 동의하\r\n는 바, 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n근거 동 건 해당 보험 약관 \r\n \r\n \r\n3. 결론\r\n근거 \r\n[약관상 보험자 지급책임의 범위]\r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n[보험금 사정에 관한 중요 근거]\r\n흥국화재 2% 합의 종결 1,400,000 원 \r\n삼성화재 2% 합의 종결 400,000 원 \r\nKB 손해보험 2% 합의 종결 2,000,000 원 \r\n롯데손해보험 2% 합의 종결 \r\n한화손해보험 2% 합의 종결 1,000,000 원 \r\n결론 삭감 지급 및 유지 \r\n \r\n \r\n4. 지급보험금\r\n지급내용\r\n담보내용 세부산정내역) 지급금액(원) \r\n일반상해후유장해 10,000,000 원 지급률 10% / 한시장해 5\r\n년 = 2% \r\n200,000 원 \r\n일반상해후유장해 10,000,000 원 지급률 10% / 한시장해 5\r\n년 = 2% 200,000 원 \r\n지급금액 400,000 원\r\n",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2024-04-12"
+      ],
+      "missed": [
+        "2021-03-24",
+        "2021-07-30",
+        "2024-11-04",
+        "2025-03-13"
+      ],
+      "extra": [
+        "2024-05-07"
+      ],
+      "rate": 20
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "S33.50",
+        "M51.1"
+      ],
+      "extra": [
+        "G55.1"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "서울바른병원"
+      ],
+      "missed": [
+        "치료병원",
+        "장해진단병원",
+        "누가재활의학과의원"
+      ],
+      "extra": [],
+      "rate": 25
+    },
+    "examinations": {
+      "matched": [
+        "MRI"
+      ],
+      "missed": [
+        "X-ray"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [
+        "치료내용",
+        "도수치료",
+        "물리치료",
+        "치료병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

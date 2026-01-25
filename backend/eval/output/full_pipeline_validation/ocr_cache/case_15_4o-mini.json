@@ -1,0 +1,176 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "model": "gpt-4o-mini",
+  "totalPages": 13,
+  "processedPages": 13,
+  "processedAt": "2026-01-25T11:01:00.109Z",
+  "processingTime": 93763,
+  "cost": 0.0702,
+  "usage": {
+    "prompt_tokens": 479571,
+    "completion_tokens": 669,
+    "total_tokens": 480240,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "고영란",
+      "birthDate": "1963-04-19",
+      "gender": "여"
+    },
+    "visitDate": {
+      "date": "2025-06-07",
+      "hospital": "의료법인자인의료재단더자인병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "유방암 검사 및 관련 검사",
+      "onsetDate": null,
+      "details": "유방암 관련 검사 및 진단"
+    },
+    "diagnoses": [
+      {
+        "code": "C50.1",
+        "nameKr": "유방암",
+        "date": "2025-06-20",
+        "isPrimary": true,
+        "hospital": "더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "유방 초음파",
+        "date": "2025-06-16",
+        "result": "2.6cm 크기의 비정형 종괴",
+        "hospital": "더자인병원"
+      },
+      {
+        "name": "CT 검사",
+        "date": "2025-06-20",
+        "result": "2.6cm 크기의 침윤성 종괴",
+        "hospital": "더자인병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "코어 바늘 생검",
+        "date": "2025-06-20",
+        "hospital": "더자인병원"
+      }
+    ],
+    "medications": [],
+    "hospitalizations": [],
+    "surgeries": [],
+    "prognosis": {
+      "summary": "유방암으로 인한 추가 치료 필요",
+      "followUpDate": "2025-06-27"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-06-07",
+        "context": "검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-06-16",
+        "context": "유방 초음파 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "CT 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "코어 바늘 생검일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-06-27",
+        "context": "추적 관찰일",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "더자인병원"
+    ],
+    "rawTextSummary": "고영란 환자는 유방암 관련 검사 및 진단을 받았으며, 2.6cm 크기의 침윤성 종괴가 발견되었다. 추가 치료가 필요하며, 추적 관찰이 요구된다."
+  },
+  "groundTruth": "일자|확인내용|관련기관\r\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\r\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\r\n - 보험계약일로부터 90일 |시점DB손해보험\r\n2025.06.07|\r\n초진일자 : 2025.06.07\r\n내원경위 : 건강검진 시행 목적 내원\r\n검사결과 : 일반건강검진, 유방암 검진(2025.06.07) : 좌측 유두하부 종괴 의심 \r\n초음파 권고\r\n통원기간 : 2025.06.07 / 1회 통원\r\n|더자인병원\r\n2025.06.16 ~ 2025.06.27|\r\n내원일자 : 2025.06.16\r\n내원경위 : 본원 유방 검진 상 이상 소견으로 내원\r\n진단병명 : 유방의 중앙부의 악성 신생물, 왼쪽(C50.11), 림프선병증 NOS(R59.1)\r\n검사결과 : 조직검사(2025.06.20)(보고일: 2025.06.24) : INVASIVE DUCTAL\r\n CARCINOMA, Grade 2\r\n : Lymph node, METASTARIC CARCINOMA from breast\r\n치료내용 : 진료의뢰서 발행\r\n통원기간 : 2025.06.16 ~ 2025.06.27 / 2회 통원\r\n|더자인병원",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-06-07",
+        "2025-06-16",
+        "2025-06-27",
+        "2025-06-20"
+      ],
+      "missed": [
+        "2025-02-25",
+        "2053-02-25",
+        "2025-05-26",
+        "2025-06-24"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "C50.11",
+        "R59.1"
+      ],
+      "extra": [
+        "C50.1"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "더자인병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "examinations": {
+      "matched": [
+        "CT",
+        "초음파"
+      ],
+      "missed": [
+        "조직검사"
+      ],
+      "extra": [],
+      "rate": 67
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}

@@ -1,0 +1,140 @@
+{
+  "caseNum": 13,
+  "model": "gpt-4o-mini",
+  "processingTime": 25686,
+  "tokens": {
+    "prompt_tokens": 46875,
+    "completion_tokens": 1019,
+    "total_tokens": 47894,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.007642649999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-03-13",
+      "time": "14:02",
+      "hospital": "누가재활의학과의원",
+      "department": "재활의학과"
+    },
+    "chiefComplaint": {
+      "summary": "넘어지면서 엉덩방아",
+      "referralSource": null,
+      "onsetDate": "2024-04-12",
+      "duration": "11개월",
+      "details": "2024년 4월 12일 빗길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원에서 치료를 받음."
+    },
+    "diagnoses": [
+      {
+        "code": "M51.30",
+        "nameKr": "추간판탈출증 - Herniated disc",
+        "nameEn": "Herniated disc",
+        "date": "2025-03-13",
+        "isPrimary": true,
+        "hospital": "누가재활의학과의원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "L-spine MRI",
+        "nameEn": "Lumbar spine MRI",
+        "date": "2024-05-07",
+        "result": "Disk bulging, Annular tear and HIVD, Central protrusion.",
+        "finding": "L4/5: Disk bulging. L5/S1: Annular tear and HIVD.",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "근전도검사",
+        "nameEn": "Electromyography",
+        "date": "2025-03-13",
+        "result": "Abnormal spontaneous activities in TA and paravertebral muscle at L4-5.",
+        "finding": "Compatible with lumbar radiculopathy at L4-5 level.",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "신경차단술",
+        "date": "2024-04-12",
+        "duration": "1일",
+        "details": "신경차단술 및 물리치료 시행.",
+        "hospital": "서울바른병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-04-12",
+      "endDate": "2025-03-13",
+      "totalVisits": 1,
+      "hospitals": [
+        "서울바른병원",
+        "누가재활의학과의원"
+      ],
+      "summary": "요추부 추간판탈출증으로 인한 통원 치료."
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "요추부 추간판탈출증",
+        "code": "M51.30",
+        "diagnosisDate": "2024-04-12",
+        "treatment": "물리치료 및 신경차단술",
+        "currentStatus": "치료 중",
+        "hospital": "서울바른병원",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "요추부 추간판탈출증으로 인한 후유장해가 예상됨.",
+      "prognosis": "치료 후 회복 가능성 있음.",
+      "recommendations": "지속적인 물리치료 및 관리 필요.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "김인화 환자는 요추부 추간판탈출증으로 인한 후유장해를 앓고 있으며, 치료가 필요함.",
+      "keyFindings": [
+        "요추부 MRI에서 추간판탈출증 확인",
+        "신경차단술 시행"
+      ],
+      "recommendations": "지속적인 치료 및 관리 필요."
+    }
+  }
+}

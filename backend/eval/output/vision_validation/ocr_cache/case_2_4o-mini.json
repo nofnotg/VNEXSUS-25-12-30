@@ -1,0 +1,104 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-05",
+      "time": null,
+      "hospital": "SM영상의학과",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "epigastric discomfort and pain",
+      "onsetDate": null,
+      "duration": null,
+      "details": "for evaluation of liver mass"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2025-02-05",
+        "isPrimary": true,
+        "hospital": "SM영상의학과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Abdomen Angiography, Phase 3",
+        "date": "2019-03-23",
+        "result": "completed",
+        "finding": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "diagnostic",
+        "name": "Dynamic syudCT",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2019-03-23",
+      "endDate": "2025-02-05",
+      "totalVisits": 1,
+      "hospitals": [
+        "SM영상의학과"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "appendectomy state",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Evaluation for liver mass due to epigastric discomfort.",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-02-05",
+      "2019-03-23"
+    ],
+    "kcdCodes": [
+      "D18.02"
+    ],
+    "hospitals": [
+      "SM영상의학과"
+    ],
+    "examinations": [
+      "Abdomen Angiography, Phase 3"
+    ],
+    "treatments": [
+      "Dynamic syudCT"
+    ],
+    "diagnoses": [
+      "간담도계의 혈관종"
+    ]
+  },
+  "timestamp": "2026-01-25T09:36:39.440Z",
+  "cached": true
+}

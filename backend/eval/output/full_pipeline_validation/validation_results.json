@@ -1,0 +1,4676 @@
+{
+  "summary": {
+    "totalCases": 29,
+    "miniCases": 19,
+    "fullCases": 4,
+    "totalPages": 1475,
+    "totalCost": 5.297600000000001,
+    "miniCost": 4.617000000000001,
+    "fullCost": 0.6806,
+    "avgProcessingTime": 131785.58620689655,
+    "miniAvg": {
+      "dates": 29,
+      "kcd": 27,
+      "hospitals": 46,
+      "exams": 37,
+      "treats": 9
+    },
+    "fullAvg": {
+      "dates": 35,
+      "kcd": 17,
+      "hospitals": 42,
+      "exams": 25,
+      "treats": 0
+    }
+  },
+  "results": [
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "model": "gpt-4o-mini",
+      "totalPages": 47,
+      "processedPages": 47,
+      "processedAt": "2026-01-25T10:54:57.007Z",
+      "processingTime": 61840,
+      "cost": 0.2538,
+      "usage": {
+        "prompt_tokens": 1731961,
+        "completion_tokens": 780,
+        "total_tokens": 1732741,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김미화",
+          "birthDate": "YYYY-MM-DD",
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2025-02-05",
+          "hospital": "삼성서울병원",
+          "department": "간담도계의 혈관종"
+        },
+        "chiefComplaint": {
+          "summary": "간담도계의 혈관종",
+          "onsetDate": "2017-01-01",
+          "details": "간 혈관종 크기 증가"
+        },
+        "diagnoses": [
+          {
+            "code": "D18.02",
+            "nameKr": "간담도계의 혈관종",
+            "date": "2025-02-05",
+            "isPrimary": true,
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT Abdomen",
+            "date": "2023-08-07",
+            "result": "8 x 6 cm sized hepatic hemangioma",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Laparoscopic right hemiepectomy",
+            "date": "2025-02-05",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "C-Reactive Protein",
+            "dosage": "0.19 mg/dL",
+            "period": "2025-02-26"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "삼성서울병원",
+            "admissionDate": "2025-02-04",
+            "dischargeDate": "2025-02-12",
+            "reason": "Laparoscopic right hemiepectomy"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "Laparoscopic right hemiepectomy",
+            "date": "2025-02-05",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "간 혈관종의 크기 증가 관찰",
+          "followUpDate": "2025-04-09"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-02-05",
+            "context": "수술일",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-02-04",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-02-12",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2023-08-07",
+            "context": "검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-02-26",
+            "context": "검사일",
+            "type": "검사일"
+          }
+        ],
+        "extractedHospitals": [
+          "삼성서울병원",
+          "SM영상의학과"
+        ],
+        "rawTextSummary": "환자는 간 혈관종으로 2017년부터 진단받았으며, 2025년 2월 5일에 수술을 받았다. 수술 후 혈관종의 크기 증가가 관찰되었으며, 추적 관찰이 필요하다."
+      },
+      "groundTruth": "\r\n1. 사고 및 손해조사 내용\r\n일자 사고경위 병원/기관\r\n2019.03.23 \r\n[가입전치료] \r\n내 원 일 : 2019.03.23 \r\n내원경위 : 검진 중 발견된 간의 양성신생물 경과관찰 목적으\r\n로 내원 \r\n진 단 명 : 간의 양성 신생물(D13.4) \r\n간담도계의 혈관종(D18.02) \r\n통원기간 : 2019.03.23 ~ 2023.08.07 / 6 회 통원 \r\n검사결과 : 복부 CT \r\nhepatic memangioma at rifht lobe (8 * 6cm) \r\n에스엠영상의학과의원 \r\n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험 \r\n2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험 \r\n2024.04.03 \r\n[가입전치료] \r\n초 진 일 : 2024.04.03 \r\n내원경위 : 간담도계 혈관종 소견으로 경과관찰 위해 내원 \r\n진 단 명 : 간담도계의 혈관종(D18.02) \r\n통원기간 : 2024.04.03 / 1 회 통원 \r\n치료내용 : 진료의뢰서 발행(2024.04.03) \r\n- 고지의무 위반사항 \r\n서울대학교직장부속의원\r\n2024.04.09 \r\n(무) NH 헤아림 355 건강보험[5 종:세만기형(해약환급금미지급형Ⅱ/납\r\n면)]2404 가입 \r\nNH 농협손해보험 \r\n2024.04.09 \r\n[청구사항] \r\n초 진 일 : 2024.04.09 \r\n내원경위 : 2017 년 간혈관종 진단 후 매년 크기 증가 소견으\r\n로 진료의뢰 하 내원 \r\n진 단 명 : 간담도계의 혈관종(D18.02) \r\n입원기간 : 2025.02.04 ~ 2025.02.12 / 9 일 입원 \r\n통원기간 : 2024.04.09 (12:55) \r\n치료내용 : 복강경 하 우측 간절제술 \r\n검사결과 : abdoman CT(보고일시 2024.04.23 12:55) \r\n- 청약 전 진료 \r\n삼성서울병원 \r\n \r\n \r\n2. 손해사정 시 적용된 관계 법규 및 약관 \r\n면부책 \r\n검토 \r\n[보상 적정성 확인]\r\n금번 청구병명인 '간담도계의 혈관종(D18.02)'은 해당 보험 가입 시점인 2024.04.09 14:11 \r\n이전인 2024.04.09 12:55 삼성서울병원 주치의로부터 복부 CT 검사 시행 오더 발행된 것으\r\n로 가입 전 동일 질환 관련 진료 시행한 사실 확인됨. \r\n[고지의무위반 확인]\r\n금번 청구사항은 동 보험 가입 3 개월 이내인 2024.04.03 서울대학교직장부속의원에서 간\r\n담도계의 혈관종(D18.02) 진단 하 진료의뢰서 발행된 것으로 이는 동 보험 고지의무 위반\r\n사항에 해당하는 것으로 확인됨. \r\n[피보험자 현 주소] \r\n서울시 관악구 남부순환로 234 길 66, 102 호 \r\n근거 동 건 해당 보험 약관 \r\n \r\n \r\n3. 결론\r\n근거 \r\n본 건 조사 결과, \r\n피보험자는 동 보험 가입 3 개월 이내 청구병명과 동일 질환으로 진료의뢰서 발행, 해당 \r\n보험 초회 보험료 납입 전 동일 질환으로 삼성서울병원 진료 시행한 것으로 확인되는 바, \r\n귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 부지급 및 계약 해지 \r\n \r\n \r\n4. 기타\r\n2024.04.09 12:55 삼성서울병원 간담도계의 혈관종(D18.02) 진단 복부 CT 주치의 오더 \r\n2024.04.09 14:11 (무) NH 헤아림 355 건강보험 보장개시",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2023-08-07",
+            "2025-02-04",
+            "2025-02-12"
+          ],
+          "missed": [
+            "2019-03-23",
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2024-04-23"
+          ],
+          "extra": [
+            "2025-02-05",
+            "2025-02-26"
+          ],
+          "rate": 33
+        },
+        "kcdCodes": {
+          "matched": [
+            "D18.02"
+          ],
+          "missed": [
+            "D13.4"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "hospitals": {
+          "matched": [
+            "삼성서울병원"
+          ],
+          "missed": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원"
+          ],
+          "extra": [],
+          "rate": 33
+        },
+        "examinations": {
+          "matched": [
+            "CT"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "간절제술",
+            "가입전치료",
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "model": "gpt-4o-mini",
+      "totalPages": 27,
+      "processedPages": 27,
+      "processedAt": "2026-01-25T10:56:08.857Z",
+      "processingTime": 133914,
+      "cost": 0.1458,
+      "usage": {
+        "prompt_tokens": 995261,
+        "completion_tokens": 1019,
+        "total_tokens": 996280,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김태형",
+          "birthDate": "1964-08-09",
+          "gender": "남"
+        },
+        "visitDate": {
+          "date": "2024-12-31",
+          "hospital": "세브란스병원",
+          "department": "심장내과"
+        },
+        "chiefComplaint": {
+          "summary": "가슴 통증",
+          "onsetDate": "2024-12-31",
+          "details": "안정 시에도 가슴 통증이 발생"
+        },
+        "diagnoses": [
+          {
+            "code": "I20.88",
+            "nameKr": "안정형 협심증",
+            "date": "2024-12-31",
+            "isPrimary": true,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "I25.1",
+            "nameKr": "관상동맥질환 (1혈관 질환)",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "E11.68",
+            "nameKr": "제2형 당뇨병 및 이상지질혈증",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "E78.8",
+            "nameKr": "이상지질혈증",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "I50.08",
+            "nameKr": "이완기 심부전",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "심장 초음파",
+            "date": "2024-12-27",
+            "result": "정상",
+            "hospital": "세브란스병원"
+          },
+          {
+            "name": "관상동맥 조영술",
+            "date": "2024-12-31",
+            "result": "관상동맥 50% 협착",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "관상동맥 조영술",
+            "date": "2024-12-31",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "concor",
+            "dosage": "1.25mg",
+            "period": "매일"
+          },
+          {
+            "name": "livalo",
+            "dosage": "2mg",
+            "period": "매일"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "세브란스병원",
+            "admissionDate": "2024-12-31",
+            "dischargeDate": null,
+            "reason": "관상동맥 조영술"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "안정형 협심증으로 관리 필요",
+          "followUpDate": "2025-01-01"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-12-31",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2024-12-27",
+            "context": "심장 초음파 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-12-31",
+            "context": "관상동맥 조영술 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-01-01",
+            "context": "추적 관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "세브란스병원"
+        ],
+        "rawTextSummary": "김태형 환자는 가슴 통증으로 세브란스병원에 내원하였으며, 안정형 협심증으로 진단받고 관상동맥 조영술을 시행하였다. 치료 계획으로 concor와 livalo를 처방받았다."
+      },
+      "groundTruth": "나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2018.05.10 \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\r\n내 \r\n㈜KB 손해보험 \r\n2023.02.10 \r\n[3 개월 이내] \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \r\n이내 ㈜KB 손해보험 \r\n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험 \r\n2024.12.12 \r\n내 원 일 : 2024.12.12 \r\n내원경위 : 간헐적 발생하는 흉통 및 흉부 답답함 증상을 주소\r\n로 내원 \r\n진 단 명 : 상세불명의 흉통(R07.4) \r\n통원기간 : 2024.12.12 / 1 회 통원 \r\n의사소견 : 진료의뢰서 발급 \r\n굿웰스의원 \r\n2024.12.27 \r\n[청구사항] \r\n초 진 일 : 2024.12.27 \r\n내원경위 : 흉통 및 숨이 차는 증상을 주소로 진료 의뢰 하 내\r\n원 \r\n진 단 명 : 안정성 협심증(I20.88) \r\n관상동맥병(I25.1) \r\n입원기간 : 2024.12.31 / 1 일 입원 \r\n신촌세브란스\r\n병원(심장내\r\n과) \r\n치료내용 : 약물 처방 \r\n검사결과 : 관상동맥조영술(2024.12.31) \r\nRCA(우측 관상동맥) \r\n: JR 5-4 분절 경미한 협착 소견 \r\nLCA(좌측 관상동맥) \r\n: mLAD 약 50% 협착\r\n과거병력 : \"당뇨 의심 된다 들음\" 2024.05.30 동신병원 검진 \r\n결과 당뇨 의심 소견(자료 별첨) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영\r\n술 결과 좌전하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 \r\n청구함. \r\n직업 \r\n직무 \r\n청약 시 : 사회복지사(1 급) \r\n현재 : 사회복지사(1 급) \r\n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\r\n약 전 고지대상에 해당하는 진료내역 없음. \r\n4. 손해사정결과\r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영술 결과 좌전\r\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\r\n상에 해당하는 진료내역 없음. \r\n신촌세브란스 초진기록 상 \"당뇨 의심 된다 들음\" 내용 관련 확인 결과 동 보험 가입일 이후인 \r\n2024.05.30 동신병원 검진 결과 당뇨 의심 소견으로 진단 받은 것으로 확인됨. \r\n4. 금번 청구 관련하여\r\n신촌세브란스병원 관상동맥조영술(2024.12.31) LCA(좌측 관상동맥) : mLAD 약 50% 협착 \r\n피보험자는 동 보험 가입 이후인 2024.12.12 간헐적 흉통을 주소로 굿웰스의원 내원하여 진료 \r\n의뢰 하 2024.12.27 신촌세브란스병원 최초 내원 하여 2024.12.31 입원 후 상기 검사 결과를 \r\n토대로 '안정성 협심증(I20.88), 관상동맥병(I25.1)' 진단 받은 것으로 확인됨. \r\n5. 손해사정 결론\r\n상기 내용 종합하여 귀사 심사 기준에 의거하여 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB 손해보험에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-12-27",
+            "2024-12-31"
+          ],
+          "missed": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-12",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "extra": [
+            "2025-01-01"
+          ],
+          "rate": 22
+        },
+        "kcdCodes": {
+          "matched": [
+            "I20.88",
+            "I25.1"
+          ],
+          "missed": [
+            "R07.4"
+          ],
+          "extra": [
+            "E11.68",
+            "E78.8",
+            "I50.08"
+          ],
+          "rate": 67
+        },
+        "hospitals": {
+          "matched": [
+            "신촌세브란스병원"
+          ],
+          "missed": [
+            "동신병원",
+            "굿웰스의원"
+          ],
+          "extra": [],
+          "rate": 33
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case9",
+      "caseNum": 9,
+      "patientName": "임승희",
+      "model": "gpt-4o-mini",
+      "totalPages": 191,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T10:58:32.780Z",
+      "processingTime": 117302,
+      "cost": 0.27,
+      "usage": {
+        "prompt_tokens": 1842466,
+        "completion_tokens": 716,
+        "total_tokens": 1843182,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "임승희",
+          "birthDate": "1969-06-05",
+          "gender": "여자"
+        },
+        "visitDate": {
+          "date": "2024-10-07",
+          "hospital": "대림성모병원",
+          "department": "유방외과"
+        },
+        "chiefComplaint": {
+          "summary": "유방암",
+          "onsetDate": "2024-10-07",
+          "details": "유방에서 이상 소견"
+        },
+        "diagnoses": [
+          {
+            "code": "D05.10",
+            "nameKr": "유방의 관내 제자리암종",
+            "date": "2024-10-07",
+            "isPrimary": true,
+            "hospital": "대림성모병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "유방 초음파",
+            "date": "2024-10-07",
+            "result": "비정상 소견",
+            "hospital": "대림성모병원"
+          },
+          {
+            "name": "유방 X선 촬영",
+            "date": "2024-10-07",
+            "result": "미세 석회화 소견",
+            "hospital": "대림성모병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "유방 절제술",
+            "date": "2024-10-31",
+            "hospital": "대림성모병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Levopromide",
+            "dosage": "적정량",
+            "period": "치료 기간 동안"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "대림성모병원",
+            "admissionDate": "2024-10-31",
+            "dischargeDate": "2024-11-01",
+            "reason": "유방암 수술"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "유방 절제술",
+            "date": "2024-10-31",
+            "hospital": "대림성모병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호",
+          "followUpDate": "2024-11-01"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-10-07",
+            "context": "최초 내원일",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-10-31",
+            "context": "유방 절제술",
+            "type": "수술일"
+          },
+          {
+            "date": "2024-11-01",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          }
+        ],
+        "extractedHospitals": [
+          "대림성모병원",
+          "양지병원"
+        ],
+        "rawTextSummary": "환자는 유방암으로 진단받고 유방 절제술을 시행하였으며, 예후는 양호하다."
+      },
+      "groundTruth": "\r\n나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2019.02.26 \r\n[5 년 이내] \r\n무) KB 2.5.5 오! 슬기로운 간편실속종합건강보험 Plus 가입 5 년 \r\n이내 \r\n㈜KB 손해보험 \r\n2023.03.23 \r\n내 원 일 : 2023.03.23 \r\n내원경위 : 건강검진 시행 목적으로 내원 \r\n통원기간 : 2023.03.23 / 1 회 통원 \r\n검사결과 : 유방암검사 : 정상 소견 \r\n양지병원(건강\r\n증진센터) \r\n2023.12.26 \r\n무) KB 2.5.5 오! 슬기로운 간편실속종합건강보험 Plus 가입 2 개\r\n월 이내 ㈜KB 손해보험 \r\n2023.12.29 \r\n내 원 일 : 2023.12.29 \r\n내원경위 : 뇌하수체 양성 종양(의증) 및 프로락틴종 경과관찰 \r\n위해 내원 \r\n진 단 명 : 뇌하수체 양성 종양, 의증 \r\n뇌하수체 프로락틴종 \r\n통원기간 : 2023.12.29 ~ 2024.02.19 / 3 회 통원 \r\n치료내용 : 경과관찰 시행 \r\n기타사항 : 2022.07.17 산정특례 재등록 \r\n양지병원(내분\r\n비내과) \r\n2024.01.02 \r\n[5 년 이내] \r\n내 원 일 : 2024.01.02 \r\n내원경위 : 뇌하수체종양에 대한 경과관찰 중 발경된 정맥역류\r\n소견으로 경과관찰 위해 입원 \r\n이대서울병원\r\n(신경외과) \r\n진 단 명 : 뇌경막 동정맥루 \r\n입원기간 : 2024.01.02 / 당일 입원 \r\n- 고지의무 위반사항\r\n통원기간 : 2024.02.08 / 1 회 통원 \r\n치료내용 : 경과관찰 시행 \r\n검사결과 : 뇌혈관 조영술 : 뇌경막 동정맥루 소견 \r\n의사소견 : 경과관찰 소견 外 특이 치료사항 없음 \r\n2024.02.26 \r\nKB 2.5.5 오! 슬기로운 간편실속종합건강보험 Plus(무배\r\n당)(24.01)_2 형_무해지 가입 ㈜KB 손해보험 \r\n2024.08.02 \r\n내 원 일 : 2024.08.02 \r\n내원경위 : 유방 경과관찰 목적으로 내원 \r\n진 단 명 : 유방의 관내 제자리암종, 오른쪽(D05.10) \r\n통원기간 : 2024.08.02 ~ 2024.10.05 / 4 회 통원 \r\n치료내용 : 진료의뢰 \r\n검사결과 : 유측 유방 조직검사(2024.09.26) \r\n: Ductal carcinoma in situ(진단일 : 2024.09.27) \r\n양지병원(유방\r\n갑상선외과) \r\n2024.10.07 \r\n[청구사항] \r\n초 진 일 : 2024.10.07 \r\n내원경위 : 타 병원 검사 결과 유방암 소견으로 진료 의뢰 받\r\n고 내원 \r\n진 단 명 : 유방의 소엽 제자리암종, 오른쪽(D05.00) \r\n입원기간 : 2024.10.30 ~ 2024.11.01 / 3 일 입원 \r\n치료내용 : 우측 부분유방절제술(2024.10.31) \r\n검사결과 : 우측 유방 조직검사(2024.10.10) \r\n: Ductal carcinoma in situ, grade 2(진단일 : \r\n2024.10.11) \r\n수술 후 조직검사(2024.10.31) \r\n: : Ductal carcinoma in situ, (pTisNx)(진단일 : \r\n2024.11.06) \r\n대림성모병원\r\n(유방센터) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자는 대림성모병원에서 '유방의 소엽 제자리암종, 오른쪽(D05.00)' 진단 하 \r\n2024.10.31 우측 부분유방절제술 후 관련 보험금 청구함. \r\n직업 \r\n직무 \r\n청약 시 : 간호사(1 급) \r\n현재 : 간호사(1 급) \r\n심평원 \r\n피보험자 면담 시 확인한 심평원 진료내역(2019.12.21 ~ 2024.02.26) 검토 결과 동 \r\n보험 가입 5 년 이내 기간인 2024.01.02 이대서울병원에서 '파열되지 않은 대뇌동맥\r\n류(I67.1)' 진단 하 입원 치료 시행한 사실 확인됨.(의무기록 별첨) \r\n4. 손해사정결과\r\n고지위반 예 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자는 대림성모병원에서 '유방의 소엽 제자리암종, 오른쪽(D05.00)' 진단 하 2024.10.31 우\r\n측 부분유방절제술 후 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n1. 2024.01.02 이대서울병원 뇌혈관조영술 결과 뇌경막 동정맥루 소견, 당일 입원\r\n상기 내용 外 청구병명 가입 전 발병 및 인과관계 존재하는 고지의무 위반사항 없음. \r\n4. 금번 청구 관련하여\r\n금번 청구병명인 '유방의 소엽 제자리암종, 오른쪽(D05.00)'은 동 보험 가입일 이후인 \r\n2024.08.02 양지병원에서 유방 정기 경과관찰 목적으로 2024.09.26 시행한 조직검사상 Ductal \r\ncarcinoma in situ 소견으로 2024.09.27 최초 진단 받고 진료의뢰 하 대림성모병원에서 \r\n2024.10.31 우측 부분유방절제술 후 조직검사 상 2024.11.06 확정 진단 받은 사항으로 확인됨. \r\n5. 손해사정 결론\r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB 손해보험에서 최종 판단해 주시기 바랍니다",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-10-07",
+            "2024-11-01",
+            "2024-10-31"
+          ],
+          "missed": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-30",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ],
+          "extra": [],
+          "rate": 14
+        },
+        "kcdCodes": {
+          "matched": [
+            "D05.10"
+          ],
+          "missed": [
+            "D05.00",
+            "I67.1"
+          ],
+          "extra": [],
+          "rate": 33
+        },
+        "hospitals": {
+          "matched": [
+            "양지병원",
+            "대림성모병원"
+          ],
+          "missed": [
+            "이대서울병원",
+            "증진센터",
+            "유방센터"
+          ],
+          "extra": [],
+          "rate": 40
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "부분유방절제술",
+            "치료내용",
+            "치료사항",
+            "치료"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case11",
+      "caseNum": 11,
+      "patientName": "허전권",
+      "model": "gpt-4o-mini",
+      "totalPages": 134,
+      "processedAt": "2026-01-25T10:52:56.433Z",
+      "processingTime": 192553,
+      "cost": 0.7236,
+      "usage": {
+        "prompt_tokens": 4936606,
+        "completion_tokens": 839,
+        "total_tokens": 4937445,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "허전권",
+          "birthDate": "1951-01-01",
+          "gender": "M"
+        },
+        "visitDate": {
+          "date": "2024-10-21",
+          "hospital": "삼성서울병원",
+          "department": "소화기내과"
+        },
+        "chiefComplaint": {
+          "summary": "GB cancer with metastases",
+          "onsetDate": null,
+          "details": "Gallbladder cancer with liver, lung, lymph nodes metastases."
+        },
+        "diagnoses": [
+          {
+            "code": "C23",
+            "nameKr": "담낭암",
+            "date": "2024-10-21",
+            "isPrimary": true,
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "EUS-FNA",
+            "date": "2024-12-24",
+            "result": "Positive for malignant cells.",
+            "hospital": "삼성서울병원"
+          },
+          {
+            "name": "CT",
+            "date": "2024-12-24",
+            "result": "Suggestive of GB cancer with multiple metastases.",
+            "hospital": "삼성서울병원"
+          },
+          {
+            "name": "MRI",
+            "date": "2024-10-23",
+            "result": "R/O GB cancer with multiple metastases.",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Chemotherapy",
+            "date": "2024-10-21",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Gabapentin",
+            "dosage": "100mg",
+            "period": "2024-12-27"
+          },
+          {
+            "name": "Celecoxib",
+            "dosage": "200mg",
+            "period": "2024-12-27"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "삼성서울병원",
+            "admissionDate": "2024-10-21",
+            "dischargeDate": "2024-11-05",
+            "reason": "R/O GB cancer"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "ERCP",
+            "date": "2024-10-28",
+            "hospital": "삼성서울병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "Progression of GB cancer with multiple metastases.",
+          "followUpDate": "2024-12-27"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-10-21",
+            "context": "Admission for GB cancer.",
+            "type": "입원일"
+          },
+          {
+            "date": "2024-10-28",
+            "context": "ERCP performed.",
+            "type": "수술일"
+          },
+          {
+            "date": "2024-12-24",
+            "context": "CT scan performed.",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-12-26",
+            "context": "Liver biopsy performed.",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-12-27",
+            "context": "Follow-up appointment.",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "삼성서울병원"
+        ],
+        "rawTextSummary": "Patient diagnosed with gallbladder cancer with metastases to liver and lymph nodes. Underwent ERCP and chemotherapy. Follow-up appointments scheduled."
+      },
+      "groundTruth": "\r\n \r\n나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2023.02.28 무배당 AXA 간편고지건강보험(갱신형)2301 가입 AXA 손해보험\r\n주식회사 \r\n2024.07.26 무배당 AXA 간편종합보험(갱신형)2404 가입 AXA 손해보험\r\n주식회사 \r\n2024.09.13 \r\n[청구사항] \r\n내 원 일 : 2024.09.13 \r\n내원경위 : 검진 시 시행한 간담도 초음파 검사 상 담낭암 소\r\n견으로 치료 위해 입원 \r\n진 단 명 : 담낭암 \r\n입원기간 : 2024.10.21 ~ 2024.11.05 / 16 일 입원 \r\n치료내용 : 2024.10.28 ERCP \r\n2024.11.01 ERCP \r\n검사결과 : 복부 CT(검사일 : 2024.10.12)(보고일 : 2024.10.14) \r\n: 담낭 암 가능성(probably GB cancer) \r\n: 담낭에서 여러개의 암이 있을 가능성, 담낭관 침\r\n범 \r\n: 간문, 위-간 인대 및 대동맥 주변 영역 여러개의 \r\n전이성 림프절 소견 등 \r\n췌장 MRI(검사일 : 2024.10.23)(보고일 : 2024.10.24)\r\n: 담낭암 및 다발성 전이 의심 \r\n: 다발성 림프절 전이 \r\n: 간 양쪽 엽 다발성 작은 전이 병변 \r\n: 췌장 내 총담관 전이 가능성 \r\n2024.10.25 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) \r\n外 암 보장 개시일 이전 '암'에 대한 확정 진단 사\r\n료될 조직검사 내용 없음. \r\n강북삼성병원 \r\n2024.10.24 무배당 AXA 간편종합보험(갱신형)2404 암 보장 개시일 AXA 손해보험\r\n주식회사 \r\n2024.11.18 \r\n[청구사항] \r\n초 진 일 : 2024.11.18 \r\n내원경위 : 2024.11.18 강북삼성병원에서 담낭암 진단 후 진료\r\n의뢰 하 내원 \r\n2024.11.26 강북삼성병원 검사 결과 지참 하 내원 \r\n진 단 명 : 담낭암(C23) \r\n입원기간 : 2024.12.23 ~ 2024.12.27 / 5 일 입원 \r\n2025.01.14 ~ 입원 중 \r\n검사결과 : Liver Bx(검사일 : 2024.12.26)(보고일 : 2024.12.30) \r\n삼성서울병원 \r\n: Liver, right (S5) ADENOCARCINOMA \r\n핵의학검사(F-18 FDG)(검사일 : 2024.12.24)(보고일 : \r\n2024.12.26) \r\n: 다발성 림프절, 간, 뼈 전이를 동반한 담낭암 - 좌\r\n측 1 번 늑골 및 흉추 5 번 골전이 소견 \r\n과거병력 : 2023 년 양쪽 어깨, 왼쪽 무릎 골절 수술 \r\n기타사항 : 타 병원(강북삼성병원) 검사 결과 \r\n2024.10.12 복부 CT \r\n2024.10.23 췌장 MRI \r\n2024.10.25 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) \r\n外 암 보장 개시일 이전 '암'에 대한 확정 진단 사\r\n료될 조직검사 내용 없음.(강북삼성 서류 누락 내용\r\n없음) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자 동 보험 가입 후 강북삼성병원에서 시행한 건강검진 상 담낭암 의심 소\r\n견으로 강북삼성병원 및 삼성서울병원에서 정밀 검사 결과 '담낭암(C23)' 진단 후 \r\n관련 보험금 청구함. \r\n직업 \r\n직무 \r\n종교인(1 급) \r\n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.21 ~ 2025.01.21) 열람 검토 결\r\n과 기 고지사항 外 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n4. 손해사정결과\r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n암 진단 적정성 및 고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자 동 보험 가입 후 강북삼성병원에서 시행한 건강검진 상 담낭암 의심 소견으로 강북\r\n삼성병원 및 삼성서울병원에서 정밀 검사 결과 '담낭암(C23)' 진단 후 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n치료병원 의무기록 및 피보험자 면담 시 확인한 심평원 진료내역(2020.01.21 ~ 2025.01.21) 열\r\n람 검토 결과 기 고지사항 外 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n4. 금번 청구 관련하여\r\n2024.07.26 무배당 AXA 간편종합보험(갱신형)2404 가입 \r\n2024.10.14 강북삼성병원 복부 CT 담낭 암 가능성(probably GB cancer), 담낭에서 여러개의 암\r\n이 있을 가능성, 담낭관 침범, 간문, 위-간 인대 및 대동맥 주변 영역 여러개의 전이성 림프절 \r\n소견 등 \r\n2024.10.23 강북삼성병원 췌장 MRI 담낭암 및 다발성 전이 의심, 다발성 림프절 전이, 간 양쪽 \r\n엽 다발성 작은 전이 병변, 췌장 내 총담관 전이 가능성 소견 \r\n2024.10.24 무배당 AXA 간편종합보험(갱신형)2404 암 보장 개시일 \r\n2024.10.25 강북삼성병원 PET-CT \r\n2024.11.01 Bx 결과(총간관-반응성 상피 비정형성) 外 암 보장 개시일 이전 '암'에 대한 확정 진\r\n단 사료될 조직검사 내용 없음. \r\n상기 내용 종합하여 볼 때, 동 보험 암 보장 개시일 이내 강북삼성병원에서 복부 CT 및 췌장\r\nMRI 등 시행 하였으나 동 보험 약관상 '암'의 진단 근거인 조직검사 미 시행 하였으며, \r\n삼성서울병원 의무기록 면밀 검토 결과 조직검사 최초 시행은 Liver Bx(검사일 : 2024.12.26)로 \r\n해당 검사 결과 Liver, right (S5) ADENOCARCINOMA 소견 확인되며, \r\n핵의학검사(F-18 FDG)(검사일 : 2024.12.24)(보고일 : 2024.12.26) 다발성 림프절, 간, 뼈 전이를 \r\n동반한 담낭암 - 좌측 1 번 늑골 및 흉추 5 번 골전이 소견 확인됨. \r\n5. 손해사정 결론\r\n금번 청구 병명인 '담낭암(C23)'은 동 보험 암 보장 개시일 이후 최초 확정 진단 받은 '암'에 해\r\n당할 것으로 판단되며 고액암 진단 적정 관련 흉추 5 번 골 전이에 대한 원발암은 담낭암으로 \r\n확인되는 바, \r\n귀사 심사 기준에 의거하여 검토 후 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 AXA 손해보험주식회사에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-10-23",
+            "2024-12-27",
+            "2024-12-26",
+            "2024-12-24"
+          ],
+          "missed": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-11-01",
+            "2024-10-12",
+            "2024-10-14",
+            "2024-10-24",
+            "2024-10-25",
+            "2024-11-18",
+            "2024-11-26",
+            "2024-12-23",
+            "2025-01-14",
+            "2024-12-30",
+            "2020-01-21",
+            "2025-01-21"
+          ],
+          "extra": [],
+          "rate": 32
+        },
+        "kcdCodes": {
+          "matched": [
+            "C23"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "hospitals": {
+          "matched": [
+            "삼성서울병원"
+          ],
+          "missed": [
+            "강북삼성병원",
+            "삼성병원",
+            "치료병원"
+          ],
+          "extra": [],
+          "rate": 25
+        },
+        "examinations": {
+          "matched": [
+            "CT",
+            "MRI"
+          ],
+          "missed": [
+            "초음파",
+            "조직검사",
+            "PET"
+          ],
+          "extra": [],
+          "rate": 40
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "치료",
+            "치료내용",
+            "치료병원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "model": "gpt-4o-mini",
+      "totalPages": 46,
+      "processedAt": "2026-01-25T10:56:11.995Z",
+      "processingTime": 131425,
+      "cost": 0.2484,
+      "usage": {
+        "prompt_tokens": 1695126,
+        "completion_tokens": 607,
+        "total_tokens": 1695733,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김인화",
+          "birthDate": "1969-06-16",
+          "gender": "여"
+        },
+        "visitDate": {
+          "date": "2024-04-12",
+          "hospital": "서울바른병원",
+          "department": "신경과"
+        },
+        "chiefComplaint": {
+          "summary": "요추의 통증 및 하지 방사통",
+          "onsetDate": "2024-04-12",
+          "details": "L-spine MRI: HNP at L4-5"
+        },
+        "diagnoses": [
+          {
+            "code": "G55.1",
+            "nameKr": "신경근병증",
+            "date": "2024-04-12",
+            "isPrimary": true,
+            "hospital": "서울바른병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "L-spine MRI",
+            "date": "2024-04-12",
+            "result": "디스크 돌출 및 관절 비후",
+            "hospital": "서울바른병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "치료",
+            "date": "2024-04-12",
+            "hospital": "서울바른병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "진통제",
+            "dosage": "적정량",
+            "period": "필요시"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "서울바른병원",
+            "admissionDate": "2024-04-12",
+            "dischargeDate": null,
+            "reason": "요추 통증"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "요추의 상태가 개선될 것으로 예상됨",
+          "followUpDate": "2024-05-07"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-04-12",
+            "context": "환자 방문일",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-05-07",
+            "context": "추적 관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "서울바른병원"
+        ],
+        "rawTextSummary": "김인화 환자는 2024년 4월 12일 서울바른병원에서 요추의 통증 및 하지 방사통으로 내원하였으며, L-spine MRI에서 HNP at L4-5로 진단받았다."
+      },
+      "groundTruth": "\r\n1. 사고 및 손해조사 내용\r\n일자 사고경위 병원/기관\r\n2021.03.24 (무) NH 가성비굿건강보험[1 종:해지환급금미지급형Ⅱ]2101 가입 NH 농협손해보험 \r\n2021.07.30 (무) NH 가성비굿건강보험[1 종:해지환급금미지급형Ⅱ]2104 가입 NH 농협손해보험 \r\n2024.04.12 상해사고 발생일 NH 농협손해보험 \r\n2024.04.12 \r\n내 원 일 : 2024.04.12 \r\n내원경위 : 2 년 전 넘어지며 요통 발생 후 최근 빗길에 넘어지\r\n며 좌측 요추부 통증 호소하여 내원 \r\n통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원 \r\n치료내용 : 신경차단술 및 도수치료, 물리치료 시행 \r\n검사결과 : L-spine MRI \r\n요추 4-5 번 추간판 팽윤 소견 \r\n요추 5-천추 1 번간 추간판 섬유륜 파열 및 추간판 \r\n돌출 소견 \r\n서울바른병원 \r\n2025.03.13 \r\n[청구사항] \r\n초 진 일 : 2025.03.13 \r\n내원경위 : 후유장해 진단 목적으로 내원 \r\n진 단 명 : 요추의 염좌 및 긴장(S33.50) \r\n신경뿌리병증을 동반한 요추 및 기타 추간판장애\r\n(M51.1) \r\n통원기간 : 2025.03.13 / 1 회 통원 \r\n검사결과 : 요추 X-ray \r\n근전도검사 \r\n의사소견 : 약간의 신경장애(지급률 10%) \r\n누가재활의학과의원 \r\n \r\n \r\n2. 손해사정 시 적용된 관계 법규 및 약관 \r\n면부책 \r\n검토 \r\n[후유장해 적정성 여부]\r\n금번 청구사항인 추간판탈출증으로 인한 약간의 신경장해(지급률 10%) 관련 치료병원 및 \r\n장해진단병원 의무기록 피보험자 면담 시 주장하는 사고 경위 등을 종합할 때 동 보험 보\r\n장 기간 중 발생한 사고에 대한 다툼은 없을 것으로 판단되며, \r\n서울바른병원에서 시행한 요추 MRI 검사 상 요추 5-천추 1 번간 추간판 섬유륜 파열 소견으\r\n로 후유장해 진단 받은 것으로 확인됨. \r\n금번 청구 후유장해 적정성 판단을 위한 제 3 의료기관을 통한 의료자문 시행 등에 동의하\r\n는 바, 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n근거 동 건 해당 보험 약관 \r\n \r\n \r\n3. 결론\r\n근거 \r\n[약관상 보험자 지급책임의 범위]\r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n[보험금 사정에 관한 중요 근거]\r\n흥국화재 2% 합의 종결 1,400,000 원 \r\n삼성화재 2% 합의 종결 400,000 원 \r\nKB 손해보험 2% 합의 종결 2,000,000 원 \r\n롯데손해보험 2% 합의 종결 \r\n한화손해보험 2% 합의 종결 1,000,000 원 \r\n결론 삭감 지급 및 유지 \r\n \r\n \r\n4. 지급보험금\r\n지급내용\r\n담보내용 세부산정내역) 지급금액(원) \r\n일반상해후유장해 10,000,000 원 지급률 10% / 한시장해 5\r\n년 = 2% \r\n200,000 원 \r\n일반상해후유장해 10,000,000 원 지급률 10% / 한시장해 5\r\n년 = 2% 200,000 원 \r\n지급금액 400,000 원\r\n",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-04-12"
+          ],
+          "missed": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-11-04",
+            "2025-03-13"
+          ],
+          "extra": [
+            "2024-05-07"
+          ],
+          "rate": 20
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "S33.50",
+            "M51.1"
+          ],
+          "extra": [
+            "G55.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "서울바른병원"
+          ],
+          "missed": [
+            "치료병원",
+            "장해진단병원",
+            "누가재활의학과의원"
+          ],
+          "extra": [],
+          "rate": 25
+        },
+        "examinations": {
+          "matched": [
+            "MRI"
+          ],
+          "missed": [
+            "X-ray"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [
+            "치료내용",
+            "도수치료",
+            "물리치료",
+            "치료병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "model": "gpt-4o-mini",
+      "totalPages": 13,
+      "processedPages": 13,
+      "processedAt": "2026-01-25T11:01:00.109Z",
+      "processingTime": 93763,
+      "cost": 0.0702,
+      "usage": {
+        "prompt_tokens": 479571,
+        "completion_tokens": 669,
+        "total_tokens": 480240,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "고영란",
+          "birthDate": "1963-04-19",
+          "gender": "여"
+        },
+        "visitDate": {
+          "date": "2025-06-07",
+          "hospital": "의료법인자인의료재단더자인병원",
+          "department": null
+        },
+        "chiefComplaint": {
+          "summary": "유방암 검사 및 관련 검사",
+          "onsetDate": null,
+          "details": "유방암 관련 검사 및 진단"
+        },
+        "diagnoses": [
+          {
+            "code": "C50.1",
+            "nameKr": "유방암",
+            "date": "2025-06-20",
+            "isPrimary": true,
+            "hospital": "더자인병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "유방 초음파",
+            "date": "2025-06-16",
+            "result": "2.6cm 크기의 비정형 종괴",
+            "hospital": "더자인병원"
+          },
+          {
+            "name": "CT 검사",
+            "date": "2025-06-20",
+            "result": "2.6cm 크기의 침윤성 종괴",
+            "hospital": "더자인병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "코어 바늘 생검",
+            "date": "2025-06-20",
+            "hospital": "더자인병원"
+          }
+        ],
+        "medications": [],
+        "hospitalizations": [],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "유방암으로 인한 추가 치료 필요",
+          "followUpDate": "2025-06-27"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-06-07",
+            "context": "검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-06-16",
+            "context": "유방 초음파 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-06-20",
+            "context": "CT 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-06-20",
+            "context": "코어 바늘 생검일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-06-27",
+            "context": "추적 관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "더자인병원"
+        ],
+        "rawTextSummary": "고영란 환자는 유방암 관련 검사 및 진단을 받았으며, 2.6cm 크기의 침윤성 종괴가 발견되었다. 추가 치료가 필요하며, 추적 관찰이 요구된다."
+      },
+      "groundTruth": "일자|확인내용|관련기관\r\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\r\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\r\n - 보험계약일로부터 90일 |시점DB손해보험\r\n2025.06.07|\r\n초진일자 : 2025.06.07\r\n내원경위 : 건강검진 시행 목적 내원\r\n검사결과 : 일반건강검진, 유방암 검진(2025.06.07) : 좌측 유두하부 종괴 의심 \r\n초음파 권고\r\n통원기간 : 2025.06.07 / 1회 통원\r\n|더자인병원\r\n2025.06.16 ~ 2025.06.27|\r\n내원일자 : 2025.06.16\r\n내원경위 : 본원 유방 검진 상 이상 소견으로 내원\r\n진단병명 : 유방의 중앙부의 악성 신생물, 왼쪽(C50.11), 림프선병증 NOS(R59.1)\r\n검사결과 : 조직검사(2025.06.20)(보고일: 2025.06.24) : INVASIVE DUCTAL\r\n CARCINOMA, Grade 2\r\n : Lymph node, METASTARIC CARCINOMA from breast\r\n치료내용 : 진료의뢰서 발행\r\n통원기간 : 2025.06.16 ~ 2025.06.27 / 2회 통원\r\n|더자인병원",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-06-07",
+            "2025-06-16",
+            "2025-06-27",
+            "2025-06-20"
+          ],
+          "missed": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-24"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "C50.11",
+            "R59.1"
+          ],
+          "extra": [
+            "C50.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "더자인병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [
+            "CT",
+            "초음파"
+          ],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 67
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "model": "gpt-4o-mini",
+      "totalPages": 28,
+      "processedAt": "2026-01-25T10:58:54.422Z",
+      "processingTime": 73335,
+      "cost": 0.1512,
+      "usage": {
+        "prompt_tokens": 1032096,
+        "completion_tokens": 785,
+        "total_tokens": 1032881,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김동아",
+          "birthDate": "null",
+          "gender": "M"
+        },
+        "visitDate": {
+          "date": "2025-09-09",
+          "hospital": "해블리병원",
+          "department": "null"
+        },
+        "chiefComplaint": {
+          "summary": "두통, 시야장애",
+          "onsetDate": "2025-08-14",
+          "details": "머리 좌측의 시야가 아프고, 아프지 않은 부분도 있다."
+        },
+        "diagnoses": [
+          {
+            "code": "CVA",
+            "nameKr": "뇌졸중",
+            "date": "2025-08-14",
+            "isPrimary": true,
+            "hospital": "해블리병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "Brain MRI + Diffusion + Brain MRA",
+            "date": "2025-08-14",
+            "result": "좌측 후두엽 고신호 병변",
+            "hospital": "해블리병원"
+          },
+          {
+            "name": "Echocardiography",
+            "date": "2025-08-19",
+            "result": "정상 LV 크기 및 정상 수축 기능",
+            "hospital": "해블리병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "약물 치료",
+            "date": "2025-08-19",
+            "hospital": "해블리병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "약물명",
+            "dosage": "75mg",
+            "period": "null"
+          },
+          {
+            "name": "약물명",
+            "dosage": "25mg",
+            "period": "null"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "해블리병원",
+            "admissionDate": "2025-08-19",
+            "dischargeDate": "2025-08-22",
+            "reason": "두통 및 시야장애"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "null",
+            "date": "null",
+            "hospital": "null"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호",
+          "followUpDate": "2025-09-09"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-08-14",
+            "context": "증상 발생일",
+            "type": "증상 발생일"
+          },
+          {
+            "date": "2025-08-19",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-08-22",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-09-09",
+            "context": "최초 내원일",
+            "type": "진료일"
+          }
+        ],
+        "extractedHospitals": [
+          "해블리병원"
+        ],
+        "rawTextSummary": "환자는 두통과 시야장애로 내원하였으며, MRI 검사 결과 좌측 후두엽에 고신호 병변이 발견되었다. 입원 후 약물 치료를 받았으며, 예후는 양호하다."
+      },
+      "groundTruth": "청구내용 및 조사 결과\r\n조사자의견\r\n및 \r\n조사결과\r\n금번 청구사항은 청약일 2일 경과 시점에 뇌경색 진단 받은 사항으로 가입 전 발병 및 기타 고지의무 위반여부\r\n검토 결과, \r\n피보험자 면담 시 청약 후 다음날부터 두통 증상 발생하여 2025.08.14 자택 인근 해븐리병원 최초 내원하였다 주\r\n장. \r\n청약 전 특이 병력 없다는 주장으로 심평원 진료내역 열람 동의하였으나, \r\n심평원 특성 조회일 기준 1~2달 진료이력은 조회되지 않아 명확한 가입 후 진단 내용 확인 불가하여 건강보험공\r\n단 방문하여 요양급여내역 발급 요청 하였으나 해당 내용은 거부함. \r\n기타 고지의무 위반사항 관련 심평원 진료내역(세부진료+처방조제내역 등) 검토 결과 청약 전 일산효자한의원에\r\n서 '요추의 염좌 및 긴장(S33.50)'진단 하 7회 이상 통원 치료 시행한 사실 확인되며 이는 동 보험 고지의무 위반\r\n사항에 해당하는 것으로 사료됨.\r\n치료병원 영상 판독 결과, \r\nBrain MRi + A(2025.08.14) : Lt. occipital lobe - Acute infarction, Stenosis, Lt. PCA, left distal ICA, Rt. MCA 소견\r\n으로 급성기 뇌경색 소견은 확인됨. \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.\r\n조사결과부책동의서징구해당없음민원여부해당없음\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)피보험자 면담조사쟁점 중(L2)사고(발병)/병원내원 경위조사자확인완료\r\n쟁 점 상 세(L3)최초 증상 발생 시기, 병원 내원 경위 확인\r\n조  사  내  용 \r\n청약 후 다음날부터 두통 증상 발생하여 2025.08.14 자택 인근 해븐리병원 최초 내원하였다 주장. \r\n청약 전 특이 병력 없다는 주장으로 심평원 진료내역 열람 동의하였으나, \r\n심평원 특성 조회일 기준 1~2달 진료이력은 업데이트 안됨. \r\n명확한 가입 후 진단 내용 확인 불가.\r\n조사쟁점 대(L1)서류징구 및 전달조사쟁점 중(L2)심평원/의료자문 위임장 요청조사자확인완료\r\n쟁 점 상 세(L3)의료자문동의서 징구 및 지급지연 안내문 전달\r\n조  사  내  용 자문동의서 작성 거부, 지연안내문 전달 및 서명 등재 완료\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)의무기록/CD/검진결과 확인조사자확인완료\r\n쟁 점 상 세(L3)치료병원 진료기록 및 영상CD 일체 징구\r\n조  사  내  용 의무기록 및 영상 발급 등재 전송 완료\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)기타 병원확인조사자확인완료\r\n쟁 점 상 세(L3)건강검진 내역 확인 및 결과지 징구\r\n조  사  내  용 검진 미 시행 주장.\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n3 / 3\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)관공서 확인조사쟁점 중(L2)건강보험공단/국세청 확인조사자확인완료\r\n쟁 점 상 세(L3)제척기간 미경과로 건강보험요양급여내역 등 징구하여 과거력 조사\r\n조  사  내  용 심평원 진료내역 발급 완료 \r\n건강보험공단 방문은 거절\r\n조사쟁점 대(L1)브로커/PA(계약적정성) 확\r\n인\r\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\r\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\r\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\r\n일자확인내용관련기관\r\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\r\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\r\n2025.08.14 ~ 2025.08.19\r\n초진일시 : 2025.08.14\r\n내원경위 : 내원 전일부터 머리 좌측 통증 발생\r\n진단병명 : 상세불명의 뇌경색증(I63.9)\r\n검사내용 : Brain MRi + A(2025.08.14)\r\n검사결과 : Lt. occipital lobe - Acute infarction \r\nStenosis, Lt. PCA, left distal ICA, Rt. MCA\r\n치료사항 : 약물처방 및 경과관찰 소견\r\n치료기간 : 2025.08.14 ~ 2025.08.19 / 2회 통원\r\n해븐리병원",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-14",
+            "2025-08-19"
+          ],
+          "missed": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12"
+          ],
+          "extra": [
+            "2025-08-22",
+            "2025-09-09",
+            "null"
+          ],
+          "rate": 40
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "S33.50",
+            "B02",
+            "I63.9"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missed": [
+            "해븐리병원",
+            "치료병원",
+            "일산효자한의원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [
+            "치료"
+          ],
+          "missed": [
+            "치료병원",
+            "치료사항",
+            "치료기간"
+          ],
+          "extra": [],
+          "rate": 25
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case18",
+      "caseNum": 18,
+      "patientName": "김명희",
+      "model": "gpt-4o-mini",
+      "totalPages": 47,
+      "processedPages": 47,
+      "processedAt": "2026-01-25T11:02:53.894Z",
+      "processingTime": 153608,
+      "cost": 0.2538,
+      "usage": {
+        "prompt_tokens": 1731961,
+        "completion_tokens": 596,
+        "total_tokens": 1732557,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김명희",
+          "birthDate": "1956-01-01",
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2025-01-08",
+          "hospital": "이기섭의원",
+          "department": "내과"
+        },
+        "chiefComplaint": {
+          "summary": "두통, 어지럼증",
+          "onsetDate": "2025-01-01",
+          "details": "일주일 전부터 어지럽고 열이 나는 것처럼 아파서 내원함."
+        },
+        "diagnoses": [
+          {
+            "code": "J040",
+            "nameKr": "급성 후두염",
+            "date": "2025-01-08",
+            "isPrimary": true,
+            "hospital": "이기섭의원"
+          },
+          {
+            "code": "J068",
+            "nameKr": "기타 다발성의 급성 상기도감염",
+            "date": "2025-01-08",
+            "isPrimary": false,
+            "hospital": "이기섭의원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "MRI",
+            "date": "2025-01-08",
+            "result": "정상",
+            "hospital": "이기섭의원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "약물치료",
+            "date": "2025-01-08",
+            "hospital": "이기섭의원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "아스피린",
+            "dosage": "300mg",
+            "period": "1일 3회"
+          }
+        ],
+        "hospitalizations": null,
+        "surgeries": null,
+        "prognosis": {
+          "summary": "경과 양호",
+          "followUpDate": "2025-01-15"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-01-08",
+            "context": "내원일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-01-15",
+            "context": "추적관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "이기섭의원"
+        ],
+        "rawTextSummary": "김명희 환자는 두통과 어지럼증으로 내원하였고, MRI 검사 결과는 정상으로 나타났으며, 약물치료를 통해 경과가 양호함."
+      },
+      "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2019.03.29 (무) NH가성비굿건강보험1901[해지환급금미지급형] 가입 NH농협손해보험 \r\n2019.07.05 \r\n[가입전치료] \r\n초 진 일 : 2019.07.05 \r\n내원경위 : 검진 목적 내원 \r\n통원기간 : 2019.07.05 / 1회 통원 \r\n검사결과 : 고혈압 질환의심 \r\nBMI 과체중(25~29.9) : 160.9cm / 69.8kg \r\n \r\n구로성심병원 \r\n2021.07.09 \r\n초 진 일 : 2021.07.09 \r\n내원경위 : 검진 목적 내원 \r\n통원기간 : 2021.07.09 / 1회 통원 \r\n검사결과 : 유질환자 : 고혈압 \r\nBMI 과체중(25~29.9) : 160.2cm / 72.6kg  \r\n \r\nKMI \r\n2025.05.12 \r\n[청구사항] \r\n초 진 일 : 2025.05.12 \r\n내원경위 : 7~8년 전부터 체중 증가 시작 \r\n위고비, 큐시미아 효과 無  \r\n체중감량 및 수술 상담 위해 내원 \r\n진 단 명 : 고도비만(E66.8) \r\n기타 및 상세불명의 원발성 고혈압(I10.9) \r\n담낭염 \r\n입원기간 : 2025.07.07 ~ 2025.07.14 / 8일 입원 \r\n치료내용 : 복강경 위 소매절제술(2025.07.08) \r\n복강경 담낭절제술(2025.07.08) \r\n검사결과 : InBody \r\nBMI (30.4) 158.6cm / 76.4kg \r\n과거병력 : 고혈압 \r\n \r\n고대구로병원 \r\n  \r\n  \r\n  \r\n \r\n \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[보상하는 손해 여부 확인] \r\n피보험자는 7~8년 전부터 체중 증가되어 위고비 등 효과 없어 체중감량 및 수술 상담 목\r\n적으로 고대구로병원 가정의학과 통해 위장관외과에서 '고도비만(E66.8), 기타 및 상세불명\r\n의 원발성 고혈압(I10.9)' 등 진단 하 복강경 위 소매절제술(2025.07.08) 시행. \r\n \r\n2019.07.05 구로성심병원 [BMI 과체중(25~29.9) : 160.9cm / 69.8kg] \r\n2021.07.09 KMI [BMI 과체중(25~29.9) : 160.2cm / 72.6kg] \r\n \r\n가입 전 검진이력 확인 없음.  \r\n해당 보험 질병후유장해 특약 기준(\"보험기간 중에 진단 확정된 질병으로 인하여...\")에 의\r\n거 동 보험 기간 중 진단 확정된 질병으로 봄이 타당할 것으로 사료되나,  \r\n청구 후유장해(지급률 30%) 적정성 관련 제3의료기관을 통한 의료자문 시행 결과,  \r\n위소매절제술 후 상태는 해당 보험 약관상 장해에 해당하지 않는다는 회신 결과 확인됨. \r\n \r\n[고지의무위반 확인] \r\n청약서 상 키 165cm, 체중 55kg 고지 \r\n2019.07.05 구로성심병원 검진 상 키 160.9cm 체중 69.8kg 확인됨.  \r\n해당 사항 관련 고지의무 위반 적용 여부 관련 귀사 검토 필요할 것으로 판단됨.  \r\n근거 동 건 해당 보험 약관  \r\n  \r\n  \r\n3. 결론 \r\n근거 \r\n[약관상 보험자 지급책임의 범위] \r\n고대구로병원에서 시행한 InBody 결과 BMI (30.4) 158.6cm / 76.4kg로 확인되며, 이는 건\r\n강보험 기준 급여 적용 대상에 해당하는 것으로 확인되며,  \r\n해당 보험 약관상 보험 기간 중 진단 확정된 질병으로 봄이 타당할 것으로 사료되나, 청구 \r\n후유장해(지급률 30%) 적정성 관련 제3의료기관을 통한 의료자문 시행 결과, 위소매절제\r\n술 후 상태는 해당 보험 약관상 장해에 해당하지 않는다는 회신 결과 확인됨.  \r\n \r\n[보험금 사정에 관한 중요 근거] \r\n의료자문 회신 \r\n해당 보험 약관상 훙복부 장해의 정의는 질병 또는 외상의 직접 결과로 인한 장해를 말하\r\n며, 노화에 의한 기능장해 또는 질병이나 외상이 없는 상태에서 예방적으로 장기를 절제, \r\n적출한 경우 장해로 보지 않는다.  \r\n결론 부지급 및 계약 유지",
+      "matching": {
+        "dates": {
+          "matched": [],
+          "missed": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-05-12",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-08"
+          ],
+          "extra": [
+            "2025-01-08",
+            "2025-01-15"
+          ],
+          "rate": 0
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "E66.8",
+            "I10.9"
+          ],
+          "extra": [
+            "J04",
+            "J06"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missed": [
+            "구로성심병원",
+            "고대구로병원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "소매절제술",
+            "담낭절제술",
+            "위소매절제술",
+            "가입전치료",
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case24",
+      "caseNum": 24,
+      "patientName": "김종렬",
+      "model": "gpt-4o-mini",
+      "totalPages": 55,
+      "processedAt": "2026-01-25T11:01:29.168Z",
+      "processingTime": 67479,
+      "cost": 0.29700000000000004,
+      "usage": {
+        "prompt_tokens": 2026641,
+        "completion_tokens": 679,
+        "total_tokens": 2027320,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김종렬",
+          "birthDate": null,
+          "gender": "남"
+        },
+        "visitDate": {
+          "date": "2022-08-24",
+          "hospital": "강북삼성병원",
+          "department": "외과"
+        },
+        "chiefComplaint": {
+          "summary": "위암",
+          "onsetDate": "2022-08-24",
+          "details": "조기 위암으로 진단됨"
+        },
+        "diagnoses": [
+          {
+            "code": "C16.1",
+            "nameKr": "위암",
+            "date": "2022-08-24",
+            "isPrimary": true,
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "EGD 검사",
+            "date": "2018-01-01",
+            "result": "위암 발견",
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "부분 위절제술",
+            "date": "2022-08-26",
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Flumarin",
+            "dosage": null,
+            "period": "2025-09-30까지"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "강북삼성병원",
+            "admissionDate": "2022-08-24",
+            "dischargeDate": "2022-09-02",
+            "reason": "위암 수술"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "부분 위절제술",
+            "date": "2022-08-26",
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호",
+          "followUpDate": "2025-10-29"
+        },
+        "extractedDates": [
+          {
+            "date": "2022-08-24",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2022-08-26",
+            "context": "수술일",
+            "type": "수술일"
+          },
+          {
+            "date": "2022-09-02",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-09-30",
+            "context": "추적관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "강북삼성병원"
+        ],
+        "rawTextSummary": "환자는 조기 위암으로 진단받고 부분 위절제술을 시행받음. 수술 후 예후는 양호하며, 추적관찰이 필요함."
+      },
+      "groundTruth": "3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 \r\n내 용 \r\n계약 시 : 사무직 관리자(1급) \r\n피보험자 \r\n직  업 \r\n사고 시 : 사무직 관리자(1급) \r\n현  재 : 사무직 관리자(1급) \r\n보험가입 \r\n경  위 \r\n2022 년 강북삼성병원에서 위암 진단 하 수술적 치료 시행 당사 설계사 신상품 소\r\n개로 가입 권유 받아 위험 보장 목적 하 동 보험 가입.  \r\n중요사항 \r\n고지여부 특이 고지사항 없음.  \r\n피보험자 \r\n면담내용 \r\n해당 보험 고지대상인 3.2.2 관련 고지대상에 해당하는 진료이력 없다는 주장으로 \r\n심평원 진료내역 열람 동의함.  \r\n2022 년 당시 위 1/2 절제 후 최근 동일 부위 암 신규 진단으로 위 전절제술 시행\r\n함을 주장. \r\n \r\n \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2022.08.24 \r\n내 원 일 : 2022.08.24 \r\n내원경위 : 조기위암 진단 하 수술적 치료 위해 내원 \r\n진 단 명 : 위의 체부의 악성 신생물, 조기(C16.20) \r\n입원기간 : 2022.08.24 ~ 2022.09.02 / 9일 입원 \r\n치료내용 : 위 아전절제술(2022.08.26)(보고일:2022.09.06) \r\n검사결과 : 수술 후 조직검사(2022.08.26 / 보고일:2022.09.06) \r\n: early gastric carcinoma \r\n: tubular adenocarcinoma \r\n \r\n강북삼성병원 \r\n2023.01.15 \r\n[2년 이내] 무배당현대해상내삶엔(3N)맞춤간편건강보험 가입 2년 이내 현대해상 \r\n2024.10.15 \r\n[3개월 이내] 무배당현대해상내삶엔(3N)맞춤간편건강보험 가입 3개월 이내 현대해상 \r\n2025.01.15 무배당현대해상내삶엔(3N)맞춤간편건강보험 가입 현대해상 \r\n2025.02.24 \r\n내 원 일 : 2025.02.24 \r\n내원경위 : 경과관찰 목적으로 내원 \r\n통원기간 : 2025.02.24 ~ 2025.09.04 / 2회 통원 \r\n검사결과 : 조직검사(2025.08.21/보고일시:2025.08.22) \r\n: Adenocarcinoma, moderatly differetiated \r\n \r\n강북삼성병원 \r\n2025.09.15 \r\n[청구사항] \r\n내 원 일 : 2025.09.15 \r\n내원경위 : 위암 재발 소견으로 수술적 치료 위해 내원 \r\n진 단 명 : 위의 체부의 악성 신생물, 조기(C16.20) \r\n입원기간 : 2025.09.15 ~ 2025.09.25 / 11일 입원 \r\n치료내용 : 위 전절제술(2025.09.17) \r\n검사결과 : 수술 후 조직검사(2025.09.17 / 보고일:2025.09.24) \r\n: tubular adenocarcinoma, moderatly differetiated \r\n \r\n강북삼성병원 \r\n2026.01.15 무배당현대해상내삶엔(3N)맞춤간편건강보험 가입 1년 경과 시점 현대해상 \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n강북삼성병원에서 '위의 체부의 악성 신생물, 조기(C16.20)' 진단 하 입원 및 수술적 \r\n치료 후 관련 보험금 청구. \r\n직업 \r\n직무 사무직 관리자(1급) \r\n심평원 \r\n심평원 진료내역(2022.10.24 ~ 2025.10.24) 검토 결과,  \r\n동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n \r\n \r\n4. 손해사정결과 \r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n고지의무 위반여부 확인 \r\n  \r\n2. 사고경위 \r\n강북삼성병원에서 '위의 체부의 악성 신생물, 조기(C16.20)' 진단 하 입원 및 수술적 치료 후 관\r\n련 보험금 청구. \r\n  \r\n3. 알릴의무와 관련하여 \r\n치료병원 의무기록 및 심평원 진료내역(2022.10.24 ~ 2025.10.24) 검토 결과, 동 보험 고지대상\r\n에 해당하는 진료내역 없는 것으로 확인됨. \r\n  \r\n4. 금번 청구 관련하여 \r\n금번 청구병명인 '위의 체부의 악성 신생물, 조기(C16.20)'은 2022.09.06 강북삼성병원에서 확정\r\n진단 이후 동 보험 가입 2년 이내인 2023.01.15 재발 또는 연속적인 치료사항은 없는 것으로 \r\n확인됨.  \r\n동 보험 가입 이후 2025.08.21 f/u 시 시행한 위 조직검사 상 Adenocarcinoma, moderatly \r\ndifferetiated 소견으로 수술적 치료 위해 입원 하 2025.09.17 위 전절제술 시행한 것으로 확인\r\n됨.  \r\n해당 '암'은 동 보험 가입 1년 이내인 2025.08.22 확정 진단 받은 것으로 봄이 타당함.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 현대해상에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2022-08-24",
+            "2022-09-02",
+            "2022-08-26"
+          ],
+          "missed": [
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-17",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ],
+          "extra": [
+            "2025-09-30",
+            "2018-01-01"
+          ],
+          "rate": 17
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "C16.20"
+          ],
+          "extra": [
+            "C16.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "강북삼성병원"
+          ],
+          "missed": [
+            "치료병원"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술적",
+            "수술",
+            "전절제술",
+            "아전절제술",
+            "치료",
+            "치료내용",
+            "치료병원",
+            "치료사항은"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case27",
+      "caseNum": 27,
+      "patientName": "박현미",
+      "model": "gpt-4o-mini",
+      "totalPages": 51,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T11:05:47.531Z",
+      "processingTime": 164172,
+      "cost": 0.27,
+      "usage": {
+        "prompt_tokens": 1842466,
+        "completion_tokens": 910,
+        "total_tokens": 1843376,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "박현미",
+          "birthDate": "1977-06-08",
+          "gender": "여"
+        },
+        "visitDate": {
+          "date": "2025-09-08",
+          "hospital": "서울아산병원",
+          "department": "내분비내과"
+        },
+        "chiefComplaint": {
+          "summary": "LUP 0.6cm PTC - L.themi",
+          "onsetDate": null,
+          "details": "갑상선 결절로 인한 수술 필요"
+        },
+        "diagnoses": [
+          {
+            "code": "C73",
+            "nameKr": "갑상선암",
+            "date": "2025-09-09",
+            "isPrimary": true,
+            "hospital": "서울아산병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "US Thyroid biopsy",
+            "date": "2025-02-21",
+            "result": "High suspicion for papillary carcinoma",
+            "hospital": "서울아산병원"
+          },
+          {
+            "name": "CT Head & Neck",
+            "date": "2025-03-19",
+            "result": "Known thyroid cancer, left (T1N0M0)",
+            "hospital": "서울아산병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Thyroid lobectomy and isthmectomy with central node dissection",
+            "date": "2025-09-09",
+            "hospital": "서울아산병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Codeawon-Forte syrup",
+            "dosage": "20ml",
+            "period": "3 times a day for 3 days"
+          },
+          {
+            "name": "Ultracet ER semi tab",
+            "dosage": "325/37.5mg",
+            "period": "2 tablets for 3 days"
+          },
+          {
+            "name": "Treno cap",
+            "dosage": "100mg",
+            "period": "2 capsules for 60 days"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "서울아산병원",
+            "admissionDate": "2025-09-08",
+            "dischargeDate": "2025-09-10",
+            "reason": "Thyroid lobectomy and isthmectomy with central node dissection"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "Thyroid lobectomy and isthmectomy with central node dissection",
+            "date": "2025-09-09",
+            "hospital": "서울아산병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호",
+          "followUpDate": "2025-09-18"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-09-08",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-09-09",
+            "context": "수술일",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-09-10",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-02-21",
+            "context": "검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-03-19",
+            "context": "검사일",
+            "type": "검사일"
+          }
+        ],
+        "extractedHospitals": [
+          "서울아산병원",
+          "중앙대광명병원"
+        ],
+        "rawTextSummary": "환자 박현미는 갑상선 결절로 인해 수술을 받았으며, 진단 결과 갑상선암으로 확인되었다. 수술 후 예후는 양호하며, 추적 관찰이 필요하다."
+      },
+      "groundTruth": "2. 청구사항 \r\n진단병명 갑상선의 악성신생물(C73) \r\n사고일자 2025-09-08 \r\n사고내용 \r\n피보험자 동 보험 가입 후 시행한 검진 결과 갑상선 이상 소견으로 서울아산병원 \r\n내원하여 시행한 정밀 검사 결과 '갑상선의 악성신생물(C73)' 진단 및 수술적 치료 \r\n후 관련 보험금 청구함. \r\n치료내용 갑상선절제술 및 경부림프절 절제술 \r\n청구내용 유사암진단비 등 \r\n \r\n \r\n3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 내 용 \r\n피보험자 \r\n직  업 \r\n계약 시 : 전업주부(1급) \r\n사고 시 : 전업주부(1급) \r\n현  재 : 전업주부(1급) \r\n보험가입 \r\n경  위 보험 리모델링 진행하며 당사 보험 가입.  \r\n중요사항 \r\n고지여부 특이 기 고지사항 없음.  \r\n피보험자 \r\n면담내용 \r\n피보험자 면담 시 개인정보 유출에 대한 우려 등으로 심평원 진료내역 제공 동의\r\n할 수 없어 명확한 고지의무 위반여부 검토 위해 추가 설득하여 본인 명의 핸드폰\r\n으로 조회하여 동 조사자 검토 결과 심평원 진료내역 전체 내역은 4page 분량으로 \r\n해당 내용 상 동 보험(일반고지상품) 고지대상에 해당하는 진료내역 없는 것으로 \r\n확인됨.  \r\n피보험자는 면담 시 관련 자료 제공에 동의하였으나, 면담 이후 해당 내용 제공할 \r\n수 없다는 주장임.  \r\n면담 시 서울아산병원 (내분비내과, 외과)에 한하여 동의서류 1매 작성 제공함.  \r\n  \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2019.06.22 \r\n[5년 이내] 보험가입 5년 이내 ㈜KB손해보험 \r\n2023.02.22 \r\n내 원 일 : 2023.02.22 \r\n내원경위 : 검진 목적 내원 \r\n진 단 명 : 정상B \r\n통원기간 : 2023.02.22 / 1회 통원 \r\n검사결과 : 일반건강검진 \r\n: 갑상선 기능검사 이상 無 \r\n \r\n피보험자 제공 \r\n2023.06.22 \r\n[1년 이내] 보험가입 1년 이내 ㈜KB손해보험 \r\n2024.03.22 \r\n[3개월 이내] 보험가입 3개월 이내 ㈜KB손해보험 \r\n2024.06.22 KB 9회주는 암보험Plus(무배당)(24.05)_2종_무해지 가입 ㈜KB손해보험 \r\n \r\n \r\n2024.06.22 KB 5.10.10 플러스 실속건강보험(무배당)(24.05)_2형_무해지 가입 ㈜KB손해보험 \r\n2024.07.19 \r\n내 원 일 : 2024.07.19 \r\n내원경위 : 종합건강검진 목적으로 내원 \r\n통원기간 : 2024.07.19 / 1회 통원 \r\n검사결과 : 종합건강검진 \r\n갑상선초음파 \r\n: 좌엽 석회동반 저에코 결절(0.61cm), 우엽 저에코\r\n결절(0.43cm) \r\n \r\n휴내과의원 \r\n2024.10.07 \r\n내 원 일 : 2024.10.07 \r\n내원경위 : 갑상선 초음파상 종대(TS) 발견되어 FNA(세침흡인\r\n검사) 권유받아 내원 \r\n통원기간 : 2024.10.07 ~ 2024.10.11 / 2회 통원 \r\n검사결과 : 갑상선 세침흡인세포검사(2024.10.07) \r\n: 드문 여포세포(Rare follicular cells) 관찰됨 (2023 \r\nBethesda Category I) \r\n의사소견 : 갑상선 기능검사(TS) 6개월 후 추적 관찰(F/U) 예정 \r\n \r\n이레미즈외과 \r\n2024.10.23 \r\n[청구사항] \r\n내 원 일 : 2024.10.23 \r\n내원경위 : 타 병원 검진 상 갑상선 이상 소견으로 추적 검사 \r\n위해 중앙대광명병원에서 진료의뢰 하 내원 \r\n진 단 명 : 갑상선의 악성신생물(C73) \r\n입원기간 : 2025.09.08 ~ 2025.09.10 / 3일 입원 \r\n통원기간 : 2024.10.23 ~ 2025.09.18 / 5회 통원 \r\n치료내용 : 갑상선절제술 및 경부림프절 절제술 \r\n검사결과 : 수술 후 조직검사(2025.09.09 / 보고일 : 2025.09.16) \r\n: FOLLICULAR VARIANT OF PALILLARY CARCINOMA \r\n \r\n서울아산병원 \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n피보험자 동 보험 가입 후 시행한 검진 결과 갑상선 이상 소견으로 서울아산병원 \r\n내원하여 시행한 정밀 검사 결과 '갑상선의 악성신생물(C73)' 진단 및 수술적 치료 \r\n후 관련 보험금 청구함. \r\n직업 \r\n직무 전업주부(1급) \r\n심평원 \r\n피보험자 면담 시 개인정보 유출에 대한 우려 등으로 심평원 진료내역 제공 동의\r\n할 수 없어 명확한 고지의무 위반여부 검토 위해 추가 설득하여 본인 명의 핸드폰\r\n으로 조회하여 동 조사자 검토 결과 심평원 진료내역 전체 내역은 4page 분량으로 \r\n해당 내용 상 동 보험(일반고지상품) 고지대상에 해당하는 진료내역 없는 것으로 \r\n확인됨. \r\n \r\n \r\n4. 손해사정결과 \r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n고지의무 위반여부 검토  \r\n  \r\n2. 사고경위 \r\n피보험자 동 보험 가입 후 시행한 검진 결과 갑상선 이상 소견으로 서울아산병원 내원하여 시\r\n행한 정밀 검사 결과 '갑상선의 악성신생물(C73)' 진단 및 수술적 치료 후 관련 보험금 청구함. \r\n  \r\n3. 알릴의무와 관련하여 \r\n가입 전 건강검진 결과, 치료병원 의무기록 검토 결과 금번 청구병명은 동 보험 가입 후 \r\n2024.07.19 휴내과의원에서 시행한 건강검진 결과 갑상선 결절 소견으로 최초 진단 하 진료의\r\n뢰 되어 2024.10.23 서울아산병원 최초 내원한 것으로 확인되며,  \r\n기타 고지의무 위반사항 관련 ICPS 내역 및 조사자 확인내역으로 볼 때, 동 보험 고지대상에 \r\n해당하는 기저질환은 없는 것으로 판단됨.  \r\n  \r\n4. 금번 청구 관련하여 \r\n금번 청구병명인 '갑상선의 악성신생물(C73)'은 동 보험 가입 이후인 2025.09.09 수술 후 조직\r\n검사 결과 FOLLICULAR VARIANT OF PALILLARY CARCINOMA 소견으로 2025.09.16 확정 진단 \r\n분류된 '암'으로 봄이 타당할 것으로 판단됨.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB손해보험에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-09-08",
+            "2025-09-10",
+            "2025-09-09"
+          ],
+          "missed": [
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2024-10-23",
+            "2025-09-18",
+            "2025-09-16"
+          ],
+          "extra": [
+            "2025-02-21",
+            "2025-03-19"
+          ],
+          "rate": 21
+        },
+        "kcdCodes": {
+          "matched": [
+            "C73"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "hospitals": {
+          "matched": [
+            "서울아산병원",
+            "중앙대광명병원"
+          ],
+          "missed": [
+            "치료병원",
+            "휴내과의원"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [
+            "초음파",
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술적",
+            "수술",
+            "갑상선절제술",
+            "절제술",
+            "치료",
+            "치료내용",
+            "치료병원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case28",
+      "caseNum": 28,
+      "patientName": "박혜경",
+      "model": "gpt-4o-mini",
+      "totalPages": 85,
+      "processedAt": "2026-01-25T11:04:09.292Z",
+      "processingTime": 126385,
+      "cost": 0.459,
+      "usage": {
+        "prompt_tokens": 3131691,
+        "completion_tokens": 755,
+        "total_tokens": 3132446,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "박혜경",
+          "birthDate": null,
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2025-08-04",
+          "hospital": "가톨릭대학교 은평성모병원",
+          "department": "산부인과"
+        },
+        "chiefComplaint": {
+          "summary": "Lung cancer, RUL, cT1aN0M0, MIA.",
+          "onsetDate": null,
+          "details": "Patient underwent unipolar VATS RUL posterior (S2) segmentectomy with MLND."
+        },
+        "diagnoses": [
+          {
+            "code": "C34.1",
+            "nameKr": "폐암",
+            "date": "2025-08-06",
+            "isPrimary": true,
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT Chest",
+            "date": "2025-08-05",
+            "result": "Persistent GGO in RUL - DX. AIS/MIA.",
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Unipolar VATS RUL posterior (S2) segmentectomy with MLND",
+            "date": "2025-08-06",
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Dexiant DP cap. 30mg",
+            "dosage": "30mg",
+            "period": "1x1"
+          },
+          {
+            "name": "Mucolytic tab. 625mg",
+            "dosage": "1x3",
+            "period": "7 days"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "가톨릭대학교 은평성모병원",
+            "admissionDate": "2025-08-04",
+            "dischargeDate": "2025-08-14",
+            "reason": "Lung cancer, RUL, cT1aN0M0, MIA."
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "Hysteroscopic myomectomy & polypectomy",
+            "date": "2020-01-03",
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "Patient is stable and tolerable.",
+          "followUpDate": "2025-09-08"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-08-04",
+            "context": "Admission date",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-08-06",
+            "context": "Surgery date",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-08-14",
+            "context": "Discharge date",
+            "type": "퇴원일"
+          }
+        ],
+        "extractedHospitals": [
+          "가톨릭대학교 은평성모병원"
+        ],
+        "rawTextSummary": "Patient diagnosed with lung cancer and underwent surgery. Follow-up scheduled."
+      },
+      "groundTruth": "3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 \r\n내 용 \r\n계약 시 : 전업주부(1급) \r\n피보험자 \r\n직  업 \r\n사고 시 : 전업주부(1급) \r\n현  재 : 전업주부(1급) \r\n보험가입 \r\n경  위 위험 보장 목적 하 동 보험 가입. \r\n중요사항 \r\n고지여부 대장요종절제술 기 고지 \r\n피보험자 \r\n면담내용 \r\n피보험자 면담 어려워 비대면 면담 진행 요청.  \r\n특이 기왕력 없음을 주장으로 심평원 진료내역 열람 동의. \r\n \r\n \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2018.10.18 \r\n[5년 이내] KB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 5년 이내 ㈜KB손해보험 \r\n2020.10.18 \r\n[3년 이내] KB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 3년 이내 ㈜KB손해보험 \r\n2023.07.18 \r\n[3개월 이내] \r\nKB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 3개월 이내 ㈜KB손해보험 \r\n2023.10.18 KB 3.3.5 슬기로운 간편실속종합건강보험Plus(무배당)(23.09) 가\r\n입 ㈜KB손해보험 \r\n2025.07.03 \r\n[청구사항] \r\n초 진 일 : 2025.07.03 \r\n내원경위 : 폐렴 치료 후 감기 객담 지속 증상으로 시행한 흉\r\n부CT 검사상 이상 소견으로 내원 \r\n진 단 명 : 폐암, 선암종(C34.99) \r\n입원기간 : 2025.08.04 ~ 2025.08.14 / 11일 입원 \r\nAO240 간호간병통합서비스 입원관리실 \r\n치료내용 : 우상엽 후분절(S2) 폐 절제술(2025.08.06) \r\n검사결과 : 수술 후 조직검사(2025.08.06)(보고일: 2025.08.12) \r\n: Minimally Invasive Adenocarcinoma(MIA), \r\npT1miN0 \r\n \r\n은평성모병원\r\n(심장혈관흉부\r\n외과) \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n폐렴 치료 후 경과관찰 중 폐암 소견으로 은평성모병원 입원 하 '폐암, 선암종\r\n(C34.99)' 진단 및 수술적 치료 후 관련 보험금 청구함. \r\n직업 \r\n직무 \r\n전업주부(1급) \r\n심평원 \r\n심평원 진료내역(2020.08.26 ~ 2023.10.18) \r\n1. 2022.08.28 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 12일 입원 \r\n2. 2022.10.04 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 3일 입원 - 미 고지 사항  \r\n \r\n \r\n4. 손해사정결과 \r\n고지위반 예 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n고지의무 위반여부 및 진단 적정성 검토 \r\n  \r\n2. 사고경위 \r\n폐렴 치료 후 경과관찰 중 폐암 소견으로 은평성모병원 입원 하 '폐암, 선암종(C34.99)' 진단 및 \r\n수술적 치료 후 관련 보험금 청구함. \r\n  \r\n3. 알릴의무와 관련하여 \r\n심평원 진료내역(2020.08.26 ~ 2023.10.18) \r\n1. 2022.08.28 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 12일 입원 \r\n2. 2022.10.04 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 3일 입원 \r\n상기 고지의무 위반사항 확인. \r\n  \r\n4. 금번 청구 관련하여 \r\n금번 청구병명은 동 보험 가입 및 암 보장 개시일 이후 2025.07.03 폐렴 치료 후 경과관찰 중 \r\n시행한 흉부CT 검사 상 이상 소견으로 2025.08.04 입원하여 시행한 우상엽 후분절(S2) 폐 절\r\n제술(2025.08.06) 조직검사 결과 : Minimally Invasive Adenocarcinoma(MIA), pT1miN0 소견으로 \r\n2025.08.12 '폐암, 선암종(C34.99)' 확정 진단 받은 것으로 확인됨.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB손해보험에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-04",
+            "2025-08-14",
+            "2025-08-06"
+          ],
+          "missed": [
+            "2018-10-18",
+            "2020-10-18",
+            "2023-07-18",
+            "2023-10-18",
+            "2025-07-03",
+            "2025-08-12",
+            "2020-08-26",
+            "2022-08-28",
+            "2022-10-04"
+          ],
+          "extra": [
+            "2025-08-05",
+            "2020-01-03"
+          ],
+          "rate": 25
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "C34.99",
+            "O24",
+            "D13.5"
+          ],
+          "extra": [
+            "C34.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "은평성모병원"
+          ],
+          "missed": [
+            "신촌세브란스병원"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "examinations": {
+          "matched": [
+            "CT"
+          ],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "수술적",
+            "대장요종절제술",
+            "절제술",
+            "치료",
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case29",
+      "caseNum": 29,
+      "patientName": "서문정숙",
+      "model": "gpt-4o-mini",
+      "totalPages": 14,
+      "processedPages": 14,
+      "processedAt": "2026-01-25T11:08:51.710Z",
+      "processingTime": 91002,
+      "cost": 0.0756,
+      "usage": {
+        "prompt_tokens": 516407,
+        "completion_tokens": 822,
+        "total_tokens": 517229,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "서문정숙",
+          "birthDate": "1958-12-15",
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2024-08-17",
+          "hospital": "더자인병원",
+          "department": "IM"
+        },
+        "chiefComplaint": {
+          "summary": "diarrhea, headache, dizziness",
+          "onsetDate": "2024-08-15",
+          "details": "Symptoms include nausea, vomiting, diarrhea, and headache."
+        },
+        "diagnoses": [
+          {
+            "code": "A01.0",
+            "nameKr": "살모넬라 장염",
+            "date": "2024-08-17",
+            "isPrimary": true,
+            "hospital": "더자인병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT abdomen-pelvic",
+            "date": "2024-08-19",
+            "result": "Diffuse bowel wall thickening with mucosal enhancement.",
+            "hospital": "더자인병원"
+          },
+          {
+            "name": "MRI brain",
+            "date": "2024-09-04",
+            "result": "Multifocal hyperintense foci at bilateral subcortical and deep white matter.",
+            "hospital": "더자인병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "antibiotics",
+            "date": "2024-08-17",
+            "hospital": "더자인병원"
+          },
+          {
+            "name": "fluids",
+            "date": "2024-08-17",
+            "hospital": "더자인병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "medication for diarrhea",
+            "dosage": "as prescribed",
+            "period": "until symptoms resolve"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "더자인병원",
+            "admissionDate": "2024-08-17",
+            "dischargeDate": "2024-08-24",
+            "reason": "diarrhea and dehydration"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "Improvement expected with treatment.",
+          "followUpDate": "2024-09-04"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-08-17",
+            "context": "Initial visit for diarrhea.",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-08-19",
+            "context": "CT abdomen-pelvic examination.",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-09-04",
+            "context": "MRI brain examination.",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-08-15",
+            "context": "Onset of symptoms.",
+            "type": "증상 발생일"
+          },
+          {
+            "date": "2024-08-24",
+            "context": "Discharge from hospital.",
+            "type": "퇴원일"
+          }
+        ],
+        "extractedHospitals": [
+          "더자인병원"
+        ],
+        "rawTextSummary": "환자는 2024년 8월 17일에 설사와 구토 증상으로 내원하였으며, 진단 결과 살모넬라 장염으로 확인되었다. 치료로 항생제와 수액을 투여받았고, 8월 24일에 퇴원하였다. 추적 관찰은 9월 4일에 진행될 예정이다."
+      },
+      "groundTruth": "3. ���系�� (���) \r\n��. �Ǻ����� ������ \r\n�� �� �� �� \r\n�Ǻ����� \r\n��  �� \r\n��� �� : �Ĵ������(2��) \r\n��� �� : �Ĵ������(2��) \r\n��  �� : �Ĵ������(2��) \r\n���谡�� \r\n��  �� ���� ���� ���� �� �� ���� ���� \r\n�߿���� \r\n�������� Ư�� �������� ����. \r\n�Ǻ����� \r\n��㳻�� \r\n2024.09 �뱸 ���� ���� ������ �ӹ��� �� ���� �������� �������������а� ����\r\n�Ͽ� �˻� ��� �����Ʒ� �ǽ� �Ұ� ����. ���� ���ܼ� ���� �Ͽ����� �ش� ������ \r\n�Ű�ܰ� ������ ���� ����� ���� ���� �Ұ� �Ͽ��� ����.  \r\n��� �Ƿ�� DB���غ��� �Ǽպ���� û�� �� \r\n���� ���ٸ� ġ�� ���� ������ �� 2025.09 ���� ����Ͽ� 2025.09.26 �����κ��� \r\n�����Ͽ� ���� �˻� ��� �����Ʒ��� ���� �ް� ���� ����� û���Ͽ����� ����. \r\n  \r\n  \r\n \r\n \r\n��. �Ǻ����� ���»��� ��� ���ǥ \r\n���� ������� ����/��� \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� ��KB���غ��� \r\n2024.09.04 \r\n�� �� �� : 2024.09.04 \r\n����Ⱓ : 2024.09.04 / 1ȸ ��� \r\n�˻��� : Brain MRI + MRA(2024.09.04) \r\n: Suggestive of small aneurysm, 2 mm, left \r\nparaclinoid ICA  \r\n: ���� ����� ���浿�� ���� ���Ʒ�, (2mm) �ǽ� \r\n�Ұ�. \r\n \r\n������������\r\n�а� \r\n2025.09.26 \r\n[û������] \r\n�� �� �� : 2025.09.26 \r\n�������� : 2�� ������ �Ӹ��� ���̰� ���� ������ �ּҷ� ��\r\n�� \r\n�� �� �� : �Ŀ����� ���� �����Ʒ�(I67.1) \r\n����Ⱓ : 2025.09.26 ~ 2025.09.29 / 2ȸ ��� \r\nġ�᳻�� : 2�� �� ������� ���� \r\n�˻��� : Brain MRI + MRA(2025.09.26) \r\n: A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA \r\n: ���� ����� �ظ� ������ ���浿�ƿ� 1~2mm ũ\r\n����, ���� �������� ����� ���� ���� ���Ʒ� ��\r\n��. \r\n \r\n�����κ��� \r\n  \r\n��. Ÿ ����� ó������ \r\n����� ��ǰ�� �������� ó������ \r\n�����ػ�     ����ɻ� ���� �� \r\n  \r\n��. ��ŸȮ�λ��� \r\n���(�ߺ�) \r\n���� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' \r\n���� �� ���� ����� û����.  \r\n���� \r\n���� �Ĵ������(2��) \r\n����� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�.  \r\n2024.09.04 �������������а����� �˻� ���� 2025.09.26���� �߰� �˻� �� ġ���\r\n�� ���� ������ Ȯ�ε�.  \r\n \r\n \r\n4. ���ػ������ \r\n�������� �ƴϿ� ���ʼ��� �� �����Ҹ� �� \r\n�ο����� �� �����䱸����   \r\n��� ���� ����� ���Ͽ� �� ��, \r\n  \r\n1. �������� �� û������ \r\n�����ǹ� ���ݿ��� �� ���� ������ ����. \r\n  \r\n2. ������� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\r\n�� ����� û����. \r\n  \r\n3. �˸��ǹ��� �����Ͽ� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�. \r\n  \r\n4. �ݹ� û�� �����Ͽ� \r\n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \r\n \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� \r\n \r\n2024.09.04 �������������а�(�뱸): Suggestive of small aneurysm, 2 mm, left paraclinoid ICA \r\n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \r\n \r\n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) 1�� ��� ���� \r\n \r\n2025.09.26 �����κ���: Brain MRA �� A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \r\nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \r\n \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а����� �˻� \r\n���� 2025.09.26���� �߰� �˻� �� ġ����� ���� ������ Ȯ�ε�. \r\n  \r\n5. ���ػ��� ��� \r\n��� ���� �����Ͽ� �ͻ� �ɻ� ���ؿ� �ǰ� ���� �� ó������ Ÿ���� ������ �Ǵܵ�.  \r\n  \r\n��� ���� �� ���� �����ڷ� Ȯ�� �� ��KB���غ��迡�� ���� �Ǵ��� �ֽñ� �ٶ��ϴ�.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-09-04"
+          ],
+          "missed": [
+            "2025-09-26",
+            "2024-08-13",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ],
+          "extra": [
+            "2024-08-17",
+            "2024-08-19",
+            "2024-08-15",
+            "2024-08-24"
+          ],
+          "rate": 14
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "I67.1"
+          ],
+          "extra": [
+            "A01.0"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "examinations": {
+          "matched": [
+            "MRI"
+          ],
+          "missed": [
+            "MRA"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case30",
+      "caseNum": 30,
+      "patientName": "송금숙",
+      "model": "gpt-4o-mini",
+      "totalPages": 18,
+      "processedPages": 18,
+      "processedAt": "2026-01-25T11:10:32.731Z",
+      "processingTime": 80415,
+      "cost": 0.09720000000000001,
+      "usage": {
+        "prompt_tokens": 663746,
+        "completion_tokens": 779,
+        "total_tokens": 664525,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "송금숙",
+          "birthDate": null,
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2025-03-23",
+          "hospital": "우리들병원",
+          "department": "정형외과"
+        },
+        "chiefComplaint": {
+          "summary": "허리 통증",
+          "onsetDate": "10년 전",
+          "details": "양쪽 무릎 통증, 허리 통증"
+        },
+        "diagnoses": [
+          {
+            "code": "M51.1",
+            "nameKr": "척추관 협착증",
+            "date": "2025-03-24",
+            "isPrimary": true,
+            "hospital": "우리들병원"
+          },
+          {
+            "code": "M43.1",
+            "nameKr": "후방 전위증",
+            "date": "2025-03-24",
+            "isPrimary": false,
+            "hospital": "우리들병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "MRI",
+            "date": "2025-03-23",
+            "result": "척추관 협착증, 디스크 탈출증",
+            "hospital": "우리들병원"
+          },
+          {
+            "name": "CT",
+            "date": "2025-03-23",
+            "result": "척추관 협착증, 디스크 탈출증",
+            "hospital": "우리들병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "PLIF + PF",
+            "date": "2025-03-24",
+            "hospital": "우리들병원"
+          }
+        ],
+        "medications": [],
+        "hospitalizations": [
+          {
+            "hospital": "우리들병원",
+            "admissionDate": "2025-03-23",
+            "dischargeDate": "2025-04-11",
+            "reason": "수술 후 회복"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "PLIF + PF",
+            "date": "2025-03-24",
+            "hospital": "우리들병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "좋은 고정 상태",
+          "followUpDate": "2025-04-11"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-03-23",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-04-11",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-03-24",
+            "context": "수술일",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-03-12",
+            "context": "MRI 검사일",
+            "type": "검사일"
+          }
+        ],
+        "extractedHospitals": [
+          "우리들병원"
+        ],
+        "rawTextSummary": "환자는 허리 통증으로 내원하였으며, MRI 및 CT 검사 결과 척추관 협착증과 디스크 탈출증 진단을 받았다. 2025년 3월 24일 PLIF + PF 수술을 시행하였고, 4월 11일 퇴원하였다."
+      },
+      "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \r\n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \r\n2025.03.23 \r\n[청구사항] \r\n내 원 일 : 2025.03.23 \r\n내원경위 : 요추부 통증을 주소로 내원 \r\n진 단 명 : 제4-5요추-제1천추간 추간판 탈출증 M512 \r\n제4-5요추-제1천추간 요추간 척추관 협착증 \r\nM4806 \r\n신경뿌리병증을 동반한 요추 및 기타 추간판장애 \r\nM511 \r\n요추부 후만증 M4026 \r\n입원기간 : 2025.03.23 ~ 2025.04.11 / 20일 입원 \r\n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \r\n입원 간 도수치료 7회 \r\n2025.04.22 ~ 2025.09.09 22회 도수치료 \r\n검사결과 : 2025.3.12 요추 MRI  \r\n제4-5요추-제1천추간 추간판 탈출 \r\n \r\n우리들병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[치료 적정성 확인] \r\n금번 우리들병원에서 시행한 도수치료(총 29회) 적정성 관련 피보험자 동의 하 제3의료\r\n기관을 통한 의료자문 결과는 아래와 같음.  \r\n \r\n통합하여 최대 12회가 적절한 시행횟수로 사료 \r\n향 후 도수치료는 필요하지 않을 것으로 판단 \r\n(자문회신서 별첨) \r\n근거 의료자문 회신원 \r\n  \r\n  \r\n  \r\n \r\n \r\n3. 결론 \r\n근거 \r\n[약관상 보험자 지급책임의 범위] \r\n금번 우리들병원에서 '제4-5요추-제1천추간 추간판 탈출증 (M512), 제4-5요추-제1천추\r\n간 요추간 척추관 협착증 (M4806), 신경뿌리병증을 동반한 요추 및 기타 추간판장애 \r\n(M511), 요추부 후만증 (M4026)' 등 진단 및 입원 하 제4-5-천추1번 유합술 시행. \r\n입원 중 도수치료 7회, 외래 총 22회 도수치료 청구건으로,  \r\n청구 도수치료 적정성 관련 의료자문 검토 결과 현재까지 통합하여 최대 12회 적정 향후 \r\n도수치료 불 필요 소견 확인됨.  \r\n \r\n해당 내용 관련 동 보험 계약자 강한 불만 제기하며 현재까지 청구된 도수치료 비용은 인\r\n정하여 지급 결정하여 줄 것을 독려함.  \r\n \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 일부지급 및 계약 유지",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-03-23",
+            "2025-04-11",
+            "2025-03-24"
+          ],
+          "missed": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-04-22",
+            "2025-09-09",
+            "2025-3-12"
+          ],
+          "extra": [
+            "2025-03-12"
+          ],
+          "rate": 38
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "M51",
+            "M48",
+            "M40"
+          ],
+          "extra": [
+            "M51.1",
+            "M43.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "우리들병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [
+            "MRI"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용",
+            "도수치료",
+            "치료",
+            "도수치료는"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case34",
+      "caseNum": 34,
+      "patientName": "윤희정",
+      "model": "gpt-4o-mini",
+      "totalPages": 52,
+      "processedAt": "2026-01-25T11:07:16.106Z",
+      "processingTime": 82259,
+      "cost": 0.2808,
+      "usage": {
+        "prompt_tokens": 1916136,
+        "completion_tokens": 814,
+        "total_tokens": 1916950,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "윤희정",
+          "birthDate": "1970-03-24",
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2025-08-10",
+          "hospital": "일산병원",
+          "department": "외과"
+        },
+        "chiefComplaint": {
+          "summary": "갑상선 암",
+          "onsetDate": "2012-12-05",
+          "details": "갑상선암으로 진단받고 수술 후 경과 관찰 중"
+        },
+        "diagnoses": [
+          {
+            "code": "C73",
+            "nameKr": "갑상선암",
+            "date": "2012-12-05",
+            "isPrimary": true,
+            "hospital": "일산병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "목 초음파",
+            "date": "2025-07-18",
+            "result": "종양 재발 없음",
+            "hospital": "일산병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "수술",
+            "date": "2025-08-11",
+            "hospital": "일산병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Synthroid tab",
+            "dosage": "100mcg",
+            "period": "6개월"
+          },
+          {
+            "name": "Alfabone soft cap",
+            "dosage": "0.5mcg",
+            "period": "6개월"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "일산병원",
+            "admissionDate": "2025-08-10",
+            "dischargeDate": "2025-08-14",
+            "reason": "갑상선암으로 인한 수술"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "MRND (Radical Neck Lymphatic Dissection)",
+            "date": "2025-08-11",
+            "hospital": "일산병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호, 정기 추적 관찰 필요",
+          "followUpDate": "2025-09-10"
+        },
+        "extractedDates": [
+          {
+            "date": "2012-12-05",
+            "context": "갑상선암 진단일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-10",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-08-11",
+            "context": "수술일",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-08-14",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-07-18",
+            "context": "목 초음파 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-09-10",
+            "context": "추적 관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "일산병원"
+        ],
+        "rawTextSummary": "환자는 갑상선암으로 진단받고 수술을 받았으며, 현재 경과 관찰 중이다. 수술 후 재발 여부를 확인하기 위해 정기적으로 검사를 받고 있다."
+      },
+      "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2017.06.13 \r\n[가입전치료] \r\n내 원 일 : 2017.06.13 \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : d/t thyroid ca, Rt. (T2N0) \r\n통원기간 : 2017.06.13 ~ 2018.02.27 / 3회 통원 \r\n치료내용 : 신지로이드 300일 처방  \r\n \r\n일산병원(외과) \r\n2018.03.29 (무) 간편가입100세시대건강보험(갱신형)[1종:간편심사형] 가입 NH농협손해보험 \r\n2018.04.17 \r\n[가입전치료] \r\n내 원 일 : 2018.04.17  \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : d/t thyroid ca, Rt. (T2N0) \r\n통원기간 : 2018.04.17 ~ 2024.01.19 / 12회 통원 \r\n치료내용 : 약물처방 및 경과관찰  \r\n \r\n일산병원 \r\n2025.06.07 단체상해보험 가입 NH농협손해보험 \r\n2025.06.24 \r\n[청구사항] \r\n내 원 일 : 2025.06.24  \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : 갑상선의 유두상 암종(C73) \r\n경부 림프절로의 전이(C77.0) \r\n입원기간 : 2025.08.10 ~ 2025.08.14 / 5일 입원 \r\n치료내용 : 우측 측경부임파선 곽청술(2025.08.11) \r\n검사결과 : 갑상선 초음파(2025.06.12) \r\ns/p total thyroidectomy(갑상선 전 절제술 후 상태) \r\n우측 경정맥 림프절(Level III) 부위 약 1.7 cm 크기 \r\n종대 (병적 림프절 가능성, FNAB 권고) \r\n수술부위(Op bed)에서 재발 소견 없음 \r\n \r\n조직검사(2025.06.24)(보고일:2025.07.02) \r\npapillary thyroid carcinoma, metastatic \r\n \r\n수술 후 조직검사(2025.08.11)(보고일:2025.08.14) \r\n갑상선 악성종양 (Malignant neoplasm of thyroid \r\ngland) \r\n림프절 전이 (Lymph node metastasis)(2/23) \r\n \r\n일산병원 \r\n  \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[단체상해보험 보상 대상 여부 확인] \r\n2025.06.07 단체상해보험 가입 \r\n2025.07.02 일산병원 조직검사 상 papillary thyroid carcinoma, metastatic 최초 진단 \r\n2025.09.05 단체상해보험 암 보장 개시일 \r\n \r\n단체상해보험에 한하여 금번 청구병명인 '경부 림프절로의 전이(C77.0)'은 암 보장 개시일 \r\n이내 확정 진단 받은 '암'으로 봄이 타당할 것으로 판단됨.  \r\n \r\n[일반암 진단 적정성 여부 확인] \r\n청구병명인 '경부 림프절로의 전이(C77.0)'는 경부 림프절(Level II, III)에서 전이 확인됨. \r\nC77 (Secondary and unspecified malignant neoplasm of lymph nodes, 림프절의 이차성 및 \r\n상세불명 악성 신생물)로 전이 여부 자체를 '악성종양' 진단 근거로 판단됨.  \r\n \r\n[고지의무위반 확인] \r\n심평원 진료내역(2020.09.02 ~ 2024.01.26) 검토 결과, 무)NH베스트간병보험(2024.01.26) 보\r\n험 가입 전 고지의무 위반사항에 해당하는 진료내역 없는 것으로 확인됨.  \r\n근거 동 건 해당 보험 약관 \r\n  \r\n  \r\n3. 결론 \r\n근거 \r\n[동 건 조사 결과] \r\n금번 '경부 림프절로의 전이(C77.0)' 최초 확정 진단일은 2025.07.02로 확인.  \r\n이는 과거 2012년 진단 후 5년 이상 경과 후 확정 진단 받은 암에 해당하며 해당 보험 \r\n기간 중 새롭게 발생한 암으로 해당 보험 약관상 전이암의 경우 원발암 기준으로 분류하고 \r\n있는 바, 귀사 심사 기준에 의거 검토 후 지급 결정 함이 타당할 것으로 판단됨.  \r\n \r\n단체상해보험 암 보장 개시일은 2025.09.05이나 해당 보험 약관상 계약 종료일로부터 14\r\n일 이내 갱신의 경우 암 보장개시일 적용하지 않는 것으로 확인됨.  \r\n \r\n기타 증권 관련 암 진단 적정성 및 기타 고지의무 위반사항에 해당하는 사항은 없는 것으\r\n로 확인되는 바,  \r\n \r\n귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 일부 지급 및 계약 유지 의견 ",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-10",
+            "2025-08-14",
+            "2025-08-11"
+          ],
+          "missed": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2024-01-19",
+            "2025-06-07",
+            "2025-06-24",
+            "2025-06-12",
+            "2025-07-02",
+            "2025-09-05",
+            "2020-09-02",
+            "2024-01-26"
+          ],
+          "extra": [
+            "2012-12-05",
+            "2025-07-18",
+            "2025-09-10"
+          ],
+          "rate": 20
+        },
+        "kcdCodes": {
+          "matched": [
+            "C73"
+          ],
+          "missed": [
+            "C77.0",
+            "C77"
+          ],
+          "extra": [],
+          "rate": 33
+        },
+        "hospitals": {
+          "matched": [
+            "일산병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [
+            "초음파"
+          ],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [
+            "수술",
+            "수술부위"
+          ],
+          "missed": [
+            "절제술",
+            "가입전치료",
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 40
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case38",
+      "caseNum": 38,
+      "patientName": "이영희",
+      "model": "gpt-4o-mini",
+      "totalPages": 115,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T11:12:13.163Z",
+      "processingTime": 105215,
+      "cost": 0.27,
+      "usage": {
+        "prompt_tokens": 1842466,
+        "completion_tokens": 813,
+        "total_tokens": 1843279,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "이영희",
+          "birthDate": "1957-12-11",
+          "gender": "여"
+        },
+        "visitDate": {
+          "date": "2025-08-03",
+          "hospital": "이대목동병원",
+          "department": "외과"
+        },
+        "chiefComplaint": {
+          "summary": "Abnormal uterine and vaginal bleeding",
+          "onsetDate": "2025-08-03",
+          "details": "Endometrial cancer unknown stage"
+        },
+        "diagnoses": [
+          {
+            "code": "C54.1",
+            "nameKr": "자궁내막암",
+            "date": "2025-08-03",
+            "isPrimary": true,
+            "hospital": "이대목동병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT Abdomen & Pelvis",
+            "date": "2025-02-10",
+            "result": "No evidence of metastasis in abdominopelvic cavity",
+            "hospital": "이대목동병원"
+          },
+          {
+            "name": "Mammography",
+            "date": "2025-02-17",
+            "result": "Negative finding in right breast",
+            "hospital": "이대목동병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "TAH BSO BPLND",
+            "date": "2025-08-21",
+            "hospital": "이대목동병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Levothyroxine",
+            "dosage": "0.05mg",
+            "period": "60 days"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "이대목동병원",
+            "admissionDate": "2025-08-21",
+            "dischargeDate": "2025-08-28",
+            "reason": "Endometrial cancer staging operation"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "Laparoscopic total hysterectomy",
+            "date": "2025-08-21",
+            "hospital": "이대목동병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "Continued monitoring for cancer recurrence",
+          "followUpDate": "2025-09-21"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-08-03",
+            "context": "Initial visit for abnormal bleeding",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-21",
+            "context": "Surgery date",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-08-28",
+            "context": "Discharge date",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2025-09-21",
+            "context": "Follow-up appointment",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "이대목동병원"
+        ],
+        "rawTextSummary": "이영희 환자는 2025년 8월 3일 비정상적인 자궁 출혈로 내원하였으며, 자궁내막암으로 진단받고 2025년 8월 21일 수술을 받았다. 이후 2025년 8월 28일 퇴원하였으며, 2025년 9월 21일 추적관찰을 계획하고 있다."
+      },
+      "groundTruth": "청구내용피보험자 2015년 이대목동병원에서 유방암 진단 및 수술 후 경과관찰 중 2025.08 자궁내막에 이상 소견으로 입\r\n원 및 수술적 치료 후 '자궁내막의 악성신생물(C54.1)' 진단 후 관련 보험금 청구함.\r\n청구내용 및 조사 결과\r\n조사자의견\r\n및 \r\n조사결과\r\n피보험자 면담하여 사고내용(내원경위) 확인후 치료병원 의무기록 징구함.\r\n첨부한 의무기록 및 조사내용 참고하여 귀사에서 검토후 처리 요청드립니다.\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n2 / 4\r\n조사결과부책동의서징구해당없음민원여부해당없음\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)피보험자 면담조사쟁점 중(L2)사고(발병)/병원내원 경위조사자확인완료\r\n쟁 점 상 세(L3)과거 동일 부위 검사 여부 확인, 암 발병 상세 부위 확인\r\n조  사  내  용 \r\n2024.09.11 이대목동병원(외과)\r\n복부CT(의뢰일:2023.09.11/ 검사일:2024.08.30)\r\n : multiple uterine myomas(다발성 자궁근종)-> 단순경과관찰, 진단 코딩 無, 치료사항 無\r\n2025.08.21 이대목동병원(산부인과)\r\n수술 후 조직검사 결과(시행일: 2025.08.21 / 보고일: 2025.08.24)\r\n소견: Endometrioid carcinoma grade 2, 자궁근층 침윤 및 양측 난소 전이.\r\n병기: pT3aN2M0 (FIGO Stage IIIC2).\r\n분류 : 자궁내막암 원발 + 복막 및 림프절 전이\r\n조사쟁점 대(L1)피보험자 면담조사쟁점 중(L2)사고(발병)/병원내원 경위조사자확인완료\r\n쟁 점 상 세(L3)건강검진 시행 여부, 검진결과 및 상담이력확인\r\n조  사  내  용 면담 및 심평원 진료내역 확인, 고지의무 위반 해당 기왕력 없음.\r\n조사쟁점 대(L1)피보험자 면담조사쟁점 중(L2)환자상태 확인(실측/촬영)조사자확인완료\r\n쟁 점 상 세(L3)피보험자 최초 면담시 의료자문동의서 징구\r\n조  사  내  용 담당자 협의 후 진행\r\n조사쟁점 대(L1)사고현장/주변/병의원 탐\r\n문\r\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\r\n쟁 점 상 세(L3)피보험자 거주지주변필수탐문병원 탐문요청\r\n조  사  내  용 심평원 확인 완료 \r\n동 보험 고지대상에 해당하는 진료내역 無\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)의무기록/CD/검진결과 확인조사자확인완료\r\n쟁 점 상 세(L3)암 확진 여부 90일 이내 또는 1년이내 암 진단여부확인\r\n조  사  내  용 암 보장 개시일 이후 및 1년 이내(2025.10.21)인 2025.08.24 확정진단\r\n조사쟁점 대(L1)관공서 확인조사쟁점 중(L2)기타 관공서(시청,구청등) 확인조사자확인완료\r\n쟁 점 상 세(L3)국세청 의료비내역, 요양급여내역서 징구\r\n조  사  내  용 심평원 확인 완료 \r\n동 보험 고지대상에 해당하는 진료내역 無\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n3 / 4\r\n주요 쟁점 사항\r\n일자확인내용관련기관\r\n2010.06.01 ~ 2058.06.01훼밀리라이프보험1004 DB손해보험\r\n2019.10.21나에게 맞춘 초경증 간편건강보험2407\r\n - 보험가입 전 5년 시점DB손해보험\r\n2024.07.21나에게 맞춘 초경증 간편건강보험2407\r\n - 보험가입 전 3개월 시점DB손해보험\r\n2024.09.11\r\n내원일자 : 2024.09.11\r\n내원경위 : 유방암 경과관찰 목적 내원\r\n검사결과 : 복부CT(의뢰일:2023.09.11/ 검사일:2024.08.30)\r\n : multiple uterine myomas(다발성 자궁근종)\r\n치료내용 : 단순경과관찰, 진단 코딩 無, 치료사항 無\r\n이대목동병원(외과)\r\n 2024.10.21 ~ 2054.10.21나에게 맞춘 초경증 간편건강보험2407 DB손해보험\r\n2025.01.19나에게 맞춘 초경증 간편건강보험2407\r\n - 보험계약일로부터 90일 시점DB손해보험\r\n2025.07.09 ~ 2025.09.02\r\n내원일자 : 2025.07.09\r\n내원경위 : 유방암으로 경과관찰 중 복강내 mass 소견으로 내원\r\n복부통증 및 질출혈로 내원, 복부 CT상 자궁내막 비 후 및 악성의심 소견 확인.\r\n진단병명 : C54.1 - Endometrial carcinoma, moderately differentiated (자궁내막\r\n암, 중등도 분화형)\r\n검사결과 : 수술 후 조직검사 결과(시행일: 2025.08.21 / 보고일: 2025.08.24)\r\n소견: Endometrioid carcinoma grade 2, 자궁근층 침윤 및 양측 난소 전이.\r\n병기: pT3aN2M0 (FIGO Stage IIIC2).\r\n치료내용 : 전자궁적출술 및 양측난소난관절제술(2025.08.21)\r\n입원기간 : 2025.08.03 ~ 2025.08.05 / 3일 입원\r\n2025.08.20 ~ 2025.09.02 / 14일 입원\r\n의사소견 : 자궁내막암 Stage IIIC2 확진, 전이 동반으로 항암치료 진행 중.\r\n과거병력 : 2015년 유방암\r\n이대목동병원(산부인\r\n과)\r\n 2025.10.21나에게 맞춘 초경증 간편건강보험2407\r\n - 보험계약일로부터 1년 시점DB손해보험",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-21",
+            "2025-08-03"
+          ],
+          "missed": [
+            "2024-09-11",
+            "2023-09-11",
+            "2024-08-30",
+            "2025-08-24",
+            "2025-10-21",
+            "2010-06-01",
+            "2058-06-01",
+            "2019-10-21",
+            "2024-07-21",
+            "2024-10-21",
+            "2054-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-09-02",
+            "2025-08-05",
+            "2025-08-20"
+          ],
+          "extra": [
+            "2025-08-28",
+            "2025-09-21",
+            "2025-02-10",
+            "2025-02-17"
+          ],
+          "rate": 11
+        },
+        "kcdCodes": {
+          "matched": [
+            "C54.1"
+          ],
+          "missed": [
+            "B02"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "hospitals": {
+          "matched": [
+            "이대목동병원"
+          ],
+          "missed": [
+            "치료병원",
+            "거주지주변필수탐문병원",
+            "병의원"
+          ],
+          "extra": [],
+          "rate": 25
+        },
+        "examinations": {
+          "matched": [
+            "CT"
+          ],
+          "missed": [
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "수술적",
+            "양측난소난관절제술",
+            "항암치료",
+            "치료",
+            "치료병원",
+            "치료사항",
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case39",
+      "caseNum": 39,
+      "patientName": "장동현",
+      "model": "gpt-4o-mini",
+      "totalPages": 63,
+      "processedAt": "2026-01-25T11:11:47.825Z",
+      "processingTime": 135504,
+      "cost": 0.3402,
+      "usage": {
+        "prompt_tokens": 2321321,
+        "completion_tokens": 769,
+        "total_tokens": 2322090,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "장동현",
+          "birthDate": null,
+          "gender": "남"
+        },
+        "visitDate": {
+          "date": "2024-04-23",
+          "hospital": "명지병원",
+          "department": "심장내과"
+        },
+        "chiefComplaint": {
+          "summary": "가슴 통증",
+          "onsetDate": "2024-04-21",
+          "details": "2일 전부터 가슴부 통증 간헐적으로 있다가 금일 지속되어 내원."
+        },
+        "diagnoses": [
+          {
+            "code": "I21.9",
+            "nameKr": "급성 심근경색증",
+            "date": "2024-04-23",
+            "isPrimary": true,
+            "hospital": "명지병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "혈액검사",
+            "date": "2024-04-23",
+            "result": "정상",
+            "hospital": "명지병원"
+          },
+          {
+            "name": "심장초음파",
+            "date": "2024-04-23",
+            "result": "EF 47%",
+            "hospital": "명지병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "PCI",
+            "date": "2024-04-23",
+            "hospital": "명지병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Aspirin",
+            "dosage": "100mg",
+            "period": "1일 1회 아침식후"
+          },
+          {
+            "name": "Clopidogrel",
+            "dosage": "75mg",
+            "period": "1일 1회 아침식후"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "명지병원",
+            "admissionDate": "2024-04-23",
+            "dischargeDate": "2024-04-25",
+            "reason": "급성 심근경색증"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "관상동맥 조영술",
+            "date": "2024-04-23",
+            "hospital": "명지병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "예후 양호",
+          "followUpDate": "2024-05-01"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-04-21",
+            "context": "증상 발생일",
+            "type": "증상 발생일"
+          },
+          {
+            "date": "2024-04-23",
+            "context": "내원일",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-04-25",
+            "context": "퇴원일",
+            "type": "퇴원일"
+          },
+          {
+            "date": "2024-05-01",
+            "context": "추적관찰일",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "명지병원"
+        ],
+        "rawTextSummary": "환자는 가슴 통증으로 내원하였으며, 급성 심근경색증 진단 후 PCI 시술을 받음."
+      },
+      "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2016.09.12 (무) 행복100세종합보험1604 가입 NH농협손해보험 \r\n2024.04.23 \r\n[청구사항] \r\n초 진 일 : 2024.04.23 \r\n내원경위 : 가슴 답답한 증상을 주소로 응급실 통해 내원 \r\n진 단 명 : 급성심근경색증(I21.9) \r\n스텐트삽입을동반한경피적심장-동맥확장술상태\r\n(Z95.5) \r\n입원기간 : 2024.04.23 ~ 2024.04.25 / 3일 입원 \r\n치료내용 : 관상동맥중재술 (PCI of culprit lesion in AMI, PTCA \r\n& stent 삽입) \r\n검사결과 : 심혈관 조영술 \r\n: pLAD(좌전하행지 근위부) 90% 협착 \r\n \r\n심근혈액효소검사  \r\nCK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\n \r\nEKG \r\nV1-4 ST 분절 상승 \r\n \r\n명지병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[진단 적정성 확인] \r\n금번 청구병명 진단 적정성 검토 관련 명지병원 의무기록 검토 결과,  \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 받은 것으로 \r\n확인됨.  \r\n \r\n이는 해당 보험 약관상 급성심근경색증의 진단 정의에 부합하는 것으로 판단됨. \r\n근거 동 건 해당 보험 약관  \r\n  \r\n  \r\n  \r\n \r\n \r\n3. 결론 \r\n근거 \r\n[동 건 조사 결과] \r\n금번 청구병명인 '급성심근경색증(I21.9)'은  \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 받은 것으로 \r\n확인됨.  \r\n  \r\n이는 해당 보험 약관상 급성심근경색증의 진단 정의에 부합하는 것으로 판단되는 바, 귀사 \r\n심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n결론 지급 및 계약 유지 \r\n  \r\n  \r\n4. 기타 \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 ",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-04-23",
+            "2024-04-25"
+          ],
+          "missed": [
+            "2016-09-12"
+          ],
+          "extra": [
+            "2024-04-21",
+            "2024-05-01"
+          ],
+          "rate": 67
+        },
+        "kcdCodes": {
+          "matched": [
+            "I21.9"
+          ],
+          "missed": [
+            "Z95.5"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "hospitals": {
+          "matched": [
+            "명지병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case41",
+      "caseNum": 41,
+      "patientName": "장우진",
+      "model": "gpt-4o-mini",
+      "totalPages": 30,
+      "processedPages": 30,
+      "processedAt": "2026-01-25T11:14:18.394Z",
+      "processingTime": 112289,
+      "cost": 0.162,
+      "usage": {
+        "prompt_tokens": 1105766,
+        "completion_tokens": 669,
+        "total_tokens": 1106435,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "장우진",
+          "birthDate": null,
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2024-04-22",
+          "hospital": "가톨릭대학교 은평성모병원",
+          "department": "신경외과"
+        },
+        "chiefComplaint": {
+          "summary": "low back pain",
+          "onsetDate": "2024-04-20",
+          "details": "L1 compression fracture"
+        },
+        "diagnoses": [
+          {
+            "code": "M51.1",
+            "nameKr": "요추간판탈출증",
+            "date": "2024-04-22",
+            "isPrimary": true,
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "MRI L-Spine",
+            "date": "2024-04-22",
+            "result": "Osteoporotic compression fracture of L2 VB",
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Pain control",
+            "date": "2024-04-22",
+            "hospital": "가톨릭대학교 은평성모병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Pain medication",
+            "dosage": null,
+            "period": null
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "가톨릭대학교 은평성모병원",
+            "admissionDate": "2024-04-22",
+            "dischargeDate": null,
+            "reason": "L1 compression fracture"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "Follow-up required for pain management and recovery.",
+          "followUpDate": "2024-05-06"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-04-20",
+            "context": "Symptoms onset",
+            "type": "증상 발생일"
+          },
+          {
+            "date": "2024-04-22",
+            "context": "Initial visit",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-05-06",
+            "context": "Follow-up date",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "가톨릭대학교 은평성모병원"
+        ],
+        "rawTextSummary": "환자는 2024년 4월 20일에 발생한 요통으로 2024년 4월 22일에 가톨릭대학교 은평성모병원에 내원하였으며, L1 압박 골절 진단을 받았다. 통증 조절을 위한 치료가 필요하며, 추적 관찰이 요구된다."
+      },
+      "groundTruth": "3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 내 용 \r\n피보험자 \r\n직  업 \r\n계약 시 : 전업주부(1급) \r\n사고 시 : 전업주부(1급) \r\n현  재 : 전업주부(1급) \r\n보험가입 \r\n경  위 위험 보장 목적 하 동 보험 가입. \r\n중요사항 \r\n고지여부 동 건 해상 사항 없음.  \r\n피보험자 \r\n면담내용 \r\n2024.04.22 증상역 출구 엘리베이터에서 바닥이 미끄러워 뒤로 넘어지는 사고로 요\r\n추부 수상.  \r\n사고 당시 목격자들은 행인들(지인x)로 119 신고 권유 받았으나 신고 없이 귀가 \r\n후 통증 지속되어 직접 119 신고 후 은평성모병원 응급실 내원하여 시행한 정밀 \r\n검사 상 요추 압박골절로 진단 받고 통원 치료 시행 하였다 주장. \r\n  \r\n  \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상 \r\n2021.05.17 \r\n내 원 일 : 2021.05.17 \r\n진 단 명 : 척추전방전위증, 요추부(M43.16) 등 \r\n입원기간 : 2021.05.17 ~ 2021.05.24 / 8일 입원 \r\n검사결과 : L-spine MRI(2021.05.17) \r\n:Lumbar spondylosis(요추부 척추증) 소견 外 특이사\r\n항 없음. \r\nT-spine MRI(2021.05.20) \r\n:  T-spine scoliosis(흉추부 척추측만증) \r\n \r\n우신향병원 \r\n2024.04.22 \r\n내 원 일 : 2024.04.22 \r\n내원경위 : 2024.04.20 17시경 엘리베이터에서 넘어지며 발생\r\n한 요추부 통증을 주소로 119 통해 내원 \r\n진 단 명 : 압박골절, 허리(S32.090) \r\n통원기간 : 2024.04.22 ~ 2025.07.11 / 5회 통원 \r\n치료내용 : 약물처방 및 보존적 치료 시행 \r\n검사결과 : L-spine X-ray, MRI \r\n: L1 acute compression fx (요추1번 급성 압박골절) \r\n과거병력 : 요추 협착증 \r\n \r\n은평성모병원 \r\n2025.09.22 \r\n[청구사항] \r\n내 원 일 : 2025.09.22 \r\n내원경위 : 후유장해 진단 목적 하 내원 \r\n진 단 명 : L1부위의 골절, 폐쇄성(S32.020) \r\n통원기간 : 2025.09.22 / 1회 통원 \r\n검사결과 : 15도 이상의 전만 변형 소견  \r\n의사소견 : \"척추에 뚜렷한 기형을 남긴 때(지급률 30%)\" \r\n \r\n한림병원 \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 \r\n내원하 시행한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 \r\n치료 시행.  \r\n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때\r\n(지급률 30%)\" 진단 후 관련 보험금 청구함. \r\n직업 \r\n직무 전업주부(1급) \r\n의료자문 금번 청구 건 관련 피보험자 대리인 의료자문 시행 미 동의 의사 표명.  \r\n4. 손해사정결과 \r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n후유장해 적정성 검토  \r\n  \r\n2. 사고경위 \r\n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원하 시행\r\n한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 치료 시행. \r\n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때(지급률 \r\n30%)\" 진단 후 관련 보험금 청구함. \r\n  \r\n3. 알릴의무와 관련하여 \r\n동 건 해당 사항 없음.  \r\n  \r\n4. 금번 청구 관련하여 \r\n피보험자 진술 및 치료병원 의무기록 검토 결과, '2024.04.20 17시경 엘리베이터에서 넘어지는 \r\n사고로 119 통해 내원' 등의 사고경위 및 영상 검사 결과 요추1번 급성 압박골절 소견 등 확\r\n인되어 상해사고 사실에 대한 다툼은 없을 것으로 판단됨.  \r\n \r\n피보험자 금번 상해사고 발생 전 2021.05. 우신향병원 입원하여 시행한 검사 상 흉추부의 척추 \r\n측만증 소견 外 척추전만, 후만증 소견은 없는 것으로 확인됨.  \r\n \r\n금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으로 \r\n확인됨.  \r\n피보험자 및 대리인은 금번 청구 후유장해 적정성 평가를 위한 제3의료기관을 통한 의료자문 \r\n시행에 동의할 수 없다는 주장임.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 현대해상에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-04-22",
+            "2024-04-20"
+          ],
+          "missed": [
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-24",
+            "2021-05-20",
+            "2025-07-11",
+            "2025-09-22",
+            "2024-04-24",
+            "2025-09-02",
+            "2025-01-03"
+          ],
+          "extra": [
+            "2024-05-06"
+          ],
+          "rate": 18
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "M43.16",
+            "S32.09",
+            "S32.02",
+            "S32.03"
+          ],
+          "extra": [
+            "M51.1"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "은평성모병원"
+          ],
+          "missed": [
+            "우신향병원",
+            "한림병원",
+            "치료병원",
+            "힘찬병원"
+          ],
+          "extra": [],
+          "rate": 20
+        },
+        "examinations": {
+          "matched": [
+            "MRI"
+          ],
+          "missed": [
+            "X-ray"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료",
+            "치료내용",
+            "치료병원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case42",
+      "caseNum": 42,
+      "patientName": "정진덕",
+      "model": "gpt-4o-mini",
+      "totalPages": 13,
+      "processedPages": 13,
+      "processedAt": "2026-01-25T11:16:20.697Z",
+      "processingTime": 67221,
+      "cost": 0.0702,
+      "usage": {
+        "prompt_tokens": 479571,
+        "completion_tokens": 686,
+        "total_tokens": 480257,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "정진덕",
+          "birthDate": null,
+          "gender": "남"
+        },
+        "visitDate": {
+          "date": "2025-02-26",
+          "hospital": "강북삼성병원",
+          "department": "신경과"
+        },
+        "chiefComplaint": {
+          "summary": "SVD, lacunes",
+          "onsetDate": null,
+          "details": "환자는 뇌 MRI 및 MRA 검사 결과를 받았습니다."
+        },
+        "diagnoses": [
+          {
+            "code": "I63.9",
+            "nameKr": "뇌경색",
+            "date": "2025-02-26",
+            "isPrimary": true,
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "MRI",
+            "date": "2025-02-26",
+            "result": "SVD, lacunes, aneurysm",
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "혈압 조절",
+            "date": "2025-02-26",
+            "hospital": "강북삼성병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Sermion Tab 10mg",
+            "dosage": "1 T BID",
+            "period": "60일"
+          }
+        ],
+        "hospitalizations": null,
+        "surgeries": null,
+        "prognosis": {
+          "summary": "정기적인 추적 관찰 필요",
+          "followUpDate": "2026-02-26"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-02-26",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-09-10",
+            "context": "출력일",
+            "type": "출력일"
+          },
+          {
+            "date": "2025-04-01",
+            "context": "MRI 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-04-15",
+            "context": "MRI 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-04-23",
+            "context": "MRI 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-04-29",
+            "context": "MRI 검사일",
+            "type": "검사일"
+          }
+        ],
+        "extractedHospitals": [
+          "강북삼성병원"
+        ],
+        "rawTextSummary": "정진덕 환자는 강북삼성병원에서 SVD 및 lacunes 진단을 받았으며, 뇌 MRI 및 MRA 검사를 통해 작은 동맥류가 발견되었습니다. 혈압 조절을 위한 치료가 필요하며, 정기적인 추적 관찰이 권장됩니다."
+      },
+      "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험 \r\n2025.02.26 \r\n[청구사항] \r\n초 진 일 : 2025.02.26 \r\n내원경위 : 건강검진 간 시행한 Brain MRI 상 이상 소견으로 \r\n진료의뢰 하 내원 \r\n진 단 명 : 대뇌동맥류(I67.1) \r\n통원기간 : 2025.02.26 ~ 2025.04.29 / 3회 통원 \r\n치료내용 : 경과관찰  \r\n검사결과 : Brain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. \r\nparaclinoid ICA(2mm) \r\n의사소견 : MRI+A f/u next yt 소견 \r\n \r\n강북삼성병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[진단 적정성 확인] \r\n강북삼성병원에서 시행한 Brain MRI+A(2025.02.26) 결과, A small unruptured aneurysm at \r\nLt. paraclinoid ICA(2mm) 좌측 내경동맥 전상돌기 부위 약 2mm의 비파열성 뇌동맥류 소\r\n견 확인되며, 해당 검사 결과를 통해 '대뇌동맥류(I67.1)'로 확정 진단 받은 사실 확인됨.  \r\n \r\n이는 동 보험 약관상 뇌혈관질환 진단 정의에 부합하는 것으로 판단됨.  \r\n근거 동 건 해당 보험 약관 \r\n  \r\n  \r\n3. 결론 \r\n근거 \r\n[약관상 보험자 지급책임의 범위] \r\nBrain MRI+A(2025.02.26) 결과, A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n좌측 내경동맥 전상돌기 부위 약 2mm의 비파열성 뇌동맥류 소견 \r\n뇌혈관질환진단비(I60~I69) \r\n \r\n[보험금 사정에 관한 중요 근거] \r\nBrain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n'대뇌동맥류(I67.1)' 확정 진단(2025.04.23) \r\n결론 지급 및 계약 유지 의견 \r\n4. 기타 \r\nBrain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n'대뇌동맥류(I67.1)' 확정 진단(2025.04.23)",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-02-26",
+            "2025-04-29",
+            "2025-04-23"
+          ],
+          "missed": [
+            "2018-09-27"
+          ],
+          "extra": [
+            "2025-09-10",
+            "2025-04-01",
+            "2025-04-15"
+          ],
+          "rate": 75
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "I67.1",
+            "I60",
+            "I69"
+          ],
+          "extra": [
+            "I63.9"
+          ],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "강북삼성병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [
+            "MRI"
+          ],
+          "missed": [
+            "MRA"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case44",
+      "caseNum": 44,
+      "patientName": "최순곤",
+      "model": "gpt-4o-mini",
+      "totalPages": 33,
+      "processedPages": 33,
+      "processedAt": "2026-01-25T11:17:37.932Z",
+      "processingTime": 161546,
+      "cost": 0.1782,
+      "usage": {
+        "prompt_tokens": 1216271,
+        "completion_tokens": 1124,
+        "total_tokens": 1217395,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "최순곤",
+          "birthDate": "1959-02-21",
+          "gender": "M"
+        },
+        "visitDate": {
+          "date": "2025-08-25",
+          "hospital": "세브란스병원",
+          "department": "신경과"
+        },
+        "chiefComplaint": {
+          "summary": "Rt. side weakness",
+          "onsetDate": "2025-08-25",
+          "details": "Drowsy mentality, ER admission"
+        },
+        "diagnoses": [
+          {
+            "code": "I63.9",
+            "nameKr": "중대뇌동맥경색증",
+            "date": "2025-08-25",
+            "isPrimary": true,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "K25.91",
+            "nameKr": "위궤양, 미상",
+            "date": "2025-08-27",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "E78.8",
+            "nameKr": "지질대사장애",
+            "date": "2025-08-27",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "F32.0",
+            "nameKr": "우울증",
+            "date": "2025-08-27",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "F90.0",
+            "nameKr": "주의력결핍장애",
+            "date": "2025-08-27",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT Angio",
+            "date": "2025-08-26",
+            "result": "No evidence of plaque or stenosis.",
+            "hospital": "세브란스병원"
+          },
+          {
+            "name": "Carotid Duplex",
+            "date": "2025-08-26",
+            "result": "Atheromatous plaques found.",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Thrombolysis",
+            "date": "2025-08-25",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Mirtazapine",
+            "dosage": "7.5 mg",
+            "period": "1T qd"
+          },
+          {
+            "name": "Alprazolam",
+            "dosage": "1 mg",
+            "period": "1T tid"
+          },
+          {
+            "name": "Trazodone",
+            "dosage": "50 mg",
+            "period": "1T qd"
+          },
+          {
+            "name": "Vortioxetine",
+            "dosage": "20 mg",
+            "period": "1T qd"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "세브란스병원",
+            "admissionDate": "2025-08-25",
+            "dischargeDate": null,
+            "reason": "Stroke management"
+          }
+        ],
+        "surgeries": [
+          {
+            "name": "Endovascular thrombectomy",
+            "date": "2025-08-25",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "prognosis": {
+          "summary": "Patient is under observation for stroke recovery.",
+          "followUpDate": "2025-09-02"
+        },
+        "extractedDates": [
+          {
+            "date": "2025-08-25",
+            "context": "Symptom onset",
+            "type": "증상 발생일"
+          },
+          {
+            "date": "2025-08-26",
+            "context": "CT Angio date",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-08-27",
+            "context": "Invasive procedure date",
+            "type": "수술일"
+          },
+          {
+            "date": "2025-09-02",
+            "context": "Follow-up date",
+            "type": "추적관찰일"
+          }
+        ],
+        "extractedHospitals": [
+          "세브란스병원"
+        ],
+        "rawTextSummary": "환자는 2025년 8월 25일에 오른쪽 약화 증상으로 응급실에 내원하였으며, 중대뇌동맥경색증으로 진단받고 thrombolysis 치료를 받았다. 이후 여러 검사를 통해 위궤양 및 지질대사장애, 우울증, 주의력결핍장애가 발견되었다."
+      },
+      "groundTruth": "청구내용2025.08.25 우측 편마비 증상을 주소로 119통해 신촌세브란스병원 입원하여 시행한 정밀 검사 결과, 'I63.9\r\n Middle cerebral artery infarction, left (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\r\n청구내용 및 조사 결과\r\n조사자의견\r\n및 \r\n조사결과\r\n[고지의무 위반여부 관련] \r\n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하\r\n는 진료내역 없는 것으로 확인됨. \r\n김안과병원 서류 보완 검토 결과 청약전 3개월 이내 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n[진단 적정 여부]\r\n신촌세브란스병원 입원 하 시행한 Brain CT/MRI (2025.08.25) - Lt MCA occlusion (좌측 중대뇌동맥 폐색) - 좌측\r\nM1 폐색 확인 소견으로, \r\nAngiography & Intervention (2025.08.25) → 뇌혈관조영 및 혈관내 혈전제거술 - 좌측 M1 폐색 재개통 성공\r\n응급 내원 후 혈전제거술(Endovascular thrombectomy) 시행 등의 치료 사항 확인됨. \r\n해당 치료사항으로 볼 때, 해당 보험 약관상 뇌혈관질환(I60~I69) 진단 기준에 부합하는 것으로 판단되는 바, 귀\r\n사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.\r\n조사결과부책동의서징구해당없음민원여부해당없음\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)서류징구 및 전달조사쟁점 중(L2)심평원/의료자문 위임장 요청조사자확인완료\r\n쟁 점 상 세(L3) ①지연안내문 전달 //  ②의료자문동의서 징구 [자문동의서는 ■ 출력해서 징구바랍니다. 수기체크불가\r\n조  사  내  용 안내문 전달 및 자문동의서 징구 등재 완료\r\n조사쟁점 대(L1)사고현장/주변/병의원 탐\r\n문\r\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\r\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\r\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \r\n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)의무기록/CD/검진결과 확인조사자확인완료\r\n쟁 점 상 세(L3)치료병원 진료기록 및 수술(시술) 기록, 판독지 검사결과지 , 영상CD\r\n조  사  내  용 완료\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n3 / 4\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)브로커/PA(계약적정성) 확\r\n인\r\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\r\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\r\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \r\n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\r\n일자확인내용관련기관\r\n2024.06.03나에게맞춘간편건강보험2404\r\n - 보험가입 전 3개월 시점DB손해보험\r\n2024.07.31\r\n내원일시 : 2024.07.31\r\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\r\n치료사항 : 경과과찰 6개월\r\n기타사항 : 입원 수술 필요 소견 없음.\r\n김안과병원\r\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\r\n2025.08.25 ~ 2025.08.29\r\n내원일자 : 2025.08.25\r\n내원경위 : 2025.08.25 오전 기상 후 화장실로 이동하다가 갑작스러운 우측 편마\r\n비 증상 발생. 보호자 119 호출 후 응급실 내원.\r\n진단병명 : I63.9 Middle cerebral artery infarction, left (좌측 중대뇌동맥 뇌경색)\r\n검사결과 : \r\nBrain CT/MRI (2025.08.25) - Lt MCA occlusion (좌측 중대뇌동맥 폐색)\r\n → 뇌영상검사 - 좌측 M1 폐색 확인\r\nAngiography & Intervention (2025.08.25, 보고일 2025.08.26) - Endovascular\r\n thrombectomy performed, successful recanalization of Lt M1 occlusion\r\n → 뇌혈관조영 및 혈관내 혈전제거술 - 좌측 M1 폐색 재개통 성공\r\n치료내용 : 2025.08.25 응급 내원 후 혈전제거술(Endovascular thrombectomy) 시\r\n행 (Penumbra/Suction 기구 사용)\r\n항혈소판제(dual antiplatelet), 지질강하제(lipitor, ezetrol, repatha) 투여\r\n입원기간 : 2025.08.25 ~ 2025.08.29 / 총 5일 입원\r\n신촌세브란스병원\r\n[청구사항",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-25",
+            "2025-08-26"
+          ],
+          "missed": [
+            "2020-09-09",
+            "2024-09-03",
+            "2024-06-03",
+            "2024-07-31",
+            "2054-09-03",
+            "2025-08-29"
+          ],
+          "extra": [
+            "2025-08-27",
+            "2025-09-02"
+          ],
+          "rate": 25
+        },
+        "kcdCodes": {
+          "matched": [
+            "I63.9"
+          ],
+          "missed": [
+            "I60",
+            "I69",
+            "B02"
+          ],
+          "extra": [
+            "K25.91",
+            "E78.8",
+            "F32.0",
+            "F90.0"
+          ],
+          "rate": 25
+        },
+        "hospitals": {
+          "matched": [
+            "신촌세브란스병원"
+          ],
+          "missed": [
+            "치료병원",
+            "김안과병원",
+            "병의원"
+          ],
+          "extra": [],
+          "rate": 25
+        },
+        "examinations": {
+          "matched": [
+            "CT"
+          ],
+          "missed": [
+            "MRI"
+          ],
+          "extra": [],
+          "rate": 50
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "수술",
+            "치료병원",
+            "치료",
+            "치료사항으로",
+            "치료력확인",
+            "치료사항",
+            "치료내용",
+            "시술"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null,
+      "batches": []
+    },
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "model": "gpt-4o",
+      "totalPages": 47,
+      "processedPages": 47,
+      "processedAt": "2026-01-25T11:20:19.480Z",
+      "processingTime": 199977,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "model": "gpt-4o",
+      "totalPages": 27,
+      "processedAt": "2026-01-25T11:17:04.479Z",
+      "processingTime": 58954,
+      "cost": 0.2241,
+      "usage": {
+        "prompt_tokens": 30551,
+        "completion_tokens": 1114,
+        "total_tokens": 31665,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김태형",
+          "birthDate": "1960-08-09",
+          "gender": "남"
+        },
+        "visitDate": {
+          "date": "2024-12-12",
+          "hospital": "세브란스병원",
+          "department": "심장내과"
+        },
+        "chiefComplaint": {
+          "summary": "가슴 통증",
+          "onsetDate": null,
+          "details": "가슴이 조이듯이 아프다. 식은땀이 발생하며, 1년 전부터 걸어가다가 흉통이 발생."
+        },
+        "diagnoses": [
+          {
+            "code": "I20.88",
+            "nameKr": "Stable angina pectoris",
+            "date": "2024-12-31",
+            "isPrimary": true,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "I25.1",
+            "nameKr": "Coronary artery disease (1 vessel disease)",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "E11.68",
+            "nameKr": "Diabetes mellitus type 2 with dyslipidemia",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "E78.8",
+            "nameKr": "Dyslipidemia",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          },
+          {
+            "code": "I50.08",
+            "nameKr": "Diastolic heart failure",
+            "date": "2024-12-31",
+            "isPrimary": false,
+            "hospital": "세브란스병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "Coronary angiography",
+            "date": "2024-12-31",
+            "result": "Right dominant, minimal LN of pRCA",
+            "hospital": "세브란스병원"
+          },
+          {
+            "name": "Echocardiography",
+            "date": "2024-12-27",
+            "result": "Normal sized cardiac chambers with normal global LV systolic function (EF: 62%)",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Coronary angiography",
+            "date": "2024-12-31",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Concor",
+            "dosage": "1.25mg qd",
+            "period": null
+          },
+          {
+            "name": "Livalo",
+            "dosage": "2mg qd",
+            "period": null
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "세브란스병원",
+            "admissionDate": "2024-12-31",
+            "dischargeDate": "2024-12-31",
+            "reason": "For Coronary angiography"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "Stable angina with coronary artery disease",
+          "followUpDate": null
+        },
+        "extractedDates": [
+          {
+            "date": "2024-12-12",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-12-27",
+            "context": "외래초진기록",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-12-31",
+            "context": "입원일",
+            "type": "입원일"
+          },
+          {
+            "date": "2025-01-09",
+            "context": "외래재진기록",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-01-14",
+            "context": "외래초진기록",
+            "type": "진료일"
+          }
+        ],
+        "extractedHospitals": [
+          "세브란스병원",
+          "의료법인동신의료재단 동신병원"
+        ],
+        "rawTextSummary": "김태형 환자는 64세 남성으로, 가슴 통증을 호소하며 세브란스병원 심장내과에 내원하였다. 2024년 12월 31일에 관상동맥조영술을 시행하였으며, 안정형 협심증 및 관상동맥질환 진단을 받았다. 치료로는 Concor와 Livalo가 처방되었다."
+      },
+      "groundTruth": "나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2018.05.10 \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\r\n내 \r\n㈜KB 손해보험 \r\n2023.02.10 \r\n[3 개월 이내] \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \r\n이내 ㈜KB 손해보험 \r\n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험 \r\n2024.12.12 \r\n내 원 일 : 2024.12.12 \r\n내원경위 : 간헐적 발생하는 흉통 및 흉부 답답함 증상을 주소\r\n로 내원 \r\n진 단 명 : 상세불명의 흉통(R07.4) \r\n통원기간 : 2024.12.12 / 1 회 통원 \r\n의사소견 : 진료의뢰서 발급 \r\n굿웰스의원 \r\n2024.12.27 \r\n[청구사항] \r\n초 진 일 : 2024.12.27 \r\n내원경위 : 흉통 및 숨이 차는 증상을 주소로 진료 의뢰 하 내\r\n원 \r\n진 단 명 : 안정성 협심증(I20.88) \r\n관상동맥병(I25.1) \r\n입원기간 : 2024.12.31 / 1 일 입원 \r\n신촌세브란스\r\n병원(심장내\r\n과) \r\n치료내용 : 약물 처방 \r\n검사결과 : 관상동맥조영술(2024.12.31) \r\nRCA(우측 관상동맥) \r\n: JR 5-4 분절 경미한 협착 소견 \r\nLCA(좌측 관상동맥) \r\n: mLAD 약 50% 협착\r\n과거병력 : \"당뇨 의심 된다 들음\" 2024.05.30 동신병원 검진 \r\n결과 당뇨 의심 소견(자료 별첨) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영\r\n술 결과 좌전하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 \r\n청구함. \r\n직업 \r\n직무 \r\n청약 시 : 사회복지사(1 급) \r\n현재 : 사회복지사(1 급) \r\n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\r\n약 전 고지대상에 해당하는 진료내역 없음. \r\n4. 손해사정결과\r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영술 결과 좌전\r\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\r\n상에 해당하는 진료내역 없음. \r\n신촌세브란스 초진기록 상 \"당뇨 의심 된다 들음\" 내용 관련 확인 결과 동 보험 가입일 이후인 \r\n2024.05.30 동신병원 검진 결과 당뇨 의심 소견으로 진단 받은 것으로 확인됨. \r\n4. 금번 청구 관련하여\r\n신촌세브란스병원 관상동맥조영술(2024.12.31) LCA(좌측 관상동맥) : mLAD 약 50% 협착 \r\n피보험자는 동 보험 가입 이후인 2024.12.12 간헐적 흉통을 주소로 굿웰스의원 내원하여 진료 \r\n의뢰 하 2024.12.27 신촌세브란스병원 최초 내원 하여 2024.12.31 입원 후 상기 검사 결과를 \r\n토대로 '안정성 협심증(I20.88), 관상동맥병(I25.1)' 진단 받은 것으로 확인됨. \r\n5. 손해사정 결론\r\n상기 내용 종합하여 귀사 심사 기준에 의거하여 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB 손해보험에서 최종 판단해 주시기 바랍니다.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2024-12-12",
+            "2024-12-27",
+            "2024-12-31"
+          ],
+          "missed": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "extra": [
+            "2025-01-09",
+            "2025-01-14"
+          ],
+          "rate": 33
+        },
+        "kcdCodes": {
+          "matched": [
+            "I20.88",
+            "I25.1"
+          ],
+          "missed": [
+            "R07.4"
+          ],
+          "extra": [
+            "E11.68",
+            "E78.8",
+            "I50.08"
+          ],
+          "rate": 67
+        },
+        "hospitals": {
+          "matched": [
+            "동신병원",
+            "신촌세브란스병원"
+          ],
+          "missed": [
+            "굿웰스의원"
+          ],
+          "extra": [],
+          "rate": 67
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "model": "gpt-4o",
+      "totalPages": 46,
+      "processedPages": 46,
+      "processedAt": "2026-01-25T11:23:59.471Z",
+      "processingTime": 370026,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "model": "gpt-4o",
+      "totalPages": 13,
+      "processedAt": "2026-01-25T11:19:45.976Z",
+      "processingTime": 30489,
+      "cost": 0.1079,
+      "usage": {
+        "prompt_tokens": 15081,
+        "completion_tokens": 678,
+        "total_tokens": 15759,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "고영란",
+          "birthDate": "1963-04-19",
+          "gender": "여"
+        },
+        "visitDate": {
+          "date": "2025-06-07",
+          "hospital": "의료법인자인의료재단더자인병원",
+          "department": "내원"
+        },
+        "chiefComplaint": {
+          "summary": "건강검진 및 유방암 검사",
+          "onsetDate": null,
+          "details": "일반 건강검진 및 유방암 검사 결과"
+        },
+        "diagnoses": [
+          {
+            "code": null,
+            "nameKr": "유방암",
+            "date": "2025-06-27",
+            "isPrimary": true,
+            "hospital": "의료법인자인의료재단더자인병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "위내시경",
+            "date": "2025-06-07",
+            "result": "헬리코박터균 위양성",
+            "hospital": "의료법인자인의료재단더자인병원"
+          },
+          {
+            "name": "유방촬영",
+            "date": "2025-06-07",
+            "result": "종괴의심소견",
+            "hospital": "의료법인자인의료재단더자인병원"
+          },
+          {
+            "name": "조직병리검사",
+            "date": "2025-06-20",
+            "result": "유방암 전이",
+            "hospital": "의료법인자인의료재단더자인병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "대학병원 의뢰 및 수술",
+            "date": "2025-06-27",
+            "hospital": "의료법인자인의료재단더자인병원"
+          }
+        ],
+        "medications": [],
+        "hospitalizations": [],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "유방암 진단 및 치료 필요",
+          "followUpDate": null
+        },
+        "extractedDates": [
+          {
+            "date": "2025-06-07",
+            "context": "건강검진 및 유방암 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-06-27",
+            "context": "유방암 진단일",
+            "type": "진단일"
+          }
+        ],
+        "extractedHospitals": [
+          "의료법인자인의료재단더자인병원"
+        ],
+        "rawTextSummary": "고영란 환자는 2025년 6월 7일 건강검진을 통해 유방암이 의심되는 소견을 받았으며, 6월 27일 유방암 진단을 받았습니다. 헬리코박터균 위양성 소견도 확인되었습니다."
+      },
+      "groundTruth": "일자|확인내용|관련기관\r\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\r\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\r\n - 보험계약일로부터 90일 |시점DB손해보험\r\n2025.06.07|\r\n초진일자 : 2025.06.07\r\n내원경위 : 건강검진 시행 목적 내원\r\n검사결과 : 일반건강검진, 유방암 검진(2025.06.07) : 좌측 유두하부 종괴 의심 \r\n초음파 권고\r\n통원기간 : 2025.06.07 / 1회 통원\r\n|더자인병원\r\n2025.06.16 ~ 2025.06.27|\r\n내원일자 : 2025.06.16\r\n내원경위 : 본원 유방 검진 상 이상 소견으로 내원\r\n진단병명 : 유방의 중앙부의 악성 신생물, 왼쪽(C50.11), 림프선병증 NOS(R59.1)\r\n검사결과 : 조직검사(2025.06.20)(보고일: 2025.06.24) : INVASIVE DUCTAL\r\n CARCINOMA, Grade 2\r\n : Lymph node, METASTARIC CARCINOMA from breast\r\n치료내용 : 진료의뢰서 발행\r\n통원기간 : 2025.06.16 ~ 2025.06.27 / 2회 통원\r\n|더자인병원",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-06-07",
+            "2025-06-27",
+            "2025-06-20"
+          ],
+          "missed": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-16",
+            "2025-06-24"
+          ],
+          "extra": [],
+          "rate": 38
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "C50.11",
+            "R59.1"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [
+            "더자인병원"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [
+            "CT",
+            "초음파",
+            "조직검사"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료내용"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "model": "gpt-4o",
+      "totalPages": 28,
+      "processedAt": "2026-01-25T11:20:19.483Z",
+      "processingTime": 46431,
+      "cost": 0.2324,
+      "usage": {
+        "prompt_tokens": 31656,
+        "completion_tokens": 833,
+        "total_tokens": 32489,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "김동아",
+          "birthDate": null,
+          "gender": "M"
+        },
+        "visitDate": {
+          "date": "2025-08-14",
+          "hospital": "해브리병원",
+          "department": null
+        },
+        "chiefComplaint": {
+          "summary": "두통, 시야장애",
+          "onsetDate": "내원 전일부터 발생",
+          "details": "머리 좌측에 쑤시듯 잦누르는 아픔. 시야 우측이 잘 안보임."
+        },
+        "diagnoses": [
+          {
+            "code": null,
+            "nameKr": "6번 신경 마비 의심, 뇌경색 의심",
+            "date": "2025-08-14",
+            "isPrimary": true,
+            "hospital": "해브리병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "Brain MRI + Diffusion + Brain MRA 1.5T",
+            "date": "2025-08-14",
+            "result": "Focal high SI lesion at left occipital lobe",
+            "hospital": "해브리병원"
+          },
+          {
+            "name": "Echocardiography",
+            "date": "2025-08-19",
+            "result": "Normal LV size and normal systolic function",
+            "hospital": "해브리병원"
+          }
+        ],
+        "treatments": [],
+        "medications": [
+          {
+            "name": "클로피도그렐75mg",
+            "dosage": "75mg",
+            "period": "QMO 1 5일 외"
+          },
+          {
+            "name": "로사르탄칼륨10mg",
+            "dosage": "10mg",
+            "period": "QMO 1 30일 외"
+          },
+          {
+            "name": "케이캡정 25mg",
+            "dosage": "25mg",
+            "period": "QMO 1 30일 외"
+          }
+        ],
+        "hospitalizations": [],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "추적 관찰 필요",
+          "followUpDate": null
+        },
+        "extractedDates": [
+          {
+            "date": "2025-08-14",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-18",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-19",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-21",
+            "context": "진료일",
+            "type": "진료일"
+          },
+          {
+            "date": "2025-08-28",
+            "context": "검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-09-09",
+            "context": "출력일시",
+            "type": "출력일"
+          }
+        ],
+        "extractedHospitals": [
+          "해브리병원"
+        ],
+        "rawTextSummary": "환자 김동아는 두통과 시야장애로 해브리병원에 내원하였으며, Brain MRI 및 Echocardiography 검사를 통해 뇌경색 의심 진단을 받았다. 클로피도그렐, 로사르탄칼륨, 케이캡정을 처방받고 추적 관찰이 필요하다."
+      },
+      "groundTruth": "청구내용 및 조사 결과\r\n조사자의견\r\n및 \r\n조사결과\r\n금번 청구사항은 청약일 2일 경과 시점에 뇌경색 진단 받은 사항으로 가입 전 발병 및 기타 고지의무 위반여부\r\n검토 결과, \r\n피보험자 면담 시 청약 후 다음날부터 두통 증상 발생하여 2025.08.14 자택 인근 해븐리병원 최초 내원하였다 주\r\n장. \r\n청약 전 특이 병력 없다는 주장으로 심평원 진료내역 열람 동의하였으나, \r\n심평원 특성 조회일 기준 1~2달 진료이력은 조회되지 않아 명확한 가입 후 진단 내용 확인 불가하여 건강보험공\r\n단 방문하여 요양급여내역 발급 요청 하였으나 해당 내용은 거부함. \r\n기타 고지의무 위반사항 관련 심평원 진료내역(세부진료+처방조제내역 등) 검토 결과 청약 전 일산효자한의원에\r\n서 '요추의 염좌 및 긴장(S33.50)'진단 하 7회 이상 통원 치료 시행한 사실 확인되며 이는 동 보험 고지의무 위반\r\n사항에 해당하는 것으로 사료됨.\r\n치료병원 영상 판독 결과, \r\nBrain MRi + A(2025.08.14) : Lt. occipital lobe - Acute infarction, Stenosis, Lt. PCA, left distal ICA, Rt. MCA 소견\r\n으로 급성기 뇌경색 소견은 확인됨. \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.\r\n조사결과부책동의서징구해당없음민원여부해당없음\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)피보험자 면담조사쟁점 중(L2)사고(발병)/병원내원 경위조사자확인완료\r\n쟁 점 상 세(L3)최초 증상 발생 시기, 병원 내원 경위 확인\r\n조  사  내  용 \r\n청약 후 다음날부터 두통 증상 발생하여 2025.08.14 자택 인근 해븐리병원 최초 내원하였다 주장. \r\n청약 전 특이 병력 없다는 주장으로 심평원 진료내역 열람 동의하였으나, \r\n심평원 특성 조회일 기준 1~2달 진료이력은 업데이트 안됨. \r\n명확한 가입 후 진단 내용 확인 불가.\r\n조사쟁점 대(L1)서류징구 및 전달조사쟁점 중(L2)심평원/의료자문 위임장 요청조사자확인완료\r\n쟁 점 상 세(L3)의료자문동의서 징구 및 지급지연 안내문 전달\r\n조  사  내  용 자문동의서 작성 거부, 지연안내문 전달 및 서명 등재 완료\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)의무기록/CD/검진결과 확인조사자확인완료\r\n쟁 점 상 세(L3)치료병원 진료기록 및 영상CD 일체 징구\r\n조  사  내  용 의무기록 및 영상 발급 등재 전송 완료\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)기타 병원확인조사자확인완료\r\n쟁 점 상 세(L3)건강검진 내역 확인 및 결과지 징구\r\n조  사  내  용 검진 미 시행 주장.\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n3 / 3\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)관공서 확인조사쟁점 중(L2)건강보험공단/국세청 확인조사자확인완료\r\n쟁 점 상 세(L3)제척기간 미경과로 건강보험요양급여내역 등 징구하여 과거력 조사\r\n조  사  내  용 심평원 진료내역 발급 완료 \r\n건강보험공단 방문은 거절\r\n조사쟁점 대(L1)브로커/PA(계약적정성) 확\r\n인\r\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\r\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\r\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\r\n일자확인내용관련기관\r\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\r\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\r\n2025.08.14 ~ 2025.08.19\r\n초진일시 : 2025.08.14\r\n내원경위 : 내원 전일부터 머리 좌측 통증 발생\r\n진단병명 : 상세불명의 뇌경색증(I63.9)\r\n검사내용 : Brain MRi + A(2025.08.14)\r\n검사결과 : Lt. occipital lobe - Acute infarction \r\nStenosis, Lt. PCA, left distal ICA, Rt. MCA\r\n치료사항 : 약물처방 및 경과관찰 소견\r\n치료기간 : 2025.08.14 ~ 2025.08.19 / 2회 통원\r\n해븐리병원",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-08-14",
+            "2025-08-19"
+          ],
+          "missed": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12"
+          ],
+          "extra": [
+            "2025-08-18",
+            "2025-08-21",
+            "2025-08-28",
+            "2025-09-09"
+          ],
+          "rate": 40
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "S33.50",
+            "B02",
+            "I63.9"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missed": [
+            "해븐리병원",
+            "치료병원",
+            "일산효자한의원"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "examinations": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [
+            "치료",
+            "치료병원",
+            "치료사항",
+            "치료기간"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "caseId": "Case18",
+      "caseNum": 18,
+      "patientName": "김명희",
+      "model": "gpt-4o",
+      "totalPages": 47,
+      "processedPages": 47,
+      "processedAt": "2026-01-25T11:30:39.533Z",
+      "processingTime": 230539,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case24",
+      "caseNum": 24,
+      "patientName": "김종렬",
+      "model": "gpt-4o",
+      "totalPages": 55,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T11:34:40.077Z",
+      "processingTime": 253876,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case27",
+      "caseNum": 27,
+      "patientName": "박현미",
+      "model": "gpt-4o",
+      "totalPages": 51,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T11:39:03.959Z",
+      "processingTime": 235999,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case28",
+      "caseNum": 28,
+      "patientName": "박혜경",
+      "model": "gpt-4o",
+      "totalPages": 85,
+      "processedPages": 50,
+      "processedAt": "2026-01-25T11:43:09.963Z",
+      "processingTime": 210325,
+      "cost": 0,
+      "usage": null,
+      "generatedJson": null,
+      "groundTruth": null,
+      "matching": null,
+      "error": "최대 재시도 횟수 초과",
+      "batches": []
+    },
+    {
+      "caseId": "Case29",
+      "caseNum": 29,
+      "patientName": "서문정숙",
+      "model": "gpt-4o",
+      "totalPages": 14,
+      "processedAt": "2026-01-25T11:25:14.408Z",
+      "processingTime": 33939,
+      "cost": 0.1162,
+      "usage": {
+        "prompt_tokens": 16187,
+        "completion_tokens": 784,
+        "total_tokens": 16971,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "generatedJson": {
+        "patientInfo": {
+          "name": "서문정숙",
+          "birthDate": "1958-12-15",
+          "gender": "F"
+        },
+        "visitDate": {
+          "date": "2024-08-17",
+          "hospital": "디자인병원",
+          "department": "IM"
+        },
+        "chiefComplaint": {
+          "summary": "Nausea, vomiting, diarrhea",
+          "onsetDate": "2024-08-15",
+          "details": "증상 발생 후 개인병원 방문하여 치료하였으나 호전 없음"
+        },
+        "diagnoses": [
+          {
+            "code": null,
+            "nameKr": "Salmonellosis",
+            "date": "2024-08-17",
+            "isPrimary": true,
+            "hospital": "디자인병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "Abdomen-pelvic CT",
+            "date": "2024-08-19",
+            "result": "Diffuse bowel wall thickening with mucosal enhancement",
+            "hospital": "디자인병원"
+          },
+          {
+            "name": "Brain MRI and MRA",
+            "date": "2024-09-04",
+            "result": "Old lacunar infarction, small aneurysm",
+            "hospital": "디자인병원"
+          }
+        ],
+        "treatments": [
+          {
+            "name": "Fluids and antibiotics",
+            "date": "2024-08-17",
+            "hospital": "디자인병원"
+          }
+        ],
+        "medications": [
+          {
+            "name": "Antibiotics",
+            "dosage": null,
+            "period": "14 days"
+          }
+        ],
+        "hospitalizations": [
+          {
+            "hospital": "디자인병원",
+            "admissionDate": "2024-08-17",
+            "dischargeDate": "2024-08-24",
+            "reason": "Salmonellosis treatment"
+          }
+        ],
+        "surgeries": [],
+        "prognosis": {
+          "summary": "No significant abnormality in brain parenchyma",
+          "followUpDate": "2025-09-26"
+        },
+        "extractedDates": [
+          {
+            "date": "2024-08-17",
+            "context": "최초 내원일",
+            "type": "진료일"
+          },
+          {
+            "date": "2024-08-19",
+            "context": "Abdomen-pelvic CT 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2024-09-04",
+            "context": "Brain MRI and MRA 검사일",
+            "type": "검사일"
+          },
+          {
+            "date": "2025-09-26",
+            "context": "추적관찰일",
+            "type": "진료일"
+          }
+        ],
+        "extractedHospitals": [
+          "디자인병원"
+        ],
+        "rawTextSummary": "환자 서문정숙은 2024년 8월 17일 디자인병원에 내원하여 Salmonellosis 진단을 받았으며, 복부 CT와 뇌 MRI/MRA 검사를 통해 이상 소견을 확인하였습니다. 치료로는 수액과 항생제가 투여되었으며, 2024년 8월 24일 퇴원하였습니다. 이후 2025년 9월 26일 추적 관찰이 이루어졌습니다."
+      },
+      "groundTruth": "3. ���系�� (���) \r\n��. �Ǻ����� ������ \r\n�� �� �� �� \r\n�Ǻ����� \r\n��  �� \r\n��� �� : �Ĵ������(2��) \r\n��� �� : �Ĵ������(2��) \r\n��  �� : �Ĵ������(2��) \r\n���谡�� \r\n��  �� ���� ���� ���� �� �� ���� ���� \r\n�߿���� \r\n�������� Ư�� �������� ����. \r\n�Ǻ����� \r\n��㳻�� \r\n2024.09 �뱸 ���� ���� ������ �ӹ��� �� ���� �������� �������������а� ����\r\n�Ͽ� �˻� ��� �����Ʒ� �ǽ� �Ұ� ����. ���� ���ܼ� ���� �Ͽ����� �ش� ������ \r\n�Ű�ܰ� ������ ���� ����� ���� ���� �Ұ� �Ͽ��� ����.  \r\n��� �Ƿ�� DB���غ��� �Ǽպ���� û�� �� \r\n���� ���ٸ� ġ�� ���� ������ �� 2025.09 ���� ����Ͽ� 2025.09.26 �����κ��� \r\n�����Ͽ� ���� �˻� ��� �����Ʒ��� ���� �ް� ���� ����� û���Ͽ����� ����. \r\n  \r\n  \r\n \r\n \r\n��. �Ǻ����� ���»��� ��� ���ǥ \r\n���� ������� ����/��� \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� ��KB���غ��� \r\n2024.09.04 \r\n�� �� �� : 2024.09.04 \r\n����Ⱓ : 2024.09.04 / 1ȸ ��� \r\n�˻��� : Brain MRI + MRA(2024.09.04) \r\n: Suggestive of small aneurysm, 2 mm, left \r\nparaclinoid ICA  \r\n: ���� ����� ���浿�� ���� ���Ʒ�, (2mm) �ǽ� \r\n�Ұ�. \r\n \r\n������������\r\n�а� \r\n2025.09.26 \r\n[û������] \r\n�� �� �� : 2025.09.26 \r\n�������� : 2�� ������ �Ӹ��� ���̰� ���� ������ �ּҷ� ��\r\n�� \r\n�� �� �� : �Ŀ����� ���� �����Ʒ�(I67.1) \r\n����Ⱓ : 2025.09.26 ~ 2025.09.29 / 2ȸ ��� \r\nġ�᳻�� : 2�� �� ������� ���� \r\n�˻��� : Brain MRI + MRA(2025.09.26) \r\n: A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA \r\n: ���� ����� �ظ� ������ ���浿�ƿ� 1~2mm ũ\r\n����, ���� �������� ����� ���� ���� ���Ʒ� ��\r\n��. \r\n \r\n�����κ��� \r\n  \r\n��. Ÿ ����� ó������ \r\n����� ��ǰ�� �������� ó������ \r\n�����ػ�     ����ɻ� ���� �� \r\n  \r\n��. ��ŸȮ�λ��� \r\n���(�ߺ�) \r\n���� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' \r\n���� �� ���� ����� û����.  \r\n���� \r\n���� �Ĵ������(2��) \r\n����� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�.  \r\n2024.09.04 �������������а����� �˻� ���� 2025.09.26���� �߰� �˻� �� ġ���\r\n�� ���� ������ Ȯ�ε�.  \r\n \r\n \r\n4. ���ػ������ \r\n�������� �ƴϿ� ���ʼ��� �� �����Ҹ� �� \r\n�ο����� �� �����䱸����   \r\n��� ���� ����� ���Ͽ� �� ��, \r\n  \r\n1. �������� �� û������ \r\n�����ǹ� ���ݿ��� �� ���� ������ ����. \r\n  \r\n2. ������� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\r\n�� ����� û����. \r\n  \r\n3. �˸��ǹ��� �����Ͽ� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�. \r\n  \r\n4. �ݹ� û�� �����Ͽ� \r\n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \r\n \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� \r\n \r\n2024.09.04 �������������а�(�뱸): Suggestive of small aneurysm, 2 mm, left paraclinoid ICA \r\n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \r\n \r\n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) 1�� ��� ���� \r\n \r\n2025.09.26 �����κ���: Brain MRA �� A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \r\nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \r\n \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а����� �˻� \r\n���� 2025.09.26���� �߰� �˻� �� ġ����� ���� ������ Ȯ�ε�. \r\n  \r\n5. ���ػ��� ��� \r\n��� ���� �����Ͽ� �ͻ� �ɻ� ���ؿ� �ǰ� ���� �� ó������ Ÿ���� ������ �Ǵܵ�.  \r\n  \r\n��� ���� �� ���� �����ڷ� Ȯ�� �� ��KB���غ��迡�� ���� �Ǵ��� �ֽñ� �ٶ��ϴ�.",
+      "matching": {
+        "dates": {
+          "matched": [
+            "2025-09-26",
+            "2024-09-04"
+          ],
+          "missed": [
+            "2024-08-13",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ],
+          "extra": [
+            "2024-08-17",
+            "2024-08-19",
+            "2024-08-24"
+          ],
+          "rate": 29
+        },
+        "kcdCodes": {
+          "matched": [],
+          "missed": [
+            "I67.1"
+          ],
+          "extra": [],
+          "rate": 0
+        },
+        "hospitals": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "examinations": {
+          "matched": [
+            "MRI",
+            "MRA"
+          ],
+          "missed": [],
+          "extra": [],
+          "rate": 100
+        },
+        "treatments": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        },
+        "diagnoses": {
+          "matched": [],
+          "missed": [],
+          "extra": [],
+          "rate": 0
+        }
+      },
+      "error": null
+    }
+  ]
+}

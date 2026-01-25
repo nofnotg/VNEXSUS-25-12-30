@@ -1,0 +1,139 @@
+{
+  "caseNum": 42,
+  "model": "gpt-4o-mini",
+  "processingTime": 17751,
+  "tokens": {
+    "prompt_tokens": 5576,
+    "completion_tokens": 918,
+    "total_tokens": 6494,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0013871999999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-26",
+      "time": null,
+      "hospital": "강북삼성병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "건강검진 이상소견",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "좌측 시상 1.2cm 성"
+    },
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "뇌경색, 상세불명",
+        "nameEn": "Cerebral infarction, unspecified",
+        "date": "2025-02-26",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI",
+        "nameEn": "MRI",
+        "date": "2025-04-17",
+        "result": "A small unruptured aneurysm at Lt. paraclinoid ICA (2mm)",
+        "finding": "Two focal old hemorrhagic lacunes at Lt. BG and thalamus, Moderate leukoaraiosis with multiple microbleeds",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Sermion Tab 10mg",
+        "date": "2025-02-26",
+        "duration": "60일",
+        "details": "1T BIDPC 2회",
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-02-26",
+      "endDate": "2025-04-29",
+      "totalVisits": 4,
+      "hospitals": [
+        "강북삼성병원"
+      ],
+      "summary": "외래 진료를 통해 뇌경색 및 관련 증상 관리"
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": null,
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "강북삼성병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": null,
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "강북삼성병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "뇌경색 및 관련 증상에 대한 지속적인 관리 필요",
+      "prognosis": "양호하나 지속적인 모니터링 필요",
+      "recommendations": "혈압 및 혈당 관리, 정기적인 MRI 검사를 권장",
+      "limitations": "일상생활에서의 스트레스 관리 필요"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "정진덕 환자는 뇌경색으로 인한 증상 관리가 필요함.",
+      "keyFindings": [
+        "좌측 시상 1.2cm 성",
+        "고혈압 및 고지혈증 병력"
+      ],
+      "recommendations": "정기적인 검진 및 약물 치료 지속"
+    }
+  }
+}

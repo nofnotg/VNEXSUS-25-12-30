@@ -1,0 +1,181 @@
+{
+  "caseId": "Case42",
+  "caseNum": 42,
+  "patientName": "정진덕",
+  "model": "gpt-4o-mini",
+  "totalPages": 13,
+  "processedPages": 13,
+  "processedAt": "2026-01-25T11:16:20.697Z",
+  "processingTime": 67221,
+  "cost": 0.0702,
+  "usage": {
+    "prompt_tokens": 479571,
+    "completion_tokens": 686,
+    "total_tokens": 480257,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "정진덕",
+      "birthDate": null,
+      "gender": "남"
+    },
+    "visitDate": {
+      "date": "2025-02-26",
+      "hospital": "강북삼성병원",
+      "department": "신경과"
+    },
+    "chiefComplaint": {
+      "summary": "SVD, lacunes",
+      "onsetDate": null,
+      "details": "환자는 뇌 MRI 및 MRA 검사 결과를 받았습니다."
+    },
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "뇌경색",
+        "date": "2025-02-26",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI",
+        "date": "2025-02-26",
+        "result": "SVD, lacunes, aneurysm",
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "혈압 조절",
+        "date": "2025-02-26",
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Sermion Tab 10mg",
+        "dosage": "1 T BID",
+        "period": "60일"
+      }
+    ],
+    "hospitalizations": null,
+    "surgeries": null,
+    "prognosis": {
+      "summary": "정기적인 추적 관찰 필요",
+      "followUpDate": "2026-02-26"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-02-26",
+        "context": "진료일",
+        "type": "진료일"
+      },
+      {
+        "date": "2025-09-10",
+        "context": "출력일",
+        "type": "출력일"
+      },
+      {
+        "date": "2025-04-01",
+        "context": "MRI 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-04-15",
+        "context": "MRI 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-04-23",
+        "context": "MRI 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-04-29",
+        "context": "MRI 검사일",
+        "type": "검사일"
+      }
+    ],
+    "extractedHospitals": [
+      "강북삼성병원"
+    ],
+    "rawTextSummary": "정진덕 환자는 강북삼성병원에서 SVD 및 lacunes 진단을 받았으며, 뇌 MRI 및 MRA 검사를 통해 작은 동맥류가 발견되었습니다. 혈압 조절을 위한 치료가 필요하며, 정기적인 추적 관찰이 권장됩니다."
+  },
+  "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험 \r\n2025.02.26 \r\n[청구사항] \r\n초 진 일 : 2025.02.26 \r\n내원경위 : 건강검진 간 시행한 Brain MRI 상 이상 소견으로 \r\n진료의뢰 하 내원 \r\n진 단 명 : 대뇌동맥류(I67.1) \r\n통원기간 : 2025.02.26 ~ 2025.04.29 / 3회 통원 \r\n치료내용 : 경과관찰  \r\n검사결과 : Brain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. \r\nparaclinoid ICA(2mm) \r\n의사소견 : MRI+A f/u next yt 소견 \r\n \r\n강북삼성병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[진단 적정성 확인] \r\n강북삼성병원에서 시행한 Brain MRI+A(2025.02.26) 결과, A small unruptured aneurysm at \r\nLt. paraclinoid ICA(2mm) 좌측 내경동맥 전상돌기 부위 약 2mm의 비파열성 뇌동맥류 소\r\n견 확인되며, 해당 검사 결과를 통해 '대뇌동맥류(I67.1)'로 확정 진단 받은 사실 확인됨.  \r\n \r\n이는 동 보험 약관상 뇌혈관질환 진단 정의에 부합하는 것으로 판단됨.  \r\n근거 동 건 해당 보험 약관 \r\n  \r\n  \r\n3. 결론 \r\n근거 \r\n[약관상 보험자 지급책임의 범위] \r\nBrain MRI+A(2025.02.26) 결과, A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n좌측 내경동맥 전상돌기 부위 약 2mm의 비파열성 뇌동맥류 소견 \r\n뇌혈관질환진단비(I60~I69) \r\n \r\n[보험금 사정에 관한 중요 근거] \r\nBrain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n'대뇌동맥류(I67.1)' 확정 진단(2025.04.23) \r\n결론 지급 및 계약 유지 의견 \r\n4. 기타 \r\nBrain MRI+A(2025.02.26) \r\nMRA : A small unruptured aneurysm at Lt. paraclinoid ICA(2mm) \r\n'대뇌동맥류(I67.1)' 확정 진단(2025.04.23)",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-02-26",
+        "2025-04-29",
+        "2025-04-23"
+      ],
+      "missed": [
+        "2018-09-27"
+      ],
+      "extra": [
+        "2025-09-10",
+        "2025-04-01",
+        "2025-04-15"
+      ],
+      "rate": 75
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "I67.1",
+        "I60",
+        "I69"
+      ],
+      "extra": [
+        "I63.9"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "강북삼성병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "examinations": {
+      "matched": [
+        "MRI"
+      ],
+      "missed": [
+        "MRA"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}

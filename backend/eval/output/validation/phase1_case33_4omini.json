@@ -1,0 +1,174 @@
+{
+  "caseNum": 33,
+  "model": "gpt-4o-mini",
+  "processingTime": 28272,
+  "tokens": {
+    "prompt_tokens": 25455,
+    "completion_tokens": 1250,
+    "total_tokens": 26705,
+    "prompt_tokens_details": {
+      "cached_tokens": 24576,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.004568249999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 33,
+    "overallScore": 60
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2023-10-26",
+      "time": "11:20",
+      "hospital": "마포리더스내과",
+      "department": "진료실3"
+    },
+    "chiefComplaint": {
+      "summary": "노인독감 및 분변검사 양성",
+      "referralSource": null,
+      "onsetDate": "2023-10-16",
+      "duration": "10일",
+      "details": "노인독감 증상으로 내원, 분변검사 결과 양성"
+    },
+    "diagnoses": [
+      {
+        "code": "J10.9",
+        "nameKr": "노인독감",
+        "nameEn": "Influenza, unspecified",
+        "date": "2023-10-26",
+        "isPrimary": true,
+        "hospital": "마포리더스내과"
+      },
+      {
+        "code": "C16.0",
+        "nameKr": "위암",
+        "nameEn": "Gastric cancer",
+        "date": "2025-08-12",
+        "isPrimary": false,
+        "hospital": "서울아산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "분변잠혈검사",
+        "nameEn": "Stool OB test",
+        "date": "2023-10-25",
+        "result": "음성",
+        "finding": "정상",
+        "normalRange": "100 ng/mL 이하",
+        "isAbnormal": false
+      },
+      {
+        "name": "AST",
+        "nameEn": "AST",
+        "date": "2023-10-26",
+        "result": "22.00",
+        "finding": "정상",
+        "normalRange": "0-40 U/L",
+        "isAbnormal": false
+      },
+      {
+        "name": "ALT",
+        "nameEn": "ALT",
+        "date": "2023-10-26",
+        "result": "22.00",
+        "finding": "정상",
+        "normalRange": "0-45 U/L",
+        "isAbnormal": false
+      },
+      {
+        "name": "크레아티닌",
+        "nameEn": "Creatinine",
+        "date": "2023-10-26",
+        "result": "0.90",
+        "finding": "정상",
+        "normalRange": "0.67-1.17 mg/dL",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-08-12",
+      "reportDate": "2025-08-13",
+      "finding": "위암, 잘 분화된 선암",
+      "stageTNM": "T2N1M0",
+      "stageOverall": "Stage II",
+      "histology": "잘 분화된 선암",
+      "margin": "정상"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "위 절제술",
+        "date": "2025-11-19",
+        "duration": "7-10일",
+        "details": "위암으로 인한 위 절제술",
+        "hospital": "서울아산병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-10-16",
+      "endDate": "2023-10-26",
+      "totalVisits": 3,
+      "hospitals": [
+        "마포리더스내과"
+      ],
+      "summary": "노인독감 및 분변검사로 통원 치료"
+    },
+    "admissionPeriod": {
+      "startDate": "2024-06-25",
+      "endDate": "2024-06-25",
+      "totalDays": 1,
+      "hospital": "서울아산병원",
+      "department": "심장내과",
+      "reason": "흉통 및 협심증"
+    },
+    "pastHistory": [
+      {
+        "condition": "협심증",
+        "code": "I25.10",
+        "diagnosisDate": "2004-11-16",
+        "treatment": "스텐트 삽입",
+        "currentStatus": "양호",
+        "hospital": "서울아산병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 노인독감 및 위암 진단을 받았으며, 수술이 필요함.",
+      "prognosis": "위암 수술 후 예후는 양호할 것으로 예상됨.",
+      "recommendations": "정기적인 검사 및 관리 필요.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 노인독감 및 위암 진단을 받았으며, 수술이 필요함.",
+      "keyFindings": [
+        "노인독감 증상",
+        "위암 진단"
+      ],
+      "recommendations": "정기적인 검사 및 관리 필요."
+    }
+  }
+}

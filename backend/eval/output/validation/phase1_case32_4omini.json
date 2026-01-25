@@ -1,0 +1,154 @@
+{
+  "caseNum": 32,
+  "model": "gpt-4o-mini",
+  "processingTime": 26865,
+  "tokens": {
+    "prompt_tokens": 108987,
+    "completion_tokens": 1133,
+    "total_tokens": 110120,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.01702785,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-10-31",
+      "time": "16:36",
+      "hospital": "세브란스병원",
+      "department": "산부인과"
+    },
+    "chiefComplaint": {
+      "summary": "Cervix cancer 진단 및 치료를 위한 입원",
+      "referralSource": "화순전남대학교병원",
+      "onsetDate": "2025-09-17",
+      "duration": "2주",
+      "details": "복부 불편감 및 watery vaginal discharge로 내원"
+    },
+    "diagnoses": [
+      {
+        "code": "C53.9",
+        "nameKr": "자궁 경부암",
+        "nameEn": "Cervical cancer",
+        "date": "2025-09-18",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT",
+        "nameEn": "Computed Tomography",
+        "date": "2025-09-17",
+        "result": "Right tubo-ovarian abscess 및 pelvic mass 확인",
+        "finding": "11.5 x 8 cm multiseptated enhancing mass",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "MRI",
+        "nameEn": "Magnetic Resonance Imaging",
+        "date": "2025-09-18",
+        "result": "Pelvic mass 및 lymph node involvement 확인",
+        "finding": "Lymphovascular invasion present",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-09-18",
+      "reportDate": "2025-09-19",
+      "finding": "Endocervical adenocarcinoma, HPV-independent, gastric type",
+      "stageTNM": "T2N1M0",
+      "stageOverall": "Stage II",
+      "histology": "Adenocarcinoma",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Robot assisted radical hysterectomy",
+        "date": "2025-09-18",
+        "duration": "정보 없음",
+        "details": "로봇을 이용한 근치적 자궁절제술 시행",
+        "hospital": "세브란스병원"
+      },
+      {
+        "type": "약물",
+        "name": "Chemotherapy",
+        "date": "2025-09-29",
+        "duration": "정보 없음",
+        "details": "Postoperative chemotherapy 계획",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-09-30",
+      "endDate": "정보 없음",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "추후 외래 진료 필요"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-09-17",
+      "endDate": "2025-09-29",
+      "totalDays": 12,
+      "hospital": "세브란스병원",
+      "department": "산부인과",
+      "reason": "Cervical cancer 치료"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 Cervical cancer로 진단되었으며, 로봇을 이용한 근치적 자궁절제술 후 항암 치료가 필요함.",
+      "prognosis": "치료 후 경과 양호",
+      "recommendations": "정기적인 외래 진료 및 추가 검사 필요",
+      "limitations": "일상생활에서의 활동 제한 필요"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "정보 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "Cervical cancer 진단 및 치료를 위한 입원 경과 양호.",
+      "keyFindings": [
+        "Cervical cancer 진단",
+        "로봇을 이용한 근치적 자궁절제술 시행"
+      ],
+      "recommendations": "정기적인 외래 진료 및 항암 치료 계획"
+    }
+  }
+}

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS 파이프라인 검증 보고서 - 2026-01-25T11-46-50</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { color: #1a237e; border-bottom: 3px solid #3f51b5; padding-bottom: 10px; }
+    h2 { color: #283593; margin-top: 30px; }
+    h3 { color: #303f9f; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+    .summary-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .summary-card h4 { margin: 0 0 10px 0; color: #5c6bc0; }
+    .summary-card .value { font-size: 2em; font-weight: bold; color: #1a237e; }
+    .summary-card .label { color: #666; font-size: 0.9em; }
+    .model-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+    .model-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .model-card.mini { border-top: 4px solid #4caf50; }
+    .model-card.full { border-top: 4px solid #2196f3; }
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; background: white; }
+    th, td { padding: 12px; text-align: left; border: 1px solid #e0e0e0; }
+    th { background: #e8eaf6; color: #1a237e; }
+    tr:nth-child(even) { background: #fafafa; }
+    .rate-bar { height: 20px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+    .rate-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+    .rate-fill.high { background: linear-gradient(90deg, #4caf50, #8bc34a); }
+    .rate-fill.medium { background: linear-gradient(90deg, #ff9800, #ffb74d); }
+    .rate-fill.low { background: linear-gradient(90deg, #f44336, #e57373); }
+    .insight-box { background: #fff3e0; border-left: 4px solid #ff9800; padding: 15px; margin: 15px 0; border-radius: 0 5px 5px 0; }
+    .insight-box.critical { background: #ffebee; border-left-color: #f44336; }
+    .insight-box.success { background: #e8f5e9; border-left-color: #4caf50; }
+    .insight-box.info { background: #e3f2fd; border-left-color: #2196f3; }
+    .case-detail { background: white; margin: 20px 0; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    .matching-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .matching-item { padding: 10px; background: #f5f5f5; border-radius: 5px; }
+    .matching-item .title { font-weight: bold; color: #333; }
+    .matching-item .count { font-size: 1.2em; color: #1a237e; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 0.8em; margin: 2px; }
+    .tag.matched { background: #c8e6c9; color: #2e7d32; }
+    .tag.missed { background: #ffcdd2; color: #c62828; }
+    .tag.extra { background: #fff9c4; color: #f57f17; }
+    .footer { margin-top: 40px; padding: 20px; text-align: center; color: #666; border-top: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔬 VNEXSUS 파이프라인 검증 보고서</h1>
+    <p>생성일시: 2026. 1. 25. 오후 8:46:50</p>
+    
+    <h2>📊 검증 요약</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h4>총 케이스</h4>
+        <div class="value">29</div>
+        <div class="label">gpt-4o-mini: 19개 / gpt-4o: 4개</div>
+      </div>
+      <div class="summary-card">
+        <h4>총 페이지</h4>
+        <div class="value">1,475</div>
+        <div class="label">PDF 문서 전체 페이지</div>
+      </div>
+      <div class="summary-card">
+        <h4>총 비용</h4>
+        <div class="value">$5.30</div>
+        <div class="label">gpt-4o-mini: $4.62 / gpt-4o: $0.68</div>
+      </div>
+      <div class="summary-card">
+        <h4>평균 처리시간</h4>
+        <div class="value">132초</div>
+        <div class="label">케이스당 평균</div>
+      </div>
+    </div>
+    
+    <h2>⚖️ 모델 성능 비교</h2>
+    <div class="model-comparison">
+      <div class="model-card mini">
+        <h3>🟢 gpt-4o-mini</h3>
+        <p><strong>케이스:</strong> 19개 (전체)</p>
+        <p><strong>비용:</strong> $4.62 (페이지당 $0.0054)</p>
+        <table>
+          <tr><th>항목</th><th>평균 매칭률</th></tr>
+          <tr><td>날짜</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 29%"></div></div> 29%</td></tr>
+          <tr><td>KCD 코드</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 27%"></div></div> 27%</td></tr>
+          <tr><td>병원명</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 46%"></div></div> 46%</td></tr>
+          <tr><td>검사</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 37%"></div></div> 37%</td></tr>
+          <tr><td>치료</td><td><div class="rate-bar"><div class="rate-fill low" style="width: 9%"></div></div> 9%</td></tr>
+        </table>
+      </div>
+      <div class="model-card full">
+        <h3>🔵 gpt-4o</h3>
+        <p><strong>케이스:</strong> 4개 (대용량 제외)</p>
+        <p><strong>비용:</strong> $0.68 (페이지당 $0.0083)</p>
+        <table>
+          <tr><th>항목</th><th>평균 매칭률</th></tr>
+          <tr><td>날짜</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 35%"></div></div> 35%</td></tr>
+          <tr><td>KCD 코드</td><td><div class="rate-bar"><div class="rate-fill low" style="width: 17%"></div></div> 17%</td></tr>
+          <tr><td>병원명</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 42%"></div></div> 42%</td></tr>
+          <tr><td>검사</td><td><div class="rate-bar"><div class="rate-fill medium" style="width: 25%"></div></div> 25%</td></tr>
+          <tr><td>치료</td><td><div class="rate-bar"><div class="rate-fill low" style="width: 0%"></div></div> 0%</td></tr>
+        </table>
+      </div>
+    </div>
+    
+    <h2>💡 인사이트 및 개선 방향</h2>
+    
+    <div class="insight-box info">
+      <strong>💰 비용 효율성</strong>
+      <p>gpt-4o는 gpt-4o-mini 대비 1.5배 비용이 발생합니다. 비용 대비 성능 향상이 -2.0%p로, 일반 케이스는 gpt-4o-mini가 효율적입니다.</p>
+    </div>
+  
+    <div class="insight-box critical">
+      <strong>⚠️ 날짜 매칭률 개선 필요</strong>
+      <p>현재 날짜 매칭률이 29%로 낮습니다. 원인: 1) 여러 날짜 형식 혼재 (YYYY.MM.DD, YYYY년 MM월 DD일 등), 2) 이미지 품질 문제, 3) 손글씨/스캔 문서. 개선안: 날짜 형식 정규화 후처리 강화, 이미지 전처리 개선.</p>
+    </div>
+  
+    <div class="insight-box info">
+      <strong>🧪 검사/치료 매칭 개선안</strong>
+      <p>검사(37%), 치료(9%) 매칭률 향상을 위해: 1) 의료 용어 사전 기반 후처리 추가, 2) 유사어 매칭 (예: "위내시경" = "상부위장관내시경"), 3) 약어 확장 (CT, MRI 등).</p>
+    </div>
+  
+    <div class="insight-box info">
+      <strong>🚀 시스템 권장사항</strong>
+      <p>1) 일반 케이스: gpt-4o-mini 사용 (비용 효율적)<br>2) 복잡/고위험 케이스: gpt-4o 사용 (정확도 우선)<br>3) OCR 캐시 활용으로 재처리 시 비용 절감<br>4) 후처리 로직에서 날짜/병원명 정규화 강화</p>
+    </div>
+  
+    
+    <h2>📋 케이스별 상세 결과</h2>
+    <div class="case-detail">
+    <h3>Case2 (김미화) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 47p | <strong>처리시간:</strong> 62초 | <strong>비용:</strong> $0.254</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">33%</div>
+        <div>일치: 3 / 누락: 6</div>
+        <div><span class="tag matched">2023-08-07</span><span class="tag matched">2025-02-04</span><span class="tag matched">2025-02-12</span></div>
+        <div><span class="tag missed">2019-03-23</span><span class="tag missed">2019-04-09</span><span class="tag missed">2024-01-09</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+        <div><span class="tag matched">D18.02</span></div>
+        <div><span class="tag missed">D13.4</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">33%</div>
+        <div>일치: 1 / 누락: 2</div>
+        <div><span class="tag matched">삼성서울병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case5 (김태형) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 27p | <strong>처리시간:</strong> 134초 | <strong>비용:</strong> $0.146</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">22%</div>
+        <div>일치: 2 / 누락: 7</div>
+        <div><span class="tag matched">2024-12-27</span><span class="tag matched">2024-12-31</span></div>
+        <div><span class="tag missed">2018-05-10</span><span class="tag missed">2023-02-10</span><span class="tag missed">2023-05-10</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">67%</div>
+        <div>일치: 2 / 누락: 1</div>
+        <div><span class="tag matched">I20.88</span><span class="tag matched">I25.1</span></div>
+        <div><span class="tag missed">R07.4</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">33%</div>
+        <div>일치: 1 / 누락: 2</div>
+        <div><span class="tag matched">신촌세브란스병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case9 (임승희) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 191p | <strong>처리시간:</strong> 117초 | <strong>비용:</strong> $0.270</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">14%</div>
+        <div>일치: 3 / 누락: 18</div>
+        <div><span class="tag matched">2024-10-07</span><span class="tag matched">2024-11-01</span><span class="tag matched">2024-10-31</span></div>
+        <div><span class="tag missed">2019-02-26</span><span class="tag missed">2023-03-23</span><span class="tag missed">2023-12-26</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">33%</div>
+        <div>일치: 1 / 누락: 2</div>
+        <div><span class="tag matched">D05.10</span></div>
+        <div><span class="tag missed">D05.00</span><span class="tag missed">I67.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">40%</div>
+        <div>일치: 2 / 누락: 3</div>
+        <div><span class="tag matched">양지병원</span><span class="tag matched">대림성모병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 5</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case11 (허전권) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 134p | <strong>처리시간:</strong> 193초 | <strong>비용:</strong> $0.724</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">32%</div>
+        <div>일치: 7 / 누락: 15</div>
+        <div><span class="tag matched">2024-10-21</span><span class="tag matched">2024-11-05</span><span class="tag matched">2024-10-28</span></div>
+        <div><span class="tag missed">2023-02-28</span><span class="tag missed">2024-07-26</span><span class="tag missed">2024-09-13</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">C23</span></div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+        <div><span class="tag matched">삼성서울병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">40%</div>
+        <div>일치: 2 / 누락: 3</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 4</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case13 (김인화) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 46p | <strong>처리시간:</strong> 131초 | <strong>비용:</strong> $0.248</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">20%</div>
+        <div>일치: 1 / 누락: 4</div>
+        <div><span class="tag matched">2024-04-12</span></div>
+        <div><span class="tag missed">2021-03-24</span><span class="tag missed">2021-07-30</span><span class="tag missed">2024-11-04</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+        <div></div>
+        <div><span class="tag missed">S33.50</span><span class="tag missed">M51.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+        <div><span class="tag matched">서울바른병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">100%</div>
+        <div>일치: 4 / 누락: 0</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case15 (고영란) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 13p | <strong>처리시간:</strong> 94초 | <strong>비용:</strong> $0.070</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">50%</div>
+        <div>일치: 4 / 누락: 4</div>
+        <div><span class="tag matched">2025-06-07</span><span class="tag matched">2025-06-16</span><span class="tag matched">2025-06-27</span></div>
+        <div><span class="tag missed">2025-02-25</span><span class="tag missed">2053-02-25</span><span class="tag missed">2025-05-26</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+        <div></div>
+        <div><span class="tag missed">C50.11</span><span class="tag missed">R59.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">더자인병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">67%</div>
+        <div>일치: 2 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case17 (김동아) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 28p | <strong>처리시간:</strong> 73초 | <strong>비용:</strong> $0.151</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">40%</div>
+        <div>일치: 2 / 누락: 3</div>
+        <div><span class="tag matched">2025-08-14</span><span class="tag matched">2025-08-19</span></div>
+        <div><span class="tag missed">2025-08-12</span><span class="tag missed">2030-08-12</span><span class="tag missed">2045-08-12</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+        <div><span class="tag missed">S33.50</span><span class="tag missed">B02</span><span class="tag missed">I63.9</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case18 (김명희) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 47p | <strong>처리시간:</strong> 154초 | <strong>비용:</strong> $0.254</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 7</div>
+        <div></div>
+        <div><span class="tag missed">2019-03-29</span><span class="tag missed">2019-07-05</span><span class="tag missed">2021-07-09</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+        <div></div>
+        <div><span class="tag missed">E66.8</span><span class="tag missed">I10.9</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 6</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case24 (김종렬) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 55p | <strong>처리시간:</strong> 67초 | <strong>비용:</strong> $0.297</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">17%</div>
+        <div>일치: 3 / 누락: 15</div>
+        <div><span class="tag matched">2022-08-24</span><span class="tag matched">2022-09-02</span><span class="tag matched">2022-08-26</span></div>
+        <div><span class="tag missed">2022-09-06</span><span class="tag missed">2023-01-15</span><span class="tag missed">2024-10-15</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+        <div></div>
+        <div><span class="tag missed">C16.20</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+        <div><span class="tag matched">강북삼성병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 8</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case27 (박현미) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 51p | <strong>처리시간:</strong> 164초 | <strong>비용:</strong> $0.270</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">21%</div>
+        <div>일치: 3 / 누락: 11</div>
+        <div><span class="tag matched">2025-09-08</span><span class="tag matched">2025-09-10</span><span class="tag matched">2025-09-09</span></div>
+        <div><span class="tag missed">2019-06-22</span><span class="tag missed">2023-02-22</span><span class="tag missed">2023-06-22</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">C73</span></div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">50%</div>
+        <div>일치: 2 / 누락: 2</div>
+        <div><span class="tag matched">서울아산병원</span><span class="tag matched">중앙대광명병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 7</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case28 (박혜경) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 85p | <strong>처리시간:</strong> 126초 | <strong>비용:</strong> $0.459</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">25%</div>
+        <div>일치: 3 / 누락: 9</div>
+        <div><span class="tag matched">2025-08-04</span><span class="tag matched">2025-08-14</span><span class="tag matched">2025-08-06</span></div>
+        <div><span class="tag missed">2018-10-18</span><span class="tag missed">2020-10-18</span><span class="tag missed">2023-07-18</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+        <div><span class="tag missed">C34.99</span><span class="tag missed">O24</span><span class="tag missed">D13.5</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+        <div><span class="tag matched">은평성모병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 6</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case29 (서문정숙) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 14p | <strong>처리시간:</strong> 91초 | <strong>비용:</strong> $0.076</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">14%</div>
+        <div>일치: 1 / 누락: 6</div>
+        <div><span class="tag matched">2024-09-04</span></div>
+        <div><span class="tag missed">2025-09-26</span><span class="tag missed">2024-08-13</span><span class="tag missed">2025-09-29</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+        <div></div>
+        <div><span class="tag missed">I67.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case30 (송금숙) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 18p | <strong>처리시간:</strong> 80초 | <strong>비용:</strong> $0.097</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">38%</div>
+        <div>일치: 3 / 누락: 5</div>
+        <div><span class="tag matched">2025-03-23</span><span class="tag matched">2025-04-11</span><span class="tag matched">2025-03-24</span></div>
+        <div><span class="tag missed">2012-11-23</span><span class="tag missed">2025-01-01</span><span class="tag missed">2025-04-22</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+        <div><span class="tag missed">M51</span><span class="tag missed">M48</span><span class="tag missed">M40</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">우리들병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 4</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case34 (윤희정) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 52p | <strong>처리시간:</strong> 82초 | <strong>비용:</strong> $0.281</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">20%</div>
+        <div>일치: 3 / 누락: 12</div>
+        <div><span class="tag matched">2025-08-10</span><span class="tag matched">2025-08-14</span><span class="tag matched">2025-08-11</span></div>
+        <div><span class="tag missed">2017-06-13</span><span class="tag missed">2018-02-27</span><span class="tag missed">2018-03-29</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">33%</div>
+        <div>일치: 1 / 누락: 2</div>
+        <div><span class="tag matched">C73</span></div>
+        <div><span class="tag missed">C77.0</span><span class="tag missed">C77</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">일산병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">40%</div>
+        <div>일치: 2 / 누락: 3</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case38 (이영희) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 115p | <strong>처리시간:</strong> 105초 | <strong>비용:</strong> $0.270</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">11%</div>
+        <div>일치: 2 / 누락: 16</div>
+        <div><span class="tag matched">2025-08-21</span><span class="tag matched">2025-08-03</span></div>
+        <div><span class="tag missed">2024-09-11</span><span class="tag missed">2023-09-11</span><span class="tag missed">2024-08-30</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+        <div><span class="tag matched">C54.1</span></div>
+        <div><span class="tag missed">B02</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+        <div><span class="tag matched">이대목동병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 8</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case39 (장동현) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 63p | <strong>처리시간:</strong> 136초 | <strong>비용:</strong> $0.340</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">67%</div>
+        <div>일치: 2 / 누락: 1</div>
+        <div><span class="tag matched">2024-04-23</span><span class="tag matched">2024-04-25</span></div>
+        <div><span class="tag missed">2016-09-12</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+        <div><span class="tag matched">I21.9</span></div>
+        <div><span class="tag missed">Z95.5</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">명지병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case41 (장우진) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 30p | <strong>처리시간:</strong> 112초 | <strong>비용:</strong> $0.162</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">18%</div>
+        <div>일치: 2 / 누락: 9</div>
+        <div><span class="tag matched">2024-04-22</span><span class="tag matched">2024-04-20</span></div>
+        <div><span class="tag missed">2007-08-08</span><span class="tag missed">2021-05-17</span><span class="tag missed">2021-05-24</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 4</div>
+        <div></div>
+        <div><span class="tag missed">M43.16</span><span class="tag missed">S32.09</span><span class="tag missed">S32.02</span><span class="tag missed">S32.03</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">20%</div>
+        <div>일치: 1 / 누락: 4</div>
+        <div><span class="tag matched">은평성모병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case42 (정진덕) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 13p | <strong>처리시간:</strong> 67초 | <strong>비용:</strong> $0.070</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">75%</div>
+        <div>일치: 3 / 누락: 1</div>
+        <div><span class="tag matched">2025-02-26</span><span class="tag matched">2025-04-29</span><span class="tag matched">2025-04-23</span></div>
+        <div><span class="tag missed">2018-09-27</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+        <div><span class="tag missed">I67.1</span><span class="tag missed">I60</span><span class="tag missed">I69</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">강북삼성병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case44 (최순곤) - gpt-4o-mini</h3>
+    <p><strong>페이지:</strong> 33p | <strong>처리시간:</strong> 162초 | <strong>비용:</strong> $0.178</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">25%</div>
+        <div>일치: 2 / 누락: 6</div>
+        <div><span class="tag matched">2025-08-25</span><span class="tag matched">2025-08-26</span></div>
+        <div><span class="tag missed">2020-09-09</span><span class="tag missed">2024-09-03</span><span class="tag missed">2024-06-03</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+        <div><span class="tag matched">I63.9</span></div>
+        <div><span class="tag missed">I60</span><span class="tag missed">I69</span><span class="tag missed">B02</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">25%</div>
+        <div>일치: 1 / 누락: 3</div>
+        <div><span class="tag matched">신촌세브란스병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">50%</div>
+        <div>일치: 1 / 누락: 1</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 8</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+      <h3>Case2 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+    <h3>Case5 (김태형) - gpt-4o</h3>
+    <p><strong>페이지:</strong> 27p | <strong>처리시간:</strong> 59초 | <strong>비용:</strong> $0.224</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">33%</div>
+        <div>일치: 3 / 누락: 6</div>
+        <div><span class="tag matched">2024-12-12</span><span class="tag matched">2024-12-27</span><span class="tag matched">2024-12-31</span></div>
+        <div><span class="tag missed">2018-05-10</span><span class="tag missed">2023-02-10</span><span class="tag missed">2023-05-10</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">67%</div>
+        <div>일치: 2 / 누락: 1</div>
+        <div><span class="tag matched">I20.88</span><span class="tag matched">I25.1</span></div>
+        <div><span class="tag missed">R07.4</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">67%</div>
+        <div>일치: 2 / 누락: 1</div>
+        <div><span class="tag matched">동신병원</span><span class="tag matched">신촌세브란스병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+      <h3>Case13 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+    <h3>Case15 (고영란) - gpt-4o</h3>
+    <p><strong>페이지:</strong> 13p | <strong>처리시간:</strong> 30초 | <strong>비용:</strong> $0.108</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">38%</div>
+        <div>일치: 3 / 누락: 5</div>
+        <div><span class="tag matched">2025-06-07</span><span class="tag matched">2025-06-27</span><span class="tag matched">2025-06-20</span></div>
+        <div><span class="tag missed">2025-02-25</span><span class="tag missed">2053-02-25</span><span class="tag missed">2025-05-26</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 2</div>
+        <div></div>
+        <div><span class="tag missed">C50.11</span><span class="tag missed">R59.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">100%</div>
+        <div>일치: 1 / 누락: 0</div>
+        <div><span class="tag matched">더자인병원</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+    <h3>Case17 (김동아) - gpt-4o</h3>
+    <p><strong>페이지:</strong> 28p | <strong>처리시간:</strong> 46초 | <strong>비용:</strong> $0.232</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">40%</div>
+        <div>일치: 2 / 누락: 3</div>
+        <div><span class="tag matched">2025-08-14</span><span class="tag matched">2025-08-19</span></div>
+        <div><span class="tag missed">2025-08-12</span><span class="tag missed">2030-08-12</span><span class="tag missed">2045-08-12</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+        <div><span class="tag missed">S33.50</span><span class="tag missed">B02</span><span class="tag missed">I63.9</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 3</div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 4</div>
+      </div>
+    </div>
+  </div><div class="case-detail">
+      <h3>Case18 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+      <h3>Case24 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+      <h3>Case27 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+      <h3>Case28 - ❌ 오류</h3>
+      <p>오류: 최대 재시도 횟수 초과</p>
+    </div><div class="case-detail">
+    <h3>Case29 (서문정숙) - gpt-4o</h3>
+    <p><strong>페이지:</strong> 14p | <strong>처리시간:</strong> 34초 | <strong>비용:</strong> $0.116</p>
+    
+    <div class="matching-grid">
+      <div class="matching-item">
+        <div class="title">📅 날짜 매칭</div>
+        <div class="count">29%</div>
+        <div>일치: 2 / 누락: 5</div>
+        <div><span class="tag matched">2025-09-26</span><span class="tag matched">2024-09-04</span></div>
+        <div><span class="tag missed">2024-08-13</span><span class="tag missed">2025-09-29</span><span class="tag missed">2020-10-15</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏷️ KCD 코드</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 1</div>
+        <div></div>
+        <div><span class="tag missed">I67.1</span></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🏥 병원명</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+        <div></div>
+      </div>
+      <div class="matching-item">
+        <div class="title">🧪 검사</div>
+        <div class="count">100%</div>
+        <div>일치: 2 / 누락: 0</div>
+      </div>
+      <div class="matching-item">
+        <div class="title">💊 치료</div>
+        <div class="count">0%</div>
+        <div>일치: 0 / 누락: 0</div>
+      </div>
+    </div>
+  </div>
+    
+    <div class="footer">
+      <p>VNEXSUS AI 손해사정 시스템 - 파이프라인 검증 보고서</p>
+      <p>생성: 2026-01-25T11:46:50.330Z</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+{
+  "caseNum": 12,
+  "model": "gpt-4o-mini",
+  "processingTime": 27173,
+  "tokens": {
+    "prompt_tokens": 38017,
+    "completion_tokens": 1378,
+    "total_tokens": 39395,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00652935,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-19",
+      "time": "16:23",
+      "hospital": "이화여자대학교의료원",
+      "department": "응급의학과"
+    },
+    "chiefComplaint": {
+      "summary": "복부 팽만 및 잇몸 출혈",
+      "referralSource": "홍익병원",
+      "onsetDate": "2025-02-05",
+      "duration": "2주",
+      "details": "환자는 2주 전부터 잇몸 출혈과 복부 팽만을 호소하며, 타 병원에서 알코올성 간경변으로 진단받고 치료를 위해 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "K70.3",
+        "nameKr": "알코올성 간경변증",
+        "nameEn": "Alcoholic liver cirrhosis",
+        "date": "2025-02-19",
+        "isPrimary": true,
+        "hospital": "이화여자대학교의료원"
+      },
+      {
+        "code": "K92.2",
+        "nameKr": "위장관 출혈",
+        "nameEn": "Gastrointestinal hemorrhage",
+        "date": "2025-02-19",
+        "isPrimary": false,
+        "hospital": "이화여자대학교의료원"
+      },
+      {
+        "code": "K76.7",
+        "nameKr": "간신증후군",
+        "nameEn": "Hepatorenal syndrome",
+        "date": "2025-02-19",
+        "isPrimary": false,
+        "hospital": "이화여자대학교의료원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CBC",
+        "nameEn": "Complete Blood Count",
+        "date": "2025-02-19",
+        "result": "Abnormal",
+        "finding": "Hypoglycemia, elevated creatinine",
+        "normalRange": "WBC: 4.0-10.0 x 10^9/L, Hb: 13.0-17.0 g/dL",
+        "isAbnormal": true
+      },
+      {
+        "name": "ECG",
+        "nameEn": "Electrocardiogram",
+        "date": "2025-02-19",
+        "result": "Abnormal",
+        "finding": "Sinus tachycardia",
+        "normalRange": "60-100 bpm",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "Computed Tomography of Abdomen",
+        "date": "2025-02-20",
+        "result": "Positive for ascites and liver cirrhosis",
+        "finding": "Increased liver volume, ascites",
+        "normalRange": "No abnormal findings",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "CRRT",
+        "date": "2025-02-20",
+        "duration": "1일",
+        "details": "지속적 신대체요법 시행",
+        "hospital": "이화여자대학교의료원"
+      },
+      {
+        "type": "처치",
+        "name": "내시경적 지혈술",
+        "date": "2025-02-20",
+        "duration": "1회",
+        "details": "위장관 출혈 지혈을 위한 내시경적 치료",
+        "hospital": "이화여자대학교의료원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": null
+    },
+    "admissionPeriod": {
+      "startDate": "2025-02-19",
+      "endDate": "2025-02-20",
+      "totalDays": 1,
+      "hospital": "이화여자대학교의료원",
+      "department": "소화기내과",
+      "reason": "간경변증 및 위장관 출혈"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2019-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "홍익병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "2018-01-01",
+        "treatment": "식이요법 및 약물",
+        "currentStatus": "관리 중",
+        "hospital": "홍익병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 알코올성 간경변증으로 인한 위장관 출혈로 응급 치료가 필요함.",
+      "prognosis": "예후 불량, 사망 가능성 높음.",
+      "recommendations": "지속적인 치료 및 관리 필요.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 알코올성 간경변증으로 인해 사망함.",
+      "keyFindings": [
+        "위장관 출혈 및 간신증후군 발생",
+        "응급 치료에도 불구하고 상태 악화"
+      ],
+      "recommendations": "향후 유사 사례에 대한 예방 조치 필요."
+    }
+  }
+}

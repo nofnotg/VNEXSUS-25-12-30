@@ -1,0 +1,52 @@
+{
+  "caseId": "Case24",
+  "caseNum": 24,
+  "patientName": "김종렬",
+  "model": "gpt-4o-mini",
+  "pdfFile": "강북삼성병원.pdf",
+  "imageCount": 3,
+  "processingTime": 8302,
+  "tokens": {
+    "prompt_tokens": 110667,
+    "completion_tokens": 203,
+    "total_tokens": 110870,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016721849999999996,
+  "generatedJson": {
+    "visitDate": "2022-08-22",
+    "chiefComplaint": "Epigastric pain (hunger pain)",
+    "diagnoses": [
+      "Known stomach cancer",
+      "Stomach ca"
+    ],
+    "examinations": [
+      "EGD 검사 시행 (2018)"
+    ],
+    "pathology": [
+      {
+        "type": "Stomach ca",
+        "details": {
+          "병변 부위": "MB/GC",
+          "육안형": "EGC type IIb",
+          "크기": "3 x 3 cm"
+        }
+      }
+    ],
+    "treatments": [],
+    "outpatientPeriod": "2022-08-22 to 2025-10-29",
+    "admissionPeriod": "",
+    "pastHistory": "No significant past medical history noted.",
+    "doctorOpinion": "Stomach ca 외부 조직병리 보고서 확인됨."
+  },
+  "timestamp": "2026-01-25T09:48:43.824Z"
+}

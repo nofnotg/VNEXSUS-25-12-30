@@ -1,0 +1,109 @@
+{
+  "caseId": "Case9",
+  "caseNum": 9,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-07",
+      "time": "09:34",
+      "hospital": "대림성모병원",
+      "department": "유방외과"
+    },
+    "chiefComplaint": {
+      "summary": "유방암 검사 이상 소견",
+      "onsetDate": "2024-10",
+      "duration": null,
+      "details": "타 병원 검사 이상 소견"
+    },
+    "diagnoses": [
+      {
+        "code": "N64.9",
+        "nameKr": "유방의 상세불명 장애",
+        "date": "2024-10-07",
+        "isPrimary": false,
+        "hospital": "대림성모병원"
+      },
+      {
+        "code": "D05.10",
+        "nameKr": "유방의 관내 제자리암종, 오른쪽",
+        "date": "2024-09-27",
+        "isPrimary": true,
+        "hospital": "대림성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PE",
+        "date": "2024-10-04",
+        "result": "Rt 9.5-4 1cm mass",
+        "finding": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "US",
+        "date": "2024-09-27",
+        "result": "Rt mild outer, focal asym w/ malignant ca+",
+        "finding": "US correlated(C6)",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Slide: DCIS",
+      "testDate": "2024-09-27",
+      "finding": "Intraductal carcinoma in situ of breast, right",
+      "stageTNM": "cTisN0M0"
+    },
+    "treatments": [
+      {
+        "type": "Medication",
+        "name": "Levosulpiride, cimetidine, metoclopramide, domperidone",
+        "date": "2024-10-07",
+        "duration": null,
+        "details": "뇌하수체로 인한 금기약물"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-07",
+      "endDate": "2024-10-30",
+      "totalVisits": null,
+      "hospitals": [
+        "대림성모병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "현재 상태가 수술의 contraindication은 아님",
+      "prognosis": "수술 전후 혈압 변화에 주의",
+      "recommendations": "Neurological deficit 발생 시 신경과에 연락"
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2024-10-07",
+      "2024-09-27",
+      "2024-10-04",
+      "2024-10-30"
+    ],
+    "kcdCodes": [
+      "N64.9",
+      "D05.10"
+    ],
+    "hospitals": [
+      "대림성모병원"
+    ],
+    "examinations": [
+      "PE",
+      "US"
+    ],
+    "treatments": [
+      "Levosulpiride, cimetidine, metoclopramide, domperidone"
+    ],
+    "diagnoses": [
+      "유방의 상세불명 장애",
+      "유방의 관내 제자리암종, 오른쪽"
+    ]
+  },
+  "timestamp": "2026-01-25T09:41:44.744Z",
+  "cached": true
+}

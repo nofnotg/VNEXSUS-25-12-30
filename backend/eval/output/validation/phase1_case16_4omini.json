@@ -1,0 +1,173 @@
+{
+  "caseNum": 16,
+  "model": "gpt-4o-mini",
+  "processingTime": 21579,
+  "tokens": {
+    "prompt_tokens": 8882,
+    "completion_tokens": 1198,
+    "total_tokens": 10080,
+    "prompt_tokens_details": {
+      "cached_tokens": 8192,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0020510999999999997,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-09-10",
+      "time": null,
+      "hospital": "일산차병원",
+      "department": "소화기내과"
+    },
+    "chiefComplaint": {
+      "summary": "직장의 악성 신생물",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "대장내시경 및 생검 결과 직장암으로 진단됨."
+    },
+    "diagnoses": [
+      {
+        "code": "C20",
+        "nameKr": "직장의 악성 신생물",
+        "nameEn": "Malignant neoplasm of rectum",
+        "date": "2025-09-10",
+        "isPrimary": true,
+        "hospital": "일산차병원"
+      },
+      {
+        "code": "B37.88",
+        "nameKr": "기타 부위의 칸디다증",
+        "nameEn": "Candidiasis of other sites",
+        "date": null,
+        "isPrimary": false,
+        "hospital": null
+      },
+      {
+        "code": "J98.40",
+        "nameKr": "고립성 폐결절 (의증)",
+        "nameEn": "Solitary pulmonary nodule (suspected)",
+        "date": null,
+        "isPrimary": false,
+        "hospital": null
+      }
+    ],
+    "examinations": [
+      {
+        "name": "대장내시경",
+        "nameEn": "Colonoscopy",
+        "date": "2025-09-10",
+        "result": "Adenocarcinoma, well to moderately differentiated",
+        "finding": "middle rectum: ulcerofungating mass occupying middle rectum",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "CT 검사",
+        "nameEn": "CT Scan",
+        "date": "2025-09-19",
+        "result": "Focal enhancing wall thickening at upper rectum",
+        "finding": "Suspicious regional LNs at superior rectal area",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "PET-CT 검사",
+        "nameEn": "PET-CT",
+        "date": "2025-09-29",
+        "result": "A hypermetabolic mass in rectum, C/W rectal cancer.",
+        "finding": "No evidence of metastasis.",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직병리 자문판독",
+      "testDate": "2025-09-29",
+      "reportDate": "2025-09-30",
+      "finding": "Adenocarcinoma, moderately differentiated",
+      "stageTNM": "cT2 or cT3a, cN2",
+      "stageOverall": null,
+      "histology": "Adenocarcinoma",
+      "margin": "Absent"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "직장암 수술",
+        "date": null,
+        "duration": null,
+        "details": "수술 의뢰: 세브란스 외과",
+        "hospital": "세브란스 병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-08-21",
+      "endDate": "2025-09-24",
+      "totalVisits": 5,
+      "hospitals": [
+        "일산차병원"
+      ],
+      "summary": "외래 진료를 통해 직장암 진단 및 치료 계획 수립."
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "유",
+        "hospital": null,
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "무",
+        "hospital": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "직장암으로 진단되었으며, 외과적 치료가 필요함.",
+      "prognosis": "치료 후 경과 관찰 필요.",
+      "recommendations": "세브란스 외과로 수술 의뢰.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "곽동인 환자는 직장암으로 진단되었으며, 외과적 치료가 필요함.",
+      "keyFindings": [
+        "직장암 진단",
+        "수술 의뢰 필요"
+      ],
+      "recommendations": "세브란스 외과에서 수술 진행."
+    }
+  }
+}

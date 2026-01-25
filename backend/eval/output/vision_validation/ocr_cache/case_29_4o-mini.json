@@ -1,0 +1,105 @@
+{
+  "caseId": "Case29",
+  "caseNum": 29,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-08-17",
+      "time": null,
+      "hospital": "더자인병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "diarrhea",
+      "onsetDate": "2024-08-15",
+      "duration": "2 days",
+      "details": null
+    },
+    "diagnoses": [
+      {
+        "code": "A09",
+        "nameKr": "설사",
+        "date": "2024-08-17",
+        "isPrimary": true,
+        "hospital": "더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PE",
+        "date": "2024-08-17",
+        "result": "increased tenderness at lower abdomen",
+        "finding": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "medication",
+        "name": "antibiotics",
+        "date": "2024-08-17",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-08-17",
+      "endDate": "2024-08-24",
+      "totalVisits": 1,
+      "hospitals": [
+        "더자인병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "Salmonellosis",
+        "code": "A02.0",
+        "diagnosisDate": "2024-08-17",
+        "treatment": "medication",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Patient shows signs of dehydration due to diarrhea.",
+      "prognosis": "Good",
+      "recommendations": "Continue hydration and follow up if symptoms persist."
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2024-08-17",
+      "2024-08-24"
+    ],
+    "kcdCodes": [
+      "A09",
+      "A02.0"
+    ],
+    "hospitals": [
+      "더자인병원"
+    ],
+    "examinations": [
+      "PE"
+    ],
+    "treatments": [
+      "antibiotics"
+    ],
+    "diagnoses": [
+      "설사"
+    ]
+  },
+  "timestamp": "2026-01-25T09:39:00.801Z",
+  "cached": true
+}

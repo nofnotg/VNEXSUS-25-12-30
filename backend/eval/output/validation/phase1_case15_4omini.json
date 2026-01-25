@@ -1,0 +1,190 @@
+{
+  "caseNum": 15,
+  "model": "gpt-4o-mini",
+  "processingTime": 23566,
+  "tokens": {
+    "prompt_tokens": 9958,
+    "completion_tokens": 1457,
+    "total_tokens": 11415,
+    "prompt_tokens_details": {
+      "cached_tokens": 9344,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0023679,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "time": null,
+      "hospital": "의료법인자인의료재단더자인병원",
+      "department": "진료과"
+    },
+    "chiefComplaint": {
+      "summary": "고혈압, 당뇨병, 이상지질혈증 질환의심",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "고혈압, 당뇨병, 이상지질혈증 질환의심으로 검진을 받음."
+    },
+    "diagnoses": [
+      {
+        "code": "I10",
+        "nameKr": "고혈압",
+        "nameEn": "Hypertension",
+        "date": "2025-06-07",
+        "isPrimary": true,
+        "hospital": "의료법인자인의료재단더자인병원"
+      },
+      {
+        "code": "E11",
+        "nameKr": "당뇨병",
+        "nameEn": "Diabetes Mellitus",
+        "date": "2025-06-07",
+        "isPrimary": false,
+        "hospital": "의료법인자인의료재단더자인병원"
+      },
+      {
+        "code": "E78.5",
+        "nameKr": "이상지질혈증",
+        "nameEn": "Dyslipidemia",
+        "date": "2025-06-07",
+        "isPrimary": false,
+        "hospital": "의료법인자인의료재단더자인병원"
+      },
+      {
+        "code": "C50.9",
+        "nameKr": "유방암",
+        "nameEn": "Breast cancer",
+        "date": "2025-06-20",
+        "isPrimary": true,
+        "hospital": "의료법인자인의료재단더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈압 측정",
+        "nameEn": "Blood Pressure Measurement",
+        "date": "2025-06-07",
+        "result": "140 / 85 mmHg",
+        "finding": "고혈압 전단계",
+        "normalRange": "120/80 mmHg 미만",
+        "isAbnormal": true
+      },
+      {
+        "name": "공복혈당 검사",
+        "nameEn": "Fasting Blood Glucose Test",
+        "date": "2025-06-07",
+        "result": "128 mg/dL",
+        "finding": "당뇨병 의심",
+        "normalRange": "100 mg/dL 미만",
+        "isAbnormal": true
+      },
+      {
+        "name": "유방촬영",
+        "nameEn": "Mammography",
+        "date": "2025-06-07",
+        "result": "종괴 의심",
+        "finding": "좌측 유두하부에 종괴의심",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "조직검사",
+        "nameEn": "Biopsy",
+        "date": "2025-06-20",
+        "result": "METASTATIC CARCINOMA from breast",
+        "finding": "유방암 전이",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "유방 생검",
+      "testDate": "2025-06-20",
+      "reportDate": "2025-06-26",
+      "finding": "침윤성 유관암, 등급 2",
+      "stageTNM": "T2N1M0",
+      "stageOverall": "Stage II",
+      "histology": "침윤성 유관암",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "제균 치료",
+        "date": "2025-06-16",
+        "duration": "2주",
+        "details": "헬리코박터균 제균 치료",
+        "hospital": "의료법인자인의료재단더자인병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-06-07",
+      "endDate": "2025-06-20",
+      "totalVisits": 2,
+      "hospitals": [
+        "의료법인자인의료재단더자인병원"
+      ],
+      "summary": "고혈압, 당뇨병, 이상지질혈증 및 유방암 검진"
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "저염식, 운동",
+        "currentStatus": "유질환자",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "유질환자",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "고혈압, 당뇨병, 이상지질혈증 및 유방암 관리 필요",
+      "prognosis": "추후 치료 및 관리 필요",
+      "recommendations": "정기적인 검진 및 치료 지속",
+      "limitations": "일상생활에서의 신체활동 필요"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "고영란 환자는 고혈압, 당뇨병, 이상지질혈증 및 유방암 진단을 받음.",
+      "keyFindings": [
+        "고혈압, 당뇨병, 이상지질혈증 의심",
+        "유방암 진단"
+      ],
+      "recommendations": "지속적인 치료 및 정기 검진 권장"
+    }
+  }
+}

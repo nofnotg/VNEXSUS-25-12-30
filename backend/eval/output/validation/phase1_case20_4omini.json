@@ -1,0 +1,222 @@
+{
+  "caseNum": 20,
+  "model": "gpt-4o-mini",
+  "processingTime": 33644,
+  "tokens": {
+    "prompt_tokens": 34476,
+    "completion_tokens": 1634,
+    "total_tokens": 36110,
+    "prompt_tokens_details": {
+      "cached_tokens": 33792,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.006151799999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-01-02",
+      "time": "16:50",
+      "hospital": "반듯한정형외과의원",
+      "department": "정형외과"
+    },
+    "chiefComplaint": {
+      "summary": "허리 통증 및 어깨 통증",
+      "referralSource": null,
+      "onsetDate": "2025-01-02",
+      "duration": "정보 없음",
+      "details": "양쪽 승모근 및 팔꿈치 통증, 측만증 및 골반 불균형"
+    },
+    "diagnoses": [
+      {
+        "code": "M6593",
+        "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 아래팔",
+        "nameEn": "Unspecified synovitis and tenosynovitis, forearm",
+        "date": "2025-01-02",
+        "isPrimary": true,
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "code": "M5422",
+        "nameKr": "경추통, 경부",
+        "nameEn": "Cervical pain",
+        "date": "2025-01-02",
+        "isPrimary": false,
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "code": "M5456",
+        "nameKr": "아래허리통증, 요추부",
+        "nameEn": "Low back pain",
+        "date": "2025-01-02",
+        "isPrimary": false,
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "code": "K291",
+        "nameKr": "기타 급성 위염",
+        "nameEn": "Other acute gastritis",
+        "date": "2025-01-02",
+        "isPrimary": false,
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "code": "K297",
+        "nameKr": "상세불명의 위염",
+        "nameEn": "Unspecified gastritis",
+        "date": "2025-01-02",
+        "isPrimary": false,
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "code": "M2558",
+        "nameKr": "관절통, 기타 부분",
+        "nameEn": "Joint pain, other sites",
+        "date": "2025-01-02",
+        "isPrimary": false,
+        "hospital": "반듯한정형외과의원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "경추 2매(CR)",
+        "nameEn": "Cervical spine X-ray",
+        "date": "2025-01-02",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "흉추 2매(CR)",
+        "nameEn": "Thoracic spine X-ray",
+        "date": "2025-01-02",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "요추 4매(CR)",
+        "nameEn": "Lumbar spine X-ray",
+        "date": "2025-01-02",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "골반 1매(CR)",
+        "nameEn": "Pelvic X-ray",
+        "date": "2025-01-02",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "주관절 4매(계)",
+        "nameEn": "Elbow X-ray",
+        "date": "2025-01-02",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "아세클낙정 해열진통소염",
+        "date": "2025-01-02",
+        "duration": "정보 없음",
+        "details": "원외 처방",
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "type": "약물",
+        "name": "모노틴정(소화기)",
+        "date": "2025-01-02",
+        "duration": "정보 없음",
+        "details": "원외 처방",
+        "hospital": "반듯한정형외과의원"
+      },
+      {
+        "type": "약물",
+        "name": "에페라정(근이완제)",
+        "date": "2025-01-02",
+        "duration": "정보 없음",
+        "details": "원외 처방",
+        "hospital": "반듯한정형외과의원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-01-02",
+      "endDate": "2025-09-15",
+      "totalVisits": 20,
+      "hospitals": [
+        "반듯한정형외과의원"
+      ],
+      "summary": "총 20회 통원 치료"
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 지속적인 통증 관리가 필요함.",
+      "prognosis": "회복 가능성 높음.",
+      "recommendations": "정기적인 물리치료 및 약물 복용 권장.",
+      "limitations": "일상생활에서의 활동 제한 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 지속적인 치료가 필요하며 회복 가능성이 높음.",
+      "keyFindings": [
+        "다양한 진단명",
+        "지속적인 통증 관리 필요"
+      ],
+      "recommendations": "정기적인 치료 및 관리 필요."
+    }
+  }
+}

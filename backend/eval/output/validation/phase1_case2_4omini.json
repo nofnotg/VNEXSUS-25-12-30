@@ -1,0 +1,139 @@
+{
+  "caseNum": 2,
+  "model": "gpt-4o-mini",
+  "processingTime": 18345,
+  "tokens": {
+    "prompt_tokens": 13106,
+    "completion_tokens": 1000,
+    "total_tokens": 14106,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0025658999999999994,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-04-03",
+      "time": null,
+      "hospital": "서울대학교직장부 수위원",
+      "department": "소화기내과"
+    },
+    "chiefComplaint": {
+      "summary": "간혈관종 크기 증가",
+      "referralSource": "삼성서울병원",
+      "onsetDate": "2023-08-07",
+      "duration": "7개월",
+      "details": "2017년 간혈관종 진단 이후 매년 크기 증가"
+    },
+    "diagnoses": [
+      {
+        "code": "D1802",
+        "nameKr": "간담도계의 혈관종",
+        "nameEn": "Hemangioma of liver",
+        "date": "2024-04-03",
+        "isPrimary": true,
+        "hospital": "서울대학교직장부 수위원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Liver CT",
+        "nameEn": "Liver CT",
+        "date": "2024-04-09",
+        "result": "Increased size of hepatic hemangioma in right liver.",
+        "finding": "8x6 cm 크기의 간혈관종",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "Blood tests",
+        "nameEn": "Blood tests",
+        "date": "2025-02-26",
+        "result": "WBC Count: 6.01 x103/μL, Hemoglobin: 13.3 g/dL",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-02-05",
+      "reportDate": "2025-02-12",
+      "finding": "Cavernous hemangioma, S5 and 6",
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": "Cavernous hemangioma",
+      "margin": "negative resection margin (safety margin: 3.5 cm)"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Laparoscopic right hemihepatectomy",
+        "date": "2025-02-05",
+        "duration": "1일",
+        "details": "간혈관종 제거를 위한 수술",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-04-03",
+      "endDate": "2024-04-03",
+      "totalVisits": 1,
+      "hospitals": [
+        "서울대학교직장부 수위원"
+      ],
+      "summary": "간혈관종 크기 증가로 인한 외래 진료"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-02-04",
+      "endDate": "2025-02-10",
+      "totalDays": 6,
+      "hospital": "삼성서울병원",
+      "department": "외과",
+      "reason": "수술적 치료"
+    },
+    "pastHistory": [
+      {
+        "condition": "간혈관종",
+        "code": "D1802",
+        "diagnosisDate": "2017-01-01",
+        "treatment": "정기적인 추적 검사",
+        "currentStatus": "크기 증가",
+        "hospital": "삼성서울병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "간혈관종의 크기 증가로 수술적 치료가 필요함.",
+      "prognosis": "수술 후 회복 가능성 높음.",
+      "recommendations": "정기적인 추적 검사 필요.",
+      "limitations": "수술 후 2개월간 무리한 활동 자제"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "간혈관종으로 인한 수술적 치료가 필요함.",
+      "keyFindings": [
+        "간혈관종 크기 증가",
+        "수술적 치료 성공적"
+      ],
+      "recommendations": "정기적인 추적 검사 및 관리 필요"
+    }
+  }
+}

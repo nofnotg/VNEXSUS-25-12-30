@@ -1,0 +1,793 @@
+{
+  "timestamp": "2026-01-25T08:30:34.437Z",
+  "comparison": {
+    "cases": [
+      {
+        "caseId": "Case2",
+        "patientName": "김미화",
+        "mini": {
+          "success": false,
+          "processingTime": 7606,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": false,
+          "processingTime": 5915,
+          "tokenUsage": 0
+        },
+        "timeDiff": -1691,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case5",
+        "patientName": "김태형",
+        "mini": {
+          "success": true,
+          "processingTime": 15910,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": true,
+          "processingTime": 15759,
+          "tokenUsage": 0
+        },
+        "timeDiff": -151,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case9",
+        "patientName": "임승희",
+        "mini": {
+          "success": true,
+          "processingTime": 16275,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": true,
+          "processingTime": 22962,
+          "tokenUsage": 0
+        },
+        "timeDiff": 6687,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case11",
+        "patientName": "허전권",
+        "mini": {
+          "success": true,
+          "processingTime": 6703,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": true,
+          "processingTime": 18133,
+          "tokenUsage": 0
+        },
+        "timeDiff": 11430,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case13",
+        "patientName": "김인화",
+        "mini": {
+          "success": true,
+          "processingTime": 15457,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": true,
+          "processingTime": 13412,
+          "tokenUsage": 0
+        },
+        "timeDiff": -2045,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case15",
+        "patientName": "고영란",
+        "mini": {
+          "success": false,
+          "processingTime": 2228,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": false,
+          "processingTime": 1566,
+          "tokenUsage": 0
+        },
+        "timeDiff": -662,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case17",
+        "patientName": "김동아",
+        "mini": {
+          "success": false,
+          "processingTime": 1834,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": false,
+          "processingTime": 1517,
+          "tokenUsage": 0
+        },
+        "timeDiff": -317,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case18",
+        "patientName": "김명희",
+        "mini": {
+          "success": false,
+          "processingTime": 5979,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": false,
+          "processingTime": 7501,
+          "tokenUsage": 0
+        },
+        "timeDiff": 1522,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case24",
+        "patientName": "김종렬",
+        "mini": {
+          "success": true,
+          "processingTime": 12744,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": true,
+          "processingTime": 13869,
+          "tokenUsage": 0
+        },
+        "timeDiff": 1125,
+        "completenessDiff": 0
+      },
+      {
+        "caseId": "Case27",
+        "patientName": "박현미",
+        "mini": {
+          "success": false,
+          "processingTime": 5476,
+          "tokenUsage": 0
+        },
+        "full": {
+          "success": false,
+          "processingTime": 7798,
+          "tokenUsage": 0
+        },
+        "timeDiff": 2322,
+        "completenessDiff": 0
+      }
+    ],
+    "summary": {
+      "mini": {
+        "total": 19,
+        "success": 8,
+        "successRate": "42.1",
+        "avgTime": 12911,
+        "avgCompleteness": "0.0",
+        "totalTokens": 0
+      },
+      "full": {
+        "total": 10,
+        "success": 5,
+        "successRate": "50.0",
+        "avgTime": 16827,
+        "avgCompleteness": "0.0",
+        "totalTokens": 0
+      }
+    }
+  },
+  "miniResults": {
+    "Case2": {
+      "caseId": "Case2",
+      "patientName": "김미화",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 7387,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 219,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 7606
+    },
+    "Case5": {
+      "caseId": "Case5",
+      "patientName": "김태형",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 2975,
+        "textLength": 11650,
+        "pageResults": [
+          {
+            "file": "동신병원 검진(24년).pdf",
+            "pageCount": 1,
+            "textLength": 2455
+          },
+          {
+            "file": "동신병원 검진_위암검진(24년).pdf",
+            "pageCount": 1,
+            "textLength": 2761
+          },
+          {
+            "file": "심평원 진료내역_김태형(2024까지).pdf",
+            "pageCount": 1,
+            "textLength": 6340
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 12935,
+        "reportLength": 1111
+      },
+      "totalProcessingTime": 15910,
+      "report": "```\n### 1. 환자 기본정보\n피보험자(환자) 이름: 김태형\n생년월일: 2000-08-09\n\n### 2. 보험 계약 및 고지 의무 사항\n1.조건\n가입보험사: 삼성화재\n가입일(보장개시일 등): 2021-01-01\n상품명: 건강보험\n청구사항(특약사항, 담보사항 등): 일반 건강검진 및 질병 의심에 대한 추가 검사 보장\n\n### 3. 상세 의료 이력 및 분석\n\n**병원 통계**\n- 동신병원 2024.05.30 ~ 2024.06.05 / 2회 통원\n- 덴티스킨치과 의원 2020.02.03 ~ 2024.09.24 / 15회 통원\n- 강북삼성병원 2024.09.24 / 1회 통원\n- 예스피부과의원 2023.08.29 ~ 2023.08.29 / 2회 통원\n- 동신비뇨기과 의원 2023.04.24 ~ 2023.04.24 / 2회 통원\n\n**기고지사항 표시**\n- 고혈압, 당뇨병(Diabetes Mellitus) 의심 - 기고지사항\n- 이상지질혈증(dyslipidemia), 우울증 검사 - 기고지사항\n\n**의료 이력**\n2024.05.30\n김태형님은 일반 건강검진을 받으셨습니다. 검사 결과 고혈압과 당뇨병(Diabetes Mellitus) 이 의심되며, 신장질환에 대한 추가 검사가 필요하다고 합니다. 고혈압과 이 의심되는 경우, 본인 부담 없이 검진을 받을 수 있습니다. 2024.06.05\n위장조영검사 결과 정상입니다. 속쓰림, 소화불량 등의 증상이 없으면 2년 후 정기검사를 받으시기 바랍니다. 2024.09.24\n강북삼성병원에서 신경과 진료를 받았습니다. 진단명은 중추신경계 통증이며, 영상검사를 시행하였습니다. 2023.08.29\n예스피부과의원에서 손발톱백선 진단을 받았습니다. 치료가 필요합니다. 2023.04.24\n동신비뇨기과 의원에서 요로폐색을 동반한 전립선증식증 진단을 받았습니다. 추가 치료가 필요합니다. 2020.02.03\n덴티스킨치과 의원에서 만성단순치주염 진단을 받았습니다. 치료가 필요합니다. 2020.01.31\n덴티스킨치과 의원에서 만성복합치주염 진단을 받았습니다. 치료가 필요합니다. **기타**\n- 김태형님은 절주 및 신체활동이 필요하며, 근력 운동을 생활화해야 합니다. - 우울증 증상이 가벼운 수준으로 나타났습니다. 추가 상담이 필요합니다. ```\n"
+    },
+    "Case9": {
+      "caseId": "Case9",
+      "patientName": "임승희",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 4230,
+        "textLength": 273,
+        "pageResults": [
+          {
+            "file": "양지병원.pdf",
+            "pageCount": 1,
+            "textLength": 254
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 12045,
+        "reportLength": 1464
+      },
+      "totalProcessingTime": 16275,
+      "report": "### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 양지병원**  \n- 내원일: 2019.01.10  \n진료내용: 고혈압(HTN, Hypertension) 으로 내원, 혈압(BP) 150/90mmHg 측정. 치료: 약물 처방 및 생활습관 개선 권장. - 내원일: 2019.03.15\n진료내용: 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 진단, 혈당 검사 결과 180mg/dL. 치료: 인슐린 치료 시작 및 식이요법 안내. - 내원일: 2020.05.20\n진료내용: 심근경색(MI, Myocardial Infarction) 의심으로 응급실(ER) 방문. 검사: ECG(심전도) 및 CT(컴퓨터 단층촬영) 촬영, 심장 초음파 시행. 치료: 스텐트 삽입 수술(OP) 진행. - 내원일: 2021.07.25\n진료내용: COPD(Chronic Obstructive Pulmonary Disease) 진단, 호흡곤란 증상. 치료: 흡입기 처방 및 재활 프로그램 안내. - 내원일: 2022.09.30\n진료내용: 뇌졸중(CVA, Cerebrovascular Accident) 증상으로 내원, CT(컴퓨터 단층촬영) 촬영 결과 뇌출혈 확인. 치료: 중환자실(ICU) 입원 및 집중 치료. - 내원일: 2023.01.15\n진료내용: 고혈압(HTN, Hypertension) 재진, 혈압(BP) 140/85mmHg. 치료: 약물 조정 및 정기적인 혈압 모니터링 권장. - 내원일: 2023.05.10\n진료내용: 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관리 재진, 혈당 160mg/dL. 치료: 인슐린 용량 조정 및 식이요법 점검. - 내원일: 2023.08.20\n진료내용: COPD(Chronic Obstructive Pulmonary Disease) 재진, 호흡기 검사 결과 악화. 치료: 약물 변경 및 재활 프로그램 지속. **통계 집계**\n양지병원 2019.01.10 ~ 2023.08.20 / 8회 통원  \n\n### 기고지사항\n- 고혈압(HTN, Hypertension) - 기고지사항\n- 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) - 기고지사항\n- 심근경색(MI, Myocardial Infarction) - 기고지사항\n\n### 결론\n본 보고서는 양지병원에서의 진료 이력을 바탕으로 작성되었으며, 보험 청구를 위한 기초 자료로 활용될 수 있습니다. 모든 진단명은 KCD-10 코드 확인이 필요하며, 보험사명 및 가입일은 문서에서 확인 후 기재해야 합니다."
+    },
+    "Case11": {
+      "caseId": "Case11",
+      "patientName": "허전권",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 4380,
+        "textLength": 193,
+        "pageResults": [
+          {
+            "file": "강북삼성병원.pdf",
+            "pageCount": 1,
+            "textLength": 172
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 2323,
+        "reportLength": 90
+      },
+      "totalProcessingTime": 6703,
+      "report": "죄송하지만, 제공된 의료 기록이 비어 있어 분석을 수행할 수 없습니다. 의료 기록을 제공해 주시면, 해당 정보를 바탕으로 보험 청구 분석 보고서를 작성하겠습니다."
+    },
+    "Case13": {
+      "caseId": "Case13",
+      "patientName": "김인화",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 7890,
+        "textLength": 13390,
+        "pageResults": [
+          {
+            "file": "농손 김인화 수임.pdf",
+            "pageCount": 1,
+            "textLength": 13366
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 7567,
+        "reportLength": 783
+      },
+      "totalProcessingTime": 15457,
+      "report": "```\n### 1. 환자 기본정보\n피보험자(환자) 이름: 김인화\n생년월일: 1969-06-16\n\n### 2. 보험 계약 및 고지 의무 사항\n1.조건\n가입보험사: NH농협생명\n가입일(보장개시일 등): 2021-03-24\n상품명:(무) NH가성비굿건강보험[1종:해지환급금미지급형II]2101\n청구사항(특약사항, 담보사항 등): 기본계약(일반상해후유장해(80%이상)), 일반상해사망, 질병수술비(1~5종), 암진단비(유사암제외) 등\n\n### 3. 상세 의료 이력 및 분석\n\n#### 병원 통원 기록\n- 병원명: [미기재] \n- 내원일: [미기재]\n- 통원 횟수: [미기재]\n\n#### 기고지사항\n- 기고지사항: 없음\n\n#### 진료 및 치료 내용\n김인화 환자는 2021년 3월 24일 NH농협생명에 가입한(무) NH가성비굿건강보험에 가입하였으며, 보험기간은 2021년 3월 24일부터 2069년 3월 24일까지입니다. 이 보험은 일반상해후유장해(80%이상) 및 일반상해사망에 대한 보장을 포함하고 있으며, 질병수술비와 암진단비도 포함되어 있습니다. 보험 가입 전 기존 질병에 대한 기고지사항은 확인되지 않았습니다. 따라서, 현재까지의 의료 이력에 대한 기고지사항은 없습니다. 보험 계약의 보장개시는 계약의 청약을 승낙하고 제1회 보험료를 받은 때부터 시작됩니다. 따라서, 김인화 환자는 보험 가입 후 발생한 질병에 대해서는 보험금 청구가 가능합니다. 이 보고서는 김인화 환자의 보험 청구를 위한 기초 자료로 활용될 수 있으며, 향후 발생할 수 있는 의료비 청구에 대한 근거 자료로 사용될 것입니다. ```"
+    },
+    "Case15": {
+      "caseId": "Case15",
+      "patientName": "고영란",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 2219,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 9,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 2228
+    },
+    "Case17": {
+      "caseId": "Case17",
+      "patientName": "김동아",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 1828,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 6,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 1834
+    },
+    "Case18": {
+      "caseId": "Case18",
+      "patientName": "김명희",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 5973,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 6,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 5979
+    },
+    "Case24": {
+      "caseId": "Case24",
+      "patientName": "김종렬",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 44,
+        "textLength": 131,
+        "pageResults": [
+          {
+            "file": "강북삼성병원.pdf",
+            "pageCount": 1,
+            "textLength": 110
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 12700,
+        "reportLength": 1333
+      },
+      "totalProcessingTime": 12744,
+      "report": "### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 강북삼성병원**  \n- 내원일: 2019.01.10 ~ 2019.01.20 / 5회 통원  \n환자는 2019년 1월 10일 강북삼성병원에 내원하여 고혈압(HTN, Hypertension) 으로 진단받고, 이후 1월 20일까지 총 5회 통원 치료를 받았습니다. 치료 과정에서 혈압(BP) 조절을 위한 약물 처방이 이루어졌습니다. - 내원일: 2020.02.15 ~ 2020.02.25 / 3회 통원\n2020년 2월 15일, 환자는 다시 강북삼성병원에 내원하여 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 진단을 받았습니다. 이 기간 동안 3회 통원하여 혈당 조절을 위한 치료를 받았습니다. - 내원일: 2021.03.05 ~ 2021.03.15 / 4회 통원\n2021년 3월 5일, 환자는 심근경색(MI, Myocardial Infarction) 으로 진단받고, 3월 15일까지 4회 통원하여 심장 재활 치료를 받았습니다. - 내원일: 2022.04.10 ~ 2022.04.20 / 2회 통원\n2022년 4월 10일, 환자는 뇌졸중(CVA, Cerebrovascular Accident) 으로 인한 후유증으로 강북삼성병원에 내원하였고, 4월 20일까지 2회 통원하여 재활 치료를 받았습니다. - 내원일: 2023.05.01 ~ 2023.05.10 / 1회 통원\n2023년 5월 1일, 환자는 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 으로 진단받고, 5월 10일까지 1회 통원하여 호흡기 치료를 받았습니다. ### 기고지사항\n- 고혈압(HTN, Hypertension) - 기고지사항\n- 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) - 기고지사항\n- 심근경색(MI, Myocardial Infarction) - 기고지사항\n\n### 보험 가입일 기준 설정\n가입일: [YYYY-MM-DD](문서에서 확인된 가입일)\n\n### 결론\n본 보고서는 강북삼성병원에서의 환자의 의료 이력을 기반으로 작성되었습니다. 모든 진단명은 KCD-10 코드에 따라 표기하였으며, 기고지사항을 명확히 구분하였습니다. 추가적인 정보가 필요할 경우, 언제든지 문의해 주시기 바랍니다."
+    },
+    "Case27": {
+      "caseId": "Case27",
+      "patientName": "박현미",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 5469,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 7,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 5476
+    },
+    "Case28": {
+      "caseId": "Case28",
+      "patientName": "박혜경",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 99,
+        "textLength": 191,
+        "pageResults": [
+          {
+            "file": "은평성모병원.pdf",
+            "pageCount": 1,
+            "textLength": 170
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 16847,
+        "reportLength": 1582
+      },
+      "totalProcessingTime": 16946,
+      "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: [홍길동]\n생년월일: [1980-01-01]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [삼성화재]  \n가입일(보장개시일 등): [2020-05-01]\n상품명: [종합의료보험]  \n청구사항(특약사항, 담보사항 등): [입원 및 통원 치료 보장]\n\n### 3. 상세 의료 이력 및 분석\n\n**은평성모병원**  \n- 내원일: 2020.06.15  \n진단: [I10/Essential Hypertension(고혈압) -본태성 고혈압]\n  치료: 고혈압 관리 및 약물 처방  \n\n- 내원일: 2020.07.20  \n진단: [[E11/제2형 당뇨병-Type 2 Diabetes Mellitus(당뇨병) ]/Type 2 Diabetes -제2형 당뇨병(Diabetes Mellitus) ]\n치료: 당뇨병(Diabetes Mellitus) 관리 및 식이요법 상담\n\n- 내원일: 2021.01.10  \n진단: [[I25/만성 허혈성 심장질환-Chronic ischaemic heart disease]/관상동맥질환(Coronary Artery Disease) -관상동맥질환(Coronary Artery Disease) ]\n  치료: 심장 초음파 검사 및 약물 조정  \n\n- 내원일: 2021.05.05  \n진단: [I63/Cerebral infarction-뇌경색]\n치료: 응급실 내원 후 CT(컴퓨터 단층촬영) 촬영 및 입원 치료\n\n- 내원일: 2022.03.15  \n진단: [J44/Chronic obstructive pulmonary disease-만성폐쇄성폐질환]\n  치료: 호흡기 치료 및 약물 처방  \n\n- 내원일: 2023.02.20  \n진단: [K21/Gastroesophageal reflux disease-위식도역류질환]\n  치료: 내시경 검사 및 약물 처방  \n\n- 내원일: 2023.08.10  \n진단: [F32/Major depressive disorder-우울증]\n  치료: 정신과 상담 및 약물 치료  \n\n- 내원일: 2024.01.05  \n진단: [M54/Low back pain-요통]\n  치료: 물리치료 및 약물 처방  \n\n- 내원일: 2024.06.15  \n진단: [E78/Hyperlipidemia-고지혈증]\n  치료: 혈액 검사 및 식이요법 상담  \n\n- 내원일: 2024.08.01  \n진단: [I50/Heart failure-심부전]\n  치료: 입원 치료 및 약물 조정  \n\n### 기고지사항\n- [I10/Essential Hypertension(고혈압) -본태성 고혈압] - 기고지사항\n- [[E11/제2형 당뇨병-Type 2 Diabetes Mellitus(당뇨병) ]/Type 2 Diabetes -제2형 당뇨병(Diabetes Mellitus) ] - 기고지사항\n\n### 통계\n- **은평성모병원** 2020.06.15 ~ 2024.08.01 / 10회 통원  \n\n### 결론\n본 보고서는 제공된 의료 기록을 바탕으로 작성되었으며, 보험 청구를 위한 모든 필수 정보를 포함하고 있습니다. 각 진단명은 KCD-10 코드와 함께 명확히 표기되었으며, 기고지사항도 구분하여 명시하였습니다."
+    },
+    "Case29": {
+      "caseId": "Case29",
+      "patientName": "서문정숙",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 3137,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 7,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 3144
+    },
+    "Case30": {
+      "caseId": "Case30",
+      "patientName": "송금숙",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 2345,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 8,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 2353
+    },
+    "Case34": {
+      "caseId": "Case34",
+      "patientName": "윤희정",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 93,
+        "textLength": 123,
+        "pageResults": [
+          {
+            "file": "일산병원.pdf",
+            "pageCount": 1,
+            "textLength": 104
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 11667,
+        "reportLength": 1479
+      },
+      "totalProcessingTime": 11760,
+      "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**일산병원**  \n내원일: 2019.01.15  \n진단: [I10/Essential Hypertension(고혈압) -본태성 고혈압]\n치료: 고혈압 관리 및 약물 처방  \n\n내원일: 2019.06.20  \n진단: [[E11/제2형 당뇨병-Type 2 Diabetes Mellitus(당뇨병) ]/Type 2 Diabetes -제2형 당뇨병(Diabetes Mellitus) ]\n치료: 당뇨 관리 및 식이요법 상담  \n\n내원일: 2020.03.10  \n진단: [[I25/만성 허혈성 심장질환-Chronic ischaemic heart disease]/관상동맥질환(Coronary Artery Disease) -관상동맥질환(Coronary Artery Disease) ]\n치료: 심장 초음파 및 약물 치료  \n\n내원일: 2021.05.05  \n진단: [J44/Chronic obstructive pulmonary disease-만성폐쇄성폐질환]\n치료: 호흡기 치료 및 약물 처방  \n\n내원일: 2022.08.15  \n진단: [I63/Cerebral infarction-뇌경색]\n치료: 응급 치료 및 재활 치료  \n\n내원일: 2023.02.10  \n진단: [K80/Gallstones-담석증]\n치료: 수술적 치료 및 추적 관찰  \n\n- 기고지사항:  \n- [I10/Essential Hypertension(고혈압) -본태성 고혈압] - 기고지사항\n- [[E11/제2형 당뇨병-Type 2 Diabetes Mellitus(당뇨병) ]/Type 2 Diabetes -제2형 당뇨병(Diabetes Mellitus) ] - 기고지사항\n\n**통계**  \n- 일산병원 2019.01.15 ~ 2023.02.10 / 6회 통원  \n\n### 4. 보험사 정확 추출\n가입보험사: 삼성화재  \n가입일: 2018-12-01  \n\n### 5. 기고지사항 표시\n- 기고지사항:  \n- [I10/Essential Hypertension(고혈압) -본태성 고혈압] - 기고지사항\n- [[E11/제2형 당뇨병-Type 2 Diabetes Mellitus(당뇨병) ]/Type 2 Diabetes -제2형 당뇨병(Diabetes Mellitus) ] - 기고지사항\n\n### 6. 결론\n본 보고서는 제공된 의료 기록을 바탕으로 작성되었으며, 보험 청구를 위한 모든 필수 정보를 포함하고 있습니다. 각 진단 및 치료 내용은 시간 순으로 정리되어 있으며, 기고지사항이 명확히 구분되어 있습니다. 추가적인 정보가 필요할 경우, 언제든지 문의해 주시기 바랍니다."
+    },
+    "Case38": {
+      "caseId": "Case38",
+      "patientName": "이영희",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 14378,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 10,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 14388
+    },
+    "Case39": {
+      "caseId": "Case39",
+      "patientName": "장동현",
+      "model": "gpt-4o-mini",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 55,
+        "textLength": 145,
+        "pageResults": [
+          {
+            "file": "명지병원.pdf",
+            "pageCount": 1,
+            "textLength": 126
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 7436,
+        "reportLength": 751
+      },
+      "totalProcessingTime": 7491,
+      "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 명지병원**  \n내원일: [YYYY.MM.DD] ~ [YYYY.MM.DD] / [X회 통원]  \n\n- [YYYY.MM.DD]: 초기 진료에서 [진단명] 진단받음. [치료 내용 및 경과 설명]. - [YYYY.MM.DD]: 재내원하여 [진단명]으로 추가 검사 시행. [검사 결과 및 치료 내용]. - [YYYY.MM.DD]: 마지막 내원 시 [진단명]으로 [치료 내용]. - 기고지사항: [기존 질병명] - 기고지사항\n\n**보험사 정확 추출**: [정확한 보험사명]  \n**기고지사항 표시**: - 기고지사항  \n\n### 4. 결론 및 권장 사항\n- 본 보고서는 제공된 의료 기록을 바탕으로 작성되었으며, 모든 데이터는 보험 청구 검토 및 승인 과정에서 사용됩니다. - 추가적인 정보가 필요할 경우, 해당 의료기관에 문의하시기 바랍니다. ---\n\n**주의**: 위의 내용은 예시로 작성된 것이며, 실제 데이터에 따라 수정이 필요합니다. 각 항목에 맞는 정확한 정보를 입력하여 최종 보고서를 완성하시기 바랍니다."
+    },
+    "Case41": {
+      "caseId": "Case41",
+      "patientName": "장우진",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 3281,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 6,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 3287
+    },
+    "Case42": {
+      "caseId": "Case42",
+      "patientName": "정진덕",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 1785,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 7,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 1792
+    },
+    "Case44": {
+      "caseId": "Case44",
+      "patientName": "최순곤",
+      "model": "gpt-4o-mini",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 2805,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 4,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 2809
+    }
+  },
+  "fullResults": {
+    "Case2": {
+      "caseId": "Case2",
+      "patientName": "김미화",
+      "model": "gpt-4o",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 5906,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 9,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 5915
+    },
+    "Case5": {
+      "caseId": "Case5",
+      "patientName": "김태형",
+      "model": "gpt-4o",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 3108,
+        "textLength": 11650,
+        "pageResults": [
+          {
+            "file": "동신병원 검진(24년).pdf",
+            "pageCount": 1,
+            "textLength": 2455
+          },
+          {
+            "file": "동신병원 검진_위암검진(24년).pdf",
+            "pageCount": 1,
+            "textLength": 2761
+          },
+          {
+            "file": "심평원 진료내역_김태형(2024까지).pdf",
+            "pageCount": 1,
+            "textLength": 6340
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 12651,
+        "reportLength": 1140
+      },
+      "totalProcessingTime": 15759,
+      "report": "```\n### 1. 환자 기본정보\n피보험자(환자) 이름: 김태형\n생년월일: 2000-08-09\n\n### 2. 보험 계약 및 고지 의무 사항\n1.조건\n가입보험사: 삼성화재\n가입일(보장개시일 등): 2021-01-01\n상품명: 건강보험\n청구사항(특약사항, 담보사항 등): 일반 건강검진 및 질병 의심에 대한 추가 검사 보장\n\n### 3. 상세 의료 이력 및 분석\n\n**병원 통계**\n- 동신병원 2024.05.30 ~ 2024.06.05 / 2회 통원\n- 덴티스킨치과 의원 2020.02.03 ~ 2024.09.24 / 15회 통원\n- 강북삼성병원 2024.09.24 / 1회 통원\n- 예스피부과의원 2023.08.29 ~ 2023.08.29 / 1회 통원\n- 동신비뇨기과 의원 2023.04.24 ~ 2023.04.24 / 1회 통원\n\n**기고지사항 표시**\n- 고혈압 - 기고지사항\n- 당뇨병(Diabetes Mellitus) - 기고지사항\n- 만성치주염 - 기고지사항\n\n**의료 이력**\n2024.05.30\n김태형님은 동신병원에서 일반 건강검진을 받으셨습니다. 검사 결과 고혈압과 당뇨병(Diabetes Mellitus) 이 의심되며, 신장질환에 대한 추가 검사가 필요하다는 소견이 있었습니다. 또한, 이상지질혈증(dyslipidemia) 과 우울증 검사도 진행되었습니다. 2024.06.05\n위암 검진 결과는 정상으로 판별되었습니다. 위장조영검사와 위내시경 검사 모두 이상소견이 없었습니다. 2024.09.24\n강북삼성병원에서 신경과 진료를 받으셨으며, 통증에 대한 영상검사가 진행되었습니다. 2024.09.12\n덴티스킨치과 의원에서 치과 보존과 관련하여 진료를 받으셨습니다. 치아 부착 및 조정을 위한 치료가 필요하다는 소견이 있었습니다. 2023.08.29\n예스피부과의원에서 손발톱백선 진료를 받으셨습니다. 검사 결과 손발톱백선이 의심되었습니다. 2023.04.24\n동신비뇨기과 의원에서 요로폐색을 동반한 전립선증식증 진료를 받으셨습니다. 추가적인 검사가 필요하다는 소견이 있었습니다. **보험사 정확 추출**\n- 삼성화재: 가입일 2021-01-01, 상품명 건강보험\n\n**기고지사항**\n- 고혈압, 당뇨병(Diabetes Mellitus), 만성치주염은 보험 가입 전 이미 존재하던 질병으로 기고지사항으로 표시됩니다. ```\n"
+    },
+    "Case9": {
+      "caseId": "Case9",
+      "patientName": "임승희",
+      "model": "gpt-4o",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 6030,
+        "textLength": 273,
+        "pageResults": [
+          {
+            "file": "양지병원.pdf",
+            "pageCount": 1,
+            "textLength": 254
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 16932,
+        "reportLength": 1778
+      },
+      "totalProcessingTime": 22962,
+      "report": "### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 양지병원**  \n- 내원일: 2019.01.10  \n진료내용: 고혈압(HTN, Hypertension) 으로 진료받음. 혈압(BP) 150/90mmHg 기록. 치료내용: 약물 치료 시작. - 내원일: 2019.03.15\n진료내용: 고혈압(HTN, Hypertension) 관리 및 추적 관찰. 혈압(BP) 140/85mmHg 기록. 치료내용: 약물 조정. - 내원일: 2020.05.20\n진료내용: 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 진단. 혈당 수치 180mg/dL. 치료내용: 식이요법 및 약물 치료 시작. - 내원일: 2021.07.25\n진료내용: 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관리. 혈압(BP) 135/80mmHg, 혈당 수치 160mg/dL. 치료내용: 약물 조정 및 운동 요법 권장. - 내원일: 2022.09.30\n진료내용: 심근경색(MI, Myocardial Infarction) 의심으로 응급실(ER) 방문. 치료내용: 심전도(ECG) 검사 및 입원. - 내원일: 2022.10.05\n진료내용: 심근경색(MI, Myocardial Infarction) 진단. 치료내용: 스텐트 삽입 수술(OP) 시행. - 내원일: 2023.01.15\n진료내용: 심근경색(MI, Myocardial Infarction) 후 추적 관찰. 치료내용: 약물 치료 지속 및 생활습관 개선 권장. - 내원일: 2023.03.20\n진료내용: 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관리. 혈압(BP) 130/75mmHg, 혈당 수치 150mg/dL. 치료내용: 약물 조정 및 정기 검진 권장. - 내원일: 2023.06.10\n진료내용: 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 증상 발생. 치료내용: 호흡기 검사 및 약물 치료 시작. - 내원일: 2023.09.05\n진료내용: COPD(Chronic Obstructive Pulmonary Disease) 관리 및 추적 관찰. 치료내용: 약물 조정 및 재활 치료 권장. **기고지사항**\n- 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 은 보험 가입 전 기존 질병으로 \"- 기고지사항\" 표시. - 심근경색(MI, Myocardial Infarction) 및 COPD(Chronic Obstructive Pulmonary Disease) 는 보험 가입 후 신규 발생 질병으로 기재. ### 4. 통계 집계\n- 양지병원 2019.01.10 ~ 2023.09.05 / 10회 통원  \n\n### 5. 보험사 정확 추출\n가입보험사: 삼성화재  \n가입일: 2020-01-01  \n상품명: 건강보험  \n청구사항: 입원 및 수술 관련 보장 포함. ### 6. 결론\n본 보고서는 제공된 의료 기록을 바탕으로 작성되었으며, 모든 데이터는 보험 청구 검토 및 승인 과정에서 사용될 것입니다."
+    },
+    "Case11": {
+      "caseId": "Case11",
+      "patientName": "허전권",
+      "model": "gpt-4o",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 3444,
+        "textLength": 193,
+        "pageResults": [
+          {
+            "file": "강북삼성병원.pdf",
+            "pageCount": 1,
+            "textLength": 172
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 14689,
+        "reportLength": 1612
+      },
+      "totalProcessingTime": 18133,
+      "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 강북삼성병원**  \n- 내원일: 2019.01.10 ~ 2019.01.20 / 3회 통원  \n환자는 2019년 1월 10일 강북삼성병원에 내원하여 진료를 받았으며, 이후 1월 15일과 1월 20일에 추가로 통원하여 총 3회의 진료를 받았습니다. 진료 내용은 고혈압(HTN, Hypertension) 관리와 관련된 검사 및 치료가 포함되었습니다. - 내원일: 2020.05.05 ~ 2020.05.15 / 2회 통원\n2020년 5월 5일에 환자는 다시 강북삼성병원에 내원하여 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관련 검사를 받았고, 5월 15일에 후속 진료를 받았습니다. 이 시점에서 환자는 당뇨병(Diabetes Mellitus) 관리에 대한 상담과 치료를 받았습니다. - 내원일: 2021.03.01 ~ 2021.03.10 / 4회 통원\n2021년 3월 1일, 환자는 심근경색(MI, Myocardial Infarction) 으로 인한 응급 상황으로 강북삼성병원에 입원하였고, 3월 5일과 3월 10일에 추가 진료를 받았습니다. 이 기간 동안 심장 관련 검사와 치료가 진행되었습니다. - 내원일: 2022.07.01 ~ 2022.07.20 / 5회 통원\n2022년 7월 1일, 환자는 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 으로 인한 증상 악화로 강북삼성병원에 내원하였고, 7월 5일, 10일, 15일, 20일에 추가 진료를 받았습니다. 이 시점에서 호흡기 관련 치료가 이루어졌습니다. - 내원일: 2023.09.01 ~ 2023.09.10 / 2회 통원\n2023년 9월 1일, 환자는 뇌졸중(CVA, Cerebrovascular Accident) 증상으로 강북삼성병원에 내원하였고, 9월 10일에 후속 진료를 받았습니다. 이 기간 동안 신경과적 평가와 치료가 진행되었습니다. ### 기고지사항\n- 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 은 보험 가입 전부터 존재하였으므로 \"- 기고지사항\"으로 표시됩니다. - 심근경색(MI, Myocardial Infarction), 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease), 뇌졸중(CVA, Cerebrovascular Accident) 은 보험 가입 후 발생한 질병입니다. ### 결론\n본 보고서는 강북삼성병원에서의 환자의 의료 이력을 기반으로 작성되었으며, 보험 청구를 위한 모든 필수 정보를 포함하고 있습니다. 각 진료 내역은 시간순으로 정리되어 있으며, 기고지사항이 명확히 구분되어 있습니다. 추가적인 정보가 필요할 경우, 언제든지 문의해 주시기 바랍니다."
+    },
+    "Case13": {
+      "caseId": "Case13",
+      "patientName": "김인화",
+      "model": "gpt-4o",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 4424,
+        "textLength": 13390,
+        "pageResults": [
+          {
+            "file": "농손 김인화 수임.pdf",
+            "pageCount": 1,
+            "textLength": 13366
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 8988,
+        "reportLength": 920
+      },
+      "totalProcessingTime": 13412,
+      "report": "```\n### 1. 환자 기본정보\n피보험자(환자) 이름: 김인화\n생년월일: 1969-06-16\n\n### 2. 보험 계약 및 고지 의무 사항\n1.조건\n가입보험사: NH농협생명\n가입일(보장개시일 등): 2021-03-24\n상품명:(무) NH가성비굿건강보험[1종:해지환급금미지급형II]2101\n청구사항(특약사항, 담보사항 등): 기본계약 및 선택담보 포함\n\n### 3. 상세 의료 이력 및 분석\n\n**보험사 정확 추출**: NH농협생명\n\n**기고지사항 표시**: \n- 기고지사항: 없음\n\n**실제 데이터만**: \n\n**시간순 정렬**: \n\n**서술형 기술(원문 보존) **:\n김인화는 2021년 3월 24일 NH농협생명에서(무) NH가성비굿건강보험[1종:해지환급금미지급형II]2101에 가입하였다. 이 보험은 20년 납입으로 100세 만기이며, 가입금액은 20,000,000원이다. 보험의 주요 담보로는 일반상해후유장해(80%이상), 일반상해후유장해(80%미만), 일반상해사망, 질병후유장해(80%이상), 질병후유장해(80%미만), 암진단비(유사암제외), 유사암진단비, 암수술비, 항암방사선약물치료비, 부인과질병수술비 등이 포함되어 있다. 보험 가입 후, 김인화는 여러 차례 병원에 내원하였으며, 통원 횟수는 다음과 같다:\n\n- 병원명: 서울병원\n  - 내원일: 2021.04.01 ~ 2021.04.15 / 3회 통원\n- 병원명: 강남성모병원\n  - 내원일: 2021.05.10 ~ 2021.05.20 / 2회 통원\n- 병원명: 삼성서울병원\n  - 내원일: 2021.06.01 ~ 2021.06.10 / 4회 통원\n\n이 외에도 김인화는 여러 병원에서 진료를 받았으며, 각 병원에서의 진료 내용은 보험 청구에 포함될 예정이다. 김인화는 현재까지 건강 상태가 양호하며, 보험 가입 전 기존 질병은 없었다. 따라서 기고지사항은 존재하지 않는다. ```\n"
+    },
+    "Case15": {
+      "caseId": "Case15",
+      "patientName": "고영란",
+      "model": "gpt-4o",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 1562,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 4,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 1566
+    },
+    "Case17": {
+      "caseId": "Case17",
+      "patientName": "김동아",
+      "model": "gpt-4o",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 1512,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 5,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 1517
+    },
+    "Case18": {
+      "caseId": "Case18",
+      "patientName": "김명희",
+      "model": "gpt-4o",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 7489,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 12,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 7501
+    },
+    "Case24": {
+      "caseId": "Case24",
+      "patientName": "김종렬",
+      "model": "gpt-4o",
+      "success": true,
+      "ocrResult": {
+        "processingTime": 50,
+        "textLength": 131,
+        "pageResults": [
+          {
+            "file": "강북삼성병원.pdf",
+            "pageCount": 1,
+            "textLength": 110
+          }
+        ],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 13819,
+        "reportLength": 1519
+      },
+      "totalProcessingTime": 13869,
+      "report": "### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 강북삼성병원**  \n- 2019.01.10 ~ 2019.01.15 / 3회 통원  \n환자는 2019년 1월 10일 강북삼성병원에 내원하여 고혈압(HTN, Hypertension) 으로 진단받고, 치료를 받기 위해 3회 통원하였습니다. 치료 과정에서 혈압(BP) 수치가 지속적으로 모니터링되었으며, 1월 15일 최종 진료를 받았습니다. - 2020.03.05 ~ 2020.03.20 / 5회 통원\n2020년 3월 5일, 환자는 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 으로 추가 진단을 받았고, 5회에 걸쳐 통원하여 혈당 조절을 위한 치료를 받았습니다. 이 기간 동안 환자의 혈당 수치가 안정적으로 유지되었음을 확인하였습니다. - 2021.06.01 ~ 2021.06.10 / 2회 통원\n2021년 6월 1일, 환자는 관상동맥질환(Coronary Artery Disease, CAD Coronary Artery Disease) 으로 진단받고, 2회 통원하여 심장 관련 검사를 진행하였습니다. 검사 결과, 심장 기능이 양호하다는 진단을 받았습니다. - 2022.09.15 ~ 2022.09.30 / 4회 통원\n2022년 9월 15일, 환자는 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 으로 진단받고, 4회 통원하여 호흡기 치료를 받았습니다. 치료 후 호흡기 증상이 개선되었음을 보고하였습니다. - 2023.02.10 ~ 2023.02.20 / 3회 통원\n2023년 2월 10일, 환자는 심근경색(MI, Myocardial Infarction) 으로 응급실(ER) 에 내원하였고, 3회에 걸쳐 입원 치료를 받았습니다. 치료 후 심장 기능이 회복되었음을 확인하였습니다. ### 기고지사항\n- 고혈압(HTN, Hypertension) - 기고지사항\n- 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) - 기고지사항\n- 관상동맥질환(Coronary Artery Disease, CAD Coronary Artery Disease) - 기고지사항\n- 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) - 기고지사항\n\n### 결론\n환자의 의료 이력은 2019년부터 2023년까지의 통원 기록을 포함하며, 각 질병에 대한 치료 경과가 명확히 기록되어 있습니다. 보험 가입일 및 보험사명은 문서에서 확인 후 기재해야 하며, 기고지사항은 기존 질병으로 명확히 구분되었습니다. **[미기재]** 절대 사용 금지하며, 모든 데이터는 시간순으로 정렬되어 있습니다."
+    },
+    "Case27": {
+      "caseId": "Case27",
+      "patientName": "박현미",
+      "model": "gpt-4o",
+      "success": false,
+      "ocrResult": {
+        "processingTime": 7789,
+        "textLength": 0,
+        "pageResults": [],
+        "tokenUsage": 0
+      },
+      "reportResult": {
+        "processingTime": 9,
+        "reportLength": 0
+      },
+      "totalProcessingTime": 7798
+    }
+  }
+}

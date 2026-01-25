@@ -1,0 +1,105 @@
+{
+  "caseId": "Case9",
+  "caseNum": 9,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-07",
+      "time": "09:34",
+      "hospital": "대림성모병원",
+      "department": "외래초진기록(유방센터)"
+    },
+    "chiefComplaint": {
+      "summary": "타병원 검사 이상 소견",
+      "onsetDate": null,
+      "duration": null,
+      "details": "유방에 종괴가 있으며 외부 검사에서 유방에 종괴가 있다고 함."
+    },
+    "diagnoses": [
+      {
+        "code": "N64.9",
+        "nameKr": "유방의 성세포명 장애",
+        "date": "2024-10-07",
+        "isPrimary": true,
+        "hospital": "대림성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PE",
+        "date": "2024-10-04",
+        "result": "Rt 9.5-4 1cm mass",
+        "finding": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "US",
+        "date": "2024-10-04",
+        "result": "Rt 9.5-0.9cm mass",
+        "finding": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "DCIS",
+      "testDate": "2024-10-30",
+      "finding": "Intraductal carcinoma in situ of breast, right",
+      "stageTNM": "D05.10"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Levosulpiride, cimetidine, metoclopramide, domperidone",
+        "date": "2024-10-07",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-07",
+      "endDate": "2024-10-30",
+      "totalVisits": 2,
+      "hospitals": [
+        "대림성모병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "환자는 현재 상태가 수술의 contraindication은 아님.",
+      "prognosis": null,
+      "recommendations": "수술 전 후 철저히 관리할 것."
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2024-10-07",
+      "2024-10-04",
+      "2024-10-30"
+    ],
+    "kcdCodes": [
+      "N64.9"
+    ],
+    "hospitals": [
+      "대림성모병원"
+    ],
+    "examinations": [
+      "PE",
+      "US"
+    ],
+    "treatments": [
+      "Levosulpiride, cimetidine, metoclopramide, domperidone"
+    ],
+    "diagnoses": [
+      "유방의 성세포명 장애"
+    ]
+  },
+  "timestamp": "2026-01-25T09:37:07.455Z",
+  "cached": true
+}

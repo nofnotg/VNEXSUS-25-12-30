@@ -1,0 +1,3291 @@
+{
+  "detailedAnalysis": [
+    {
+      "caseId": "Case11",
+      "caseNum": 11,
+      "patientName": "허전권",
+      "model": "gpt-4o",
+      "processingTime": 15388,
+      "cost": 0.02438,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 22,
+          "matchedItems": [],
+          "missedItems": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-12",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-10-25",
+            "2024-11-18",
+            "2024-11-26",
+            "2024-12-23",
+            "2024-12-27",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "C23"
+          ]
+        },
+        "hospitals": {
+          "rate": 50,
+          "matched": 2,
+          "total": 4,
+          "matchedItems": [
+            "강북삼성병원",
+            "삼성병원"
+          ],
+          "missedItems": [
+            "삼성서울병원",
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 6,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "MRI",
+            "초음파",
+            "PET",
+            "PET-CT",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2023-05-17",
+            "1962"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "강북삼성병원"
+          ],
+          "examinations": [],
+          "treatments": [
+            "Observation"
+          ],
+          "diagnoses": [
+            "뇌진탕"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-12",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-10-25",
+            "2024-11-18",
+            "2024-11-26",
+            "2024-12-23",
+            "2024-12-27",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ],
+          "kcdCodes": [
+            "C23"
+          ],
+          "hospitals": [
+            "강북삼성병원",
+            "삼성서울병원",
+            "삼성병원",
+            "치료병원"
+          ],
+          "examinations": [
+            "CT",
+            "MRI",
+            "초음파",
+            "PET",
+            "PET-CT",
+            "조직검사"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 20
+    },
+    {
+      "caseId": "Case11",
+      "caseNum": 11,
+      "patientName": "허전권",
+      "model": "gpt-4o-mini",
+      "processingTime": 13353,
+      "cost": 0.0169017,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 22,
+          "matchedItems": [],
+          "missedItems": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-12",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-10-25",
+            "2024-11-18",
+            "2024-11-26",
+            "2024-12-23",
+            "2024-12-27",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "C23"
+          ]
+        },
+        "hospitals": {
+          "rate": 50,
+          "matched": 2,
+          "total": 4,
+          "matchedItems": [
+            "강북삼성병원",
+            "삼성병원"
+          ],
+          "missedItems": [
+            "삼성서울병원",
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 6,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "MRI",
+            "초음파",
+            "PET",
+            "PET-CT",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2023-04-18",
+            "1962-01-01"
+          ],
+          "kcdCodes": [
+            "S06.0"
+          ],
+          "hospitals": [
+            "강북삼성병원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": [
+            "두부 외상"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-12",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-10-25",
+            "2024-11-18",
+            "2024-11-26",
+            "2024-12-23",
+            "2024-12-27",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ],
+          "kcdCodes": [
+            "C23"
+          ],
+          "hospitals": [
+            "강북삼성병원",
+            "삼성서울병원",
+            "삼성병원",
+            "치료병원"
+          ],
+          "examinations": [
+            "CT",
+            "MRI",
+            "초음파",
+            "PET",
+            "PET-CT",
+            "조직검사"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 20
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "model": "gpt-4o",
+      "processingTime": 6456,
+      "cost": 0.0194,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 5,
+          "matchedItems": [],
+          "missedItems": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-04-12",
+            "2024-11-04",
+            "2025-03-13"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "S33.50",
+            "M51.1",
+            "S33",
+            "M51"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "서울바른병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "장해진단병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "MRI",
+            "X-ray"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "신경차단술",
+            "도수치료",
+            "물리치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-04-12",
+            "2024-11-04",
+            "2025-03-13"
+          ],
+          "kcdCodes": [
+            "S33.50",
+            "M51.1",
+            "S33",
+            "M51"
+          ],
+          "hospitals": [
+            "서울바른병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "장해진단병원"
+          ],
+          "examinations": [
+            "MRI",
+            "X-ray"
+          ],
+          "treatments": [
+            "신경차단술",
+            "도수치료",
+            "물리치료"
+          ]
+        }
+      },
+      "overallScore": 0
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "model": "gpt-4o-mini",
+      "processingTime": 6872,
+      "cost": 0.01667985,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 5,
+          "matchedItems": [],
+          "missedItems": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-04-12",
+            "2024-11-04",
+            "2025-03-13"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "S33.50",
+            "M51.1",
+            "S33",
+            "M51"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "서울바른병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "장해진단병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "MRI",
+            "X-ray"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "신경차단술",
+            "도수치료",
+            "물리치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-04-12",
+            "2024-11-04",
+            "2025-03-13"
+          ],
+          "kcdCodes": [
+            "S33.50",
+            "M51.1",
+            "S33",
+            "M51"
+          ],
+          "hospitals": [
+            "서울바른병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "장해진단병원"
+          ],
+          "examinations": [
+            "MRI",
+            "X-ray"
+          ],
+          "treatments": [
+            "신경차단술",
+            "도수치료",
+            "물리치료"
+          ]
+        }
+      },
+      "overallScore": 0
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "model": "gpt-4o",
+      "processingTime": 25869,
+      "cost": 0.027995,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2025-06-07"
+          ],
+          "missedItems": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-16",
+            "2025-06-27",
+            "2025-06-20",
+            "2025-06-24",
+            "1953-02-25"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "C50.11",
+            "R59.1",
+            "C50",
+            "R59"
+          ]
+        },
+        "hospitals": {
+          "rate": 100,
+          "matched": 1,
+          "total": 1,
+          "matchedItems": [
+            "더자인병원"
+          ],
+          "missedItems": []
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "초음파",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-06-07"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "의료법인자인의료재단더자인병원"
+          ],
+          "examinations": [
+            "혈압",
+            "공복혈당",
+            "총콜레스테롤"
+          ],
+          "treatments": [
+            "운동 및 식이요법"
+          ],
+          "diagnoses": [
+            "고혈압 의심",
+            "이상지질혈증 의심"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-07",
+            "2025-06-16",
+            "2025-06-27",
+            "2025-06-20",
+            "2025-06-24",
+            "1953-02-25"
+          ],
+          "kcdCodes": [
+            "C50.11",
+            "R59.1",
+            "C50",
+            "R59"
+          ],
+          "hospitals": [
+            "더자인병원"
+          ],
+          "examinations": [
+            "CT",
+            "초음파",
+            "조직검사"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 33
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "model": "gpt-4o-mini",
+      "processingTime": 22308,
+      "cost": 0.0168429,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2025-06-07"
+          ],
+          "missedItems": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-16",
+            "2025-06-27",
+            "2025-06-20",
+            "2025-06-24",
+            "1953-02-25"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "C50.11",
+            "R59.1",
+            "C50",
+            "R59"
+          ]
+        },
+        "hospitals": {
+          "rate": 100,
+          "matched": 1,
+          "total": 1,
+          "matchedItems": [
+            "더자인병원"
+          ],
+          "missedItems": []
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "초음파",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-06-07"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "의료법인자인의료재단더자인병원"
+          ],
+          "examinations": [
+            "혈액검사",
+            "소변검사"
+          ],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-07",
+            "2025-06-16",
+            "2025-06-27",
+            "2025-06-20",
+            "2025-06-24",
+            "1953-02-25"
+          ],
+          "kcdCodes": [
+            "C50.11",
+            "R59.1",
+            "C50",
+            "R59"
+          ],
+          "hospitals": [
+            "더자인병원"
+          ],
+          "examinations": [
+            "CT",
+            "초음파",
+            "조직검사"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 33
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "model": "gpt-4o",
+      "processingTime": 24060,
+      "cost": 0.02837,
+      "matching": {
+        "dates": {
+          "rate": 20,
+          "matched": 1,
+          "total": 5,
+          "matchedItems": [
+            "2025-08-14"
+          ],
+          "missedItems": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "S33.50",
+            "I63.9",
+            "S33",
+            "I63"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "해븐리병원",
+            "일산효자한의원",
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-08-14",
+            "2025-08-24"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "해브리병원"
+          ],
+          "examinations": [
+            "Neurological examination",
+            "Brain MRI/Diffusion"
+          ],
+          "treatments": [
+            "아스피린"
+          ],
+          "diagnoses": [
+            "6번 신경 마비 의심",
+            "뇌졸중 의심"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-08-14",
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ],
+          "kcdCodes": [
+            "S33.50",
+            "I63.9",
+            "S33",
+            "I63"
+          ],
+          "hospitals": [
+            "해븐리병원",
+            "일산효자한의원",
+            "치료병원"
+          ],
+          "examinations": [],
+          "treatments": []
+        }
+      },
+      "overallScore": 30
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "model": "gpt-4o-mini",
+      "processingTime": 11370,
+      "cost": 0.016717649999999997,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 5,
+          "matchedItems": [],
+          "missedItems": [
+            "2025-08-14",
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "S33.50",
+            "I63.9",
+            "S33",
+            "I63"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "해븐리병원",
+            "일산효자한의원",
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-08-14",
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ],
+          "kcdCodes": [
+            "S33.50",
+            "I63.9",
+            "S33",
+            "I63"
+          ],
+          "hospitals": [
+            "해븐리병원",
+            "일산효자한의원",
+            "치료병원"
+          ],
+          "examinations": [],
+          "treatments": []
+        }
+      },
+      "overallScore": 25
+    },
+    {
+      "caseId": "Case18",
+      "caseNum": 18,
+      "patientName": "김명희",
+      "model": "gpt-4o",
+      "processingTime": 13504,
+      "cost": 0.02309,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "matchedItems": [],
+          "missedItems": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-05-12",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-08"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "E66.8",
+            "I10.9",
+            "E66",
+            "I10"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "구로성심병원",
+            "고대구로병원",
+            "위장관외과"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "소매절제술",
+            "담낭절제술",
+            "위소매절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-02-17"
+          ],
+          "kcdCodes": [
+            "R42"
+          ],
+          "hospitals": [
+            "한림대학교강남성심병원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": [
+            "현기증 NOS"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-05-12",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-08"
+          ],
+          "kcdCodes": [
+            "E66.8",
+            "I10.9",
+            "E66",
+            "I10"
+          ],
+          "hospitals": [
+            "구로성심병원",
+            "고대구로병원",
+            "위장관외과"
+          ],
+          "examinations": [],
+          "treatments": [
+            "소매절제술",
+            "담낭절제술",
+            "위소매절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "overallScore": 15
+    },
+    {
+      "caseId": "Case18",
+      "caseNum": 18,
+      "patientName": "김명희",
+      "model": "gpt-4o-mini",
+      "processingTime": 12788,
+      "cost": 0.0168009,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "matchedItems": [],
+          "missedItems": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-05-12",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-08"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "E66.8",
+            "I10.9",
+            "E66",
+            "I10"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "구로성심병원",
+            "고대구로병원",
+            "위장관외과"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "소매절제술",
+            "담낭절제술",
+            "위소매절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-02-17"
+          ],
+          "kcdCodes": [
+            "R42"
+          ],
+          "hospitals": [
+            "강남성심병원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": [
+            "현기증 NOS"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-05-12",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-08"
+          ],
+          "kcdCodes": [
+            "E66.8",
+            "I10.9",
+            "E66",
+            "I10"
+          ],
+          "hospitals": [
+            "구로성심병원",
+            "고대구로병원",
+            "위장관외과"
+          ],
+          "examinations": [],
+          "treatments": [
+            "소매절제술",
+            "담낭절제술",
+            "위소매절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "overallScore": 15
+    },
+    {
+      "caseId": "Case24",
+      "caseNum": 24,
+      "patientName": "김종렬",
+      "model": "gpt-4o",
+      "processingTime": 15963,
+      "cost": 0.025564999999999997,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 18,
+          "matchedItems": [],
+          "missedItems": [
+            "2022-08-24",
+            "2022-09-02",
+            "2022-08-26",
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-17",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "C16.20",
+            "C16"
+          ]
+        },
+        "hospitals": {
+          "rate": 50,
+          "matched": 1,
+          "total": 2,
+          "matchedItems": [
+            "강북삼성병원"
+          ],
+          "missedItems": [
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "전절제술",
+            "아전절제술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2022-08-22",
+            "2018"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "강북삼성병원"
+          ],
+          "examinations": [
+            "EGD 검사"
+          ],
+          "treatments": [],
+          "diagnoses": [
+            "Stomach ca"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2022-08-24",
+            "2022-09-02",
+            "2022-08-26",
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-17",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ],
+          "kcdCodes": [
+            "C16.20",
+            "C16"
+          ],
+          "hospitals": [
+            "강북삼성병원",
+            "치료병원"
+          ],
+          "examinations": [
+            "조직검사"
+          ],
+          "treatments": [
+            "전절제술",
+            "아전절제술"
+          ]
+        }
+      },
+      "overallScore": 10
+    },
+    {
+      "caseId": "Case24",
+      "caseNum": 24,
+      "patientName": "김종렬",
+      "model": "gpt-4o-mini",
+      "processingTime": 8302,
+      "cost": 0.016721849999999996,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 18,
+          "matchedItems": [],
+          "missedItems": [
+            "2022-08-24",
+            "2022-09-02",
+            "2022-08-26",
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-17",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "C16.20",
+            "C16"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "강북삼성병원",
+            "치료병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "전절제술",
+            "아전절제술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2022-08-24",
+            "2022-09-02",
+            "2022-08-26",
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-17",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ],
+          "kcdCodes": [
+            "C16.20",
+            "C16"
+          ],
+          "hospitals": [
+            "강북삼성병원",
+            "치료병원"
+          ],
+          "examinations": [
+            "조직검사"
+          ],
+          "treatments": [
+            "전절제술",
+            "아전절제술"
+          ]
+        }
+      },
+      "overallScore": 0
+    },
+    {
+      "caseId": "Case27",
+      "caseNum": 27,
+      "patientName": "박현미",
+      "model": "gpt-4o",
+      "processingTime": 26446,
+      "cost": 0.027245,
+      "matching": {
+        "dates": {
+          "rate": 21,
+          "matched": 3,
+          "total": 14,
+          "matchedItems": [
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-23"
+          ],
+          "missedItems": [
+            "2025-09-08",
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-10-11",
+            "2025-09-10",
+            "2025-09-18",
+            "2025-09-09",
+            "2025-09-16"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "C73"
+          ]
+        },
+        "hospitals": {
+          "rate": 17,
+          "matched": 1,
+          "total": 6,
+          "matchedItems": [
+            "서울아산병원"
+          ],
+          "missedItems": [
+            "휴내과의원",
+            "중앙대광명병원",
+            "치료병원",
+            "내분비내과",
+            "이레미즈외과"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "초음파",
+            "조직검사",
+            "세포검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "갑상선절제술",
+            "절제술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-10-23",
+            "2024-10-07",
+            "2024-07-19"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "서울아산병원"
+          ],
+          "examinations": [
+            "FNA",
+            "Thyroid USG"
+          ],
+          "treatments": [
+            "US & US guided CNB"
+          ],
+          "diagnoses": [
+            "Thyroid nodule"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-09-08",
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2024-10-23",
+            "2025-09-10",
+            "2025-09-18",
+            "2025-09-09",
+            "2025-09-16"
+          ],
+          "kcdCodes": [
+            "C73"
+          ],
+          "hospitals": [
+            "서울아산병원",
+            "휴내과의원",
+            "중앙대광명병원",
+            "치료병원",
+            "내분비내과",
+            "이레미즈외과"
+          ],
+          "examinations": [
+            "초음파",
+            "조직검사",
+            "세포검사"
+          ],
+          "treatments": [
+            "갑상선절제술",
+            "절제술"
+          ]
+        }
+      },
+      "overallScore": 9
+    },
+    {
+      "caseId": "Case27",
+      "caseNum": 27,
+      "patientName": "박현미",
+      "model": "gpt-4o-mini",
+      "processingTime": 8955,
+      "cost": 0.016690049999999998,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 14,
+          "matchedItems": [],
+          "missedItems": [
+            "2025-09-08",
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2024-10-23",
+            "2025-09-10",
+            "2025-09-18",
+            "2025-09-09",
+            "2025-09-16"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "C73"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 6,
+          "matchedItems": [],
+          "missedItems": [
+            "서울아산병원",
+            "휴내과의원",
+            "중앙대광명병원",
+            "치료병원",
+            "내분비내과",
+            "이레미즈외과"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "초음파",
+            "조직검사",
+            "세포검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "갑상선절제술",
+            "절제술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-09-08",
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2024-10-23",
+            "2025-09-10",
+            "2025-09-18",
+            "2025-09-09",
+            "2025-09-16"
+          ],
+          "kcdCodes": [
+            "C73"
+          ],
+          "hospitals": [
+            "서울아산병원",
+            "휴내과의원",
+            "중앙대광명병원",
+            "치료병원",
+            "내분비내과",
+            "이레미즈외과"
+          ],
+          "examinations": [
+            "초음파",
+            "조직검사",
+            "세포검사"
+          ],
+          "treatments": [
+            "갑상선절제술",
+            "절제술"
+          ]
+        }
+      },
+      "overallScore": 0
+    },
+    {
+      "caseId": "Case29",
+      "caseNum": 29,
+      "patientName": "서문정숙",
+      "model": "gpt-4o-mini",
+      "processingTime": 13110,
+      "cost": 0.016928850000000002,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "matchedItems": [],
+          "missedItems": [
+            "2025-09-26",
+            "2024-08-13",
+            "2024-09-04",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "I67.1",
+            "I67"
+          ]
+        },
+        "hospitals": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "MRI",
+            "MRA"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-08-17",
+            "2024-08-24"
+          ],
+          "kcdCodes": [
+            "A09",
+            "A02.0"
+          ],
+          "hospitals": [
+            "더자인병원"
+          ],
+          "examinations": [
+            "PE"
+          ],
+          "treatments": [
+            "antibiotics"
+          ],
+          "diagnoses": [
+            "설사"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-09-26",
+            "2024-08-13",
+            "2024-09-04",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ],
+          "kcdCodes": [
+            "I67.1",
+            "I67"
+          ],
+          "hospitals": [],
+          "examinations": [
+            "MRI",
+            "MRA"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 30
+    },
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "model": "gpt-4o",
+      "processingTime": 19175,
+      "cost": 0.026465,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2019-03-23"
+          ],
+          "missedItems": [
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2025-02-04",
+            "2025-02-12",
+            "2024-04-23"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 50,
+          "matched": 2,
+          "total": 4,
+          "matchedItems": [
+            "D18.02",
+            "D18"
+          ],
+          "missedItems": [
+            "D13.4",
+            "D13"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원",
+            "삼성서울병원"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 1,
+          "total": 1,
+          "matchedItems": [
+            "CT"
+          ],
+          "missedItems": []
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "간절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2019-03-23"
+          ],
+          "kcdCodes": [
+            "D18.02"
+          ],
+          "hospitals": [
+            "SM영상의학과의원"
+          ],
+          "examinations": [
+            "Abdomen Angiography, Phase 3",
+            "Dynamic 5yudCT"
+          ],
+          "treatments": [
+            "선량니패주350ml",
+            "선타바란"
+          ],
+          "diagnoses": [
+            "간담도계의 혈관종"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-03-23",
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2025-02-04",
+            "2025-02-12",
+            "2024-04-23"
+          ],
+          "kcdCodes": [
+            "D13.4",
+            "D18.02",
+            "D13",
+            "D18"
+          ],
+          "hospitals": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원",
+            "삼성서울병원"
+          ],
+          "examinations": [
+            "CT"
+          ],
+          "treatments": [
+            "간절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "overallScore": 33
+    },
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "model": "gpt-4o-mini",
+      "processingTime": 22170,
+      "cost": 0.016927499999999998,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2019-03-23"
+          ],
+          "missedItems": [
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2025-02-04",
+            "2025-02-12",
+            "2024-04-23"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 50,
+          "matched": 2,
+          "total": 4,
+          "matchedItems": [
+            "D18.02",
+            "D18"
+          ],
+          "missedItems": [
+            "D13.4",
+            "D13"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원",
+            "삼성서울병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "CT"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "간절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-02-05",
+            "2019-03-23"
+          ],
+          "kcdCodes": [
+            "D18.02"
+          ],
+          "hospitals": [
+            "SM영상의학과"
+          ],
+          "examinations": [
+            "Abdomen Angiography, Phase 3"
+          ],
+          "treatments": [
+            "Dynamic syudCT"
+          ],
+          "diagnoses": [
+            "간담도계의 혈관종"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-03-23",
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2025-02-04",
+            "2025-02-12",
+            "2024-04-23"
+          ],
+          "kcdCodes": [
+            "D13.4",
+            "D18.02",
+            "D13",
+            "D18"
+          ],
+          "hospitals": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원",
+            "삼성서울병원"
+          ],
+          "examinations": [
+            "CT"
+          ],
+          "treatments": [
+            "간절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "overallScore": 18
+    },
+    {
+      "caseId": "Case34",
+      "caseNum": 34,
+      "patientName": "윤희정",
+      "model": "gpt-4o-mini",
+      "processingTime": 13267,
+      "cost": 0.016787249999999997,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 15,
+          "matchedItems": [],
+          "missedItems": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2024-01-19",
+            "2025-06-07",
+            "2025-06-24",
+            "2025-08-10",
+            "2025-08-14",
+            "2025-08-11",
+            "2025-06-12",
+            "2025-07-02",
+            "2025-09-05",
+            "2020-09-02",
+            "2024-01-26"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "C73",
+            "C77.0",
+            "C77"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "일산병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "초음파",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "곽청술",
+            "절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2024-01-19",
+            "2025-06-07",
+            "2025-06-24",
+            "2025-08-10",
+            "2025-08-14",
+            "2025-08-11",
+            "2025-06-12",
+            "2025-07-02",
+            "2025-09-05",
+            "2020-09-02",
+            "2024-01-26"
+          ],
+          "kcdCodes": [
+            "C73",
+            "C77.0",
+            "C77"
+          ],
+          "hospitals": [
+            "일산병원"
+          ],
+          "examinations": [
+            "초음파",
+            "조직검사"
+          ],
+          "treatments": [
+            "곽청술",
+            "절제술",
+            "가입전치료"
+          ]
+        }
+      },
+      "overallScore": 0
+    },
+    {
+      "caseId": "Case38",
+      "caseNum": 38,
+      "patientName": "이영희",
+      "model": "gpt-4o-mini",
+      "processingTime": 16903,
+      "cost": 0.016927499999999998,
+      "matching": {
+        "dates": {
+          "rate": 5,
+          "matched": 1,
+          "total": 20,
+          "matchedItems": [
+            "2025-08-03"
+          ],
+          "missedItems": [
+            "2024-09-11",
+            "2023-09-11",
+            "2024-08-30",
+            "2025-08-21",
+            "2025-08-24",
+            "2025-10-21",
+            "2010-06-01",
+            "2058-06-01",
+            "2019-10-21",
+            "2024-07-21",
+            "2024-10-21",
+            "2054-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-09-02",
+            "2025-08-05",
+            "2025-08-20",
+            "1958-06-01",
+            "1954-10-21"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "C54.1",
+            "C54"
+          ]
+        },
+        "hospitals": {
+          "rate": 25,
+          "matched": 1,
+          "total": 4,
+          "matchedItems": [
+            "이대목동병원"
+          ],
+          "missedItems": [
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "전자궁적출술",
+            "양측난소난관절제술",
+            "항암치료"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-08-03",
+            "2015-04-01",
+            "2015-09-15"
+          ],
+          "kcdCodes": [
+            "D25.9",
+            "C50.9"
+          ],
+          "hospitals": [
+            "이대목동병원"
+          ],
+          "examinations": [],
+          "treatments": [
+            "Centrix silver advance 1T QD"
+          ],
+          "diagnoses": [
+            "자궁근종",
+            "유방암"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2024-09-11",
+            "2023-09-11",
+            "2024-08-30",
+            "2025-08-21",
+            "2025-08-24",
+            "2025-10-21",
+            "2010-06-01",
+            "2058-06-01",
+            "2019-10-21",
+            "2024-07-21",
+            "2024-10-21",
+            "2054-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-09-02",
+            "2025-08-03",
+            "2025-08-05",
+            "2025-08-20",
+            "1958-06-01",
+            "1954-10-21"
+          ],
+          "kcdCodes": [
+            "C54.1",
+            "C54"
+          ],
+          "hospitals": [
+            "이대목동병원",
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ],
+          "examinations": [
+            "CT",
+            "조직검사"
+          ],
+          "treatments": [
+            "전자궁적출술",
+            "양측난소난관절제술",
+            "항암치료"
+          ]
+        }
+      },
+      "overallScore": 6
+    },
+    {
+      "caseId": "Case41",
+      "caseNum": 41,
+      "patientName": "장우진",
+      "model": "gpt-4o-mini",
+      "processingTime": 20780,
+      "cost": 0.0168795,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 11,
+          "matchedItems": [],
+          "missedItems": [
+            "2024-04-22",
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-24",
+            "2021-05-20",
+            "2024-04-20",
+            "2025-07-11",
+            "2025-09-22",
+            "2024-04-24",
+            "2025-09-02",
+            "2025-01-03"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "M43.16",
+            "M43",
+            "S32"
+          ]
+        },
+        "hospitals": {
+          "rate": 20,
+          "matched": 1,
+          "total": 5,
+          "matchedItems": [
+            "우신향병원"
+          ],
+          "missedItems": [
+            "은평성모병원",
+            "한림병원",
+            "치료병원",
+            "힘찬병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "MRI",
+            "X-ray"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2025-10-13"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "우신향병원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2024-04-22",
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-24",
+            "2021-05-20",
+            "2024-04-20",
+            "2025-07-11",
+            "2025-09-22",
+            "2024-04-24",
+            "2025-09-02",
+            "2025-01-03"
+          ],
+          "kcdCodes": [
+            "M43.16",
+            "M43",
+            "S32"
+          ],
+          "hospitals": [
+            "은평성모병원",
+            "우신향병원",
+            "한림병원",
+            "치료병원",
+            "힘찬병원"
+          ],
+          "examinations": [
+            "MRI",
+            "X-ray"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 14
+    },
+    {
+      "caseId": "Case42",
+      "caseNum": 42,
+      "patientName": "정진덕",
+      "model": "gpt-4o-mini",
+      "processingTime": 13837,
+      "cost": 0.016699049999999997,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "2018-09-27",
+            "2025-02-26",
+            "2025-04-29",
+            "2025-04-23"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "I67.1",
+            "I67",
+            "I60",
+            "I69"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "강북삼성병원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "MRI",
+            "MRA"
+          ]
+        },
+        "treatments": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [],
+          "kcdCodes": [],
+          "hospitals": [],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2018-09-27",
+            "2025-02-26",
+            "2025-04-29",
+            "2025-04-23"
+          ],
+          "kcdCodes": [
+            "I67.1",
+            "I67",
+            "I60",
+            "I69"
+          ],
+          "hospitals": [
+            "강북삼성병원"
+          ],
+          "examinations": [
+            "MRI",
+            "MRA"
+          ],
+          "treatments": []
+        }
+      },
+      "overallScore": 10
+    },
+    {
+      "caseId": "Case44",
+      "caseNum": 44,
+      "patientName": "최순곤",
+      "model": "gpt-4o-mini",
+      "processingTime": 17827,
+      "cost": 0.016949699999999998,
+      "matching": {
+        "dates": {
+          "rate": 0,
+          "matched": 0,
+          "total": 9,
+          "matchedItems": [],
+          "missedItems": [
+            "2025-08-25",
+            "2020-09-09",
+            "2024-09-03",
+            "2024-06-03",
+            "2024-07-31",
+            "2054-09-03",
+            "2025-08-29",
+            "2025-08-26",
+            "1954-09-03"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "matchedItems": [],
+          "missedItems": [
+            "I63.9",
+            "I63",
+            "I60",
+            "I69"
+          ]
+        },
+        "hospitals": {
+          "rate": 40,
+          "matched": 2,
+          "total": 5,
+          "matchedItems": [
+            "김안과병원",
+            "김안과"
+          ],
+          "missedItems": [
+            "신촌세브란스병원",
+            "치료병원",
+            "병의원"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "matchedItems": [],
+          "missedItems": [
+            "CT",
+            "MRI"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "혈전제거술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-01-31",
+            "2018-12-18",
+            "2025-09-19"
+          ],
+          "kcdCodes": [
+            "H25.9",
+            "I10"
+          ],
+          "hospitals": [
+            "김안과병원"
+          ],
+          "examinations": [
+            "안과 검사"
+          ],
+          "treatments": [
+            "백내장 수술"
+          ],
+          "diagnoses": [
+            "노인성 백내장"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2025-08-25",
+            "2020-09-09",
+            "2024-09-03",
+            "2024-06-03",
+            "2024-07-31",
+            "2054-09-03",
+            "2025-08-29",
+            "2025-08-26",
+            "1954-09-03"
+          ],
+          "kcdCodes": [
+            "I63.9",
+            "I63",
+            "I60",
+            "I69"
+          ],
+          "hospitals": [
+            "신촌세브란스병원",
+            "치료병원",
+            "김안과병원",
+            "병의원",
+            "김안과"
+          ],
+          "examinations": [
+            "CT",
+            "MRI"
+          ],
+          "treatments": [
+            "혈전제거술"
+          ]
+        }
+      },
+      "overallScore": 8
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "model": "gpt-4o",
+      "processingTime": 12158,
+      "cost": 0.01734,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2024-12-12"
+          ],
+          "missedItems": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-27",
+            "2024-12-31",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 17,
+          "matched": 1,
+          "total": 6,
+          "matchedItems": [
+            "R07"
+          ],
+          "missedItems": [
+            "R07.4",
+            "I20.88",
+            "I25.1",
+            "I20",
+            "I25"
+          ]
+        },
+        "hospitals": {
+          "rate": 33,
+          "matched": 1,
+          "total": 3,
+          "matchedItems": [
+            "굿웰스의원"
+          ],
+          "missedItems": [
+            "동신병원",
+            "신촌세브란스병원"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "관상동맥조영술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-12-12"
+          ],
+          "kcdCodes": [
+            "R074"
+          ],
+          "hospitals": [
+            "굿웰스의원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": [
+            "상세불명의 흉통"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-12",
+            "2024-12-27",
+            "2024-12-31",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "kcdCodes": [
+            "R07.4",
+            "I20.88",
+            "I25.1",
+            "R07",
+            "I20",
+            "I25"
+          ],
+          "hospitals": [
+            "굿웰스의원",
+            "동신병원",
+            "신촌세브란스병원"
+          ],
+          "examinations": [],
+          "treatments": [
+            "관상동맥조영술"
+          ]
+        }
+      },
+      "overallScore": 29
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "model": "gpt-4o-mini",
+      "processingTime": 8171,
+      "cost": 0.01125465,
+      "matching": {
+        "dates": {
+          "rate": 11,
+          "matched": 1,
+          "total": 9,
+          "matchedItems": [
+            "2024-12-12"
+          ],
+          "missedItems": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-27",
+            "2024-12-31",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 6,
+          "matchedItems": [],
+          "missedItems": [
+            "R07.4",
+            "I20.88",
+            "I25.1",
+            "R07",
+            "I20",
+            "I25"
+          ]
+        },
+        "hospitals": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "굿웰스의원",
+            "동신병원",
+            "신촌세브란스병원"
+          ]
+        },
+        "examinations": {
+          "rate": 100,
+          "matched": 0,
+          "total": 0
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "관상동맥조영술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-12-12"
+          ],
+          "kcdCodes": [],
+          "hospitals": [
+            "굿윌스의원"
+          ],
+          "examinations": [],
+          "treatments": [],
+          "diagnoses": []
+        },
+        "groundTruth": {
+          "dates": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-12",
+            "2024-12-27",
+            "2024-12-31",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "kcdCodes": [
+            "R07.4",
+            "I20.88",
+            "I25.1",
+            "R07",
+            "I20",
+            "I25"
+          ],
+          "hospitals": [
+            "굿웰스의원",
+            "동신병원",
+            "신촌세브란스병원"
+          ],
+          "examinations": [],
+          "treatments": [
+            "관상동맥조영술"
+          ]
+        }
+      },
+      "overallScore": 18
+    },
+    {
+      "caseId": "Case9",
+      "caseNum": 9,
+      "patientName": "임승희",
+      "model": "gpt-4o",
+      "processingTime": 21418,
+      "cost": 0.027815,
+      "matching": {
+        "dates": {
+          "rate": 14,
+          "matched": 3,
+          "total": 21,
+          "matchedItems": [
+            "2024-09-27",
+            "2024-10-07",
+            "2024-10-30"
+          ],
+          "missedItems": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-11-01",
+            "2024-10-31",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 60,
+          "matched": 3,
+          "total": 5,
+          "matchedItems": [
+            "D05.10",
+            "D05.00",
+            "D05"
+          ],
+          "missedItems": [
+            "I67.1",
+            "I67"
+          ]
+        },
+        "hospitals": {
+          "rate": 13,
+          "matched": 1,
+          "total": 8,
+          "matchedItems": [
+            "대림성모병원"
+          ],
+          "missedItems": [
+            "양지병원",
+            "증진센터",
+            "이대서울병원",
+            "유방센터",
+            "비내과",
+            "신경외과",
+            "갑상선외과"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "조영술",
+            "부분유방절제술",
+            "뇌혈관조영술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-10-07",
+            "2024-09-27",
+            "2024-10-04",
+            "2024-10-30"
+          ],
+          "kcdCodes": [
+            "N64.9",
+            "D05.10"
+          ],
+          "hospitals": [
+            "대림성모병원"
+          ],
+          "examinations": [
+            "PE",
+            "US"
+          ],
+          "treatments": [
+            "Levosulpiride, cimetidine, metoclopramide, domperidone"
+          ],
+          "diagnoses": [
+            "유방의 상세불명 장애",
+            "유방의 관내 제자리암종, 오른쪽"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-07",
+            "2024-10-30",
+            "2024-11-01",
+            "2024-10-31",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ],
+          "kcdCodes": [
+            "D05.10",
+            "D05.00",
+            "I67.1",
+            "D05",
+            "I67"
+          ],
+          "hospitals": [
+            "양지병원",
+            "증진센터",
+            "이대서울병원",
+            "대림성모병원",
+            "유방센터",
+            "비내과",
+            "신경외과",
+            "갑상선외과"
+          ],
+          "examinations": [
+            "조직검사"
+          ],
+          "treatments": [
+            "조영술",
+            "부분유방절제술",
+            "뇌혈관조영술"
+          ]
+        }
+      },
+      "overallScore": 24
+    },
+    {
+      "caseId": "Case9",
+      "caseNum": 9,
+      "patientName": "임승희",
+      "model": "gpt-4o-mini",
+      "processingTime": 15772,
+      "cost": 0.0169827,
+      "matching": {
+        "dates": {
+          "rate": 10,
+          "matched": 2,
+          "total": 21,
+          "matchedItems": [
+            "2024-10-07",
+            "2024-10-30"
+          ],
+          "missedItems": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-11-01",
+            "2024-10-31",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ]
+        },
+        "kcdCodes": {
+          "rate": 0,
+          "matched": 0,
+          "total": 5,
+          "matchedItems": [],
+          "missedItems": [
+            "D05.10",
+            "D05.00",
+            "I67.1",
+            "D05",
+            "I67"
+          ]
+        },
+        "hospitals": {
+          "rate": 13,
+          "matched": 1,
+          "total": 8,
+          "matchedItems": [
+            "대림성모병원"
+          ],
+          "missedItems": [
+            "양지병원",
+            "증진센터",
+            "이대서울병원",
+            "유방센터",
+            "비내과",
+            "신경외과",
+            "갑상선외과"
+          ]
+        },
+        "examinations": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "matchedItems": [],
+          "missedItems": [
+            "조직검사"
+          ]
+        },
+        "treatments": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "matchedItems": [],
+          "missedItems": [
+            "조영술",
+            "부분유방절제술",
+            "뇌혈관조영술"
+          ]
+        }
+      },
+      "extracted": {
+        "generated": {
+          "dates": [
+            "2024-10-07",
+            "2024-10-04",
+            "2024-10-30"
+          ],
+          "kcdCodes": [
+            "N64.9"
+          ],
+          "hospitals": [
+            "대림성모병원"
+          ],
+          "examinations": [
+            "PE",
+            "US"
+          ],
+          "treatments": [
+            "Levosulpiride, cimetidine, metoclopramide, domperidone"
+          ],
+          "diagnoses": [
+            "유방의 성세포명 장애"
+          ]
+        },
+        "groundTruth": {
+          "dates": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-07",
+            "2024-10-30",
+            "2024-11-01",
+            "2024-10-31",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ],
+          "kcdCodes": [
+            "D05.10",
+            "D05.00",
+            "I67.1",
+            "D05",
+            "I67"
+          ],
+          "hospitals": [
+            "양지병원",
+            "증진센터",
+            "이대서울병원",
+            "대림성모병원",
+            "유방센터",
+            "비내과",
+            "신경외과",
+            "갑상선외과"
+          ],
+          "examinations": [
+            "조직검사"
+          ],
+          "treatments": [
+            "조영술",
+            "부분유방절제술",
+            "뇌혈관조영술"
+          ]
+        }
+      },
+      "overallScore": 5
+    }
+  ],
+  "modelStats": {
+    "gpt-4o-mini": {
+      "count": 16,
+      "avgOverallScore": 13,
+      "avgDateMatch": 3,
+      "avgKCDMatch": 3,
+      "avgHospitalMatch": 22,
+      "avgExamMatch": 19,
+      "avgTreatmentMatch": 38,
+      "avgCost": 0.016480724999999998,
+      "avgTime": 14111.5625
+    },
+    "gpt-4o": {
+      "count": 10,
+      "avgOverallScore": 20,
+      "avgDateMatch": 9,
+      "avgKCDMatch": 13,
+      "avgHospitalMatch": 26,
+      "avgExamMatch": 40,
+      "avgTreatmentMatch": 30,
+      "avgCost": 0.0247665,
+      "avgTime": 18043.7
+    }
+  },
+  "insights": [
+    {
+      "category": "날짜 추출",
+      "severity": "high",
+      "issue": "날짜 매칭률이 5%로 낮음",
+      "cause": "다양한 날짜 형식 (YYYY.MM.DD, YYYY년 MM월 DD일 등)에 대한 정규화 미흡",
+      "recommendation": [
+        "프롬프트에 명시적 날짜 형식 지정 (YYYY-MM-DD)",
+        "후처리 단계에서 날짜 정규화 로직 강화",
+        "PDF의 여러 페이지에서 날짜 정보 종합 수집"
+      ]
+    },
+    {
+      "category": "KCD 진단코드",
+      "severity": "critical",
+      "issue": "KCD 코드 매칭률이 7%로 매우 낮음",
+      "cause": "PDF 첫 3페이지만 사용하여 진단 코드가 있는 페이지 누락 가능성",
+      "recommendation": [
+        "PDF 전체 페이지 처리 (비용 증가 감안)",
+        "진단서/소견서 페이지 우선 탐지 로직 추가",
+        "KCD 코드 패턴 인식 프롬프트 강화",
+        "진단명 → KCD 코드 매핑 데이터베이스 활용"
+      ]
+    },
+    {
+      "category": "병원명 추출",
+      "severity": "medium",
+      "issue": "병원명 매칭률이 24%",
+      "cause": "병원명 표기 변형 (약어, 띄어쓰기 차이 등)",
+      "recommendation": [
+        "병원명 정규화 사전 구축",
+        "유사도 기반 병원명 매칭 적용",
+        "OCR 후 병원명 검증 단계 추가"
+      ]
+    },
+    {
+      "category": "모델 선택",
+      "severity": "info",
+      "issue": "gpt-4o가 7%p 높은 점수지만 1.5배 비용",
+      "cause": "gpt-4o-mini가 비용 대비 효율적",
+      "recommendation": [
+        "일반 케이스: gpt-4o-mini 사용",
+        "복잡/고위험 케이스: gpt-4o 사용",
+        "2단계 접근: gpt-4o-mini 1차 → 품질 미달시 gpt-4o 재처리"
+      ]
+    },
+    {
+      "category": "PDF 처리",
+      "severity": "medium",
+      "issue": "현재 PDF 첫 3페이지만 처리",
+      "cause": "비용 절감을 위한 페이지 제한",
+      "recommendation": [
+        "문서 유형 자동 감지 (진단서, 의무기록, 영수증 등)",
+        "중요 페이지 우선 처리 알고리즘 구현",
+        "필요시 추가 페이지 동적 로드"
+      ]
+    }
+  ]
+}

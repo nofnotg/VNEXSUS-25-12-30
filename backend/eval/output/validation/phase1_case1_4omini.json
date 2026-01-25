@@ -1,0 +1,157 @@
+{
+  "caseNum": 1,
+  "model": "gpt-4o-mini",
+  "processingTime": 23776,
+  "tokens": {
+    "prompt_tokens": 25475,
+    "completion_tokens": 1161,
+    "total_tokens": 26636,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00451785,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-17",
+      "time": "14:40",
+      "hospital": "한림대학교 강남성심병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "두통, 어지럼증",
+      "referralSource": "이기섭의원",
+      "onsetDate": "2025-01-01",
+      "duration": "1개월",
+      "details": "한달 전부터 일어날 때 어지럽고 옆쪽 머리가 찢어지는 것처럼 아파서 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "R42",
+        "nameKr": "현기증 NOS",
+        "nameEn": "Dizziness NOS",
+        "date": "2025-02-17",
+        "isPrimary": true,
+        "hospital": "한림대학교 강남성심병원"
+      },
+      {
+        "code": "I67.9",
+        "nameKr": "기타 및 상세불명의 뇌혈관 질환",
+        "nameEn": "Other cerebrovascular diseases",
+        "date": "2025-02-17",
+        "isPrimary": false,
+        "hospital": "한림대학교 강남성심병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI",
+        "nameEn": "Magnetic Resonance Imaging",
+        "date": "2025-02-17",
+        "result": "White matter hypersignal intensities of presumed vascular origin, Fazekas 1.",
+        "finding": "Microbleed, left operculum.",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT",
+        "nameEn": "Computed Tomography",
+        "date": "2025-02-17",
+        "result": "No other major findings of ischemia, hemorrhage, mass or atrophy in the brain.",
+        "finding": "Short segmental mild stenosis, right V4.",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "진통제 및 혈압약",
+        "date": "2025-02-18",
+        "duration": "2일",
+        "details": "약물 주사 치료 후 증상 개선.",
+        "hospital": "한림대학교 강남성심병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-01-08",
+      "endDate": "2025-02-17",
+      "totalVisits": 5,
+      "hospitals": [
+        "이기섭의원",
+        "한림대학교 강남성심병원"
+      ],
+      "summary": "외래 진료를 통해 두통 및 어지럼증 치료."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-02-17",
+      "endDate": "2025-02-18",
+      "totalDays": 1,
+      "hospital": "한림대학교 강남성심병원",
+      "department": "신경외과",
+      "reason": "두통 및 어지럼증으로 입원."
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 두통 및 어지럼증으로 내원하였으며, MRI 및 CT 검사 결과 뇌혈관 질환이 의심됨.",
+      "prognosis": "증상 개선이 예상되며, 지속적인 관리 필요.",
+      "recommendations": "정기적인 외래 진료 및 약물 복용 권장.",
+      "limitations": "일상생활에서 어지럼증 발생 시 주의 필요."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 두통 및 어지럼증으로 입원 치료 후 퇴원.",
+      "keyFindings": [
+        "MRI에서 백질 고신호 소견",
+        "미세출혈 발견"
+      ],
+      "recommendations": "지속적인 외래 진료 및 관리 필요."
+    }
+  }
+}

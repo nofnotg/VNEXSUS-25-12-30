@@ -1,0 +1,137 @@
+{
+  "caseNum": 25,
+  "model": "gpt-4o-mini",
+  "processingTime": 16353,
+  "tokens": {
+    "prompt_tokens": 8992,
+    "completion_tokens": 919,
+    "total_tokens": 9911,
+    "prompt_tokens_details": {
+      "cached_tokens": 8192,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0019002,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 33,
+    "overallScore": 60
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-10-15",
+      "time": null,
+      "hospital": "강동경희대병원",
+      "department": "피부과"
+    },
+    "chiefComplaint": {
+      "summary": "피부과 외래통원치료",
+      "referralSource": null,
+      "onsetDate": "2025-10-15",
+      "duration": "정보 없음",
+      "details": "악성질환으로 수술적 치료가 필요함."
+    },
+    "diagnoses": [
+      {
+        "code": "C49.6",
+        "nameKr": "연조직육종",
+        "nameEn": "Soft tissue sarcoma",
+        "date": "2025-10-15",
+        "isPrimary": true,
+        "hospital": "강동경희대병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "병리검사",
+        "nameEn": "Pathology examination",
+        "date": "2025-09-30",
+        "result": "Dermatofibrosarcoma protuberans",
+        "finding": "방추형 종양세포가 피부의 진피와 피부밑지방층을 침범",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-09-30",
+      "reportDate": "2025-10-02",
+      "finding": "Dermatofibrosarcoma protuberans",
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": "방추형 종양세포",
+      "margin": "종양세포 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Excision of single benign breast mass (right)",
+        "date": "2025-09-12",
+        "duration": "정보 없음",
+        "details": "3.5cm soft tissue mass excision",
+        "hospital": "동국대학교일산병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "정보 없음",
+      "endDate": "정보 없음",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "정보 없음"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-09-12",
+      "endDate": "2025-09-12",
+      "totalDays": 1,
+      "hospital": "동국대학교일산병원",
+      "department": "외과",
+      "reason": "Rt. breast mass excision"
+    },
+    "pastHistory": [
+      {
+        "condition": "당뇨",
+        "code": null,
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고혈압",
+        "code": null,
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "악성 종양으로 수술적 치료 필요",
+      "prognosis": "정보 없음",
+      "recommendations": "정기적인 추적 관찰 필요",
+      "limitations": "정보 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "김진희 환자는 연조직육종으로 진단됨.",
+      "keyFindings": [
+        "Dermatofibrosarcoma protuberans 진단",
+        "수술적 치료 필요"
+      ],
+      "recommendations": "정기적인 추적 관찰 및 치료 필요"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "caseId": "Case27",
+  "patientName": "박현미",
+  "model": "gpt-4o-mini",
+  "success": true,
+  "ocrResult": {
+    "processingTime": 373046,
+    "textLength": 19095,
+    "pageResults": [
+      {
+        "file": "서울아산병원.pdf",
+        "pageCount": 10,
+        "textLength": 7572
+      },
+      {
+        "file": "이레미즈외과.pdf",
+        "pageCount": 2,
+        "textLength": 901
+      },
+      {
+        "file": "청약 전 검진.pdf",
+        "pageCount": 5,
+        "textLength": 2612
+      },
+      {
+        "file": "휴내과의원.pdf",
+        "pageCount": 10,
+        "textLength": 7926
+      }
+    ],
+    "tokenUsage": 0
+  },
+  "reportResult": {
+    "processingTime": 17536,
+    "reportLength": 876
+  },
+  "totalProcessingTime": 390582,
+  "report": "```\n### 1. 환자 기본정보\n피보험자(환자) 이름: 박현미\n생년월일: 1977-06-08\n\n### 2. 상세 의료 이력 및 분석\n\n#### 1. 서울아산병원\n- 진료일자: 2024-10-23\n  - 진료과: 내분비내과\n- 주소소(Chief Complaint): 갑상선 결절\n  - 현병력: 2024.07 외부병원 건진 갑상선 소결절 검사 상 결절 소견으로 악성여부 확인 필요\n- 평가 및 추정 진단: Thyroid Nodule(갑상선 결절)\n- 치료 계획: US & US guided CNB(Lt, cm)\n\n- 진료일자: 2025-06-26\n  - 진료과: 내분비외과\n- 주소소(Chief Complaint): Thyroid Nodule(갑상선 결절)\n- 과거력: 병력(+) 갑상선암\n- 평가 및 추정 진단: LUP 0.6cm PTC - Lt.hemi\n\n- 진료일자: 2025-09-10\n  - 입원일자: 2025-09-08\n  - 퇴원일자: 2025-09-10\n- 주진단: papillary carcinoma, thyroid gland\n  - 수술 및 시술: thyroid lobectomy and isthmusectomy with central node dissection\n  - 퇴원 상태: 호전됨\n\n#### 2. 이레미즈외과\n- 진료일자: 2024-10-11\n  - 진료과: [미제공]\n- 진단: Rare follicular cells associated with lymphocytic Thyroiditis(갑상선염)\n- FNA(세침흡인검사) 권유받아 내원\n\n#### 3. 청약 전 검진\n- 검진일: 2023-02-22\n- 일반건강검진 결과: 정상A, 정상B(경계)\n- 의심 질환: 고혈압·당뇨병(Diabetes Mellitus) 질환의심\n\n#### 4"
+}

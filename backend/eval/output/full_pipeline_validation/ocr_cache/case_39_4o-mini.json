@@ -1,0 +1,185 @@
+{
+  "caseId": "Case39",
+  "caseNum": 39,
+  "patientName": "장동현",
+  "model": "gpt-4o-mini",
+  "totalPages": 63,
+  "processedAt": "2026-01-25T11:11:47.825Z",
+  "processingTime": 135504,
+  "cost": 0.3402,
+  "usage": {
+    "prompt_tokens": 2321321,
+    "completion_tokens": 769,
+    "total_tokens": 2322090,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "장동현",
+      "birthDate": null,
+      "gender": "남"
+    },
+    "visitDate": {
+      "date": "2024-04-23",
+      "hospital": "명지병원",
+      "department": "심장내과"
+    },
+    "chiefComplaint": {
+      "summary": "가슴 통증",
+      "onsetDate": "2024-04-21",
+      "details": "2일 전부터 가슴부 통증 간헐적으로 있다가 금일 지속되어 내원."
+    },
+    "diagnoses": [
+      {
+        "code": "I21.9",
+        "nameKr": "급성 심근경색증",
+        "date": "2024-04-23",
+        "isPrimary": true,
+        "hospital": "명지병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈액검사",
+        "date": "2024-04-23",
+        "result": "정상",
+        "hospital": "명지병원"
+      },
+      {
+        "name": "심장초음파",
+        "date": "2024-04-23",
+        "result": "EF 47%",
+        "hospital": "명지병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "PCI",
+        "date": "2024-04-23",
+        "hospital": "명지병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Aspirin",
+        "dosage": "100mg",
+        "period": "1일 1회 아침식후"
+      },
+      {
+        "name": "Clopidogrel",
+        "dosage": "75mg",
+        "period": "1일 1회 아침식후"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "명지병원",
+        "admissionDate": "2024-04-23",
+        "dischargeDate": "2024-04-25",
+        "reason": "급성 심근경색증"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "관상동맥 조영술",
+        "date": "2024-04-23",
+        "hospital": "명지병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "예후 양호",
+      "followUpDate": "2024-05-01"
+    },
+    "extractedDates": [
+      {
+        "date": "2024-04-21",
+        "context": "증상 발생일",
+        "type": "증상 발생일"
+      },
+      {
+        "date": "2024-04-23",
+        "context": "내원일",
+        "type": "진료일"
+      },
+      {
+        "date": "2024-04-25",
+        "context": "퇴원일",
+        "type": "퇴원일"
+      },
+      {
+        "date": "2024-05-01",
+        "context": "추적관찰일",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "명지병원"
+    ],
+    "rawTextSummary": "환자는 가슴 통증으로 내원하였으며, 급성 심근경색증 진단 후 PCI 시술을 받음."
+  },
+  "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2016.09.12 (무) 행복100세종합보험1604 가입 NH농협손해보험 \r\n2024.04.23 \r\n[청구사항] \r\n초 진 일 : 2024.04.23 \r\n내원경위 : 가슴 답답한 증상을 주소로 응급실 통해 내원 \r\n진 단 명 : 급성심근경색증(I21.9) \r\n스텐트삽입을동반한경피적심장-동맥확장술상태\r\n(Z95.5) \r\n입원기간 : 2024.04.23 ~ 2024.04.25 / 3일 입원 \r\n치료내용 : 관상동맥중재술 (PCI of culprit lesion in AMI, PTCA \r\n& stent 삽입) \r\n검사결과 : 심혈관 조영술 \r\n: pLAD(좌전하행지 근위부) 90% 협착 \r\n \r\n심근혈액효소검사  \r\nCK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\n \r\nEKG \r\nV1-4 ST 분절 상승 \r\n \r\n명지병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[진단 적정성 확인] \r\n금번 청구병명 진단 적정성 검토 관련 명지병원 의무기록 검토 결과,  \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 받은 것으로 \r\n확인됨.  \r\n \r\n이는 해당 보험 약관상 급성심근경색증의 진단 정의에 부합하는 것으로 판단됨. \r\n근거 동 건 해당 보험 약관  \r\n  \r\n  \r\n  \r\n \r\n \r\n3. 결론 \r\n근거 \r\n[동 건 조사 결과] \r\n금번 청구병명인 '급성심근경색증(I21.9)'은  \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 받은 것으로 \r\n확인됨.  \r\n  \r\n이는 해당 보험 약관상 급성심근경색증의 진단 정의에 부합하는 것으로 판단되는 바, 귀사 \r\n심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n결론 지급 및 계약 유지 \r\n  \r\n  \r\n4. 기타 \r\n심혈관 조영술 : pLAD(좌전하행지 근위부) 90% 협착 \r\n심근혈액효소검사 : CK-MB: 59.6 ng/mL(참고치 : 〈=5ng/mL) \r\nEKG : V1-4 ST 분절 상승 소견 등으로 'STEMI (전중격부, Anteroseptal)' 진단 ",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2024-04-23",
+        "2024-04-25"
+      ],
+      "missed": [
+        "2016-09-12"
+      ],
+      "extra": [
+        "2024-04-21",
+        "2024-05-01"
+      ],
+      "rate": 67
+    },
+    "kcdCodes": {
+      "matched": [
+        "I21.9"
+      ],
+      "missed": [
+        "Z95.5"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "hospitals": {
+      "matched": [
+        "명지병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "examinations": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

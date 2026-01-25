@@ -1,0 +1,97 @@
+{
+  "caseId": "Case24",
+  "caseNum": 24,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2022-08-22",
+      "time": null,
+      "hospital": "강북삼성병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "Known stomach cancer",
+      "onsetDate": null,
+      "duration": null,
+      "details": "Insight (+)"
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "Stomach ca",
+        "date": "2022-08-22",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "EGD 검사",
+        "date": "2018",
+        "result": null,
+        "finding": "Stomach ca 외부 내시경",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Stomach ca 외부 내시경",
+      "testDate": "2022-08-22",
+      "finding": "MB/GC, EGC type IIb, 크기 3 x 3(cm)",
+      "stageTNM": null
+    },
+    "treatments": [],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": null,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "질환력 없음",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": false
+      },
+      {
+        "condition": "수술 및 치료력 없음",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": null,
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2022-08-22",
+      "2018"
+    ],
+    "kcdCodes": [],
+    "hospitals": [
+      "강북삼성병원"
+    ],
+    "examinations": [
+      "EGD 검사"
+    ],
+    "treatments": [],
+    "diagnoses": [
+      "Stomach ca"
+    ]
+  },
+  "timestamp": "2026-01-25T09:43:44.060Z",
+  "cached": true
+}

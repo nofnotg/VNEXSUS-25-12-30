@@ -1,0 +1,157 @@
+{
+  "caseNum": 36,
+  "model": "gpt-4o-mini",
+  "processingTime": 21974,
+  "tokens": {
+    "prompt_tokens": 83420,
+    "completion_tokens": 1193,
+    "total_tokens": 84613,
+    "prompt_tokens_details": {
+      "cached_tokens": 83072,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.013228799999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-19",
+      "time": null,
+      "hospital": "동국대학교일산병원",
+      "department": "비뇨의학과"
+    },
+    "chiefComplaint": {
+      "summary": "Prostate cancer 진단 후 수술을 위해 입원",
+      "referralSource": "운정와이즈병원",
+      "onsetDate": "2025-08-18",
+      "duration": "1일",
+      "details": "PSA 수치 상승으로 인해 전립선암 진단 후 수술을 위해 입원"
+    },
+    "diagnoses": [
+      {
+        "code": "N40.1",
+        "nameKr": "전립선 비대증 - Hyperplasia of prostate with obstruction",
+        "nameEn": "Benign prostatic hyperplasia with obstruction",
+        "date": "2025-08-19",
+        "isPrimary": true,
+        "hospital": "동국대학교일산병원"
+      },
+      {
+        "code": "C61",
+        "nameKr": "전립선암 - Prostate cancer",
+        "nameEn": "Prostate cancer",
+        "date": "2025-08-19",
+        "isPrimary": false,
+        "hospital": "동국대학교일산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PSA 검사",
+        "nameEn": "PSA test",
+        "date": "2025-05-01",
+        "result": "10.1",
+        "finding": "상승",
+        "normalRange": "0-4",
+        "isAbnormal": true
+      },
+      {
+        "name": "MRI 검사",
+        "nameEn": "MRI",
+        "date": "2025-07-10",
+        "result": "pT2a or T3aNxMx, probable ECE",
+        "finding": "Prostate cancer 의심",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직병리검사",
+      "testDate": "2025-08-20",
+      "reportDate": "2025-08-26",
+      "finding": "Benign prostatic glands and stroma, Adenocarcinoma, Gleason score 8(4+4)",
+      "stageTNM": "pT3aN0M0",
+      "stageOverall": "Stage III",
+      "histology": "Adenocarcinoma",
+      "margin": "Involvement of posterior resection margin"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "로봇 보조 전립선 절제술",
+        "date": "2025-08-19",
+        "duration": "1일",
+        "details": "Prostatectomy, radical (robotic) with PLND",
+        "hospital": "동국대학교일산병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-09-01",
+      "endDate": null,
+      "totalVisits": 1,
+      "hospitals": [
+        "운정와이즈병원",
+        "동국대학교일산병원"
+      ],
+      "summary": "외래 진료 후 지속적인 추적 관찰 필요"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-18",
+      "endDate": "2025-08-26",
+      "totalDays": 8,
+      "hospital": "동국대학교일산병원",
+      "department": "비뇨의학과",
+      "reason": "Prostate cancer 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-10-20",
+        "treatment": "약물 치료 중",
+        "currentStatus": "관리 중",
+        "hospital": "운정와이즈병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "담낭염",
+        "code": "K81",
+        "diagnosisDate": "2021-12-21",
+        "treatment": "담낭 절제술",
+        "currentStatus": "수술 후 회복",
+        "hospital": "일산백병원",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 전립선암으로 진단받고 로봇 보조 전립선 절제술을 시행받음.",
+      "prognosis": "양호",
+      "recommendations": "정기적인 PSA 검사 및 외래 진료 필요",
+      "limitations": "무거운 물건 들기 금지"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 전립선암으로 진단받고 수술을 시행받음.",
+      "keyFindings": [
+        "전립선암 진단",
+        "로봇 보조 전립선 절제술 시행"
+      ],
+      "recommendations": "정기적인 추적 관찰 및 관리 필요"
+    }
+  }
+}

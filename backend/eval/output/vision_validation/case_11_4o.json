@@ -1,0 +1,83 @@
+{
+  "caseId": "Case11",
+  "caseNum": 11,
+  "patientName": "허전권",
+  "model": "gpt-4o",
+  "pdfFile": "강북삼성병원.pdf",
+  "imageCount": 3,
+  "processingTime": 15388,
+  "tokens": {
+    "prompt_tokens": 3664,
+    "completion_tokens": 404,
+    "total_tokens": 4068,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.02438,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2023-05-17",
+      "time": null,
+      "hospital": "강북삼성병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "두통",
+      "onsetDate": "2023-04-18",
+      "duration": "지속적",
+      "details": "두부 통증, NRS 3점"
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "뇌진탕",
+        "date": "2023-05-17",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [],
+    "pathology": null,
+    "treatments": [
+      {
+        "type": "관찰",
+        "name": "Observation",
+        "date": "2023-05-17",
+        "duration": null,
+        "details": "두부 통증 지속 관찰"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-05-17",
+      "endDate": "2023-05-17",
+      "totalVisits": 1,
+      "hospitals": [
+        "강북삼성병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "두부외상 수술",
+        "code": null,
+        "diagnosisDate": "1962",
+        "treatment": "수술",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "좌측 immobilization 된 상태",
+      "prognosis": "관찰 필요",
+      "recommendations": "추가 검사 및 관찰"
+    }
+  },
+  "timestamp": "2026-01-25T09:42:03.144Z"
+}

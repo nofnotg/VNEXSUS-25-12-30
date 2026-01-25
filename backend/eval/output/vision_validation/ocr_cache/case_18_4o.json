@@ -1,0 +1,64 @@
+{
+  "caseId": "Case18",
+  "caseNum": 18,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-17",
+      "time": null,
+      "hospital": "한림대학교강남성심병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "현기증",
+      "onsetDate": null,
+      "duration": null,
+      "details": "주증상: 어지럼증, 일어날 때 어지럼증, 도수요법 걷다가 핑 돌면서 쓰러진 적 있다함."
+    },
+    "diagnoses": [
+      {
+        "code": "R42",
+        "nameKr": "현기증 NOS",
+        "date": "2025-02-17",
+        "isPrimary": true,
+        "hospital": "한림대학교강남성심병원"
+      }
+    ],
+    "examinations": [],
+    "pathology": null,
+    "treatments": [],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": "2025-02-17",
+      "totalVisits": 1,
+      "hospitals": [
+        "한림대학교강남성심병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "환자의 검사 및 치료를 위하여 전원",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-02-17"
+    ],
+    "kcdCodes": [
+      "R42"
+    ],
+    "hospitals": [
+      "한림대학교강남성심병원"
+    ],
+    "examinations": [],
+    "treatments": [],
+    "diagnoses": [
+      "현기증 NOS"
+    ]
+  },
+  "timestamp": "2026-01-25T09:43:25.082Z",
+  "cached": true
+}

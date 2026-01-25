@@ -1,0 +1,186 @@
+{
+  "caseId": "Case41",
+  "caseNum": 41,
+  "patientName": "장우진",
+  "model": "gpt-4o-mini",
+  "totalPages": 30,
+  "processedPages": 30,
+  "processedAt": "2026-01-25T11:14:18.394Z",
+  "processingTime": 112289,
+  "cost": 0.162,
+  "usage": {
+    "prompt_tokens": 1105766,
+    "completion_tokens": 669,
+    "total_tokens": 1106435,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "장우진",
+      "birthDate": null,
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2024-04-22",
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "low back pain",
+      "onsetDate": "2024-04-20",
+      "details": "L1 compression fracture"
+    },
+    "diagnoses": [
+      {
+        "code": "M51.1",
+        "nameKr": "요추간판탈출증",
+        "date": "2024-04-22",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI L-Spine",
+        "date": "2024-04-22",
+        "result": "Osteoporotic compression fracture of L2 VB",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Pain control",
+        "date": "2024-04-22",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Pain medication",
+        "dosage": null,
+        "period": null
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "가톨릭대학교 은평성모병원",
+        "admissionDate": "2024-04-22",
+        "dischargeDate": null,
+        "reason": "L1 compression fracture"
+      }
+    ],
+    "surgeries": [],
+    "prognosis": {
+      "summary": "Follow-up required for pain management and recovery.",
+      "followUpDate": "2024-05-06"
+    },
+    "extractedDates": [
+      {
+        "date": "2024-04-20",
+        "context": "Symptoms onset",
+        "type": "증상 발생일"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "Initial visit",
+        "type": "진료일"
+      },
+      {
+        "date": "2024-05-06",
+        "context": "Follow-up date",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "가톨릭대학교 은평성모병원"
+    ],
+    "rawTextSummary": "환자는 2024년 4월 20일에 발생한 요통으로 2024년 4월 22일에 가톨릭대학교 은평성모병원에 내원하였으며, L1 압박 골절 진단을 받았다. 통증 조절을 위한 치료가 필요하며, 추적 관찰이 요구된다."
+  },
+  "groundTruth": "3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 내 용 \r\n피보험자 \r\n직  업 \r\n계약 시 : 전업주부(1급) \r\n사고 시 : 전업주부(1급) \r\n현  재 : 전업주부(1급) \r\n보험가입 \r\n경  위 위험 보장 목적 하 동 보험 가입. \r\n중요사항 \r\n고지여부 동 건 해상 사항 없음.  \r\n피보험자 \r\n면담내용 \r\n2024.04.22 증상역 출구 엘리베이터에서 바닥이 미끄러워 뒤로 넘어지는 사고로 요\r\n추부 수상.  \r\n사고 당시 목격자들은 행인들(지인x)로 119 신고 권유 받았으나 신고 없이 귀가 \r\n후 통증 지속되어 직접 119 신고 후 은평성모병원 응급실 내원하여 시행한 정밀 \r\n검사 상 요추 압박골절로 진단 받고 통원 치료 시행 하였다 주장. \r\n  \r\n  \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상 \r\n2021.05.17 \r\n내 원 일 : 2021.05.17 \r\n진 단 명 : 척추전방전위증, 요추부(M43.16) 등 \r\n입원기간 : 2021.05.17 ~ 2021.05.24 / 8일 입원 \r\n검사결과 : L-spine MRI(2021.05.17) \r\n:Lumbar spondylosis(요추부 척추증) 소견 外 특이사\r\n항 없음. \r\nT-spine MRI(2021.05.20) \r\n:  T-spine scoliosis(흉추부 척추측만증) \r\n \r\n우신향병원 \r\n2024.04.22 \r\n내 원 일 : 2024.04.22 \r\n내원경위 : 2024.04.20 17시경 엘리베이터에서 넘어지며 발생\r\n한 요추부 통증을 주소로 119 통해 내원 \r\n진 단 명 : 압박골절, 허리(S32.090) \r\n통원기간 : 2024.04.22 ~ 2025.07.11 / 5회 통원 \r\n치료내용 : 약물처방 및 보존적 치료 시행 \r\n검사결과 : L-spine X-ray, MRI \r\n: L1 acute compression fx (요추1번 급성 압박골절) \r\n과거병력 : 요추 협착증 \r\n \r\n은평성모병원 \r\n2025.09.22 \r\n[청구사항] \r\n내 원 일 : 2025.09.22 \r\n내원경위 : 후유장해 진단 목적 하 내원 \r\n진 단 명 : L1부위의 골절, 폐쇄성(S32.020) \r\n통원기간 : 2025.09.22 / 1회 통원 \r\n검사결과 : 15도 이상의 전만 변형 소견  \r\n의사소견 : \"척추에 뚜렷한 기형을 남긴 때(지급률 30%)\" \r\n \r\n한림병원 \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 \r\n내원하 시행한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 \r\n치료 시행.  \r\n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때\r\n(지급률 30%)\" 진단 후 관련 보험금 청구함. \r\n직업 \r\n직무 전업주부(1급) \r\n의료자문 금번 청구 건 관련 피보험자 대리인 의료자문 시행 미 동의 의사 표명.  \r\n4. 손해사정결과 \r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n후유장해 적정성 검토  \r\n  \r\n2. 사고경위 \r\n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원하 시행\r\n한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 치료 시행. \r\n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때(지급률 \r\n30%)\" 진단 후 관련 보험금 청구함. \r\n  \r\n3. 알릴의무와 관련하여 \r\n동 건 해당 사항 없음.  \r\n  \r\n4. 금번 청구 관련하여 \r\n피보험자 진술 및 치료병원 의무기록 검토 결과, '2024.04.20 17시경 엘리베이터에서 넘어지는 \r\n사고로 119 통해 내원' 등의 사고경위 및 영상 검사 결과 요추1번 급성 압박골절 소견 등 확\r\n인되어 상해사고 사실에 대한 다툼은 없을 것으로 판단됨.  \r\n \r\n피보험자 금번 상해사고 발생 전 2021.05. 우신향병원 입원하여 시행한 검사 상 흉추부의 척추 \r\n측만증 소견 外 척추전만, 후만증 소견은 없는 것으로 확인됨.  \r\n \r\n금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으로 \r\n확인됨.  \r\n피보험자 및 대리인은 금번 청구 후유장해 적정성 평가를 위한 제3의료기관을 통한 의료자문 \r\n시행에 동의할 수 없다는 주장임.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 현대해상에서 최종 판단해 주시기 바랍니다.",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2024-04-22",
+        "2024-04-20"
+      ],
+      "missed": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-24",
+        "2021-05-20",
+        "2025-07-11",
+        "2025-09-22",
+        "2024-04-24",
+        "2025-09-02",
+        "2025-01-03"
+      ],
+      "extra": [
+        "2024-05-06"
+      ],
+      "rate": 18
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "M43.16",
+        "S32.09",
+        "S32.02",
+        "S32.03"
+      ],
+      "extra": [
+        "M51.1"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "은평성모병원"
+      ],
+      "missed": [
+        "우신향병원",
+        "한림병원",
+        "치료병원",
+        "힘찬병원"
+      ],
+      "extra": [],
+      "rate": 20
+    },
+    "examinations": {
+      "matched": [
+        "MRI"
+      ],
+      "missed": [
+        "X-ray"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료",
+        "치료내용",
+        "치료병원"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}

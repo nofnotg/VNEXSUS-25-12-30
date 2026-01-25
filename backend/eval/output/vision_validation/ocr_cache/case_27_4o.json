@@ -1,0 +1,105 @@
+{
+  "caseId": "Case27",
+  "caseNum": 27,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-23",
+      "time": null,
+      "hospital": "서울아산병원",
+      "department": "내분비내과"
+    },
+    "chiefComplaint": {
+      "summary": "갑상선 결절",
+      "onsetDate": "2024-07",
+      "duration": null,
+      "details": "갑상선 결절 소견으로 악성 여부 확인 필요"
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "Thyroid nodule",
+        "date": "2024-10-23",
+        "isPrimary": true,
+        "hospital": "서울아산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "FNA",
+        "date": "2024-10-07",
+        "result": "Rare follicular cells associated with lymphocytic thyroiditis",
+        "finding": "0.6cm high suspicion nodule with calcification",
+        "isAbnormal": true
+      },
+      {
+        "name": "Thyroid USG",
+        "date": "2024-07-19",
+        "result": "직경 석회동반 경계모 결절 0.61cm, 우엽 저에코 결절 0.43cm",
+        "finding": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "FNA",
+      "testDate": "2024-10-07",
+      "finding": "Rare follicular cells associated with lymphocytic thyroiditis",
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "Procedure",
+        "name": "US & US guided CNB",
+        "date": "2024-10-23",
+        "duration": null,
+        "details": "0.6cm nodule, high suspicion"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-23",
+      "endDate": "2024-10-23",
+      "totalVisits": 1,
+      "hospitals": [
+        "서울아산병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "C/sec",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Thyroid nodule with high suspicion",
+      "prognosis": null,
+      "recommendations": "US & US guided CNB"
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2024-10-23",
+      "2024-10-07",
+      "2024-07-19"
+    ],
+    "kcdCodes": [],
+    "hospitals": [
+      "서울아산병원"
+    ],
+    "examinations": [
+      "FNA",
+      "Thyroid USG"
+    ],
+    "treatments": [
+      "US & US guided CNB"
+    ],
+    "diagnoses": [
+      "Thyroid nodule"
+    ]
+  },
+  "timestamp": "2026-01-25T09:44:13.522Z",
+  "cached": true
+}

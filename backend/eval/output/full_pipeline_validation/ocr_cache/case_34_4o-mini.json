@@ -1,0 +1,212 @@
+{
+  "caseId": "Case34",
+  "caseNum": 34,
+  "patientName": "윤희정",
+  "model": "gpt-4o-mini",
+  "totalPages": 52,
+  "processedAt": "2026-01-25T11:07:16.106Z",
+  "processingTime": 82259,
+  "cost": 0.2808,
+  "usage": {
+    "prompt_tokens": 1916136,
+    "completion_tokens": 814,
+    "total_tokens": 1916950,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "윤희정",
+      "birthDate": "1970-03-24",
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2025-08-10",
+      "hospital": "일산병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "갑상선 암",
+      "onsetDate": "2012-12-05",
+      "details": "갑상선암으로 진단받고 수술 후 경과 관찰 중"
+    },
+    "diagnoses": [
+      {
+        "code": "C73",
+        "nameKr": "갑상선암",
+        "date": "2012-12-05",
+        "isPrimary": true,
+        "hospital": "일산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "목 초음파",
+        "date": "2025-07-18",
+        "result": "종양 재발 없음",
+        "hospital": "일산병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "수술",
+        "date": "2025-08-11",
+        "hospital": "일산병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Synthroid tab",
+        "dosage": "100mcg",
+        "period": "6개월"
+      },
+      {
+        "name": "Alfabone soft cap",
+        "dosage": "0.5mcg",
+        "period": "6개월"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "일산병원",
+        "admissionDate": "2025-08-10",
+        "dischargeDate": "2025-08-14",
+        "reason": "갑상선암으로 인한 수술"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "MRND (Radical Neck Lymphatic Dissection)",
+        "date": "2025-08-11",
+        "hospital": "일산병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "예후 양호, 정기 추적 관찰 필요",
+      "followUpDate": "2025-09-10"
+    },
+    "extractedDates": [
+      {
+        "date": "2012-12-05",
+        "context": "갑상선암 진단일",
+        "type": "진료일"
+      },
+      {
+        "date": "2025-08-10",
+        "context": "입원일",
+        "type": "입원일"
+      },
+      {
+        "date": "2025-08-11",
+        "context": "수술일",
+        "type": "수술일"
+      },
+      {
+        "date": "2025-08-14",
+        "context": "퇴원일",
+        "type": "퇴원일"
+      },
+      {
+        "date": "2025-07-18",
+        "context": "목 초음파 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-09-10",
+        "context": "추적 관찰일",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "일산병원"
+    ],
+    "rawTextSummary": "환자는 갑상선암으로 진단받고 수술을 받았으며, 현재 경과 관찰 중이다. 수술 후 재발 여부를 확인하기 위해 정기적으로 검사를 받고 있다."
+  },
+  "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2017.06.13 \r\n[가입전치료] \r\n내 원 일 : 2017.06.13 \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : d/t thyroid ca, Rt. (T2N0) \r\n통원기간 : 2017.06.13 ~ 2018.02.27 / 3회 통원 \r\n치료내용 : 신지로이드 300일 처방  \r\n \r\n일산병원(외과) \r\n2018.03.29 (무) 간편가입100세시대건강보험(갱신형)[1종:간편심사형] 가입 NH농협손해보험 \r\n2018.04.17 \r\n[가입전치료] \r\n내 원 일 : 2018.04.17  \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : d/t thyroid ca, Rt. (T2N0) \r\n통원기간 : 2018.04.17 ~ 2024.01.19 / 12회 통원 \r\n치료내용 : 약물처방 및 경과관찰  \r\n \r\n일산병원 \r\n2025.06.07 단체상해보험 가입 NH농협손해보험 \r\n2025.06.24 \r\n[청구사항] \r\n내 원 일 : 2025.06.24  \r\n내원경위 : 갑상선암 수술 후 경과관찰 위해 내원 \r\n진 단 명 : 갑상선의 유두상 암종(C73) \r\n경부 림프절로의 전이(C77.0) \r\n입원기간 : 2025.08.10 ~ 2025.08.14 / 5일 입원 \r\n치료내용 : 우측 측경부임파선 곽청술(2025.08.11) \r\n검사결과 : 갑상선 초음파(2025.06.12) \r\ns/p total thyroidectomy(갑상선 전 절제술 후 상태) \r\n우측 경정맥 림프절(Level III) 부위 약 1.7 cm 크기 \r\n종대 (병적 림프절 가능성, FNAB 권고) \r\n수술부위(Op bed)에서 재발 소견 없음 \r\n \r\n조직검사(2025.06.24)(보고일:2025.07.02) \r\npapillary thyroid carcinoma, metastatic \r\n \r\n수술 후 조직검사(2025.08.11)(보고일:2025.08.14) \r\n갑상선 악성종양 (Malignant neoplasm of thyroid \r\ngland) \r\n림프절 전이 (Lymph node metastasis)(2/23) \r\n \r\n일산병원 \r\n  \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[단체상해보험 보상 대상 여부 확인] \r\n2025.06.07 단체상해보험 가입 \r\n2025.07.02 일산병원 조직검사 상 papillary thyroid carcinoma, metastatic 최초 진단 \r\n2025.09.05 단체상해보험 암 보장 개시일 \r\n \r\n단체상해보험에 한하여 금번 청구병명인 '경부 림프절로의 전이(C77.0)'은 암 보장 개시일 \r\n이내 확정 진단 받은 '암'으로 봄이 타당할 것으로 판단됨.  \r\n \r\n[일반암 진단 적정성 여부 확인] \r\n청구병명인 '경부 림프절로의 전이(C77.0)'는 경부 림프절(Level II, III)에서 전이 확인됨. \r\nC77 (Secondary and unspecified malignant neoplasm of lymph nodes, 림프절의 이차성 및 \r\n상세불명 악성 신생물)로 전이 여부 자체를 '악성종양' 진단 근거로 판단됨.  \r\n \r\n[고지의무위반 확인] \r\n심평원 진료내역(2020.09.02 ~ 2024.01.26) 검토 결과, 무)NH베스트간병보험(2024.01.26) 보\r\n험 가입 전 고지의무 위반사항에 해당하는 진료내역 없는 것으로 확인됨.  \r\n근거 동 건 해당 보험 약관 \r\n  \r\n  \r\n3. 결론 \r\n근거 \r\n[동 건 조사 결과] \r\n금번 '경부 림프절로의 전이(C77.0)' 최초 확정 진단일은 2025.07.02로 확인.  \r\n이는 과거 2012년 진단 후 5년 이상 경과 후 확정 진단 받은 암에 해당하며 해당 보험 \r\n기간 중 새롭게 발생한 암으로 해당 보험 약관상 전이암의 경우 원발암 기준으로 분류하고 \r\n있는 바, 귀사 심사 기준에 의거 검토 후 지급 결정 함이 타당할 것으로 판단됨.  \r\n \r\n단체상해보험 암 보장 개시일은 2025.09.05이나 해당 보험 약관상 계약 종료일로부터 14\r\n일 이내 갱신의 경우 암 보장개시일 적용하지 않는 것으로 확인됨.  \r\n \r\n기타 증권 관련 암 진단 적정성 및 기타 고지의무 위반사항에 해당하는 사항은 없는 것으\r\n로 확인되는 바,  \r\n \r\n귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 일부 지급 및 계약 유지 의견 ",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-08-10",
+        "2025-08-14",
+        "2025-08-11"
+      ],
+      "missed": [
+        "2017-06-13",
+        "2018-02-27",
+        "2018-03-29",
+        "2018-04-17",
+        "2024-01-19",
+        "2025-06-07",
+        "2025-06-24",
+        "2025-06-12",
+        "2025-07-02",
+        "2025-09-05",
+        "2020-09-02",
+        "2024-01-26"
+      ],
+      "extra": [
+        "2012-12-05",
+        "2025-07-18",
+        "2025-09-10"
+      ],
+      "rate": 20
+    },
+    "kcdCodes": {
+      "matched": [
+        "C73"
+      ],
+      "missed": [
+        "C77.0",
+        "C77"
+      ],
+      "extra": [],
+      "rate": 33
+    },
+    "hospitals": {
+      "matched": [
+        "일산병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "examinations": {
+      "matched": [
+        "초음파"
+      ],
+      "missed": [
+        "조직검사"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [
+        "수술",
+        "수술부위"
+      ],
+      "missed": [
+        "절제술",
+        "가입전치료",
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 40
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

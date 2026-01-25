@@ -1,0 +1,145 @@
+{
+  "caseNum": 10,
+  "model": "gpt-4o-mini",
+  "processingTime": 20282,
+  "tokens": {
+    "prompt_tokens": 43367,
+    "completion_tokens": 982,
+    "total_tokens": 44349,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.007094249999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-21",
+      "time": null,
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "산부인과"
+    },
+    "chiefComplaint": {
+      "summary": "제왕절개 수술을 위해 입원",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "임신 37주 1일, SGA로 입원"
+    },
+    "diagnoses": [
+      {
+        "code": "O99.89",
+        "nameKr": "기타 임신 관련 질환",
+        "nameEn": "Other specified diseases complicating pregnancy",
+        "date": "2024-10-21",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 은평성모병원"
+      },
+      {
+        "code": "O36.5",
+        "nameKr": "태아 성장 지연",
+        "nameEn": "Fetal growth restriction",
+        "date": "2024-10-21",
+        "isPrimary": false,
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "심전도 검사",
+        "nameEn": "Electrocardiogram",
+        "date": "2024-10-23",
+        "result": "주기적으로 심박수 증가",
+        "finding": "주로 동성 빈맥",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "제왕절개 수술",
+        "date": "2024-10-22",
+        "duration": null,
+        "details": "저위험군 제왕절개",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": null
+    },
+    "admissionPeriod": {
+      "startDate": "2024-10-21",
+      "endDate": "2024-10-29",
+      "totalDays": 8,
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "산부인과",
+      "reason": "제왕절개 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "갑상선 기능 저하증",
+        "code": "E03.9",
+        "diagnosisDate": null,
+        "treatment": "Synthyroxine 복용",
+        "currentStatus": "관리 중",
+        "hospital": "가톨릭대학교 은평성모병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고관절이형성증",
+        "code": null,
+        "diagnosisDate": "2019-2020",
+        "treatment": "수술",
+        "currentStatus": "회복 중",
+        "hospital": "가톨릭대학교 은평성모병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "임신 37주 2일, 제왕절개 후 안정적 상태",
+      "prognosis": "양호",
+      "recommendations": "정기적인 산후 관리",
+      "limitations": "무리한 활동 자제"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "제왕절개 수술 후 안정적 회복",
+      "keyFindings": [
+        "임신 37주 2일, SGA",
+        "심박수 증가"
+      ],
+      "recommendations": "정기적인 산후 관리 및 추적 검사"
+    }
+  }
+}

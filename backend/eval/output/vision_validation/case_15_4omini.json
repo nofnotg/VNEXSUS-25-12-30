@@ -1,0 +1,83 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "model": "gpt-4o-mini",
+  "pdfFile": "더자인병원.pdf",
+  "imageCount": 3,
+  "processingTime": 22308,
+  "tokens": {
+    "prompt_tokens": 110854,
+    "completion_tokens": 358,
+    "total_tokens": 111212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0168429,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "time": null,
+      "hospital": "의료법인자인의료재단더자인병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": null
+    },
+    "diagnoses": [],
+    "examinations": [
+      {
+        "name": "혈액검사",
+        "date": "2025-06-07",
+        "result": "정상",
+        "finding": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "소변검사",
+        "date": "2025-06-07",
+        "result": "정상",
+        "finding": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": null,
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "timestamp": "2026-01-25T09:37:55.173Z"
+}

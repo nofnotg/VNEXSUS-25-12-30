@@ -1,0 +1,172 @@
+{
+  "caseNum": 22,
+  "model": "gpt-4o-mini",
+  "processingTime": 22486,
+  "tokens": {
+    "prompt_tokens": 89911,
+    "completion_tokens": 1275,
+    "total_tokens": 91186,
+    "prompt_tokens_details": {
+      "cached_tokens": 89088,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.01425165,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-11-22",
+      "time": "14:54",
+      "hospital": "응암서울정형외과",
+      "department": "정형외과"
+    },
+    "chiefComplaint": {
+      "summary": "양측 무릎 통증",
+      "referralSource": "null",
+      "onsetDate": "2024-11-01",
+      "duration": "3주",
+      "details": "수년 전부터 아팠는데 최근 3주 전부터 심해짐. 다친 적은 없다."
+    },
+    "diagnoses": [
+      {
+        "code": "M170",
+        "nameKr": "양쪽 원발성 무릎관절증",
+        "nameEn": "Primary osteoarthritis of both knees",
+        "date": "2024-11-22",
+        "isPrimary": true,
+        "hospital": "응암서울정형외과"
+      },
+      {
+        "code": "M6596",
+        "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 무릎관절[양측]",
+        "nameEn": "Other and unspecified synovitis and tenosynovitis, knee joint, bilateral",
+        "date": "2024-11-22",
+        "isPrimary": false,
+        "hospital": "응암서울정형외과"
+      },
+      {
+        "code": "K210",
+        "nameKr": "식도염을 동반한 위식도역류병",
+        "nameEn": "Gastroesophageal reflux disease with esophagitis",
+        "date": "2024-11-22",
+        "isPrimary": false,
+        "hospital": "응암서울정형외과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "X-ray",
+        "nameEn": "X-ray",
+        "date": "2024-11-22",
+        "result": "Both knees show degenerative changes.",
+        "finding": "K-L Grade 3/3",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "정보 없음",
+      "testDate": "null",
+      "reportDate": "null",
+      "finding": "정보 없음",
+      "stageTNM": "정보 없음",
+      "stageOverall": "정보 없음",
+      "histology": "정보 없음",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "양측 무릎 연골주사",
+        "date": "2024-11-22",
+        "duration": "정보 없음",
+        "details": "1차 연골주사 시행",
+        "hospital": "응암서울정형외과"
+      },
+      {
+        "type": "약물",
+        "name": "건초내주사",
+        "date": "2024-11-22",
+        "duration": "정보 없음",
+        "details": "무릎관절에 시행",
+        "hospital": "응암서울정형외과"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-11-22",
+      "endDate": "null",
+      "totalVisits": 1,
+      "hospitals": [
+        "응암서울정형외과"
+      ],
+      "summary": "초진 후 연골주사 시행"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-18",
+      "endDate": "2025-10-02",
+      "totalDays": 45,
+      "hospital": "본서부병원",
+      "department": "정형외과",
+      "reason": "양측 무릎 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "10년 전",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "삼성병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": "4년 전",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "삼성병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "양측 무릎 통증이 심해지고 있으며, 연골주사 치료가 필요함.",
+      "prognosis": "증상 호전 가능성 있음.",
+      "recommendations": "정기적인 외래 방문 및 운동 요법 권장.",
+      "limitations": "무릎에 무리한 하중을 주지 않도록 주의."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "정보 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "양측 무릎 통증으로 연골주사 치료 필요.",
+      "keyFindings": [
+        "양측 무릎 관절증",
+        "상세불명의 윤활막염"
+      ],
+      "recommendations": "정기적인 외래 방문 및 운동 요법 권장."
+    }
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "caseNum": 18,
+  "model": "gpt-4o-mini",
+  "processingTime": 24627,
+  "tokens": {
+    "prompt_tokens": 16735,
+    "completion_tokens": 1267,
+    "total_tokens": 18002,
+    "prompt_tokens_details": {
+      "cached_tokens": 16512,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00327045,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-07-08",
+      "time": null,
+      "hospital": "고려대학교 구로병원",
+      "department": "위장관외과"
+    },
+    "chiefComplaint": {
+      "summary": "고도비만 수술 상담",
+      "referralSource": null,
+      "onsetDate": "2025-05-12",
+      "duration": "2개월",
+      "details": "7~8년 전부터 체중 증가 시작, 큐시미아, 위고비 주사 등에도 체중 감량 치료 실패"
+    },
+    "diagnoses": [
+      {
+        "code": "E66.9",
+        "nameKr": "고도비만",
+        "nameEn": "Morbid obesity",
+        "date": "2025-07-08",
+        "isPrimary": true,
+        "hospital": "고려대학교 구로병원"
+      },
+      {
+        "code": "K80.9",
+        "nameKr": "담낭결석",
+        "nameEn": "Cholelithiasis",
+        "date": "2025-07-08",
+        "isPrimary": false,
+        "hospital": "고려대학교 구로병원"
+      },
+      {
+        "code": "K81.0",
+        "nameKr": "급성 담낭염",
+        "nameEn": "Acute cholecystitis",
+        "date": "2025-07-08",
+        "isPrimary": false,
+        "hospital": "고려대학교 구로병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Abdomen & Pelvis",
+        "nameEn": "CT Abdomen & Pelvis",
+        "date": "2025-06-24",
+        "result": "A few tiny hepatic cysts, Multiple GB stones, A small left renal cyst",
+        "finding": "Diffuse enlargement of the uterus with small nodular lesions",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "Blood Test",
+        "nameEn": "Blood Test",
+        "date": "2025-06-12",
+        "result": "Abnormal blood laboratory finding",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Gallbladder pathology",
+      "testDate": "2025-07-08",
+      "reportDate": "2025-07-11",
+      "finding": "Cholelithiasis, Chronic cholecystitis",
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": "Non-specific mucosal change",
+      "margin": "No"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Laparoscopic sleeve gastrectomy",
+        "date": "2025-07-08",
+        "duration": null,
+        "details": "Morbid obesity, BMI 31 with metabolic disease",
+        "hospital": "고려대학교 구로병원"
+      },
+      {
+        "type": "수술",
+        "name": "Laparoscopic cholecystectomy",
+        "date": "2025-07-08",
+        "duration": null,
+        "details": "Gallbladder, cholecystectomy",
+        "hospital": "고려대학교 구로병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-05-12",
+      "endDate": "2025-07-08",
+      "totalVisits": 5,
+      "hospitals": [
+        "고려대학교 구로병원"
+      ],
+      "summary": "고도비만 및 담낭염 관련 상담 및 검사"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-07-07",
+      "endDate": "2025-07-08",
+      "totalDays": 1,
+      "hospital": "고려대학교 구로병원",
+      "department": "위장관외과",
+      "reason": "수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2019-07-05",
+        "treatment": "약물 치료",
+        "currentStatus": "조절됨",
+        "hospital": "고려대학교 구로병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨 전단계",
+        "code": "R73.0",
+        "diagnosisDate": "2019-07-05",
+        "treatment": "식이요법 및 운동",
+        "currentStatus": "관리 필요",
+        "hospital": "고려대학교 구로병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "고도비만으로 인한 수술 필요",
+      "prognosis": "수술 후 체중 감소 기대",
+      "recommendations": "정기적인 체중 관리 및 추적 검사",
+      "limitations": "수술 후 일상생활 제한 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "고도비만 및 담낭염으로 인한 수술 진행",
+      "keyFindings": [
+        "고도비만 진단",
+        "담낭결석 발견"
+      ],
+      "recommendations": "수술 후 지속적인 관리 필요"
+    }
+  }
+}

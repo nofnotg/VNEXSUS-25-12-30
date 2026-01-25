@@ -1,0 +1,153 @@
+{
+  "caseNum": 11,
+  "model": "gpt-4o-mini",
+  "processingTime": 27543,
+  "tokens": {
+    "prompt_tokens": 102704,
+    "completion_tokens": 1085,
+    "total_tokens": 103789,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016056599999999997,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-01-21",
+      "time": "16:30",
+      "hospital": "강북삼성병원",
+      "department": "소화기내과"
+    },
+    "chiefComplaint": {
+      "summary": "담낭의 악성 신생물",
+      "referralSource": "삼성서울병원",
+      "onsetDate": "2024-11-18",
+      "duration": "2개월",
+      "details": "담낭암 진단 후 조직검사 및 치료를 위해 입원"
+    },
+    "diagnoses": [
+      {
+        "code": "C23",
+        "nameKr": "담낭암",
+        "nameEn": "Malignant neoplasm of gallbladder",
+        "date": "2024-11-18",
+        "isPrimary": true,
+        "hospital": "삼성서울병원"
+      },
+      {
+        "code": "C78.7",
+        "nameKr": "간 전이",
+        "nameEn": "Secondary malignant neoplasm of liver",
+        "date": "2024-11-18",
+        "isPrimary": false,
+        "hospital": "삼성서울병원"
+      },
+      {
+        "code": "C79.51",
+        "nameKr": "뼈 전이",
+        "nameEn": "Secondary malignant neoplasm of bone",
+        "date": "2024-11-18",
+        "isPrimary": false,
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PET CT",
+        "nameEn": "Positron Emission Tomography",
+        "date": "2024-10-25",
+        "result": "GB cancer with multiple lymph nodes and hepatic metastasis",
+        "finding": "Increased FDG uptake in liver and lymph nodes",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "Computed Tomography of Abdomen",
+        "date": "2024-10-12",
+        "result": "Increased extent of GB cancer and liver metastasis",
+        "finding": "Multiple metastatic lesions in liver",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2024-12-26",
+      "reportDate": "2024-12-30",
+      "finding": "Adenocarcinoma, moderately differentiated",
+      "stageTNM": "정보 없음",
+      "stageOverall": "정보 없음",
+      "histology": "Adenocarcinoma",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Chemotherapy",
+        "date": "2025-01-08",
+        "duration": "정보 없음",
+        "details": "Palliative chemotherapy regimen: GP",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "정보 없음",
+      "endDate": "정보 없음",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "정보 없음"
+    },
+    "admissionPeriod": {
+      "startDate": "2024-12-23",
+      "endDate": "2024-12-27",
+      "totalDays": 5,
+      "hospital": "삼성서울병원",
+      "department": "소화기내과",
+      "reason": "Gallbladder cancer diagnosis and treatment"
+    },
+    "pastHistory": [
+      {
+        "condition": "간염",
+        "code": "B18.2",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "보균자",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 담낭암으로 진단받았으며, 간 전이 및 뼈 전이가 확인됨.",
+      "prognosis": "예후 불량",
+      "recommendations": "지속적인 항암 치료 필요",
+      "limitations": "일상생활 제한"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "정보 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "허전권 환자는 담낭암으로 진단받고 치료를 받고 있음.",
+      "keyFindings": [
+        "담낭암 진단",
+        "간 및 뼈 전이 확인"
+      ],
+      "recommendations": "지속적인 치료 및 관리 필요"
+    }
+  }
+}

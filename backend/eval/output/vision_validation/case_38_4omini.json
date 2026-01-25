@@ -1,0 +1,93 @@
+{
+  "caseId": "Case38",
+  "caseNum": 38,
+  "patientName": "이영희",
+  "model": "gpt-4o-mini",
+  "pdfFile": "간호정보.pdf",
+  "imageCount": 3,
+  "processingTime": 16903,
+  "tokens": {
+    "prompt_tokens": 110854,
+    "completion_tokens": 499,
+    "total_tokens": 111353,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016927499999999998,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-03",
+      "time": null,
+      "hospital": "이대목동병원",
+      "department": "외래"
+    },
+    "chiefComplaint": {
+      "summary": "Myoama of uterus / Lt.breast ca",
+      "onsetDate": null,
+      "duration": null,
+      "details": "복장 내 mass 소견 하 baseline study 위해 입원함."
+    },
+    "diagnoses": [
+      {
+        "code": "D25.9",
+        "nameKr": "자궁근종",
+        "date": "2025-08-03",
+        "isPrimary": true,
+        "hospital": "이대목동병원"
+      },
+      {
+        "code": "C50.9",
+        "nameKr": "유방암",
+        "date": "2025-08-03",
+        "isPrimary": false,
+        "hospital": "이대목동병원"
+      }
+    ],
+    "examinations": [],
+    "pathology": {
+      "testName": "Myoama of uterus / Lt.breast ca",
+      "testDate": "2025-08-03",
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "Medication",
+        "name": "Centrix silver advance 1T QD",
+        "date": "2025-08-03",
+        "duration": null,
+        "details": "d/t breast ca"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2015-04-01",
+      "endDate": "2015-09-15",
+      "totalVisits": 10,
+      "hospitals": [
+        "이대목동병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-03",
+      "endDate": null,
+      "totalDays": null,
+      "hospital": "이대목동병원",
+      "reason": "baseline study"
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "입원 필요",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "timestamp": "2026-01-25T09:39:37.479Z"
+}

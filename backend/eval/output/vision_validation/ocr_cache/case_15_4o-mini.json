@@ -1,0 +1,79 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "time": null,
+      "hospital": "의료법인자인의료재단더자인병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": null
+    },
+    "diagnoses": [],
+    "examinations": [
+      {
+        "name": "혈액검사",
+        "date": "2025-06-07",
+        "result": "정상",
+        "finding": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "소변검사",
+        "date": "2025-06-07",
+        "result": "정상",
+        "finding": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": null,
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-06-07"
+    ],
+    "kcdCodes": [],
+    "hospitals": [
+      "의료법인자인의료재단더자인병원"
+    ],
+    "examinations": [
+      "혈액검사",
+      "소변검사"
+    ],
+    "treatments": [],
+    "diagnoses": []
+  },
+  "timestamp": "2026-01-25T09:37:55.173Z",
+  "cached": true
+}

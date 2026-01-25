@@ -1,0 +1,265 @@
+{
+  "summary": {
+    "totalComparisons": 10,
+    "gpt-4o-mini": {
+      "avgTime": 13006.1,
+      "avgCost": 0.016251974999999995,
+      "totalCost": 0.16251974999999996,
+      "avgStructure": 74,
+      "avgKCDMatch": 5,
+      "efficiency": 4553.292753649943
+    },
+    "gpt-4o": {
+      "avgTime": 18043.7,
+      "avgCost": 0.0247665,
+      "totalCost": 0.247665,
+      "avgStructure": 73,
+      "avgKCDMatch": 15,
+      "efficiency": 2947.5299295419213
+    },
+    "costRatio": 1.5239070943685311,
+    "winner": "gpt-4o-mini"
+  },
+  "comparisons": [
+    {
+      "caseId": "Case11",
+      "caseNum": 11,
+      "patientName": "허전권",
+      "mini": {
+        "processingTime": 13353,
+        "cost": 0.0169017,
+        "structure": 95,
+        "kcdMatch": 0,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "full": {
+        "processingTime": 15388,
+        "cost": 0.02438,
+        "structure": 75,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 1
+      }
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "mini": {
+        "processingTime": 6872,
+        "cost": 0.01667985,
+        "structure": 50,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 4
+      },
+      "full": {
+        "processingTime": 6456,
+        "cost": 0.0194,
+        "structure": 20,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 0
+      },
+      "groundTruth": {
+        "kcdCount": 2
+      }
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "mini": {
+        "processingTime": 22308,
+        "cost": 0.0168429,
+        "structure": 85,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 0
+      },
+      "full": {
+        "processingTime": 25869,
+        "cost": 0.027995,
+        "structure": 70,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 2
+      },
+      "groundTruth": {
+        "kcdCount": 2
+      }
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "mini": {
+        "processingTime": 11370,
+        "cost": 0.016717649999999997,
+        "structure": 60,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 2
+      },
+      "full": {
+        "processingTime": 24060,
+        "cost": 0.02837,
+        "structure": 80,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 2
+      },
+      "groundTruth": {
+        "kcdCount": 2
+      }
+    },
+    {
+      "caseId": "Case18",
+      "caseNum": 18,
+      "patientName": "김명희",
+      "mini": {
+        "processingTime": 12788,
+        "cost": 0.0168009,
+        "structure": 65,
+        "kcdMatch": 0,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "full": {
+        "processingTime": 13504,
+        "cost": 0.02309,
+        "structure": 65,
+        "kcdMatch": 0,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 2
+      }
+    },
+    {
+      "caseId": "Case24",
+      "caseNum": 24,
+      "patientName": "김종렬",
+      "mini": {
+        "processingTime": 8302,
+        "cost": 0.016721849999999996,
+        "structure": 60,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 2
+      },
+      "full": {
+        "processingTime": 15963,
+        "cost": 0.025564999999999997,
+        "structure": 95,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 1
+      }
+    },
+    {
+      "caseId": "Case27",
+      "caseNum": 27,
+      "patientName": "박현미",
+      "mini": {
+        "processingTime": 8955,
+        "cost": 0.016690049999999998,
+        "structure": 50,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 30
+      },
+      "full": {
+        "processingTime": 26446,
+        "cost": 0.027245,
+        "structure": 90,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 1
+      }
+    },
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "mini": {
+        "processingTime": 22170,
+        "cost": 0.016927499999999998,
+        "structure": 100,
+        "kcdMatch": 50,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "full": {
+        "processingTime": 19175,
+        "cost": 0.026465,
+        "structure": 80,
+        "kcdMatch": 50,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 2
+      }
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "mini": {
+        "processingTime": 8171,
+        "cost": 0.01125465,
+        "structure": 80,
+        "kcdMatch": 0,
+        "kcdCount": 0,
+        "diagnosisCount": 0
+      },
+      "full": {
+        "processingTime": 12158,
+        "cost": 0.01734,
+        "structure": 65,
+        "kcdMatch": 33,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "groundTruth": {
+        "kcdCount": 3
+      }
+    },
+    {
+      "caseId": "Case9",
+      "caseNum": 9,
+      "patientName": "임승희",
+      "mini": {
+        "processingTime": 15772,
+        "cost": 0.0169827,
+        "structure": 95,
+        "kcdMatch": 0,
+        "kcdCount": 1,
+        "diagnosisCount": 1
+      },
+      "full": {
+        "processingTime": 21418,
+        "cost": 0.027815,
+        "structure": 85,
+        "kcdMatch": 67,
+        "kcdCount": 2,
+        "diagnosisCount": 2
+      },
+      "groundTruth": {
+        "kcdCount": 3
+      }
+    }
+  ]
+}

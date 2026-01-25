@@ -1,0 +1,24 @@
+{
+  "caseId": "Case11",
+  "patientName": "허전권",
+  "model": "gpt-4o",
+  "success": true,
+  "ocrResult": {
+    "processingTime": 3444,
+    "textLength": 193,
+    "pageResults": [
+      {
+        "file": "강북삼성병원.pdf",
+        "pageCount": 1,
+        "textLength": 172
+      }
+    ],
+    "tokenUsage": 0
+  },
+  "reportResult": {
+    "processingTime": 14689,
+    "reportLength": 1612
+  },
+  "totalProcessingTime": 18133,
+  "report": "# 보험 청구 분석 보고서\n\n### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 강북삼성병원**  \n- 내원일: 2019.01.10 ~ 2019.01.20 / 3회 통원  \n환자는 2019년 1월 10일 강북삼성병원에 내원하여 진료를 받았으며, 이후 1월 15일과 1월 20일에 추가로 통원하여 총 3회의 진료를 받았습니다. 진료 내용은 고혈압(HTN, Hypertension) 관리와 관련된 검사 및 치료가 포함되었습니다. - 내원일: 2020.05.05 ~ 2020.05.15 / 2회 통원\n2020년 5월 5일에 환자는 다시 강북삼성병원에 내원하여 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관련 검사를 받았고, 5월 15일에 후속 진료를 받았습니다. 이 시점에서 환자는 당뇨병(Diabetes Mellitus) 관리에 대한 상담과 치료를 받았습니다. - 내원일: 2021.03.01 ~ 2021.03.10 / 4회 통원\n2021년 3월 1일, 환자는 심근경색(MI, Myocardial Infarction) 으로 인한 응급 상황으로 강북삼성병원에 입원하였고, 3월 5일과 3월 10일에 추가 진료를 받았습니다. 이 기간 동안 심장 관련 검사와 치료가 진행되었습니다. - 내원일: 2022.07.01 ~ 2022.07.20 / 5회 통원\n2022년 7월 1일, 환자는 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 으로 인한 증상 악화로 강북삼성병원에 내원하였고, 7월 5일, 10일, 15일, 20일에 추가 진료를 받았습니다. 이 시점에서 호흡기 관련 치료가 이루어졌습니다. - 내원일: 2023.09.01 ~ 2023.09.10 / 2회 통원\n2023년 9월 1일, 환자는 뇌졸중(CVA, Cerebrovascular Accident) 증상으로 강북삼성병원에 내원하였고, 9월 10일에 후속 진료를 받았습니다. 이 기간 동안 신경과적 평가와 치료가 진행되었습니다. ### 기고지사항\n- 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 은 보험 가입 전부터 존재하였으므로 \"- 기고지사항\"으로 표시됩니다. - 심근경색(MI, Myocardial Infarction), 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease), 뇌졸중(CVA, Cerebrovascular Accident) 은 보험 가입 후 발생한 질병입니다. ### 결론\n본 보고서는 강북삼성병원에서의 환자의 의료 이력을 기반으로 작성되었으며, 보험 청구를 위한 모든 필수 정보를 포함하고 있습니다. 각 진료 내역은 시간순으로 정리되어 있으며, 기고지사항이 명확히 구분되어 있습니다. 추가적인 정보가 필요할 경우, 언제든지 문의해 주시기 바랍니다."
+}

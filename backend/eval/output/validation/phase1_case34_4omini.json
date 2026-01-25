@@ -1,0 +1,145 @@
+{
+  "caseNum": 34,
+  "model": "gpt-4o-mini",
+  "processingTime": 23558,
+  "tokens": {
+    "prompt_tokens": 28319,
+    "completion_tokens": 1016,
+    "total_tokens": 29335,
+    "prompt_tokens_details": {
+      "cached_tokens": 27648,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.004857449999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 33,
+    "overallScore": 60
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-10",
+      "time": "15:10",
+      "hospital": "일산병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "thyroid cancer",
+      "referralSource": null,
+      "onsetDate": "2025-08-10",
+      "duration": "정보 없음",
+      "details": "상기 과거력 있는 분으로 추적 중 level II LN mets 소견으로 Rt. RND 위해 입원함."
+    },
+    "diagnoses": [
+      {
+        "code": "C73",
+        "nameKr": "갑상선암",
+        "nameEn": "Thyroid cancer",
+        "date": "2025-08-10",
+        "isPrimary": true,
+        "hospital": "일산병원"
+      },
+      {
+        "code": "C77.1",
+        "nameKr": "경부 림프절 전이",
+        "nameEn": "Metastasis to cervical lymph node",
+        "date": "2025-08-10",
+        "isPrimary": false,
+        "hospital": "일산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Neck CT",
+        "nameEn": "Neck CT",
+        "date": "2025-08-11",
+        "result": "S/P total thyroidectomy and no evidence of tumor recurrence.",
+        "finding": "Two reactive LNs, both neck level 2a.",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "Thyroglobulin Ag",
+        "nameEn": "Thyroglobulin Ag",
+        "date": "2025-07-01",
+        "result": "> 500.0 ng/mL",
+        "finding": "Positive for malignancy",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직병리검사",
+      "testDate": "2025-08-14",
+      "reportDate": "2025-08-14",
+      "finding": "Metastasis in 1 out of 23 lymph nodes",
+      "stageTNM": "pT2N0",
+      "stageOverall": "정보 없음",
+      "histology": "Papillary thyroid carcinoma",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "MRND (Modified Radical Neck Node Dissection)",
+        "date": "2025-08-11",
+        "duration": "정보 없음",
+        "details": "Right side neck lymphatic dissection",
+        "hospital": "일산병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "정보 없음",
+      "endDate": "정보 없음",
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": "정보 없음"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-10",
+      "endDate": "2025-08-14",
+      "totalDays": 4,
+      "hospital": "일산병원",
+      "department": "외과",
+      "reason": "thyroid cancer"
+    },
+    "pastHistory": [
+      {
+        "condition": "갑상선암",
+        "code": "C73",
+        "diagnosisDate": "2012-12-05",
+        "treatment": "Radical OP of Malignant Thyroid Tumor",
+        "currentStatus": "정보 없음",
+        "hospital": "일산병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 갑상선암으로 수술 후 경과 관찰 필요.",
+      "prognosis": "정보 없음",
+      "recommendations": "정기적인 추적 검사 필요.",
+      "limitations": "일상생활 제한 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 갑상선암으로 수술 후 경과 관찰 중.",
+      "keyFindings": [
+        "갑상선암 진단",
+        "경부 림프절 전이 확인"
+      ],
+      "recommendations": "정기적인 추적 검사 및 치료 필요."
+    }
+  }
+}

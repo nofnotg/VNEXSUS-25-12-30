@@ -1,0 +1,164 @@
+{
+  "caseNum": 8,
+  "model": "gpt-4o-mini",
+  "processingTime": 24589,
+  "tokens": {
+    "prompt_tokens": 80552,
+    "completion_tokens": 1221,
+    "total_tokens": 81773,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0128154,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-03-19",
+      "time": "13:27",
+      "hospital": "세브란스병원",
+      "department": "심장내과"
+    },
+    "chiefComplaint": {
+      "summary": "뇌혈관 질환으로 인한 입원 및 치료",
+      "referralSource": "세브란스병원",
+      "onsetDate": "2024-12-11",
+      "duration": "3개월",
+      "details": "뇌검사 후 입원"
+    },
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "뇌경색 - 뇌경색",
+        "nameEn": "Cerebral infarction",
+        "date": "2025-03-19",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E11.9",
+        "nameKr": "당뇨병 - 당뇨병, 합병증 없음",
+        "nameEn": "Diabetes Mellitus, unspecified",
+        "date": "2025-03-19",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I25.10",
+        "nameKr": "관상동맥질환 - 관상동맥질환, 비지속적",
+        "nameEn": "Coronary Artery Disease, unspecified",
+        "date": "2025-03-19",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "ABI 검사",
+        "nameEn": "Ankle-Brachial Index Test",
+        "date": "2025-03-19",
+        "result": "0.81 / 0.79",
+        "finding": "정상",
+        "normalRange": "0.90 이상",
+        "isAbnormal": true
+      },
+      {
+        "name": "혈액 검사",
+        "nameEn": "Blood Test",
+        "date": "2025-03-19",
+        "result": "Glucose 134, HbA1c 7.2",
+        "finding": "당뇨병 관리 필요",
+        "normalRange": "Glucose < 100, HbA1c < 6.5",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "아스피린, 플래리스",
+        "date": "2025-03-19",
+        "duration": "지속적",
+        "details": "심장질환 예방을 위한 약물 치료",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-01",
+      "endDate": "2025-03-19",
+      "totalVisits": 5,
+      "hospitals": [
+        "세브란스병원"
+      ],
+      "summary": "정기적인 외래 진료 및 검사"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-03-19",
+      "endDate": "2025-03-26",
+      "totalDays": 7,
+      "hospital": "세브란스병원",
+      "department": "신경과",
+      "reason": "뇌혈관 질환 치료"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2018-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "세브란스병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "2012-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "세브란스병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 뇌혈관 질환으로 인한 입원 치료가 필요하며, 지속적인 관리가 요구됨.",
+      "prognosis": "양호하나 지속적인 관리 필요",
+      "recommendations": "정기적인 외래 진료 및 혈당 관리",
+      "limitations": "일상생활에서의 과도한 스트레스 및 운동 제한"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 뇌혈관 질환으로 인한 입원 치료가 필요하며, 지속적인 관리가 요구됨.",
+      "keyFindings": [
+        "뇌경색 진단",
+        "당뇨병 관리 필요"
+      ],
+      "recommendations": "정기적인 외래 진료 및 혈당 관리"
+    }
+  }
+}

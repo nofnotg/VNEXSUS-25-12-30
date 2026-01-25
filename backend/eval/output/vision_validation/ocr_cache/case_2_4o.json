@@ -1,0 +1,108 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "model": "gpt-4o",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2019-03-23",
+      "time": "11:06:34",
+      "hospital": "SM영상의학과의원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "Epigastric discomfort and pain",
+      "onsetDate": null,
+      "duration": null,
+      "details": "For evaluation of liver mass"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2019-03-23",
+        "isPrimary": true,
+        "hospital": "SM영상의학과의원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Abdomen Angiography, Phase 3",
+        "date": "2019-03-23",
+        "result": null,
+        "finding": null,
+        "isAbnormal": null
+      },
+      {
+        "name": "Dynamic 5yudCT",
+        "date": "2019-03-23",
+        "result": null,
+        "finding": null,
+        "isAbnormal": null
+      }
+    ],
+    "pathology": null,
+    "treatments": [
+      {
+        "type": "방사선",
+        "name": "선량니패주350ml",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": "0.26"
+      },
+      {
+        "type": "방사선",
+        "name": "선타바란",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2019-03-23",
+      "endDate": "2019-03-23",
+      "totalVisits": 1,
+      "hospitals": [
+        "SM영상의학과의원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "Appendectomy state",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "No DM, no HBP",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2019-03-23"
+    ],
+    "kcdCodes": [
+      "D18.02"
+    ],
+    "hospitals": [
+      "SM영상의학과의원"
+    ],
+    "examinations": [
+      "Abdomen Angiography, Phase 3",
+      "Dynamic 5yudCT"
+    ],
+    "treatments": [
+      "선량니패주350ml",
+      "선타바란"
+    ],
+    "diagnoses": [
+      "간담도계의 혈관종"
+    ]
+  },
+  "timestamp": "2026-01-25T09:41:05.153Z",
+  "cached": true
+}

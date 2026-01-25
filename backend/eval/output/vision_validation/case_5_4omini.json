@@ -1,0 +1,68 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "model": "gpt-4o-mini",
+  "pdfFile": "굿웰스의원.pdf",
+  "imageCount": 2,
+  "processingTime": 8171,
+  "tokens": {
+    "prompt_tokens": 74019,
+    "completion_tokens": 253,
+    "total_tokens": 74272,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.01125465,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-12-12",
+      "time": null,
+      "hospital": "굿윌스의원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": null
+    },
+    "diagnoses": [],
+    "examinations": [],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": null,
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "timestamp": "2026-01-25T09:36:49.674Z"
+}

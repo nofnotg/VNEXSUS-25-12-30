@@ -1,0 +1,96 @@
+{
+  "caseId": "Case38",
+  "caseNum": 38,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-03",
+      "time": null,
+      "hospital": "이대목동병원",
+      "department": "외래"
+    },
+    "chiefComplaint": {
+      "summary": "Myoama of uterus / Lt.breast ca",
+      "onsetDate": null,
+      "duration": null,
+      "details": "복장 내 mass 소견 하 baseline study 위해 입원함."
+    },
+    "diagnoses": [
+      {
+        "code": "D25.9",
+        "nameKr": "자궁근종",
+        "date": "2025-08-03",
+        "isPrimary": true,
+        "hospital": "이대목동병원"
+      },
+      {
+        "code": "C50.9",
+        "nameKr": "유방암",
+        "date": "2025-08-03",
+        "isPrimary": false,
+        "hospital": "이대목동병원"
+      }
+    ],
+    "examinations": [],
+    "pathology": {
+      "testName": "Myoama of uterus / Lt.breast ca",
+      "testDate": "2025-08-03",
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "Medication",
+        "name": "Centrix silver advance 1T QD",
+        "date": "2025-08-03",
+        "duration": null,
+        "details": "d/t breast ca"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2015-04-01",
+      "endDate": "2015-09-15",
+      "totalVisits": 10,
+      "hospitals": [
+        "이대목동병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-03",
+      "endDate": null,
+      "totalDays": null,
+      "hospital": "이대목동병원",
+      "reason": "baseline study"
+    },
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "입원 필요",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-08-03",
+      "2015-04-01",
+      "2015-09-15"
+    ],
+    "kcdCodes": [
+      "D25.9",
+      "C50.9"
+    ],
+    "hospitals": [
+      "이대목동병원"
+    ],
+    "examinations": [],
+    "treatments": [
+      "Centrix silver advance 1T QD"
+    ],
+    "diagnoses": [
+      "자궁근종",
+      "유방암"
+    ]
+  },
+  "timestamp": "2026-01-25T09:39:37.479Z",
+  "cached": true
+}

@@ -1,0 +1,102 @@
+{
+  "caseId": "Case44",
+  "caseNum": 44,
+  "patientName": "최순곤",
+  "model": "gpt-4o-mini",
+  "pdfFile": "김안과병원.pdf",
+  "imageCount": 3,
+  "processingTime": 17827,
+  "tokens": {
+    "prompt_tokens": 110854,
+    "completion_tokens": 536,
+    "total_tokens": 111390,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016949699999999998,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-01-31",
+      "time": "09:25",
+      "hospital": "김안과병원",
+      "department": "안과"
+    },
+    "chiefComplaint": {
+      "summary": "양안 안보임",
+      "onsetDate": "2024-01-31",
+      "duration": "5-6개월",
+      "details": "양안 백내장 관련"
+    },
+    "diagnoses": [
+      {
+        "code": "H25.9",
+        "nameKr": "노인성 백내장",
+        "date": "2024-01-31",
+        "isPrimary": true,
+        "hospital": "김안과병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "안과 검사",
+        "date": "2024-01-31",
+        "result": "정상",
+        "finding": "백내장",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "백내장 수술",
+        "date": "2024-01-31",
+        "duration": "1일",
+        "details": "양안 백내장 수술 필요"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-01-31",
+      "endDate": "2025-09-19",
+      "totalVisits": 5,
+      "hospitals": [
+        "김안과병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2018-12-18",
+        "treatment": "약물 치료",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "양안 백내장으로 수술 필요",
+      "prognosis": "양호",
+      "recommendations": "정기적인 검진 필요"
+    }
+  },
+  "timestamp": "2026-01-25T09:40:43.966Z"
+}

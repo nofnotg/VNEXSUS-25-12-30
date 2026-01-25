@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS Vision LLM 비교 분석 보고서</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { text-align: center; color: white; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+    .summary-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); text-align: center; }
+    .summary-card h3 { color: #666; font-size: 13px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .summary-card .value { font-size: 36px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .summary-card .subvalue { font-size: 13px; color: #888; margin-top: 5px; }
+    .model-compare { background: white; border-radius: 16px; padding: 30px; margin-bottom: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+    .model-compare h2 { color: #333; margin-bottom: 25px; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+    .model-compare h2::before { content: ''; width: 5px; height: 28px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 3px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #f8f9fa; color: #555; font-weight: 600; font-size: 13px; text-transform: uppercase; }
+    tr:hover { background: #fafafa; }
+    .badge { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+    .winner-badge { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+    .recommendation { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; border-radius: 16px; padding: 30px; margin-top: 30px; }
+    .recommendation h2 { margin-bottom: 20px; font-size: 22px; }
+    .recommendation ul { margin-left: 25px; }
+    .recommendation li { margin-bottom: 10px; font-size: 15px; }
+    .case-table { margin-top: 30px; }
+    .cost-diff { font-weight: bold; }
+    .cost-diff.positive { color: #ef4444; }
+    .cost-diff.negative { color: #10b981; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔬 Vision LLM 비교 분석 보고서</h1>
+    <p style="text-align:center;color:rgba(255,255,255,0.9);margin-bottom:30px;">PDF → Vision OCR → 보고서 생성 End-to-End 검증 결과</p>
+    
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h3>분석 케이스</h3>
+        <div class="value">10</div>
+        <div class="subvalue">공통 검증 케이스</div>
+      </div>
+      <div class="summary-card">
+        <h3>비용 차이</h3>
+        <div class="value">1.5x</div>
+        <div class="subvalue">gpt-4o가 더 비쌈</div>
+      </div>
+      <div class="summary-card">
+        <h3>총 비용</h3>
+        <div class="value">$0.41</div>
+        <div class="subvalue">mini: $0.16 / 4o: $0.25</div>
+      </div>
+      <div class="summary-card">
+        <h3>추천 모델</h3>
+        <div class="value" style="font-size:24px;">gpt-4o-mini</div>
+        <div class="subvalue">비용 대비 품질 최적</div>
+      </div>
+    </div>
+    
+    <div class="model-compare">
+      <h2>모델별 성능 비교</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>평균 처리 시간</th>
+            <th>평균 비용</th>
+            <th>구조 완성도</th>
+            <th>KCD 매칭률</th>
+            <th>비용 효율성</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>gpt-4o-mini</strong> <span class="winner-badge">추천</span></td>
+            <td>13.0초</td>
+            <td>$0.0163</td>
+            <td><span class="badge badge-success">74%</span></td>
+            <td><span class="badge badge-danger">5%</span></td>
+            <td><span class="badge badge-info">4553 점/$</span></td>
+          </tr>
+          <tr>
+            <td><strong>gpt-4o</strong> </td>
+            <td>18.0초</td>
+            <td>$0.0248</td>
+            <td><span class="badge badge-success">73%</span></td>
+            <td><span class="badge badge-danger">15%</span></td>
+            <td><span class="badge badge-info">2948 점/$</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="model-compare case-table">
+      <h2>케이스별 상세 비교</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>케이스</th>
+            <th>피보험자</th>
+            <th>gpt-4o-mini 구조</th>
+            <th>gpt-4o 구조</th>
+            <th>gpt-4o-mini KCD</th>
+            <th>gpt-4o KCD</th>
+            <th>비용 차이</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td><strong>Case11</strong></td>
+              <td>허전권</td>
+              <td><span class="badge badge-success">95%</span></td>
+              <td><span class="badge badge-success">75%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0075</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case13</strong></td>
+              <td>김인화</td>
+              <td><span class="badge badge-warning">50%</span></td>
+              <td><span class="badge badge-danger">20%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0027</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case15</strong></td>
+              <td>고영란</td>
+              <td><span class="badge badge-success">85%</span></td>
+              <td><span class="badge badge-success">70%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0112</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case17</strong></td>
+              <td>김동아</td>
+              <td><span class="badge badge-warning">60%</span></td>
+              <td><span class="badge badge-success">80%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0117</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case18</strong></td>
+              <td>김명희</td>
+              <td><span class="badge badge-warning">65%</span></td>
+              <td><span class="badge badge-warning">65%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0063</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case24</strong></td>
+              <td>김종렬</td>
+              <td><span class="badge badge-warning">60%</span></td>
+              <td><span class="badge badge-success">95%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0088</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case27</strong></td>
+              <td>박현미</td>
+              <td><span class="badge badge-warning">50%</span></td>
+              <td><span class="badge badge-success">90%</span></td>
+              <td>0%</td>
+              <td>0%</td>
+              <td class="cost-diff positive">+$0.0106</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case2</strong></td>
+              <td>김미화</td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-success">80%</span></td>
+              <td>50%</td>
+              <td>50%</td>
+              <td class="cost-diff positive">+$0.0095</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case5</strong></td>
+              <td>김태형</td>
+              <td><span class="badge badge-success">80%</span></td>
+              <td><span class="badge badge-warning">65%</span></td>
+              <td>0%</td>
+              <td>33%</td>
+              <td class="cost-diff positive">+$0.0061</td>
+            </tr>
+          
+            <tr>
+              <td><strong>Case9</strong></td>
+              <td>임승희</td>
+              <td><span class="badge badge-success">95%</span></td>
+              <td><span class="badge badge-success">85%</span></td>
+              <td>0%</td>
+              <td>67%</td>
+              <td class="cost-diff positive">+$0.0108</td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="recommendation">
+      <h2>🎯 최종 권장사항</h2>
+      <ul>
+        <li><strong>일반 사용:</strong> gpt-4o-mini 권장 (비용 대비 품질 최적, 1.5배 저렴)</li>
+        <li><strong>고품질 필요시:</strong> gpt-4o 사용 (복잡한 의료 문서, 고위험 케이스)</li>
+        <li><strong>비용 최적화:</strong> gpt-4o-mini로 1차 처리 후, 품질 미달시 gpt-4o 재처리</li>
+      </ul>
+    </div>
+    
+    <div style="text-align:center;margin-top:30px;color:rgba(255,255,255,0.7);font-size:12px;">
+      Generated: 2026-01-25T09:51:34.076Z | VNEXSUS Vision LLM Validation
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+{
+  "caseNum": 28,
+  "model": "gpt-4o-mini",
+  "processingTime": 17116,
+  "tokens": {
+    "prompt_tokens": 48450,
+    "completion_tokens": 1038,
+    "total_tokens": 49488,
+    "prompt_tokens_details": {
+      "cached_tokens": 48128,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0078903,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-07-03",
+      "time": null,
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "심장혈관흉부외과"
+    },
+    "chiefComplaint": {
+      "summary": "GGN 소견으로 내원함.",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "GGN 소견으로 수술 위해 입원함."
+    },
+    "diagnoses": [
+      {
+        "code": "C34.1",
+        "nameKr": "폐암 - Lung cancer",
+        "nameEn": "Lung cancer",
+        "date": "2025-08-06",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Chest PA",
+        "nameEn": "Chest PA",
+        "date": "2025-08-18",
+        "result": "Tiny calcified granulomas in right upper lung field.",
+        "finding": "Same as conclusion.",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Chest",
+        "nameEn": "CT Chest",
+        "date": "2025-08-04",
+        "result": "Little interval change",
+        "finding": "RUL GGN 1.4cm",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "EGFR 유전자 돌연변이 검사",
+      "testDate": "2025-08-06",
+      "reportDate": "2025-08-12",
+      "finding": "Mutation Positive",
+      "stageTNM": "pT1mi pN0 pMx",
+      "stageOverall": "Stage I",
+      "histology": "Adenocarcinoma",
+      "margin": "free from tumor (2.0 cm)"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Uniportal VATS RUL posterior (S2) segmentectomy with MLND",
+        "date": "2025-08-06",
+        "duration": "1일",
+        "details": "RUL S2 segmentectomy with lymph node dissection.",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-07-03",
+      "endDate": "2025-08-18",
+      "totalVisits": 5,
+      "hospitals": [
+        "가톨릭대학교 은평성모병원"
+      ],
+      "summary": "폐암 진단을 위한 외래 진료."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-04",
+      "endDate": "2025-08-14",
+      "totalDays": 10,
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "심장혈관흉부외과",
+      "reason": "Lung cancer 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "DM",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "HTN",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 수술 후 상태가 안정적이며, 추가 치료가 필요함.",
+      "prognosis": "양호",
+      "recommendations": "정기적인 추적 관찰 필요.",
+      "limitations": "일상생활에서의 과도한 활동 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 폐암 진단 후 수술을 받았으며, 회복 중.",
+      "keyFindings": [
+        "Lung cancer 진단",
+        "수술 후 안정적 상태"
+      ],
+      "recommendations": "정기적인 추적 관찰 및 치료 필요."
+    }
+  }
+}

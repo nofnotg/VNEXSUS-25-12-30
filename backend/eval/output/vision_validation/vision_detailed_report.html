@@ -1,0 +1,1511 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS Vision LLM 상세 분석 보고서</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; min-height: 100vh; padding: 20px; color: #333; }
+    .container { max-width: 1600px; margin: 0 auto; }
+    h1 { text-align: center; color: #1a1a2e; margin-bottom: 10px; font-size: 32px; }
+    .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 14px; }
+    
+    /* Summary Cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 30px; }
+    .summary-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); text-align: center; }
+    .summary-card h3 { color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .summary-card .value { font-size: 32px; font-weight: bold; color: #1a1a2e; }
+    .summary-card .subvalue { font-size: 12px; color: #666; margin-top: 5px; }
+    .summary-card.highlight { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .summary-card.highlight * { color: white !important; }
+    
+    /* Model Comparison */
+    .section { background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .section h2 { color: #1a1a2e; margin-bottom: 20px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .section h2::before { content: ''; width: 4px; height: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 2px; }
+    
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+    th { background: #f8f9fa; color: #555; font-weight: 600; font-size: 12px; text-transform: uppercase; }
+    tr:hover { background: #fafafa; }
+    
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+    
+    /* Insights */
+    .insight-card { background: #f8f9fa; border-radius: 10px; padding: 20px; margin-bottom: 15px; border-left: 4px solid; }
+    .insight-card.critical { border-color: #ef4444; background: #fef2f2; }
+    .insight-card.high { border-color: #f97316; background: #fff7ed; }
+    .insight-card.medium { border-color: #eab308; background: #fefce8; }
+    .insight-card.info { border-color: #3b82f6; background: #eff6ff; }
+    .insight-card h4 { font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .insight-card .issue { font-size: 13px; color: #555; margin-bottom: 10px; }
+    .insight-card .cause { font-size: 12px; color: #888; margin-bottom: 10px; font-style: italic; }
+    .insight-card ul { margin-left: 20px; font-size: 12px; }
+    .insight-card li { margin-bottom: 5px; color: #444; }
+    
+    /* Chart placeholder */
+    .chart-container { display: flex; justify-content: center; gap: 30px; margin: 20px 0; }
+    .chart-bar { display: flex; flex-direction: column; align-items: center; }
+    .bar-wrapper { display: flex; gap: 4px; align-items: flex-end; height: 120px; }
+    .bar { width: 35px; border-radius: 4px 4px 0 0; transition: all 0.3s; }
+    .bar.mini { background: linear-gradient(180deg, #667eea 0%, #5a67d8 100%); }
+    .bar.full { background: linear-gradient(180deg, #764ba2 0%, #6b21a8 100%); }
+    .bar-label { font-size: 11px; color: #666; margin-top: 5px; }
+    .bar-value { font-size: 10px; color: #999; }
+    
+    /* Case Details */
+    .case-row { cursor: pointer; }
+    .case-row:hover { background: #f0f4ff !important; }
+    .case-details { display: none; background: #f8f9fa; }
+    .case-details.show { display: table-row; }
+    .case-details td { padding: 20px; }
+    .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .detail-item { background: white; border-radius: 8px; padding: 15px; }
+    .detail-item h5 { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .detail-item .list { font-size: 12px; color: #333; }
+    .detail-item .missed { color: #ef4444; text-decoration: line-through; }
+    .detail-item .matched { color: #10b981; }
+    
+    .footer { text-align: center; color: #999; font-size: 11px; margin-top: 30px; padding: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vision LLM 상세 분석 보고서</h1>
+    <p class="subtitle">PDF → Vision OCR → 보고서 생성 End-to-End 검증 | 항목별 매칭률 및 개선 인사이트</p>
+    
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <h3>분석 케이스</h3>
+        <div class="value">26</div>
+        <div class="subvalue">총 검증 케이스</div>
+      </div>
+      <div class="summary-card">
+        <h3>평균 날짜 매칭</h3>
+        <div class="value">5%</div>
+        <div class="subvalue">날짜 추출 정확도</div>
+      </div>
+      <div class="summary-card">
+        <h3>평균 KCD 매칭</h3>
+        <div class="value">7%</div>
+        <div class="subvalue">진단코드 정확도</div>
+      </div>
+      <div class="summary-card">
+        <h3>평균 병원명 매칭</h3>
+        <div class="value">24%</div>
+        <div class="subvalue">병원명 정확도</div>
+      </div>
+      <div class="summary-card highlight">
+        <h3>종합 점수</h3>
+        <div class="value">16%</div>
+        <div class="subvalue">가중 평균</div>
+      </div>
+    </div>
+    
+    <!-- Model Comparison -->
+    <div class="section">
+      <h2>모델별 항목 매칭률 비교</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>케이스 수</th>
+            <th>날짜 매칭</th>
+            <th>KCD 코드</th>
+            <th>병원명</th>
+            <th>검사명</th>
+            <th>치료/수술</th>
+            <th>종합 점수</th>
+            <th>평균 비용</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td><strong>gpt-4o-mini</strong></td>
+              <td>16</td>
+              <td><span class="badge badge-danger">3%</span></td>
+              <td><span class="badge badge-danger">3%</span></td>
+              <td><span class="badge badge-danger">22%</span></td>
+              <td><span class="badge badge-danger">19%</span></td>
+              <td><span class="badge badge-warning">38%</span></td>
+              <td><span class="badge badge-info">13%</span></td>
+              <td>$0.0165</td>
+            </tr>
+          
+            <tr>
+              <td><strong>gpt-4o</strong></td>
+              <td>10</td>
+              <td><span class="badge badge-danger">9%</span></td>
+              <td><span class="badge badge-danger">13%</span></td>
+              <td><span class="badge badge-danger">26%</span></td>
+              <td><span class="badge badge-warning">40%</span></td>
+              <td><span class="badge badge-warning">30%</span></td>
+              <td><span class="badge badge-info">20%</span></td>
+              <td>$0.0248</td>
+            </tr>
+          
+        </tbody>
+      </table>
+      
+      <!-- Visual Chart -->
+      <div class="chart-container">
+        
+            <div class="chart-bar">
+              <div class="bar-wrapper">
+                <div class="bar mini" style="height: 3.5999999999999996px;" title="gpt-4o-mini: 3%"></div>
+                <div class="bar full" style="height: 10.799999999999999px;" title="gpt-4o: 9%"></div>
+              </div>
+              <div class="bar-label">날짜</div>
+              <div class="bar-value">3% / 9%</div>
+            </div>
+          
+            <div class="chart-bar">
+              <div class="bar-wrapper">
+                <div class="bar mini" style="height: 3.5999999999999996px;" title="gpt-4o-mini: 3%"></div>
+                <div class="bar full" style="height: 15.6px;" title="gpt-4o: 13%"></div>
+              </div>
+              <div class="bar-label">KCD코드</div>
+              <div class="bar-value">3% / 13%</div>
+            </div>
+          
+            <div class="chart-bar">
+              <div class="bar-wrapper">
+                <div class="bar mini" style="height: 26.4px;" title="gpt-4o-mini: 22%"></div>
+                <div class="bar full" style="height: 31.2px;" title="gpt-4o: 26%"></div>
+              </div>
+              <div class="bar-label">병원명</div>
+              <div class="bar-value">22% / 26%</div>
+            </div>
+          
+            <div class="chart-bar">
+              <div class="bar-wrapper">
+                <div class="bar mini" style="height: 22.8px;" title="gpt-4o-mini: 19%"></div>
+                <div class="bar full" style="height: 48px;" title="gpt-4o: 40%"></div>
+              </div>
+              <div class="bar-label">검사명</div>
+              <div class="bar-value">19% / 40%</div>
+            </div>
+          
+            <div class="chart-bar">
+              <div class="bar-wrapper">
+                <div class="bar mini" style="height: 45.6px;" title="gpt-4o-mini: 38%"></div>
+                <div class="bar full" style="height: 36px;" title="gpt-4o: 30%"></div>
+              </div>
+              <div class="bar-label">치료/수술</div>
+              <div class="bar-value">38% / 30%</div>
+            </div>
+          
+      </div>
+      <div style="text-align:center;font-size:11px;color:#888;margin-top:10px;">
+        <span style="display:inline-block;width:10px;height:10px;background:#667eea;border-radius:2px;margin-right:5px;"></span>gpt-4o-mini
+        <span style="display:inline-block;width:10px;height:10px;background:#764ba2;border-radius:2px;margin-left:15px;margin-right:5px;"></span>gpt-4o
+      </div>
+    </div>
+    
+    <!-- Insights -->
+    <div class="section">
+      <h2>개선 인사이트</h2>
+      
+        <div class="insight-card high">
+          <h4>
+            🟠
+            날짜 추출
+          </h4>
+          <div class="issue"><strong>이슈:</strong> 날짜 매칭률이 5%로 낮음</div>
+          <div class="cause"><strong>원인:</strong> 다양한 날짜 형식 (YYYY.MM.DD, YYYY년 MM월 DD일 등)에 대한 정규화 미흡</div>
+          <ul>
+            <li>프롬프트에 명시적 날짜 형식 지정 (YYYY-MM-DD)</li><li>후처리 단계에서 날짜 정규화 로직 강화</li><li>PDF의 여러 페이지에서 날짜 정보 종합 수집</li>
+          </ul>
+        </div>
+      
+        <div class="insight-card critical">
+          <h4>
+            🔴
+            KCD 진단코드
+          </h4>
+          <div class="issue"><strong>이슈:</strong> KCD 코드 매칭률이 7%로 매우 낮음</div>
+          <div class="cause"><strong>원인:</strong> PDF 첫 3페이지만 사용하여 진단 코드가 있는 페이지 누락 가능성</div>
+          <ul>
+            <li>PDF 전체 페이지 처리 (비용 증가 감안)</li><li>진단서/소견서 페이지 우선 탐지 로직 추가</li><li>KCD 코드 패턴 인식 프롬프트 강화</li><li>진단명 → KCD 코드 매핑 데이터베이스 활용</li>
+          </ul>
+        </div>
+      
+        <div class="insight-card medium">
+          <h4>
+            🟡
+            병원명 추출
+          </h4>
+          <div class="issue"><strong>이슈:</strong> 병원명 매칭률이 24%</div>
+          <div class="cause"><strong>원인:</strong> 병원명 표기 변형 (약어, 띄어쓰기 차이 등)</div>
+          <ul>
+            <li>병원명 정규화 사전 구축</li><li>유사도 기반 병원명 매칭 적용</li><li>OCR 후 병원명 검증 단계 추가</li>
+          </ul>
+        </div>
+      
+        <div class="insight-card info">
+          <h4>
+            🔵
+            모델 선택
+          </h4>
+          <div class="issue"><strong>이슈:</strong> gpt-4o가 7%p 높은 점수지만 1.5배 비용</div>
+          <div class="cause"><strong>원인:</strong> gpt-4o-mini가 비용 대비 효율적</div>
+          <ul>
+            <li>일반 케이스: gpt-4o-mini 사용</li><li>복잡/고위험 케이스: gpt-4o 사용</li><li>2단계 접근: gpt-4o-mini 1차 → 품질 미달시 gpt-4o 재처리</li>
+          </ul>
+        </div>
+      
+        <div class="insight-card medium">
+          <h4>
+            🟡
+            PDF 처리
+          </h4>
+          <div class="issue"><strong>이슈:</strong> 현재 PDF 첫 3페이지만 처리</div>
+          <div class="cause"><strong>원인:</strong> 비용 절감을 위한 페이지 제한</div>
+          <ul>
+            <li>문서 유형 자동 감지 (진단서, 의무기록, 영수증 등)</li><li>중요 페이지 우선 처리 알고리즘 구현</li><li>필요시 추가 페이지 동적 로드</li>
+          </ul>
+        </div>
+      
+    </div>
+    
+    <!-- Case Details Table -->
+    <div class="section">
+      <h2>케이스별 상세 분석</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>케이스</th>
+            <th>피보험자</th>
+            <th>모델</th>
+            <th>날짜</th>
+            <th>KCD</th>
+            <th>병원명</th>
+            <th>검사</th>
+            <th>치료</th>
+            <th>종합</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr class="case-row" onclick="toggleDetails(0)">
+              <td><strong>Case11</strong></td>
+              <td>허전권</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">50%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">20%</span></td>
+            </tr>
+            <tr class="case-details" id="details-0">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 22개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2023-02-28, 2024-07-26, 2024-09-13, 2024-10-21, 2024-11-05, 2024-10-28, 2024-11-01, 2024-10-12, 2024-10-14, 2024-10-23, 2024-10-24, 2024-10-25, 2024-11-18, 2024-11-26, 2024-12-23, 2024-12-27, 2025-01-14, 2024-12-26, 2024-12-30, 2024-12-24, 2020-01-21, 2025-01-21</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 1개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C23</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 강북삼성병원, 삼성서울병원, 삼성병원, 치료병원<br>
+                      <strong>추출:</strong> 강북삼성병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, MRI, 초음파, PET, PET-CT, 조직검사<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(1)">
+              <td><strong>Case11</strong></td>
+              <td>허전권</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">50%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">20%</span></td>
+            </tr>
+            <tr class="case-details" id="details-1">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 22개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2023-02-28, 2024-07-26, 2024-09-13, 2024-10-21, 2024-11-05, 2024-10-28, 2024-11-01, 2024-10-12, 2024-10-14, 2024-10-23, 2024-10-24, 2024-10-25, 2024-11-18, 2024-11-26, 2024-12-23, 2024-12-27, 2025-01-14, 2024-12-26, 2024-12-30, 2024-12-24, 2020-01-21, 2025-01-21</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 1개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C23</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 강북삼성병원, 삼성서울병원, 삼성병원, 치료병원<br>
+                      <strong>추출:</strong> 강북삼성병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, MRI, 초음파, PET, PET-CT, 조직검사<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(2)">
+              <td><strong>Case13</strong></td>
+              <td>김인화</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">0%</span></td>
+            </tr>
+            <tr class="case-details" id="details-2">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 5개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2021-03-24, 2021-07-30, 2024-04-12, 2024-11-04, 2025-03-13</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">S33.50, M51.1, S33, M51</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 서울바른병원, 누가재활의학과의원, 치료병원, 장해진단병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> MRI, X-ray<br>
+                      <strong>치료(GT):</strong> 신경차단술, 도수치료, 물리치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(3)">
+              <td><strong>Case13</strong></td>
+              <td>김인화</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">0%</span></td>
+            </tr>
+            <tr class="case-details" id="details-3">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 5개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2021-03-24, 2021-07-30, 2024-04-12, 2024-11-04, 2025-03-13</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">S33.50, M51.1, S33, M51</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 서울바른병원, 누가재활의학과의원, 치료병원, 장해진단병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> MRI, X-ray<br>
+                      <strong>치료(GT):</strong> 신경차단술, 도수치료, 물리치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(4)">
+              <td><strong>Case15</strong></td>
+              <td>고영란</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">33%</span></td>
+            </tr>
+            <tr class="case-details" id="details-4">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2025-06-07<br>
+                      <strong>누락:</strong> <span class="missed">2025-02-25, 2053-02-25, 2025-05-26, 2025-06-16, 2025-06-27, 2025-06-20, 2025-06-24, 1953-02-25</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C50.11, R59.1, C50, R59</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 1개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 더자인병원<br>
+                      <strong>추출:</strong> 의료법인자인의료재단더자인병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, 초음파, 조직검사<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(5)">
+              <td><strong>Case15</strong></td>
+              <td>고영란</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">33%</span></td>
+            </tr>
+            <tr class="case-details" id="details-5">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2025-06-07<br>
+                      <strong>누락:</strong> <span class="missed">2025-02-25, 2053-02-25, 2025-05-26, 2025-06-16, 2025-06-27, 2025-06-20, 2025-06-24, 1953-02-25</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C50.11, R59.1, C50, R59</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 1개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 더자인병원<br>
+                      <strong>추출:</strong> 의료법인자인의료재단더자인병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, 초음파, 조직검사<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(6)">
+              <td><strong>Case17</strong></td>
+              <td>김동아</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">20%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">30%</span></td>
+            </tr>
+            <tr class="case-details" id="details-6">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 5개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2025-08-14<br>
+                      <strong>누락:</strong> <span class="missed">2025-08-12, 2030-08-12, 2045-08-12, 2025-08-19</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">S33.50, I63.9, S33, I63</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 해븐리병원, 일산효자한의원, 치료병원<br>
+                      <strong>추출:</strong> 해브리병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(7)">
+              <td><strong>Case17</strong></td>
+              <td>김동아</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">25%</span></td>
+            </tr>
+            <tr class="case-details" id="details-7">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 5개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2025-08-14, 2025-08-12, 2030-08-12, 2045-08-12, 2025-08-19</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">S33.50, I63.9, S33, I63</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 해븐리병원, 일산효자한의원, 치료병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(8)">
+              <td><strong>Case18</strong></td>
+              <td>김명희</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">15%</span></td>
+            </tr>
+            <tr class="case-details" id="details-8">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 7개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2019-03-29, 2019-07-05, 2021-07-09, 2025-05-12, 2025-07-07, 2025-07-14, 2025-07-08</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">E66.8, I10.9, E66, I10</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 구로성심병원, 고대구로병원, 위장관외과<br>
+                      <strong>추출:</strong> 한림대학교강남성심병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 소매절제술, 담낭절제술, 위소매절제술, 가입전치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(9)">
+              <td><strong>Case18</strong></td>
+              <td>김명희</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">15%</span></td>
+            </tr>
+            <tr class="case-details" id="details-9">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 7개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2019-03-29, 2019-07-05, 2021-07-09, 2025-05-12, 2025-07-07, 2025-07-14, 2025-07-08</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">E66.8, I10.9, E66, I10</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 구로성심병원, 고대구로병원, 위장관외과<br>
+                      <strong>추출:</strong> 강남성심병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 소매절제술, 담낭절제술, 위소매절제술, 가입전치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(10)">
+              <td><strong>Case24</strong></td>
+              <td>김종렬</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">50%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">10%</span></td>
+            </tr>
+            <tr class="case-details" id="details-10">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 18개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2022-08-24, 2022-09-02, 2022-08-26, 2022-09-06, 2023-01-15, 2024-10-15, 2025-01-15, 2025-02-24, 2025-09-04, 2025-08-21, 2025-08-22, 2025-09-15, 2025-09-25, 2025-09-17, 2025-09-24, 2026-01-15, 2022-10-24, 2025-10-24</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 2개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C16.20, C16</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 2개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 강북삼성병원, 치료병원<br>
+                      <strong>추출:</strong> 강북삼성병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 조직검사<br>
+                      <strong>치료(GT):</strong> 전절제술, 아전절제술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(11)">
+              <td><strong>Case24</strong></td>
+              <td>김종렬</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">0%</span></td>
+            </tr>
+            <tr class="case-details" id="details-11">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 18개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2022-08-24, 2022-09-02, 2022-08-26, 2022-09-06, 2023-01-15, 2024-10-15, 2025-01-15, 2025-02-24, 2025-09-04, 2025-08-21, 2025-08-22, 2025-09-15, 2025-09-25, 2025-09-17, 2025-09-24, 2026-01-15, 2022-10-24, 2025-10-24</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 2개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C16.20, C16</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 2개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 강북삼성병원, 치료병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 조직검사<br>
+                      <strong>치료(GT):</strong> 전절제술, 아전절제술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(12)">
+              <td><strong>Case27</strong></td>
+              <td>박현미</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">21%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">17%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">9%</span></td>
+            </tr>
+            <tr class="case-details" id="details-12">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 14개, 추출: 3개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2024-07-19, 2024-10-07, 2024-10-23<br>
+                      <strong>누락:</strong> <span class="missed">2025-09-08, 2019-06-22, 2023-02-22, 2023-06-22, 2024-03-22, 2024-06-22, 2024-10-11, 2025-09-10, 2025-09-18, 2025-09-09, 2025-09-16</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 1개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C73</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 6개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 서울아산병원, 휴내과의원, 중앙대광명병원, 치료병원, 내분비내과, 이레미즈외과<br>
+                      <strong>추출:</strong> 서울아산병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 초음파, 조직검사, 세포검사<br>
+                      <strong>치료(GT):</strong> 갑상선절제술, 절제술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(13)">
+              <td><strong>Case27</strong></td>
+              <td>박현미</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">0%</span></td>
+            </tr>
+            <tr class="case-details" id="details-13">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 14개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2025-09-08, 2019-06-22, 2023-02-22, 2023-06-22, 2024-03-22, 2024-06-22, 2024-07-19, 2024-10-07, 2024-10-11, 2024-10-23, 2025-09-10, 2025-09-18, 2025-09-09, 2025-09-16</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 1개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C73</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 6개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 서울아산병원, 휴내과의원, 중앙대광명병원, 치료병원, 내분비내과, 이레미즈외과<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 초음파, 조직검사, 세포검사<br>
+                      <strong>치료(GT):</strong> 갑상선절제술, 절제술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(14)">
+              <td><strong>Case29</strong></td>
+              <td>서문정숙</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">30%</span></td>
+            </tr>
+            <tr class="case-details" id="details-14">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 7개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2025-09-26, 2024-08-13, 2024-09-04, 2025-09-29, 2020-10-15, 2025-10-15, 2025-08-13</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 2개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">I67.1, I67</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 0개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 없음<br>
+                      <strong>추출:</strong> 더자인병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> MRI, MRA<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(15)">
+              <td><strong>Case2</strong></td>
+              <td>김미화</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-success">50%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">33%</span></td>
+            </tr>
+            <tr class="case-details" id="details-15">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2019-03-23<br>
+                      <strong>누락:</strong> <span class="missed">2023-08-07, 2019-04-09, 2024-01-09, 2024-04-03, 2024-04-09, 2025-02-04, 2025-02-12, 2024-04-23</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> D18.02, D18<br>
+                      <strong>누락:</strong> <span class="missed">D13.4, D13</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 에스엠영상의학과의원, 서울대학교직장부속의원, 삼성서울병원<br>
+                      <strong>추출:</strong> SM영상의학과의원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT<br>
+                      <strong>치료(GT):</strong> 간절제술, 가입전치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(16)">
+              <td><strong>Case2</strong></td>
+              <td>김미화</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-success">50%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">18%</span></td>
+            </tr>
+            <tr class="case-details" id="details-16">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2019-03-23<br>
+                      <strong>누락:</strong> <span class="missed">2023-08-07, 2019-04-09, 2024-01-09, 2024-04-03, 2024-04-09, 2025-02-04, 2025-02-12, 2024-04-23</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> D18.02, D18<br>
+                      <strong>누락:</strong> <span class="missed">D13.4, D13</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 에스엠영상의학과의원, 서울대학교직장부속의원, 삼성서울병원<br>
+                      <strong>추출:</strong> SM영상의학과
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT<br>
+                      <strong>치료(GT):</strong> 간절제술, 가입전치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(17)">
+              <td><strong>Case34</strong></td>
+              <td>윤희정</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">0%</span></td>
+            </tr>
+            <tr class="case-details" id="details-17">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 15개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2017-06-13, 2018-02-27, 2018-03-29, 2018-04-17, 2024-01-19, 2025-06-07, 2025-06-24, 2025-08-10, 2025-08-14, 2025-08-11, 2025-06-12, 2025-07-02, 2025-09-05, 2020-09-02, 2024-01-26</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 3개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C73, C77.0, C77</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 1개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 일산병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 초음파, 조직검사<br>
+                      <strong>치료(GT):</strong> 곽청술, 절제술, 가입전치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(18)">
+              <td><strong>Case38</strong></td>
+              <td>이영희</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">5%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">25%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">6%</span></td>
+            </tr>
+            <tr class="case-details" id="details-18">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 20개, 추출: 3개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2025-08-03<br>
+                      <strong>누락:</strong> <span class="missed">2024-09-11, 2023-09-11, 2024-08-30, 2025-08-21, 2025-08-24, 2025-10-21, 2010-06-01, 2058-06-01, 2019-10-21, 2024-07-21, 2024-10-21, 2054-10-21, 2025-01-19, 2025-07-09, 2025-09-02, 2025-08-05, 2025-08-20, 1958-06-01, 1954-10-21</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 2개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">C54.1, C54</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 4개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 이대목동병원, 치료병원, 병의원, 거주지주변필수탐문병원<br>
+                      <strong>추출:</strong> 이대목동병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, 조직검사<br>
+                      <strong>치료(GT):</strong> 전자궁적출술, 양측난소난관절제술, 항암치료
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(19)">
+              <td><strong>Case41</strong></td>
+              <td>장우진</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">20%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">14%</span></td>
+            </tr>
+            <tr class="case-details" id="details-19">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 11개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2024-04-22, 2007-08-08, 2021-05-17, 2021-05-24, 2021-05-20, 2024-04-20, 2025-07-11, 2025-09-22, 2024-04-24, 2025-09-02, 2025-01-03</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 3개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">M43.16, M43, S32</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 5개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 은평성모병원, 우신향병원, 한림병원, 치료병원, 힘찬병원<br>
+                      <strong>추출:</strong> 우신향병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> MRI, X-ray<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(20)">
+              <td><strong>Case42</strong></td>
+              <td>정진덕</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-info">10%</span></td>
+            </tr>
+            <tr class="case-details" id="details-20">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2018-09-27, 2025-02-26, 2025-04-29, 2025-04-23</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">I67.1, I67, I60, I69</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 1개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 강북삼성병원<br>
+                      <strong>추출:</strong> 없음
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> MRI, MRA<br>
+                      <strong>치료(GT):</strong> 없음
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(21)">
+              <td><strong>Case44</strong></td>
+              <td>최순곤</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-warning">40%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">8%</span></td>
+            </tr>
+            <tr class="case-details" id="details-21">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 3개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">2025-08-25, 2020-09-09, 2024-09-03, 2024-06-03, 2024-07-31, 2054-09-03, 2025-08-29, 2025-08-26, 1954-09-03</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 4개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">I63.9, I63, I60, I69</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 5개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 신촌세브란스병원, 치료병원, 김안과병원, 병의원, 김안과<br>
+                      <strong>추출:</strong> 김안과병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> CT, MRI<br>
+                      <strong>치료(GT):</strong> 혈전제거술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(22)">
+              <td><strong>Case5</strong></td>
+              <td>김태형</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-danger">17%</span></td>
+              <td><span class="badge badge-warning">33%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">29%</span></td>
+            </tr>
+            <tr class="case-details" id="details-22">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2024-12-12<br>
+                      <strong>누락:</strong> <span class="missed">2018-05-10, 2023-02-10, 2023-05-10, 2024-12-27, 2024-12-31, 2024-05-30, 2020-01-17, 2024-01-24</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 6개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> R07<br>
+                      <strong>누락:</strong> <span class="missed">R07.4, I20.88, I25.1, I20, I25</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 굿웰스의원, 동신병원, 신촌세브란스병원<br>
+                      <strong>추출:</strong> 굿웰스의원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 관상동맥조영술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(23)">
+              <td><strong>Case5</strong></td>
+              <td>김태형</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">11%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-success">100%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">18%</span></td>
+            </tr>
+            <tr class="case-details" id="details-23">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 9개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2024-12-12<br>
+                      <strong>누락:</strong> <span class="missed">2018-05-10, 2023-02-10, 2023-05-10, 2024-12-27, 2024-12-31, 2024-05-30, 2020-01-17, 2024-01-24</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 6개, 추출: 0개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">R07.4, I20.88, I25.1, R07, I20, I25</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 3개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 굿웰스의원, 동신병원, 신촌세브란스병원<br>
+                      <strong>추출:</strong> 굿윌스의원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 없음<br>
+                      <strong>치료(GT):</strong> 관상동맥조영술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(24)">
+              <td><strong>Case9</strong></td>
+              <td>임승희</td>
+              <td>gpt-4o</td>
+              <td><span class="badge badge-danger">14%</span></td>
+              <td><span class="badge badge-success">60%</span></td>
+              <td><span class="badge badge-danger">13%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">24%</span></td>
+            </tr>
+            <tr class="case-details" id="details-24">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 21개, 추출: 4개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2024-09-27, 2024-10-07, 2024-10-30<br>
+                      <strong>누락:</strong> <span class="missed">2019-02-26, 2023-03-23, 2023-12-26, 2023-12-29, 2024-02-19, 2022-07-17, 2024-01-02, 2024-02-08, 2024-02-26, 2024-08-02, 2024-10-05, 2024-09-26, 2024-11-01, 2024-10-31, 2024-10-10, 2024-10-11, 2024-11-06, 2019-12-21</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 5개, 추출: 2개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> D05.10, D05.00, D05<br>
+                      <strong>누락:</strong> <span class="missed">I67.1, I67</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 8개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 양지병원, 증진센터, 이대서울병원, 대림성모병원, 유방센터, 비내과, 신경외과, 갑상선외과<br>
+                      <strong>추출:</strong> 대림성모병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 조직검사<br>
+                      <strong>치료(GT):</strong> 조영술, 부분유방절제술, 뇌혈관조영술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+            <tr class="case-row" onclick="toggleDetails(25)">
+              <td><strong>Case9</strong></td>
+              <td>임승희</td>
+              <td>gpt-4o-mini</td>
+              <td><span class="badge badge-danger">10%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">13%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-danger">0%</span></td>
+              <td><span class="badge badge-info">5%</span></td>
+            </tr>
+            <tr class="case-details" id="details-25">
+              <td colspan="9">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <h5>날짜 (GT: 21개, 추출: 3개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 2024-10-07, 2024-10-30<br>
+                      <strong>누락:</strong> <span class="missed">2019-02-26, 2023-03-23, 2023-12-26, 2023-12-29, 2024-02-19, 2022-07-17, 2024-01-02, 2024-02-08, 2024-02-26, 2024-08-02, 2024-10-05, 2024-09-26, 2024-09-27, 2024-11-01, 2024-10-31, 2024-10-10, 2024-10-11, 2024-11-06, 2019-12-21</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>KCD 코드 (GT: 5개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>매칭:</strong> 없음<br>
+                      <strong>누락:</strong> <span class="missed">D05.10, D05.00, I67.1, D05, I67</span>
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>병원명 (GT: 8개, 추출: 1개)</h5>
+                    <div class="list">
+                      <strong>GT:</strong> 양지병원, 증진센터, 이대서울병원, 대림성모병원, 유방센터, 비내과, 신경외과, 갑상선외과<br>
+                      <strong>추출:</strong> 대림성모병원
+                    </div>
+                  </div>
+                  <div class="detail-item">
+                    <h5>검사/치료 정보</h5>
+                    <div class="list">
+                      <strong>검사(GT):</strong> 조직검사<br>
+                      <strong>치료(GT):</strong> 조영술, 부분유방절제술, 뇌혈관조영술
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="footer">
+      Generated: 2026-01-25T10:12:31.169Z | VNEXSUS Vision LLM Detailed Analysis Report<br>
+      OCR 캐시 저장 위치: backend/eval/output/vision_validation/ocr_cache/
+    </div>
+  </div>
+  
+  <script>
+    function toggleDetails(idx) {
+      const details = document.getElementById('details-' + idx);
+      details.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

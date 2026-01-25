@@ -1,0 +1,217 @@
+{
+  "caseNum": 6,
+  "model": "gpt-4o-mini",
+  "processingTime": 30656,
+  "tokens": {
+    "prompt_tokens": 37363,
+    "completion_tokens": 1625,
+    "total_tokens": 38988,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00657945,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 17,
+    "overallScore": 50
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-26",
+      "time": null,
+      "hospital": "명지병원",
+      "department": "심장내과"
+    },
+    "chiefComplaint": {
+      "summary": "간헐적으로 답답하고 조여서 내원. 등도 아플때도 있었다.",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "주증상: 가슴통증, 과거력: 고혈압, 당뇨병, 고지혈증"
+    },
+    "diagnoses": [
+      {
+        "code": "I20.9",
+        "nameKr": "변형 협심증",
+        "nameEn": "Variant angina",
+        "date": "2025-02-26",
+        "isPrimary": true,
+        "hospital": "명지병원"
+      },
+      {
+        "code": "I25.1",
+        "nameKr": "관상동맥병",
+        "nameEn": "Coronary artery disease",
+        "date": "2025-02-26",
+        "isPrimary": false,
+        "hospital": "명지병원"
+      },
+      {
+        "code": "E119",
+        "nameKr": "합병증을 동반하지 않은 2형 당뇨병",
+        "nameEn": "Type 2 diabetes mellitus, without complications",
+        "date": "2025-02-26",
+        "isPrimary": false,
+        "hospital": "명지병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "심전도",
+        "nameEn": "Electrocardiogram",
+        "date": "2025-02-19",
+        "result": "Sinus bradycardia, Otherwise normal ECG",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "관상동맥 조영술",
+        "nameEn": "Coronary Angiography",
+        "date": "2025-02-19",
+        "result": "30~40% 정도 협착의 경미한 관상동맥질환 발견",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "CBC",
+        "nameEn": "Complete Blood Count",
+        "date": "2025-02-26",
+        "result": "정상",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "Troponin",
+        "nameEn": "Troponin",
+        "date": "2025-02-19",
+        "result": "< 2.51 pg/mL",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "CK-MB",
+        "nameEn": "CK-MB",
+        "date": "2025-02-19",
+        "result": "0.4 ng/mL",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "NT-proBNP",
+        "nameEn": "NT-proBNP",
+        "date": "2025-02-19",
+        "result": "128.00 pg/mL",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Nitroglycerin",
+        "date": "2025-02-19",
+        "duration": "1일",
+        "details": "NTG 복용, 필요시 1T SL 10분간격 최대 2회",
+        "hospital": "명지병원"
+      },
+      {
+        "type": "약물",
+        "name": "Rosulord",
+        "date": "2025-02-26",
+        "duration": "30일",
+        "details": "1일 1회 아침식후 30분에 복용",
+        "hospital": "명지병원"
+      },
+      {
+        "type": "약물",
+        "name": "Isotril ER",
+        "date": "2025-02-26",
+        "duration": "30일",
+        "details": "1일 2회 아침, 저녁식후 30분에 복용",
+        "hospital": "명지병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2021-01-26",
+      "endDate": "2025-03-10",
+      "totalVisits": 15,
+      "hospitals": [
+        "김윤호서울외과의원",
+        "명지병원"
+      ],
+      "summary": "고혈압, 당뇨병, 협심증으로 외래 진료"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-02-19",
+      "endDate": "2025-02-19",
+      "totalDays": 1,
+      "hospital": "명지병원",
+      "department": "심장내과",
+      "reason": "관상동맥 조영술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2015-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "매화가정의학과의원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E119",
+        "diagnosisDate": "2023-02-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "임성식 내과의원",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 변형 협심증 및 경미한 관상동맥질환으로 약물 치료가 필요함.",
+      "prognosis": "약물 치료 후 증상 개선 기대",
+      "recommendations": "정기적인 외래 진료 및 약물 복용 지속",
+      "limitations": "과도한 신체 활동 자제"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 변형 협심증 및 경미한 관상동맥질환으로 치료 필요.",
+      "keyFindings": [
+        "변형 협심증 진단",
+        "관상동맥 경미한 협착 발견"
+      ],
+      "recommendations": "정기적인 외래 진료 및 약물 치료 지속"
+    }
+  }
+}

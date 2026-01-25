@@ -1,0 +1,148 @@
+{
+  "caseNum": 31,
+  "model": "gpt-4o-mini",
+  "processingTime": 23448,
+  "tokens": {
+    "prompt_tokens": 21954,
+    "completion_tokens": 962,
+    "total_tokens": 22916,
+    "prompt_tokens_details": {
+      "cached_tokens": 21376,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0038702999999999997,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-09-02",
+      "time": "14:00",
+      "hospital": "이지신경외과",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "좌측 어깨 통증 및 운동 시 불편",
+      "referralSource": null,
+      "onsetDate": "2025-07-18",
+      "duration": "46일",
+      "details": "복싱 후 어깨 통증이 심해짐"
+    },
+    "diagnoses": [
+      {
+        "code": "M75.1",
+        "nameKr": "어깨 충돌 증후군",
+        "nameEn": "Shoulder Impingement Syndrome",
+        "date": "2025-07-18",
+        "isPrimary": true,
+        "hospital": "이지신경외과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "완전혈구검사",
+        "nameEn": "Complete Blood Count",
+        "date": "2025-07-18",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      },
+      {
+        "name": "C-반응성 단백질",
+        "nameEn": "C-Reactive Protein",
+        "date": "2025-07-18",
+        "result": "정상",
+        "finding": "정보 없음",
+        "normalRange": "정보 없음",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "물리치료",
+        "name": "충격파 치료",
+        "date": "2025-08-26",
+        "duration": "1일",
+        "details": "좌측 어깨 충돌 증후군 치료를 위한 충격파 치료",
+        "hospital": "이지신경외과"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-07-18",
+      "endDate": "2025-09-02",
+      "totalVisits": 10,
+      "hospitals": [
+        "이지신경외과"
+      ],
+      "summary": "좌측 어깨 통증으로 10회 통원 치료"
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2025-07-18",
+        "treatment": "약물 치료",
+        "currentStatus": "안정",
+        "hospital": "이지신경외과",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "2025-07-18",
+        "treatment": "약물 치료",
+        "currentStatus": "안정",
+        "hospital": "이지신경외과",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "좌측 어깨 충돌 증후군으로 인한 통증 및 운동 제한",
+      "prognosis": "예후 양호",
+      "recommendations": "지속적인 물리치료 및 운동 요법",
+      "limitations": "무거운 물건 들기 금지"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "좌측 어깨 충돌 증후군으로 인한 통원 치료",
+      "keyFindings": [
+        "좌측 어깨 통증",
+        "물리치료 필요"
+      ],
+      "recommendations": "지속적인 치료 및 관리 필요"
+    }
+  }
+}

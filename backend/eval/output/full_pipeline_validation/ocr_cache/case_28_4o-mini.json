@@ -1,0 +1,196 @@
+{
+  "caseId": "Case28",
+  "caseNum": 28,
+  "patientName": "박혜경",
+  "model": "gpt-4o-mini",
+  "totalPages": 85,
+  "processedAt": "2026-01-25T11:04:09.292Z",
+  "processingTime": 126385,
+  "cost": 0.459,
+  "usage": {
+    "prompt_tokens": 3131691,
+    "completion_tokens": 755,
+    "total_tokens": 3132446,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "박혜경",
+      "birthDate": null,
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2025-08-04",
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "산부인과"
+    },
+    "chiefComplaint": {
+      "summary": "Lung cancer, RUL, cT1aN0M0, MIA.",
+      "onsetDate": null,
+      "details": "Patient underwent unipolar VATS RUL posterior (S2) segmentectomy with MLND."
+    },
+    "diagnoses": [
+      {
+        "code": "C34.1",
+        "nameKr": "폐암",
+        "date": "2025-08-06",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Chest",
+        "date": "2025-08-05",
+        "result": "Persistent GGO in RUL - DX. AIS/MIA.",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Unipolar VATS RUL posterior (S2) segmentectomy with MLND",
+        "date": "2025-08-06",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Dexiant DP cap. 30mg",
+        "dosage": "30mg",
+        "period": "1x1"
+      },
+      {
+        "name": "Mucolytic tab. 625mg",
+        "dosage": "1x3",
+        "period": "7 days"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "가톨릭대학교 은평성모병원",
+        "admissionDate": "2025-08-04",
+        "dischargeDate": "2025-08-14",
+        "reason": "Lung cancer, RUL, cT1aN0M0, MIA."
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "Hysteroscopic myomectomy & polypectomy",
+        "date": "2020-01-03",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "Patient is stable and tolerable.",
+      "followUpDate": "2025-09-08"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-08-04",
+        "context": "Admission date",
+        "type": "입원일"
+      },
+      {
+        "date": "2025-08-06",
+        "context": "Surgery date",
+        "type": "수술일"
+      },
+      {
+        "date": "2025-08-14",
+        "context": "Discharge date",
+        "type": "퇴원일"
+      }
+    ],
+    "extractedHospitals": [
+      "가톨릭대학교 은평성모병원"
+    ],
+    "rawTextSummary": "Patient diagnosed with lung cancer and underwent surgery. Follow-up scheduled."
+  },
+  "groundTruth": "3. 조사내용 (요약) \r\n가. 피보험자 면담사항 \r\n구 분 \r\n내 용 \r\n계약 시 : 전업주부(1급) \r\n피보험자 \r\n직  업 \r\n사고 시 : 전업주부(1급) \r\n현  재 : 전업주부(1급) \r\n보험가입 \r\n경  위 위험 보장 목적 하 동 보험 가입. \r\n중요사항 \r\n고지여부 대장요종절제술 기 고지 \r\n피보험자 \r\n면담내용 \r\n피보험자 면담 어려워 비대면 면담 진행 요청.  \r\n특이 기왕력 없음을 주장으로 심평원 진료내역 열람 동의. \r\n \r\n \r\n나. 피보험자 병력사항 요약 경과표 \r\n일자 사고경위 병원/기관 \r\n2018.10.18 \r\n[5년 이내] KB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 5년 이내 ㈜KB손해보험 \r\n2020.10.18 \r\n[3년 이내] KB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 3년 이내 ㈜KB손해보험 \r\n2023.07.18 \r\n[3개월 이내] \r\nKB 3.3.5 슬기로운 간편실속종합건강보험Plus 가입 3개월 이내 ㈜KB손해보험 \r\n2023.10.18 KB 3.3.5 슬기로운 간편실속종합건강보험Plus(무배당)(23.09) 가\r\n입 ㈜KB손해보험 \r\n2025.07.03 \r\n[청구사항] \r\n초 진 일 : 2025.07.03 \r\n내원경위 : 폐렴 치료 후 감기 객담 지속 증상으로 시행한 흉\r\n부CT 검사상 이상 소견으로 내원 \r\n진 단 명 : 폐암, 선암종(C34.99) \r\n입원기간 : 2025.08.04 ~ 2025.08.14 / 11일 입원 \r\nAO240 간호간병통합서비스 입원관리실 \r\n치료내용 : 우상엽 후분절(S2) 폐 절제술(2025.08.06) \r\n검사결과 : 수술 후 조직검사(2025.08.06)(보고일: 2025.08.12) \r\n: Minimally Invasive Adenocarcinoma(MIA), \r\npT1miN0 \r\n \r\n은평성모병원\r\n(심장혈관흉부\r\n외과) \r\n  \r\n다. 기타확인사항 \r\n사고(발병) \r\n경위 \r\n폐렴 치료 후 경과관찰 중 폐암 소견으로 은평성모병원 입원 하 '폐암, 선암종\r\n(C34.99)' 진단 및 수술적 치료 후 관련 보험금 청구함. \r\n직업 \r\n직무 \r\n전업주부(1급) \r\n심평원 \r\n심평원 진료내역(2020.08.26 ~ 2023.10.18) \r\n1. 2022.08.28 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 12일 입원 \r\n2. 2022.10.04 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 3일 입원 - 미 고지 사항  \r\n \r\n \r\n4. 손해사정결과 \r\n고지위반 예 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항   \r\n상기 조사 결과에 의하여 볼 때, \r\n  \r\n1. 중점조사 및 청구사항 \r\n고지의무 위반여부 및 진단 적정성 검토 \r\n  \r\n2. 사고경위 \r\n폐렴 치료 후 경과관찰 중 폐암 소견으로 은평성모병원 입원 하 '폐암, 선암종(C34.99)' 진단 및 \r\n수술적 치료 후 관련 보험금 청구함. \r\n  \r\n3. 알릴의무와 관련하여 \r\n심평원 진료내역(2020.08.26 ~ 2023.10.18) \r\n1. 2022.08.28 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 12일 입원 \r\n2. 2022.10.04 신촌세브란스병원 '간외담관의 양성신생물()D13.5)' 3일 입원 \r\n상기 고지의무 위반사항 확인. \r\n  \r\n4. 금번 청구 관련하여 \r\n금번 청구병명은 동 보험 가입 및 암 보장 개시일 이후 2025.07.03 폐렴 치료 후 경과관찰 중 \r\n시행한 흉부CT 검사 상 이상 소견으로 2025.08.04 입원하여 시행한 우상엽 후분절(S2) 폐 절\r\n제술(2025.08.06) 조직검사 결과 : Minimally Invasive Adenocarcinoma(MIA), pT1miN0 소견으로 \r\n2025.08.12 '폐암, 선암종(C34.99)' 확정 진단 받은 것으로 확인됨.  \r\n  \r\n5. 손해사정 결론 \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.  \r\n  \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB손해보험에서 최종 판단해 주시기 바랍니다.",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-08-04",
+        "2025-08-14",
+        "2025-08-06"
+      ],
+      "missed": [
+        "2018-10-18",
+        "2020-10-18",
+        "2023-07-18",
+        "2023-10-18",
+        "2025-07-03",
+        "2025-08-12",
+        "2020-08-26",
+        "2022-08-28",
+        "2022-10-04"
+      ],
+      "extra": [
+        "2025-08-05",
+        "2020-01-03"
+      ],
+      "rate": 25
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "C34.99",
+        "O24",
+        "D13.5"
+      ],
+      "extra": [
+        "C34.1"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "은평성모병원"
+      ],
+      "missed": [
+        "신촌세브란스병원"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "examinations": {
+      "matched": [
+        "CT"
+      ],
+      "missed": [
+        "조직검사"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "수술",
+        "수술적",
+        "대장요종절제술",
+        "절제술",
+        "치료",
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,146 @@
+{
+  "caseNum": 39,
+  "model": "gpt-4o-mini",
+  "processingTime": 20582,
+  "tokens": {
+    "prompt_tokens": 31209,
+    "completion_tokens": 996,
+    "total_tokens": 32205,
+    "prompt_tokens_details": {
+      "cached_tokens": 30848,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00527895,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-04-23",
+      "time": "08:43",
+      "hospital": "명지병원",
+      "department": "응급의학과"
+    },
+    "chiefComplaint": {
+      "summary": "가슴 통증",
+      "referralSource": null,
+      "onsetDate": "2024-04-21",
+      "duration": "2일",
+      "details": "농기계에 왼 어깨와 명치부 부딪힘, 2일 전부터 명치부 통증 간헐적으로 있다가 금일 지속되어 내원"
+    },
+    "diagnoses": [
+      {
+        "code": "I21.9",
+        "nameKr": "급성 심근경색증",
+        "nameEn": "Acute Myocardial Infarction",
+        "date": "2024-04-23",
+        "isPrimary": true,
+        "hospital": "명지병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "심전도",
+        "nameEn": "Electrocardiogram",
+        "date": "2024-04-23",
+        "result": "V1~4 ST elevation",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "혈액 검사",
+        "nameEn": "Blood Test",
+        "date": "2024-04-23",
+        "result": "CK 192, CK-MB 10.3, Troponin I 575.31",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "관상동맥 조영술 및 스텐트 삽입",
+        "date": "2024-04-23",
+        "duration": null,
+        "details": "PTCA of culprit lesion in AMI",
+        "hospital": "명지병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": null
+    },
+    "admissionPeriod": {
+      "startDate": "2024-04-23",
+      "endDate": "2024-04-25",
+      "totalDays": 2,
+      "hospital": "명지병원",
+      "department": "심장내과",
+      "reason": "급성 심근경색증"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 급성 심근경색증으로 입원 치료가 필요함.",
+      "prognosis": "예후 양호",
+      "recommendations": "정기적인 외래 진료 및 약물 복용 지속",
+      "limitations": "격렬한 운동 및 스트레스 피해야 함"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 급성 심근경색증으로 치료 후 퇴원함.",
+      "keyFindings": [
+        "급성 심근경색증 진단",
+        "관상동맥 조영술 및 스텐트 삽입 시행"
+      ],
+      "recommendations": "정기적인 심장 검진 및 약물 복용 지속"
+    }
+  }
+}

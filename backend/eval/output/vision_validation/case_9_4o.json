@@ -1,0 +1,102 @@
+{
+  "caseId": "Case9",
+  "caseNum": 9,
+  "patientName": "임승희",
+  "model": "gpt-4o",
+  "pdfFile": "대림성모병원.pdf",
+  "imageCount": 3,
+  "processingTime": 21418,
+  "tokens": {
+    "prompt_tokens": 3664,
+    "completion_tokens": 633,
+    "total_tokens": 4297,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.027815,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-07",
+      "time": "09:34",
+      "hospital": "대림성모병원",
+      "department": "유방외과"
+    },
+    "chiefComplaint": {
+      "summary": "유방암 검사 이상 소견",
+      "onsetDate": "2024-10",
+      "duration": null,
+      "details": "타 병원 검사 이상 소견"
+    },
+    "diagnoses": [
+      {
+        "code": "N64.9",
+        "nameKr": "유방의 상세불명 장애",
+        "date": "2024-10-07",
+        "isPrimary": false,
+        "hospital": "대림성모병원"
+      },
+      {
+        "code": "D05.10",
+        "nameKr": "유방의 관내 제자리암종, 오른쪽",
+        "date": "2024-09-27",
+        "isPrimary": true,
+        "hospital": "대림성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PE",
+        "date": "2024-10-04",
+        "result": "Rt 9.5-4 1cm mass",
+        "finding": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "US",
+        "date": "2024-09-27",
+        "result": "Rt mild outer, focal asym w/ malignant ca+",
+        "finding": "US correlated(C6)",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Slide: DCIS",
+      "testDate": "2024-09-27",
+      "finding": "Intraductal carcinoma in situ of breast, right",
+      "stageTNM": "cTisN0M0"
+    },
+    "treatments": [
+      {
+        "type": "Medication",
+        "name": "Levosulpiride, cimetidine, metoclopramide, domperidone",
+        "date": "2024-10-07",
+        "duration": null,
+        "details": "뇌하수체로 인한 금기약물"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-07",
+      "endDate": "2024-10-30",
+      "totalVisits": null,
+      "hospitals": [
+        "대림성모병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [],
+    "doctorOpinion": {
+      "summary": "현재 상태가 수술의 contraindication은 아님",
+      "prognosis": "수술 전후 혈압 변화에 주의",
+      "recommendations": "Neurological deficit 발생 시 신경과에 연락"
+    }
+  },
+  "timestamp": "2026-01-25T09:41:44.744Z"
+}

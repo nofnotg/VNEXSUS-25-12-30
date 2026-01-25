@@ -1,0 +1,141 @@
+{
+  "caseNum": 27,
+  "model": "gpt-4o-mini",
+  "processingTime": 16235,
+  "tokens": {
+    "prompt_tokens": 21913,
+    "completion_tokens": 997,
+    "total_tokens": 22910,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0038851499999999995,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-09-08",
+      "time": null,
+      "hospital": "서울아산병원",
+      "department": "내분비외과"
+    },
+    "chiefComplaint": {
+      "summary": "갑상선 유두암 의심",
+      "referralSource": "중앙대광명병원",
+      "onsetDate": "2024-07-01",
+      "duration": "1년",
+      "details": "갑상선 결절로 인해 FNA 시행 후 유두암 의심 소견."
+    },
+    "diagnoses": [
+      {
+        "code": "C73",
+        "nameKr": "갑상선암",
+        "nameEn": "Thyroid cancer",
+        "date": "2025-09-09",
+        "isPrimary": true,
+        "hospital": "서울아산병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Thyroid biopsy",
+        "nameEn": "Thyroid biopsy",
+        "date": "2025-02-21",
+        "result": "SUSPICIOUS FOR PAPILLARY CARCINOMA",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "CT, Head & Neck",
+        "nameEn": "CT, Head & Neck",
+        "date": "2025-03-19",
+        "result": "Proved thyroid cancer.",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "Thyroid, hemithyroidectomy with left central node dissection",
+      "testDate": "2025-09-09",
+      "reportDate": "2025-09-16",
+      "finding": "FOLLICULAR VARIANT OF PAPILLARY CARCINOMA, INFILTRATIVE SUBTYPE",
+      "stageTNM": "T1N0M0",
+      "stageOverall": "Stage I",
+      "histology": "Follicular variant of papillary carcinoma",
+      "margin": "clear"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Thyroid lobectomy and isthmusectomy with central node dissection",
+        "date": "2025-09-09",
+        "duration": "1일",
+        "details": "갑상선 유두암 의심으로 수술 시행.",
+        "hospital": "서울아산병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-23",
+      "endDate": "2025-10-14",
+      "totalVisits": 5,
+      "hospitals": [
+        "서울아산병원",
+        "중앙대광명병원",
+        "이레미즈외과"
+      ],
+      "summary": "갑상선 결절 및 유두암 의심으로 외래 진료."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-09-08",
+      "endDate": "2025-09-10",
+      "totalDays": 2,
+      "hospital": "서울아산병원",
+      "department": "내분비외과",
+      "reason": "갑상선 유두암 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "갑상선 유두암으로 수술 후 경과 관찰 필요.",
+      "prognosis": "양호",
+      "recommendations": "정기적인 추적 검사 필요.",
+      "limitations": "일상생활 제한 없음."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "갑상선 유두암 진단 및 수술 완료.",
+      "keyFindings": [
+        "갑상선 유두암 진단",
+        "수술 후 경과 양호"
+      ],
+      "recommendations": "정기적인 외래 진료 및 검사 필요."
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "caseId": "Case29",
+  "caseNum": 29,
+  "patientName": "서문정숙",
+  "model": "gpt-4o-mini",
+  "pdfFile": "더자인병원.pdf",
+  "imageCount": 3,
+  "processingTime": 13110,
+  "tokens": {
+    "prompt_tokens": 110855,
+    "completion_tokens": 501,
+    "total_tokens": 111356,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016928850000000002,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-08-17",
+      "time": null,
+      "hospital": "더자인병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "diarrhea",
+      "onsetDate": "2024-08-15",
+      "duration": "2 days",
+      "details": null
+    },
+    "diagnoses": [
+      {
+        "code": "A09",
+        "nameKr": "설사",
+        "date": "2024-08-17",
+        "isPrimary": true,
+        "hospital": "더자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "PE",
+        "date": "2024-08-17",
+        "result": "increased tenderness at lower abdomen",
+        "finding": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "medication",
+        "name": "antibiotics",
+        "date": "2024-08-17",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-08-17",
+      "endDate": "2024-08-24",
+      "totalVisits": 1,
+      "hospitals": [
+        "더자인병원"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "Salmonellosis",
+        "code": "A02.0",
+        "diagnosisDate": "2024-08-17",
+        "treatment": "medication",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Patient shows signs of dehydration due to diarrhea.",
+      "prognosis": "Good",
+      "recommendations": "Continue hydration and follow up if symptoms persist."
+    }
+  },
+  "timestamp": "2026-01-25T09:39:00.801Z"
+}

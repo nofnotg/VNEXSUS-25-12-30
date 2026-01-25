@@ -1,0 +1,112 @@
+{
+  "caseId": "Case17",
+  "caseNum": 17,
+  "patientName": "김동아",
+  "model": "gpt-4o",
+  "pdfFile": "해븐리병원.pdf",
+  "imageCount": 3,
+  "processingTime": 24060,
+  "tokens": {
+    "prompt_tokens": 3664,
+    "completion_tokens": 670,
+    "total_tokens": 4334,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.02837,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-14",
+      "time": "13:11",
+      "hospital": "해브리병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "두통, 시야장애",
+      "onsetDate": "내원 전일부터 발생",
+      "duration": null,
+      "details": "머리 좌측에 쑤시는 잦누름 아프다. 시야 우측이 잘 안보임. 고개를 돌리지 않으면 우측을 보지 못함."
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "6번 신경 마비 의심",
+        "date": "2025-08-14",
+        "isPrimary": false,
+        "hospital": "해브리병원"
+      },
+      {
+        "code": null,
+        "nameKr": "뇌졸중 의심",
+        "date": "2025-08-14",
+        "isPrimary": true,
+        "hospital": "해브리병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Neurological examination",
+        "date": "2025-08-14",
+        "result": "alert, normal",
+        "finding": "시야 우측에서 중력에 의한 수평형 복시",
+        "isAbnormal": true
+      },
+      {
+        "name": "Brain MRI/Diffusion",
+        "date": "2025-08-24",
+        "result": "acute infarction",
+        "finding": "Lt occipital lobe, Lt parietofrontal lobe multiple embolic",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": null,
+    "treatments": [
+      {
+        "type": "Medication",
+        "name": "아스피린",
+        "date": null,
+        "duration": null,
+        "details": "약국에서 사서 복용했으나 큰 반응 없음"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-08-14",
+      "endDate": null,
+      "totalVisits": null,
+      "hospitals": [
+        "해브리병원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      },
+      {
+        "condition": "뇌졸중",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "갑자기 발생한 신경학적 이상으로 시야장애 및 두통",
+      "prognosis": null,
+      "recommendations": "뇌졸중 의심으로 brain MRI 시행"
+    }
+  },
+  "timestamp": "2026-01-25T09:43:08.562Z"
+}

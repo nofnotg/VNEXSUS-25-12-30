@@ -1,0 +1,2004 @@
+{
+  "phase": 2,
+  "timestamp": "2026-01-25T06:55:03.265Z",
+  "totalCost": 1.708,
+  "modelComparison": {
+    "gpt-4o": {
+      "totalCases": 15,
+      "successfulCases": 12,
+      "avgQualityScore": 58,
+      "avgProcessingTime": 42591,
+      "totalCost": 1.708,
+      "results": [
+        {
+          "caseNum": 1,
+          "processingTime": 12848,
+          "tokens": {
+            "prompt_tokens": 25475,
+            "completion_tokens": 971,
+            "total_tokens": 26446,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.14194,
+          "quality": {
+            "structureCompleteness": 90,
+            "diagnosisMatch": 13,
+            "overallScore": 44
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-02-17",
+              "time": "14:40",
+              "hospital": "한림대학교 강남성심병원",
+              "department": "신경외과"
+            },
+            "chiefComplaint": {
+              "summary": "두통, 어지럼증",
+              "referralSource": "이기섭의원",
+              "onsetDate": "2025-01",
+              "duration": "1개월",
+              "details": "일어날 때 어지럽고 옆쪽 머리가 찢어지는 것처럼 아파서 내원함."
+            },
+            "diagnoses": [
+              {
+                "code": "I67.8",
+                "nameKr": "기타 명시된 뇌혈관 질환",
+                "nameEn": "Other specified cerebrovascular diseases",
+                "date": "2025-02-18",
+                "isPrimary": true,
+                "hospital": "한림대학교 강남성심병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "MRI(Brain+3D Angio)",
+                "nameEn": "MRI(Brain+3D Angio)",
+                "date": "2025-02-17",
+                "result": "White matter hypersignal intensities of presumed vascular origin, Fazekas 1. Microbleed, left operculum. Short segmental mild stenosis, right V4.",
+                "finding": "No other major findings of ischemia, hemorrhage, mass or atrophy in the brain.",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "약물 주사치료",
+                "date": "2025-02-17",
+                "duration": "1일",
+                "details": "정밀 검사상 뇌혈관질환 진단하에 약물 주사치료하고 증상개선되어 퇴원",
+                "hospital": "한림대학교 강남성심병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-02-21",
+              "endDate": null,
+              "totalVisits": 1,
+              "hospitals": [
+                "한림대학교 강남성심병원"
+              ],
+              "summary": "퇴원 후 외래 진료 예정"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-02-17",
+              "endDate": "2025-02-18",
+              "totalDays": 2,
+              "hospital": "한림대학교 강남성심병원",
+              "department": "신경외과",
+              "reason": "두통, 어지럼증으로 인한 정밀 검사 및 치료"
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": null,
+                "diagnosisDate": "2015",
+                "treatment": "약물 치료",
+                "currentStatus": "관리 중",
+                "hospital": "지역 병원",
+                "isPreExisting": true
+              },
+              {
+                "condition": "당뇨병",
+                "code": null,
+                "diagnosisDate": "2015",
+                "treatment": "약물 치료",
+                "currentStatus": "관리 중",
+                "hospital": "지역 병원",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "증상 호전되어 퇴원하였으며, 외래 진료를 통해 지속적인 관리 필요.",
+              "prognosis": "양호",
+              "recommendations": "정기적인 외래 방문 및 혈압, 혈당 관리",
+              "limitations": "특별한 제한 사항 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": "low"
+            },
+            "conclusion": {
+              "summary": "뇌혈관질환으로 인한 입원 치료 후 호전됨.",
+              "keyFindings": [
+                "White matter hypersignal intensities of presumed vascular origin, Fazekas 1.",
+                "Microbleed, left operculum."
+              ],
+              "recommendations": "정기적인 외래 방문 및 지속적인 관리 필요"
+            }
+          }
+        },
+        {
+          "caseNum": 3,
+          "processingTime": 12016,
+          "tokens": {
+            "prompt_tokens": 13756,
+            "completion_tokens": 1119,
+            "total_tokens": 14875,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.085565,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 100,
+            "overallScore": 100
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2024-12-13",
+              "time": "00:42",
+              "hospital": "이대목동병원",
+              "department": "응급의학과"
+            },
+            "chiefComplaint": {
+              "summary": "어지러움과 두통",
+              "referralSource": null,
+              "onsetDate": "2024-12-12",
+              "duration": "1일",
+              "details": "12/7 음주 후 어지러움과 두통 발생, 소화 불량 증상 지속"
+            },
+            "diagnoses": [
+              {
+                "code": "D43.0",
+                "nameKr": "천막상 뇌의 행동양식 불명 또는 미상의 신생물",
+                "nameEn": "Uncertain behavior brain tumor, supratentorial",
+                "date": "2025-01-15",
+                "isPrimary": true,
+                "hospital": "이대목동병원"
+              },
+              {
+                "code": "R42",
+                "nameKr": "어지러움",
+                "nameEn": "Dizziness",
+                "date": "2024-12-13",
+                "isPrimary": false,
+                "hospital": "이대목동병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI",
+                "nameEn": "MRI Brain+Venography+MRA(Brain+Neck)+DWI+PWI",
+                "date": "2025-01-15",
+                "result": "좌측 측두엽 영역 다발 초점의 결절",
+                "finding": "양성 병변 또는 신경계 낭종 등 감별 진단 필요",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "CT 3D Brain Perfusion Stroke+ CTA (Neck)",
+                "nameEn": "CT 3D Brain Perfusion Stroke+ CTA (Neck)",
+                "date": "2024-12-31",
+                "result": "우측 쇄골하동맥 근위부의 국소 죽상경화성 혈관 석회화",
+                "finding": "뇌 실질의 비정상적인 감쇠 증거 없음",
+                "normalRange": null,
+                "isAbnormal": false
+              }
+            ],
+            "pathology": {
+              "testName": null,
+              "testDate": null,
+              "reportDate": null,
+              "finding": null,
+              "stageTNM": null,
+              "stageOverall": null,
+              "histology": null,
+              "margin": null
+            },
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "PO 처방",
+                "date": "2024-12-13",
+                "duration": null,
+                "details": "생활 style 조절 권유",
+                "hospital": "이대목동병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2024-12-17",
+              "endDate": "2025-03-04",
+              "totalVisits": 4,
+              "hospitals": [
+                "이대목동병원"
+              ],
+              "summary": "두통 및 어지러움으로 신경과 외래 방문"
+            },
+            "admissionPeriod": {
+              "startDate": "2024-12-13",
+              "endDate": "2024-12-13",
+              "totalDays": 1,
+              "hospital": "이대목동병원",
+              "department": "응급의학과",
+              "reason": "어지러움과 두통"
+            },
+            "pastHistory": [
+              {
+                "condition": "부정맥",
+                "code": null,
+                "diagnosisDate": null,
+                "treatment": null,
+                "currentStatus": "현재 상태 정보 없음",
+                "hospital": null,
+                "isPreExisting": false
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "두통 및 어지러움의 원인으로 이차두통 강력 의심",
+              "prognosis": "두통 호전",
+              "recommendations": "생활 style 조절 권유",
+              "limitations": "일상생활 제한 사항 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "두통 및 어지러움으로 인한 응급실 및 외래 방문",
+              "keyFindings": [
+                "MRI에서 좌측 측두엽 영역 다발 초점의 결절 발견",
+                "CT에서 우측 쇄골하동맥의 국소 죽상경화성 혈관 석회화"
+              ],
+              "recommendations": "보험 약관상 '암'의 진단 기준에 부합하지 않아 보상 불가"
+            }
+          }
+        },
+        {
+          "caseNum": 6,
+          "processingTime": 54385,
+          "tokens": {
+            "prompt_tokens": 37363,
+            "completion_tokens": 1192,
+            "total_tokens": 38555,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.20469500000000002,
+          "quality": {
+            "structureCompleteness": 90,
+            "diagnosisMatch": 17,
+            "overallScore": 46
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-02-26",
+              "time": null,
+              "hospital": "명지병원",
+              "department": "심장내과"
+            },
+            "chiefComplaint": {
+              "summary": "간헐적으로 답답하고 조여서 내원",
+              "referralSource": null,
+              "onsetDate": null,
+              "duration": null,
+              "details": "등도 아플 때도 있었다. HTN, HL, DM 병력 있음."
+            },
+            "diagnoses": [
+              {
+                "code": "I20.1",
+                "nameKr": "변이형 협심증",
+                "nameEn": "Variant angina",
+                "date": "2025-02-26",
+                "isPrimary": true,
+                "hospital": "명지병원"
+              },
+              {
+                "code": "E78.5",
+                "nameKr": "상세불명의 고지질혈증",
+                "nameEn": "Hyperlipidaemia, unspecified",
+                "date": "2025-02-26",
+                "isPrimary": false,
+                "hospital": "명지병원"
+              },
+              {
+                "code": "E11.9",
+                "nameKr": "합병증을 동반하지 않은 2형 당뇨병",
+                "nameEn": "Type 2 diabetes mellitus, without complications",
+                "date": "2025-02-26",
+                "isPrimary": false,
+                "hospital": "명지병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "관상동맥 조영술",
+                "nameEn": "Coronary Angiography",
+                "date": "2025-02-19",
+                "result": "30~40% 정도 협착의 경미한 관상동맥질환 발견",
+                "finding": "혈관 수축 유발 검사 결과 양성",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "심전도",
+                "nameEn": "Electrocardiogram",
+                "date": "2025-02-19",
+                "result": "Sinus bradycardia",
+                "finding": "Otherwise normal ECG",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "Rosulord tab 5mg/T",
+                "date": "2025-02-26",
+                "duration": "1 month",
+                "details": "약물 치료 계획하에 퇴원",
+                "hospital": "명지병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-02-05",
+              "endDate": "2025-02-26",
+              "totalVisits": 3,
+              "hospitals": [
+                "명지병원"
+              ],
+              "summary": "심장내과 외래 방문"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-02-19",
+              "endDate": "2025-02-19",
+              "totalDays": 1,
+              "hospital": "명지병원",
+              "department": "심장내과",
+              "reason": "관상동맥 조영술 시행"
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": "I10",
+                "diagnosisDate": "2015-01-01",
+                "treatment": "약물 치료",
+                "currentStatus": "약물 복용 중",
+                "hospital": "매화가정의학과의원",
+                "isPreExisting": true
+              },
+              {
+                "condition": "고지혈증",
+                "code": "E78.5",
+                "diagnosisDate": "2021-06-01",
+                "treatment": "약물 치료",
+                "currentStatus": "약물 복용 중",
+                "hospital": "임성식 내과의원",
+                "isPreExisting": true
+              },
+              {
+                "condition": "당뇨병",
+                "code": "E11.9",
+                "diagnosisDate": "2023-02-03",
+                "treatment": "약물 치료",
+                "currentStatus": "약물 복용 중",
+                "hospital": "임성식 내과의원",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "약물 치료 계획하에 퇴원, 추적관찰 필요",
+              "prognosis": "양호",
+              "recommendations": "6개월 이상 지속적으로 약물 치료 유지",
+              "limitations": null
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": "low"
+            },
+            "conclusion": {
+              "summary": "변이형 협심증 진단 및 약물 치료 계획",
+              "keyFindings": [
+                "관상동맥 조영술 결과 경미한 관상동맥질환 발견",
+                "혈관 수축 유발 검사 결과 양성"
+              ],
+              "recommendations": "약물 치료 유지 및 추적관찰"
+            }
+          }
+        },
+        {
+          "caseNum": 8,
+          "error": "429 Request too large for gpt-4o in organization org-x0D2c6rxdynOqdiCr09gtKeR on tokens per min (TPM): Limit 30000, Requested 58228. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more."
+        },
+        {
+          "caseNum": 10,
+          "processingTime": 71426,
+          "tokens": {
+            "prompt_tokens": 43367,
+            "completion_tokens": 1080,
+            "total_tokens": 44447,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.233035,
+          "quality": {
+            "structureCompleteness": 90,
+            "diagnosisMatch": 0,
+            "overallScore": 36
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2024-04-18",
+              "time": "10:09",
+              "hospital": "가톨릭대학교 은평성모병원",
+              "department": "산부인과"
+            },
+            "chiefComplaint": {
+              "summary": "임신 및 갑상선 기능 이상",
+              "referralSource": null,
+              "onsetDate": "2024-02-01",
+              "duration": "10+4 weeks",
+              "details": "임신 초기 산모로 갑상선 기능 이상에 대한 평가 관리 위해 내원"
+            },
+            "diagnoses": [
+              {
+                "code": "O36.4",
+                "nameKr": "임신 중 기타 특정 상태의 관리",
+                "nameEn": "Maternal care for other specified fetal problems",
+                "date": "2024-04-18",
+                "isPrimary": true,
+                "hospital": "가톨릭대학교 은평성모병원"
+              },
+              {
+                "code": "E03.9",
+                "nameKr": "갑상선 기능 저하증, 상세불명",
+                "nameEn": "Hypothyroidism, unspecified",
+                "date": "2024-04-18",
+                "isPrimary": false,
+                "hospital": "가톨릭대학교 은평성모병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "Thyroid Function Test",
+                "nameEn": "Thyroid Function Test",
+                "date": "2024-04-18",
+                "result": "TSH 4.19, Free T4 0.90, T3 1.43",
+                "finding": "TSH 상승, Free T4 및 T3 정상 범위",
+                "normalRange": "TSH: 0.4-4.0, Free T4: 0.8-1.8, T3: 0.8-2.0",
+                "isAbnormal": true
+              },
+              {
+                "name": "Obstetrical Ultrasound",
+                "nameEn": "Obstetrical Ultrasound",
+                "date": "2024-04-18",
+                "result": "CRL: 3.8 cm, FHB: 154 BPM",
+                "finding": "정상 범위 내 태아 발달",
+                "normalRange": null,
+                "isAbnormal": false
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "Levothyroxine (LT4)",
+                "date": "2024-04-18",
+                "duration": "4주",
+                "details": "TSH 조절을 위해 LT4 25 mcg 처방",
+                "hospital": "가톨릭대학교 은평성모병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2024-04-18",
+              "endDate": "2024-11-25",
+              "totalVisits": 10,
+              "hospitals": [
+                "가톨릭대학교 은평성모병원"
+              ],
+              "summary": "임신 및 갑상선 기능 이상 관리 위해 정기적으로 내원"
+            },
+            "admissionPeriod": {
+              "startDate": "2024-10-21",
+              "endDate": "2024-10-29",
+              "totalDays": 8,
+              "hospital": "가톨릭대학교 은평성모병원",
+              "department": "산부인과",
+              "reason": "제왕절개를 통한 출산"
+            },
+            "pastHistory": [
+              {
+                "condition": "고관절 이형성증",
+                "code": null,
+                "diagnosisDate": "2019",
+                "treatment": "수술",
+                "currentStatus": "완쾌",
+                "hospital": "정보 없음",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "임신 중 갑상선 기능 이상 관리 필요",
+              "prognosis": "출산 후 갑상선 기능 정상화 예상",
+              "recommendations": "정기적인 갑상선 기능 검사 및 약물 복용 지속",
+              "limitations": "특별한 제한 사항 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": "low"
+            },
+            "conclusion": {
+              "summary": "임신 중 갑상선 기능 이상으로 인한 정기적인 관리 필요",
+              "keyFindings": [
+                "TSH 상승",
+                "정상 범위 내 태아 발달"
+              ],
+              "recommendations": "출산 후 갑상선 기능 재평가 및 필요 시 약물 조정"
+            }
+          }
+        },
+        {
+          "caseNum": 12,
+          "processingTime": 78859,
+          "tokens": {
+            "prompt_tokens": 38017,
+            "completion_tokens": 1215,
+            "total_tokens": 39232,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.20831000000000002,
+          "quality": {
+            "structureCompleteness": 80,
+            "diagnosisMatch": 50,
+            "overallScore": 62
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-02-19",
+              "time": "16:23",
+              "hospital": "이대목동병원",
+              "department": "응급의학과"
+            },
+            "chiefComplaint": {
+              "summary": "복부 팽만 및 잇몸 출혈",
+              "referralSource": "홍익병원",
+              "onsetDate": "2025-01-30",
+              "duration": "약 3주",
+              "details": "환자는 3주 전 타병원에서 alcoholic LC로 진단받고 치료 위해 내원."
+            },
+            "diagnoses": [
+              {
+                "code": "K74.64",
+                "nameKr": "비대상성 간경변증",
+                "nameEn": "Decompensated liver cirrhosis",
+                "date": "2025-01-30",
+                "isPrimary": true,
+                "hospital": "이대목동병원"
+              },
+              {
+                "code": "K92.2",
+                "nameKr": "위장관 출혈",
+                "nameEn": "Gastrointestinal hemorrhage",
+                "date": "2025-02-19",
+                "isPrimary": false,
+                "hospital": "이대목동병원"
+              },
+              {
+                "code": "K76.7",
+                "nameKr": "간신증후군",
+                "nameEn": "Hepatorenal syndrome",
+                "date": "2025-02-19",
+                "isPrimary": false,
+                "hospital": "이대목동병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "CBC",
+                "nameEn": "Complete Blood Count",
+                "date": "2025-02-19",
+                "result": "WBC 10800, Hb 4.0",
+                "finding": "빈혈 및 백혈구 증가",
+                "normalRange": "WBC: 4,000-10,000, Hb: 13.5-17.5",
+                "isAbnormal": true
+              },
+              {
+                "name": "CRP",
+                "nameEn": "C-Reactive Protein",
+                "date": "2025-02-19",
+                "result": "4.55",
+                "finding": "염증 반응 증가",
+                "normalRange": "0-1",
+                "isAbnormal": true
+              },
+              {
+                "name": "Liver Function Test",
+                "nameEn": "Liver Function Test",
+                "date": "2025-02-19",
+                "result": "AST/ALT 143/31, TB/DB 6.2/4.8",
+                "finding": "간 기능 저하",
+                "normalRange": "AST: 10-40, ALT: 7-56, TB: 0.1-1.2",
+                "isAbnormal": true
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "내시경적 상부소화관출혈지혈법",
+                "date": "2025-02-20",
+                "duration": null,
+                "details": "Hemoclipping 시행",
+                "hospital": "이대목동병원"
+              },
+              {
+                "type": "약물",
+                "name": "CRRT, Ventilator 적용",
+                "date": "2025-02-20",
+                "duration": null,
+                "details": "신장 대체 요법 및 인공호흡기 적용",
+                "hospital": "이대목동병원"
+              }
+            ],
+            "outpatientPeriod": null,
+            "admissionPeriod": {
+              "startDate": "2025-02-19",
+              "endDate": "2025-02-20",
+              "totalDays": 1,
+              "hospital": "이대목동병원",
+              "department": "소화기내과",
+              "reason": "비대상성 간경변증 및 위장관 출혈"
+            },
+            "pastHistory": [
+              {
+                "condition": "알코올성 간경변증",
+                "code": "K70.3",
+                "diagnosisDate": "2025-01-30",
+                "treatment": "없음",
+                "currentStatus": "진행 중",
+                "hospital": "홍익병원",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "환자는 알코올성 간경변증으로 인한 위장관 출혈 및 간신증후군으로 예후가 불량함.",
+              "prognosis": "예후 불량",
+              "recommendations": "입원 치료 및 지속적인 관리 필요",
+              "limitations": "일상생활 어려움"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "환자는 알코올성 간경변증으로 인한 위장관 출혈로 입원하였으며, 예후가 불량함.",
+              "keyFindings": [
+                "알코올성 간경변증",
+                "위장관 출혈",
+                "간신증후군"
+              ],
+              "recommendations": "지속적인 입원 치료 및 관리 필요"
+            }
+          }
+        },
+        {
+          "caseNum": 14,
+          "processingTime": 62271,
+          "tokens": {
+            "prompt_tokens": 31150,
+            "completion_tokens": 1158,
+            "total_tokens": 32308,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.17312,
+          "quality": {
+            "structureCompleteness": 90,
+            "diagnosisMatch": 25,
+            "overallScore": 51
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-02-26",
+              "time": null,
+              "hospital": "명지병원",
+              "department": "심장내과"
+            },
+            "chiefComplaint": {
+              "summary": "간헐적으로 답답하고 조이는 가슴 통증",
+              "referralSource": null,
+              "onsetDate": null,
+              "duration": null,
+              "details": "등도 아플 때가 있었으며, 변형 협심증 진단을 받음"
+            },
+            "diagnoses": [
+              {
+                "code": "I20.1",
+                "nameKr": "변형 협심증",
+                "nameEn": "Variant angina",
+                "date": "2025-02-26",
+                "isPrimary": true,
+                "hospital": "명지병원"
+              },
+              {
+                "code": "E78.5",
+                "nameKr": "상세불명의 고지질혈증",
+                "nameEn": "Hyperlipidaemia, unspecified",
+                "date": "2025-02-26",
+                "isPrimary": false,
+                "hospital": "명지병원"
+              },
+              {
+                "code": "E11.9",
+                "nameKr": "합병증을 동반하지 않은 2형 당뇨병",
+                "nameEn": "Type 2 diabetes mellitus, without complications",
+                "date": "2025-02-26",
+                "isPrimary": false,
+                "hospital": "명지병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "관상동맥 조영술",
+                "nameEn": "Coronary Angiography",
+                "date": "2025-02-19",
+                "result": "30~40% 정도 협착의 경미한 관상동맥질환 발견",
+                "finding": "ergonovine provocation test positive",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "심전도",
+                "nameEn": "ECG",
+                "date": "2025-02-19",
+                "result": "Sinus bradycardia",
+                "finding": "Otherwise normal ECG",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "Rosulord tab 5mg",
+                "date": "2025-02-26",
+                "duration": "1 month",
+                "details": "약물 치료 계획하에 퇴원",
+                "hospital": "명지병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-02-05",
+              "endDate": "2025-02-26",
+              "totalVisits": 3,
+              "hospitals": [
+                "명지병원"
+              ],
+              "summary": "심장내과 외래 방문"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-02-19",
+              "endDate": "2025-02-19",
+              "totalDays": 1,
+              "hospital": "명지병원",
+              "department": "심장내과",
+              "reason": "관상동맥 조영술 시행"
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": "I10",
+                "diagnosisDate": "약 10년 전",
+                "treatment": "약물 치료",
+                "currentStatus": "유지 중",
+                "hospital": null,
+                "isPreExisting": true
+              },
+              {
+                "condition": "고지혈증",
+                "code": "E78.5",
+                "diagnosisDate": "약 4년 전",
+                "treatment": "약물 치료",
+                "currentStatus": "유지 중",
+                "hospital": null,
+                "isPreExisting": true
+              },
+              {
+                "condition": "당뇨병",
+                "code": "E11.9",
+                "diagnosisDate": "약 1~2년 전",
+                "treatment": "약물 치료",
+                "currentStatus": "유지 중",
+                "hospital": null,
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "약물 치료 계획하에 퇴원, 6개월 이상 지속적 약물 치료 필요",
+              "prognosis": "지속적 관찰 필요",
+              "recommendations": "약물 치료 유지",
+              "limitations": "일상생활 제한 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "변형 협심증 및 경미한 관상동맥질환 진단",
+              "keyFindings": [
+                "변형 협심증 진단",
+                "경미한 관상동맥질환 발견"
+              ],
+              "recommendations": "약물 치료 유지 및 지속적 관찰"
+            }
+          }
+        },
+        {
+          "caseNum": 16,
+          "processingTime": 23583,
+          "tokens": {
+            "prompt_tokens": 8882,
+            "completion_tokens": 1059,
+            "total_tokens": 9941,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.060295,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 100,
+            "overallScore": 100
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-09-25",
+              "time": null,
+              "hospital": "일산차병원",
+              "department": "소화기내과"
+            },
+            "chiefComplaint": {
+              "summary": "직장암 진단 및 치료 계획",
+              "referralSource": "일산차병원",
+              "onsetDate": "2025-08-21",
+              "duration": "약 1개월",
+              "details": "대장내시경 및 생검 결과 직장암 진단, 외과적 치료 필요"
+            },
+            "diagnoses": [
+              {
+                "code": "C20",
+                "nameKr": "직장의 악성 신생물",
+                "nameEn": "Malignant neoplasm of rectum",
+                "date": "2025-09-25",
+                "isPrimary": true,
+                "hospital": "일산차병원"
+              },
+              {
+                "code": "B37.88",
+                "nameKr": "기타 부위의 칸디다증",
+                "nameEn": "Other sites of candidiasis",
+                "date": "2025-09-25",
+                "isPrimary": false,
+                "hospital": "일산차병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "MR Pelvis",
+                "nameEn": "MR Pelvis",
+                "date": "2025-09-30",
+                "result": "Rectal cancer, cT2 or cT3a, cN2",
+                "finding": "Moderately differentiated adenocarcinoma",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "PET-CT Torso",
+                "nameEn": "PET-CT Torso",
+                "date": "2025-09-29",
+                "result": "Hypermetabolic mass in rectum, consistent with rectal cancer",
+                "finding": "No evidence of metastasis",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "CT Chest",
+                "nameEn": "CT Chest",
+                "date": "2025-09-29",
+                "result": "No remarkable abnormality",
+                "finding": "No significant lymphadenopathy",
+                "normalRange": null,
+                "isAbnormal": false
+              }
+            ],
+            "pathology": {
+              "testName": "Colonoscopic biopsy",
+              "testDate": "2025-09-10",
+              "reportDate": "2025-09-11",
+              "finding": "Adenocarcinoma, well to moderately differentiated",
+              "stageTNM": "cT2 or cT3a, cN2",
+              "stageOverall": null,
+              "histology": "Moderately differentiated adenocarcinoma",
+              "margin": null
+            },
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "외과적 치료",
+                "date": null,
+                "duration": null,
+                "details": "외과적 치료 필요",
+                "hospital": "일산차병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-08-21",
+              "endDate": "2025-09-25",
+              "totalVisits": 5,
+              "hospitals": [
+                "일산차병원"
+              ],
+              "summary": "직장암 진단 및 치료 계획을 위한 외래 방문"
+            },
+            "admissionPeriod": {
+              "startDate": null,
+              "endDate": null,
+              "totalDays": 0,
+              "hospital": null,
+              "department": null,
+              "reason": null
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": null,
+                "diagnosisDate": null,
+                "treatment": null,
+                "currentStatus": "유",
+                "hospital": null,
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "직장암에 대한 외과적 치료 필요",
+              "prognosis": "외과적 치료 후 경과 관찰 필요",
+              "recommendations": "수술 권고",
+              "limitations": "일상생활 제한 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "직장암 진단 및 외과적 치료 필요",
+              "keyFindings": [
+                "직장암 진단",
+                "외과적 치료 권고"
+              ],
+              "recommendations": "수술 후 경과 관찰 필요"
+            }
+          }
+        },
+        {
+          "caseNum": 18,
+          "processingTime": 40979,
+          "tokens": {
+            "prompt_tokens": 16735,
+            "completion_tokens": 1301,
+            "total_tokens": 18036,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.10319,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 0,
+            "overallScore": 40
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-07-08",
+              "time": null,
+              "hospital": "고려대학교 구로병원",
+              "department": "위장관외과(상부)"
+            },
+            "chiefComplaint": {
+              "summary": "고도비만 수술 상담",
+              "referralSource": "참 튼튼병원",
+              "onsetDate": "2018",
+              "duration": "7-8년",
+              "details": "체중 증가로 인해 큐시미아 및 위고비 주사 치료 실패 후 수술을 위해 내원"
+            },
+            "diagnoses": [
+              {
+                "code": "E66.01",
+                "nameKr": "병적 비만",
+                "nameEn": "Morbid obesity",
+                "date": "2025-05-12",
+                "isPrimary": true,
+                "hospital": "고려대학교 구로병원"
+              },
+              {
+                "code": "K80.10",
+                "nameKr": "담낭결석을 동반한 만성 담낭염",
+                "nameEn": "Gallbladder stone with chronic cholecystitis",
+                "date": "2025-07-04",
+                "isPrimary": false,
+                "hospital": "고려대학교 구로병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "CT Abdomen & Pelvis",
+                "nameEn": "CT Abdomen & Pelvis",
+                "date": "2025-06-24",
+                "result": "Multiple GB stones, small left renal cyst, diffuse enlargement of the uterus",
+                "finding": "A few tiny hepatic cysts, multiple GB stones, small left renal cyst",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "XR Chest PA",
+                "nameEn": "XR Chest PA",
+                "date": "2025-07-11",
+                "result": "Subsegmental atelectasis in RMLF, LLLF",
+                "finding": "Pneumoperitoneum",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": {
+              "testName": "Gallbladder, cholecystectomy",
+              "testDate": "2025-07-08",
+              "reportDate": "2025-07-11",
+              "finding": "Cholelithiasis, chronic cholecystitis",
+              "stageTNM": null,
+              "stageOverall": null,
+              "histology": null,
+              "margin": null
+            },
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "Laparoscopic sleeve gastrectomy",
+                "date": "2025-07-08",
+                "duration": null,
+                "details": "3-D laparoscopic approach, 5 port system, Ligasure for greater curvature",
+                "hospital": "고려대학교 구로병원"
+              },
+              {
+                "type": "수술",
+                "name": "Laparoscopic cholecystectomy",
+                "date": "2025-07-08",
+                "duration": null,
+                "details": "Gallbladder distention and inflammation, adhesions around fundus",
+                "hospital": "고려대학교 구로병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-05-12",
+              "endDate": "2025-07-23",
+              "totalVisits": 5,
+              "hospitals": [
+                "고려대학교 구로병원"
+              ],
+              "summary": "고도비만 및 담낭결석 관련 수술 전후 관리"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-07-07",
+              "endDate": "2025-07-23",
+              "totalDays": 16,
+              "hospital": "고려대학교 구로병원",
+              "department": "위장관외과(상부)",
+              "reason": "고도비만 및 담낭결석 수술"
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": "I10",
+                "diagnosisDate": "2022",
+                "treatment": "약물 치료",
+                "currentStatus": "조절 중",
+                "hospital": "고려대학교 구로병원",
+                "isPreExisting": true
+              },
+              {
+                "condition": "당뇨 전단계",
+                "code": "R73.03",
+                "diagnosisDate": "2022",
+                "treatment": "생활습관 관리",
+                "currentStatus": "관리 중",
+                "hospital": "고려대학교 구로병원",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "고도비만으로 인한 수술 필요성 강조",
+              "prognosis": "수술 후 체중 감소 및 건강 개선 기대",
+              "recommendations": "지속적인 체중 관리 및 정기 검진 필요",
+              "limitations": "수술 후 초기 회복 기간 동안 활동 제한"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "김명희 환자는 고도비만 및 담낭결석으로 인해 수술을 받았으며, 수술 후 회복 중입니다.",
+              "keyFindings": [
+                "Laparoscopic sleeve gastrectomy 및 cholecystectomy 시행",
+                "고도비만 및 만성 담낭염 진단"
+              ],
+              "recommendations": "지속적인 체중 관리 및 정기 검진을 통한 건강 유지 권고"
+            }
+          }
+        },
+        {
+          "caseNum": 20,
+          "processingTime": 63479,
+          "tokens": {
+            "prompt_tokens": 34476,
+            "completion_tokens": 2021,
+            "total_tokens": 36497,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.20269500000000001,
+          "quality": {
+            "structureCompleteness": 80,
+            "diagnosisMatch": 0,
+            "overallScore": 32
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-01-02",
+              "time": "16:50",
+              "hospital": "반듯한정형외과의원",
+              "department": "정형외과"
+            },
+            "chiefComplaint": {
+              "summary": "허리 및 어깨 통증, 무릎 통증",
+              "referralSource": null,
+              "onsetDate": "2025-01-02",
+              "duration": "8개월",
+              "details": "허리 및 어깨 통증으로 내원하였으며, 무릎 통증이 동반됨."
+            },
+            "diagnoses": [
+              {
+                "code": "M6593",
+                "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 아래팔",
+                "nameEn": "Synovitis and tenosynovitis, unspecified, forearm",
+                "date": "2025-01-02",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M5422",
+                "nameKr": "경추통, 경부",
+                "nameEn": "Cervicalgia, neck",
+                "date": "2025-01-02",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M5456",
+                "nameKr": "아래허리통증, 요추부",
+                "nameEn": "Low back pain, lumbar region",
+                "date": "2025-01-02",
+                "isPrimary": true,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "K291",
+                "nameKr": "기타 급성 위염",
+                "nameEn": "Other acute gastritis",
+                "date": "2025-01-02",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "K297",
+                "nameKr": "상세불명의 위염",
+                "nameEn": "Gastritis, unspecified",
+                "date": "2025-01-02",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M2558",
+                "nameKr": "관절통, 기타 부분",
+                "nameEn": "Joint pain, other parts",
+                "date": "2025-01-02",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "S22330",
+                "nameKr": "제1늑골 이외 단일 늑골의 골절, 폐쇄성",
+                "nameEn": "Fracture of one rib, closed",
+                "date": "2025-03-06",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "S202",
+                "nameKr": "흉부의 타박상",
+                "nameEn": "Contusion of thorax",
+                "date": "2025-03-06",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "S836",
+                "nameKr": "기타 및 상세불명의 무릎 부분의 염좌 및 긴장",
+                "nameEn": "Sprain and strain of other and unspecified parts of knee",
+                "date": "2025-03-13",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M6595",
+                "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 골반 부분 및 넓적다리",
+                "nameEn": "Synovitis and tenosynovitis, unspecified, pelvic region and thigh",
+                "date": "2025-06-05",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M6591",
+                "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 어깨 부분",
+                "nameEn": "Synovitis and tenosynovitis, unspecified, shoulder region",
+                "date": "2025-06-05",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "code": "M6596",
+                "nameKr": "상세불명의 윤활막염 및 힘줄윤활막염, 아래다리",
+                "nameEn": "Synovitis and tenosynovitis, unspecified, lower leg",
+                "date": "2025-07-09",
+                "isPrimary": false,
+                "hospital": "반듯한정형외과의원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "경추 2매",
+                "nameEn": "Cervical spine X-ray",
+                "date": "2025-01-02",
+                "result": "측만증, 어깨, 골반 불균형",
+                "finding": "측만증, 어깨, 골반 불균형",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "늑골 3매",
+                "nameEn": "Rib X-ray",
+                "date": "2025-03-06",
+                "result": "골절 의심",
+                "finding": "골절 의심",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "슬관절 4매",
+                "nameEn": "Knee X-ray",
+                "date": "2025-03-13",
+                "result": "K-L Gr IOA",
+                "finding": "K-L Gr IOA",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "초음파검사-근골격, 연부",
+                "nameEn": "Ultrasound examination - musculoskeletal, soft tissue",
+                "date": "2025-03-13",
+                "result": "연부조직 3",
+                "finding": "연부조직 3",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": null,
+            "treatments": [
+              {
+                "type": "약물",
+                "name": "아세클낙정 해열진통소염",
+                "date": "2025-01-02",
+                "duration": null,
+                "details": "해열진통소염제",
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "type": "물리치료",
+                "name": "도수치료",
+                "date": "2025-02-14",
+                "duration": "8개월",
+                "details": "허리 및 어깨 통증 완화 목적",
+                "hospital": "반듯한정형외과의원"
+              },
+              {
+                "type": "주사",
+                "name": "대한리도카인염산염수화물 2% 주",
+                "date": "2025-03-13",
+                "duration": null,
+                "details": "신경차단술",
+                "hospital": "반듯한정형외과의원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-01-02",
+              "endDate": "2025-09-15",
+              "totalVisits": 50,
+              "hospitals": [
+                "반듯한정형외과의원"
+              ],
+              "summary": "정형외과에서 도수치료 및 약물치료를 받음"
+            },
+            "admissionPeriod": null,
+            "pastHistory": [],
+            "doctorOpinion": {
+              "summary": "허리 및 어깨 통증의 호전 추세",
+              "prognosis": "양호",
+              "recommendations": "지속적인 물리치료 및 약물치료 권장",
+              "limitations": "장시간 서 있거나 무거운 물건을 드는 것 제한"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": "low"
+            },
+            "conclusion": {
+              "summary": "허리 및 어깨 통증으로 인한 지속적인 치료 필요",
+              "keyFindings": [
+                "허리 및 어깨 통증의 호전",
+                "무릎 통증의 지속"
+              ],
+              "recommendations": "지속적인 물리치료 및 약물치료 권장"
+            }
+          }
+        },
+        {
+          "caseNum": 22,
+          "error": "429 Request too large for gpt-4o in organization org-x0D2c6rxdynOqdiCr09gtKeR on tokens per min (TPM): Limit 30000, Requested 57728. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more."
+        },
+        {
+          "caseNum": 24,
+          "processingTime": 36594,
+          "tokens": {
+            "prompt_tokens": 25276,
+            "completion_tokens": 991,
+            "total_tokens": 26267,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.14124499999999998,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 0,
+            "overallScore": 40
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2022-08-22",
+              "time": null,
+              "hospital": "강북삼성병원",
+              "department": "외과"
+            },
+            "chiefComplaint": {
+              "summary": "Known stomach cancer",
+              "referralSource": "연신내바른내과",
+              "onsetDate": null,
+              "duration": null,
+              "details": "Epigastric pain with hunger pain, no weight loss, incidental detection."
+            },
+            "diagnoses": [
+              {
+                "code": "C16.0",
+                "nameKr": "위암",
+                "nameEn": "Gastric cancer",
+                "date": "2022-08-22",
+                "isPrimary": true,
+                "hospital": "강북삼성병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "CT",
+                "nameEn": "Computed Tomography",
+                "date": "2022-08-22",
+                "result": "R/O early gastric cancer, no definite metastasis.",
+                "finding": "Focal lesion with disruption, no perigastric fat infiltration.",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "EGD",
+                "nameEn": "Esophagogastroduodenoscopy",
+                "date": "2022-08-25",
+                "result": "Chronic atrophic gastritis, EGC IIb.",
+                "finding": "Hyperemic flat lesion with irregular margin.",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": {
+              "testName": "Endoscopic biopsy",
+              "testDate": "2022-08-24",
+              "reportDate": "2022-08-26",
+              "finding": "Adenocarcinoma, moderately differentiated.",
+              "stageTNM": "pT1aN0M0",
+              "stageOverall": "Stage IA",
+              "histology": "Tubular adenocarcinoma, moderately differentiated",
+              "margin": "Free from carcinoma"
+            },
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "Laparoscopic Subtotal Gastrectomy (Distal) + L/N Dissection",
+                "date": "2022-08-26",
+                "duration": null,
+                "details": "Successful laparoscopic subtotal gastrectomy with LN dissection.",
+                "hospital": "강북삼성병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2022-08-22",
+              "endDate": "2025-10-25",
+              "totalVisits": 10,
+              "hospitals": [
+                "강북삼성병원"
+              ],
+              "summary": "Regular follow-up visits for gastric cancer management."
+            },
+            "admissionPeriod": {
+              "startDate": "2022-08-24",
+              "endDate": "2022-09-02",
+              "totalDays": 9,
+              "hospital": "강북삼성병원",
+              "department": "외과",
+              "reason": "Surgical treatment for stomach cancer"
+            },
+            "pastHistory": [
+              {
+                "condition": "바이러스뇌염",
+                "code": null,
+                "diagnosisDate": "2009",
+                "treatment": "Not specified",
+                "currentStatus": "Not specified",
+                "hospital": null,
+                "isPreExisting": false
+              },
+              {
+                "condition": "DVT",
+                "code": null,
+                "diagnosisDate": "2007",
+                "treatment": "Not specified",
+                "currentStatus": "Not specified",
+                "hospital": null,
+                "isPreExisting": false
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "Patient requires regular follow-up due to gastric cancer history.",
+              "prognosis": "Good post-surgery recovery.",
+              "recommendations": "Regular endoscopic surveillance.",
+              "limitations": "None specified."
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "Successful surgical treatment of early gastric cancer.",
+              "keyFindings": [
+                "Early gastric cancer detected and treated.",
+                "No evidence of metastasis."
+              ],
+              "recommendations": "Continue regular follow-up and monitoring."
+            }
+          }
+        },
+        {
+          "caseNum": 26,
+          "processingTime": 39120,
+          "tokens": {
+            "prompt_tokens": 19496,
+            "completion_tokens": 1087,
+            "total_tokens": 20583,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.113785,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 100,
+            "overallScore": 100
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-07-11",
+              "time": null,
+              "hospital": "고려대학교 안암병원",
+              "department": "산부인과"
+            },
+            "chiefComplaint": {
+              "summary": "huge myoma",
+              "referralSource": "local 산부인과",
+              "onsetDate": "2025-07",
+              "duration": null,
+              "details": "자궁근종 절제수술을 위해 내원"
+            },
+            "diagnoses": [
+              {
+                "code": "D25.9",
+                "nameKr": "자궁의 평활근종",
+                "nameEn": "Uterine leiomyoma",
+                "date": "2025-07-11",
+                "isPrimary": true,
+                "hospital": "고려대학교 안암병원"
+              },
+              {
+                "code": "N84.0",
+                "nameKr": "자궁내막 폴립",
+                "nameEn": "Endometrial polyp",
+                "date": "2025-10-02",
+                "isPrimary": false,
+                "hospital": "고려대학교 안암병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "부인과 초음파",
+                "nameEn": "Gynecological Ultrasound",
+                "date": "2025-10-01",
+                "result": "Retroverted uterus with multiple myomas",
+                "finding": "12cm, 6cm, 5cm SS myoma",
+                "normalRange": null,
+                "isAbnormal": true
+              },
+              {
+                "name": "병리검사",
+                "nameEn": "Histopath Exam",
+                "date": "2025-10-02",
+                "result": "Leiomyoma, Endometrial polyp",
+                "finding": "whitish whirling and fibrotic appearance",
+                "normalRange": null,
+                "isAbnormal": true
+              }
+            ],
+            "pathology": {
+              "testName": "Myomectomy and Polypectomy",
+              "testDate": "2025-10-02",
+              "reportDate": "2025-10-14",
+              "finding": "Leiomyoma, Endometrial polyp",
+              "stageTNM": null,
+              "stageOverall": null,
+              "histology": "Leiomyoma",
+              "margin": null
+            },
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "Uterine myomectomy, da Vinci",
+                "date": "2025-10-02",
+                "duration": null,
+                "details": "13 myomas removed, no complications",
+                "hospital": "고려대학교 안암병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-07-11",
+              "endDate": "2025-10-21",
+              "totalVisits": 6,
+              "hospitals": [
+                "고려대학교 안암병원"
+              ],
+              "summary": "정기적인 외래 방문을 통해 수술 전후 경과 관찰"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-10-01",
+              "endDate": "2025-10-04",
+              "totalDays": 3,
+              "hospital": "고려대학교 안암병원",
+              "department": "산부인과",
+              "reason": "수술목적"
+            },
+            "pastHistory": [
+              {
+                "condition": "축녹증 수술",
+                "code": null,
+                "diagnosisDate": "20ya",
+                "treatment": "수술",
+                "currentStatus": "완쾌",
+                "hospital": "정보 없음",
+                "isPreExisting": false
+              },
+              {
+                "condition": "편도선 수술",
+                "code": null,
+                "diagnosisDate": "20ya",
+                "treatment": "수술",
+                "currentStatus": "완쾌",
+                "hospital": "정보 없음",
+                "isPreExisting": false
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "수술 후 특별한 합병증 없이 경과 호전",
+              "prognosis": "완쾌/경쾌",
+              "recommendations": "정기적인 외래 방문",
+              "limitations": "정보 없음"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": null
+            },
+            "conclusion": {
+              "summary": "자궁근종 수술 후 회복 중",
+              "keyFindings": [
+                "자궁근종 제거",
+                "수술 후 합병증 없음"
+              ],
+              "recommendations": "정기적인 외래 방문으로 경과 관찰"
+            }
+          }
+        },
+        {
+          "caseNum": 28,
+          "error": "429 Request too large for gpt-4o in organization org-x0D2c6rxdynOqdiCr09gtKeR on tokens per min (TPM): Limit 30000, Requested 32294. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more."
+        },
+        {
+          "caseNum": 30,
+          "processingTime": 15530,
+          "tokens": {
+            "prompt_tokens": 4635,
+            "completion_tokens": 1129,
+            "total_tokens": 5764,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "cost": 0.04010999999999999,
+          "quality": {
+            "structureCompleteness": 100,
+            "diagnosisMatch": 0,
+            "overallScore": 40
+          },
+          "generatedJson": {
+            "visitDate": {
+              "date": "2025-03-12",
+              "time": "14:09",
+              "hospital": "우리들병원",
+              "department": "NS"
+            },
+            "chiefComplaint": {
+              "summary": "허리 통증 및 좌측 다리 저림",
+              "referralSource": null,
+              "onsetDate": "정보 없음",
+              "duration": "10년 이상",
+              "details": "좌측 다리가 저리고 얼얼하다. 이전에는 우측 다리가 저리고 얼얼했다. 주방일 팔을 받혀야 된다. 걸으면 구부정하다."
+            },
+            "diagnoses": [
+              {
+                "code": "M48.06",
+                "nameKr": "척추협착, 요추부",
+                "nameEn": "Spinal stenosis, lumbar region",
+                "date": "2025-03-24",
+                "isPrimary": true,
+                "hospital": "우리들병원"
+              },
+              {
+                "code": "M43.06",
+                "nameKr": "척추후방전위증, 요추부",
+                "nameEn": "Retrolisthesis, lumbar region",
+                "date": "2025-03-24",
+                "isPrimary": false,
+                "hospital": "우리들병원"
+              }
+            ],
+            "examinations": [
+              {
+                "name": "L-Spine MRI & CT",
+                "nameEn": "L-Spine MRI & CT",
+                "date": "2025-03-12",
+                "result": "허리 통증, 좌측 엉치-허벅지-종아리-발바닥 저림, 감각저하",
+                "finding": "좌측 엉치-허벅지(외)-종아리(외)-발바닥 저림, 감각저하, 우측 발꿈치 저림, 양측 무릎 통증",
+                "normalRange": "정보 없음",
+                "isAbnormal": true
+              }
+            ],
+            "pathology": {
+              "testName": null,
+              "testDate": null,
+              "reportDate": null,
+              "finding": null,
+              "stageTNM": null,
+              "stageOverall": null,
+              "histology": null,
+              "margin": null
+            },
+            "treatments": [
+              {
+                "type": "수술",
+                "name": "PLIF+PF [요추4-5 사이, 요추5-천추사이]",
+                "date": "2025-03-24",
+                "duration": null,
+                "details": "요추4-5 및 요추5-천추사이의 척추유합술 및 후방고정술",
+                "hospital": "우리들병원"
+              }
+            ],
+            "outpatientPeriod": {
+              "startDate": "2025-03-12",
+              "endDate": "2025-09-03",
+              "totalVisits": 5,
+              "hospitals": [
+                "우리들병원"
+              ],
+              "summary": "허리 통증 및 좌측 다리 저림으로 외래 방문"
+            },
+            "admissionPeriod": {
+              "startDate": "2025-03-23",
+              "endDate": "2025-04-11",
+              "totalDays": 19,
+              "hospital": "우리들병원",
+              "department": "31W 병동",
+              "reason": "척추협착 및 척추후방전위증 수술"
+            },
+            "pastHistory": [
+              {
+                "condition": "고혈압",
+                "code": "I10",
+                "diagnosisDate": "정보 없음",
+                "treatment": "약물 치료",
+                "currentStatus": "관리 중",
+                "hospital": "정보 없음",
+                "isPreExisting": true
+              },
+              {
+                "condition": "고지혈증",
+                "code": "E78.5",
+                "diagnosisDate": "정보 없음",
+                "treatment": "약물 치료",
+                "currentStatus": "관리 중",
+                "hospital": "정보 없음",
+                "isPreExisting": true
+              }
+            ],
+            "doctorOpinion": {
+              "summary": "수술 후 상태 양호하며, 물리치료 후 통증 호전",
+              "prognosis": "양호",
+              "recommendations": "수술적 치료 및 물리치료 권장",
+              "limitations": "일상 생활에 지장이 있다면 수술적 가료 고려"
+            },
+            "disclosureViolation": {
+              "hasViolation": false,
+              "evidence": null,
+              "relatedEvents": [],
+              "riskLevel": "low"
+            },
+            "conclusion": {
+              "summary": "척추협착 및 척추후방전위증으로 수술 후 상태 양호",
+              "keyFindings": [
+                "척추협착, 요추부",
+                "척추후방전위증, 요추부"
+              ],
+              "recommendations": "수술 후 지속적인 물리치료 및 추적 관찰 필요"
+            }
+          }
+        }
+      ]
+    },
+    "gemini-1.5-pro": {
+      "totalCases": 15,
+      "successfulCases": 0,
+      "avgQualityScore": 0,
+      "avgProcessingTime": 0,
+      "totalCost": 0,
+      "results": [
+        {
+          "caseNum": 1,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 3,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 6,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 8,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 10,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 12,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 14,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 16,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 18,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 20,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 22,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 24,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 26,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 28,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        },
+        {
+          "caseNum": 30,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent: [404 Not Found] models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "bestQuality": {
+      "model": "gpt-4o",
+      "score": 58
+    },
+    "bestSpeed": {
+      "model": "gemini-1.5-pro",
+      "time": 0
+    },
+    "bestCost": {
+      "model": "gemini-1.5-pro",
+      "cost": 0
+    }
+  }
+}

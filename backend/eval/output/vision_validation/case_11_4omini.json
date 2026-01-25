@@ -1,0 +1,92 @@
+{
+  "caseId": "Case11",
+  "caseNum": 11,
+  "patientName": "허전권",
+  "model": "gpt-4o-mini",
+  "pdfFile": "강북삼성병원.pdf",
+  "imageCount": 3,
+  "processingTime": 13353,
+  "tokens": {
+    "prompt_tokens": 110854,
+    "completion_tokens": 456,
+    "total_tokens": 111310,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0169017,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2023-04-18",
+      "time": null,
+      "hospital": "강북삼성병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "두부 외상",
+      "onsetDate": "2023-04-18",
+      "duration": null,
+      "details": "Concussion, without open intracranial wound"
+    },
+    "diagnoses": [
+      {
+        "code": "S06.0",
+        "nameKr": "두부 외상",
+        "date": "2023-04-18",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "Observation",
+        "name": null,
+        "date": "2023-04-18",
+        "duration": null,
+        "details": "Observation for concussion"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "두부 외상",
+        "code": "S06.0",
+        "diagnosisDate": "1962-01-01",
+        "treatment": "수술",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 두부 외상으로 인한 경과 관찰이 필요함.",
+      "prognosis": "양호",
+      "recommendations": "추가적인 검사 필요 없음."
+    }
+  },
+  "timestamp": "2026-01-25T09:37:22.814Z"
+}

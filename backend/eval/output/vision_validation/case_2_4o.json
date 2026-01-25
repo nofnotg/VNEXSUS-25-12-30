@@ -1,0 +1,105 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "model": "gpt-4o",
+  "pdfFile": "sm영상의학과.pdf",
+  "imageCount": 3,
+  "processingTime": 19175,
+  "tokens": {
+    "prompt_tokens": 3664,
+    "completion_tokens": 543,
+    "total_tokens": 4207,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.026465,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2019-03-23",
+      "time": "11:06:34",
+      "hospital": "SM영상의학과의원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "Epigastric discomfort and pain",
+      "onsetDate": null,
+      "duration": null,
+      "details": "For evaluation of liver mass"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2019-03-23",
+        "isPrimary": true,
+        "hospital": "SM영상의학과의원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Abdomen Angiography, Phase 3",
+        "date": "2019-03-23",
+        "result": null,
+        "finding": null,
+        "isAbnormal": null
+      },
+      {
+        "name": "Dynamic 5yudCT",
+        "date": "2019-03-23",
+        "result": null,
+        "finding": null,
+        "isAbnormal": null
+      }
+    ],
+    "pathology": null,
+    "treatments": [
+      {
+        "type": "방사선",
+        "name": "선량니패주350ml",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": "0.26"
+      },
+      {
+        "type": "방사선",
+        "name": "선타바란",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2019-03-23",
+      "endDate": "2019-03-23",
+      "totalVisits": 1,
+      "hospitals": [
+        "SM영상의학과의원"
+      ]
+    },
+    "admissionPeriod": null,
+    "pastHistory": [
+      {
+        "condition": "Appendectomy state",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "No DM, no HBP",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "timestamp": "2026-01-25T09:41:05.153Z"
+}

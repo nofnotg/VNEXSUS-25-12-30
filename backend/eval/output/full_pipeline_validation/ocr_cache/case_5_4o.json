@@ -1,0 +1,227 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "model": "gpt-4o",
+  "totalPages": 27,
+  "processedAt": "2026-01-25T11:17:04.479Z",
+  "processingTime": 58954,
+  "cost": 0.2241,
+  "usage": {
+    "prompt_tokens": 30551,
+    "completion_tokens": 1114,
+    "total_tokens": 31665,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "김태형",
+      "birthDate": "1960-08-09",
+      "gender": "남"
+    },
+    "visitDate": {
+      "date": "2024-12-12",
+      "hospital": "세브란스병원",
+      "department": "심장내과"
+    },
+    "chiefComplaint": {
+      "summary": "가슴 통증",
+      "onsetDate": null,
+      "details": "가슴이 조이듯이 아프다. 식은땀이 발생하며, 1년 전부터 걸어가다가 흉통이 발생."
+    },
+    "diagnoses": [
+      {
+        "code": "I20.88",
+        "nameKr": "Stable angina pectoris",
+        "date": "2024-12-31",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I25.1",
+        "nameKr": "Coronary artery disease (1 vessel disease)",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E11.68",
+        "nameKr": "Diabetes mellitus type 2 with dyslipidemia",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E78.8",
+        "nameKr": "Dyslipidemia",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I50.08",
+        "nameKr": "Diastolic heart failure",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Coronary angiography",
+        "date": "2024-12-31",
+        "result": "Right dominant, minimal LN of pRCA",
+        "hospital": "세브란스병원"
+      },
+      {
+        "name": "Echocardiography",
+        "date": "2024-12-27",
+        "result": "Normal sized cardiac chambers with normal global LV systolic function (EF: 62%)",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Coronary angiography",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Concor",
+        "dosage": "1.25mg qd",
+        "period": null
+      },
+      {
+        "name": "Livalo",
+        "dosage": "2mg qd",
+        "period": null
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "세브란스병원",
+        "admissionDate": "2024-12-31",
+        "dischargeDate": "2024-12-31",
+        "reason": "For Coronary angiography"
+      }
+    ],
+    "surgeries": [],
+    "prognosis": {
+      "summary": "Stable angina with coronary artery disease",
+      "followUpDate": null
+    },
+    "extractedDates": [
+      {
+        "date": "2024-12-12",
+        "context": "진료일",
+        "type": "진료일"
+      },
+      {
+        "date": "2024-12-27",
+        "context": "외래초진기록",
+        "type": "검사일"
+      },
+      {
+        "date": "2024-12-31",
+        "context": "입원일",
+        "type": "입원일"
+      },
+      {
+        "date": "2025-01-09",
+        "context": "외래재진기록",
+        "type": "진료일"
+      },
+      {
+        "date": "2025-01-14",
+        "context": "외래초진기록",
+        "type": "진료일"
+      }
+    ],
+    "extractedHospitals": [
+      "세브란스병원",
+      "의료법인동신의료재단 동신병원"
+    ],
+    "rawTextSummary": "김태형 환자는 64세 남성으로, 가슴 통증을 호소하며 세브란스병원 심장내과에 내원하였다. 2024년 12월 31일에 관상동맥조영술을 시행하였으며, 안정형 협심증 및 관상동맥질환 진단을 받았다. 치료로는 Concor와 Livalo가 처방되었다."
+  },
+  "groundTruth": "나. 피보험자 병력사항 요약 경과표\r\n일자 사고경위 병원/기관\r\n2018.05.10 \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\r\n내 \r\n㈜KB 손해보험 \r\n2023.02.10 \r\n[3 개월 이내] \r\n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \r\n이내 ㈜KB 손해보험 \r\n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험 \r\n2024.12.12 \r\n내 원 일 : 2024.12.12 \r\n내원경위 : 간헐적 발생하는 흉통 및 흉부 답답함 증상을 주소\r\n로 내원 \r\n진 단 명 : 상세불명의 흉통(R07.4) \r\n통원기간 : 2024.12.12 / 1 회 통원 \r\n의사소견 : 진료의뢰서 발급 \r\n굿웰스의원 \r\n2024.12.27 \r\n[청구사항] \r\n초 진 일 : 2024.12.27 \r\n내원경위 : 흉통 및 숨이 차는 증상을 주소로 진료 의뢰 하 내\r\n원 \r\n진 단 명 : 안정성 협심증(I20.88) \r\n관상동맥병(I25.1) \r\n입원기간 : 2024.12.31 / 1 일 입원 \r\n신촌세브란스\r\n병원(심장내\r\n과) \r\n치료내용 : 약물 처방 \r\n검사결과 : 관상동맥조영술(2024.12.31) \r\nRCA(우측 관상동맥) \r\n: JR 5-4 분절 경미한 협착 소견 \r\nLCA(좌측 관상동맥) \r\n: mLAD 약 50% 협착\r\n과거병력 : \"당뇨 의심 된다 들음\" 2024.05.30 동신병원 검진 \r\n결과 당뇨 의심 소견(자료 별첨) \r\n \r\n다. 기타확인사항\r\n사고(발병) \r\n경위 \r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영\r\n술 결과 좌전하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 \r\n청구함. \r\n직업 \r\n직무 \r\n청약 시 : 사회복지사(1 급) \r\n현재 : 사회복지사(1 급) \r\n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\r\n약 전 고지대상에 해당하는 진료내역 없음. \r\n4. 손해사정결과\r\n고지위반 아니오 자필서명 예 고객불만 하 \r\n민원성향 하 고객요구사항 \r\n상기 조사 결과에 의하여 볼 때,\r\n1. 중점조사 및 청구사항\r\n고지의무 위반여부 확인 \r\n2. 사고경위\r\n피보험자는 흉통으로 2024.12.31 신촌세브란스병원 내원하여 시행한 관상동맥조영술 결과 좌전\r\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \r\n3. 알릴의무와 관련하여\r\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\r\n상에 해당하는 진료내역 없음. \r\n신촌세브란스 초진기록 상 \"당뇨 의심 된다 들음\" 내용 관련 확인 결과 동 보험 가입일 이후인 \r\n2024.05.30 동신병원 검진 결과 당뇨 의심 소견으로 진단 받은 것으로 확인됨. \r\n4. 금번 청구 관련하여\r\n신촌세브란스병원 관상동맥조영술(2024.12.31) LCA(좌측 관상동맥) : mLAD 약 50% 협착 \r\n피보험자는 동 보험 가입 이후인 2024.12.12 간헐적 흉통을 주소로 굿웰스의원 내원하여 진료 \r\n의뢰 하 2024.12.27 신촌세브란스병원 최초 내원 하여 2024.12.31 입원 후 상기 검사 결과를 \r\n토대로 '안정성 협심증(I20.88), 관상동맥병(I25.1)' 진단 받은 것으로 확인됨. \r\n5. 손해사정 결론\r\n상기 내용 종합하여 귀사 심사 기준에 의거하여 처리함이 타당할 것으로 판단됨. \r\n상기 내용 및 관련 조사자료 확인 후 ㈜KB 손해보험에서 최종 판단해 주시기 바랍니다.",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ],
+      "missed": [
+        "2018-05-10",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-05-30",
+        "2020-01-17",
+        "2024-01-24"
+      ],
+      "extra": [
+        "2025-01-09",
+        "2025-01-14"
+      ],
+      "rate": 33
+    },
+    "kcdCodes": {
+      "matched": [
+        "I20.88",
+        "I25.1"
+      ],
+      "missed": [
+        "R07.4"
+      ],
+      "extra": [
+        "E11.68",
+        "E78.8",
+        "I50.08"
+      ],
+      "rate": 67
+    },
+    "hospitals": {
+      "matched": [
+        "동신병원",
+        "신촌세브란스병원"
+      ],
+      "missed": [
+        "굿웰스의원"
+      ],
+      "extra": [],
+      "rate": 67
+    },
+    "examinations": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,155 @@
+{
+  "caseNum": 24,
+  "model": "gpt-4o-mini",
+  "processingTime": 19592,
+  "tokens": {
+    "prompt_tokens": 25276,
+    "completion_tokens": 1105,
+    "total_tokens": 26381,
+    "prompt_tokens_details": {
+      "cached_tokens": 24576,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.004454399999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2022-08-22",
+      "time": "16:02",
+      "hospital": "강북삼성병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "상복부 통증",
+      "referralSource": "연신내바른내과",
+      "onsetDate": "2022-08-22",
+      "duration": "정보 없음",
+      "details": "상환 지난 8월 건강검진 시 시행한 위내시경하 조직검사 결과상 stomach ca 진단하 수술위해 입원함"
+    },
+    "diagnoses": [
+      {
+        "code": "C16.0",
+        "nameKr": "위암",
+        "nameEn": "Gastric cancer",
+        "date": "2022-08-26",
+        "isPrimary": true,
+        "hospital": "강북삼성병원"
+      },
+      {
+        "code": "C16.0",
+        "nameKr": "위암",
+        "nameEn": "Gastric cancer",
+        "date": "2025-09-17",
+        "isPrimary": false,
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT 복부",
+        "nameEn": "CT Abdomen",
+        "date": "2022-08-22",
+        "result": "Early gastric cancer 의심",
+        "finding": "Focal lesion이 의심되어 gastric cancer의 가능성이 배제되지 않음",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "조직검사",
+        "nameEn": "Pathology",
+        "date": "2022-08-26",
+        "result": "Moderately differentiated adenocarcinoma",
+        "finding": "No evidence of malignancy, esophagus stump margin",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2022-08-26",
+      "reportDate": "2022-09-06",
+      "finding": "Moderately differentiated adenocarcinoma",
+      "stageTNM": "pT1aNO",
+      "stageOverall": "Stage I",
+      "histology": "Tubular adenocarcinoma",
+      "margin": "Free from carcinoma"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Laparoscopic Subtotal Gastrectomy",
+        "date": "2022-08-26",
+        "duration": "정보 없음",
+        "details": "Subtotal gastrectomy with lymph node dissection",
+        "hospital": "강북삼성병원"
+      },
+      {
+        "type": "수술",
+        "name": "Total Gastrectomy",
+        "date": "2025-09-17",
+        "duration": "정보 없음",
+        "details": "Total gastrectomy with lymph node dissection",
+        "hospital": "강북삼성병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2022-09-02",
+      "endDate": "2025-10-29",
+      "totalVisits": 12,
+      "hospitals": [
+        "강북삼성병원"
+      ],
+      "summary": "정기적인 외래 진료"
+    },
+    "admissionPeriod": {
+      "startDate": "2022-08-24",
+      "endDate": "2022-09-02",
+      "totalDays": 9,
+      "hospital": "강북삼성병원",
+      "department": "외과",
+      "reason": "stomach ca"
+    },
+    "pastHistory": [
+      {
+        "condition": "위암",
+        "code": "C16.0",
+        "diagnosisDate": "2022-08-22",
+        "treatment": "Subtotal gastrectomy",
+        "currentStatus": "호전",
+        "hospital": "강북삼성병원",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "수술 후 경과 양호",
+      "prognosis": "정기적인 추적 관찰 필요",
+      "recommendations": "정기적인 외래 진료 및 검사",
+      "limitations": "정보 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "위암으로 인한 수술 후 경과 양호",
+      "keyFindings": [
+        "조직검사 결과 위암 확인",
+        "수술 후 경과 양호"
+      ],
+      "recommendations": "정기적인 외래 진료 및 검사"
+    }
+  }
+}

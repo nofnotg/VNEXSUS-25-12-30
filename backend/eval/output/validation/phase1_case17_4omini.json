@@ -1,0 +1,157 @@
+{
+  "caseNum": 17,
+  "model": "gpt-4o-mini",
+  "processingTime": 18585,
+  "tokens": {
+    "prompt_tokens": 21943,
+    "completion_tokens": 1060,
+    "total_tokens": 23003,
+    "prompt_tokens_details": {
+      "cached_tokens": 21376,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.00392745,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 33,
+    "overallScore": 60
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-08-14",
+      "time": "13:11",
+      "hospital": "해븐리병원",
+      "department": "신경과"
+    },
+    "chiefComplaint": {
+      "summary": "두통 및 시야장애",
+      "referralSource": null,
+      "onsetDate": "2025-08-13",
+      "duration": "1일",
+      "details": "내원 전일부터 발생한 두통과 시야장애로 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "뇌경색",
+        "nameEn": "Cerebral Infarction",
+        "date": "2025-08-14",
+        "isPrimary": true,
+        "hospital": "해븐리병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Brain MRI",
+        "nameEn": "Brain MRI",
+        "date": "2025-08-14",
+        "result": "Acute infarct in Lt occipital lobe, Lt parietofrontal lobe multiple embolic.",
+        "finding": "Focal high SI lesion at left occipital lobe on DWI.",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "EKG",
+        "nameEn": "Electrocardiogram",
+        "date": "2025-08-14",
+        "result": "NSR",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "CBC",
+        "nameEn": "Complete Blood Count",
+        "date": "2025-08-14",
+        "result": "정상",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "클라빅신정75mg",
+        "date": "2025-08-14",
+        "duration": "30일",
+        "details": "고혈압 및 당뇨병 관리 약물",
+        "hospital": "해븐리병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-08-14",
+      "endDate": "2025-08-21",
+      "totalVisits": 5,
+      "hospitals": [
+        "해븐리병원"
+      ],
+      "summary": "정기적인 통원 치료를 받음."
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "department": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "해븐리병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "해븐리병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 급성 뇌경색으로 진단되었으며, 지속적인 관리가 필요함.",
+      "prognosis": "예후는 양호하나 지속적인 관리 필요.",
+      "recommendations": "정기적인 검사 및 약물 복용 권장.",
+      "limitations": "운전 및 중노동 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 급성 뇌경색으로 진단받고 치료 중임.",
+      "keyFindings": [
+        "급성 뇌경색 진단",
+        "정기적인 통원 치료 필요"
+      ],
+      "recommendations": "지속적인 약물 치료 및 정기 검진 권장."
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "caseNum": 23,
+  "model": "gpt-4o-mini",
+  "processingTime": 16200,
+  "tokens": {
+    "prompt_tokens": 22205,
+    "completion_tokens": 1002,
+    "total_tokens": 23207,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.003931949999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2023-02-09",
+      "time": null,
+      "hospital": "국립암센터",
+      "department": "산부인과"
+    },
+    "chiefComplaint": {
+      "summary": "Cervical Cancer 진단을 위한 입원",
+      "referralSource": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": "Cervical cancer로 인한 입원 및 검사 진행"
+    },
+    "diagnoses": [
+      {
+        "code": "C53.9",
+        "nameKr": "자궁경부암",
+        "nameEn": "Cervical Cancer",
+        "date": "2023-02-09",
+        "isPrimary": true,
+        "hospital": "국립암센터"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Pelvis MRI",
+        "nameEn": "Pelvis MRI",
+        "date": "2023-02-13",
+        "result": "5cm cervix ca with parametrial invasion",
+        "finding": "Mildly enlarged rt ext. iliac L/N: nonspecific",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "Chest CT",
+        "nameEn": "Chest CT",
+        "date": "2023-02-10",
+        "result": "No evidence of metastasis, both lungs.",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "PET-CT",
+        "nameEn": "PET-CT",
+        "date": "2023-02-14",
+        "result": "pending",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": null
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2023-02-09",
+      "reportDate": null,
+      "finding": "Invasive squamous cell carcinoma, moderately differentiated",
+      "stageTNM": "T3bN0M0",
+      "stageOverall": "Stage III",
+      "histology": "Invasive squamous cell carcinoma",
+      "margin": "Not specified"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Cisplatin",
+        "date": "2023-03-10",
+        "duration": null,
+        "details": "Cisplatin 항암치료",
+        "hospital": "국립암센터"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": null
+    },
+    "admissionPeriod": {
+      "startDate": "2023-02-09",
+      "endDate": "2023-02-15",
+      "totalDays": 6,
+      "hospital": "국립암센터",
+      "department": "산부인과",
+      "reason": "Cervical Cancer 진단 및 검사"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "없음",
+        "hospital": null,
+        "isPreExisting": false
+      },
+      {
+        "condition": "당뇨병",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "없음",
+        "hospital": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Cervical cancer로 인한 입원 및 치료 필요",
+      "prognosis": "치료 후 경과 관찰 필요",
+      "recommendations": "정기적인 검사 및 치료 지속",
+      "limitations": "일상생활에서의 활동 제한 필요"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "Cervical cancer 진단 및 치료 계획 수립",
+      "keyFindings": [
+        "Cervical cancer 진단",
+        "입원 및 치료 필요"
+      ],
+      "recommendations": "정기적인 추적 검사 및 치료 지속"
+    }
+  }
+}

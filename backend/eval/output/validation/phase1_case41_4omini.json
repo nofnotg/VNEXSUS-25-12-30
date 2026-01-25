@@ -1,0 +1,144 @@
+{
+  "caseNum": 41,
+  "model": "gpt-4o-mini",
+  "processingTime": 20131,
+  "tokens": {
+    "prompt_tokens": 13772,
+    "completion_tokens": 1026,
+    "total_tokens": 14798,
+    "prompt_tokens_details": {
+      "cached_tokens": 13312,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0026814,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-04-22",
+      "time": "10:07",
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "신경외과"
+    },
+    "chiefComplaint": {
+      "summary": "Low back pain due to fall",
+      "referralSource": null,
+      "onsetDate": "2024-04-20",
+      "duration": "2 days",
+      "details": "Patient fell in the elevator and experienced low back pain."
+    },
+    "diagnoses": [
+      {
+        "code": "M51.2",
+        "nameKr": "척추전방전위증 - Lumbar Spondylolisthesis",
+        "nameEn": "Lumbar Spondylolisthesis",
+        "date": "2024-04-22",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 은평성모병원"
+      },
+      {
+        "code": "M48.0",
+        "nameKr": "척추협착증 - Spinal Stenosis",
+        "nameEn": "Spinal Stenosis",
+        "date": "2024-04-22",
+        "isPrimary": false,
+        "hospital": "가톨릭대학교 은평성모병원"
+      },
+      {
+        "code": "S32.0",
+        "nameKr": "요추 압박 골절 - Lumbar Compression Fracture",
+        "nameEn": "Lumbar Compression Fracture",
+        "date": "2024-04-22",
+        "isPrimary": false,
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI L-Spine",
+        "nameEn": "MRI L-Spine",
+        "date": "2024-04-22",
+        "result": "Recent benign osteoporotic compression fracture of L2 VB.",
+        "finding": "Lumbar spondylosis, retrolisthesis, disc bulging.",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "Pain control",
+        "date": "2024-04-22",
+        "duration": null,
+        "details": "Pain management for low back pain.",
+        "hospital": "가톨릭대학교 은평성모병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": [],
+      "summary": null
+    },
+    "admissionPeriod": {
+      "startDate": "2024-04-22",
+      "endDate": "2024-04-22",
+      "totalDays": 1,
+      "hospital": "가톨릭대학교 은평성모병원",
+      "department": "신경외과",
+      "reason": "Low back pain due to fall"
+    },
+    "pastHistory": [
+      {
+        "condition": "척추관 협착증",
+        "code": "M48.0",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 엘리베이터에서 넘어져 요통을 호소하며 내원함.",
+      "prognosis": "증상 지속 시 수술적 치료 필요.",
+      "recommendations": "2주 후 재검사.",
+      "limitations": "일상생활에서의 무리한 활동 자제."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 요추 압박 골절 및 척추전방전위증 진단.",
+      "keyFindings": [
+        "요추 압박 골절 확인",
+        "척추전방전위증 동반"
+      ],
+      "recommendations": "적극적인 보존적 치료 및 재평가 필요."
+    }
+  }
+}

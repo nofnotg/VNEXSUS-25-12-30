@@ -1,0 +1,102 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "model": "gpt-4o-mini",
+  "pdfFile": "sm영상의학과.pdf",
+  "imageCount": 3,
+  "processingTime": 22170,
+  "tokens": {
+    "prompt_tokens": 110854,
+    "completion_tokens": 499,
+    "total_tokens": 111353,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016927499999999998,
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-02-05",
+      "time": null,
+      "hospital": "SM영상의학과",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "epigastric discomfort and pain",
+      "onsetDate": null,
+      "duration": null,
+      "details": "for evaluation of liver mass"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2025-02-05",
+        "isPrimary": true,
+        "hospital": "SM영상의학과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Abdomen Angiography, Phase 3",
+        "date": "2019-03-23",
+        "result": "completed",
+        "finding": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": "diagnostic",
+        "name": "Dynamic syudCT",
+        "date": "2019-03-23",
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2019-03-23",
+      "endDate": "2025-02-05",
+      "totalVisits": 1,
+      "hospitals": [
+        "SM영상의학과"
+      ]
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": null,
+      "hospital": null,
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": "appendectomy state",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "Evaluation for liver mass due to epigastric discomfort.",
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "timestamp": "2026-01-25T09:36:39.440Z"
+}

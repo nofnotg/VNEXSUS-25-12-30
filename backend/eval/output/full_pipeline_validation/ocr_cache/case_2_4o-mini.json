@@ -1,0 +1,195 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "model": "gpt-4o-mini",
+  "totalPages": 47,
+  "processedPages": 47,
+  "processedAt": "2026-01-25T10:54:57.007Z",
+  "processingTime": 61840,
+  "cost": 0.2538,
+  "usage": {
+    "prompt_tokens": 1731961,
+    "completion_tokens": 780,
+    "total_tokens": 1732741,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "김미화",
+      "birthDate": "YYYY-MM-DD",
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2025-02-05",
+      "hospital": "삼성서울병원",
+      "department": "간담도계의 혈관종"
+    },
+    "chiefComplaint": {
+      "summary": "간담도계의 혈관종",
+      "onsetDate": "2017-01-01",
+      "details": "간 혈관종 크기 증가"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2025-02-05",
+        "isPrimary": true,
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Abdomen",
+        "date": "2023-08-07",
+        "result": "8 x 6 cm sized hepatic hemangioma",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Laparoscopic right hemiepectomy",
+        "date": "2025-02-05",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "C-Reactive Protein",
+        "dosage": "0.19 mg/dL",
+        "period": "2025-02-26"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "삼성서울병원",
+        "admissionDate": "2025-02-04",
+        "dischargeDate": "2025-02-12",
+        "reason": "Laparoscopic right hemiepectomy"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "Laparoscopic right hemiepectomy",
+        "date": "2025-02-05",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "간 혈관종의 크기 증가 관찰",
+      "followUpDate": "2025-04-09"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-02-05",
+        "context": "수술일",
+        "type": "수술일"
+      },
+      {
+        "date": "2025-02-04",
+        "context": "입원일",
+        "type": "입원일"
+      },
+      {
+        "date": "2025-02-12",
+        "context": "퇴원일",
+        "type": "퇴원일"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-02-26",
+        "context": "검사일",
+        "type": "검사일"
+      }
+    ],
+    "extractedHospitals": [
+      "삼성서울병원",
+      "SM영상의학과"
+    ],
+    "rawTextSummary": "환자는 간 혈관종으로 2017년부터 진단받았으며, 2025년 2월 5일에 수술을 받았다. 수술 후 혈관종의 크기 증가가 관찰되었으며, 추적 관찰이 필요하다."
+  },
+  "groundTruth": "\r\n1. 사고 및 손해조사 내용\r\n일자 사고경위 병원/기관\r\n2019.03.23 \r\n[가입전치료] \r\n내 원 일 : 2019.03.23 \r\n내원경위 : 검진 중 발견된 간의 양성신생물 경과관찰 목적으\r\n로 내원 \r\n진 단 명 : 간의 양성 신생물(D13.4) \r\n간담도계의 혈관종(D18.02) \r\n통원기간 : 2019.03.23 ~ 2023.08.07 / 6 회 통원 \r\n검사결과 : 복부 CT \r\nhepatic memangioma at rifht lobe (8 * 6cm) \r\n에스엠영상의학과의원 \r\n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험 \r\n2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험 \r\n2024.04.03 \r\n[가입전치료] \r\n초 진 일 : 2024.04.03 \r\n내원경위 : 간담도계 혈관종 소견으로 경과관찰 위해 내원 \r\n진 단 명 : 간담도계의 혈관종(D18.02) \r\n통원기간 : 2024.04.03 / 1 회 통원 \r\n치료내용 : 진료의뢰서 발행(2024.04.03) \r\n- 고지의무 위반사항 \r\n서울대학교직장부속의원\r\n2024.04.09 \r\n(무) NH 헤아림 355 건강보험[5 종:세만기형(해약환급금미지급형Ⅱ/납\r\n면)]2404 가입 \r\nNH 농협손해보험 \r\n2024.04.09 \r\n[청구사항] \r\n초 진 일 : 2024.04.09 \r\n내원경위 : 2017 년 간혈관종 진단 후 매년 크기 증가 소견으\r\n로 진료의뢰 하 내원 \r\n진 단 명 : 간담도계의 혈관종(D18.02) \r\n입원기간 : 2025.02.04 ~ 2025.02.12 / 9 일 입원 \r\n통원기간 : 2024.04.09 (12:55) \r\n치료내용 : 복강경 하 우측 간절제술 \r\n검사결과 : abdoman CT(보고일시 2024.04.23 12:55) \r\n- 청약 전 진료 \r\n삼성서울병원 \r\n \r\n \r\n2. 손해사정 시 적용된 관계 법규 및 약관 \r\n면부책 \r\n검토 \r\n[보상 적정성 확인]\r\n금번 청구병명인 '간담도계의 혈관종(D18.02)'은 해당 보험 가입 시점인 2024.04.09 14:11 \r\n이전인 2024.04.09 12:55 삼성서울병원 주치의로부터 복부 CT 검사 시행 오더 발행된 것으\r\n로 가입 전 동일 질환 관련 진료 시행한 사실 확인됨. \r\n[고지의무위반 확인]\r\n금번 청구사항은 동 보험 가입 3 개월 이내인 2024.04.03 서울대학교직장부속의원에서 간\r\n담도계의 혈관종(D18.02) 진단 하 진료의뢰서 발행된 것으로 이는 동 보험 고지의무 위반\r\n사항에 해당하는 것으로 확인됨. \r\n[피보험자 현 주소] \r\n서울시 관악구 남부순환로 234 길 66, 102 호 \r\n근거 동 건 해당 보험 약관 \r\n \r\n \r\n3. 결론\r\n근거 \r\n본 건 조사 결과, \r\n피보험자는 동 보험 가입 3 개월 이내 청구병명과 동일 질환으로 진료의뢰서 발행, 해당 \r\n보험 초회 보험료 납입 전 동일 질환으로 삼성서울병원 진료 시행한 것으로 확인되는 바, \r\n귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 부지급 및 계약 해지 \r\n \r\n \r\n4. 기타\r\n2024.04.09 12:55 삼성서울병원 간담도계의 혈관종(D18.02) 진단 복부 CT 주치의 오더 \r\n2024.04.09 14:11 (무) NH 헤아림 355 건강보험 보장개시",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2023-08-07",
+        "2025-02-04",
+        "2025-02-12"
+      ],
+      "missed": [
+        "2019-03-23",
+        "2019-04-09",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23"
+      ],
+      "extra": [
+        "2025-02-05",
+        "2025-02-26"
+      ],
+      "rate": 33
+    },
+    "kcdCodes": {
+      "matched": [
+        "D18.02"
+      ],
+      "missed": [
+        "D13.4"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "hospitals": {
+      "matched": [
+        "삼성서울병원"
+      ],
+      "missed": [
+        "에스엠영상의학과의원",
+        "서울대학교직장부속의원"
+      ],
+      "extra": [],
+      "rate": 33
+    },
+    "examinations": {
+      "matched": [
+        "CT"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "간절제술",
+        "가입전치료",
+        "치료내용"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}

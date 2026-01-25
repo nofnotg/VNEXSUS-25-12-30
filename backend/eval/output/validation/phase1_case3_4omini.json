@@ -1,0 +1,139 @@
+{
+  "caseNum": 3,
+  "model": "gpt-4o-mini",
+  "processingTime": 19807,
+  "tokens": {
+    "prompt_tokens": 13756,
+    "completion_tokens": 998,
+    "total_tokens": 14754,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0026622,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 100,
+    "overallScore": 100
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-12-13",
+      "time": "00:42",
+      "hospital": "이대목동병원",
+      "department": "응급의학과"
+    },
+    "chiefComplaint": {
+      "summary": "어지러움 및 두통",
+      "referralSource": null,
+      "onsetDate": "2024-12-12",
+      "duration": "1일",
+      "details": "12/7 음주 후 어지러움과 두통, 소화가 잘 안되는 증상으로 경과관찰 하던 중 증상이 지속되어 응급실 내원."
+    },
+    "diagnoses": [
+      {
+        "code": "D43.0",
+        "nameKr": "신생물의 행동양식 불명 또는 미상",
+        "nameEn": "Uncertain behavior brain tumor",
+        "date": "2025-01-13",
+        "isPrimary": true,
+        "hospital": "이대목동병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Brain MRI, DWI, PWI",
+        "nameEn": "Brain MRI, DWI, PWI",
+        "date": "2025-01-15",
+        "result": "Focal multinodular T2 hyperintensity lesion in the left superior temporal gyrus area.",
+        "finding": "Benign lesion such as multinodular vacuolating neuronal tumor (MVNT) or cluster of perivascular space.",
+        "normalRange": null,
+        "isAbnormal": true
+      },
+      {
+        "name": "TCD (Transcranial Doppler Sonography)",
+        "nameEn": "TCD (Transcranial Doppler Sonography)",
+        "date": "2025-01-13",
+        "result": "Findings consistent with RCVS.",
+        "finding": null,
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "진통제",
+        "date": "2024-12-13",
+        "duration": "퇴원 시까지",
+        "details": "지속적인 두통 완화를 위한 약물 처방.",
+        "hospital": "이대목동병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-12-13",
+      "endDate": "2025-01-13",
+      "totalVisits": 1,
+      "hospitals": [
+        "이대목동병원"
+      ],
+      "summary": "응급실 방문 후 외래 진료 진행."
+    },
+    "admissionPeriod": {
+      "startDate": "2024-12-13",
+      "endDate": "2024-12-13",
+      "totalDays": 1,
+      "hospital": "이대목동병원",
+      "department": "응급의학과",
+      "reason": "어지러움 및 두통"
+    },
+    "pastHistory": [
+      {
+        "condition": "부정맥",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "currentStatus": "정보 없음",
+        "hospital": null,
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "신생물의 행동양식 불명 또는 미상 진단에 대한 추가 검사가 필요.",
+      "prognosis": "추가적인 검사 후 치료 계획 수립.",
+      "recommendations": "정기적인 추적 관찰 필요.",
+      "limitations": "일상생활에서의 두통으로 인한 활동 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "신생물의 행동양식 불명 또는 미상 진단.",
+      "keyFindings": [
+        "Focal multinodular T2 hyperintensity lesion",
+        "RCVS 의심"
+      ],
+      "recommendations": "추가 검사 및 정기적인 추적 관찰 권고."
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "caseId": "Case29",
+  "caseNum": 29,
+  "patientName": "서문정숙",
+  "model": "gpt-4o",
+  "totalPages": 14,
+  "processedAt": "2026-01-25T11:25:14.408Z",
+  "processingTime": 33939,
+  "cost": 0.1162,
+  "usage": {
+    "prompt_tokens": 16187,
+    "completion_tokens": 784,
+    "total_tokens": 16971,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "서문정숙",
+      "birthDate": "1958-12-15",
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2024-08-17",
+      "hospital": "디자인병원",
+      "department": "IM"
+    },
+    "chiefComplaint": {
+      "summary": "Nausea, vomiting, diarrhea",
+      "onsetDate": "2024-08-15",
+      "details": "증상 발생 후 개인병원 방문하여 치료하였으나 호전 없음"
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "Salmonellosis",
+        "date": "2024-08-17",
+        "isPrimary": true,
+        "hospital": "디자인병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Abdomen-pelvic CT",
+        "date": "2024-08-19",
+        "result": "Diffuse bowel wall thickening with mucosal enhancement",
+        "hospital": "디자인병원"
+      },
+      {
+        "name": "Brain MRI and MRA",
+        "date": "2024-09-04",
+        "result": "Old lacunar infarction, small aneurysm",
+        "hospital": "디자인병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Fluids and antibiotics",
+        "date": "2024-08-17",
+        "hospital": "디자인병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Antibiotics",
+        "dosage": null,
+        "period": "14 days"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "디자인병원",
+        "admissionDate": "2024-08-17",
+        "dischargeDate": "2024-08-24",
+        "reason": "Salmonellosis treatment"
+      }
+    ],
+    "surgeries": [],
+    "prognosis": {
+      "summary": "No significant abnormality in brain parenchyma",
+      "followUpDate": "2025-09-26"
+    },
+    "extractedDates": [
+      {
+        "date": "2024-08-17",
+        "context": "최초 내원일",
+        "type": "진료일"
+      },
+      {
+        "date": "2024-08-19",
+        "context": "Abdomen-pelvic CT 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2024-09-04",
+        "context": "Brain MRI and MRA 검사일",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-09-26",
+        "context": "추적관찰일",
+        "type": "진료일"
+      }
+    ],
+    "extractedHospitals": [
+      "디자인병원"
+    ],
+    "rawTextSummary": "환자 서문정숙은 2024년 8월 17일 디자인병원에 내원하여 Salmonellosis 진단을 받았으며, 복부 CT와 뇌 MRI/MRA 검사를 통해 이상 소견을 확인하였습니다. 치료로는 수액과 항생제가 투여되었으며, 2024년 8월 24일 퇴원하였습니다. 이후 2025년 9월 26일 추적 관찰이 이루어졌습니다."
+  },
+  "groundTruth": "3. ���系�� (���) \r\n��. �Ǻ����� ������ \r\n�� �� �� �� \r\n�Ǻ����� \r\n��  �� \r\n��� �� : �Ĵ������(2��) \r\n��� �� : �Ĵ������(2��) \r\n��  �� : �Ĵ������(2��) \r\n���谡�� \r\n��  �� ���� ���� ���� �� �� ���� ���� \r\n�߿���� \r\n�������� Ư�� �������� ����. \r\n�Ǻ����� \r\n��㳻�� \r\n2024.09 �뱸 ���� ���� ������ �ӹ��� �� ���� �������� �������������а� ����\r\n�Ͽ� �˻� ��� �����Ʒ� �ǽ� �Ұ� ����. ���� ���ܼ� ���� �Ͽ����� �ش� ������ \r\n�Ű�ܰ� ������ ���� ����� ���� ���� �Ұ� �Ͽ��� ����.  \r\n��� �Ƿ�� DB���غ��� �Ǽպ���� û�� �� \r\n���� ���ٸ� ġ�� ���� ������ �� 2025.09 ���� ����Ͽ� 2025.09.26 �����κ��� \r\n�����Ͽ� ���� �˻� ��� �����Ʒ��� ���� �ް� ���� ����� û���Ͽ����� ����. \r\n  \r\n  \r\n \r\n \r\n��. �Ǻ����� ���»��� ��� ���ǥ \r\n���� ������� ����/��� \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� ��KB���غ��� \r\n2024.09.04 \r\n�� �� �� : 2024.09.04 \r\n����Ⱓ : 2024.09.04 / 1ȸ ��� \r\n�˻��� : Brain MRI + MRA(2024.09.04) \r\n: Suggestive of small aneurysm, 2 mm, left \r\nparaclinoid ICA  \r\n: ���� ����� ���浿�� ���� ���Ʒ�, (2mm) �ǽ� \r\n�Ұ�. \r\n \r\n������������\r\n�а� \r\n2025.09.26 \r\n[û������] \r\n�� �� �� : 2025.09.26 \r\n�������� : 2�� ������ �Ӹ��� ���̰� ���� ������ �ּҷ� ��\r\n�� \r\n�� �� �� : �Ŀ����� ���� �����Ʒ�(I67.1) \r\n����Ⱓ : 2025.09.26 ~ 2025.09.29 / 2ȸ ��� \r\nġ�᳻�� : 2�� �� ������� ���� \r\n�˻��� : Brain MRI + MRA(2025.09.26) \r\n: A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA \r\n: ���� ����� �ظ� ������ ���浿�ƿ� 1~2mm ũ\r\n����, ���� �������� ����� ���� ���� ���Ʒ� ��\r\n��. \r\n \r\n�����κ��� \r\n  \r\n��. Ÿ ����� ó������ \r\n����� ��ǰ�� �������� ó������ \r\n�����ػ�     ����ɻ� ���� �� \r\n  \r\n��. ��ŸȮ�λ��� \r\n���(�ߺ�) \r\n���� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' \r\n���� �� ���� ����� û����.  \r\n���� \r\n���� �Ĵ������(2��) \r\n����� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�.  \r\n2024.09.04 �������������а����� �˻� ���� 2025.09.26���� �߰� �˻� �� ġ���\r\n�� ���� ������ Ȯ�ε�.  \r\n \r\n \r\n4. ���ػ������ \r\n�������� �ƴϿ� ���ʼ��� �� �����Ҹ� �� \r\n�ο����� �� �����䱸����   \r\n��� ���� ����� ���Ͽ� �� ��, \r\n  \r\n1. �������� �� û������ \r\n�����ǹ� ���ݿ��� �� ���� ������ ����. \r\n  \r\n2. ������� \r\n2025.09.26 �����κ������� ������ ���� �˻� ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\r\n�� ����� û����. \r\n  \r\n3. �˸��ǹ��� �����Ͽ� \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \r\nû�� �� �� ���� ������� �ش��ϴ� ���᳻�� ���� ������ Ȯ�ε�. \r\n  \r\n4. �ݹ� û�� �����Ͽ� \r\n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \r\n \r\n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ���� \r\n \r\n2024.09.04 �������������а�(�뱸): Suggestive of small aneurysm, 2 mm, left paraclinoid ICA \r\n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \r\n \r\n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) 1�� ��� ���� \r\n \r\n2025.09.26 �����κ���: Brain MRA �� A small(1~2mm), saccular aneurysm with medial \r\ndirection at left infraclinoid cavernous distal ICA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \r\nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \r\n \r\n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а����� �˻� \r\n���� 2025.09.26���� �߰� �˻� �� ġ����� ���� ������ Ȯ�ε�. \r\n  \r\n5. ���ػ��� ��� \r\n��� ���� �����Ͽ� �ͻ� �ɻ� ���ؿ� �ǰ� ���� �� ó������ Ÿ���� ������ �Ǵܵ�.  \r\n  \r\n��� ���� �� ���� �����ڷ� Ȯ�� �� ��KB���غ��迡�� ���� �Ǵ��� �ֽñ� �ٶ��ϴ�.",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-09-26",
+        "2024-09-04"
+      ],
+      "missed": [
+        "2024-08-13",
+        "2025-09-29",
+        "2020-10-15",
+        "2025-10-15",
+        "2025-08-13"
+      ],
+      "extra": [
+        "2024-08-17",
+        "2024-08-19",
+        "2024-08-24"
+      ],
+      "rate": 29
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "I67.1"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    },
+    "examinations": {
+      "matched": [
+        "MRI",
+        "MRA"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null
+}

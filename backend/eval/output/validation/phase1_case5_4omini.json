@@ -1,0 +1,189 @@
+{
+  "caseNum": 5,
+  "model": "gpt-4o-mini",
+  "processingTime": 25597,
+  "tokens": {
+    "prompt_tokens": 18493,
+    "completion_tokens": 1380,
+    "total_tokens": 19873,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.003601949999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-12-27",
+      "time": "null",
+      "hospital": "세브란스병원",
+      "department": "심장내과"
+    },
+    "chiefComplaint": {
+      "summary": "가슴이 조이듯이 아프고 식은땀이 많음",
+      "referralSource": "null",
+      "onsetDate": "2023-12-27",
+      "duration": "1년",
+      "details": "걸어가다가 숨이 찬 증상"
+    },
+    "diagnoses": [
+      {
+        "code": "I20.9",
+        "nameKr": "안정형 협심증",
+        "nameEn": "Stable angina pectoris",
+        "date": "2024-12-31",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I25.10",
+        "nameKr": "관상동맥질환",
+        "nameEn": "Coronary artery disease (1 vessel disease)",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E11.68",
+        "nameKr": "제2형 당뇨병 및 이상지질혈증",
+        "nameEn": "Diabetes mellitus type 2 with dyslipidemia",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E78.8",
+        "nameKr": "이상지질혈증",
+        "nameEn": "Dyslipidemia",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I50.9",
+        "nameKr": "이완기 심부전",
+        "nameEn": "Diastolic heart failure",
+        "date": "2024-12-31",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "심전도",
+        "nameEn": "Electrocardiogram",
+        "date": "2024-12-27",
+        "result": "정상",
+        "finding": "null",
+        "normalRange": "null",
+        "isAbnormal": false
+      },
+      {
+        "name": "심장 초음파",
+        "nameEn": "Echocardiography",
+        "date": "2024-12-27",
+        "result": "정상",
+        "finding": "Relaxation abnormality of LV filling pattern",
+        "normalRange": "null",
+        "isAbnormal": true
+      },
+      {
+        "name": "관상동맥 조영술",
+        "nameEn": "Coronary Angiography",
+        "date": "2024-12-31",
+        "result": "정상",
+        "finding": "Minimal LN of PRCA, Tubular ecc. 50% LN of mLAD",
+        "normalRange": "null",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "null",
+      "testDate": "null",
+      "reportDate": "null",
+      "finding": "null",
+      "stageTNM": "null",
+      "stageOverall": "null",
+      "histology": "null",
+      "margin": "null"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "관상동맥 조영술",
+        "date": "2024-12-31",
+        "duration": "null",
+        "details": "관상동맥 조영술 시행",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-12-27",
+      "endDate": "2024-12-31",
+      "totalVisits": 1,
+      "hospitals": [
+        "세브란스병원"
+      ],
+      "summary": "가슴 통증으로 외래 방문"
+    },
+    "admissionPeriod": {
+      "startDate": "2024-12-31",
+      "endDate": "2024-12-31",
+      "totalDays": 1,
+      "hospital": "세브란스병원",
+      "department": "심장내과",
+      "reason": "관상동맥 조영술 시행"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "당뇨병",
+        "code": "E11",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 안정형 협심증으로 진단되었으며, 관상동맥 조영술을 통해 치료가 필요함.",
+      "prognosis": "양호",
+      "recommendations": "정기적인 외래 진료 및 약물 치료 필요",
+      "limitations": "격렬한 운동 자제 필요"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "null",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 안정형 협심증으로 진단받고 치료를 받음.",
+      "keyFindings": [
+        "관상동맥 질환 확인",
+        "당뇨병 동반"
+      ],
+      "recommendations": "정기적인 진료 및 관리 필요"
+    }
+  }
+}

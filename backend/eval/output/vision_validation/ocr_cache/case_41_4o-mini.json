@@ -1,0 +1,93 @@
+{
+  "caseId": "Case41",
+  "caseNum": 41,
+  "model": "gpt-4o-mini",
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-10-13",
+      "time": "14:34:36",
+      "hospital": "우신향병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": null,
+      "onsetDate": null,
+      "duration": null,
+      "details": null
+    },
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": null,
+        "date": null,
+        "isPrimary": false,
+        "hospital": "우신향병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": null,
+        "date": null,
+        "result": null,
+        "finding": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "finding": null,
+      "stageTNM": null
+    },
+    "treatments": [
+      {
+        "type": null,
+        "name": null,
+        "date": null,
+        "duration": null,
+        "details": null
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalVisits": 0,
+      "hospitals": []
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": "우신향병원",
+      "reason": null
+    },
+    "pastHistory": [
+      {
+        "condition": null,
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": null,
+      "prognosis": null,
+      "recommendations": null
+    }
+  },
+  "extractedData": {
+    "dates": [
+      "2025-10-13"
+    ],
+    "kcdCodes": [],
+    "hospitals": [
+      "우신향병원"
+    ],
+    "examinations": [],
+    "treatments": [],
+    "diagnoses": []
+  },
+  "timestamp": "2026-01-25T09:40:08.569Z",
+  "cached": true
+}

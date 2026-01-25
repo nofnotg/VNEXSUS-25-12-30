@@ -1,0 +1,140 @@
+{
+  "caseNum": 9,
+  "model": "gpt-4o-mini",
+  "processingTime": 26386,
+  "tokens": {
+    "prompt_tokens": 119004,
+    "completion_tokens": 967,
+    "total_tokens": 119971,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.018430799999999997,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 33,
+    "overallScore": 60
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-10-30",
+      "time": "12:00",
+      "hospital": "대림성모병원",
+      "department": "유방외과"
+    },
+    "chiefComplaint": {
+      "summary": "유방암 진단",
+      "referralSource": "양지병원",
+      "onsetDate": "2024-10-04",
+      "duration": "정보 없음",
+      "details": "유방에 혹이 발견되어 조직검사 필요"
+    },
+    "diagnoses": [
+      {
+        "code": "D05.10",
+        "nameKr": "유방의 관내 제자리암종, 오른쪽",
+        "nameEn": "Intraductal carcinoma in situ of breast, right",
+        "date": "2024-10-04",
+        "isPrimary": true,
+        "hospital": "양지병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "Mammography",
+        "nameEn": "Mammography",
+        "date": "2024-10-04",
+        "result": "Grouped microcalcifications with suspicious associated soft tissue density",
+        "finding": "No evidence of suspicious mass",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "Breast Ultrasound",
+        "nameEn": "Breast Ultrasound",
+        "date": "2024-10-04",
+        "result": "1.3cm extent heterogeneous nonmass lesion with microcalcifications",
+        "finding": "Correlated with MG",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직병리검사",
+      "testDate": "2024-10-04",
+      "reportDate": "2024-10-05",
+      "finding": "Ductal carcinoma in situ",
+      "stageTNM": "pTisNx",
+      "stageOverall": "정보 없음",
+      "histology": "정보 없음",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "우측 부분유방절제술",
+        "date": "2024-10-31",
+        "duration": "정보 없음",
+        "details": "Lumpectomy 및 부분 유방 재건",
+        "hospital": "대림성모병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-10-04",
+      "endDate": "2024-10-30",
+      "totalVisits": 3,
+      "hospitals": [
+        "양지병원",
+        "대림성모병원"
+      ],
+      "summary": "유방암 진단 및 수술 전후 경과 관찰"
+    },
+    "admissionPeriod": {
+      "startDate": "2024-10-30",
+      "endDate": "2024-11-01",
+      "totalDays": 2,
+      "hospital": "대림성모병원",
+      "department": "유방외과",
+      "reason": "유방암 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": "정보 없음",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "유방암으로 인한 수술 필요",
+      "prognosis": "정기적인 추적 관찰 필요",
+      "recommendations": "호르몬 치료 시작",
+      "limitations": "일상생활에서의 활동 제한"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "유방암 진단 후 수술 진행",
+      "keyFindings": [
+        "유방의 관내 제자리암종 진단",
+        "수술 후 경과 관찰 필요"
+      ],
+      "recommendations": "정기적인 검진 및 호르몬 치료"
+    }
+  }
+}

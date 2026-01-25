@@ -1,0 +1,31 @@
+{
+  "totalCases": 12,
+  "totalCost": 1.7707636000000002,
+  "phase1Cost": 0.06277859999999999,
+  "phase2Cost": 1.7079850000000003,
+  "gpt4omini": {
+    "avgQuality": 54,
+    "avgStructure": 92,
+    "avgDiagnosis": 29,
+    "avgTime": 71584,
+    "avgCost": 0.005231549999999999,
+    "efficiency": 10321.98870315681,
+    "isEfficiencyWinner": true
+  },
+  "gpt4o": {
+    "avgQuality": 58,
+    "avgStructure": 93,
+    "avgDiagnosis": 34,
+    "avgTime": 42591,
+    "avgCost": 0.14233208333333336,
+    "efficiency": 407.4977239261468,
+    "isQualityWinner": true
+  },
+  "recommendation": {
+    "model": "GPT-4o-mini",
+    "reason": "품질 차이 4%에 비해 비용이 27배 높음",
+    "generalUse": "GPT-4o-mini 권장 (비용 대비 품질 최적)",
+    "highQuality": "GPT-4o 사용 (고위험 케이스, 복잡한 진단)",
+    "costOptimization": "GPT-4o-mini로 1차 처리 후 필요시 GPT-4o 재처리"
+  }
+}

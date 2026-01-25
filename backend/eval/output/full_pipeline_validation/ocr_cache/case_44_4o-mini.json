@@ -1,0 +1,252 @@
+{
+  "caseId": "Case44",
+  "caseNum": 44,
+  "patientName": "최순곤",
+  "model": "gpt-4o-mini",
+  "totalPages": 33,
+  "processedPages": 33,
+  "processedAt": "2026-01-25T11:17:37.932Z",
+  "processingTime": 161546,
+  "cost": 0.1782,
+  "usage": {
+    "prompt_tokens": 1216271,
+    "completion_tokens": 1124,
+    "total_tokens": 1217395,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "최순곤",
+      "birthDate": "1959-02-21",
+      "gender": "M"
+    },
+    "visitDate": {
+      "date": "2025-08-25",
+      "hospital": "세브란스병원",
+      "department": "신경과"
+    },
+    "chiefComplaint": {
+      "summary": "Rt. side weakness",
+      "onsetDate": "2025-08-25",
+      "details": "Drowsy mentality, ER admission"
+    },
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "중대뇌동맥경색증",
+        "date": "2025-08-25",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "K25.91",
+        "nameKr": "위궤양, 미상",
+        "date": "2025-08-27",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E78.8",
+        "nameKr": "지질대사장애",
+        "date": "2025-08-27",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "F32.0",
+        "nameKr": "우울증",
+        "date": "2025-08-27",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "F90.0",
+        "nameKr": "주의력결핍장애",
+        "date": "2025-08-27",
+        "isPrimary": false,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Angio",
+        "date": "2025-08-26",
+        "result": "No evidence of plaque or stenosis.",
+        "hospital": "세브란스병원"
+      },
+      {
+        "name": "Carotid Duplex",
+        "date": "2025-08-26",
+        "result": "Atheromatous plaques found.",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "Thrombolysis",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "medications": [
+      {
+        "name": "Mirtazapine",
+        "dosage": "7.5 mg",
+        "period": "1T qd"
+      },
+      {
+        "name": "Alprazolam",
+        "dosage": "1 mg",
+        "period": "1T tid"
+      },
+      {
+        "name": "Trazodone",
+        "dosage": "50 mg",
+        "period": "1T qd"
+      },
+      {
+        "name": "Vortioxetine",
+        "dosage": "20 mg",
+        "period": "1T qd"
+      }
+    ],
+    "hospitalizations": [
+      {
+        "hospital": "세브란스병원",
+        "admissionDate": "2025-08-25",
+        "dischargeDate": null,
+        "reason": "Stroke management"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "Endovascular thrombectomy",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "Patient is under observation for stroke recovery.",
+      "followUpDate": "2025-09-02"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-08-25",
+        "context": "Symptom onset",
+        "type": "증상 발생일"
+      },
+      {
+        "date": "2025-08-26",
+        "context": "CT Angio date",
+        "type": "검사일"
+      },
+      {
+        "date": "2025-08-27",
+        "context": "Invasive procedure date",
+        "type": "수술일"
+      },
+      {
+        "date": "2025-09-02",
+        "context": "Follow-up date",
+        "type": "추적관찰일"
+      }
+    ],
+    "extractedHospitals": [
+      "세브란스병원"
+    ],
+    "rawTextSummary": "환자는 2025년 8월 25일에 오른쪽 약화 증상으로 응급실에 내원하였으며, 중대뇌동맥경색증으로 진단받고 thrombolysis 치료를 받았다. 이후 여러 검사를 통해 위궤양 및 지질대사장애, 우울증, 주의력결핍장애가 발견되었다."
+  },
+  "groundTruth": "청구내용2025.08.25 우측 편마비 증상을 주소로 119통해 신촌세브란스병원 입원하여 시행한 정밀 검사 결과, 'I63.9\r\n Middle cerebral artery infarction, left (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\r\n청구내용 및 조사 결과\r\n조사자의견\r\n및 \r\n조사결과\r\n[고지의무 위반여부 관련] \r\n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하\r\n는 진료내역 없는 것으로 확인됨. \r\n김안과병원 서류 보완 검토 결과 청약전 3개월 이내 고지대상에 해당하는 진료내역 없는 것으로 확인됨. \r\n[진단 적정 여부]\r\n신촌세브란스병원 입원 하 시행한 Brain CT/MRI (2025.08.25) - Lt MCA occlusion (좌측 중대뇌동맥 폐색) - 좌측\r\nM1 폐색 확인 소견으로, \r\nAngiography & Intervention (2025.08.25) → 뇌혈관조영 및 혈관내 혈전제거술 - 좌측 M1 폐색 재개통 성공\r\n응급 내원 후 혈전제거술(Endovascular thrombectomy) 시행 등의 치료 사항 확인됨. \r\n해당 치료사항으로 볼 때, 해당 보험 약관상 뇌혈관질환(I60~I69) 진단 기준에 부합하는 것으로 판단되는 바, 귀\r\n사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨.\r\n조사결과부책동의서징구해당없음민원여부해당없음\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)서류징구 및 전달조사쟁점 중(L2)심평원/의료자문 위임장 요청조사자확인완료\r\n쟁 점 상 세(L3) ①지연안내문 전달 //  ②의료자문동의서 징구 [자문동의서는 ■ 출력해서 징구바랍니다. 수기체크불가\r\n조  사  내  용 안내문 전달 및 자문동의서 징구 등재 완료\r\n조사쟁점 대(L1)사고현장/주변/병의원 탐\r\n문\r\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\r\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\r\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \r\n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\r\n조사쟁점 대(L1)병원 확인조사쟁점 중(L2)의무기록/CD/검진결과 확인조사자확인완료\r\n쟁 점 상 세(L3)치료병원 진료기록 및 수술(시술) 기록, 판독지 검사결과지 , 영상CD\r\n조  사  내  용 완료\r\n상기와 같이 위임 받은 사고조사에 대하여 신의성실의 원칙에 의거 공정하게 처리되었음을 확인하고, 보고서를 제출합니다.\r\n CBIB025RP\r\n대외비\r\n3 / 4\r\n주요 쟁점 사항\r\n조사쟁점 대(L1)브로커/PA(계약적정성) 확\r\n인\r\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\r\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\r\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \r\n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\r\n일자확인내용관련기관\r\n2024.06.03나에게맞춘간편건강보험2404\r\n - 보험가입 전 3개월 시점DB손해보험\r\n2024.07.31\r\n내원일시 : 2024.07.31\r\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\r\n치료사항 : 경과과찰 6개월\r\n기타사항 : 입원 수술 필요 소견 없음.\r\n김안과병원\r\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\r\n2025.08.25 ~ 2025.08.29\r\n내원일자 : 2025.08.25\r\n내원경위 : 2025.08.25 오전 기상 후 화장실로 이동하다가 갑작스러운 우측 편마\r\n비 증상 발생. 보호자 119 호출 후 응급실 내원.\r\n진단병명 : I63.9 Middle cerebral artery infarction, left (좌측 중대뇌동맥 뇌경색)\r\n검사결과 : \r\nBrain CT/MRI (2025.08.25) - Lt MCA occlusion (좌측 중대뇌동맥 폐색)\r\n → 뇌영상검사 - 좌측 M1 폐색 확인\r\nAngiography & Intervention (2025.08.25, 보고일 2025.08.26) - Endovascular\r\n thrombectomy performed, successful recanalization of Lt M1 occlusion\r\n → 뇌혈관조영 및 혈관내 혈전제거술 - 좌측 M1 폐색 재개통 성공\r\n치료내용 : 2025.08.25 응급 내원 후 혈전제거술(Endovascular thrombectomy) 시\r\n행 (Penumbra/Suction 기구 사용)\r\n항혈소판제(dual antiplatelet), 지질강하제(lipitor, ezetrol, repatha) 투여\r\n입원기간 : 2025.08.25 ~ 2025.08.29 / 총 5일 입원\r\n신촌세브란스병원\r\n[청구사항",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-08-25",
+        "2025-08-26"
+      ],
+      "missed": [
+        "2020-09-09",
+        "2024-09-03",
+        "2024-06-03",
+        "2024-07-31",
+        "2054-09-03",
+        "2025-08-29"
+      ],
+      "extra": [
+        "2025-08-27",
+        "2025-09-02"
+      ],
+      "rate": 25
+    },
+    "kcdCodes": {
+      "matched": [
+        "I63.9"
+      ],
+      "missed": [
+        "I60",
+        "I69",
+        "B02"
+      ],
+      "extra": [
+        "K25.91",
+        "E78.8",
+        "F32.0",
+        "F90.0"
+      ],
+      "rate": 25
+    },
+    "hospitals": {
+      "matched": [
+        "신촌세브란스병원"
+      ],
+      "missed": [
+        "치료병원",
+        "김안과병원",
+        "병의원"
+      ],
+      "extra": [],
+      "rate": 25
+    },
+    "examinations": {
+      "matched": [
+        "CT"
+      ],
+      "missed": [
+        "MRI"
+      ],
+      "extra": [],
+      "rate": 50
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "수술",
+        "치료병원",
+        "치료",
+        "치료사항으로",
+        "치료력확인",
+        "치료사항",
+        "치료내용",
+        "시술"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}

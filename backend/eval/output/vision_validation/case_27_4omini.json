@@ -1,0 +1,38 @@
+{
+  "caseId": "Case27",
+  "caseNum": 27,
+  "patientName": "박현미",
+  "model": "gpt-4o-mini",
+  "pdfFile": "서울아산병원.pdf",
+  "imageCount": 3,
+  "processingTime": 8955,
+  "tokens": {
+    "prompt_tokens": 110667,
+    "completion_tokens": 150,
+    "total_tokens": 110817,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016690049999999998,
+  "generatedJson": {
+    "visitDate": "2024-10-23",
+    "chiefComplaint": "갑상선 결절 소견",
+    "diagnoses": "Thyroid nodule, high suspicion",
+    "examinations": "FNA (Fine Needle Aspiration) performed",
+    "pathology": "Rare follicular cells associated with lymphocytic thyroiditis",
+    "treatments": "US & US guided CNB (0.6cm nodule)",
+    "outpatientPeriod": "2024-10-23",
+    "admissionPeriod": "N/A",
+    "pastHistory": "No significant past medical history",
+    "doctorOpinion": "Further evaluation needed for thyroid nodule"
+  },
+  "timestamp": "2026-01-25T09:48:57.790Z"
+}

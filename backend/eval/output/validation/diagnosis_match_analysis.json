@@ -1,0 +1,7062 @@
+{
+  "problems": {
+    "kcdCode": {
+      "issues": [
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "P22.8",
+          "message": "Ground Truth에 있는 P22.8가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "I46.0",
+          "message": "Ground Truth에 있는 I46.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "P00.9",
+          "message": "Ground Truth에 있는 P00.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "P03.4",
+          "message": "Ground Truth에 있는 P03.4가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "P05.1",
+          "message": "Ground Truth에 있는 P05.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "P90.9",
+          "message": "Ground Truth에 있는 P90.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "R06.8",
+          "message": "Ground Truth에 있는 R06.8가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "R09.8",
+          "message": "Ground Truth에 있는 R09.8가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "gtCode": "Z38.0",
+          "message": "Ground Truth에 있는 Z38.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 10,
+          "type": "extra",
+          "genCode": "O99.89",
+          "message": "Ground Truth에 없는 O99.89가 추가로 생성됨"
+        },
+        {
+          "caseNum": 10,
+          "type": "extra",
+          "genCode": "O36.5",
+          "message": "Ground Truth에 없는 O36.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 10,
+          "type": "extra",
+          "genCode": "E03.9",
+          "message": "Ground Truth에 없는 E03.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 11,
+          "type": "extra",
+          "genCode": "C78.7",
+          "message": "Ground Truth에 없는 C78.7가 추가로 생성됨"
+        },
+        {
+          "caseNum": 11,
+          "type": "extra",
+          "genCode": "C79.51",
+          "message": "Ground Truth에 없는 C79.51가 추가로 생성됨"
+        },
+        {
+          "caseNum": 11,
+          "type": "extra",
+          "genCode": "B18.2",
+          "message": "Ground Truth에 없는 B18.2가 추가로 생성됨"
+        },
+        {
+          "caseNum": 12,
+          "type": "missing",
+          "gtCode": "K74.69",
+          "message": "Ground Truth에 있는 K74.69가 생성되지 않음"
+        },
+        {
+          "caseNum": 12,
+          "type": "extra",
+          "genCode": "K92.2",
+          "message": "Ground Truth에 없는 K92.2가 추가로 생성됨"
+        },
+        {
+          "caseNum": 12,
+          "type": "extra",
+          "genCode": "K76.7",
+          "message": "Ground Truth에 없는 K76.7가 추가로 생성됨"
+        },
+        {
+          "caseNum": 12,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 12,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 13,
+          "type": "missing",
+          "gtCode": "S33.50",
+          "message": "Ground Truth에 있는 S33.50가 생성되지 않음"
+        },
+        {
+          "caseNum": 13,
+          "type": "partial",
+          "gtCode": "M51.1",
+          "genCode": "M51.30",
+          "message": "M51.1 → M51.30 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "gtCode": "N63.9",
+          "message": "Ground Truth에 있는 N63.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "gtCode": "D34.9",
+          "message": "Ground Truth에 있는 D34.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "gtCode": "I20.1",
+          "message": "Ground Truth에 있는 I20.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "gtCode": "I25.1",
+          "message": "Ground Truth에 있는 I25.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 15,
+          "type": "partial",
+          "gtCode": "C50.11",
+          "genCode": "C50.9",
+          "message": "C50.11 → C50.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 15,
+          "type": "missing",
+          "gtCode": "R59.1",
+          "message": "Ground Truth에 있는 R59.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 15,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 15,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 15,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 16,
+          "type": "extra",
+          "genCode": "B37.88",
+          "message": "Ground Truth에 없는 B37.88가 추가로 생성됨"
+        },
+        {
+          "caseNum": 16,
+          "type": "extra",
+          "genCode": "J98.40",
+          "message": "Ground Truth에 없는 J98.40가 추가로 생성됨"
+        },
+        {
+          "caseNum": 17,
+          "type": "missing",
+          "gtCode": "S33.50",
+          "message": "Ground Truth에 있는 S33.50가 생성되지 않음"
+        },
+        {
+          "caseNum": 17,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 17,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 18,
+          "type": "partial",
+          "gtCode": "E66.8",
+          "genCode": "E66.9",
+          "message": "E66.8 → E66.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 18,
+          "type": "extra",
+          "genCode": "K80.9",
+          "message": "Ground Truth에 없는 K80.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 18,
+          "type": "extra",
+          "genCode": "K81.0",
+          "message": "Ground Truth에 없는 K81.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 18,
+          "type": "extra",
+          "genCode": "R73.0",
+          "message": "Ground Truth에 없는 R73.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 19,
+          "type": "missing",
+          "gtCode": "C25.9",
+          "message": "Ground Truth에 있는 C25.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 19,
+          "type": "extra",
+          "genCode": "C16.0",
+          "message": "Ground Truth에 없는 C16.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 1,
+          "type": "partial",
+          "gtCode": "E11.78",
+          "genCode": "E11.9",
+          "message": "E11.78 → E11.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "J04.0",
+          "message": "Ground Truth에 있는 J04.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "K29.7",
+          "message": "Ground Truth에 있는 K29.7가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "J30.4",
+          "message": "Ground Truth에 있는 J30.4가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "H10.3",
+          "message": "Ground Truth에 있는 H10.3가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "partial",
+          "gtCode": "I67.8",
+          "genCode": "I67.9",
+          "message": "I67.8 → I67.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "I62.9",
+          "message": "Ground Truth에 있는 I62.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "gtCode": "I66.8",
+          "message": "Ground Truth에 있는 I66.8가 생성되지 않음"
+        },
+        {
+          "caseNum": 1,
+          "type": "extra",
+          "genCode": "R42.9",
+          "message": "Ground Truth에 없는 R42.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 1,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "partial",
+          "gtCode": "M65.95",
+          "genCode": "M6593",
+          "message": "M65.95 → M6593 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 20,
+          "type": "partial",
+          "gtCode": "M65.91",
+          "genCode": "M6593",
+          "message": "M65.91 → M6593 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "M6593",
+          "message": "Ground Truth에 없는 M6593가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "M5422",
+          "message": "Ground Truth에 없는 M5422가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "M5456",
+          "message": "Ground Truth에 없는 M5456가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "K291",
+          "message": "Ground Truth에 없는 K291가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "K297",
+          "message": "Ground Truth에 없는 K297가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "M2558",
+          "message": "Ground Truth에 없는 M2558가 추가로 생성됨"
+        },
+        {
+          "caseNum": 20,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 21,
+          "type": "partial",
+          "gtCode": "H33.02",
+          "genCode": "H3302",
+          "message": "H33.02 → H3302 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 21,
+          "type": "partial",
+          "gtCode": "H25.91",
+          "genCode": "H2591",
+          "message": "H25.91 → H2591 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 21,
+          "type": "missing",
+          "gtCode": "H40.0",
+          "message": "Ground Truth에 있는 H40.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 21,
+          "type": "missing",
+          "gtCode": "H35.9",
+          "message": "Ground Truth에 있는 H35.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 21,
+          "type": "partial",
+          "gtCode": "H33.0",
+          "genCode": "H3302",
+          "message": "H33.0 → H3302 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 21,
+          "type": "extra",
+          "genCode": "H3302",
+          "message": "Ground Truth에 없는 H3302가 추가로 생성됨"
+        },
+        {
+          "caseNum": 21,
+          "type": "extra",
+          "genCode": "H2591",
+          "message": "Ground Truth에 없는 H2591가 추가로 생성됨"
+        },
+        {
+          "caseNum": 21,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "missing",
+          "gtCode": "S93.5",
+          "message": "Ground Truth에 있는 S93.5가 생성되지 않음"
+        },
+        {
+          "caseNum": 22,
+          "type": "partial",
+          "gtCode": "M65.87",
+          "genCode": "M6596",
+          "message": "M65.87 → M6596 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 22,
+          "type": "partial",
+          "gtCode": "M17.0",
+          "genCode": "M170",
+          "message": "M17.0 → M170 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "M170",
+          "message": "Ground Truth에 없는 M170가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "M6596",
+          "message": "Ground Truth에 없는 M6596가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "K210",
+          "message": "Ground Truth에 없는 K210가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 22,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 23,
+          "type": "missing",
+          "gtCode": "C20.9",
+          "message": "Ground Truth에 있는 C20.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 23,
+          "type": "extra",
+          "genCode": "C53.9",
+          "message": "Ground Truth에 없는 C53.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 24,
+          "type": "partial",
+          "gtCode": "C16.20",
+          "genCode": "C16.0",
+          "message": "C16.20 → C16.0 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 25,
+          "type": "missing",
+          "gtCode": "D48.5",
+          "message": "Ground Truth에 있는 D48.5가 생성되지 않음"
+        },
+        {
+          "caseNum": 26,
+          "type": "missing",
+          "gtCode": "N84.0",
+          "message": "Ground Truth에 있는 N84.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 27,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 28,
+          "type": "partial",
+          "gtCode": "C34.99",
+          "genCode": "C34.1",
+          "message": "C34.99 → C34.1 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 28,
+          "type": "missing",
+          "gtCode": "D13.5",
+          "message": "Ground Truth에 있는 D13.5가 생성되지 않음"
+        },
+        {
+          "caseNum": 28,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 28,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 29,
+          "type": "missing",
+          "gtCode": "I67.1",
+          "message": "Ground Truth에 있는 I67.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 29,
+          "type": "extra",
+          "genCode": "A02.0",
+          "message": "Ground Truth에 없는 A02.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 29,
+          "type": "extra",
+          "genCode": "K52.9",
+          "message": "Ground Truth에 없는 K52.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 29,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 29,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 2,
+          "type": "missing",
+          "gtCode": "D13.4",
+          "message": "Ground Truth에 있는 D13.4가 생성되지 않음"
+        },
+        {
+          "caseNum": 2,
+          "type": "partial",
+          "gtCode": "D18.02",
+          "genCode": "D1802",
+          "message": "D18.02 → D1802 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 2,
+          "type": "extra",
+          "genCode": "D1802",
+          "message": "Ground Truth에 없는 D1802가 추가로 생성됨"
+        },
+        {
+          "caseNum": 32,
+          "type": "missing",
+          "gtCode": "D27.0",
+          "message": "Ground Truth에 있는 D27.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 32,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 32,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 33,
+          "type": "missing",
+          "gtCode": "K76.0",
+          "message": "Ground Truth에 있는 K76.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 33,
+          "type": "extra",
+          "genCode": "J10.9",
+          "message": "Ground Truth에 없는 J10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 33,
+          "type": "extra",
+          "genCode": "C16.0",
+          "message": "Ground Truth에 없는 C16.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 33,
+          "type": "extra",
+          "genCode": "I25.10",
+          "message": "Ground Truth에 없는 I25.10가 추가로 생성됨"
+        },
+        {
+          "caseNum": 33,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 34,
+          "type": "partial",
+          "gtCode": "C77.0",
+          "genCode": "C77.1",
+          "message": "C77.0 → C77.1 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 36,
+          "type": "missing",
+          "gtCode": "S83.21",
+          "message": "Ground Truth에 있는 S83.21가 생성되지 않음"
+        },
+        {
+          "caseNum": 36,
+          "type": "missing",
+          "gtCode": "M25.48",
+          "message": "Ground Truth에 있는 M25.48가 생성되지 않음"
+        },
+        {
+          "caseNum": 36,
+          "type": "extra",
+          "genCode": "N40.1",
+          "message": "Ground Truth에 없는 N40.1가 추가로 생성됨"
+        },
+        {
+          "caseNum": 36,
+          "type": "extra",
+          "genCode": "C61.9",
+          "message": "Ground Truth에 없는 C61.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 36,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 36,
+          "type": "extra",
+          "genCode": "K81.9",
+          "message": "Ground Truth에 없는 K81.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 37,
+          "type": "partial",
+          "gtCode": "S83.21",
+          "genCode": "S8321",
+          "message": "S83.21 → S8321 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 37,
+          "type": "partial",
+          "gtCode": "M25.48",
+          "genCode": "M2548",
+          "message": "M25.48 → M2548 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 37,
+          "type": "extra",
+          "genCode": "S8321",
+          "message": "Ground Truth에 없는 S8321가 추가로 생성됨"
+        },
+        {
+          "caseNum": 37,
+          "type": "extra",
+          "genCode": "M2548",
+          "message": "Ground Truth에 없는 M2548가 추가로 생성됨"
+        },
+        {
+          "caseNum": 37,
+          "type": "extra",
+          "genCode": "정보 없음",
+          "message": "Ground Truth에 없는 정보 없음가 추가로 생성됨"
+        },
+        {
+          "caseNum": 38,
+          "type": "extra",
+          "genCode": "D25.9",
+          "message": "Ground Truth에 없는 D25.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 38,
+          "type": "extra",
+          "genCode": "C50.4",
+          "message": "Ground Truth에 없는 C50.4가 추가로 생성됨"
+        },
+        {
+          "caseNum": 39,
+          "type": "missing",
+          "gtCode": "Z95.5",
+          "message": "Ground Truth에 있는 Z95.5가 생성되지 않음"
+        },
+        {
+          "caseNum": 39,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 39,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 40,
+          "type": "extra",
+          "genCode": "Z480",
+          "message": "Ground Truth에 없는 Z480가 추가로 생성됨"
+        },
+        {
+          "caseNum": 41,
+          "type": "missing",
+          "gtCode": "M43.16",
+          "message": "Ground Truth에 있는 M43.16가 생성되지 않음"
+        },
+        {
+          "caseNum": 41,
+          "type": "partial",
+          "gtCode": "S32.09",
+          "genCode": "S32.0",
+          "message": "S32.09 → S32.0 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 41,
+          "type": "partial",
+          "gtCode": "S32.02",
+          "genCode": "S32.0",
+          "message": "S32.02 → S32.0 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 41,
+          "type": "partial",
+          "gtCode": "S32.03",
+          "genCode": "S32.0",
+          "message": "S32.03 → S32.0 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 41,
+          "type": "extra",
+          "genCode": "M51.2",
+          "message": "Ground Truth에 없는 M51.2가 추가로 생성됨"
+        },
+        {
+          "caseNum": 41,
+          "type": "extra",
+          "genCode": "M48.0",
+          "message": "Ground Truth에 없는 M48.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 42,
+          "type": "missing",
+          "gtCode": "I67.1",
+          "message": "Ground Truth에 있는 I67.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 42,
+          "type": "extra",
+          "genCode": "I63.9",
+          "message": "Ground Truth에 없는 I63.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 42,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 42,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        },
+        {
+          "caseNum": 5,
+          "type": "missing",
+          "gtCode": "R07.4",
+          "message": "Ground Truth에 있는 R07.4가 생성되지 않음"
+        },
+        {
+          "caseNum": 5,
+          "type": "partial",
+          "gtCode": "I20.88",
+          "genCode": "I20.9",
+          "message": "I20.88 → I20.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 5,
+          "type": "partial",
+          "gtCode": "I25.1",
+          "genCode": "I25.10",
+          "message": "I25.1 → I25.10 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 5,
+          "type": "extra",
+          "genCode": "E11.68",
+          "message": "Ground Truth에 없는 E11.68가 추가로 생성됨"
+        },
+        {
+          "caseNum": 5,
+          "type": "extra",
+          "genCode": "E78.8",
+          "message": "Ground Truth에 없는 E78.8가 추가로 생성됨"
+        },
+        {
+          "caseNum": 5,
+          "type": "extra",
+          "genCode": "I50.9",
+          "message": "Ground Truth에 없는 I50.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 5,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 5,
+          "type": "extra",
+          "genCode": "E11.9",
+          "message": "Ground Truth에 없는 E11.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 6,
+          "type": "missing",
+          "gtCode": "N63.9",
+          "message": "Ground Truth에 있는 N63.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 6,
+          "type": "missing",
+          "gtCode": "D34.9",
+          "message": "Ground Truth에 있는 D34.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 6,
+          "type": "partial",
+          "gtCode": "I20.1",
+          "genCode": "I20.9",
+          "message": "I20.1 → I20.9 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 6,
+          "type": "extra",
+          "genCode": "E119",
+          "message": "Ground Truth에 없는 E119가 추가로 생성됨"
+        },
+        {
+          "caseNum": 6,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "J06.0",
+          "message": "Ground Truth에 있는 J06.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "J20.9",
+          "message": "Ground Truth에 있는 J20.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "J30.4",
+          "message": "Ground Truth에 있는 J30.4가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "M54.56",
+          "message": "Ground Truth에 있는 M54.56가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "D10.5",
+          "message": "Ground Truth에 있는 D10.5가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "L04.0",
+          "message": "Ground Truth에 있는 L04.0가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "gtCode": "C09.9",
+          "message": "Ground Truth에 있는 C09.9가 생성되지 않음"
+        },
+        {
+          "caseNum": 7,
+          "type": "extra",
+          "genCode": "C10.9",
+          "message": "Ground Truth에 없는 C10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 7,
+          "type": "extra",
+          "genCode": "C77.0",
+          "message": "Ground Truth에 없는 C77.0가 추가로 생성됨"
+        },
+        {
+          "caseNum": 7,
+          "type": "extra",
+          "genCode": "I10.9",
+          "message": "Ground Truth에 없는 I10.9가 추가로 생성됨"
+        },
+        {
+          "caseNum": 9,
+          "type": "partial",
+          "gtCode": "D05.00",
+          "genCode": "D05.10",
+          "message": "D05.00 → D05.10 (카테고리만 일치)"
+        },
+        {
+          "caseNum": 9,
+          "type": "missing",
+          "gtCode": "I67.1",
+          "message": "Ground Truth에 있는 I67.1가 생성되지 않음"
+        },
+        {
+          "caseNum": 9,
+          "type": "extra",
+          "genCode": "E78.5",
+          "message": "Ground Truth에 없는 E78.5가 추가로 생성됨"
+        }
+      ],
+      "frequency": {},
+      "avgRate": 52
+    },
+    "date": {
+      "issues": [
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "dates": [
+            "2024-05-01",
+            "2054-11-10",
+            "2025-11-10",
+            "2024-04-18",
+            "2024-12-20"
+          ],
+          "message": "누락된 날짜: 2024-05-01, 2054-11-10, 2025-11-10, 2024-04-18, 2024-12-20"
+        },
+        {
+          "caseNum": 11,
+          "type": "missing",
+          "dates": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-11-26",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ],
+          "message": "누락된 날짜: 2023-02-28, 2024-07-26, 2024-09-13, 2024-10-21, 2024-11-05, 2024-10-28, 2024-11-01, 2024-10-14, 2024-10-23, 2024-10-24, 2024-11-26, 2025-01-14, 2024-12-26, 2024-12-30, 2024-12-24, 2020-01-21, 2025-01-21"
+        },
+        {
+          "caseNum": 12,
+          "type": "missing",
+          "dates": [
+            "2024-03-27",
+            "2025-02-18",
+            "2019-03-01",
+            "2024-03-31"
+          ],
+          "message": "누락된 날짜: 2024-03-27, 2025-02-18, 2019-03-01, 2024-03-31"
+        },
+        {
+          "caseNum": 13,
+          "type": "missing",
+          "dates": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-11-04"
+          ],
+          "message": "누락된 날짜: 2021-03-24, 2021-07-30, 2024-11-04"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "dates": [
+            "2018-07-26",
+            "2021-01-26",
+            "2023-04-26",
+            "2023-07-26",
+            "2025-02-05",
+            "2025-02-19",
+            "2025-02-26"
+          ],
+          "message": "누락된 날짜: 2018-07-26, 2021-01-26, 2023-04-26, 2023-07-26, 2025-02-05, 2025-02-19, 2025-02-26"
+        },
+        {
+          "caseNum": 15,
+          "type": "missing",
+          "dates": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-27",
+            "2025-06-24"
+          ],
+          "message": "누락된 날짜: 2025-02-25, 2053-02-25, 2025-05-26, 2025-06-27, 2025-06-24"
+        },
+        {
+          "caseNum": 16,
+          "type": "missing",
+          "dates": [
+            "2025-09-25",
+            "2024-11-25",
+            "2025-02-23",
+            "2025-09-11",
+            "2025-09-30",
+            "2025-11-25"
+          ],
+          "message": "누락된 날짜: 2025-09-25, 2024-11-25, 2025-02-23, 2025-09-11, 2025-09-30, 2025-11-25"
+        },
+        {
+          "caseNum": 17,
+          "type": "missing",
+          "dates": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ],
+          "message": "누락된 날짜: 2025-08-12, 2030-08-12, 2045-08-12, 2025-08-19"
+        },
+        {
+          "caseNum": 18,
+          "type": "missing",
+          "dates": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-07-14"
+          ],
+          "message": "누락된 날짜: 2019-03-29, 2019-07-05, 2021-07-09, 2025-07-14"
+        },
+        {
+          "caseNum": 19,
+          "type": "missing",
+          "dates": [
+            "2024-04-09",
+            "2024-06-17",
+            "2024-07-09",
+            "2024-08-29",
+            "2025-06-12",
+            "2025-03-31",
+            "2024-10-07",
+            "2025-07-09",
+            "2025-06-16",
+            "2025-09-29",
+            "2025-10-03",
+            "2025-08-12",
+            "2020-10-17",
+            "2025-10-17"
+          ],
+          "message": "누락된 날짜: 2024-04-09, 2024-06-17, 2024-07-09, 2024-08-29, 2025-06-12, 2025-03-31, 2024-10-07, 2025-07-09, 2025-06-16, 2025-09-29, 2025-10-03, 2025-08-12, 2020-10-17, 2025-10-17"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "dates": [
+            "2019-09-27",
+            "2019-11-15",
+            "2024-08-14",
+            "2020-10-28",
+            "2024-04-11",
+            "2023-10-20",
+            "2024-01-27",
+            "2023-09-27",
+            "2024-06-27",
+            "2024-09-27",
+            "2020-03-14",
+            "2025-03-07"
+          ],
+          "message": "누락된 날짜: 2019-09-27, 2019-11-15, 2024-08-14, 2020-10-28, 2024-04-11, 2023-10-20, 2024-01-27, 2023-09-27, 2024-06-27, 2024-09-27, 2020-03-14, 2025-03-07"
+        },
+        {
+          "caseNum": 20,
+          "type": "missing",
+          "dates": [
+            "2025-09-11"
+          ],
+          "message": "누락된 날짜: 2025-09-11"
+        },
+        {
+          "caseNum": 21,
+          "type": "missing",
+          "dates": [
+            "2023-11-09",
+            "2023-11-24",
+            "2023-11-27",
+            "2024-01-24",
+            "2024-00-24",
+            "2023-12-21",
+            "2025-09-08",
+            "2025-09-18"
+          ],
+          "message": "누락된 날짜: 2023-11-09, 2023-11-24, 2023-11-27, 2024-01-24, 2024-00-24, 2023-12-21, 2025-09-08, 2025-09-18"
+        },
+        {
+          "caseNum": 22,
+          "type": "missing",
+          "dates": [
+            "2019-08-16",
+            "2021-08-16",
+            "2024-05-06",
+            "2024-05-16",
+            "2024-08-16",
+            "2025-07-24",
+            "2025-03-04",
+            "2025-07-25",
+            "2025-08-12",
+            "2025-08-19",
+            "2025-08-26"
+          ],
+          "message": "누락된 날짜: 2019-08-16, 2021-08-16, 2024-05-06, 2024-05-16, 2024-08-16, 2025-07-24, 2025-03-04, 2025-07-25, 2025-08-12, 2025-08-19, 2025-08-26"
+        },
+        {
+          "caseNum": 23,
+          "type": "missing",
+          "dates": [
+            "2023-02-01",
+            "2024-12-06",
+            "2025-06-13",
+            "2025-07-16",
+            "2025-07-18",
+            "2023-01-27",
+            "2024-10-07",
+            "2023-02-03",
+            "2023-12-06",
+            "2055-12-06",
+            "2025-03-06",
+            "2025-09-22"
+          ],
+          "message": "누락된 날짜: 2023-02-01, 2024-12-06, 2025-06-13, 2025-07-16, 2025-07-18, 2023-01-27, 2024-10-07, 2023-02-03, 2023-12-06, 2055-12-06, 2025-03-06, 2025-09-22"
+        },
+        {
+          "caseNum": 24,
+          "type": "missing",
+          "dates": [
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ],
+          "message": "누락된 날짜: 2022-09-06, 2023-01-15, 2024-10-15, 2025-01-15, 2025-02-24, 2025-09-04, 2025-08-21, 2025-08-22, 2025-09-15, 2025-09-25, 2025-09-24, 2026-01-15, 2022-10-24, 2025-10-24"
+        },
+        {
+          "caseNum": 25,
+          "type": "missing",
+          "dates": [
+            "2020-08-28",
+            "2025-08-18",
+            "2025-09-19",
+            "2025-10-02"
+          ],
+          "message": "누락된 날짜: 2020-08-28, 2025-08-18, 2025-09-19, 2025-10-02"
+        },
+        {
+          "caseNum": 26,
+          "type": "missing",
+          "dates": [
+            "2024-03-25",
+            "2024-03-27",
+            "2020-10-28",
+            "2025-10-28",
+            "2025-05-06",
+            "2025-05-22"
+          ],
+          "message": "누락된 날짜: 2024-03-25, 2024-03-27, 2020-10-28, 2025-10-28, 2025-05-06, 2025-05-22"
+        },
+        {
+          "caseNum": 27,
+          "type": "missing",
+          "dates": [
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2025-09-18",
+            "2025-09-16"
+          ],
+          "message": "누락된 날짜: 2019-06-22, 2023-02-22, 2023-06-22, 2024-03-22, 2024-06-22, 2024-07-19, 2024-10-07, 2024-10-11, 2025-09-18, 2025-09-16"
+        },
+        {
+          "caseNum": 28,
+          "type": "missing",
+          "dates": [
+            "2018-10-18",
+            "2020-10-18",
+            "2023-07-18",
+            "2023-10-18",
+            "2025-08-12",
+            "2020-08-26",
+            "2022-08-28",
+            "2022-10-04"
+          ],
+          "message": "누락된 날짜: 2018-10-18, 2020-10-18, 2023-07-18, 2023-10-18, 2025-08-12, 2020-08-26, 2022-08-28, 2022-10-04"
+        },
+        {
+          "caseNum": 29,
+          "type": "missing",
+          "dates": [
+            "2025-09-26",
+            "2024-08-13",
+            "2024-09-04",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ],
+          "message": "누락된 날짜: 2025-09-26, 2024-08-13, 2024-09-04, 2025-09-29, 2020-10-15, 2025-10-15, 2025-08-13"
+        },
+        {
+          "caseNum": 2,
+          "type": "missing",
+          "dates": [
+            "2019-03-23",
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2025-02-12",
+            "2024-04-23"
+          ],
+          "message": "누락된 날짜: 2019-03-23, 2023-08-07, 2019-04-09, 2024-01-09, 2025-02-12, 2024-04-23"
+        },
+        {
+          "caseNum": 30,
+          "type": "missing",
+          "dates": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-04-22",
+            "2025-09-09"
+          ],
+          "message": "누락된 날짜: 2012-11-23, 2025-01-01, 2025-04-22, 2025-09-09"
+        },
+        {
+          "caseNum": 31,
+          "type": "missing",
+          "dates": [
+            "2015-03-27"
+          ],
+          "message": "누락된 날짜: 2015-03-27"
+        },
+        {
+          "caseNum": 32,
+          "type": "missing",
+          "dates": [
+            "2014-12-24",
+            "2016-06-07",
+            "2016-06-14",
+            "2024-12-24",
+            "2025-07-22",
+            "2025-07-29",
+            "2025-09-04",
+            "2025-09-05",
+            "2020-10-22"
+          ],
+          "message": "누락된 날짜: 2014-12-24, 2016-06-07, 2016-06-14, 2024-12-24, 2025-07-22, 2025-07-29, 2025-09-04, 2025-09-05, 2020-10-22"
+        },
+        {
+          "caseNum": 33,
+          "type": "missing",
+          "dates": [
+            "2025-08-27",
+            "2025-08-28",
+            "2021-01-23",
+            "2023-01-23",
+            "2023-10-23",
+            "2024-01-23",
+            "2034-01-23",
+            "2024-04-22",
+            "2025-01-23"
+          ],
+          "message": "누락된 날짜: 2025-08-27, 2025-08-28, 2021-01-23, 2023-01-23, 2023-10-23, 2024-01-23, 2034-01-23, 2024-04-22, 2025-01-23"
+        },
+        {
+          "caseNum": 34,
+          "type": "missing",
+          "dates": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2024-01-19",
+            "2025-06-07",
+            "2025-06-24",
+            "2025-06-12",
+            "2025-07-02",
+            "2025-09-05",
+            "2020-09-02",
+            "2024-01-26"
+          ],
+          "message": "누락된 날짜: 2017-06-13, 2018-02-27, 2018-03-29, 2018-04-17, 2024-01-19, 2025-06-07, 2025-06-24, 2025-06-12, 2025-07-02, 2025-09-05, 2020-09-02, 2024-01-26"
+        },
+        {
+          "caseNum": 36,
+          "type": "missing",
+          "dates": [
+            "2021-06-02",
+            "2023-01-15",
+            "2023-01-16",
+            "2023-01-17",
+            "2025-06-24"
+          ],
+          "message": "누락된 날짜: 2021-06-02, 2023-01-15, 2023-01-16, 2023-01-17, 2025-06-24"
+        },
+        {
+          "caseNum": 37,
+          "type": "missing",
+          "dates": [
+            "2021-06-02",
+            "2025-06-24"
+          ],
+          "message": "누락된 날짜: 2021-06-02, 2025-06-24"
+        },
+        {
+          "caseNum": 38,
+          "type": "missing",
+          "dates": [
+            "2024-09-11",
+            "2023-09-11",
+            "2024-08-30",
+            "2025-08-24",
+            "2025-10-21",
+            "2010-06-01",
+            "2058-06-01",
+            "2019-10-21",
+            "2024-07-21",
+            "2024-10-21",
+            "2054-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-09-02"
+          ],
+          "message": "누락된 날짜: 2024-09-11, 2023-09-11, 2024-08-30, 2025-08-24, 2025-10-21, 2010-06-01, 2058-06-01, 2019-10-21, 2024-07-21, 2024-10-21, 2054-10-21, 2025-01-19, 2025-07-09, 2025-09-02"
+        },
+        {
+          "caseNum": 39,
+          "type": "missing",
+          "dates": [
+            "2016-09-12"
+          ],
+          "message": "누락된 날짜: 2016-09-12"
+        },
+        {
+          "caseNum": 3,
+          "type": "missing",
+          "dates": [
+            "2019-11-22",
+            "2021-09-02",
+            "2023-11-22",
+            "2024-08-22",
+            "2024-11-22",
+            "2025-03-04",
+            "2020-03-20",
+            "2025-03-19"
+          ],
+          "message": "누락된 날짜: 2019-11-22, 2021-09-02, 2023-11-22, 2024-08-22, 2024-11-22, 2025-03-04, 2020-03-20, 2025-03-19"
+        },
+        {
+          "caseNum": 40,
+          "type": "missing",
+          "dates": [
+            "2024-01-16",
+            "2025-09-18",
+            "2020-09-12",
+            "2025-09-11"
+          ],
+          "message": "누락된 날짜: 2024-01-16, 2025-09-18, 2020-09-12, 2025-09-11"
+        },
+        {
+          "caseNum": 41,
+          "type": "missing",
+          "dates": [
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-24",
+            "2021-05-20",
+            "2024-04-20",
+            "2025-07-11",
+            "2025-09-22",
+            "2024-04-24",
+            "2025-09-02",
+            "2025-01-03"
+          ],
+          "message": "누락된 날짜: 2007-08-08, 2021-05-17, 2021-05-24, 2021-05-20, 2024-04-20, 2025-07-11, 2025-09-22, 2024-04-24, 2025-09-02, 2025-01-03"
+        },
+        {
+          "caseNum": 42,
+          "type": "missing",
+          "dates": [
+            "2018-09-27",
+            "2025-04-23"
+          ],
+          "message": "누락된 날짜: 2018-09-27, 2025-04-23"
+        },
+        {
+          "caseNum": 5,
+          "type": "missing",
+          "dates": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-12",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "message": "누락된 날짜: 2018-05-10, 2023-02-10, 2023-05-10, 2024-12-12, 2024-05-30, 2020-01-17, 2024-01-24"
+        },
+        {
+          "caseNum": 6,
+          "type": "missing",
+          "dates": [
+            "2018-07-26",
+            "2023-04-26",
+            "2023-07-26",
+            "2025-02-05",
+            "2020-03-10",
+            "2023-04-28"
+          ],
+          "message": "누락된 날짜: 2018-07-26, 2023-04-26, 2023-07-26, 2025-02-05, 2020-03-10, 2023-04-28"
+        },
+        {
+          "caseNum": 7,
+          "type": "missing",
+          "dates": [
+            "2023-02-17",
+            "2023-02-18",
+            "2024-02-01",
+            "2024-02-17",
+            "2024-08-28",
+            "2024-11-04",
+            "2024-12-04",
+            "2024-12-09",
+            "2024-12-17",
+            "2025-02-11",
+            "2024-12-26",
+            "2024-12-27",
+            "2025-01-02",
+            "2020-02-14",
+            "2025-02-13"
+          ],
+          "message": "누락된 날짜: 2023-02-17, 2023-02-18, 2024-02-01, 2024-02-17, 2024-08-28, 2024-11-04, 2024-12-04, 2024-12-09, 2024-12-17, 2025-02-11, 2024-12-26, 2024-12-27, 2025-01-02, 2020-02-14, 2025-02-13"
+        },
+        {
+          "caseNum": 8,
+          "type": "missing",
+          "dates": [
+            "2019-10-08",
+            "2022-10-08",
+            "2024-07-08",
+            "2024-07-16",
+            "2024-09-12",
+            "2024-10-08"
+          ],
+          "message": "누락된 날짜: 2019-10-08, 2022-10-08, 2024-07-08, 2024-07-16, 2024-09-12, 2024-10-08"
+        },
+        {
+          "caseNum": 9,
+          "type": "missing",
+          "dates": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-07",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ],
+          "message": "누락된 날짜: 2019-02-26, 2023-03-23, 2023-12-26, 2023-12-29, 2024-02-19, 2022-07-17, 2024-01-02, 2024-02-08, 2024-02-26, 2024-08-02, 2024-10-05, 2024-09-26, 2024-09-27, 2024-10-07, 2024-10-10, 2024-10-11, 2024-11-06, 2019-12-21"
+        }
+      ],
+      "frequency": {},
+      "avgRate": 29
+    },
+    "hospital": {
+      "issues": [
+        {
+          "caseNum": 10,
+          "type": "missing",
+          "hospitals": [
+            "종합병원",
+            "치료병원",
+            "청구병원"
+          ],
+          "message": "누락된 병원: 종합병원, 치료병원, 청구병원"
+        },
+        {
+          "caseNum": 11,
+          "type": "missing",
+          "hospitals": [
+            "강북삼성병원",
+            "삼성병원",
+            "치료병원"
+          ],
+          "message": "누락된 병원: 강북삼성병원, 삼성병원, 치료병원"
+        },
+        {
+          "caseNum": 12,
+          "type": "missing",
+          "hospitals": [
+            "홍익병원",
+            "이대목동병원"
+          ],
+          "message": "누락된 병원: 홍익병원, 이대목동병원"
+        },
+        {
+          "caseNum": 13,
+          "type": "missing",
+          "hospitals": [
+            "치료병원",
+            "장해진단병원"
+          ],
+          "message": "누락된 병원: 치료병원, 장해진단병원"
+        },
+        {
+          "caseNum": 14,
+          "type": "missing",
+          "hospitals": [
+            "김윤호서울외과의원",
+            "명지병원"
+          ],
+          "message": "누락된 병원: 김윤호서울외과의원, 명지병원"
+        },
+        {
+          "caseNum": 16,
+          "type": "missing",
+          "hospitals": [
+            "검진센터",
+            "일산백병원"
+          ],
+          "message": "누락된 병원: 검진센터, 일산백병원"
+        },
+        {
+          "caseNum": 17,
+          "type": "missing",
+          "hospitals": [
+            "일산효자한의원",
+            "치료병원"
+          ],
+          "message": "누락된 병원: 일산효자한의원, 치료병원"
+        },
+        {
+          "caseNum": 18,
+          "type": "missing",
+          "hospitals": [
+            "구로성심병원",
+            "고대구로병원"
+          ],
+          "message": "누락된 병원: 구로성심병원, 고대구로병원"
+        },
+        {
+          "caseNum": 19,
+          "type": "missing",
+          "hospitals": [
+            "고대구로병원",
+            "동국대일산병원",
+            "치료병원",
+            "구대구로병원"
+          ],
+          "message": "누락된 병원: 고대구로병원, 동국대일산병원, 치료병원, 구대구로병원"
+        },
+        {
+          "caseNum": 1,
+          "type": "missing",
+          "hospitals": [
+            "치료병원",
+            "내과의원",
+            "이깁서의원"
+          ],
+          "message": "누락된 병원: 치료병원, 내과의원, 이깁서의원"
+        },
+        {
+          "caseNum": 21,
+          "type": "missing",
+          "hospitals": [
+            "과의원"
+          ],
+          "message": "누락된 병원: 과의원"
+        },
+        {
+          "caseNum": 22,
+          "type": "missing",
+          "hospitals": [
+            "외과의원",
+            "동신병원",
+            "은평본정형외과의원",
+            "밝은내일재활의학과의원",
+            "라온정형외과신경외과의원",
+            "바로척마취통증의학과의원",
+            "새서울정형외과의원",
+            "바른정형외과의원",
+            "은평성모정형외과의원",
+            "연세정형외과의원",
+            "김학수정형외과의원",
+            "치료병원",
+            "청구병원"
+          ],
+          "message": "누락된 병원: 외과의원, 동신병원, 은평본정형외과의원, 밝은내일재활의학과의원, 라온정형외과신경외과의원, 바로척마취통증의학과의원, 새서울정형외과의원, 바른정형외과의원, 은평성모정형외과의원, 연세정형외과의원, 김학수정형외과의원, 치료병원, 청구병원"
+        },
+        {
+          "caseNum": 24,
+          "type": "missing",
+          "hospitals": [
+            "치료병원"
+          ],
+          "message": "누락된 병원: 치료병원"
+        },
+        {
+          "caseNum": 25,
+          "type": "missing",
+          "hospitals": [
+            "동국대일산병원"
+          ],
+          "message": "누락된 병원: 동국대일산병원"
+        },
+        {
+          "caseNum": 26,
+          "type": "missing",
+          "hospitals": [
+            "고대안암병원",
+            "지축라움산부인과의원",
+            "은평성모병원"
+          ],
+          "message": "누락된 병원: 고대안암병원, 지축라움산부인과의원, 은평성모병원"
+        },
+        {
+          "caseNum": 27,
+          "type": "missing",
+          "hospitals": [
+            "휴내과의원",
+            "치료병원"
+          ],
+          "message": "누락된 병원: 휴내과의원, 치료병원"
+        },
+        {
+          "caseNum": 28,
+          "type": "missing",
+          "hospitals": [
+            "신촌세브란스병원"
+          ],
+          "message": "누락된 병원: 신촌세브란스병원"
+        },
+        {
+          "caseNum": 2,
+          "type": "missing",
+          "hospitals": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원"
+          ],
+          "message": "누락된 병원: 에스엠영상의학과의원, 서울대학교직장부속의원"
+        },
+        {
+          "caseNum": 32,
+          "type": "missing",
+          "hospitals": [
+            "에덴병원",
+            "여성병원",
+            "화순전남대병원",
+            "화순전남병원"
+          ],
+          "message": "누락된 병원: 에덴병원, 여성병원, 화순전남대병원, 화순전남병원"
+        },
+        {
+          "caseNum": 33,
+          "type": "missing",
+          "hospitals": [
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ],
+          "message": "누락된 병원: 치료병원, 병의원, 거주지주변필수탐문병원"
+        },
+        {
+          "caseNum": 36,
+          "type": "missing",
+          "hospitals": [
+            "서울척탑병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "상계백병원"
+          ],
+          "message": "누락된 병원: 서울척탑병원, 누가재활의학과의원, 치료병원, 상계백병원"
+        },
+        {
+          "caseNum": 37,
+          "type": "missing",
+          "hospitals": [
+            "누가재활의학과의원",
+            "치료병원",
+            "상계백병원"
+          ],
+          "message": "누락된 병원: 누가재활의학과의원, 치료병원, 상계백병원"
+        },
+        {
+          "caseNum": 38,
+          "type": "missing",
+          "hospitals": [
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ],
+          "message": "누락된 병원: 치료병원, 병의원, 거주지주변필수탐문병원"
+        },
+        {
+          "caseNum": 3,
+          "type": "missing",
+          "hospitals": [
+            "치료병원"
+          ],
+          "message": "누락된 병원: 치료병원"
+        },
+        {
+          "caseNum": 40,
+          "type": "missing",
+          "hospitals": [
+            "치료병원"
+          ],
+          "message": "누락된 병원: 치료병원"
+        },
+        {
+          "caseNum": 41,
+          "type": "missing",
+          "hospitals": [
+            "우신향병원",
+            "한림병원",
+            "치료병원",
+            "힘찬병원"
+          ],
+          "message": "누락된 병원: 우신향병원, 한림병원, 치료병원, 힘찬병원"
+        },
+        {
+          "caseNum": 5,
+          "type": "missing",
+          "hospitals": [
+            "굿웰스의원",
+            "동신병원"
+          ],
+          "message": "누락된 병원: 굿웰스의원, 동신병원"
+        },
+        {
+          "caseNum": 9,
+          "type": "missing",
+          "hospitals": [
+            "증진센터",
+            "이대서울병원",
+            "유방센터"
+          ],
+          "message": "누락된 병원: 증진센터, 이대서울병원, 유방센터"
+        }
+      ],
+      "frequency": {},
+      "avgRate": 47
+    },
+    "diagnosisName": {
+      "issues": [],
+      "frequency": {},
+      "avgRate": 34
+    }
+  },
+  "plan": {
+    "priority": [
+      {
+        "name": "날짜",
+        "rate": 29,
+        "key": "date"
+      },
+      {
+        "name": "진단명",
+        "rate": 34,
+        "key": "diagnosisName"
+      },
+      {
+        "name": "병원명",
+        "rate": 47,
+        "key": "hospital"
+      },
+      {
+        "name": "KCD 코드",
+        "rate": 52,
+        "key": "kcdCode"
+      }
+    ],
+    "improvements": [
+      {
+        "target": "KCD 코드 매칭",
+        "currentRate": 52,
+        "rootCause": [
+          "1. KCD 코드 형식 불일치 (E11 vs E11.78)",
+          "2. 상위 카테고리만 추출하고 세부 코드 누락",
+          "3. Ground Truth에 있는 과거력 코드 미추출",
+          "4. 청구 관련 코드만 추출하고 병력 코드 누락"
+        ],
+        "solutions": [
+          {
+            "priority": "HIGH",
+            "action": "프롬프트에 KCD 코드 완전성 강조",
+            "detail": "모든 진단명에 KCD 코드를 세부 코드까지 포함하도록 명시",
+            "implementation": "enhancedPromptBuilder.js의 systemPrompt에 추가"
+          },
+          {
+            "priority": "HIGH",
+            "action": "KCD 코드 정규화 후처리 추가",
+            "detail": "E11 → E11.9 자동 변환, 형식 통일",
+            "implementation": "structuredReportGenerator.js에 normalizeKCDCode 함수 추가"
+          },
+          {
+            "priority": "MEDIUM",
+            "action": "과거력 KCD 코드 추출 강화",
+            "detail": "병력 섹션에서도 KCD 코드 추출하도록 프롬프트 수정",
+            "implementation": "프롬프트에 \"과거력의 모든 질환에도 KCD 코드 포함\" 명시"
+          }
+        ]
+      },
+      {
+        "target": "날짜 매칭",
+        "currentRate": 29,
+        "rootCause": [
+          "1. 날짜 형식 불일치 (2025.02.17 vs 2025-02-17)",
+          "2. 과거 병력 날짜 누락",
+          "3. 보험 가입일/갱신일 미추출"
+        ],
+        "solutions": [
+          {
+            "priority": "HIGH",
+            "action": "날짜 형식 통일 후처리",
+            "detail": "YYYY-MM-DD 형식으로 자동 정규화",
+            "implementation": "structuredReportGenerator.js에 normalizeDate 함수 추가"
+          },
+          {
+            "priority": "MEDIUM",
+            "action": "전체 날짜 스캔 범위 확대",
+            "detail": "현재 2000~2025 → 1990~2030으로 확대",
+            "implementation": "프롬프트의 날짜 스캔 범위 수정"
+          }
+        ]
+      },
+      {
+        "target": "병원명 매칭",
+        "currentRate": 47,
+        "rootCause": [
+          "1. 병원명 표기 불일치 (강남성심병원 vs 한림대학교 강남성심병원)",
+          "2. 의원명 축약 (이기섭의원 vs 이깁서의원 - OCR 오류)",
+          "3. 과거 통원 병원 누락"
+        ],
+        "solutions": [
+          {
+            "priority": "MEDIUM",
+            "action": "병원명 정규화 사전 구축",
+            "detail": "공식 명칭 ↔ 약칭 매핑 테이블 구축",
+            "implementation": "hospitalNormalizer.js 신규 생성"
+          },
+          {
+            "priority": "LOW",
+            "action": "OCR 오류 보정",
+            "detail": "흔한 OCR 오류 패턴 자동 수정",
+            "implementation": "ocrPostProcessor.js에 병원명 보정 로직 추가"
+          }
+        ]
+      }
+    ]
+  },
+  "results": [
+    {
+      "caseNum": 10,
+      "groundTruth": {
+        "kcdCodes": [
+          "P22.8",
+          "I46.0",
+          "P00.9",
+          "P03.4",
+          "P05.1",
+          "P90",
+          "R06.8",
+          "R09.8",
+          "Z38.0"
+        ],
+        "dates": [
+          "2024-05-01",
+          "2054-11-10",
+          "2025-11-10",
+          "2024-04-18",
+          "2024-10-22",
+          "2024-12-20",
+          "2024-10-23"
+        ],
+        "hospitals": [
+          "종합병원",
+          "은평성모병원",
+          "치료병원",
+          "청구병원"
+        ],
+        "diagnosisNames": [
+          "신생아의 기타 호흡곤란"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "O99.89",
+          "O36.5",
+          "E03.9"
+        ],
+        "dates": [
+          "2024-10-21",
+          "2024-10-23",
+          "2024-10-22",
+          "2024-10-29"
+        ],
+        "hospitals": [
+          "가톨릭대학교은평성모병원"
+        ],
+        "diagnosisNames": [
+          "기타 임신 관련 질환",
+          "태아 성장 지연",
+          "갑상선 기능 저하증",
+          "고관절이형성증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 9,
+          "details": [
+            {
+              "gtCode": "P22.8",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I46.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "P00.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "P03.4",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "P05.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "P90.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "R06.8",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "R09.8",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "Z38.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "O99.89",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "O36.5",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E03.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2857142857142857,
+          "matched": 2,
+          "total": 7,
+          "missing": [
+            "2024-05-01",
+            "2054-11-10",
+            "2025-11-10",
+            "2024-04-18",
+            "2024-12-20"
+          ],
+          "extra": [
+            "2024-10-21",
+            "2024-10-29"
+          ]
+        },
+        "hospital": {
+          "rate": 0.25,
+          "matched": 1,
+          "total": 4,
+          "missing": [
+            "종합병원",
+            "치료병원",
+            "청구병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "신생아의 기타 호흡곤란"
+          ],
+          "extra": [
+            "기타 임신 관련 질환",
+            "태아 성장 지연",
+            "갑상선 기능 저하증",
+            "고관절이형성증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 11,
+      "groundTruth": {
+        "kcdCodes": [
+          "C23"
+        ],
+        "dates": [
+          "2023-02-28",
+          "2024-07-26",
+          "2024-09-13",
+          "2024-10-21",
+          "2024-11-05",
+          "2024-10-28",
+          "2024-11-01",
+          "2024-10-12",
+          "2024-10-14",
+          "2024-10-23",
+          "2024-10-24",
+          "2024-10-25",
+          "2024-11-18",
+          "2024-11-26",
+          "2024-12-23",
+          "2024-12-27",
+          "2025-01-14",
+          "2024-12-26",
+          "2024-12-30",
+          "2024-12-24",
+          "2020-01-21",
+          "2025-01-21"
+        ],
+        "hospitals": [
+          "강북삼성병원",
+          "삼성서울병원",
+          "삼성병원",
+          "치료병원"
+        ],
+        "diagnosisNames": [
+          "담낭암"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C23",
+          "C78.7",
+          "C79.51",
+          "B18.2"
+        ],
+        "dates": [
+          "2024-11-18",
+          "2024-10-25",
+          "2024-10-12",
+          "2025-01-08",
+          "2024-12-23",
+          "2024-12-27",
+          "정보 없음"
+        ],
+        "hospitals": [
+          "삼성서울병원"
+        ],
+        "diagnosisNames": [
+          "담낭암",
+          "간 전이",
+          "뼈 전이",
+          "간염"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C23.9",
+              "genCode": "C23.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "C78.7",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C79.51",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "B18.2",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.22727272727272727,
+          "matched": 5,
+          "total": 22,
+          "missing": [
+            "2023-02-28",
+            "2024-07-26",
+            "2024-09-13",
+            "2024-10-21",
+            "2024-11-05",
+            "2024-10-28",
+            "2024-11-01",
+            "2024-10-14",
+            "2024-10-23",
+            "2024-10-24",
+            "2024-11-26",
+            "2025-01-14",
+            "2024-12-26",
+            "2024-12-30",
+            "2024-12-24",
+            "2020-01-21",
+            "2025-01-21"
+          ],
+          "extra": [
+            "2025-01-08",
+            "정보 없음"
+          ]
+        },
+        "hospital": {
+          "rate": 0.25,
+          "matched": 1,
+          "total": 4,
+          "missing": [
+            "강북삼성병원",
+            "삼성병원",
+            "치료병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": [
+            "간 전이",
+            "뼈 전이",
+            "간염"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 12,
+      "groundTruth": {
+        "kcdCodes": [
+          "K74.69",
+          "K70.3"
+        ],
+        "dates": [
+          "2024-03-27",
+          "2025-02-18",
+          "2025-02-19",
+          "2025-02-20",
+          "2019-03-01",
+          "2024-03-31"
+        ],
+        "hospitals": [
+          "홍익병원",
+          "이대목동병원"
+        ],
+        "diagnosisNames": [
+          "간경변증 NOS, 상세불명",
+          "알콜성 간경변증"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "K70.3",
+          "K92.2",
+          "K76.7",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-02-19",
+          "2025-02-20"
+        ],
+        "hospitals": [
+          "이화여자대학교의료원"
+        ],
+        "diagnosisNames": [
+          "알코올성 간경변증",
+          "위장관 출혈",
+          "간신증후군",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "K74.69",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "K70.3",
+              "genCode": "K70.3",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "K92.2",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K76.7",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.3333333333333333,
+          "matched": 2,
+          "total": 6,
+          "missing": [
+            "2024-03-27",
+            "2025-02-18",
+            "2019-03-01",
+            "2024-03-31"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "홍익병원",
+            "이대목동병원"
+          ],
+          "extra": [
+            "이화여자대학교의료원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "간경변증 NOS, 상세불명",
+            "알콜성 간경변증"
+          ],
+          "extra": [
+            "알코올성 간경변증",
+            "위장관 출혈",
+            "간신증후군",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 13,
+      "groundTruth": {
+        "kcdCodes": [
+          "S33.50",
+          "M51.1"
+        ],
+        "dates": [
+          "2021-03-24",
+          "2021-07-30",
+          "2024-04-12",
+          "2024-11-04",
+          "2025-03-13"
+        ],
+        "hospitals": [
+          "서울바른병원",
+          "누가재활의학과의원",
+          "치료병원",
+          "장해진단병원"
+        ],
+        "diagnosisNames": [
+          "요추의 염좌 및 긴장"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "M51.30"
+        ],
+        "dates": [
+          "2025-03-13",
+          "2024-05-07",
+          "2024-04-12"
+        ],
+        "hospitals": [
+          "누가재활의학과의원",
+          "서울바른병원"
+        ],
+        "diagnosisNames": [
+          "추간판탈출증 - Herniated disc",
+          "요추부 추간판탈출증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.35,
+          "matched": 0.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "S33.50",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "M51.1",
+              "genCode": "M51.30",
+              "matchType": "category",
+              "matched": true
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.4,
+          "matched": 2,
+          "total": 5,
+          "missing": [
+            "2021-03-24",
+            "2021-07-30",
+            "2024-11-04"
+          ],
+          "extra": [
+            "2024-05-07"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 2,
+          "total": 4,
+          "missing": [
+            "치료병원",
+            "장해진단병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "요추의 염좌 및 긴장"
+          ],
+          "extra": [
+            "추간판탈출증 - Herniated disc",
+            "요추부 추간판탈출증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 14,
+      "groundTruth": {
+        "kcdCodes": [
+          "N63",
+          "D34",
+          "I20.1",
+          "I25.1"
+        ],
+        "dates": [
+          "2018-07-26",
+          "2021-01-26",
+          "2023-04-26",
+          "2023-07-26",
+          "2025-02-05",
+          "2025-02-19",
+          "2025-02-26"
+        ],
+        "hospitals": [
+          "김윤호서울외과의원",
+          "명지병원"
+        ],
+        "diagnosisNames": [
+          "유방의 상세불명의 덩이",
+          "변형 협심증"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [],
+        "dates": [],
+        "hospitals": [],
+        "diagnosisNames": []
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "details": [
+            {
+              "gtCode": "N63.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "D34.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I20.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I25.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "missing": [
+            "2018-07-26",
+            "2021-01-26",
+            "2023-04-26",
+            "2023-07-26",
+            "2025-02-05",
+            "2025-02-19",
+            "2025-02-26"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "김윤호서울외과의원",
+            "명지병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "유방의 상세불명의 덩이",
+            "변형 협심증"
+          ],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 15,
+      "groundTruth": {
+        "kcdCodes": [
+          "C50.11",
+          "R59.1"
+        ],
+        "dates": [
+          "2025-02-25",
+          "2053-02-25",
+          "2025-05-26",
+          "2025-06-07",
+          "2025-06-16",
+          "2025-06-27",
+          "2025-06-20",
+          "2025-06-24"
+        ],
+        "hospitals": [
+          "더자인병원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "I10",
+          "E11",
+          "E78.5",
+          "C50.9"
+        ],
+        "dates": [
+          "2025-06-07",
+          "2025-06-20",
+          "2025-06-16"
+        ],
+        "hospitals": [
+          "의료법인자인의료재단더자인병원"
+        ],
+        "diagnosisNames": [
+          "고혈압",
+          "당뇨병",
+          "이상지질혈증",
+          "유방암"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.35,
+          "matched": 0.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "C50.11",
+              "genCode": "C50.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "R59.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.375,
+          "matched": 3,
+          "total": 8,
+          "missing": [
+            "2025-02-25",
+            "2053-02-25",
+            "2025-05-26",
+            "2025-06-27",
+            "2025-06-24"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 16,
+      "groundTruth": {
+        "kcdCodes": [
+          "C20"
+        ],
+        "dates": [
+          "2025-09-25",
+          "2025-09-10",
+          "2024-11-25",
+          "2025-02-23",
+          "2025-08-21",
+          "2025-09-11",
+          "2025-09-19",
+          "2025-09-30",
+          "2025-09-29",
+          "2025-11-25"
+        ],
+        "hospitals": [
+          "일산차병원",
+          "검진센터",
+          "일산백병원"
+        ],
+        "diagnosisNames": [
+          "직장의 악성 신생물"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C20",
+          "B37.88",
+          "J98.40"
+        ],
+        "dates": [
+          "2025-09-10",
+          "2025-09-19",
+          "2025-09-29",
+          "2025-08-21",
+          "2025-09-24"
+        ],
+        "hospitals": [
+          "일산차병원",
+          "세브란스병원"
+        ],
+        "diagnosisNames": [
+          "직장의 악성 신생물",
+          "기타 부위의 칸디다증",
+          "고립성 폐결절 (의증)",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C20.9",
+              "genCode": "C20.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "B37.88",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "J98.40",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.4,
+          "matched": 4,
+          "total": 10,
+          "missing": [
+            "2025-09-25",
+            "2024-11-25",
+            "2025-02-23",
+            "2025-09-11",
+            "2025-09-30",
+            "2025-11-25"
+          ],
+          "extra": [
+            "2025-09-24"
+          ]
+        },
+        "hospital": {
+          "rate": 0.3333333333333333,
+          "matched": 1,
+          "total": 3,
+          "missing": [
+            "검진센터",
+            "일산백병원"
+          ],
+          "extra": [
+            "세브란스병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": [
+            "기타 부위의 칸디다증",
+            "고립성 폐결절 (의증)",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 17,
+      "groundTruth": {
+        "kcdCodes": [
+          "S33.50",
+          "I63.9"
+        ],
+        "dates": [
+          "2025-08-14",
+          "2025-08-12",
+          "2030-08-12",
+          "2045-08-12",
+          "2025-08-19"
+        ],
+        "hospitals": [
+          "해븐리병원",
+          "일산효자한의원",
+          "치료병원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "I63.9",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-08-14",
+          "2025-08-21"
+        ],
+        "hospitals": [
+          "해븐리병원"
+        ],
+        "diagnosisNames": [
+          "뇌경색",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "S33.50",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I63.9",
+              "genCode": "I63.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2,
+          "matched": 1,
+          "total": 5,
+          "missing": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12",
+            "2025-08-19"
+          ],
+          "extra": [
+            "2025-08-21"
+          ]
+        },
+        "hospital": {
+          "rate": 0.3333333333333333,
+          "matched": 1,
+          "total": 3,
+          "missing": [
+            "일산효자한의원",
+            "치료병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 18,
+      "groundTruth": {
+        "kcdCodes": [
+          "E66.8",
+          "I10.9"
+        ],
+        "dates": [
+          "2019-03-29",
+          "2019-07-05",
+          "2021-07-09",
+          "2025-05-12",
+          "2025-07-07",
+          "2025-07-14",
+          "2025-07-08"
+        ],
+        "hospitals": [
+          "구로성심병원",
+          "고대구로병원"
+        ],
+        "diagnosisNames": [
+          "고도비만"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "E66.9",
+          "K80.9",
+          "K81.0",
+          "I10",
+          "R73.0"
+        ],
+        "dates": [
+          "2025-07-08",
+          "2025-06-24",
+          "2025-06-12",
+          "2025-07-07",
+          "2025-05-12"
+        ],
+        "hospitals": [
+          "고려대학교구로병원"
+        ],
+        "diagnosisNames": [
+          "고도비만",
+          "담낭결석",
+          "급성 담낭염",
+          "고혈압",
+          "당뇨 전단계"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.85,
+          "matched": 1.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "E66.8",
+              "genCode": "E66.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "I10.9",
+              "genCode": "I10.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "K80.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K81.0",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "R73.0",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.42857142857142855,
+          "matched": 3,
+          "total": 7,
+          "missing": [
+            "2019-03-29",
+            "2019-07-05",
+            "2021-07-09",
+            "2025-07-14"
+          ],
+          "extra": [
+            "2025-06-24",
+            "2025-06-12"
+          ]
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "구로성심병원",
+            "고대구로병원"
+          ],
+          "extra": [
+            "고려대학교구로병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": [
+            "담낭결석",
+            "급성 담낭염",
+            "고혈압",
+            "당뇨 전단계"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 19,
+      "groundTruth": {
+        "kcdCodes": [
+          "D13.6",
+          "K86.8",
+          "C25.9"
+        ],
+        "dates": [
+          "2024-04-09",
+          "2024-06-17",
+          "2024-07-09",
+          "2024-08-29",
+          "2024-09-05",
+          "2025-06-12",
+          "2024-09-10",
+          "2025-03-31",
+          "2025-06-10",
+          "2024-10-07",
+          "2025-07-09",
+          "2025-08-03",
+          "2025-06-16",
+          "2025-08-17",
+          "2025-09-29",
+          "2025-10-03",
+          "2025-08-05",
+          "2025-08-12",
+          "2020-10-17",
+          "2025-10-17"
+        ],
+        "hospitals": [
+          "고대구로병원",
+          "국립암센터",
+          "동국대일산병원",
+          "치료병원",
+          "구대구로병원"
+        ],
+        "diagnosisNames": [
+          "만성 B형간염",
+          "췌장의 양성 신생물",
+          "상세불명의 췌장의 악성신생물"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "D13.6",
+          "K86.8",
+          "C16.0"
+        ],
+        "dates": [
+          "2024-09-05",
+          "2024-09-10",
+          "2025-06-10",
+          "2025-08-05",
+          "2025-08-03",
+          "2025-08-17",
+          "2025-10-21"
+        ],
+        "hospitals": [
+          "고려대학교구로병원",
+          "국립암센터"
+        ],
+        "diagnosisNames": [
+          "췌장의 양성신생물",
+          "기타 명시된 췌장 질환",
+          "위암",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.6666666666666666,
+          "matched": 2,
+          "total": 3,
+          "details": [
+            {
+              "gtCode": "D13.6",
+              "genCode": "D13.6",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "K86.8",
+              "genCode": "K86.8",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "C25.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C16.0",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.3,
+          "matched": 6,
+          "total": 20,
+          "missing": [
+            "2024-04-09",
+            "2024-06-17",
+            "2024-07-09",
+            "2024-08-29",
+            "2025-06-12",
+            "2025-03-31",
+            "2024-10-07",
+            "2025-07-09",
+            "2025-06-16",
+            "2025-09-29",
+            "2025-10-03",
+            "2025-08-12",
+            "2020-10-17",
+            "2025-10-17"
+          ],
+          "extra": [
+            "2025-10-21"
+          ]
+        },
+        "hospital": {
+          "rate": 0.2,
+          "matched": 1,
+          "total": 5,
+          "missing": [
+            "고대구로병원",
+            "동국대일산병원",
+            "치료병원",
+            "구대구로병원"
+          ],
+          "extra": [
+            "고려대학교구로병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "missing": [
+            "만성 B형간염",
+            "췌장의 양성 신생물",
+            "상세불명의 췌장의 악성신생물"
+          ],
+          "extra": [
+            "췌장의 양성신생물",
+            "기타 명시된 췌장 질환",
+            "위암",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 1,
+      "groundTruth": {
+        "kcdCodes": [
+          "E11.78",
+          "J04.0",
+          "K29.7",
+          "J30.4",
+          "H10.3",
+          "I67.8",
+          "I62.9",
+          "I66.8"
+        ],
+        "dates": [
+          "2019-09-27",
+          "2019-11-15",
+          "2024-08-14",
+          "2020-10-28",
+          "2024-04-11",
+          "2023-10-20",
+          "2024-01-27",
+          "2023-09-27",
+          "2024-06-27",
+          "2024-09-27",
+          "2025-02-17",
+          "2025-02-18",
+          "2020-03-14",
+          "2025-03-07"
+        ],
+        "hospitals": [
+          "이기섭의원",
+          "강남성심병원",
+          "치료병원",
+          "내과의원",
+          "이깁서의원"
+        ],
+        "diagnosisNames": [
+          "기타 다발성 합병증을 동반한 2 형 당뇨병",
+          "기타 명시된 뇌혈관질환"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "R42",
+          "I67.9",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-02-17",
+          "2025-02-18",
+          "2025-01-08"
+        ],
+        "hospitals": [
+          "한림대학교강남성심병원",
+          "이기섭의원"
+        ],
+        "diagnosisNames": [
+          "현기증 NOS",
+          "기타 및 상세불명의 뇌혈관 질환",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.175,
+          "matched": 1.4,
+          "total": 8,
+          "details": [
+            {
+              "gtCode": "E11.78",
+              "genCode": "E11.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "J04.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "K29.7",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "J30.4",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "H10.3",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I67.8",
+              "genCode": "I67.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "I62.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I66.8",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "R42.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.14285714285714285,
+          "matched": 2,
+          "total": 14,
+          "missing": [
+            "2019-09-27",
+            "2019-11-15",
+            "2024-08-14",
+            "2020-10-28",
+            "2024-04-11",
+            "2023-10-20",
+            "2024-01-27",
+            "2023-09-27",
+            "2024-06-27",
+            "2024-09-27",
+            "2020-03-14",
+            "2025-03-07"
+          ],
+          "extra": [
+            "2025-01-08"
+          ]
+        },
+        "hospital": {
+          "rate": 0.4,
+          "matched": 2,
+          "total": 5,
+          "missing": [
+            "치료병원",
+            "내과의원",
+            "이깁서의원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "기타 명시된 뇌혈관질환"
+          ],
+          "extra": [
+            "현기증 NOS",
+            "기타 및 상세불명의 뇌혈관 질환",
+            "고혈압"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 20,
+      "groundTruth": {
+        "kcdCodes": [
+          "M65.95",
+          "M65.91"
+        ],
+        "dates": [
+          "2025-01-02",
+          "2025-09-11"
+        ],
+        "hospitals": [
+          "과의원",
+          "반듯한정형외과의원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "M6593",
+          "M5422",
+          "M5456",
+          "K291",
+          "K297",
+          "M2558",
+          "I10"
+        ],
+        "dates": [
+          "2025-01-02",
+          "2025-09-15"
+        ],
+        "hospitals": [
+          "반듯한정형외과의원"
+        ],
+        "diagnosisNames": [
+          "상세불명의 윤활막염 및 힘줄윤활막염, 아래팔",
+          "경추통, 경부",
+          "아래허리통증, 요추부",
+          "기타 급성 위염",
+          "상세불명의 위염",
+          "관절통, 기타 부분",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.7,
+          "matched": 1.4,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "M65.95",
+              "genCode": "M6593",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "M65.91",
+              "genCode": "M6593",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "M6593",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M5422",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M5456",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K291",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K297",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M2558",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "2025-09-11"
+          ],
+          "extra": [
+            "2025-09-15"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 21,
+      "groundTruth": {
+        "kcdCodes": [
+          "H33.02",
+          "H25.91",
+          "H40.0",
+          "H35.9",
+          "H33.0"
+        ],
+        "dates": [
+          "2023-10-16",
+          "2023-11-09",
+          "2023-11-24",
+          "2023-11-27",
+          "2023-11-29",
+          "2023-12-01",
+          "2024-01-24",
+          "2023-11-30",
+          "2024-00-24",
+          "2023-12-21",
+          "2025-09-08",
+          "2025-09-18"
+        ],
+        "hospitals": [
+          "과의원",
+          "가천대길병원"
+        ],
+        "diagnosisNames": [
+          "거대찢김이 있는 망막박리",
+          "상세불명의 노년백내장, 왼쪽",
+          "망막박리"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "H3302",
+          "H2591",
+          "I10"
+        ],
+        "dates": [
+          "2023-10-16",
+          "2023-11-29",
+          "2023-11-30",
+          "2023-12-01",
+          "2025-10-15"
+        ],
+        "hospitals": [
+          "고양신세계안과",
+          "가천대길병원"
+        ],
+        "diagnosisNames": [
+          "거대찢김이 있는 망막박리",
+          "상세불명의 노년백내장, 왼쪽",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.41999999999999993,
+          "matched": 2.0999999999999996,
+          "total": 5,
+          "details": [
+            {
+              "gtCode": "H33.02",
+              "genCode": "H3302",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "H25.91",
+              "genCode": "H2591",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "H40.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "H35.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "H33.0",
+              "genCode": "H3302",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "H3302",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "H2591",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.3333333333333333,
+          "matched": 4,
+          "total": 12,
+          "missing": [
+            "2023-11-09",
+            "2023-11-24",
+            "2023-11-27",
+            "2024-01-24",
+            "2024-00-24",
+            "2023-12-21",
+            "2025-09-08",
+            "2025-09-18"
+          ],
+          "extra": [
+            "2025-10-15"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "과의원"
+          ],
+          "extra": [
+            "고양신세계안과"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0.6666666666666666,
+          "matched": 2,
+          "total": 3,
+          "missing": [],
+          "extra": [
+            "고혈압"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 22,
+      "groundTruth": {
+        "kcdCodes": [
+          "S93.5",
+          "M65.87",
+          "M17.0"
+        ],
+        "dates": [
+          "2019-08-16",
+          "2021-08-16",
+          "2024-05-06",
+          "2024-05-16",
+          "2024-08-16",
+          "2024-11-22",
+          "2025-07-24",
+          "2025-03-04",
+          "2025-07-25",
+          "2025-08-12",
+          "2025-08-18",
+          "2025-10-02",
+          "2025-08-19",
+          "2025-08-26"
+        ],
+        "hospitals": [
+          "본서부병원",
+          "외과의원",
+          "동신병원",
+          "은평본정형외과의원",
+          "밝은내일재활의학과의원",
+          "라온정형외과신경외과의원",
+          "바로척마취통증의학과의원",
+          "새서울정형외과의원",
+          "바른정형외과의원",
+          "은평성모정형외과의원",
+          "연세정형외과의원",
+          "김학수정형외과의원",
+          "응암서울정형외과의원",
+          "치료병원",
+          "청구병원"
+        ],
+        "diagnosisNames": [
+          "발가락의 염좌 및 긴장",
+          "양쪽 원발성 무릎관절증",
+          "양슬관절 말기 관절염"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "M170",
+          "M6596",
+          "K210",
+          "I10",
+          "E78.5",
+          "E11"
+        ],
+        "dates": [
+          "2024-11-22",
+          "2025-08-18",
+          "2025-10-02",
+          "null"
+        ],
+        "hospitals": [
+          "응암서울정형외과",
+          "본서부병원"
+        ],
+        "diagnosisNames": [
+          "양쪽 원발성 무릎관절증",
+          "상세불명의 윤활막염 및 힘줄윤활막염, 무릎관절[양측]",
+          "식도염을 동반한 위식도역류병",
+          "고혈압",
+          "고지혈증",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.4666666666666666,
+          "matched": 1.4,
+          "total": 3,
+          "details": [
+            {
+              "gtCode": "S93.5",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "M65.87",
+              "genCode": "M6596",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "M17.0",
+              "genCode": "M170",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "M170",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M6596",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K210",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.21428571428571427,
+          "matched": 3,
+          "total": 14,
+          "missing": [
+            "2019-08-16",
+            "2021-08-16",
+            "2024-05-06",
+            "2024-05-16",
+            "2024-08-16",
+            "2025-07-24",
+            "2025-03-04",
+            "2025-07-25",
+            "2025-08-12",
+            "2025-08-19",
+            "2025-08-26"
+          ],
+          "extra": [
+            "null"
+          ]
+        },
+        "hospital": {
+          "rate": 0.13333333333333333,
+          "matched": 2,
+          "total": 15,
+          "missing": [
+            "외과의원",
+            "동신병원",
+            "은평본정형외과의원",
+            "밝은내일재활의학과의원",
+            "라온정형외과신경외과의원",
+            "바로척마취통증의학과의원",
+            "새서울정형외과의원",
+            "바른정형외과의원",
+            "은평성모정형외과의원",
+            "연세정형외과의원",
+            "김학수정형외과의원",
+            "치료병원",
+            "청구병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0.3333333333333333,
+          "matched": 1,
+          "total": 3,
+          "missing": [
+            "발가락의 염좌 및 긴장",
+            "양슬관절 말기 관절염"
+          ],
+          "extra": [
+            "상세불명의 윤활막염 및 힘줄윤활막염, 무릎관절[양측]",
+            "식도염을 동반한 위식도역류병",
+            "고혈압",
+            "고지혈증",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 23,
+      "groundTruth": {
+        "kcdCodes": [
+          "C20"
+        ],
+        "dates": [
+          "2023-02-01",
+          "2024-12-06",
+          "2025-06-13",
+          "2025-07-16",
+          "2025-07-18",
+          "2023-01-27",
+          "2024-10-07",
+          "2023-02-09",
+          "2023-02-15",
+          "2023-02-03",
+          "2023-12-06",
+          "2055-12-06",
+          "2025-03-06",
+          "2025-09-22"
+        ],
+        "hospitals": [
+          "국립암센터"
+        ],
+        "diagnosisNames": [
+          "원발암"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C53.9"
+        ],
+        "dates": [
+          "2023-02-09",
+          "2023-02-13",
+          "2023-02-10",
+          "2023-02-14",
+          "2023-03-10",
+          "2023-02-15"
+        ],
+        "hospitals": [
+          "국립암센터"
+        ],
+        "diagnosisNames": [
+          "자궁경부암",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C20.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C53.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.14285714285714285,
+          "matched": 2,
+          "total": 14,
+          "missing": [
+            "2023-02-01",
+            "2024-12-06",
+            "2025-06-13",
+            "2025-07-16",
+            "2025-07-18",
+            "2023-01-27",
+            "2024-10-07",
+            "2023-02-03",
+            "2023-12-06",
+            "2055-12-06",
+            "2025-03-06",
+            "2025-09-22"
+          ],
+          "extra": [
+            "2023-02-13",
+            "2023-02-10",
+            "2023-02-14",
+            "2023-03-10"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "원발암"
+          ],
+          "extra": [
+            "자궁경부암",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 24,
+      "groundTruth": {
+        "kcdCodes": [
+          "C16.20"
+        ],
+        "dates": [
+          "2022-08-24",
+          "2022-09-02",
+          "2022-08-26",
+          "2022-09-06",
+          "2023-01-15",
+          "2024-10-15",
+          "2025-01-15",
+          "2025-02-24",
+          "2025-09-04",
+          "2025-08-21",
+          "2025-08-22",
+          "2025-09-15",
+          "2025-09-25",
+          "2025-09-17",
+          "2025-09-24",
+          "2026-01-15",
+          "2022-10-24",
+          "2025-10-24"
+        ],
+        "hospitals": [
+          "강북삼성병원",
+          "치료병원"
+        ],
+        "diagnosisNames": [
+          "위의 체부의 악성 신생물, 조기"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C16.0"
+        ],
+        "dates": [
+          "2022-08-26",
+          "2025-09-17",
+          "2022-08-22",
+          "2022-08-24",
+          "2022-09-02",
+          "2025-10-29"
+        ],
+        "hospitals": [
+          "강북삼성병원"
+        ],
+        "diagnosisNames": [
+          "위암"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.7,
+          "matched": 0.7,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C16.20",
+              "genCode": "C16.0",
+              "matchType": "category",
+              "matched": true
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2222222222222222,
+          "matched": 4,
+          "total": 18,
+          "missing": [
+            "2022-09-06",
+            "2023-01-15",
+            "2024-10-15",
+            "2025-01-15",
+            "2025-02-24",
+            "2025-09-04",
+            "2025-08-21",
+            "2025-08-22",
+            "2025-09-15",
+            "2025-09-25",
+            "2025-09-24",
+            "2026-01-15",
+            "2022-10-24",
+            "2025-10-24"
+          ],
+          "extra": [
+            "2022-08-22",
+            "2025-10-29"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "치료병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "위의 체부의 악성 신생물, 조기"
+          ],
+          "extra": [
+            "위암"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 25,
+      "groundTruth": {
+        "kcdCodes": [
+          "D48.5",
+          "C49.6"
+        ],
+        "dates": [
+          "2020-08-28",
+          "2025-08-18",
+          "2025-09-12",
+          "2025-09-19",
+          "2025-09-30",
+          "2025-10-15",
+          "2025-10-02"
+        ],
+        "hospitals": [
+          "동국대일산병원",
+          "강동경희대병원"
+        ],
+        "diagnosisNames": [
+          "피부의 행동양식 불명 또는 미상의 신생물",
+          "연조직육종, 몸통"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C49.6"
+        ],
+        "dates": [
+          "2025-10-15",
+          "2025-09-30",
+          "2025-09-12",
+          "정보 없음"
+        ],
+        "hospitals": [
+          "강동경희대병원",
+          "동국대학교일산병원"
+        ],
+        "diagnosisNames": [
+          "연조직육종",
+          "당뇨",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "D48.5",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "C49.6",
+              "genCode": "C49.6",
+              "matchType": "exact",
+              "matched": true
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.42857142857142855,
+          "matched": 3,
+          "total": 7,
+          "missing": [
+            "2020-08-28",
+            "2025-08-18",
+            "2025-09-19",
+            "2025-10-02"
+          ],
+          "extra": [
+            "정보 없음"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "동국대일산병원"
+          ],
+          "extra": [
+            "동국대학교일산병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "피부의 행동양식 불명 또는 미상의 신생물"
+          ],
+          "extra": [
+            "당뇨",
+            "고혈압"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 26,
+      "groundTruth": {
+        "kcdCodes": [
+          "D25.9",
+          "N84.0"
+        ],
+        "dates": [
+          "2024-03-25",
+          "2024-03-27",
+          "2025-10-01",
+          "2025-10-04",
+          "2020-10-28",
+          "2025-10-28",
+          "2025-05-06",
+          "2025-05-22"
+        ],
+        "hospitals": [
+          "고대안암병원",
+          "지축라움산부인과의원",
+          "은평성모병원"
+        ],
+        "diagnosisNames": [
+          "상세불명의 자궁의 평활근종"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "D25.9",
+          "D25.0"
+        ],
+        "dates": [
+          "2025-10-02",
+          "2025-09-05",
+          "2025-09-13",
+          "2025-10-01",
+          "2025-10-04",
+          "2025-07-11",
+          "2025-10-21"
+        ],
+        "hospitals": [
+          "고려대학교안암병원"
+        ],
+        "diagnosisNames": [
+          "자궁 평활근종",
+          "내막 폴립",
+          "특이 질환 없음"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "D25.9",
+              "genCode": "D25.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "N84.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.25,
+          "matched": 2,
+          "total": 8,
+          "missing": [
+            "2024-03-25",
+            "2024-03-27",
+            "2020-10-28",
+            "2025-10-28",
+            "2025-05-06",
+            "2025-05-22"
+          ],
+          "extra": [
+            "2025-10-02",
+            "2025-09-05",
+            "2025-09-13",
+            "2025-07-11",
+            "2025-10-21"
+          ]
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "missing": [
+            "고대안암병원",
+            "지축라움산부인과의원",
+            "은평성모병원"
+          ],
+          "extra": [
+            "고려대학교안암병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "상세불명의 자궁의 평활근종"
+          ],
+          "extra": [
+            "자궁 평활근종",
+            "내막 폴립",
+            "특이 질환 없음"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 27,
+      "groundTruth": {
+        "kcdCodes": [
+          "C73"
+        ],
+        "dates": [
+          "2025-09-08",
+          "2019-06-22",
+          "2023-02-22",
+          "2023-06-22",
+          "2024-03-22",
+          "2024-06-22",
+          "2024-07-19",
+          "2024-10-07",
+          "2024-10-11",
+          "2024-10-23",
+          "2025-09-10",
+          "2025-09-18",
+          "2025-09-09",
+          "2025-09-16"
+        ],
+        "hospitals": [
+          "서울아산병원",
+          "휴내과의원",
+          "중앙대광명병원",
+          "치료병원"
+        ],
+        "diagnosisNames": [
+          "갑상선의 악성신생물"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C73",
+          "I10"
+        ],
+        "dates": [
+          "2025-09-09",
+          "2025-02-21",
+          "2025-03-19",
+          "2025-09-08",
+          "2025-09-10",
+          "2024-10-23",
+          "2025-10-14"
+        ],
+        "hospitals": [
+          "서울아산병원",
+          "중앙대광명병원",
+          "이레미즈외과"
+        ],
+        "diagnosisNames": [
+          "갑상선암",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C73.9",
+              "genCode": "C73.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2857142857142857,
+          "matched": 4,
+          "total": 14,
+          "missing": [
+            "2019-06-22",
+            "2023-02-22",
+            "2023-06-22",
+            "2024-03-22",
+            "2024-06-22",
+            "2024-07-19",
+            "2024-10-07",
+            "2024-10-11",
+            "2025-09-18",
+            "2025-09-16"
+          ],
+          "extra": [
+            "2025-02-21",
+            "2025-03-19",
+            "2025-10-14"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 2,
+          "total": 4,
+          "missing": [
+            "휴내과의원",
+            "치료병원"
+          ],
+          "extra": [
+            "이레미즈외과"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "갑상선의 악성신생물"
+          ],
+          "extra": [
+            "갑상선암",
+            "고혈압"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 28,
+      "groundTruth": {
+        "kcdCodes": [
+          "C34.99",
+          "D13.5"
+        ],
+        "dates": [
+          "2018-10-18",
+          "2020-10-18",
+          "2023-07-18",
+          "2023-10-18",
+          "2025-07-03",
+          "2025-08-04",
+          "2025-08-14",
+          "2025-08-06",
+          "2025-08-12",
+          "2020-08-26",
+          "2022-08-28",
+          "2022-10-04"
+        ],
+        "hospitals": [
+          "은평성모병원",
+          "신촌세브란스병원"
+        ],
+        "diagnosisNames": [
+          "폐암, 선암종"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C34.1",
+          "E11",
+          "I10"
+        ],
+        "dates": [
+          "2025-08-06",
+          "2025-08-18",
+          "2025-08-04",
+          "2025-08-14",
+          "2025-07-03"
+        ],
+        "hospitals": [
+          "가톨릭대학교은평성모병원"
+        ],
+        "diagnosisNames": [
+          "폐암 - Lung cancer",
+          "DM",
+          "HTN"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.35,
+          "matched": 0.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "C34.99",
+              "genCode": "C34.1",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "D13.5",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.3333333333333333,
+          "matched": 4,
+          "total": 12,
+          "missing": [
+            "2018-10-18",
+            "2020-10-18",
+            "2023-07-18",
+            "2023-10-18",
+            "2025-08-12",
+            "2020-08-26",
+            "2022-08-28",
+            "2022-10-04"
+          ],
+          "extra": [
+            "2025-08-18"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "신촌세브란스병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "폐암, 선암종"
+          ],
+          "extra": [
+            "폐암 - Lung cancer",
+            "DM",
+            "HTN"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 29,
+      "groundTruth": {
+        "kcdCodes": [
+          "I67.1"
+        ],
+        "dates": [
+          "2025-09-26",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-09-29",
+          "2020-10-15",
+          "2025-10-15",
+          "2025-08-13"
+        ],
+        "hospitals": [],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "A02.0",
+          "K52.9",
+          "I10",
+          "E78.5"
+        ],
+        "dates": [
+          "2024-08-17",
+          "2024-08-24",
+          "null"
+        ],
+        "hospitals": [
+          "더자인병원"
+        ],
+        "diagnosisNames": [
+          "살모넬라 장염",
+          "상세불명 기원의 위장염 및 결장염",
+          "고혈압",
+          "고지혈증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "I67.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "A02.0",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K52.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "missing": [
+            "2025-09-26",
+            "2024-08-13",
+            "2024-09-04",
+            "2025-09-29",
+            "2020-10-15",
+            "2025-10-15",
+            "2025-08-13"
+          ],
+          "extra": [
+            "2024-08-17",
+            "2024-08-24",
+            "null"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 2,
+      "groundTruth": {
+        "kcdCodes": [
+          "D13.4",
+          "D18.02"
+        ],
+        "dates": [
+          "2019-03-23",
+          "2023-08-07",
+          "2019-04-09",
+          "2024-01-09",
+          "2024-04-03",
+          "2024-04-09",
+          "2025-02-04",
+          "2025-02-12",
+          "2024-04-23"
+        ],
+        "hospitals": [
+          "에스엠영상의학과의원",
+          "서울대학교직장부속의원",
+          "삼성서울병원"
+        ],
+        "diagnosisNames": [
+          "간의 양성 신생물",
+          "간담도계의 혈관종"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "D1802"
+        ],
+        "dates": [
+          "2024-04-03",
+          "2024-04-09",
+          "2025-02-26",
+          "2025-02-05",
+          "2025-02-04",
+          "2025-02-10"
+        ],
+        "hospitals": [
+          "서울대학교직장부수위원",
+          "삼성서울병원"
+        ],
+        "diagnosisNames": [
+          "간담도계의 혈관종",
+          "간혈관종"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.35,
+          "matched": 0.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "D13.4",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "D18.02",
+              "genCode": "D1802",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "D1802",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.3333333333333333,
+          "matched": 3,
+          "total": 9,
+          "missing": [
+            "2019-03-23",
+            "2023-08-07",
+            "2019-04-09",
+            "2024-01-09",
+            "2025-02-12",
+            "2024-04-23"
+          ],
+          "extra": [
+            "2025-02-26",
+            "2025-02-05",
+            "2025-02-10"
+          ]
+        },
+        "hospital": {
+          "rate": 0.3333333333333333,
+          "matched": 1,
+          "total": 3,
+          "missing": [
+            "에스엠영상의학과의원",
+            "서울대학교직장부속의원"
+          ],
+          "extra": [
+            "서울대학교직장부수위원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "간의 양성 신생물"
+          ],
+          "extra": [
+            "간혈관종"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 30,
+      "groundTruth": {
+        "kcdCodes": [],
+        "dates": [
+          "2012-11-23",
+          "2025-01-01",
+          "2025-03-23",
+          "2025-04-11",
+          "2025-03-24",
+          "2025-04-22",
+          "2025-09-09",
+          "2025-03-12"
+        ],
+        "hospitals": [
+          "우리들병원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "M48.06",
+          "M43.16",
+          "M48.07",
+          "M54.16",
+          "M54.17",
+          "I10",
+          "E78.5"
+        ],
+        "dates": [
+          "2025-03-23",
+          "2025-03-12",
+          "2025-03-24",
+          "2025-04-11",
+          "2025-09-03"
+        ],
+        "hospitals": [
+          "우리들병원"
+        ],
+        "diagnosisNames": [
+          "척추협착증, 요추부",
+          "척추후방전위증, 요추부",
+          "척추협착증, 요천부",
+          "추간공 협착증, 요추부위",
+          "추간공 협착증, 요천부위",
+          "고혈압",
+          "고지혈증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "details": []
+        },
+        "date": {
+          "rate": 0.5,
+          "matched": 4,
+          "total": 8,
+          "missing": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-04-22",
+            "2025-09-09"
+          ],
+          "extra": [
+            "2025-09-03"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 31,
+      "groundTruth": {
+        "kcdCodes": [],
+        "dates": [
+          "2015-03-27",
+          "2025-07-18",
+          "2025-09-02"
+        ],
+        "hospitals": [
+          "이지신경외과의원"
+        ],
+        "diagnosisNames": [
+          "좌측 삼각근 및 삼두근의 염좌 및 긴장"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "M75.1",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-07-18",
+          "2025-08-26",
+          "2025-09-02"
+        ],
+        "hospitals": [
+          "이지신경외과"
+        ],
+        "diagnosisNames": [
+          "어깨 충돌 증후군",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "details": []
+        },
+        "date": {
+          "rate": 0.6666666666666666,
+          "matched": 2,
+          "total": 3,
+          "missing": [
+            "2015-03-27"
+          ],
+          "extra": [
+            "2025-08-26"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "좌측 삼각근 및 삼두근의 염좌 및 긴장"
+          ],
+          "extra": [
+            "어깨 충돌 증후군",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 32,
+      "groundTruth": {
+        "kcdCodes": [
+          "D27.0",
+          "C53.9"
+        ],
+        "dates": [
+          "2014-12-24",
+          "2016-06-07",
+          "2016-06-14",
+          "2024-12-24",
+          "2025-07-22",
+          "2025-07-29",
+          "2025-09-17",
+          "2025-09-29",
+          "2025-09-04",
+          "2025-09-05",
+          "2020-10-22"
+        ],
+        "hospitals": [
+          "에덴병원",
+          "여성병원",
+          "화순전남대병원",
+          "화순전남병원",
+          "신촌세브란스병원"
+        ],
+        "diagnosisNames": [
+          "난소의 양성 신생물 오른쪽",
+          "자궁경부의 악성 신생물"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C53.9",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-09-18",
+          "2025-09-17",
+          "2025-09-29",
+          "2025-09-30",
+          "정보 없음"
+        ],
+        "hospitals": [
+          "세브란스병원"
+        ],
+        "diagnosisNames": [
+          "자궁 경부암",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "D27.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "C53.9",
+              "genCode": "C53.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.18181818181818182,
+          "matched": 2,
+          "total": 11,
+          "missing": [
+            "2014-12-24",
+            "2016-06-07",
+            "2016-06-14",
+            "2024-12-24",
+            "2025-07-22",
+            "2025-07-29",
+            "2025-09-04",
+            "2025-09-05",
+            "2020-10-22"
+          ],
+          "extra": [
+            "2025-09-18",
+            "2025-09-30",
+            "정보 없음"
+          ]
+        },
+        "hospital": {
+          "rate": 0.2,
+          "matched": 1,
+          "total": 5,
+          "missing": [
+            "에덴병원",
+            "여성병원",
+            "화순전남대병원",
+            "화순전남병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "난소의 양성 신생물 오른쪽",
+            "자궁경부의 악성 신생물"
+          ],
+          "extra": [
+            "자궁 경부암",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 33,
+      "groundTruth": {
+        "kcdCodes": [
+          "K76.0"
+        ],
+        "dates": [
+          "2025-08-27",
+          "2025-08-28",
+          "2021-01-23",
+          "2023-01-23",
+          "2023-10-16",
+          "2023-10-26",
+          "2023-10-23",
+          "2024-01-23",
+          "2034-01-23",
+          "2024-04-22",
+          "2025-01-23"
+        ],
+        "hospitals": [
+          "치료병원",
+          "병의원",
+          "거주지주변필수탐문병원",
+          "서울아산병원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "J10.9",
+          "C16.0",
+          "I25.10",
+          "I10"
+        ],
+        "dates": [
+          "2023-10-26",
+          "2025-08-12",
+          "2023-10-25",
+          "2025-11-19",
+          "2024-06-25",
+          "2023-10-16"
+        ],
+        "hospitals": [
+          "마포리더스내과",
+          "서울아산병원"
+        ],
+        "diagnosisNames": [
+          "노인독감",
+          "위암",
+          "협심증",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "K76.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "J10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C16.0",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I25.10",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.18181818181818182,
+          "matched": 2,
+          "total": 11,
+          "missing": [
+            "2025-08-27",
+            "2025-08-28",
+            "2021-01-23",
+            "2023-01-23",
+            "2023-10-23",
+            "2024-01-23",
+            "2034-01-23",
+            "2024-04-22",
+            "2025-01-23"
+          ],
+          "extra": [
+            "2025-08-12",
+            "2023-10-25",
+            "2025-11-19",
+            "2024-06-25"
+          ]
+        },
+        "hospital": {
+          "rate": 0.25,
+          "matched": 1,
+          "total": 4,
+          "missing": [
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ],
+          "extra": [
+            "마포리더스내과"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 34,
+      "groundTruth": {
+        "kcdCodes": [
+          "C73",
+          "C77.0"
+        ],
+        "dates": [
+          "2017-06-13",
+          "2018-02-27",
+          "2018-03-29",
+          "2018-04-17",
+          "2024-01-19",
+          "2025-06-07",
+          "2025-06-24",
+          "2025-08-10",
+          "2025-08-14",
+          "2025-08-11",
+          "2025-06-12",
+          "2025-07-02",
+          "2025-09-05",
+          "2020-09-02",
+          "2024-01-26"
+        ],
+        "hospitals": [
+          "일산병원"
+        ],
+        "diagnosisNames": [
+          "d/t thyroid ca, Rt.",
+          "갑상선의 유두상 암종"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C73",
+          "C77.1"
+        ],
+        "dates": [
+          "2025-08-10",
+          "2025-08-11",
+          "2025-07-01",
+          "2025-08-14",
+          "정보 없음"
+        ],
+        "hospitals": [
+          "일산병원"
+        ],
+        "diagnosisNames": [
+          "갑상선암",
+          "경부 림프절 전이"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.85,
+          "matched": 1.7,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "C73.9",
+              "genCode": "C73.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "C77.0",
+              "genCode": "C77.1",
+              "matchType": "category",
+              "matched": true
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2,
+          "matched": 3,
+          "total": 15,
+          "missing": [
+            "2017-06-13",
+            "2018-02-27",
+            "2018-03-29",
+            "2018-04-17",
+            "2024-01-19",
+            "2025-06-07",
+            "2025-06-24",
+            "2025-06-12",
+            "2025-07-02",
+            "2025-09-05",
+            "2020-09-02",
+            "2024-01-26"
+          ],
+          "extra": [
+            "2025-07-01",
+            "정보 없음"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "d/t thyroid ca, Rt.",
+            "갑상선의 유두상 암종"
+          ],
+          "extra": [
+            "갑상선암",
+            "경부 림프절 전이"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 36,
+      "groundTruth": {
+        "kcdCodes": [
+          "S83.21",
+          "M25.48"
+        ],
+        "dates": [
+          "2021-06-02",
+          "2023-01-15",
+          "2023-01-16",
+          "2023-01-17",
+          "2025-06-24"
+        ],
+        "hospitals": [
+          "서울척탑병원",
+          "누가재활의학과의원",
+          "치료병원",
+          "상계백병원"
+        ],
+        "diagnosisNames": [
+          "외측 반달연골의 찢김, 양측"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "N40.1",
+          "C61",
+          "I10",
+          "K81"
+        ],
+        "dates": [
+          "2025-08-19",
+          "2025-05-01",
+          "2025-07-10",
+          "2025-08-18",
+          "2025-08-26",
+          "2025-09-01"
+        ],
+        "hospitals": [
+          "동국대학교일산병원",
+          "운정와이즈병원"
+        ],
+        "diagnosisNames": [
+          "전립선 비대증 - Hyperplasia of prostate with obstruction",
+          "전립선암 - Prostate cancer",
+          "고혈압",
+          "담낭염"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "S83.21",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "M25.48",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "N40.1",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C61.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "K81.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0,
+          "matched": 0,
+          "total": 5,
+          "missing": [
+            "2021-06-02",
+            "2023-01-15",
+            "2023-01-16",
+            "2023-01-17",
+            "2025-06-24"
+          ],
+          "extra": [
+            "2025-08-19",
+            "2025-05-01",
+            "2025-07-10",
+            "2025-08-18",
+            "2025-08-26",
+            "2025-09-01"
+          ]
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 4,
+          "missing": [
+            "서울척탑병원",
+            "누가재활의학과의원",
+            "치료병원",
+            "상계백병원"
+          ],
+          "extra": [
+            "동국대학교일산병원",
+            "운정와이즈병원"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "외측 반달연골의 찢김, 양측"
+          ],
+          "extra": [
+            "전립선 비대증 - Hyperplasia of prostate with obstruction",
+            "전립선암 - Prostate cancer",
+            "고혈압",
+            "담낭염"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 37,
+      "groundTruth": {
+        "kcdCodes": [
+          "S83.21",
+          "M25.48"
+        ],
+        "dates": [
+          "2021-06-02",
+          "2023-01-15",
+          "2023-01-16",
+          "2023-01-17",
+          "2025-06-24"
+        ],
+        "hospitals": [
+          "서울척탑병원",
+          "누가재활의학과의원",
+          "치료병원",
+          "상계백병원"
+        ],
+        "diagnosisNames": [
+          "외측 반달연골의 찢김, 양측"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "S8321",
+          "M2548",
+          "정보 없음"
+        ],
+        "dates": [
+          "2023-01-15",
+          "2023-01-17",
+          "2023-01-16",
+          "2023-01-18",
+          "정보 없음"
+        ],
+        "hospitals": [
+          "서울척탑병원"
+        ],
+        "diagnosisNames": [
+          "외측반달 연골의 찢김[양측]",
+          "관절의 삼출액, 기타 부분[양측]",
+          "기왕증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.7,
+          "matched": 1.4,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "S83.21",
+              "genCode": "S8321",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "M25.48",
+              "genCode": "M2548",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "S8321",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M2548",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "정보 없음",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.6,
+          "matched": 3,
+          "total": 5,
+          "missing": [
+            "2021-06-02",
+            "2025-06-24"
+          ],
+          "extra": [
+            "2023-01-18",
+            "정보 없음"
+          ]
+        },
+        "hospital": {
+          "rate": 0.25,
+          "matched": 1,
+          "total": 4,
+          "missing": [
+            "누가재활의학과의원",
+            "치료병원",
+            "상계백병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "외측 반달연골의 찢김, 양측"
+          ],
+          "extra": [
+            "외측반달 연골의 찢김[양측]",
+            "관절의 삼출액, 기타 부분[양측]",
+            "기왕증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 38,
+      "groundTruth": {
+        "kcdCodes": [
+          "C54.1"
+        ],
+        "dates": [
+          "2024-09-11",
+          "2023-09-11",
+          "2024-08-30",
+          "2025-08-21",
+          "2025-08-24",
+          "2025-10-21",
+          "2010-06-01",
+          "2058-06-01",
+          "2019-10-21",
+          "2024-07-21",
+          "2024-10-21",
+          "2054-10-21",
+          "2025-01-19",
+          "2025-07-09",
+          "2025-09-02",
+          "2025-08-03",
+          "2025-08-05",
+          "2025-08-20"
+        ],
+        "hospitals": [
+          "이대목동병원",
+          "치료병원",
+          "병의원",
+          "거주지주변필수탐문병원"
+        ],
+        "diagnosisNames": []
+      },
+      "generated": {
+        "kcdCodes": [
+          "C54.1",
+          "D25.9",
+          "C50.4"
+        ],
+        "dates": [
+          "2025-08-20",
+          "2025-08-03",
+          "2025-08-05",
+          "2025-08-21",
+          "2025-09-01",
+          "2025-08-06"
+        ],
+        "hospitals": [
+          "EUMC이대목동병원"
+        ],
+        "diagnosisNames": [
+          "Endometrial cancer unknown stage",
+          "Myoma of uterus",
+          "Breast cancer"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "C54.1",
+              "genCode": "C54.1",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "D25.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C50.4",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2222222222222222,
+          "matched": 4,
+          "total": 18,
+          "missing": [
+            "2024-09-11",
+            "2023-09-11",
+            "2024-08-30",
+            "2025-08-24",
+            "2025-10-21",
+            "2010-06-01",
+            "2058-06-01",
+            "2019-10-21",
+            "2024-07-21",
+            "2024-10-21",
+            "2054-10-21",
+            "2025-01-19",
+            "2025-07-09",
+            "2025-09-02"
+          ],
+          "extra": [
+            "2025-09-01",
+            "2025-08-06"
+          ]
+        },
+        "hospital": {
+          "rate": 0.25,
+          "matched": 1,
+          "total": 4,
+          "missing": [
+            "치료병원",
+            "병의원",
+            "거주지주변필수탐문병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "missing": [],
+          "extra": []
+        }
+      }
+    },
+    {
+      "caseNum": 39,
+      "groundTruth": {
+        "kcdCodes": [
+          "I21.9",
+          "Z95.5"
+        ],
+        "dates": [
+          "2016-09-12",
+          "2024-04-23",
+          "2024-04-25"
+        ],
+        "hospitals": [
+          "명지병원"
+        ],
+        "diagnosisNames": [
+          "급성심근경색증"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I21.9",
+          "I10",
+          "E78.5"
+        ],
+        "dates": [
+          "2024-04-23",
+          "2024-04-25"
+        ],
+        "hospitals": [
+          "명지병원"
+        ],
+        "diagnosisNames": [
+          "급성 심근경색증",
+          "고혈압",
+          "고지혈증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "details": [
+            {
+              "gtCode": "I21.9",
+              "genCode": "I21.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "Z95.5",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.6666666666666666,
+          "matched": 2,
+          "total": 3,
+          "missing": [
+            "2016-09-12"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "급성심근경색증"
+          ],
+          "extra": [
+            "급성 심근경색증",
+            "고혈압",
+            "고지혈증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 3,
+      "groundTruth": {
+        "kcdCodes": [
+          "D43.0"
+        ],
+        "dates": [
+          "2019-11-22",
+          "2021-09-02",
+          "2023-11-22",
+          "2024-08-22",
+          "2024-11-22",
+          "2024-12-13",
+          "2025-03-04",
+          "2025-01-15",
+          "2020-03-20",
+          "2025-03-19"
+        ],
+        "hospitals": [
+          "이대목동병원",
+          "치료병원"
+        ],
+        "diagnosisNames": [
+          "천막상 뇌의 행동양식 불명 또는 미상의 신생물"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "D43.0"
+        ],
+        "dates": [
+          "2025-01-13",
+          "2025-01-15",
+          "2024-12-13"
+        ],
+        "hospitals": [
+          "이대목동병원"
+        ],
+        "diagnosisNames": [
+          "신생물의 행동양식 불명 또는 미상",
+          "부정맥"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "D43.0",
+              "genCode": "D43.0",
+              "matchType": "exact",
+              "matched": true
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2,
+          "matched": 2,
+          "total": 10,
+          "missing": [
+            "2019-11-22",
+            "2021-09-02",
+            "2023-11-22",
+            "2024-08-22",
+            "2024-11-22",
+            "2025-03-04",
+            "2020-03-20",
+            "2025-03-19"
+          ],
+          "extra": [
+            "2025-01-13"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "치료병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "천막상 뇌의 행동양식 불명 또는 미상의 신생물"
+          ],
+          "extra": [
+            "신생물의 행동양식 불명 또는 미상",
+            "부정맥"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 40,
+      "groundTruth": {
+        "kcdCodes": [
+          "I83.9"
+        ],
+        "dates": [
+          "2024-01-16",
+          "2025-08-19",
+          "2025-08-29",
+          "2025-08-30",
+          "2025-09-18",
+          "2020-09-12",
+          "2025-09-11"
+        ],
+        "hospitals": [
+          "치료병원"
+        ],
+        "diagnosisNames": [
+          "궤양 또는 염증이 없는 하지의 정맥류"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I83.9",
+          "Z480"
+        ],
+        "dates": [
+          "2025-08-19",
+          "2025-09-02",
+          "2025-08-29",
+          "2025-09-06",
+          "2025-08-30",
+          "2025-09-19"
+        ],
+        "hospitals": [
+          "더으뜸정형외과"
+        ],
+        "diagnosisNames": [
+          "하지정맥류",
+          "외과적 드레싱 및 봉합의 처치"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "I83.9",
+              "genCode": "I83.9",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "Z480",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.42857142857142855,
+          "matched": 3,
+          "total": 7,
+          "missing": [
+            "2024-01-16",
+            "2025-09-18",
+            "2020-09-12",
+            "2025-09-11"
+          ],
+          "extra": [
+            "2025-09-02",
+            "2025-09-06",
+            "2025-09-19"
+          ]
+        },
+        "hospital": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "치료병원"
+          ],
+          "extra": [
+            "더으뜸정형외과"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "궤양 또는 염증이 없는 하지의 정맥류"
+          ],
+          "extra": [
+            "하지정맥류",
+            "외과적 드레싱 및 봉합의 처치"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 41,
+      "groundTruth": {
+        "kcdCodes": [
+          "M43.16",
+          "S32.09",
+          "S32.02",
+          "S32.03"
+        ],
+        "dates": [
+          "2024-04-22",
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-24",
+          "2021-05-20",
+          "2024-04-20",
+          "2025-07-11",
+          "2025-09-22",
+          "2024-04-24",
+          "2025-09-02",
+          "2025-01-03"
+        ],
+        "hospitals": [
+          "은평성모병원",
+          "우신향병원",
+          "한림병원",
+          "치료병원",
+          "힘찬병원"
+        ],
+        "diagnosisNames": [
+          "척추전방전위증, 요추부",
+          "압박골절, 허리",
+          "L1부위의 골절, 폐쇄성"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "M51.2",
+          "M48.0",
+          "S32.0"
+        ],
+        "dates": [
+          "2024-04-22"
+        ],
+        "hospitals": [
+          "가톨릭대학교은평성모병원"
+        ],
+        "diagnosisNames": [
+          "척추전방전위증 - Lumbar Spondylolisthesis",
+          "척추협착증 - Spinal Stenosis",
+          "요추 압박 골절 - Lumbar Compression Fracture",
+          "척추관 협착증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5249999999999999,
+          "matched": 2.0999999999999996,
+          "total": 4,
+          "details": [
+            {
+              "gtCode": "M43.16",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "S32.09",
+              "genCode": "S32.0",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "S32.02",
+              "genCode": "S32.0",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "S32.03",
+              "genCode": "S32.0",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "M51.2",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "M48.0",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.09090909090909091,
+          "matched": 1,
+          "total": 11,
+          "missing": [
+            "2007-08-08",
+            "2021-05-17",
+            "2021-05-24",
+            "2021-05-20",
+            "2024-04-20",
+            "2025-07-11",
+            "2025-09-22",
+            "2024-04-24",
+            "2025-09-02",
+            "2025-01-03"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 0.2,
+          "matched": 1,
+          "total": 5,
+          "missing": [
+            "우신향병원",
+            "한림병원",
+            "치료병원",
+            "힘찬병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 3,
+          "missing": [
+            "척추전방전위증, 요추부",
+            "압박골절, 허리",
+            "L1부위의 골절, 폐쇄성"
+          ],
+          "extra": [
+            "척추전방전위증 - Lumbar Spondylolisthesis",
+            "척추협착증 - Spinal Stenosis",
+            "요추 압박 골절 - Lumbar Compression Fracture",
+            "척추관 협착증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 42,
+      "groundTruth": {
+        "kcdCodes": [
+          "I67.1"
+        ],
+        "dates": [
+          "2018-09-27",
+          "2025-02-26",
+          "2025-04-29",
+          "2025-04-23"
+        ],
+        "hospitals": [
+          "강북삼성병원"
+        ],
+        "diagnosisNames": [
+          "대뇌동맥류"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I63.9",
+          "I10",
+          "E78.5"
+        ],
+        "dates": [
+          "2025-02-26",
+          "2025-04-17",
+          "2025-04-29"
+        ],
+        "hospitals": [
+          "강북삼성병원"
+        ],
+        "diagnosisNames": [
+          "뇌경색, 상세불명",
+          "고혈압",
+          "고지혈증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "details": [
+            {
+              "gtCode": "I67.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I63.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.5,
+          "matched": 2,
+          "total": 4,
+          "missing": [
+            "2018-09-27",
+            "2025-04-23"
+          ],
+          "extra": [
+            "2025-04-17"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "대뇌동맥류"
+          ],
+          "extra": [
+            "뇌경색, 상세불명",
+            "고혈압",
+            "고지혈증"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 5,
+      "groundTruth": {
+        "kcdCodes": [
+          "R07.4",
+          "I20.88",
+          "I25.1"
+        ],
+        "dates": [
+          "2018-05-10",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31",
+          "2024-05-30",
+          "2020-01-17",
+          "2024-01-24"
+        ],
+        "hospitals": [
+          "굿웰스의원",
+          "동신병원",
+          "신촌세브란스병원"
+        ],
+        "diagnosisNames": [
+          "상세불명의 흉통",
+          "안정성 협심증"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I20.9",
+          "I25.10",
+          "E11.68",
+          "E78.8",
+          "I50.9",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2024-12-31",
+          "2024-12-27",
+          "2023-12-27"
+        ],
+        "hospitals": [
+          "세브란스병원"
+        ],
+        "diagnosisNames": [
+          "안정형 협심증",
+          "관상동맥질환",
+          "제2형 당뇨병 및 이상지질혈증",
+          "이상지질혈증",
+          "이완기 심부전",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.4666666666666666,
+          "matched": 1.4,
+          "total": 3,
+          "details": [
+            {
+              "gtCode": "R07.4",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I20.88",
+              "genCode": "I20.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "I25.1",
+              "genCode": "I25.10",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.68",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.8",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I50.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E11.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.2222222222222222,
+          "matched": 2,
+          "total": 9,
+          "missing": [
+            "2018-05-10",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-12-12",
+            "2024-05-30",
+            "2020-01-17",
+            "2024-01-24"
+          ],
+          "extra": [
+            "2023-12-27"
+          ]
+        },
+        "hospital": {
+          "rate": 0.3333333333333333,
+          "matched": 1,
+          "total": 3,
+          "missing": [
+            "굿웰스의원",
+            "동신병원"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 2,
+          "missing": [
+            "상세불명의 흉통",
+            "안정성 협심증"
+          ],
+          "extra": [
+            "안정형 협심증",
+            "관상동맥질환",
+            "제2형 당뇨병 및 이상지질혈증",
+            "이상지질혈증",
+            "이완기 심부전",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 6,
+      "groundTruth": {
+        "kcdCodes": [
+          "N63",
+          "D34",
+          "I20.1",
+          "I25.1"
+        ],
+        "dates": [
+          "2018-07-26",
+          "2021-01-26",
+          "2023-04-26",
+          "2023-07-26",
+          "2025-02-05",
+          "2025-02-19",
+          "2025-02-26",
+          "2020-03-10",
+          "2025-03-10",
+          "2023-04-28"
+        ],
+        "hospitals": [
+          "김윤호서울외과의원",
+          "명지병원"
+        ],
+        "diagnosisNames": [
+          "유방의 상세불명의 덩이",
+          "변형 협심증"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I20.9",
+          "I25.1",
+          "E119",
+          "I10"
+        ],
+        "dates": [
+          "2025-02-26",
+          "2025-02-19",
+          "2021-01-26",
+          "2025-03-10"
+        ],
+        "hospitals": [
+          "명지병원",
+          "김윤호서울외과의원"
+        ],
+        "diagnosisNames": [
+          "변형 협심증",
+          "관상동맥병",
+          "합병증을 동반하지 않은 2형 당뇨병",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.425,
+          "matched": 1.7,
+          "total": 4,
+          "details": [
+            {
+              "gtCode": "N63.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "D34.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "I20.1",
+              "genCode": "I20.9",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "I25.1",
+              "genCode": "I25.1",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": null,
+              "genCode": "E119",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.4,
+          "matched": 4,
+          "total": 10,
+          "missing": [
+            "2018-07-26",
+            "2023-04-26",
+            "2023-07-26",
+            "2025-02-05",
+            "2020-03-10",
+            "2023-04-28"
+          ],
+          "extra": []
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 2,
+          "total": 2,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "유방의 상세불명의 덩이"
+          ],
+          "extra": [
+            "관상동맥병",
+            "합병증을 동반하지 않은 2형 당뇨병",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 7,
+      "groundTruth": {
+        "kcdCodes": [
+          "J06.0",
+          "J20.9",
+          "J30.4",
+          "M54.56",
+          "D10.5",
+          "L04.0",
+          "C09.9"
+        ],
+        "dates": [
+          "2023-02-17",
+          "2023-02-18",
+          "2024-02-01",
+          "2024-02-17",
+          "2024-08-28",
+          "2024-11-04",
+          "2024-12-02",
+          "2024-12-04",
+          "2024-12-09",
+          "2024-12-17",
+          "2025-02-11",
+          "2024-12-26",
+          "2024-12-27",
+          "2025-01-02",
+          "2025-01-15",
+          "2025-01-20",
+          "2020-02-14",
+          "2025-02-13"
+        ],
+        "hospitals": [
+          "서울성모병원",
+          "모병원"
+        ],
+        "diagnosisNames": [
+          "급성 인후두염",
+          "급성 후두인두염",
+          "입인두의 기타 부분의 양성 신생물",
+          "상세불명의 편도의 악성신생물",
+          "편도암"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "C10.9",
+          "C77.0",
+          "I10"
+        ],
+        "dates": [
+          "2024-12-02",
+          "2024-12-20",
+          "2025-01-16",
+          "2025-01-15",
+          "2025-01-20",
+          "2025-02-10"
+        ],
+        "hospitals": [
+          "가톨릭대학교서울성모병원",
+          "제일이비인후과"
+        ],
+        "diagnosisNames": [
+          "편도암",
+          "전이성 림프절암",
+          "고혈압"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0,
+          "matched": 0,
+          "total": 7,
+          "details": [
+            {
+              "gtCode": "J06.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "J20.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "J30.4",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "M54.56",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "D10.5",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "L04.0",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": "C09.9",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C10.9",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "C77.0",
+              "matchType": "extra",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "I10.9",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.16666666666666666,
+          "matched": 3,
+          "total": 18,
+          "missing": [
+            "2023-02-17",
+            "2023-02-18",
+            "2024-02-01",
+            "2024-02-17",
+            "2024-08-28",
+            "2024-11-04",
+            "2024-12-04",
+            "2024-12-09",
+            "2024-12-17",
+            "2025-02-11",
+            "2024-12-26",
+            "2024-12-27",
+            "2025-01-02",
+            "2020-02-14",
+            "2025-02-13"
+          ],
+          "extra": [
+            "2024-12-20",
+            "2025-01-16",
+            "2025-02-10"
+          ]
+        },
+        "hospital": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [],
+          "extra": [
+            "제일이비인후과"
+          ]
+        },
+        "diagnosisName": {
+          "rate": 0.2,
+          "matched": 1,
+          "total": 5,
+          "missing": [
+            "급성 인후두염",
+            "급성 후두인두염",
+            "입인두의 기타 부분의 양성 신생물",
+            "상세불명의 편도의 악성신생물"
+          ],
+          "extra": [
+            "전이성 림프절암",
+            "고혈압"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 8,
+      "groundTruth": {
+        "kcdCodes": [],
+        "dates": [
+          "2019-10-08",
+          "2022-10-08",
+          "2024-07-08",
+          "2024-07-16",
+          "2024-10-01",
+          "2024-09-12",
+          "2024-10-08",
+          "2025-03-26"
+        ],
+        "hospitals": [
+          "신촌세브란스병원"
+        ],
+        "diagnosisNames": [
+          "심장내과"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "I63.9",
+          "E11.9",
+          "I25.10",
+          "I10",
+          "E11"
+        ],
+        "dates": [
+          "2025-03-19",
+          "2025-03-26",
+          "2024-10-01"
+        ],
+        "hospitals": [
+          "세브란스병원"
+        ],
+        "diagnosisNames": [
+          "뇌경색 - 뇌경색",
+          "당뇨병 - 당뇨병, 합병증 없음",
+          "관상동맥질환 - 관상동맥질환, 비지속적",
+          "고혈압",
+          "당뇨병"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 1,
+          "matched": 0,
+          "total": 0,
+          "details": []
+        },
+        "date": {
+          "rate": 0.25,
+          "matched": 2,
+          "total": 8,
+          "missing": [
+            "2019-10-08",
+            "2022-10-08",
+            "2024-07-08",
+            "2024-07-16",
+            "2024-09-12",
+            "2024-10-08"
+          ],
+          "extra": [
+            "2025-03-19"
+          ]
+        },
+        "hospital": {
+          "rate": 1,
+          "matched": 1,
+          "total": 1,
+          "missing": [],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0,
+          "matched": 0,
+          "total": 1,
+          "missing": [
+            "심장내과"
+          ],
+          "extra": [
+            "뇌경색 - 뇌경색",
+            "당뇨병 - 당뇨병, 합병증 없음",
+            "관상동맥질환 - 관상동맥질환, 비지속적",
+            "고혈압",
+            "당뇨병"
+          ]
+        }
+      }
+    },
+    {
+      "caseNum": 9,
+      "groundTruth": {
+        "kcdCodes": [
+          "D05.10",
+          "D05.00",
+          "I67.1"
+        ],
+        "dates": [
+          "2019-02-26",
+          "2023-03-23",
+          "2023-12-26",
+          "2023-12-29",
+          "2024-02-19",
+          "2022-07-17",
+          "2024-01-02",
+          "2024-02-08",
+          "2024-02-26",
+          "2024-08-02",
+          "2024-10-05",
+          "2024-09-26",
+          "2024-09-27",
+          "2024-10-07",
+          "2024-10-30",
+          "2024-11-01",
+          "2024-10-31",
+          "2024-10-10",
+          "2024-10-11",
+          "2024-11-06",
+          "2019-12-21"
+        ],
+        "hospitals": [
+          "양지병원",
+          "증진센터",
+          "이대서울병원",
+          "대림성모병원",
+          "유방센터"
+        ],
+        "diagnosisNames": [
+          "유방의 관내 제자리암종, 오른쪽",
+          "유방의 소엽 제자리암종, 오른쪽"
+        ]
+      },
+      "generated": {
+        "kcdCodes": [
+          "D05.10",
+          "E78.5"
+        ],
+        "dates": [
+          "2024-10-04",
+          "2024-10-31",
+          "2024-10-30",
+          "2024-11-01"
+        ],
+        "hospitals": [
+          "양지병원",
+          "대림성모병원"
+        ],
+        "diagnosisNames": [
+          "유방의 관내 제자리암종, 오른쪽",
+          "고지혈증"
+        ]
+      },
+      "matchRates": {
+        "kcdCode": {
+          "rate": 0.5666666666666667,
+          "matched": 1.7,
+          "total": 3,
+          "details": [
+            {
+              "gtCode": "D05.10",
+              "genCode": "D05.10",
+              "matchType": "exact",
+              "matched": true
+            },
+            {
+              "gtCode": "D05.00",
+              "genCode": "D05.10",
+              "matchType": "category",
+              "matched": true
+            },
+            {
+              "gtCode": "I67.1",
+              "genCode": null,
+              "matchType": "missing",
+              "matched": false
+            },
+            {
+              "gtCode": null,
+              "genCode": "E78.5",
+              "matchType": "extra",
+              "matched": false
+            }
+          ]
+        },
+        "date": {
+          "rate": 0.14285714285714285,
+          "matched": 3,
+          "total": 21,
+          "missing": [
+            "2019-02-26",
+            "2023-03-23",
+            "2023-12-26",
+            "2023-12-29",
+            "2024-02-19",
+            "2022-07-17",
+            "2024-01-02",
+            "2024-02-08",
+            "2024-02-26",
+            "2024-08-02",
+            "2024-10-05",
+            "2024-09-26",
+            "2024-09-27",
+            "2024-10-07",
+            "2024-10-10",
+            "2024-10-11",
+            "2024-11-06",
+            "2019-12-21"
+          ],
+          "extra": [
+            "2024-10-04"
+          ]
+        },
+        "hospital": {
+          "rate": 0.4,
+          "matched": 2,
+          "total": 5,
+          "missing": [
+            "증진센터",
+            "이대서울병원",
+            "유방센터"
+          ],
+          "extra": []
+        },
+        "diagnosisName": {
+          "rate": 0.5,
+          "matched": 1,
+          "total": 2,
+          "missing": [
+            "유방의 소엽 제자리암종, 오른쪽"
+          ],
+          "extra": [
+            "고지혈증"
+          ]
+        }
+      }
+    }
+  ]
+}

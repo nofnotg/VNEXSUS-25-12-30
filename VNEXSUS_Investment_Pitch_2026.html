@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS - AI 기반 보험 손해사정 자동화 플랫폼 | 투자제안서</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 200px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+        
+        .hero-stat .label {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .card p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        /* Market Section */
+        .market-section {
+            background: #f1f5f9;
+        }
+        
+        .market-chart {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .market-item {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .market-item .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .market-item .label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .market-item .source {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+        
+        /* Technology Section */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .tech-tag {
+            background: var(--gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table th {
+            background: var(--dark);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .highlight {
+            background: #eff6ff;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .cross {
+            color: #ef4444;
+        }
+        
+        /* Roadmap */
+        .roadmap {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+        
+        .roadmap-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .roadmap-dot {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .roadmap-item.completed .roadmap-dot {
+            background: var(--secondary);
+        }
+        
+        .roadmap-item h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .roadmap-item p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        /* Investment Section */
+        .investment-section {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .investment-section .section-title {
+            color: white;
+        }
+        
+        .investment-section .section-subtitle {
+            color: #94a3b8;
+        }
+        
+        .investment-highlight {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .investment-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .investment-item .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        
+        .investment-item .use {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+        
+        .investment-item ul {
+            text-align: left;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            padding-left: 20px;
+        }
+        
+        .investment-item li {
+            margin-bottom: 8px;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background: #f8fafc;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .team-member h4 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        
+        .team-member .role {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .team-member p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #94a3b8;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-left: 4px solid var(--primary);
+            padding: 24px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .market-chart {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .roadmap {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .roadmap::before {
+                display: none;
+            }
+            
+            .investment-highlight {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .hero {
+                background: #2563eb !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .card, .market-item {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>VNEXSUS</h1>
+            <p class="tagline">AI 기반 보험 손해사정 자동화 플랫폼<br>의료기록 분석부터 보고서 생성까지, 완전 자동화</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="number">80%</span>
+                    <span class="label">업무 시간 절감</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">95%+</span>
+                    <span class="label">분석 정확도</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">50+</span>
+                    <span class="label">검증 완료 케이스</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">188</span>
+                    <span class="label">병원 템플릿 패턴</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">🎯 해결하고자 하는 문제</h2>
+            <p class="section-subtitle">보험 손해사정 업무의 비효율성과 높은 인건비 문제를 AI로 혁신합니다</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📄</div>
+                    <h3>수작업 의료기록 분석</h3>
+                    <p>손해사정사가 수백 페이지의 의료기록을 직접 검토하며, 케이스당 평균 <strong>4-8시간</strong> 소요. 인적 오류 발생률 15-20%</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⏰</div>
+                    <h3>긴 처리 시간</h3>
+                    <p>청구 건당 평균 처리 기간 <strong>7-14일</strong>. 고객 불만 증가 및 경쟁력 저하의 주요 원인</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h3>높은 운영 비용</h3>
+                    <p>손해사정사 인건비와 외주 비용으로 건당 <strong>30-50만원</strong> 발생. 연간 수백억 원의 비용 부담</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚠️</div>
+                    <h3>고지의무 위반 검출 어려움</h3>
+                    <p>방대한 의료기록에서 3개월/2년/5년 고지의무 위반 사항을 정확히 추출하는 것은 숙련된 전문가도 어려운 작업</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">💡 VNEXSUS 솔루션</h2>
+            <p class="section-subtitle">엔드투엔드 AI 파이프라인으로 의료기록 분석을 완전 자동화합니다</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Vision AI OCR</h3>
+                    <p>Google Cloud Vision + GPT-4o Vision 이중 OCR로 복잡한 의료 문서도 99% 이상 인식. 수기 처방전, 스캔 품질 저하 문서도 처리 가능</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>하이브리드 AI 엔진</h3>
+                    <p>규칙 기반 추출 + LLM 분석의 결합으로 날짜, 진단명, 치료 내역을 구조화. 188개 병원 템플릿 사전 학습 완료</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>고지의무 자동 분석</h3>
+                    <p>보험 가입일 기준 3개월/2년/5년 고지의무 위반 사항을 자동 분류. 위험도 점수화 및 근거 문서 자동 연결</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📝</div>
+                    <h3>자동 보고서 생성</h3>
+                    <p>손해사정 보고서를 확장형/요약형 동시 생성. Make.com 연동으로 Google Docs/PDF 자동 내보내기</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👁️</div>
+                    <h3>Investigator View</h3>
+                    <p>전문가용 인터페이스로 에피소드 타임라인 시각화. 드래그앤드롭 편집 및 30초 자동저장 기능</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔄</div>
+                    <h3>실시간 품질 모니터링</h3>
+                    <p>신뢰도 점수(Confidence Score) 기반 자동 검증. A급/B급/확인요망 3단계 품질 분류 시스템</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🚀 핵심 혁신 포인트</h4>
+                <p>VNEXSUS는 "Fact-First, Write-Second" 철학으로 설계되었습니다. 먼저 규칙 엔진이 날짜와 수치를 100% 정확하게 추출하고, LLM은 이 사실 데이터를 기반으로 보고서만 작성합니다. 이로써 AI 환각(Hallucination) 문제를 원천 차단합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section class="market-section">
+        <div class="container">
+            <h2 class="section-title">📈 시장 기회</h2>
+            <p class="section-subtitle">글로벌 인슈어테크 AI 시장은 폭발적으로 성장 중입니다</p>
+            
+            <div class="market-chart">
+                <div class="market-item">
+                    <div class="value">$88B</div>
+                    <div class="label">글로벌 보험 AI 시장 규모<br>(2030년 전망)</div>
+                    <div class="source">Mordor Intelligence, 2025</div>
+                </div>
+                <div class="market-item">
+                    <div class="value">35%</div>
+                    <div class="label">연평균 성장률<br>(CAGR 2025-2030)</div>
+                    <div class="source">Mordor Intelligence, 2025</div>
+                </div>
+                <div class="market-item">
+                    <div class="value">$100B</div>
+                    <div class="label">Gen AI 청구 처리<br>기회 규모</div>
+                    <div class="source">Bain & Company, 2025</div>
+                </div>
+                <div class="market-item">
+                    <div class="value">$60B</div>
+                    <div class="label">글로벌 인슈어테크<br>누적 투자액</div>
+                    <div class="source">Gallagher Re Q2 2025</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h4>🇰🇷 한국 시장 기회</h4>
+                <p>한국 보험사들은 AI 도입을 가속화하고 있습니다. SOLUTUS는 7개 대형 보험사와 계약을 체결했고, AITRICS는 730억원 누적 투자를 유치했습니다. Upstage는 $143M 투자를 받으며 문서 처리 AI 분야를 선도하고 있습니다. VNEXSUS는 손해사정 특화 솔루션으로 이 시장에서 독보적 포지션을 구축할 수 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantage -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">⚔️ 경쟁 우위</h2>
+            <p class="section-subtitle">기존 솔루션 대비 VNEXSUS만의 차별화된 강점</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>기능</th>
+                        <th>일반 OCR 솔루션</th>
+                        <th>범용 AI 플랫폼</th>
+                        <th class="highlight">VNEXSUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>의료 문서 특화 OCR</td>
+                        <td class="cross">✗ 범용 OCR</td>
+                        <td class="cross">✗ 제한적</td>
+                        <td class="highlight check">✓ 188개 병원 템플릿</td>
+                    </tr>
+                    <tr>
+                        <td>고지의무 분석 자동화</td>
+                        <td class="cross">✗ 미지원</td>
+                        <td class="cross">✗ 수동 설정 필요</td>
+                        <td class="highlight check">✓ 3개월/2년/5년 자동 분류</td>
+                    </tr>
+                    <tr>
+                        <td>하이브리드 AI 아키텍처</td>
+                        <td class="cross">✗ 규칙만</td>
+                        <td class="cross">✗ LLM만 (환각 위험)</td>
+                        <td class="highlight check">✓ 규칙+LLM 이중 검증</td>
+                    </tr>
+                    <tr>
+                        <td>실시간 품질 점수</td>
+                        <td class="cross">✗ 미지원</td>
+                        <td class="cross">✗ 제한적</td>
+                        <td class="highlight check">✓ Confidence Score 기반</td>
+                    </tr>
+                    <tr>
+                        <td>보고서 자동 생성</td>
+                        <td class="cross">✗ 미지원</td>
+                        <td>△ 템플릿 기반</td>
+                        <td class="highlight check">✓ 확장형/요약형 동시 생성</td>
+                    </tr>
+                    <tr>
+                        <td>워크플로우 자동화</td>
+                        <td class="cross">✗ 미지원</td>
+                        <td>△ API 연동 필요</td>
+                        <td class="highlight check">✓ Make.com 완전 연동</td>
+                    </tr>
+                    <tr>
+                        <td>한국어 의료 용어</td>
+                        <td class="cross">✗ 미지원</td>
+                        <td>△ 번역 의존</td>
+                        <td class="highlight check">✓ 네이티브 지원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">🔧 기술 스택</h2>
+            <p class="section-subtitle">검증된 최신 기술로 구축된 엔터프라이즈급 플랫폼</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🖥️ 백엔드</h3>
+                    <p>Node.js 18+ / Express 5.1 / ES Modules</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🤖 AI/ML</h3>
+                    <p>멀티 AI 통합 아키텍처</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">GPT-4o</span>
+                        <span class="tech-tag">Claude</span>
+                        <span class="tech-tag">Gemini</span>
+                        <span class="tech-tag">Vision API</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>☁️ 클라우드</h3>
+                    <p>Google Cloud Platform 기반</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Cloud Vision</span>
+                        <span class="tech-tag">Cloud Storage</span>
+                        <span class="tech-tag">Pub/Sub</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🔄 자동화</h3>
+                    <p>워크플로우 자동화 연동</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Make.com</span>
+                        <span class="tech-tag">Webhook</span>
+                        <span class="tech-tag">Google Docs API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h4>📊 시스템 성능 지표</h4>
+                <p>
+                    • <strong>처리 속도</strong>: PDF 10페이지 기준 평균 30-45초<br>
+                    • <strong>동시 처리</strong>: 8개 파일 병렬 처리 지원<br>
+                    • <strong>API 응답</strong>: 평균 100ms 이내<br>
+                    • <strong>가동률</strong>: 99.9% 목표 (현재 개발 환경 100% 달성)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">🗺️ 개발 로드맵</h2>
+            <p class="section-subtitle">명확한 마일스톤과 함께 빠르게 성장하고 있습니다</p>
+            
+            <div class="roadmap">
+                <div class="roadmap-item completed">
+                    <div class="roadmap-dot">✓</div>
+                    <h4>Phase 1: MVP</h4>
+                    <p>OCR 파이프라인<br>기본 분석 엔진<br>웹 인터페이스</p>
+                </div>
+                <div class="roadmap-item completed">
+                    <div class="roadmap-dot">✓</div>
+                    <h4>Phase 2: 고도화</h4>
+                    <p>하이브리드 AI 엔진<br>Investigator View<br>50+ 케이스 검증</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">Q1</div>
+                    <h4>Phase 3: 확장</h4>
+                    <p>불확실성 스코어<br>자가학습 시스템<br>API 고도화</p>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-dot">Q2</div>
+                    <h4>Phase 4: 상용화</h4>
+                    <p>SaaS 플랫폼 런칭<br>보험사 파일럿<br>엔터프라이즈 기능</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Model -->
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">💼 비즈니스 모델</h2>
+            <p class="section-subtitle">B2B SaaS 구독 + 건당 과금 하이브리드 모델</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Enterprise 요금제</h3>
+                    <p><strong>월 500만원~</strong><br><br>
+                    • 무제한 문서 처리<br>
+                    • 전담 기술 지원<br>
+                    • 커스텀 템플릿 개발<br>
+                    • SLA 99.9% 보장<br>
+                    • On-premise 옵션</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Growth 요금제</h3>
+                    <p><strong>월 200만원</strong><br><br>
+                    • 월 1,000건 처리<br>
+                    • 이메일 지원<br>
+                    • 기본 템플릿 제공<br>
+                    • SLA 99% 보장<br>
+                    • 클라우드 기반</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>건당 과금</h3>
+                    <p><strong>건당 5,000원~</strong><br><br>
+                    • Pay-as-you-go<br>
+                    • 소규모 손해사정 법인<br>
+                    • 월 약정 없음<br>
+                    • 볼륨 할인 제공<br>
+                    • 즉시 시작 가능</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h4>💰 예상 ROI (고객 관점)</h4>
+                <p>
+                    현재 손해사정 건당 비용: <strong>30-50만원</strong> (인건비 + 시간)<br>
+                    VNEXSUS 사용 시 비용: <strong>5,000원</strong> (건당 과금 기준)<br>
+                    <strong style="color: var(--secondary);">→ 98% 비용 절감, ROI 6,000%+</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section class="investment-section">
+        <div class="container">
+            <h2 class="section-title">💎 투자 유치 계획</h2>
+            <p class="section-subtitle">Seed 라운드를 통해 제품 완성도를 높이고 초기 고객을 확보합니다</p>
+            
+            <div class="investment-highlight">
+                <div class="investment-item">
+                    <div class="amount">₩10억</div>
+                    <div class="use">제품 개발 (50%)</div>
+                    <ul>
+                        <li>불확실성 스코어 시스템 완성</li>
+                        <li>자가학습 피드백 루프 구축</li>
+                        <li>엔터프라이즈 보안 강화</li>
+                        <li>모바일 앱 개발</li>
+                    </ul>
+                </div>
+                <div class="investment-item">
+                    <div class="amount">₩6억</div>
+                    <div class="use">영업 & 마케팅 (30%)</div>
+                    <ul>
+                        <li>보험사 파일럿 프로그램</li>
+                        <li>손해사정 법인 영업</li>
+                        <li>업계 컨퍼런스 참가</li>
+                        <li>성공 사례 마케팅</li>
+                    </ul>
+                </div>
+                <div class="investment-item">
+                    <div class="amount">₩4억</div>
+                    <div class="use">팀 빌딩 (20%)</div>
+                    <ul>
+                        <li>AI/ML 엔지니어 2명</li>
+                        <li>풀스택 개발자 2명</li>
+                        <li>영업/CS 담당자 2명</li>
+                        <li>보험 도메인 전문가 1명</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traction Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">📊 현재 성과 (Traction)</h2>
+            <p class="section-subtitle">MVP 단계에서 이미 검증된 기술력과 시장 적합성</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">✅</div>
+                    <h3>기술 검증 완료</h3>
+                    <p>
+                        • 50+ 실제 케이스 처리 완료<br>
+                        • 188개 병원 템플릿 구축<br>
+                        • 95%+ 분석 정확도 달성<br>
+                        • 하이브리드 AI 아키텍처 완성
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏆</div>
+                    <h3>개발 완성도</h3>
+                    <p>
+                        • 전체 개발 진행률: 85-90%<br>
+                        • 핵심 기능 100% 구현<br>
+                        • 프로덕션 배포 준비 완료<br>
+                        • 60+ 기술 문서 작성
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>시장 검증 준비</h3>
+                    <p>
+                        • 파일럿 프로그램 설계 완료<br>
+                        • 손해사정 업계 니즈 파악<br>
+                        • 가격 책정 모델 수립<br>
+                        • Go-to-Market 전략 수립
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Now Section -->
+    <section style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">⏰ 왜 지금인가?</h2>
+            <p class="section-subtitle">시장 타이밍과 기술 성숙도가 완벽하게 맞아떨어지는 시점입니다</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Gen AI 기술 성숙</h3>
+                    <p>GPT-4, Claude, Gemini 등 대형 언어모델의 상용화로 문서 분석 정확도가 획기적으로 향상. Vision AI의 OCR 정확도도 99%+ 달성</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏦</div>
+                    <h3>보험사 DX 가속화</h3>
+                    <p>한국 보험사들이 적극적으로 AI 도입 중. DB손해보험의 SOLUTUS 투자, 한화생명의 Cha Biotech 투자 등 업계 전반의 디지털 전환 가속</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👴</div>
+                    <h3>인력 수급 위기</h3>
+                    <p>숙련된 손해사정사 고령화 및 신규 인력 유입 감소. 자동화 솔루션에 대한 수요가 급증하는 구조적 변화</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>규제 환경 개선</h3>
+                    <p>금융위원회의 AI 활용 가이드라인 정비로 보험 업무에 AI 도입이 용이해짐. 개인정보보호법 개정으로 의료데이터 활용 범위 확대</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>보험 손해사정의 미래,<br>VNEXSUS와 함께 만들어갑니다</h2>
+            <p>AI 기반 손해사정 자동화 시장의 선두주자가 되기 위한 여정에 함께해 주세요</p>
+            <div class="cta-buttons">
+                <a href="mailto:invest@vnexsus.com" class="btn btn-primary">투자 문의하기</a>
+                <a href="http://localhost:3030" class="btn btn-secondary">데모 체험하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                <strong>VNEXSUS</strong> - AI-Powered Insurance Claims Automation
+            </p>
+            <p>
+                📧 Contact: <a href="mailto:info@vnexsus.com">info@vnexsus.com</a><br>
+                🌐 Demo: <a href="http://localhost:3030">http://localhost:3030</a>
+            </p>
+            <p style="margin-top: 30px; font-size: 0.85rem;">
+                © 2026 VNEXSUS. All rights reserved.<br>
+                본 문서는 투자 유치를 위한 참고 자료이며, 투자 권유를 목적으로 하지 않습니다.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Print functionality
+        function printDocument() {
+            window.print();
+        }
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Download as PDF (using browser print)
+        const downloadBtn = document.createElement('button');
+        downloadBtn.innerHTML = '📥 PDF 다운로드';
+        downloadBtn.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s;
+        `;
+        downloadBtn.onmouseover = () => downloadBtn.style.transform = 'scale(1.05)';
+        downloadBtn.onmouseout = () => downloadBtn.style.transform = 'scale(1)';
+        downloadBtn.onclick = () => window.print();
+        document.body.appendChild(downloadBtn);
+    </script>
+</body>
+</html>

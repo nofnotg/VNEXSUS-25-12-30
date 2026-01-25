@@ -1,0 +1,157 @@
+{
+  "caseNum": 21,
+  "model": "gpt-4o-mini",
+  "processingTime": 24990,
+  "tokens": {
+    "prompt_tokens": 50830,
+    "completion_tokens": 1145,
+    "total_tokens": 51975,
+    "prompt_tokens_details": {
+      "cached_tokens": 50048,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0083115,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2023-11-29",
+      "time": "14:07",
+      "hospital": "가천대길병원",
+      "department": "안과"
+    },
+    "chiefComplaint": {
+      "summary": "좌안 시력저하",
+      "referralSource": "고양신세계안과",
+      "onsetDate": "2023-10-16",
+      "duration": "5일",
+      "details": "차량 전복 교통사고 이후 좌안 재발성 망막박리 소견"
+    },
+    "diagnoses": [
+      {
+        "code": "H3302",
+        "nameKr": "거대찢김이 있는 망막박리",
+        "nameEn": "Retinal detachment with giant tear",
+        "date": "2023-10-16",
+        "isPrimary": true,
+        "hospital": "고양신세계안과"
+      },
+      {
+        "code": "H2591",
+        "nameKr": "상세불명의 노년백내장, 왼쪽",
+        "nameEn": "Senile cataract, left",
+        "date": "2023-10-16",
+        "isPrimary": false,
+        "hospital": "고양신세계안과"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "세극등현미경검사",
+        "nameEn": "Slit lamp examination",
+        "date": "2023-11-29",
+        "result": "정상",
+        "finding": "AC deep, cell++",
+        "normalRange": "정상",
+        "isAbnormal": false
+      },
+      {
+        "name": "안압측정-기타",
+        "nameEn": "Intraocular pressure measurement",
+        "date": "2023-11-29",
+        "result": "정상",
+        "finding": "Tn Rt 14 Lt 9",
+        "normalRange": "정상",
+        "isAbnormal": false
+      },
+      {
+        "name": "광각 안저촬영 [편측]",
+        "nameEn": "Wide-field fundus photography [left]",
+        "date": "2023-11-29",
+        "result": "정상",
+        "finding": "RD chuge H-S tear at 11 o/c, os",
+        "normalRange": "정상",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "정보 없음",
+      "reportDate": "정보 없음",
+      "finding": "정보 없음",
+      "stageTNM": "정보 없음",
+      "stageOverall": "정보 없음",
+      "histology": "정보 없음",
+      "margin": "정보 없음"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Vitrectomy, pars planar (left)",
+        "date": "2023-11-30",
+        "duration": "정보 없음",
+        "details": "L)PPV,TA inj,MP,F-A-E,Laser,Cryo,Gas tamponade(C3F8)",
+        "hospital": "고양신세계안과"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-10-16",
+      "endDate": "2025-10-15",
+      "totalVisits": 48,
+      "hospitals": [
+        "고양신세계안과",
+        "가천대길병원"
+      ],
+      "summary": "정보 없음"
+    },
+    "admissionPeriod": {
+      "startDate": "2023-11-29",
+      "endDate": "2023-12-01",
+      "totalDays": 3,
+      "hospital": "가천대길병원",
+      "department": "안과",
+      "reason": "좌안 재발성 망막박리"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "10년 전",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "좌안 망막박리 재발 가능성 있음.",
+      "prognosis": "시력 예후 불량 가능성.",
+      "recommendations": "정기적인 안과 검진 필요.",
+      "limitations": "일상생활에서 시력 저하로 인한 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "정보 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "좌안 망막박리로 인한 수술 치료 필요.",
+      "keyFindings": [
+        "거대찢김이 있는 망막박리",
+        "상세불명의 노년백내장"
+      ],
+      "recommendations": "수술 후 정기 검진 필요."
+    }
+  }
+}

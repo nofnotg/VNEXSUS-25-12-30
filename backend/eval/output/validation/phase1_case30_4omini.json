@@ -1,0 +1,171 @@
+{
+  "caseNum": 30,
+  "model": "gpt-4o-mini",
+  "processingTime": 21512,
+  "tokens": {
+    "prompt_tokens": 4635,
+    "completion_tokens": 1246,
+    "total_tokens": 5881,
+    "prompt_tokens_details": {
+      "cached_tokens": 4224,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.0014428499999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2025-03-12",
+      "time": "14:09",
+      "hospital": "우리들병원",
+      "department": "01-1"
+    },
+    "chiefComplaint": {
+      "summary": "허리 통증, 좌측 다리가 저리고 얼얼하다",
+      "referralSource": null,
+      "onsetDate": "several years ago",
+      "duration": "10년 이상",
+      "details": "좌측 엉치-허벅지(외)-종아리(외)-발바닥 저림, 감각저하"
+    },
+    "diagnoses": [
+      {
+        "code": "M48.06",
+        "nameKr": "척추협착증, 요추부",
+        "nameEn": "Spinal stenosis, lumbar region",
+        "date": "2025-03-23",
+        "isPrimary": true,
+        "hospital": "우리들병원"
+      },
+      {
+        "code": "M43.16",
+        "nameKr": "척추후방전위증, 요추부",
+        "nameEn": "Retrolisthesis, lumbar region",
+        "date": "2025-03-23",
+        "isPrimary": false,
+        "hospital": "우리들병원"
+      },
+      {
+        "code": "M48.07",
+        "nameKr": "척추협착증, 요천부",
+        "nameEn": "Spinal stenosis, lumbosacral region",
+        "date": "2025-03-23",
+        "isPrimary": false,
+        "hospital": "우리들병원"
+      },
+      {
+        "code": "M54.16",
+        "nameKr": "추간공 협착증, 요추부위",
+        "nameEn": "Foraminal stenosis, lumbar region",
+        "date": "2025-03-23",
+        "isPrimary": false,
+        "hospital": "우리들병원"
+      },
+      {
+        "code": "M54.17",
+        "nameKr": "추간공 협착증, 요천부위",
+        "nameEn": "Foraminal stenosis, lumbosacral region",
+        "date": "2025-03-23",
+        "isPrimary": false,
+        "hospital": "우리들병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "L-Spine MRI & CTL",
+        "nameEn": "L-Spine MRI & CTL",
+        "date": "2025-03-12",
+        "result": "진단방사선 결과지",
+        "finding": "좌측 엉치-허벅지(외)-종아리(외)-발바닥 저림, 감각저하",
+        "normalRange": null,
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "PLIF+PF",
+        "date": "2025-03-24",
+        "duration": null,
+        "details": "요추4-5 사이, 요추5-천추사이",
+        "hospital": "우리들병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-03-12",
+      "endDate": "2025-09-03",
+      "totalVisits": 5,
+      "hospitals": [
+        "우리들병원"
+      ],
+      "summary": "허리 통증으로 외래 진료"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-03-23",
+      "endDate": "2025-04-11",
+      "totalDays": 19,
+      "hospital": "우리들병원",
+      "department": "31W",
+      "reason": "주진단명: 척추협착증"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고지혈증",
+        "code": "E78.5",
+        "diagnosisDate": "정보 없음",
+        "treatment": "정보 없음",
+        "currentStatus": "정보 없음",
+        "hospital": "정보 없음",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "수술 후 회복 상태 양호",
+      "prognosis": "양호",
+      "recommendations": "정기적인 추적 관찰 필요",
+      "limitations": "일상생활에 지장 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "척추협착증으로 인한 수술 및 치료 경과 양호",
+      "keyFindings": [
+        "척추협착증 진단",
+        "PLIF+PF 수술 시행"
+      ],
+      "recommendations": "정기적인 외래 진료 권장"
+    }
+  }
+}

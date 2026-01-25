@@ -1,0 +1,47 @@
+{
+  "caseId": "Case42",
+  "caseNum": 42,
+  "patientName": "정진덕",
+  "model": "gpt-4o-mini",
+  "pdfFile": "강북삼성병원.pdf",
+  "imageCount": 3,
+  "processingTime": 13837,
+  "tokens": {
+    "prompt_tokens": 110667,
+    "completion_tokens": 165,
+    "total_tokens": 110832,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.016699049999999997,
+  "generatedJson": {
+    "visitDate": "2025-02-22",
+    "chiefComplaint": "Headache and visual disturbances",
+    "diagnoses": [
+      "Glaucoma",
+      "Headache"
+    ],
+    "examinations": [
+      "Brain MRI",
+      "Ophthalmologic examination"
+    ],
+    "pathology": "No significant findings noted in MRI; glaucoma diagnosed.",
+    "treatments": [
+      "Medication for glaucoma",
+      "Follow-up appointments"
+    ],
+    "outpatientPeriod": "2025-02-22 to 2025-09-10",
+    "admissionPeriod": null,
+    "pastHistory": "No significant past medical history reported.",
+    "doctorOpinion": "Patient requires ongoing management for glaucoma and regular follow-ups."
+  },
+  "timestamp": "2026-01-25T09:50:13.719Z"
+}

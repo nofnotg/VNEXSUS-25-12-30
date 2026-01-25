@@ -1,0 +1,166 @@
+{
+  "caseNum": 19,
+  "model": "gpt-4o-mini",
+  "processingTime": 21581,
+  "tokens": {
+    "prompt_tokens": 45464,
+    "completion_tokens": 1259,
+    "total_tokens": 46723,
+    "prompt_tokens_details": {
+      "cached_tokens": 45184,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.007574999999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 50,
+    "overallScore": 70
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-09-05",
+      "time": null,
+      "hospital": "고려대학교 구로병원",
+      "department": "소화기내과"
+    },
+    "chiefComplaint": {
+      "summary": "췌장에 낭성 병변 발견",
+      "referralSource": "null",
+      "onsetDate": "2024-09-05",
+      "duration": "정보 없음",
+      "details": "2024년 9월 5일 건강검진에서 췌장 병변 발견 후 외래 진료 의뢰"
+    },
+    "diagnoses": [
+      {
+        "code": "D13.6",
+        "nameKr": "췌장의 양성신생물",
+        "nameEn": "Benign neoplasm of pancreas",
+        "date": "2024-09-05",
+        "isPrimary": true,
+        "hospital": "고려대학교 구로병원"
+      },
+      {
+        "code": "K86.8",
+        "nameKr": "기타 명시된 췌장 질환",
+        "nameEn": "Other specified diseases of pancreas",
+        "date": "2024-09-05",
+        "isPrimary": false,
+        "hospital": "고려대학교 구로병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI Pancreas",
+        "nameEn": "MRI of the pancreas",
+        "date": "2024-09-10",
+        "result": "Several cystic lesions without solid portion in the whole pancreas.",
+        "finding": "Main p-duct dilatation upto 6 mm.",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Biliary & Pancreas",
+        "nameEn": "CT of biliary and pancreas",
+        "date": "2025-06-10",
+        "result": "Slightly Increased size of the largest cystic lesion at the pancreas head.",
+        "finding": "Internal hemorrhage.",
+        "normalRange": "정보 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-08-05",
+      "reportDate": "2025-08-12",
+      "finding": "Adenocarcinoma, poorly differentiated, uncinate process.",
+      "stageTNM": "pT2N0M0",
+      "stageOverall": "Stage II",
+      "histology": "Mixed ductal adenocarcinoma, poorly differentiated.",
+      "margin": "Free"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "Pancreaticoduodenectomy",
+        "date": "2025-08-05",
+        "duration": "정보 없음",
+        "details": "Pylorus preserving pancreaticoduodenectomy performed.",
+        "hospital": "국립암센터"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-09-05",
+      "endDate": "2025-10-21",
+      "totalVisits": 5,
+      "hospitals": [
+        "고려대학교 구로병원",
+        "국립암센터"
+      ],
+      "summary": "정기적인 외래 진료 및 추적 검사 필요"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-08-03",
+      "endDate": "2025-08-17",
+      "totalDays": 14,
+      "hospital": "국립암센터",
+      "department": "간담췌암외과",
+      "reason": "췌장암 수술"
+    },
+    "pastHistory": [
+      {
+        "condition": "위암",
+        "code": "C16.0",
+        "diagnosisDate": "2012-01-01",
+        "treatment": "위 전절제술 및 항암치료",
+        "currentStatus": "완치",
+        "hospital": "연세대학교 신촌세브란스병원",
+        "isPreExisting": true
+      },
+      {
+        "condition": "고혈압",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": "정보 없음",
+        "currentStatus": "현재 상태",
+        "hospital": null,
+        "isPreExisting": false
+      },
+      {
+        "condition": "당뇨병",
+        "code": null,
+        "diagnosisDate": null,
+        "treatment": "정보 없음",
+        "currentStatus": "현재 상태",
+        "hospital": null,
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "췌장암으로 인한 수술 후 경과 관찰 필요",
+      "prognosis": "정기적인 추적 검사 필요",
+      "recommendations": "술, 담배 금지, 건강한 식습관 유지",
+      "limitations": "일상생활에서의 과도한 스트레스 피하기"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "췌장암으로 인한 수술 후 경과 관찰 필요",
+      "keyFindings": [
+        "췌장에 낭성 병변 발견",
+        "수술 후 경과 양호"
+      ],
+      "recommendations": "정기적인 외래 진료 및 추적 검사 필요"
+    }
+  }
+}

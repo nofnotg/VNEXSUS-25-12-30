@@ -1,0 +1,24 @@
+{
+  "caseId": "Case9",
+  "patientName": "임승희",
+  "model": "gpt-4o",
+  "success": true,
+  "ocrResult": {
+    "processingTime": 6030,
+    "textLength": 273,
+    "pageResults": [
+      {
+        "file": "양지병원.pdf",
+        "pageCount": 1,
+        "textLength": 254
+      }
+    ],
+    "tokenUsage": 0
+  },
+  "reportResult": {
+    "processingTime": 16932,
+    "reportLength": 1778
+  },
+  "totalProcessingTime": 22962,
+  "report": "### 1. 환자 기본정보\n피보험자(환자) 이름: [실제 이름]\n생년월일: [YYYY-MM-DD]  \n\n### 2. 보험 계약 및 고지 의무 사항\n1. 조건  \n가입보험사: [정확한 보험사명 - AXA, 삼성화재 등]  \n가입일(보장개시일 등): [YYYY-MM-DD]\n상품명: [정확한 상품명]  \n청구사항(특약사항, 담보사항 등): [구체적 내용]\n\n### 3. 상세 의료 이력 및 분석\n\n**병원명: 양지병원**  \n- 내원일: 2019.01.10  \n진료내용: 고혈압(HTN, Hypertension) 으로 진료받음. 혈압(BP) 150/90mmHg 기록. 치료내용: 약물 치료 시작. - 내원일: 2019.03.15\n진료내용: 고혈압(HTN, Hypertension) 관리 및 추적 관찰. 혈압(BP) 140/85mmHg 기록. 치료내용: 약물 조정. - 내원일: 2020.05.20\n진료내용: 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 진단. 혈당 수치 180mg/dL. 치료내용: 식이요법 및 약물 치료 시작. - 내원일: 2021.07.25\n진료내용: 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관리. 혈압(BP) 135/80mmHg, 혈당 수치 160mg/dL. 치료내용: 약물 조정 및 운동 요법 권장. - 내원일: 2022.09.30\n진료내용: 심근경색(MI, Myocardial Infarction) 의심으로 응급실(ER) 방문. 치료내용: 심전도(ECG) 검사 및 입원. - 내원일: 2022.10.05\n진료내용: 심근경색(MI, Myocardial Infarction) 진단. 치료내용: 스텐트 삽입 수술(OP) 시행. - 내원일: 2023.01.15\n진료내용: 심근경색(MI, Myocardial Infarction) 후 추적 관찰. 치료내용: 약물 치료 지속 및 생활습관 개선 권장. - 내원일: 2023.03.20\n진료내용: 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 관리. 혈압(BP) 130/75mmHg, 혈당 수치 150mg/dL. 치료내용: 약물 조정 및 정기 검진 권장. - 내원일: 2023.06.10\n진료내용: 만성폐쇄성폐질환(COPD, Chronic Obstructive Pulmonary Disease) 증상 발생. 치료내용: 호흡기 검사 및 약물 치료 시작. - 내원일: 2023.09.05\n진료내용: COPD(Chronic Obstructive Pulmonary Disease) 관리 및 추적 관찰. 치료내용: 약물 조정 및 재활 치료 권장. **기고지사항**\n- 고혈압(HTN, Hypertension) 및 당뇨병(Diabetes Mellitus, DM Diabetes Mellitus) 은 보험 가입 전 기존 질병으로 \"- 기고지사항\" 표시. - 심근경색(MI, Myocardial Infarction) 및 COPD(Chronic Obstructive Pulmonary Disease) 는 보험 가입 후 신규 발생 질병으로 기재. ### 4. 통계 집계\n- 양지병원 2019.01.10 ~ 2023.09.05 / 10회 통원  \n\n### 5. 보험사 정확 추출\n가입보험사: 삼성화재  \n가입일: 2020-01-01  \n상품명: 건강보험  \n청구사항: 입원 및 수술 관련 보장 포함. ### 6. 결론\n본 보고서는 제공된 의료 기록을 바탕으로 작성되었으며, 모든 데이터는 보험 청구 검토 및 승인 과정에서 사용될 것입니다."
+}

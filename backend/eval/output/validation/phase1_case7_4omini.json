@@ -1,0 +1,148 @@
+{
+  "caseNum": 7,
+  "model": "gpt-4o-mini",
+  "processingTime": 25327,
+  "tokens": {
+    "prompt_tokens": 85995,
+    "completion_tokens": 1057,
+    "total_tokens": 87052,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "cost": 0.013533449999999999,
+  "quality": {
+    "structureCompleteness": 100,
+    "diagnosisMatch": 0,
+    "overallScore": 40
+  },
+  "generatedJson": {
+    "visitDate": {
+      "date": "2024-12-17",
+      "time": "null",
+      "hospital": "가톨릭대학교 서울성모병원",
+      "department": "이비인후과"
+    },
+    "chiefComplaint": {
+      "summary": "Sore throat and voice change",
+      "referralSource": "제일이비인후과",
+      "onsetDate": "2024-12-02",
+      "duration": "15 days",
+      "details": "Patient referred for evaluation of suspected right tonsil cancer."
+    },
+    "diagnoses": [
+      {
+        "code": "C10.9",
+        "nameKr": "편도암",
+        "nameEn": "Tonsil cancer",
+        "date": "2024-12-02",
+        "isPrimary": true,
+        "hospital": "가톨릭대학교 서울성모병원"
+      },
+      {
+        "code": "C77.0",
+        "nameKr": "전이성 림프절암",
+        "nameEn": "Metastatic lymph node carcinoma",
+        "date": "2024-12-02",
+        "isPrimary": false,
+        "hospital": "가톨릭대학교 서울성모병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI Neck",
+        "nameEn": "MRI Neck",
+        "date": "2024-12-20",
+        "result": "Diffuse enhancing mucosal thickening at oropharyngeal wall.",
+        "finding": "Clinical information Rt tonsil cancer.",
+        "normalRange": "null",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Chest",
+        "nameEn": "CT Chest",
+        "date": "2024-12-20",
+        "result": "No remarkable findings.",
+        "finding": "null",
+        "normalRange": "null",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2024-12-02",
+      "reportDate": "2024-12-04",
+      "finding": "Squamous cell carcinoma, moderately differentiated.",
+      "stageTNM": "T4N1M0",
+      "stageOverall": "Stage III",
+      "histology": "Squamous cell carcinoma",
+      "margin": "null"
+    },
+    "treatments": [
+      {
+        "type": "항암치료",
+        "name": "Induction chemotherapy",
+        "date": "2025-01-16",
+        "duration": "5 days",
+        "details": "Induction DCF chemotherapy.",
+        "hospital": "가톨릭대학교 서울성모병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-12-02",
+      "endDate": "2025-02-10",
+      "totalVisits": 6,
+      "hospitals": [
+        "가톨릭대학교 서울성모병원",
+        "제일이비인후과"
+      ],
+      "summary": "Multiple visits for evaluation and treatment of tonsil cancer."
+    },
+    "admissionPeriod": {
+      "startDate": "2025-01-15",
+      "endDate": "2025-01-20",
+      "totalDays": 5,
+      "hospital": "가톨릭대학교 서울성모병원",
+      "department": "종양내과",
+      "reason": "Induction chemotherapy for tonsil cancer."
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "null",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "null",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 우측 편도암으로 진단되었으며, 림프절 전이가 확인됨.",
+      "prognosis": "예후는 불확실하나, 치료 반응에 따라 결정됨.",
+      "recommendations": "지속적인 항암 치료 및 추적 관찰 필요.",
+      "limitations": "일상생활에서의 피로감 및 식사 제한."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "null",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "우측 편도암 진단 및 치료 계획 수립.",
+      "keyFindings": [
+        "편도암 진단",
+        "림프절 전이 확인"
+      ],
+      "recommendations": "지속적인 항암 치료 및 정기적인 검사 필요."
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "caseId": "Case30",
+  "caseNum": 30,
+  "patientName": "송금숙",
+  "model": "gpt-4o-mini",
+  "totalPages": 18,
+  "processedPages": 18,
+  "processedAt": "2026-01-25T11:10:32.731Z",
+  "processingTime": 80415,
+  "cost": 0.09720000000000001,
+  "usage": {
+    "prompt_tokens": 663746,
+    "completion_tokens": 779,
+    "total_tokens": 664525,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "patientInfo": {
+      "name": "송금숙",
+      "birthDate": null,
+      "gender": "F"
+    },
+    "visitDate": {
+      "date": "2025-03-23",
+      "hospital": "우리들병원",
+      "department": "정형외과"
+    },
+    "chiefComplaint": {
+      "summary": "허리 통증",
+      "onsetDate": "10년 전",
+      "details": "양쪽 무릎 통증, 허리 통증"
+    },
+    "diagnoses": [
+      {
+        "code": "M51.1",
+        "nameKr": "척추관 협착증",
+        "date": "2025-03-24",
+        "isPrimary": true,
+        "hospital": "우리들병원"
+      },
+      {
+        "code": "M43.1",
+        "nameKr": "후방 전위증",
+        "date": "2025-03-24",
+        "isPrimary": false,
+        "hospital": "우리들병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "MRI",
+        "date": "2025-03-23",
+        "result": "척추관 협착증, 디스크 탈출증",
+        "hospital": "우리들병원"
+      },
+      {
+        "name": "CT",
+        "date": "2025-03-23",
+        "result": "척추관 협착증, 디스크 탈출증",
+        "hospital": "우리들병원"
+      }
+    ],
+    "treatments": [
+      {
+        "name": "PLIF + PF",
+        "date": "2025-03-24",
+        "hospital": "우리들병원"
+      }
+    ],
+    "medications": [],
+    "hospitalizations": [
+      {
+        "hospital": "우리들병원",
+        "admissionDate": "2025-03-23",
+        "dischargeDate": "2025-04-11",
+        "reason": "수술 후 회복"
+      }
+    ],
+    "surgeries": [
+      {
+        "name": "PLIF + PF",
+        "date": "2025-03-24",
+        "hospital": "우리들병원"
+      }
+    ],
+    "prognosis": {
+      "summary": "좋은 고정 상태",
+      "followUpDate": "2025-04-11"
+    },
+    "extractedDates": [
+      {
+        "date": "2025-03-23",
+        "context": "입원일",
+        "type": "입원일"
+      },
+      {
+        "date": "2025-04-11",
+        "context": "퇴원일",
+        "type": "퇴원일"
+      },
+      {
+        "date": "2025-03-24",
+        "context": "수술일",
+        "type": "수술일"
+      },
+      {
+        "date": "2025-03-12",
+        "context": "MRI 검사일",
+        "type": "검사일"
+      }
+    ],
+    "extractedHospitals": [
+      "우리들병원"
+    ],
+    "rawTextSummary": "환자는 허리 통증으로 내원하였으며, MRI 및 CT 검사 결과 척추관 협착증과 디스크 탈출증 진단을 받았다. 2025년 3월 24일 PLIF + PF 수술을 시행하였고, 4월 11일 퇴원하였다."
+  },
+  "groundTruth": "Ⅱ. 조사 사항 \r\n1. 사고 및 손해조사 내용 \r\n일자 사고경위 병원/기관 \r\n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \r\n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \r\n2025.03.23 \r\n[청구사항] \r\n내 원 일 : 2025.03.23 \r\n내원경위 : 요추부 통증을 주소로 내원 \r\n진 단 명 : 제4-5요추-제1천추간 추간판 탈출증 M512 \r\n제4-5요추-제1천추간 요추간 척추관 협착증 \r\nM4806 \r\n신경뿌리병증을 동반한 요추 및 기타 추간판장애 \r\nM511 \r\n요추부 후만증 M4026 \r\n입원기간 : 2025.03.23 ~ 2025.04.11 / 20일 입원 \r\n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \r\n입원 간 도수치료 7회 \r\n2025.04.22 ~ 2025.09.09 22회 도수치료 \r\n검사결과 : 2025.3.12 요추 MRI  \r\n제4-5요추-제1천추간 추간판 탈출 \r\n \r\n우리들병원 \r\n  \r\n  \r\n2. 손해사정 시 적용된 관계 법규 및 약관  \r\n면부책 \r\n검토 \r\n[치료 적정성 확인] \r\n금번 우리들병원에서 시행한 도수치료(총 29회) 적정성 관련 피보험자 동의 하 제3의료\r\n기관을 통한 의료자문 결과는 아래와 같음.  \r\n \r\n통합하여 최대 12회가 적절한 시행횟수로 사료 \r\n향 후 도수치료는 필요하지 않을 것으로 판단 \r\n(자문회신서 별첨) \r\n근거 의료자문 회신원 \r\n  \r\n  \r\n  \r\n \r\n \r\n3. 결론 \r\n근거 \r\n[약관상 보험자 지급책임의 범위] \r\n금번 우리들병원에서 '제4-5요추-제1천추간 추간판 탈출증 (M512), 제4-5요추-제1천추\r\n간 요추간 척추관 협착증 (M4806), 신경뿌리병증을 동반한 요추 및 기타 추간판장애 \r\n(M511), 요추부 후만증 (M4026)' 등 진단 및 입원 하 제4-5-천추1번 유합술 시행. \r\n입원 중 도수치료 7회, 외래 총 22회 도수치료 청구건으로,  \r\n청구 도수치료 적정성 관련 의료자문 검토 결과 현재까지 통합하여 최대 12회 적정 향후 \r\n도수치료 불 필요 소견 확인됨.  \r\n \r\n해당 내용 관련 동 보험 계약자 강한 불만 제기하며 현재까지 청구된 도수치료 비용은 인\r\n정하여 지급 결정하여 줄 것을 독려함.  \r\n \r\n상기 내용 종합하여 귀사 심사 기준에 의거 검토 후 처리함이 타당할 것으로 판단됨. \r\n결론 일부지급 및 계약 유지",
+  "matching": {
+    "dates": {
+      "matched": [
+        "2025-03-23",
+        "2025-04-11",
+        "2025-03-24"
+      ],
+      "missed": [
+        "2012-11-23",
+        "2025-01-01",
+        "2025-04-22",
+        "2025-09-09",
+        "2025-3-12"
+      ],
+      "extra": [
+        "2025-03-12"
+      ],
+      "rate": 38
+    },
+    "kcdCodes": {
+      "matched": [],
+      "missed": [
+        "M51",
+        "M48",
+        "M40"
+      ],
+      "extra": [
+        "M51.1",
+        "M43.1"
+      ],
+      "rate": 0
+    },
+    "hospitals": {
+      "matched": [
+        "우리들병원"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "examinations": {
+      "matched": [
+        "MRI"
+      ],
+      "missed": [],
+      "extra": [],
+      "rate": 100
+    },
+    "treatments": {
+      "matched": [],
+      "missed": [
+        "치료내용",
+        "도수치료",
+        "치료",
+        "도수치료는"
+      ],
+      "extra": [],
+      "rate": 0
+    },
+    "diagnoses": {
+      "matched": [],
+      "missed": [],
+      "extra": [],
+      "rate": 0
+    }
+  },
+  "error": null,
+  "batches": []
+}
