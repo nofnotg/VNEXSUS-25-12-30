@@ -42,16 +42,16 @@ class StructuredReportGenerator {
         console.log('📋 Validation result:', JSON.stringify(validation, null, 2));
       }
 
-      // 2. 검증 실패 시 처리
-      if (!validation.valid) {
+      // 2. 항상 기본값 적용 (누락/빈값 필드 모두 보완)
+      jsonResponse = applyDefaultValues(jsonResponse, validation);
+      
+      if (!validation.valid || validation.emptyFields.length > 0) {
         logger.warn({
-          event: 'report_validation_failed',
+          event: 'report_validation_issues',
           missingFields: validation.missingFields,
+          emptyFields: validation.emptyFields,
           completenessScore: validation.completenessScore
         });
-
-        // 기본값 적용
-        jsonResponse = applyDefaultValues(jsonResponse, validation);
       }
 
       // 3. 보고서 텍스트 생성

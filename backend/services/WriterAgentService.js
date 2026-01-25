@@ -85,10 +85,8 @@ class WriterAgentService {
                     let structuredJsonData = JSON.parse(rawResponse);
                     const validation = validateReportSchema(structuredJsonData);
 
-                    // 누락된 필드에 기본값 적용
-                    if (!validation.valid) {
-                        structuredJsonData = applyDefaultValues(structuredJsonData, validation);
-                    }
+                    // 항상 기본값 적용 (누락/빈값 필드 모두 보완)
+                    structuredJsonData = applyDefaultValues(structuredJsonData, validation);
 
                     // 구조화된 보고서 생성기로 텍스트 변환
                     const reportGenerator = new StructuredReportGenerator({ debug: false });

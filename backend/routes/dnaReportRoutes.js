@@ -13,7 +13,7 @@ import {
 import InsuranceValidationService from '../services/insuranceValidationService.js';
 import MedicalTermTranslationService from '../services/medicalTermTranslationService.js';
 import StructuredReportGenerator from '../services/structuredReportGenerator.js';
-import { validateReportSchema, applyDefaultValues } from '../services/structuredReportSchema.js';
+import { validateReportSchema, applyDefaultValues, calculateVisitStatistics } from '../services/structuredReportSchema.js';
 // NineItemReportGenerator는 대형 모듈이므로 필요 시점에 동적 import로 로드
 import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../../src/shared/logging/logger.js';
 import { ProgressiveRAGSystem } from '../../src/rag/progressiveRAG.js';
@@ -150,13 +150,22 @@ router.post('/generate', async (req, res) => {
           event: 'json_validation_result', 
           valid: validation.valid,
           completenessScore: validation.completenessScore,
-          missingFields: validation.missingFields
+          missingFields: validation.missingFields,
+          emptyFields: validation.emptyFields
         });
         
-        // 누락된 필드에 기본값 적용
-        if (!validation.valid) {
-          structuredJsonData = applyDefaultValues(structuredJsonData, validation);
-          logger.warn({ event: 'applied_default_values', fields: validation.missingFields });
+        // 항상 기본값 적용 (누락/빈값 필드 모두 보완)
+        structuredJsonData = applyDefaultValues(structuredJsonData, validation);
+        
+        // 통원/입원 통계 자동 계산 및 보완
+        structuredJsonData = calculateVisitStatistics(structuredJsonData);
+        
+        if (!validation.valid || validation.emptyFields.length > 0) {
+          logger.warn({ 
+            event: 'applied_default_values', 
+            missingFields: validation.missingFields,
+            emptyFields: validation.emptyFields 
+          });
         }
         
         // 구조화된 보고서 생성기로 텍스트 변환

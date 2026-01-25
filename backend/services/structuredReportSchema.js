@@ -333,25 +333,123 @@ function validateObjectProperties(obj, properties, parentField) {
 export function applyDefaultValues(response, validation) {
   const result = { ...response };
 
+  // 12개 필수 항목 기본값 정의
   const defaults = {
-    visitDate: { date: '정보 없음', hospital: '', department: '' },
-    chiefComplaint: { summary: '정보 없음', details: '' },
-    diagnoses: [],
+    visitDate: { 
+      date: '정보 없음', 
+      time: '', 
+      hospital: '정보 없음', 
+      department: '' 
+    },
+    chiefComplaint: { 
+      summary: '내원경위 정보 없음', 
+      details: '',
+      referralSource: '',
+      onsetDate: '',
+      duration: ''
+    },
+    diagnoses: [{ 
+      code: '미상', 
+      nameKr: '진단명 정보 없음', 
+      nameEn: 'Unknown', 
+      date: '', 
+      isPrimary: true, 
+      hospital: '' 
+    }],
     examinations: [],
     pathology: null,
-    treatments: [],
-    outpatientPeriod: { summary: '정보 없음' },
-    admissionPeriod: { summary: '정보 없음' },
-    pastHistory: [],
-    doctorOpinion: { summary: '정보 없음' },
-    disclosureViolation: { hasViolation: false, evidence: '판단 불가' },
-    conclusion: { summary: '추가 검토 필요' }
+    treatments: [{ 
+      type: '기타', 
+      name: '치료내용 정보 없음', 
+      date: '', 
+      details: '', 
+      hospital: '' 
+    }],
+    outpatientPeriod: { 
+      startDate: '정보 없음', 
+      endDate: '정보 없음', 
+      totalVisits: 0, 
+      hospitals: [], 
+      summary: '통원기간 정보 없음' 
+    },
+    admissionPeriod: { 
+      startDate: '', 
+      endDate: '', 
+      totalDays: 0, 
+      hospital: '', 
+      department: '', 
+      reason: '', 
+      summary: '입원 기록 없음' 
+    },
+    pastHistory: [{ 
+      condition: '과거병력 정보 없음', 
+      code: '', 
+      diagnosisDate: '', 
+      treatment: '', 
+      currentStatus: '', 
+      hospital: '', 
+      isPreExisting: false 
+    }],
+    doctorOpinion: { 
+      summary: '의사소견 정보 없음', 
+      prognosis: '', 
+      recommendations: '', 
+      limitations: '' 
+    },
+    disclosureViolation: { 
+      hasViolation: false, 
+      evidence: '판단 불가 - 추가 자료 필요', 
+      relatedEvents: [], 
+      riskLevel: 'low' 
+    },
+    conclusion: { 
+      summary: '추가 검토 필요', 
+      keyFindings: ['분석 대상 자료 불충분'], 
+      recommendations: '추가 자료 요청' 
+    }
   };
 
-  // 누락된 필드에 기본값 적용
-  for (const field of validation.missingFields) {
-    if (defaults[field] !== undefined) {
-      result[field] = defaults[field];
+  // 모든 필수 필드에 대해 누락/빈값 확인 후 기본값 적용
+  for (const [fieldName, defaultValue] of Object.entries(defaults)) {
+    const value = result[fieldName];
+    
+    // 필드가 없거나 null인 경우
+    if (value === undefined || value === null) {
+      result[fieldName] = defaultValue;
+      continue;
+    }
+    
+    // 빈 배열인 경우 (필수 배열 필드 제외: examinations, pathology)
+    if (Array.isArray(value) && value.length === 0) {
+      if (fieldName === 'diagnoses' || fieldName === 'treatments' || fieldName === 'pastHistory') {
+        result[fieldName] = defaultValue;
+      }
+      continue;
+    }
+    
+    // 객체인데 핵심 필드가 비어있는 경우
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      if (fieldName === 'visitDate' && (!value.date || value.date === '')) {
+        result[fieldName] = { ...defaultValue, ...value, date: value.date || '정보 없음' };
+      }
+      if (fieldName === 'chiefComplaint' && (!value.summary || value.summary === '')) {
+        result[fieldName] = { ...defaultValue, ...value, summary: value.summary || '내원경위 정보 없음' };
+      }
+      if (fieldName === 'outpatientPeriod' && (!value.summary && !value.startDate)) {
+        result[fieldName] = { ...defaultValue, ...value };
+      }
+      if (fieldName === 'admissionPeriod' && (!value.summary && !value.startDate)) {
+        result[fieldName] = { ...defaultValue, ...value };
+      }
+      if (fieldName === 'doctorOpinion' && (!value.summary || value.summary === '')) {
+        result[fieldName] = { ...defaultValue, ...value, summary: value.summary || '의사소견 정보 없음' };
+      }
+      if (fieldName === 'disclosureViolation' && value.hasViolation === undefined) {
+        result[fieldName] = { ...defaultValue, ...value, hasViolation: false };
+      }
+      if (fieldName === 'conclusion' && (!value.summary || value.summary === '')) {
+        result[fieldName] = { ...defaultValue, ...value, summary: value.summary || '추가 검토 필요' };
+      }
     }
   }
 
@@ -474,10 +572,101 @@ export function getRequiredFields() {
     .map(([name, _]) => name);
 }
 
+/**
+ * 통원/입원 통계 자동 계산 및 보완
+ * GPT가 집계하지 못한 경우 treatments 데이터에서 자동 계산
+ * @param {Object} data - GPT 응답 데이터
+ * @returns {Object} 통계가 보완된 데이터
+ */
+export function calculateVisitStatistics(data) {
+  const result = { ...data };
+  
+  // 날짜 배열 수집 (treatments에서)
+  const allDates = [];
+  const admissionDates = [];
+  const outpatientDates = [];
+  
+  if (data.treatments && Array.isArray(data.treatments)) {
+    data.treatments.forEach(t => {
+      if (t.date) {
+        allDates.push(t.date);
+        // 입원 치료 판별
+        if (t.type && (t.type.includes('입원') || t.type.includes('수술'))) {
+          admissionDates.push(t.date);
+        } else {
+          outpatientDates.push(t.date);
+        }
+      }
+    });
+  }
+  
+  // visitDate에서도 날짜 수집
+  if (data.visitDate && data.visitDate.date && data.visitDate.date !== '정보 없음') {
+    allDates.push(data.visitDate.date);
+  }
+  
+  // 진단 날짜에서도 수집
+  if (data.diagnoses && Array.isArray(data.diagnoses)) {
+    data.diagnoses.forEach(d => {
+      if (d.date) allDates.push(d.date);
+    });
+  }
+  
+  // 날짜 정렬
+  const sortedDates = [...new Set(allDates)].sort();
+  
+  // 통원기간 보완
+  if (result.outpatientPeriod) {
+    if (!result.outpatientPeriod.startDate || result.outpatientPeriod.startDate === '정보 없음') {
+      if (sortedDates.length > 0) {
+        result.outpatientPeriod.startDate = sortedDates[0];
+      }
+    }
+    if (!result.outpatientPeriod.endDate || result.outpatientPeriod.endDate === '정보 없음') {
+      if (sortedDates.length > 0) {
+        result.outpatientPeriod.endDate = sortedDates[sortedDates.length - 1];
+      }
+    }
+    if (!result.outpatientPeriod.totalVisits || result.outpatientPeriod.totalVisits === 0) {
+      // 고유 날짜 개수로 통원 횟수 추정
+      result.outpatientPeriod.totalVisits = sortedDates.length;
+    }
+    // summary 자동 생성
+    if (!result.outpatientPeriod.summary || result.outpatientPeriod.summary === '통원기간 정보 없음') {
+      if (result.outpatientPeriod.startDate && result.outpatientPeriod.endDate) {
+        result.outpatientPeriod.summary = `${result.outpatientPeriod.startDate} ~ ${result.outpatientPeriod.endDate} / ${result.outpatientPeriod.totalVisits || 0}회 통원`;
+      }
+    }
+  }
+  
+  // 입원기간 보완
+  if (result.admissionPeriod && admissionDates.length > 0) {
+    const sortedAdmission = [...new Set(admissionDates)].sort();
+    if (!result.admissionPeriod.startDate || result.admissionPeriod.startDate === '') {
+      result.admissionPeriod.startDate = sortedAdmission[0];
+    }
+    if (!result.admissionPeriod.endDate || result.admissionPeriod.endDate === '') {
+      result.admissionPeriod.endDate = sortedAdmission[sortedAdmission.length - 1];
+    }
+    if (!result.admissionPeriod.totalDays || result.admissionPeriod.totalDays === 0) {
+      result.admissionPeriod.totalDays = admissionDates.length;
+    }
+    // summary 자동 생성
+    if (!result.admissionPeriod.summary || result.admissionPeriod.summary === '입원 기록 없음') {
+      if (result.admissionPeriod.startDate && result.admissionPeriod.endDate) {
+        result.admissionPeriod.summary = `${result.admissionPeriod.startDate} ~ ${result.admissionPeriod.endDate} / ${result.admissionPeriod.totalDays || 0}일 입원`;
+      }
+    }
+  }
+  
+  return result;
+}
+
 export default {
   REPORT_SCHEMA,
   validateReportSchema,
   applyDefaultValues,
   getSchemaForPrompt,
-  getRequiredFields
+  getRequiredFields,
+  calculateVisitStatistics
 };

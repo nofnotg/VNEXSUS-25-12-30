@@ -245,12 +245,24 @@ ${periodInfo ? `
 - ...
 
 ## 3. 상세 의료 분석
-(시간순으로 상세 내역 기술, 위 질환별 검사결과 규칙 준수)
+(시간순으로 상세 내역 기술, 질환별 검사결과 규칙 준수)
 
-- **[YYYY-MM-DD] [병원명]**
-  - **진단**: ...
-  - **검사**: ...
-  - **치료**: ...
+**⚠️ 날짜별 항목 배치 순서 (필수):**
+1. 날짜 (헤더)
+2. 진단 (최상단) - [KCD코드/영문명-한글명]
+3. 검사결과/치료내용 (중간)
+4. 내원경위 코멘트 (하단)
+5. 병원명 (최하단)
+
+**형식 예시:**
+**[YYYY-MM-DD]**
+진단: [I10/Essential Hypertension-본태성 고혈압]
+검사: 혈압 측정 150/95 mmHg
+치료: 약물 치료 시작
+환자는 고혈압으로 내원하였으며...
+병원명: [서울내과의원]
+
+**⚠️ 금지: "진료일: [YYYY-MM-DD]" 별도 표기 (날짜 헤더에서 이미 표기됨)**
 
 ## 4. 종합 소견
 (손해사정사의 전문적 견해)
@@ -408,10 +420,34 @@ ${insurancePeriodGuide}
 청구사항(특약사항, 담보사항 등): [구체적 내용]
 
 ### 3. 상세 의료 이력 및 분석
+
+**⚠️ 날짜별 항목 배치 규칙 (필수 준수):**
+
+각 날짜별 데이터 블록은 다음 순서로 배치:
+1. **날짜** (상단 헤더, 별도 줄)
+2. **진단** (날짜 바로 다음, 최상단 배치) - [KCD코드/영문명-한글명] 형식
+3. **검사결과/치료내용** (중간 배치) - 주요 의료 행위
+4. **내원경위 코멘트** (하단 배치) - 서술형 설명
+5. **병원명** (최하단 배치)
+
+**형식 예시:**
+```
+YYYY-MM-DD  
+진단: [I10/Essential Hypertension(고혈압)-본태성 고혈압]
+
+환자는 고혈압으로 내원하였으며, 혈압 측정 결과 150/95 mmHg로 확인되었다. 이후 약물 치료를 시작하였다.
+병원명: [서울내과의원]
+```
+
+**⚠️ 금지사항:**
+- "진료일: [YYYY-MM-DD]" 별도 표기 금지 (날짜 헤더에서 이미 표기됨)
+- 날짜 중복 표기 금지
+
+**추가 규칙:**
 3. **보험사 정확 추출**: AXA, 삼성화재, 흥국화재 등 정확한 명칭
 4. **기고지사항 표시**: "- 기고지사항" 명시
 5. **실제 데이터만**: "[미기재]" 절대 사용 금지
-6. **시간순 정렬**: 가장 오래된 것부터
+6. **시간순 정렬**: 가장 오래된 것부터 (과거→현재)
 7. **서술형 기술 (원문 보존)**: 내원경위와 치료내용은 단순 나열이 아닌 진료의 흐름과 문맥이 드러나도록 서술형으로 기술하되, **추출된 원문 텍스트의 핵심 내용과 표현을 최대한 보존**하여 작성할 것.
 8. **가독성 확보**: 각 날짜별 데이터 블록 사이에는 반드시 빈 줄을 추가하여 구분
 `;
@@ -498,13 +534,28 @@ export function buildStructuredJsonPrompt(extractedText, knowledgeBase, insuranc
 당신은 **보험 청구 문서 분석 전문가**입니다.
 제공된 의료 기록을 분석하여 **반드시 JSON 형식으로만** 응답해야 합니다.
 
-## ⚠️ 필수 규칙 (절대 준수)
+## ⚠️ 필수 규칙 (절대 준수 - 위반 시 보고서 불합격)
 
 1. **JSON 형식으로만 응답**: 마크다운, 설명 텍스트 없이 순수 JSON만 출력
-2. **10개 항목 필수 포함**: 누락된 항목 없이 모든 필드 채우기
-3. **정보 없으면 명시적 표기**: null 또는 빈 배열 [] 사용
+2. **12개 필수 항목 모두 포함**: 아래 체크리스트의 모든 항목 반드시 출력
+3. **정보 없으면 명시적 표기**: "정보 없음" 또는 "해당 없음" 문자열 사용 (null 금지)
 4. **추가 항목 금지**: 스키마에 없는 항목(진료의사, 보험유형 등) 절대 추가 금지
-5. **진단명 형식 준수**: [KCD코드] 영문명 - 한글명 (예: [C16.0] Gastric cancer - 위암)
+5. **진단명 형식 준수**: [KCD코드/영문명-한글명] (예: [I83.9/Varicose veins-하지정맥류])
+6. **통계 집계 필수**: 통원기간/입원기간은 반드시 "YYYY.MM.DD ~ YYYY.MM.DD / n회(일)" 형식
+
+## ✅ 12개 필수 항목 체크리스트 (모두 출력 필수)
+□ 1. visitDate (내원일시) - 최초 내원일 필수
+□ 2. chiefComplaint (내원경위/주호소) - summary 필수
+□ 3. diagnoses (진단병명) - 최소 1개 이상, [KCD코드/영문-한글] 형식
+□ 4. examinations (검사결과) - 검사 없으면 빈 배열 []
+□ 5. pathology (조직검사) - 암 아니면 null
+□ 6. treatments (치료내용) - 최소 1개 이상
+□ 7. outpatientPeriod (통원기간) - startDate, endDate, totalVisits 필수
+□ 8. admissionPeriod (입원기간) - 입원 없으면 summary: "입원 없음"
+□ 9. pastHistory (과거병력/기고지사항) - 기존 병력 모두 포함
+□ 10. doctorOpinion (의사소견) - 의무기록 내 소견 요약
+□ 11. disclosureViolation (고지의무 위반) - hasViolation 필수 (true/false)
+□ 12. conclusion (종합의견) - summary 필수
 
 ## 📅 고지의무 분석 기준
 ${periodInfo ? `
@@ -562,14 +613,20 @@ ${extractedText}
 
 ---
 
-**⚠️ 응답 요구사항:**
+**⚠️ 응답 요구사항 (반드시 준수):**
 1. 반드시 JSON 형식으로만 응답 (마크다운/설명 금지)
-2. 모든 10개 항목 포함 (visitDate, chiefComplaint, diagnoses, examinations, pathology, treatments, outpatientPeriod, admissionPeriod, pastHistory, doctorOpinion, disclosureViolation, conclusion)
-3. 진단명은 [KCD코드] 영문명 - 한글명 형식
-4. 정보 없는 필드는 null 또는 빈 배열 사용
+2. 12개 필수 항목 모두 포함 (누락 시 보고서 불합격):
+   - visitDate, chiefComplaint, diagnoses, examinations, pathology, treatments
+   - outpatientPeriod, admissionPeriod, pastHistory, doctorOpinion
+   - disclosureViolation, conclusion
+3. 진단명 형식: [KCD코드/영문명-한글명] (예: [I83.9/Varicose veins-하지정맥류])
+4. 정보 없는 필드: "정보 없음" 또는 "해당 없음" 문자열 (null 금지)
 5. 추가 항목 생성 금지
+6. 통원기간 필수 형식: {"startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD", "totalVisits": N, "summary": "~회 통원"}
+7. 입원기간 필수 형식: {"startDate": "YYYY-MM-DD", "endDate": "YYYY-MM-DD", "totalDays": N, "summary": "~일 입원"}
+8. 과거병력(pastHistory): 기고지사항, 기존 진료력 모두 포함
 
-지금 JSON 보고서를 생성하세요:
+지금 12개 항목 모두 포함된 JSON 보고서를 생성하세요:
 `;
 
     return { systemPrompt, userPrompt };
