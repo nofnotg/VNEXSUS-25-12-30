@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><title>Report ⊆ VNEXSUS 검증 리포트</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;color:#0f172a;margin:0}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hd{background:linear-gradient(135deg,#334155,#0ea5e9);color:#fff;padding:20px}
+.hd h1{margin:0;font-size:20px}
+.meta{font-size:12px;opacity:.9;margin-top:4px}
+.ct{padding:16px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fff}
+.bar{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#84cc16);width:0%}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left;font-size:12px;vertical-align:top}
+.muted{color:#64748b;font-size:12px}
+</style></head><body>
+<div class="wrap">
+ <div class="hd"><h1>Report ⊆ VNEXSUS 검증 리포트</h1>
+ <div class="meta">생성 시각: 2026. 1. 25. 오전 4:54:14</div></div>
+ <div class="ct">
+  <div class="cards">
+   <div class="card">
+     <div>평균 날짜 매칭률: 46.1%</div>
+     <div class="bar"><span style="width:46.1%"></span></div>
+     <div style="margin-top:6px">평균 ICD 매칭률: 24.0%</div>
+     <div class="bar"><span style="width:24.0%"></span></div>
+     <div style="margin-top:6px">평균 병원 매칭률: 18.6%</div>
+     <div class="bar"><span style="width:18.6%"></span></div>
+   </div>
+   <div class="card">
+     <div>총 케이스: 33</div>
+     <div>검증 케이스: 33</div>
+     <div>누락 있는 케이스: 33</div>
+     <div class="muted" style="margin-top:6px">목표: 날짜/ICD 95%+, 병원 80%+</div>
+   </div>
+  </div>
+  <table>
+   <thead><tr>
+    <th>케이스</th><th>날짜</th><th>ICD</th><th>병원</th><th>LabelScore</th>
+    <th>날짜 포함</th><th>ICD 포함</th><th>병원 포함</th>
+   </tr></thead>
+   <tbody>
+            <tr>
+              <td>Case14</td>
+              <td>57.1%</td>
+              <td>0.0%</td>
+              <td>66.7%</td>
+              <td>50.0%</td>
+              <td>2021-01-26, 2025-02-05, 2025-02-19, 2025-02-26</td>
+              <td>-</td>
+              <td>김윤호서울외과의원, 명지병원</td>
+            </tr>
+
+            <tr>
+              <td>Case15</td>
+              <td>25.0%</td>
+              <td>0.0%</td>
+              <td>100.0%</td>
+              <td>27.3%</td>
+              <td>2025-06-07, 2025-06-20</td>
+              <td>-</td>
+              <td>더자인병원</td>
+            </tr>
+
+            <tr>
+              <td>Case16</td>
+              <td>60.0%</td>
+              <td>100.0%</td>
+              <td>0.0%</td>
+              <td>37.5%</td>
+              <td>2025-08-21, 2025-09-10, 2025-09-11, 2025-09-25, 2025-09-29, 2025-09-30</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case17</td>
+              <td>60.0%</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>25.0%</td>
+              <td>2025-08-12, 2025-08-14, 2025-08-19</td>
+              <td>I63.9</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case18</td>
+              <td>71.4%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>38.5%</td>
+              <td>2019-07-05, 2021-07-09, 2025-05-12, 2025-07-07, 2025-07-08</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case19</td>
+              <td>30.0%</td>
+              <td>0.0%</td>
+              <td>10.0%</td>
+              <td>20.6%</td>
+              <td>2024-08-29, 2024-09-05, 2025-03-31, 2025-06-10, 2025-06-12, 2025-10-17</td>
+              <td>-</td>
+              <td>국립암센터</td>
+            </tr>
+
+            <tr>
+              <td>Case20</td>
+              <td>100.0%</td>
+              <td>100.0%</td>
+              <td>0.0%</td>
+              <td>66.7%</td>
+              <td>2025-01-02, 2025-09-11</td>
+              <td>M65.91, M65.95</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case21</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>25.0%</td>
+              <td>33.3%</td>
+              <td>2023-10-16, 2023-11-27, 2023-11-29, 2023-11-30, 2023-12-01, 2024-01-24</td>
+              <td>-</td>
+              <td>가천대길병원</td>
+            </tr>
+
+            <tr>
+              <td>Case22</td>
+              <td>35.7%</td>
+              <td>0.0%</td>
+              <td>4.8%</td>
+              <td>15.8%</td>
+              <td>2024-05-06, 2025-03-04, 2025-08-18, 2025-08-19, 2025-10-02</td>
+              <td>-</td>
+              <td>본서부병원</td>
+            </tr>
+
+            <tr>
+              <td>Case23</td>
+              <td>14.3%</td>
+              <td>100.0%</td>
+              <td>33.3%</td>
+              <td>17.6%</td>
+              <td>2023-02-09, 2023-02-15</td>
+              <td>-</td>
+              <td>국립암센터</td>
+            </tr>
+
+            <tr>
+              <td>Case24</td>
+              <td>38.9%</td>
+              <td>0.0%</td>
+              <td>25.0%</td>
+              <td>34.8%</td>
+              <td>2022-08-24, 2022-08-26, 2022-09-02, 2025-09-15, 2025-09-17, 2025-09-24, 2025-09-25</td>
+              <td>-</td>
+              <td>강북삼성병원</td>
+            </tr>
+
+            <tr>
+              <td>Case25</td>
+              <td>57.1%</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>41.7%</td>
+              <td>2025-09-12, 2025-09-30, 2025-10-02, 2025-10-15</td>
+              <td>C49.6</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case26</td>
+              <td>25.0%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>14.3%</td>
+              <td>2025-10-01, 2025-10-04</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case27</td>
+              <td>28.6%</td>
+              <td>100.0%</td>
+              <td>12.5%</td>
+              <td>22.7%</td>
+              <td>2024-10-23, 2025-09-08, 2025-09-09, 2025-09-10</td>
+              <td>-</td>
+              <td>서울아산병원</td>
+            </tr>
+
+            <tr>
+              <td>Case28</td>
+              <td>41.7%</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>33.3%</td>
+              <td>2025-07-03, 2025-08-04, 2025-08-06, 2025-08-12, 2025-08-14</td>
+              <td>C34.99</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case29</td>
+              <td>42.9%</td>
+              <td>0.0%</td>
+              <td>100.0%</td>
+              <td>37.5%</td>
+              <td>2024-09-04, 2025-09-26, 2025-09-29</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case2</td>
+              <td>44.4%</td>
+              <td>100.0%</td>
+              <td>20.0%</td>
+              <td>43.8%</td>
+              <td>2019-03-23, 2023-08-07, 2024-04-09, 2025-02-04</td>
+              <td>D13.4, D18.02</td>
+              <td>삼성서울병원</td>
+            </tr>
+
+            <tr>
+              <td>Case30</td>
+              <td>50.0%</td>
+              <td>25.0%</td>
+              <td>33.3%</td>
+              <td>40.0%</td>
+              <td>2025-03-12, 2025-03-23, 2025-03-24, 2025-04-11</td>
+              <td>M48.06</td>
+              <td>우리들병원</td>
+            </tr>
+
+            <tr>
+              <td>Case31</td>
+              <td>66.7%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>28.6%</td>
+              <td>2025-07-18, 2025-09-02</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case32</td>
+              <td>18.2%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>10.5%</td>
+              <td>2025-09-17, 2025-09-29</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case33</td>
+              <td>27.3%</td>
+              <td>0.0%</td>
+              <td>11.1%</td>
+              <td>19.0%</td>
+              <td>2023-10-16, 2023-10-23, 2023-10-26</td>
+              <td>-</td>
+              <td>서울아산병원</td>
+            </tr>
+
+            <tr>
+              <td>Case34</td>
+              <td>20.0%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>16.7%</td>
+              <td>2024-01-19, 2025-06-12, 2025-06-24</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case36</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case37</td>
+              <td>80.0%</td>
+              <td>0.0%</td>
+              <td>28.6%</td>
+              <td>42.9%</td>
+              <td>2023-01-15, 2023-01-16, 2023-01-17, 2025-06-24</td>
+              <td>-</td>
+              <td>누가재활의학과의원, 서울척탑병원</td>
+            </tr>
+
+            <tr>
+              <td>Case38</td>
+              <td>27.8%</td>
+              <td>0.0%</td>
+              <td>12.5%</td>
+              <td>22.2%</td>
+              <td>2025-08-03, 2025-08-05, 2025-08-20, 2025-08-21, 2025-09-02</td>
+              <td>-</td>
+              <td>이대목동병원</td>
+            </tr>
+
+            <tr>
+              <td>Case39</td>
+              <td>66.7%</td>
+              <td>0.0%</td>
+              <td>33.3%</td>
+              <td>37.5%</td>
+              <td>2024-04-23, 2024-04-25</td>
+              <td>-</td>
+              <td>명지병원</td>
+            </tr>
+
+            <tr>
+              <td>Case40</td>
+              <td>71.4%</td>
+              <td>0.0%</td>
+              <td>0.0%</td>
+              <td>50.0%</td>
+              <td>2025-08-19, 2025-08-29, 2025-08-30, 2025-09-11, 2025-09-18</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case41</td>
+              <td>63.6%</td>
+              <td>0.0%</td>
+              <td>12.5%</td>
+              <td>40.0%</td>
+              <td>2021-05-17, 2021-05-20, 2021-05-24, 2024-04-20, 2024-04-22, 2024-04-24, 2025-07-11</td>
+              <td>-</td>
+              <td>우신향병원</td>
+            </tr>
+
+            <tr>
+              <td>Case42</td>
+              <td>75.0%</td>
+              <td>0.0%</td>
+              <td>50.0%</td>
+              <td>57.1%</td>
+              <td>2025-02-26, 2025-04-23, 2025-04-29</td>
+              <td>-</td>
+              <td>강북삼성병원</td>
+            </tr>
+
+            <tr>
+              <td>Case43</td>
+              <td>42.9%</td>
+              <td>33.3%</td>
+              <td>0.0%</td>
+              <td>28.0%</td>
+              <td>2021-08-16, 2021-08-17, 2021-08-23, 2022-12-15, 2022-12-16, 2022-12-19</td>
+              <td>N20.0</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case44</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>25.0%</td>
+              <td>35.3%</td>
+              <td>2024-07-31, 2025-08-25, 2025-08-26, 2025-08-29</td>
+              <td>-</td>
+              <td>김안과병원, 세브란스병원</td>
+            </tr>
+
+            <tr>
+              <td>Case45</td>
+              <td>37.5%</td>
+              <td>50.0%</td>
+              <td>0.0%</td>
+              <td>26.7%</td>
+              <td>2025-04-21, 2025-09-02, 2025-09-04</td>
+              <td>I20.0</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>Case46</td>
+              <td>41.7%</td>
+              <td>33.3%</td>
+              <td>11.1%</td>
+              <td>29.2%</td>
+              <td>2025-07-31, 2025-08-01, 2025-09-07, 2025-09-08, 2025-09-11</td>
+              <td>R31.1</td>
+              <td>부민병원</td>
+            </tr></tbody>
+  </table>
+ </div>
+</div>
+</body></html>

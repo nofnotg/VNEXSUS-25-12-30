@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><title>Event 라벨링 통계</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;color:#0f172a;margin:0}
+.wrap{max-width:1100px;margin:0 auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hd{background:linear-gradient(135deg,#0ea5e9,#22c55e);color:#fff;padding:20px}
+.hd h1{margin:0;font-size:20px}
+.meta{font-size:12px;opacity:.9;margin-top:4px}
+.ct{padding:16px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#fff}
+.bar{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin-top:6px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#0ea5e9,#22c55e);width:0%}
+table{width:100%;border-collapse:collapse;margin-top:14px}
+th,td{border-bottom:1px solid #e5e7eb;padding:8px;text-align:left;font-size:12px;vertical-align:top}
+.muted{color:#64748b;font-size:12px}
+</style></head><body>
+<div class="wrap">
+ <div class="hd"><h1>Event 라벨링 통계</h1>
+ <div class="meta">생성 시각: 2026. 1. 25. 오전 4:54:14</div></div>
+ <div class="ct">
+  <div class="cards">
+   <div class="card">
+     <div>평균 날짜 포함률: 40.4%</div>
+     <div class="bar"><span style="width:40.4%"></span></div>
+     <div style="margin-top:6px">평균 ICD 포함률: 18.3%</div>
+     <div class="bar"><span style="width:18.3%"></span></div>
+     <div style="margin-top:6px">평균 병원 포함률: 11.6%</div>
+     <div class="bar"><span style="width:11.6%"></span></div>
+   </div>
+   <div class="card">
+     <div>LabelScore 평균: 31.6%</div>
+     <div>LabelScore 분포 P50: 33.3% · P95: 50.0%</div>
+     <div class="muted" style="margin-top:6px">목표: 날짜/ICD 95%+, 병원 80%+</div>
+   </div>
+  </div>
+  <div class="cards" style="margin-top:12px">
+   <div class="card">
+     <div>Top 누락 날짜</div>
+     <table><thead><tr><th>날짜</th><th>빈도</th></tr></thead><tbody><tr><td>2024-10-07</td><td>3</td></tr><tr><td>2025-06-16</td><td>2</td></tr><tr><td>2025-06-24</td><td>2</td></tr><tr><td>2025-09-19</td><td>2</td></tr><tr><td>2025-07-09</td><td>2</td></tr><tr><td>2025-08-12</td><td>2</td></tr><tr><td>2025-09-18</td><td>2</td></tr><tr><td>2025-09-22</td><td>2</td></tr><tr><td>2023-01-15</td><td>2</td></tr><tr><td>2025-09-04</td><td>2</td></tr></tbody></table>
+   </div>
+   <div class="card">
+     <div>Top 누락 ICD</div>
+     <table><thead><tr><th>코드</th><th>빈도</th></tr></thead><tbody><tr><td>I67.1</td><td>2</td></tr><tr><td>M25.48</td><td>2</td></tr><tr><td>S83.21</td><td>2</td></tr><tr><td>I20.1</td><td>1</td></tr><tr><td>I25.1</td><td>1</td></tr><tr><td>C50.11</td><td>1</td></tr><tr><td>R59.1</td><td>1</td></tr><tr><td>S33.50</td><td>1</td></tr><tr><td>E66.8</td><td>1</td></tr><tr><td>I10.9</td><td>1</td></tr></tbody></table>
+   </div>
+  </div>
+  <div class="card" style="margin-top:12px">
+     <div>Top 누락 병원</div>
+     <table><thead><tr><th>병원</th><th>빈도</th></tr></thead><tbody><tr><td>일자 사고경위 병원</td><td>25</td></tr><tr><td>확인조사쟁점 중병원</td><td>6</td></tr><tr><td>내원 경위조사자확인완료병원</td><td>4</td></tr><tr><td>직장 주변 병원</td><td>4</td></tr><tr><td>탐의원</td><td>4</td></tr><tr><td>고대구로병원</td><td>3</td></tr><tr><td>동국대일산병원</td><td>3</td></tr><tr><td>은평성모병원</td><td>3</td></tr><tr><td>피보험자 거주지주변필수탐문병원</td><td>2</td></tr><tr><td>확인후 치료병원</td><td>2</td></tr></tbody></table>
+  </div>
+ </div>
+</div>
+</body></html>
