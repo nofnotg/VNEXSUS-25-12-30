@@ -471,15 +471,20 @@ ${periodInfo ? `
 /**
  * JSON 출력 전용 프롬프트 빌더
  * GPT가 반드시 JSON 형식으로만 응답하도록 강제
- * 
+ *
  * @param {string} extractedText - OCR로 추출된 텍스트
  * @param {Object} knowledgeBase - 의료 지식 베이스
  * @param {string|null} insuranceJoinDate - 보험 가입일
+ * @param {Object} patientInfo - 환자 정보 (이름, 생년월일 등)
  * @returns {{ systemPrompt: string, userPrompt: string }}
  */
-export function buildStructuredJsonPrompt(extractedText, knowledgeBase, insuranceJoinDate = null) {
+export function buildStructuredJsonPrompt(extractedText, knowledgeBase, insuranceJoinDate = null, patientInfo = {}) {
     const analyzer = new EnhancedMedicalDnaAnalyzer();
     const { abbreviations } = knowledgeBase;
+
+    // 환자 정보 기본값 설정
+    const patientName = patientInfo.patientName || patientInfo.name || '[문서에서 추출 필요]';
+    const birthDate = patientInfo.birthDate || patientInfo.dateOfBirth || '[문서에서 추출 필요]';
 
     // 보험 가입일 기준 기간 계산
     const periodInfo = analyzer.calculateInsurancePeriods(insuranceJoinDate);
@@ -523,11 +528,18 @@ ${Object.entries(abbreviations).slice(0, 20).map(([abbr, meaning]) => `${abbr}: 
 ## 📋 응답 JSON 스키마 (필수 준수)
 ${jsonSchema}
 
+## 👤 환자 정보
+- **피보험자 이름**: ${patientName}
+- **생년월일**: ${birthDate}
+
+**중요**: 위 환자 정보를 보고서에 반영하되, 문서에서 다른 환자 정보가 발견되면 문서의 정보를 우선 사용하세요.
+
 ## 🎯 데이터 추출 원칙
 1. **전체 연도 스캔**: 2000~2025년 모든 날짜 데이터 수집
 2. **병원별 통계**: 첫 방문 ~ 마지막 방문, 총 방문 횟수 계산
 3. **원문 보존**: 추출된 텍스트의 핵심 내용 최대한 보존
 4. **빈 필드 처리**: 정보 없으면 null 또는 빈 배열, "정보 없음" 문자열 사용
+5. **환자 정보 우선순위**: 문서에서 추출된 환자 정보 > 제공된 환자 정보 > 플레이스홀더
 
 **중요**: 응답은 반드시 유효한 JSON 객체여야 합니다. 코드 블록(\`\`\`)이나 설명 없이 순수 JSON만 출력하세요.
 `;

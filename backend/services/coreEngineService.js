@@ -506,7 +506,16 @@ class CoreEngineService {
 
         // Phase 3: Writer Agent (Async Real LLM)
         try {
-          generatedReport = await writerAgentService.generateReport(vectorResult, contractDate, events, processedInput.text);
+          // 🆕 환자 정보 전달
+          const patientInfo = input.patientInfo || {};
+          generatedReport = await writerAgentService.generateReport(
+            vectorResult,
+            contractDate,
+            events,
+            processedInput.text,
+            patientInfo,
+            input.options || {}
+          );
         } catch (err) {
           console.error('Writer Agent Failed:', err);
           generatedReport = "보고서 생성 실패";

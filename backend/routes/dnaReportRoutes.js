@@ -39,6 +39,10 @@ const GenerateRequestSchema = z.object({
       insuranceCompany: z.string().optional(),
       insuranceJoinDate: z.string().optional(),
       patientId: z.string().optional(),
+      patientName: z.string().optional(),  // 🆕 환자 이름
+      name: z.string().optional(),         // 🆕 환자 이름 (alias)
+      birthDate: z.string().optional(),    // 🆕 생년월일
+      dateOfBirth: z.string().optional(),  // 🆕 생년월일 (alias)
     })
     .optional(),
   options: z
@@ -97,11 +101,12 @@ router.post('/generate', async (req, res) => {
       const jsonPrompts = buildStructuredJsonPrompt(
         extractedText,
         knowledgeBase,
-        patientInfo?.insuranceJoinDate
+        patientInfo?.insuranceJoinDate,
+        patientInfo  // 🆕 환자 정보 전달
       );
       systemPrompt = jsonPrompts.systemPrompt;
       userPrompt = jsonPrompts.userPrompt;
-      logger.info({ event: 'using_structured_json_mode' });
+      logger.info({ event: 'using_structured_json_mode', hasPatientInfo: !!(patientInfo?.patientName || patientInfo?.name) });
     } else {
       // 기존 모드: 텍스트 형식 보고서
       const legacyPrompts = buildEnhancedMedicalDnaPrompt(

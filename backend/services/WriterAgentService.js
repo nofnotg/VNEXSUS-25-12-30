@@ -1,5 +1,12 @@
 import medicalAnalysisService from './medicalAnalysisService.js';
-import { buildEnhancedMedicalDnaPrompt, loadEnhancedMedicalKnowledgeBase } from '../config/enhancedPromptBuilder.js';
+import {
+    buildEnhancedMedicalDnaPrompt,
+    buildStructuredJsonPrompt,
+    loadEnhancedMedicalKnowledgeBase,
+    getJsonModelOptions
+} from '../config/enhancedPromptBuilder.js';
+import StructuredReportGenerator from './structuredReportGenerator.js';
+import { validateReportSchema, applyDefaultValues } from './structuredReportSchema.js';
 
 class WriterAgentService {
     constructor() {
@@ -11,9 +18,12 @@ class WriterAgentService {
      * @param {Object} vectorResult - Result from VectorEvaluationService
      * @param {string} contractDate - Contract date
      * @param {Array<Object>} events - List of medical events
+     * @param {string} originalText - Original extracted text
+     * @param {Object} patientInfo - Patient information (name, birthDate, etc.)
+     * @param {Object} options - Generation options
      * @returns {Promise<string>} Markdown formatted report
      */
-    async generateReport(vectorResult, contractDate, events = [], originalText = '') {
+    async generateReport(vectorResult, contractDate, events = [], originalText = '', patientInfo = {}, options = {}) {
         if (!vectorResult || !vectorResult.vectorType) {
             return "분석 결과가 충분하지 않아 보고서를 생성할 수 없습니다.";
         }
@@ -43,21 +53,74 @@ class WriterAgentService {
             // Load Knowledge Base
             const knowledgeBase = await loadEnhancedMedicalKnowledgeBase();
 
-            // Build Enhanced Prompt
-            const { systemPrompt, userPrompt } = buildEnhancedMedicalDnaPrompt(originalText, knowledgeBase, contractDate);
+            // 🆕 JSON 구조화 모드 사용 (기본값: true)
+            const useStructuredJson = options.useStructuredJson ?? true;
 
-            // Call OpenAI via MedicalAnalysisService
-            const completion = await medicalAnalysisService.getOpenAIClient().chat.completions.create({
-                model: "gpt-4o-mini",
-                messages: [
-                    { role: "system", content: systemPrompt },
-                    { role: "user", content: userPrompt }
-                ],
-                temperature: 0.1,
-                max_tokens: 1000
-            });
+            let systemPrompt, userPrompt;
+            if (useStructuredJson) {
+                // JSON 구조화 모드: 10항목 보고서를 JSON으로 생성
+                const jsonPrompts = buildStructuredJsonPrompt(
+                    originalText,
+                    knowledgeBase,
+                    contractDate,
+                    patientInfo
+                );
+                systemPrompt = jsonPrompts.systemPrompt;
+                userPrompt = jsonPrompts.userPrompt;
 
-            return completion.choices[0].message.content;
+                // JSON 모드로 GPT 호출
+                const jsonModelOptions = getJsonModelOptions();
+                const completion = await medicalAnalysisService.getOpenAIClient().chat.completions.create({
+                    ...jsonModelOptions,
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        { role: "user", content: userPrompt }
+                    ],
+                });
+
+                const rawResponse = completion.choices[0]?.message?.content ?? '{}';
+
+                try {
+                    // JSON 파싱 및 검증
+                    let structuredJsonData = JSON.parse(rawResponse);
+                    const validation = validateReportSchema(structuredJsonData);
+
+                    // 누락된 필드에 기본값 적용
+                    if (!validation.valid) {
+                        structuredJsonData = applyDefaultValues(structuredJsonData, validation);
+                    }
+
+                    // 구조화된 보고서 생성기로 텍스트 변환
+                    const reportGenerator = new StructuredReportGenerator({ debug: false });
+                    const reportResult = await reportGenerator.generateReport(structuredJsonData);
+
+                    return reportResult.report;
+
+                } catch (parseError) {
+                    // JSON 파싱 실패 시 폴백
+                    console.error('JSON 파싱 실패:', parseError);
+                    return `[JSON 파싱 실패 - 원본 응답]\n${rawResponse}`;
+                }
+
+            } else {
+                // 기존 텍스트 모드
+                const legacyPrompts = buildEnhancedMedicalDnaPrompt(originalText, knowledgeBase, contractDate);
+                systemPrompt = legacyPrompts.systemPrompt;
+                userPrompt = legacyPrompts.userPrompt;
+
+                // Call OpenAI via MedicalAnalysisService
+                const completion = await medicalAnalysisService.getOpenAIClient().chat.completions.create({
+                    model: "gpt-4o-mini",
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        { role: "user", content: userPrompt }
+                    ],
+                    temperature: 0.1,
+                    max_tokens: 1000
+                });
+
+                return completion.choices[0].message.content;
+            }
 
         } catch (error) {
             console.error("Writer Agent Error:", error);
