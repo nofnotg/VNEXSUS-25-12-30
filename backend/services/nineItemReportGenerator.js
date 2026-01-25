@@ -19,8 +19,27 @@ import { logger } from '../../src/shared/logging/logger.js';
 // CommonJS(.cjs) 모듈 로드를 위한 require 컨텍스트
 const require = createRequire(path.resolve(process.cwd(), 'backend', 'services', 'nineItemReportGenerator.js'));
 
+// ⚠️ LEGACY USAGE TRACKING
+let legacyUsageCount = 0;
+const logLegacyUsage = () => {
+  legacyUsageCount++;
+  const timestamp = new Date().toISOString();
+  console.warn(`
+╔════════════════════════════════════════════════════════════════╗
+║ ⚠️  DEPRECATED: NineItemReportGenerator 사용됨                 ║
+║ 사용 횟수: ${legacyUsageCount}회                                         ║
+║ 타임스탬프: ${timestamp}                         ║
+║                                                                ║
+║ 📌 대안: structuredReportGenerator.js 사용 권장                ║
+║ 🗓️  제거 예정: 2주 후 (사용률 0% 확인 시)                      ║
+╚════════════════════════════════════════════════════════════════╝
+  `);
+};
+
 class NineItemReportGenerator {
     constructor(options = {}) {
+        // ⚠️ LEGACY: 사용률 추적
+        logLegacyUsage();
         this.options = {
             useEnhancedExtractors: options.useEnhancedExtractors ?? false,
             enableNaNGuard: options.enableNaNGuard ?? true,
@@ -1998,6 +2017,18 @@ class DoctorOpinionExtractor {
             allOpinions: opinions.slice(0, 10),
             confidence: emrOpinions.length > 0 ?
                 emrOpinions.reduce((sum, o) => sum + o.confidence, 0) / emrOpinions.length : 0
+        };
+    }
+
+    /**
+     * 사용률 통계 조회 (모니터링용)
+     * @static
+     */
+    static getUsageStats() {
+        return {
+            usageCount: legacyUsageCount,
+            lastChecked: new Date().toISOString(),
+            status: legacyUsageCount === 0 ? 'SAFE_TO_REMOVE' : 'IN_USE'
         };
     }
 }

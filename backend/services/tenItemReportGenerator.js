@@ -1,5 +1,22 @@
 import fs from "fs";
 
+// ⚠️ LEGACY USAGE TRACKING
+let legacyUsageCount = 0;
+const logLegacyUsage = () => {
+  legacyUsageCount++;
+  const timestamp = new Date().toISOString();
+  console.warn(`
+╔════════════════════════════════════════════════════════════════╗
+║ ⚠️  DEPRECATED: TenItemReportGenerator 사용됨                  ║
+║ 사용 횟수: ${legacyUsageCount}회                                         ║
+║ 타임스탬프: ${timestamp}                         ║
+║                                                                ║
+║ 📌 대안: structuredReportGenerator.js 사용 권장                ║
+║ 🗓️  제거 예정: 2주 후 (사용률 0% 확인 시)                      ║
+╚════════════════════════════════════════════════════════════════╝
+  `);
+};
+
 const fmtDate = (s) => {
   const m = s.match(/(\d{4})-(\d{2})-(\d{2})/);
   if (m) return `${m[1]}.${m[2]}.${m[3]}`;
@@ -69,6 +86,9 @@ const toHTML = (events) => {
 
 export const TenItemReportGenerator = {
   build(events, opts = {}) {
+    // ⚠️ LEGACY: 사용률 추적
+    logLegacyUsage();
+
     const json = toJSON(events);
     const markdown = toMarkdown(events);
     const html = toHTML(events);
@@ -82,5 +102,14 @@ export const TenItemReportGenerator = {
     }
     return { json, markdown, html };
   },
+
+  // 사용률 통계 조회 (모니터링용)
+  getUsageStats() {
+    return {
+      usageCount: legacyUsageCount,
+      lastChecked: new Date().toISOString(),
+      status: legacyUsageCount === 0 ? 'SAFE_TO_REMOVE' : 'IN_USE'
+    };
+  }
 };
 
