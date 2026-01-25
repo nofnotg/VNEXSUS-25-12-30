@@ -506,23 +506,65 @@
     }
     const autoGenerateInput = document.getElementById('autoGenerateReport');
     if (autoGenerateInput) {
-      autoGenerateInput.addEventListener('change', () => {
+      // 필수항목 체크 함수
+      const checkRequiredFields = () => {
+        const patientName = document.getElementById('patientName')?.value?.trim() || '';
+        const firstRecord = document.querySelector('.insurance-record');
+        const companyValue = firstRecord?.querySelector('.insurance-company')?.value?.trim() || '';
+        const enrollmentRaw = firstRecord?.querySelector('.insurance-date')?.value?.trim() || '';
+        return patientName && companyValue && enrollmentRaw;
+      };
+
+      autoGenerateInput.addEventListener('change', (e) => {
         const enabled = autoGenerateInput.checked;
         toggleRequiredIndicators(enabled);
-        if (enabled) {
+        
+        // 체크하려고 할 때만 필수항목 확인
+        if (enabled && !checkRequiredFields()) {
           showPopup('필수입력사항 [피보험자 이름/보험회사/가입일]을 입력하고 진행하세요');
         }
+        // 필수항목이 채워져 있으면 안내창 없이 바로 체크됨
       });
-      autoGenerateInput.addEventListener('click', () => {
-        const enabled = autoGenerateInput.checked;
-        if (enabled) {
-          toggleRequiredIndicators(true);
-          showPopup('필수입력사항 [피보험자 이름/보험회사/가입일]을 입력하고 진행하세요');
-        } else {
-          toggleRequiredIndicators(false);
-        }
-      });
+      
       toggleRequiredIndicators(autoGenerateInput.checked);
+    }
+
+    // 전체 초기화 버튼 이벤트 리스너
+    const resetAllBtn = document.getElementById('resetAllBtn');
+    if (resetAllBtn) {
+      resetAllBtn.addEventListener('click', resetAllState);
+    }
+
+    // 텍스트 복사 버튼 이벤트 리스너
+    const copyReportTextBtn = document.getElementById('copyReportTextBtn');
+    if (copyReportTextBtn) {
+      copyReportTextBtn.addEventListener('click', copyReportTextOnly);
+    }
+
+    // HTML 보고서 다운로드 버튼 이벤트 리스너
+    const downloadHtmlReportBtn = document.getElementById('downloadHtmlReportBtn');
+    if (downloadHtmlReportBtn) {
+      downloadHtmlReportBtn.addEventListener('click', downloadHtmlReport);
+    }
+
+    // 보고서 출력 필드에서 Ctrl+A 시 해당 필드 내용만 전체선택
+    const aiReportContent = document.getElementById('ai-report-content');
+    if (aiReportContent) {
+      aiReportContent.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+          e.preventDefault();
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(aiReportContent);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      });
+      
+      // 클릭 시 포커스 설정 (Ctrl+A 작동을 위해)
+      aiReportContent.addEventListener('click', function() {
+        this.focus();
+      });
     }
   }
 
@@ -831,17 +873,16 @@
       const isPdf = file.type === 'application/pdf';
       const iconClass = isPdf ? 'bi-file-earmark-pdf text-danger' : 'bi-file-earmark-image text-primary';
 
-      fileItem.className = 'file-item d-flex align-items-center justify-content-between p-2 mb-2 bg-white border rounded-2';
-      fileItem.style.transition = 'transform 0.2s, border-color 0.2s';
+      // 슬림한 한 줄 레이아웃
+      fileItem.className = 'file-item d-flex align-items-center justify-content-between py-1 px-2 mb-1 bg-white border rounded-1';
+      fileItem.style.cssText = 'transition: background 0.2s; font-size: 0.8rem;';
       fileItem.innerHTML = `
-        <div class="d-flex align-items-center">
-          <i class="bi ${iconClass} fs-5 me-3"></i>
-          <div>
-            <div class="fw-bold small text-truncate" style="max-width: 300px;">${file.name}</div>
-            <div class="text-muted" style="font-size: 0.75rem;">${formatFileSize(file.size)}</div>
-          </div>
+        <div class="d-flex align-items-center flex-grow-1" style="min-width: 0;">
+          <i class="bi ${iconClass} me-2" style="font-size: 0.9rem;"></i>
+          <span class="text-truncate fw-medium" style="max-width: 220px;" title="${file.name}">${file.name}</span>
+          <span class="text-muted ms-2" style="font-size: 0.7rem; flex-shrink: 0;">(${formatFileSize(file.size)})</span>
         </div>
-        <button class="btn btn-link text-muted p-0 btn-remove" data-index="${index}"><i class="bi bi-x-lg"></i></button>
+        <button class="btn btn-link text-muted p-0 btn-remove" data-index="${index}" style="font-size: 0.8rem;"><i class="bi bi-x"></i></button>
       `;
 
       fileItem.addEventListener('mouseenter', () => {
@@ -888,7 +929,370 @@
     selectedFiles = [];
     updateFileList();
     updateUploadButton();
+    stopProgressAnimation();
     updateProgressBar(0, "대기중");
+  }
+
+  // 전체 초기화 (모든 입력 및 결과 초기화)
+  function resetAllState() {
+    // 1. 파일 관련 초기화
+    selectedFiles = [];
+    currentJobId = null;
+    resultData = null;
+    summaryData = null;
+    
+    // 2. 파일 리스트 UI 초기화
+    updateFileList();
+    updateUploadButton();
+    
+    // 2.5 프로그레스바 애니메이션 정리
+    stopProgressAnimation();
+    currentDisplayedProgress = 0;
+    targetProgress = 0;
+    lastCompletedFiles = 0;
+    
+    // 3. 프로그레스바 초기화
+    updateProgressBar(0, "대기 중...");
+    const ocrProgressSection = document.getElementById('ocrProgressSection');
+    if (ocrProgressSection) {
+      ocrProgressSection.style.display = 'flex';
+      ocrProgressSection.style.flexDirection = 'column';
+    }
+    // 완료 메시지도 숨기고 프로그레스바 표시
+    const ocrProgressBarContainer = document.getElementById('ocrProgressBarContainer');
+    const ocrCompleteMessage = document.getElementById('ocrCompleteMessage');
+    if (ocrProgressBarContainer) ocrProgressBarContainer.classList.remove('d-none');
+    if (ocrCompleteMessage) ocrCompleteMessage.classList.add('d-none');
+    
+    // 4. 상태 컨테이너 초기화 (더 이상 사용 안 함)
+    const statusContainer = document.getElementById('statusContainer');
+    if (statusContainer) {
+      statusContainer.classList.add('d-none');
+      statusContainer.innerHTML = '';
+    }
+    
+    // 5. 피보험자 정보 초기화
+    const patientName = document.getElementById('patientName');
+    const patientMemo = document.getElementById('patientMemo');
+    if (patientName) patientName.value = '';
+    if (patientMemo) patientMemo.value = '';
+    
+    // 6. 보험 정보 초기화
+    const insuranceRecordsEl = document.getElementById('insuranceRecords');
+    if (insuranceRecordsEl) {
+      const records = insuranceRecordsEl.querySelectorAll('.insurance-record');
+      records.forEach((record, index) => {
+        if (index === 0) {
+          // 첫 번째 레코드는 값만 초기화
+          const company = record.querySelector('.insurance-company');
+          const product = record.querySelector('.insurance-product');
+          const date = record.querySelector('.insurance-date');
+          const period = record.querySelector('.insurance-period');
+          if (company) company.value = '';
+          if (product) product.value = '';
+          if (date) date.value = '';
+          if (period) period.value = 'all';
+        } else {
+          // 나머지 레코드는 삭제
+          record.remove();
+        }
+      });
+    }
+    insuranceRecordCounter = 1;
+    
+    // 7. 타임라인 섹션 숨기기
+    const timelineSection = document.getElementById('timeline-section');
+    if (timelineSection) {
+      timelineSection.classList.add('d-none');
+    }
+    
+    // 8. 요약표 내용 초기화
+    const timelineBody = document.getElementById('timeline-body');
+    if (timelineBody) {
+      timelineBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">요약 데이터가 여기에 표시됩니다.</td></tr>';
+    }
+    
+    // 9. 보고서 섹션 초기화
+    const aiReportContent = document.getElementById('ai-report-content');
+    if (aiReportContent) {
+      aiReportContent.innerHTML = '';
+    }
+    
+    // 10. 보고서 버튼 상태 초기화
+    const copyReportBtn = document.getElementById('copyReportBtn');
+    const copyReportTextBtn = document.getElementById('copyReportTextBtn');
+    const downloadHtmlReportBtn = document.getElementById('downloadHtmlReportBtn');
+    if (copyReportBtn) copyReportBtn.disabled = true;
+    if (copyReportTextBtn) copyReportTextBtn.disabled = true;
+    if (downloadHtmlReportBtn) downloadHtmlReportBtn.disabled = true;
+    
+    // 11. 요약 생성 버튼 비활성화
+    const createSummaryBtn = document.getElementById('createSummaryBtn');
+    if (createSummaryBtn) createSummaryBtn.disabled = true;
+    
+    // 12. 자동 생성 체크박스 해제
+    const autoGenerateReport = document.getElementById('autoGenerateReport');
+    if (autoGenerateReport) {
+      autoGenerateReport.checked = false;
+      toggleRequiredIndicators(false);
+    }
+    
+    // 13. Low-value 섹션 숨기기
+    const lowValueSection = document.getElementById('low-value-info-section');
+    if (lowValueSection) {
+      lowValueSection.style.display = 'none';
+    }
+    
+    // 14. Analysis 탭으로 전환
+    const analysisTab = document.getElementById('analysis-tab');
+    if (analysisTab) {
+      analysisTab.click();
+    }
+    
+    console.log('✅ 전체 초기화 완료');
+    updateStatus('info', '모든 입력 및 결과가 초기화되었습니다.');
+    
+    // 3초 후 상태 메시지 숨기기
+    setTimeout(() => {
+      const statusContainer = document.getElementById('statusContainer');
+      if (statusContainer) {
+        statusContainer.style.display = 'none';
+      }
+    }, 3000);
+  }
+
+  // 보고서 텍스트만 복사
+  function copyReportTextOnly() {
+    const aiReportContent = document.getElementById('ai-report-content');
+    if (!aiReportContent || !aiReportContent.textContent.trim()) {
+      updateStatus('warning', '복사할 보고서가 없습니다.');
+      return;
+    }
+    
+    const textContent = aiReportContent.innerText || aiReportContent.textContent;
+    
+    navigator.clipboard.writeText(textContent).then(() => {
+      updateStatus('success', '보고서 텍스트가 클립보드에 복사되었습니다.');
+      
+      // 버튼 피드백
+      const copyBtn = document.getElementById('copyReportTextBtn');
+      if (copyBtn) {
+        const originalHtml = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="bi bi-check me-2"></i>복사됨!';
+        copyBtn.classList.remove('btn-outline-primary');
+        copyBtn.classList.add('btn-success');
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = originalHtml;
+          copyBtn.classList.remove('btn-success');
+          copyBtn.classList.add('btn-outline-primary');
+        }, 2000);
+      }
+    }).catch(err => {
+      console.error('복사 실패:', err);
+      updateStatus('danger', '클립보드 복사에 실패했습니다.');
+    });
+  }
+
+  // HTML 보고서 다운로드
+  function downloadHtmlReport() {
+    const aiReportContent = document.getElementById('ai-report-content');
+    if (!aiReportContent || !aiReportContent.innerHTML.trim()) {
+      updateStatus('warning', '다운로드할 보고서가 없습니다.');
+      return;
+    }
+    
+    // 환자 정보 수집
+    const patientName = document.getElementById('patientName')?.value?.trim() || '환자';
+    const enrollmentDate = document.querySelector('.insurance-date')?.value || '';
+    const insuranceCompany = document.querySelector('.insurance-company')?.value || '';
+    const productName = document.querySelector('.insurance-product')?.value || '';
+    
+    // HTML 보고서 템플릿 생성
+    const htmlContent = generateHtmlReportTemplate({
+      patientName,
+      enrollmentDate,
+      insuranceCompany,
+      productName,
+      reportContent: aiReportContent.innerHTML,
+      generatedAt: new Date().toLocaleString('ko-KR')
+    });
+    
+    // 다운로드
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `VNEXSUS_보고서_${patientName}_${new Date().toISOString().split('T')[0]}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    updateStatus('success', 'HTML 보고서가 다운로드되었습니다.');
+  }
+
+  // HTML 보고서 템플릿 생성 함수
+  function generateHtmlReportTemplate({ patientName, enrollmentDate, insuranceCompany, productName, reportContent, generatedAt }) {
+    return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS 분석 보고서 - ${patientName}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #1e293b;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: white;
+      padding: 30px 40px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .header .subtitle {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    .info-section {
+      background: #f8fafc;
+      padding: 25px 40px;
+      border-bottom: 1px solid #e2e8f0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .content {
+      padding: 40px;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+    .content h2, .content h3, .content h4 {
+      margin: 24px 0 12px;
+      color: #1e293b;
+    }
+    .period-badge-3m {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #dc3545;
+      color: white;
+      font-weight: 700;
+      font-size: 11px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .period-badge-5y {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #fd7e14;
+      color: white;
+      font-weight: 700;
+      font-size: 11px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .event-row {
+      padding: 12px 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border-left: 4px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    .event-row.critical { border-left-color: #dc3545; background: #fef2f2; }
+    .event-row.warning { border-left-color: #fd7e14; background: #fffbeb; }
+    .footer {
+      background: #f1f5f9;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📋 VNEXSUS 분석 보고서</h1>
+      <div class="subtitle">AI 기반 의료기록 분석 및 고지의무 평가</div>
+    </div>
+    
+    <div class="info-section">
+      <div class="info-item">
+        <span class="info-label">피보험자</span>
+        <span class="info-value">${patientName}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">보험사</span>
+        <span class="info-value">${insuranceCompany || '-'}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">상품명</span>
+        <span class="info-value">${productName || '-'}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">가입일</span>
+        <span class="info-value">${enrollmentDate || '-'}</span>
+      </div>
+    </div>
+    
+    <div class="content">
+      ${reportContent}
+    </div>
+    
+    <div class="footer">
+      <p>생성일시: ${generatedAt}</p>
+      <p>VNEXSUS AI 분석 시스템에서 자동 생성된 보고서입니다.</p>
+      <p style="margin-top: 8px;">
+        <span class="period-badge-3m">3m</span> 가입일 기준 3개월 이내 &nbsp;&nbsp;
+        <span class="period-badge-5y">5y</span> 가입일 기준 5년 이내
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
   }
 
   // 파일 업로드
@@ -997,12 +1401,64 @@
     }
   }
 
+  // 점진적 프로그레스바 애니메이션 변수
+  let progressAnimationInterval = null;
+  let currentDisplayedProgress = 30;
+  let targetProgress = 30;
+  let lastCompletedFiles = 0;
+
+  // 점진적 프로그레스바 애니메이션 시작
+  function startProgressAnimation(filesTotal) {
+    // 이전 애니메이션 정리
+    if (progressAnimationInterval) {
+      clearInterval(progressAnimationInterval);
+    }
+    
+    currentDisplayedProgress = 30;
+    targetProgress = 30;
+    lastCompletedFiles = 0;
+    
+    // 3초마다 1%씩 증가 (목표 퍼센트까지만)
+    progressAnimationInterval = setInterval(() => {
+      // 현재 표시된 진행률이 목표보다 작으면 1%씩 증가
+      if (currentDisplayedProgress < targetProgress - 1) {
+        currentDisplayedProgress += 1;
+        updateOCRProgressVisual(currentDisplayedProgress, '문서 분석 중...');
+      }
+    }, 3000); // 3초마다 1% 증가
+  }
+
+  // 점진적 프로그레스바 애니메이션 중지
+  function stopProgressAnimation() {
+    if (progressAnimationInterval) {
+      clearInterval(progressAnimationInterval);
+      progressAnimationInterval = null;
+    }
+  }
+
+  // 프로그레스바 시각적 업데이트만 (상태 변경 없이)
+  function updateOCRProgressVisual(percentage, statusText) {
+    const ocrProgressBar = document.getElementById('ocrProgressBar');
+    const ocrProgressPercentage = document.getElementById('ocrProgressPercentage');
+    const ocrProgressStatus = document.getElementById('ocrProgressStatus');
+
+    if (ocrProgressBar && ocrProgressPercentage && ocrProgressStatus) {
+      ocrProgressBar.style.width = `${percentage}%`;
+      ocrProgressBar.setAttribute('aria-valuenow', percentage);
+      ocrProgressPercentage.textContent = `${percentage}%`;
+      ocrProgressStatus.textContent = statusText;
+    }
+  }
+
   // 작업 상태 폴링 시작
   function startPolling(jobId) {
     // 이전 폴링 중단
     if (pollingTimeout) {
       clearTimeout(pollingTimeout);
     }
+
+    // 점진적 애니메이션 시작 (파일 수는 나중에 업데이트됨)
+    startProgressAnimation(selectedFiles.length);
 
     // 폴링 함수
     const pollStatus = async () => {
@@ -1027,18 +1483,35 @@
 
         const data = await response.json();
 
-        // 프로그레스바 업데이트 (새로운 워크플로우용)
-        const percentage = data.filesTotal > 0 ? Math.round((data.filesProcessed / data.filesTotal) * 70) + 30 : 30;
-        updateOCRProgress(percentage, data.status === 'processing' ? '문서 분석 중...' : data.status);
+        // 파일 완료 시 목표 진행률 계산 및 즉시 점프
+        // 예: 2개 파일이면 30% -> 65% -> 100%
+        // 예: 3개 파일이면 30% -> 53% -> 77% -> 100%
+        const filesTotal = data.filesTotal || 1;
+        const filesProcessed = data.filesProcessed || 0;
+        
+        // 파일이 완료될 때마다 해당 구간으로 즉시 점프
+        if (filesProcessed > lastCompletedFiles) {
+          lastCompletedFiles = filesProcessed;
+          const completedPercentage = Math.round((filesProcessed / filesTotal) * 70) + 30;
+          currentDisplayedProgress = completedPercentage;
+          updateOCRProgressVisual(completedPercentage, '문서 분석 중...');
+        }
+        
+        // 다음 목표 진행률 설정 (현재 완료된 파일 + 1의 진행률 - 5%)
+        // 이렇게 하면 점진적 증가가 목표 직전까지만 진행됨
+        const nextFileProgress = Math.round(((filesProcessed + 1) / filesTotal) * 70) + 30;
+        targetProgress = Math.min(nextFileProgress - 2, 98); // 최대 98%까지만 (100%는 완료 시에만)
 
         // 완료 시 결과 가져오기
         if (data.status === 'completed') {
+          stopProgressAnimation();
           await fetchResults(jobId);
           return;
         }
 
         // 오류 시 폴링 중단
         if (data.status === 'failed') {
+          stopProgressAnimation();
           updateOCRProgress(0, '문서 분석 실패');
           updateStatus('danger', `[메디아이] 문서 처리 실패: ${data.error || '알 수 없는 오류'}`);
           return;
@@ -1083,9 +1556,10 @@
       const data = await response.json();
       resultData = data;
 
-      // 새로운 워크플로우 UI 업데이트
-      updateOCRProgress(100, '문서 분석 완료!');
-      updateStatus('success', `문서 처리 완료! ${Object.keys(data.results).length}개 파일 처리됨`);
+      // 새로운 워크플로우 UI 업데이트 (fileCount 전달)
+      const processedFileCount = Object.keys(data.results).length;
+      updateOCRProgress(100, '문서 분석 완료!', processedFileCount);
+      // updateStatus 제거 - 이제 프로그레스바 영역에서 완료 메시지 표시
 
       // 결과 보기/요약표 버튼 활성화
       const createSummaryBtnEl = document.getElementById('createSummaryBtn');
@@ -1131,10 +1605,13 @@
   
 
   // 분리된 프로그레스바 업데이트 함수들
-  function updateOCRProgress(percentage, statusText) {
+  function updateOCRProgress(percentage, statusText, fileCount = null) {
     const ocrProgressBar = document.getElementById('ocrProgressBar');
     const ocrProgressPercentage = document.getElementById('ocrProgressPercentage');
     const ocrProgressStatus = document.getElementById('ocrProgressStatus');
+    const ocrProgressBarContainer = document.getElementById('ocrProgressBarContainer');
+    const ocrCompleteMessage = document.getElementById('ocrCompleteMessage');
+    const ocrCompleteText = document.getElementById('ocrCompleteText');
 
     if (ocrProgressBar && ocrProgressPercentage && ocrProgressStatus) {
       ocrProgressBar.style.width = `${percentage}%`;
@@ -1146,8 +1623,23 @@
 
       if (percentage > 0 && percentage < 100) {
         ocrProgressStatus.classList.add('processing');
+        // 진행 중: 프로그레스바 표시, 완료 메시지 숨김
+        if (ocrProgressBarContainer) ocrProgressBarContainer.classList.remove('d-none');
+        if (ocrCompleteMessage) ocrCompleteMessage.classList.add('d-none');
       } else if (percentage === 100) {
         ocrProgressStatus.classList.add('completed');
+        // 완료: 프로그레스바 숨김, 완료 메시지 표시
+        if (ocrProgressBarContainer) ocrProgressBarContainer.classList.add('d-none');
+        if (ocrCompleteMessage) {
+          ocrCompleteMessage.classList.remove('d-none');
+          if (ocrCompleteText && fileCount !== null) {
+            ocrCompleteText.textContent = `문서 처리 완료! ${fileCount}개 파일 처리됨`;
+          }
+        }
+      } else if (percentage === 0) {
+        // 초기화: 프로그레스바 표시, 완료 메시지 숨김
+        if (ocrProgressBarContainer) ocrProgressBarContainer.classList.remove('d-none');
+        if (ocrCompleteMessage) ocrCompleteMessage.classList.add('d-none');
       }
     }
   }
@@ -1324,91 +1816,109 @@
     console.log('결과 모달이 표시되었습니다');
   }
 
-  // 보험 기록 추가
+  // 보험 기록 추가 (새로운 2열 레이아웃)
   function addInsuranceRecord() {
+    const insuranceRecordsEl = document.getElementById('insuranceRecords');
+    if (!insuranceRecordsEl) return;
+    
+    const existingRecords = insuranceRecordsEl.querySelectorAll('.insurance-record');
+    const newRecordNumber = existingRecords.length + 1;
     const recordId = Date.now().toString();
+    
     const newRecord = document.createElement('div');
-    newRecord.className = 'insurance-record';
+    newRecord.className = 'insurance-record mb-3 p-3 bg-white border rounded-3';
     newRecord.dataset.recordId = recordId;
 
     // 보험사 옵션 HTML 생성
-    let insurersOptions = '<option value="">선택하세요</option>';
-    insurersOptions = '<option value="">가입보험사</option>';
-
-    // 보험사 카테고리별 옵션 그룹 추가
-    Object.entries(insurerOptions).forEach(([category, companies]) => {
-      insurersOptions += `<optgroup label="${category}">`;
-
-      companies.forEach(company => {
-        insurersOptions += `<option value="${company}">${company}</option>`;
+    let insurersOptions = '<option value="">선택</option>';
+    if (typeof insurerOptions !== 'undefined' && insurerOptions) {
+      Object.entries(insurerOptions).forEach(([category, companies]) => {
+        insurersOptions += `<optgroup label="${category}">`;
+        companies.forEach(company => {
+          insurersOptions += `<option value="${company}">${company}</option>`;
+        });
+        insurersOptions += '</optgroup>';
       });
-
-      insurersOptions += '</optgroup>';
-    });
+    }
 
     newRecord.innerHTML = `
-    <div class="row g-3 mb-2">
-      <div class="col-md-6 d-flex align-items-center">
-        <label class="form-label me-2" style="white-space: nowrap;">가입보험사:</label>
-        <select class="form-select insurance-company">
-          ${insurersOptions}
-            </select>
-          </div>
-      <div class="col-md-6 d-flex align-items-center">
-        <label class="form-label me-2" style="white-space: nowrap;">가입일자:</label>
-        <input type="hidden" class="insurance-date">
-        <div class="d-flex">
-          <select class="form-select me-1 insurance-date-year">
-            <option value="">년</option>
-                  ${generateYearOptions()}
-                </select>
-          <select class="form-select me-1 insurance-date-month">
-                  <option value="">월</option>
-                  ${generateMonthOptions()}
-                </select>
-          <select class="form-select insurance-date-day">
-                  <option value="">일</option>
-                  ${generateDayOptions()}
-                </select>
-              </div>
-            </div>
-          </div>
-    <div class="row g-3 mb-2">
-      <div class="col-md-6 d-flex align-items-center">
-        <label class="form-label me-2" style="white-space: nowrap;">보험상품:</label>
-        <input type="text" class="form-control insurance-product" placeholder="보험상품명">
+      <!-- 1열: 필수 정보 (보험사, 가입일, 기간+범례, 삭제) -->
+      <div class="d-flex align-items-end gap-2 mb-2" style="min-width: 600px;">
+        <span class="d-flex align-items-center justify-content-center fw-bold text-white"
+          style="width: 24px; height: 24px; background: linear-gradient(135deg, #2563eb, #06b6d4); border-radius: 6px; flex-shrink: 0; font-size: 0.85rem;">${newRecordNumber}</span>
+        
+        <div style="width: 130px; flex-shrink: 0;">
+          <label class="form-label mb-1 small fw-bold text-muted">보험사 <span class="text-danger">*</span></label>
+          <select class="form-select form-select-sm insurance-company">
+            ${insurersOptions}
+          </select>
         </div>
-      <div class="col-md-4 d-flex align-items-center">
-        <label class="form-label me-2" style="white-space: nowrap;">조회기간:</label>
-        <select class="form-select insurance-period">
-          <option value="all" selected>전기간</option>
-          <option value="5">5년</option>
-          <option value="4">4년</option>
-          <option value="3">3년</option>
-          <option value="2">2년</option>
-          <option value="1">1년</option>
-            </select>
-          </div>
-      <div class="col-md-2 d-flex align-items-center justify-content-end">
-        <button class="btn btn-outline-danger remove-insurance" data-record-id="${recordId}" type="button">삭제</button>
+        
+        <div style="width: 110px; flex-shrink: 0;">
+          <label class="form-label mb-1 small fw-bold text-muted">가입일 <span class="text-danger">*</span></label>
+          <input type="text" class="form-control form-control-sm insurance-date" 
+            style="font-weight: 700; background: #fffbe6; border: 2px solid #f0ad4e;"
+            placeholder="20250101" inputmode="numeric" maxlength="10">
+        </div>
+        
+        <div style="width: 75px; flex-shrink: 0;">
+          <label class="form-label mb-1 small fw-bold text-muted">기간</label>
+          <select class="form-select form-select-sm insurance-period">
+            <option value="all" selected>전체</option>
+            <option value="5">5년</option>
+            <option value="3">3년</option>
+          </select>
+        </div>
+        
+        <!-- 3m/5y 범례 (한 줄) -->
+        <div class="d-flex align-items-center" style="flex-shrink: 0;">
+          <span class="text-muted" style="font-size: 0.8rem; white-space: nowrap;">
+            <span style="color: #dc3545; font-weight: 700;">●3m</span>:3개월 / <span style="color: #fd7e14; font-weight: 700;">●5y</span>:5년
+          </span>
+        </div>
+        
+        <button class="btn btn-sm btn-outline-danger remove-insurance ms-auto" data-record-id="${recordId}" title="이 보험 정보 삭제" style="white-space: nowrap; height: 31px;">
+          <i class="bi bi-trash"></i> 삭제
+        </button>
       </div>
-    </div>
-  `;
+      
+      <!-- 2열: 선택 정보 (상품명) -->
+      <div class="d-flex align-items-end gap-2" style="min-width: 600px; padding-left: 30px;">
+        <div style="flex: 1;">
+          <label class="form-label mb-1 small text-muted">상품명 (선택)</label>
+          <input type="text" class="form-control form-control-sm insurance-product" placeholder="보험 상품명 입력">
+        </div>
+      </div>
+    `;
 
-    insuranceRecords.appendChild(newRecord);
+    insuranceRecordsEl.appendChild(newRecord);
 
-    // 삭제 버튼 이벤트 리스너 추가
+    // 삭제 버튼 이벤트 리스너 추가 (추가된 레코드는 삭제 가능)
     const removeBtn = newRecord.querySelector('.remove-insurance');
     removeBtn.addEventListener('click', function () {
-      if (insuranceRecords.childElementCount > 1) {
-        newRecord.remove();
-      } else {
-        updateStatus('warning', '최소 1개의 보험 정보는 유지해야 합니다.');
-      }
+      newRecord.remove();
+      // 레코드 번호 재정렬
+      renumberInsuranceRecords();
     });
 
-    // 날짜 선택 필드 설정
-    setupDateSelects(newRecord);
+    // 스크롤하여 새 레코드 표시
+    newRecord.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    console.log(`보험 레코드 #${newRecordNumber} 추가됨`);
+  }
+  
+  // 보험 레코드 번호 재정렬
+  function renumberInsuranceRecords() {
+    const insuranceRecordsEl = document.getElementById('insuranceRecords');
+    if (!insuranceRecordsEl) return;
+    
+    const records = insuranceRecordsEl.querySelectorAll('.insurance-record');
+    records.forEach((record, index) => {
+      const numberBadge = record.querySelector('span[style*="background: linear-gradient"]');
+      if (numberBadge) {
+        numberBadge.textContent = index + 1;
+      }
+    });
   }
 
   // 기존 보험 레코드의 날짜 입력 필드를 셀렉트 박스로 변경
@@ -1436,7 +1946,7 @@
       }
     });
 
-    // 초기화 버튼 이벤트 리스너 추가
+    // 초기화 버튼 이벤트 리스너 추가 (1번 레코드용)
     const resetBtns = document.querySelectorAll('.reset-insurance');
     resetBtns.forEach(resetBtn => {
       resetBtn.addEventListener('click', function () {
@@ -1444,35 +1954,48 @@
         const record = document.querySelector(`.insurance-record[data-record-id="${recordId}"]`);
 
         if (record) {
-          // 보험회사 초기화
-          const companySelect = record.querySelector('.insurance-company');
-          if (companySelect) companySelect.value = '';
-
-          // 날짜 초기화
-          const yearSelect = record.querySelector('.insurance-date-year');
-          const monthSelect = record.querySelector('.insurance-date-month');
-          const daySelect = record.querySelector('.insurance-date-day');
-          const dateInput = record.querySelector('.insurance-date');
-
-          if (yearSelect) yearSelect.value = '';
-          if (monthSelect) monthSelect.value = '';
-          if (daySelect) daySelect.value = '';
-          if (dateInput) dateInput.value = '';
-
-          // 보험상품 초기화
-          const productInput = record.querySelector('.insurance-product');
-          if (productInput) productInput.value = '';
-
-          // 조회기간 초기화
-          const periodSelect = record.querySelector('.insurance-period');
-          if (periodSelect) periodSelect.value = 'all';
-
-          // 피보험자 이름과 참고사항도 초기화
-          document.getElementById('patientName').value = '';
-          document.getElementById('patientMemo').value = '';
+          // 1번 레코드(recordId가 '1'인 경우)는 초기화만, 나머지는 삭제
+          if (recordId === '1') {
+            resetInsuranceRecord(record);
+          } else {
+            // 추가된 레코드는 삭제
+            record.remove();
+            renumberInsuranceRecords();
+          }
         }
       });
     });
+  }
+  
+  // 보험 레코드 내용 초기화 (삭제가 아닌 값만 리셋)
+  function resetInsuranceRecord(record) {
+    if (!record) return;
+    
+    // 보험회사 초기화
+    const companySelect = record.querySelector('.insurance-company');
+    if (companySelect) companySelect.value = '';
+
+    // 날짜 초기화 (새 레이아웃 - 단일 입력 필드)
+    const dateInput = record.querySelector('.insurance-date');
+    if (dateInput) dateInput.value = '';
+    
+    // 이전 레이아웃 호환 - 연/월/일 분리 셀렉트
+    const yearSelect = record.querySelector('.insurance-date-year');
+    const monthSelect = record.querySelector('.insurance-date-month');
+    const daySelect = record.querySelector('.insurance-date-day');
+    if (yearSelect) yearSelect.value = '';
+    if (monthSelect) monthSelect.value = '';
+    if (daySelect) daySelect.value = '';
+
+    // 보험상품 초기화
+    const productInput = record.querySelector('.insurance-product');
+    if (productInput) productInput.value = '';
+
+    // 조회기간 초기화
+    const periodSelect = record.querySelector('.insurance-period');
+    if (periodSelect) periodSelect.value = 'all';
+    
+    console.log('보험 레코드 초기화 완료');
 
     setupDateSelects();
   }

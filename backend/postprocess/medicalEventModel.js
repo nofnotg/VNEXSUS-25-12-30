@@ -7,10 +7,13 @@
  * - 원문 재요약 경로 차단으로 정밀도 확보
  * 
  * Phase 1 - T02, T03
+ * Phase 2 - T04 (점수함수), T05 (절대규칙)
  * Phase 4 - T08 (Code Preservation), T09 (Time Extraction)
  */
 
 import sourceSpanManager from './sourceSpanManager.js';
+import eventScoringEngine from './eventScoringEngine.js';
+import criticalRiskEngine from './criticalRiskRules.js';
 
 class MedicalEventModel {
     constructor() {
@@ -151,9 +154,28 @@ class MedicalEventModel {
             sourceSpanManager.logMissingSpans();
         }
 
-        console.log(`✅ 총 ${events.length}개 이벤트 생성 완료`);
-        this.labelEventsFromText(events, rawText);
-        return events;
+        // Phase 2 - T04: 점수함수 적용
+        let scoredEvents = events;
+        try {
+            scoredEvents = eventScoringEngine.scoreEvents(events, patientInfo, patientInfo);
+            console.log(`📊 점수 적용 완료: Core 이벤트 ${scoredEvents.filter(e => e.isCore).length}개`);
+        } catch (err) {
+            console.warn(`⚠️ 점수함수 적용 실패: ${err.message}`);
+        }
+
+        // Phase 2 - T05: 절대규칙 적용
+        let finalEvents = scoredEvents;
+        try {
+            finalEvents = criticalRiskEngine.evaluateEvents(scoredEvents, patientInfo);
+            const criticalCount = finalEvents.filter(e => e.criticalRisk?.isCritical).length;
+            console.log(`📊 절대규칙 적용 완료: Critical 이벤트 ${criticalCount}개`);
+        } catch (err) {
+            console.warn(`⚠️ 절대규칙 적용 실패: ${err.message}`);
+        }
+
+        console.log(`✅ 총 ${finalEvents.length}개 이벤트 생성 완료`);
+        this.labelEventsFromText(finalEvents, rawText);
+        return finalEvents;
     }
 
     /**

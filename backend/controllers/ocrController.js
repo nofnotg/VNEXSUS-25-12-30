@@ -13,6 +13,7 @@ import * as fileHelper from '../utils/fileHelper.js';
 import { logService } from '../utils/logger.js';
 import pdfProcessor from '../utils/pdfProcessor.js';
 import coreEngineService from '../services/coreEngineService.js';
+import PostProcessingManager from '../postprocess/index.js';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
@@ -269,14 +270,18 @@ export const getResult = (req, res) => {
       return res.send(allText);
     }
 
-    // 기본 JSON 반환
+    // 기본 JSON 반환 (후처리 결과 포함)
     res.json({
       jobId,
       status: 'completed',
       completedAt: job.completedAt,
       elapsedTime: getElapsedTime(job.startTime, job.completedAt),
       fileCount: job.filesTotal,
-      results: job.results
+      results: job.results,
+      // 후처리 파이프라인 결과
+      postProcessing: job.postProcessing || null,
+      medicalEvents: job.postProcessing?.medicalEvents || [],
+      disclosureReport: job.postProcessing?.disclosureReport || null
     });
   } catch (error) {
     logService.error(`결과 조회 중 오류: ${error.message}`);
@@ -536,7 +541,65 @@ async function processFiles(jobId, files) {
       }
     }
 
-    // 모든 파일 처리 완료
+    // 모든 파일 처리 완료 - 후처리 파이프라인 실행
+    logService.info(`OCR 처리 완료, 후처리 파이프라인 시작`, { jobId });
+    
+    try {
+      // 모든 추출된 텍스트를 합침
+      const allTexts = Object.values(jobData.results)
+        .filter(r => !r.error && r.mergedText)
+        .map(r => r.mergedText);
+      
+      if (allTexts.length > 0) {
+        const combinedText = allTexts.join('\n\n');
+        
+        // 후처리 파이프라인 실행
+        const postProcessor = new PostProcessingManager();
+        const postProcessResult = await postProcessor.processOCRResult(combinedText, {
+          patientInfo: {},
+          reportFormat: 'json',
+          useAIExtraction: false // 규칙 기반 처리만 사용 (LLM 비용 절감)
+        });
+        
+        if (postProcessResult.success) {
+          // 후처리 결과 저장
+          jobData.postProcessing = {
+            success: true,
+            medicalEvents: postProcessResult.pipeline.medicalEvents || [],
+            disclosureReport: postProcessResult.pipeline.disclosureReport || null,
+            safeModeResult: postProcessResult.pipeline.safeModeResult || null,
+            statistics: postProcessResult.statistics || {},
+            processingTime: postProcessResult.processingTime
+          };
+          
+          logService.info(`후처리 파이프라인 완료`, {
+            jobId,
+            eventsCount: postProcessResult.pipeline.medicalEvents?.length || 0,
+            coreEvents: postProcessResult.statistics?.coreEvents || 0,
+            criticalEvents: postProcessResult.statistics?.criticalEvents || 0
+          });
+        } else {
+          logService.warn(`후처리 파이프라인 실패: ${postProcessResult.error}`, { jobId });
+          jobData.postProcessing = {
+            success: false,
+            error: postProcessResult.error || '후처리 실패'
+          };
+        }
+      } else {
+        logService.warn(`후처리 스킵: 추출된 텍스트 없음`, { jobId });
+        jobData.postProcessing = {
+          success: false,
+          error: '추출된 텍스트가 없습니다.'
+        };
+      }
+    } catch (postProcessError) {
+      logService.error(`후처리 파이프라인 오류: ${postProcessError.message}`, { jobId });
+      jobData.postProcessing = {
+        success: false,
+        error: postProcessError.message
+      };
+    }
+    
     jobData.status = 'completed';
     jobData.completedAt = new Date().toISOString();
 

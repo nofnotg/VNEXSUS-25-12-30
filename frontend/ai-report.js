@@ -43,6 +43,12 @@
       copyReportBtn.addEventListener('click', copyReportContent);
       copyReportBtn.disabled = true;
     }
+    
+    // [DEV] 재작성 버튼 이벤트 핸들러
+    const regenerateReportBtn = document.getElementById('regenerateReportBtn');
+    if (regenerateReportBtn) {
+      regenerateReportBtn.addEventListener('click', regenerateReport);
+    }
 
     // 메시지가 있을 때 UI 표시
     setTimeout(() => {
@@ -164,6 +170,21 @@
   }
 
   /**
+   * [DEV] 보고서 재작성 함수 - Vision LLM 재호출 없이 보고서만 재생성
+   */
+  async function regenerateReport() {
+    console.log('[DEV] 보고서 재작성 시작 - Vision LLM 결과 재사용');
+    
+    if (!extractedText) {
+      alert('[DEV] 재작성할 추출된 텍스트가 없습니다. 먼저 문서 분석을 실행하세요.');
+      return;
+    }
+    
+    // 기존 generateAIReport 함수 호출 (extractedText가 이미 있으므로 Vision LLM 재호출 없음)
+    await generateAIReport();
+  }
+
+  /**
    * AI 보고서 생성 함수
    */
   async function generateAIReport() {
@@ -274,6 +295,14 @@
         aiReportContent.innerHTML = violationAlertHtml + markdownToHtml(reportText);
 
         if (copyReportBtn) copyReportBtn.disabled = false;
+        
+        // 추가 버튼들 활성화
+        const copyReportTextBtn = document.getElementById('copyReportTextBtn');
+        const downloadHtmlReportBtn = document.getElementById('downloadHtmlReportBtn');
+        const regenerateReportBtn = document.getElementById('regenerateReportBtn');
+        if (copyReportTextBtn) copyReportTextBtn.disabled = false;
+        if (downloadHtmlReportBtn) downloadHtmlReportBtn.disabled = false;
+        if (regenerateReportBtn) regenerateReportBtn.disabled = false; // [DEV] 재작성 버튼 활성화
         var rb = document.getElementById('reportProgressBar');
         var rp = document.getElementById('reportProgressPercentage');
         var rs = document.getElementById('reportProgressStatus');

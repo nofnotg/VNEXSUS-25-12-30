@@ -4,9 +4,16 @@ import OpenAI from 'openai';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { z } from 'zod';
-import { buildEnhancedMedicalDnaPrompt, loadEnhancedMedicalKnowledgeBase } from '../config/enhancedPromptBuilder.js';
+import { 
+  buildEnhancedMedicalDnaPrompt, 
+  loadEnhancedMedicalKnowledgeBase,
+  buildStructuredJsonPrompt,
+  getJsonModelOptions 
+} from '../config/enhancedPromptBuilder.js';
 import InsuranceValidationService from '../services/insuranceValidationService.js';
 import MedicalTermTranslationService from '../services/medicalTermTranslationService.js';
+import StructuredReportGenerator from '../services/structuredReportGenerator.js';
+import { validateReportSchema, applyDefaultValues } from '../services/structuredReportSchema.js';
 // NineItemReportGenerator는 대형 모듈이므로 필요 시점에 동적 import로 로드
 import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../../src/shared/logging/logger.js';
 import { ProgressiveRAGSystem } from '../../src/rag/progressiveRAG.js';
@@ -37,6 +44,7 @@ const GenerateRequestSchema = z.object({
   options: z
     .object({
       useNineItem: z.boolean().optional(),
+      useStructuredJson: z.boolean().optional(),  // 🆕 JSON 구조화 모드 (방안 C)
       template: z.enum(['standard', 'detailed', 'summary']).optional(),
       enableTranslationEnhancement: z.boolean().optional(),
       enableTermProcessing: z.boolean().optional(),
@@ -79,21 +87,92 @@ router.post('/generate', async (req, res) => {
 
     // 강화된 의료 지식 베이스 로드
     const knowledgeBase = await loadEnhancedMedicalKnowledgeBase();
-    const { systemPrompt, userPrompt } = buildEnhancedMedicalDnaPrompt(
-      extractedText,
-      knowledgeBase,
-      patientInfo?.insuranceJoinDate
-    );
+    
+    // 🆕 JSON 구조화 모드 (방안 C) 또는 기존 모드 선택
+    const useStructuredJson = options.useStructuredJson ?? true;  // 기본값: true (JSON 모드)
+    
+    let systemPrompt, userPrompt;
+    if (useStructuredJson) {
+      // JSON 구조화 모드: 10항목 보고서를 JSON으로 생성
+      const jsonPrompts = buildStructuredJsonPrompt(
+        extractedText,
+        knowledgeBase,
+        patientInfo?.insuranceJoinDate
+      );
+      systemPrompt = jsonPrompts.systemPrompt;
+      userPrompt = jsonPrompts.userPrompt;
+      logger.info({ event: 'using_structured_json_mode' });
+    } else {
+      // 기존 모드: 텍스트 형식 보고서
+      const legacyPrompts = buildEnhancedMedicalDnaPrompt(
+        extractedText,
+        knowledgeBase,
+        patientInfo?.insuranceJoinDate
+      );
+      systemPrompt = legacyPrompts.systemPrompt;
+      userPrompt = legacyPrompts.userPrompt;
+    }
 
     // GPT 호출 또는 스킵
     const openai = options.skipLLM ? null : getOpenAIClient();
     let baseReportText = '';
+    let structuredJsonData = null;  // 🆕 JSON 구조화 데이터
 
     if (options.skipLLM) {
       // 개발/테스트용 LLM 스킵: 입력 텍스트를 기반으로 간단한 보고서 헤더만 부여
       baseReportText = `Report_Sample.txt\n\n[Input Summary]\n${extractedText}`;
       logger.info({ event: 'llm_skipped', reason: 'options.skipLLM=true' });
+    } else if (useStructuredJson) {
+      // 🆕 JSON 모드로 GPT 호출
+      const jsonModelOptions = getJsonModelOptions();
+      const completion = await openai.chat.completions.create({
+        ...jsonModelOptions,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt },
+        ],
+      });
+      
+      const rawResponse = completion.choices[0]?.message?.content ?? '{}';
+      logger.info({ event: 'gpt_json_response_received', length: rawResponse.length });
+      
+      try {
+        // JSON 파싱 및 검증
+        structuredJsonData = JSON.parse(rawResponse);
+        const validation = validateReportSchema(structuredJsonData);
+        
+        logger.info({ 
+          event: 'json_validation_result', 
+          valid: validation.valid,
+          completenessScore: validation.completenessScore,
+          missingFields: validation.missingFields
+        });
+        
+        // 누락된 필드에 기본값 적용
+        if (!validation.valid) {
+          structuredJsonData = applyDefaultValues(structuredJsonData, validation);
+          logger.warn({ event: 'applied_default_values', fields: validation.missingFields });
+        }
+        
+        // 구조화된 보고서 생성기로 텍스트 변환
+        const reportGenerator = new StructuredReportGenerator({ debug: false });
+        const reportResult = await reportGenerator.generateReport(structuredJsonData);
+        
+        baseReportText = reportResult.report;
+        logger.info({ 
+          event: 'structured_report_generated', 
+          completenessScore: reportResult.validation?.completenessScore 
+        });
+        
+      } catch (parseError) {
+        // JSON 파싱 실패 시 폴백
+        logger.error({ event: 'json_parse_failed', error: parseError.message });
+        baseReportText = `[JSON 파싱 실패 - 원본 응답]\n${rawResponse}`;
+        structuredJsonData = null;
+      }
+      
     } else {
+      // 기존 텍스트 모드
       const completion = await openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
@@ -188,14 +267,29 @@ router.post('/generate', async (req, res) => {
     } catch (e) {
       logProcessingError('rag_save', e, { patientId: patientInfo.patientId });
     }
+    // 🆕 응답 메시지 결정
+    let responseMessage = 'Report_Sample.txt 양식 보고서 생성 완료';
+    if (useStructuredJson && structuredJsonData) {
+      responseMessage = '10항목 구조화 보고서 생성 완료 (JSON 모드)';
+    } else if (options.useNineItem) {
+      responseMessage = '9항목 보고서 생성 완료';
+    }
+
+    // 🆕 최종 보고서 결정 (우선순위: 구조화 JSON > 9항목 > 텍스트)
+    let finalReport = enhancedText;
+    if (useStructuredJson && structuredJsonData) {
+      finalReport = enhancedText;  // structuredReportGenerator에서 생성된 텍스트
+    } else if (options.useNineItem && nineItemResult?.report) {
+      finalReport = nineItemResult.report;
+    }
+
     const responsePayload = {
       success: true,
-      message: options.useNineItem
-        ? '9항목 보고서 생성 완료'
-        : 'Report_Sample.txt 양식 보고서 생성 완료',
-      pipeline: 'Enhanced DNA Sequencing + Timeline Analysis',
-      report: options.useNineItem && nineItemResult?.report ? nineItemResult.report : enhancedText,
+      message: responseMessage,
+      pipeline: useStructuredJson ? 'Structured JSON + Template Engine' : 'Enhanced DNA Sequencing + Timeline Analysis',
+      report: finalReport,
       reportText: enhancedText,
+      structuredData: structuredJsonData,  // 🆕 JSON 구조화 데이터 포함
       processingTime: `${processingTimeMs}ms`,
       model: options.skipLLM ? 'skipped' : 'gpt-4o-mini',
       timestamp: new Date().toISOString(),
@@ -203,6 +297,7 @@ router.post('/generate', async (req, res) => {
       metadata: {
         insuranceValidation,
         translation: translationMeta,
+        useStructuredJson,  // 🆕 JSON 모드 사용 여부
         termProcessing: termProcessingMeta,
         nineItem: nineItemResult
           ? {

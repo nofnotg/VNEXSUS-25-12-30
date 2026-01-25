@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { getSchemaForPrompt } from '../services/structuredReportSchema.js';
 // __filename/__dirname 계산은 불필요하므로 제거하여 Jest 환경 호환성 확보
 
 // 🧬 다단계 DNA 시퀀싱 파이프라인
@@ -207,12 +208,19 @@ ${periodInfo ? `
 
 # 📑 손해사정 보고서 (결재용 요약본)
 
-- **내원일시**: yyyy.mm.dd
-- **내원경위**: (요약)
-- **진단병명**: (KCD-10, 영문+한글)
-- **검사결과**: (핵심 요약)
-- **치료내용**: (수술/시술/약물)
-- **통원/입원**: yyyy.mm.dd ~ yyyy.mm.dd (n일/n회)
+**⚠️ 중요: 아래 10개 항목 외의 항목(진료의사, 보험유형 등)은 절대 추가하지 마세요.**
+
+1. **내원일시**: yyyy.mm.dd
+2. **내원경위(주호소)**: (외부 병원 진료의뢰, 증상 요약)
+3. **진단병명**: (반드시 [KCD-10코드] [영문명] [한글명] 형식으로 표기, 예: [C16.0] Malignant neoplasm of cardia - 위암)
+4. **검사결과**: (검사명, 검사일, 검사결과, 소견 / 영문+한글 번역)
+5. **수술 후 조직검사 결과(암의 경우만)**: (검사명, 검사일, 보고일, 조직검사 소견, 병기 TNM)
+6. **치료내용**: (수술/약물/방사선/처치 등)
+7. **통원기간**: yyyy.mm.dd ~ yyyy.mm.dd / n회 통원
+8. **입원기간**: yyyy.mm.dd ~ yyyy.mm.dd / n일 입원
+9. **과거병력**: (주요 질환, 합병증 등)
+10. **의사소견**: (주치의 기재 내용 요약)
+
 - **고지의무 위반 여부**: **[위반 있음/없음]** (근거: ...)
 - **종합의견**: (한 줄 요약)
 
@@ -453,6 +461,119 @@ ${periodInfo ? `
 `;
 
     return { systemPrompt, userPrompt };
+}
+
+// =====================================================
+// 🆕 JSON 강제 출력용 프롬프트 빌더 (방안 C)
+// 10항목 구조화 보고서를 위한 JSON 스키마 기반 프롬프트
+// =====================================================
+
+/**
+ * JSON 출력 전용 프롬프트 빌더
+ * GPT가 반드시 JSON 형식으로만 응답하도록 강제
+ * 
+ * @param {string} extractedText - OCR로 추출된 텍스트
+ * @param {Object} knowledgeBase - 의료 지식 베이스
+ * @param {string|null} insuranceJoinDate - 보험 가입일
+ * @returns {{ systemPrompt: string, userPrompt: string }}
+ */
+export function buildStructuredJsonPrompt(extractedText, knowledgeBase, insuranceJoinDate = null) {
+    const analyzer = new EnhancedMedicalDnaAnalyzer();
+    const { abbreviations } = knowledgeBase;
+
+    // 보험 가입일 기준 기간 계산
+    const periodInfo = analyzer.calculateInsurancePeriods(insuranceJoinDate);
+
+    // JSON 스키마 가져오기
+    const jsonSchema = getSchemaForPrompt();
+
+    const systemPrompt = `
+# 🧬 VNEXSUS AI - 구조화된 손해사정 보고서 생성기 (JSON 전용)
+
+당신은 **보험 청구 문서 분석 전문가**입니다.
+제공된 의료 기록을 분석하여 **반드시 JSON 형식으로만** 응답해야 합니다.
+
+## ⚠️ 필수 규칙 (절대 준수)
+
+1. **JSON 형식으로만 응답**: 마크다운, 설명 텍스트 없이 순수 JSON만 출력
+2. **10개 항목 필수 포함**: 누락된 항목 없이 모든 필드 채우기
+3. **정보 없으면 명시적 표기**: null 또는 빈 배열 [] 사용
+4. **추가 항목 금지**: 스키마에 없는 항목(진료의사, 보험유형 등) 절대 추가 금지
+5. **진단명 형식 준수**: [KCD코드] 영문명 - 한글명 (예: [C16.0] Gastric cancer - 위암)
+
+## 📅 고지의무 분석 기준
+${periodInfo ? `
+**제공된 보험 가입일**: ${periodInfo.joinDate}
+- **[3개월 이내]**: ${periodInfo.threeMonthsBefore} ~ ${periodInfo.joinDate} → 고지의무 위반 주의
+- **[1년 이내]**: ${periodInfo.oneYearBefore} ~ ${periodInfo.joinDate}
+- **[5년 이내]**: ${periodInfo.fiveYearsBefore} ~ ${periodInfo.joinDate} → 중대 질병 고지 대상
+` : `
+**보험 가입일 미제공**: 문서에서 "가입일", "보장개시일", "계약일"을 찾아 기준 설정
+`}
+
+## 📚 의료 약어 참조
+${Object.entries(abbreviations).slice(0, 20).map(([abbr, meaning]) => `${abbr}: ${meaning}`).join('\n')}
+
+## 🏥 질환별 필수 검사 규칙
+1. **암(Cancer)**: 조직검사 결과, TNM 병기 필수
+2. **심장질환**: Troponin, CK-MB, EKG, Coronary CT 필수
+3. **뇌혈관질환**: Brain CT/MRI 소견 필수
+4. **당뇨병**: HbA1c, 공복혈당 필수
+
+## 📋 응답 JSON 스키마 (필수 준수)
+${jsonSchema}
+
+## 🎯 데이터 추출 원칙
+1. **전체 연도 스캔**: 2000~2025년 모든 날짜 데이터 수집
+2. **병원별 통계**: 첫 방문 ~ 마지막 방문, 총 방문 횟수 계산
+3. **원문 보존**: 추출된 텍스트의 핵심 내용 최대한 보존
+4. **빈 필드 처리**: 정보 없으면 null 또는 빈 배열, "정보 없음" 문자열 사용
+
+**중요**: 응답은 반드시 유효한 JSON 객체여야 합니다. 코드 블록(\`\`\`)이나 설명 없이 순수 JSON만 출력하세요.
+`;
+
+    const userPrompt = `
+다음 의료 기록을 분석하여 **10항목 손해사정 보고서를 JSON 형식으로** 생성하세요.
+
+${periodInfo ? `
+📅 **보험 가입일**: ${periodInfo.joinDate}
+기간 분류:
+- 3개월 이내: ${periodInfo.threeMonthsBefore} ~ ${periodInfo.joinDate}
+- 1년 이내: ${periodInfo.oneYearBefore} ~ ${periodInfo.joinDate}
+- 5년 이내: ${periodInfo.fiveYearsBefore} ~ ${periodInfo.joinDate}
+` : '📅 **보험 가입일**: 문서에서 찾아 기준 설정'}
+
+---
+**의료 기록 원본:**
+
+${extractedText}
+
+---
+
+**⚠️ 응답 요구사항:**
+1. 반드시 JSON 형식으로만 응답 (마크다운/설명 금지)
+2. 모든 10개 항목 포함 (visitDate, chiefComplaint, diagnoses, examinations, pathology, treatments, outpatientPeriod, admissionPeriod, pastHistory, doctorOpinion, disclosureViolation, conclusion)
+3. 진단명은 [KCD코드] 영문명 - 한글명 형식
+4. 정보 없는 필드는 null 또는 빈 배열 사용
+5. 추가 항목 생성 금지
+
+지금 JSON 보고서를 생성하세요:
+`;
+
+    return { systemPrompt, userPrompt };
+}
+
+/**
+ * JSON 프롬프트용 모델 호출 옵션
+ * OpenAI API의 response_format 옵션 포함
+ */
+export function getJsonModelOptions() {
+    return {
+        model: 'gpt-4o-mini',
+        response_format: { type: "json_object" },
+        temperature: 0.1,
+        max_tokens: 8000
+    };
 }
 
 // 의료 지식 베이스 (확장)

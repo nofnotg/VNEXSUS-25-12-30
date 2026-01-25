@@ -249,7 +249,7 @@
 
   <div class="glass-header">
     <div class="container d-flex justify-content-between align-items-center">
-      <div class="brand-logo"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</div>
+      <a href="/" class="brand-logo text-decoration-none" style="cursor: pointer;"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</a>
       <div class="d-flex gap-3">
         <ul class="nav nav-pills" id="mainTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -274,31 +274,23 @@
         <!-- File Upload Section -->
         <div class="glass-card">
           <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5 class="fw-bold text-primary"><i class="bi bi-cloud-upload me-2"></i>Document Ingestion</h5>
-              <div class="d-flex align-items-center">
+            <!-- Row 1: Title + Text Review + 초기화 -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold text-primary mb-0"><i class="bi bi-cloud-upload me-2"></i>Document Ingestion</h5>
+              <div class="d-flex align-items-center gap-2">
                 <button id="textReviewBtn" class="btn btn-outline-secondary btn-sm">
                   <i class="bi bi-file-text me-1"></i>Text Review
+                </button>
+                <button id="resetAllBtn" class="btn btn-outline-danger btn-sm" title="모든 입력 및 결과 초기화">
+                  <i class="bi bi-arrow-counterclockwise me-1"></i>초기화
                 </button>
               </div>
             </div>
 
-            <div class="row mb-4">
-              <!-- Left: Upload Area (1/4 width) -->
-              <div class="col-md-3">
-                <div class="drop-zone h-100 d-flex flex-column justify-content-center text-center p-3" id="dropZone"
-                  style="min-height: 200px; border: 2px dashed var(--primary); border-radius: 12px; background: rgba(37, 99, 235, 0.05); transition: all 0.3s;">
-                  <div class="drop-zone-content">
-                    <i class="bi bi-cloud-arrow-up fs-1 text-primary mb-2"></i>
-                    <h6 class="fw-bold mb-1">파일 업로드</h6>
-                    <p class="text-muted small mb-0" style="font-size: 0.8rem;">클릭 또는 드래그</p>
-                  </div>
-                  <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none">
-                </div>
-              </div>
-
-              <!-- Right: File List (3/4 width) -->
-              <div class="col-md-9">
+            <!-- Row 2: File List (Left) + Upload Zone (Right) -->
+            <div class="row mb-3">
+              <!-- Left: File List -->
+              <div class="col-md-8">
                 <div id="fileListContainer" class="h-100 border rounded-3 p-3 bg-white shadow-sm d-flex flex-column">
                   <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
                     <span id="fileCount" class="fw-bold text-primary small"><i class="bi bi-files me-1"></i>0개 파일
@@ -315,99 +307,151 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Right: Upload Area -->
+              <div class="col-md-4">
+                <div class="drop-zone h-100 d-flex flex-column justify-content-center text-center p-3" id="dropZone"
+                  style="min-height: 180px; border: 2px dashed var(--primary); border-radius: 12px; background: rgba(37, 99, 235, 0.05); transition: all 0.3s;">
+                  <div class="drop-zone-content">
+                    <i class="bi bi-cloud-arrow-up fs-1 text-primary mb-2"></i>
+                    <h6 class="fw-bold mb-1">파일 업로드</h6>
+                    <p class="text-muted small mb-0" style="font-size: 0.8rem;">클릭 또는 드래그</p>
+                  </div>
+                  <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none">
+                </div>
+              </div>
             </div>
 
-            <!-- Button & Progress Bar Row - ALWAYS VISIBLE -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <!-- Progress Bar (Left) - Large and Visual -->
-              <div class="flex-grow-1 me-4" id="ocrProgressSection" style="display: flex; flex-direction: column;">
-                <div class="d-flex justify-content-between small fw-bold mb-1">
-                  <span id="ocrProgressStatus" class="text-primary">대기 중...</span>
-                  <span id="ocrProgressPercentage" class="text-primary">0%</span>
-                </div>
-                <div class="progress" style="height: 16px; border-radius: 8px; background: #e2e8f0;">
-                  <div id="ocrProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar"
-                    style="width: 0%; background: linear-gradient(90deg, #2563eb, #06b6d4); border-radius: 8px;"></div>
+            <hr class="my-3" style="border-color: #e2e8f0;">
+
+            <!-- Row 3: Progress Bar (Left) + Buttons (Right) -->
+            <div class="row align-items-center">
+              <!-- Left: Progress Bar -->
+              <div class="col-md-8">
+                <div id="ocrProgressSection" style="display: flex; flex-direction: column;">
+                  <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span id="ocrProgressStatus" class="text-primary">대기 중...</span>
+                    <span id="ocrProgressPercentage" class="text-primary">0%</span>
+                  </div>
+                  <!-- 프로그레스바 또는 완료 메시지 (같은 공간 사용) -->
+                  <div id="ocrProgressBarContainer">
+                    <div class="progress" style="height: 16px; border-radius: 8px; background: #e2e8f0;">
+                      <div id="ocrProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        style="width: 0%; background: linear-gradient(90deg, #2563eb, #06b6d4); border-radius: 8px;"></div>
+                    </div>
+                  </div>
+                  <!-- 완료 메시지 (프로그레스바와 같은 위치, 완료 시 표시) -->
+                  <div id="ocrCompleteMessage" class="d-none" style="height: 16px; line-height: 16px;">
+                    <span class="badge bg-success w-100 text-start" style="font-size: 0.8rem; border-radius: 8px; padding: 2px 10px;">
+                      <i class="bi bi-check-circle me-1"></i><span id="ocrCompleteText">문서 처리 완료!</span>
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Status Container (Middle) -->
-              <div id="statusContainer" class="alert alert-light border-0 shadow-sm py-2 px-3 mb-0 me-3"
-                style="display:none;"></div>
-              <div id="statusSpinner" class="me-3" style="display: none;">
-                <div class="spinner-border spinner-border-sm text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
+              <!-- Right: Buttons (stacked vertically, aligned with upload zone) -->
+              <div class="col-md-4">
+                <div class="d-flex flex-column align-items-stretch gap-2">
+                  <!-- Auto Generate Report Option -->
+                  <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input me-2" type="checkbox" id="autoGenerateReport">
+                    <label class="form-check-label small" for="autoGenerateReport">보고서 자동생성</label>
+                  </div>
+                  <!-- Upload Button (70% size) -->
+                  <button id="uploadBtn" class="btn btn-glass-primary w-100" disabled style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+                    <i class="bi bi-lightning-charge-fill me-1"></i>문서 분석 시작
+                  </button>
                 </div>
               </div>
+            </div>
 
-              <!-- Auto Generate Report Option -->
-              <div class="form-check me-3">
-                <input class="form-check-input" type="checkbox" id="autoGenerateReport">
-                <label class="form-check-label small" for="autoGenerateReport">보고서 자동생성</label>
+            <!-- Status Container (숨김 - 더 이상 사용 안 함) -->
+            <div id="statusContainer" class="d-none"></div>
+            <div id="statusSpinner" class="me-3" style="display: none;">
+              <div class="spinner-border spinner-border-sm text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
               </div>
-
-              <!-- Upload Button (Right) -->
-              <button id="uploadBtn" class="btn btn-glass-primary px-4" disabled>
-                <i class="bi bi-lightning-charge-fill me-2"></i>문서 분석 시작
-              </button>
             </div>
           </div>
         </div>
 
-        <!-- Insurance Info Section (Minimal Style) -->
+        <!-- Insurance Info Section (2-Column Layout) -->
         <div class="glass-card">
           <div class="card-body">
             <h5 class="fw-bold text-success mb-4"><i class="bi bi-shield-check me-2"></i>보험 정보</h5>
 
-            <!-- Patient Info Compact (No Birth Date) -->
-            <div class="d-flex align-items-end gap-3 mb-4 p-3 rounded-3"
-              style="background: #f8fafc; border: 1px solid #e2e8f0;">
-              <div style="flex: 1;">
-                <label class="form-label mb-1 small fw-bold text-muted">피보험자</label>
+            <!-- 피보험자 + 쟁점사항 (같은 행) -->
+            <div class="d-flex align-items-end gap-3 mb-4 p-3 rounded-3" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+              <div style="flex: 1; max-width: 200px;">
+                <label class="form-label mb-1 small fw-bold text-muted">피보험자 <span class="text-danger">*</span></label>
                 <input type="text" class="form-control form-control-sm" id="patientName" placeholder="피보험자 이름 입력">
               </div>
-              <div style="flex: 2;">
-                <label class="form-label mb-1 small fw-bold text-muted">추가입력사항(쟁점사항 등)</label>
+              <div style="flex: 3;">
+                <label class="form-label mb-1 small text-muted">쟁점사항 (선택)</label>
                 <input type="text" class="form-control form-control-sm" id="patientMemo"
                   placeholder="예: 고지의무 위반 의심, 보험금 청구 사유 등">
               </div>
             </div>
 
-            <!-- Insurance Records (Minimal Row Style with Date Input) -->
+            <!-- Insurance Records (2-Row Layout - Fixed Width) -->
             <div id="insuranceRecords">
-              <div class="insurance-record d-flex align-items-center gap-2 p-2 mb-2 bg-white border rounded-2"
-                data-record-id="1">
-                <span class="d-flex align-items-center justify-content-center fw-bold text-primary"
-                  style="width: 28px; height: 28px; background: #f1f5f9; border-radius: 6px; flex-shrink: 0;">1</span>
-                <div class="d-flex flex-column" style="width: 130px; flex-shrink: 0;">
-                  <select class="form-select form-select-sm insurance-company">
-                    <option value="">가입보험사</option>
-                  </select>
+              <div class="insurance-record mb-3 p-3 bg-white border rounded-3" data-record-id="1">
+                <!-- 1열: 필수 정보 (보험사, 가입일, 기간+범례, 초기화) -->
+                <div class="d-flex align-items-end gap-2 mb-2" style="min-width: 600px;">
+                  <span class="d-flex align-items-center justify-content-center fw-bold text-white"
+                    style="width: 24px; height: 24px; background: linear-gradient(135deg, #2563eb, #06b6d4); border-radius: 6px; flex-shrink: 0; font-size: 0.85rem;">1</span>
+                  
+                  <div style="width: 130px; flex-shrink: 0;">
+                    <label class="form-label mb-1 small fw-bold text-muted">보험사 <span class="text-danger">*</span></label>
+                    <select class="form-select form-select-sm insurance-company">
+                      <option value="">선택</option>
+                    </select>
+                  </div>
+                  
+                  <div style="width: 110px; flex-shrink: 0;">
+                    <label class="form-label mb-1 small fw-bold text-muted">가입일 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control form-control-sm insurance-date" 
+                      style="font-weight: 700; background: #fffbe6; border: 2px solid #f0ad4e;"
+                      placeholder="20250101" inputmode="numeric" maxlength="10">
+                  </div>
+                  
+                  <div style="width: 75px; flex-shrink: 0;">
+                    <label class="form-label mb-1 small fw-bold text-muted">기간</label>
+                    <select class="form-select form-select-sm insurance-period">
+                      <option value="all" selected>전체</option>
+                      <option value="5">5년</option>
+                      <option value="3">3년</option>
+                    </select>
+                  </div>
+                  
+                  <!-- 3m/5y 범례 (한 줄) -->
+                  <div class="d-flex align-items-center" style="flex-shrink: 0;">
+                    <span class="text-muted" style="font-size: 0.8rem; white-space: nowrap;">
+                      <span style="color: #dc3545; font-weight: 700;">●3m</span>:3개월 / <span style="color: #fd7e14; font-weight: 700;">●5y</span>:5년
+                    </span>
+                  </div>
+                  
+                  <button class="btn btn-sm btn-outline-secondary reset-insurance ms-auto" data-record-id="1" title="이 보험 정보 초기화" style="white-space: nowrap; height: 31px;">
+                    <i class="bi bi-arrow-counterclockwise"></i> 초기화
+                  </button>
                 </div>
-                <input type="text" class="form-control form-control-sm insurance-product flex-grow-1" placeholder="상품명">
-                <div class="d-flex align-items-center gap-2" style="flex-shrink: 0;">
-                  <label class="form-label mb-0 text-muted" id="enrollmentLabel" style="white-space: nowrap; font-weight: 700; font-size: 0.95rem;">가입일:</label>
-                  <input type="text" class="form-control form-control-sm insurance-date" style="width: 120px; font-weight: 700; font-size: 0.95rem; background: #fffbe6; border: 1px solid #f0ad4e;"
-                    placeholder="20250101" inputmode="numeric" maxlength="10">
-                  <span class="rounded-circle d-inline-flex align-items-center justify-content-center" title="가입일 기준 3개월 내 이벤트" style="width: 26px; height: 26px; background: #dc3545; color: #fff; font-weight: 700; font-size: 0.75rem;">3m</span>
-                  <span class="rounded-circle d-inline-flex align-items-center justify-content-center" title="가입일 기준 5년 내 이벤트" style="width: 26px; height: 26px; background: #fd7e14; color: #fff; font-weight: 700; font-size: 0.75rem;">5y</span>
+                
+                <!-- 2열: 선택 정보 (상품명 + 요약표 생성 버튼) -->
+                <div class="d-flex align-items-end gap-2" style="min-width: 600px; padding-left: 30px;">
+                  <div style="flex: 1;">
+                    <label class="form-label mb-1 small text-muted">상품명 (선택)</label>
+                    <input type="text" class="form-control form-control-sm insurance-product" placeholder="보험 상품명 입력">
+                  </div>
+                  <button id="createSummaryBtn" class="btn btn-success btn-sm" disabled style="white-space: nowrap; height: 31px;">
+                    <i class="bi bi-table me-1"></i>요약표 생성
+                  </button>
                 </div>
-                <select class="form-select form-select-sm insurance-period" style="width: 80px; flex-shrink: 0;">
-                  <option value="all" selected>전체</option>
-                  <option value="5">5년</option>
-                  <option value="3">3년</option>
-                </select>
-                <button class="btn btn-sm btn-outline-secondary reset-insurance" data-record-id="1"
-                  style="padding: 0.25rem 0.5rem; flex-shrink: 0;"><i class="bi bi-x"></i></button>
               </div>
             </div>
 
-            <div class="d-flex justify-content-between mt-3">
-              <button id="addInsuranceBtn" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus me-1"></i>보험
-                추가</button>
-              <button id="createSummaryBtn" class="btn btn-success btn-sm" disabled><i class="bi bi-table me-1"></i>요약표
-                생성</button>
+            <div class="d-flex justify-content-start mt-2">
+              <button id="addInsuranceBtn" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus me-1"></i>보험 추가</button>
             </div>
           </div>
         </div>
@@ -492,11 +536,22 @@
             </div>
 
             <div class="d-flex gap-2 mb-3">
-              <button id="generateAIReportBtn" class="btn btn-glass-primary">
-                <i class="bi bi-magic me-2"></i>보고서 생성
+              <button id="generateAIReportBtn" class="btn btn-glass-primary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">
+                <i class="bi bi-magic me-1"></i>보고서 생성
               </button>
-              <button id="copyReportBtn" class="btn btn-outline-secondary" disabled>
-                <i class="bi bi-clipboard me-2"></i>복사
+              <!-- DEV: 재작성 버튼 (Vision LLM 재호출 없이 보고서만 재생성) -->
+              <button id="regenerateReportBtn" class="btn btn-warning btn-sm" disabled title="[DEV] Vision LLM 결과 재사용하여 보고서만 재생성" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">
+                <i class="bi bi-arrow-repeat me-1"></i>재작성
+              </button>
+              <button id="copyReportTextBtn" class="btn btn-outline-primary btn-sm" disabled title="보고서 텍스트만 복사" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">
+                <i class="bi bi-clipboard-check me-1"></i>텍스트 복사
+              </button>
+              <button id="downloadHtmlReportBtn" class="btn btn-outline-success btn-sm" disabled title="HTML 보고서 다운로드" style="font-size: 0.8rem; padding: 0.35rem 0.7rem;">
+                <i class="bi bi-file-earmark-arrow-down me-1"></i>HTML 저장
+              </button>
+              <!-- 숨김 처리: copyReportBtn (중복 기능) -->
+              <button id="copyReportBtn" class="btn btn-outline-secondary btn-sm d-none" disabled>
+                <i class="bi bi-clipboard me-1"></i>복사
               </button>
             </div>
 
@@ -520,7 +575,14 @@
               <p class="mt-2 text-muted">패턴 분석 및 보고서 생성 중...</p>
             </div>
 
-            <div id="ai-report-content" class="report-content mt-4" style="max-width: 900px; margin: 0 auto; font-size: 1.06rem; line-height: 1.7; word-break: break-word; white-space: pre-line;"></div>
+            <!-- Report Content Container (Selectable) -->
+            <div id="ai-report-wrapper" class="mt-4" style="max-width: 900px; margin: 0 auto;">
+              <div id="ai-report-content" class="report-content" 
+                tabindex="0"
+                style="font-size: 1.06rem; line-height: 1.8; word-break: break-word; white-space: pre-wrap; 
+                       overflow-wrap: break-word; padding: 25px; background: #fafafa; border: 1px solid #e2e8f0; 
+                       border-radius: 12px; max-height: 70vh; overflow-y: auto; cursor: text; user-select: text;"></div>
+            </div>
 
             <!-- Hidden Preview for Logic -->
             <div class="d-none">

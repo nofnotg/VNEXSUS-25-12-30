@@ -47,8 +47,11 @@ router.post('/generate-report', async (req, res) => {
           insuranceCompany: req.body.insuranceCompany || req.body.patientInfo?.insuranceCompany
         },
         // 개선 옵션을 프록시에서 명시적으로 전달(기본값 활성화)
+        // API 키가 없으면 자동으로 skipLLM 모드 활성화
+        // 🆕 useStructuredJson: true (기본값) - JSON 구조화 모드로 10항목 보고서 생성
         options: {
-          skipLLM: req.body.options?.skipLLM ?? false,
+          skipLLM: req.body.options?.skipLLM ?? (!process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'dummy-key'),
+          useStructuredJson: req.body.options?.useStructuredJson ?? true,  // 🆕 JSON 모드 기본 활성화
           useNineItem: req.body.options?.useNineItem ?? false,
           template: req.body.options?.template,
           enableTranslationEnhancement: req.body.options?.enableTranslationEnhancement ?? true,

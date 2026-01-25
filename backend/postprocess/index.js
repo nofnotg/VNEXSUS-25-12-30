@@ -18,6 +18,12 @@ import { MedicalEventSchema } from '../../src/modules/reports/types/structuredOu
 import fs from 'fs';
 import ReportSubsetValidator from '../eval/report_subset_validator.js';
 
+// Phase 2 모듈 (T04, T05, T08, T09)
+import eventScoringEngine from './eventScoringEngine.js';
+import criticalRiskEngine from './criticalRiskRules.js';
+import disclosureReportBuilder from './disclosureReportBuilder.js';
+import safeModeGuard from './safeModeGuard.js';
+
 function clamp01(n) {
   const x = Number(n);
   if (!Number.isFinite(x)) return 0;
@@ -269,6 +275,31 @@ class PostProcessingManager {
         const code = e?.diagnosis?.code ? ` ${e.diagnosis.code}` : '';
         return `${e.date || ''} ${e.hospital || ''}${code} ${e.description || ''}`;
       }).join('\n');
+
+      // Phase 2: 안전모드 검증 (T09)
+      let safeModeResult = null;
+      try {
+        safeModeResult = safeModeGuard.validateAndGuard(unifiedMedicalEvents);
+        if (safeModeResult.safeModeActive) {
+          console.log(`🛡️ 안전모드 활성화: ${safeModeResult.safeModeReason}`);
+        }
+      } catch (safeModeErr) {
+        console.warn(`⚠️ 안전모드 검증 실패: ${safeModeErr.message}`);
+      }
+
+      // Phase 2: 고지의무 분석 보고서 생성 (T08)
+      let disclosureReport = null;
+      try {
+        disclosureReport = disclosureReportBuilder.buildReport(
+          unifiedMedicalEvents,
+          options.patientInfo || {},
+          { format: options.reportFormat }
+        );
+        console.log(`📋 고지의무 보고서 생성 완료: Core ${disclosureReport.metadata.coreEvents}건, Critical ${disclosureReport.metadata.criticalEvents}건`);
+      } catch (disclosureErr) {
+        console.warn(`⚠️ 고지의무 보고서 생성 실패: ${disclosureErr.message}`);
+      }
+
       let subsetValidation = null;
       try {
         const validator = new ReportSubsetValidator();
@@ -308,20 +339,28 @@ class PostProcessingManager {
           medicalEvents: unifiedMedicalEvents,
           finalReport,
           reportSubsetValidation: subsetValidation,
-          coordinateSections
+          coordinateSections,
+          // Phase 2 결과
+          disclosureReport,
+          safeModeResult,
         },
         statistics: {
           originalTextLength: ocrText.length,
           processedGroups: massiveDateResult.structuredGroups.length,
           dateBlocks: massiveDateResult.dateBlocks.length,
           confidence: massiveDateResult.statistics.averageConfidence,
-          filteringRate: massiveDateResult.statistics.filteringRate
+          filteringRate: massiveDateResult.statistics.filteringRate,
+          // Phase 2 통계
+          coreEvents: disclosureReport?.metadata?.coreEvents || 0,
+          criticalEvents: disclosureReport?.metadata?.criticalEvents || 0,
+          safeModeActive: safeModeResult?.safeModeActive || false,
         },
         metadata: {
-          version: '7.2',
+          version: '7.3',
           timestamp: new Date().toISOString(),
           processingMode: options.useAIExtraction ? 'AI_ENHANCED' : 'RULE_BASED',
-          pipelineSteps: 5
+          pipelineSteps: 5,
+          phase2Enabled: true,
         }
       };
       

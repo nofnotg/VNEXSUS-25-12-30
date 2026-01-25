@@ -15,6 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import criticalRiskEngine from './criticalRiskRules.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,11 +54,21 @@ class DisclosureRulesEngine {
         console.log(`   - 이벤트: ${events.length}개`);
         console.log(`   - 질문: ${this.questions.length}개`);
 
+        // T05: Critical Risk 절대규칙 적용
+        let processedEvents = events;
+        try {
+            processedEvents = criticalRiskEngine.evaluateEvents(events, patientInfo);
+            const criticalCount = processedEvents.filter(e => e.criticalRisk?.isCritical).length;
+            console.log(`   - Critical 이벤트: ${criticalCount}개 (절대규칙)`);
+        } catch (err) {
+            console.warn(`⚠️ 절대규칙 평가 실패: ${err.message}`);
+        }
+
         const questionMap = {};
 
         // 각 질문에 대해 매칭되는 이벤트 찾기
         this.questions.forEach(question => {
-            const matchedEvents = this.matchEventsToQuestion(events, question, patientInfo);
+            const matchedEvents = this.matchEventsToQuestion(processedEvents, question, patientInfo);
 
             if (matchedEvents.length > 0) {
                 questionMap[question.id] = {
@@ -69,10 +80,17 @@ class DisclosureRulesEngine {
                     },
                     matchedEvents: matchedEvents,
                     summary: this.generateQuestionSummary(matchedEvents, question),
-                    totalScore: this.calculateTotalScore(matchedEvents)
+                    totalScore: this.calculateTotalScore(matchedEvents),
+                    hasCriticalEvents: matchedEvents.some(e => e.criticalRisk?.isCritical)
                 };
             }
         });
+
+        // Critical 이벤트 추가 (점수와 무관하게 포함)
+        const criticalEvents = processedEvents.filter(e => e.criticalRisk?.forceInclude);
+        if (criticalEvents.length > 0) {
+            console.log(`   - Force-include Critical 이벤트: ${criticalEvents.length}개`);
+        }
 
         console.log(`✅ ${Object.keys(questionMap).length}개 질문에 이벤트 매칭됨`);
         return questionMap;
