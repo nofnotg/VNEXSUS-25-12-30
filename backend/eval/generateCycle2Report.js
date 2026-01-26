@@ -1,0 +1,480 @@
+/**
+ * Cycle 2 분석 HTML 보고서 생성
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const PATHS = {
+  analysisFile: path.join(__dirname, 'output/cycle2_analysis/cycle2_analysis_results.json'),
+  outputFile: path.join(__dirname, 'output/cycle2_analysis/reports/cycle2_analysis_report.html')
+};
+
+// 분석 결과 로드
+const analysis = JSON.parse(fs.readFileSync(PATHS.analysisFile, 'utf-8'));
+
+// 누락 패턴 통계 집계
+const aggregatedPatterns = {
+  insurance: 0,
+  admission: 0,
+  examination: 0,
+  recent: 0,
+  past: 0
+};
+
+analysis.results.forEach(r => {
+  if (r.missedPatterns) {
+    aggregatedPatterns.insurance += r.missedPatterns.insurance.length;
+    aggregatedPatterns.admission += r.missedPatterns.admission.length;
+    aggregatedPatterns.examination += r.missedPatterns.examination.length;
+    aggregatedPatterns.recent += r.missedPatterns.recent.length;
+    aggregatedPatterns.past += r.missedPatterns.past.length;
+  }
+});
+
+const totalMissed = analysis.totalMissedDates;
+const patternPercentages = {
+  insurance: totalMissed > 0 ? (aggregatedPatterns.insurance / totalMissed * 100).toFixed(1) : 0,
+  admission: totalMissed > 0 ? (aggregatedPatterns.admission / totalMissed * 100).toFixed(1) : 0,
+  examination: totalMissed > 0 ? (aggregatedPatterns.examination / totalMissed * 100).toFixed(1) : 0,
+  recent: totalMissed > 0 ? (aggregatedPatterns.recent / totalMissed * 100).toFixed(1) : 0,
+  past: totalMissed > 0 ? (aggregatedPatterns.past / totalMissed * 100).toFixed(1) : 0
+};
+
+// HTML 생성
+const html = `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS Cycle 2 분석 보고서</title>
+  <style>
+    :root {
+      --primary: #1a237e;
+      --secondary: #3f51b5;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --danger: #f44336;
+      --info: #2196f3;
+      --light-bg: #f8f9fa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Malgun Gothic', 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+    .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .header .subtitle { opacity: 0.9; font-size: 1.1em; }
+
+    .section { padding: 40px; border-bottom: 1px solid #eee; }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 1.8em;
+      color: var(--primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .alert {
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-left: 5px solid;
+    }
+    .alert-danger {
+      background: #ffebee;
+      border-color: var(--danger);
+      color: #c62828;
+    }
+    .alert-warning {
+      background: #fff3e0;
+      border-color: var(--warning);
+      color: #e65100;
+    }
+    .alert-info {
+      background: #e3f2fd;
+      border-color: var(--info);
+      color: #1565c0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: var(--light-bg);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      border: 3px solid transparent;
+    }
+    .stat-card.danger { border-color: var(--danger); }
+    .stat-card .value {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .stat-card.danger .value { color: var(--danger); }
+    .stat-card .label { color: #666; }
+
+    .case-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .case-table th,
+    .case-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .case-table th {
+      background: var(--light-bg);
+      font-weight: bold;
+      color: var(--primary);
+    }
+    .case-table tr:hover {
+      background: #f5f5f5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+    .badge-danger {
+      background: var(--danger);
+      color: white;
+    }
+    .badge-warning {
+      background: var(--warning);
+      color: white;
+    }
+
+    .chart-bar {
+      height: 40px;
+      background: linear-gradient(90deg, var(--danger) 0%, var(--warning) 100%);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .strategy-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    .strategy-box h3 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    .strategy-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .strategy-box li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+    .strategy-box li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .roadmap-step {
+      background: white;
+      border: 3px solid var(--info);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+    }
+    .roadmap-step .number {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: var(--info);
+      color: white;
+      border-radius: 50%;
+      line-height: 50px;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .roadmap-step h4 {
+      color: var(--info);
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 VNEXSUS Cycle 2 분석 보고서</h1>
+      <p class="subtitle">의료 문서 OCR 날짜 추출 검증 - Baseline 평가</p>
+      <div style="margin-top: 20px; opacity: 0.9;">
+        생성일: ${new Date(analysis.generatedAt).toLocaleString('ko-KR')}
+      </div>
+    </div>
+
+    <!-- 긴급 알림 -->
+    <div class="section">
+      <div class="alert alert-danger">
+        <h3 style="margin-bottom: 15px;">🚨 긴급: GT Coverage 심각하게 낮음</h3>
+        <p style="font-size: 1.1em; line-height: 1.6;">
+          현재 Cycle 2 (Baseline) GT Coverage는 <strong>${analysis.overallCoverage.toFixed(1)}%</strong>로,
+          목표치 <strong>95%</strong>에 비해 <strong style="color: var(--danger);">${(95 - analysis.overallCoverage).toFixed(1)}%p 부족</strong>합니다.
+          <br>즉시 Cycle 4 Top-Down 전략을 적용하여 개선이 필요합니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- 전체 요약 -->
+    <div class="section">
+      <div class="section-title">
+        <span>📈</span>
+        <span>전체 요약</span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="value">${analysis.totalCases}</div>
+          <div class="label">분석 케이스</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">${analysis.totalGroundTruthDates}</div>
+          <div class="label">Ground Truth 날짜</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">${analysis.totalMissedDates}</div>
+          <div class="label">누락된 날짜</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">${analysis.overallCoverage.toFixed(1)}%</div>
+          <div class="label">GT Coverage</div>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>📌 핵심 발견:</strong>
+        전체 ${analysis.totalGroundTruthDates}개의 Ground Truth 날짜 중
+        <strong>${analysis.totalMatchedDates}개만 추출</strong>되었으며,
+        <strong>${analysis.totalMissedDates}개가 누락</strong>되었습니다.
+      </div>
+    </div>
+
+    <!-- 케이스별 결과 -->
+    <div class="section">
+      <div class="section-title">
+        <span>📋</span>
+        <span>케이스별 상세 결과</span>
+      </div>
+
+      <table class="case-table">
+        <thead>
+          <tr>
+            <th>케이스</th>
+            <th>GT 날짜</th>
+            <th>추출</th>
+            <th>매칭</th>
+            <th>누락</th>
+            <th>Coverage</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${analysis.results.map(r => `
+            <tr>
+              <td><strong>Case ${r.caseNum}</strong></td>
+              <td>${r.coverage.groundTruthCount}</td>
+              <td>${r.coverage.extractedCount}</td>
+              <td>${r.coverage.matchedCount}</td>
+              <td style="color: var(--danger); font-weight: bold;">${r.coverage.missedCount}</td>
+              <td>${r.coverage.coverage.toFixed(1)}%</td>
+              <td>
+                <span class="badge ${r.coverage.coverage >= 50 ? 'badge-warning' : 'badge-danger'}">
+                  ${r.coverage.coverage >= 50 ? '⚠️ 개선 필요' : '❌ 매우 낮음'}
+                </span>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 누락 패턴 분석 -->
+    <div class="section">
+      <div class="section-title">
+        <span>🔍</span>
+        <span>누락 패턴 분석</span>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>⚠️ 주요 누락 원인:</strong>
+        보험 관련 날짜가 ${aggregatedPatterns.insurance}개(${patternPercentages.insurance}%)로 가장 많이 누락되었습니다.
+      </div>
+
+      <div style="margin-top: 30px;">
+        <div class="chart-bar" style="width: ${patternPercentages.insurance}%">
+          보험 관련: ${aggregatedPatterns.insurance}개 (${patternPercentages.insurance}%)
+        </div>
+        <div class="chart-bar" style="width: ${patternPercentages.recent}%; background: linear-gradient(90deg, var(--warning) 0%, var(--info) 100%);">
+          최근 의료: ${aggregatedPatterns.recent}개 (${patternPercentages.recent}%)
+        </div>
+        <div class="chart-bar" style="width: ${patternPercentages.admission}%; background: linear-gradient(90deg, var(--info) 0%, var(--success) 100%);">
+          입원/퇴원: ${aggregatedPatterns.admission}개 (${patternPercentages.admission}%)
+        </div>
+        <div class="chart-bar" style="width: ${patternPercentages.examination}%; background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);">
+          검사/보고: ${aggregatedPatterns.examination}개 (${patternPercentages.examination}%)
+        </div>
+        <div class="chart-bar" style="width: ${patternPercentages.past}%; background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);">
+          과거 병력: ${aggregatedPatterns.past}개 (${patternPercentages.past}%)
+        </div>
+      </div>
+    </div>
+
+    <!-- Cycle 4 Top-Down 전략 -->
+    <div class="section">
+      <div class="section-title">
+        <span>🎯</span>
+        <span>Cycle 4 Top-Down 개선 전략</span>
+      </div>
+
+      <div class="strategy-box">
+        <h3>📌 핵심 원칙: "누락보다 과추출이 낫다"</h3>
+        <ul>
+          <li><strong>보험사 주변 100자 내 모든 날짜 추출</strong><br>
+              NH, KB, 삼성, 현대, AXA, DB 등 보험사 언급 전후 100자 이내의 모든 날짜를 적극 추출</li>
+          <li><strong>테이블/표의 모든 날짜 추출</strong><br>
+              "일자", "날짜", "기간" 열의 모든 값 및 테이블 첫 번째 열의 모든 날짜 추출</li>
+          <li><strong>기간 표현의 시작일과 종료일 모두 추출</strong><br>
+              "2019.03.23 ~ 2023.08.07" 형식에서 두 날짜 모두 추출</li>
+          <li><strong>미래 날짜 포함</strong><br>
+              2030년, 2040년 등 보험 만기일도 추출</li>
+          <li><strong>과거 날짜 포함</strong><br>
+              2000년대, 1990년대 등 오래된 과거력도 추출</li>
+          <li><strong>의료 관련 모든 날짜</strong><br>
+              입원일, 퇴원일, 수술일, 검사일, 진단일, 처방일 등</li>
+          <li><strong>보험 관련 모든 날짜</strong><br>
+              가입일, 청약일, 보장개시일, 청구일, 조사일 등</li>
+        </ul>
+      </div>
+
+      <div class="alert alert-info" style="margin-top: 20px;">
+        <strong>💡 예상 개선 효과:</strong>
+        Cycle 4 Top-Down 전략 적용 시, GT Coverage를
+        <strong>${analysis.overallCoverage.toFixed(1)}% → 95%+</strong>로
+        <strong style="color: var(--success);">${(95 - analysis.overallCoverage).toFixed(1)}%p 향상</strong> 예상
+      </div>
+    </div>
+
+    <!-- 로드맵 -->
+    <div class="section">
+      <div class="section-title">
+        <span>🗺️</span>
+        <span>목표 달성 로드맵</span>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-step">
+          <div class="number">1</div>
+          <h4>Cycle 4 스크립트 실행</h4>
+          <p>과추출 전략이 적용된 Vision LLM 프롬프트로 11개 타겟 케이스 처리</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="number">2</div>
+          <h4>결과 분석 및 검증</h4>
+          <p>GT Coverage 95% 이상 달성 여부 확인 및 누락 케이스 분석</p>
+        </div>
+        <div class="roadmap-step">
+          <div class="number">3</div>
+          <h4>프로덕션 통합</h4>
+          <p>검증된 전략을 메인 파이프라인에 반영하여 전체 시스템 개선</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 결론 -->
+    <div class="section">
+      <div class="section-title">
+        <span>📝</span>
+        <span>결론 및 권장사항</span>
+      </div>
+
+      <div class="alert alert-danger">
+        <h3 style="margin-bottom: 15px;">🚨 즉시 조치 필요</h3>
+        <ol style="padding-left: 20px; line-height: 1.8;">
+          <li><strong>Cycle 4 Top-Down 검증 즉시 실행</strong><br>
+              현재 ${analysis.overallCoverage.toFixed(1)}% GT Coverage는 프로덕션 사용 불가 수준</li>
+          <li><strong>보험 관련 날짜 추출 강화</strong><br>
+              누락의 ${patternPercentages.insurance}%가 보험 관련 날짜로, 최우선 개선 필요</li>
+          <li><strong>과추출 전략 적용</strong><br>
+              "누락보다 과추출이 낫다" 원칙으로 정확도보다 재현율 우선</li>
+          <li><strong>목표 GT Coverage 95% 이상 달성</strong><br>
+              프로덕션 통합을 위한 최소 요구사항</li>
+        </ol>
+      </div>
+
+      <div style="margin-top: 30px; padding: 20px; background: var(--light-bg); border-radius: 10px;">
+        <p style="font-size: 1.1em; line-height: 1.6; color: #333;">
+          <strong>📌 다음 단계:</strong><br>
+          1. <code>node backend/eval/cycle4TopDownValidator.js</code> 실행<br>
+          2. 결과 분석 및 GT Coverage 검증<br>
+          3. 95% 이상 달성 시 프로덕션 통합<br>
+          4. 95% 미달 시 Cycle 5 전략 수립
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+// HTML 파일 저장
+fs.writeFileSync(PATHS.outputFile, html);
+
+console.log('✅ HTML 보고서 생성 완료');
+console.log(`📁 저장 위치: ${PATHS.outputFile}`);
+console.log();
+console.log('🌐 브라우저에서 열어서 확인하세요!');
