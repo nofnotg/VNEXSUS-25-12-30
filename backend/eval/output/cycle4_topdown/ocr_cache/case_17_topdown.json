@@ -1,0 +1,451 @@
+{
+  "caseId": "Case17",
+  "caseNum": 17,
+  "patientName": "김동아",
+  "totalPages": 28,
+  "processedPages": 28,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:31:48.927Z",
+  "processingTime": 194082,
+  "cost": 0.1512,
+  "usage": {
+    "prompt_tokens": 1034734,
+    "completion_tokens": 2383,
+    "total_tokens": 1037117
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025년 09월 09일",
+        "context": "이 의무기록 사본은 위 용도 이외에 사용 할 수 없으며, 사용 후 즉시 폐기 처분하여 주시기 바랍니다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 13:11 보험유형 : 보험",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-19",
+        "originalFormat": "2025.08.19",
+        "context": "2025.08.19 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 14:00",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.21 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 09:15",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-28",
+        "originalFormat": "2025.08.28",
+        "context": "2025.08.28 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 10:44",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-28",
+        "originalFormat": "2025.08.28",
+        "context": "2025.08.28 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 10:05",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-19",
+        "originalFormat": "2025-08-19 15:02:00",
+        "context": "Start Date & Time 2025-08-19 15:02:00",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-22",
+        "originalFormat": "2025-08-22 14:37:37",
+        "context": "End Date & Time 2025-08-22 14:37:37",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025/09/09",
+        "context": "출력자 : 이혜원",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-19",
+        "originalFormat": "2025-08-19",
+        "context": "Time : 2025-08-19 15:43:39",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-20",
+        "originalFormat": "2025-08-20",
+        "context": "Time : 2025-08-20 21:06:52",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025-08-21",
+        "context": "Time : 2025-08-21 08:06:24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-22",
+        "originalFormat": "2025-08-22",
+        "context": "Time : 2025-08-22 14:37:37",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-28",
+        "originalFormat": "2025-08-28",
+        "context": "2025-08-28 10:44:59",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025/09/09",
+        "context": "출력일시: 2025/09/09",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025.09.09",
+        "context": "2025.09.09 2025.09.19",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-19",
+        "originalFormat": "2025.09.19",
+        "context": "2025.09.09 2025.09.19",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.21 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-18",
+        "originalFormat": "2025.08.18",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-14",
+        "originalFormat": "2025.08.14",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-21",
+        "originalFormat": "2025.08.21",
+        "context": "2025.08.14 2025.08.21",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2025-08-19",
+        "endDate": "2025-08-22",
+        "context": "Start Date & Time 2025-08-19 15:02:00 End Date & Time 2025-08-22 14:37:37",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-19",
+        "endDate": "2025-08-22",
+        "context": "Period : 2025-08-19 15:02:00 - 2025-08-22 14:37:37",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-14",
+        "endDate": "2025-08-21",
+        "context": "진료비 세부산정내역",
+        "type": "조회기간"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": [
+      {
+        "date": "2025-09-09",
+        "rowContent": "2025.09.09 2025.09.19",
+        "tableType": "기타"
+      },
+      {
+        "date": "2025-09-19",
+        "rowContent": "2025.09.09 2025.09.19",
+        "tableType": "기타"
+      },
+      {
+        "date": "2025-08-21",
+        "rowContent": "2025.08.21",
+        "tableType": "기타"
+      },
+      {
+        "date": "2025-08-14",
+        "rowContent": "2025.08.14",
+        "tableType": "기타"
+      },
+      {
+        "date": "2025-08-18",
+        "rowContent": "2025.08.18",
+        "tableType": "기타"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2025-08-12",
+      "2025-08-14",
+      "2025-08-19",
+      "2030-08-12",
+      "2045-08-12"
+    ],
+    "aiDates": [
+      "2025-08-14",
+      "2025-08-18",
+      "2025-08-19",
+      "2025-08-20",
+      "2025-08-21",
+      "2025-08-22",
+      "2025-08-28",
+      "2025-09-09",
+      "2025-09-19"
+    ],
+    "matched": [
+      "2025-08-14",
+      "2025-08-19"
+    ],
+    "missed": [
+      "2025-08-12",
+      "2030-08-12",
+      "2045-08-12"
+    ],
+    "extra": [
+      "2025-08-18",
+      "2025-08-20",
+      "2025-08-21",
+      "2025-08-22",
+      "2025-08-28",
+      "2025-09-09",
+      "2025-09-19"
+    ],
+    "gtCoverageRate": 40,
+    "gtCount": 5,
+    "aiCount": 9,
+    "matchedCount": 2,
+    "missedCount": 3,
+    "extraCount": 7
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 23
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 24
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 25
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 26
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 27
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 28
+    }
+  ]
+}

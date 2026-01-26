@@ -1,0 +1,1223 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "totalPages": 34,
+  "processedPages": 34,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:15:57.928Z",
+  "processingTime": 411660,
+  "cost": 0.1836,
+  "usage": {
+    "prompt_tokens": 1256862,
+    "completion_tokens": 8628,
+    "total_tokens": 1265490
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-01-22",
+        "originalFormat": "2025-01-22 14:04:23",
+        "context": "2025-01-22 14:04:23",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-12",
+        "originalFormat": "2024-12-12",
+        "context": "2024-12-12",
+        "type": "진단",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-30",
+        "originalFormat": "2024.05.30",
+        "context": "검진일: 2024.05.30",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-06-05",
+        "originalFormat": "2024.06.05",
+        "context": "판정일: 2024.06.05",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-30",
+        "originalFormat": "2024.05.30",
+        "context": "검진일: 2024.05.30",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-06-05",
+        "originalFormat": "2024.06.05",
+        "context": "판정일: 2024.06.05",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-30",
+        "originalFormat": "2024.05.30",
+        "context": "검진일: 2024.05.30",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-06-05",
+        "originalFormat": "2024.06.05",
+        "context": "판정일: 2024.06.05",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-27",
+        "originalFormat": "2024-12-27",
+        "context": "2024-12-27",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-24",
+        "originalFormat": "2025년01월24일",
+        "context": "2025년01월24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025년01월21일",
+        "context": "2025년01월21일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025년01월21일",
+        "context": "2025년01월21일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-27",
+        "originalFormat": "2024-12-27",
+        "context": "2024-12-27",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-12",
+        "originalFormat": "2024-12-12",
+        "context": "2024-12-12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-12",
+        "originalFormat": "2024-12-12",
+        "context": "2024-12-12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-12",
+        "originalFormat": "2024-12-12",
+        "context": "2024-12-12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-27",
+        "originalFormat": "2024-12-27",
+        "context": "외래초진기록",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-31",
+        "originalFormat": "2024-12-31",
+        "context": "입원일자: 2024-12-31",
+        "type": "입원",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-01",
+        "originalFormat": "2025-01-01",
+        "context": "목표일: 2025-01-01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-31",
+        "originalFormat": "2024-12-31",
+        "context": "계획일: 2024-12-31",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-31",
+        "originalFormat": "2024-12-31",
+        "context": "Date\nOperator 1 (임원주치의) 홍성진",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-21",
+        "originalFormat": "출력일: 2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-09",
+        "originalFormat": "2025-01-09",
+        "context": "2025-01-09\nBP(S): 146 mmHg",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-14",
+        "originalFormat": "2025-01-14",
+        "context": "2025-01-14\nPI newly detected diabetes",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-31",
+        "originalFormat": "LAD MILKING 2024-12-31",
+        "context": "Assessment\nLAD MILKING 2024-12-31",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-12-31",
+        "originalFormat": "2024-12-31",
+        "context": "LCA c JL 5-4\nTubular ecc. 50% LN of mLAD c moderate milking",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-30",
+        "originalFormat": "2024-04-30",
+        "context": "dLAD : distal left ascending artery",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-04-12",
+        "originalFormat": "통원기간 : 2024.04.12 ~ 2024.11.04",
+        "context": "통원기간 : 2024.04.12 ~ 2024.11.04",
+        "type": "통원기간",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-11-04",
+        "originalFormat": "통원기간 : 2024.04.12 ~ 2024.11.04",
+        "context": "통원기간 : 2024.04.12 ~ 2024.11.04",
+        "type": "통원기간",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-01-17",
+        "originalFormat": "심평원 진료내역(2020.01.17 ~ 2024.01.24)",
+        "context": "심평원 진료내역(2020.01.17 ~ 2024.01.24)",
+        "type": "심평원조회기간",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-01-24",
+        "originalFormat": "심평원 진료내역(2020.01.17 ~ 2024.01.24)",
+        "context": "심평원 진료내역(2020.01.17 ~ 2024.01.24)",
+        "type": "심평원조회기간",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-10-30",
+        "originalFormat": "2023-10-30",
+        "context": "2023-10-30\n치과 외래 AK0531",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2023-12-21",
+        "originalFormat": "2023-12-21",
+        "context": "2023-12-21\n영동프라자 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2023-12-28",
+        "originalFormat": "2023-12-28",
+        "context": "2023-12-28\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2023-12-30",
+        "originalFormat": "2023-12-30",
+        "context": "2023-12-30\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-01-01",
+        "originalFormat": "2024-01-01",
+        "context": "2024-01-01\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-01-25",
+        "originalFormat": "2024-01-25",
+        "context": "2024-01-25\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-01-30",
+        "originalFormat": "2024-01-30",
+        "context": "2024-01-30\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-01",
+        "originalFormat": "2024-02-01",
+        "context": "2024-02-01\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-05",
+        "originalFormat": "2024-02-05",
+        "context": "2024-02-05\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-10",
+        "originalFormat": "2024-02-10",
+        "context": "2024-02-10\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-15",
+        "originalFormat": "2024-02-15",
+        "context": "2024-02-15\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-20",
+        "originalFormat": "2024-02-20",
+        "context": "2024-02-20\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-02-25",
+        "originalFormat": "2024-02-25",
+        "context": "2024-02-25\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-01",
+        "originalFormat": "2024-03-01",
+        "context": "2024-03-01\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-05",
+        "originalFormat": "2024-03-05",
+        "context": "2024-03-05\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-10",
+        "originalFormat": "2024-03-10",
+        "context": "2024-03-10\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-15",
+        "originalFormat": "2024-03-15",
+        "context": "2024-03-15\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-20",
+        "originalFormat": "2024-03-20",
+        "context": "2024-03-20\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-25",
+        "originalFormat": "2024-03-25",
+        "context": "2024-03-25\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2024-03-30",
+        "originalFormat": "2024-03-30",
+        "context": "2024-03-30\n구강악안면외과 외래",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2023-06-07",
+        "originalFormat": "2023-06-07",
+        "context": "홍제튼외과 일반의 AS400 (양방) 개 위협의 태상",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-04-24",
+        "originalFormat": "2023-04-24",
+        "context": "동신비뇨기과 외래 AN401 (양방)으로 폐쇄유도",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-04-24",
+        "originalFormat": "2023-04-24",
+        "context": "동신비뇨기과 외래 AN401 (양방)으로 폐쇄유도",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-04-17",
+        "originalFormat": "2023-04-17",
+        "context": "가까운약국 일반의 AN310 (양방) 항방향",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-04-03",
+        "originalFormat": "2023-04-03",
+        "context": "덴티스킨치과 의원 AZ463 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-04-03",
+        "originalFormat": "2023-04-03",
+        "context": "영동포진약국 일반의 AK0528 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-03-30",
+        "originalFormat": "2023-03-30",
+        "context": "가까운약국 일반의 AN310 (양방) 항방향",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-03-13",
+        "originalFormat": "2023-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-03-13",
+        "originalFormat": "2023-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-03-13",
+        "originalFormat": "2023-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-01-31",
+        "originalFormat": "2023-01-31",
+        "context": "덴티스킨치과 의원 AK0531 (양방)성",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-12-31",
+        "originalFormat": "2022-12-31",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-12-31",
+        "originalFormat": "2022-12-31",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-10-28",
+        "originalFormat": "2022-10-28",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-10-28",
+        "originalFormat": "2022-10-28",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-08-05",
+        "originalFormat": "2022-08-05",
+        "context": "덴티스킨치과 의원 AK0881 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-08-05",
+        "originalFormat": "2022-08-05",
+        "context": "영동포진약국 일반의 AK0881 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-08-05",
+        "originalFormat": "2022-08-05",
+        "context": "영동포진약국 일반의 AK0881 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-03-13",
+        "originalFormat": "2022-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-03-13",
+        "originalFormat": "2022-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-03-13",
+        "originalFormat": "2022-03-13",
+        "context": "강한내과의원 내과 AU071 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-12-31",
+        "originalFormat": "2021-12-31",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-12-31",
+        "originalFormat": "2021-12-31",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-10-28",
+        "originalFormat": "2021-10-28",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-10-28",
+        "originalFormat": "2021-10-28",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-08-05",
+        "originalFormat": "2021-08-05",
+        "context": "영동포진약국 일반의 AK0881 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-26",
+        "originalFormat": "2021-07-26",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-14",
+        "originalFormat": "2021-06-14",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-09",
+        "originalFormat": "2021-06-09",
+        "context": "홍제삼성의원 외래 AS600 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-01",
+        "originalFormat": "2021-06-01",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021-05-31",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021-05-31",
+        "context": "영동포진약국 일반의 AK0530 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021-05-31",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-12-01",
+        "originalFormat": "2020-12-01",
+        "context": "덴티스킨치과 의원 AK0531 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-01-31",
+        "originalFormat": "2020-01-31",
+        "context": "덴티스킨치과 의원 AK0531 (양방)기",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2024-12-12",
+        "endDate": "2024-12-12",
+        "context": "진료구분: O원",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-05-30",
+        "endDate": "2024-06-05",
+        "context": "검진일: 2024.05.30",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-12-31",
+        "endDate": "2024-12-31",
+        "context": "입원정보",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-01-01",
+        "endDate": "2024-12-31",
+        "context": "목표일: 2025-01-01",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-12",
+        "endDate": "2024-11-04",
+        "context": "통원기간 : 2024.04.12 ~ 2024.11.04",
+        "type": "통원기간"
+      },
+      {
+        "startDate": "2020-01-17",
+        "endDate": "2024-01-24",
+        "context": "심평원 진료내역(2020.01.17 ~ 2024.01.24)",
+        "type": "심평원조회기간"
+      },
+      {
+        "startDate": "2023-04-24",
+        "endDate": "2023-04-24",
+        "context": "동신비뇨기과 외래 AN401 (양방)으로 폐쇄유도",
+        "type": "기타"
+      },
+      {
+        "startDate": "2023-04-17",
+        "endDate": "2023-04-17",
+        "context": "가까운약국 일반의 AN310 (양방) 항방향",
+        "type": "기타"
+      },
+      {
+        "startDate": "2023-03-30",
+        "endDate": "2023-03-30",
+        "context": "가까운약국 일반의 AN310 (양방) 항방향",
+        "type": "기타"
+      },
+      {
+        "startDate": "2023-01-31",
+        "endDate": "2023-01-31",
+        "context": "덴티스킨치과 의원 AK0531 (양방)성",
+        "type": "기타"
+      },
+      {
+        "startDate": "2022-12-31",
+        "endDate": "2022-12-31",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2022-10-28",
+        "endDate": "2022-10-28",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2022-08-05",
+        "endDate": "2022-08-05",
+        "context": "영동포진약국 일반의 AK0881 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-12-31",
+        "endDate": "2021-12-31",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-10-28",
+        "endDate": "2021-10-28",
+        "context": "덴티스킨치과 의원 AK0538 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-08-05",
+        "endDate": "2021-08-05",
+        "context": "영동포진약국 일반의 AK0881 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-07-26",
+        "endDate": "2021-07-26",
+        "context": "영동포진약국 일반의 AK0538 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-06-14",
+        "endDate": "2021-06-14",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-06-09",
+        "endDate": "2021-06-09",
+        "context": "홍제삼성의원 외래 AS600 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-06-01",
+        "endDate": "2021-06-01",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-05-31",
+        "endDate": "2021-05-31",
+        "context": "덴티스킨치과 의원 AK045 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2020-12-01",
+        "endDate": "2020-12-01",
+        "context": "덴티스킨치과 의원 AK0531 (양방)기",
+        "type": "기타"
+      },
+      {
+        "startDate": "2020-01-31",
+        "endDate": "2020-01-31",
+        "context": "덴티스킨치과 의원 AK0531 (양방)기",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": [
+      {
+        "date": "2023-06-07",
+        "rowContent": "34 2023-06-07 홍제튼외과 일반의 AS400 (양방) 개 위협의 태상",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2023-06-04",
+        "rowContent": "35 2023-06-04 홍제튼외과 정형외과 AS400 (양방) 개 위협의 태상",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2023-04-24",
+        "rowContent": "36 2023-04-24 동신비뇨기과 외래 AN401 (양방)으로 폐쇄유도",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2023-04-17",
+        "rowContent": "38 2023-04-17 동신비뇨기과 외래 AN400 (양방) 항방향",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2023-03-30",
+        "rowContent": "39 2023-03-30 가까운약국 일반의 AN310 (양방) 항방향",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2023-03-13",
+        "rowContent": "43 2023-03-13 덴티스킨치과 의원 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2022-12-31",
+        "rowContent": "49 2022-12-31 덴티스킨치과 의원 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2022-10-28",
+        "rowContent": "50 2022-10-28 영동포진약국 일반의 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2022-08-05",
+        "rowContent": "51 2022-08-05 영동포진약국 일반의 AK0881 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-12-31",
+        "rowContent": "52 2021-12-31 덴티스킨치과 의원 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-10-28",
+        "rowContent": "53 2021-10-28 영동포진약국 일반의 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-08-05",
+        "rowContent": "54 2021-08-05 영동포진약국 일반의 AK0881 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-07-26",
+        "rowContent": "55 2021-07-26 영동포진약국 일반의 AK0538 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-06-14",
+        "rowContent": "56 2021-06-14 덴티스킨치과 의원 AK045 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-06-09",
+        "rowContent": "57 2021-06-09 홍제삼성의원 외래 AS600 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-06-01",
+        "rowContent": "58 2021-06-01 덴티스킨치과 의원 AK045 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2021-05-31",
+        "rowContent": "59 2021-05-31 덴티스킨치과 의원 AK045 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2020-12-01",
+        "rowContent": "60 2020-12-01 덴티스킨치과 의원 AK0531 (양방)기",
+        "tableType": "사고경위표"
+      },
+      {
+        "date": "2020-01-31",
+        "rowContent": "67 2020-01-31 덴티스킨치과 의원 AK0531 (양방)기",
+        "tableType": "사고경위표"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2018-05-10",
+      "2020-01-17",
+      "2023-02-10",
+      "2023-05-10",
+      "2024-01-24",
+      "2024-05-30",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31"
+    ],
+    "aiDates": [
+      "2020-01-17",
+      "2020-01-31",
+      "2020-12-01",
+      "2021-05-31",
+      "2021-06-01",
+      "2021-06-09",
+      "2021-06-14",
+      "2021-07-26",
+      "2021-08-05",
+      "2021-10-28",
+      "2021-12-31",
+      "2022-03-13",
+      "2022-08-05",
+      "2022-10-28",
+      "2022-12-31",
+      "2023-01-31",
+      "2023-03-13",
+      "2023-03-30",
+      "2023-04-03",
+      "2023-04-17",
+      "2023-04-24",
+      "2023-06-04",
+      "2023-06-07",
+      "2023-10-30",
+      "2023-12-21",
+      "2023-12-28",
+      "2023-12-30",
+      "2024-01-01",
+      "2024-01-17",
+      "2024-01-24",
+      "2024-01-25",
+      "2024-01-30",
+      "2024-02-01",
+      "2024-02-05",
+      "2024-02-10",
+      "2024-02-15",
+      "2024-02-20",
+      "2024-02-25",
+      "2024-03-01",
+      "2024-03-05",
+      "2024-03-10",
+      "2024-03-15",
+      "2024-03-20",
+      "2024-03-25",
+      "2024-03-30",
+      "2024-04-12",
+      "2024-04-30",
+      "2024-05-30",
+      "2024-06-05",
+      "2024-11-04",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31",
+      "2025-01-01",
+      "2025-01-09",
+      "2025-01-14",
+      "2025-01-21",
+      "2025-01-22",
+      "2025-01-24"
+    ],
+    "matched": [
+      "2020-01-17",
+      "2024-01-24",
+      "2024-05-30",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31"
+    ],
+    "missed": [
+      "2018-05-10",
+      "2023-02-10",
+      "2023-05-10"
+    ],
+    "extra": [
+      "2020-01-31",
+      "2020-12-01",
+      "2021-05-31",
+      "2021-06-01",
+      "2021-06-09",
+      "2021-06-14",
+      "2021-07-26",
+      "2021-08-05",
+      "2021-10-28",
+      "2021-12-31",
+      "2022-03-13",
+      "2022-08-05",
+      "2022-10-28",
+      "2022-12-31",
+      "2023-01-31",
+      "2023-03-13",
+      "2023-03-30",
+      "2023-04-03",
+      "2023-04-17",
+      "2023-04-24",
+      "2023-06-04",
+      "2023-06-07",
+      "2023-10-30",
+      "2023-12-21",
+      "2023-12-28",
+      "2023-12-30",
+      "2024-01-01",
+      "2024-01-17",
+      "2024-01-25",
+      "2024-01-30",
+      "2024-02-01",
+      "2024-02-05",
+      "2024-02-10",
+      "2024-02-15",
+      "2024-02-20",
+      "2024-02-25",
+      "2024-03-01",
+      "2024-03-05",
+      "2024-03-10",
+      "2024-03-15",
+      "2024-03-20",
+      "2024-03-25",
+      "2024-03-30",
+      "2024-04-12",
+      "2024-04-30",
+      "2024-06-05",
+      "2024-11-04",
+      "2025-01-01",
+      "2025-01-09",
+      "2025-01-14",
+      "2025-01-21",
+      "2025-01-22",
+      "2025-01-24"
+    ],
+    "gtCoverageRate": 67,
+    "gtCount": 9,
+    "aiCount": 59,
+    "matchedCount": 6,
+    "missedCount": 3,
+    "extraCount": 53
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "굿웰스의원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "굿웰스의원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "동신병원 검진_위암검진(24년).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "동신병원 검진_위암검진(24년).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 34,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 7
+    }
+  ]
+}

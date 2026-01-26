@@ -1,0 +1,320 @@
+{
+  "caseId": "Case30",
+  "caseNum": 30,
+  "patientName": "송금숙",
+  "totalPages": 18,
+  "processedPages": 18,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:53:42.956Z",
+  "processingTime": 102875,
+  "cost": 0.09720000000000001,
+  "usage": {
+    "prompt_tokens": 665266,
+    "completion_tokens": 1483,
+    "total_tokens": 666749
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-09-24",
+        "originalFormat": "2025-09-24",
+        "context": "2025-09-24 13:46:06",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-19",
+        "originalFormat": "2025/09/19",
+        "context": "발행일자 2025/09/19",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-24",
+        "originalFormat": "2025-03-24",
+        "context": "Operation Date : 2025-03-24",
+        "type": "수술",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-23",
+        "originalFormat": "2025-03-23",
+        "context": "퇴원일자 2025년 03월 23일",
+        "type": "퇴원",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-11",
+        "originalFormat": "2025년 04월 11일",
+        "context": "퇴원일자 2025년 04월 11일",
+        "type": "퇴원",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-23",
+        "originalFormat": "2025년 03월 23일",
+        "context": "입원일자 2025년 03월 23일",
+        "type": "입원",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-25",
+        "originalFormat": "2025/03/25",
+        "context": "Reading Date: 2025/03/25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-25",
+        "originalFormat": "2025/03/25",
+        "context": "Reading Date: 2025/03/25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-24",
+        "originalFormat": "2025/03/24",
+        "context": "Reading Date: 2025/03/24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-24",
+        "originalFormat": "2025/03/24",
+        "context": "Reading Date: 2025/03/24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-25",
+        "originalFormat": "2025/03/25",
+        "context": "Reading Date: 2025/03/25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-12",
+        "originalFormat": "2025/03/12",
+        "context": "환자ID: 25530237 성명: 송금숙 주민등록번호: 540817-2******(F/70) 진료과(의무기록사본전방): 01-1",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-12",
+        "originalFormat": "2025/03/12",
+        "context": "L-Spine MRI & CTL - 2025/03/12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-30",
+        "originalFormat": "2025/04/30",
+        "context": "[Progress note] 10:57 어제 리니지로 유축 엉치가 아프다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-05-07",
+        "originalFormat": "2025/05/07",
+        "context": "[Progress note] 15:21 우측 엉치 통증은 호전되고 있다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-04",
+        "originalFormat": "2025/06/04",
+        "context": "[Progress note] 15:29 good fixation state",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-03",
+        "originalFormat": "2025/09/03",
+        "context": "[Progress note] 16:02 good fixation state",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-24",
+        "originalFormat": "2025/03/24",
+        "context": "판독자(Reported By): 유지원",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-12",
+        "originalFormat": "2025/03/12",
+        "context": "검사(Exam): L-Spine MRI & CTL - 2025/03/12",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2025-03-23",
+        "endDate": "2025-04-11",
+        "context": "입원일자 2025년 03월 23일 ~ 퇴원일자 2025년 04월 11일",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-03-12",
+        "endDate": "2025-03-12",
+        "context": "L-Spine MRI & CTL - 2025/03/12",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-03-12",
+        "endDate": "2025-03-24",
+        "context": "판독자(Reported By): 유지원",
+        "type": "조회기간"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": []
+  },
+  "matching": {
+    "gtDates": [
+      "2012-11-23",
+      "2025-01-01",
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-04-11",
+      "2025-04-22",
+      "2025-09-09"
+    ],
+    "aiDates": [
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-03-25",
+      "2025-04-11",
+      "2025-04-30",
+      "2025-05-07",
+      "2025-06-04",
+      "2025-09-03",
+      "2025-09-19",
+      "2025-09-24"
+    ],
+    "matched": [
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-04-11"
+    ],
+    "missed": [
+      "2012-11-23",
+      "2025-01-01",
+      "2025-04-22",
+      "2025-09-09"
+    ],
+    "extra": [
+      "2025-03-25",
+      "2025-04-30",
+      "2025-05-07",
+      "2025-06-04",
+      "2025-09-03",
+      "2025-09-19",
+      "2025-09-24"
+    ],
+    "gtCoverageRate": 50,
+    "gtCount": 8,
+    "aiCount": 11,
+    "matchedCount": 4,
+    "missedCount": 4,
+    "extraCount": 7
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 18
+    }
+  ]
+}

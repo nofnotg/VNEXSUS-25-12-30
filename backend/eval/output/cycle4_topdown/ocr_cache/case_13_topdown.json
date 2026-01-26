@@ -1,0 +1,1360 @@
+{
+  "caseId": "Case13",
+  "caseNum": 13,
+  "patientName": "김인화",
+  "totalPages": 46,
+  "processedPages": 46,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:25:29.743Z",
+  "processingTime": 531961,
+  "cost": 0.2484,
+  "usage": {
+    "prompt_tokens": 1700000,
+    "completion_tokens": 10329,
+    "total_tokens": 1710329
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-04-01",
+        "originalFormat": "2025년04월01일",
+        "context": "발급일자 : 2025년04월01일 15시28분",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-10",
+        "originalFormat": "2025-03-10",
+        "context": "최종납입일(최초) 2025-03-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-10",
+        "originalFormat": "2025-03-10",
+        "context": "최종납입일(최초) 2025-03-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-24",
+        "originalFormat": "2025-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021-07-30",
+        "context": "가입시기 2021-07-30",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2059-07-30",
+        "originalFormat": "2059-07-30",
+        "context": "보험기간 2021-07-30 ~ 2059-07-30",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "가입시기 2021-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2069-03-24",
+        "originalFormat": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021년 07월 30일",
+        "context": "발행일 2021년 07월 30일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021-07-30",
+        "context": "계약일자 2021-07-30",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021-07-30",
+        "context": "청약서 2021-07-30",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021-07-30",
+        "context": "청약서 2021-07-30",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-30",
+        "originalFormat": "2021-07-30",
+        "context": "계약 전 알림 의무사항 2021-07-30",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021년 03월 24일",
+        "context": "발행일 2021년 03월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021.03.24",
+        "context": "계약자: 김인화\n가입일: 2021.03.24",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-12-16",
+        "originalFormat": "2021-12-16",
+        "context": "계약자: 김인화\n가입일: 2021-12-16",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-20",
+        "originalFormat": "20/03/2025",
+        "context": "보험금 청구서\n사고일시: 2025-03-20",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-01",
+        "originalFormat": "2025-04-01",
+        "context": "사고일시: 2025-04-01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-03-24",
+        "originalFormat": "2021-03-24",
+        "context": "계약자: 김인화\n계약 전 알림 의무사항",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-12",
+        "originalFormat": "2024년 04월 12일",
+        "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-12",
+        "originalFormat": "2024-04-12",
+        "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-07",
+        "originalFormat": "2024-05-07",
+        "context": "2024년 5월 7일 진료",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-14",
+        "originalFormat": "2024-05-14",
+        "context": "2024년 5월 14일 진료",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-05-07",
+        "originalFormat": "2025-05-07",
+        "context": "2025년 5월 7일 진료",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025년 03월 13일",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-12",
+        "originalFormat": "2024.04.12",
+        "context": "2년 slip down 하면서 요통으로 고생했던 적 있었음.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-07",
+        "originalFormat": "2024.05.07",
+        "context": "L-spine MRI 촬영 후 내원.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-21",
+        "originalFormat": "2024년 5월 21일",
+        "context": "SSC repair sh Rt op (상담실)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-14",
+        "originalFormat": "2024-05-14",
+        "context": "L-spine MRI & Foramina MR (B)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-14",
+        "originalFormat": "2024-05-14",
+        "context": "L-spine MRI & W/S Sagittal T2WI",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-23",
+        "originalFormat": "2025-04-23",
+        "context": "보험금 청구건에 대한 내용",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-13",
+        "originalFormat": "2025.03.13",
+        "context": "보험금 청구건에 대한 내용",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-23",
+        "originalFormat": "2025-04-23",
+        "context": "보험금 청구건에 대한 내용",
+        "type": "보험가입",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-12",
+        "originalFormat": "2024.04.12",
+        "context": "2년 slip down 하면서 요통으로 고생했던 적 있었음.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-07",
+        "originalFormat": "2024.05.07",
+        "context": "L-spine MRI 촬영 후 내원.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-21",
+        "originalFormat": "2024년 5월 21일",
+        "context": "SSC repair sh Rt op (상담실)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-14",
+        "originalFormat": "2024-05-14",
+        "context": "L-spine MRI & Foramina MR (B)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-14",
+        "originalFormat": "2024-05-14",
+        "context": "L-spine MRI & W/S Sagittal T2WI",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2021-07-30",
+        "endDate": "2059-07-30",
+        "context": "보험기간 2021-07-30 ~ 2059-07-30",
+        "type": "보장기간"
+      },
+      {
+        "startDate": "2021-03-24",
+        "endDate": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보장기간"
+      },
+      {
+        "startDate": "2021-07-30",
+        "endDate": "2021-07-30",
+        "context": "계약일자 2021-07-30",
+        "type": "기타"
+      },
+      {
+        "startDate": "2021-03-24",
+        "endDate": "2025-03-20",
+        "context": "보험금 청구서\n사고일시: 2025-03-20",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-12",
+        "endDate": "2024-04-12",
+        "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-03-13",
+        "endDate": "2025-03-13",
+        "context": "내원일: 2025년 03월 13일 13:54:58",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-12",
+        "endDate": "2024-05-07",
+        "context": "2년 slip down 하면서 요통으로 고생했던 적 있었음.",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-12",
+        "endDate": "2024-05-21",
+        "context": "SSC repair sh Rt op (상담실)",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [
+      {
+        "date": "2021-07-30",
+        "company": "NH농협손해보험",
+        "type": "가입일",
+        "productName": "해지환급금미지급형"
+      },
+      {
+        "date": "2059-07-30",
+        "company": "NH농협손해보험",
+        "type": "만기일",
+        "productName": "해지환급금미지급형"
+      },
+      {
+        "date": "2021-03-24",
+        "company": "NH농협손해보험",
+        "type": "가입일",
+        "productName": "해지환급금미지급형"
+      },
+      {
+        "date": "2069-03-24",
+        "company": "NH농협손해보험",
+        "type": "만기일",
+        "productName": "해지환급금미지급형"
+      },
+      {
+        "date": "2021-07-30",
+        "company": "NH",
+        "type": "가입일",
+        "productName": "가성비굿건강보험"
+      },
+      {
+        "date": "2021-07-30",
+        "company": "NH",
+        "type": "보장개시일",
+        "productName": "가성비굿건강보험"
+      },
+      {
+        "date": "2021-03-24",
+        "company": "NH",
+        "type": "가입일",
+        "productName": "가정버스 건강보험"
+      },
+      {
+        "date": "2021-12-16",
+        "company": "NH",
+        "type": "보장개시일",
+        "productName": "가정버스 건강보험"
+      },
+      {
+        "date": "2025-03-20",
+        "company": "NH농협손해보험",
+        "type": "가입일",
+        "productName": "보험상품명"
+      },
+      {
+        "date": "2025-03-13",
+        "company": "NH농협손해보험",
+        "type": "가입일",
+        "productName": "상해보험"
+      },
+      {
+        "date": "2025-04-23",
+        "company": "NH농협손해보험",
+        "type": "청구일",
+        "productName": "상해보험"
+      }
+    ],
+    "tableDates": [
+      {
+        "date": "2021-07-30",
+        "rowContent": "보험기간 2021-07-30 ~ 2059-07-30",
+        "tableType": "보험가입"
+      },
+      {
+        "date": "2059-07-30",
+        "rowContent": "보험기간 2021-07-30 ~ 2059-07-30",
+        "tableType": "보험가입"
+      },
+      {
+        "date": "2021-03-24",
+        "rowContent": "보험기간 2021-03-24 ~ 2069-03-24",
+        "tableType": "보험가입"
+      },
+      {
+        "date": "2069-03-24",
+        "rowContent": "보험기간 2021-03-24 ~ 2069-03-24",
+        "tableType": "보험가입"
+      },
+      {
+        "date": "2021-07-30",
+        "rowContent": "계약일자 2021-07-30",
+        "tableType": "기타"
+      },
+      {
+        "date": "2021-07-30",
+        "rowContent": "발행일 2021-07-30",
+        "tableType": "기타"
+      },
+      {
+        "date": "2021-03-24",
+        "rowContent": "발행일 2021년 03월 24일",
+        "tableType": "기타"
+      },
+      {
+        "date": "2021-03-24",
+        "rowContent": "계약자: 김인화\n가입일: 2021.03.24",
+        "tableType": "기타"
+      },
+      {
+        "date": "2021-12-16",
+        "rowContent": "계약자: 김인화\n가입일: 2021-12-16",
+        "tableType": "기타"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2021-03-24",
+      "2021-07-30",
+      "2024-04-12",
+      "2024-11-04",
+      "2025-03-13"
+    ],
+    "aiDates": [
+      "2021-03-24",
+      "2021-07-30",
+      "2021-12-16",
+      "2024-04-12",
+      "2024-04-23",
+      "2024-05-07",
+      "2024-05-14",
+      "2024-05-21",
+      "2025-03-10",
+      "2025-03-12",
+      "2025-03-13",
+      "2025-03-20",
+      "2025-03-24",
+      "2025-04-01",
+      "2025-04-23",
+      "2025-05-07",
+      "2059-07-30",
+      "2069-03-24"
+    ],
+    "matched": [
+      "2021-03-24",
+      "2021-07-30",
+      "2024-04-12",
+      "2025-03-13"
+    ],
+    "missed": [
+      "2024-11-04"
+    ],
+    "extra": [
+      "2021-12-16",
+      "2024-04-23",
+      "2024-05-07",
+      "2024-05-14",
+      "2024-05-21",
+      "2025-03-10",
+      "2025-03-12",
+      "2025-03-20",
+      "2025-03-24",
+      "2025-04-01",
+      "2025-04-23",
+      "2025-05-07",
+      "2059-07-30",
+      "2069-03-24"
+    ],
+    "gtCoverageRate": 80,
+    "gtCount": 5,
+    "aiCount": 18,
+    "matchedCount": 4,
+    "missedCount": 1,
+    "extraCount": 14
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 23
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 24
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 25
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 26
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 27
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 28
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 29
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 30
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 31
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 32
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 33
+    },
+    {
+      "globalPageNum": 34,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 34
+    },
+    {
+      "globalPageNum": 35,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 35
+    },
+    {
+      "globalPageNum": 36,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 36
+    },
+    {
+      "globalPageNum": 37,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 37
+    },
+    {
+      "globalPageNum": 38,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 38
+    },
+    {
+      "globalPageNum": 39,
+      "sourceFile": "누가재활의학과.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 40,
+      "sourceFile": "누가재활의학과.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 41,
+      "sourceFile": "누가재활의학과.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 42,
+      "sourceFile": "서울바른병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 43,
+      "sourceFile": "서울바른병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 44,
+      "sourceFile": "서울바른병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 45,
+      "sourceFile": "화해계약서.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 46,
+      "sourceFile": "화해계약서.pdf",
+      "pageInFile": 2
+    }
+  ]
+}

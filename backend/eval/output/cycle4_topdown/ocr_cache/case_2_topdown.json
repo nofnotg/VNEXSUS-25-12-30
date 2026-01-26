@@ -1,0 +1,952 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "totalPages": 50,
+  "processedPages": 50,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:08:31.339Z",
+  "processingTime": 487575,
+  "cost": 0.27,
+  "usage": {
+    "prompt_tokens": 1847340,
+    "completion_tokens": 5806,
+    "total_tokens": 1853146
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-03-19",
+        "originalFormat": "2025.03.19",
+        "context": "수신자 : 빈경환 ★핸드폰 ★보험사 NH농협손해보험",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-05",
+        "originalFormat": "2025.02.05",
+        "context": "수술일 2025.02.05",
+        "type": "수술",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-09",
+        "originalFormat": "2024.04.09",
+        "context": "보험계약일 2024.04.09",
+        "type": "보험계약일",
+        "confidence": "high"
+      },
+      {
+        "date": "2019-03-23",
+        "originalFormat": "2019-03-23",
+        "context": "2019-03-23 11:06:34",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020-06-20",
+        "context": "2020-06-20 10:56:48",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-08-11",
+        "originalFormat": "2020-08-11",
+        "context": "2020-08-11 09:02:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-09",
+        "originalFormat": "2021-07-09",
+        "context": "2021-07-09 16:09:09",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-07-19",
+        "originalFormat": "2022-07-19",
+        "context": "2022-07-19 13:39:50",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023-08-07",
+        "context": "2023-08-07 09:31:32",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2019-03-23",
+        "originalFormat": "2019-03-23",
+        "context": "2019-03-23 11:32:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020-06-20",
+        "context": "2020-06-20 10:56:48",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-09",
+        "originalFormat": "2021-07-09 16:30:12",
+        "context": "2021-07-09 16:30:12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020.6.20.",
+        "context": "compared with previous CT(2020.6.20.).",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-07-19",
+        "originalFormat": "2022-07-19 14:01:08",
+        "context": "2022-07-19 14:01:08",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023-08-07 10:34:15",
+        "context": "2023-08-07 10:34:15",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-09",
+        "originalFormat": "2021년 7월 9일",
+        "context": "2021년 7월 9일과 비교하여 크기가 증가",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-07-19",
+        "originalFormat": "2022년 7월 19일",
+        "context": "2022년 7월 19일과 비교하여 크기가 증가",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023년 8월 7일",
+        "context": "2023년 8월 7일과 비교하여 크기가 증가",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-07",
+        "originalFormat": "2025-04-07 12:58:58",
+        "context": "2025-04-07 12:58:58",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025년 03월 21일",
+        "context": "2025년 03월 21일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-09",
+        "originalFormat": "2024.04.09",
+        "context": "2024.04.09",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-03",
+        "originalFormat": "2024년 04월 03일",
+        "context": "2024년 04월 03일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-25",
+        "originalFormat": "2024.04.25",
+        "context": "주요소 * 주증상 Diet: Good 소화불량: No 오심: No 간혈관종, 크기 증가",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-11-21",
+        "originalFormat": "2024.11.21",
+        "context": "주요소 수술날짜 진단명 Hemangioma of liver",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-05",
+        "originalFormat": "2025-02-05",
+        "context": "수술 및 처치 Laparoscopic right hemiehepatctomy",
+        "type": "수술",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-26",
+        "originalFormat": "2025-02-26",
+        "context": "검사일시 [검사명] [검사결과]",
+        "type": "검사",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-10",
+        "originalFormat": "2025-02-10",
+        "context": "진료계획 * 치료계획",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-12",
+        "originalFormat": "2025.02.12",
+        "context": "최종진단 * 주진단 Hemangioma of liver",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025-03-21 오후 02:23",
+        "context": "2025-03-21 오후 02:23",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-10",
+        "originalFormat": "2025-02-10",
+        "context": "치료계획 (퇴원계획일: 2025-02-10)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023/08/07",
+        "context": "2023/08/07 CT와 비교해서 right liver의 hemangioma는 8.7 cm로 이전보다 더 커졌음.",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2025-02-05",
+        "originalFormat": "2025.02.05",
+        "context": "주관적 소견 (S) sputum (+) 객관적 소견 (O) 인플루엔자 (+) 타미플루 치료 완료.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-05",
+        "originalFormat": "2025.02.05",
+        "context": "수술/시술 후 기록 V/S stable Pain tolerable Wound clear Immediate complication : No",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-07",
+        "originalFormat": "2025.02.07",
+        "context": "치료 및 경과 POD 2 n-s",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-11",
+        "originalFormat": "2025.02.11",
+        "context": "치료 및 경과 POD 2 n-s",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025-03-21 오후 02:23",
+        "context": "삼성서울병원 1/2 2025-03-21 오후 02:23: PP7286",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025-03-21 오후 02:24:03",
+        "context": "삼성서울병원 2/2 2025-03-21 오후 02:24:03: PP7286",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025-03-21 오후 02:24:21",
+        "context": "삼성서울병원 1/3 2025-03-21 오후 02:24:21: PP7286",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-03-21",
+        "originalFormat": "2025-03-21 오후 02:24:21",
+        "context": "삼성서울병원 2/2 2025-03-21 오후 02:24:21: PP7286",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-07",
+        "originalFormat": "2025-01-07",
+        "context": "정서상태 안전 산과력 [가임기, 마지막 생리 시작일] 2025-01-07",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023-08-07",
+        "context": "Liver S3/4에 tiny hemangioma가 하나 더 의심됨. 이는 이전 CT에서는 뚜렷하지 않음.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-09",
+        "originalFormat": "2024-04-09",
+        "context": "2024-04-09 15:54 [입원일] 2024-04-09 15:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-25",
+        "originalFormat": "2024-04-25",
+        "context": "2024-04-25 07:55 [입원일] 2024-04-25 07:55",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-11-19",
+        "originalFormat": "2024-11-19",
+        "context": "2024-11-19 11:03 [보고일] 2024-11-19 11:03",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-01",
+        "originalFormat": "2025-01-01",
+        "context": "사회/문화/종교적 특수성 무 [음주력] 금주기록 25/01/01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-01-01",
+        "originalFormat": "2025-01-01",
+        "context": "사회/문화/종교적 특수성 무 [음주력] 금주기록 25/01/01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2019-03-23",
+        "originalFormat": "2019-03-23",
+        "context": "정서상태 안전 [가임기, 마지막 생리 시작일] 2019-03-23",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020-06-20",
+        "context": "2020-06-20 09:54:04",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020-06-20",
+        "context": "2020-06-20 09:58:00",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-08-11",
+        "originalFormat": "2020-08-11",
+        "context": "2020-08-11 09:02:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-09",
+        "originalFormat": "2021-07-09",
+        "context": "2021-07-09 16:09:09",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-07-19",
+        "originalFormat": "2022-07-19",
+        "context": "2022-07-19 13:39:50",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023-08-07",
+        "context": "2023-08-07 09:31:32",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2019-03-23",
+        "originalFormat": "2019-03-23",
+        "context": "2019-03-23 11:32:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-06-20",
+        "originalFormat": "2020-06-20",
+        "context": "2020-06-20 10:56:48",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-07-09",
+        "originalFormat": "2021-07-09",
+        "context": "2021-07-09 16:30:12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2022-07-19",
+        "originalFormat": "2022-07-19",
+        "context": "2022-07-19 14:01:08",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2023-08-07",
+        "originalFormat": "2023-08-07",
+        "context": "2023-08-07 10:34:15",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2019-03-23",
+        "endDate": "2024-04-09",
+        "context": "보험계약일 2024.04.09",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-03",
+        "endDate": "2024-04-03",
+        "context": "2024년 04월 03일",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-02-05",
+        "endDate": "2025-02-05",
+        "context": "수술 및 처치 Laparoscopic right hemiehepatctomy",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-02-05",
+        "endDate": "2025-02-05",
+        "context": "주관적 소견 (S) sputum (+) 객관적 소견 (O) 인플루엔자 (+) 타미플루 치료 완료.",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-02-05",
+        "endDate": "2025-02-05",
+        "context": "수술/시술 후 기록 V/S stable Pain tolerable Wound clear Immediate complication : No",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-02-07",
+        "endDate": "2025-02-07",
+        "context": "치료 및 경과 POD 2 n-s",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-02-11",
+        "endDate": "2025-02-11",
+        "context": "치료 및 경과 POD 2 n-s",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-03-21",
+        "endDate": "2025-03-21",
+        "context": "삼성서울병원 1/2 2025-03-21 오후 02:23: PP7286",
+        "type": "입원기간"
+      }
+    ],
+    "insuranceDates": [
+      {
+        "date": "2025-03-19",
+        "company": "NH농협손해보험",
+        "type": "가입일",
+        "productName": ""
+      },
+      {
+        "date": "2025-03-21",
+        "company": "삼성",
+        "type": "만기일",
+        "productName": "보험상품명"
+      }
+    ],
+    "tableDates": [
+      {
+        "date": "2025-03-19",
+        "rowContent": "병원조사 의뢰서",
+        "tableType": "기타"
+      },
+      {
+        "date": "2025-02-05",
+        "rowContent": "수술일 2025.02.05",
+        "tableType": "기타"
+      },
+      {
+        "date": "2024-04-09",
+        "rowContent": "보험계약일 2024.04.09",
+        "tableType": "기타"
+      },
+      {
+        "date": "2019-03-23",
+        "rowContent": "2019-03-23 11:06:34",
+        "tableType": "기타"
+      },
+      {
+        "date": "2020-06-20",
+        "rowContent": "2020-06-20 10:56:48",
+        "tableType": "기타"
+      },
+      {
+        "date": "2020-08-11",
+        "rowContent": "2020-08-11 09:02:54",
+        "tableType": "기타"
+      },
+      {
+        "date": "2021-07-09",
+        "rowContent": "2021-07-09 16:09:09",
+        "tableType": "기타"
+      },
+      {
+        "date": "2022-07-19",
+        "rowContent": "2022-07-19 13:39:50",
+        "tableType": "기타"
+      },
+      {
+        "date": "2023-08-07",
+        "rowContent": "2023-08-07 09:31:32",
+        "tableType": "기타"
+      },
+      {
+        "date": "2019-03-23",
+        "rowContent": "2019-03-23 11:32:54",
+        "tableType": "기타"
+      },
+      {
+        "date": "2020-06-20",
+        "rowContent": "2020-06-20 10:56:48",
+        "tableType": "기타"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2019-03-23",
+      "2019-04-09",
+      "2023-08-07",
+      "2024-01-09",
+      "2024-04-03",
+      "2024-04-09",
+      "2024-04-23",
+      "2025-02-04",
+      "2025-02-12"
+    ],
+    "aiDates": [
+      "2019-03-23",
+      "2020-06-20",
+      "2020-08-11",
+      "2021-07-09",
+      "2022-07-19",
+      "2023-08-07",
+      "2024-04-03",
+      "2024-04-09",
+      "2024-04-25",
+      "2024-11-19",
+      "2024-11-21",
+      "2025-01-01",
+      "2025-01-07",
+      "2025-02-05",
+      "2025-02-07",
+      "2025-02-10",
+      "2025-02-11",
+      "2025-02-12",
+      "2025-02-26",
+      "2025-03-19",
+      "2025-03-21",
+      "2025-04-07"
+    ],
+    "matched": [
+      "2019-03-23",
+      "2023-08-07",
+      "2024-04-03",
+      "2024-04-09",
+      "2025-02-12"
+    ],
+    "missed": [
+      "2019-04-09",
+      "2024-01-09",
+      "2024-04-23",
+      "2025-02-04"
+    ],
+    "extra": [
+      "2020-06-20",
+      "2020-08-11",
+      "2021-07-09",
+      "2022-07-19",
+      "2024-04-25",
+      "2024-11-19",
+      "2024-11-21",
+      "2025-01-01",
+      "2025-01-07",
+      "2025-02-05",
+      "2025-02-07",
+      "2025-02-10",
+      "2025-02-11",
+      "2025-02-26",
+      "2025-03-19",
+      "2025-03-21",
+      "2025-04-07"
+    ],
+    "gtCoverageRate": 56,
+    "gtCount": 9,
+    "aiCount": 22,
+    "matchedCount": 5,
+    "missedCount": 4,
+    "extraCount": 17
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "문답서.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "문답서.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "문답서.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 34,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 35,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 36,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 37,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 38,
+      "sourceFile": "삼성서울병원.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 39,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 40,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 41,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 42,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 43,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 44,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 45,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 46,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 47,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 48,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 49,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 50,
+      "sourceFile": "에스엠영상의학과.pdf",
+      "pageInFile": 12
+    }
+  ]
+}

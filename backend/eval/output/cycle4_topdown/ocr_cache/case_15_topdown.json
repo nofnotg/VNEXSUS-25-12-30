@@ -1,0 +1,406 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "totalPages": 13,
+  "processedPages": 13,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:28:02.221Z",
+  "processingTime": 121094,
+  "cost": 0.0702,
+  "usage": {
+    "prompt_tokens": 481091,
+    "completion_tokens": 2575,
+    "total_tokens": 483666
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-06-07",
+        "originalFormat": "2025년 06월 07일",
+        "context": "검 진 일 자 : 2025년 06월 07일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-09",
+        "originalFormat": "2025년 06월 09일",
+        "context": "판정일 2025년 06월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-09",
+        "originalFormat": "2025년 06월 09일",
+        "context": "판정일 2025년 06월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-09",
+        "originalFormat": "2025년 06월 09일",
+        "context": "판정일 2025년 06월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-09",
+        "originalFormat": "2025년 06월 09일",
+        "context": "판정일 2025년 06월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-16",
+        "originalFormat": "2025년 06월 16일",
+        "context": "처방일 : 2025년 06월 16일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-27",
+        "originalFormat": "2025년 06월 27일",
+        "context": "처방일 : 2025년 06월 27일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-26",
+        "originalFormat": "2025년 06월 26일",
+        "context": "결과일 : 2025년 06월 26일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "결과일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "결과일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "결과일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025년 06월 20일",
+        "context": "결과일 : 2025년 06월 20일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025년 09월 09일",
+        "context": "2025년 09월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-09",
+        "originalFormat": "2025년 09월 09일",
+        "context": "2025년 09월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025/06/20",
+        "context": "진료과 RAD 재접수일 : 2025/06/20",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-21",
+        "originalFormat": "2025/06/21",
+        "context": "접수일시 2025/06/21 13:25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-23",
+        "originalFormat": "2025/06/23",
+        "context": "검사일시 2025/06/23 09:14",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-24",
+        "originalFormat": "2025/06/24",
+        "context": "보고일시 2025/06/24 15:01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-20",
+        "originalFormat": "2025/06/20",
+        "context": "진료과 RAD 재접수일 : 2025/06/20",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-21",
+        "originalFormat": "2025/06/21",
+        "context": "접수일시 2025/06/21 13:25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-23",
+        "originalFormat": "2025/06/23",
+        "context": "검사일시 2025/06/23 09:14",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-24",
+        "originalFormat": "2025/06/24",
+        "context": "보고일시 2025/06/24 15:01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-07",
+        "originalFormat": "2025/06/07",
+        "context": "접수일: 2025/06/07 12:46",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-07",
+        "originalFormat": "2025/06/07",
+        "context": "결과일: 2025/06/07 12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-07",
+        "originalFormat": "2025/06/07",
+        "context": "접수일: 2025/06/07 12:14",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-07",
+        "originalFormat": "2025/06/07",
+        "context": "결과일: 2025/06/07 12",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2025-06-07",
+        "endDate": "2025-06-07",
+        "context": "위내시경 검사에서 헬리코박터 위염 의심되어 헬리코박터 검사 시행하였습니다.",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-16",
+        "endDate": "2025-06-16",
+        "context": "처방일 : 2025년 06월 16일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-20",
+        "endDate": "2025-06-20",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-20",
+        "endDate": "2025-06-20",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-20",
+        "endDate": "2025-06-20",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-20",
+        "endDate": "2025-06-20",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-20",
+        "endDate": "2025-06-20",
+        "context": "접수일 : 2025년 06월 20일",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-06-27",
+        "endDate": "2025-06-27",
+        "context": "처방일 : 2025년 06월 27일",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": []
+  },
+  "matching": {
+    "gtDates": [
+      "2025-02-25",
+      "2025-05-26",
+      "2025-06-07",
+      "2025-06-16",
+      "2025-06-20",
+      "2025-06-24",
+      "2025-06-27",
+      "2053-02-25"
+    ],
+    "aiDates": [
+      "2025-06-07",
+      "2025-06-09",
+      "2025-06-16",
+      "2025-06-20",
+      "2025-06-21",
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-26",
+      "2025-06-27",
+      "2025-09-09"
+    ],
+    "matched": [
+      "2025-06-07",
+      "2025-06-16",
+      "2025-06-20",
+      "2025-06-24",
+      "2025-06-27"
+    ],
+    "missed": [
+      "2025-02-25",
+      "2025-05-26",
+      "2053-02-25"
+    ],
+    "extra": [
+      "2025-06-09",
+      "2025-06-21",
+      "2025-06-23",
+      "2025-06-26",
+      "2025-09-09"
+    ],
+    "gtCoverageRate": 63,
+    "gtCount": 8,
+    "aiCount": 10,
+    "matchedCount": 5,
+    "missedCount": 3,
+    "extraCount": 5
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 13
+    }
+  ]
+}

@@ -1,0 +1,617 @@
+{
+  "caseId": "Case44",
+  "caseNum": 44,
+  "patientName": "최순곤",
+  "totalPages": 33,
+  "processedPages": 33,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T04:06:58.804Z",
+  "processingTime": 324189,
+  "cost": 0.1782,
+  "usage": {
+    "prompt_tokens": 1220027,
+    "completion_tokens": 3416,
+    "total_tokens": 1223443
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-09-19",
+        "originalFormat": "2025년 09월 19일",
+        "context": "이 사본은 의무기록 원본과 틀림이 없음을 증명합니다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2018-12-18",
+        "originalFormat": "2018/12/18",
+        "context": "초진일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-01-31",
+        "originalFormat": "2024/01/31",
+        "context": "2024/01/31 [수] 09:25 망막병원 (이진현) [건보]",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-07-31",
+        "originalFormat": "2024/07/31",
+        "context": "2024/07/31 [수] 08:05 망막병원 (이진현) [건보]",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-05",
+        "originalFormat": "2025/02/05",
+        "context": "2025/02/05 [일] 08:00 망막병원 (이진현) [건보]",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025년 09월 10일",
+        "context": "이 사본은 의무기록 원본과 틀림이 없음을 증명합니다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "응급실 도착시간 2025-08-25 08:26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "응급실 도착시간 2025-08-25 08:26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-29",
+        "originalFormat": "2025-08-29",
+        "context": "퇴원일자 2025-08-29",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "발현 시기 2025-08-25 07:50",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "Chief complaint: Rt. side weakness Clear onset: 2025.08.25 7:50",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25 07:50",
+        "context": "발병일시 2025-08-25 07:50 Clear onset: 2025.08.25 7:50",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "출력일: 2025-09-10",
+        "context": "출력일: 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-02",
+        "originalFormat": "2025-09-02",
+        "context": "thrombolysis 후 NIHSS 점수가 악화되지 않는다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-06",
+        "originalFormat": "2025-09-06",
+        "context": "목표일 2025-09-06",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "계획일 2025-08-25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-28",
+        "originalFormat": "8/28",
+        "context": "lipid lab FU 8/28",
+        "type": "기타",
+        "confidence": "medium"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "Detection time 2025-08-25 08:26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "입원일자 2025-08-25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025-08-25",
+        "context": "입원일자 2025-08-25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "투여 tPA injection time",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "투여 tPA ending time",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-02",
+        "originalFormat": "2025-09-02",
+        "context": "thrombolysis 후 NIHSS 점수",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-06",
+        "originalFormat": "2025-09-06",
+        "context": "목표일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-26",
+        "originalFormat": "2025.08.26",
+        "context": "CT Heart Angio 검사일자",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "간호정보 조사일자",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "간호정보 조사일자",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-25",
+        "originalFormat": "2025.08.25",
+        "context": "영상검사 특수활영 검사일자",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-26",
+        "originalFormat": "2025.08.26",
+        "context": "영상검사 CT&MR 검사일자",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025.09.10",
+        "context": "출력일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-26",
+        "originalFormat": "2025-08-26",
+        "context": "시행일자 2025-08-26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-27",
+        "originalFormat": "2025-08-27",
+        "context": "시행일자 2025-08-27",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일: 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-08-27",
+        "originalFormat": "2025-08-27",
+        "context": "시행일자 2025-08-27",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일: 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2024-01-31",
+        "endDate": "2025-02-05",
+        "context": "망막병원 진료기록",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-25",
+        "endDate": "2025-08-29",
+        "context": "입원일자 및 퇴원일자",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-08-25",
+        "endDate": "2025-09-10",
+        "context": "입원일자 2025-08-25 ~ 출력일 2025-09-10",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-25",
+        "endDate": "2025-08-25",
+        "context": "투여 tPA injection time",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-25",
+        "endDate": "2025-08-25",
+        "context": "투여 tPA ending time",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-25",
+        "endDate": "2025-08-25",
+        "context": "간호정보 조사일자",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-08-26",
+        "endDate": "2025-08-26",
+        "context": "영상검사 CT&MR 검사일자",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": [
+      {
+        "date": "2024-01-31",
+        "rowContent": "2024/01/31 [수] 09:25 망막병원 (이진현) [건보]",
+        "tableType": "진료기록표"
+      },
+      {
+        "date": "2024-07-31",
+        "rowContent": "2024/07/31 [수] 08:05 망막병원 (이진현) [건보]",
+        "tableType": "진료기록표"
+      },
+      {
+        "date": "2025-02-05",
+        "rowContent": "2025/02/05 [일] 08:00 망막병원 (이진현) [건보]",
+        "tableType": "진료기록표"
+      },
+      {
+        "date": "2025-08-25",
+        "rowContent": "응급실 도착시간 2025-08-25 08:26",
+        "tableType": "응급진료기록"
+      },
+      {
+        "date": "2025-08-25",
+        "rowContent": "응급실 도착시간 2025-08-25 08:26",
+        "tableType": "응급진료기록"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2020-09-09",
+      "2024-06-03",
+      "2024-07-31",
+      "2024-09-03",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-29",
+      "2054-09-03"
+    ],
+    "aiDates": [
+      "2018-12-18",
+      "2024-01-31",
+      "2024-07-31",
+      "2025-02-05",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-27",
+      "2025-08-28",
+      "2025-08-29",
+      "2025-09-02",
+      "2025-09-06",
+      "2025-09-10",
+      "2025-09-19"
+    ],
+    "matched": [
+      "2024-07-31",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-29"
+    ],
+    "missed": [
+      "2020-09-09",
+      "2024-06-03",
+      "2024-09-03",
+      "2054-09-03"
+    ],
+    "extra": [
+      "2018-12-18",
+      "2024-01-31",
+      "2025-02-05",
+      "2025-08-27",
+      "2025-08-28",
+      "2025-09-02",
+      "2025-09-06",
+      "2025-09-10",
+      "2025-09-19"
+    ],
+    "gtCoverageRate": 50,
+    "gtCount": 8,
+    "aiCount": 13,
+    "matchedCount": 4,
+    "missedCount": 4,
+    "extraCount": 9
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 23
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 24
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 25
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 26
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 27
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 28
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 29
+    }
+  ]
+}

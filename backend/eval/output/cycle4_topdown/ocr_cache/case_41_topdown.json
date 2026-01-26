@@ -1,0 +1,702 @@
+{
+  "caseId": "Case41",
+  "caseNum": 41,
+  "patientName": "장우진",
+  "totalPages": 30,
+  "processedPages": 30,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T03:58:09.841Z",
+  "processingTime": 233338,
+  "cost": 0.162,
+  "usage": {
+    "prompt_tokens": 1108404,
+    "completion_tokens": 4733,
+    "total_tokens": 1113137
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-10-13",
+        "originalFormat": "2025-10-13 14:34:36",
+        "context": "의무기록 사본 총 0 부 (표지제외)",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2020-09-24",
+        "originalFormat": "20 년 09월 24일",
+        "context": "청부한 사본은 의무기록 원본과 틀림없음을 증명합니다.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "2021/05/17 10:31 21002112 초진 차트(Patient's Chart) wsh2004[민형식] NS1",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-21",
+        "originalFormat": "2021/05/21",
+        "context": "2021/05/21 10:34 21002112 초진 차트(Patient's Chart) wsh2004[민형식] NS1",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 경과기록지 wsh2004[민형식] NS1",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-09",
+        "originalFormat": "2021/06/09",
+        "context": "2021/06/09 21002112 경과기록지 wsh2004[민형식] NS1",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-18",
+        "originalFormat": "2021/05/18",
+        "context": "2021/05/18 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-20",
+        "originalFormat": "2021/05/20",
+        "context": "2021/05/20 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "2021/05/24 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "2021/05/17 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "2021/05/17 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "2021/05/24 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-09",
+        "originalFormat": "2021/06/09",
+        "context": "2021/06/09 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-06-30",
+        "originalFormat": "2021/06/30",
+        "context": "2021/06/30 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "진료",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "환자명 : 장우진 보험유형 : 국민건강보험",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-20",
+        "originalFormat": "2021/05/20",
+        "context": "진단명 : Both Knee Standing AP/PA455 Lat/Skyline view",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "진단명 : MRI Lt Shoulder",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "진단연월일 : 2021년 05월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "진단명 : MRI L-S spine",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "진단연월일 : 2021년 05월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-17",
+        "originalFormat": "2021/05/17",
+        "context": "진단명 : MRI C-spine",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-31",
+        "originalFormat": "2021/05/31",
+        "context": "2021/05/31 21002112 진단방사선결과지 wsh2093[임현경] RAD",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "진단연월일 : 2021년 05월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "진단연월일 : 2021년 05월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2021-05-24",
+        "originalFormat": "2021/05/24",
+        "context": "진단연월일 : 2021년 05월 24일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-24",
+        "originalFormat": "2025/09/24",
+        "context": "출력일 : 2025/09/24 15:04",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22",
+        "context": "2025년 09월 22일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22",
+        "context": "2025년 09월 22일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22",
+        "context": "2024-04-22 acute L1 compression fx.",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-25",
+        "originalFormat": "2024-04-25",
+        "context": "2024년 04월 25일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-05-09",
+        "originalFormat": "2024-05-09",
+        "context": "2024년 05월 09일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-12",
+        "originalFormat": "2025-06-12",
+        "context": "2025년 06월 12일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-07-11",
+        "originalFormat": "2025-07-11",
+        "context": "2025년 07월 11일",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-12",
+        "originalFormat": "2025-06-12",
+        "context": "진료기간 : 2025-06-12",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-12",
+        "originalFormat": "2025-06-12 14:18",
+        "context": "2025-06-12 14:18 2025-06-13 06:46",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-06-13",
+        "originalFormat": "2025-06-13 06:46",
+        "context": "2025-06-12 14:18 2025-06-13 06:46",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22",
+        "context": "진료기간 : 2024-04-22",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 12:31",
+        "context": "2024-04-22 12:31 2024-04-22 16:25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 16:25",
+        "context": "2024-04-22 12:31 2024-04-22 16:25",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 10:35",
+        "context": "2024-04-22 10:35 2024-04-22 15:11",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 15:11",
+        "context": "2024-04-22 10:35 2024-04-22 15:11",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 10:35",
+        "context": "2024-04-22 10:35 2024-04-22 13:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 13:54",
+        "context": "2024-04-22 10:35 2024-04-22 13:54",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-20",
+        "originalFormat": "2024-04-20 17:00",
+        "context": "1. Low back pain - 2024-04-20 17:00",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-20",
+        "originalFormat": "2024-04-20 10:07",
+        "context": "2024-04-20 10:07 2024-04-20 10:18",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2024-04-22",
+        "originalFormat": "2024-04-22 10:18",
+        "context": "2024-04-22 10:18 2024-04-22 10:18",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22 10:16:34",
+        "context": "출력 : 2025/09/22 10:16:34",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22 10:16:57",
+        "context": "출력 : 2025/09/22 10:16:57",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22 10:16:57",
+        "context": "출력 : 2025/09/22 10:16:57",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-22",
+        "originalFormat": "2025/09/22 10:16:57",
+        "context": "출력 : 2025/09/22 10:16:57",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2021-05-17",
+        "endDate": "2021-05-21",
+        "context": "2021/05/17 10:31 21002112 초진 차트(Patient's Chart) wsh2004[민형식] NS1",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2021-05-17",
+        "endDate": "2021-05-31",
+        "context": "2021/05/17 10:31 21002112 초진 차트(Patient's Chart) wsh2004[민형식] NS1",
+        "type": "통원기간"
+      },
+      {
+        "startDate": "2021-05-24",
+        "endDate": "2021-05-31",
+        "context": "입원-퇴원 연월일",
+        "type": "입원기간"
+      },
+      {
+        "startDate": "2025-09-24",
+        "endDate": "2025-09-24",
+        "context": "출력일 : 2025/09/24 15:04",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-22",
+        "endDate": "2024-04-22",
+        "context": "진료기간 : ER:2024/04/22/2024/04/22 ~ 2024/04/22",
+        "type": "기타"
+      },
+      {
+        "startDate": "2024-04-20",
+        "endDate": "2024-04-20",
+        "context": "1. Low back pain - 2024-04-20 17:00",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [],
+    "tableDates": [
+      {
+        "date": "2025-06-12",
+        "rowContent": "2025-06-12 14:18 2025-06-13 06:46",
+        "tableType": "기타"
+      },
+      {
+        "date": "2024-04-22",
+        "rowContent": "2024-04-22 12:31 2024-04-22 16:25",
+        "tableType": "기타"
+      },
+      {
+        "date": "2024-04-22",
+        "rowContent": "2024-04-22 10:35 2024-04-22 15:11",
+        "tableType": "기타"
+      },
+      {
+        "date": "2024-04-22",
+        "rowContent": "2024-04-22 10:35 2024-04-22 13:54",
+        "tableType": "기타"
+      },
+      {
+        "date": "2024-04-22",
+        "rowContent": "2024-04-22 10:18",
+        "tableType": "기타"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2007-08-08",
+      "2021-05-17",
+      "2021-05-20",
+      "2021-05-24",
+      "2024-04-20",
+      "2024-04-22",
+      "2024-04-24",
+      "2025-01-03",
+      "2025-07-11",
+      "2025-09-02",
+      "2025-09-22"
+    ],
+    "aiDates": [
+      "2020-09-24",
+      "2021-05-17",
+      "2021-05-18",
+      "2021-05-20",
+      "2021-05-21",
+      "2021-05-24",
+      "2021-05-31",
+      "2021-06-09",
+      "2021-06-30",
+      "2024-04-20",
+      "2024-04-22",
+      "2024-04-25",
+      "2024-05-09",
+      "2025-06-12",
+      "2025-06-13",
+      "2025-07-11",
+      "2025-09-22",
+      "2025-09-24",
+      "2025-10-13"
+    ],
+    "matched": [
+      "2021-05-17",
+      "2021-05-20",
+      "2021-05-24",
+      "2024-04-20",
+      "2024-04-22",
+      "2025-07-11",
+      "2025-09-22"
+    ],
+    "missed": [
+      "2007-08-08",
+      "2024-04-24",
+      "2025-01-03",
+      "2025-09-02"
+    ],
+    "extra": [
+      "2020-09-24",
+      "2021-05-18",
+      "2021-05-21",
+      "2021-05-31",
+      "2021-06-09",
+      "2021-06-30",
+      "2024-04-25",
+      "2024-05-09",
+      "2025-06-12",
+      "2025-06-13",
+      "2025-09-24",
+      "2025-10-13"
+    ],
+    "gtCoverageRate": 64,
+    "gtCount": 11,
+    "aiCount": 19,
+    "matchedCount": 7,
+    "missedCount": 4,
+    "extraCount": 12
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 16
+    }
+  ]
+}

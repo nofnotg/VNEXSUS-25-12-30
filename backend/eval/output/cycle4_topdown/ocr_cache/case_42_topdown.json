@@ -1,0 +1,320 @@
+{
+  "caseId": "Case42",
+  "caseNum": 42,
+  "patientName": "정진덕",
+  "totalPages": 13,
+  "processedPages": 13,
+  "model": "gpt-4o-mini",
+  "approach": "top-down",
+  "processedAt": "2026-01-26T04:01:01.039Z",
+  "processingTime": 139240,
+  "cost": 0.0702,
+  "usage": {
+    "prompt_tokens": 481091,
+    "completion_tokens": 1702,
+    "total_tokens": 482793
+  },
+  "generatedJson": {
+    "allExtractedDates": [
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025 년 09 월 10 일",
+        "context": "의료정보실 담당자 : 박영현",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-26",
+        "originalFormat": "2025-02-26",
+        "context": "작성일 2025-02-26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-22",
+        "originalFormat": "2025.02.22",
+        "context": "발행일 2025.02.22",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-15",
+        "originalFormat": "2025-04-15",
+        "context": "작성일 2025-04-15",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-23",
+        "originalFormat": "2025-04-23",
+        "context": "작성일 2025-04-23",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-29",
+        "originalFormat": "2025-04-29",
+        "context": "작성일 2025-04-29",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-22",
+        "originalFormat": "2025.02.22",
+        "context": "작성일 2025-02-22",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "출력일 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-29",
+        "originalFormat": "작성일 2025-04-29",
+        "context": "작성일 2025-04-29",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "출력일 2025-09-10",
+        "context": "출력일 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-01",
+        "originalFormat": "2025-04-01",
+        "context": "2025-04-01 - 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-09-10",
+        "originalFormat": "2025-09-10",
+        "context": "2025-04-01 - 2025-09-10",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-02-26",
+        "originalFormat": "2025-02-26",
+        "context": "2025-02-26",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-17",
+        "originalFormat": "2025-04-17",
+        "context": "2025-04-17 20:42 2025-04-01",
+        "type": "기타",
+        "confidence": "high"
+      },
+      {
+        "date": "2025-04-29",
+        "originalFormat": "작성일 2025-04-29",
+        "context": "작성일 2025-04-29",
+        "type": "기타",
+        "confidence": "high"
+      }
+    ],
+    "dateRanges": [
+      {
+        "startDate": "2025-02-22",
+        "endDate": "2025-02-22",
+        "context": "작성일 2025-02-22",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-04-15",
+        "endDate": "2025-04-15",
+        "context": "작성일 2025-04-15",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-04-23",
+        "endDate": "2025-04-23",
+        "context": "작성일 2025-04-23",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-04-29",
+        "endDate": "2025-04-29",
+        "context": "작성일 2025-04-29",
+        "type": "기타"
+      },
+      {
+        "startDate": "2025-04-01",
+        "endDate": "2025-09-10",
+        "context": "2025-04-01 - 2025-09-10",
+        "type": "기타"
+      }
+    ],
+    "insuranceDates": [
+      {
+        "date": "2025-09-10",
+        "company": "삼성",
+        "type": "보장개시일",
+        "productName": "보험회사"
+      }
+    ],
+    "tableDates": [
+      {
+        "date": "2025-02-26",
+        "rowContent": "작성일 2025-02-26",
+        "tableType": "진료의뢰서"
+      },
+      {
+        "date": "2025-02-22",
+        "rowContent": "발행일 2025.02.22",
+        "tableType": "진료의뢰서"
+      },
+      {
+        "date": "2025-04-15",
+        "rowContent": "작성일 2025-04-15",
+        "tableType": "외래초진기록"
+      },
+      {
+        "date": "2025-04-23",
+        "rowContent": "작성일 2025-04-23",
+        "tableType": "외래재진기록"
+      },
+      {
+        "date": "2025-04-29",
+        "rowContent": "작성일 2025-04-29",
+        "tableType": "의사 지시 기록"
+      }
+    ]
+  },
+  "matching": {
+    "gtDates": [
+      "2018-09-27",
+      "2025-02-26",
+      "2025-04-23",
+      "2025-04-29"
+    ],
+    "aiDates": [
+      "2025-02-22",
+      "2025-02-26",
+      "2025-04-01",
+      "2025-04-15",
+      "2025-04-17",
+      "2025-04-23",
+      "2025-04-29",
+      "2025-09-10"
+    ],
+    "matched": [
+      "2025-02-26",
+      "2025-04-23",
+      "2025-04-29"
+    ],
+    "missed": [
+      "2018-09-27"
+    ],
+    "extra": [
+      "2025-02-22",
+      "2025-04-01",
+      "2025-04-15",
+      "2025-04-17",
+      "2025-09-10"
+    ],
+    "gtCoverageRate": 75,
+    "gtCount": 4,
+    "aiCount": 8,
+    "matchedCount": 3,
+    "missedCount": 1,
+    "extraCount": 5
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 13
+    }
+  ]
+}
