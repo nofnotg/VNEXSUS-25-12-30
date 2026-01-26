@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Cycle 7: 10항목 보고서 매핑 결과</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; padding: 2rem; background: #f5f5f5; }
+    .container { max-width: 1400px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    h1 { color: #1e293b; text-align: center; }
+    .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; }
+    .stat { background: linear-gradient(135deg, #667eea, #764ba2); padding: 1.5rem; border-radius: 12px; text-align: center; color: white; }
+    .stat .value { font-size: 2.5rem; font-weight: bold; }
+    .stat .label { opacity: 0.9; margin-top: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #1e293b; color: white; }
+    tr:hover { background: #f8fafc; }
+    .good { color: #10b981; font-weight: bold; }
+    .bad { color: #ef4444; font-weight: bold; }
+    .case-detail { background: #f8fafc; padding: 1.5rem; margin: 1.5rem 0; border-radius: 12px; border-left: 4px solid #667eea; }
+    .case-title { font-size: 1.3rem; font-weight: 600; color: #1e293b; margin-bottom: 1rem; }
+    .report-item { display: grid; grid-template-columns: 150px 1fr; gap: 0.5rem; margin: 0.5rem 0; }
+    .report-label { font-weight: 600; color: #64748b; }
+    .report-value { color: #1e293b; }
+    .missed { color: #ef4444; }
+    .matched { color: #10b981; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Cycle 7: 10항목 보고서 매핑 결과</h1>
+    <p style="text-align:center;color:#64748b;">Cycle 4 캐시 기반 10항목 보고서 생성 및 GT 검증</p>
+    
+    <div class="summary">
+      <div class="stat">
+        <div class="value">47%</div>
+        <div class="label">평균 10항목 완성도</div>
+      </div>
+      <div class="stat">
+        <div class="value">36%</div>
+        <div class="label">평균 GT 날짜 커버리지</div>
+      </div>
+      <div class="stat">
+        <div class="value">100%</div>
+        <div class="label">평균 진단명 커버리지</div>
+      </div>
+      <div class="stat">
+        <div class="value">5</div>
+        <div class="label">처리된 케이스</div>
+      </div>
+    </div>
+    
+    <h2>📋 케이스별 결과</h2>
+    <table>
+      <tr>
+        <th>케이스</th>
+        <th>환자명</th>
+        <th>10항목 완성도</th>
+        <th>GT 날짜 커버리지</th>
+        <th>진단명 커버리지</th>
+        <th>병원명 커버리지</th>
+        <th>누락 날짜</th>
+      </tr>
+      
+        <tr>
+          <td><strong>Case2</strong></td>
+          <td>김미화</td>
+          <td class="good">75%</td>
+          <td class="good">67%</td>
+          <td class="good">100%</td>
+          <td class="good">100%</td>
+          <td class="missed">2019-04-09, 2024-01-09, 2024-04-23</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Case5</strong></td>
+          <td>김태형</td>
+          <td class="bad">58%</td>
+          <td class="bad">22%</td>
+          <td class="good">100%</td>
+          <td class="good">67%</td>
+          <td class="missed">2018-05-10, 2020-01-17, 2023-02-10...</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Case13</strong></td>
+          <td>김인화</td>
+          <td class="bad">42%</td>
+          <td class="good">60%</td>
+          <td class="good">100%</td>
+          <td class="good">50%</td>
+          <td class="missed">2021-07-30, 2025-03-13</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Case15</strong></td>
+          <td>고영란</td>
+          <td class="bad">33%</td>
+          <td class="bad">29%</td>
+          <td class="good">100%</td>
+          <td class="good">100%</td>
+          <td class="missed">2025-02-25, 2025-05-26, 2025-06-07...</td>
+        </tr>
+      
+        <tr>
+          <td><strong>Case17</strong></td>
+          <td>김동아</td>
+          <td class="bad">25%</td>
+          <td class="bad">0%</td>
+          <td class="good">100%</td>
+          <td class="good">67%</td>
+          <td class="missed">2025-08-12, 2025-08-14, 2025-08-19...</td>
+        </tr>
+      
+    </table>
+    
+    <h2>📄 생성된 10항목 보고서</h2>
+    
+      <div class="case-detail">
+        <div class="case-title">Case2 - 김미화</div>
+        
+        <div class="report-item">
+          <div class="report-label">1. 내원일시</div>
+          <div class="report-value">정보 없음 @ 미상</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">2. 내원경위</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">3. 진단병명</div>
+          <div class="report-value">[D13.4] 간의 양성 신생물, [D18.02] 간담도계의 혈관종, [D18.02] 서울대학교직장부속의원에서 간
+담도계의 혈관종, [D18.02] 삼성서울병원 간담도계의 혈관종</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">4. 검사결과</div>
+          <div class="report-value">1건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">5. 조직검사</div>
+          <div class="report-value">해당 없음</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">6. 치료내용</div>
+          <div class="report-value">2건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">7. 통원기간</div>
+          <div class="report-value">2019-03-23 ~ 2023-08-07 / 6회</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">8. 입원기간</div>
+          <div class="report-value">2025-02-04 ~ 2025-02-12</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">9. 과거병력</div>
+          <div class="report-value">41건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">10. 의사소견</div>
+          <div class="report-value">주관적 소견 (S) sputum (+) 객관적 소견 (O) 인플루엔자 (+) 타미플루 치료...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">11. 고지의무위반</div>
+          <div class="report-value bad">
+            ⚠️ 위반 의심: 가입일(2024-04-09) 3개월 이내 진료 12건
+          </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">12. 결론</div>
+          <div class="report-value">부지급</div>
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0;">
+        <div class="report-item">
+          <div class="report-label">GT 날짜 (9개)</div>
+          <div class="report-value">2019-03-23, 2019-04-09, 2023-08-07, 2024-01-09, 2024-04-03, 2024-04-09, 2024-04-23, 2025-02-04, 2025-02-12</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">매칭된 날짜</div>
+          <div class="report-value matched">2019-03-23, 2023-08-07, 2024-04-03, 2024-04-09, 2025-02-04, 2025-02-12</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">누락된 날짜</div>
+          <div class="report-value missed">2019-04-09, 2024-01-09, 2024-04-23</div>
+        </div>
+      </div>
+    
+      <div class="case-detail">
+        <div class="case-title">Case5 - 김태형</div>
+        
+        <div class="report-item">
+          <div class="report-label">1. 내원일시</div>
+          <div class="report-value">2024-04-12 @ 미상</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">2. 내원경위</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">3. 진단병명</div>
+          <div class="report-value">[R07.4] 상세불명의 흉통, [I20.88] 안정성 협심증, [I25.1] 관상동맥병</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">4. 검사결과</div>
+          <div class="report-value">6건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">5. 조직검사</div>
+          <div class="report-value">해당 없음</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">6. 치료내용</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">7. 통원기간</div>
+          <div class="report-value">2024-04-12 ~ 2024-11-04 / 2회</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">8. 입원기간</div>
+          <div class="report-value">2024-12-31 ~ </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">9. 과거병력</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">10. 의사소견</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">11. 고지의무위반</div>
+          <div class="report-value good">
+            ✅ 위반 없음
+          </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">12. 결론</div>
+          <div class="report-value">추가 검토 필요</div>
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0;">
+        <div class="report-item">
+          <div class="report-label">GT 날짜 (9개)</div>
+          <div class="report-value">2018-05-10, 2020-01-17, 2023-02-10, 2023-05-10, 2024-01-24, 2024-05-30, 2024-12-12, 2024-12-27, 2024-12-31</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">매칭된 날짜</div>
+          <div class="report-value matched">2024-05-30, 2024-12-31</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">누락된 날짜</div>
+          <div class="report-value missed">2018-05-10, 2020-01-17, 2023-02-10, 2023-05-10, 2024-01-24, 2024-12-12, 2024-12-27</div>
+        </div>
+      </div>
+    
+      <div class="case-detail">
+        <div class="case-title">Case13 - 김인화</div>
+        
+        <div class="report-item">
+          <div class="report-label">1. 내원일시</div>
+          <div class="report-value">정보 없음 @ 미상</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">2. 내원경위</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">3. 진단병명</div>
+          <div class="report-value">[S33.50] 요추의 염좌 및 긴장, [M51.1] 신경뿌리병증을 동반한 요추 및 기타 추간판장애</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">4. 검사결과</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">5. 조직검사</div>
+          <div class="report-value">해당 없음</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">6. 치료내용</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">7. 통원기간</div>
+          <div class="report-value">2024-04-12 ~ 2024-11-04 / 5회</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">8. 입원기간</div>
+          <div class="report-value">해당 없음 ~ </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">9. 과거병력</div>
+          <div class="report-value">14건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">10. 의사소견</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">11. 고지의무위반</div>
+          <div class="report-value good">
+            ✅ 위반 없음
+          </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">12. 결론</div>
+          <div class="report-value">지급</div>
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0;">
+        <div class="report-item">
+          <div class="report-label">GT 날짜 (5개)</div>
+          <div class="report-value">2021-03-24, 2021-07-30, 2024-04-12, 2024-11-04, 2025-03-13</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">매칭된 날짜</div>
+          <div class="report-value matched">2021-03-24, 2024-04-12, 2024-11-04</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">누락된 날짜</div>
+          <div class="report-value missed">2021-07-30, 2025-03-13</div>
+        </div>
+      </div>
+    
+      <div class="case-detail">
+        <div class="case-title">Case15 - 고영란</div>
+        
+        <div class="report-item">
+          <div class="report-label">1. 내원일시</div>
+          <div class="report-value">정보 없음 @ 미상</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">2. 내원경위</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">3. 진단병명</div>
+          <div class="report-value">[C50.11] 왼쪽</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">4. 검사결과</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">5. 조직검사</div>
+          <div class="report-value">해당 없음</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">6. 치료내용</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">7. 통원기간</div>
+          <div class="report-value">2025-06-16 ~ 2025-06-27 / 2회</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">8. 입원기간</div>
+          <div class="report-value">해당 없음 ~ </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">9. 과거병력</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">10. 의사소견</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">11. 고지의무위반</div>
+          <div class="report-value good">
+            ✅ 위반 없음
+          </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">12. 결론</div>
+          <div class="report-value">추가 검토 필요</div>
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0;">
+        <div class="report-item">
+          <div class="report-label">GT 날짜 (7개)</div>
+          <div class="report-value">2025-02-25, 2025-05-26, 2025-06-07, 2025-06-16, 2025-06-20, 2025-06-24, 2025-06-27</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">매칭된 날짜</div>
+          <div class="report-value matched">2025-06-16, 2025-06-27</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">누락된 날짜</div>
+          <div class="report-value missed">2025-02-25, 2025-05-26, 2025-06-07, 2025-06-20, 2025-06-24</div>
+        </div>
+      </div>
+    
+      <div class="case-detail">
+        <div class="case-title">Case17 - 김동아</div>
+        
+        <div class="report-item">
+          <div class="report-label">1. 내원일시</div>
+          <div class="report-value">정보 없음 @ 미상</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">2. 내원경위</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">3. 진단병명</div>
+          <div class="report-value">[S33.50] 요추의 염좌 및 긴장, [I63.9] 상세불명의 뇌경색증</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">4. 검사결과</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">5. 조직검사</div>
+          <div class="report-value">해당 없음</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">6. 치료내용</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">7. 통원기간</div>
+          <div class="report-value"> ~  / 0회</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">8. 입원기간</div>
+          <div class="report-value">해당 없음 ~ </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">9. 과거병력</div>
+          <div class="report-value">0건</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">10. 의사소견</div>
+          <div class="report-value">정보 없음...</div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">11. 고지의무위반</div>
+          <div class="report-value good">
+            ✅ 위반 없음
+          </div>
+        </div>
+        
+        <div class="report-item">
+          <div class="report-label">12. 결론</div>
+          <div class="report-value">추가 검토 필요</div>
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid #e2e8f0;">
+        <div class="report-item">
+          <div class="report-label">GT 날짜 (4개)</div>
+          <div class="report-value">2025-08-12, 2025-08-14, 2025-08-19, 2030-08-12</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">매칭된 날짜</div>
+          <div class="report-value matched">없음</div>
+        </div>
+        <div class="report-item">
+          <div class="report-label">누락된 날짜</div>
+          <div class="report-value missed">2025-08-12, 2025-08-14, 2025-08-19, 2030-08-12</div>
+        </div>
+      </div>
+    
+    
+    <div style="text-align:center;margin-top:2rem;color:#94a3b8;">
+      <p>Generated: 2026-01-26T06:51:49.722Z</p>
+      <p>VNEXSUS AI Claims System - Cycle 7</p>
+    </div>
+  </div>
+</body>
+</html>

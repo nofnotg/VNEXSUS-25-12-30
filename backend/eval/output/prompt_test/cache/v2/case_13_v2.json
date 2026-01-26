@@ -1,0 +1,175 @@
+{
+  "caseId": "Case13",
+  "caseNum": 13,
+  "patientName": "김인화",
+  "version": "v2",
+  "processedAt": "2026-01-26T06:56:10.701Z",
+  "processingTime": 48677,
+  "totalPages": 46,
+  "processedPages": 30,
+  "result": {
+    "visitDate": {
+      "date": "2025-03-30",
+      "hospital": "서울대학교병원",
+      "department": "내과"
+    },
+    "chiefComplaint": {
+      "summary": "복통 및 구토",
+      "referralSource": "서울아산병원",
+      "onsetDate": "2025-03-15",
+      "duration": "15일",
+      "details": "복통이 심해져 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "KCD-10 코드",
+        "nameKr": "급성 위염",
+        "nameEn": "Acute Gastritis",
+        "date": "2025-03-30",
+        "isPrimary": true,
+        "hospital": "서울대학교병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "위내시경",
+        "nameEn": "Gastroscopy",
+        "date": "2025-03-30",
+        "result": "정상",
+        "finding": "위 점막 염증",
+        "normalRange": "정상",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-03-30",
+      "reportDate": "2025-04-01",
+      "finding": "염증성 변화",
+      "stageTNM": "N/A",
+      "stageOverall": "N/A",
+      "histology": "급성 염증",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "소화제",
+        "date": "2025-03-30",
+        "duration": "7일",
+        "details": "소화제 처방 및 경과 관찰",
+        "hospital": "서울대학교병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-03-30",
+      "endDate": "2025-04-06",
+      "totalVisits": 3,
+      "hospitals": [
+        "서울대학교병원",
+        "서울아산병원"
+      ],
+      "summary": "복통으로 3회 통원 치료"
+    },
+    "admissionPeriod": {
+      "startDate": "N/A",
+      "endDate": "N/A",
+      "totalDays": 0,
+      "hospital": "N/A",
+      "department": "N/A",
+      "reason": "N/A"
+    },
+    "pastHistory": [
+      {
+        "condition": "위염",
+        "code": "KCD-10 코드",
+        "diagnosisDate": "2020-01-15",
+        "treatment": "약물 치료",
+        "currentStatus": "완치",
+        "hospital": "서울아산병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "급성 위염으로 인한 복통",
+      "prognosis": "양호",
+      "recommendations": "지속적인 약물 복용",
+      "limitations": "자극적인 음식 피하기"
+    },
+    "disclosureViolation": {
+      "hasViolation": true,
+      "evidence": "가입 3개월 이내 위염 진료",
+      "relatedEvents": [
+        "2025-03-15 복통으로 내원"
+      ],
+      "riskLevel": "high"
+    },
+    "conclusion": {
+      "summary": "부지급: 가입 전 발병 및 고지의무 위반",
+      "keyFindings": [
+        "가입 3개월 이내 동일 질환 진료",
+        "기왕증 존재"
+      ],
+      "recommendations": "부지급 결정"
+    }
+  },
+  "gtDates": [
+    "2021-03-24",
+    "2021-07-30",
+    "2024-04-12",
+    "2024-11-04",
+    "2025-03-13"
+  ],
+  "resultDates": [
+    "2020-01-15",
+    "2025-03-15",
+    "2025-03-30",
+    "2025-04-01",
+    "2025-04-06"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 5,
+      "resultCount": 5,
+      "matchedCount": 0,
+      "missedCount": 5,
+      "extraCount": 5,
+      "coverage": 0,
+      "precision": 0,
+      "matched": [],
+      "missed": [
+        "2021-03-24",
+        "2021-07-30",
+        "2024-04-12",
+        "2024-11-04",
+        "2025-03-13"
+      ],
+      "extra": [
+        "2020-01-15",
+        "2025-03-15",
+        "2025-03-30",
+        "2025-04-01",
+        "2025-04-06"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

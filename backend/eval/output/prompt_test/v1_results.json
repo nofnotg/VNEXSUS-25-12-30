@@ -1,0 +1,956 @@
+{
+  "summary": {
+    "version": "v1",
+    "totalCases": 5,
+    "avgCoverage": 11,
+    "avgPrecision": 31,
+    "avgCompleteness": 98,
+    "totalGtDates": 34,
+    "totalMatched": 4,
+    "totalMissed": 30
+  },
+  "results": [
+    {
+      "caseId": "Case2",
+      "caseNum": 2,
+      "patientName": "김미화",
+      "version": "v1",
+      "processedAt": "2026-01-26T06:45:30.839Z",
+      "processingTime": 24532,
+      "totalPages": 13,
+      "processedPages": 13,
+      "result": {
+        "visitDate": {
+          "date": "2023-08-07",
+          "time": "09:37",
+          "hospital": "SM병원",
+          "department": "영상의학과"
+        },
+        "chiefComplaint": {
+          "summary": "오른쪽 하복부 통증",
+          "referralSource": "N/A",
+          "onsetDate": "2023-08-06",
+          "duration": "1일",
+          "details": "환자는 오른쪽 하복부 통증을 호소하며 내원함."
+        },
+        "diagnoses": [
+          {
+            "code": "D18.02",
+            "nameKr": "거대 간 혈관종",
+            "nameEn": "Giant hepatic hemangioma",
+            "date": "2023-08-07",
+            "isPrimary": true,
+            "hospital": "SM병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT Abdomen",
+            "nameEn": "CT Abdomen",
+            "date": "2023-08-07",
+            "result": "Giant hepatic hemangioma",
+            "finding": "오른쪽 간엽에 8 x 6 cm 크기의 간 혈관종 확인",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          },
+          {
+            "name": "CT Abdomen",
+            "nameEn": "CT Abdomen",
+            "date": "2022-07-19",
+            "result": "Giant hepatic hemangioma",
+            "finding": "7.7 x 5.7 cm 크기의 간 혈관종 확인",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          },
+          {
+            "name": "CT Abdomen",
+            "nameEn": "CT Abdomen",
+            "date": "2021-07-09",
+            "result": "Liver hemangioma",
+            "finding": "6.9 cm 크기의 간 혈관종 확인",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          },
+          {
+            "name": "CT Abdomen",
+            "nameEn": "CT Abdomen",
+            "date": "2020-06-20",
+            "result": "Liver hemangioma",
+            "finding": "6.7 cm 크기의 간 혈관종 확인",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          },
+          {
+            "name": "CT Abdomen",
+            "nameEn": "CT Abdomen",
+            "date": "2019-03-23",
+            "result": "Liver hemangioma",
+            "finding": "5.2 cm 크기의 간 혈관종 확인",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          }
+        ],
+        "pathology": {
+          "testName": "N/A",
+          "testDate": "N/A",
+          "reportDate": "N/A",
+          "finding": "N/A",
+          "stageTNM": "N/A",
+          "stageOverall": "N/A",
+          "histology": "N/A",
+          "margin": "N/A"
+        },
+        "treatments": [
+          {
+            "type": "N/A",
+            "name": "N/A",
+            "date": "N/A",
+            "duration": "N/A",
+            "details": "N/A",
+            "hospital": "N/A"
+          }
+        ],
+        "outpatientPeriod": {
+          "startDate": "2023-08-07",
+          "endDate": "2023-08-07",
+          "totalVisits": 1,
+          "hospitals": [
+            "SM병원"
+          ],
+          "summary": "2023년 8월 7일에 통원하여 진료를 받음."
+        },
+        "admissionPeriod": {
+          "startDate": "N/A",
+          "endDate": "N/A",
+          "totalDays": 0,
+          "hospital": "N/A",
+          "department": "N/A",
+          "reason": "N/A"
+        },
+        "pastHistory": [
+          {
+            "condition": "간 혈관종",
+            "code": "D18.02",
+            "diagnosisDate": "2019-03-23",
+            "treatment": "정기적인 CT 검사",
+            "currentStatus": "관찰 중",
+            "hospital": "SM병원",
+            "isPreExisting": true
+          }
+        ],
+        "doctorOpinion": {
+          "summary": "거대 간 혈관종으로 인한 오른쪽 하복부 통증.",
+          "prognosis": "양호하나 지속적인 관찰 필요.",
+          "recommendations": "정기적인 CT 검사 권장.",
+          "limitations": "일상생활에 큰 제한 없음."
+        },
+        "disclosureViolation": {
+          "hasViolation": false,
+          "evidence": "N/A",
+          "relatedEvents": [],
+          "riskLevel": "low"
+        },
+        "conclusion": {
+          "summary": "거대 간 혈관종 진단.",
+          "keyFindings": [
+            "오른쪽 하복부 통증",
+            "거대 간 혈관종 확인"
+          ],
+          "recommendations": "정기적인 검사 및 관찰 필요."
+        }
+      },
+      "gtDates": [
+        "2019-03-23",
+        "2019-04-09",
+        "2023-08-07",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ],
+      "resultDates": [
+        "2019-03-23",
+        "2020-06-20",
+        "2021-07-09",
+        "2022-07-19",
+        "2023-08-06",
+        "2023-08-07"
+      ],
+      "metrics": {
+        "gtMatching": {
+          "gtCount": 9,
+          "resultCount": 6,
+          "matchedCount": 2,
+          "missedCount": 7,
+          "extraCount": 4,
+          "coverage": 22,
+          "precision": 33,
+          "matched": [
+            "2019-03-23",
+            "2023-08-07"
+          ],
+          "missed": [
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-03",
+            "2024-04-09",
+            "2024-04-23",
+            "2025-02-04",
+            "2025-02-12"
+          ],
+          "extra": [
+            "2020-06-20",
+            "2021-07-09",
+            "2022-07-19",
+            "2023-08-06"
+          ]
+        },
+        "completeness": {
+          "score": 100,
+          "details": {
+            "visitDate": true,
+            "chiefComplaint": true,
+            "diagnoses": true,
+            "examinations": true,
+            "pathology": true,
+            "treatments": true,
+            "outpatientPeriod": true,
+            "admissionPeriod": true,
+            "pastHistory": true,
+            "doctorOpinion": true,
+            "disclosureViolation": true,
+            "conclusion": true
+          },
+          "filled": 12,
+          "total": 12
+        }
+      }
+    },
+    {
+      "caseId": "Case5",
+      "caseNum": 5,
+      "patientName": "김태형",
+      "version": "v1",
+      "processedAt": "2026-01-26T06:46:23.685Z",
+      "processingTime": 22833,
+      "totalPages": 2,
+      "processedPages": 2,
+      "result": {
+        "visitDate": {
+          "date": "2023-01-12",
+          "time": "14:00",
+          "hospital": "세브란스병원",
+          "department": "내과"
+        },
+        "chiefComplaint": {
+          "summary": "복통 및 구토",
+          "referralSource": "해오름 손해사정",
+          "onsetDate": "2023-01-10",
+          "duration": "2일",
+          "details": "환자는 2일 전부터 복통과 구토 증상을 호소하며 내원함."
+        },
+        "diagnoses": [
+          {
+            "code": "KCD-10 코드",
+            "nameKr": "급성 위염",
+            "nameEn": "Acute Gastritis",
+            "date": "2023-01-12",
+            "isPrimary": true,
+            "hospital": "세브란스병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "혈액검사",
+            "nameEn": "Blood Test",
+            "date": "2023-01-12",
+            "result": "정상",
+            "finding": "특이 소견 없음",
+            "normalRange": "정상 범위",
+            "isAbnormal": false
+          },
+          {
+            "name": "복부 초음파",
+            "nameEn": "Abdominal Ultrasound",
+            "date": "2023-01-12",
+            "result": "정상",
+            "finding": "특이 소견 없음",
+            "normalRange": "정상 범위",
+            "isAbnormal": false
+          }
+        ],
+        "pathology": {
+          "testName": "조직검사",
+          "testDate": "2023-01-12",
+          "reportDate": "2023-01-15",
+          "finding": "조직 검사 결과 정상",
+          "stageTNM": "N/A",
+          "stageOverall": "N/A",
+          "histology": "N/A",
+          "margin": "N/A"
+        },
+        "treatments": [
+          {
+            "type": "약물",
+            "name": "소화제",
+            "date": "2023-01-12",
+            "duration": "5일",
+            "details": "복통 완화를 위한 약물 처방",
+            "hospital": "세브란스병원"
+          }
+        ],
+        "outpatientPeriod": {
+          "startDate": "2023-01-12",
+          "endDate": "2023-01-12",
+          "totalVisits": 1,
+          "hospitals": [
+            "세브란스병원"
+          ],
+          "summary": "환자는 1회 통원하여 진료를 받음."
+        },
+        "admissionPeriod": {
+          "startDate": "N/A",
+          "endDate": "N/A",
+          "totalDays": 0,
+          "hospital": "N/A",
+          "department": "N/A",
+          "reason": "N/A"
+        },
+        "pastHistory": [
+          {
+            "condition": "고혈압",
+            "code": "I10",
+            "diagnosisDate": "2020-05-10",
+            "treatment": "약물 치료",
+            "currentStatus": "양호",
+            "hospital": "세브란스병원",
+            "isPreExisting": true
+          }
+        ],
+        "doctorOpinion": {
+          "summary": "환자는 급성 위염으로 진단되었으며, 약물 치료가 필요함.",
+          "prognosis": "예후 양호",
+          "recommendations": "지속적인 약물 복용 및 식이요법 권장",
+          "limitations": "과식 및 자극적인 음식 피할 것"
+        },
+        "disclosureViolation": {
+          "hasViolation": false,
+          "evidence": "N/A",
+          "relatedEvents": [],
+          "riskLevel": "low"
+        },
+        "conclusion": {
+          "summary": "환자는 급성 위염으로 진단받고 치료 중임.",
+          "keyFindings": [
+            "급성 위염 진단",
+            "정상 혈액검사 결과"
+          ],
+          "recommendations": "보험금 지급 권장"
+        }
+      },
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ],
+      "resultDates": [
+        "2020-05-10",
+        "2023-01-10",
+        "2023-01-12",
+        "2023-01-15"
+      ],
+      "metrics": {
+        "gtMatching": {
+          "gtCount": 9,
+          "resultCount": 4,
+          "matchedCount": 0,
+          "missedCount": 9,
+          "extraCount": 4,
+          "coverage": 0,
+          "precision": 0,
+          "matched": [],
+          "missed": [
+            "2018-05-10",
+            "2020-01-17",
+            "2023-02-10",
+            "2023-05-10",
+            "2024-01-24",
+            "2024-05-30",
+            "2024-12-12",
+            "2024-12-27",
+            "2024-12-31"
+          ],
+          "extra": [
+            "2020-05-10",
+            "2023-01-10",
+            "2023-01-12",
+            "2023-01-15"
+          ]
+        },
+        "completeness": {
+          "score": 100,
+          "details": {
+            "visitDate": true,
+            "chiefComplaint": true,
+            "diagnoses": true,
+            "examinations": true,
+            "pathology": true,
+            "treatments": true,
+            "outpatientPeriod": true,
+            "admissionPeriod": true,
+            "pastHistory": true,
+            "doctorOpinion": true,
+            "disclosureViolation": true,
+            "conclusion": true
+          },
+          "filled": 12,
+          "total": 12
+        }
+      }
+    },
+    {
+      "caseId": "Case13",
+      "caseNum": 13,
+      "patientName": "김인화",
+      "version": "v1",
+      "processedAt": "2026-01-26T06:47:28.451Z",
+      "processingTime": 34754,
+      "totalPages": 38,
+      "processedPages": 30,
+      "result": {
+        "visitDate": {
+          "date": "2021-07-30",
+          "time": "09:00",
+          "hospital": "NH농협생명보험",
+          "department": "보험청구"
+        },
+        "chiefComplaint": {
+          "summary": "보험 청구 관련 상담",
+          "referralSource": "해당 없음",
+          "onsetDate": "2021-07-30",
+          "duration": "1일",
+          "details": "보험 청구를 위한 서류 제출 및 상담"
+        },
+        "diagnoses": [
+          {
+            "code": "Z00.0",
+            "nameKr": "건강검진",
+            "nameEn": "Health Examination",
+            "date": "2021-07-30",
+            "isPrimary": true,
+            "hospital": "NH농협생명보험"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "보험 청구 서류",
+            "nameEn": "Insurance Claim Document",
+            "date": "2021-07-30",
+            "result": "제출 완료",
+            "finding": "해당 없음",
+            "normalRange": "해당 없음",
+            "isAbnormal": false
+          }
+        ],
+        "pathology": {
+          "testName": "해당 없음",
+          "testDate": "해당 없음",
+          "reportDate": "해당 없음",
+          "finding": "해당 없음",
+          "stageTNM": "해당 없음",
+          "stageOverall": "해당 없음",
+          "histology": "해당 없음",
+          "margin": "해당 없음"
+        },
+        "treatments": [
+          {
+            "type": "상담",
+            "name": "보험 청구 상담",
+            "date": "2021-07-30",
+            "duration": "1일",
+            "details": "보험 청구 관련 서류 제출 및 상담",
+            "hospital": "NH농협생명보험"
+          }
+        ],
+        "outpatientPeriod": {
+          "startDate": "2021-07-30",
+          "endDate": "2021-07-30",
+          "totalVisits": 1,
+          "hospitals": [
+            "NH농협생명보험"
+          ],
+          "summary": "보험 청구 관련 상담 1회"
+        },
+        "admissionPeriod": {
+          "startDate": "해당 없음",
+          "endDate": "해당 없음",
+          "totalDays": 0,
+          "hospital": "해당 없음",
+          "department": "해당 없음",
+          "reason": "해당 없음"
+        },
+        "pastHistory": [
+          {
+            "condition": "해당 없음",
+            "code": "해당 없음",
+            "diagnosisDate": "해당 없음",
+            "treatment": "해당 없음",
+            "currentStatus": "해당 없음",
+            "hospital": "해당 없음",
+            "isPreExisting": false
+          }
+        ],
+        "doctorOpinion": {
+          "summary": "보험 청구 관련 상담 완료",
+          "prognosis": "해당 없음",
+          "recommendations": "서류 제출 후 결과 대기",
+          "limitations": "해당 없음"
+        },
+        "disclosureViolation": {
+          "hasViolation": false,
+          "evidence": "해당 없음",
+          "relatedEvents": [],
+          "riskLevel": "low"
+        },
+        "conclusion": {
+          "summary": "보험 청구 상담 완료",
+          "keyFindings": [
+            "서류 제출 완료",
+            "상담 완료"
+          ],
+          "recommendations": "보험금 지급 요청"
+        }
+      },
+      "gtDates": [
+        "2021-03-24",
+        "2021-07-30",
+        "2024-04-12",
+        "2024-11-04",
+        "2025-03-13"
+      ],
+      "resultDates": [
+        "2021-07-30"
+      ],
+      "metrics": {
+        "gtMatching": {
+          "gtCount": 5,
+          "resultCount": 1,
+          "matchedCount": 1,
+          "missedCount": 4,
+          "extraCount": 0,
+          "coverage": 20,
+          "precision": 100,
+          "matched": [
+            "2021-07-30"
+          ],
+          "missed": [
+            "2021-03-24",
+            "2024-04-12",
+            "2024-11-04",
+            "2025-03-13"
+          ],
+          "extra": []
+        },
+        "completeness": {
+          "score": 100,
+          "details": {
+            "visitDate": true,
+            "chiefComplaint": true,
+            "diagnoses": true,
+            "examinations": true,
+            "pathology": true,
+            "treatments": true,
+            "outpatientPeriod": true,
+            "admissionPeriod": true,
+            "pastHistory": true,
+            "doctorOpinion": true,
+            "disclosureViolation": true,
+            "conclusion": true
+          },
+          "filled": 12,
+          "total": 12
+        }
+      }
+    },
+    {
+      "caseId": "Case15",
+      "caseNum": 15,
+      "patientName": "고영란",
+      "version": "v1",
+      "processedAt": "2026-01-26T06:48:23.699Z",
+      "processingTime": 25228,
+      "totalPages": 13,
+      "processedPages": 13,
+      "result": {
+        "visitDate": {
+          "date": "2025-06-07",
+          "time": "N/A",
+          "hospital": "고양시 고양이동 병원",
+          "department": "내과"
+        },
+        "chiefComplaint": {
+          "summary": "유방에 2.6cm 크기의 종괴 발견",
+          "referralSource": "N/A",
+          "onsetDate": "2025-05-01",
+          "duration": "1개월",
+          "details": "유방에서 종괴가 발견되어 검사를 받음."
+        },
+        "diagnoses": [
+          {
+            "code": "C50.11",
+            "nameKr": "유방암",
+            "nameEn": "Breast cancer",
+            "date": "2025-06-07",
+            "isPrimary": true,
+            "hospital": "고양시 고양이동 병원"
+          },
+          {
+            "code": "C77.0",
+            "nameKr": "림프절 전이",
+            "nameEn": "Lymph node metastasis",
+            "date": "2025-06-07",
+            "isPrimary": false,
+            "hospital": "고양시 고양이동 병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "유방 초음파",
+            "nameEn": "Breast ultrasound",
+            "date": "2025-06-07",
+            "result": "2.6cm 크기의 종괴 확인",
+            "finding": "왼쪽 유방 하부에 종괴",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          },
+          {
+            "name": "CT 검사",
+            "nameEn": "CT scan",
+            "date": "2025-06-07",
+            "result": "림프절 전이 의심",
+            "finding": "왼쪽 겨드랑이 림프절 비대",
+            "normalRange": "N/A",
+            "isAbnormal": true
+          }
+        ],
+        "pathology": {
+          "testName": "유방 조직검사",
+          "testDate": "2025-06-07",
+          "reportDate": "2025-06-07",
+          "finding": "침윤성 유관암, 조직학적 2등급",
+          "stageTNM": "T2N1M0",
+          "stageOverall": "Stage II",
+          "histology": "Invasive ductal carcinoma",
+          "margin": "N/A"
+        },
+        "treatments": [
+          {
+            "type": "수술",
+            "name": "유방 절제술",
+            "date": "2025-06-14",
+            "duration": "1일",
+            "details": "왼쪽 유방 절제",
+            "hospital": "고양시 고양이동 병원"
+          }
+        ],
+        "outpatientPeriod": {
+          "startDate": "2025-05-01",
+          "endDate": "2025-06-07",
+          "totalVisits": 3,
+          "hospitals": [
+            "고양시 고양이동 병원"
+          ],
+          "summary": "유방 종괴 발견 후 3회 통원"
+        },
+        "admissionPeriod": {
+          "startDate": "2025-06-14",
+          "endDate": "2025-06-15",
+          "totalDays": 1,
+          "hospital": "고양시 고양이동 병원",
+          "department": "외과",
+          "reason": "유방암 수술",
+          "summary": "2025-06-14 ~ 2025-06-15 / 1일 입원"
+        },
+        "pastHistory": [
+          {
+            "condition": "고혈압",
+            "code": "I10",
+            "diagnosisDate": "2020-01-01",
+            "treatment": "약물 치료",
+            "currentStatus": "조절됨",
+            "hospital": "고양시 고양이동 병원",
+            "isPreExisting": true
+          }
+        ],
+        "doctorOpinion": {
+          "summary": "유방암 진단 후 수술 필요",
+          "prognosis": "예후 양호",
+          "recommendations": "정기적인 추적 검사 필요",
+          "limitations": "수술 후 2주간 무리한 활동 금지"
+        },
+        "disclosureViolation": {
+          "hasViolation": false,
+          "evidence": "N/A",
+          "relatedEvents": [],
+          "riskLevel": "low"
+        },
+        "conclusion": {
+          "summary": "유방암 진단 및 치료 경과",
+          "keyFindings": [
+            "유방암 진단",
+            "림프절 전이 의심"
+          ],
+          "recommendations": "손해사정 지급 권고"
+        }
+      },
+      "gtDates": [
+        "2025-02-25",
+        "2025-05-26",
+        "2025-06-07",
+        "2025-06-16",
+        "2025-06-20",
+        "2025-06-24",
+        "2025-06-27"
+      ],
+      "resultDates": [
+        "2020-01-01",
+        "2025-05-01",
+        "2025-06-07",
+        "2025-06-14",
+        "2025-06-15"
+      ],
+      "metrics": {
+        "gtMatching": {
+          "gtCount": 7,
+          "resultCount": 5,
+          "matchedCount": 1,
+          "missedCount": 6,
+          "extraCount": 4,
+          "coverage": 14,
+          "precision": 20,
+          "matched": [
+            "2025-06-07"
+          ],
+          "missed": [
+            "2025-02-25",
+            "2025-05-26",
+            "2025-06-16",
+            "2025-06-20",
+            "2025-06-24",
+            "2025-06-27"
+          ],
+          "extra": [
+            "2020-01-01",
+            "2025-05-01",
+            "2025-06-14",
+            "2025-06-15"
+          ]
+        },
+        "completeness": {
+          "score": 100,
+          "details": {
+            "visitDate": true,
+            "chiefComplaint": true,
+            "diagnoses": true,
+            "examinations": true,
+            "pathology": true,
+            "treatments": true,
+            "outpatientPeriod": true,
+            "admissionPeriod": true,
+            "pastHistory": true,
+            "doctorOpinion": true,
+            "disclosureViolation": true,
+            "conclusion": true
+          },
+          "filled": 12,
+          "total": 12
+        }
+      }
+    },
+    {
+      "caseId": "Case17",
+      "caseNum": 17,
+      "patientName": "김동아",
+      "version": "v1",
+      "processedAt": "2026-01-26T06:49:25.190Z",
+      "processingTime": 31471,
+      "totalPages": 28,
+      "processedPages": 28,
+      "result": {
+        "visitDate": {
+          "date": "2025-09-09",
+          "time": null,
+          "hospital": "해블리병원",
+          "department": null
+        },
+        "chiefComplaint": {
+          "summary": "복통 및 구토",
+          "referralSource": null,
+          "onsetDate": "2025-09-01",
+          "duration": "8일",
+          "details": "환자는 복통과 구토 증상을 호소하며 내원함."
+        },
+        "diagnoses": [
+          {
+            "code": "R10.9",
+            "nameKr": "복통",
+            "nameEn": "Abdominal pain",
+            "date": "2025-09-09",
+            "isPrimary": true,
+            "hospital": "해블리병원"
+          }
+        ],
+        "examinations": [
+          {
+            "name": "CT 스캔",
+            "nameEn": "CT scan",
+            "date": "2025-09-09",
+            "result": "정상",
+            "finding": "특이 소견 없음",
+            "normalRange": null,
+            "isAbnormal": false
+          },
+          {
+            "name": "혈액 검사",
+            "nameEn": "Blood test",
+            "date": "2025-09-09",
+            "result": "정상",
+            "finding": "모든 수치 정상",
+            "normalRange": null,
+            "isAbnormal": false
+          }
+        ],
+        "pathology": {
+          "testName": null,
+          "testDate": null,
+          "reportDate": null,
+          "finding": null,
+          "stageTNM": null,
+          "stageOverall": null,
+          "histology": null,
+          "margin": null
+        },
+        "treatments": [
+          {
+            "type": "약물",
+            "name": "진통제",
+            "date": "2025-09-09",
+            "duration": "1일",
+            "details": "복통 완화를 위한 진통제 투여",
+            "hospital": "해블리병원"
+          }
+        ],
+        "outpatientPeriod": {
+          "startDate": "2025-09-01",
+          "endDate": "2025-09-09",
+          "totalVisits": 1,
+          "hospitals": [
+            "해블리병원"
+          ],
+          "summary": "복통 및 구토로 인한 통원"
+        },
+        "admissionPeriod": {
+          "startDate": null,
+          "endDate": null,
+          "totalDays": 0,
+          "hospital": null,
+          "department": null,
+          "reason": null,
+          "summary": "입원 기록 없음"
+        },
+        "pastHistory": [
+          {
+            "condition": "고혈압",
+            "code": "I10",
+            "diagnosisDate": "2020-01-15",
+            "treatment": "약물 치료",
+            "currentStatus": "관리 중",
+            "hospital": "해블리병원",
+            "isPreExisting": true
+          }
+        ],
+        "doctorOpinion": {
+          "summary": "복통 원인 불명, 추가 검사 필요",
+          "prognosis": "양호",
+          "recommendations": "추가 검사 및 경과 관찰",
+          "limitations": "일상생활에 큰 제한 없음"
+        },
+        "disclosureViolation": {
+          "hasViolation": false,
+          "evidence": null,
+          "relatedEvents": [],
+          "riskLevel": "low"
+        },
+        "conclusion": {
+          "summary": "복통으로 인한 내원, 추가 검사 필요",
+          "keyFindings": [
+            "복통 및 구토 증상",
+            "CT 및 혈액 검사 정상"
+          ],
+          "recommendations": "추가 검사 후 치료 결정"
+        }
+      },
+      "gtDates": [
+        "2025-08-12",
+        "2025-08-14",
+        "2025-08-19",
+        "2030-08-12"
+      ],
+      "resultDates": [
+        "2020-01-15",
+        "2025-09-01",
+        "2025-09-09"
+      ],
+      "metrics": {
+        "gtMatching": {
+          "gtCount": 4,
+          "resultCount": 3,
+          "matchedCount": 0,
+          "missedCount": 4,
+          "extraCount": 3,
+          "coverage": 0,
+          "precision": 0,
+          "matched": [],
+          "missed": [
+            "2025-08-12",
+            "2025-08-14",
+            "2025-08-19",
+            "2030-08-12"
+          ],
+          "extra": [
+            "2020-01-15",
+            "2025-09-01",
+            "2025-09-09"
+          ]
+        },
+        "completeness": {
+          "score": 92,
+          "details": {
+            "visitDate": true,
+            "chiefComplaint": true,
+            "diagnoses": true,
+            "examinations": true,
+            "pathology": true,
+            "treatments": true,
+            "outpatientPeriod": true,
+            "admissionPeriod": null,
+            "pastHistory": true,
+            "doctorOpinion": true,
+            "disclosureViolation": true,
+            "conclusion": true
+          },
+          "filled": 11,
+          "total": 12
+        }
+      }
+    }
+  ]
+}

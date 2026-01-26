@@ -1,0 +1,178 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "version": "v2",
+  "processedAt": "2026-01-26T06:54:52.003Z",
+  "processingTime": 27533,
+  "totalPages": 34,
+  "processedPages": 30,
+  "result": {
+    "visitDate": {
+      "date": "2024-01-09",
+      "hospital": "세브란스병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "흉통",
+      "referralSource": "세브란스병원",
+      "onsetDate": "2024-01-01",
+      "duration": "8일",
+      "details": "환자는 2024년 1월 1일부터 흉통을 호소하며 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "I20.9",
+        "nameKr": "협심증",
+        "nameEn": "Angina pectoris",
+        "date": "2024-01-09",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "심장 초음파",
+        "nameEn": "Echocardiography",
+        "date": "2024-01-09",
+        "result": "정상",
+        "finding": "심장 기능 정상",
+        "normalRange": "정상 범위",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "관상동맥 조영술",
+      "testDate": "2024-01-09",
+      "reportDate": "2024-01-09",
+      "finding": "관상동맥 1개 혈관 질환",
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "시술",
+        "name": "관상동맥 조영술",
+        "date": "2024-01-09",
+        "duration": "1일",
+        "details": "관상동맥 조영술 시행",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2024-01-01",
+      "endDate": "2024-01-09",
+      "totalVisits": 1,
+      "hospitals": [
+        "세브란스병원"
+      ],
+      "summary": "흉통으로 내원하여 진단 및 치료를 받음."
+    },
+    "admissionPeriod": {
+      "startDate": "2024-01-09",
+      "endDate": "2024-01-09",
+      "totalDays": 1,
+      "hospital": "세브란스병원",
+      "department": "외과",
+      "reason": "협심증 진단 및 치료"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "세브란스병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 협심증으로 진단되었으며, 관상동맥 조영술을 통해 치료가 필요함.",
+      "prognosis": "양호",
+      "recommendations": "지속적인 관리 필요",
+      "limitations": "격렬한 운동 제한"
+    },
+    "disclosureViolation": {
+      "hasViolation": true,
+      "evidence": "가입일 3개월 이내 흉통으로 내원",
+      "relatedEvents": [
+        "2024-01-01 흉통으로 내원"
+      ],
+      "riskLevel": "high"
+    },
+    "conclusion": {
+      "summary": "가입 전 발병으로 인한 고지의무 위반.",
+      "keyFindings": [
+        "협심증 진단",
+        "가입 3개월 이내 진료"
+      ],
+      "recommendations": "부지급"
+    }
+  },
+  "gtDates": [
+    "2018-05-10",
+    "2020-01-17",
+    "2023-02-10",
+    "2023-05-10",
+    "2024-01-24",
+    "2024-05-30",
+    "2024-12-12",
+    "2024-12-27",
+    "2024-12-31"
+  ],
+  "resultDates": [
+    "2020-01-01",
+    "2024-01-01",
+    "2024-01-09"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 9,
+      "resultCount": 3,
+      "matchedCount": 0,
+      "missedCount": 9,
+      "extraCount": 3,
+      "coverage": 0,
+      "precision": 0,
+      "matched": [],
+      "missed": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ],
+      "extra": [
+        "2020-01-01",
+        "2024-01-01",
+        "2024-01-09"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

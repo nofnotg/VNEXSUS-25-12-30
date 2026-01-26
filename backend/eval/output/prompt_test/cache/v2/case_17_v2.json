@@ -1,0 +1,168 @@
+{
+  "caseId": "Case17",
+  "caseNum": 17,
+  "patientName": "김동아",
+  "version": "v2",
+  "processedAt": "2026-01-26T06:58:02.087Z",
+  "processingTime": 26091,
+  "totalPages": 28,
+  "processedPages": 28,
+  "result": {
+    "visitDate": {
+      "date": "2025-09-09",
+      "hospital": "해블리병원",
+      "department": "내과"
+    },
+    "chiefComplaint": {
+      "summary": "복통 및 구토",
+      "referralSource": "해블리병원",
+      "onsetDate": "2025-09-01",
+      "duration": "8일",
+      "details": "환자는 복통과 구토 증상으로 내원하였으며, 증상 발생 후 8일간 지속됨."
+    },
+    "diagnoses": [
+      {
+        "code": "KCD-10 코드 없음",
+        "nameKr": "복통",
+        "nameEn": "Abdominal Pain",
+        "date": "2025-09-09",
+        "isPrimary": true,
+        "hospital": "해블리병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT 스캔",
+        "nameEn": "CT Scan",
+        "date": "2025-09-09",
+        "result": "정상",
+        "finding": "특이 소견 없음",
+        "normalRange": "정상",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-09-09",
+      "reportDate": "2025-09-09",
+      "finding": "정상 조직",
+      "stageTNM": "N/A",
+      "stageOverall": "N/A",
+      "histology": "N/A",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "진통제",
+        "date": "2025-09-09",
+        "duration": "1일",
+        "details": "복통 완화를 위한 진통제 처방",
+        "hospital": "해블리병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-09",
+      "totalVisits": 1,
+      "hospitals": [
+        "해블리병원"
+      ],
+      "summary": "복통 및 구토로 내원하여 진료 및 검사 진행"
+    },
+    "admissionPeriod": {
+      "startDate": "N/A",
+      "endDate": "N/A",
+      "totalDays": 0,
+      "hospital": "N/A",
+      "department": "N/A",
+      "reason": "N/A"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "해블리병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "복통의 원인은 명확하지 않으나, 추가적인 검사 필요.",
+      "prognosis": "양호할 것으로 예상됨.",
+      "recommendations": "추가적인 검사 및 경과 관찰 필요.",
+      "limitations": "일상생활에 큰 제한 없음."
+    },
+    "disclosureViolation": {
+      "hasViolation": true,
+      "evidence": "가입 3개월 이내 복통 관련 진료",
+      "relatedEvents": [
+        "복통 증상 발생"
+      ],
+      "riskLevel": "medium"
+    },
+    "conclusion": {
+      "summary": "가입 전 복통 발생으로 인한 고지의무 위반.",
+      "keyFindings": [
+        "가입 3개월 이내 복통 진료",
+        "고혈압 기왕증"
+      ],
+      "recommendations": "부지급 권고"
+    }
+  },
+  "gtDates": [
+    "2025-08-12",
+    "2025-08-14",
+    "2025-08-19",
+    "2030-08-12"
+  ],
+  "resultDates": [
+    "2020-01-01",
+    "2025-09-01",
+    "2025-09-09"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 4,
+      "resultCount": 3,
+      "matchedCount": 0,
+      "missedCount": 4,
+      "extraCount": 3,
+      "coverage": 0,
+      "precision": 0,
+      "matched": [],
+      "missed": [
+        "2025-08-12",
+        "2025-08-14",
+        "2025-08-19",
+        "2030-08-12"
+      ],
+      "extra": [
+        "2020-01-01",
+        "2025-09-01",
+        "2025-09-09"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

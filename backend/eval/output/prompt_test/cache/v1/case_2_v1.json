@@ -1,0 +1,218 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "version": "v1",
+  "processedAt": "2026-01-26T06:45:30.839Z",
+  "processingTime": 24532,
+  "totalPages": 13,
+  "processedPages": 13,
+  "result": {
+    "visitDate": {
+      "date": "2023-08-07",
+      "time": "09:37",
+      "hospital": "SM병원",
+      "department": "영상의학과"
+    },
+    "chiefComplaint": {
+      "summary": "오른쪽 하복부 통증",
+      "referralSource": "N/A",
+      "onsetDate": "2023-08-06",
+      "duration": "1일",
+      "details": "환자는 오른쪽 하복부 통증을 호소하며 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "거대 간 혈관종",
+        "nameEn": "Giant hepatic hemangioma",
+        "date": "2023-08-07",
+        "isPrimary": true,
+        "hospital": "SM병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2023-08-07",
+        "result": "Giant hepatic hemangioma",
+        "finding": "오른쪽 간엽에 8 x 6 cm 크기의 간 혈관종 확인",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2022-07-19",
+        "result": "Giant hepatic hemangioma",
+        "finding": "7.7 x 5.7 cm 크기의 간 혈관종 확인",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2021-07-09",
+        "result": "Liver hemangioma",
+        "finding": "6.9 cm 크기의 간 혈관종 확인",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2020-06-20",
+        "result": "Liver hemangioma",
+        "finding": "6.7 cm 크기의 간 혈관종 확인",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2019-03-23",
+        "result": "Liver hemangioma",
+        "finding": "5.2 cm 크기의 간 혈관종 확인",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "N/A",
+      "testDate": "N/A",
+      "reportDate": "N/A",
+      "finding": "N/A",
+      "stageTNM": "N/A",
+      "stageOverall": "N/A",
+      "histology": "N/A",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "N/A",
+        "name": "N/A",
+        "date": "N/A",
+        "duration": "N/A",
+        "details": "N/A",
+        "hospital": "N/A"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-08-07",
+      "endDate": "2023-08-07",
+      "totalVisits": 1,
+      "hospitals": [
+        "SM병원"
+      ],
+      "summary": "2023년 8월 7일에 통원하여 진료를 받음."
+    },
+    "admissionPeriod": {
+      "startDate": "N/A",
+      "endDate": "N/A",
+      "totalDays": 0,
+      "hospital": "N/A",
+      "department": "N/A",
+      "reason": "N/A"
+    },
+    "pastHistory": [
+      {
+        "condition": "간 혈관종",
+        "code": "D18.02",
+        "diagnosisDate": "2019-03-23",
+        "treatment": "정기적인 CT 검사",
+        "currentStatus": "관찰 중",
+        "hospital": "SM병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "거대 간 혈관종으로 인한 오른쪽 하복부 통증.",
+      "prognosis": "양호하나 지속적인 관찰 필요.",
+      "recommendations": "정기적인 CT 검사 권장.",
+      "limitations": "일상생활에 큰 제한 없음."
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "N/A",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "거대 간 혈관종 진단.",
+      "keyFindings": [
+        "오른쪽 하복부 통증",
+        "거대 간 혈관종 확인"
+      ],
+      "recommendations": "정기적인 검사 및 관찰 필요."
+    }
+  },
+  "gtDates": [
+    "2019-03-23",
+    "2019-04-09",
+    "2023-08-07",
+    "2024-01-09",
+    "2024-04-03",
+    "2024-04-09",
+    "2024-04-23",
+    "2025-02-04",
+    "2025-02-12"
+  ],
+  "resultDates": [
+    "2019-03-23",
+    "2020-06-20",
+    "2021-07-09",
+    "2022-07-19",
+    "2023-08-06",
+    "2023-08-07"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 9,
+      "resultCount": 6,
+      "matchedCount": 2,
+      "missedCount": 7,
+      "extraCount": 4,
+      "coverage": 22,
+      "precision": 33,
+      "matched": [
+        "2019-03-23",
+        "2023-08-07"
+      ],
+      "missed": [
+        "2019-04-09",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ],
+      "extra": [
+        "2020-06-20",
+        "2021-07-09",
+        "2022-07-19",
+        "2023-08-06"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

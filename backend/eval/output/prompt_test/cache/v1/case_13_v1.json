@@ -1,0 +1,164 @@
+{
+  "caseId": "Case13",
+  "caseNum": 13,
+  "patientName": "김인화",
+  "version": "v1",
+  "processedAt": "2026-01-26T06:47:28.451Z",
+  "processingTime": 34754,
+  "totalPages": 38,
+  "processedPages": 30,
+  "result": {
+    "visitDate": {
+      "date": "2021-07-30",
+      "time": "09:00",
+      "hospital": "NH농협생명보험",
+      "department": "보험청구"
+    },
+    "chiefComplaint": {
+      "summary": "보험 청구 관련 상담",
+      "referralSource": "해당 없음",
+      "onsetDate": "2021-07-30",
+      "duration": "1일",
+      "details": "보험 청구를 위한 서류 제출 및 상담"
+    },
+    "diagnoses": [
+      {
+        "code": "Z00.0",
+        "nameKr": "건강검진",
+        "nameEn": "Health Examination",
+        "date": "2021-07-30",
+        "isPrimary": true,
+        "hospital": "NH농협생명보험"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "보험 청구 서류",
+        "nameEn": "Insurance Claim Document",
+        "date": "2021-07-30",
+        "result": "제출 완료",
+        "finding": "해당 없음",
+        "normalRange": "해당 없음",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "해당 없음",
+      "testDate": "해당 없음",
+      "reportDate": "해당 없음",
+      "finding": "해당 없음",
+      "stageTNM": "해당 없음",
+      "stageOverall": "해당 없음",
+      "histology": "해당 없음",
+      "margin": "해당 없음"
+    },
+    "treatments": [
+      {
+        "type": "상담",
+        "name": "보험 청구 상담",
+        "date": "2021-07-30",
+        "duration": "1일",
+        "details": "보험 청구 관련 서류 제출 및 상담",
+        "hospital": "NH농협생명보험"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2021-07-30",
+      "endDate": "2021-07-30",
+      "totalVisits": 1,
+      "hospitals": [
+        "NH농협생명보험"
+      ],
+      "summary": "보험 청구 관련 상담 1회"
+    },
+    "admissionPeriod": {
+      "startDate": "해당 없음",
+      "endDate": "해당 없음",
+      "totalDays": 0,
+      "hospital": "해당 없음",
+      "department": "해당 없음",
+      "reason": "해당 없음"
+    },
+    "pastHistory": [
+      {
+        "condition": "해당 없음",
+        "code": "해당 없음",
+        "diagnosisDate": "해당 없음",
+        "treatment": "해당 없음",
+        "currentStatus": "해당 없음",
+        "hospital": "해당 없음",
+        "isPreExisting": false
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "보험 청구 관련 상담 완료",
+      "prognosis": "해당 없음",
+      "recommendations": "서류 제출 후 결과 대기",
+      "limitations": "해당 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "해당 없음",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "보험 청구 상담 완료",
+      "keyFindings": [
+        "서류 제출 완료",
+        "상담 완료"
+      ],
+      "recommendations": "보험금 지급 요청"
+    }
+  },
+  "gtDates": [
+    "2021-03-24",
+    "2021-07-30",
+    "2024-04-12",
+    "2024-11-04",
+    "2025-03-13"
+  ],
+  "resultDates": [
+    "2021-07-30"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 5,
+      "resultCount": 1,
+      "matchedCount": 1,
+      "missedCount": 4,
+      "extraCount": 0,
+      "coverage": 20,
+      "precision": 100,
+      "matched": [
+        "2021-07-30"
+      ],
+      "missed": [
+        "2021-03-24",
+        "2024-04-12",
+        "2024-11-04",
+        "2025-03-13"
+      ],
+      "extra": []
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

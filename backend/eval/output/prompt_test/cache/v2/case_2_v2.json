@@ -1,0 +1,188 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "version": "v2",
+  "processedAt": "2026-01-26T06:53:54.435Z",
+  "processingTime": 29903,
+  "totalPages": 50,
+  "processedPages": 30,
+  "result": {
+    "visitDate": {
+      "date": "2023-08-07",
+      "hospital": "삼성서울병원",
+      "department": "외과"
+    },
+    "chiefComplaint": {
+      "summary": "우측 하복부 통증",
+      "referralSource": "SM병원",
+      "onsetDate": "2023-08-01",
+      "duration": "6일",
+      "details": "우측 하복부 통증으로 내원"
+    },
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간 혈관종",
+        "nameEn": "Hepatic Hemangioma",
+        "date": "2023-08-07",
+        "isPrimary": true,
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT Abdomen",
+        "nameEn": "CT Abdomen",
+        "date": "2023-08-07",
+        "result": "간 혈관종 확인",
+        "finding": "우측 간엽에 혈관종",
+        "normalRange": "정상",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2023-02-05",
+      "reportDate": "2023-02-10",
+      "finding": "간 혈관종",
+      "stageTNM": "N/A",
+      "stageOverall": "N/A",
+      "histology": "혈관종",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "복강경 우측 간 절제술",
+        "date": "2023-02-05",
+        "duration": "1일",
+        "details": "간 혈관종 제거",
+        "hospital": "삼성서울병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-08-07",
+      "endDate": "2023-08-07",
+      "totalVisits": 1,
+      "hospitals": [
+        "삼성서울병원"
+      ],
+      "summary": "우측 하복부 통증으로 내원"
+    },
+    "admissionPeriod": {
+      "startDate": "2023-02-05",
+      "endDate": "2023-02-06",
+      "totalDays": 1,
+      "hospital": "삼성서울병원",
+      "department": "외과",
+      "reason": "간 혈관종 제거",
+      "summary": "2023-02-05 ~ 2023-02-06 / 1일 입원"
+    },
+    "pastHistory": [
+      {
+        "condition": "간 혈관종",
+        "code": "D18.02",
+        "diagnosisDate": "2017-01-01",
+        "treatment": "정기적 관찰",
+        "currentStatus": "관찰 중",
+        "hospital": "SM병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "간 혈관종으로 인한 통증",
+      "prognosis": "양호",
+      "recommendations": "정기적 추적 관찰",
+      "limitations": "무리한 운동 자제"
+    },
+    "disclosureViolation": {
+      "hasViolation": true,
+      "evidence": "가입일 3개월 이내 간 혈관종 진료",
+      "relatedEvents": [
+        "가입일: 2023-05-01",
+        "진료일: 2023-08-07"
+      ],
+      "riskLevel": "high"
+    },
+    "conclusion": {
+      "summary": "부지급: 가입 전 발병, 고지의무 위반",
+      "keyFindings": [
+        "가입 전 간 혈관종 진료",
+        "고지의무 위반"
+      ],
+      "recommendations": "부지급 결정"
+    }
+  },
+  "gtDates": [
+    "2019-03-23",
+    "2019-04-09",
+    "2023-08-07",
+    "2024-01-09",
+    "2024-04-03",
+    "2024-04-09",
+    "2024-04-23",
+    "2025-02-04",
+    "2025-02-12"
+  ],
+  "resultDates": [
+    "2017-01-01",
+    "2023-02-05",
+    "2023-02-06",
+    "2023-02-10",
+    "2023-05-01",
+    "2023-08-01",
+    "2023-08-07"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 9,
+      "resultCount": 7,
+      "matchedCount": 1,
+      "missedCount": 8,
+      "extraCount": 6,
+      "coverage": 11,
+      "precision": 14,
+      "matched": [
+        "2023-08-07"
+      ],
+      "missed": [
+        "2019-03-23",
+        "2019-04-09",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ],
+      "extra": [
+        "2017-01-01",
+        "2023-02-05",
+        "2023-02-06",
+        "2023-02-10",
+        "2023-05-01",
+        "2023-08-01"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "caseId": "Case17",
+  "caseNum": 17,
+  "patientName": "김동아",
+  "version": "v1",
+  "processedAt": "2026-01-26T06:49:25.190Z",
+  "processingTime": 31471,
+  "totalPages": 28,
+  "processedPages": 28,
+  "result": {
+    "visitDate": {
+      "date": "2025-09-09",
+      "time": null,
+      "hospital": "해블리병원",
+      "department": null
+    },
+    "chiefComplaint": {
+      "summary": "복통 및 구토",
+      "referralSource": null,
+      "onsetDate": "2025-09-01",
+      "duration": "8일",
+      "details": "환자는 복통과 구토 증상을 호소하며 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "R10.9",
+        "nameKr": "복통",
+        "nameEn": "Abdominal pain",
+        "date": "2025-09-09",
+        "isPrimary": true,
+        "hospital": "해블리병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "CT 스캔",
+        "nameEn": "CT scan",
+        "date": "2025-09-09",
+        "result": "정상",
+        "finding": "특이 소견 없음",
+        "normalRange": null,
+        "isAbnormal": false
+      },
+      {
+        "name": "혈액 검사",
+        "nameEn": "Blood test",
+        "date": "2025-09-09",
+        "result": "정상",
+        "finding": "모든 수치 정상",
+        "normalRange": null,
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": null,
+      "testDate": null,
+      "reportDate": null,
+      "finding": null,
+      "stageTNM": null,
+      "stageOverall": null,
+      "histology": null,
+      "margin": null
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "진통제",
+        "date": "2025-09-09",
+        "duration": "1일",
+        "details": "복통 완화를 위한 진통제 투여",
+        "hospital": "해블리병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-09-01",
+      "endDate": "2025-09-09",
+      "totalVisits": 1,
+      "hospitals": [
+        "해블리병원"
+      ],
+      "summary": "복통 및 구토로 인한 통원"
+    },
+    "admissionPeriod": {
+      "startDate": null,
+      "endDate": null,
+      "totalDays": 0,
+      "hospital": null,
+      "department": null,
+      "reason": null,
+      "summary": "입원 기록 없음"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-15",
+        "treatment": "약물 치료",
+        "currentStatus": "관리 중",
+        "hospital": "해블리병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "복통 원인 불명, 추가 검사 필요",
+      "prognosis": "양호",
+      "recommendations": "추가 검사 및 경과 관찰",
+      "limitations": "일상생활에 큰 제한 없음"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": null,
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "복통으로 인한 내원, 추가 검사 필요",
+      "keyFindings": [
+        "복통 및 구토 증상",
+        "CT 및 혈액 검사 정상"
+      ],
+      "recommendations": "추가 검사 후 치료 결정"
+    }
+  },
+  "gtDates": [
+    "2025-08-12",
+    "2025-08-14",
+    "2025-08-19",
+    "2030-08-12"
+  ],
+  "resultDates": [
+    "2020-01-15",
+    "2025-09-01",
+    "2025-09-09"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 4,
+      "resultCount": 3,
+      "matchedCount": 0,
+      "missedCount": 4,
+      "extraCount": 3,
+      "coverage": 0,
+      "precision": 0,
+      "matched": [],
+      "missed": [
+        "2025-08-12",
+        "2025-08-14",
+        "2025-08-19",
+        "2030-08-12"
+      ],
+      "extra": [
+        "2020-01-15",
+        "2025-09-01",
+        "2025-09-09"
+      ]
+    },
+    "completeness": {
+      "score": 92,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": null,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 11,
+      "total": 12
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "version": "v2",
+  "processedAt": "2026-01-26T06:57:05.987Z",
+  "processingTime": 25260,
+  "totalPages": 13,
+  "processedPages": 13,
+  "result": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "hospital": "고양시 고양이동 555",
+      "department": "내과"
+    },
+    "chiefComplaint": {
+      "summary": "유방 종양",
+      "referralSource": "고양시 고양이동 555",
+      "onsetDate": "2025-05-01",
+      "duration": "1개월",
+      "details": "유방에 2.6cm 크기의 종양 발견"
+    },
+    "diagnoses": [
+      {
+        "code": "C50.9",
+        "nameKr": "유방암",
+        "nameEn": "Breast Cancer",
+        "date": "2025-06-07",
+        "isPrimary": true,
+        "hospital": "고양시 고양이동 555"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "유방 초음파",
+        "nameEn": "Breast Ultrasound",
+        "date": "2025-06-07",
+        "result": "2.6cm 크기의 종양 발견",
+        "finding": "종양 존재",
+        "normalRange": "정상 범위 없음",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2025-06-07",
+      "reportDate": "2025-06-14",
+      "finding": "침윤성 유관암",
+      "stageTNM": "T2N1M0",
+      "stageOverall": "Stage II",
+      "histology": "침윤성 유관암",
+      "margin": "음성"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "유방 절제술",
+        "date": "2025-06-15",
+        "duration": "1일",
+        "details": "유방 종양 제거",
+        "hospital": "고양시 고양이동 555"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-06-07",
+      "endDate": "2025-06-14",
+      "totalVisits": 3,
+      "hospitals": [
+        "고양시 고양이동 555"
+      ],
+      "summary": "유방 종양 관련 통원 치료"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-06-15",
+      "endDate": "2025-06-16",
+      "totalDays": 1,
+      "hospital": "고양시 고양이동 555",
+      "department": "외과",
+      "reason": "유방 종양 제거 수술",
+      "summary": "2025-06-15 ~ 2025-06-16 / 1일 입원"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "고양시 고양이동 555",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "유방암 진단 후 수술 필요",
+      "prognosis": "양호",
+      "recommendations": "정기적인 추적 검사",
+      "limitations": "무리한 운동 자제"
+    },
+    "disclosureViolation": {
+      "hasViolation": true,
+      "evidence": "가입 3개월 이내 유방 종양 진료",
+      "relatedEvents": [
+        "유방 종양 발견",
+        "조직검사 결과"
+      ],
+      "riskLevel": "high"
+    },
+    "conclusion": {
+      "summary": "가입 전 유방암 발병으로 인한 부지급",
+      "keyFindings": [
+        "가입 3개월 이내 유방 종양 진료",
+        "고지의무 위반"
+      ],
+      "recommendations": "부지급 결정"
+    }
+  },
+  "gtDates": [
+    "2025-02-25",
+    "2025-05-26",
+    "2025-06-07",
+    "2025-06-16",
+    "2025-06-20",
+    "2025-06-24",
+    "2025-06-27"
+  ],
+  "resultDates": [
+    "2020-01-01",
+    "2025-05-01",
+    "2025-06-07",
+    "2025-06-14",
+    "2025-06-15",
+    "2025-06-16"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 7,
+      "resultCount": 6,
+      "matchedCount": 2,
+      "missedCount": 5,
+      "extraCount": 4,
+      "coverage": 29,
+      "precision": 33,
+      "matched": [
+        "2025-06-07",
+        "2025-06-16"
+      ],
+      "missed": [
+        "2025-02-25",
+        "2025-05-26",
+        "2025-06-20",
+        "2025-06-24",
+        "2025-06-27"
+      ],
+      "extra": [
+        "2020-01-01",
+        "2025-05-01",
+        "2025-06-14",
+        "2025-06-15"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

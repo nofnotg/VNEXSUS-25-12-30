@@ -1,0 +1,195 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "version": "v1",
+  "processedAt": "2026-01-26T06:48:23.699Z",
+  "processingTime": 25228,
+  "totalPages": 13,
+  "processedPages": 13,
+  "result": {
+    "visitDate": {
+      "date": "2025-06-07",
+      "time": "N/A",
+      "hospital": "고양시 고양이동 병원",
+      "department": "내과"
+    },
+    "chiefComplaint": {
+      "summary": "유방에 2.6cm 크기의 종괴 발견",
+      "referralSource": "N/A",
+      "onsetDate": "2025-05-01",
+      "duration": "1개월",
+      "details": "유방에서 종괴가 발견되어 검사를 받음."
+    },
+    "diagnoses": [
+      {
+        "code": "C50.11",
+        "nameKr": "유방암",
+        "nameEn": "Breast cancer",
+        "date": "2025-06-07",
+        "isPrimary": true,
+        "hospital": "고양시 고양이동 병원"
+      },
+      {
+        "code": "C77.0",
+        "nameKr": "림프절 전이",
+        "nameEn": "Lymph node metastasis",
+        "date": "2025-06-07",
+        "isPrimary": false,
+        "hospital": "고양시 고양이동 병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "유방 초음파",
+        "nameEn": "Breast ultrasound",
+        "date": "2025-06-07",
+        "result": "2.6cm 크기의 종괴 확인",
+        "finding": "왼쪽 유방 하부에 종괴",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      },
+      {
+        "name": "CT 검사",
+        "nameEn": "CT scan",
+        "date": "2025-06-07",
+        "result": "림프절 전이 의심",
+        "finding": "왼쪽 겨드랑이 림프절 비대",
+        "normalRange": "N/A",
+        "isAbnormal": true
+      }
+    ],
+    "pathology": {
+      "testName": "유방 조직검사",
+      "testDate": "2025-06-07",
+      "reportDate": "2025-06-07",
+      "finding": "침윤성 유관암, 조직학적 2등급",
+      "stageTNM": "T2N1M0",
+      "stageOverall": "Stage II",
+      "histology": "Invasive ductal carcinoma",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "수술",
+        "name": "유방 절제술",
+        "date": "2025-06-14",
+        "duration": "1일",
+        "details": "왼쪽 유방 절제",
+        "hospital": "고양시 고양이동 병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2025-05-01",
+      "endDate": "2025-06-07",
+      "totalVisits": 3,
+      "hospitals": [
+        "고양시 고양이동 병원"
+      ],
+      "summary": "유방 종괴 발견 후 3회 통원"
+    },
+    "admissionPeriod": {
+      "startDate": "2025-06-14",
+      "endDate": "2025-06-15",
+      "totalDays": 1,
+      "hospital": "고양시 고양이동 병원",
+      "department": "외과",
+      "reason": "유방암 수술",
+      "summary": "2025-06-14 ~ 2025-06-15 / 1일 입원"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-01-01",
+        "treatment": "약물 치료",
+        "currentStatus": "조절됨",
+        "hospital": "고양시 고양이동 병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "유방암 진단 후 수술 필요",
+      "prognosis": "예후 양호",
+      "recommendations": "정기적인 추적 검사 필요",
+      "limitations": "수술 후 2주간 무리한 활동 금지"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "N/A",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "유방암 진단 및 치료 경과",
+      "keyFindings": [
+        "유방암 진단",
+        "림프절 전이 의심"
+      ],
+      "recommendations": "손해사정 지급 권고"
+    }
+  },
+  "gtDates": [
+    "2025-02-25",
+    "2025-05-26",
+    "2025-06-07",
+    "2025-06-16",
+    "2025-06-20",
+    "2025-06-24",
+    "2025-06-27"
+  ],
+  "resultDates": [
+    "2020-01-01",
+    "2025-05-01",
+    "2025-06-07",
+    "2025-06-14",
+    "2025-06-15"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 7,
+      "resultCount": 5,
+      "matchedCount": 1,
+      "missedCount": 6,
+      "extraCount": 4,
+      "coverage": 14,
+      "precision": 20,
+      "matched": [
+        "2025-06-07"
+      ],
+      "missed": [
+        "2025-02-25",
+        "2025-05-26",
+        "2025-06-16",
+        "2025-06-20",
+        "2025-06-24",
+        "2025-06-27"
+      ],
+      "extra": [
+        "2020-01-01",
+        "2025-05-01",
+        "2025-06-14",
+        "2025-06-15"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}

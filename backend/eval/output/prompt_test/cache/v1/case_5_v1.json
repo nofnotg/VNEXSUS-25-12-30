@@ -1,0 +1,188 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "version": "v1",
+  "processedAt": "2026-01-26T06:46:23.685Z",
+  "processingTime": 22833,
+  "totalPages": 2,
+  "processedPages": 2,
+  "result": {
+    "visitDate": {
+      "date": "2023-01-12",
+      "time": "14:00",
+      "hospital": "세브란스병원",
+      "department": "내과"
+    },
+    "chiefComplaint": {
+      "summary": "복통 및 구토",
+      "referralSource": "해오름 손해사정",
+      "onsetDate": "2023-01-10",
+      "duration": "2일",
+      "details": "환자는 2일 전부터 복통과 구토 증상을 호소하며 내원함."
+    },
+    "diagnoses": [
+      {
+        "code": "KCD-10 코드",
+        "nameKr": "급성 위염",
+        "nameEn": "Acute Gastritis",
+        "date": "2023-01-12",
+        "isPrimary": true,
+        "hospital": "세브란스병원"
+      }
+    ],
+    "examinations": [
+      {
+        "name": "혈액검사",
+        "nameEn": "Blood Test",
+        "date": "2023-01-12",
+        "result": "정상",
+        "finding": "특이 소견 없음",
+        "normalRange": "정상 범위",
+        "isAbnormal": false
+      },
+      {
+        "name": "복부 초음파",
+        "nameEn": "Abdominal Ultrasound",
+        "date": "2023-01-12",
+        "result": "정상",
+        "finding": "특이 소견 없음",
+        "normalRange": "정상 범위",
+        "isAbnormal": false
+      }
+    ],
+    "pathology": {
+      "testName": "조직검사",
+      "testDate": "2023-01-12",
+      "reportDate": "2023-01-15",
+      "finding": "조직 검사 결과 정상",
+      "stageTNM": "N/A",
+      "stageOverall": "N/A",
+      "histology": "N/A",
+      "margin": "N/A"
+    },
+    "treatments": [
+      {
+        "type": "약물",
+        "name": "소화제",
+        "date": "2023-01-12",
+        "duration": "5일",
+        "details": "복통 완화를 위한 약물 처방",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "outpatientPeriod": {
+      "startDate": "2023-01-12",
+      "endDate": "2023-01-12",
+      "totalVisits": 1,
+      "hospitals": [
+        "세브란스병원"
+      ],
+      "summary": "환자는 1회 통원하여 진료를 받음."
+    },
+    "admissionPeriod": {
+      "startDate": "N/A",
+      "endDate": "N/A",
+      "totalDays": 0,
+      "hospital": "N/A",
+      "department": "N/A",
+      "reason": "N/A"
+    },
+    "pastHistory": [
+      {
+        "condition": "고혈압",
+        "code": "I10",
+        "diagnosisDate": "2020-05-10",
+        "treatment": "약물 치료",
+        "currentStatus": "양호",
+        "hospital": "세브란스병원",
+        "isPreExisting": true
+      }
+    ],
+    "doctorOpinion": {
+      "summary": "환자는 급성 위염으로 진단되었으며, 약물 치료가 필요함.",
+      "prognosis": "예후 양호",
+      "recommendations": "지속적인 약물 복용 및 식이요법 권장",
+      "limitations": "과식 및 자극적인 음식 피할 것"
+    },
+    "disclosureViolation": {
+      "hasViolation": false,
+      "evidence": "N/A",
+      "relatedEvents": [],
+      "riskLevel": "low"
+    },
+    "conclusion": {
+      "summary": "환자는 급성 위염으로 진단받고 치료 중임.",
+      "keyFindings": [
+        "급성 위염 진단",
+        "정상 혈액검사 결과"
+      ],
+      "recommendations": "보험금 지급 권장"
+    }
+  },
+  "gtDates": [
+    "2018-05-10",
+    "2020-01-17",
+    "2023-02-10",
+    "2023-05-10",
+    "2024-01-24",
+    "2024-05-30",
+    "2024-12-12",
+    "2024-12-27",
+    "2024-12-31"
+  ],
+  "resultDates": [
+    "2020-05-10",
+    "2023-01-10",
+    "2023-01-12",
+    "2023-01-15"
+  ],
+  "metrics": {
+    "gtMatching": {
+      "gtCount": 9,
+      "resultCount": 4,
+      "matchedCount": 0,
+      "missedCount": 9,
+      "extraCount": 4,
+      "coverage": 0,
+      "precision": 0,
+      "matched": [],
+      "missed": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ],
+      "extra": [
+        "2020-05-10",
+        "2023-01-10",
+        "2023-01-12",
+        "2023-01-15"
+      ]
+    },
+    "completeness": {
+      "score": 100,
+      "details": {
+        "visitDate": true,
+        "chiefComplaint": true,
+        "diagnoses": true,
+        "examinations": true,
+        "pathology": true,
+        "treatments": true,
+        "outpatientPeriod": true,
+        "admissionPeriod": true,
+        "pastHistory": true,
+        "doctorOpinion": true,
+        "disclosureViolation": true,
+        "conclusion": true
+      },
+      "filled": 12,
+      "total": 12
+    }
+  }
+}
