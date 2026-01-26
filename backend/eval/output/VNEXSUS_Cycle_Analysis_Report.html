@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS 개발 Cycle 검증-분석 종합 보고서</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: var(--bg-white);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: white;
+      padding: 3rem;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .header .meta {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .header .meta-item {
+      background: rgba(255,255,255,0.15);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .content {
+      padding: 2rem 3rem;
+    }
+    
+    h2 {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    h3 {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      margin: 1.5rem 0 1rem;
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .summary-card {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .summary-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    }
+    
+    .summary-card .value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .summary-card .label {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    
+    .summary-card.success .value { color: var(--success); }
+    .summary-card.warning .value { color: var(--warning); }
+    .summary-card.danger .value { color: var(--danger); }
+    
+    .cycle-timeline {
+      position: relative;
+      padding-left: 3rem;
+      margin: 2rem 0;
+    }
+    
+    .cycle-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--success) 100%);
+      border-radius: 2px;
+    }
+    
+    .cycle-item {
+      position: relative;
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    
+    .cycle-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 1.5rem;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 4px solid var(--bg-white);
+      box-shadow: 0 0 0 4px var(--primary);
+    }
+    
+    .cycle-item.completed::before { background: var(--success); box-shadow: 0 0 0 4px var(--success); }
+    .cycle-item.in-progress::before { background: var(--warning); box-shadow: 0 0 0 4px var(--warning); }
+    
+    .cycle-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .cycle-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .cycle-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .badge-completed { background: #d1fae5; color: #065f46; }
+    .badge-in-progress { background: #fef3c7; color: #92400e; }
+    .badge-error { background: #fee2e2; color: #991b1b; }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background: var(--bg-white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    
+    th, td {
+      padding: 0.875rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    th {
+      background: var(--bg-light);
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    tr:hover { background: #f1f5f9; }
+    tr:last-child td { border-bottom: none; }
+    
+    .progress-bar {
+      width: 100%;
+      height: 24px;
+      background: var(--bg-light);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      border-radius: 12px;
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    
+    .progress-fill.low { background: linear-gradient(90deg, #ef4444 0%, #f87171 100%); }
+    .progress-fill.medium { background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%); }
+    .progress-fill.high { background: linear-gradient(90deg, #10b981 0%, #34d399 100%); }
+    
+    .analysis-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #7dd3fc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .analysis-box h4 {
+      color: #0369a1;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .recommendation-list {
+      list-style: none;
+      margin: 1rem 0;
+    }
+    
+    .recommendation-list li {
+      padding: 1rem;
+      margin: 0.5rem 0;
+      background: var(--bg-white);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    
+    .recommendation-list .priority {
+      background: var(--primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    
+    .recommendation-content h5 {
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    
+    .recommendation-content p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .chart-container {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .bar-label {
+      width: 120px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+    
+    .bar-track {
+      flex: 1;
+      height: 30px;
+      background: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .bar-value {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border-radius: 6px;
+    }
+    
+    .footer {
+      background: var(--bg-light);
+      padding: 2rem 3rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    .status-dot.running { background: var(--warning); }
+    .status-dot.completed { background: var(--success); animation: none; }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .highlight-box h4 {
+      color: #92400e;
+      margin-bottom: 0.5rem;
+    }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .comparison-card {
+      background: var(--bg-white);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    
+    .comparison-card.highlight {
+      border-color: var(--success);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+    
+    .comparison-card h4 {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    
+    .stat-row:last-child { border-bottom: none; }
+    
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      .content { padding: 1rem; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>VNEXSUS 개발 Cycle 검증-분석 종합 보고서</h1>
+      <p class="subtitle">의료 문서 OCR 날짜 추출 시스템 성능 분석</p>
+      <div class="meta">
+        <span class="meta-item">📅 보고서 생성일: 2026년 1월 26일</span>
+        <span class="meta-item">🔬 분석 대상: Cycle 1~4</span>
+        <span class="meta-item">📊 총 케이스: 11개</span>
+      </div>
+    </header>
+    
+    <div class="content">
+      <!-- Executive Summary -->
+      <h2>📊 Executive Summary</h2>
+      <div class="summary-grid">
+        <div class="summary-card warning">
+          <div class="value">50%</div>
+          <div class="label">Cycle 2 GT Coverage</div>
+        </div>
+        <div class="summary-card">
+          <div class="value">39/78</div>
+          <div class="label">매칭/GT 날짜</div>
+        </div>
+        <div class="summary-card danger">
+          <div class="value">39</div>
+          <div class="label">누락된 날짜</div>
+        </div>
+        <div class="summary-card">
+          <div class="value">263</div>
+          <div class="label">AI 추출 날짜</div>
+        </div>
+        <div class="summary-card success">
+          <div class="value">$2.35</div>
+          <div class="label">총 처리 비용</div>
+        </div>
+      </div>
+      
+      <!-- Cycle Timeline -->
+      <h2>🔄 개발 Cycle 진행 현황</h2>
+      <div class="cycle-timeline">
+        <div class="cycle-item completed">
+          <div class="cycle-header">
+            <span class="cycle-title">Cycle 1: Full Pipeline Validation</span>
+            <span class="cycle-badge badge-completed">완료</span>
+          </div>
+          <p>Vision LLM(GPT-4o, GPT-4o-mini)을 활용한 PDF 문서 날짜 추출 기본 파이프라인 구축</p>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem; color: var(--text-secondary);">
+            <li>23개 케이스 처리</li>
+            <li>PDF → 이미지 변환 → Vision LLM 호출 → 날짜 추출</li>
+            <li>기본 검증 프레임워크 구축</li>
+          </ul>
+        </div>
+        
+        <div class="cycle-item completed">
+          <div class="cycle-header">
+            <span class="cycle-title">Cycle 2: Improved Validation</span>
+            <span class="cycle-badge badge-completed">완료</span>
+          </div>
+          <p>개선된 프롬프트와 배치 처리 방식으로 날짜 추출 정확도 측정</p>
+          <div style="margin-top: 1rem;">
+            <div class="progress-bar">
+              <div class="progress-fill medium" style="width: 50%;">GT Coverage: 50%</div>
+            </div>
+          </div>
+          <table style="margin-top: 1rem;">
+            <tr><th>지표</th><th>수치</th></tr>
+            <tr><td>처리 케이스</td><td>11개 (50페이지 이하)</td></tr>
+            <tr><td>Ground Truth 날짜</td><td>78개</td></tr>
+            <tr><td>매칭 성공</td><td>39개 (50%)</td></tr>
+            <tr><td>누락</td><td>39개 (50%)</td></tr>
+            <tr><td>AI 추출 총량</td><td>263개</td></tr>
+            <tr><td>처리 비용</td><td>$2.35</td></tr>
+          </table>
+        </div>
+        
+        <div class="cycle-item completed">
+          <div class="cycle-header">
+            <span class="cycle-title">Cycle 3: Pattern Analysis</span>
+            <span class="cycle-badge badge-completed">완료</span>
+          </div>
+          <p>Cycle 2에서 누락된 날짜들의 패턴 분석 및 프롬프트 개선안 도출</p>
+          <div class="chart-container">
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary);">누락 날짜 카테고리 분석</h4>
+            <div class="bar-chart">
+              <div class="bar-item">
+                <span class="bar-label">보험 관련</span>
+                <div class="bar-track">
+                  <div class="bar-value" style="width: 69%; background: linear-gradient(90deg, #ef4444, #f87171);">27개 (69%)</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">입원/퇴원</span>
+                <div class="bar-track">
+                  <div class="bar-value" style="width: 13%; background: linear-gradient(90deg, #f59e0b, #fbbf24);">5개 (13%)</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">검사/보고</span>
+                <div class="bar-track">
+                  <div class="bar-value" style="width: 10%; background: linear-gradient(90deg, #3b82f6, #60a5fa);">4개 (10%)</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">최근 의료</span>
+                <div class="bar-track">
+                  <div class="bar-value" style="width: 5%; background: linear-gradient(90deg, #10b981, #34d399);">2개 (5%)</div>
+                </div>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">과거 병력</span>
+                <div class="bar-track">
+                  <div class="bar-value" style="width: 3%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);">1개 (3%)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cycle-item in-progress">
+          <div class="cycle-header">
+            <span class="cycle-title">Cycle 4: Top-Down Over-extraction</span>
+            <span class="cycle-badge badge-in-progress">
+              <span class="status-indicator">
+                <span class="status-dot running"></span>
+                진행 중
+              </span>
+            </span>
+          </div>
+          <p>"누락보다 과추출이 낫다" 전략 - 모든 가능한 날짜를 극단적으로 추출 후 후처리로 노이즈 제거</p>
+          <div class="highlight-box" style="margin-top: 1rem;">
+            <h4>🎯 Cycle 4 목표</h4>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+              <li>GT Coverage: 50% → <strong>80%+ 달성</strong></li>
+              <li>모든 보험 관련 날짜 추출</li>
+              <li>테이블/표 형식의 날짜 완전 추출</li>
+              <li>기간 표현(YYYY.MM.DD ~ YYYY.MM.DD) 시작일/종료일 모두 추출</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Detailed Case Analysis -->
+      <h2>📋 케이스별 상세 분석 (Cycle 2)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>케이스</th>
+            <th>환자명</th>
+            <th>페이지</th>
+            <th>GT 날짜</th>
+            <th>매칭</th>
+            <th>누락</th>
+            <th>Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Case2</strong></td>
+            <td>김미화</td>
+            <td>50p</td>
+            <td>12</td>
+            <td>9</td>
+            <td>3</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill high" style="width: 75%;">75%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case5</strong></td>
+            <td>김태형</td>
+            <td>29p</td>
+            <td>8</td>
+            <td>3</td>
+            <td>5</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill low" style="width: 38%;">38%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case13</strong></td>
+            <td>김영숙</td>
+            <td>25p</td>
+            <td>5</td>
+            <td>4</td>
+            <td>1</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill high" style="width: 80%;">80%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case15</strong></td>
+            <td>윤동현</td>
+            <td>18p</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill medium" style="width: 50%;">50%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case17</strong></td>
+            <td>윤희정</td>
+            <td>15p</td>
+            <td>4</td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill medium" style="width: 50%;">50%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case18</strong></td>
+            <td>이광욱</td>
+            <td>22p</td>
+            <td>10</td>
+            <td>3</td>
+            <td>7</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill low" style="width: 30%;">30%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case29</strong></td>
+            <td>박다정</td>
+            <td>20p</td>
+            <td>8</td>
+            <td>2</td>
+            <td>6</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill low" style="width: 25%;">25%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case30</strong></td>
+            <td>박송자</td>
+            <td>24p</td>
+            <td>6</td>
+            <td>2</td>
+            <td>4</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill low" style="width: 33%;">33%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case41</strong></td>
+            <td>염막여</td>
+            <td>35p</td>
+            <td>9</td>
+            <td>3</td>
+            <td>6</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill low" style="width: 33%;">33%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case42</strong></td>
+            <td>장우진</td>
+            <td>18p</td>
+            <td>5</td>
+            <td>4</td>
+            <td>1</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill high" style="width: 80%;">80%</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Case44</strong></td>
+            <td>조수남</td>
+            <td>21p</td>
+            <td>7</td>
+            <td>5</td>
+            <td>2</td>
+            <td>
+              <div class="progress-bar" style="height: 20px;">
+                <div class="progress-fill high" style="width: 71%;">71%</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Cycle 3 Analysis -->
+      <h2>🔍 누락 패턴 심층 분석 (Cycle 3)</h2>
+      
+      <div class="analysis-box">
+        <h4>📌 핵심 발견사항</h4>
+        <p>누락된 39개 날짜 중 <strong>69% (27개)</strong>가 보험 관련 날짜입니다. 이는 보험사명(NH, KB, 삼성, AXA, DB) 주변의 날짜를 인식하지 못하는 문제로 확인되었습니다.</p>
+      </div>
+      
+      <h3>누락 유형별 상세 분석</h3>
+      
+      <div class="recommendation-list">
+        <li>
+          <span class="priority">1</span>
+          <div class="recommendation-content">
+            <h5>보험 관련 날짜 (27개 누락)</h5>
+            <p><strong>문제:</strong> 보험 가입일, 만기일, 갱신일 등이 추출되지 않음</p>
+            <p><strong>해결:</strong> 보험사명(NH, KB, 삼성, 현대, AXA, DB) 주변 100자 내 모든 날짜 추출 지시 추가</p>
+            <p style="margin-top: 0.5rem; font-style: italic; color: #666;">예: "2024.01.09 (무) NH 헤아림 355 건강보험 가입" → 2024-01-09 누락됨</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">2</span>
+          <div class="recommendation-content">
+            <h5>입원/퇴원 날짜 (5개 누락)</h5>
+            <p><strong>문제:</strong> 기간 표현에서 시작일 또는 종료일이 누락됨</p>
+            <p><strong>해결:</strong> "YYYY.MM.DD ~ YYYY.MM.DD" 형식에서 양쪽 날짜 모두 추출</p>
+            <p style="margin-top: 0.5rem; font-style: italic; color: #666;">예: "입원기간 : 2025.07.07 ~ 2025.07.14" → 두 날짜 모두 추출 필요</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">3</span>
+          <div class="recommendation-content">
+            <h5>검사/보고 날짜 (4개 누락)</h5>
+            <p><strong>문제:</strong> 통원기간의 종료일이 누락됨</p>
+            <p><strong>해결:</strong> 검사일, 보고일, 판독일을 구분하여 모두 추출</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">4</span>
+          <div class="recommendation-content">
+            <h5>최근 의료 이벤트 (2개 누락)</h5>
+            <p><strong>문제:</strong> 문맥 내 날짜가 추출되지 않음</p>
+            <p><strong>해결:</strong> 진료 기록 내 모든 날짜 포괄적 추출</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">5</span>
+          <div class="recommendation-content">
+            <h5>과거 병력 (1개 누락)</h5>
+            <p><strong>문제:</strong> 오래된 과거 날짜가 무시됨</p>
+            <p><strong>해결:</strong> 연도와 관계없이 모든 날짜 추출</p>
+          </div>
+        </li>
+      </div>
+      
+      <!-- Cycle 4 Approach -->
+      <h2>🚀 Cycle 4: Top-Down 접근법</h2>
+      
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <h4>기존 접근법 (Bottom-Up)</h4>
+          <div class="stat-row">
+            <span>전략</span>
+            <span>정밀 추출</span>
+          </div>
+          <div class="stat-row">
+            <span>GT Coverage</span>
+            <span>50%</span>
+          </div>
+          <div class="stat-row">
+            <span>False Negative</span>
+            <span>높음 (39개)</span>
+          </div>
+          <div class="stat-row">
+            <span>False Positive</span>
+            <span>낮음</span>
+          </div>
+        </div>
+        <div class="comparison-card highlight">
+          <h4>🎯 Cycle 4 접근법 (Top-Down)</h4>
+          <div class="stat-row">
+            <span>전략</span>
+            <span><strong>과추출 후 정제</strong></span>
+          </div>
+          <div class="stat-row">
+            <span>GT Coverage 목표</span>
+            <span><strong>80%+</strong></span>
+          </div>
+          <div class="stat-row">
+            <span>False Negative</span>
+            <span><strong>최소화</strong></span>
+          </div>
+          <div class="stat-row">
+            <span>False Positive</span>
+            <span>후처리로 제거</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="analysis-box">
+        <h4>💡 Cycle 4 핵심 전략</h4>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>테이블/표의 모든 날짜 추출</strong> - "일자 | 사고경위 | 병원/기관" 형식의 첫 열 전체</li>
+          <li><strong>기간 표현 완전 추출</strong> - 시작일과 종료일 모두 (YYYY.MM.DD ~ YYYY.MM.DD)</li>
+          <li><strong>보험사 주변 날짜 강화</strong> - NH, KB, 삼성, 현대, AXA, DB 언급 주변 100자 내 모든 날짜</li>
+          <li><strong>미래 날짜 포함</strong> - 2030년, 2040년 등 보험 만기일</li>
+          <li><strong>과거 날짜 포함</strong> - 2007년, 2012년 등 오래된 과거력</li>
+        </ul>
+      </div>
+      
+      <!-- Technical Details -->
+      <h2>⚙️ 기술적 세부사항</h2>
+      
+      <h3>시스템 구성</h3>
+      <table>
+        <tr><th>구성요소</th><th>상세</th></tr>
+        <tr><td>OCR 엔진</td><td>Google Cloud Vision API</td></tr>
+        <tr><td>Vision LLM</td><td>GPT-4o-mini (OpenAI)</td></tr>
+        <tr><td>배치 처리</td><td>10페이지/배치, 65초 rate limit 대기</td></tr>
+        <tr><td>비용 단가</td><td>$0.0054/페이지 (gpt-4o-mini)</td></tr>
+        <tr><td>Ground Truth</td><td>손해사정사 작성 보고서 기반</td></tr>
+      </table>
+      
+      <h3>검증 파이프라인</h3>
+      <table>
+        <tr><th>단계</th><th>설명</th></tr>
+        <tr><td>1. PDF 변환</td><td>Poppler를 사용하여 PDF → JPEG 이미지 (150 DPI)</td></tr>
+        <tr><td>2. 이미지 최적화</td><td>Sharp로 2000x2000 이내 리사이징</td></tr>
+        <tr><td>3. Vision LLM</td><td>GPT-4o-mini로 날짜 추출 (JSON 응답)</td></tr>
+        <tr><td>4. GT 비교</td><td>Ground Truth 보고서와 날짜 매칭</td></tr>
+        <tr><td>5. 메트릭 계산</td><td>Coverage, Precision, 누락률 산출</td></tr>
+      </table>
+      
+      <!-- Recommendations -->
+      <h2>📈 향후 개선 권장사항</h2>
+      
+      <div class="recommendation-list">
+        <li>
+          <span class="priority">1</span>
+          <div class="recommendation-content">
+            <h5>보험 날짜 전용 추출기 개발</h5>
+            <p>보험사명 패턴 매칭 후 주변 텍스트에서 날짜 추출하는 규칙 기반 모듈 추가</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">2</span>
+          <div class="recommendation-content">
+            <h5>테이블 구조 인식 강화</h5>
+            <p>표 형식의 데이터를 별도로 처리하는 테이블 파서 도입</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">3</span>
+          <div class="recommendation-content">
+            <h5>기간 표현 정규화</h5>
+            <p>"YYYY.MM.DD ~ YYYY.MM.DD" 형식을 전처리 단계에서 두 개의 개별 날짜로 분리</p>
+          </div>
+        </li>
+        <li>
+          <span class="priority">4</span>
+          <div class="recommendation-content">
+            <h5>하이브리드 접근법</h5>
+            <p>규칙 기반 + AI 추출 결과를 병합하여 coverage 극대화</p>
+          </div>
+        </li>
+      </div>
+      
+      <!-- Current Status -->
+      <h2>📡 현재 상태</h2>
+      
+      <div class="highlight-box">
+        <h4>🔄 Cycle 4 실행 중</h4>
+        <p>Top-Down 과추출 검증이 백그라운드에서 진행 중입니다. 11개 케이스, 약 280페이지 처리 예정.</p>
+        <p style="margin-top: 0.5rem;"><strong>예상 소요시간:</strong> 케이스당 약 5-10분 (rate limit 대기 포함)</p>
+        <p><strong>예상 비용:</strong> 약 $1.50 ~ $2.00</p>
+      </div>
+      
+    </div>
+    
+    <footer class="footer">
+      <p>VNEXSUS AI Claims System | Cycle Analysis Report</p>
+      <p style="margin-top: 0.5rem;">생성일시: 2026-01-26 11:03 KST</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">이 보고서는 자동 생성되었습니다.</p>
+    </footer>
+  </div>
+</body>
+</html>

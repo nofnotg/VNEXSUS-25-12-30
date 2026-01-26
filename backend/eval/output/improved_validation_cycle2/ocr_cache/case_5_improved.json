@@ -1,0 +1,760 @@
+{
+  "caseId": "Case5",
+  "caseNum": 5,
+  "patientName": "김태형",
+  "totalPages": 34,
+  "processedPages": 34,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:00:58.397Z",
+  "processingTime": 142576,
+  "cost": 0.2822,
+  "usage": {
+    "prompt_tokens": 38613,
+    "completion_tokens": 3741,
+    "total_tokens": 42354,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-01-22",
+        "context": "2025-01-22 14:04:23",
+        "type": "기타",
+        "source": "의무기록사본/진료의뢰서"
+      },
+      {
+        "date": "2025-01-21",
+        "context": "출력일: 2025-01-21",
+        "type": "기타",
+        "source": "진료의뢰서"
+      },
+      {
+        "date": "2024-12-12",
+        "context": "진료일: 2024-12-12",
+        "type": "진료일",
+        "source": "진료의뢰서"
+      },
+      {
+        "date": "2024-12-31",
+        "context": "입원일자: 2024-12-31",
+        "type": "입원일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2024-12-31",
+        "context": "퇴원일자: 2024-12-31",
+        "type": "퇴원일",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2024-12-27",
+        "context": "외래초진기록 2024-12-27",
+        "type": "외래진료일",
+        "source": "외래초진기록"
+      },
+      {
+        "date": "2024-05-30",
+        "context": "검진일 2024.05.30",
+        "type": "검사일",
+        "source": "일반건강검진 결과통보서"
+      },
+      {
+        "date": "2024-06-05",
+        "context": "판정일 2024년 06월 05일",
+        "type": "검사보고일",
+        "source": "위암 검진 결과내역"
+      },
+      {
+        "date": "2025-01-09",
+        "context": "외래재진기록 2025-01-09",
+        "type": "외래진료일",
+        "source": "외래재진기록"
+      },
+      {
+        "date": "2025-01-14",
+        "context": "외래초진기록 2025-01-14",
+        "type": "외래진료일",
+        "source": "외래초진기록"
+      },
+      {
+        "date": "2025-01-24",
+        "context": "2025년01월24일",
+        "type": "기타",
+        "source": "건강검진 결과통보서"
+      },
+      {
+        "date": "2024-09-24",
+        "context": "진료시작일 2024-09-24",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-09-12",
+        "context": "진료시작일 2024-09-12",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-06-17",
+        "context": "진료시작일 2024-06-17",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-05-16",
+        "context": "진료시작일 2024-05-16",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-05-08",
+        "context": "진료시작일 2024-05-08",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-04-30",
+        "context": "진료시작일 2024-04-30",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-04-23",
+        "context": "진료시작일 2024-04-23",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-04-16",
+        "context": "진료시작일 2024-04-16",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-03-28",
+        "context": "진료시작일 2024-03-28",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-03-14",
+        "context": "진료시작일 2024-03-14",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-01-30",
+        "context": "진료시작일 2024-01-30",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-01-25",
+        "context": "진료시작일 2024-01-25",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2024-01-05",
+        "context": "진료시작일 2024-01-05",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-12-28",
+        "context": "진료시작일 2023-12-28",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-12-21",
+        "context": "진료시작일 2023-12-21",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-10-30",
+        "context": "진료시작일 2023-10-30",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-08-29",
+        "context": "진료시작일 2023-08-29",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-08-10",
+        "context": "진료시작일 2023-08-10",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-07-25",
+        "context": "진료시작일 2023-07-25",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-06-20",
+        "context": "진료시작일 2023-06-20",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-06-08",
+        "context": "진료시작일 2023-06-08",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-06-07",
+        "context": "진료시작일 2023-06-07",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-04-24",
+        "context": "진료시작일 2023-04-24",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-04-17",
+        "context": "진료시작일 2023-04-17",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-04-05",
+        "context": "진료시작일 2023-04-05",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2023-01-30",
+        "context": "진료시작일 2023-01-30",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-04-22",
+        "context": "진료시작일 2022-04-22",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-03-16",
+        "context": "진료시작일 2022-03-16",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-03-15",
+        "context": "진료시작일 2022-03-15",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-03-14",
+        "context": "진료시작일 2022-03-14",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-03-13",
+        "context": "진료시작일 2022-03-13",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2022-03-12",
+        "context": "진료시작일 2022-03-12",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-12-31",
+        "context": "진료시작일 2021-12-31",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-10-28",
+        "context": "진료시작일 2021-10-28",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-08-19",
+        "context": "진료시작일 2021-08-19",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-08-10",
+        "context": "진료시작일 2021-08-10",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-08-05",
+        "context": "진료시작일 2021-08-05",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-07-26",
+        "context": "진료시작일 2021-07-26",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-06-14",
+        "context": "진료시작일 2021-06-14",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-06-09",
+        "context": "진료시작일 2021-06-09",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-06-01",
+        "context": "진료시작일 2021-06-01",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-05-31",
+        "context": "진료시작일 2021-05-31",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2021-05-22",
+        "context": "진료시작일 2021-05-22",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2020-02-11",
+        "context": "진료시작일 2020-02-11",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2020-02-03",
+        "context": "진료시작일 2020-02-03",
+        "type": "진료일",
+        "source": "기본진료정보"
+      },
+      {
+        "date": "2020-01-31",
+        "context": "진료시작일 2020-01-31",
+        "type": "진료일",
+        "source": "기본진료정보"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2024-12-31",
+        "hospital": "세브란스병원",
+        "type": "입원",
+        "description": "For Coronary angiography",
+        "diagnosis": "Typical angina"
+      },
+      {
+        "date": "2024-12-31",
+        "hospital": "세브란스병원",
+        "type": "퇴원",
+        "description": "퇴원요약",
+        "diagnosis": "Stable angina pectoris"
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": "I20.88",
+        "nameKr": "Stable angina pectoris",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I25.1",
+        "nameKr": "Coronary artery disease (1 vessel disease)",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E11.68",
+        "nameKr": "Diabetes mellitus type 2 with dyslipidemia",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E78.8",
+        "nameKr": "Dyslipidemia",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "I50.08",
+        "nameKr": "Diastolic heart failure",
+        "date": "2024-12-31",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "hospitals": [
+      "세브란스병원",
+      "굿웰스의원",
+      "강북삼성병원",
+      "덴티스킨치과의원",
+      "영동포진약국",
+      "우리마을홍제약국",
+      "동신비뇨기과의원",
+      "가까운약국",
+      "홍제튼튼약국",
+      "강한내과의원"
+    ],
+    "patientInfo": {
+      "name": "김태형",
+      "birthDate": "1960-08-09",
+      "gender": "남"
+    },
+    "rawTextSummary": "김태형 환자의 의료 기록 및 진료 내역. 주요 진단은 Stable angina pectoris, Coronary artery disease, Diabetes mellitus type 2 with dyslipidemia 등. 2024-12-31에 세브란스병원에서 입원 및 퇴원. 다양한 진료 및 검사 내역 포함."
+  },
+  "matching": {
+    "gtDates": [
+      "2018-05-10",
+      "2020-01-17",
+      "2023-02-10",
+      "2023-05-10",
+      "2024-01-24",
+      "2024-05-30",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31"
+    ],
+    "aiDates": [
+      "1960-08-09",
+      "2020-01-31",
+      "2020-02-03",
+      "2020-02-11",
+      "2021-05-22",
+      "2021-05-31",
+      "2021-06-01",
+      "2021-06-09",
+      "2021-06-14",
+      "2021-07-26",
+      "2021-08-05",
+      "2021-08-10",
+      "2021-08-19",
+      "2021-10-28",
+      "2021-12-31",
+      "2022-03-12",
+      "2022-03-13",
+      "2022-03-14",
+      "2022-03-15",
+      "2022-03-16",
+      "2022-04-22",
+      "2023-01-30",
+      "2023-04-05",
+      "2023-04-17",
+      "2023-04-24",
+      "2023-06-07",
+      "2023-06-08",
+      "2023-06-20",
+      "2023-07-25",
+      "2023-08-10",
+      "2023-08-29",
+      "2023-10-30",
+      "2023-12-21",
+      "2023-12-28",
+      "2024-01-05",
+      "2024-01-25",
+      "2024-01-30",
+      "2024-03-14",
+      "2024-03-28",
+      "2024-04-16",
+      "2024-04-23",
+      "2024-04-30",
+      "2024-05-08",
+      "2024-05-16",
+      "2024-05-30",
+      "2024-06-05",
+      "2024-06-17",
+      "2024-09-12",
+      "2024-09-24",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31",
+      "2025-01-09",
+      "2025-01-14",
+      "2025-01-21",
+      "2025-01-22",
+      "2025-01-24"
+    ],
+    "matched": [
+      "2024-05-30",
+      "2024-12-12",
+      "2024-12-27",
+      "2024-12-31"
+    ],
+    "missed": [
+      "2018-05-10",
+      "2020-01-17",
+      "2023-02-10",
+      "2023-05-10",
+      "2024-01-24"
+    ],
+    "extra": [
+      "1960-08-09",
+      "2020-01-31",
+      "2020-02-03",
+      "2020-02-11",
+      "2021-05-22",
+      "2021-05-31",
+      "2021-06-01",
+      "2021-06-09",
+      "2021-06-14",
+      "2021-07-26",
+      "2021-08-05",
+      "2021-08-10",
+      "2021-08-19",
+      "2021-10-28",
+      "2021-12-31",
+      "2022-03-12",
+      "2022-03-13",
+      "2022-03-14",
+      "2022-03-15",
+      "2022-03-16",
+      "2022-04-22",
+      "2023-01-30",
+      "2023-04-05",
+      "2023-04-17",
+      "2023-04-24",
+      "2023-06-07",
+      "2023-06-08",
+      "2023-06-20",
+      "2023-07-25",
+      "2023-08-10",
+      "2023-08-29",
+      "2023-10-30",
+      "2023-12-21",
+      "2023-12-28",
+      "2024-01-05",
+      "2024-01-25",
+      "2024-01-30",
+      "2024-03-14",
+      "2024-03-28",
+      "2024-04-16",
+      "2024-04-23",
+      "2024-04-30",
+      "2024-05-08",
+      "2024-05-16",
+      "2024-06-05",
+      "2024-06-17",
+      "2024-09-12",
+      "2024-09-24",
+      "2025-01-09",
+      "2025-01-14",
+      "2025-01-21",
+      "2025-01-22",
+      "2025-01-24"
+    ],
+    "gtCoverageRate": 44,
+    "gtCount": 9,
+    "aiCount": 57,
+    "matchedCount": 4,
+    "missedCount": 5,
+    "extraCount": 53
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "굿웰스의원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "굿웰스의원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "동신병원 검진(24년).pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "동신병원 검진_위암검진(24년).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "동신병원 검진_위암검진(24년).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "신촌세브란스병원.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 34,
+      "sourceFile": "심평원 진료내역_김태형(2024까지).pdf",
+      "pageInFile": 7
+    }
+  ]
+}

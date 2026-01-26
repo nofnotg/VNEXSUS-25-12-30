@@ -1,0 +1,314 @@
+{
+  "caseId": "Case30",
+  "caseNum": 30,
+  "patientName": "송금숙",
+  "totalPages": 18,
+  "processedPages": 18,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:10:28.823Z",
+  "processingTime": 103574,
+  "cost": 0.1494,
+  "usage": {
+    "prompt_tokens": 20933,
+    "completion_tokens": 1378,
+    "total_tokens": 22311,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-09-24",
+        "context": "2025-09-24 13:46:06",
+        "type": "기타",
+        "source": "의무기록사본"
+      },
+      {
+        "date": "2025-09-19",
+        "context": "발행일자 2025/09/19",
+        "type": "기타",
+        "source": "의무기록사본증명서"
+      },
+      {
+        "date": "2025-03-24",
+        "context": "Operation Date : 2025-03-24",
+        "type": "수술일",
+        "source": "수술 기록지"
+      },
+      {
+        "date": "2025-03-23",
+        "context": "입원일자 : 2025년 03월 23일",
+        "type": "입원일",
+        "source": "퇴원기록지"
+      },
+      {
+        "date": "2025-04-11",
+        "context": "퇴원일자 : 2025년 04월 11일",
+        "type": "퇴원일",
+        "source": "퇴원기록지"
+      },
+      {
+        "date": "2025-03-23",
+        "context": "입원일 : 2025년 3월 23일",
+        "type": "입원일",
+        "source": "입원 CHART"
+      },
+      {
+        "date": "2025-03-24",
+        "context": "판독일(Reading Date): 2025/03/24 10:10",
+        "type": "검사보고일",
+        "source": "영상의학 판독지"
+      },
+      {
+        "date": "2025-03-23",
+        "context": "검 사(Exam): *L-spine MR Myelogram - 2025/03/23",
+        "type": "검사일",
+        "source": "영상의학 판독지"
+      },
+      {
+        "date": "2025-03-25",
+        "context": "검 사(Exam): *L-Spine MRI(post op) - 2025/03/25",
+        "type": "검사일",
+        "source": "영상의학 판독지"
+      },
+      {
+        "date": "2025-03-12",
+        "context": "검 사(Exam): *L-Spine MRI & CTL - 2025/03/12",
+        "type": "검사일",
+        "source": "영상의학 판독지"
+      },
+      {
+        "date": "2025-03-12",
+        "context": "2025/03/12 25530237 초진기록지",
+        "type": "초진일",
+        "source": "외래 CHART"
+      },
+      {
+        "date": "2025-04-30",
+        "context": "2025/04/30 25530237 경과기록지",
+        "type": "기타",
+        "source": "외래 CHART"
+      },
+      {
+        "date": "2025-05-07",
+        "context": "2025/05/07 25530237 경과기록지",
+        "type": "기타",
+        "source": "외래 CHART"
+      },
+      {
+        "date": "2025-06-04",
+        "context": "2025/06/04 25530237 경과기록지",
+        "type": "기타",
+        "source": "외래 CHART"
+      },
+      {
+        "date": "2025-09-03",
+        "context": "2025/09/03 25530237 경과기록지",
+        "type": "기타",
+        "source": "외래 CHART"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2025-03-24",
+        "hospital": "우리들병원",
+        "type": "수술",
+        "description": "PLIF+PF [요추4-5 사이, 요추5-천추사이]",
+        "diagnosis": "Spinal stenosis, lumbosacral region"
+      },
+      {
+        "date": "2025-03-23",
+        "hospital": "우리들병원",
+        "type": "입원",
+        "description": "허리 통증, 좌측 엉치-허벅지(외)-종아리(외)-발바닥 저림, 감각저하",
+        "diagnosis": "Spinal stenosis, lumbar region"
+      },
+      {
+        "date": "2025-04-11",
+        "hospital": "우리들병원",
+        "type": "퇴원",
+        "description": "증상 호전",
+        "diagnosis": "Spinal stenosis, lumbar region"
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "척추협착, 요추부",
+        "date": "2025-03-23",
+        "hospital": "우리들병원"
+      },
+      {
+        "code": null,
+        "nameKr": "척추전방전위증, 요추부",
+        "date": "2025-03-23",
+        "hospital": "우리들병원"
+      }
+    ],
+    "hospitals": [
+      "우리들병원"
+    ],
+    "patientInfo": {
+      "name": "송금숙",
+      "birthDate": null,
+      "gender": "F"
+    },
+    "rawTextSummary": "환자 송금숙은 2025년 3월 23일 우리들병원에 입원하여 요추부 척추협착증 및 척추전방전위증 진단을 받았으며, 2025년 3월 24일 PLIF+PF 수술을 받았다. 2025년 4월 11일 퇴원하였으며, 이후 경과 기록이 지속적으로 작성되었다."
+  },
+  "matching": {
+    "gtDates": [
+      "2012-11-23",
+      "2025-01-01",
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-04-11",
+      "2025-04-22",
+      "2025-09-09"
+    ],
+    "aiDates": [
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-03-25",
+      "2025-04-11",
+      "2025-04-30",
+      "2025-05-07",
+      "2025-06-04",
+      "2025-09-03",
+      "2025-09-19",
+      "2025-09-24"
+    ],
+    "matched": [
+      "2025-03-12",
+      "2025-03-23",
+      "2025-03-24",
+      "2025-04-11"
+    ],
+    "missed": [
+      "2012-11-23",
+      "2025-01-01",
+      "2025-04-22",
+      "2025-09-09"
+    ],
+    "extra": [
+      "2025-03-25",
+      "2025-04-30",
+      "2025-05-07",
+      "2025-06-04",
+      "2025-09-03",
+      "2025-09-19",
+      "2025-09-24"
+    ],
+    "gtCoverageRate": 50,
+    "gtCount": 8,
+    "aiCount": 11,
+    "matchedCount": 4,
+    "missedCount": 4,
+    "extraCount": 7
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "우리들병원.pdf",
+      "pageInFile": 18
+    }
+  ]
+}

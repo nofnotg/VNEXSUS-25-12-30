@@ -1,0 +1,302 @@
+{
+  "caseId": "Case17",
+  "caseNum": 17,
+  "patientName": "김동아",
+  "totalPages": 28,
+  "processedPages": 28,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:05:41.993Z",
+  "processingTime": 77080,
+  "cost": 0.2324,
+  "usage": {
+    "prompt_tokens": 31983,
+    "completion_tokens": 794,
+    "total_tokens": 32777,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-09-09",
+        "context": "출력일시: 2025/09/09",
+        "type": "기타",
+        "source": "의무기록 사본 증명서"
+      },
+      {
+        "date": "2025-08-14",
+        "context": "2025.08.14 | NU6",
+        "type": "진료일",
+        "source": "통합 기록"
+      },
+      {
+        "date": "2025-08-18",
+        "context": "2025.08.18 | NU6",
+        "type": "진료일",
+        "source": "통합 기록"
+      },
+      {
+        "date": "2025-08-19",
+        "context": "2025.08.19 | NU6",
+        "type": "진료일",
+        "source": "통합 기록"
+      },
+      {
+        "date": "2025-08-21",
+        "context": "2025.08.21 | NU6",
+        "type": "진료일",
+        "source": "통합 기록"
+      },
+      {
+        "date": "2025-08-28",
+        "context": "2025-08-28 10:44:59",
+        "type": "기타",
+        "source": "Scan 기록"
+      },
+      {
+        "date": "2025-08-19",
+        "context": "Start Date & Time 2025-08-19 15:02:00",
+        "type": "검사일",
+        "source": "Scan 기록"
+      },
+      {
+        "date": "2025-08-22",
+        "context": "End Date & Time 2025-08-22 14:37:37",
+        "type": "검사일",
+        "source": "Scan 기록"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2025-08-14",
+        "hospital": "해브리병원",
+        "type": "진료",
+        "description": "두통 시야장애",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-08-18",
+        "hospital": "해브리병원",
+        "type": "진료",
+        "description": "계속해서 어지러움",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-08-19",
+        "hospital": "해브리병원",
+        "type": "진료",
+        "description": "운전 어려움",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-08-21",
+        "hospital": "해브리병원",
+        "type": "진료",
+        "description": "상태 호전",
+        "diagnosis": null
+      }
+    ],
+    "diagnoses": [],
+    "hospitals": [
+      "해브리병원"
+    ],
+    "patientInfo": {
+      "name": "김동아",
+      "birthDate": null,
+      "gender": "M"
+    },
+    "rawTextSummary": "의무기록 사본 증명서와 통합 기록에서 2025년 8월 14일부터 8월 21일까지의 진료 기록이 있으며, 두통과 시야장애 등의 증상이 기록되어 있습니다. 검사 및 진료는 해브리병원에서 이루어졌습니다."
+  },
+  "matching": {
+    "gtDates": [
+      "2025-08-12",
+      "2025-08-14",
+      "2025-08-19",
+      "2030-08-12"
+    ],
+    "aiDates": [
+      "2025-08-14",
+      "2025-08-18",
+      "2025-08-19",
+      "2025-08-21",
+      "2025-08-22",
+      "2025-08-28",
+      "2025-09-09"
+    ],
+    "matched": [
+      "2025-08-14",
+      "2025-08-19"
+    ],
+    "missed": [
+      "2025-08-12",
+      "2030-08-12"
+    ],
+    "extra": [
+      "2025-08-18",
+      "2025-08-21",
+      "2025-08-22",
+      "2025-08-28",
+      "2025-09-09"
+    ],
+    "gtCoverageRate": 50,
+    "gtCount": 4,
+    "aiCount": 7,
+    "matchedCount": 2,
+    "missedCount": 2,
+    "extraCount": 5
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 23
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 24
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 25
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 26
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 27
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "해븐리병원.pdf",
+      "pageInFile": 28
+    }
+  ]
+}

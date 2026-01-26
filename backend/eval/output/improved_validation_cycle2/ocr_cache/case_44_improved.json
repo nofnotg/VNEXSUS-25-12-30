@@ -1,0 +1,451 @@
+{
+  "caseId": "Case44",
+  "caseNum": 44,
+  "patientName": "최순곤",
+  "totalPages": 33,
+  "processedPages": 33,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:15:01.208Z",
+  "processingTime": 102404,
+  "cost": 0.2739,
+  "usage": {
+    "prompt_tokens": 37508,
+    "completion_tokens": 1921,
+    "total_tokens": 39429,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-09-19",
+        "context": "2025년 09월 19일\n담당자: 임보라",
+        "type": "기타",
+        "source": "의무기록 사본 증명서"
+      },
+      {
+        "date": "2018-12-18",
+        "context": "초진일 2018/12/18",
+        "type": "초진일",
+        "source": "의무기록표지"
+      },
+      {
+        "date": "2024-01-31",
+        "context": "2024/01/31 [수] 09:25 망막병원",
+        "type": "검사일",
+        "source": "경과기록지"
+      },
+      {
+        "date": "2024-07-31",
+        "context": "2024/07/31 [수] 08:05 망막병원",
+        "type": "검사일",
+        "source": "경과기록지"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "2025/02/05 [화] 08:01 망막병원",
+        "type": "검사일",
+        "source": "경과기록지"
+      },
+      {
+        "date": "2025-09-10",
+        "context": "출력일: 2025-09-10",
+        "type": "기타",
+        "source": "의무기록 사본 증명서"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "응급실 도착시간 2025-08-25 08:26",
+        "type": "응급실 도착일",
+        "source": "응급진료기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "발현 시기 2025-08-25 07:50",
+        "type": "발병일",
+        "source": "응급진료기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "입원일자 2025-08-25",
+        "type": "입원일",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2025-08-29",
+        "context": "퇴원일자 2025-08-29",
+        "type": "퇴원일",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2025-09-02",
+        "context": "목표일 2025-09-02",
+        "type": "기타",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2025-09-06",
+        "context": "목표일 2025-09-06",
+        "type": "기타",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "계획일 2025-08-25",
+        "type": "기타",
+        "source": "퇴원요약"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "tPA injection time 2025-08-25 09:03",
+        "type": "기타",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "tPA ending time 2025-08-25 10:07",
+        "type": "기타",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "응급실 도착시간 2025-08-25 08:26",
+        "type": "응급실 도착일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "발병일시 2025-08-25 07:50",
+        "type": "발병일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-08-25",
+        "context": "검사일자 2025.08.25 09:19",
+        "type": "검사일",
+        "source": "영상검사 특수촬영"
+      },
+      {
+        "date": "2025-08-26",
+        "context": "판독일자 2025.08.26 08:38",
+        "type": "검사보고일",
+        "source": "영상검사 특수촬영"
+      },
+      {
+        "date": "2025-08-26",
+        "context": "검사일자 2025.08.26 18:22",
+        "type": "검사일",
+        "source": "영상검사 CT&MR"
+      },
+      {
+        "date": "2025-08-27",
+        "context": "판독일자 2025.08.27 09:39",
+        "type": "검사보고일",
+        "source": "영상검사 CT&MR"
+      },
+      {
+        "date": "2025-08-26",
+        "context": "보고일 2025-08-26",
+        "type": "검사보고일",
+        "source": "Carotid Duplex report"
+      },
+      {
+        "date": "2025-08-27",
+        "context": "시행일자 2025-08-27",
+        "type": "수술일",
+        "source": "침습적 시술 기록"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2025-08-25",
+        "hospital": "세브란스병원",
+        "type": "입원",
+        "description": "응급실 도착 및 입원",
+        "diagnosis": "Middle cerebral artery infarction, left"
+      },
+      {
+        "date": "2025-08-29",
+        "hospital": "세브란스병원",
+        "type": "퇴원",
+        "description": "퇴원",
+        "diagnosis": "Middle cerebral artery infarction, left"
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": "I63.9",
+        "nameKr": "Middle cerebral artery infarction, left",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "K25.91",
+        "nameKr": "Gastric ulcer, unspecified",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "E78.8",
+        "nameKr": "Dyslipidemia",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "F32.0",
+        "nameKr": "Mild depressive episode",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      },
+      {
+        "code": "F90.0",
+        "nameKr": "Attention deficit disorder",
+        "date": "2025-08-25",
+        "hospital": "세브란스병원"
+      }
+    ],
+    "hospitals": [
+      "김안과병원",
+      "세브란스병원"
+    ],
+    "patientInfo": {
+      "name": "최순곤",
+      "birthDate": "1959-03-20",
+      "gender": "남"
+    },
+    "rawTextSummary": "환자 최순곤은 2025년 8월 25일 세브란스병원에 입원하여 8월 29일 퇴원하였습니다. 주요 진단은 좌측 중대뇌동맥 경색(I63.9)이며, 추가 진단으로는 위궤양(K25.91), 이상지질혈증(E78.8), 경증 우울 삽화(F32.0), 주의력 결핍 장애(F90.0)가 있습니다. 2018년 12월 18일 초진 기록이 있으며, 여러 차례의 검사 및 시술이 진행되었습니다."
+  },
+  "matching": {
+    "gtDates": [
+      "2020-09-09",
+      "2024-06-03",
+      "2024-07-31",
+      "2024-09-03",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-29"
+    ],
+    "aiDates": [
+      "1959-03-20",
+      "2018-12-18",
+      "2024-01-31",
+      "2024-07-31",
+      "2025-02-05",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-27",
+      "2025-08-29",
+      "2025-09-02",
+      "2025-09-06",
+      "2025-09-10",
+      "2025-09-19"
+    ],
+    "matched": [
+      "2024-07-31",
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-29"
+    ],
+    "missed": [
+      "2020-09-09",
+      "2024-06-03",
+      "2024-09-03"
+    ],
+    "extra": [
+      "1959-03-20",
+      "2018-12-18",
+      "2024-01-31",
+      "2025-02-05",
+      "2025-08-27",
+      "2025-09-02",
+      "2025-09-06",
+      "2025-09-10",
+      "2025-09-19"
+    ],
+    "gtCoverageRate": 57,
+    "gtCount": 7,
+    "aiCount": 13,
+    "matchedCount": 4,
+    "missedCount": 3,
+    "extraCount": 9
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "김안과병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 16
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 17
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 18
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 19
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 20
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 21
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 22
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 23
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 24
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 25
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 26
+    },
+    {
+      "globalPageNum": 31,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 27
+    },
+    {
+      "globalPageNum": 32,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 28
+    },
+    {
+      "globalPageNum": 33,
+      "sourceFile": "신촌세브란스.pdf",
+      "pageInFile": 29
+    }
+  ]
+}

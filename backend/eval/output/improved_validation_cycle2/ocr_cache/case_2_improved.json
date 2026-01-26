@@ -1,0 +1,738 @@
+{
+  "caseId": "Case2",
+  "caseNum": 2,
+  "patientName": "김미화",
+  "totalPages": 50,
+  "processedPages": 10,
+  "model": "gpt-4o-mini",
+  "processedAt": "2026-01-25T15:22:03.721Z",
+  "processingTime": 422298,
+  "cost": 0.27,
+  "usage": {
+    "prompt_tokens": 1846965,
+    "completion_tokens": 6158,
+    "total_tokens": 1853123
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-03-19",
+        "context": "날짜: 2025.03.19",
+        "type": "기타",
+        "source": "병원조사 의뢰서"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "수술일 2025.02.05",
+        "type": "수술일",
+        "source": "병원조사 의뢰서"
+      },
+      {
+        "date": "2024-04-09",
+        "context": "보험계약일 2024.04.09",
+        "type": "보험계약일",
+        "source": "병원조사 의뢰서"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 09:31:32",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2023-07-19",
+        "context": "2022-07-19 13:39:50",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2021-07-09",
+        "context": "2021-07-09 16:09:09",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2020-06-20",
+        "context": "2020-06-20 10:56:48",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2020-03-23",
+        "context": "2019-03-23 11:32:54",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2019-03-23",
+        "context": "2019-03-23 11:06:34",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2019-03-23",
+        "context": "2019-03-23 11:06:34",
+        "type": "검사보고일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2020-06-20",
+        "context": "previous CT(2020.6.20.)",
+        "type": "검사보고일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2021-07-09",
+        "context": "2021-07-09 16:30:12",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2022-07-19",
+        "context": "2022-07-19 14:01:08",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 10:34:15",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 12:58:58",
+        "type": "발급일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2024-04-03",
+        "context": "2024-04-03 ~ 2024-04-03",
+        "type": "입원기간",
+        "source": "의무기록"
+      },
+      {
+        "date": "2024-04-09",
+        "context": "2024-04-09",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2024-04-03",
+        "context": "2024-04-03",
+        "type": "진료기간",
+        "source": "의무기록"
+      },
+      {
+        "date": "2024-04-25",
+        "context": "2024.04.25 외과\n■ 주호소\n* 주증상\nDiet : Good",
+        "type": "기타",
+        "source": "의무기록"
+      },
+      {
+        "date": "2024-11-21",
+        "context": "2024.11.21 외과\n■ 주호소\n수술날짜",
+        "type": "기타",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "2025-02-05 Laparoscopic right hemih hepatectomy",
+        "type": "수술일",
+        "source": "수술기록"
+      },
+      {
+        "date": "2025-02-10",
+        "context": "2025-02-10 07:14\nCRP (C-Reactive Protein) : 1.9 mg/dL",
+        "type": "검사일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-02-12",
+        "context": "2025.02.12 외과\n■ 최종진단\n* 주진단\nHemangioma of liver",
+        "type": "진단일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-02-26",
+        "context": "2025-02-26 11:08\nWBC Count, Blood : 6.01 x10³ /µL",
+        "type": "검사일",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 오후 02:23",
+        "type": "서류 작성일",
+        "source": "수술기록"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023/08/07 CT와 비교해서 right liver의 hemangioma는 8.7 cm로 이전보다 더 커졌음.",
+        "type": "검사일",
+        "source": "입원기록"
+      },
+      {
+        "date": "2017-01-01",
+        "context": "2017년부터 발견된 hepatic hemangioma가 4.5cm에서 크기 증가하여 수술적 치료 위해 입원함",
+        "type": "기왕증 관련 날짜",
+        "source": "입원기록"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "2025-02-05 외과\n주관적 소견 (S)\nsputum (+)",
+        "type": "초진일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "2025-02-05 외과\n진단명 (A)\nHemangioma of liver <[+L-RH]Hemangioma of liver in Rt. lobe, 8.7cm>",
+        "type": "진단일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-07",
+        "context": "2025-02-07 외과\n치료 및 경과\nPOD 2 n-s",
+        "type": "재진일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-11",
+        "context": "2025-02-11 외과\n치료 및 경과\nPOD 2 n-s",
+        "type": "재진일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-04",
+        "context": "2025-02-04 15:07\n입원경로에 의해\n입원일정: 도보",
+        "type": "입원일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-02-05",
+        "context": "2025-02-05 외과\n수술/시술 후 기록\nImmediate complication: No",
+        "type": "수술일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 오후 02:23: PP7286",
+        "type": "서류 작성일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 오후 02:24:03 PP7286",
+        "type": "서류 작성일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 오후 02:24:21 PP7286",
+        "type": "서류 작성일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-03-21",
+        "context": "2025-03-21 오후 02:24:03 PP7286",
+        "type": "서류 작성일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2025-04-07",
+        "context": "2025-04-07 12:58:58\n의무기록사본\n총 1부 (표지제외)",
+        "type": "서류 작성일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2019-03-23",
+        "context": "2019-03-23 11:06:34\n[상세내역] 2019-03-23\n환자명: 김미화(F/31) - 외과",
+        "type": "과거 진료 기록",
+        "source": "의무기록"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 CT 결과\nGiant hepatic hemangioma in right lobe.",
+        "type": "과거 진료 기록",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 CT 결과\nLiver S3/4 tiny hemangioma?",
+        "type": "과거 진료 기록",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2024-04-25",
+        "context": "2024-04-25 검사명: LIVER AND PELVIS CT (POST-CONTRAST)",
+        "type": "과거 진료 기록",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2024-01-01",
+        "context": "2024-01-01\n[과거력] 없음",
+        "type": "과거 진료 기록",
+        "source": "의무기록"
+      },
+      {
+        "date": "2020-06-20",
+        "context": "2020-06-20 09:58:00 C/C - right flank pain",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2020-08-11",
+        "context": "2020-08-11 09:18:50 right inguinal area pain",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2021-07-09",
+        "context": "2021-07-09 16:12:51 C/C - dyspepsia",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2022-07-19",
+        "context": "2022-07-19 13:43:57 right lobe hepatic hemangioma",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 09:37:44 right lower abdominal pain",
+        "type": "검사일",
+        "source": "의무기록"
+      },
+      {
+        "date": "2019-03-23",
+        "context": "2019-03-23 11:32:54 - Liver hemangioma, 5.2cm, right lobe.",
+        "type": "검사일",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2020-06-20",
+        "context": "2020-06-20 10:56:48 - Liver hemangioma, 6.7cm, right lobe.",
+        "type": "검사보고일",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2021-07-09",
+        "context": "2021-07-09 16:30:12 - Liver hemangioma, 6.9cm, right lobe.",
+        "type": "검사보고일",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2022-07-19",
+        "context": "2022-07-19 14:01:08 - about 7.7 X 5.7 cm sized hepatic hemangioma",
+        "type": "검사보고일",
+        "source": "검사결과지"
+      },
+      {
+        "date": "2023-08-07",
+        "context": "2023-08-07 10:34:15 - about 8 X 6 cm sized hepatic hemangioma",
+        "type": "검사보고일",
+        "source": "검사결과지"
+      }
+    ],
+    "medicalEvents": [
+      {
+        "date": "2025-02-05",
+        "hospital": "SM영상의학과",
+        "type": "수술",
+        "description": "간담도계의 혈관종(D18.02)",
+        "diagnosis": "간담도계의 혈관종"
+      },
+      {
+        "date": "2023-08-07",
+        "hospital": "SM영상의학과",
+        "type": "검사",
+        "description": "복부 CT 검사",
+        "diagnosis": "Giant hepatic hemangioma"
+      },
+      {
+        "date": "2022-07-19",
+        "hospital": "SM영상의학과",
+        "type": "검사",
+        "description": "복부 CT 검사",
+        "diagnosis": "Liver hemangioma"
+      },
+      {
+        "date": "2021-07-09",
+        "hospital": "SM영상의학과",
+        "type": "검사",
+        "description": "복부 CT 검사",
+        "diagnosis": "Liver hemangioma"
+      },
+      {
+        "date": "2020-06-20",
+        "hospital": "SM영상의학과",
+        "type": "검사",
+        "description": "복부 CT 검사",
+        "diagnosis": "Liver hemangioma"
+      },
+      {
+        "date": "2019-03-23",
+        "hospital": "SM영상의학과",
+        "type": "검사",
+        "description": "복부 CT 검사",
+        "diagnosis": "Liver hemangioma"
+      },
+      {
+        "date": "2021-07-09",
+        "hospital": "SM Radiology Clinic",
+        "type": "검사",
+        "description": "Dynamic enhanced MDCT scan of abdomen reveals",
+        "diagnosis": "Liver hemangioma, 6.9cm, right lobe."
+      },
+      {
+        "date": "2022-07-19",
+        "hospital": "SM Radiology Clinic",
+        "type": "검사",
+        "description": "Dynamic enhanced MDCT scan of abdomen reveals",
+        "diagnosis": "Hepatic hemangioma at right lobe."
+      },
+      {
+        "date": "2023-08-07",
+        "hospital": "SM Radiology Clinic",
+        "type": "검사",
+        "description": "Dynamic enhanced MDCT scan of abdomen reveals",
+        "diagnosis": "Hepatic hemangioma at right lobe."
+      },
+      {
+        "date": "2024-04-03",
+        "hospital": "서울대학교병원",
+        "type": "진료",
+        "description": "진료의뢰서",
+        "diagnosis": "Hepatic hemangioma."
+      },
+      {
+        "date": "2025-02-05",
+        "hospital": "SAMSUNG MEDICAL CENTER",
+        "type": "수술",
+        "description": "Laparoscopic right hemih hepatectomy",
+        "diagnosis": "Hemangioma of liver"
+      },
+      {
+        "date": "2025-02-10",
+        "hospital": "SAMSUNG MEDICAL CENTER",
+        "type": "입원",
+        "description": "입원 치료",
+        "diagnosis": "Hemangioma of liver"
+      },
+      {
+        "date": "2025-02-04",
+        "hospital": "삼성서울병원",
+        "type": "입원",
+        "description": "입원경로에 의해",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-02-05",
+        "hospital": "삼성서울병원",
+        "type": "수술",
+        "description": "Hemangioma of liver",
+        "diagnosis": "Hemangioma of liver"
+      },
+      {
+        "date": "2025-02-07",
+        "hospital": "삼성서울병원",
+        "type": "통원",
+        "description": "POD 2 n-s",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-02-11",
+        "hospital": "삼성서울병원",
+        "type": "통원",
+        "description": "POD 2 n-s",
+        "diagnosis": null
+      },
+      {
+        "date": "2020-06-20",
+        "hospital": "SM 방사선과",
+        "type": "검사",
+        "description": "C/C - right flank pain",
+        "diagnosis": null
+      },
+      {
+        "date": "2020-08-11",
+        "hospital": "SM 방사선과",
+        "type": "검사",
+        "description": "right inguinal area pain",
+        "diagnosis": null
+      },
+      {
+        "date": "2021-07-09",
+        "hospital": "SM 방사선과",
+        "type": "검사",
+        "description": "C/C - dyspepsia",
+        "diagnosis": null
+      },
+      {
+        "date": "2022-07-19",
+        "hospital": "SM 방사선과",
+        "type": "검사",
+        "description": "right lobe hepatic hemangioma",
+        "diagnosis": null
+      },
+      {
+        "date": "2023-08-07",
+        "hospital": "SM 방사선과",
+        "type": "검사",
+        "description": "right lower abdominal pain",
+        "diagnosis": null
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": "D18.02",
+        "nameKr": "간담도계의 혈관종",
+        "date": "2025-02-05",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Giant hepatic hemangioma",
+        "date": "2023-08-07",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2022-07-19",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2021-07-09",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2020-06-20",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2019-03-23",
+        "hospital": "SM영상의학과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2021-07-09",
+        "hospital": "SM Radiology Clinic"
+      },
+      {
+        "code": null,
+        "nameKr": "Hepatic hemangioma",
+        "date": "2022-07-19",
+        "hospital": "SM Radiology Clinic"
+      },
+      {
+        "code": null,
+        "nameKr": "Hepatic hemangioma",
+        "date": "2023-08-07",
+        "hospital": "SM Radiology Clinic"
+      },
+      {
+        "code": null,
+        "nameKr": "Hepatic hemangioma",
+        "date": "2024-04-03",
+        "hospital": "서울대학교병원"
+      },
+      {
+        "code": null,
+        "nameKr": "Hemangioma of liver",
+        "date": "2025-02-12",
+        "hospital": "SAMSUNG MEDICAL CENTER"
+      },
+      {
+        "code": null,
+        "nameKr": "Hemangioma of liver",
+        "date": "2025-02-05",
+        "hospital": "삼성서울병원"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2019-03-23",
+        "hospital": "SM 방사선과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2020-06-20",
+        "hospital": "SM 방사선과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2021-07-09",
+        "hospital": "SM 방사선과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2022-07-19",
+        "hospital": "SM 방사선과"
+      },
+      {
+        "code": null,
+        "nameKr": "Liver hemangioma",
+        "date": "2023-08-07",
+        "hospital": "SM 방사선과"
+      }
+    ],
+    "hospitals": [
+      "SM영상의학과",
+      "SM Radiology Clinic",
+      "서울대학교병원",
+      "SAMSUNG MEDICAL CENTER",
+      "삼성서울병원",
+      "SM 방사선과"
+    ],
+    "patientInfo": {
+      "name": "김미화",
+      "birthDate": null,
+      "gender": "여"
+    },
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    }
+  },
+  "matching": {
+    "gtDates": [
+      "2019-03-23",
+      "2019-04-09",
+      "2023-08-07",
+      "2024-01-09",
+      "2024-04-03",
+      "2024-04-09",
+      "2024-04-23",
+      "2025-02-04",
+      "2025-02-12"
+    ],
+    "aiDates": [
+      "2017-01-01",
+      "2019-03-23",
+      "2020-03-23",
+      "2020-06-20",
+      "2020-08-11",
+      "2021-07-09",
+      "2022-07-19",
+      "2023-07-19",
+      "2023-08-07",
+      "2024-01-01",
+      "2024-04-03",
+      "2024-04-09",
+      "2024-04-25",
+      "2024-11-21",
+      "2025-02-04",
+      "2025-02-05",
+      "2025-02-07",
+      "2025-02-10",
+      "2025-02-11",
+      "2025-02-12",
+      "2025-02-26",
+      "2025-03-19",
+      "2025-03-21",
+      "2025-04-07"
+    ],
+    "matched": [
+      "2019-03-23",
+      "2023-08-07",
+      "2024-04-03",
+      "2024-04-09",
+      "2025-02-04",
+      "2025-02-12"
+    ],
+    "missed": [
+      "2019-04-09",
+      "2024-01-09",
+      "2024-04-23"
+    ],
+    "extra": [
+      "2017-01-01",
+      "2020-03-23",
+      "2020-06-20",
+      "2020-08-11",
+      "2021-07-09",
+      "2022-07-19",
+      "2023-07-19",
+      "2024-01-01",
+      "2024-04-25",
+      "2024-11-21",
+      "2025-02-05",
+      "2025-02-07",
+      "2025-02-10",
+      "2025-02-11",
+      "2025-02-26",
+      "2025-03-19",
+      "2025-03-21",
+      "2025-04-07"
+    ],
+    "gtCoverageRate": 67,
+    "gtCount": 9,
+    "aiCount": 24,
+    "matchedCount": 6,
+    "missedCount": 3,
+    "extraCount": 18
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "sm영상의학과.pdf",
+      "pageInFile": 10
+    }
+  ]
+}

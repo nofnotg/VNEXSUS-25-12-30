@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>VNEXSUS Improved Validation Report (Cycle 2)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { color: #1a365d; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { color: #2d3748; margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+    
+    .notice { background: #dcfce7; border-left: 4px solid #22c55e; padding: 1rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+    .notice strong { color: #166534; }
+    .notice.warning { background: #fef3c7; border-color: #f59e0b; }
+    .notice.warning strong { color: #92400e; }
+    
+    .summary-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1rem 0; }
+    .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+    .card .value { font-size: 2.5rem; font-weight: bold; color: #2563eb; }
+    .card .label { color: #64748b; margin-top: 0.5rem; font-size: 0.9rem; }
+    .card.success .value { color: #10b981; }
+    .card.warning .value { color: #f59e0b; }
+    .card.danger .value { color: #ef4444; }
+    
+    table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 1rem 0; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; }
+    tr:hover { background: #f8fafc; }
+    
+    .badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+    .comparison-box { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .comparison-box h4 { color: #1e40af; margin-bottom: 1rem; }
+    
+    .missed { color: #dc2626; }
+    .context { color: #64748b; font-size: 0.85rem; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 VNEXSUS 개선된 검증 보고서 (Cycle 2)</h1>
+    <p class="subtitle">개선된 프롬프트 적용 | 2026. 1. 26. 오전 12:43:29</p>
+    
+    <div class="notice">
+      <strong>📌 개선 사항:</strong><br>
+      - 보험 관련 날짜 (가입일, 갱신일, 만기일, 청약일) 명시적 추출<br>
+      - 과거 5년 이상 날짜도 모두 포함<br>
+      - 광범위한 키워드 확장 (초진일, 재진일, 검사보고일 등)
+    </div>
+    
+    <h2>📊 핵심 지표</h2>
+    <div class="summary-cards">
+      <div class="card warning">
+        <div class="value">50%</div>
+        <div class="label">전체 GT 포함율</div>
+      </div>
+      <div class="card">
+        <div class="value">39/78</div>
+        <div class="label">매칭/GT 날짜</div>
+      </div>
+      <div class="card danger">
+        <div class="value">39</div>
+        <div class="label">놓친 날짜</div>
+      </div>
+      <div class="card">
+        <div class="value">263</div>
+        <div class="label">AI 추출 날짜</div>
+      </div>
+    </div>
+    
+    <div class="comparison">
+      <div class="comparison-box">
+        <h4>📈 이전 대비 개선</h4>
+        <p>이전 GT 포함율: <strong>31%</strong></p>
+        <p>현재 GT 포함율: <strong>50%</strong></p>
+        <p>개선율: <strong style="color:#10b981">+19%p</strong></p>
+      </div>
+      <div class="comparison-box">
+        <h4>💰 비용 정보</h4>
+        <p>처리 케이스: 11개</p>
+        <p>총 비용: $2.35</p>
+        <p>케이스당 평균: $0.21</p>
+      </div>
+    </div>
+    
+    <h2>📋 케이스별 상세</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>케이스</th>
+          <th>환자명</th>
+          <th>페이지</th>
+          <th>GT 포함율</th>
+          <th>GT/매칭/놓침</th>
+          <th>AI 추출</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>Case2</strong></td>
+          <td>김미화</td>
+          <td>50p</td>
+          <td>
+            <span class="badge badge-warning">
+              67%
+            </span>
+          </td>
+          <td>9 / 6 / 3</td>
+          <td>24개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case5</strong></td>
+          <td>김태형</td>
+          <td>34p</td>
+          <td>
+            <span class="badge badge-danger">
+              44%
+            </span>
+          </td>
+          <td>9 / 4 / 5</td>
+          <td>57개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case13</strong></td>
+          <td>김인화</td>
+          <td>46p</td>
+          <td>
+            <span class="badge badge-success">
+              80%
+            </span>
+          </td>
+          <td>5 / 4 / 1</td>
+          <td>17개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case15</strong></td>
+          <td>고영란</td>
+          <td>13p</td>
+          <td>
+            <span class="badge badge-warning">
+              71%
+            </span>
+          </td>
+          <td>7 / 5 / 2</td>
+          <td>10개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case17</strong></td>
+          <td>김동아</td>
+          <td>28p</td>
+          <td>
+            <span class="badge badge-warning">
+              50%
+            </span>
+          </td>
+          <td>4 / 2 / 2</td>
+          <td>7개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case18</strong></td>
+          <td>김명희</td>
+          <td>58p</td>
+          <td>
+            <span class="badge badge-danger">
+              0%
+            </span>
+          </td>
+          <td>7 / 0 / 7</td>
+          <td>89개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case29</strong></td>
+          <td>서문정숙</td>
+          <td>14p</td>
+          <td>
+            <span class="badge badge-danger">
+              29%
+            </span>
+          </td>
+          <td>7 / 2 / 5</td>
+          <td>13개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case30</strong></td>
+          <td>송금숙</td>
+          <td>18p</td>
+          <td>
+            <span class="badge badge-warning">
+              50%
+            </span>
+          </td>
+          <td>8 / 4 / 4</td>
+          <td>11개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case41</strong></td>
+          <td>장우진</td>
+          <td>30p</td>
+          <td>
+            <span class="badge badge-danger">
+              45%
+            </span>
+          </td>
+          <td>11 / 5 / 6</td>
+          <td>13개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case42</strong></td>
+          <td>정진덕</td>
+          <td>13p</td>
+          <td>
+            <span class="badge badge-warning">
+              75%
+            </span>
+          </td>
+          <td>4 / 3 / 1</td>
+          <td>9개</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case44</strong></td>
+          <td>최순곤</td>
+          <td>33p</td>
+          <td>
+            <span class="badge badge-warning">
+              57%
+            </span>
+          </td>
+          <td>7 / 4 / 3</td>
+          <td>13개</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+    <h2>🔍 놓친 날짜 상세</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>케이스</th>
+          <th>놓친 날짜</th>
+          <th>Ground Truth 맥락</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>Case2</td>
+            <td class="missed"><strong>2019-04-09</strong></td>
+            <td class="context">"at rifht lobe (8 * 6cm)  에스엠영상의학과의원  2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험  2024.01"</td>
+          </tr>
+          
+          <tr>
+            <td>Case2</td>
+            <td class="missed"><strong>2024-01-09</strong></td>
+            <td class="context">") NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험  2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험  2024.04.0"</td>
+          </tr>
+          
+          <tr>
+            <td>Case2</td>
+            <td class="missed"><strong>2024-04-23</strong></td>
+            <td class="context">"복강경 하 우측 간절제술  검사결과 : abdoman CT(보고일시 2024.04.23 12:55)  - 청약 전 진료  삼성서울병원      2. 손해사정 시 적용된"</td>
+          </tr>
+          
+          <tr>
+            <td>Case5</td>
+            <td class="missed"><strong>2018-05-10</strong></td>
+            <td class="context">"나. 피보험자 병력사항 요약 경과표 일자 사고경위 병원/기관 2018.05.10  (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이"</td>
+          </tr>
+          
+          <tr>
+            <td>Case5</td>
+            <td class="missed"><strong>2020-01-17</strong></td>
+            <td class="context">"사회복지사(1 급)  심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청 약 전 고지대상에 해당하는 진료내역 없음."</td>
+          </tr>
+          
+          <tr>
+            <td>Case5</td>
+            <td class="missed"><strong>2023-02-10</strong></td>
+            <td class="context">"보험 Plus(23.05) 가입 5 년 이 내  ㈜KB 손해보험  2023.02.10  [3 개월 이내]  (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.0"</td>
+          </tr>
+          
+          <tr>
+            <td>Case5</td>
+            <td class="missed"><strong>2023-05-10</strong></td>
+            <td class="context">"강보험 Plus(23.05) 가입 3 개월  이내 ㈜KB 손해보험  2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 ㈜KB 손해보험"</td>
+          </tr>
+          
+          <tr>
+            <td>Case5</td>
+            <td class="missed"><strong>2024-01-24</strong></td>
+            <td class="context">"하여 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대 상에 해당하는 진료내역 없음.  신촌세브란스 초진기록 상"</td>
+          </tr>
+          
+          <tr>
+            <td>Case13</td>
+            <td class="missed"><strong>2024-11-04</strong></td>
+            <td class="context">"좌측 요추부 통증 호소하여 내원  통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원  치료내용 : 신경차단술 및 도수치료, 물리치료 시행  검사결과 :"</td>
+          </tr>
+          
+          <tr>
+            <td>Case15</td>
+            <td class="missed"><strong>2025-02-25</strong></td>
+            <td class="context">"일자|확인내용|관련기관 2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험 2025."</td>
+          </tr>
+          
+          <tr>
+            <td>Case15</td>
+            <td class="missed"><strong>2025-05-26</strong></td>
+            <td class="context">"53.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험 2025.05.26|나에게 맞춘 초경증 간편건강보험2407  - 보험계약일로부터 90일 |시점DB손해보험"</td>
+          </tr>
+          
+          <tr>
+            <td>Case17</td>
+            <td class="missed"><strong>2025-08-12</strong></td>
+            <td class="context">"내  용 심평원 진료내역 상 특이 기왕력 없음. 일자확인내용관련기관 2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험 2025.08.12 ~ 2045"</td>
+          </tr>
+          
+          <tr>
+            <td>Case17</td>
+            <td class="missed"><strong>2030-08-12</strong></td>
+            <td class="context">"상 특이 기왕력 없음. 일자확인내용관련기관 2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험 2025.08.12 ~ 2045.08.12참좋은행복더블"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2019-03-29</strong></td>
+            <td class="context">"사항  1. 사고 및 손해조사 내용  일자 사고경위 병원/기관  2019.03.29 (무) NH가성비굿건강보험1901[해지환급금미지급형] 가입 NH농협손해보험  2019."</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2019-07-05</strong></td>
+            <td class="context">"NH가성비굿건강보험1901[해지환급금미지급형] 가입 NH농협손해보험  2019.07.05  [가입전치료]  초 진 일 : 2019.07.05  내원경위 : 검진 목적 내원"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2021-07-09</strong></td>
+            <td class="context">"~29.9) : 160.9cm / 69.8kg    구로성심병원  2021.07.09  초 진 일 : 2021.07.09  내원경위 : 검진 목적 내원  통원기간 : 2"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2025-05-12</strong></td>
+            <td class="context">"25~29.9) : 160.2cm / 72.6kg     KMI  2025.05.12  [청구사항]  초 진 일 : 2025.05.12  내원경위 : 7~8년 전부터 체"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2025-07-07</strong></td>
+            <td class="context">"타 및 상세불명의 원발성 고혈압(I10.9)  담낭염  입원기간 : 2025.07.07 ~ 2025.07.14 / 8일 입원  치료내용 : 복강경 위 소매절제술(2025.07"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2025-07-08</strong></td>
+            <td class="context">"2025.07.14 / 8일 입원  치료내용 : 복강경 위 소매절제술(2025.07.08)  복강경 담낭절제술(2025.07.08)  검사결과 : InBody  BMI (3"</td>
+          </tr>
+          
+          <tr>
+            <td>Case18</td>
+            <td class="missed"><strong>2025-07-14</strong></td>
+            <td class="context">"고혈압(I10.9)  담낭염  입원기간 : 2025.07.07 ~ 2025.07.14 / 8일 입원  치료내용 : 복강경 위 소매절제술(2025.07.08)  복강경 담낭"</td>
+          </tr>
+          
+          <tr>
+            <td>Case29</td>
+            <td class="missed"><strong>2020-10-15</strong></td>
+            <td class="context">"�� �Ĵ������(2��)  �����  ����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,   û�� �� �� ���� �������"</td>
+          </tr>
+          
+          <tr>
+            <td>Case29</td>
+            <td class="missed"><strong>2024-08-13</strong></td>
+            <td class="context">"»��� ��� ���ǥ  ���� ������� ����/���  2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) ��"</td>
+          </tr>
+          
+          <tr>
+            <td>Case29</td>
+            <td class="missed"><strong>2025-08-13</strong></td>
+            <td class="context">"� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�.    2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)(24.05) 1�"</td>
+          </tr>
+          
+          <tr>
+            <td>Case29</td>
+            <td class="missed"><strong>2025-09-29</strong></td>
+            <td class="context">"� �����Ʒ�(I67.1)  ����Ⱓ : 2025.09.26 ~ 2025.09.29 / 2ȸ ���  ġ�᳻�� : 2�� �� ������� ����  �˻��� :"</td>
+          </tr>
+          
+          <tr>
+            <td>Case29</td>
+            <td class="missed"><strong>2025-10-15</strong></td>
+            <td class="context">"��)  �����  ����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,   û�� �� �� ���� ������� �ش��ϴ� ���᳻�"</td>
+          </tr>
+          
+          <tr>
+            <td>Case30</td>
+            <td class="missed"><strong>2012-11-23</strong></td>
+            <td class="context">"사항  1. 사고 및 손해조사 내용  일자 사고경위 병원/기관  2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험  2025.01.01 단체상해보"</td>
+          </tr>
+          
+          <tr>
+            <td>Case30</td>
+            <td class="missed"><strong>2025-01-01</strong></td>
+            <td class="context">".11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험  2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험  2025.03.23  [청구사항]"</td>
+          </tr>
+          
+          <tr>
+            <td>Case30</td>
+            <td class="missed"><strong>2025-04-22</strong></td>
+            <td class="context">"03.24 제4-5요추-제1천추간 유합술  입원 간 도수치료 7회  2025.04.22 ~ 2025.09.09 22회 도수치료  검사결과 : 2025.3.12 요추 MRI"</td>
+          </tr>
+          
+          <tr>
+            <td>Case30</td>
+            <td class="missed"><strong>2025-09-09</strong></td>
+            <td class="context">"제1천추간 유합술  입원 간 도수치료 7회  2025.04.22 ~ 2025.09.09 22회 도수치료  검사결과 : 2025.3.12 요추 MRI   제4-5요추-제1천추"</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2007-08-08</strong></td>
+            <td class="context">"나. 피보험자 병력사항 요약 경과표  일자 사고경위 병원/기관  2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상  2021.05.17  내 원 일"</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2024-04-20</strong></td>
+            <td class="context">"024.04.22  내 원 일 : 2024.04.22  내원경위 : 2024.04.20 17시경 엘리베이터에서 넘어지며 발생 한 요추부 통증을 주소로 119 통해 내원  진"</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2024-04-24</strong></td>
+            <td class="context">"한림병원     다. 기타확인사항  사고(발병)  경위  2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원  내원하 시행한 정밀"</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2025-01-03</strong></td>
+            <td class="context">"척추전만, 후만증 소견은 없는 것으로 확인됨.     금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으로  확인됨."</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2025-09-02</strong></td>
+            <td class="context">"030)' 진단 후 보존적  치료 시행.   후유증상 잔존함에 따라 2025.09.02 한림병원에서 "척추에 뚜렷한 기형을 남긴 때 (지급률 30%)" 진단 후 관련 보험금"</td>
+          </tr>
+          
+          <tr>
+            <td>Case41</td>
+            <td class="missed"><strong>2025-09-22</strong></td>
+            <td class="context">"급성 압박골절)  과거병력 : 요추 협착증    은평성모병원  2025.09.22  [청구사항]  내 원 일 : 2025.09.22  내원경위 : 후유장해 진단 목적"</td>
+          </tr>
+          
+          <tr>
+            <td>Case42</td>
+            <td class="missed"><strong>2018-09-27</strong></td>
+            <td class="context">"사항  1. 사고 및 손해조사 내용  일자 사고경위 병원/기관  2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험  2025.0"</td>
+          </tr>
+          
+          <tr>
+            <td>Case44</td>
+            <td class="missed"><strong>2020-09-09</strong></td>
+            <td class="context">"의견 및  조사결과 [고지의무 위반여부 관련]  심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에"</td>
+          </tr>
+          
+          <tr>
+            <td>Case44</td>
+            <td class="missed"><strong>2024-06-03</strong></td>
+            <td class="context">"지대상에 해당하는 진료내역 없는 것으로 확인됨. 일자확인내용관련기관 2024.06.03나에게맞춘간편건강보험2404  - 보험가입 전 3개월 시점DB손해보험 2024.07.3"</td>
+          </tr>
+          
+          <tr>
+            <td>Case44</td>
+            <td class="missed"><strong>2024-09-03</strong></td>
+            <td class="context">"[고지의무 위반여부 관련]  심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하 는 진료내역 없"</td>
+          </tr>
+          
+        
+      </tbody>
+    </table>
+    
+    <p style="text-align:center;color:#64748b;margin-top:2rem;">
+      VNEXSUS AI 손해사정 시스템 | Cycle 2 검증 | 2026-01-25T15:43:29.478Z
+    </p>
+  </div>
+</body>
+</html>

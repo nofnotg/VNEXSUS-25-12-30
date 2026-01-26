@@ -1,0 +1,402 @@
+{
+  "caseId": "Case41",
+  "caseNum": 41,
+  "patientName": "장우진",
+  "totalPages": 30,
+  "processedPages": 30,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:12:06.090Z",
+  "processingTime": 78966,
+  "cost": 0.249,
+  "usage": {
+    "prompt_tokens": 34193,
+    "completion_tokens": 1431,
+    "total_tokens": 35624,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-10-13",
+        "context": "2025-10-13 14:34:36",
+        "type": "기타",
+        "source": "의무기록사본"
+      },
+      {
+        "date": "2025-09-24",
+        "context": "2025 년 09 월 24 일",
+        "type": "발급일",
+        "source": "의무기록 사본 증명서"
+      },
+      {
+        "date": "2021-05-17",
+        "context": "입원일: 2021 년 05 월 17 일부터",
+        "type": "입원일",
+        "source": "진단서"
+      },
+      {
+        "date": "2021-05-24",
+        "context": "퇴원일: 2021 년 05 월 24 일",
+        "type": "퇴원일",
+        "source": "진단서"
+      },
+      {
+        "date": "2021-05-17",
+        "context": "촬영일: 2021/05/17",
+        "type": "검사일",
+        "source": "진단방사선결과지"
+      },
+      {
+        "date": "2021-05-18",
+        "context": "판독일: 2021/05/18",
+        "type": "검사보고일",
+        "source": "진단방사선결과지"
+      },
+      {
+        "date": "2021-05-20",
+        "context": "촬영일: 2021/05/20",
+        "type": "검사일",
+        "source": "진단방사선결과지"
+      },
+      {
+        "date": "2021-05-31",
+        "context": "판독일: 2021/05/31",
+        "type": "검사보고일",
+        "source": "진단방사선결과지"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "진료기간: 2024-04-22",
+        "type": "진료일",
+        "source": "영상의학 판독 보고서"
+      },
+      {
+        "date": "2024-04-25",
+        "context": "2024년 04월 25일",
+        "type": "진료일",
+        "source": "외래재진기록"
+      },
+      {
+        "date": "2024-05-09",
+        "context": "2024년 05월 09일",
+        "type": "진료일",
+        "source": "외래재진기록"
+      },
+      {
+        "date": "2025-06-12",
+        "context": "2025년 06월 12일",
+        "type": "진료일",
+        "source": "외래재진기록"
+      },
+      {
+        "date": "2025-07-11",
+        "context": "2025년 07월 11일",
+        "type": "진료일",
+        "source": "외래재진기록"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "2024-04-22 10:35",
+        "type": "검사일",
+        "source": "영상의학 판독 보고서"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "2024-04-22 15:11",
+        "type": "검사보고일",
+        "source": "영상의학 판독 보고서"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "2024-04-22 13:54",
+        "type": "검사보고일",
+        "source": "영상의학 판독 보고서"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "2024-04-22 10:07",
+        "type": "입원일",
+        "source": "응급실기록"
+      },
+      {
+        "date": "2024-04-22",
+        "context": "2024-04-22 11:40",
+        "type": "교육일",
+        "source": "응급실경과기록"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2021-05-17",
+        "hospital": "우신향병원",
+        "type": "입원",
+        "description": "입원일",
+        "diagnosis": null
+      },
+      {
+        "date": "2021-05-24",
+        "hospital": "우신향병원",
+        "type": "퇴원",
+        "description": "퇴원일",
+        "diagnosis": null
+      },
+      {
+        "date": "2024-04-22",
+        "hospital": "가톨릭대학교 은평성모병원",
+        "type": "진료",
+        "description": "응급실 진료",
+        "diagnosis": "L1 compression fracture"
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": "M4316",
+        "nameKr": "척추전방전위증",
+        "date": null,
+        "hospital": null
+      },
+      {
+        "code": "M4806",
+        "nameKr": "척추협착증",
+        "date": null,
+        "hospital": null
+      }
+    ],
+    "hospitals": [
+      "우신향병원",
+      "가톨릭대학교 은평성모병원"
+    ],
+    "patientInfo": {
+      "name": "장우진",
+      "birthDate": "1948-05-29",
+      "gender": "F"
+    },
+    "rawTextSummary": "장우진 환자는 2021년 5월 17일부터 5월 24일까지 우신향병원에 입원하였으며, 2024년 4월 22일 가톨릭대학교 은평성모병원 응급실에서 L1 압박 골절 진단을 받았습니다. 주요 진단으로는 척추전방전위증과 척추협착증이 있습니다."
+  },
+  "matching": {
+    "gtDates": [
+      "2007-08-08",
+      "2021-05-17",
+      "2021-05-20",
+      "2021-05-24",
+      "2024-04-20",
+      "2024-04-22",
+      "2024-04-24",
+      "2025-01-03",
+      "2025-07-11",
+      "2025-09-02",
+      "2025-09-22"
+    ],
+    "aiDates": [
+      "1948-05-29",
+      "2021-05-17",
+      "2021-05-18",
+      "2021-05-20",
+      "2021-05-24",
+      "2021-05-31",
+      "2024-04-22",
+      "2024-04-25",
+      "2024-05-09",
+      "2025-06-12",
+      "2025-07-11",
+      "2025-09-24",
+      "2025-10-13"
+    ],
+    "matched": [
+      "2021-05-17",
+      "2021-05-20",
+      "2021-05-24",
+      "2024-04-22",
+      "2025-07-11"
+    ],
+    "missed": [
+      "2007-08-08",
+      "2024-04-20",
+      "2024-04-24",
+      "2025-01-03",
+      "2025-09-02",
+      "2025-09-22"
+    ],
+    "extra": [
+      "1948-05-29",
+      "2021-05-18",
+      "2021-05-31",
+      "2024-04-25",
+      "2024-05-09",
+      "2025-06-12",
+      "2025-09-24",
+      "2025-10-13"
+    ],
+    "gtCoverageRate": 45,
+    "gtCount": 11,
+    "aiCount": 13,
+    "matchedCount": 5,
+    "missedCount": 6,
+    "extraCount": 8
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 14,
+      "sourceFile": "우신향병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 15,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 16,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 17,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 18,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 19,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 20,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 21,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 22,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 23,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 24,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 25,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 26,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 27,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 13
+    },
+    {
+      "globalPageNum": 28,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 14
+    },
+    {
+      "globalPageNum": 29,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 15
+    },
+    {
+      "globalPageNum": 30,
+      "sourceFile": "은평성모병원.pdf",
+      "pageInFile": 16
+    }
+  ]
+}

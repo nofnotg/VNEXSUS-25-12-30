@@ -1,0 +1,290 @@
+{
+  "caseId": "Case15",
+  "caseNum": 15,
+  "patientName": "고영란",
+  "totalPages": 13,
+  "processedPages": 13,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:04:07.605Z",
+  "processingTime": 69938,
+  "cost": 0.1079,
+  "usage": {
+    "prompt_tokens": 15408,
+    "completion_tokens": 1405,
+    "total_tokens": 16813,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-06-07",
+        "context": "검진일 2025-06-07 고영란 귀하",
+        "type": "검사일",
+        "source": "건강검진 결과통보서"
+      },
+      {
+        "date": "2025-06-09",
+        "context": "판정일 2025년 06월 09일",
+        "type": "판정일",
+        "source": "위암 검진 결과통보서"
+      },
+      {
+        "date": "2025-06-17",
+        "context": "2025년 06월 17일",
+        "type": "통보일",
+        "source": "위암 검진 결과통보서"
+      },
+      {
+        "date": "2025-06-16",
+        "context": "처방일: 2025/06/16",
+        "type": "처방일",
+        "source": "진료기록지"
+      },
+      {
+        "date": "2025-06-27",
+        "context": "처방일: 2025/06/27",
+        "type": "처방일",
+        "source": "진료기록지"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "접수일: 2025-06-20",
+        "type": "접수일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "검사일시: 2025-06-20",
+        "type": "검사일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "판독일: 2025-06-20",
+        "type": "판독일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-16",
+        "context": "접수일시: 2025-06-16",
+        "type": "접수일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-16",
+        "context": "검사일시: 2025-06-16",
+        "type": "검사일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-16",
+        "context": "판독일: 2025-06-16",
+        "type": "판독일",
+        "source": "영상의학결과지"
+      },
+      {
+        "date": "2025-06-07",
+        "context": "검체번호: 250607-0267 검사자: 김강자 판독의: 접수일: 2025/06/07",
+        "type": "접수일",
+        "source": "진단검사결과"
+      },
+      {
+        "date": "2025-06-07",
+        "context": "결과일: 2025/06/07",
+        "type": "결과일",
+        "source": "진단검사결과"
+      },
+      {
+        "date": "2025-06-20",
+        "context": "접수일시 2025/06/20",
+        "type": "접수일",
+        "source": "조직병리검사-Level B"
+      },
+      {
+        "date": "2025-06-23",
+        "context": "검사일시 2025/06/23",
+        "type": "검사일",
+        "source": "조직병리검사-Level B"
+      },
+      {
+        "date": "2025-06-24",
+        "context": "보고일시 2025/06/24",
+        "type": "보고일",
+        "source": "조직병리검사-Level B"
+      },
+      {
+        "date": "2025-09-09",
+        "context": "2025년 09월 09일",
+        "type": "발급일",
+        "source": "의무기록 사본 증명서"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [
+      {
+        "date": "2025-06-07",
+        "hospital": "의료법인자인의료재단더자인병원",
+        "type": "검사",
+        "description": "일반건강검진",
+        "diagnosis": null
+      },
+      {
+        "date": "2025-06-16",
+        "hospital": "의료법인자인의료재단더자인병원",
+        "type": "검사",
+        "description": "유방 초음파 검사",
+        "diagnosis": "Breast cancer"
+      },
+      {
+        "date": "2025-06-20",
+        "hospital": "의료법인자인의료재단더자인병원",
+        "type": "검사",
+        "description": "Chest + Neck CT",
+        "diagnosis": "Breast cancer"
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": null,
+        "nameKr": "유방암",
+        "date": "2025-06-16",
+        "hospital": "의료법인자인의료재단더자인병원"
+      }
+    ],
+    "hospitals": [
+      "의료법인자인의료재단더자인병원"
+    ],
+    "patientInfo": {
+      "name": "고영란",
+      "birthDate": "1963-04-19",
+      "gender": "여"
+    },
+    "rawTextSummary": "고영란 님은 2025년 6월 7일 일반건강검진을 받았으며, 6월 16일 유방 초음파 검사에서 유방암 진단을 받았습니다. 6월 20일에는 Chest + Neck CT 검사를 통해 추가 진단을 받았습니다. 관련된 모든 검사와 진단은 의료법인자인의료재단더자인병원에서 이루어졌습니다."
+  },
+  "matching": {
+    "gtDates": [
+      "2025-02-25",
+      "2025-05-26",
+      "2025-06-07",
+      "2025-06-16",
+      "2025-06-20",
+      "2025-06-24",
+      "2025-06-27"
+    ],
+    "aiDates": [
+      "1963-04-19",
+      "2025-06-07",
+      "2025-06-09",
+      "2025-06-16",
+      "2025-06-17",
+      "2025-06-20",
+      "2025-06-23",
+      "2025-06-24",
+      "2025-06-27",
+      "2025-09-09"
+    ],
+    "matched": [
+      "2025-06-07",
+      "2025-06-16",
+      "2025-06-20",
+      "2025-06-24",
+      "2025-06-27"
+    ],
+    "missed": [
+      "2025-02-25",
+      "2025-05-26"
+    ],
+    "extra": [
+      "1963-04-19",
+      "2025-06-09",
+      "2025-06-17",
+      "2025-06-23",
+      "2025-09-09"
+    ],
+    "gtCoverageRate": 71,
+    "gtCount": 7,
+    "aiCount": 10,
+    "matchedCount": 5,
+    "missedCount": 2,
+    "extraCount": 5
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "더자인병원.pdf",
+      "pageInFile": 13
+    }
+  ]
+}

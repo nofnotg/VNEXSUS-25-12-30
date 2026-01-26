@@ -1,0 +1,466 @@
+{
+  "caseId": "Case13",
+  "caseNum": 13,
+  "patientName": "김인화",
+  "totalPages": 46,
+  "processedPages": 10,
+  "model": "gpt-4o-mini",
+  "processedAt": "2026-01-25T15:29:29.515Z",
+  "processingTime": 376396,
+  "cost": 0.2484,
+  "usage": {
+    "prompt_tokens": 1699625,
+    "completion_tokens": 4330,
+    "total_tokens": 1703955
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2021-07-30",
+        "context": "보험기간 2021-07-30 ~ 2059-07-30",
+        "type": "보험가입일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2059-07-30",
+        "context": "보험기간 2021-07-30 ~ 2059-07-30",
+        "type": "만기일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2025-03-10",
+        "context": "최종납입일(첫수) 2025-03-10",
+        "type": "최종납입일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2025-03-10",
+        "context": "계약서 유효(2025-03-10)",
+        "type": "계약일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "보험가입일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2069-03-24",
+        "context": "보험기간 2021-03-24 ~ 2069-03-24",
+        "type": "만기일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2025-04-01",
+        "context": "발급일자 : 2025-04-01",
+        "type": "서류작성일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "발행일 2021년 07월 30일",
+        "type": "청약일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "계약일 2021-07-30",
+        "type": "계약일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "청약일 2021-07-30",
+        "type": "청약일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "보험 가입일 2021-07-30",
+        "type": "보험가입일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "보험 갱신일 2021-07-30",
+        "type": "갱신일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "보험 만기일 2021-07-30",
+        "type": "만기일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-07-30",
+        "context": "발행일 2021-07-30",
+        "type": "발행일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-03-24",
+        "context": "발행일 2021년 03월 24일",
+        "type": "발행일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-03-24",
+        "context": "계약일: 2021-03-24, 청약일: 2021-03-24, 보험가입일: 2021-03-24",
+        "type": "계약일|청약일|보험가입일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-12-16",
+        "context": "보험계약일: 2021-12-16",
+        "type": "계약일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2025-03-24",
+        "context": "보험 만기일: 2025-03-24",
+        "type": "만기일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2021-03-24",
+        "context": "서류 작성일: 2021-03-24",
+        "type": "서류 작성일",
+        "source": "보험서류"
+      },
+      {
+        "date": "2025-03-20",
+        "context": "보험금 청구서 작성일: 2025-03-20",
+        "type": "서류 작성일",
+        "source": "보험금 청구서"
+      },
+      {
+        "date": "2025-04-01",
+        "context": "사고일: 2025-04-01",
+        "type": "사고일",
+        "source": "보험금 청구서"
+      },
+      {
+        "date": "2025-04-02",
+        "context": "검사일: 2025-04-02",
+        "type": "검사일",
+        "source": "보험금 청구서"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "내원일: 2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "통원일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "진료시간: 14:02:25",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-12",
+        "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-spine MRI: HNP at L 4-5로 안전 및 물리치료",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2024-04-12",
+        "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-spine MRI: HNP at L 4-5로 안전 및 물리치료",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "type": "검사일",
+        "source": "진료 기록"
+      },
+      {
+        "date": "2024-05-14",
+        "context": "2024-05-14 15:54",
+        "type": "검사보고일",
+        "source": "영상의학 결과지"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "type": "검사일",
+        "source": "Clinical Chart"
+      },
+      {
+        "date": "2024-04-12",
+        "context": "2024년 4월 12일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "type": "초진일",
+        "source": "진료기록"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "type": "재진일",
+        "source": "진료기록"
+      },
+      {
+        "date": "2024-05-14",
+        "context": "2024-05-14 15:54",
+        "type": "검사보고일",
+        "source": "영상의학 결과지"
+      },
+      {
+        "date": "2024-05-21",
+        "context": "2024년 5월 21일 주치의: OS 조준호 진단코드: 주 S43.4",
+        "type": "재진일",
+        "source": "진료기록"
+      },
+      {
+        "date": "2024-04-23",
+        "context": "2025년 4월 23일 16:29:36",
+        "type": "서류 작성일",
+        "source": "보험 서류"
+      },
+      {
+        "date": "2025-03-13",
+        "context": "2025년 3월 13일, 누가치혈관외과의원에서",
+        "type": "청구일",
+        "source": "보험 서류"
+      },
+      {
+        "date": "2024-04-12",
+        "context": "2024년 4월 12일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "type": "입원일",
+        "source": "진료기록"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "type": "퇴원일",
+        "source": "진료기록"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024-05-07 16:35",
+        "type": "검사일",
+        "source": "영상의학 결과지"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024-05-07 16:35",
+        "type": "검사일",
+        "source": "영상의학 결과지"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024-05-07 16:35",
+        "type": "검사일",
+        "source": "영상의학 결과지"
+      },
+      {
+        "date": "2024-05-07",
+        "context": "2024-05-07 16:35",
+        "type": "검사일",
+        "source": "영상의학 결과지"
+      }
+    ],
+    "medicalEvents": [
+      {
+        "date": "2025-04-01",
+        "hospital": "병원명",
+        "type": "입원",
+        "description": "사고로 인한 입원",
+        "diagnosis": "진단명"
+      },
+      {
+        "date": "2025-04-02",
+        "hospital": "병원명",
+        "type": "검사",
+        "description": "사고 관련 검사",
+        "diagnosis": "진단명"
+      },
+      {
+        "date": "2025-03-13",
+        "hospital": "서울바른병원",
+        "type": "통원",
+        "description": "2025년 3월 13일 13:54:58 조합: 총:13022316628",
+        "diagnosis": null
+      },
+      {
+        "date": "2024-04-12",
+        "hospital": "서울바른병원",
+        "type": "검사",
+        "description": "L-spine MRI: HNP at L 4-5",
+        "diagnosis": null
+      },
+      {
+        "date": "2024-04-12",
+        "hospital": "서울 바른 병원",
+        "type": "입원",
+        "description": "2년 전 slip down 하여 요통으로 고생했던 적 있음.",
+        "diagnosis": "Lumbar radiculopathy at L4-5 level."
+      },
+      {
+        "date": "2024-05-07",
+        "hospital": "서울 바른 병원",
+        "type": "퇴원",
+        "description": "L-spine MRI 결과.",
+        "diagnosis": null
+      }
+    ],
+    "diagnoses": [
+      {
+        "code": "L4-5",
+        "nameKr": "Lumbar radiculopathy",
+        "date": "2024-04-12",
+        "hospital": "서울 바른 병원"
+      }
+    ],
+    "hospitals": [
+      "병원명",
+      "서울바른병원",
+      "서울 바른 병원"
+    ],
+    "patientInfo": {
+      "name": "김인화",
+      "birthDate": null,
+      "gender": null
+    },
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    }
+  },
+  "matching": {
+    "gtDates": [
+      "2021-03-24",
+      "2021-07-30",
+      "2024-04-12",
+      "2024-11-04",
+      "2025-03-13"
+    ],
+    "aiDates": [
+      "2021-03-24",
+      "2021-07-30",
+      "2021-12-16",
+      "2024-04-12",
+      "2024-04-23",
+      "2024-05-07",
+      "2024-05-14",
+      "2024-05-21",
+      "2025-03-10",
+      "2025-03-12",
+      "2025-03-13",
+      "2025-03-20",
+      "2025-03-24",
+      "2025-04-01",
+      "2025-04-02",
+      "2059-07-30",
+      "2069-03-24"
+    ],
+    "matched": [
+      "2021-03-24",
+      "2021-07-30",
+      "2024-04-12",
+      "2025-03-13"
+    ],
+    "missed": [
+      "2024-11-04"
+    ],
+    "extra": [
+      "2021-12-16",
+      "2024-04-23",
+      "2024-05-07",
+      "2024-05-14",
+      "2024-05-21",
+      "2025-03-10",
+      "2025-03-12",
+      "2025-03-20",
+      "2025-03-24",
+      "2025-04-01",
+      "2025-04-02",
+      "2059-07-30",
+      "2069-03-24"
+    ],
+    "gtCoverageRate": 80,
+    "gtCount": 5,
+    "aiCount": 17,
+    "matchedCount": 4,
+    "missedCount": 1,
+    "extraCount": 13
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "농손 김인화 수임.pdf",
+      "pageInFile": 10
+    }
+  ]
+}

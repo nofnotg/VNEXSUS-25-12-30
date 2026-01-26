@@ -1,0 +1,225 @@
+{
+  "caseId": "Case42",
+  "caseNum": 42,
+  "patientName": "정진덕",
+  "totalPages": 13,
+  "processedPages": 13,
+  "model": "gpt-4o",
+  "processedAt": "2026-01-25T15:13:00.471Z",
+  "processingTime": 37754,
+  "cost": 0.1079,
+  "usage": {
+    "prompt_tokens": 15408,
+    "completion_tokens": 885,
+    "total_tokens": 16293,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "generatedJson": {
+    "allDates": [
+      {
+        "date": "2025-09-10",
+        "context": "발행번호 : 20250910 - 113",
+        "type": "기타",
+        "source": "의무기록사본증명서"
+      },
+      {
+        "date": "2025-09-10",
+        "context": "의료정보실 담당자 : 박영현",
+        "type": "기타",
+        "source": "의무기록사본증명서"
+      },
+      {
+        "date": "2025-02-26",
+        "context": "작성일 2025-02-26 등록번호",
+        "type": "기타",
+        "source": "진료의뢰서"
+      },
+      {
+        "date": "2025-02-22",
+        "context": "발행일 2025.02.22 요양기관기호",
+        "type": "기타",
+        "source": "진료의뢰서"
+      },
+      {
+        "date": "2025-02-22",
+        "context": "2025.02.22 본인(서명)",
+        "type": "기타",
+        "source": "진료의뢰서"
+      },
+      {
+        "date": "2025-04-15",
+        "context": "작성일 2025-04-15 등록번호",
+        "type": "기타",
+        "source": "외래초진기록"
+      },
+      {
+        "date": "2025-04-23",
+        "context": "작성일 2025-04-23 등록번호",
+        "type": "기타",
+        "source": "의사지시기록"
+      },
+      {
+        "date": "2025-04-29",
+        "context": "작성일 2025-04-29 등록번호",
+        "type": "기타",
+        "source": "의사지시기록"
+      },
+      {
+        "date": "2025-04-01",
+        "context": "HEAD and NECK(MRI) 2025-04-01 - 2025-09-10",
+        "type": "검사일",
+        "source": "MRI 검사결과"
+      },
+      {
+        "date": "2025-09-10",
+        "context": "HEAD and NECK(MRI) 2025-04-01 - 2025-09-10",
+        "type": "검사보고일",
+        "source": "MRI 검사결과"
+      },
+      {
+        "date": "2025-04-17",
+        "context": "2025-04-17 20:42 검사시행",
+        "type": "검사일",
+        "source": "MRI 검사결과"
+      },
+      {
+        "date": "2025-04-18",
+        "context": "2025-04-18 09:35 보고일",
+        "type": "검사보고일",
+        "source": "MRI 검사결과"
+      }
+    ],
+    "insuranceInfo": {
+      "policies": [],
+      "relatedDates": []
+    },
+    "medicalEvents": [],
+    "diagnoses": [],
+    "hospitals": [
+      "강북삼성병원"
+    ],
+    "patientInfo": {
+      "name": "정진덕",
+      "birthDate": null,
+      "gender": "남"
+    },
+    "rawTextSummary": "문서에는 강북삼성병원에서 발행된 의무기록사본증명서와 진료의뢰서, 외래초진기록, 의사지시기록, MRI 검사결과가 포함되어 있습니다. 주요 날짜로는 2025-02-22, 2025-02-26, 2025-04-15, 2025-04-23, 2025-04-29, 2025-04-01, 2025-09-10 등이 있으며, 검사일과 보고일이 명시되어 있습니다."
+  },
+  "matching": {
+    "gtDates": [
+      "2018-09-27",
+      "2025-02-26",
+      "2025-04-23",
+      "2025-04-29"
+    ],
+    "aiDates": [
+      "2025-02-22",
+      "2025-02-26",
+      "2025-04-01",
+      "2025-04-15",
+      "2025-04-17",
+      "2025-04-18",
+      "2025-04-23",
+      "2025-04-29",
+      "2025-09-10"
+    ],
+    "matched": [
+      "2025-02-26",
+      "2025-04-23",
+      "2025-04-29"
+    ],
+    "missed": [
+      "2018-09-27"
+    ],
+    "extra": [
+      "2025-02-22",
+      "2025-04-01",
+      "2025-04-15",
+      "2025-04-17",
+      "2025-04-18",
+      "2025-09-10"
+    ],
+    "gtCoverageRate": 75,
+    "gtCount": 4,
+    "aiCount": 9,
+    "matchedCount": 3,
+    "missedCount": 1,
+    "extraCount": 6
+  },
+  "pageSourceMap": [
+    {
+      "globalPageNum": 1,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 1
+    },
+    {
+      "globalPageNum": 2,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 2
+    },
+    {
+      "globalPageNum": 3,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 3
+    },
+    {
+      "globalPageNum": 4,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 4
+    },
+    {
+      "globalPageNum": 5,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 5
+    },
+    {
+      "globalPageNum": 6,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 6
+    },
+    {
+      "globalPageNum": 7,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 7
+    },
+    {
+      "globalPageNum": 8,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 8
+    },
+    {
+      "globalPageNum": 9,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 9
+    },
+    {
+      "globalPageNum": 10,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 10
+    },
+    {
+      "globalPageNum": 11,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 11
+    },
+    {
+      "globalPageNum": 12,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 12
+    },
+    {
+      "globalPageNum": 13,
+      "sourceFile": "강북삼성병원.pdf",
+      "pageInFile": 13
+    }
+  ]
+}
