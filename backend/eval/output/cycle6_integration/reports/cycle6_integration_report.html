@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cycle 6: Report Integration Results</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: 0.9; }
+    .content { padding: 2rem; }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      border-left: 4px solid #11998e;
+    }
+    .stat-card .value { font-size: 2.5rem; font-weight: bold; color: #11998e; }
+    .stat-card .label { color: #64748b; font-size: 0.9rem; }
+    
+    .case-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 4px solid #667eea;
+    }
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .case-title { font-size: 1.3rem; font-weight: 600; color: #1e293b; }
+    .case-score {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .score-high { background: #d1fae5; color: #065f46; }
+    .score-medium { background: #fef3c7; color: #92400e; }
+    .score-low { background: #fee2e2; color: #991b1b; }
+    
+    .timeline {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date {
+      min-width: 100px;
+      font-family: monospace;
+      font-weight: 600;
+      color: #475569;
+    }
+    .timeline-type {
+      min-width: 80px;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin: 0 0.5rem;
+      text-align: center;
+    }
+    .type-수술 { background: #fecaca; color: #991b1b; }
+    .type-입원 { background: #fed7aa; color: #9a3412; }
+    .type-진단 { background: #fef08a; color: #854d0e; }
+    .type-검사 { background: #bbf7d0; color: #166534; }
+    .type-보험가입일 { background: #c7d2fe; color: #3730a3; }
+    .type-default { background: #e2e8f0; color: #475569; }
+    
+    .timeline-content { flex: 1; color: #64748b; font-size: 0.9rem; }
+    
+    .flag-badge {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+    }
+    .flag-critical { background: #dc2626; color: white; }
+    .flag-warning { background: #f59e0b; color: white; }
+    .flag-info { background: #3b82f6; color: white; }
+    
+    .insurance-info {
+      background: #eff6ff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .insurance-title { font-weight: 600; color: #1e40af; margin-bottom: 0.5rem; }
+    
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Cycle 6: Report Integration</h1>
+      <div class="subtitle">Vision LLM 추출 → 10항목 보고서 통합 파이프라인</div>
+      <div class="subtitle">2026. 1. 26. 오후 2:55:00</div>
+    </div>
+    
+    <div class="content">
+      <h2>📈 Overall Summary</h2>
+      <div class="summary-grid">
+        <div class="stat-card">
+          <div class="value">10</div>
+          <div class="label">Processed Cases</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">32%</div>
+          <div class="label">Avg Completeness</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">507</div>
+          <div class="label">Total Events</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">4</div>
+          <div class="label">Insurance Flagged</div>
+        </div>
+      </div>
+      
+      <h2>📋 Case Details</h2>
+      
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case13 - 김인화</div>
+        <div class="case-score score-low">20% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">126</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+        <div class="insurance-info">
+          <div class="insurance-title">📋 보험가입일: 2021-07-30</div>
+          <div>• 가입일 전 3개월 이내 이벤트: 0건</div>
+          <div>• 가입일 전 5년 이내 이벤트: 14건</div>
+        </div>
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-03-24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                발행일 2021년 03월 24일
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+가입일: 2021.03.24
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계약자: 김인화
+계약 전 알림 의무사항
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-07-30</div>
+              <div class="timeline-type type-보험가입">보험가입</div>
+              <div class="timeline-content">
+                가입시기 2021-07-30
+                <span class="flag-badge flag-info">가입일</span>
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 111개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case15 - 고영란</div>
+        <div class="case-score score-low">20% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">31</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                검 진 일 자 : 2025년 06월 07일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일: 2025/06/07 12:46
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                결과일: 2025/06/07 12
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일: 2025/06/07 12:14
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                결과일: 2025/06/07 12
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                판정일 2025년 06월 09일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                판정일 2025년 06월 09일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                판정일 2025년 06월 09일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                판정일 2025년 06월 09일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-16</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                처방일 : 2025년 06월 16일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일 : 2025년 06월 20일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일 : 2025년 06월 20일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일 : 2025년 06월 20일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일 : 2025년 06월 20일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                접수일 : 2025년 06월 20일
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 16개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case17 - 김동아</div>
+        <div class="case-score score-low">20% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">28</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 13
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-18</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.19 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 14
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Start Date & Time 2025-08-19 15:02:00
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Time : 2025-08-19 15:43:39
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Time : 2025-08-20 21:06:52
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-21</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.21 [ NU6 ] 입원자 : 조재욱 | 접수시간 : 09
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-21</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Time : 2025-08-21 08:06:24
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-21</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.21 2025.08.21
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-21</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025.08.14 2025.08.21
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 13개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case29 - 서문정숙</div>
+        <div class="case-score score-low">30% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">25</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">17</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+        <div class="insurance-info">
+          <div class="insurance-title">📋 보험가입일: 2024-09-04</div>
+          <div>• 가입일 전 3개월 이내 이벤트: 17건</div>
+          <div>• 가입일 전 5년 이내 이벤트: 17건</div>
+        </div>
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                병동진료기록지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                간호정보조사지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                간호정보조사지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단검사결과
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단검사결과
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                응급진료기록지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                병동진료기록지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                검사일: 2024/08/17 07:09 결과일: 2024/08/17 07
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-18</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                검사일: 2024/08/17 07:09 결과일: 2024/08/18 20
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진료기록지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단검사결과
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영상의학결과지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영상의학결과지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영상의학결과지
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-08-19</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                검사일: 2024/08/19 07:29 결과일: 2024/08/19 08
+                <span class="flag-badge flag-critical">3M</span>
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 10개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case2 - 김미화</div>
+        <div class="case-score score-medium">55% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">69</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">2</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">13</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+        <div class="insurance-info">
+          <div class="insurance-title">📋 보험가입일: 2025-03-19</div>
+          <div>• 가입일 전 3개월 이내 이벤트: 13건</div>
+          <div>• 가입일 전 5년 이내 이벤트: 57건</div>
+        </div>
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2019-03-23</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2019-03-23 11:06:34
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2019-03-23</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2019-03-23 11:32:54
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2019-03-23</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                정서상태 안전 [가임기, 마지막 생리 시작일] 2019-03-23
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2019-03-23</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2019-03-23 11:32:54
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-06-20 10:56:48
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-06-20 10:56:48
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                compared with previous CT(2020.6.20.).
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-06-20 09:54:04
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-06-20 09:58:00
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-06-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-06-20 10:56:48
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-08-11</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-08-11 09:02:54
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-08-11</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2020-08-11 09:02:54
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-07-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2021-07-09 16:09:09
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-07-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2021-07-09 16:30:12
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-07-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2021년 7월 9일과 비교하여 크기가 증가
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 54개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case30 - 송금숙</div>
+        <div class="case-score score-medium">45% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">19</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">1</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-12</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                환자ID: 25530237 성명: 송금숙 주민등록번호: 540817-2*
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-12</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                L-Spine MRI & CTL - 2025/03/12
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-12</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                검사(Exam): L-Spine MRI & CTL - 2025/03/12
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-23</div>
+              <div class="timeline-type type-퇴원">퇴원</div>
+              <div class="timeline-content">
+                퇴원일자 2025년 03월 23일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-23</div>
+              <div class="timeline-type type-입원">입원</div>
+              <div class="timeline-content">
+                입원일자 2025년 03월 23일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-24</div>
+              <div class="timeline-type type-수술">수술</div>
+              <div class="timeline-content">
+                Operation Date : 2025-03-24
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Reading Date: 2025/03/24
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Reading Date: 2025/03/24
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                판독자(Reported By): 유지원
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Reading Date: 2025/03/25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Reading Date: 2025/03/25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-03-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Reading Date: 2025/03/25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-11</div>
+              <div class="timeline-type type-퇴원">퇴원</div>
+              <div class="timeline-content">
+                퇴원일자 2025년 04월 11일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-30</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                [Progress note] 10:57 어제 리니지로 유축 엉치가 아프다
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-05-07</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                [Progress note] 15:21 우측 엉치 통증은 호전되고 있다.
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 4개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case41 - 장우진</div>
+        <div class="case-score score-medium">40% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">56</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2020-09-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                청부한 사본은 의무기록 원본과 틀림없음을 증명합니다.
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/17 10:31 21002112 초진 차트(Patient'
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/17 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/17 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단명 : MRI Lt Shoulder
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단명 : MRI L-S spine
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단명 : MRI C-spine
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-18</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/18 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-20</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/20 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-20</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단명 : Both Knee Standing AP/PA455 Lat/Sk
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-21</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/21 10:34 21002112 초진 차트(Patient'
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-24</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/24 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-24</div>
+              <div class="timeline-type type-진료">진료</div>
+              <div class="timeline-content">
+                2021/05/24 21002112 진단방사선결과지 wsh2093[임현경
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                환자명 : 장우진 보험유형 : 국민건강보험
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-24</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                진단연월일 : 2021년 05월 24일
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 41개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case42 - 정진덕</div>
+        <div class="case-score score-low">20% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">18</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+        <div class="insurance-info">
+          <div class="insurance-title">📋 보험가입일: 2025-09-10</div>
+          <div>• 가입일 전 3개월 이내 이벤트: 0건</div>
+          <div>• 가입일 전 5년 이내 이벤트: 11건</div>
+        </div>
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2025-02-22</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                발행일 2025.02.22
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-02-22</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-02-22
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-02-26</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-02-26
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-02-26</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025-02-26
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-01</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025-04-01 - 2025-09-10
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-15</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-04-15
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-17</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                2025-04-17 20:42 2025-04-01
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-23</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-04-23
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-29</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-04-29
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-29</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-04-29
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-04-29</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                작성일 2025-04-29
+                <span class="flag-badge flag-warning">5Y</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-09-10</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                의료정보실 담당자 : 박영현
+                <span class="flag-badge flag-info">가입일</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-09-10</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                출력일 2025-09-10
+                <span class="flag-badge flag-info">가입일</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-09-10</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                출력일 2025-09-10
+                <span class="flag-badge flag-info">가입일</span>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-09-10</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                출력일 2025-09-10
+                <span class="flag-badge flag-info">가입일</span>
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 3개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case44 - 최순곤</div>
+        <div class="case-score score-low">30% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">43</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2018-12-18</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                초진일
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-01-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                망막병원
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2024-07-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                망막병원
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-02-05</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                망막병원
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                응급실 도착시간 2025-08-25 08:26
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                응급실 도착시간 2025-08-25 08:26
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                발현 시기 2025-08-25 07:50
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Chief complaint: Rt. side weakness Clear
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                발병일시 2025-08-25 07:50 Clear onset: 2025.
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                계획일 2025-08-25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                Detection time 2025-08-25 08:26
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                입원일자 2025-08-25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                입원일자 2025-08-25
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                투여 tPA injection time
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2025-08-25</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                투여 tPA ending time
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 28개 이벤트</div>
+      </div>
+    </div>
+  
+
+    <div class="case-section">
+      <div class="case-header">
+        <div class="case-title">Case5 - 김태형</div>
+        <div class="case-score score-medium">40% 완성도</div>
+      </div>
+      
+      <div class="summary-grid" style="margin: 1rem 0;">
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">92</div>
+          <div class="label">이벤트</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">진단</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">치료</div>
+        </div>
+        <div class="stat-card" style="padding: 0.75rem;">
+          <div class="value" style="font-size: 1.5rem;">0</div>
+          <div class="label">3M 이내</div>
+        </div>
+      </div>
+      
+      
+      
+      <div class="timeline">
+        <strong>📅 이벤트 타임라인 (최근 15건)</strong>
+        
+            <div class="timeline-item">
+              <div class="timeline-date">2020-01-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK0531 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2020-12-01</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK0531 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK045 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영동포진약국 일반의 AK0530 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-05-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK045 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-06-01</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK045 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-06-09</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                홍제삼성의원
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-06-14</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK045 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-07-26</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영동포진약국 일반의 AK0538 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-08-05</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영동포진약국 일반의 AK0881 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-10-28</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK0538 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-10-28</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영동포진약국 일반의 AK0538 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-12-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                덴티스킨치과 의원 AK0538 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2021-12-31</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                영동포진약국 일반의 AK0538 (양방)기
+                
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-date">2022-03-13</div>
+              <div class="timeline-type type-기타">기타</div>
+              <div class="timeline-content">
+                강한내과의원
+                
+              </div>
+            </div>
+          
+        <div style="text-align: center; color: #94a3b8; padding: 0.5rem;">... 외 77개 이벤트</div>
+      </div>
+    </div>
+  
+    </div>
+    
+    <div class="footer">
+      <p>VNEXSUS AI Claims System - Cycle 6 Integration Report</p>
+      <p>Generated: 2026-01-26T05:55:00.180Z</p>
+    </div>
+  </div>
+</body>
+</html>
