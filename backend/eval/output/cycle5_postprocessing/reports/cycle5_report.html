@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>VNEXSUS Cycle 5 Post-Processing Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { color: #1a365d; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { color: #2d3748; margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+
+    .approach-box { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+    .approach-box h3 { margin-bottom: 0.5rem; }
+
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+    .comparison-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .comparison-card h4 { color: #475569; margin-bottom: 1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; }
+    .comparison-card.winner { border: 3px solid #10b981; }
+
+    .summary-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 1rem 0; }
+    .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+    .card .value { font-size: 2rem; font-weight: bold; color: #2563eb; }
+    .card .label { color: #64748b; margin-top: 0.5rem; font-size: 0.85rem; }
+    .card.success .value { color: #10b981; }
+    .card.warning .value { color: #f59e0b; }
+    .card.danger .value { color: #ef4444; }
+
+    table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 1rem 0; }
+    th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; }
+    tr:hover { background: #f8fafc; }
+
+    .badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+
+    .improvement { font-size: 1.5rem; font-weight: bold; }
+    .improvement.positive { color: #10b981; }
+    .improvement.negative { color: #ef4444; }
+
+    .phases { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin: 2rem 0; }
+    .phase { background: white; padding: 1rem; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
+    .phase .num { font-size: 1.2rem; font-weight: bold; color: #10b981; }
+    .phase .name { font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cycle 5: Post-Processing Optimization Report</h1>
+    <p class="subtitle">7-Phase filtering & scoring system | 2026. 1. 26. 오전 5:28:41</p>
+
+    <div class="approach-box">
+      <h3>7-Phase Post-Processing Pipeline</h3>
+      <div class="phases">
+        <div class="phase"><div class="num">1</div><div class="name">Date Range Validation</div></div>
+        <div class="phase"><div class="num">2</div><div class="name">Type-based Scoring</div></div>
+        <div class="phase"><div class="num">3</div><div class="name">Recency Scoring</div></div>
+        <div class="phase"><div class="num">4</div><div class="name">Insurance Parser</div></div>
+        <div class="phase"><div class="num">5</div><div class="name">Metadata Filter</div></div>
+        <div class="phase"><div class="num">6</div><div class="name">Context Analysis</div></div>
+        <div class="phase"><div class="num">7</div><div class="name">Comprehensive Scoring</div></div>
+      </div>
+      <p><strong>Goal:</strong> Maintain GT Coverage (56.8%) while improving Precision to 70-80%</p>
+    </div>
+
+    <h2>Cycle 4 vs Cycle 5 Comparison</h2>
+    <div class="comparison">
+      <div class="comparison-card">
+        <h4>Cycle 4 (Top-Down Only)</h4>
+        <p><strong>GT Coverage:</strong> 53%</p>
+        <p><strong>Matched:</strong> 43/81</p>
+        <p><strong>AI Extracted:</strong> 371</p>
+        <p><strong>Precision:</strong> 12%</p>
+        <p><strong>Noise:</strong> 328 dates</p>
+      </div>
+      <div class="comparison-card winner">
+        <h4>Cycle 5 (With Post-Processing) 🎯</h4>
+        <p><strong>GT Coverage:</strong> 57%</p>
+        <p><strong>Matched:</strong> 42/74</p>
+        <p><strong>AI Extracted:</strong> 178</p>
+        <p><strong>Precision:</strong> 24%</p>
+        <p><strong>Noise:</strong> 136 dates</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:2rem 0;">
+      <div style="text-align:center; padding: 2rem; background: white; border-radius: 12px;">
+        <p style="color:#64748b;">Precision Improvement</p>
+        <p class="improvement positive">
+          +12%p
+        </p>
+        <p style="color:#64748b;margin-top:0.5rem;">12% → 24%</p>
+      </div>
+      <div style="text-align:center; padding: 2rem; background: white; border-radius: 12px;">
+        <p style="color:#64748b;">Noise Reduction</p>
+        <p class="improvement positive">
+          59%
+        </p>
+        <p style="color:#64748b;margin-top:0.5rem;">328 → 136 dates</p>
+      </div>
+    </div>
+
+    <h2>Cycle 5 Summary</h2>
+    <div class="summary-cards">
+      <div class="card success">
+        <div class="value">57%</div>
+        <div class="label">GT Coverage</div>
+      </div>
+      <div class="card danger">
+        <div class="value">24%</div>
+        <div class="label">Precision</div>
+      </div>
+      <div class="card">
+        <div class="value">42/74</div>
+        <div class="label">Matched/GT</div>
+      </div>
+      <div class="card">
+        <div class="value">178</div>
+        <div class="label">AI Extracted</div>
+      </div>
+      <div class="card warning">
+        <div class="value">136</div>
+        <div class="label">Extra (Noise)</div>
+      </div>
+    </div>
+
+    <h2>Case-by-Case Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Case</th>
+          <th>Patient</th>
+          <th>Cycle 4</th>
+          <th>Cycle 5</th>
+          <th>GT Coverage</th>
+          <th>Precision</th>
+          <th>GT/Match/Miss</th>
+          <th>Noise</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>Case2</strong></td>
+          <td>김미화</td>
+          <td>98</td>
+          <td>22</td>
+          <td>
+            <span class="badge badge-success">
+              56%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              23%
+            </span>
+          </td>
+          <td>9 / 5 / 4</td>
+          <td>17</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case5</strong></td>
+          <td>김태형</td>
+          <td>157</td>
+          <td>59</td>
+          <td>
+            <span class="badge badge-success">
+              67%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              10%
+            </span>
+          </td>
+          <td>9 / 6 / 3</td>
+          <td>53</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case13</strong></td>
+          <td>김인화</td>
+          <td>162</td>
+          <td>18</td>
+          <td>
+            <span class="badge badge-success">
+              80%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              22%
+            </span>
+          </td>
+          <td>5 / 4 / 1</td>
+          <td>14</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case15</strong></td>
+          <td>고영란</td>
+          <td>47</td>
+          <td>10</td>
+          <td>
+            <span class="badge badge-success">
+              63%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              50%
+            </span>
+          </td>
+          <td>8 / 5 / 3</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case17</strong></td>
+          <td>김동아</td>
+          <td>39</td>
+          <td>9</td>
+          <td>
+            <span class="badge badge-warning">
+              40%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              22%
+            </span>
+          </td>
+          <td>5 / 2 / 3</td>
+          <td>7</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case29</strong></td>
+          <td>서문정숙</td>
+          <td>29</td>
+          <td>9</td>
+          <td>
+            <span class="badge badge-warning">
+              29%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              22%
+            </span>
+          </td>
+          <td>7 / 2 / 5</td>
+          <td>7</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case30</strong></td>
+          <td>송금숙</td>
+          <td>25</td>
+          <td>11</td>
+          <td>
+            <span class="badge badge-success">
+              50%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              36%
+            </span>
+          </td>
+          <td>8 / 4 / 4</td>
+          <td>7</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case41</strong></td>
+          <td>장우진</td>
+          <td>73</td>
+          <td>19</td>
+          <td>
+            <span class="badge badge-success">
+              64%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              37%
+            </span>
+          </td>
+          <td>11 / 7 / 4</td>
+          <td>12</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case42</strong></td>
+          <td>정진덕</td>
+          <td>34</td>
+          <td>8</td>
+          <td>
+            <span class="badge badge-success">
+              75%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              38%
+            </span>
+          </td>
+          <td>4 / 3 / 1</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case44</strong></td>
+          <td>최순곤</td>
+          <td>62</td>
+          <td>13</td>
+          <td>
+            <span class="badge badge-success">
+              50%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-danger">
+              31%
+            </span>
+          </td>
+          <td>8 / 4 / 4</td>
+          <td>9</td>
+        </tr>
+        
+      </tbody>
+    </table>
+
+    <h2>Analysis</h2>
+    <div style="background:white; padding:1.5rem; border-radius:12px; margin:1rem 0;">
+      <h4 style="color:#1e40af; margin-bottom:1rem;">Key Achievements</h4>
+      <ul style="margin-left:1.5rem;">
+        <li><strong>Precision:</strong> Improved from 12% to 24% (+12%p)</li>
+        <li><strong>Noise Reduction:</strong> 328 → 136 dates (59% reduction)</li>
+        <li><strong>GT Coverage:</strong> 57% maintained</li>
+        <li><strong>Filtering:</strong> 371 → 178 dates extracted</li>
+      </ul>
+    </div>
+
+    <p style="text-align:center;color:#64748b;margin-top:2rem;">
+      VNEXSUS AI Claims System | Cycle 5 Post-Processing | 2026-01-26T05:28:41.542Z
+    </p>
+  </div>
+</body>
+</html>
