@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cycle 4: Post-Processing Logic 개발 인사이트 리포트</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    .content {
+      padding: 2rem;
+    }
+
+    .exec-summary {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    .exec-summary h2 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .exec-summary p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      border-left: 4px solid #667eea;
+    }
+    .stat-card .value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+    .stat-card .label {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    .stat-card.warning .value { color: #f59e0b; border-color: #f59e0b; }
+    .stat-card.danger .value { color: #ef4444; border-color: #ef4444; }
+    .stat-card.success .value { color: #10b981; border-color: #10b981; }
+
+    h2 {
+      color: #1e293b;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #e2e8f0;
+      font-size: 1.8rem;
+    }
+
+    .recommendation {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-left: 5px solid #cbd5e1;
+    }
+    .recommendation.priority-critical {
+      border-left-color: #dc2626;
+      background: #fef2f2;
+    }
+    .recommendation.priority-high {
+      border-left-color: #ea580c;
+      background: #fff7ed;
+    }
+    .recommendation.priority-medium {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .recommendation.priority-low {
+      border-left-color: #06b6d4;
+      background: #ecfeff;
+    }
+    .recommendation.priority-implemented {
+      border-left-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .rec-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .rec-priority {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .rec-priority.critical { background: #dc2626; color: white; }
+    .rec-priority.high { background: #ea580c; color: white; }
+    .rec-priority.medium { background: #f59e0b; color: white; }
+    .rec-priority.low { background: #06b6d4; color: white; }
+    .rec-priority.implemented { background: #10b981; color: white; }
+
+    .rec-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .rec-section {
+      margin-bottom: 1rem;
+    }
+    .rec-section-title {
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 0.5rem;
+    }
+    .rec-section-content {
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .pattern-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .pattern-table th,
+    .pattern-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .pattern-table th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #475569;
+    }
+    .pattern-table tr:hover {
+      background: #f8fafc;
+    }
+
+    .examples {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+    .example-item {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .example-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .example-date {
+      font-weight: 600;
+      color: #667eea;
+    }
+    .example-context {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      font-family: monospace;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-noise { background: #fee2e2; color: #991b1b; }
+    .badge-valid { background: #d1fae5; color: #065f46; }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      background: #f8fafc;
+    }
+
+    .insight-highlight {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+    }
+    .insight-highlight h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .duplicate-chart {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎯 Cycle 4: Post-Processing Logic 개발 인사이트</h1>
+      <p class="subtitle">Vision LLM 과추출 데이터 분석 및 후처리 로직 최적화 방향</p>
+      <p class="subtitle">2026. 1. 26. 오전 4:56:24</p>
+    </div>
+
+    <div class="content">
+      <div class="exec-summary">
+        <h2>📊 Executive Summary</h2>
+        <p><strong>분석 케이스:</strong> 10개 (Case18 제외)</p>
+        <p><strong>현재 성능:</strong> GT Coverage 56.8% | Precision 23.7% | Noise Rate 76.3%</p>
+        <p><strong>핵심 발견:</strong> VisionLLM이 507개의 날짜를 과추출했으며, 이 중 65.1%가 중복, 76.3%가 Noise입니다.</p>
+        <p><strong>최적화 목표:</strong> 후처리 로직을 통해 Precision을 23.7% → 70-80%로 향상시키면서 GT Coverage 56.8% 유지</p>
+      </div>
+
+      <h2>📈 Current Performance Metrics</h2>
+      <div class="stats-grid">
+        <div class="stat-card warning">
+          <div class="value">56.8%</div>
+          <div class="label">GT Coverage</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">23.7%</div>
+          <div class="label">Precision</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">76.3%</div>
+          <div class="label">Noise Rate</div>
+        </div>
+        <div class="stat-card success">
+          <div class="value">65.1%</div>
+          <div class="label">Duplicate Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">507</div>
+          <div class="label">Raw Extractions</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">177</div>
+          <div class="label">Unique Dates</div>
+        </div>
+        <div class="stat-card success">
+          <div class="value">42</div>
+          <div class="label">Matched with GT</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">32</div>
+          <div class="label">Missed GT Dates</div>
+        </div>
+        <div class="stat-card danger">
+          <div class="value">135</div>
+          <div class="label">Extra (Noise)</div>
+        </div>
+      </div>
+
+      <div class="insight-highlight">
+        <h3>💡 Key Insight: 과추출 전략의 효과</h3>
+        <p>VisionLLM이 507개의 날짜를 과추출했지만, 중복 제거만으로도 177개(65% 감소)로 줄어듭니다. 추가로 타입 기반 필터링, 컨텍스트 분석, 날짜 범위 검증을 적용하면 Precision을 70-80%까지 끌어올릴 수 있습니다.</p>
+      </div>
+
+      <h2>🎯 Post-Processing 최적화 방향 (우선순위별)</h2>
+
+
+      <div class="recommendation priority-implemented">
+        <div class="rec-header">
+          <span class="rec-priority implemented">IMPLEMENTED</span>
+          <span class="rec-title">1. Duplicate Removal</span>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Status</div>
+          <div class="rec-section-content">✓ Already working</div>
+        </div>
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">65.1% of raw extractions are duplicates (507 → 177 unique)</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Eliminates 330 duplicate dates</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Current deduplication logic is effective. No action needed.</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">Continue using Set-based deduplication or similar approach</div>
+        </div>
+        
+
+        
+      </div>
+  
+      <div class="recommendation priority-high">
+        <div class="rec-header">
+          <span class="rec-priority high">HIGH</span>
+          <span class="rec-title">2. Type-Based Relevance Scoring</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">"기타" type accounts for 241 false positives (178.5% of noise)</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Could reduce noise by 178.5%</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Implement multi-tier type scoring system:</p><p style="margin-bottom:0.5rem;">      TIER 1 (High Priority): 수술, 입원, 퇴원, 진단</p><p style="margin-bottom:0.5rem;">      TIER 2 (Medium Priority): 검사, 처방</p><p style="margin-bottom:0.5rem;">      TIER 3 (Low Priority): 진료일, 방문일</p><p style="margin-bottom:0.5rem;">      TIER 4 (Filter/Deprioritize): 서류작성일, 발급일, 출력일, 기타</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+      - Assign relevance scores: TIER1=100, TIER2=70, TIER3=40, TIER4=10
+      - Filter out dates with score < threshold (e.g., 30)
+      - Or rank dates by score for claims review</div>
+        </div>
+        
+
+        
+      </div>
+  
+      <div class="recommendation priority-medium">
+        <div class="rec-header">
+          <span class="rec-priority medium">MEDIUM</span>
+          <span class="rec-title">3. Timestamp Context Filtering</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">116 dates have HH:MM:SS timestamps, 29 (25.0%) are noise</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Could reduce noise by filtering timestamp-only dates</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Filter dates that appear only as timestamps (HH:MM:SS) without meaningful medical context</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+      - Detect pattern: /\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}/
+      - Check if context has medical keywords (수술, 입원, 퇴원, 진단, 검사)
+      - If no medical keywords, mark as low-relevance timestamp</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Examples (5 shown)</div>
+          <div class="examples">
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-03-13</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"내원일: 2025년 03월 13일 13:54:58"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-03-13</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"내원일: 2025년 03월 13일 13:54:58"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-03-13</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"내원일: 2025년 03월 13일 13:54:58"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-03-13</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"내원일: 2025년 03월 13일 13:54:58"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-03-13</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"내원일: 2025년 03월 13일 13:54:58"</div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+  
+      <div class="recommendation priority-high">
+        <div class="rec-header">
+          <span class="rec-priority high">HIGH</span>
+          <span class="rec-title">4. Document Metadata Filtering</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">41 dates identified as document metadata, 30 (73.2%) are noise</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Could reduce noise by 73.2%</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Filter or deprioritize dates with document issuance context</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+      - Detect keywords: 발급, 출력, 서류, 작성, 발행, issue, print, document
+      - Assign low relevance score (10-20)
+      - These are rarely relevant for claims analysis</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Examples (5 shown)</div>
+          <div class="examples">
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-04-01</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"발급일자 : 2025년04월01일 15시28분"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2021-07-30</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"발행일 2021년 07월 30일"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2021-03-24</span>
+                <span class="badge badge-valid">VALID</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"발행일 2021년 03월 24일"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-09-09</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case17]</span>
+              </div>
+              <div class="example-context">"출력자 : 이혜원"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2025-09-09</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case17]</span>
+              </div>
+              <div class="example-context">"출력일시: 2025/09/09"</div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+  
+      <div class="recommendation priority-critical">
+        <div class="rec-header">
+          <span class="rec-priority critical">CRITICAL</span>
+          <span class="rec-title">5. Date Range Validation</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">8 dates outside reasonable medical record range (before 2000 or after 2030)</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Eliminates 8 obvious invalid dates</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Hard filter dates outside reasonable range</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+      - MIN_YEAR: 2000 (or patient birth year - 10)
+      - MAX_YEAR: 2030 (current year + 5)
+      - Remove dates outside this range</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Examples (8 shown)</div>
+          <div class="examples">
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2069-03-24</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"보험기간 2021-03-24 ~ 2069-03-24"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2059-07-30</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"보험기간 2021-07-30 ~ 2059-07-30"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2069-03-24</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"보험기간 2021-03-24 ~ 2069-03-24"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2069-03-24</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"보험기간 2021-03-24 ~ 2069-03-24"</div>
+            </div>
+            
+            <div class="example-item">
+              <div>
+                <span class="example-date">2069-03-24</span>
+                <span class="badge badge-noise">NOISE</span>
+                <span style="color:#94a3b8;font-size:0.85rem;margin-left:0.5rem;">[Case13]</span>
+              </div>
+              <div class="example-context">"보험기간 2021-03-24 ~ 2069-03-24"</div>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+  
+      <div class="recommendation priority-high">
+        <div class="rec-header">
+          <span class="rec-priority high">HIGH</span>
+          <span class="rec-title">7. Comprehensive Relevance Scoring System</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">Current system: 56.8% coverage, 23.7% precision, 76.3% noise rate</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Could improve precision from 23.7% to 70-80%+ while maintaining 56.8% coverage</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Implement multi-factor scoring algorithm combining all above insights</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+    SCORING FORMULA:
+    score = typeScore + contextScore + recencyScore + frequencyScore
+
+    1. TYPE SCORE (0-100):
+       - 수술: 100
+       - 입원/퇴원: 90
+       - 진단: 80
+       - 검사: 60
+       - 진료: 40
+       - 보험계약일: 30
+       - 서류/발급: 10
+       - 기타: 20
+
+    2. CONTEXT SCORE (-50 to +50):
+       - Medical keywords (수술, 입원, 진단, 치료): +30
+       - Document keywords (발급, 출력, 작성): -30
+       - Timestamp only (HH:MM:SS without context): -20
+       - Comparison context (비교, compared): -10
+       - Insurance context: +20
+
+    3. RECENCY SCORE (0-20):
+       - Recent dates (within 2 years): +20
+       - 2-5 years: +10
+       - 5-10 years: +5
+       - 10+ years: 0
+
+    4. FREQUENCY SCORE (0-30):
+       - Appears 3+ times: +30
+       - Appears 2 times: +15
+       - Appears once: 0
+
+    FILTERING THRESHOLDS:
+       - score >= 70: HIGH relevance (show first)
+       - score >= 40: MEDIUM relevance (show second)
+       - score >= 20: LOW relevance (show last)
+       - score < 20: FILTER OUT (noise)
+  </div>
+        </div>
+        
+
+        
+      </div>
+  
+      <div class="recommendation priority-low">
+        <div class="rec-header">
+          <span class="rec-priority low">LOW</span>
+          <span class="rec-title">8. Coverage Improvement (Prompt Engineering)</span>
+        </div>
+
+        
+
+        <div class="rec-section">
+          <div class="rec-section-title">Finding</div>
+          <div class="rec-section-content">Still missing 32 GT dates (43.2% miss rate)</div>
+        </div>
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Impact</div>
+          <div class="rec-section-content">Could improve coverage from 56.8% toward 80-90%</div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Recommendation</div>
+          <div class="rec-section-content"><p style="margin-bottom:0.5rem;">Only pursue after post-processing optimization is complete</p></div>
+        </div>
+        
+
+        
+        <div class="rec-section">
+          <div class="rec-section-title">Implementation</div>
+          <div class="code-block">
+    CURRENT PRIORITY: Focus on post-processing to reduce noise
+    FUTURE WORK:
+      - Analyze missed dates patterns
+      - Enhance VisionLLM prompt if needed
+      - Consider multi-pass extraction for critical date types</div>
+        </div>
+        
+
+        
+      </div>
+  
+
+      <h2>🔍 Pattern Analysis Details</h2>
+
+      <div class="duplicate-chart">
+        <h3 style="margin-bottom:1rem;color:#1e293b;">Duplicate Analysis by Case</h3>
+        <table class="pattern-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Raw Count</th>
+              <th>Unique Count</th>
+              <th>Duplicates</th>
+              <th>Duplicate Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td><strong>Case13</strong></td>
+              <td>126</td>
+              <td>18</td>
+              <td>108</td>
+              <td><strong>85.7%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case15</strong></td>
+              <td>31</td>
+              <td>10</td>
+              <td>21</td>
+              <td><strong>67.7%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case17</strong></td>
+              <td>28</td>
+              <td>9</td>
+              <td>19</td>
+              <td><strong>67.9%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case29</strong></td>
+              <td>25</td>
+              <td>10</td>
+              <td>15</td>
+              <td><strong>60.0%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case2</strong></td>
+              <td>69</td>
+              <td>22</td>
+              <td>47</td>
+              <td><strong>68.1%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case30</strong></td>
+              <td>19</td>
+              <td>11</td>
+              <td>8</td>
+              <td><strong>42.1%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case41</strong></td>
+              <td>56</td>
+              <td>19</td>
+              <td>37</td>
+              <td><strong>66.1%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case42</strong></td>
+              <td>18</td>
+              <td>8</td>
+              <td>10</td>
+              <td><strong>55.6%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case44</strong></td>
+              <td>43</td>
+              <td>13</td>
+              <td>30</td>
+              <td><strong>69.8%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>Case5</strong></td>
+              <td>92</td>
+              <td>57</td>
+              <td>35</td>
+              <td><strong>38.0%</strong></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+
+      <div class="duplicate-chart">
+        <h3 style="margin-bottom:1rem;color:#1e293b;">Top Noise Types</h3>
+        <table class="pattern-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Count</th>
+              <th>Percentage of Total Noise</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td><strong>기타</strong></td>
+              <td>241</td>
+              <td><strong>178.5%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>보험가입</strong></td>
+              <td>9</td>
+              <td><strong>6.7%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>진료</strong></td>
+              <td>7</td>
+              <td><strong>5.2%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>검사</strong></td>
+              <td>4</td>
+              <td><strong>3.0%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>수술</strong></td>
+              <td>2</td>
+              <td><strong>1.5%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>통원기간</strong></td>
+              <td>2</td>
+              <td><strong>1.5%</strong></td>
+            </tr>
+            
+            <tr>
+              <td><strong>심평원조회기간</strong></td>
+              <td>1</td>
+              <td><strong>0.7%</strong></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+
+      <h2>🎬 Next Steps</h2>
+      <div style="background:#f8fafc;padding:1.5rem;border-radius:12px;margin:1rem 0;">
+        <ol style="margin-left:1.5rem;color:#475569;line-height:2;">
+          <li><strong>Phase 1 (CRITICAL):</strong> 날짜 범위 검증 (2000-2030) 적용하여 명백한 오류 제거</li>
+          <li><strong>Phase 2 (HIGH):</strong> 타입 기반 relevance scoring 시스템 구현</li>
+          <li><strong>Phase 3 (HIGH):</strong> 문서 메타데이터 날짜 필터링 (발급일, 출력일, 서류작성일)</li>
+          <li><strong>Phase 4 (MEDIUM):</strong> 타임스탬프 및 비교 컨텍스트 분석 로직 추가</li>
+          <li><strong>Phase 5 (HIGH):</strong> 종합 relevance scoring 시스템 구현 (다중 요인 조합)</li>
+          <li><strong>Phase 6 (LOW):</strong> Coverage 개선을 위한 VisionLLM 프롬프트 엔지니어링</li>
+        </ol>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <p><strong>VNEXSUS AI Claims System</strong></p>
+      <p>Cycle 4 Top-Down Post-Processing Analysis</p>
+      <p>2026-01-26T04:57:48.339Z</p>
+      <p style="margin-top:1rem;color:#cbd5e1;">Generated by analyzeCycle4PostProcessingInsights.cjs</p>
+    </div>
+  </div>
+</body>
+</html>

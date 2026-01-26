@@ -1,0 +1,1612 @@
+{
+  "metadata": {
+    "totalCases": 10,
+    "analysisDate": "2026-01-26T04:56:24.592Z",
+    "approach": "top-down-over-extraction"
+  },
+  "basicStats": {
+    "totalGtDates": 74,
+    "totalExtracted": 507,
+    "totalUnique": 177,
+    "totalMatched": 42,
+    "totalMissed": 32,
+    "totalExtra": 135
+  },
+  "insights": {
+    "duplicateAnalysis": {
+      "totalDuplicates": 330,
+      "duplicateRate": "65.1%",
+      "caseBreakdown": [
+        {
+          "caseId": "Case13",
+          "rawCount": 126,
+          "uniqueCount": 18,
+          "duplicates": 108,
+          "duplicateRate": "85.7%"
+        },
+        {
+          "caseId": "Case15",
+          "rawCount": 31,
+          "uniqueCount": 10,
+          "duplicates": 21,
+          "duplicateRate": "67.7%"
+        },
+        {
+          "caseId": "Case17",
+          "rawCount": 28,
+          "uniqueCount": 9,
+          "duplicates": 19,
+          "duplicateRate": "67.9%"
+        },
+        {
+          "caseId": "Case29",
+          "rawCount": 25,
+          "uniqueCount": 10,
+          "duplicates": 15,
+          "duplicateRate": "60.0%"
+        },
+        {
+          "caseId": "Case2",
+          "rawCount": 69,
+          "uniqueCount": 22,
+          "duplicates": 47,
+          "duplicateRate": "68.1%"
+        },
+        {
+          "caseId": "Case30",
+          "rawCount": 19,
+          "uniqueCount": 11,
+          "duplicates": 8,
+          "duplicateRate": "42.1%"
+        },
+        {
+          "caseId": "Case41",
+          "rawCount": 56,
+          "uniqueCount": 19,
+          "duplicates": 37,
+          "duplicateRate": "66.1%"
+        },
+        {
+          "caseId": "Case42",
+          "rawCount": 18,
+          "uniqueCount": 8,
+          "duplicates": 10,
+          "duplicateRate": "55.6%"
+        },
+        {
+          "caseId": "Case44",
+          "rawCount": 43,
+          "uniqueCount": 13,
+          "duplicates": 30,
+          "duplicateRate": "69.8%"
+        },
+        {
+          "caseId": "Case5",
+          "rawCount": 92,
+          "uniqueCount": 57,
+          "duplicates": 35,
+          "duplicateRate": "38.0%"
+        }
+      ]
+    },
+    "typeDistribution": {
+      "extracted": {
+        "기타": 457,
+        "보험가입": 17,
+        "수술": 3,
+        "보험계약일": 1,
+        "검사": 7,
+        "퇴원": 2,
+        "입원": 2,
+        "진료": 13,
+        "진단": 1,
+        "통원기간": 2,
+        "심평원조회기간": 2
+      },
+      "noise": {
+        "기타": 241,
+        "보험가입": 9,
+        "수술": 2,
+        "검사": 4,
+        "진료": 7,
+        "통원기간": 2,
+        "심평원조회기간": 1
+      },
+      "matched": {
+        "보험가입": 8,
+        "기타": 216,
+        "보험계약일": 1,
+        "수술": 1,
+        "퇴원": 2,
+        "입원": 2,
+        "진료": 6,
+        "진단": 1,
+        "검사": 3,
+        "심평원조회기간": 1
+      }
+    },
+    "contextPatterns": {
+      "timestampPatterns": [
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-19",
+          "context": "Start Date & Time 2025-08-19 15:02:00",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-22",
+          "context": "End Date & Time 2025-08-22 14:37:37",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-19",
+          "context": "Time : 2025-08-19 15:43:39",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-20",
+          "context": "Time : 2025-08-20 21:06:52",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-21",
+          "context": "Time : 2025-08-21 08:06:24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-22",
+          "context": "Time : 2025-08-22 14:37:37",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-08-28",
+          "context": "2025-08-28 10:44:59",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case29",
+          "date": "2024-09-04",
+          "context": "Report Date: 2024-09-04 12:44:37",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case29",
+          "date": "2025-10-19",
+          "context": "2025-10-19 11:53:27",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case29",
+          "date": "2025-10-19",
+          "context": "2025-10-19 11:52:30",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case29",
+          "date": "2025-10-19",
+          "context": "2025-10-19 11:53:16",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2019-03-23",
+          "context": "2019-03-23 11:06:34",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "2020-06-20 10:56:48",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-08-11",
+          "context": "2020-08-11 09:02:54",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2021-07-09",
+          "context": "2021-07-09 16:09:09",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2022-07-19",
+          "context": "2022-07-19 13:39:50",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023-08-07 09:31:32",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2019-03-23",
+          "context": "2019-03-23 11:32:54",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "2020-06-20 10:56:48",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2021-07-09",
+          "context": "2021-07-09 16:30:12",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2022-07-19",
+          "context": "2022-07-19 14:01:08",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023-08-07 10:34:15",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2025-04-07",
+          "context": "2025-04-07 12:58:58",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2025-03-21",
+          "context": "삼성서울병원 2/2 2025-03-21 오후 02:24:03: PP7286",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2025-03-21",
+          "context": "삼성서울병원 1/3 2025-03-21 오후 02:24:21: PP7286",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2025-03-21",
+          "context": "삼성서울병원 2/2 2025-03-21 오후 02:24:21: PP7286",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "2020-06-20 09:54:04",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "2020-06-20 09:58:00",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-08-11",
+          "context": "2020-08-11 09:02:54",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2021-07-09",
+          "context": "2021-07-09 16:09:09",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2022-07-19",
+          "context": "2022-07-19 13:39:50",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023-08-07 09:31:32",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2019-03-23",
+          "context": "2019-03-23 11:32:54",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "2020-06-20 10:56:48",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2021-07-09",
+          "context": "2021-07-09 16:30:12",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2022-07-19",
+          "context": "2022-07-19 14:01:08",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023-08-07 10:34:15",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case30",
+          "date": "2025-09-24",
+          "context": "2025-09-24 13:46:06",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:34",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-22",
+          "context": "2025-01-22 14:04:23",
+          "isNoise": true
+        }
+      ],
+      "documentDates": [
+        {
+          "caseId": "Case13",
+          "date": "2025-04-01",
+          "context": "발급일자 : 2025년04월01일 15시28분",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2021-07-30",
+          "context": "발행일 2021년 07월 30일",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2021-03-24",
+          "context": "발행일 2021년 03월 24일",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-09-09",
+          "context": "출력자 : 이혜원",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-09-09",
+          "context": "출력일시: 2025/09/09",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case30",
+          "date": "2025-09-19",
+          "context": "발행일자 2025/09/19",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-24",
+          "context": "출력일 : 2025/09/24 15:04",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:34",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case41",
+          "date": "2025-09-22",
+          "context": "출력 : 2025/09/22 10:16:57",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-02-26",
+          "context": "작성일 2025-02-26",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-02-22",
+          "context": "발행일 2025.02.22",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-04-15",
+          "context": "작성일 2025-04-15",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-04-23",
+          "context": "작성일 2025-04-23",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-04-29",
+          "context": "작성일 2025-04-29",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-02-22",
+          "context": "작성일 2025-02-22",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-09-10",
+          "context": "출력일 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-09-10",
+          "context": "출력일 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-09-10",
+          "context": "출력일 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-09-10",
+          "context": "출력일 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-04-29",
+          "context": "작성일 2025-04-29",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-09-10",
+          "context": "출력일 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case42",
+          "date": "2025-04-29",
+          "context": "작성일 2025-04-29",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일: 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일: 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case44",
+          "date": "2025-09-10",
+          "context": "출력일: 2025-09-10",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-21",
+          "context": "출력일: 2025-01-21",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-21",
+          "context": "출력일: 2025-01-21",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-21",
+          "context": "출력일: 2025-01-21",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-21",
+          "context": "출력일: 2025-01-21",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case5",
+          "date": "2025-01-21",
+          "context": "출력일: 2025-01-21",
+          "isNoise": true
+        }
+      ],
+      "futureOrInvalidDates": [
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2059-07-30",
+          "year": 2059,
+          "context": "보험기간 2021-07-30 ~ 2059-07-30",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        }
+      ],
+      "comparisonDates": [
+        {
+          "caseId": "Case2",
+          "date": "2020-06-20",
+          "context": "compared with previous CT(2020.6.20.).",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2021-07-09",
+          "context": "2021년 7월 9일과 비교하여 크기가 증가",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2022-07-19",
+          "context": "2022년 7월 19일과 비교하여 크기가 증가",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023년 8월 7일과 비교하여 크기가 증가",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case2",
+          "date": "2023-08-07",
+          "context": "2023/08/07 CT와 비교해서 right liver의 hemangioma는 8.7 cm로 이전보다 더 커졌음.",
+          "isNoise": false
+        }
+      ]
+    },
+    "noiseCharacteristics": {
+      "topNoiseTypes": [
+        {
+          "type": "기타",
+          "count": 241,
+          "percentage": "178.5%"
+        },
+        {
+          "type": "보험가입",
+          "count": 9,
+          "percentage": "6.7%"
+        },
+        {
+          "type": "진료",
+          "count": 7,
+          "percentage": "5.2%"
+        },
+        {
+          "type": "검사",
+          "count": 4,
+          "percentage": "3.0%"
+        },
+        {
+          "type": "수술",
+          "count": 2,
+          "percentage": "1.5%"
+        },
+        {
+          "type": "통원기간",
+          "count": 2,
+          "percentage": "1.5%"
+        },
+        {
+          "type": "심평원조회기간",
+          "count": 1,
+          "percentage": "0.7%"
+        }
+      ],
+      "commonNoisePatterns": []
+    },
+    "missedDateAnalysis": {
+      "totalMissed": 0,
+      "missedByCase": [
+        {
+          "caseId": "Case13",
+          "missed": [
+            "2024-11-04"
+          ],
+          "gtCount": 5,
+          "coverage": "80.0%"
+        },
+        {
+          "caseId": "Case15",
+          "missed": [
+            "2025-02-25",
+            "2025-05-26",
+            "2053-02-25"
+          ],
+          "gtCount": 8,
+          "coverage": "62.5%"
+        },
+        {
+          "caseId": "Case17",
+          "missed": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12"
+          ],
+          "gtCount": 5,
+          "coverage": "40.0%"
+        },
+        {
+          "caseId": "Case29",
+          "missed": [
+            "2020-10-15",
+            "2024-08-13",
+            "2025-08-13",
+            "2025-10-15"
+          ],
+          "gtCount": 7,
+          "coverage": "42.9%"
+        },
+        {
+          "caseId": "Case2",
+          "missed": [
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-23",
+            "2025-02-04"
+          ],
+          "gtCount": 9,
+          "coverage": "55.6%"
+        },
+        {
+          "caseId": "Case30",
+          "missed": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-04-22",
+            "2025-09-09"
+          ],
+          "gtCount": 8,
+          "coverage": "50.0%"
+        },
+        {
+          "caseId": "Case41",
+          "missed": [
+            "2007-08-08",
+            "2024-04-24",
+            "2025-01-03",
+            "2025-09-02"
+          ],
+          "gtCount": 11,
+          "coverage": "63.6%"
+        },
+        {
+          "caseId": "Case42",
+          "missed": [
+            "2018-09-27"
+          ],
+          "gtCount": 4,
+          "coverage": "75.0%"
+        },
+        {
+          "caseId": "Case44",
+          "missed": [
+            "2020-09-09",
+            "2024-06-03",
+            "2024-09-03",
+            "2054-09-03"
+          ],
+          "gtCount": 8,
+          "coverage": "50.0%"
+        },
+        {
+          "caseId": "Case5",
+          "missed": [
+            "2018-05-10",
+            "2020-01-17",
+            "2023-02-10",
+            "2023-05-10"
+          ],
+          "gtCount": 9,
+          "coverage": "55.6%"
+        }
+      ]
+    }
+  },
+  "postProcessingRecommendations": [
+    {
+      "priority": "IMPLEMENTED",
+      "category": "1. Duplicate Removal",
+      "status": "✓ Already working",
+      "finding": "65.1% of raw extractions are duplicates (507 → 177 unique)",
+      "impact": "Eliminates 330 duplicate dates",
+      "recommendation": "Current deduplication logic is effective. No action needed.",
+      "implementation": "Continue using Set-based deduplication or similar approach"
+    },
+    {
+      "priority": "HIGH",
+      "category": "2. Type-Based Relevance Scoring",
+      "finding": "\"기타\" type accounts for 241 false positives (178.5% of noise)",
+      "impact": "Could reduce noise by 178.5%",
+      "recommendation": "Implement multi-tier type scoring system:\n      TIER 1 (High Priority): 수술, 입원, 퇴원, 진단\n      TIER 2 (Medium Priority): 검사, 처방\n      TIER 3 (Low Priority): 진료일, 방문일\n      TIER 4 (Filter/Deprioritize): 서류작성일, 발급일, 출력일, 기타",
+      "implementation": "\n      - Assign relevance scores: TIER1=100, TIER2=70, TIER3=40, TIER4=10\n      - Filter out dates with score < threshold (e.g., 30)\n      - Or rank dates by score for claims review"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "3. Timestamp Context Filtering",
+      "finding": "116 dates have HH:MM:SS timestamps, 29 (25.0%) are noise",
+      "impact": "Could reduce noise by filtering timestamp-only dates",
+      "recommendation": "Filter dates that appear only as timestamps (HH:MM:SS) without meaningful medical context",
+      "implementation": "\n      - Detect pattern: /\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2}/\n      - Check if context has medical keywords (수술, 입원, 퇴원, 진단, 검사)\n      - If no medical keywords, mark as low-relevance timestamp",
+      "examples": [
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2025-03-13",
+          "context": "내원일: 2025년 03월 13일 13:54:58",
+          "isNoise": false
+        }
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "category": "4. Document Metadata Filtering",
+      "finding": "41 dates identified as document metadata, 30 (73.2%) are noise",
+      "impact": "Could reduce noise by 73.2%",
+      "recommendation": "Filter or deprioritize dates with document issuance context",
+      "implementation": "\n      - Detect keywords: 발급, 출력, 서류, 작성, 발행, issue, print, document\n      - Assign low relevance score (10-20)\n      - These are rarely relevant for claims analysis",
+      "examples": [
+        {
+          "caseId": "Case13",
+          "date": "2025-04-01",
+          "context": "발급일자 : 2025년04월01일 15시28분",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2021-07-30",
+          "context": "발행일 2021년 07월 30일",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case13",
+          "date": "2021-03-24",
+          "context": "발행일 2021년 03월 24일",
+          "isNoise": false
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-09-09",
+          "context": "출력자 : 이혜원",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case17",
+          "date": "2025-09-09",
+          "context": "출력일시: 2025/09/09",
+          "isNoise": true
+        }
+      ]
+    },
+    {
+      "priority": "CRITICAL",
+      "category": "5. Date Range Validation",
+      "finding": "8 dates outside reasonable medical record range (before 2000 or after 2030)",
+      "impact": "Eliminates 8 obvious invalid dates",
+      "recommendation": "Hard filter dates outside reasonable range",
+      "implementation": "\n      - MIN_YEAR: 2000 (or patient birth year - 10)\n      - MAX_YEAR: 2030 (current year + 5)\n      - Remove dates outside this range",
+      "examples": [
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2059-07-30",
+          "year": 2059,
+          "context": "보험기간 2021-07-30 ~ 2059-07-30",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        },
+        {
+          "caseId": "Case13",
+          "date": "2069-03-24",
+          "year": 2069,
+          "context": "보험기간 2021-03-24 ~ 2069-03-24",
+          "isNoise": true
+        }
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "category": "7. Comprehensive Relevance Scoring System",
+      "finding": "Current system: 56.8% coverage, 23.7% precision, 76.3% noise rate",
+      "impact": "Could improve precision from 23.7% to 70-80%+ while maintaining 56.8% coverage",
+      "recommendation": "Implement multi-factor scoring algorithm combining all above insights",
+      "implementation": "\n    SCORING FORMULA:\n    score = typeScore + contextScore + recencyScore + frequencyScore\n\n    1. TYPE SCORE (0-100):\n       - 수술: 100\n       - 입원/퇴원: 90\n       - 진단: 80\n       - 검사: 60\n       - 진료: 40\n       - 보험계약일: 30\n       - 서류/발급: 10\n       - 기타: 20\n\n    2. CONTEXT SCORE (-50 to +50):\n       - Medical keywords (수술, 입원, 진단, 치료): +30\n       - Document keywords (발급, 출력, 작성): -30\n       - Timestamp only (HH:MM:SS without context): -20\n       - Comparison context (비교, compared): -10\n       - Insurance context: +20\n\n    3. RECENCY SCORE (0-20):\n       - Recent dates (within 2 years): +20\n       - 2-5 years: +10\n       - 5-10 years: +5\n       - 10+ years: 0\n\n    4. FREQUENCY SCORE (0-30):\n       - Appears 3+ times: +30\n       - Appears 2 times: +15\n       - Appears once: 0\n\n    FILTERING THRESHOLDS:\n       - score >= 70: HIGH relevance (show first)\n       - score >= 40: MEDIUM relevance (show second)\n       - score >= 20: LOW relevance (show last)\n       - score < 20: FILTER OUT (noise)\n  "
+    },
+    {
+      "priority": "LOW",
+      "category": "8. Coverage Improvement (Prompt Engineering)",
+      "finding": "Still missing 32 GT dates (43.2% miss rate)",
+      "impact": "Could improve coverage from 56.8% toward 80-90%",
+      "recommendation": "Only pursue after post-processing optimization is complete",
+      "implementation": "\n    CURRENT PRIORITY: Focus on post-processing to reduce noise\n    FUTURE WORK:\n      - Analyze missed dates patterns\n      - Enhance VisionLLM prompt if needed\n      - Consider multi-pass extraction for critical date types",
+      "missedCases": [
+        {
+          "caseId": "Case13",
+          "missed": [
+            "2024-11-04"
+          ],
+          "gtCount": 5,
+          "coverage": "80.0%"
+        },
+        {
+          "caseId": "Case15",
+          "missed": [
+            "2025-02-25",
+            "2025-05-26",
+            "2053-02-25"
+          ],
+          "gtCount": 8,
+          "coverage": "62.5%"
+        },
+        {
+          "caseId": "Case17",
+          "missed": [
+            "2025-08-12",
+            "2030-08-12",
+            "2045-08-12"
+          ],
+          "gtCount": 5,
+          "coverage": "40.0%"
+        },
+        {
+          "caseId": "Case29",
+          "missed": [
+            "2020-10-15",
+            "2024-08-13",
+            "2025-08-13",
+            "2025-10-15"
+          ],
+          "gtCount": 7,
+          "coverage": "42.9%"
+        },
+        {
+          "caseId": "Case2",
+          "missed": [
+            "2019-04-09",
+            "2024-01-09",
+            "2024-04-23",
+            "2025-02-04"
+          ],
+          "gtCount": 9,
+          "coverage": "55.6%"
+        },
+        {
+          "caseId": "Case30",
+          "missed": [
+            "2012-11-23",
+            "2025-01-01",
+            "2025-04-22",
+            "2025-09-09"
+          ],
+          "gtCount": 8,
+          "coverage": "50.0%"
+        },
+        {
+          "caseId": "Case41",
+          "missed": [
+            "2007-08-08",
+            "2024-04-24",
+            "2025-01-03",
+            "2025-09-02"
+          ],
+          "gtCount": 11,
+          "coverage": "63.6%"
+        },
+        {
+          "caseId": "Case42",
+          "missed": [
+            "2018-09-27"
+          ],
+          "gtCount": 4,
+          "coverage": "75.0%"
+        },
+        {
+          "caseId": "Case44",
+          "missed": [
+            "2020-09-09",
+            "2024-06-03",
+            "2024-09-03",
+            "2054-09-03"
+          ],
+          "gtCount": 8,
+          "coverage": "50.0%"
+        },
+        {
+          "caseId": "Case5",
+          "missed": [
+            "2018-05-10",
+            "2020-01-17",
+            "2023-02-10",
+            "2023-05-10"
+          ],
+          "gtCount": 9,
+          "coverage": "55.6%"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "cases": 10,
+    "gtCoverage": "56.8%",
+    "precision": "23.7%",
+    "recall": "56.8%",
+    "noiseRate": "76.3%",
+    "duplicateRate": "65.1%",
+    "rawExtractions": 507,
+    "uniqueDates": 177,
+    "matched": 42,
+    "missed": 32,
+    "extra": 135
+  }
+}
