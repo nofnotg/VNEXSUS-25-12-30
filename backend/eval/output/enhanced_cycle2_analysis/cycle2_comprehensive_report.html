@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VNEXSUS Cycle 2 종합 분석 보고서</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: 0.9; }
+
+    .content { padding: 2rem; }
+
+    h2 {
+      color: #2d3748;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #667eea;
+      font-size: 1.8rem;
+    }
+
+    h3 {
+      color: #4a5568;
+      margin: 1.5rem 0 1rem;
+      font-size: 1.3rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .metric-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .metric-card .value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-card.success .value { color: #10b981; }
+    .metric-card.warning .value { color: #f59e0b; }
+    .metric-card.danger .value { color: #ef4444; }
+
+    .metric-card .label {
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    table {
+      width: 100%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 1.5rem 0;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+
+    .case-details {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+      border-left: 4px solid #667eea;
+    }
+
+    .case-details h4 {
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+    .date-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .date-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid #667eea;
+      font-size: 0.9rem;
+    }
+
+    .date-item .date {
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .date-item .type {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    .date-item .context {
+      color: #475569;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .chart-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 1.5rem 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: #64748b;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 2rem;
+    }
+
+    .analysis-section {
+      background: #f0f9ff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 4px solid #0ea5e9;
+    }
+
+    .analysis-section h4 {
+      color: #0c4a6e;
+      margin-bottom: 1rem;
+    }
+
+    .analysis-section ul {
+      margin-left: 1.5rem;
+    }
+
+    .analysis-section li {
+      margin: 0.5rem 0;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔬 VNEXSUS Cycle 2</h1>
+      <h2 style="margin: 0.5rem 0;">종합 분석 보고서</h2>
+      <div class="subtitle">
+        GPT-4o-mini Vision LLM • 날짜 추출 검증 분석
+        <br/>
+        생성일시: 2026. 1. 26. 오전 3:00:35
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>📊 전체 요약</h2>
+
+      <div class="summary-grid">
+        <div class="metric-card warning">
+          <div class="value">50%</div>
+          <div class="label">GT Coverage</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="value">11</div>
+          <div class="label">처리된 케이스</div>
+        </div>
+
+        <div class="metric-card success">
+          <div class="value">39</div>
+          <div class="label">매칭된 날짜</div>
+        </div>
+
+        <div class="metric-card danger">
+          <div class="value">39</div>
+          <div class="label">누락된 날짜</div>
+        </div>
+
+        <div class="metric-card info">
+          <div class="value">263</div>
+          <div class="label">AI 추출 날짜</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="value">$2.35</div>
+          <div class="label">총 비용</div>
+        </div>
+      </div>
+
+      <h2>📈 케이스별 상세 결과</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>케이스</th>
+            <th>환자명</th>
+            <th>페이지</th>
+            <th>GT Coverage</th>
+            <th>매칭/GT/누락</th>
+            <th>AI 추출</th>
+            <th>비용</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td><strong>Case2</strong></td>
+            <td>김미화</td>
+            <td>10p</td>
+            <td>
+              <span class="badge badge-warning">
+                67%
+              </span>
+            </td>
+            <td>6 / 9 / 3</td>
+            <td>24</td>
+            <td>$0.27</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case5</strong></td>
+            <td>김태형</td>
+            <td>34p</td>
+            <td>
+              <span class="badge badge-danger">
+                44%
+              </span>
+            </td>
+            <td>4 / 9 / 5</td>
+            <td>57</td>
+            <td>$0.28</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case13</strong></td>
+            <td>김인화</td>
+            <td>10p</td>
+            <td>
+              <span class="badge badge-success">
+                80%
+              </span>
+            </td>
+            <td>4 / 5 / 1</td>
+            <td>17</td>
+            <td>$0.25</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case15</strong></td>
+            <td>고영란</td>
+            <td>13p</td>
+            <td>
+              <span class="badge badge-success">
+                71%
+              </span>
+            </td>
+            <td>5 / 7 / 2</td>
+            <td>10</td>
+            <td>$0.11</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case17</strong></td>
+            <td>김동아</td>
+            <td>28p</td>
+            <td>
+              <span class="badge badge-warning">
+                50%
+              </span>
+            </td>
+            <td>2 / 4 / 2</td>
+            <td>7</td>
+            <td>$0.23</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case18</strong></td>
+            <td>김명희</td>
+            <td>10p</td>
+            <td>
+              <span class="badge badge-danger">
+                0%
+              </span>
+            </td>
+            <td>0 / 7 / 7</td>
+            <td>89</td>
+            <td>$0.31</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case29</strong></td>
+            <td>서문정숙</td>
+            <td>14p</td>
+            <td>
+              <span class="badge badge-danger">
+                29%
+              </span>
+            </td>
+            <td>2 / 7 / 5</td>
+            <td>13</td>
+            <td>$0.12</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case30</strong></td>
+            <td>송금숙</td>
+            <td>18p</td>
+            <td>
+              <span class="badge badge-warning">
+                50%
+              </span>
+            </td>
+            <td>4 / 8 / 4</td>
+            <td>11</td>
+            <td>$0.15</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case41</strong></td>
+            <td>장우진</td>
+            <td>30p</td>
+            <td>
+              <span class="badge badge-danger">
+                45%
+              </span>
+            </td>
+            <td>5 / 11 / 6</td>
+            <td>13</td>
+            <td>$0.25</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case42</strong></td>
+            <td>정진덕</td>
+            <td>13p</td>
+            <td>
+              <span class="badge badge-success">
+                75%
+              </span>
+            </td>
+            <td>3 / 4 / 1</td>
+            <td>9</td>
+            <td>$0.11</td>
+          </tr>
+          
+          <tr>
+            <td><strong>Case44</strong></td>
+            <td>최순곤</td>
+            <td>33p</td>
+            <td>
+              <span class="badge badge-warning">
+                57%
+              </span>
+            </td>
+            <td>4 / 7 / 3</td>
+            <td>13</td>
+            <td>$0.27</td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+      <h2>🎯 날짜 유형별 분석</h2>
+
+      <div class="chart-container">
+        <table>
+          <thead>
+            <tr>
+              <th>날짜 유형</th>
+              <th>추출 횟수</th>
+              <th>비율</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td><span class="badge badge-info">진료일</span></td>
+                <td><strong>99</strong></td>
+                <td>22.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">검사일</span></td>
+                <td><strong>80</strong></td>
+                <td>18.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">기타</span></td>
+                <td><strong>70</strong></td>
+                <td>15.9%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">초진일</span></td>
+                <td><strong>28</strong></td>
+                <td>6.4%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">입원일</span></td>
+                <td><strong>23</strong></td>
+                <td>5.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">재진일</span></td>
+                <td><strong>22</strong></td>
+                <td>5.0%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">검사보고일</span></td>
+                <td><strong>21</strong></td>
+                <td>4.8%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">과거 진료 기록</span></td>
+                <td><strong>14</strong></td>
+                <td>3.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">서류 작성일</span></td>
+                <td><strong>9</strong></td>
+                <td>2.0%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">퇴원일</span></td>
+                <td><strong>6</strong></td>
+                <td>1.4%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">판독일</span></td>
+                <td><strong>6</strong></td>
+                <td>1.4%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">입원</span></td>
+                <td><strong>6</strong></td>
+                <td>1.4%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">수술일</span></td>
+                <td><strong>5</strong></td>
+                <td>1.1%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">만기일</span></td>
+                <td><strong>4</strong></td>
+                <td>0.9%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">접수일</span></td>
+                <td><strong>4</strong></td>
+                <td>0.9%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">발급일</span></td>
+                <td><strong>3</strong></td>
+                <td>0.7%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">외래진료일</span></td>
+                <td><strong>3</strong></td>
+                <td>0.7%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">보험가입일</span></td>
+                <td><strong>3</strong></td>
+                <td>0.7%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">계약일</span></td>
+                <td><strong>3</strong></td>
+                <td>0.7%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">청구일</span></td>
+                <td><strong>3</strong></td>
+                <td>0.7%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">진단일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">청약일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">발행일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">처방일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">응급실 도착일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">발병일</span></td>
+                <td><strong>2</strong></td>
+                <td>0.5%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">보험계약일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">입원기간</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">진료기간</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">기왕증 관련 날짜</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">최종납입일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">서류작성일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">갱신일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">계약일|청약일|보험가입일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">사고일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">통원일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">판정일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">통보일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">결과일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">보고일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">진료시작일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+              <tr>
+                <td><span class="badge badge-info">교육일</span></td>
+                <td><strong>1</strong></td>
+                <td>0.2%</td>
+              </tr>
+              
+          </tbody>
+        </table>
+      </div>
+
+      <h2>🔍 케이스별 상세 분석</h2>
+
+      
+        <div class="case-details">
+          <h4>Case2: 김미화</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 10</span>
+            <span class="badge badge-warning">
+              GT Coverage: 67%
+            </span>
+            <span class="badge badge-info">AI 추출: 24개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (6개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2019-03-23, 2023-08-07, 2024-04-03, 2024-04-09, 2025-02-04, 2025-02-12
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (3개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2019-04-09, 2024-01-09, 2024-04-23
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (53개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-03-19</div>
+                <div class="type">기타</div>
+                <div class="context">날짜: 2025.03.19...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-05</div>
+                <div class="type">수술일</div>
+                <div class="context">수술일 2025.02.05...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-09</div>
+                <div class="type">보험계약일</div>
+                <div class="context">보험계약일 2024.04.09...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2023-08-07</div>
+                <div class="type">검사일</div>
+                <div class="context">2023-08-07 09:31:32...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2023-07-19</div>
+                <div class="type">검사일</div>
+                <div class="context">2022-07-19 13:39:50...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-09</div>
+                <div class="type">검사일</div>
+                <div class="context">2021-07-09 16:09:09...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2020-06-20</div>
+                <div class="type">검사일</div>
+                <div class="context">2020-06-20 10:56:48...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2020-03-23</div>
+                <div class="type">검사일</div>
+                <div class="context">2019-03-23 11:32:54...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2019-03-23</div>
+                <div class="type">검사일</div>
+                <div class="context">2019-03-23 11:06:34...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2019-03-23</div>
+                <div class="type">검사보고일</div>
+                <div class="context">2019-03-23 11:06:34...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2020-06-20</div>
+                <div class="type">검사보고일</div>
+                <div class="context">previous CT(2020.6.20.)...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-09</div>
+                <div class="type">검사일</div>
+                <div class="context">2021-07-09 16:30:12...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2022-07-19</div>
+                <div class="type">검사일</div>
+                <div class="context">2022-07-19 14:01:08...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2023-08-07</div>
+                <div class="type">검사일</div>
+                <div class="context">2023-08-07 10:34:15...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-21</div>
+                <div class="type">발급일</div>
+                <div class="context">2025-03-21 12:58:58...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-03</div>
+                <div class="type">입원기간</div>
+                <div class="context">2024-04-03 ~ 2024-04-03...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-09</div>
+                <div class="type">검사일</div>
+                <div class="context">2024-04-09...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-03</div>
+                <div class="type">진료기간</div>
+                <div class="context">2024-04-03...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-25</div>
+                <div class="type">기타</div>
+                <div class="context">2024.04.25 외과
+■ 주호소
+* 주증상
+Diet : Good...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-11-21</div>
+                <div class="type">기타</div>
+                <div class="context">2024.11.21 외과
+■ 주호소
+수술날짜...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 33개</div>
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case5: 김태형</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 34</span>
+            <span class="badge badge-danger">
+              GT Coverage: 44%
+            </span>
+            <span class="badge badge-info">AI 추출: 57개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (4개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2024-05-30, 2024-12-12, 2024-12-27, 2024-12-31
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (5개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2018-05-10, 2020-01-17, 2023-02-10, 2023-05-10, 2024-01-24
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (57개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-01-22</div>
+                <div class="type">기타</div>
+                <div class="context">2025-01-22 14:04:23...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-01-21</div>
+                <div class="type">기타</div>
+                <div class="context">출력일: 2025-01-21...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-12-12</div>
+                <div class="type">진료일</div>
+                <div class="context">진료일: 2024-12-12...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-12-31</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일자: 2024-12-31...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-12-31</div>
+                <div class="type">퇴원일</div>
+                <div class="context">퇴원일자: 2024-12-31...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-12-27</div>
+                <div class="type">외래진료일</div>
+                <div class="context">외래초진기록 2024-12-27...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-05-30</div>
+                <div class="type">검사일</div>
+                <div class="context">검진일 2024.05.30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-06-05</div>
+                <div class="type">검사보고일</div>
+                <div class="context">판정일 2024년 06월 05일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-01-09</div>
+                <div class="type">외래진료일</div>
+                <div class="context">외래재진기록 2025-01-09...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-01-14</div>
+                <div class="type">외래진료일</div>
+                <div class="context">외래초진기록 2025-01-14...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-01-24</div>
+                <div class="type">기타</div>
+                <div class="context">2025년01월24일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-09-24</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-09-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-09-12</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-09-12...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-06-17</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-06-17...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-05-16</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-05-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-05-08</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-05-08...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-30</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-04-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-23</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-04-23...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-16</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-04-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-03-28</div>
+                <div class="type">진료일</div>
+                <div class="context">진료시작일 2024-03-28...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 37개</div>
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case13: 김인화</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 10</span>
+            <span class="badge badge-success">
+              GT Coverage: 80%
+            </span>
+            <span class="badge badge-info">AI 추출: 17개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (4개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2021-03-24, 2021-07-30, 2024-04-12, 2025-03-13
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (1개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2024-11-04
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (45개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">보험가입일</div>
+                <div class="context">보험기간 2021-07-30 ~ 2059-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2059-07-30</div>
+                <div class="type">만기일</div>
+                <div class="context">보험기간 2021-07-30 ~ 2059-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-10</div>
+                <div class="type">최종납입일</div>
+                <div class="context">최종납입일(첫수) 2025-03-10...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-10</div>
+                <div class="type">계약일</div>
+                <div class="context">계약서 유효(2025-03-10)...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-03-24</div>
+                <div class="type">보험가입일</div>
+                <div class="context">보험기간 2021-03-24 ~ 2069-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2069-03-24</div>
+                <div class="type">만기일</div>
+                <div class="context">보험기간 2021-03-24 ~ 2069-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-01</div>
+                <div class="type">서류작성일</div>
+                <div class="context">발급일자 : 2025-04-01...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">청약일</div>
+                <div class="context">발행일 2021년 07월 30일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">계약일</div>
+                <div class="context">계약일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">청약일</div>
+                <div class="context">청약일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">보험가입일</div>
+                <div class="context">보험 가입일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">갱신일</div>
+                <div class="context">보험 갱신일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">만기일</div>
+                <div class="context">보험 만기일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-07-30</div>
+                <div class="type">발행일</div>
+                <div class="context">발행일 2021-07-30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-03-24</div>
+                <div class="type">발행일</div>
+                <div class="context">발행일 2021년 03월 24일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-03-24</div>
+                <div class="type">계약일|청약일|보험가입일</div>
+                <div class="context">계약일: 2021-03-24, 청약일: 2021-03-24, 보험가입일: 2021-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-12-16</div>
+                <div class="type">계약일</div>
+                <div class="context">보험계약일: 2021-12-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-24</div>
+                <div class="type">만기일</div>
+                <div class="context">보험 만기일: 2025-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-03-24</div>
+                <div class="type">서류 작성일</div>
+                <div class="context">서류 작성일: 2021-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-20</div>
+                <div class="type">서류 작성일</div>
+                <div class="context">보험금 청구서 작성일: 2025-03-20...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 25개</div>
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case15: 고영란</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 13</span>
+            <span class="badge badge-success">
+              GT Coverage: 71%
+            </span>
+            <span class="badge badge-info">AI 추출: 10개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (5개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2025-06-07, 2025-06-16, 2025-06-20, 2025-06-24, 2025-06-27
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (2개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2025-02-25, 2025-05-26
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (17개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-06-07</div>
+                <div class="type">검사일</div>
+                <div class="context">검진일 2025-06-07 고영란 귀하...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-09</div>
+                <div class="type">판정일</div>
+                <div class="context">판정일 2025년 06월 09일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-17</div>
+                <div class="type">통보일</div>
+                <div class="context">2025년 06월 17일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-16</div>
+                <div class="type">처방일</div>
+                <div class="context">처방일: 2025/06/16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-27</div>
+                <div class="type">처방일</div>
+                <div class="context">처방일: 2025/06/27...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-20</div>
+                <div class="type">접수일</div>
+                <div class="context">접수일: 2025-06-20...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-20</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시: 2025-06-20...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-20</div>
+                <div class="type">판독일</div>
+                <div class="context">판독일: 2025-06-20...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-16</div>
+                <div class="type">접수일</div>
+                <div class="context">접수일시: 2025-06-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-16</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시: 2025-06-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-16</div>
+                <div class="type">판독일</div>
+                <div class="context">판독일: 2025-06-16...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-07</div>
+                <div class="type">접수일</div>
+                <div class="context">검체번호: 250607-0267 검사자: 김강자 판독의: 접수일: 2025/06/07...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-07</div>
+                <div class="type">결과일</div>
+                <div class="context">결과일: 2025/06/07...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-20</div>
+                <div class="type">접수일</div>
+                <div class="context">접수일시 2025/06/20...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-23</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시 2025/06/23...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-24</div>
+                <div class="type">보고일</div>
+                <div class="context">보고일시 2025/06/24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-09</div>
+                <div class="type">발급일</div>
+                <div class="context">2025년 09월 09일...</div>
+              </div>
+            
+            
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case17: 김동아</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 28</span>
+            <span class="badge badge-warning">
+              GT Coverage: 50%
+            </span>
+            <span class="badge badge-info">AI 추출: 7개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (2개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2025-08-14, 2025-08-19
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (2개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2025-08-12, 2030-08-12
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (8개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-09-09</div>
+                <div class="type">기타</div>
+                <div class="context">출력일시: 2025/09/09...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-14</div>
+                <div class="type">진료일</div>
+                <div class="context">2025.08.14 | NU6...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-18</div>
+                <div class="type">진료일</div>
+                <div class="context">2025.08.18 | NU6...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-19</div>
+                <div class="type">진료일</div>
+                <div class="context">2025.08.19 | NU6...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-21</div>
+                <div class="type">진료일</div>
+                <div class="context">2025.08.21 | NU6...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-28</div>
+                <div class="type">기타</div>
+                <div class="context">2025-08-28 10:44:59...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-19</div>
+                <div class="type">검사일</div>
+                <div class="context">Start Date & Time 2025-08-19 15:02:00...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-22</div>
+                <div class="type">검사일</div>
+                <div class="context">End Date & Time 2025-08-22 14:37:37...</div>
+              </div>
+            
+            
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case18: 김명희</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 10</span>
+            <span class="badge badge-danger">
+              GT Coverage: 0%
+            </span>
+            <span class="badge badge-info">AI 추출: 89개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (0개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            없음
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (7개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2019-03-29, 2019-07-05, 2021-07-09, 2025-05-12, 2025-07-07, 2025-07-08, 2025-07-14
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (159개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-03-10</div>
+                <div class="type">기타</div>
+                <div class="context">발급용도 보헙회사 제출 구비서류 (신)신분증,(환)신분증,(환)동의서,(환)위임장...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">입원</div>
+                <div class="context">진료기간 ~ 2025.02.17 진료구분 O입원 O외래...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">입원</div>
+                <div class="context">[2025-02-17 15:25] 입원과: 신경외과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-18</div>
+                <div class="type">입원</div>
+                <div class="context">입원기간: 2025-02-18 (예상입원기간: 2일)...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-21</div>
+                <div class="type">기타</div>
+                <div class="context">2025-02-21 15:00 / 환정훈...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-21</div>
+                <div class="type">기타</div>
+                <div class="context">2025-02-21 medication x 30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">입원</div>
+                <div class="context">입원일: 2025-02-17 Admission 후 정밀 검사 및 약물 주사 치료 예정...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-17 17:04 Hb (Whole blood) 11.4...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-18</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-18 07:34 현정신경과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-18</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-18 18:34...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-18</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-18 05:01 MRI(Braind3D Angio)...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-17 15:11 현정신경과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-17 14:40 현정신경과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-17 15:02 현정신경과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">기타</div>
+                <div class="context">2025-02-17 15:00 / 환정훈...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-21</div>
+                <div class="type">기타</div>
+                <div class="context">2025-02-21 15:00 / 환정훈...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-21</div>
+                <div class="type">기타</div>
+                <div class="context">2025-02-21 medication x 30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">입원</div>
+                <div class="context">입원일: 2025-02-17 Admission 후 정밀 검사 및 약물 주사 치료 예정...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">입원</div>
+                <div class="context">2025-02-17 15:25 입원과: 신경외과...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-02-17 14:40 현정신경과...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 139개</div>
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case29: 서문정숙</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 14</span>
+            <span class="badge badge-danger">
+              GT Coverage: 29%
+            </span>
+            <span class="badge badge-info">AI 추출: 13개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (2개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2024-09-04, 2025-09-26
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (5개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2020-10-15, 2024-08-13, 2025-08-13, 2025-09-29, 2025-10-15
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (33개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-10-19</div>
+                <div class="type">기타</div>
+                <div class="context">2025-10-19 11:52:30...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일자: 2024-08-17...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 17일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-24</div>
+                <div class="type">퇴원일</div>
+                <div class="context">퇴원일: 2024년 08월 24일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-09-04</div>
+                <div class="type">검사일</div>
+                <div class="context">타병원에서 2024.09.04 brain MRI...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-09-26</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 09월 26일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-09-13</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 09월 13일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">기타</div>
+                <div class="context">작성일시: 2024-08-17 08:00...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일: 2024-08-17...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 17일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-24</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 24일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-22</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 22일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-19</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 19일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일: 2024년 08월 17일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시: 2024-08-17 05:40...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-19</div>
+                <div class="type">판독일</div>
+                <div class="context">판독일: 2024-08-19 05:56...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-17</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시: 2024-08-17 07:00...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-19</div>
+                <div class="type">판독일</div>
+                <div class="context">판독일: 2024-08-19 06:57...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-19</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일시: 2024-08-19 09:18...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-08-19</div>
+                <div class="type">판독일</div>
+                <div class="context">판독일: 2024-08-19 11:57...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 13개</div>
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case30: 송금숙</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 18</span>
+            <span class="badge badge-warning">
+              GT Coverage: 50%
+            </span>
+            <span class="badge badge-info">AI 추출: 11개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (4개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2025-03-12, 2025-03-23, 2025-03-24, 2025-04-11
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (4개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2012-11-23, 2025-01-01, 2025-04-22, 2025-09-09
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (15개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-09-24</div>
+                <div class="type">기타</div>
+                <div class="context">2025-09-24 13:46:06...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-19</div>
+                <div class="type">기타</div>
+                <div class="context">발행일자 2025/09/19...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-24</div>
+                <div class="type">수술일</div>
+                <div class="context">Operation Date : 2025-03-24...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-23</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일자 : 2025년 03월 23일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-11</div>
+                <div class="type">퇴원일</div>
+                <div class="context">퇴원일자 : 2025년 04월 11일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-23</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일 : 2025년 3월 23일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-24</div>
+                <div class="type">검사보고일</div>
+                <div class="context">판독일(Reading Date): 2025/03/24 10:10...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-23</div>
+                <div class="type">검사일</div>
+                <div class="context">검 사(Exam): *L-spine MR Myelogram - 2025/03/23...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-25</div>
+                <div class="type">검사일</div>
+                <div class="context">검 사(Exam): *L-Spine MRI(post op) - 2025/03/25...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-12</div>
+                <div class="type">검사일</div>
+                <div class="context">검 사(Exam): *L-Spine MRI & CTL - 2025/03/12...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-03-12</div>
+                <div class="type">초진일</div>
+                <div class="context">2025/03/12 25530237 초진기록지...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-30</div>
+                <div class="type">기타</div>
+                <div class="context">2025/04/30 25530237 경과기록지...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-05-07</div>
+                <div class="type">기타</div>
+                <div class="context">2025/05/07 25530237 경과기록지...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-04</div>
+                <div class="type">기타</div>
+                <div class="context">2025/06/04 25530237 경과기록지...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-03</div>
+                <div class="type">기타</div>
+                <div class="context">2025/09/03 25530237 경과기록지...</div>
+              </div>
+            
+            
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case41: 장우진</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 30</span>
+            <span class="badge badge-danger">
+              GT Coverage: 45%
+            </span>
+            <span class="badge badge-info">AI 추출: 13개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (5개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2021-05-17, 2021-05-20, 2021-05-24, 2024-04-22, 2025-07-11
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (6개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2007-08-08, 2024-04-20, 2024-04-24, 2025-01-03, 2025-09-02, 2025-09-22
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (18개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-10-13</div>
+                <div class="type">기타</div>
+                <div class="context">2025-10-13 14:34:36...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-24</div>
+                <div class="type">발급일</div>
+                <div class="context">2025 년 09 월 24 일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-17</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일: 2021 년 05 월 17 일부터...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-24</div>
+                <div class="type">퇴원일</div>
+                <div class="context">퇴원일: 2021 년 05 월 24 일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-17</div>
+                <div class="type">검사일</div>
+                <div class="context">촬영일: 2021/05/17...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-18</div>
+                <div class="type">검사보고일</div>
+                <div class="context">판독일: 2021/05/18...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-20</div>
+                <div class="type">검사일</div>
+                <div class="context">촬영일: 2021/05/20...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2021-05-31</div>
+                <div class="type">검사보고일</div>
+                <div class="context">판독일: 2021/05/31...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">진료일</div>
+                <div class="context">진료기간: 2024-04-22...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-25</div>
+                <div class="type">진료일</div>
+                <div class="context">2024년 04월 25일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-05-09</div>
+                <div class="type">진료일</div>
+                <div class="context">2024년 05월 09일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-06-12</div>
+                <div class="type">진료일</div>
+                <div class="context">2025년 06월 12일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-07-11</div>
+                <div class="type">진료일</div>
+                <div class="context">2025년 07월 11일...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">검사일</div>
+                <div class="context">2024-04-22 10:35...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">검사보고일</div>
+                <div class="context">2024-04-22 15:11...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">검사보고일</div>
+                <div class="context">2024-04-22 13:54...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">입원일</div>
+                <div class="context">2024-04-22 10:07...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-04-22</div>
+                <div class="type">교육일</div>
+                <div class="context">2024-04-22 11:40...</div>
+              </div>
+            
+            
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case42: 정진덕</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 13</span>
+            <span class="badge badge-success">
+              GT Coverage: 75%
+            </span>
+            <span class="badge badge-info">AI 추출: 9개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (3개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2025-02-26, 2025-04-23, 2025-04-29
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (1개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2018-09-27
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (12개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-09-10</div>
+                <div class="type">기타</div>
+                <div class="context">발행번호 : 20250910 - 113...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-10</div>
+                <div class="type">기타</div>
+                <div class="context">의료정보실 담당자 : 박영현...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-26</div>
+                <div class="type">기타</div>
+                <div class="context">작성일 2025-02-26 등록번호...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-22</div>
+                <div class="type">기타</div>
+                <div class="context">발행일 2025.02.22 요양기관기호...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-22</div>
+                <div class="type">기타</div>
+                <div class="context">2025.02.22 본인(서명)...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-15</div>
+                <div class="type">기타</div>
+                <div class="context">작성일 2025-04-15 등록번호...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-23</div>
+                <div class="type">기타</div>
+                <div class="context">작성일 2025-04-23 등록번호...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-29</div>
+                <div class="type">기타</div>
+                <div class="context">작성일 2025-04-29 등록번호...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-01</div>
+                <div class="type">검사일</div>
+                <div class="context">HEAD and NECK(MRI) 2025-04-01 - 2025-09-10...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-10</div>
+                <div class="type">검사보고일</div>
+                <div class="context">HEAD and NECK(MRI) 2025-04-01 - 2025-09-10...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-17</div>
+                <div class="type">검사일</div>
+                <div class="context">2025-04-17 20:42 검사시행...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-04-18</div>
+                <div class="type">검사보고일</div>
+                <div class="context">2025-04-18 09:35 보고일...</div>
+              </div>
+            
+            
+          </div>
+        </div>
+      
+        <div class="case-details">
+          <h4>Case44: 최순곤</h4>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="badge badge-info">페이지: 33</span>
+            <span class="badge badge-warning">
+              GT Coverage: 57%
+            </span>
+            <span class="badge badge-info">AI 추출: 13개</span>
+          </div>
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">✅ 매칭된 날짜 (4개)</h5>
+          <div style="background: #ecfdf5; padding: 1rem; border-radius: 8px;">
+            2024-07-31, 2025-08-25, 2025-08-26, 2025-08-29
+          </div>
+
+          
+          <h5 style="color: #dc2626; margin: 1rem 0 0.5rem;">❌ 누락된 날짜 (3개)</h5>
+          <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; color: #991b1b;">
+            2020-09-09, 2024-06-03, 2024-09-03
+          </div>
+          
+
+          <h5 style="color: #2d3748; margin: 1rem 0 0.5rem;">📋 추출된 날짜 상세 (23개)</h5>
+          <div class="date-list">
+            
+              <div class="date-item">
+                <div class="date">2025-09-19</div>
+                <div class="type">기타</div>
+                <div class="context">2025년 09월 19일
+담당자: 임보라...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2018-12-18</div>
+                <div class="type">초진일</div>
+                <div class="context">초진일 2018/12/18...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-01-31</div>
+                <div class="type">검사일</div>
+                <div class="context">2024/01/31 [수] 09:25 망막병원...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2024-07-31</div>
+                <div class="type">검사일</div>
+                <div class="context">2024/07/31 [수] 08:05 망막병원...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-02-05</div>
+                <div class="type">검사일</div>
+                <div class="context">2025/02/05 [화] 08:01 망막병원...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-10</div>
+                <div class="type">기타</div>
+                <div class="context">출력일: 2025-09-10...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">응급실 도착일</div>
+                <div class="context">응급실 도착시간 2025-08-25 08:26...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">발병일</div>
+                <div class="context">발현 시기 2025-08-25 07:50...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">입원일</div>
+                <div class="context">입원일자 2025-08-25...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-29</div>
+                <div class="type">퇴원일</div>
+                <div class="context">퇴원일자 2025-08-29...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-02</div>
+                <div class="type">기타</div>
+                <div class="context">목표일 2025-09-02...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-09-06</div>
+                <div class="type">기타</div>
+                <div class="context">목표일 2025-09-06...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">기타</div>
+                <div class="context">계획일 2025-08-25...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">기타</div>
+                <div class="context">tPA injection time 2025-08-25 09:03...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">기타</div>
+                <div class="context">tPA ending time 2025-08-25 10:07...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">응급실 도착일</div>
+                <div class="context">응급실 도착시간 2025-08-25 08:26...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">발병일</div>
+                <div class="context">발병일시 2025-08-25 07:50...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-25</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일자 2025.08.25 09:19...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-26</div>
+                <div class="type">검사보고일</div>
+                <div class="context">판독일자 2025.08.26 08:38...</div>
+              </div>
+            
+              <div class="date-item">
+                <div class="date">2025-08-26</div>
+                <div class="type">검사일</div>
+                <div class="context">검사일자 2025.08.26 18:22...</div>
+              </div>
+            
+            <div style="padding: 1rem; color: #64748b;">... 외 3개</div>
+          </div>
+        </div>
+      
+
+      <h2>💡 핵심 인사이트</h2>
+
+      <div class="analysis-section">
+        <h4>주요 발견사항</h4>
+        <ul>
+          <li><strong>전체 GT Coverage:</strong> 50% (39/78)</li>
+          <li><strong>평균 GT Coverage:</strong> 52%</li>
+          <li><strong>총 AI 추출 날짜:</strong> 263개 (GT 대비 337%)</li>
+          <li><strong>정밀도:</strong> 15% (매칭/추출)</li>
+          <li><strong>재현율:</strong> 50% (매칭/GT)</li>
+        </ul>
+      </div>
+
+      <div class="analysis-section">
+        <h4>개선 방향</h4>
+        <ul>
+          <li>누락된 날짜 39개에 대한 원인 분석 필요</li>
+          <li>가장 많이 추출된 날짜 유형: <strong>진료일</strong> (99회)</li>
+          <li>Coverage가 낮은 케이스(< 50%) 집중 분석 권장</li>
+          <li>과추출(Over-extraction) 접근법 고려하여 누락율 감소 시도</li>
+        </ul>
+      </div>
+
+      <h2>📦 재사용 가능한 데이터</h2>
+
+      <div class="analysis-section">
+        <h4>구조화된 데이터 파일</h4>
+        <p>모든 추출 결과와 분석 데이터가 JSON 형식으로 저장되었습니다:</p>
+        <p><code>/home/user/VNEXSUS-25-12-30/backend/eval/output/enhanced_cycle2_analysis/cycle2_structured_data.json</code></p>
+        <br/>
+        <p><strong>포함된 내용:</strong></p>
+        <ul>
+          <li>케이스별 상세 날짜 추출 결과</li>
+          <li>매칭/누락/추가 날짜 목록</li>
+          <li>날짜 유형별 집계 데이터</li>
+          <li>케이스별 집계 데이터</li>
+          <li>Coverage 분석 결과</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>VNEXSUS AI 보험 청구 분석 시스템</strong></p>
+      <p>Cycle 2 Improved Validation | GPT-4o-mini Vision LLM</p>
+      <p>생성: 2026-01-26T03:00:35.335Z</p>
+    </div>
+  </div>
+</body>
+</html>

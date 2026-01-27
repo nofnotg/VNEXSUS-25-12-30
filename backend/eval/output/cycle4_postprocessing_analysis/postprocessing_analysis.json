@@ -1,0 +1,2784 @@
+{
+  "timestamp": "2026-01-26T04:52:19.484Z",
+  "aggregated": {
+    "totalCases": 10,
+    "totalGtDates": 71,
+    "totalAiDates": 174,
+    "totalMatched": 39,
+    "totalMissed": 32,
+    "totalExtra": 135,
+    "totalAllDates": 281,
+    "dateTypeDistribution": {
+      "보험가입일": 3,
+      "만기일": 4,
+      "최종납입일": 1,
+      "계약일": 3,
+      "서류작성일": 1,
+      "청약일": 2,
+      "갱신일": 1,
+      "발행일": 2,
+      "계약일|청약일|보험가입일": 1,
+      "서류 작성일": 9,
+      "사고일": 1,
+      "검사일": 66,
+      "통원일": 1,
+      "검사보고일": 20,
+      "초진일": 12,
+      "재진일": 4,
+      "청구일": 1,
+      "입원일": 10,
+      "퇴원일": 6,
+      "판정일": 1,
+      "통보일": 1,
+      "처방일": 2,
+      "접수일": 4,
+      "판독일": 6,
+      "결과일": 1,
+      "보고일": 1,
+      "발급일": 3,
+      "기타": 34,
+      "진료일": 56,
+      "수술일": 5,
+      "보험계약일": 1,
+      "입원기간": 1,
+      "진료기간": 1,
+      "진단일": 2,
+      "기왕증 관련 날짜": 1,
+      "과거 진료 기록": 5,
+      "교육일": 1,
+      "응급실 도착일": 2,
+      "발병일": 2,
+      "외래진료일": 3
+    },
+    "extraDateTypes": {
+      "만기일": {
+        "count": 3,
+        "examples": [
+          {
+            "date": "2059-07-30",
+            "context": "보험기간 2021-07-30 ~ 2059-07-30",
+            "source": "보험서류"
+          },
+          {
+            "date": "2069-03-24",
+            "context": "보험기간 2021-03-24 ~ 2069-03-24",
+            "source": "보험서류"
+          },
+          {
+            "date": "2025-03-24",
+            "context": "보험 만기일: 2025-03-24",
+            "source": "보험서류"
+          }
+        ]
+      },
+      "최종납입일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-03-10",
+            "context": "최종납입일(첫수) 2025-03-10",
+            "source": "보험서류"
+          }
+        ]
+      },
+      "계약일": {
+        "count": 2,
+        "examples": [
+          {
+            "date": "2025-03-10",
+            "context": "계약서 유효(2025-03-10)",
+            "source": "보험서류"
+          },
+          {
+            "date": "2021-12-16",
+            "context": "보험계약일: 2021-12-16",
+            "source": "보험서류"
+          }
+        ]
+      },
+      "서류작성일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-04-01",
+            "context": "발급일자 : 2025-04-01",
+            "source": "보험서류"
+          }
+        ]
+      },
+      "서류 작성일": {
+        "count": 8,
+        "examples": [
+          {
+            "date": "2025-03-20",
+            "context": "보험금 청구서 작성일: 2025-03-20",
+            "source": "보험금 청구서"
+          },
+          {
+            "date": "2024-04-23",
+            "context": "2025년 4월 23일 16:29:36",
+            "source": "보험 서류"
+          },
+          {
+            "date": "2025-03-21",
+            "context": "2025-03-21 오후 02:23",
+            "source": "수술기록"
+          }
+        ]
+      },
+      "사고일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-04-01",
+            "context": "사고일: 2025-04-01",
+            "source": "보험금 청구서"
+          }
+        ]
+      },
+      "검사일": {
+        "count": 37,
+        "examples": [
+          {
+            "date": "2025-04-02",
+            "context": "검사일: 2025-04-02",
+            "source": "보험금 청구서"
+          },
+          {
+            "date": "2025-03-12",
+            "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-spine MRI: HNP at L 4-5로 안전 및 물리치료",
+            "source": "Clinical Chart"
+          },
+          {
+            "date": "2024-05-07",
+            "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+            "source": "진료 기록"
+          }
+        ]
+      },
+      "검사보고일": {
+        "count": 12,
+        "examples": [
+          {
+            "date": "2024-05-14",
+            "context": "2024-05-14 15:54",
+            "source": "영상의학 결과지"
+          },
+          {
+            "date": "2024-05-14",
+            "context": "2024-05-14 15:54",
+            "source": "영상의학 결과지"
+          },
+          {
+            "date": "2020-06-20",
+            "context": "previous CT(2020.6.20.)",
+            "source": "의무기록"
+          }
+        ]
+      },
+      "재진일": {
+        "count": 4,
+        "examples": [
+          {
+            "date": "2024-05-07",
+            "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+            "source": "진료기록"
+          },
+          {
+            "date": "2024-05-21",
+            "context": "2024년 5월 21일 주치의: OS 조준호 진단코드: 주 S43.4",
+            "source": "진료기록"
+          },
+          {
+            "date": "2025-02-07",
+            "context": "2025-02-07 외과\n치료 및 경과\nPOD 2 n-s",
+            "source": "의무기록"
+          }
+        ]
+      },
+      "퇴원일": {
+        "count": 2,
+        "examples": [
+          {
+            "date": "2024-05-07",
+            "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+            "source": "진료기록"
+          },
+          {
+            "date": "2024-08-24",
+            "context": "퇴원일: 2024년 08월 24일",
+            "source": "병동진료기록지"
+          }
+        ]
+      },
+      "판정일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-06-09",
+            "context": "판정일 2025년 06월 09일",
+            "source": "위암 검진 결과통보서"
+          }
+        ]
+      },
+      "통보일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-06-17",
+            "context": "2025년 06월 17일",
+            "source": "위암 검진 결과통보서"
+          }
+        ]
+      },
+      "발급일": {
+        "count": 3,
+        "examples": [
+          {
+            "date": "2025-09-09",
+            "context": "2025년 09월 09일",
+            "source": "의무기록 사본 증명서"
+          },
+          {
+            "date": "2025-03-21",
+            "context": "2025-03-21 12:58:58",
+            "source": "보험서류"
+          },
+          {
+            "date": "2025-09-24",
+            "context": "2025 년 09 월 24 일",
+            "source": "의무기록 사본 증명서"
+          }
+        ]
+      },
+      "기타": {
+        "count": 28,
+        "examples": [
+          {
+            "date": "2025-09-09",
+            "context": "출력일시: 2025/09/09",
+            "source": "의무기록 사본 증명서"
+          },
+          {
+            "date": "2025-08-28",
+            "context": "2025-08-28 10:44:59",
+            "source": "Scan 기록"
+          },
+          {
+            "date": "2025-10-19",
+            "context": "2025-10-19 11:52:30",
+            "source": "의무기록사본"
+          }
+        ]
+      },
+      "진료일": {
+        "count": 51,
+        "examples": [
+          {
+            "date": "2025-08-18",
+            "context": "2025.08.18 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2025-08-21",
+            "context": "2025.08.21 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2024-04-25",
+            "context": "2024년 04월 25일",
+            "source": "외래재진기록"
+          }
+        ]
+      },
+      "입원일": {
+        "count": 2,
+        "examples": [
+          {
+            "date": "2024-08-17",
+            "context": "입원일자: 2024-08-17",
+            "source": "병동진료기록지"
+          },
+          {
+            "date": "2024-08-17",
+            "context": "입원일: 2024-08-17",
+            "source": "간호정보조사지"
+          }
+        ]
+      },
+      "초진일": {
+        "count": 10,
+        "examples": [
+          {
+            "date": "2024-08-17",
+            "context": "초진일: 2024년 08월 17일",
+            "source": "병동진료기록지"
+          },
+          {
+            "date": "2024-09-26",
+            "context": "초진일: 2024년 09월 26일",
+            "source": "진료기록지"
+          },
+          {
+            "date": "2024-09-13",
+            "context": "초진일: 2024년 09월 13일",
+            "source": "진료기록지"
+          }
+        ]
+      },
+      "판독일": {
+        "count": 4,
+        "examples": [
+          {
+            "date": "2024-08-19",
+            "context": "판독일: 2024-08-19 05:56",
+            "source": "영상의학결과지"
+          },
+          {
+            "date": "2024-08-19",
+            "context": "판독일: 2024-08-19 06:57",
+            "source": "영상의학결과지"
+          },
+          {
+            "date": "2024-08-19",
+            "context": "판독일: 2024-08-19 11:57",
+            "source": "영상의학결과지"
+          }
+        ]
+      },
+      "수술일": {
+        "count": 4,
+        "examples": [
+          {
+            "date": "2025-02-05",
+            "context": "수술일 2025.02.05",
+            "source": "병원조사 의뢰서"
+          },
+          {
+            "date": "2025-02-05",
+            "context": "2025-02-05 Laparoscopic right hemih hepatectomy",
+            "source": "수술기록"
+          },
+          {
+            "date": "2025-02-05",
+            "context": "2025-02-05 외과\n수술/시술 후 기록\nImmediate complication: No",
+            "source": "의무기록"
+          }
+        ]
+      },
+      "기왕증 관련 날짜": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2017-01-01",
+            "context": "2017년부터 발견된 hepatic hemangioma가 4.5cm에서 크기 증가하여 수술적 치료 위해 입원함",
+            "source": "입원기록"
+          }
+        ]
+      },
+      "진단일": {
+        "count": 1,
+        "examples": [
+          {
+            "date": "2025-02-05",
+            "context": "2025-02-05 외과\n진단명 (A)\nHemangioma of liver <[+L-RH]Hemangioma of liver in Rt. lobe, 8.7cm>",
+            "source": "의무기록"
+          }
+        ]
+      },
+      "과거 진료 기록": {
+        "count": 2,
+        "examples": [
+          {
+            "date": "2024-04-25",
+            "context": "2024-04-25 검사명: LIVER AND PELVIS CT (POST-CONTRAST)",
+            "source": "검사결과지"
+          },
+          {
+            "date": "2024-01-01",
+            "context": "2024-01-01\n[과거력] 없음",
+            "source": "의무기록"
+          }
+        ]
+      },
+      "외래진료일": {
+        "count": 2,
+        "examples": [
+          {
+            "date": "2025-01-09",
+            "context": "외래재진기록 2025-01-09",
+            "source": "외래재진기록"
+          },
+          {
+            "date": "2025-01-14",
+            "context": "외래초진기록 2025-01-14",
+            "source": "외래초진기록"
+          }
+        ]
+      }
+    },
+    "missedDateAnalysis": [
+      {
+        "caseId": "Case13",
+        "date": "2024-11-04",
+        "gtDates": [
+          "2021-03-24",
+          "2021-07-30",
+          "2024-04-12",
+          "2024-11-04",
+          "2025-03-13"
+        ]
+      },
+      {
+        "caseId": "Case15",
+        "date": "2025-02-25",
+        "gtDates": [
+          "2025-02-25",
+          "2025-05-26",
+          "2025-06-07",
+          "2025-06-16",
+          "2025-06-20",
+          "2025-06-24",
+          "2025-06-27"
+        ]
+      },
+      {
+        "caseId": "Case15",
+        "date": "2025-05-26",
+        "gtDates": [
+          "2025-02-25",
+          "2025-05-26",
+          "2025-06-07",
+          "2025-06-16",
+          "2025-06-20",
+          "2025-06-24",
+          "2025-06-27"
+        ]
+      },
+      {
+        "caseId": "Case17",
+        "date": "2025-08-12",
+        "gtDates": [
+          "2025-08-12",
+          "2025-08-14",
+          "2025-08-19",
+          "2030-08-12"
+        ]
+      },
+      {
+        "caseId": "Case17",
+        "date": "2030-08-12",
+        "gtDates": [
+          "2025-08-12",
+          "2025-08-14",
+          "2025-08-19",
+          "2030-08-12"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2020-10-15",
+        "gtDates": [
+          "2020-10-15",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-08-13",
+          "2025-09-26",
+          "2025-09-29",
+          "2025-10-15"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2024-08-13",
+        "gtDates": [
+          "2020-10-15",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-08-13",
+          "2025-09-26",
+          "2025-09-29",
+          "2025-10-15"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2025-08-13",
+        "gtDates": [
+          "2020-10-15",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-08-13",
+          "2025-09-26",
+          "2025-09-29",
+          "2025-10-15"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2025-09-29",
+        "gtDates": [
+          "2020-10-15",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-08-13",
+          "2025-09-26",
+          "2025-09-29",
+          "2025-10-15"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2025-10-15",
+        "gtDates": [
+          "2020-10-15",
+          "2024-08-13",
+          "2024-09-04",
+          "2025-08-13",
+          "2025-09-26",
+          "2025-09-29",
+          "2025-10-15"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2019-04-09",
+        "gtDates": [
+          "2019-03-23",
+          "2019-04-09",
+          "2023-08-07",
+          "2024-01-09",
+          "2024-04-03",
+          "2024-04-09",
+          "2024-04-23",
+          "2025-02-04",
+          "2025-02-12"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2024-01-09",
+        "gtDates": [
+          "2019-03-23",
+          "2019-04-09",
+          "2023-08-07",
+          "2024-01-09",
+          "2024-04-03",
+          "2024-04-09",
+          "2024-04-23",
+          "2025-02-04",
+          "2025-02-12"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2024-04-23",
+        "gtDates": [
+          "2019-03-23",
+          "2019-04-09",
+          "2023-08-07",
+          "2024-01-09",
+          "2024-04-03",
+          "2024-04-09",
+          "2024-04-23",
+          "2025-02-04",
+          "2025-02-12"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2012-11-23",
+        "gtDates": [
+          "2012-11-23",
+          "2025-01-01",
+          "2025-03-12",
+          "2025-03-23",
+          "2025-03-24",
+          "2025-04-11",
+          "2025-04-22",
+          "2025-09-09"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-01-01",
+        "gtDates": [
+          "2012-11-23",
+          "2025-01-01",
+          "2025-03-12",
+          "2025-03-23",
+          "2025-03-24",
+          "2025-04-11",
+          "2025-04-22",
+          "2025-09-09"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-04-22",
+        "gtDates": [
+          "2012-11-23",
+          "2025-01-01",
+          "2025-03-12",
+          "2025-03-23",
+          "2025-03-24",
+          "2025-04-11",
+          "2025-04-22",
+          "2025-09-09"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-09-09",
+        "gtDates": [
+          "2012-11-23",
+          "2025-01-01",
+          "2025-03-12",
+          "2025-03-23",
+          "2025-03-24",
+          "2025-04-11",
+          "2025-04-22",
+          "2025-09-09"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2007-08-08",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2024-04-20",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2024-04-24",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2025-01-03",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2025-09-02",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2025-09-22",
+        "gtDates": [
+          "2007-08-08",
+          "2021-05-17",
+          "2021-05-20",
+          "2021-05-24",
+          "2024-04-20",
+          "2024-04-22",
+          "2024-04-24",
+          "2025-01-03",
+          "2025-07-11",
+          "2025-09-02",
+          "2025-09-22"
+        ]
+      },
+      {
+        "caseId": "Case42",
+        "date": "2018-09-27",
+        "gtDates": [
+          "2018-09-27",
+          "2025-02-26",
+          "2025-04-23",
+          "2025-04-29"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2020-09-09",
+        "gtDates": [
+          "2020-09-09",
+          "2024-06-03",
+          "2024-07-31",
+          "2024-09-03",
+          "2025-08-25",
+          "2025-08-26",
+          "2025-08-29"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2024-06-03",
+        "gtDates": [
+          "2020-09-09",
+          "2024-06-03",
+          "2024-07-31",
+          "2024-09-03",
+          "2025-08-25",
+          "2025-08-26",
+          "2025-08-29"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2024-09-03",
+        "gtDates": [
+          "2020-09-09",
+          "2024-06-03",
+          "2024-07-31",
+          "2024-09-03",
+          "2025-08-25",
+          "2025-08-26",
+          "2025-08-29"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2018-05-10",
+        "gtDates": [
+          "2018-05-10",
+          "2020-01-17",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-01-24",
+          "2024-05-30",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2020-01-17",
+        "gtDates": [
+          "2018-05-10",
+          "2020-01-17",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-01-24",
+          "2024-05-30",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2023-02-10",
+        "gtDates": [
+          "2018-05-10",
+          "2020-01-17",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-01-24",
+          "2024-05-30",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2023-05-10",
+        "gtDates": [
+          "2018-05-10",
+          "2020-01-17",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-01-24",
+          "2024-05-30",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2024-01-24",
+        "gtDates": [
+          "2018-05-10",
+          "2020-01-17",
+          "2023-02-10",
+          "2023-05-10",
+          "2024-01-24",
+          "2024-05-30",
+          "2024-12-12",
+          "2024-12-27",
+          "2024-12-31"
+        ]
+      }
+    ],
+    "duplicatePatterns": [
+      {
+        "caseId": "Case13",
+        "date": "2021-07-30",
+        "count": 8,
+        "types": [
+          "보험가입일",
+          "청약일",
+          "계약일",
+          "갱신일",
+          "만기일",
+          "발행일"
+        ],
+        "sources": [
+          "보험서류"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2025-03-10",
+        "count": 2,
+        "types": [
+          "최종납입일",
+          "계약일"
+        ],
+        "sources": [
+          "보험서류"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2021-03-24",
+        "count": 4,
+        "types": [
+          "보험가입일",
+          "발행일",
+          "계약일|청약일|보험가입일",
+          "서류 작성일"
+        ],
+        "sources": [
+          "보험서류"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2025-04-01",
+        "count": 2,
+        "types": [
+          "서류작성일",
+          "사고일"
+        ],
+        "sources": [
+          "보험서류",
+          "보험금 청구서"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2025-03-13",
+        "count": 8,
+        "types": [
+          "통원일",
+          "검사일",
+          "청구일"
+        ],
+        "sources": [
+          "Clinical Chart",
+          "보험 서류"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2024-04-12",
+        "count": 3,
+        "types": [
+          "검사일",
+          "초진일",
+          "입원일"
+        ],
+        "sources": [
+          "Clinical Chart",
+          "진료기록"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2024-05-07",
+        "count": 7,
+        "types": [
+          "검사일",
+          "재진일",
+          "퇴원일"
+        ],
+        "sources": [
+          "진료 기록",
+          "진료기록",
+          "영상의학 결과지"
+        ]
+      },
+      {
+        "caseId": "Case13",
+        "date": "2024-05-14",
+        "count": 2,
+        "types": [
+          "검사보고일"
+        ],
+        "sources": [
+          "영상의학 결과지"
+        ]
+      },
+      {
+        "caseId": "Case15",
+        "date": "2025-06-07",
+        "count": 3,
+        "types": [
+          "검사일",
+          "접수일",
+          "결과일"
+        ],
+        "sources": [
+          "건강검진 결과통보서",
+          "진단검사결과"
+        ]
+      },
+      {
+        "caseId": "Case15",
+        "date": "2025-06-16",
+        "count": 4,
+        "types": [
+          "처방일",
+          "접수일",
+          "검사일",
+          "판독일"
+        ],
+        "sources": [
+          "진료기록지",
+          "영상의학결과지"
+        ]
+      },
+      {
+        "caseId": "Case15",
+        "date": "2025-06-20",
+        "count": 4,
+        "types": [
+          "접수일",
+          "검사일",
+          "판독일"
+        ],
+        "sources": [
+          "영상의학결과지",
+          "조직병리검사-Level B"
+        ]
+      },
+      {
+        "caseId": "Case17",
+        "date": "2025-08-19",
+        "count": 2,
+        "types": [
+          "진료일",
+          "검사일"
+        ],
+        "sources": [
+          "통합 기록",
+          "Scan 기록"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2025-10-19",
+        "count": 3,
+        "types": [
+          "기타"
+        ],
+        "sources": [
+          "의무기록사본"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2024-08-17",
+        "count": 13,
+        "types": [
+          "입원일",
+          "초진일",
+          "기타",
+          "검사일"
+        ],
+        "sources": [
+          "병동진료기록지",
+          "간호정보조사지",
+          "응급진료기록지",
+          "영상의학결과지",
+          "진단검사결과"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2024-08-24",
+        "count": 2,
+        "types": [
+          "퇴원일",
+          "초진일"
+        ],
+        "sources": [
+          "병동진료기록지"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2024-09-04",
+        "count": 2,
+        "types": [
+          "검사일",
+          "검사보고일"
+        ],
+        "sources": [
+          "진료기록지",
+          "영상의학과 보고서"
+        ]
+      },
+      {
+        "caseId": "Case29",
+        "date": "2024-08-19",
+        "count": 6,
+        "types": [
+          "초진일",
+          "판독일",
+          "검사일"
+        ],
+        "sources": [
+          "병동진료기록지",
+          "영상의학결과지",
+          "진단검사결과"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2025-02-05",
+        "count": 5,
+        "types": [
+          "수술일",
+          "초진일",
+          "진단일"
+        ],
+        "sources": [
+          "병원조사 의뢰서",
+          "수술기록",
+          "의무기록"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2024-04-09",
+        "count": 2,
+        "types": [
+          "보험계약일",
+          "검사일"
+        ],
+        "sources": [
+          "병원조사 의뢰서",
+          "의무기록"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2023-08-07",
+        "count": 7,
+        "types": [
+          "검사일",
+          "과거 진료 기록",
+          "검사보고일"
+        ],
+        "sources": [
+          "의무기록",
+          "입원기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2021-07-09",
+        "count": 4,
+        "types": [
+          "검사일",
+          "검사보고일"
+        ],
+        "sources": [
+          "의무기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2020-06-20",
+        "count": 4,
+        "types": [
+          "검사일",
+          "검사보고일"
+        ],
+        "sources": [
+          "의무기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2019-03-23",
+        "count": 4,
+        "types": [
+          "검사일",
+          "검사보고일",
+          "과거 진료 기록"
+        ],
+        "sources": [
+          "의무기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2022-07-19",
+        "count": 3,
+        "types": [
+          "검사일",
+          "검사보고일"
+        ],
+        "sources": [
+          "의무기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2025-03-21",
+        "count": 6,
+        "types": [
+          "발급일",
+          "서류 작성일"
+        ],
+        "sources": [
+          "보험서류",
+          "수술기록",
+          "의무기록"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2024-04-03",
+        "count": 2,
+        "types": [
+          "입원기간",
+          "진료기간"
+        ],
+        "sources": [
+          "의무기록"
+        ]
+      },
+      {
+        "caseId": "Case2",
+        "date": "2024-04-25",
+        "count": 2,
+        "types": [
+          "기타",
+          "과거 진료 기록"
+        ],
+        "sources": [
+          "의무기록",
+          "검사결과지"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-03-24",
+        "count": 2,
+        "types": [
+          "수술일",
+          "검사보고일"
+        ],
+        "sources": [
+          "수술 기록지",
+          "영상의학 판독지"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-03-23",
+        "count": 3,
+        "types": [
+          "입원일",
+          "검사일"
+        ],
+        "sources": [
+          "퇴원기록지",
+          "입원 CHART",
+          "영상의학 판독지"
+        ]
+      },
+      {
+        "caseId": "Case30",
+        "date": "2025-03-12",
+        "count": 2,
+        "types": [
+          "검사일",
+          "초진일"
+        ],
+        "sources": [
+          "영상의학 판독지",
+          "외래 CHART"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2021-05-17",
+        "count": 2,
+        "types": [
+          "입원일",
+          "검사일"
+        ],
+        "sources": [
+          "진단서",
+          "진단방사선결과지"
+        ]
+      },
+      {
+        "caseId": "Case41",
+        "date": "2024-04-22",
+        "count": 6,
+        "types": [
+          "진료일",
+          "검사일",
+          "검사보고일",
+          "입원일",
+          "교육일"
+        ],
+        "sources": [
+          "영상의학 판독 보고서",
+          "응급실기록",
+          "응급실경과기록"
+        ]
+      },
+      {
+        "caseId": "Case42",
+        "date": "2025-09-10",
+        "count": 3,
+        "types": [
+          "기타",
+          "검사보고일"
+        ],
+        "sources": [
+          "의무기록사본증명서",
+          "MRI 검사결과"
+        ]
+      },
+      {
+        "caseId": "Case42",
+        "date": "2025-02-22",
+        "count": 2,
+        "types": [
+          "기타"
+        ],
+        "sources": [
+          "진료의뢰서"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2025-08-25",
+        "count": 9,
+        "types": [
+          "응급실 도착일",
+          "발병일",
+          "입원일",
+          "기타",
+          "검사일"
+        ],
+        "sources": [
+          "응급진료기록",
+          "퇴원요약",
+          "입원기록",
+          "영상검사 특수촬영"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2025-08-26",
+        "count": 3,
+        "types": [
+          "검사보고일",
+          "검사일"
+        ],
+        "sources": [
+          "영상검사 특수촬영",
+          "영상검사 CT&MR",
+          "Carotid Duplex report"
+        ]
+      },
+      {
+        "caseId": "Case44",
+        "date": "2025-08-27",
+        "count": 2,
+        "types": [
+          "검사보고일",
+          "수술일"
+        ],
+        "sources": [
+          "영상검사 CT&MR",
+          "침습적 시술 기록"
+        ]
+      },
+      {
+        "caseId": "Case5",
+        "date": "2024-12-31",
+        "count": 2,
+        "types": [
+          "입원일",
+          "퇴원일"
+        ],
+        "sources": [
+          "입원기록",
+          "퇴원요약"
+        ]
+      }
+    ],
+    "contextPatterns": {},
+    "sourceDistribution": {
+      "보험서류": 20,
+      "보험금 청구서": 3,
+      "Clinical Chart": 9,
+      "진료 기록": 1,
+      "영상의학 결과지": 6,
+      "진료기록": 5,
+      "보험 서류": 2,
+      "건강검진 결과통보서": 2,
+      "위암 검진 결과통보서": 2,
+      "진료기록지": 5,
+      "영상의학결과지": 14,
+      "진단검사결과": 10,
+      "조직병리검사-Level B": 3,
+      "의무기록 사본 증명서": 5,
+      "통합 기록": 4,
+      "Scan 기록": 3,
+      "의무기록사본": 5,
+      "병동진료기록지": 7,
+      "간호정보조사지": 2,
+      "응급진료기록지": 1,
+      "영상의학과 보고서": 1,
+      "병원조사 의뢰서": 3,
+      "의무기록": 34,
+      "수술기록": 2,
+      "입원기록": 9,
+      "검사결과지": 9,
+      "의무기록사본증명서": 3,
+      "수술 기록지": 1,
+      "퇴원기록지": 2,
+      "입원 CHART": 1,
+      "영상의학 판독지": 4,
+      "외래 CHART": 5,
+      "진단서": 2,
+      "진단방사선결과지": 4,
+      "영상의학 판독 보고서": 4,
+      "외래재진기록": 5,
+      "응급실기록": 1,
+      "응급실경과기록": 1,
+      "진료의뢰서": 5,
+      "외래초진기록": 3,
+      "의사지시기록": 2,
+      "MRI 검사결과": 4,
+      "의무기록표지": 1,
+      "경과기록지": 3,
+      "응급진료기록": 2,
+      "퇴원요약": 6,
+      "영상검사 특수촬영": 2,
+      "영상검사 CT&MR": 2,
+      "Carotid Duplex report": 1,
+      "침습적 시술 기록": 1,
+      "의무기록사본/진료의뢰서": 1,
+      "일반건강검진 결과통보서": 1,
+      "위암 검진 결과내역": 1,
+      "기본진료정보": 46
+    },
+    "casesBreakdown": [
+      {
+        "caseId": "Case13",
+        "gtCount": 5,
+        "aiCount": 17,
+        "allDatesCount": 45,
+        "matchedCount": 4,
+        "missedCount": 1,
+        "extraCount": 13,
+        "gtCoverage": 80,
+        "duplicateRatio": "62.2"
+      },
+      {
+        "caseId": "Case15",
+        "gtCount": 7,
+        "aiCount": 10,
+        "allDatesCount": 17,
+        "matchedCount": 5,
+        "missedCount": 2,
+        "extraCount": 5,
+        "gtCoverage": 71,
+        "duplicateRatio": "41.2"
+      },
+      {
+        "caseId": "Case17",
+        "gtCount": 4,
+        "aiCount": 7,
+        "allDatesCount": 8,
+        "matchedCount": 2,
+        "missedCount": 2,
+        "extraCount": 5,
+        "gtCoverage": 50,
+        "duplicateRatio": "12.5"
+      },
+      {
+        "caseId": "Case29",
+        "gtCount": 7,
+        "aiCount": 13,
+        "allDatesCount": 33,
+        "matchedCount": 2,
+        "missedCount": 5,
+        "extraCount": 11,
+        "gtCoverage": 29,
+        "duplicateRatio": "60.6"
+      },
+      {
+        "caseId": "Case2",
+        "gtCount": 9,
+        "aiCount": 24,
+        "allDatesCount": 53,
+        "matchedCount": 6,
+        "missedCount": 3,
+        "extraCount": 18,
+        "gtCoverage": 67,
+        "duplicateRatio": "54.7"
+      },
+      {
+        "caseId": "Case30",
+        "gtCount": 8,
+        "aiCount": 11,
+        "allDatesCount": 15,
+        "matchedCount": 4,
+        "missedCount": 4,
+        "extraCount": 7,
+        "gtCoverage": 50,
+        "duplicateRatio": "26.7"
+      },
+      {
+        "caseId": "Case41",
+        "gtCount": 11,
+        "aiCount": 13,
+        "allDatesCount": 18,
+        "matchedCount": 5,
+        "missedCount": 6,
+        "extraCount": 8,
+        "gtCoverage": 45,
+        "duplicateRatio": "27.8"
+      },
+      {
+        "caseId": "Case42",
+        "gtCount": 4,
+        "aiCount": 9,
+        "allDatesCount": 12,
+        "matchedCount": 3,
+        "missedCount": 1,
+        "extraCount": 6,
+        "gtCoverage": 75,
+        "duplicateRatio": "25.0"
+      },
+      {
+        "caseId": "Case44",
+        "gtCount": 7,
+        "aiCount": 13,
+        "allDatesCount": 23,
+        "matchedCount": 4,
+        "missedCount": 3,
+        "extraCount": 9,
+        "gtCoverage": 57,
+        "duplicateRatio": "43.5"
+      },
+      {
+        "caseId": "Case5",
+        "gtCount": 9,
+        "aiCount": 57,
+        "allDatesCount": 57,
+        "matchedCount": 4,
+        "missedCount": 5,
+        "extraCount": 53,
+        "gtCoverage": 44,
+        "duplicateRatio": "0.0"
+      }
+    ]
+  },
+  "insights": {
+    "summary": {
+      "totalCases": 10,
+      "gtCoverage": "54.9%",
+      "precision": "22.4%",
+      "recall": "54.9%",
+      "duplicateRate": "38.1%",
+      "noiseRate": "77.6%",
+      "rawExtractions": 281,
+      "uniqueDates": 174,
+      "matched": 39,
+      "missed": 32,
+      "extra": 135
+    },
+    "postProcessingRecommendations": [
+      {
+        "priority": "HIGH",
+        "category": "Duplicate Removal",
+        "finding": "38.1% of extracted dates are duplicates (281 → 174 unique dates)",
+        "recommendation": "Implement exact date deduplication logic. This is already working effectively.",
+        "impact": "Reduces noise by 107 dates"
+      },
+      {
+        "priority": "HIGH",
+        "category": "Type-Based Filtering",
+        "finding": "\"진료일\" type has 51 false positives (37.8% of all noise)",
+        "recommendation": "Consider filtering or deprioritizing dates with type=\"진료일\". Common patterns: 2025.08.18 | NU6; 2025.08.21 | NU6; 2024년 04월 25일",
+        "examples": [
+          {
+            "date": "2025-08-18",
+            "context": "2025.08.18 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2025-08-21",
+            "context": "2025.08.21 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2024-04-25",
+            "context": "2024년 04월 25일",
+            "source": "외래재진기록"
+          }
+        ],
+        "impact": "Could reduce noise by 37.8%"
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Type-Based Filtering",
+        "finding": "\"검사일\" type has 37 false positives (27.4% of all noise)",
+        "recommendation": "Consider filtering or deprioritizing dates with type=\"검사일\". Common patterns: 검사일: 2025-04-02; 2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-sp; 2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+        "examples": [
+          {
+            "date": "2025-04-02",
+            "context": "검사일: 2025-04-02",
+            "source": "보험금 청구서"
+          },
+          {
+            "date": "2025-03-12",
+            "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-spine MRI: HNP at L 4-5로 안전 및 물리치료",
+            "source": "Clinical Chart"
+          },
+          {
+            "date": "2024-05-07",
+            "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+            "source": "진료 기록"
+          }
+        ],
+        "impact": "Could reduce noise by 27.4%"
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Type-Based Filtering",
+        "finding": "\"기타\" type has 28 false positives (20.7% of all noise)",
+        "recommendation": "Consider filtering or deprioritizing dates with type=\"기타\". Common patterns: 출력일시: 2025/09/09; 2025-08-28 10:44:59; 2025-10-19 11:52:30",
+        "examples": [
+          {
+            "date": "2025-09-09",
+            "context": "출력일시: 2025/09/09",
+            "source": "의무기록 사본 증명서"
+          },
+          {
+            "date": "2025-08-28",
+            "context": "2025-08-28 10:44:59",
+            "source": "Scan 기록"
+          },
+          {
+            "date": "2025-10-19",
+            "context": "2025-10-19 11:52:30",
+            "source": "의무기록사본"
+          }
+        ],
+        "impact": "Could reduce noise by 20.7%"
+      },
+      {
+        "priority": "MEDIUM",
+        "category": "Context-Based Filtering",
+        "finding": "Many dates appear to be document issuance dates, print dates, or metadata timestamps",
+        "recommendation": "Implement context analysis to filter out dates from contexts like: \"발급일\", \"출력일\", \"서류 작성일\", timestamps with HH:MM:SS format",
+        "impact": "Could significantly reduce administrative noise"
+      },
+      {
+        "priority": "HIGH",
+        "category": "Date Range Filtering",
+        "finding": "Found 2 dates outside reasonable range (e.g., 2059-07-30, 2069-03-24)",
+        "recommendation": "Filter dates outside reasonable medical record range (e.g., 2000-2030)",
+        "examples": [
+          {
+            "date": "2059-07-30",
+            "context": "보험기간 2021-07-30 ~ 2059-07-30",
+            "type": "만기일"
+          },
+          {
+            "date": "2069-03-24",
+            "context": "보험기간 2021-03-24 ~ 2069-03-24",
+            "type": "만기일"
+          }
+        ],
+        "impact": "Removes 2 obvious noise dates"
+      },
+      {
+        "priority": "HIGH",
+        "category": "Relevance Scoring System",
+        "finding": "Current GT coverage is 54.9% but with 77.6% noise",
+        "recommendation": "Implement multi-factor relevance scoring:\n    - Date type priority: 수술일 > 입원일/퇴원일 > 검사일 > 진료일 > 서류작성일\n    - Source priority: 수술기록 > 입원기록 > 검사결과 > 의무기록 > 보험서류\n    - Context keywords: Boost dates near \"수술\", \"입원\", \"퇴원\", \"진단\"\n    - Recency: Recent dates more relevant than old dates\n    - Frequency: Dates appearing multiple times may be more significant",
+        "impact": "Could improve precision from 22.4% to 70-80%+"
+      },
+      {
+        "priority": "LOW",
+        "category": "Coverage Improvement",
+        "finding": "Still missing 32 GT dates (45.1% miss rate)",
+        "recommendation": "Focus on post-processing optimization first. Prompt engineering only after reaching post-processing limits.",
+        "casesWithMissed": [
+          {
+            "caseId": "Case13",
+            "dates": [
+              "2024-11-04"
+            ]
+          },
+          {
+            "caseId": "Case15",
+            "dates": [
+              "2025-02-25",
+              "2025-05-26"
+            ]
+          },
+          {
+            "caseId": "Case17",
+            "dates": [
+              "2025-08-12",
+              "2030-08-12"
+            ]
+          },
+          {
+            "caseId": "Case29",
+            "dates": [
+              "2020-10-15",
+              "2024-08-13",
+              "2025-08-13",
+              "2025-09-29",
+              "2025-10-15"
+            ]
+          },
+          {
+            "caseId": "Case2",
+            "dates": [
+              "2019-04-09",
+              "2024-01-09",
+              "2024-04-23"
+            ]
+          },
+          {
+            "caseId": "Case30",
+            "dates": [
+              "2012-11-23",
+              "2025-01-01",
+              "2025-04-22",
+              "2025-09-09"
+            ]
+          },
+          {
+            "caseId": "Case41",
+            "dates": [
+              "2007-08-08",
+              "2024-04-20",
+              "2024-04-24",
+              "2025-01-03",
+              "2025-09-02",
+              "2025-09-22"
+            ]
+          },
+          {
+            "caseId": "Case42",
+            "dates": [
+              "2018-09-27"
+            ]
+          },
+          {
+            "caseId": "Case44",
+            "dates": [
+              "2020-09-09",
+              "2024-06-03",
+              "2024-09-03"
+            ]
+          },
+          {
+            "caseId": "Case5",
+            "dates": [
+              "2018-05-10",
+              "2020-01-17",
+              "2023-02-10",
+              "2023-05-10",
+              "2024-01-24"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "casesBreakdown": [
+    {
+      "caseId": "Case13",
+      "gtCount": 5,
+      "aiCount": 17,
+      "allDatesCount": 45,
+      "matchedCount": 4,
+      "missedCount": 1,
+      "extraCount": 13,
+      "gtCoverage": 80,
+      "duplicateRatio": "62.2"
+    },
+    {
+      "caseId": "Case15",
+      "gtCount": 7,
+      "aiCount": 10,
+      "allDatesCount": 17,
+      "matchedCount": 5,
+      "missedCount": 2,
+      "extraCount": 5,
+      "gtCoverage": 71,
+      "duplicateRatio": "41.2"
+    },
+    {
+      "caseId": "Case17",
+      "gtCount": 4,
+      "aiCount": 7,
+      "allDatesCount": 8,
+      "matchedCount": 2,
+      "missedCount": 2,
+      "extraCount": 5,
+      "gtCoverage": 50,
+      "duplicateRatio": "12.5"
+    },
+    {
+      "caseId": "Case29",
+      "gtCount": 7,
+      "aiCount": 13,
+      "allDatesCount": 33,
+      "matchedCount": 2,
+      "missedCount": 5,
+      "extraCount": 11,
+      "gtCoverage": 29,
+      "duplicateRatio": "60.6"
+    },
+    {
+      "caseId": "Case2",
+      "gtCount": 9,
+      "aiCount": 24,
+      "allDatesCount": 53,
+      "matchedCount": 6,
+      "missedCount": 3,
+      "extraCount": 18,
+      "gtCoverage": 67,
+      "duplicateRatio": "54.7"
+    },
+    {
+      "caseId": "Case30",
+      "gtCount": 8,
+      "aiCount": 11,
+      "allDatesCount": 15,
+      "matchedCount": 4,
+      "missedCount": 4,
+      "extraCount": 7,
+      "gtCoverage": 50,
+      "duplicateRatio": "26.7"
+    },
+    {
+      "caseId": "Case41",
+      "gtCount": 11,
+      "aiCount": 13,
+      "allDatesCount": 18,
+      "matchedCount": 5,
+      "missedCount": 6,
+      "extraCount": 8,
+      "gtCoverage": 45,
+      "duplicateRatio": "27.8"
+    },
+    {
+      "caseId": "Case42",
+      "gtCount": 4,
+      "aiCount": 9,
+      "allDatesCount": 12,
+      "matchedCount": 3,
+      "missedCount": 1,
+      "extraCount": 6,
+      "gtCoverage": 75,
+      "duplicateRatio": "25.0"
+    },
+    {
+      "caseId": "Case44",
+      "gtCount": 7,
+      "aiCount": 13,
+      "allDatesCount": 23,
+      "matchedCount": 4,
+      "missedCount": 3,
+      "extraCount": 9,
+      "gtCoverage": 57,
+      "duplicateRatio": "43.5"
+    },
+    {
+      "caseId": "Case5",
+      "gtCount": 9,
+      "aiCount": 57,
+      "allDatesCount": 57,
+      "matchedCount": 4,
+      "missedCount": 5,
+      "extraCount": 53,
+      "gtCoverage": 44,
+      "duplicateRatio": "0.0"
+    }
+  ],
+  "topExtraTypes": [
+    [
+      "진료일",
+      {
+        "count": 51,
+        "examples": [
+          {
+            "date": "2025-08-18",
+            "context": "2025.08.18 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2025-08-21",
+            "context": "2025.08.21 | NU6",
+            "source": "통합 기록"
+          },
+          {
+            "date": "2024-04-25",
+            "context": "2024년 04월 25일",
+            "source": "외래재진기록"
+          }
+        ]
+      }
+    ],
+    [
+      "검사일",
+      {
+        "count": 37,
+        "examples": [
+          {
+            "date": "2025-04-02",
+            "context": "검사일: 2025-04-02",
+            "source": "보험금 청구서"
+          },
+          {
+            "date": "2025-03-12",
+            "context": "2024년 4월 12일 빛길에 미끄러져 넘어지면서 심한 허리 통증으로 서울바른병원 L-spine MRI: HNP at L 4-5로 안전 및 물리치료",
+            "source": "Clinical Chart"
+          },
+          {
+            "date": "2024-05-07",
+            "context": "2024년 5월 7일 주치의: NS 양승현 진단코드: 주 S33.0",
+            "source": "진료 기록"
+          }
+        ]
+      }
+    ],
+    [
+      "기타",
+      {
+        "count": 28,
+        "examples": [
+          {
+            "date": "2025-09-09",
+            "context": "출력일시: 2025/09/09",
+            "source": "의무기록 사본 증명서"
+          },
+          {
+            "date": "2025-08-28",
+            "context": "2025-08-28 10:44:59",
+            "source": "Scan 기록"
+          },
+          {
+            "date": "2025-10-19",
+            "context": "2025-10-19 11:52:30",
+            "source": "의무기록사본"
+          }
+        ]
+      }
+    ],
+    [
+      "검사보고일",
+      {
+        "count": 12,
+        "examples": [
+          {
+            "date": "2024-05-14",
+            "context": "2024-05-14 15:54",
+            "source": "영상의학 결과지"
+          },
+          {
+            "date": "2024-05-14",
+            "context": "2024-05-14 15:54",
+            "source": "영상의학 결과지"
+          },
+          {
+            "date": "2020-06-20",
+            "context": "previous CT(2020.6.20.)",
+            "source": "의무기록"
+          }
+        ]
+      }
+    ],
+    [
+      "초진일",
+      {
+        "count": 10,
+        "examples": [
+          {
+            "date": "2024-08-17",
+            "context": "초진일: 2024년 08월 17일",
+            "source": "병동진료기록지"
+          },
+          {
+            "date": "2024-09-26",
+            "context": "초진일: 2024년 09월 26일",
+            "source": "진료기록지"
+          },
+          {
+            "date": "2024-09-13",
+            "context": "초진일: 2024년 09월 13일",
+            "source": "진료기록지"
+          }
+        ]
+      }
+    ]
+  ],
+  "topSources": [
+    [
+      "기본진료정보",
+      46
+    ],
+    [
+      "의무기록",
+      34
+    ],
+    [
+      "보험서류",
+      20
+    ],
+    [
+      "영상의학결과지",
+      14
+    ],
+    [
+      "진단검사결과",
+      10
+    ],
+    [
+      "Clinical Chart",
+      9
+    ],
+    [
+      "입원기록",
+      9
+    ],
+    [
+      "검사결과지",
+      9
+    ],
+    [
+      "병동진료기록지",
+      7
+    ],
+    [
+      "영상의학 결과지",
+      6
+    ]
+  ],
+  "duplicatePatterns": [
+    {
+      "caseId": "Case13",
+      "date": "2021-07-30",
+      "count": 8,
+      "types": [
+        "보험가입일",
+        "청약일",
+        "계약일",
+        "갱신일",
+        "만기일",
+        "발행일"
+      ],
+      "sources": [
+        "보험서류"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2025-03-10",
+      "count": 2,
+      "types": [
+        "최종납입일",
+        "계약일"
+      ],
+      "sources": [
+        "보험서류"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2021-03-24",
+      "count": 4,
+      "types": [
+        "보험가입일",
+        "발행일",
+        "계약일|청약일|보험가입일",
+        "서류 작성일"
+      ],
+      "sources": [
+        "보험서류"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2025-04-01",
+      "count": 2,
+      "types": [
+        "서류작성일",
+        "사고일"
+      ],
+      "sources": [
+        "보험서류",
+        "보험금 청구서"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2025-03-13",
+      "count": 8,
+      "types": [
+        "통원일",
+        "검사일",
+        "청구일"
+      ],
+      "sources": [
+        "Clinical Chart",
+        "보험 서류"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2024-04-12",
+      "count": 3,
+      "types": [
+        "검사일",
+        "초진일",
+        "입원일"
+      ],
+      "sources": [
+        "Clinical Chart",
+        "진료기록"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2024-05-07",
+      "count": 7,
+      "types": [
+        "검사일",
+        "재진일",
+        "퇴원일"
+      ],
+      "sources": [
+        "진료 기록",
+        "진료기록",
+        "영상의학 결과지"
+      ]
+    },
+    {
+      "caseId": "Case13",
+      "date": "2024-05-14",
+      "count": 2,
+      "types": [
+        "검사보고일"
+      ],
+      "sources": [
+        "영상의학 결과지"
+      ]
+    },
+    {
+      "caseId": "Case15",
+      "date": "2025-06-07",
+      "count": 3,
+      "types": [
+        "검사일",
+        "접수일",
+        "결과일"
+      ],
+      "sources": [
+        "건강검진 결과통보서",
+        "진단검사결과"
+      ]
+    },
+    {
+      "caseId": "Case15",
+      "date": "2025-06-16",
+      "count": 4,
+      "types": [
+        "처방일",
+        "접수일",
+        "검사일",
+        "판독일"
+      ],
+      "sources": [
+        "진료기록지",
+        "영상의학결과지"
+      ]
+    },
+    {
+      "caseId": "Case15",
+      "date": "2025-06-20",
+      "count": 4,
+      "types": [
+        "접수일",
+        "검사일",
+        "판독일"
+      ],
+      "sources": [
+        "영상의학결과지",
+        "조직병리검사-Level B"
+      ]
+    },
+    {
+      "caseId": "Case17",
+      "date": "2025-08-19",
+      "count": 2,
+      "types": [
+        "진료일",
+        "검사일"
+      ],
+      "sources": [
+        "통합 기록",
+        "Scan 기록"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2025-10-19",
+      "count": 3,
+      "types": [
+        "기타"
+      ],
+      "sources": [
+        "의무기록사본"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2024-08-17",
+      "count": 13,
+      "types": [
+        "입원일",
+        "초진일",
+        "기타",
+        "검사일"
+      ],
+      "sources": [
+        "병동진료기록지",
+        "간호정보조사지",
+        "응급진료기록지",
+        "영상의학결과지",
+        "진단검사결과"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2024-08-24",
+      "count": 2,
+      "types": [
+        "퇴원일",
+        "초진일"
+      ],
+      "sources": [
+        "병동진료기록지"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2024-09-04",
+      "count": 2,
+      "types": [
+        "검사일",
+        "검사보고일"
+      ],
+      "sources": [
+        "진료기록지",
+        "영상의학과 보고서"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2024-08-19",
+      "count": 6,
+      "types": [
+        "초진일",
+        "판독일",
+        "검사일"
+      ],
+      "sources": [
+        "병동진료기록지",
+        "영상의학결과지",
+        "진단검사결과"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2025-02-05",
+      "count": 5,
+      "types": [
+        "수술일",
+        "초진일",
+        "진단일"
+      ],
+      "sources": [
+        "병원조사 의뢰서",
+        "수술기록",
+        "의무기록"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2024-04-09",
+      "count": 2,
+      "types": [
+        "보험계약일",
+        "검사일"
+      ],
+      "sources": [
+        "병원조사 의뢰서",
+        "의무기록"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2023-08-07",
+      "count": 7,
+      "types": [
+        "검사일",
+        "과거 진료 기록",
+        "검사보고일"
+      ],
+      "sources": [
+        "의무기록",
+        "입원기록",
+        "검사결과지"
+      ]
+    }
+  ],
+  "missedDateAnalysis": [
+    {
+      "caseId": "Case13",
+      "date": "2024-11-04",
+      "gtDates": [
+        "2021-03-24",
+        "2021-07-30",
+        "2024-04-12",
+        "2024-11-04",
+        "2025-03-13"
+      ]
+    },
+    {
+      "caseId": "Case15",
+      "date": "2025-02-25",
+      "gtDates": [
+        "2025-02-25",
+        "2025-05-26",
+        "2025-06-07",
+        "2025-06-16",
+        "2025-06-20",
+        "2025-06-24",
+        "2025-06-27"
+      ]
+    },
+    {
+      "caseId": "Case15",
+      "date": "2025-05-26",
+      "gtDates": [
+        "2025-02-25",
+        "2025-05-26",
+        "2025-06-07",
+        "2025-06-16",
+        "2025-06-20",
+        "2025-06-24",
+        "2025-06-27"
+      ]
+    },
+    {
+      "caseId": "Case17",
+      "date": "2025-08-12",
+      "gtDates": [
+        "2025-08-12",
+        "2025-08-14",
+        "2025-08-19",
+        "2030-08-12"
+      ]
+    },
+    {
+      "caseId": "Case17",
+      "date": "2030-08-12",
+      "gtDates": [
+        "2025-08-12",
+        "2025-08-14",
+        "2025-08-19",
+        "2030-08-12"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2020-10-15",
+      "gtDates": [
+        "2020-10-15",
+        "2024-08-13",
+        "2024-09-04",
+        "2025-08-13",
+        "2025-09-26",
+        "2025-09-29",
+        "2025-10-15"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2024-08-13",
+      "gtDates": [
+        "2020-10-15",
+        "2024-08-13",
+        "2024-09-04",
+        "2025-08-13",
+        "2025-09-26",
+        "2025-09-29",
+        "2025-10-15"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2025-08-13",
+      "gtDates": [
+        "2020-10-15",
+        "2024-08-13",
+        "2024-09-04",
+        "2025-08-13",
+        "2025-09-26",
+        "2025-09-29",
+        "2025-10-15"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2025-09-29",
+      "gtDates": [
+        "2020-10-15",
+        "2024-08-13",
+        "2024-09-04",
+        "2025-08-13",
+        "2025-09-26",
+        "2025-09-29",
+        "2025-10-15"
+      ]
+    },
+    {
+      "caseId": "Case29",
+      "date": "2025-10-15",
+      "gtDates": [
+        "2020-10-15",
+        "2024-08-13",
+        "2024-09-04",
+        "2025-08-13",
+        "2025-09-26",
+        "2025-09-29",
+        "2025-10-15"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2019-04-09",
+      "gtDates": [
+        "2019-03-23",
+        "2019-04-09",
+        "2023-08-07",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2024-01-09",
+      "gtDates": [
+        "2019-03-23",
+        "2019-04-09",
+        "2023-08-07",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ]
+    },
+    {
+      "caseId": "Case2",
+      "date": "2024-04-23",
+      "gtDates": [
+        "2019-03-23",
+        "2019-04-09",
+        "2023-08-07",
+        "2024-01-09",
+        "2024-04-03",
+        "2024-04-09",
+        "2024-04-23",
+        "2025-02-04",
+        "2025-02-12"
+      ]
+    },
+    {
+      "caseId": "Case30",
+      "date": "2012-11-23",
+      "gtDates": [
+        "2012-11-23",
+        "2025-01-01",
+        "2025-03-12",
+        "2025-03-23",
+        "2025-03-24",
+        "2025-04-11",
+        "2025-04-22",
+        "2025-09-09"
+      ]
+    },
+    {
+      "caseId": "Case30",
+      "date": "2025-01-01",
+      "gtDates": [
+        "2012-11-23",
+        "2025-01-01",
+        "2025-03-12",
+        "2025-03-23",
+        "2025-03-24",
+        "2025-04-11",
+        "2025-04-22",
+        "2025-09-09"
+      ]
+    },
+    {
+      "caseId": "Case30",
+      "date": "2025-04-22",
+      "gtDates": [
+        "2012-11-23",
+        "2025-01-01",
+        "2025-03-12",
+        "2025-03-23",
+        "2025-03-24",
+        "2025-04-11",
+        "2025-04-22",
+        "2025-09-09"
+      ]
+    },
+    {
+      "caseId": "Case30",
+      "date": "2025-09-09",
+      "gtDates": [
+        "2012-11-23",
+        "2025-01-01",
+        "2025-03-12",
+        "2025-03-23",
+        "2025-03-24",
+        "2025-04-11",
+        "2025-04-22",
+        "2025-09-09"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2007-08-08",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2024-04-20",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2024-04-24",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2025-01-03",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2025-09-02",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case41",
+      "date": "2025-09-22",
+      "gtDates": [
+        "2007-08-08",
+        "2021-05-17",
+        "2021-05-20",
+        "2021-05-24",
+        "2024-04-20",
+        "2024-04-22",
+        "2024-04-24",
+        "2025-01-03",
+        "2025-07-11",
+        "2025-09-02",
+        "2025-09-22"
+      ]
+    },
+    {
+      "caseId": "Case42",
+      "date": "2018-09-27",
+      "gtDates": [
+        "2018-09-27",
+        "2025-02-26",
+        "2025-04-23",
+        "2025-04-29"
+      ]
+    },
+    {
+      "caseId": "Case44",
+      "date": "2020-09-09",
+      "gtDates": [
+        "2020-09-09",
+        "2024-06-03",
+        "2024-07-31",
+        "2024-09-03",
+        "2025-08-25",
+        "2025-08-26",
+        "2025-08-29"
+      ]
+    },
+    {
+      "caseId": "Case44",
+      "date": "2024-06-03",
+      "gtDates": [
+        "2020-09-09",
+        "2024-06-03",
+        "2024-07-31",
+        "2024-09-03",
+        "2025-08-25",
+        "2025-08-26",
+        "2025-08-29"
+      ]
+    },
+    {
+      "caseId": "Case44",
+      "date": "2024-09-03",
+      "gtDates": [
+        "2020-09-09",
+        "2024-06-03",
+        "2024-07-31",
+        "2024-09-03",
+        "2025-08-25",
+        "2025-08-26",
+        "2025-08-29"
+      ]
+    },
+    {
+      "caseId": "Case5",
+      "date": "2018-05-10",
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ]
+    },
+    {
+      "caseId": "Case5",
+      "date": "2020-01-17",
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ]
+    },
+    {
+      "caseId": "Case5",
+      "date": "2023-02-10",
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ]
+    },
+    {
+      "caseId": "Case5",
+      "date": "2023-05-10",
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ]
+    },
+    {
+      "caseId": "Case5",
+      "date": "2024-01-24",
+      "gtDates": [
+        "2018-05-10",
+        "2020-01-17",
+        "2023-02-10",
+        "2023-05-10",
+        "2024-01-24",
+        "2024-05-30",
+        "2024-12-12",
+        "2024-12-27",
+        "2024-12-31"
+      ]
+    }
+  ]
+}
