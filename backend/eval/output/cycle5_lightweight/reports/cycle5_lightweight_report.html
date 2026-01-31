@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Cycle 5 Lightweight (3-Phase) Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { color: #1a365d; margin-bottom: 0.5rem; }
+    .subtitle { color: #64748b; margin-bottom: 2rem; }
+    h2 { color: #2d3748; margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+
+    .approach-box { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; }
+    .approach-box h3 { margin-bottom: 0.5rem; }
+
+    .summary-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin: 1rem 0; }
+    .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+    .card .value { font-size: 2rem; font-weight: bold; color: #2563eb; }
+    .card .label { color: #64748b; margin-top: 0.5rem; font-size: 0.85rem; }
+    .card.success .value { color: #10b981; }
+    .card.warning .value { color: #f59e0b; }
+
+    table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 1rem 0; }
+    th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; }
+    tr:hover { background: #f8fafc; }
+
+    .badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cycle 5: Lightweight (3-Phase) Report</h1>
+    <p class="subtitle">Simplified post-processing | 2026. 1. 31. 오전 4:19:41</p>
+
+    <div class="approach-box">
+      <h3>3-Phase Lightweight Approach</h3>
+      <p><strong>Phase 1:</strong> Remove insurance end dates (만기일 제거)</p>
+      <p><strong>Phase 2:</strong> Normalize timestamps (타임스탬프 정규화)</p>
+      <p><strong>Phase 3:</strong> Sort by importance (중요도 정렬)</p>
+    </div>
+
+    <h2>Summary</h2>
+    <div class="summary-cards">
+      <div class="card warning">
+        <div class="value">0%</div>
+        <div class="label">GT Coverage</div>
+      </div>
+      <div class="card">
+        <div class="value">0%</div>
+        <div class="label">Avg Precision</div>
+      </div>
+      <div class="card">
+        <div class="value">0/0</div>
+        <div class="label">Matched/GT</div>
+      </div>
+      <div class="card">
+        <div class="value">179</div>
+        <div class="label">AI Extracted</div>
+      </div>
+      <div class="card">
+        <div class="value">179</div>
+        <div class="label">Extra (Noise)</div>
+      </div>
+    </div>
+
+    <h2>Case-by-Case Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Case</th>
+          <th>Patient</th>
+          <th>Cycle 4 Extracted</th>
+          <th>After Lightweight</th>
+          <th>GT Coverage</th>
+          <th>Precision</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>Case2</strong></td>
+          <td>김미화</td>
+          <td>98</td>
+          <td>97</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case5</strong></td>
+          <td>김태형</td>
+          <td>157</td>
+          <td>157</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case13</strong></td>
+          <td>김인화</td>
+          <td>162</td>
+          <td>157</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case15</strong></td>
+          <td>고영란</td>
+          <td>47</td>
+          <td>47</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case17</strong></td>
+          <td>김동아</td>
+          <td>39</td>
+          <td>39</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case29</strong></td>
+          <td>서문정숙</td>
+          <td>29</td>
+          <td>29</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case30</strong></td>
+          <td>송금숙</td>
+          <td>25</td>
+          <td>25</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case41</strong></td>
+          <td>장우진</td>
+          <td>73</td>
+          <td>73</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case42</strong></td>
+          <td>정진덕</td>
+          <td>34</td>
+          <td>34</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+        <tr>
+          <td><strong>Case44</strong></td>
+          <td>최순곤</td>
+          <td>62</td>
+          <td>62</td>
+          <td>
+            <span class="badge badge-success">
+              100%
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-warning">
+              0%
+            </span>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+
+    <p style="text-align:center;color:#64748b;margin-top:2rem;">
+      VNEXSUS AI Claims System | Cycle 5 Lightweight | 2026-01-31T04:19:41.955Z
+    </p>
+  </div>
+</body>
+</html>

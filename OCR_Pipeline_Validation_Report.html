@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VNEXSUS OCR 파이프라인 검증 보고서</title>
+    <title>VNEXSUS OCR 파이프라인 검증 보고서 (Case18 제외)</title>
     <style>
         * {
             margin: 0;
@@ -48,112 +48,110 @@
 
         .header .date {
             margin-top: 15px;
-            font-size: 0.95em;
             opacity: 0.8;
+            font-size: 0.9em;
         }
 
         .content {
             padding: 40px;
         }
 
-        .section {
-            margin-bottom: 50px;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            font-weight: 600;
-        }
-
         .summary-box {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(240, 147, 251, 0.3);
+            border-radius: 12px;
+            margin-bottom: 40px;
         }
 
-        .summary-box h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
+        .summary-box h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
         }
 
         .summary-box ul {
             list-style: none;
-            font-size: 1.1em;
+            padding: 0;
         }
 
-        .summary-box ul li {
-            margin: 10px 0;
+        .summary-box li {
+            margin: 12px 0;
+            font-size: 1.1em;
             padding-left: 25px;
             position: relative;
         }
 
-        .summary-box ul li:before {
+        .summary-box li:before {
             content: "✓";
             position: absolute;
             left: 0;
             font-weight: bold;
         }
 
-        .info-grid {
+        .section-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 25px 0;
+            margin: 30px 0;
         }
 
-        .info-card {
-            background: #f8f9fa;
+        .comparison-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
         }
 
-        .info-card h4 {
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            font-size: 1.4em;
             color: #667eea;
             margin-bottom: 15px;
-            font-size: 1.2em;
         }
 
-        .info-card p {
-            color: #666;
-            line-height: 1.8;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .stat-box .number {
-            font-size: 3em;
-            font-weight: bold;
+        .comparison-card .metric {
+            display: flex;
+            justify-content: space-between;
             margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .stat-box .label {
-            font-size: 1.1em;
-            opacity: 0.9;
+        .comparison-card .metric:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-card .metric-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .comparison-card .metric-value {
+            font-weight: 700;
+            color: #2d3748;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 20px 0;
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         thead {
@@ -166,23 +164,15 @@
             text-align: left;
         }
 
-        th {
-            font-weight: 600;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        tbody tr {
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        tr:hover {
-            background: #e9ecef;
+        tbody tr:hover {
+            background: #f7fafc;
         }
 
         .badge {
-            display: inline-block;
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.85em;
@@ -190,147 +180,60 @@
         }
 
         .badge-success {
-            background: #d4edda;
-            color: #155724;
+            background: #c6f6d5;
+            color: #22543d;
         }
 
         .badge-warning {
-            background: #fff3cd;
-            color: #856404;
+            background: #fef3c7;
+            color: #92400e;
         }
 
         .badge-danger {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .badge-info {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: #fed7d7;
+            color: #742a2a;
         }
 
         .alert {
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 20px 0;
         }
 
-        .alert-warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            color: #856404;
-        }
-
         .alert-info {
-            background: #d1ecf1;
-            border-left: 4px solid #17a2b8;
-            color: #0c5460;
+            background: #bee3f8;
+            border-left: 4px solid #3182ce;
+            color: #1a365d;
         }
 
-        .alert-success {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            color: #155724;
+        .alert-warning {
+            background: #fef3c7;
+            border-left: 4px solid #d69e2e;
+            color: #744210;
         }
 
-        .code-block {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-
-        .code-block .keyword {
-            color: #ff79c6;
-        }
-
-        .code-block .string {
-            color: #f1fa8c;
-        }
-
-        .code-block .comment {
-            color: #6272a4;
-            font-style: italic;
-        }
-
-        .recommendation-list {
-            list-style: none;
-            counter-reset: recommendation;
-        }
-
-        .recommendation-list li {
-            counter-increment: recommendation;
-            margin: 25px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-            position: relative;
-            padding-left: 70px;
-        }
-
-        .recommendation-list li:before {
-            content: counter(recommendation);
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .improvement-indicator {
+            font-size: 2em;
             font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .recommendation-list li h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .feature-comparison {
-            margin: 30px 0;
-        }
-
-        .feature-comparison table td:first-child {
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .checkmark {
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .crossmark {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        .footer {
-            background: #f8f9fa;
-            padding: 30px;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
         }
 
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
+        .improvement-positive {
+            background: #c6f6d5;
+            color: #22543d;
+        }
 
-            .container {
-                box-shadow: none;
-            }
+        .improvement-negative {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .improvement-neutral {
+            background: #e2e8f0;
+            color: #2d3748;
         }
     </style>
 </head>
@@ -338,450 +241,355 @@
     <div class="container">
         <div class="header">
             <h1>VNEXSUS OCR 파이프라인 검증 보고서</h1>
-            <div class="subtitle">좌표 정보(BBox) 포함 여부 및 시스템 평가</div>
-            <div class="date">작성일: 2026년 1월 28일</div>
+            <p class="subtitle">Vision LLM → OCR 전환 대비 성능 검증 (Case18 제외)</p>
+            <p class="date">생성일: 2026. 1. 31. 오전 4:13:19</p>
         </div>
 
         <div class="content">
-            <!-- 요약 -->
             <div class="summary-box">
-                <h3>핵심 요약</h3>
+                <h2>📊 Executive Summary</h2>
                 <ul>
-                    <li><strong>19개 케이스</strong>: PDF 매칭 완료된 검증 가능 케이스</li>
-                    <li><strong>좌표 정보 상태</strong>: 현재 없음 (GPT-4o Vision은 좌표 미지원)</li>
-                    <li><strong>시스템 설계</strong>: 좌표 정보 지원 구조 이미 구현됨</li>
-                    <li><strong>권장 사항</strong>: Google Cloud Vision API 또는 Tesseract OCR 통합 권장</li>
+                    <li><strong>검증 케이스</strong>: 10개 케이스 (Case18 제외 - GT 불일치)</li>
+                    <li><strong>Cycle 4 GT Coverage</strong>: 58% (Matched: 43/74)</li>
+                    <li><strong>Cycle 5 GT Coverage</strong>: 57% (변화: -1%p)</li>
+                    <li><strong>Cycle 4 Precision</strong>: 24%</li>
+                    <li><strong>Cycle 5 Precision</strong>: 24%</li>
+                    <li><strong>핵심 발견</strong>: Cycle 4 과추출 전략이 효과적, Cycle 5 7-Phase 필터링은 개선 효과 미미</li>
                 </ul>
             </div>
 
-            <!-- 섹션 1: 케이스 분석 -->
-            <section class="section">
-                <h2 class="section-title">1. 19개 케이스 분석</h2>
+            <div class="alert alert-warning">
+                <h3 style="margin-bottom: 10px;">⚠️ Case18 제외 사유</h3>
+                <p>Case18(김명희)은 GT 문서와 PDF 간 일치율이 검증되지 않아 데이터 신뢰성 부족으로 제외되었습니다.
+                검증 가능한 케이스는 총 <strong>10개</strong>입니다.</p>
+            </div>
 
-                <div class="info-grid">
-                    <div class="stat-box">
-                        <div class="label">총 케이스 수</div>
-                        <div class="number">19</div>
-                        <div class="label">PDF 매칭 완료</div>
+            <h2 class="section-title">1. Cycle 4 (Top-Down) vs Cycle 5 (Post-Processing) 비교</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>Cycle 4: Top-Down 과추출</h3>
+                    <div class="metric">
+                        <span class="metric-label">GT Coverage</span>
+                        <span class="metric-value">58%</span>
                     </div>
-
-                    <div class="stat-box">
-                        <div class="label">좌표 정보 포함</div>
-                        <div class="number">0</div>
-                        <div class="label">케이스 (0%)</div>
+                    <div class="metric">
+                        <span class="metric-label">Precision</span>
+                        <span class="metric-value">24%</span>
                     </div>
-
-                    <div class="stat-box">
-                        <div class="label">시스템 지원 준비</div>
-                        <div class="number">100%</div>
-                        <div class="label">인터페이스 구현됨</div>
+                    <div class="metric">
+                        <span class="metric-label">AI Extracted</span>
+                        <span class="metric-value">179 dates</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Matched/GT</span>
+                        <span class="metric-value">43/74</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Extra (Noise)</span>
+                        <span class="metric-value">136</span>
                     </div>
                 </div>
 
-                <h3 style="margin: 30px 0 20px 0; color: #667eea;">케이스 목록</h3>
-                <table>
-                    <thead>
+                <div class="comparison-card">
+                    <h3>Cycle 5: 7-Phase 후처리</h3>
+                    <div class="metric">
+                        <span class="metric-label">GT Coverage</span>
+                        <span class="metric-value">57%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Precision</span>
+                        <span class="metric-value">24%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">AI Extracted</span>
+                        <span class="metric-value">178 dates</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Matched/GT</span>
+                        <span class="metric-value">42/74</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Extra (Noise)</span>
+                        <span class="metric-value">136</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="improvement-indicator improvement-negative">
+                GT Coverage 변화: -1%p
+                <br>
+                <span style="font-size: 0.5em; font-weight: normal;">
+                    58% → 57%
+                </span>
+            </div>
+
+            <h2 class="section-title">2. 케이스별 상세 결과</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Case</th>
+                        <th>환자명</th>
+                        <th>페이지</th>
+                        <th>Cycle 4 GT Coverage</th>
+                        <th>Cycle 5 GT Coverage</th>
+                        <th>GT/Matched</th>
+                        <th>AI Extracted (C4/C5)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
                         <tr>
-                            <th>케이스 ID</th>
-                            <th>피보험자</th>
-                            <th>PDF 파일 수</th>
-                            <th>좌표 정보</th>
+                            <td><strong>Case2</strong></td>
+                            <td>김미화</td>
+                            <td>50p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    56%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    56%
+                                </span>
+                            </td>
+                            <td>9 / 5</td>
+                            <td>22 / 22</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Case2</td><td>김미화</td><td>4</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case5</td><td>김태형</td><td>5</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case9</td><td>임승희</td><td>4</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case11</td><td>허전권</td><td>3</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case13</td><td>김인화</td><td>4</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case15</td><td>고영란</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case17</td><td>김동아</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case18</td><td>김명희</td><td>4</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case24</td><td>김종렬</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case27</td><td>박현미</td><td>4</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case28</td><td>박혜경</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case29</td><td>서문정숙</td><td>2</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case30</td><td>송금숙</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case34</td><td>윤희정</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case38</td><td>이영희</td><td>7</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case39</td><td>장동현</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case41</td><td>장우진</td><td>2</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case42</td><td>정진덕</td><td>1</td><td><span class="badge badge-danger">없음</span></td></tr>
-                        <tr><td>Case44</td><td>최순곤</td><td>2</td><td><span class="badge badge-danger">없음</span></td></tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- 섹션 2: OCR 시스템 현황 -->
-            <section class="section">
-                <h2 class="section-title">2. OCR 파이프라인 현황</h2>
-
-                <div class="alert alert-info">
-                    <strong>중요 발견:</strong> 시스템은 이미 좌표 정보(BBox)를 지원하도록 설계되어 있습니다. IOCRProvider 인터페이스에 BBox 구조가 정의되어 있으며, 현재 GPT-4o Vision Provider만 좌표를 제공하지 않을 뿐입니다.
-                </div>
-
-                <h3 style="margin: 30px 0 20px 0; color: #667eea;">현재 OCR Provider 분석</h3>
-
-                <div class="info-card">
-                    <h4>GPT-4o Vision Provider</h4>
-                    <table style="box-shadow: none; margin: 15px 0;">
+                        
                         <tr>
-                            <td style="padding: 10px;"><strong>버전</strong></td>
-                            <td style="padding: 10px;">1.0.0</td>
+                            <td><strong>Case5</strong></td>
+                            <td>김태형</td>
+                            <td>34p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    67%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    67%
+                                </span>
+                            </td>
+                            <td>9 / 6</td>
+                            <td>59 / 59</td>
                         </tr>
+                        
                         <tr>
-                            <td style="padding: 10px;"><strong>좌표 지원</strong></td>
-                            <td style="padding: 10px;"><span class="crossmark">✗</span> <span class="badge badge-danger">미지원</span></td>
+                            <td><strong>Case13</strong></td>
+                            <td>김인화</td>
+                            <td>46p</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    80%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-success">
+                                    80%
+                                </span>
+                            </td>
+                            <td>5 / 4</td>
+                            <td>18 / 18</td>
                         </tr>
+                        
                         <tr>
-                            <td style="padding: 10px;"><strong>다중 페이지</strong></td>
-                            <td style="padding: 10px;"><span class="checkmark">✓</span> 최대 50페이지</td>
+                            <td><strong>Case15</strong></td>
+                            <td>고영란</td>
+                            <td>13p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    63%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    63%
+                                </span>
+                            </td>
+                            <td>8 / 5</td>
+                            <td>10 / 10</td>
                         </tr>
+                        
                         <tr>
-                            <td style="padding: 10px;"><strong>표 구조 인식</strong></td>
-                            <td style="padding: 10px;"><span class="checkmark">✓</span> 우수</td>
+                            <td><strong>Case17</strong></td>
+                            <td>김동아</td>
+                            <td>28p</td>
+                            <td>
+                                <span class="badge badge-danger">
+                                    40%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-danger">
+                                    40%
+                                </span>
+                            </td>
+                            <td>5 / 2</td>
+                            <td>9 / 9</td>
                         </tr>
+                        
                         <tr>
-                            <td style="padding: 10px;"><strong>처리 방식</strong></td>
-                            <td style="padding: 10px;">Vision LLM (텍스트만 추출)</td>
+                            <td><strong>Case29</strong></td>
+                            <td>서문정숙</td>
+                            <td>14p</td>
+                            <td>
+                                <span class="badge badge-danger">
+                                    43%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-danger">
+                                    29%
+                                </span>
+                            </td>
+                            <td>7 / 3</td>
+                            <td>10 / 9</td>
                         </tr>
-                    </table>
-                </div>
+                        
+                        <tr>
+                            <td><strong>Case30</strong></td>
+                            <td>송금숙</td>
+                            <td>18p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    50%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    50%
+                                </span>
+                            </td>
+                            <td>8 / 4</td>
+                            <td>11 / 11</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Case41</strong></td>
+                            <td>장우진</td>
+                            <td>30p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    64%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    64%
+                                </span>
+                            </td>
+                            <td>11 / 7</td>
+                            <td>19 / 19</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Case42</strong></td>
+                            <td>정진덕</td>
+                            <td>13p</td>
+                            <td>
+                                <span class="badge badge-success">
+                                    75%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-success">
+                                    75%
+                                </span>
+                            </td>
+                            <td>4 / 3</td>
+                            <td>8 / 8</td>
+                        </tr>
+                        
+                        <tr>
+                            <td><strong>Case44</strong></td>
+                            <td>최순곤</td>
+                            <td>33p</td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    50%
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">
+                                    50%
+                                </span>
+                            </td>
+                            <td>8 / 4</td>
+                            <td>13 / 13</td>
+                        </tr>
+                        
+                </tbody>
+            </table>
 
-                <h3 style="margin: 30px 0 20px 0; color: #667eea;">IOCRProvider 인터페이스 구조</h3>
+            <h2 class="section-title">3. 핵심 발견사항</h2>
 
-                <div class="code-block">
-<span class="keyword">export interface</span> <span class="string">OCRBlock</span> {
-  text: <span class="keyword">string</span>;
-  bbox?: {
-    page: <span class="keyword">number</span>;
-    x: <span class="keyword">number</span>;
-    y: <span class="keyword">number</span>;
-    width: <span class="keyword">number</span>;
-    height: <span class="keyword">number</span>;
-  };
-  confidence?: <span class="keyword">number</span>;
-  pageIndex?: <span class="keyword">number</span>;
-}
-
-<span class="keyword">export interface</span> <span class="string">OCRResult</span> {
-  blocks: OCRBlock[];
-  metadata: {
-    provider: <span class="keyword">string</span>;
-    processingTime: <span class="keyword">number</span>;
-    pageCount: <span class="keyword">number</span>;
-    totalCost?: <span class="keyword">number</span>;
-    model?: <span class="keyword">string</span>;
-    hasCoordinates: <span class="keyword">boolean</span>; <span class="comment">// 좌표 정보 포함 여부</span>
-  };
-}
-                </div>
-            </section>
-
-            <!-- 섹션 3: 완성도 평가 -->
-            <section class="section">
-                <h2 class="section-title">3. OCR 파이프라인 완성도 평가</h2>
-
-                <div class="feature-comparison">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>기능</th>
-                                <th>현재 상태</th>
-                                <th>완성도</th>
-                                <th>비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>텍스트 추출</td>
-                                <td><span class="badge badge-success">구현 완료</span></td>
-                                <td><strong>95%</strong></td>
-                                <td>GPT-4o Vision으로 고품질 추출</td>
-                            </tr>
-                            <tr>
-                                <td>다중 페이지 처리</td>
-                                <td><span class="badge badge-success">구현 완료</span></td>
-                                <td><strong>100%</strong></td>
-                                <td>최대 50페이지 지원</td>
-                            </tr>
-                            <tr>
-                                <td>표 구조 인식</td>
-                                <td><span class="badge badge-success">구현 완료</span></td>
-                                <td><strong>90%</strong></td>
-                                <td>Vision LLM의 강점</td>
-                            </tr>
-                            <tr>
-                                <td>좌표 정보 (BBox)</td>
-                                <td><span class="badge badge-danger">미구현</span></td>
-                                <td><strong>0%</strong></td>
-                                <td>인터페이스는 준비됨</td>
-                            </tr>
-                            <tr>
-                                <td>신뢰도 정보</td>
-                                <td><span class="badge badge-warning">부분 구현</span></td>
-                                <td><strong>60%</strong></td>
-                                <td>Vision LLM은 고정값 사용</td>
-                            </tr>
-                            <tr>
-                                <td>날짜 추출</td>
-                                <td><span class="badge badge-success">구현 완료</span></td>
-                                <td><strong>85%</strong></td>
-                                <td>여러 형식 지원</td>
-                            </tr>
-                            <tr>
-                                <td>병원명 추출</td>
-                                <td><span class="badge badge-success">구현 완료</span></td>
-                                <td><strong>80%</strong></td>
-                                <td>패턴 매칭 기반</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="info-grid" style="margin-top: 30px;">
-                    <div class="info-card">
-                        <h4>강점</h4>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin: 10px 0;">✓ 표 구조 인식 우수</li>
-                            <li style="margin: 10px 0;">✓ 다중 페이지 안정적 처리</li>
-                            <li style="margin: 10px 0;">✓ 날짜/병원명 자동 추출</li>
-                            <li style="margin: 10px 0;">✓ 확장 가능한 인터페이스 설계</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>개선 필요</h4>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin: 10px 0;">✗ 좌표 정보 없음</li>
-                            <li style="margin: 10px 0;">✗ 실제 OCR 신뢰도 부재</li>
-                            <li style="margin: 10px 0;">✗ 텍스트 위치 정보 없음</li>
-                            <li style="margin: 10px 0;">✗ 영역별 정밀 분석 불가</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 섹션 4: 좌표 정보의 중요성 -->
-            <section class="section">
-                <h2 class="section-title">4. 좌표 정보(BBox)의 중요성</h2>
-
-                <div class="alert alert-warning">
-                    <strong>왜 좌표 정보가 필요한가?</strong><br>
-                    좌표 정보는 OCR 파이프라인의 완성도를 측정하고 개선하는 데 필수적입니다.
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>1. 정밀한 영역 분석</h4>
-                        <p>문서의 특정 영역(헤더, 표, 날짜 등)을 정확히 식별하고 분석할 수 있습니다.</p>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>2. 정확도 측정</h4>
-                        <p>Ground Truth와 비교하여 텍스트 위치의 정확도를 측정할 수 있습니다.</p>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>3. 레이아웃 분석</h4>
-                        <p>문서 구조를 이해하고 문맥을 더 정확하게 파악할 수 있습니다.</p>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>4. 시각화 및 디버깅</h4>
-                        <p>OCR 결과를 원본 이미지 위에 오버레이하여 문제점을 쉽게 파악할 수 있습니다.</p>
-                    </div>
-                </div>
-
-                <h3 style="margin: 30px 0 20px 0; color: #667eea;">좌표 정보 활용 예시</h3>
-
-                <div class="code-block">
-<span class="comment">// 날짜 필드 위치 검증</span>
-<span class="keyword">const</span> dateField = ocrResult.blocks.find(block =>
-  block.text.includes(<span class="string">'2024-05-01'</span>) &&
-  block.bbox.y < <span class="keyword">200</span> <span class="comment">// 상단 200px 이내</span>
-);
-
-<span class="comment">// 표 영역 자동 탐지</span>
-<span class="keyword">const</span> tableBlocks = ocrResult.blocks.filter(block =>
-  block.bbox.width > <span class="keyword">500</span> && <span class="comment">// 넓은 영역</span>
-  block.bbox.height < <span class="keyword">50</span> <span class="comment">// 행 높이</span>
-);
-
-<span class="comment">// 정확도 측정</span>
-<span class="keyword">const</span> accuracy = calculateOverlap(
-  predictedBbox,
-  groundTruthBbox
-); <span class="comment">// IoU (Intersection over Union)</span>
-                </div>
-            </section>
-
-            <!-- 섹션 5: 권장 사항 -->
-            <section class="section">
-                <h2 class="section-title">5. 권장 사항</h2>
-
-                <ul class="recommendation-list">
-                    <li>
-                        <h4>Google Cloud Vision API 통합</h4>
-                        <p>
-                            <strong>장점:</strong> 높은 정확도, bbox 정보 제공, 한글 지원 우수<br>
-                            <strong>비용:</strong> $1.50 / 1,000 페이지<br>
-                            <strong>통합 난이도:</strong> 중 (기존 인터페이스 활용 가능)
-                        </p>
-                    </li>
-
-                    <li>
-                        <h4>Tesseract OCR 통합</h4>
-                        <p>
-                            <strong>장점:</strong> 무료, 오픈소스, bbox 정보 제공<br>
-                            <strong>단점:</strong> 정확도가 Vision LLM보다 낮을 수 있음<br>
-                            <strong>통합 난이도:</strong> 낮 (Python 라이브러리 사용)
-                        </p>
-                    </li>
-
-                    <li>
-                        <h4>하이브리드 접근법</h4>
-                        <p>
-                            <strong>전략:</strong> Tesseract로 bbox 추출 + GPT-4o Vision으로 텍스트 정제<br>
-                            <strong>장점:</strong> 비용 효율적이면서 높은 품질 유지<br>
-                            <strong>구현:</strong> 두 OCR 결과를 병합하는 로직 추가
-                        </p>
-                    </li>
-
-                    <li>
-                        <h4>AWS Textract 고려</h4>
-                        <p>
-                            <strong>장점:</strong> 표 구조 인식 우수, bbox 제공, AWS 생태계 통합<br>
-                            <strong>비용:</strong> $1.50 / 1,000 페이지<br>
-                            <strong>통합 난이도:</strong> 중
-                        </p>
-                    </li>
+            <div class="alert alert-info">
+                <h3 style="margin-bottom: 15px;">✅ Cycle 4 (Top-Down 과추출) 분석</h3>
+                <ul style="margin-left: 20px;">
+                    <li style="margin: 8px 0;"><strong>GT Coverage 58%</strong> 달성 (10개 케이스 평균)</li>
+                    <li style="margin: 8px 0;">과추출 전략으로 누락 최소화 (Missed: 31)</li>
+                    <li style="margin: 8px 0;">프롬프트 개선으로 importance 태깅 및 타임스탬프 제외 적용</li>
+                    <li style="margin: 8px 0;">보험 가입일(importance=critical), 만기일(importance=low) 구분</li>
                 </ul>
+            </div>
 
-                <div class="alert alert-success">
-                    <strong>추천:</strong> 하이브리드 접근법 (Tesseract + GPT-4o Vision)을 먼저 시도하고, 정확도가 부족할 경우 Google Cloud Vision API로 업그레이드하는 것을 권장합니다.
-                </div>
-            </section>
+            <div class="alert alert-info">
+                <h3 style="margin-bottom: 15px;">⚠️ Cycle 5 (7-Phase 후처리) 평가</h3>
+                <ul style="margin-left: 20px;">
+                    <li style="margin: 8px 0;"><strong>GT Coverage -1%p 변화</strong> - 개선 효과 미미</li>
+                    <li style="margin: 8px 0;">Precision 24% (목표 70-80% 미달)</li>
+                    <li style="margin: 8px 0;">7-Phase 필터링의 한계: Rule-based 접근으로는 컨텍스트 이해 부족</li>
+                    <li style="margin: 8px 0;"><strong>결론: Cycle 5는 경량화하여 Cycle 4에 통합 필요</strong></li>
+                </ul>
+            </div>
 
-            <!-- 섹션 6: OCR Provider 비교 -->
-            <section class="section">
-                <h2 class="section-title">6. OCR Provider 비교</h2>
+            <h2 class="section-title">4. 권장사항 및 다음 단계</h2>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Provider</th>
-                            <th>BBox 지원</th>
-                            <th>한글 정확도</th>
-                            <th>표 인식</th>
-                            <th>비용 (1000 페이지)</th>
-                            <th>통합 난이도</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>GPT-4o Vision</strong></td>
-                            <td><span class="badge badge-danger">없음</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td>$2.00 - $3.00</td>
-                            <td><span class="badge badge-success">구현됨</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Google Cloud Vision</strong></td>
-                            <td><span class="badge badge-success">있음</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td>$1.50</td>
-                            <td><span class="badge badge-info">중간</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tesseract OCR</strong></td>
-                            <td><span class="badge badge-success">있음</span></td>
-                            <td><span class="badge badge-warning">보통</span></td>
-                            <td><span class="badge badge-warning">보통</span></td>
-                            <td>무료</td>
-                            <td><span class="badge badge-success">쉬움</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>AWS Textract</strong></td>
-                            <td><span class="badge badge-success">있음</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td>$1.50</td>
-                            <td><span class="badge badge-info">중간</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Azure Computer Vision</strong></td>
-                            <td><span class="badge badge-success">있음</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td><span class="badge badge-success">우수</span></td>
-                            <td>$1.00</td>
-                            <td><span class="badge badge-info">중간</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- 섹션 7: 다음 단계 -->
-            <section class="section">
-                <h2 class="section-title">7. 다음 단계</h2>
-
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>즉시 실행 가능</h4>
-                        <ul style="list-style: disc; padding-left: 20px;">
-                            <li style="margin: 8px 0;">Tesseract OCR Provider 구현</li>
-                            <li style="margin: 8px 0;">하이브리드 파이프라인 테스트</li>
-                            <li style="margin: 8px 0;">19개 케이스로 정확도 측정</li>
+            <div style="background: #f7fafc; padding: 25px; border-radius: 12px; margin: 20px 0;">
+                <h3 style="color: #2d3748; margin-bottom: 15px;">🎯 즉시 실행 권장사항</h3>
+                <ol style="margin-left: 20px; color: #4a5568;">
+                    <li style="margin: 10px 0;">
+                        <strong>Cycle 4 프롬프트 지속 개선</strong>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>컨텍스트 태깅 강화 (importance 필드 활용)</li>
+                            <li>보험 만기일 하향 조정 (심사 무관)</li>
+                            <li>타임스탬프 제외 (YYYY-MM-DD만 사용)</li>
                         </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>중기 계획</h4>
-                        <ul style="list-style: disc; padding-left: 20px;">
-                            <li style="margin: 8px 0;">Google Cloud Vision API 통합</li>
-                            <li style="margin: 8px 0;">BBox 기반 시각화 도구 개발</li>
-                            <li style="margin: 8px 0;">정밀 정확도 측정 시스템 구축</li>
+                    </li>
+                    <li style="margin: 10px 0;">
+                        <strong>Cycle 5 경량화 (7-Phase → 3-Phase)</strong>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>Phase 1: 보험 만기일 제거</li>
+                            <li>Phase 2: 타임스탬프 정규화</li>
+                            <li>Phase 3: 중요도 기반 정렬</li>
                         </ul>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>장기 비전</h4>
-                        <ul style="list-style: disc; padding-left: 20px;">
-                            <li style="margin: 8px 0;">커스텀 OCR 모델 학습</li>
-                            <li style="margin: 8px 0;">문서 레이아웃 자동 분석</li>
-                            <li style="margin: 8px 0;">End-to-End 자동화</li>
+                    </li>
+                    <li style="margin: 10px 0;">
+                        <strong>컨텍스트 기반 후처리 설계</strong>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>컨텍스트 우선, BBox는 보조 정보로 활용</li>
+                            <li>키워드 + 문맥 분석 중심</li>
                         </ul>
-                    </div>
-                </div>
-            </section>
+                    </li>
+                    <li style="margin: 10px 0;">
+                        <strong>보고서 포맷 강제화</strong>
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>9-10항목 표준 포맷 적용</li>
+                            <li>항목 구조 강제, 내용 어레인지는 유연하게</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
 
-            <!-- 결론 -->
-            <section class="section">
-                <h2 class="section-title">결론</h2>
-
-                <div class="alert alert-info">
-                    <h3 style="margin-bottom: 15px; color: #0c5460;">핵심 결론</h3>
-                    <ul style="list-style: disc; padding-left: 25px; line-height: 1.8;">
-                        <li><strong>19개 케이스 모두 좌표 정보가 없습니다</strong> - GPT-4o Vision은 bbox를 제공하지 않기 때문입니다.</li>
-                        <li><strong>시스템은 이미 준비되어 있습니다</strong> - IOCRProvider 인터페이스에 bbox 구조가 정의되어 있어 새로운 OCR Provider 추가가 용이합니다.</li>
-                        <li><strong>하이브리드 접근법을 권장합니다</strong> - Tesseract로 bbox 추출 + GPT-4o Vision으로 텍스트 정제하면 비용 효율적입니다.</li>
-                        <li><strong>즉시 실행 가능합니다</strong> - 기존 인터페이스를 활용하여 Tesseract OCR Provider를 쉽게 통합할 수 있습니다.</li>
-                    </ul>
-                </div>
-
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; margin-top: 30px; text-align: center;">
-                    <h3 style="margin-bottom: 15px; font-size: 1.5em;">OCR 파이프라인 완성도</h3>
-                    <div style="font-size: 3.5em; font-weight: bold; margin: 20px 0;">73%</div>
-                    <p style="font-size: 1.1em; opacity: 0.9;">좌표 정보 추가 시 <strong>95%</strong>로 향상 가능</p>
-                </div>
-            </section>
-        </div>
-
-        <div class="footer">
-            <p><strong>VNEXSUS</strong> - 의료보험 손해사정 자동화 시스템</p>
-            <p>생성일: 2026년 1월 28일 | 보고서 버전: 1.0</p>
+            <div style="margin-top: 40px; padding: 20px; background: #edf2f7; border-radius: 12px; text-align: center;">
+                <p style="color: #4a5568;">
+                    <strong>VNEXSUS AI Claims System</strong> |
+                    Cycle 4-5 검증 완료 |
+                    2026-01-31T04:13:19.453Z
+                </p>
+            </div>
         </div>
     </div>
 </body>

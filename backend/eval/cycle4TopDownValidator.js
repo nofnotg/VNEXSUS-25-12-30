@@ -508,18 +508,18 @@ async function processCase(caseNum, caseInfo) {
   console.log(`\n${'='.repeat(60)}`);
   console.log(`[Case${caseNum}] ${caseInfo.patientName} - Top-Down Processing`);
   console.log(`${'='.repeat(60)}`);
-  
-  const pdfFolder = caseInfo.pdfFolder;
-  if (!pdfFolder || !fs.existsSync(pdfFolder)) {
-    console.log(`  X PDF folder not found: ${pdfFolder}`);
-    return { caseId: `Case${caseNum}`, error: 'PDF folder not found' };
-  }
-  
-  // 캐시 확인
+
+  // 캐시 먼저 확인 (PDF 경로 문제 우회)
   const cachePath = path.join(CONFIG.cacheDir, `case_${caseNum}_topdown.json`);
   if (fs.existsSync(cachePath)) {
     console.log(`  * Using cache: ${cachePath}`);
     return JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+  }
+
+  const pdfFolder = caseInfo.pdfFolder;
+  if (!pdfFolder || !fs.existsSync(pdfFolder)) {
+    console.log(`  X PDF folder not found: ${pdfFolder}`);
+    return { caseId: `Case${caseNum}`, error: 'PDF folder not found' };
   }
   
   // PDF 변환
