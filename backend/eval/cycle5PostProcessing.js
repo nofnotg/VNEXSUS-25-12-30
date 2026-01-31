@@ -94,6 +94,23 @@ function extractGroundTruthDates(groundTruth) {
   return Array.from(dates).sort();
 }
 
+// 날짜 정규화: 타임스탬프 제거 (YYYY-MM-DDThh:mm:ss → YYYY-MM-DD)
+function normalizeDate(dateStr) {
+  if (!dateStr) return null;
+
+  // YYYY-MM-DDThh:mm:ss 형식인 경우 T 이후 제거
+  if (dateStr.includes('T')) {
+    return dateStr.split('T')[0];
+  }
+
+  // 이미 YYYY-MM-DD 형식인 경우 그대로 반환
+  if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return dateStr;
+  }
+
+  return dateStr;
+}
+
 // Cycle 4 캐시에서 날짜 수집
 function collectCycle4Dates(generatedJson) {
   const allDates = [];
@@ -101,9 +118,10 @@ function collectCycle4Dates(generatedJson) {
   // allExtractedDates
   if (generatedJson.allExtractedDates) {
     generatedJson.allExtractedDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
         allDates.push({
-          date: item.date,
+          date: normalized,
           originalFormat: item.originalFormat,
           context: item.context || '',
           type: item.type || '기타',
@@ -117,17 +135,20 @@ function collectCycle4Dates(generatedJson) {
   // dateRanges (시작일, 종료일 모두)
   if (generatedJson.dateRanges) {
     generatedJson.dateRanges.forEach(item => {
-      if (item.startDate && item.startDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const startNormalized = normalizeDate(item.startDate);
+      const endNormalized = normalizeDate(item.endDate);
+
+      if (startNormalized && startNormalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
         allDates.push({
-          date: item.startDate,
+          date: startNormalized,
           context: `${item.context} (시작일)`,
           type: item.type ? `${item.type}_시작일` : '기간_시작일',
           source: 'dateRanges_start'
         });
       }
-      if (item.endDate && item.endDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      if (endNormalized && endNormalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
         allDates.push({
-          date: item.endDate,
+          date: endNormalized,
           context: `${item.context} (종료일)`,
           type: item.type ? `${item.type}_종료일` : '기간_종료일',
           source: 'dateRanges_end'
@@ -139,9 +160,10 @@ function collectCycle4Dates(generatedJson) {
   // insuranceDates
   if (generatedJson.insuranceDates) {
     generatedJson.insuranceDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
         allDates.push({
-          date: item.date,
+          date: normalized,
           context: `${item.company || ''} ${item.productName || ''} ${item.type || ''}`,
           type: item.type || '보험관련',
           source: 'insuranceDates'
@@ -153,9 +175,10 @@ function collectCycle4Dates(generatedJson) {
   // tableDates
   if (generatedJson.tableDates) {
     generatedJson.tableDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
         allDates.push({
-          date: item.date,
+          date: normalized,
           context: item.rowContent || '',
           type: item.tableType || '테이블',
           source: 'tableDates'
