@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VNEXSUS HTML 보고서 시스템 데모</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 50px 40px;
+        }
+        .feature-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        .feature-box h2 {
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            margin: 15px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.15em;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #48bb78;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .demo-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .demo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .demo-card h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .demo-card p {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        .highlight {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .success-banner {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .success-banner h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .info-box {
+            background: #bee3f8;
+            border-left: 4px solid #3182ce;
+            color: #1a365d;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        .info-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .workflow {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .workflow-step {
+            text-align: center;
+            padding: 20px;
+            flex: 1;
+            min-width: 200px;
+        }
+        .workflow-step .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .workflow-step h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .workflow-arrow {
+            font-size: 2em;
+            color: #cbd5e0;
+        }
+        .footer {
+            background: #edf2f7;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #667eea;
+        }
+        .footer p {
+            color: #4a5568;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 VNEXSUS HTML 보고서 시스템</h1>
+            <p>GitHub 링크 + 브라우저 프리뷰로 제공되는 차세대 보고서 시스템</p>
+        </div>
+
+        <div class="content">
+            <div class="success-banner">
+                <h2>✅ 시스템 구축 완료!</h2>
+                <p>모든 HTML 보고서는 이제 브라우저 프리뷰와 GitHub 링크로 제공됩니다</p>
+            </div>
+
+            <div class="feature-box">
+                <h2>📊 주요 기능</h2>
+                <ul class="feature-list">
+                    <li><strong>브라우저 프리뷰 자동 열기</strong> - 보고서 생성 시 시스템 브라우저에서 자동으로 열림</li>
+                    <li><strong>GitHub 링크 생성</strong> - Raw URL 및 Repo URL 자동 생성</li>
+                    <li><strong>체계적 파일 관리</strong> - reports/ 디렉토리에 모든 보고서 저장</li>
+                    <li><strong>다중 언어 지원</strong> - Python, JavaScript, Shell 스크립트 모두 지원</li>
+                    <li><strong>간편한 사용</strong> - 한 줄의 코드로 보고서 게시 가능</li>
+                </ul>
+            </div>
+
+            <h2 style="font-size: 2em; color: #2d3748; margin: 40px 0 25px; border-bottom: 3px solid #667eea; padding-bottom: 10px;">
+                💡 작동 방식
+            </h2>
+
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div class="icon">📝</div>
+                    <h4>1. HTML 생성</h4>
+                    <p>보고서 HTML 작성</p>
+                </div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step">
+                    <div class="icon">💾</div>
+                    <h4>2. 자동 저장</h4>
+                    <p>reports/에 저장</p>
+                </div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step">
+                    <div class="icon">🌐</div>
+                    <h4>3. 브라우저 열기</h4>
+                    <p>자동 프리뷰</p>
+                </div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step">
+                    <div class="icon">🔗</div>
+                    <h4>4. GitHub 링크</h4>
+                    <p>URL 생성 완료</p>
+                </div>
+            </div>
+
+            <h2 style="font-size: 2em; color: #2d3748; margin: 40px 0 25px; border-bottom: 3px solid #667eea; padding-bottom: 10px;">
+                🛠️ 사용 방법
+            </h2>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🐍 Python</h3>
+                    <p>Python 스크립트에서 간편하게 사용</p>
+                    <div class="code-block">
+<pre>from scripts.publish_html_report import publish_report
+
+info = publish_report(
+    html_content=html,
+    filename='report.html',
+    title='내 보고서'
+)</pre>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>📜 JavaScript</h3>
+                    <p>JavaScript/Node.js에서 사용</p>
+                    <div class="code-block">
+<pre>import { publishReport } from './utils/reportPublisher.js';
+
+const info = await publishReport({
+    htmlContent: html,
+    filename: 'report.html',
+    title: '내 보고서'
+});</pre>
+                    </div>
+                </div>
+
+                <div class="demo-card">
+                    <h3>💻 CLI</h3>
+                    <p>커맨드라인에서 직접 사용</p>
+                    <div class="code-block">
+<pre>python3 scripts/publish_html_report.py \
+  report.html "보고서 제목"
+
+# 또는
+./scripts/publish-html-report.sh \
+  report.html "보고서 제목"</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 생성되는 링크</h4>
+                <p><strong>GitHub Raw URL:</strong> <span class="highlight">https://raw.githubusercontent.com/.../reports/report.html</span></p>
+                <p style="margin-top: 10px;"><strong>GitHub Repo URL:</strong> <span class="highlight">https://github.com/.../blob/.../reports/report.html</span></p>
+                <p style="margin-top: 15px; font-style: italic;">⚠️ 커밋 및 푸시 후 GitHub URL에 접근할 수 있습니다</p>
+            </div>
+
+            <h2 style="font-size: 2em; color: #2d3748; margin: 40px 0 25px; border-bottom: 3px solid #667eea; padding-bottom: 10px;">
+                📦 제공되는 도구
+            </h2>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>utils/reportPublisher.js</h3>
+                    <p>JavaScript용 보고서 게시 모듈</p>
+                </div>
+                <div class="demo-card">
+                    <h3>scripts/publish_html_report.py</h3>
+                    <p>Python용 보고서 게시 유틸리티</p>
+                </div>
+                <div class="demo-card">
+                    <h3>scripts/publish-html-report.sh</h3>
+                    <p>Shell 스크립트 보고서 도구</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>📚 자세한 사용법</h4>
+                <p><code style="background: #2d3748; color: #e2e8f0; padding: 2px 8px; border-radius: 4px;">reports/README.md</code> 파일에서 전체 문서를 확인하세요</p>
+            </div>
+
+            <div class="success-banner">
+                <h2>🎉 이제 모든 HTML 보고서를 프리뷰로 제공합니다!</h2>
+                <p style="margin-top: 15px; font-size: 1.1em;">
+                    더 이상 HTML을 직접 제공하지 않고, GitHub 링크와 브라우저 프리뷰로 전환되었습니다
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>VNEXSUS HTML 보고서 시스템</strong></p>
+            <p>Version 1.0 | 2026-02-01</p>
+            <p style="margin-top: 15px; color: #718096;">
+                Powered by VNEXSUS Medical OCR Event Pipeline
+            </p>
+        </div>
+    </div>
+</body>
+</html>
