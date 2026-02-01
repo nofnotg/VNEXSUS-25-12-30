@@ -10,6 +10,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { publishReport } from '../../utils/reportPublisher.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +19,7 @@ const __dirname = path.dirname(__filename);
 const CONFIG = {
   cycle4ResultsPath: path.join(__dirname, 'output/cycle4_topdown/cycle4_topdown_results.json'),
   cycle5ResultsPath: path.join(__dirname, 'output/cycle5_postprocessing/cycle5_results.json'),
-  outputPath: path.join(process.cwd(), 'OCR_Pipeline_Validation_Report.html')
+  outputFilename: 'OCR_Pipeline_Validation_Report.html'
 };
 
 // 결과 로드
@@ -483,7 +484,7 @@ function generateHTML(cycle4, cycle5) {
 }
 
 // 메인 실행
-function main() {
+async function main() {
   console.log('Generating OCR Pipeline Validation Report...\n');
 
   const { cycle4, cycle5 } = loadResults();
@@ -497,9 +498,22 @@ function main() {
   console.log(`  Cases: ${cycle5.summary.validCases}`);
 
   const html = generateHTML(cycle4, cycle5);
-  fs.writeFileSync(CONFIG.outputPath, html, 'utf-8');
 
-  console.log(`\n✓ Report generated: ${CONFIG.outputPath}`);
+  // HTML 보고서를 GitHub 링크와 브라우저 프리뷰로 게시
+  const reportInfo = await publishReport({
+    htmlContent: html,
+    filename: CONFIG.outputFilename,
+    title: 'VNEXSUS OCR 파이프라인 검증 보고서',
+    openBrowser: true
+  });
+
+  console.log('\n✅ Report published successfully!');
+  console.log(`\n📊 Report Details:`);
+  console.log(`   Local Preview: ${reportInfo.localPath}`);
+  console.log(`   GitHub Raw URL: ${reportInfo.githubRawUrl}`);
+  console.log(`   GitHub Repo URL: ${reportInfo.githubRepoUrl}`);
+  console.log(`\n💡 The browser preview should open automatically.`);
+  console.log(`💡 Commit and push to GitHub to make the raw URL accessible.`);
 }
 
-main();
+main().catch(console.error);
