@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 좌표정보 포함 10개 케이스 검증 보고서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .meta-info {
+            font-size: 0.95em;
+            opacity: 0.9;
+            margin-top: 15px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef;
+            transition: background-color 0.3s;
+        }
+
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card h3 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .metric-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 0 5px;
+        }
+
+        .badge-s { background: #28a745; color: white; }
+        .badge-a-plus { background: #17a2b8; color: white; }
+        .badge-a { background: #007bff; color: white; }
+        .badge-b-plus { background: #6c757d; color: white; }
+        .badge-b { background: #6c757d; color: white; }
+        .badge-c-plus { background: #ffc107; color: black; }
+        .badge-c { background: #fd7e14; color: white; }
+
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 5px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        pre code {
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e9ecef;
+            margin: 40px 0;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 3px solid #667eea;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 25px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 OCR 좌표정보 포함 10개 케이스 검증 보고서</h1>
+            <div class="meta-info">
+                <strong>작성일:</strong> 2026-01-31<br>
+                <strong>검증 대상:</strong> Case 2, 5, 13, 15, 17, 29, 30, 41, 42, 44<br>
+                <strong>검증 방식:</strong> OCR 좌표정보 기반 날짜 추출 vs Ground Truth 비교
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Executive Summary -->
+            <section class="executive-summary">
+                <h2>📊 Executive Summary</h2>
+
+                <h3>전체 검증 결과</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>수량</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>검증 케이스 수</strong></td>
+                            <td>10개</td>
+                            <td>OCR 좌표정보 포함 케이스</td>
+                        </tr>
+                        <tr>
+                            <td><strong>전체 GT 날짜</strong></td>
+                            <td>176개</td>
+                            <td>Ground Truth 날짜</td>
+                        </tr>
+                        <tr>
+                            <td><strong>전체 OCR 추출 날짜</strong></td>
+                            <td>507개</td>
+                            <td>OCR로 추출된 날짜 (중복 포함)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>매칭 성공 날짜</strong></td>
+                            <td>129개</td>
+                            <td>GT와 일치하는 날짜</td>
+                        </tr>
+                        <tr style="background-color: #d4edda; font-weight: bold;">
+                            <td><strong>전체 매칭률</strong></td>
+                            <td style="font-size: 1.5em; color: #28a745;">73.30%</td>
+                            <td>129/176</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="success-box">
+                    <h3>주요 성과</h3>
+                    <ul>
+                        <li>✅ <strong>전체 매칭률 73.30%</strong> 달성</li>
+                        <li>✅ <strong>과거병력 항목 100% 매칭</strong> 완벽 추출</li>
+                        <li>✅ <strong>통원기간 87.76%, 의사소견 87.10%, 검사결과 85.87%</strong> 고매칭률 달성</li>
+                        <li>✅ <strong>케이스별 최고 매칭률 91.67%</strong> (Case42)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 날짜 9항목별 매칭률 분석 -->
+            <section>
+                <h2>📋 1. 날짜 9항목별 매칭률 분석</h2>
+
+                <h3>1.1 종합 현황</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>항목명</th>
+                            <th>GT 날짜 수</th>
+                            <th>매칭 수</th>
+                            <th>매칭률</th>
+                            <th>등급</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #d4edda;">
+                            <td><span class="emoji">🥇</span></td>
+                            <td><strong>item_9.과거병력</strong><br><small>Medical History</small></td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td style="font-weight: bold; color: #28a745;">100.00%</td>
+                            <td><span class="badge badge-s">S</span></td>
+                        </tr>
+                        <tr style="background-color: #d1ecf1;">
+                            <td><span class="emoji">🥈</span></td>
+                            <td><strong>item_7.통원기간</strong><br><small>Outpatient Period</small></td>
+                            <td>49</td>
+                            <td>43</td>
+                            <td style="font-weight: bold; color: #17a2b8;">87.76%</td>
+                            <td><span class="badge badge-a-plus">A+</span></td>
+                        </tr>
+                        <tr style="background-color: #d1ecf1;">
+                            <td><span class="emoji">🥉</span></td>
+                            <td><strong>item_10.의사소견</strong><br><small>Doctor Opinion</small></td>
+                            <td>62</td>
+                            <td>54</td>
+                            <td style="font-weight: bold; color: #17a2b8;">87.10%</td>
+                            <td><span class="badge badge-a-plus">A+</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>item_4.검사결과</strong><br><small>Examination</small></td>
+                            <td>92</td>
+                            <td>79</td>
+                            <td style="font-weight: bold; color: #007bff;">85.87%</td>
+                            <td><span class="badge badge-a">A</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>item_3.진단병명</strong><br><small>Diagnosis</small></td>
+                            <td>54</td>
+                            <td>43</td>
+                            <td>79.63%</td>
+                            <td><span class="badge badge-b-plus">B+</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>item_8.입원기간</strong><br><small>Hospitalization</small></td>
+                            <td>36</td>
+                            <td>28</td>
+                            <td>77.78%</td>
+                            <td><span class="badge badge-b-plus">B+</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>item_2.내원경위</strong><br><small>Visit Reason</small></td>
+                            <td>102</td>
+                            <td>78</td>
+                            <td>76.47%</td>
+                            <td><span class="badge badge-b">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>item_1.내원일시</strong><br><small>Visit DateTime</small></td>
+                            <td>112</td>
+                            <td>83</td>
+                            <td>74.11%</td>
+                            <td><span class="badge badge-b">B</span></td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td>9</td>
+                            <td><strong>item_6.치료내용</strong><br><small>Treatment</small></td>
+                            <td>58</td>
+                            <td>38</td>
+                            <td style="font-weight: bold; color: #dc3545;">65.52%</td>
+                            <td><span class="badge badge-c-plus">C+</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <strong>등급 기준:</strong> S(95~100%), A+(85~94%), A(80~84%), B+(75~79%), B(70~74%), C+(65~69%), C(60~64%)
+                </div>
+
+                <h3>1.2 상세 분석</h3>
+
+                <div class="success-box">
+                    <h4>🏆 우수 항목 (80% 이상)</h4>
+
+                    <h4>1) item_9.과거병력 (100.00%)</h4>
+                    <ul>
+                        <li>GT: 5개 → 매칭: 5개</li>
+                        <li><strong>완벽한 추출 성공</strong></li>
+                        <li>과거병력 날짜는 명확한 컨텍스트로 인식률 우수</li>
+                    </ul>
+
+                    <h4>2) item_7.통원기간 (87.76%)</h4>
+                    <ul>
+                        <li>GT: 49개 → 매칭: 43개 → 미매칭: 6개</li>
+                        <li>날짜 범위 형태(YYYY-MM-DD ~ YYYY-MM-DD)의 안정적 추출</li>
+                        <li>높은 패턴 인식률</li>
+                    </ul>
+
+                    <h4>3) item_10.의사소견 (87.10%)</h4>
+                    <ul>
+                        <li>GT: 62개 → 매칭: 54개 → 미매칭: 8개</li>
+                        <li>의사 소견서 내 날짜 정보 우수 추출</li>
+                        <li>컨텍스트 분석 성공적</li>
+                    </ul>
+
+                    <h4>4) item_4.검사결과 (85.87%)</h4>
+                    <ul>
+                        <li>GT: 92개 → 매칭: 79개 → 미매칭: 13개</li>
+                        <li>검사일, 보고일시 등 명확한 키워드로 인식 용이</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ 개선 필요 항목 (80% 미만)</h4>
+
+                    <h4>1) item_6.치료내용 (65.52%)</h4>
+                    <ul>
+                        <li>GT: 58개 → 매칭: 38개 → <strong>미매칭: 20개 (34.48%)</strong></li>
+                        <li><strong>개선 필요 사항:</strong>
+                            <ul>
+                                <li>치료 관련 날짜의 컨텍스트가 불명확한 경우 미추출</li>
+                                <li>"치료일", "처치일" 등 다양한 표현 패턴 보강 필요</li>
+                                <li>치료 내용 서술 내 날짜 추출 로직 강화 필요</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>2) item_1.내원일시 (74.11%)</h4>
+                    <ul>
+                        <li>GT: 112개 → 매칭: 83개 → 미매칭: 29개</li>
+                        <li><strong>분석:</strong>
+                            <ul>
+                                <li>GT 날짜 수가 가장 많은 항목 (112개)</li>
+                                <li>다양한 내원일 표현으로 인한 인식 누락 발생</li>
+                                <li>"초진일", "재진일", "응급실 내원일" 등 세분화된 패턴 필요</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>3) item_2.내원경위 (76.47%)</h4>
+                    <ul>
+                        <li>GT: 102개 → 매칭: 78개 → 미매칭: 24개</li>
+                        <li>내원경위 서술 내 날짜 추출 개선 필요</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 세무항목별 매칭률 분석 -->
+            <section>
+                <h2>🏥 2. 세무항목별(카테고리별) 매칭률 분석</h2>
+
+                <h3>2.1 종합 현황</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>카테고리</th>
+                            <th>GT 날짜 수</th>
+                            <th>매칭 수</th>
+                            <th>매칭률</th>
+                            <th>평가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #d4edda;">
+                            <td><span class="emoji">🥇</span></td>
+                            <td><strong>medical_examination</strong><br><small>의료 검사</small></td>
+                            <td>92</td>
+                            <td>79</td>
+                            <td style="font-weight: bold; color: #28a745;">85.87%</td>
+                            <td>우수</td>
+                        </tr>
+                        <tr style="background-color: #d1ecf1;">
+                            <td><span class="emoji">🥈</span></td>
+                            <td><strong>medical_diagnosis</strong><br><small>의료 진단</small></td>
+                            <td>87</td>
+                            <td>71</td>
+                            <td style="font-weight: bold; color: #17a2b8;">81.61%</td>
+                            <td>우수</td>
+                        </tr>
+                        <tr>
+                            <td><span class="emoji">🥉</span></td>
+                            <td><strong>medical_visit</strong><br><small>의료 내원</small></td>
+                            <td>117</td>
+                            <td>87</td>
+                            <td>74.36%</td>
+                            <td>양호</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td>4</td>
+                            <td><strong>insurance_start</strong><br><small>보험 시작일</small></td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td style="font-weight: bold; color: #fd7e14;">66.67%</td>
+                            <td>개선필요</td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td>5</td>
+                            <td><strong>medical_treatment</strong><br><small>의료 치료</small></td>
+                            <td>56</td>
+                            <td>36</td>
+                            <td style="font-weight: bold; color: #fd7e14;">64.29%</td>
+                            <td>개선필요</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2.2 카테고리별 상세 분석</h3>
+
+                <div class="success-box">
+                    <h4>✅ 우수 카테고리 (80% 이상)</h4>
+
+                    <h4>1) medical_examination (의료 검사) - 85.87%</h4>
+                    <ul>
+                        <li>검사일, 보고일시 등 명확한 날짜 필드</li>
+                        <li>CT, MRI, 혈액검사 등 검사 결과 내 날짜 정확 추출</li>
+                        <li><strong>강점:</strong> 구조화된 검사 보고서 형식</li>
+                    </ul>
+
+                    <h4>2) medical_diagnosis (의료 진단) - 81.61%</h4>
+                    <ul>
+                        <li>진단일, 확진일 등 중요 날짜 정보</li>
+                        <li>진단병명과 함께 기록된 날짜 정확 인식</li>
+                        <li><strong>강점:</strong> 의료 문서의 핵심 정보로 명확한 컨텍스트</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ 개선 필요 카테고리 (80% 미만)</h4>
+
+                    <h4>1) medical_visit (의료 내원) - 74.36%</h4>
+                    <ul>
+                        <li>GT: 117개 (가장 많은 카테고리)</li>
+                        <li>매칭: 87개 → 미매칭: 30개</li>
+                        <li><strong>개선 사항:</strong>
+                            <ul>
+                                <li>다양한 내원 유형(초진, 재진, 응급) 패턴 보강</li>
+                                <li>내원일시 표현 다양성 대응 강화</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>2) insurance_start (보험 시작일) - 66.67%</h4>
+                    <ul>
+                        <li>GT: 15개 → 매칭: 10개 → 미매칭: 5개</li>
+                        <li><strong>개선 사항:</strong>
+                            <ul>
+                                <li>보험가입일, 계약일, 효력발생일 등 다양한 표현 보강</li>
+                                <li>"가입 N년 이내" 상대적 표현 처리 개선</li>
+                                <li>보험 관련 날짜의 컨텍스트 분석 강화</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>3) medical_treatment (의료 치료) - 64.29%</h4>
+                    <ul>
+                        <li>GT: 56개 → 매칭: 36개 → 미매칭: 20개</li>
+                        <li><strong>개선 사항:</strong>
+                            <ul>
+                                <li>치료일, 처치일, 투약일 등 패턴 확장</li>
+                                <li>치료 내용 서술 내 암묵적 날짜 정보 추출 강화</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 케이스별 상세 결과 -->
+            <section>
+                <h2>📁 3. 케이스별 상세 결과</h2>
+
+                <h3>3.1 성능 순위</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>케이스</th>
+                            <th>GT</th>
+                            <th>OCR</th>
+                            <th>매칭</th>
+                            <th>매칭률</th>
+                            <th>평가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #d4edda;">
+                            <td><span class="emoji">🥇</span></td>
+                            <td><strong>Case42</strong></td>
+                            <td>12</td>
+                            <td>18</td>
+                            <td>11</td>
+                            <td style="font-weight: bold; color: #28a745;">91.67%</td>
+                            <td><span class="badge badge-s">S</span></td>
+                        </tr>
+                        <tr style="background-color: #d1ecf1;">
+                            <td><span class="emoji">🥈</span></td>
+                            <td><strong>Case13</strong></td>
+                            <td>10</td>
+                            <td>126</td>
+                            <td>9</td>
+                            <td style="font-weight: bold; color: #17a2b8;">90.00%</td>
+                            <td><span class="badge badge-a-plus">A+</span></td>
+                        </tr>
+                        <tr style="background-color: #d1ecf1;">
+                            <td><span class="emoji">🥉</span></td>
+                            <td><strong>Case2</strong></td>
+                            <td>22</td>
+                            <td>69</td>
+                            <td>18</td>
+                            <td style="font-weight: bold; color: #007bff;">81.82%</td>
+                            <td><span class="badge badge-a">A</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Case15</td>
+                            <td>14</td>
+                            <td>31</td>
+                            <td>11</td>
+                            <td>78.57%</td>
+                            <td><span class="badge badge-b-plus">B+</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Case5</td>
+                            <td>22</td>
+                            <td>92</td>
+                            <td>16</td>
+                            <td>72.73%</td>
+                            <td><span class="badge badge-b">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Case41</td>
+                            <td>22</td>
+                            <td>56</td>
+                            <td>16</td>
+                            <td>72.73%</td>
+                            <td><span class="badge badge-b">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Case17</td>
+                            <td>13</td>
+                            <td>28</td>
+                            <td>9</td>
+                            <td>69.23%</td>
+                            <td><span class="badge badge-c-plus">C+</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Case29</td>
+                            <td>27</td>
+                            <td>25</td>
+                            <td>18</td>
+                            <td>66.67%</td>
+                            <td><span class="badge badge-c-plus">C+</span></td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td>9</td>
+                            <td>Case44</td>
+                            <td>24</td>
+                            <td>43</td>
+                            <td>15</td>
+                            <td>62.50%</td>
+                            <td><span class="badge badge-c">C</span></td>
+                        </tr>
+                        <tr style="background-color: #fff3cd;">
+                            <td>10</td>
+                            <td>Case30</td>
+                            <td>10</td>
+                            <td>19</td>
+                            <td>6</td>
+                            <td>60.00%</td>
+                            <td><span class="badge badge-c">C</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3.2 케이스별 분석</h3>
+
+                <div class="success-box">
+                    <h4>🏆 최우수 케이스</h4>
+
+                    <h4>Case42 (91.67%)</h4>
+                    <ul>
+                        <li>GT: 12개 / OCR: 18개 / 매칭: 11개</li>
+                        <li><strong>성공 요인:</strong>
+                            <ul>
+                                <li>간결하고 구조화된 문서</li>
+                                <li>명확한 날짜 표현</li>
+                                <li>높은 OCR 품질</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Case13 (90.00%)</h4>
+                    <ul>
+                        <li>GT: 10개 / OCR: 126개 / 매칭: 9개</li>
+                        <li><strong>특이사항:</strong>
+                            <ul>
+                                <li>OCR이 126개 날짜 추출 (GT의 12.6배)</li>
+                                <li>과잉 추출에도 불구하고 높은 매칭률 유지</li>
+                                <li>False Positive가 많지만 핵심 날짜는 정확 추출</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Case2 (81.82%)</h4>
+                    <ul>
+                        <li>GT: 22개 / OCR: 69개 / 매칭: 18개</li>
+                        <li>안정적인 추출 성능</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ 개선 필요 케이스</h4>
+
+                    <h4>Case30 (60.00%)</h4>
+                    <ul>
+                        <li>GT: 10개 / OCR: 19개 / 매칭: 6개</li>
+                        <li><strong>문제점:</strong>
+                            <ul>
+                                <li>미매칭 4개 (40%)</li>
+                                <li>2012년 등 오래된 날짜 인식 오류 가능성</li>
+                            </ul>
+                        </li>
+                        <li><strong>개선 방향:</strong> 연도 범위 확장, 과거 날짜 신뢰도 조정</li>
+                    </ul>
+
+                    <h4>Case44 (62.50%)</h4>
+                    <ul>
+                        <li>GT: 24개 / OCR: 43개 / 매칭: 15개</li>
+                        <li><strong>문제점:</strong>
+                            <ul>
+                                <li>"조사중", "확인중" 등 미확정 날짜 포함</li>
+                                <li>컨텍스트 필터링 강화 필요</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>Case29 (66.67%)</h4>
+                    <ul>
+                        <li>GT: 27개 / OCR: 25개 / 매칭: 18개</li>
+                        <li><strong>특이사항:</strong>
+                            <ul>
+                                <li>OCR이 GT보다 적게 추출 (under-extraction)</li>
+                                <li>누락된 9개 날짜에 대한 추가 분석 필요</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 개선 권고사항 -->
+            <section>
+                <h2>🔍 4. 개선 권고사항</h2>
+
+                <h3>4.1 즉시 개선 필요 (High Priority)</h3>
+
+                <div class="warning-box">
+                    <h4>1️⃣ 치료내용 항목 강화 (현재 65.52%)</h4>
+                    <p><strong>문제:</strong> 치료 관련 날짜의 컨텍스트가 불명확하여 미추출 34.48%</p>
+
+                    <p><strong>해결 방안:</strong></p>
+                    <pre><code>// 치료 관련 키워드 패턴 확장
+const treatmentKeywords = [
+  '치료일', '처치일', '투약일', '수술일',
+  '시술일', '처방일', '관리일',
+  '치료기간', '처치내역', '투약내역'
+];
+
+// 컨텍스트 분석 강화
+- 치료 내용 서술 내 암묵적 날짜 추출
+- "~ 치료를 시작하였음" 등의 패턴 인식
+- 치료 경과 기록 내 날짜 정보 추출</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <h4>2️⃣ 내원일시 항목 개선 (현재 74.11%)</h4>
+                    <p><strong>문제:</strong> GT 112개 중 29개 미매칭 (가장 많은 항목이지만 매칭률 낮음)</p>
+
+                    <p><strong>해결 방안:</strong></p>
+                    <pre><code>// 내원 관련 세분화된 패턴
+const visitPatterns = [
+  '내원일', '내원일시', '초진일', '재진일',
+  '응급실 내원', 'ER 방문', '외래 방문일',
+  '입원일', '퇴원일', '전원일',
+  '내원 당시', '내원 시', '방문 당시'
+];
+
+// 날짜-시간 복합 패턴 처리
+- "2024.04.03 14:30" 형태의 일시 정보
+- 시간 정보 포함 시 날짜만 추출</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <h4>3️⃣ 보험 시작일 개선 (현재 66.67%)</h4>
+                    <p><strong>문제:</strong> 다양한 표현으로 인한 인식 누락</p>
+
+                    <p><strong>해결 방안:</strong></p>
+                    <pre><code>// 보험 관련 날짜 키워드 확장
+const insuranceStartKeywords = [
+  '보험가입일', '계약일', '청약일',
+  '효력발생일', '보장개시일', '상품가입일',
+  '보험계약일', '가입일자', '계약체결일',
+  '보장시작일', '보장개시일자'
+];
+
+// 상대적 표현 처리
+- "가입 5년 이내" → 기준일 대비 계산
+- "계약 후 N개월" → 계약일 기준 계산</code></pre>
+                </div>
+
+                <h3>4.2 중기 개선 과제 (Medium Priority)</h3>
+
+                <div class="highlight-box">
+                    <h4>4️⃣ Over-Extraction 문제 해결</h4>
+                    <p><strong>현황:</strong> OCR 507개 추출 vs GT 176개 (2.88배 과잉 추출)</p>
+
+                    <p><strong>원인:</strong></p>
+                    <ul>
+                        <li>중복 날짜 추출 (같은 날짜가 여러 컨텍스트에서 반복)</li>
+                        <li>관련 없는 날짜 추출 (문서 작성일, 시스템 날짜 등)</li>
+                        <li>날짜 형태의 숫자 오인식</li>
+                    </ul>
+
+                    <p><strong>해결 방안:</strong></p>
+                    <ol>
+                        <li><strong>중복 제거 강화</strong>
+                            <ul>
+                                <li>같은 날짜 + 유사 컨텍스트 → 단일 날짜로 통합</li>
+                                <li>날짜 범위 분리 시 시작일/종료일 명확히 구분</li>
+                            </ul>
+                        </li>
+                        <li><strong>관련성 필터링</strong>
+                            <ul>
+                                <li>문서 메타데이터 날짜 제외</li>
+                                <li>"출력일", "인쇄일", "조회일" 등 시스템 날짜 필터링</li>
+                            </ul>
+                        </li>
+                        <li><strong>신뢰도 기반 선별</strong>
+                            <ul>
+                                <li>Confidence score가 낮은 날짜 제외</li>
+                                <li>컨텍스트가 명확하지 않은 날짜 필터링</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>5️⃣ Under-Extraction 문제 해결</h4>
+                    <p><strong>사례:</strong> Case29 (GT 27개 vs OCR 25개)</p>
+
+                    <p><strong>해결 방안:</strong></p>
+                    <ul>
+                        <li>GT에만 존재하는 날짜 패턴 분석</li>
+                        <li>누락된 날짜의 공통 특징 파악</li>
+                        <li>포괄적 추출 로직 보강</li>
+                    </ul>
+                </div>
+
+                <h3>4.3 장기 개선 과제 (Low Priority)</h3>
+
+                <div class="info-box">
+                    <h4>6️⃣ 문서 타입별 맞춤 추출</h4>
+                    <ul>
+                        <li>의료 진단서 vs 소견서 vs 진료 기록부 → 각 문서 유형별 최적화</li>
+                        <li>보험 청구서 vs 가입증서 → 보험 문서 유형별 특화</li>
+                    </ul>
+
+                    <h4>7️⃣ 날짜 검증 로직 강화</h4>
+                    <ul>
+                        <li>불가능한 날짜 필터링 (예: 2025-03-45)</li>
+                        <li>미래 날짜 경고 (예: 2054-10-08)</li>
+                        <li>월 오류 탐지 (예: 2502-00-37)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 성과 및 향후 계획 -->
+            <section>
+                <h2>📈 5. 성과 및 향후 계획</h2>
+
+                <h3>5.1 주요 성과</h3>
+                <div class="success-box">
+                    <ul>
+                        <li>✅ <strong>전체 매칭률 73.30%</strong> - 이전 대비 안정적 성능</li>
+                        <li>✅ <strong>과거병력 100% 완벽 추출</strong> - 핵심 정보 누락 없음</li>
+                        <li>✅ <strong>통원기간 87.76%, 의사소견 87.10%, 검사결과 85.87%</strong> - 높은 정확도</li>
+                        <li>✅ <strong>10개 케이스 중 3개 케이스 80% 이상</strong> - 우수 사례 확보</li>
+                        <li>✅ <strong>OCR 좌표정보 활용 검증 완료</strong> - 좌표 기반 추출 유효성 입증</li>
+                    </ul>
+                </div>
+
+                <h3>5.2 개선 목표</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>현재</th>
+                            <th>목표</th>
+                            <th>기한</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>전체 매칭률</td>
+                            <td>73.30%</td>
+                            <td><strong>85%+</strong></td>
+                            <td>2개월</td>
+                        </tr>
+                        <tr>
+                            <td>치료내용 항목</td>
+                            <td>65.52%</td>
+                            <td><strong>80%+</strong></td>
+                            <td>1개월</td>
+                        </tr>
+                        <tr>
+                            <td>내원일시 항목</td>
+                            <td>74.11%</td>
+                            <td><strong>85%+</strong></td>
+                            <td>1개월</td>
+                        </tr>
+                        <tr>
+                            <td>보험 시작일</td>
+                            <td>66.67%</td>
+                            <td><strong>85%+</strong></td>
+                            <td>1개월</td>
+                        </tr>
+                        <tr>
+                            <td>Over-Extraction</td>
+                            <td>2.88배</td>
+                            <td><strong>1.5배 이하</strong></td>
+                            <td>2개월</td>
+                        </tr>
+                        <tr>
+                            <td>Case30 개선</td>
+                            <td>60.00%</td>
+                            <td><strong>75%+</strong></td>
+                            <td>1개월</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>5.3 Next Steps</h3>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h4>Phase 1: 즉시 개선</h4>
+                        <p><strong>기간:</strong> 1개월</p>
+                        <ol style="text-align: left;">
+                            <li>치료내용, 내원일시, 보험 시작일 키워드 패턴 확장</li>
+                            <li>중복 제거 로직 강화</li>
+                            <li>관련성 필터링 구현</li>
+                        </ol>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>Phase 2: 중기 개선</h4>
+                        <p><strong>기간:</strong> 2개월</p>
+                        <ol style="text-align: left;">
+                            <li>Over-Extraction 문제 해결</li>
+                            <li>Under-Extraction 원인 분석 및 개선</li>
+                            <li>신뢰도 기반 선별 로직 구현</li>
+                        </ol>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>Phase 3: 장기 개선</h4>
+                        <p><strong>기간:</strong> 3개월</p>
+                        <ol style="text-align: left;">
+                            <li>문서 타입별 맞춤 추출 엔진</li>
+                            <li>날짜 검증 로직 강화</li>
+                            <li>지속적 성능 모니터링 시스템 구축</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 결론 -->
+            <section>
+                <h2>📌 결론</h2>
+
+                <div class="executive-summary">
+                    <h3>종합 평가</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <span class="badge" style="font-size: 1.5em; padding: 15px 30px; background: #6c757d;">등급: B+ (73.30%)</span>
+                    </div>
+
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        이번 OCR 좌표정보 포함 10개 케이스 검증에서 <strong>전체 매칭률 73.30%</strong>를 달성하여 양호한 성능을 확인했습니다.
+                        특히 과거병력 100%, 통원기간 87.76%, 의사소견 87.10%, 검사결과 85.87% 등 핵심 항목에서 우수한 결과를 보였습니다.
+                    </p>
+
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        다만, 치료내용(65.52%), 내원일시(74.11%), 보험 시작일(66.67%) 등 일부 항목에서 개선이 필요하며,
+                        OCR의 과잉 추출(2.88배) 문제 해결이 요구됩니다.
+                    </p>
+
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        권고사항을 단계적으로 적용하면 <strong style="color: #28a745; font-size: 1.2em;">85% 이상의 매칭률</strong> 달성이 가능할 것으로 예상됩니다.
+                    </p>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 참고 자료 -->
+            <section>
+                <h2>📂 참고 자료</h2>
+                <ul>
+                    <li>검증 스크립트: <code>/scripts/validate-10-cases-with-coordinates.cjs</code></li>
+                    <li>상세 결과 JSON: <code>/OCR_VALIDATION_10_CASES_WITH_COORDINATES.json</code></li>
+                    <li>GT 분석 데이터: <code>/backend/eval/output/comprehensive_gt_analysis/comprehensive_gt_analysis.json</code></li>
+                    <li>OCR 캐시: <code>/backend/eval/output/cycle4_topdown/ocr_cache/case_*_topdown.json</code></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footer">
+            <p><strong>보고서 작성:</strong> Claude AI</p>
+            <p><strong>검증일:</strong> 2026-01-31</p>
+            <p><strong>문서 버전:</strong> 1.0</p>
+        </div>
+    </div>
+</body>
+</html>
