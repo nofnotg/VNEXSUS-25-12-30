@@ -107,8 +107,8 @@ const CASE_PATTERNS = {
  * OCR 캐시 파일 읽기
  */
 function readOCRCache(caseNum) {
-  // 절대 경로 사용
-  const cachePath = `/home/user/VNEXSUS-25-12-30/backend/eval/output/full_pipeline_validation/ocr_cache/case_${caseNum}_4o-mini.json`;
+  // cycle4_topdown 경로 사용
+  const cachePath = `/home/user/VNEXSUS-25-12-30/backend/eval/output/cycle4_topdown/ocr_cache/case_${caseNum}_topdown.json`;
 
   try {
     const content = fs.readFileSync(cachePath, 'utf-8');

@@ -29,6 +29,8 @@ class EnhancedMassiveDateBlockProcessor {
         hospitalizationBlock: /(?:입원|퇴원|병동|응급실)(?:\s*기간\s*[:：]?)?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?[\s\S]*?(?=(?:입원|퇴원|\d{4}[-\/.년])|$)/gi,
         // 수술/시술 블록
         surgeryBlock: /(?:수술|시술|처치|마취|절제|적출)(?:\s*일\s*[:：]?)?\s*[:：]?[\s\S]*?(?=(?:수술|시술|처치|\d{4}[-\/.년])|$)/gi,
+        // 치료 블록 (신규 추가 - 치료내용 항목 강화)
+        treatmentBlock: /(?:치료|물리치료|재활|관리|요법|치료\s*내용|치료\s*기간|치료\s*내역)(?:\s*[:：]?)?\s*[\s\S]*?(?=(?:치료|\d{4}[-\/.년])|$)/gi,
         // 검사 결과 블록 (영상, 혈액, 조직검사 등 + 보고일시)
         testBlock: /(?:검사|촬영|CT|MRI|초음파|X-ray|X선|혈액|소변|조직|병리|보고일시)\s*[:：]?[\s\S]*?(?=(?:검사|촬영|\d{4}[-\/.년])|$)/gi,
         // 진단 블록
@@ -43,8 +45,8 @@ class EnhancedMassiveDateBlockProcessor {
         standardDate: /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
         // 한국어 날짜
         koreanDate: /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/g,
-        // 의료 특화 날짜 (진료일, 검사일 등)
-        medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일|내원일|초진일|보고일시)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
+        // 의료 특화 날짜 (진료일, 검사일 등 - 대폭 확장)
+        medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일|내원일|초진일|재진일|보고일시|치료일|처치일|투약일|시술일|관리일|전원일|응급실\s*내원|ER\s*방문|외래\s*방문일|내원\s*당시|내원\s*시|방문\s*당시|물리치료일|재활치료일)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
         // 보험 가입 관련 날짜 (대폭 강화)
         insuranceDate: /(?:가입일|계약일|보험가입일|보장기간시작일|보장개시일|상품가입일|청약일|효력발생일|보험계약일|보장기간|가입\s*\d+\s*(?:년|개월)\s*이내)\s*[:：~부터]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
         // 날짜 범위 패턴 (시작~종료)
@@ -69,6 +71,12 @@ class EnhancedMassiveDateBlockProcessor {
       /^\s*페이지\s*\d+\s*$/gm, // 페이지 번호
       /^\s*\d+\s*\/\s*\d+\s*$/gm, // 페이지 표시
       /^\s*\[\s*\]\s*$/gm     // 빈 체크박스
+    ];
+
+    // 문서 메타데이터 키워드 (제외할 날짜)
+    this.metadataKeywords = [
+      '출력일', '인쇄일', '조회일', '발행일', '작성일시', '생성일',
+      '출력', '인쇄', '조회', '발행', '작성', '등록일', '수정일'
     ];
 
     // 조사중/예정/미확정 필터 패턴
@@ -539,6 +547,7 @@ class EnhancedMassiveDateBlockProcessor {
 
   _optimizeBlocks(dateGroups, options = {}) {
     const optimized = [];
+    const seenDates = new Map(); // 날짜 중복 추적
 
     dateGroups.forEach(group => {
       // 조사중 내용 필터링 (옵션으로 제어)
@@ -554,10 +563,37 @@ class EnhancedMassiveDateBlockProcessor {
         }
       }
 
+      // 메타데이터 날짜 필터링 (출력일, 인쇄일, 조회일 등 제외)
+      const isMetadata = this._isMetadataDate(group.blocks);
+      if (isMetadata) {
+        return; // skip metadata dates
+      }
+
+      // 신뢰도 기반 필터링 (낮은 신뢰도 제외)
+      if (group.confidence < 0.5) {
+        return; // skip low confidence dates
+      }
+
+      // 중복 날짜 필터링 (같은 날짜 + 유사한 컨텍스트)
+      const dateKey = group.date;
+      if (seenDates.has(dateKey)) {
+        const existingGroup = seenDates.get(dateKey);
+        // 더 높은 신뢰도의 그룹만 유지
+        if (group.confidence > existingGroup.confidence) {
+          // 기존 그룹 제거하고 새 그룹으로 교체
+          const existingIndex = optimized.findIndex(b => b.date === dateKey);
+          if (existingIndex !== -1) {
+            optimized.splice(existingIndex, 1);
+          }
+        } else {
+          return; // skip lower confidence duplicate
+        }
+      }
+
       // 중복 제거 및 병합
       const mergedContent = this._mergeBlockContents(group.blocks);
 
-      optimized.push({
+      const optimizedBlock = {
         date: group.date,
         type: 'dateGroup',
         content: mergedContent,
@@ -566,10 +602,23 @@ class EnhancedMassiveDateBlockProcessor {
         blockCount: group.blocks.length,
         isInvestigation: group.blocks.some(block => block.isInvestigation),
         optimized: true
-      });
+      };
+
+      optimized.push(optimizedBlock);
+      seenDates.set(dateKey, optimizedBlock);
     });
 
     return optimized;
+  }
+
+  /**
+   * 메타데이터 날짜 확인
+   * @param {Array} blocks 블록들
+   * @returns {boolean} 메타데이터 여부
+   */
+  _isMetadataDate(blocks) {
+    const content = blocks.map(b => b.content || '').join(' ');
+    return this.metadataKeywords.some(keyword => content.includes(keyword));
   }
 
   _mergeBlockContents(blocks) {
