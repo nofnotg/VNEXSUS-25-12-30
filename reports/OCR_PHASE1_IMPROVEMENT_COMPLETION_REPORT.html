@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 파이프라인 Phase 1 개선 완료 보고서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        .content {
+            padding: 50px 40px;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section-title {
+            font-size: 2em;
+            color: #2d3748;
+            margin: 40px 0 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .status-box {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .status-box h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .status-box .status-detail {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        .improvement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .improvement-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .improvement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .improvement-card h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .improvement-card .icon {
+            font-size: 1.8em;
+        }
+        .improvement-card .metric {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .improvement-card .metric-label {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .improvement-card .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        .highlight {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .info-box {
+            background: #bee3f8;
+            border-left: 4px solid #3182ce;
+            color: #1a365d;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        .info-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .comparison-table tr:hover {
+            background: #f7fafc;
+        }
+        .before-value {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+        .after-value {
+            color: #48bb78;
+            font-weight: bold;
+        }
+        .arrow {
+            color: #667eea;
+            font-size: 1.2em;
+            margin: 0 10px;
+        }
+        .footer {
+            background: #edf2f7;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #667eea;
+        }
+        .footer p {
+            color: #4a5568;
+            margin: 5px 0;
+        }
+        ul.feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        ul.feature-list li {
+            margin: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.05em;
+        }
+        ul.feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #48bb78;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 OCR 파이프라인 Phase 1 개선 완료</h1>
+            <p>치료내용/내원일시 항목 강화 및 중복 제거 로직 개선</p>
+            <p style="margin-top: 10px; font-size: 0.95em; opacity: 0.9;">2026-02-02 | Commit: 05eab3d</p>
+        </div>
+
+        <div class="content">
+            <div class="status-box">
+                <h2>✅ Phase 1 개선 작업 완료!</h2>
+                <div class="status-detail">
+                    3가지 핵심 개선사항 적용 완료 <br>
+                    치료내용 65.52% → 80%+ | 내원일시 74.11% → 85%+ | Over-Extraction 2.88배 → 1.5배 목표
+                </div>
+            </div>
+
+            <h2 class="section-title">📋 Executive Summary</h2>
+            <p style="font-size: 1.1em; line-height: 1.8; color: #4a5568;">
+                OCR 검증 보고서 (매칭률 73.30%)의 Phase 1 권고사항을 반영하여 OCR 파이프라인을 개선했습니다.
+                특히 치료내용(65.52%)과 내원일시(74.11%) 항목의 매칭률을 높이기 위한 패턴 확장 및
+                Over-Extraction 문제(2.88배)를 해결하기 위한 중복 제거 로직을 강화했습니다.
+            </p>
+
+            <h2 class="section-title">🎯 주요 개선 사항</h2>
+
+            <div class="improvement-grid">
+                <div class="improvement-card">
+                    <h3><span class="icon">💊</span> 치료내용 항목 강화</h3>
+                    <div class="metric">
+                        <div class="metric-label">현재 매칭률</div>
+                        <div class="metric-value">65.52%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">목표 매칭률</div>
+                        <div class="metric-value">80%+</div>
+                    </div>
+                    <ul class="feature-list">
+                        <li>치료 블록 패턴 신규 추가</li>
+                        <li>치료일, 처치일, 투약일 추가</li>
+                        <li>물리치료일, 재활치료일 추가</li>
+                        <li>시술일, 관리일 패턴 추가</li>
+                    </ul>
+                </div>
+
+                <div class="improvement-card">
+                    <h3><span class="icon">🏥</span> 내원일시 항목 확장</h3>
+                    <div class="metric">
+                        <div class="metric-label">현재 매칭률</div>
+                        <div class="metric-value">74.11%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">목표 매칭률</div>
+                        <div class="metric-value">85%+</div>
+                    </div>
+                    <ul class="feature-list">
+                        <li>재진일, 전원일 패턴 추가</li>
+                        <li>응급실 내원, ER 방문 추가</li>
+                        <li>외래 방문일, 내원 당시 추가</li>
+                        <li>내원 시, 방문 당시 패턴 추가</li>
+                    </ul>
+                </div>
+
+                <div class="improvement-card">
+                    <h3><span class="icon">🔄</span> 중복 제거 강화</h3>
+                    <div class="metric">
+                        <div class="metric-label">현재 Over-Extraction</div>
+                        <div class="metric-value">2.88배</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">목표</div>
+                        <div class="metric-value">1.5배 이하</div>
+                    </div>
+                    <ul class="feature-list">
+                        <li>문서 메타데이터 날짜 필터링</li>
+                        <li>신뢰도 기반 필터링 (< 0.5)</li>
+                        <li>같은 날짜 중복 시 고신뢰도 유지</li>
+                        <li>출력일/인쇄일/조회일 자동 제외</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">💻 코드 변경 상세</h2>
+
+            <div class="section">
+                <h3 style="color: #667eea; font-size: 1.3em; margin: 25px 0 15px;">1. 치료 블록 패턴 추가</h3>
+                <div class="code-block"><pre>// 신규 추가: treatmentBlock
+treatmentBlock: /(?:치료|물리치료|재활|관리|요법|치료\s*내용|치료\s*기간|치료\s*내역)(?:\s*[:：]?)?\s*[\s\S]*?(?=(?:치료|\d{4}[-\/.년])|$)/gi,</pre></div>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.8;">
+                    치료 관련 날짜를 포괄적으로 추출하기 위해 새로운 블록 패턴을 추가했습니다.
+                    물리치료, 재활, 요법 등 다양한 치료 형태를 모두 인식합니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3 style="color: #667eea; font-size: 1.3em; margin: 25px 0 15px;">2. 의료 특화 날짜 패턴 확장</h3>
+                <div class="code-block"><pre>// Before (8개 패턴)
+medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일|내원일|초진일|보고일시)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
+
+// After (21개 패턴)
+medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일|내원일|초진일|재진일|보고일시|치료일|처치일|투약일|시술일|관리일|전원일|응급실\s*내원|ER\s*방문|외래\s*방문일|내원\s*당시|내원\s*시|방문\s*당시|물리치료일|재활치료일)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,</pre></div>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.8;">
+                    의료 특화 날짜 패턴을 <span class="highlight">8개 → 21개</span>로 확장했습니다.
+                    치료 관련 날짜(치료일, 처치일, 투약일, 시술일, 관리일) 5개와
+                    내원 관련 날짜(재진일, 전원일, 응급실 내원, ER 방문, 외래 방문일, 내원 당시, 내원 시, 방문 당시) 8개를 추가했습니다.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3 style="color: #667eea; font-size: 1.3em; margin: 25px 0 15px;">3. 중복 제거 로직 강화</h3>
+                <div class="code-block"><pre>// 1) 문서 메타데이터 키워드 정의
+this.metadataKeywords = [
+  '출력일', '인쇄일', '조회일', '발행일', '작성일시', '생성일',
+  '출력', '인쇄', '조회', '발행', '작성', '등록일', '수정일'
+];
+
+// 2) _optimizeBlocks에서 필터링 로직 추가
+_optimizeBlocks(dateGroups, options = {}) {
+  const optimized = [];
+  const seenDates = new Map(); // 날짜 중복 추적
+
+  dateGroups.forEach(group => {
+    // 메타데이터 날짜 필터링
+    const isMetadata = this._isMetadataDate(group.blocks);
+    if (isMetadata) return; // skip
+
+    // 신뢰도 기반 필터링
+    if (group.confidence < 0.5) return; // skip
+
+    // 중복 날짜 필터링
+    if (seenDates.has(dateKey)) {
+      // 더 높은 신뢰도만 유지
+      if (group.confidence > existingGroup.confidence) {
+        // 기존 그룹 제거 후 교체
+      } else {
+        return; // skip
+      }
+    }
+
+    optimized.push(optimizedBlock);
+    seenDates.set(dateKey, optimizedBlock);
+  });
+}</pre></div>
+                <p style="margin-top: 15px; color: #4a5568; line-height: 1.8;">
+                    3단계 필터링 로직을 추가했습니다:
+                    <strong>(1) 메타데이터 날짜 제외</strong> → 출력일, 인쇄일, 조회일 등 문서 시스템 날짜를 자동으로 제외합니다.
+                    <strong>(2) 낮은 신뢰도 제외</strong> → confidence < 0.5인 날짜를 필터링합니다.
+                    <strong>(3) 중복 날짜 병합</strong> → 같은 날짜가 여러 번 추출된 경우, 더 높은 신뢰도를 가진 것만 유지합니다.
+                </p>
+            </div>
+
+            <h2 class="section-title">📊 기대 효과</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>현재 (Before)</th>
+                        <th>목표 (After)</th>
+                        <th>개선 목표</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>치료내용 매칭률</strong></td>
+                        <td><span class="before-value">65.52%</span></td>
+                        <td><span class="after-value">80%+</span></td>
+                        <td>+14.48%p 이상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>내원일시 매칭률</strong></td>
+                        <td><span class="before-value">74.11%</span></td>
+                        <td><span class="after-value">85%+</span></td>
+                        <td>+10.89%p 이상</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Over-Extraction 비율</strong></td>
+                        <td><span class="before-value">2.88배</span></td>
+                        <td><span class="after-value">1.5배 이하</span></td>
+                        <td>-1.38배 (48% 감소)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>전체 매칭률</strong></td>
+                        <td><span class="before-value">73.30%</span></td>
+                        <td><span class="after-value">80%+</span></td>
+                        <td>+6.70%p 이상</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <h4>💡 검증 필요</h4>
+                <p>이번 개선사항의 실제 효과를 확인하려면 10개 타겟 케이스에 대한 재검증이 필요합니다.
+                raw OCR 데이터를 사용한 검증 또는 실제 PDF 파일을 통한 End-to-End 검증을 수행해야 합니다.</p>
+            </div>
+
+            <h2 class="section-title">📈 다음 단계 (Phase 2)</h2>
+
+            <div class="improvement-grid">
+                <div class="improvement-card">
+                    <h3><span class="icon">🔬</span> 개선 효과 검증</h3>
+                    <ul class="feature-list">
+                        <li>10개 타겟 케이스 재검증</li>
+                        <li>실제 매칭률 측정</li>
+                        <li>개선 효과 보고서 작성</li>
+                    </ul>
+                </div>
+
+                <div class="improvement-card">
+                    <h3><span class="icon">⚙️</span> 추가 최적화</h3>
+                    <ul class="feature-list">
+                        <li>Under-Extraction 분석</li>
+                        <li>컨텍스트 기반 필터링 강화</li>
+                        <li>날짜 검증 로직 추가</li>
+                    </ul>
+                </div>
+
+                <div class="improvement-card">
+                    <h3><span class="icon">📚</span> 문서 타입별 최적화</h3>
+                    <ul class="feature-list">
+                        <li>의료 진단서 vs 소견서 구분</li>
+                        <li>보험 청구서 vs 가입증서 구분</li>
+                        <li>각 타입별 특화 패턴 적용</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">🔗 관련 문서</h2>
+
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 15px 0; padding: 15px; background: #f7fafc; border-left: 4px solid #667eea; border-radius: 4px;">
+                    <strong>📄 OCR 검증 10개 케이스 보고서</strong><br>
+                    <code style="color: #667eea;">OCR_VALIDATION_10_CASES_REPORT.md</code><br>
+                    <span style="color: #718096; font-size: 0.95em;">전체 매칭률 73.30%, Phase 1 권고사항 포함</span>
+                </li>
+                <li style="margin: 15px 0; padding: 15px; background: #f7fafc; border-left: 4px solid #667eea; border-radius: 4px;">
+                    <strong>📄 OCR 파이프라인 개선 보고서</strong><br>
+                    <code style="color: #667eea;">OCR_PIPELINE_IMPROVEMENT_REPORT.md</code><br>
+                    <span style="color: #718096; font-size: 0.95em;">보험 날짜, 날짜 범위, 조사중 필터링 개선</span>
+                </li>
+                <li style="margin: 15px 0; padding: 15px; background: #f7fafc; border-left: 4px solid #667eea; border-radius: 4px;">
+                    <strong>💻 개선된 파이프라인 코드</strong><br>
+                    <code style="color: #667eea;">backend/postprocess/enhancedMassiveDateBlockProcessor.js</code><br>
+                    <span style="color: #718096; font-size: 0.95em;">Commit 05eab3d</span>
+                </li>
+            </ul>
+
+            <div class="status-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-top: 50px;">
+                <h2>🎉 Phase 1 개선 작업 완료!</h2>
+                <div class="status-detail">
+                    치료내용/내원일시 패턴 확장 + 중복 제거 로직 강화<br>
+                    다음 단계: 개선 효과 검증 및 Phase 2 계획 수립
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>VNEXSUS OCR 파이프라인 Phase 1 개선 완료 보고서</strong></p>
+            <p>작성일: 2026-02-02 | Commit: 05eab3d | Branch: claude/medical-ocr-event-pipeline-dnReg</p>
+            <p style="margin-top: 15px; color: #718096;">
+                Powered by VNEXSUS Medical OCR Event Pipeline
+            </p>
+        </div>
+    </div>
+</body>
+</html>
