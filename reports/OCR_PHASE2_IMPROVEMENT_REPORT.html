@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR 파이프라인 Phase 2 개선 보고서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .meta {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.critical {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+        }
+
+        .stat-card.warning {
+            background: linear-gradient(135deg, #ffd93d 0%, #f6c23e 100%);
+        }
+
+        .stat-card.success {
+            background: linear-gradient(135deg, #6bcf7f 0%, #4facfe 100%);
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-detail {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge.high {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .badge.medium {
+            background: #ffd93d;
+            color: #333;
+        }
+
+        .badge.low {
+            background: #6bcf7f;
+            color: white;
+        }
+
+        .badge.critical {
+            background: #d63031;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .improvement-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .improvement-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .improvement-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .improvement-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .improvement-list li:before {
+            content: "→";
+            position: absolute;
+            left: 10px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            margin: 30px 0;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+        }
+
+        .chart {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .bar {
+            height: 30px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            margin: 10px 0;
+            border-radius: 5px;
+            position: relative;
+            transition: width 0.3s ease;
+        }
+
+        .bar-label {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #2d3436;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: #74b9ff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .example-box {
+            background: #e7f3ff;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .example-box pre {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 OCR 파이프라인 Phase 2 개선 보고서</h1>
+            <div class="subtitle">Under-Extraction 분석 및 컨텍스트 기반 필터링 강화</div>
+            <div class="meta">
+                <div>생성일: 2026-02-02</div>
+                <div>대상: 10개 타겟 케이스 (Case 2, 5, 13, 15, 17, 29, 30, 41, 42, 44)</div>
+                <div>개선 버전: Phase 2 (Phase 1 개선 기반)</div>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- 1. Executive Summary -->
+            <section class="section">
+                <h2>📊 Executive Summary</h2>
+                <div class="stats-grid">
+                    <div class="stat-card success">
+                        <div class="stat-label">전체 매칭률</div>
+                        <div class="stat-value">73.30%</div>
+                        <div class="stat-detail">176개 GT 중 129개 매칭</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-label">Under-Extraction (누락률)</div>
+                        <div class="stat-value">26.70%</div>
+                        <div class="stat-detail">47개 날짜 누락</div>
+                    </div>
+                    <div class="stat-card critical">
+                        <div class="stat-label">Over-Extraction (과다추출)</div>
+                        <div class="stat-value">188.07%</div>
+                        <div class="stat-detail">GT 대비 331개 과다 추출</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">검증 케이스</div>
+                        <div class="stat-value">10개</div>
+                        <div class="stat-detail">타겟 케이스 검증 완료</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 재검증 결과 -->
+            <section class="section">
+                <h2>🔍 Phase 1 개선 효과 재검증</h2>
+
+                <h3>날짜 9항목별 매칭률</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목명</th>
+                            <th>GT 날짜</th>
+                            <th>매칭 날짜</th>
+                            <th>매칭률</th>
+                            <th>등급</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>과거병력 (Medical History)</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td><strong>100.00%</strong></td>
+                            <td><span class="badge low">S등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>통원기간 (Outpatient Period)</td>
+                            <td>49</td>
+                            <td>43</td>
+                            <td><strong>87.76%</strong></td>
+                            <td><span class="badge low">A+등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>의사소견 (Doctor Opinion)</td>
+                            <td>62</td>
+                            <td>54</td>
+                            <td><strong>87.10%</strong></td>
+                            <td><span class="badge low">A+등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>검사결과 (Examination)</td>
+                            <td>92</td>
+                            <td>79</td>
+                            <td><strong>85.87%</strong></td>
+                            <td><span class="badge low">A등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>진단병명 (Diagnosis)</td>
+                            <td>54</td>
+                            <td>43</td>
+                            <td><strong>79.63%</strong></td>
+                            <td><span class="badge low">B+등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>입원기간 (Hospitalization)</td>
+                            <td>36</td>
+                            <td>28</td>
+                            <td><strong>77.78%</strong></td>
+                            <td><span class="badge low">B+등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>내원경위 (Visit Reason)</td>
+                            <td>102</td>
+                            <td>78</td>
+                            <td><strong>76.47%</strong></td>
+                            <td><span class="badge medium">B등급</span></td>
+                        </tr>
+                        <tr>
+                            <td>내원일시 (Visit DateTime)</td>
+                            <td>112</td>
+                            <td>83</td>
+                            <td><strong>74.11%</strong></td>
+                            <td><span class="badge medium">B등급</span></td>
+                        </tr>
+                        <tr style="background-color: #ffe6e6;">
+                            <td>치료내용 (Treatment)</td>
+                            <td>58</td>
+                            <td>38</td>
+                            <td><strong>65.52%</strong></td>
+                            <td><span class="badge high">C등급</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>케이스별 매칭률</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>케이스</th>
+                            <th>GT</th>
+                            <th>OCR</th>
+                            <th>매칭</th>
+                            <th>매칭률</th>
+                            <th>평가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Case42</td>
+                            <td>12</td>
+                            <td>18</td>
+                            <td>11</td>
+                            <td><strong>91.67%</strong></td>
+                            <td><span class="badge low">우수</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case13</td>
+                            <td>10</td>
+                            <td>126</td>
+                            <td>9</td>
+                            <td><strong>90.00%</strong></td>
+                            <td><span class="badge low">우수</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case2</td>
+                            <td>22</td>
+                            <td>69</td>
+                            <td>18</td>
+                            <td><strong>81.82%</strong></td>
+                            <td><span class="badge low">양호</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case15</td>
+                            <td>14</td>
+                            <td>31</td>
+                            <td>11</td>
+                            <td><strong>78.57%</strong></td>
+                            <td><span class="badge low">양호</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case5</td>
+                            <td>22</td>
+                            <td>92</td>
+                            <td>16</td>
+                            <td><strong>72.73%</strong></td>
+                            <td><span class="badge medium">보통</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case41</td>
+                            <td>22</td>
+                            <td>56</td>
+                            <td>16</td>
+                            <td><strong>72.73%</strong></td>
+                            <td><span class="badge medium">보통</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case17</td>
+                            <td>13</td>
+                            <td>28</td>
+                            <td>9</td>
+                            <td><strong>69.23%</strong></td>
+                            <td><span class="badge medium">보통</span></td>
+                        </tr>
+                        <tr>
+                            <td>Case29</td>
+                            <td>27</td>
+                            <td>25</td>
+                            <td>18</td>
+                            <td><strong>66.67%</strong></td>
+                            <td><span class="badge medium">보통</span></td>
+                        </tr>
+                        <tr style="background-color: #ffe6e6;">
+                            <td>Case44</td>
+                            <td>24</td>
+                            <td>43</td>
+                            <td>15</td>
+                            <td><strong>62.50%</strong></td>
+                            <td><span class="badge high">개선필요</span></td>
+                        </tr>
+                        <tr style="background-color: #ffe6e6;">
+                            <td>Case30</td>
+                            <td>10</td>
+                            <td>19</td>
+                            <td>6</td>
+                            <td><strong>60.00%</strong></td>
+                            <td><span class="badge high">개선필요</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 3. Under-Extraction 심층 분석 -->
+            <section class="section">
+                <h2>📉 Under-Extraction 심층 분석</h2>
+
+                <h3>항목별 누락 현황</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목명</th>
+                            <th>GT</th>
+                            <th>매칭</th>
+                            <th>누락</th>
+                            <th>누락률</th>
+                            <th>우선순위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #ffe6e6;">
+                            <td>치료내용</td>
+                            <td>58</td>
+                            <td>38</td>
+                            <td>20</td>
+                            <td><strong>34.48%</strong></td>
+                            <td><span class="badge critical">HIGH</span></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>내원일시</td>
+                            <td>112</td>
+                            <td>83</td>
+                            <td>29</td>
+                            <td><strong>25.89%</strong></td>
+                            <td><span class="badge high">HIGH</span></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>내원경위</td>
+                            <td>102</td>
+                            <td>78</td>
+                            <td>24</td>
+                            <td><strong>23.53%</strong></td>
+                            <td><span class="badge high">HIGH</span></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>입원기간</td>
+                            <td>36</td>
+                            <td>28</td>
+                            <td>8</td>
+                            <td><strong>22.22%</strong></td>
+                            <td><span class="badge high">HIGH</span></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>진단병명</td>
+                            <td>54</td>
+                            <td>43</td>
+                            <td>11</td>
+                            <td><strong>20.37%</strong></td>
+                            <td><span class="badge high">HIGH</span></td>
+                        </tr>
+                        <tr>
+                            <td>검사결과</td>
+                            <td>92</td>
+                            <td>79</td>
+                            <td>13</td>
+                            <td><strong>14.13%</strong></td>
+                            <td><span class="badge medium">MEDIUM</span></td>
+                        </tr>
+                        <tr>
+                            <td>의사소견</td>
+                            <td>62</td>
+                            <td>54</td>
+                            <td>8</td>
+                            <td><strong>12.90%</strong></td>
+                            <td><span class="badge medium">MEDIUM</span></td>
+                        </tr>
+                        <tr>
+                            <td>통원기간</td>
+                            <td>49</td>
+                            <td>43</td>
+                            <td>6</td>
+                            <td><strong>12.24%</strong></td>
+                            <td><span class="badge medium">MEDIUM</span></td>
+                        </tr>
+                        <tr>
+                            <td>과거병력</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td><strong>0.00%</strong></td>
+                            <td><span class="badge low">LOW</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>컨텍스트 패턴 분석</h3>
+                <div class="stats-grid">
+                    <div class="stat-card critical">
+                        <div class="stat-label">강한 컨텍스트가 있는데 놓친 날짜</div>
+                        <div class="stat-value">31건</div>
+                        <div class="stat-detail">의료 키워드가 있는데도 누락</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">약한 컨텍스트로 놓친 날짜</div>
+                        <div class="stat-value">0건</div>
+                        <div class="stat-detail">컨텍스트 길이 50자 미만</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">컨텍스트 없이 놓친 날짜</div>
+                        <div class="stat-value">16건</div>
+                        <div class="stat-detail">단독 날짜</div>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>강한 컨텍스트가 있는데 놓친 날짜 예시</h4>
+                    <pre>Case2: 2019-04-09
+컨텍스트: ".03.23 ~ 2023.08.07 / 6 회 통원 검사결과 : 복부 CT hepatic memangioma..."
+
+Case5: 2018-05-10
+컨텍스트: "나. 피보험자 병력사항 요약 경과표 일자 사고경위 병원/기관 2018.05.10..."
+
+Case13: 2024-11-04
+컨텍스트: "내 원 일 : 2024.04.12 내원경위 : 2 년 전 넘어지며 요통 발생 후..."</pre>
+                    <p style="margin-top: 10px;"><strong>문제점:</strong> 의료 키워드(통원, 검사결과, 내원경위 등)가 명확히 있는데도 날짜를 추출하지 못함</p>
+                </div>
+            </section>
+
+            <!-- 4. Over-Extraction 분석 -->
+            <section class="section">
+                <h2>📈 Over-Extraction 분석</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card critical">
+                        <div class="stat-label">전체 과다 추출률</div>
+                        <div class="stat-value">188.07%</div>
+                        <div class="stat-detail">GT 176개 대비 OCR 507개</div>
+                    </div>
+                    <div class="stat-card critical">
+                        <div class="stat-label">과다 추출 개수</div>
+                        <div class="stat-value">331개</div>
+                        <div class="stat-detail">중복 또는 불필요 날짜</div>
+                    </div>
+                </div>
+
+                <h3>케이스별 과다 추출 Top 5</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>케이스</th>
+                            <th>OCR 추출</th>
+                            <th>GT 실제</th>
+                            <th>과다 추출</th>
+                            <th>과다율</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #ffe6e6;">
+                            <td>Case13</td>
+                            <td>126</td>
+                            <td>10</td>
+                            <td>116</td>
+                            <td><strong>1160%</strong></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>Case5</td>
+                            <td>92</td>
+                            <td>22</td>
+                            <td>70</td>
+                            <td><strong>318.18%</strong></td>
+                        </tr>
+                        <tr style="background-color: #fff8e6;">
+                            <td>Case2</td>
+                            <td>69</td>
+                            <td>22</td>
+                            <td>47</td>
+                            <td><strong>213.64%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Case41</td>
+                            <td>56</td>
+                            <td>22</td>
+                            <td>34</td>
+                            <td><strong>154.55%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Case44</td>
+                            <td>43</td>
+                            <td>24</td>
+                            <td>19</td>
+                            <td><strong>79.17%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>주요 원인:</strong></p>
+                <ul class="improvement-list">
+                    <li>날짜 중복 제거 로직 미흡 (같은 날짜의 다른 표현: 2024.01.01, 2024-01-01, 2024년 1월 1일)</li>
+                    <li>컨텍스트 필터링 부재 (문서작성일, 출력일 등 행정 날짜 포함)</li>
+                    <li>신뢰도 기반 필터링 부재 (낮은 신뢰도 날짜도 모두 추출)</li>
+                </ul>
+            </section>
+
+            <!-- 5. Phase 2 개선 계획 -->
+            <section class="section">
+                <h2>🎯 Phase 2 개선 계획</h2>
+
+                <div class="improvement-box">
+                    <h4>1️⃣ Under-Extraction 개선</h4>
+                    <ul class="improvement-list">
+                        <li><strong>치료내용 누락률 34.48% → 목표 20% 이하</strong>
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>키워드 확장: 투약, 처방, 복용, 시술, 처치, 요법, 재활 등 50+ 키워드 추가</li>
+                                <li>복합 키워드 패턴: "복강경 하 우측 간절제술", "약물치료", "물리치료" 등</li>
+                            </ul>
+                        </li>
+                        <li><strong>내원일시 누락률 25.89% → 목표 15% 이하</strong>
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>키워드 확장: 초진, 재진, 경유, 추적검사, 외래, 응급실 등 30+ 키워드 추가</li>
+                                <li>시간 패턴 강화: YYYY.MM.DD (HH:MM) 형식 지원</li>
+                            </ul>
+                        </li>
+                        <li><strong>내원경위 누락률 23.53% → 목표 15% 이하</strong>
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>키워드 확장: 증상, 호소, 불편감, 악화, 발현 등 40+ 키워드 추가</li>
+                                <li>인과 관계 패턴: "~로 인하여", "~때문에", "~하여" 등</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="improvement-box">
+                    <h4>2️⃣ Over-Extraction 개선</h4>
+                    <ul class="improvement-list">
+                        <li><strong>과다 추출률 188% → 목표 50% 이하</strong></li>
+                        <li>유사 날짜 클러스터링
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>같은 날짜의 다른 표현 통합 (2024.01.01 = 2024-01-01 = 2024년 1월 1일)</li>
+                                <li>위치 기반 유사도 계산 (±50자 이내)</li>
+                                <li>클러스터 내 가장 신뢰도 높은 날짜 선택</li>
+                            </ul>
+                        </li>
+                        <li>제외 키워드 필터링
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>조사중, 확인중, 미확정, 예정 등 불확실 날짜 제외</li>
+                                <li>문서작성일, 출력일, 발행일 등 행정 날짜 제외</li>
+                                <li>참고, 예시 등 참조 날짜 제외</li>
+                            </ul>
+                        </li>
+                        <li>신뢰도 기반 필터링
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>최소 신뢰도 임계값 0.3 적용</li>
+                                <li>컨텍스트 점수 기반 우선순위</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="improvement-box">
+                    <h4>3️⃣ 컨텍스트 기반 필터링 강화</h4>
+                    <ul class="improvement-list">
+                        <li><strong>강한 컨텍스트 누락 31건 → 목표 10건 이하</strong></li>
+                        <li>컨텍스트 윈도우 확장: 100자 → 150자</li>
+                        <li>의료 키워드 가중치 상향: 1.0 → 1.5</li>
+                        <li>시간 키워드 가중치 상향: 0.5 → 0.8</li>
+                        <li>보험 키워드 추가: 가입일, 계약일, 청약일 등 (가중치 1.0)</li>
+                        <li>최소 관련성 임계값: 0.5 → 0.3 (더 많은 날짜 포함)</li>
+                    </ul>
+                </div>
+
+                <div class="improvement-box">
+                    <h4>4️⃣ 날짜 패턴 확장</h4>
+                    <ul class="improvement-list">
+                        <li>날짜 범위 패턴: YYYY.MM.DD ~ YYYY.MM.DD</li>
+                        <li>시간 포함 패턴: YYYY.MM.DD (HH:MM)</li>
+                        <li>불완전 날짜 패턴: YYYY년 MM월 (일 생략)</li>
+                        <li>상대 날짜 패턴: N일/주/개월 전</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 6. 구현 상세 -->
+            <section class="section">
+                <h2>💻 Phase 2 구현 상세</h2>
+
+                <h3>주요 변경사항</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">구분</th>
+                            <th style="width: 35%;">Phase 1 (현재)</th>
+                            <th style="width: 35%;">Phase 2 (개선)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>의료 키워드</td>
+                            <td>~50개</td>
+                            <td><strong>~200개</strong> (+150개)</td>
+                        </tr>
+                        <tr>
+                            <td>컨텍스트 윈도우</td>
+                            <td>100자</td>
+                            <td><strong>150자</strong> (+50%)</td>
+                        </tr>
+                        <tr>
+                            <td>중복 제거 방식</td>
+                            <td>완전 일치만</td>
+                            <td><strong>클러스터링 + 유사도</strong></td>
+                        </tr>
+                        <tr>
+                            <td>필터링</td>
+                            <td>기본</td>
+                            <td><strong>제외 키워드 + 신뢰도</strong></td>
+                        </tr>
+                        <tr>
+                            <td>날짜 패턴</td>
+                            <td>8개</td>
+                            <td><strong>20개</strong> (+12개)</td>
+                        </tr>
+                        <tr>
+                            <td>의료 키워드 가중치</td>
+                            <td>1.0</td>
+                            <td><strong>1.5</strong> (+50%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>새로 추가된 주요 키워드 카테고리</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">치료내용 관련</div>
+                        <div class="stat-value">50+</div>
+                        <div class="stat-detail">투약, 처방, 시술, 재활 등</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">내원일시 관련</div>
+                        <div class="stat-value">30+</div>
+                        <div class="stat-detail">초진, 재진, 외래, 응급 등</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">내원경위 관련</div>
+                        <div class="stat-value">40+</div>
+                        <div class="stat-detail">증상, 호소, 악화, 발현 등</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">보험 관련</div>
+                        <div class="stat-value">20+</div>
+                        <div class="stat-detail">가입일, 계약일, 청구일 등</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 기대 효과 -->
+            <section class="section">
+                <h2>📊 Phase 2 기대 효과</h2>
+
+                <h3>목표 성능 지표</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>지표</th>
+                            <th>Phase 1 (현재)</th>
+                            <th>Phase 2 (목표)</th>
+                            <th>개선폭</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>전체 매칭률</td>
+                            <td>73.30%</td>
+                            <td><strong>85% 이상</strong></td>
+                            <td>+11.7%p</td>
+                        </tr>
+                        <tr>
+                            <td>Under-Extraction</td>
+                            <td>26.70%</td>
+                            <td><strong>15% 이하</strong></td>
+                            <td>-11.7%p</td>
+                        </tr>
+                        <tr>
+                            <td>Over-Extraction</td>
+                            <td>188.07%</td>
+                            <td><strong>50% 이하</strong></td>
+                            <td>-138%p</td>
+                        </tr>
+                        <tr>
+                            <td>치료내용 누락률</td>
+                            <td>34.48%</td>
+                            <td><strong>20% 이하</strong></td>
+                            <td>-14.5%p</td>
+                        </tr>
+                        <tr>
+                            <td>내원일시 누락률</td>
+                            <td>25.89%</td>
+                            <td><strong>15% 이하</strong></td>
+                            <td>-10.9%p</td>
+                        </tr>
+                        <tr>
+                            <td>강한 컨텍스트 누락</td>
+                            <td>31건</td>
+                            <td><strong>10건 이하</strong></td>
+                            <td>-21건</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>예상 개선 효과</h3>
+                <ul class="improvement-list">
+                    <li><strong>날짜 추출 정확도 향상:</strong> 73.30% → 85% (11.7%p 개선)</li>
+                    <li><strong>과다 추출 대폭 감소:</strong> 331개 → 88개 이하 (73% 감소)</li>
+                    <li><strong>처리 효율 향상:</strong> 불필요한 날짜 필터링으로 후속 처리 속도 개선</li>
+                    <li><strong>데이터 품질 향상:</strong> 신뢰도 기반 필터링으로 높은 품질의 날짜만 추출</li>
+                </ul>
+            </section>
+
+            <!-- 8. 다음 단계 -->
+            <section class="section">
+                <h2>🚀 다음 단계</h2>
+
+                <h3>Phase 2 구현 로드맵</h3>
+                <div class="improvement-box">
+                    <ul class="improvement-list">
+                        <li><strong>Step 1:</strong> Phase 2 패치 적용 (<code>DateAnchoringOptimizerPhase2.patch.js</code>)</li>
+                        <li><strong>Step 2:</strong> 10개 케이스 재검증 및 성능 측정</li>
+                        <li><strong>Step 3:</strong> 개선 효과 분석 및 미세 조정</li>
+                        <li><strong>Step 4:</strong> 28개 전체 케이스 검증</li>
+                        <li><strong>Step 5:</strong> Production 배포 및 모니터링</li>
+                    </ul>
+                </div>
+
+                <h3>추가 개선 고려사항</h3>
+                <ul class="improvement-list">
+                    <li>ML 기반 날짜 추출 모델 도입 검토</li>
+                    <li>Vision-LLM 통합으로 이미지 내 날짜 추출 개선</li>
+                    <li>실시간 피드백 루프 구축</li>
+                    <li>A/B 테스트를 통한 지속적 개선</li>
+                </ul>
+            </section>
+
+            <!-- 9. 결론 -->
+            <section class="section">
+                <h2>✨ 결론</h2>
+
+                <p>Phase 1 개선 효과 재검증 결과, <strong>전체 매칭률 73.30%</strong>를 달성했으나, 다음과 같은 개선 영역을 발견했습니다:</p>
+
+                <div class="stats-grid" style="margin: 20px 0;">
+                    <div class="stat-card critical">
+                        <div class="stat-label">주요 문제</div>
+                        <div class="stat-value">3가지</div>
+                        <div class="stat-detail">Under-Extraction, Over-Extraction, 컨텍스트 누락</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-label">Phase 2 개선</div>
+                        <div class="stat-value">4가지</div>
+                        <div class="stat-detail">키워드 확장, 중복제거, 필터링, 패턴 강화</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">예상 효과</div>
+                        <div class="stat-value">85%+</div>
+                        <div class="stat-detail">목표 매칭률</div>
+                    </div>
+                </div>
+
+                <p>Phase 2 개선사항 구현을 통해 <strong>날짜 추출 정확도를 85% 이상</strong>으로 향상시키고, <strong>Over-Extraction을 73% 감소</strong>시킬 수 있을 것으로 기대됩니다.</p>
+
+                <div class="improvement-box" style="margin-top: 30px; border-left-color: #6bcf7f;">
+                    <h4>핵심 성과</h4>
+                    <ul class="improvement-list">
+                        <li>✅ 10개 타겟 케이스 재검증 완료</li>
+                        <li>✅ Under-Extraction 47건 (26.7%) 식별</li>
+                        <li>✅ Over-Extraction 331건 (188%) 분석</li>
+                        <li>✅ Phase 2 개선 패치 작성 완료</li>
+                        <li>✅ 200+ 키워드 확장</li>
+                        <li>✅ 향상된 중복 제거 알고리즘 설계</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div>
+                <strong>OCR Pipeline Phase 2 Improvement Report</strong>
+            </div>
+            <div class="meta" style="margin-top: 10px;">
+                Generated: 2026-02-02 | Version: Phase 2 | Status: Implementation Ready
+            </div>
+            <div class="footer-links">
+                <a href="#top">맨 위로</a>
+                <a href="https://github.com/nofnotg/VNEXSUS-25-12-30">GitHub Repository</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
