@@ -107,13 +107,12 @@ const CASE_PATTERNS = {
  * OCR 캐시 파일 읽기
  */
 function readOCRCache(caseNum) {
-  // cycle4_topdown 경로 사용
-  const cachePath = `/home/user/VNEXSUS-25-12-30/backend/eval/output/cycle4_topdown/ocr_cache/case_${caseNum}_topdown.json`;
+  const cachePath = `/home/user/VNEXSUS-25-12-30/backend/eval/output/full_pipeline_validation/ocr_cache/case_${caseNum}_4o-mini.json`;
 
   try {
     const content = fs.readFileSync(cachePath, 'utf-8');
     const data = JSON.parse(content);
-    return data.fullText || data.text || '';
+    return data.groundTruth || data.fullText || data.text || '';
   } catch (error) {
     console.error(`Case ${caseNum} OCR 캐시 읽기 실패:`, error.message);
     console.error(`경로: ${cachePath}`);
