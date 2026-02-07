@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-02-07T06:57:08.148Z",
+  "totalCases": 33,
+  "successfulCases": 9,
+  "failedCases": 24,
+  "avgProcessingTime": 1.5,
+  "coverage": {
+    "date": 46,
+    "hospital": 19,
+    "diagnosis": 24
+  },
+  "ruleHits": [
+    {
+      "name": "가입 전 3개월 이내 진료",
+      "count": 14
+    },
+    {
+      "name": "가입 전 5년 이내 진료",
+      "count": 24
+    },
+    {
+      "name": "수술/입원 기록",
+      "count": 8
+    },
+    {
+      "name": "중대질환 진단",
+      "count": 5
+    },
+    {
+      "name": "ICD/KCD 코드 확인",
+      "count": 7
+    }
+  ],
+  "sourceSpanRate": 96,
+  "caseDetails": [],
+  "successRate": 27
+}
