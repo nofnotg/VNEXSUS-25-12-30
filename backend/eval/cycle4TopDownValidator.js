@@ -36,8 +36,11 @@ const CONFIG = {
   caseSetsPath: path.join(__dirname, 'output/case_sets/case_sets_v2.json'),
   groundTruthDir: 'C:\\VNEXSUS_26-01-23\\VNEXSUS_reports_pdf\\sample_pdf\\caseN_report',
   
-  // 50페이지 이하 케이스
-  targetCases: [2, 5, 13, 15, 17, 18, 29, 30, 41, 42, 44],
+  // 50페이지 이하 케이스 (Case18 제외 - GT 불일치)
+  targetCases: [2, 5, 13, 15, 17, 29, 30, 41, 42, 44],
+
+  // 제외할 케이스 (PDF/GT 불일치)
+  excludeCases: [18],
   
   // API 설정
   rateLimitDelay: 30000,
@@ -215,6 +218,8 @@ const TOPDOWN_SYSTEM_PROMPT = `당신은 보험 손해사정 문서에서 날짜
 
 ### 출력 형식
 
+**중요**: 날짜는 반드시 YYYY-MM-DD 형식으로만 출력하세요. hh:mm:ss 시간 정보는 포함하지 마세요.
+
 {
   "allExtractedDates": [
     {
@@ -222,7 +227,8 @@ const TOPDOWN_SYSTEM_PROMPT = `당신은 보험 손해사정 문서에서 날짜
       "originalFormat": "문서에서 발견된 원래 형식",
       "context": "날짜 앞뒤 30자 맥락",
       "type": "보험가입|보험만기|심평원조회기간|입원|퇴원|수술|검사|진단|통원|기타",
-      "confidence": "high|medium|low"
+      "confidence": "high|medium|low",
+      "importance": "critical|high|medium|low"
     }
   ],
   "dateRanges": [
@@ -230,7 +236,8 @@ const TOPDOWN_SYSTEM_PROMPT = `당신은 보험 손해사정 문서에서 날짜
       "startDate": "YYYY-MM-DD",
       "endDate": "YYYY-MM-DD",
       "context": "기간 맥락",
-      "type": "입원기간|통원기간|보장기간|조회기간|기타"
+      "type": "입원기간|통원기간|보장기간|조회기간|기타",
+      "importance": "critical|high|medium|low"
     }
   ],
   "insuranceDates": [
@@ -238,17 +245,45 @@ const TOPDOWN_SYSTEM_PROMPT = `당신은 보험 손해사정 문서에서 날짜
       "date": "YYYY-MM-DD",
       "company": "보험사명",
       "type": "가입일|보장개시일|만기일|갱신일",
-      "productName": "상품명 (있는 경우)"
+      "productName": "상품명 (있는 경우)",
+      "importance": "critical (가입일/보장개시일) | low (만기일)"
     }
   ],
   "tableDates": [
     {
       "date": "YYYY-MM-DD",
       "rowContent": "해당 행 전체 내용",
-      "tableType": "사고경위표|확인내용표|진료내역표|기타"
+      "tableType": "사고경위표|확인내용표|진료내역표|기타",
+      "importance": "high (의료 이벤트) | medium (기타)"
     }
   ]
 }
+
+### 중요도 기준 (importance)
+
+**critical (매우 중요)**:
+- 보험 가입일 (보장개시일)
+- 주요 의료 사건 발생일 (수술일, 진단일)
+
+**high (중요)**:
+- 입원일, 퇴원일
+- 검사일, 치료일
+- 통원 시작일
+
+**medium (보통)**:
+- 문서 작성일
+- 기타 날짜
+
+**low (낮음)**:
+- 보험 만기일 (보험 심사에 무관)
+- 조회기간 종료일
+
+**중요**: 보험기간의 경우, 시작일(보장개시일)은 importance="critical", 종료일(만기일)은 importance="low"로 태깅하세요.
+
+### 타임스탬프 제외
+
+날짜는 반드시 YYYY-MM-DD 형식으로만 출력하세요.
+hh:mm:ss 시간 정보는 보험 심사에 불필요하므로 포함하지 마세요.
 
 ### 최종 점검
 
@@ -256,8 +291,10 @@ const TOPDOWN_SYSTEM_PROMPT = `당신은 보험 손해사정 문서에서 날짜
 - [ ] 테이블의 모든 날짜를 추출했는가?
 - [ ] 기간 표현의 시작일과 종료일 모두 추출했는가?
 - [ ] 보험사 언급 주변의 날짜를 모두 추출했는가?
-- [ ] 미래 날짜(만기일 등)를 포함했는가?
+- [ ] 미래 날짜(만기일 등)를 포함했는가? (importance="low"로 태깅)
 - [ ] 과거 날짜(과거력 등)를 포함했는가?
+- [ ] 모든 날짜에 importance를 태깅했는가?
+- [ ] hh:mm:ss 시간 정보는 제외했는가?
 
 **누락보다 과추출이 낫습니다!**`;
 
@@ -344,6 +381,23 @@ function extractGroundTruthDates(groundTruth) {
   return Array.from(dates).sort();
 }
 
+// 날짜 정규화: 타임스탬프 제거 (YYYY-MM-DDThh:mm:ss → YYYY-MM-DD)
+function normalizeDate(dateStr) {
+  if (!dateStr) return null;
+
+  // YYYY-MM-DDThh:mm:ss 형식인 경우 T 이후 제거
+  if (dateStr.includes('T')) {
+    return dateStr.split('T')[0];
+  }
+
+  // 이미 YYYY-MM-DD 형식인 경우 그대로 반환
+  if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return dateStr;
+  }
+
+  return dateStr;
+}
+
 // AI 추출 결과에서 모든 날짜 수집 (Top-Down 형식)
 function collectAIDates(generatedJson) {
   const dates = new Set();
@@ -351,8 +405,9 @@ function collectAIDates(generatedJson) {
   // allExtractedDates
   if (generatedJson.allExtractedDates) {
     generatedJson.allExtractedDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
@@ -360,29 +415,34 @@ function collectAIDates(generatedJson) {
   // dateRanges (시작일, 종료일 모두)
   if (generatedJson.dateRanges) {
     generatedJson.dateRanges.forEach(item => {
-      if (item.startDate && item.startDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.startDate);
+      const startNormalized = normalizeDate(item.startDate);
+      const endNormalized = normalizeDate(item.endDate);
+
+      if (startNormalized && startNormalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(startNormalized);
       }
-      if (item.endDate && item.endDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.endDate);
+      if (endNormalized && endNormalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(endNormalized);
       }
     });
   }
-  
+
   // insuranceDates
   if (generatedJson.insuranceDates) {
     generatedJson.insuranceDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
-  
+
   // tableDates
   if (generatedJson.tableDates) {
     generatedJson.tableDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
@@ -390,24 +450,27 @@ function collectAIDates(generatedJson) {
   // 기존 형식 호환
   if (generatedJson.allDates) {
     generatedJson.allDates.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
-  
+
   if (generatedJson.medicalEvents) {
     generatedJson.medicalEvents.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
-  
+
   if (generatedJson.diagnoses) {
     generatedJson.diagnoses.forEach(item => {
-      if (item.date && item.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-        dates.add(item.date);
+      const normalized = normalizeDate(item.date);
+      if (normalized && normalized.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        dates.add(normalized);
       }
     });
   }
@@ -445,18 +508,18 @@ async function processCase(caseNum, caseInfo) {
   console.log(`\n${'='.repeat(60)}`);
   console.log(`[Case${caseNum}] ${caseInfo.patientName} - Top-Down Processing`);
   console.log(`${'='.repeat(60)}`);
-  
-  const pdfFolder = caseInfo.pdfFolder;
-  if (!pdfFolder || !fs.existsSync(pdfFolder)) {
-    console.log(`  X PDF folder not found: ${pdfFolder}`);
-    return { caseId: `Case${caseNum}`, error: 'PDF folder not found' };
-  }
-  
-  // 캐시 확인
+
+  // 캐시 먼저 확인 (PDF 경로 문제 우회)
   const cachePath = path.join(CONFIG.cacheDir, `case_${caseNum}_topdown.json`);
   if (fs.existsSync(cachePath)) {
     console.log(`  * Using cache: ${cachePath}`);
     return JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+  }
+
+  const pdfFolder = caseInfo.pdfFolder;
+  if (!pdfFolder || !fs.existsSync(pdfFolder)) {
+    console.log(`  X PDF folder not found: ${pdfFolder}`);
+    return { caseId: `Case${caseNum}`, error: 'PDF folder not found' };
   }
   
   // PDF 변환

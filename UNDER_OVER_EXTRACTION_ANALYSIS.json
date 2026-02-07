@@ -1,0 +1,2413 @@
+{
+  "timestamp": "2026-02-02T11:45:07.678Z",
+  "underExtraction": {
+    "summary": {
+      "totalCases": 10,
+      "totalGT": 176,
+      "totalMatched": 129,
+      "totalMissed": 47,
+      "missRate": "26.70"
+    },
+    "itemAnalysis": {
+      "item_1.내원일시": {
+        "name": "item_1.내원일시",
+        "totalGT": 112,
+        "matched": 83,
+        "missed": 29,
+        "missRate": "25.89",
+        "matchingRate": "74.11"
+      },
+      "item_2.내원경위": {
+        "name": "item_2.내원경위",
+        "totalGT": 102,
+        "matched": 78,
+        "missed": 24,
+        "missRate": "23.53",
+        "matchingRate": "76.47"
+      },
+      "item_3.진단병명": {
+        "name": "item_3.진단병명",
+        "totalGT": 54,
+        "matched": 43,
+        "missed": 11,
+        "missRate": "20.37",
+        "matchingRate": "79.63"
+      },
+      "item_4.검사결과": {
+        "name": "item_4.검사결과",
+        "totalGT": 92,
+        "matched": 79,
+        "missed": 13,
+        "missRate": "14.13",
+        "matchingRate": "85.87"
+      },
+      "item_6.치료내용": {
+        "name": "item_6.치료내용",
+        "totalGT": 58,
+        "matched": 38,
+        "missed": 20,
+        "missRate": "34.48",
+        "matchingRate": "65.52"
+      },
+      "item_7.통원기간": {
+        "name": "item_7.통원기간",
+        "totalGT": 49,
+        "matched": 43,
+        "missed": 6,
+        "missRate": "12.24",
+        "matchingRate": "87.76"
+      },
+      "item_8.입원기간": {
+        "name": "item_8.입원기간",
+        "totalGT": 36,
+        "matched": 28,
+        "missed": 8,
+        "missRate": "22.22",
+        "matchingRate": "77.78"
+      },
+      "item_9.과거병력": {
+        "name": "item_9.과거병력",
+        "totalGT": 5,
+        "matched": 5,
+        "missed": 0,
+        "missRate": "0.00",
+        "matchingRate": "100.00"
+      },
+      "item_10.의사소견": {
+        "name": "item_10.의사소견",
+        "totalGT": 62,
+        "matched": 54,
+        "missed": 8,
+        "missRate": "12.90",
+        "matchingRate": "87.10"
+      }
+    },
+    "categoryAnalysis": {
+      "medical_visit": {
+        "name": "medical_visit",
+        "totalGT": 117,
+        "matched": 87,
+        "missed": 30,
+        "missRate": "25.64",
+        "matchingRate": "74.36"
+      },
+      "medical_examination": {
+        "name": "medical_examination",
+        "totalGT": 92,
+        "matched": 79,
+        "missed": 13,
+        "missRate": "14.13",
+        "matchingRate": "85.87"
+      },
+      "medical_treatment": {
+        "name": "medical_treatment",
+        "totalGT": 56,
+        "matched": 36,
+        "missed": 20,
+        "missRate": "35.71",
+        "matchingRate": "64.29"
+      },
+      "medical_diagnosis": {
+        "name": "medical_diagnosis",
+        "totalGT": 87,
+        "matched": 71,
+        "missed": 16,
+        "missRate": "18.39",
+        "matchingRate": "81.61"
+      },
+      "insurance_start": {
+        "name": "insurance_start",
+        "totalGT": 15,
+        "matched": 10,
+        "missed": 5,
+        "missRate": "33.33",
+        "matchingRate": "66.67"
+      }
+    },
+    "caseAnalysis": [
+      {
+        "caseNum": 2,
+        "caseId": "Case2",
+        "totalGT": 22,
+        "matched": 18,
+        "missed": 4,
+        "missRate": "18.18",
+        "missedDates": [
+          {
+            "date": "2019-04-09",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "item_4.검사결과",
+              "item_7.통원기간"
+            ],
+            "context": ".03.23 ~ 2023.08.07 / 6 회 통원 \n검사결과 : 복부 CT \nhepatic memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험",
+            "coordinates": null
+          },
+          {
+            "date": "2024-01-09",
+            "categories": [
+              "medical_visit",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용",
+              "item_10.의사소견"
+            ],
+            "context": "memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험 \n2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험 \n",
+            "coordinates": null
+          },
+          {
+            "date": "2025-02-04",
+            "categories": [
+              "medical_visit",
+              "medical_admission",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_7.통원기간",
+              "item_8.입원기간",
+              "item_10.의사소견"
+            ],
+            "context": "일 : 2024.04.09 \n내원경위 : 2017 년 간혈관종 진단 후 매년 크기 증가 소견으\n로 진료의뢰 하 내원 \n진 단 명 : 간담도계의 혈관종(D18.02) \n입원기간 : 2025.02.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.0",
+            "coordinates": null
+          },
+          {
+            "date": "2024-04-23",
+            "categories": [
+              "medical_visit",
+              "medical_admission",
+              "medical_examination",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_7.통원기간",
+              "item_8.입원기간"
+            ],
+            "context": "2.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.09 (12:55) \n치료내용 : 복강경 하 우측 간절제술 \n검사결과 : abdoman CT(보고일시 2024.04.23 12:55) \n- 청약 전 진료 \n삼성서울병원 \n \n \n2. 손해사정 ",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 5,
+        "caseId": "Case5",
+        "totalGT": 22,
+        "matched": 16,
+        "missed": 6,
+        "missRate": "27.27",
+        "missedDates": [
+          {
+            "date": "2018-05-10",
+            "categories": [
+              "item_2.내원경위"
+            ],
+            "context": "나. 피보험자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! ",
+            "coordinates": null
+          },
+          {
+            "date": "2023-02-10",
+            "categories": [
+              "item_2.내원경위"
+            ],
+            "context": "자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 P",
+            "coordinates": null
+          },
+          {
+            "date": "2023-05-10",
+            "categories": [
+              "medical_visit",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": "년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \n이내 ㈜KB 손해보험 \n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가",
+            "coordinates": null
+          },
+          {
+            "date": "2020-01-17",
+            "categories": [
+              "medical_visit",
+              "medical_diagnosis",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_3.진단병명"
+            ],
+            "context": "(I20.88)' 진단 하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료",
+            "coordinates": null
+          },
+          {
+            "date": "2023-05-10",
+            "categories": [
+              "medical_visit",
+              "insurance_claim",
+              "item_1.내원일시"
+            ],
+            "context": "하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료내역 없음. \n4. 손해",
+            "coordinates": null
+          },
+          {
+            "date": "2020-01-17",
+            "categories": [
+              "medical_visit",
+              "medical_diagnosis",
+              "insurance_start",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_3.진단병명",
+              "item_10.의사소견"
+            ],
+            "context": "관상동맥조영술 결과 좌전\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \n3. 알릴의무와 관련하여\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\n상에 해당하는 진료",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 13,
+        "caseId": "Case13",
+        "totalGT": 10,
+        "matched": 9,
+        "missed": 1,
+        "missRate": "10.00",
+        "missedDates": [
+          {
+            "date": "2024-11-04",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_7.통원기간",
+              "item_10.의사소견"
+            ],
+            "context": " \n내 원 일 : 2024.04.12 \n내원경위 : 2 년 전 넘어지며 요통 발생 후 최근 빗길에 넘어지\n며 좌측 요추부 통증 호소하여 내원 \n통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원 \n치료내용 : 신경차단술 및 도수치료, 물리치료 시행 ",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 15,
+        "caseId": "Case15",
+        "totalGT": 14,
+        "matched": 11,
+        "missed": 3,
+        "missRate": "21.43",
+        "missedDates": [
+          {
+            "date": "2025-02-25",
+            "categories": [
+              "insurance_start"
+            ],
+            "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해",
+            "coordinates": null
+          },
+          {
+            "date": "2053-02-25",
+            "categories": [
+              "insurance_start"
+            ],
+            "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07",
+            "coordinates": null
+          },
+          {
+            "date": "2025-05-26",
+            "categories": [
+              "medical_visit",
+              "insurance_start",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07|\n초진일자 : 2025.",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 17,
+        "caseId": "Case17",
+        "totalGT": 13,
+        "matched": 9,
+        "missed": 4,
+        "missRate": "30.77",
+        "missedDates": [
+          {
+            "date": "2025-08-12",
+            "categories": [
+              "medical_visit",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": ")모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.",
+            "coordinates": null
+          },
+          {
+            "date": "2030-08-12",
+            "categories": [
+              "medical_visit",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": "정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.",
+            "coordinates": null
+          },
+          {
+            "date": "2025-08-12",
+            "categories": [
+              "medical_visit",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": " 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2",
+            "coordinates": null
+          },
+          {
+            "date": "2045-08-12",
+            "categories": [
+              "medical_visit",
+              "medical_diagnosis",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명"
+            ],
+            "context": "\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2025.08.14 ~ 2",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 29,
+        "caseId": "Case29",
+        "totalGT": 27,
+        "matched": 18,
+        "missed": 9,
+        "missRate": "33.33",
+        "missedDates": [
+          {
+            "date": "2024-08-13",
+            "categories": [
+              "other"
+            ],
+            "context": "��� �ް� ���� ����� û���Ͽ����� ����. \n  \n  \n \n \n��. �Ǻ����� ���»��� ��� ���ǥ \n���� ������� ����/��� \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+            "coordinates": null
+          },
+          {
+            "date": "2020-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": "��� ���� �����Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+            "coordinates": null
+          },
+          {
+            "date": "2025-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": "�Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+            "coordinates": null
+          },
+          {
+            "date": "2020-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": " ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+            "coordinates": null
+          },
+          {
+            "date": "2025-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": " ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+            "coordinates": null
+          },
+          {
+            "date": "2024-08-13",
+            "categories": [
+              "other"
+            ],
+            "context": "�� Ȯ�ε�. \n  \n4. �ݹ� û�� �����Ͽ� \n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \n \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+            "coordinates": null
+          },
+          {
+            "date": "2025-08-13",
+            "categories": [
+              "other"
+            ],
+            "context": "tive of small aneurysm, 2 mm, left paraclinoid ICA \n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \n \n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+            "coordinates": null
+          },
+          {
+            "date": "2020-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": "CA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 ����",
+            "coordinates": null
+          },
+          {
+            "date": "2025-10-15",
+            "categories": [
+              "other"
+            ],
+            "context": " �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а���",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 30,
+        "caseId": "Case30",
+        "totalGT": 10,
+        "matched": 6,
+        "missed": 4,
+        "missRate": "40.00",
+        "missedDates": [
+          {
+            "date": "2012-11-23",
+            "categories": [
+              "insurance_claim",
+              "item_2.내원경위"
+            ],
+            "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+            "coordinates": null
+          },
+          {
+            "date": "2025-01-01",
+            "categories": [
+              "medical_visit",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+            "coordinates": null
+          },
+          {
+            "date": "2025-04-22",
+            "categories": [
+              "medical_admission",
+              "medical_examination",
+              "medical_treatment",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_8.입원기간"
+            ],
+            "context": "증 M4026 \n입원기간 : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12",
+            "coordinates": null
+          },
+          {
+            "date": "2025-09-09",
+            "categories": [
+              "medical_admission",
+              "medical_examination",
+              "medical_treatment",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_8.입원기간"
+            ],
+            "context": " : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12 요추 MRI  \n제4-",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 41,
+        "caseId": "Case41",
+        "totalGT": 22,
+        "matched": 16,
+        "missed": 6,
+        "missRate": "27.27",
+        "missedDates": [
+          {
+            "date": "2007-08-08",
+            "categories": [
+              "medical_visit",
+              "medical_admission",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_7.통원기간",
+              "item_8.입원기간"
+            ],
+            "context": "병원 응급실 내원하여 시행한 정밀 \n검사 상 요추 압박골절로 진단 받고 통원 치료 시행 하였다 주장. \n  \n  \n나. 피보험자 병력사항 요약 경과표 \n일자 사고경위 병원/기관 \n2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상 \n2021.05.17",
+            "coordinates": null
+          },
+          {
+            "date": "2024-04-24",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용",
+              "item_7.통원기간",
+              "item_10.의사소견"
+            ],
+            "context": "통원 \n검사결과 : 15도 이상의 전만 변형 소견  \n의사소견 : \"척추에 뚜렷한 기형을 남긴 때(지급률 30%)\" \n \n한림병원 \n  \n다. 기타확인사항 \n사고(발병) \n경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내",
+            "coordinates": null
+          },
+          {
+            "date": "2025-09-02",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용"
+            ],
+            "context": "끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내원하 시행한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 \n치료 시행.  \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때\n(지급률 30%)\" 진단 ",
+            "coordinates": null
+          },
+          {
+            "date": "2024-04-24",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용"
+            ],
+            "context": "니오 자필서명 예 고객불만 하 \n민원성향 하 고객요구사항   \n상기 조사 결과에 의하여 볼 때, \n  \n1. 중점조사 및 청구사항 \n후유장해 적정성 검토  \n  \n2. 사고경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원",
+            "coordinates": null
+          },
+          {
+            "date": "2025-09-02",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용"
+            ],
+            "context": " 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원하 시행\n한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 치료 시행. \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때(지급률 \n30%)\" 진단 ",
+            "coordinates": null
+          },
+          {
+            "date": "2025-01-03",
+            "categories": [
+              "medical_admission",
+              "medical_examination",
+              "medical_diagnosis",
+              "insurance_claim",
+              "item_4.검사결과",
+              "item_8.입원기간",
+              "item_10.의사소견"
+            ],
+            "context": "자 금번 상해사고 발생 전 2021.05. 우신향병원 입원하여 시행한 검사 상 흉추부의 척추 \n측만증 소견 外 척추전만, 후만증 소견은 없는 것으로 확인됨.  \n \n금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 42,
+        "caseId": "Case42",
+        "totalGT": 12,
+        "matched": 11,
+        "missed": 1,
+        "missRate": "8.33",
+        "missedDates": [
+          {
+            "date": "2018-09-27",
+            "categories": [
+              "medical_visit",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_2.내원경위"
+            ],
+            "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험 \n2025.02.26 \n[청구사항] \n초 진 일 : 2025.02.26 \n내원경위 : 건강검진 간 시",
+            "coordinates": null
+          }
+        ]
+      },
+      {
+        "caseNum": 44,
+        "caseId": "Case44",
+        "totalGT": 24,
+        "matched": 15,
+        "missed": 9,
+        "missRate": "37.50",
+        "missedDates": [
+          {
+            "date": "2020-09-09",
+            "categories": [
+              "medical_visit",
+              "medical_examination",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_3.진단병명",
+              "item_4.검사결과",
+              "item_6.치료내용"
+            ],
+            "context": "farction, left (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동",
+            "coordinates": null
+          },
+          {
+            "date": "2024-09-03",
+            "categories": [
+              "medical_visit",
+              "medical_diagnosis",
+              "medical_treatment",
+              "insurance_claim",
+              "item_1.내원일시",
+              "item_3.진단병명",
+              "item_6.치료내용"
+            ],
+            "context": "t (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하",
+            "coordinates": null
+          },
+          {
+            "date": "2020-09-09",
+            "categories": [
+              "medical_visit",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_6.치료내용"
+            ],
+            "context": "문\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+            "coordinates": null
+          },
+          {
+            "date": "2024-09-03",
+            "categories": [
+              "medical_visit",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_6.치료내용"
+            ],
+            "context": "주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+            "coordinates": null
+          },
+          {
+            "date": "2020-09-09",
+            "categories": [
+              "medical_visit",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용"
+            ],
+            "context": "/PA(계약적정성) 확\n인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+            "coordinates": null
+          },
+          {
+            "date": "2024-09-03",
+            "categories": [
+              "medical_visit",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용"
+            ],
+            "context": "인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+            "coordinates": null
+          },
+          {
+            "date": "2024-06-03",
+            "categories": [
+              "medical_visit",
+              "medical_treatment",
+              "insurance_start",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용"
+            ],
+            "context": " 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\n일자확인내용관련기관\n2024.06.03나에게맞춘간편건강보험2404\n - 보험가입 전 3개월 시점DB손해보험\n2",
+            "coordinates": null
+          },
+          {
+            "date": "2024-09-03",
+            "categories": [
+              "medical_visit",
+              "medical_admission",
+              "medical_surgery",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용",
+              "item_8.입원기간",
+              "item_10.의사소견"
+            ],
+            "context": "024.07.31\n내원일시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025",
+            "coordinates": null
+          },
+          {
+            "date": "2054-09-03",
+            "categories": [
+              "medical_visit",
+              "medical_admission",
+              "medical_surgery",
+              "medical_diagnosis",
+              "medical_treatment",
+              "item_1.내원일시",
+              "item_2.내원경위",
+              "item_6.치료내용",
+              "item_8.입원기간",
+              "item_10.의사소견"
+            ],
+            "context": "시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025.08.25 ~ 2025",
+            "coordinates": null
+          }
+        ]
+      }
+    ],
+    "missedDatePatterns": [
+      {
+        "caseNum": 2,
+        "date": "2019-04-09",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "item_4.검사결과",
+          "item_7.통원기간"
+        ],
+        "context": ".03.23 ~ 2023.08.07 / 6 회 통원 \n검사결과 : 복부 CT \nhepatic memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험",
+        "coordinates": null
+      },
+      {
+        "caseNum": 2,
+        "date": "2024-01-09",
+        "categories": [
+          "medical_visit",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용",
+          "item_10.의사소견"
+        ],
+        "context": "memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험 \n2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험 \n",
+        "coordinates": null
+      },
+      {
+        "caseNum": 2,
+        "date": "2025-02-04",
+        "categories": [
+          "medical_visit",
+          "medical_admission",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_7.통원기간",
+          "item_8.입원기간",
+          "item_10.의사소견"
+        ],
+        "context": "일 : 2024.04.09 \n내원경위 : 2017 년 간혈관종 진단 후 매년 크기 증가 소견으\n로 진료의뢰 하 내원 \n진 단 명 : 간담도계의 혈관종(D18.02) \n입원기간 : 2025.02.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.0",
+        "coordinates": null
+      },
+      {
+        "caseNum": 2,
+        "date": "2024-04-23",
+        "categories": [
+          "medical_visit",
+          "medical_admission",
+          "medical_examination",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_7.통원기간",
+          "item_8.입원기간"
+        ],
+        "context": "2.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.09 (12:55) \n치료내용 : 복강경 하 우측 간절제술 \n검사결과 : abdoman CT(보고일시 2024.04.23 12:55) \n- 청약 전 진료 \n삼성서울병원 \n \n \n2. 손해사정 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2018-05-10",
+        "categories": [
+          "item_2.내원경위"
+        ],
+        "context": "나. 피보험자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2023-02-10",
+        "categories": [
+          "item_2.내원경위"
+        ],
+        "context": "자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 P",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2023-05-10",
+        "categories": [
+          "medical_visit",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": "년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \n이내 ㈜KB 손해보험 \n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2020-01-17",
+        "categories": [
+          "medical_visit",
+          "medical_diagnosis",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_3.진단병명"
+        ],
+        "context": "(I20.88)' 진단 하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2023-05-10",
+        "categories": [
+          "medical_visit",
+          "insurance_claim",
+          "item_1.내원일시"
+        ],
+        "context": "하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료내역 없음. \n4. 손해",
+        "coordinates": null
+      },
+      {
+        "caseNum": 5,
+        "date": "2020-01-17",
+        "categories": [
+          "medical_visit",
+          "medical_diagnosis",
+          "insurance_start",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_3.진단병명",
+          "item_10.의사소견"
+        ],
+        "context": "관상동맥조영술 결과 좌전\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \n3. 알릴의무와 관련하여\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\n상에 해당하는 진료",
+        "coordinates": null
+      },
+      {
+        "caseNum": 13,
+        "date": "2024-11-04",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_7.통원기간",
+          "item_10.의사소견"
+        ],
+        "context": " \n내 원 일 : 2024.04.12 \n내원경위 : 2 년 전 넘어지며 요통 발생 후 최근 빗길에 넘어지\n며 좌측 요추부 통증 호소하여 내원 \n통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원 \n치료내용 : 신경차단술 및 도수치료, 물리치료 시행 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 15,
+        "date": "2025-02-25",
+        "categories": [
+          "insurance_start"
+        ],
+        "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해",
+        "coordinates": null
+      },
+      {
+        "caseNum": 15,
+        "date": "2053-02-25",
+        "categories": [
+          "insurance_start"
+        ],
+        "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07",
+        "coordinates": null
+      },
+      {
+        "caseNum": 15,
+        "date": "2025-05-26",
+        "categories": [
+          "medical_visit",
+          "insurance_start",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07|\n초진일자 : 2025.",
+        "coordinates": null
+      },
+      {
+        "caseNum": 17,
+        "date": "2025-08-12",
+        "categories": [
+          "medical_visit",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": ")모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.",
+        "coordinates": null
+      },
+      {
+        "caseNum": 17,
+        "date": "2030-08-12",
+        "categories": [
+          "medical_visit",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": "정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.",
+        "coordinates": null
+      },
+      {
+        "caseNum": 17,
+        "date": "2025-08-12",
+        "categories": [
+          "medical_visit",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": " 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2",
+        "coordinates": null
+      },
+      {
+        "caseNum": 17,
+        "date": "2045-08-12",
+        "categories": [
+          "medical_visit",
+          "medical_diagnosis",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명"
+        ],
+        "context": "\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2025.08.14 ~ 2",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2024-08-13",
+        "categories": [
+          "other"
+        ],
+        "context": "��� �ް� ���� ����� û���Ͽ����� ����. \n  \n  \n \n \n��. �Ǻ����� ���»��� ��� ���ǥ \n���� ������� ����/��� \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2020-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": "��� ���� �����Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2025-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": "�Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2020-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": " ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2025-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": " ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2024-08-13",
+        "categories": [
+          "other"
+        ],
+        "context": "�� Ȯ�ε�. \n  \n4. �ݹ� û�� �����Ͽ� \n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \n \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2025-08-13",
+        "categories": [
+          "other"
+        ],
+        "context": "tive of small aneurysm, 2 mm, left paraclinoid ICA \n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \n \n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2020-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": "CA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 ����",
+        "coordinates": null
+      },
+      {
+        "caseNum": 29,
+        "date": "2025-10-15",
+        "categories": [
+          "other"
+        ],
+        "context": " �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а���",
+        "coordinates": null
+      },
+      {
+        "caseNum": 30,
+        "date": "2012-11-23",
+        "categories": [
+          "insurance_claim",
+          "item_2.내원경위"
+        ],
+        "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 30,
+        "date": "2025-01-01",
+        "categories": [
+          "medical_visit",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 30,
+        "date": "2025-04-22",
+        "categories": [
+          "medical_admission",
+          "medical_examination",
+          "medical_treatment",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_8.입원기간"
+        ],
+        "context": "증 M4026 \n입원기간 : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12",
+        "coordinates": null
+      },
+      {
+        "caseNum": 30,
+        "date": "2025-09-09",
+        "categories": [
+          "medical_admission",
+          "medical_examination",
+          "medical_treatment",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_8.입원기간"
+        ],
+        "context": " : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12 요추 MRI  \n제4-",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2007-08-08",
+        "categories": [
+          "medical_visit",
+          "medical_admission",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_7.통원기간",
+          "item_8.입원기간"
+        ],
+        "context": "병원 응급실 내원하여 시행한 정밀 \n검사 상 요추 압박골절로 진단 받고 통원 치료 시행 하였다 주장. \n  \n  \n나. 피보험자 병력사항 요약 경과표 \n일자 사고경위 병원/기관 \n2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상 \n2021.05.17",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2024-04-24",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용",
+          "item_7.통원기간",
+          "item_10.의사소견"
+        ],
+        "context": "통원 \n검사결과 : 15도 이상의 전만 변형 소견  \n의사소견 : \"척추에 뚜렷한 기형을 남긴 때(지급률 30%)\" \n \n한림병원 \n  \n다. 기타확인사항 \n사고(발병) \n경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2025-09-02",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용"
+        ],
+        "context": "끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내원하 시행한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 \n치료 시행.  \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때\n(지급률 30%)\" 진단 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2024-04-24",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용"
+        ],
+        "context": "니오 자필서명 예 고객불만 하 \n민원성향 하 고객요구사항   \n상기 조사 결과에 의하여 볼 때, \n  \n1. 중점조사 및 청구사항 \n후유장해 적정성 검토  \n  \n2. 사고경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2025-09-02",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용"
+        ],
+        "context": " 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원하 시행\n한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 치료 시행. \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때(지급률 \n30%)\" 진단 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 41,
+        "date": "2025-01-03",
+        "categories": [
+          "medical_admission",
+          "medical_examination",
+          "medical_diagnosis",
+          "insurance_claim",
+          "item_4.검사결과",
+          "item_8.입원기간",
+          "item_10.의사소견"
+        ],
+        "context": "자 금번 상해사고 발생 전 2021.05. 우신향병원 입원하여 시행한 검사 상 흉추부의 척추 \n측만증 소견 外 척추전만, 후만증 소견은 없는 것으로 확인됨.  \n \n금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으",
+        "coordinates": null
+      },
+      {
+        "caseNum": 42,
+        "date": "2018-09-27",
+        "categories": [
+          "medical_visit",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_2.내원경위"
+        ],
+        "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험 \n2025.02.26 \n[청구사항] \n초 진 일 : 2025.02.26 \n내원경위 : 건강검진 간 시",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2020-09-09",
+        "categories": [
+          "medical_visit",
+          "medical_examination",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_3.진단병명",
+          "item_4.검사결과",
+          "item_6.치료내용"
+        ],
+        "context": "farction, left (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2024-09-03",
+        "categories": [
+          "medical_visit",
+          "medical_diagnosis",
+          "medical_treatment",
+          "insurance_claim",
+          "item_1.내원일시",
+          "item_3.진단병명",
+          "item_6.치료내용"
+        ],
+        "context": "t (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2020-09-09",
+        "categories": [
+          "medical_visit",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_6.치료내용"
+        ],
+        "context": "문\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2024-09-03",
+        "categories": [
+          "medical_visit",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_6.치료내용"
+        ],
+        "context": "주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2020-09-09",
+        "categories": [
+          "medical_visit",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용"
+        ],
+        "context": "/PA(계약적정성) 확\n인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2024-09-03",
+        "categories": [
+          "medical_visit",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용"
+        ],
+        "context": "인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2024-06-03",
+        "categories": [
+          "medical_visit",
+          "medical_treatment",
+          "insurance_start",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용"
+        ],
+        "context": " 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\n일자확인내용관련기관\n2024.06.03나에게맞춘간편건강보험2404\n - 보험가입 전 3개월 시점DB손해보험\n2",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2024-09-03",
+        "categories": [
+          "medical_visit",
+          "medical_admission",
+          "medical_surgery",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용",
+          "item_8.입원기간",
+          "item_10.의사소견"
+        ],
+        "context": "024.07.31\n내원일시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025",
+        "coordinates": null
+      },
+      {
+        "caseNum": 44,
+        "date": "2054-09-03",
+        "categories": [
+          "medical_visit",
+          "medical_admission",
+          "medical_surgery",
+          "medical_diagnosis",
+          "medical_treatment",
+          "item_1.내원일시",
+          "item_2.내원경위",
+          "item_6.치료내용",
+          "item_8.입원기간",
+          "item_10.의사소견"
+        ],
+        "context": "시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025.08.25 ~ 2025",
+        "coordinates": null
+      }
+    ],
+    "contextPatterns": {
+      "withStrongContext": [
+        {
+          "caseNum": 2,
+          "date": "2019-04-09",
+          "context": ".03.23 ~ 2023.08.07 / 6 회 통원 \n검사결과 : 복부 CT \nhepatic memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "item_4.검사결과",
+            "item_7.통원기간"
+          ]
+        },
+        {
+          "caseNum": 2,
+          "date": "2025-02-04",
+          "context": "일 : 2024.04.09 \n내원경위 : 2017 년 간혈관종 진단 후 매년 크기 증가 소견으\n로 진료의뢰 하 내원 \n진 단 명 : 간담도계의 혈관종(D18.02) \n입원기간 : 2025.02.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.0",
+          "categories": [
+            "medical_visit",
+            "medical_admission",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_7.통원기간",
+            "item_8.입원기간",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 2,
+          "date": "2024-04-23",
+          "context": "2.04 ~ 2025.02.12 / 9 일 입원 \n통원기간 : 2024.04.09 (12:55) \n치료내용 : 복강경 하 우측 간절제술 \n검사결과 : abdoman CT(보고일시 2024.04.23 12:55) \n- 청약 전 진료 \n삼성서울병원 \n \n \n2. 손해사정 ",
+          "categories": [
+            "medical_visit",
+            "medical_admission",
+            "medical_examination",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_7.통원기간",
+            "item_8.입원기간"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2018-05-10",
+          "context": "나. 피보험자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! ",
+          "categories": [
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2023-02-10",
+          "context": "자 병력사항 요약 경과표\n일자 사고경위 병원/기관\n2018.05.10 \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 5 년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 P",
+          "categories": [
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2020-01-17",
+          "context": "(I20.88)' 진단 하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료",
+          "categories": [
+            "medical_visit",
+            "medical_diagnosis",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_3.진단병명"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2023-05-10",
+          "context": "하 관련 보험금 \n청구함. \n직업 \n직무 \n청약 시 : 사회복지사(1 급) \n현재 : 사회복지사(1 급) \n심평원 피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2023.05.10) 검토 결과 청\n약 전 고지대상에 해당하는 진료내역 없음. \n4. 손해",
+          "categories": [
+            "medical_visit",
+            "insurance_claim",
+            "item_1.내원일시"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2020-01-17",
+          "context": "관상동맥조영술 결과 좌전\n하행지 심근교 소견으로 '안정성 협심증(I20.88)' 진단 하 관련 보험금 청구함. \n3. 알릴의무와 관련하여\n피보험자 면담 시 확인한 심평원 진료내역(2020.01.17 ~ 2024.01.24) 검토 결과 청약 전 고지대\n상에 해당하는 진료",
+          "categories": [
+            "medical_visit",
+            "medical_diagnosis",
+            "insurance_start",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_3.진단병명",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 13,
+          "date": "2024-11-04",
+          "context": " \n내 원 일 : 2024.04.12 \n내원경위 : 2 년 전 넘어지며 요통 발생 후 최근 빗길에 넘어지\n며 좌측 요추부 통증 호소하여 내원 \n통원기간 : 2024.04.12 ~ 2024.11.04 / 5 회 통원 \n치료내용 : 신경차단술 및 도수치료, 물리치료 시행 ",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_7.통원기간",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 17,
+          "date": "2025-08-12",
+          "context": ")모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.",
+          "categories": [
+            "medical_visit",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 17,
+          "date": "2030-08-12",
+          "context": "정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.",
+          "categories": [
+            "medical_visit",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 17,
+          "date": "2025-08-12",
+          "context": " 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2",
+          "categories": [
+            "medical_visit",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 17,
+          "date": "2045-08-12",
+          "context": "\n조  사  내  용 심평원 진료내역 상 특이 기왕력 없음.\n일자확인내용관련기관\n2025.08.12 ~ 2030.08.12실손의료비보험2507 DB손해보험\n2025.08.12 ~ 2045.08.12참좋은행복더블플러스종합보험2508 DB손해보험\n2025.08.14 ~ 2",
+          "categories": [
+            "medical_visit",
+            "medical_diagnosis",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명"
+          ]
+        },
+        {
+          "caseNum": 30,
+          "date": "2025-04-22",
+          "context": "증 M4026 \n입원기간 : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12",
+          "categories": [
+            "medical_admission",
+            "medical_examination",
+            "medical_treatment",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_8.입원기간"
+          ]
+        },
+        {
+          "caseNum": 30,
+          "date": "2025-09-09",
+          "context": " : 2025.03.23 ~ 2025.04.11 / 20일 입원 \n치료내용 : 2025.03.24 제4-5요추-제1천추간 유합술 \n입원 간 도수치료 7회 \n2025.04.22 ~ 2025.09.09 22회 도수치료 \n검사결과 : 2025.3.12 요추 MRI  \n제4-",
+          "categories": [
+            "medical_admission",
+            "medical_examination",
+            "medical_treatment",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_8.입원기간"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2007-08-08",
+          "context": "병원 응급실 내원하여 시행한 정밀 \n검사 상 요추 압박골절로 진단 받고 통원 치료 시행 하였다 주장. \n  \n  \n나. 피보험자 병력사항 요약 경과표 \n일자 사고경위 병원/기관 \n2007.08.08 무배당행복을다모은보험(Hi0604) 가입 현대해상 \n2021.05.17",
+          "categories": [
+            "medical_visit",
+            "medical_admission",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_7.통원기간",
+            "item_8.입원기간"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2024-04-24",
+          "context": "통원 \n검사결과 : 15도 이상의 전만 변형 소견  \n의사소견 : \"척추에 뚜렷한 기형을 남긴 때(지급률 30%)\" \n \n한림병원 \n  \n다. 기타확인사항 \n사고(발병) \n경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용",
+            "item_7.통원기간",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2025-09-02",
+          "context": "끄러져 넘어지며 요추부 수상 후 은평성모병원 \n내원하 시행한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 \n치료 시행.  \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때\n(지급률 30%)\" 진단 ",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2024-04-24",
+          "context": "니오 자필서명 예 고객불만 하 \n민원성향 하 고객요구사항   \n상기 조사 결과에 의하여 볼 때, \n  \n1. 중점조사 및 청구사항 \n후유장해 적정성 검토  \n  \n2. 사고경위 \n2024.04.24 엘리베이터 바닥에서 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2025-09-02",
+          "context": " 미끄러져 넘어지며 요추부 수상 후 은평성모병원 내원하 시행\n한 정밀 검사 결과 'L1부위의 골절, 폐쇄성(S32.030)' 진단 후 보존적 치료 시행. \n후유증상 잔존함에 따라 2025.09.02 한림병원에서 \"척추에 뚜렷한 기형을 남긴 때(지급률 \n30%)\" 진단 ",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 41,
+          "date": "2025-01-03",
+          "context": "자 금번 상해사고 발생 전 2021.05. 우신향병원 입원하여 시행한 검사 상 흉추부의 척추 \n측만증 소견 外 척추전만, 후만증 소견은 없는 것으로 확인됨.  \n \n금번 사고 전 2025.01.03 힘찬병원에서 시행한 골밀도 검사 상 요추부 T-score는 약 -2점으",
+          "categories": [
+            "medical_admission",
+            "medical_examination",
+            "medical_diagnosis",
+            "insurance_claim",
+            "item_4.검사결과",
+            "item_8.입원기간",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 42,
+          "date": "2018-09-27",
+          "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2018.09.27 (무) NH가성비굿건강보험[1종:해지환급금미지급형] 가입 NH농협손해보험 \n2025.02.26 \n[청구사항] \n초 진 일 : 2025.02.26 \n내원경위 : 건강검진 간 시",
+          "categories": [
+            "medical_visit",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2020-09-09",
+          "context": "farction, left (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동",
+          "categories": [
+            "medical_visit",
+            "medical_examination",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_3.진단병명",
+            "item_4.검사결과",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2024-09-03",
+          "context": "t (좌측 중대뇌동맥 뇌경색)' 진단 후 관련 보험금 청구함.\n청구내용 및 조사 결과\n조사자의견\n및 \n조사결과\n[고지의무 위반여부 관련] \n심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, 청약 전 동 보험 고지대상에 해당하",
+          "categories": [
+            "medical_visit",
+            "medical_diagnosis",
+            "medical_treatment",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_3.진단병명",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2020-09-09",
+          "context": "문\n조사쟁점 중(L2)거주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+          "categories": [
+            "medical_visit",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2024-09-03",
+          "context": "주지/직장 주변 병원탐문조사자확인완료\n쟁 점 상 세(L3)가입전 치료력확인 (요양급여원, 탐문시행)고지위반에 대한 조사\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+          "categories": [
+            "medical_visit",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2020-09-09",
+          "context": "/PA(계약적정성) 확\n인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 ",
+          "categories": [
+            "medical_visit",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2024-09-03",
+          "context": "인\n조사쟁점 중(L2)모집경위서 징구(계약적정성 여부)조사자확인완료\n쟁 점 상 세(L3)고지위반 확인시 모집경위서 징구\n조  사  내  용 심평원 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당",
+          "categories": [
+            "medical_visit",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2024-06-03",
+          "context": " 진료내역(2020.09.09 ~ 2024.09.03) 및 치료병원 의무기록 검토 결과, \n청약 전 동 보험 고지대상에 해당하는 진료내역 없는 것으로 확인됨.\n일자확인내용관련기관\n2024.06.03나에게맞춘간편건강보험2404\n - 보험가입 전 3개월 시점DB손해보험\n2",
+          "categories": [
+            "medical_visit",
+            "medical_treatment",
+            "insurance_start",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2024-09-03",
+          "context": "024.07.31\n내원일시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025",
+          "categories": [
+            "medical_visit",
+            "medical_admission",
+            "medical_surgery",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용",
+            "item_8.입원기간",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 44,
+          "date": "2054-09-03",
+          "context": "시 : 2024.07.31\n내원경위 : 양안 백내장 경과관찰 목적으로 내원\n치료사항 : 경과과찰 6개월\n기타사항 : 입원 수술 필요 소견 없음.\n김안과병원\n2024.09.03 ~ 2054.09.03나에게맞춘간편건강보험2404 DB손해보험\n2025.08.25 ~ 2025",
+          "categories": [
+            "medical_visit",
+            "medical_admission",
+            "medical_surgery",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용",
+            "item_8.입원기간",
+            "item_10.의사소견"
+          ]
+        }
+      ],
+      "withWeakContext": [],
+      "withoutContext": [
+        {
+          "caseNum": 2,
+          "date": "2024-01-09",
+          "context": "memangioma at rifht lobe (8 * 6cm) \n에스엠영상의학과의원 \n2019.04.09 (무) NH 헤아림 355 건강보험 가입 5 년 이내 NH 농협손해보험 \n2024.01.09 (무) NH 헤아림 355 건강보험 3 개월 이내 NH 농협손해보험 \n",
+          "categories": [
+            "medical_visit",
+            "medical_diagnosis",
+            "medical_treatment",
+            "item_1.내원일시",
+            "item_2.내원경위",
+            "item_6.치료내용",
+            "item_10.의사소견"
+          ]
+        },
+        {
+          "caseNum": 5,
+          "date": "2023-05-10",
+          "context": "년 이\n내 \n㈜KB 손해보험 \n2023.02.10 \n[3 개월 이내] \n(무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가입 3 개월 \n이내 ㈜KB 손해보험 \n2023.05.10 (무)KB 3.5.5 오! 슬기로운간편건강보험 Plus(23.05) 가",
+          "categories": [
+            "medical_visit",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 15,
+          "date": "2025-02-25",
+          "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해",
+          "categories": [
+            "insurance_start"
+          ]
+        },
+        {
+          "caseNum": 15,
+          "date": "2053-02-25",
+          "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07",
+          "categories": [
+            "insurance_start"
+          ]
+        },
+        {
+          "caseNum": 15,
+          "date": "2025-05-26",
+          "context": "일자|확인내용|관련기관\n2025.02.25 ~ 2053.02.25|나에게 맞춘 초경증 간편건강보험2407 |DB손해보험\n2025.05.26|나에게 맞춘 초경증 간편건강보험2407\n - 보험계약일로부터 90일 |시점DB손해보험\n2025.06.07|\n초진일자 : 2025.",
+          "categories": [
+            "medical_visit",
+            "insurance_start",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2024-08-13",
+          "context": "��� �ް� ���� ����� û���Ͽ����� ����. \n  \n  \n \n \n��. �Ǻ����� ���»��� ��� ���ǥ \n���� ������� ����/��� \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2020-10-15",
+          "context": "��� ���� �����Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2025-10-15",
+          "context": "�Ʒ�(I67.1)' \n���� �� ���� ����� û����.  \n���� \n���� �Ĵ������(2��) \n����� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2020-10-15",
+          "context": " ��� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2025-10-15",
+          "context": " ���� �����Ʒ�(I67.1)' ���� �� ��\n�� ����� û����. \n  \n3. �˸��ǹ��� �����Ͽ� \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���,  \nû�� �� �� ���� ������� �ش�",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2024-08-13",
+          "context": "�� Ȯ�ε�. \n  \n4. �ݹ� û�� �����Ͽ� \n�ݹ� û�������� '�Ŀ����� ���� �����Ʒ�(I67.1)' ���� ���� �����Ͽ�,  \n \n2024.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2025-08-13",
+          "context": "tive of small aneurysm, 2 mm, left paraclinoid ICA \n(���� ����� ���浿�� ���� ���Ʒ�, 2mm �ǽ�) �Ұ�. \n \n2025.08.13 KB 3.5.5 ��! ����ο���ǰ�����Plus(�����)",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2020-10-15",
+          "context": "CA(���� ����� �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 ����",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 29,
+          "date": "2025-10-15",
+          "context": " �ظ� ������ ���浿�ƿ� 1~2mm \nũ����, ���� �������� ����� ���� ���� ���Ʒ�) \n \n����� ���᳻��(2020.10.15 ~ 2025.10.15) ���� ���, 2024.09.04 �������������а���",
+          "categories": [
+            "other"
+          ]
+        },
+        {
+          "caseNum": 30,
+          "date": "2012-11-23",
+          "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+          "categories": [
+            "insurance_claim",
+            "item_2.내원경위"
+          ]
+        },
+        {
+          "caseNum": 30,
+          "date": "2025-01-01",
+          "context": "Ⅱ. 조사 사항 \n1. 사고 및 손해조사 내용 \n일자 사고경위 병원/기관 \n2012.11.23 무배당 내가정 채움종합프로젝트보험 가입 NH농협손해보험 \n2025.01.01 단체상해보험(NH농협) 가입 NH농협손해보험 \n2025.03.23 \n[청구사항] \n내 원 일 : ",
+          "categories": [
+            "medical_visit",
+            "insurance_claim",
+            "item_1.내원일시",
+            "item_2.내원경위"
+          ]
+        }
+      ]
+    }
+  },
+  "overExtraction": {
+    "summary": {
+      "totalOCR": 507,
+      "totalGT": 176,
+      "overExtracted": 331,
+      "overExtractionRate": "188.07"
+    },
+    "caseAnalysis": [
+      {
+        "caseNum": 13,
+        "caseId": "Case13",
+        "totalOCR": 126,
+        "totalGT": 10,
+        "overExtracted": 116,
+        "overRate": 1160,
+        "ocrOnlyDates": [
+          "2025-04-01",
+          "2025-03-10",
+          "2025-03-10",
+          "2025-03-24",
+          "2069-03-24",
+          "2059-07-30",
+          "2069-03-24",
+          "2069-03-24",
+          "2069-03-24",
+          "2069-03-24",
+          "2069-03-24",
+          "2069-03-24",
+          "2021-12-16",
+          "2025-03-20",
+          "2025-04-01",
+          "2025-03-12",
+          "2024-05-07",
+          "2024-05-14",
+          "2025-05-07",
+          "2024-05-07",
+          "2024-05-21",
+          "2024-05-14",
+          "2024-05-14",
+          "2024-04-23",
+          "2025-04-23",
+          "2024-05-07",
+          "2024-05-21",
+          "2024-05-14",
+          "2024-05-14"
+        ]
+      },
+      {
+        "caseNum": 5,
+        "caseId": "Case5",
+        "totalOCR": 92,
+        "totalGT": 22,
+        "overExtracted": 70,
+        "overRate": 318.18,
+        "ocrOnlyDates": [
+          "2025-01-22",
+          "2025-01-21",
+          "2025-01-21",
+          "2024-06-05",
+          "2024-06-05",
+          "2024-06-05",
+          "2025-01-24",
+          "2025-01-21",
+          "2025-01-21",
+          "2025-01-21",
+          "2025-01-01",
+          "2025-01-21",
+          "2025-01-21",
+          "2025-01-21",
+          "2025-01-21",
+          "2025-01-09",
+          "2025-01-14",
+          "2024-04-30",
+          "2024-04-12",
+          "2024-11-04",
+          "2024-01-17",
+          "2023-10-30",
+          "2023-12-21",
+          "2023-12-28",
+          "2023-12-30",
+          "2024-01-01",
+          "2024-01-25",
+          "2024-01-30",
+          "2024-02-01",
+          "2024-02-05",
+          "2024-02-10",
+          "2024-02-15",
+          "2024-02-20",
+          "2024-02-25",
+          "2024-03-01",
+          "2024-03-05",
+          "2024-03-10",
+          "2024-03-15",
+          "2024-03-20",
+          "2024-03-25",
+          "2024-03-30",
+          "2023-06-07",
+          "2023-04-24",
+          "2023-04-24",
+          "2023-04-17",
+          "2023-04-03",
+          "2023-04-03",
+          "2023-03-30",
+          "2023-03-13",
+          "2023-03-13",
+          "2023-03-13",
+          "2023-01-31",
+          "2022-12-31",
+          "2022-12-31",
+          "2022-10-28",
+          "2022-10-28",
+          "2022-08-05",
+          "2022-08-05",
+          "2022-08-05",
+          "2022-03-13",
+          "2022-03-13",
+          "2022-03-13",
+          "2021-12-31",
+          "2021-12-31",
+          "2021-10-28",
+          "2021-10-28",
+          "2021-08-05",
+          "2021-07-26",
+          "2021-06-14",
+          "2021-06-09",
+          "2021-06-01",
+          "2021-05-31",
+          "2021-05-31",
+          "2021-05-31",
+          "2020-12-01",
+          "2020-01-31"
+        ]
+      },
+      {
+        "caseNum": 2,
+        "caseId": "Case2",
+        "totalOCR": 69,
+        "totalGT": 22,
+        "overExtracted": 47,
+        "overRate": 213.64,
+        "ocrOnlyDates": [
+          "2025-03-19",
+          "2025-02-05",
+          "2020-06-20",
+          "2020-08-11",
+          "2021-07-09",
+          "2022-07-19",
+          "2020-06-20",
+          "2021-07-09",
+          "2020-06-20",
+          "2022-07-19",
+          "2021-07-09",
+          "2022-07-19",
+          "2025-04-07",
+          "2025-03-21",
+          "2024-04-25",
+          "2024-11-21",
+          "2025-02-05",
+          "2025-02-26",
+          "2025-02-10",
+          "2025-03-21",
+          "2025-02-10",
+          "2025-02-05",
+          "2025-02-05",
+          "2025-02-07",
+          "2025-02-11",
+          "2025-03-21",
+          "2025-03-21",
+          "2025-03-21",
+          "2025-03-21",
+          "2025-01-07",
+          "2024-04-25",
+          "2024-11-19",
+          "2025-01-01",
+          "2025-01-01",
+          "2020-06-20",
+          "2020-06-20",
+          "2020-08-11",
+          "2021-07-09",
+          "2022-07-19",
+          "2020-06-20",
+          "2021-07-09",
+          "2022-07-19"
+        ]
+      },
+      {
+        "caseNum": 41,
+        "caseId": "Case41",
+        "totalOCR": 56,
+        "totalGT": 22,
+        "overExtracted": 34,
+        "overRate": 154.55,
+        "ocrOnlyDates": [
+          "2025-10-13",
+          "2020-09-24",
+          "2021-05-21",
+          "2021-05-31",
+          "2021-06-09",
+          "2021-05-18",
+          "2021-05-31",
+          "2021-06-09",
+          "2021-06-30",
+          "2021-05-31",
+          "2021-05-31",
+          "2021-05-31",
+          "2021-05-31",
+          "2021-05-31",
+          "2021-05-31",
+          "2025-09-24",
+          "2024-04-25",
+          "2024-05-09",
+          "2025-06-12",
+          "2025-06-12",
+          "2025-06-12",
+          "2025-06-13"
+        ]
+      },
+      {
+        "caseNum": 44,
+        "caseId": "Case44",
+        "totalOCR": 43,
+        "totalGT": 24,
+        "overExtracted": 19,
+        "overRate": 79.17,
+        "ocrOnlyDates": [
+          "2025-09-19",
+          "2018-12-18",
+          "2024-01-31",
+          "2025-02-05",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-02",
+          "2025-09-06",
+          "2025-08-28",
+          "2025-09-02",
+          "2025-09-06",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-08-27",
+          "2025-09-10",
+          "2025-08-27",
+          "2025-09-10"
+        ]
+      },
+      {
+        "caseNum": 15,
+        "caseId": "Case15",
+        "totalOCR": 31,
+        "totalGT": 14,
+        "overExtracted": 17,
+        "overRate": 121.43,
+        "ocrOnlyDates": [
+          "2025-06-09",
+          "2025-06-09",
+          "2025-06-09",
+          "2025-06-09",
+          "2025-06-26",
+          "2025-09-09",
+          "2025-09-09",
+          "2025-06-21",
+          "2025-06-23",
+          "2025-06-21",
+          "2025-06-23"
+        ]
+      },
+      {
+        "caseNum": 17,
+        "caseId": "Case17",
+        "totalOCR": 28,
+        "totalGT": 13,
+        "overExtracted": 15,
+        "overRate": 115.38,
+        "ocrOnlyDates": [
+          "2025-09-09",
+          "2025-08-21",
+          "2025-08-28",
+          "2025-08-28",
+          "2025-08-22",
+          "2025-09-09",
+          "2025-08-20",
+          "2025-08-21",
+          "2025-08-22",
+          "2025-08-28",
+          "2025-09-09",
+          "2025-09-09",
+          "2025-09-19",
+          "2025-08-21",
+          "2025-08-18",
+          "2025-08-21",
+          "2025-08-21",
+          "2025-08-21",
+          "2025-08-21"
+        ]
+      },
+      {
+        "caseNum": 30,
+        "caseId": "Case30",
+        "totalOCR": 19,
+        "totalGT": 10,
+        "overExtracted": 9,
+        "overRate": 90,
+        "ocrOnlyDates": [
+          "2025-09-24",
+          "2025-09-19",
+          "2025-03-25",
+          "2025-03-25",
+          "2025-03-25",
+          "2025-04-30",
+          "2025-05-07",
+          "2025-06-04",
+          "2025-09-03"
+        ]
+      },
+      {
+        "caseNum": 42,
+        "caseId": "Case42",
+        "totalOCR": 18,
+        "totalGT": 12,
+        "overExtracted": 6,
+        "overRate": 50,
+        "ocrOnlyDates": [
+          "2025-09-10",
+          "2025-02-22",
+          "2025-04-15",
+          "2025-02-22",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-09-10",
+          "2025-04-01",
+          "2025-09-10",
+          "2025-04-17"
+        ]
+      },
+      {
+        "caseNum": 29,
+        "caseId": "Case29",
+        "totalOCR": 25,
+        "totalGT": 27,
+        "overExtracted": -2,
+        "overRate": -7.41,
+        "ocrOnlyDates": [
+          "2024-08-17",
+          "2024-08-24",
+          "2024-08-19",
+          "2024-09-26",
+          "2025-10-19",
+          "2024-08-17",
+          "2024-08-17",
+          "2024-08-17",
+          "2024-08-17",
+          "2024-08-19",
+          "2024-08-19",
+          "2024-08-19",
+          "2024-08-19",
+          "2024-08-22",
+          "2024-08-17",
+          "2024-08-17",
+          "2024-08-17",
+          "2024-08-18",
+          "2024-08-19",
+          "2025-10-19",
+          "2025-10-19",
+          "2025-10-19"
+        ]
+      }
+    ]
+  },
+  "improvements": {
+    "underExtractionImprovements": [
+      {
+        "priority": "HIGH",
+        "item": "item_6.치료내용",
+        "missRate": "34.48",
+        "suggestion": "item_6.치료내용 항목의 날짜 추출 패턴 강화 필요 (누락률 34.48%)"
+      },
+      {
+        "priority": "HIGH",
+        "item": "item_1.내원일시",
+        "missRate": "25.89",
+        "suggestion": "item_1.내원일시 항목의 날짜 추출 패턴 강화 필요 (누락률 25.89%)"
+      },
+      {
+        "priority": "HIGH",
+        "item": "item_2.내원경위",
+        "missRate": "23.53",
+        "suggestion": "item_2.내원경위 항목의 날짜 추출 패턴 강화 필요 (누락률 23.53%)"
+      },
+      {
+        "priority": "HIGH",
+        "item": "item_8.입원기간",
+        "missRate": "22.22",
+        "suggestion": "item_8.입원기간 항목의 날짜 추출 패턴 강화 필요 (누락률 22.22%)"
+      },
+      {
+        "priority": "HIGH",
+        "item": "item_3.진단병명",
+        "missRate": "20.37",
+        "suggestion": "item_3.진단병명 항목의 날짜 추출 패턴 강화 필요 (누락률 20.37%)"
+      }
+    ],
+    "overExtractionImprovements": [
+      {
+        "priority": "CRITICAL",
+        "issue": "과다 추출 심각",
+        "overRate": "188.07",
+        "suggestion": "OCR이 GT 대비 188% 과다 추출. 중복 제거 및 필터링 로직 강화 필요"
+      }
+    ],
+    "contextFilteringImprovements": [
+      {
+        "priority": "HIGH",
+        "issue": "강한 컨텍스트가 있는데도 놓친 날짜",
+        "count": 31,
+        "suggestion": "의료 키워드가 포함된 컨텍스트의 날짜 추출 로직 개선 필요"
+      },
+      {
+        "priority": "LOW",
+        "issue": "컨텍스트 없는 날짜 누락",
+        "count": 16,
+        "suggestion": "날짜 단독 추출 로직 검토 필요"
+      }
+    ]
+  }
+}

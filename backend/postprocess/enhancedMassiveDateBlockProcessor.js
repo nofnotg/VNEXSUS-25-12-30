@@ -19,18 +19,22 @@ class EnhancedMassiveDateBlockProcessor {
         medicalHeaderBlock: /(?:병원|의원|클리닉|센터|한의원)[^\n]*\n[\s\S]*?(?=\d{4}[-\/.년]|$)/gi,
         // 날짜별 진료 섹션 (개선된 패턴)
         dateBasedSection: /(?:\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?|\d{4}년\s*\d{1,2}월\s*\d{1,2}일)[\s\S]*?(?=(?:\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?|\d{4}년\s*\d{1,2}월\s*\d{1,2}일)|$)/gi,
-        // 보험 관련 블록
-        insuranceBlock: /(?:보험|가입|청구|지급)[\s\S]*?(?=\n\s*\n|$)/gi
+        // 보험 관련 블록 (대폭 강화)
+        insuranceBlock: /(?:보험|가입|청구|지급|보장기간|계약일|청약|효력발생|상품가입)[\s\S]*?(?=\n\s*\n|$)/gi
       },
       
       // Level 2: 중간 크기 의료 행위 블록
       mediumBlocks: {
-        // 입원/퇴원 기간 블록 (실제 패턴 반영)
-        hospitalizationBlock: /(?:입원|퇴원|병동|응급실)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?[\s\S]*?(?=(?:입원|퇴원|\d{4}[-\/.년])|$)/gi,
+        // 입원/퇴원 기간 블록 (실제 패턴 반영 + 기간 범위 지원 강화)
+        hospitalizationBlock: /(?:입원|퇴원|병동|응급실|재원)(?:\s*기간\s*[:：]?)?\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?(?:\s*[~\-]\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?)?[\s\S]*?(?=(?:입원|퇴원|통원|\d{4}[-\/.년])|$)/gi,
+        // 통원 기간 블록 (신규 추가)
+        outpatientBlock: /(?:통원|외래)(?:\s*기간\s*[:：]?)?\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?(?:\s*[~\-]\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?)?[\s\S]*?(?=(?:입원|퇴원|통원|\d{4}[-\/.년])|$)/gi,
         // 수술/시술 블록
-        surgeryBlock: /(?:수술|시술|처치|마취|절제|적출)\s*[:：]?[\s\S]*?(?=(?:수술|시술|처치|\d{4}[-\/.년])|$)/gi,
-        // 검사 결과 블록 (영상, 혈액, 조직검사 등)
-        testBlock: /(?:검사|촬영|CT|MRI|초음파|X-ray|혈액|소변|조직|병리)\s*[:：]?[\s\S]*?(?=(?:검사|촬영|\d{4}[-\/.년])|$)/gi,
+        surgeryBlock: /(?:수술|시술|처치|마취|절제|적출)(?:\s*일\s*[:：]?)?\s*[:：]?[\s\S]*?(?=(?:수술|시술|처치|\d{4}[-\/.년])|$)/gi,
+        // 치료 블록 (신규 추가 - 치료내용 항목 강화, 수술/시술 포함)
+        treatmentBlock: /(?:치료|물리치료|재활|관리|요법|치료\s*내용|치료\s*기간|치료\s*내역|수술\s*내용|시술\s*내용|처치\s*내용|복강경|내시경|개복|절제술|적출술|성형술|이식|봉합|삽입|제거|삭제)(?:\s*[:：]?)?\s*[\s\S]*?(?=(?:치료|검사|\d{4}[-\/.년])|$)/gi,
+        // 검사 결과 블록 (영상, 혈액, 조직검사 등 + 보고일시)
+        testBlock: /(?:검사|촬영|CT|MRI|초음파|X-ray|X선|혈액|소변|조직|병리|보고일시)\s*[:：]?[\s\S]*?(?=(?:검사|촬영|\d{4}[-\/.년])|$)/gi,
         // 진단 블록
         diagnosisBlock: /(?:진단|병명|질환|증상|소견)\s*[:：]?[\s\S]*?(?=(?:진단|치료|\d{4}[-\/.년])|$)/gi,
         // 처방/투약 블록
@@ -43,8 +47,16 @@ class EnhancedMassiveDateBlockProcessor {
         standardDate: /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
         // 한국어 날짜
         koreanDate: /\d{4}년\s*\d{1,2}월\s*\d{1,2}일/g,
-        // 의료 특화 날짜 (진료일, 검사일 등)
-        medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
+        // 의료 특화 날짜 (진료일, 검사일 등 - 대폭 확장, 시간 포함)
+        medicalSpecificDate: /(?:진료일|검사일|수술일|입원일|퇴원일|처방일|내원일|초진일|재진일|보고일시|치료일|처치일|투약일|시술일|관리일|전원일|응급실\s*내원|ER\s*방문|외래\s*방문일|내원\s*당시|내원\s*시|방문\s*당시|물리치료일|재활치료일)\s*[:：]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?(?:\s*\d{1,2}[:：]\d{1,2})?/g,
+        // 날짜 + 시간 패턴 (보고일시 등)
+        dateWithTime: /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?\s+\d{1,2}[:：]\d{1,2}/g,
+        // 보험 가입 관련 날짜 (대폭 강화 - 정방향/역방향 모두 지원)
+        insuranceDate: /(?:가입일|계약일|보험가입일|보장기간시작일|보장개시일|상품가입일|청약일|효력발생일|보험계약일|보장기간|가입\s*\d+\s*(?:년|개월)\s*이내)\s*[:：~부터]?\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g,
+        // 보험 역방향 패턴 (날짜 뒤에 보험 정보)
+        insuranceDateReverse: /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?\s+\([^\)]+\)\s+(?:NH|삼성|DB|KB|현대|메리츠|동부|한화|AIA|MG|흥국|ABL|AXA|푸르덴셜|알리안츠|라이나|처브|더케이|DGB|BNP|카디프|교보|신한|우리|하나|미래에셋|키움|IBK|NH농협|신협|새마을금고|우체국|수협|산림조합|MG새마을금고|상호저축은행|저축은행)\s+[^\s]*\s*(?:건강보험|암보험|실손보험|종신보험|정기보험|변액보험|연금보험|CI보험|단체보험|개인보험)\s*(?:가입|계약|청약|효력발생|보장개시|보장기간시작)\s*(?:\d+\s*(?:년|개월)\s*이내)?/g,
+        // 날짜 범위 패턴 (시작~종료, 회수/일수 정보 포함 가능)
+        dateRange: /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?\s*[~\-]\s*\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?(?:\s*\/\s*\d+\s*(?:회|일))?/g,
         // 상대 날짜 표현
         relativeDate: /(?:오늘|어제|내일|이번주|지난주|다음주|\d+일\s*전|\d+일\s*후|\d+개월\s*전|\d+개월\s*후|\d+년\s*전|\d+년\s*후)/g
       }
@@ -65,6 +77,30 @@ class EnhancedMassiveDateBlockProcessor {
       /^\s*페이지\s*\d+\s*$/gm, // 페이지 번호
       /^\s*\d+\s*\/\s*\d+\s*$/gm, // 페이지 표시
       /^\s*\[\s*\]\s*$/gm     // 빈 체크박스
+    ];
+
+    // 문서 메타데이터 키워드 (제외할 날짜)
+    this.metadataKeywords = [
+      '출력일', '인쇄일', '조회일', '발행일', '작성일시', '생성일',
+      '출력', '인쇄', '조회', '발행', '작성', '등록일', '수정일'
+    ];
+
+    // 조사중/예정/미확정 필터 패턴 (g 플래그 제거: .test() lastIndex 상태 충돌 방지)
+    this.investigationPatterns = [
+      /조사\s*중/i,
+      /조사\s*예정/i,
+      /확인\s*중/i,
+      /확인\s*예정/i,
+      /미확정/i,
+      /진행\s*중/i,
+      /예정\s*(?:일|날짜|시행|검사)/i
+    ];
+
+    // 보험 관련 추가 키워드
+    this.insuranceKeywords = [
+      '가입일', '계약일', '보험가입일', '보장기간시작일', '보장개시일',
+      '상품가입일', '청약일', '효력발생일', '보험계약일', '보장기간',
+      '가입', '청구', '지급', '보험금'
     ];
   }
 
@@ -207,22 +243,69 @@ class EnhancedMassiveDateBlockProcessor {
    */
   _analyzeDetailedPatterns(text) {
     const patterns = [];
-    
+
     Object.entries(this.enhancedDatePatterns.detailedPatterns).forEach(([patternType, regex]) => {
       const matches = [...text.matchAll(regex)];
-      
+
       matches.forEach((match, index) => {
-        patterns.push({
-          type: patternType,
-          level: 3,
-          date: match[0],
-          position: match.index,
-          confidence: this._calculatePatternConfidence(match[0], patternType)
-        });
+        const matchText = match[0];
+
+        // 조사중/예정/미확정 내용 필터링
+        const contextStart = Math.max(0, match.index - 100);
+        const contextEnd = Math.min(text.length, match.index + matchText.length + 100);
+        const context = text.substring(contextStart, contextEnd);
+
+        const isInvestigationContext = this.investigationPatterns.some(pattern =>
+          pattern.test(context)
+        );
+
+        // 날짜 범위 패턴인 경우 분리 추출
+        if (patternType === 'dateRange') {
+          const dates = this._extractDatesFromRange(matchText);
+          dates.forEach(date => {
+            patterns.push({
+              type: 'dateRangePart',
+              level: 3,
+              date: date,
+              originalRange: matchText,
+              position: match.index,
+              confidence: this._calculatePatternConfidence(date, 'standardDate'),
+              isInvestigation: isInvestigationContext
+            });
+          });
+        } else {
+          patterns.push({
+            type: patternType,
+            level: 3,
+            date: matchText,
+            position: match.index,
+            confidence: this._calculatePatternConfidence(matchText, patternType),
+            isInvestigation: isInvestigationContext
+          });
+        }
       });
     });
-    
+
     return patterns;
+  }
+
+  /**
+   * 날짜 범위에서 개별 날짜 추출
+   * @param {string} rangeText 날짜 범위 문자열 (예: "2025.02.25 ~ 2053.02.25")
+   * @returns {Array} 추출된 날짜 배열
+   */
+  _extractDatesFromRange(rangeText) {
+    const dates = [];
+    const datePattern = /\d{4}[-\/.년]\s*\d{1,2}[-\/.]?\s*\d{1,2}[일]?/g;
+    const matches = rangeText.match(datePattern);
+
+    if (matches) {
+      matches.forEach(date => {
+        dates.push(date.trim());
+      });
+    }
+
+    return dates;
   }
 
   /**
@@ -298,9 +381,9 @@ class EnhancedMassiveDateBlockProcessor {
    */
   _extractMedicalEvents(content) {
     if (!content) return [];
-    
+
     const events = [];
-    
+
     // 고중요도 키워드 검색
     this.medicalKeywords.high.forEach(keyword => {
       if (content.includes(keyword)) {
@@ -311,7 +394,7 @@ class EnhancedMassiveDateBlockProcessor {
         });
       }
     });
-    
+
     // 중간 중요도 키워드 검색
     this.medicalKeywords.medium.forEach(keyword => {
       if (content.includes(keyword)) {
@@ -322,7 +405,7 @@ class EnhancedMassiveDateBlockProcessor {
         });
       }
     });
-    
+
     // 낮은 중요도 키워드 검색
     this.medicalKeywords.low.forEach(keyword => {
       if (content.includes(keyword)) {
@@ -333,7 +416,18 @@ class EnhancedMassiveDateBlockProcessor {
         });
       }
     });
-    
+
+    // 보험 관련 키워드 검색 (중요도 높음)
+    this.insuranceKeywords.forEach(keyword => {
+      if (content.includes(keyword)) {
+        events.push({
+          type: 'insurance',
+          keyword,
+          priority: 3
+        });
+      }
+    });
+
     return events;
   }
 
@@ -374,7 +468,7 @@ class EnhancedMassiveDateBlockProcessor {
    */
   _calculatePatternConfidence(pattern, type) {
     let confidence = 0.5; // 기본 신뢰도
-    
+
     switch (type) {
       case 'standardDate':
         confidence = 0.9;
@@ -385,11 +479,30 @@ class EnhancedMassiveDateBlockProcessor {
       case 'medicalSpecificDate':
         confidence = 0.95;
         break;
+      case 'insuranceDate':
+        // 보험 관련 날짜는 매우 높은 신뢰도
+        confidence = 0.95;
+        break;
+      case 'dateRange':
+        confidence = 0.85;
+        break;
+      case 'dateRangePart':
+        confidence = 0.85;
+        break;
       case 'relativeDate':
         confidence = 0.6;
         break;
     }
-    
+
+    // 날짜 유효성 검사 (1900~2100 범위)
+    const yearMatch = pattern.match(/(\d{4})/);
+    if (yearMatch) {
+      const year = parseInt(yearMatch[1]);
+      if (year < 1900 || year > 2100) {
+        confidence *= 0.5; // 신뢰도 하락
+      }
+    }
+
     return confidence;
   }
 
@@ -440,23 +553,78 @@ class EnhancedMassiveDateBlockProcessor {
 
   _optimizeBlocks(dateGroups, options = {}) {
     const optimized = [];
-    
+    const seenDates = new Map(); // 날짜 중복 추적
+
     dateGroups.forEach(group => {
+      // 조사중 내용 필터링 (옵션으로 제어)
+      const filterInvestigation = options.filterInvestigation !== false;
+
+      if (filterInvestigation) {
+        // 블록 중 조사중 플래그가 있는지 확인
+        const hasInvestigationFlag = group.blocks.some(block => block.isInvestigation);
+
+        // 조사중 내용이면서 낮은 신뢰도인 경우 제외
+        if (hasInvestigationFlag && group.confidence < 0.7) {
+          return; // skip this group
+        }
+      }
+
+      // 메타데이터 날짜 필터링 (출력일, 인쇄일, 조회일 등 제외)
+      const isMetadata = this._isMetadataDate(group.blocks);
+      if (isMetadata) {
+        return; // skip metadata dates
+      }
+
+      // 신뢰도 기반 필터링 (낮은 신뢰도 제외)
+      if (group.confidence < 0.5) {
+        return; // skip low confidence dates
+      }
+
+      // 중복 날짜 필터링 (같은 날짜 + 유사한 컨텍스트)
+      const dateKey = group.date;
+      if (seenDates.has(dateKey)) {
+        const existingGroup = seenDates.get(dateKey);
+        // 더 높은 신뢰도의 그룹만 유지
+        if (group.confidence > existingGroup.confidence) {
+          // 기존 그룹 제거하고 새 그룹으로 교체
+          const existingIndex = optimized.findIndex(b => b.date === dateKey);
+          if (existingIndex !== -1) {
+            optimized.splice(existingIndex, 1);
+          }
+        } else {
+          return; // skip lower confidence duplicate
+        }
+      }
+
       // 중복 제거 및 병합
       const mergedContent = this._mergeBlockContents(group.blocks);
-      
-      optimized.push({
+
+      const optimizedBlock = {
         date: group.date,
         type: 'dateGroup',
         content: mergedContent,
         events: group.events,
         confidence: group.confidence,
         blockCount: group.blocks.length,
+        isInvestigation: group.blocks.some(block => block.isInvestigation),
         optimized: true
-      });
+      };
+
+      optimized.push(optimizedBlock);
+      seenDates.set(dateKey, optimizedBlock);
     });
-    
+
     return optimized;
+  }
+
+  /**
+   * 메타데이터 날짜 확인
+   * @param {Array} blocks 블록들
+   * @returns {boolean} 메타데이터 여부
+   */
+  _isMetadataDate(blocks) {
+    const content = blocks.map(b => b.content || '').join(' ');
+    return this.metadataKeywords.some(keyword => content.includes(keyword));
   }
 
   _mergeBlockContents(blocks) {

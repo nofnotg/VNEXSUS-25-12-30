@@ -2,8 +2,14 @@
  * Phase 4: Insurance Period Parser
  *
  * 목표: "보험기간 YYYY-MM-DD ~ YYYY-MM-DD"에서 시작일만 중요하게 처리
- * - 보험가입일(시작일): 최고 중요도
- * - 보험만기일(종료일): 낮은 중요도
+ * - 보험가입일(시작일): 최고 중요도 (보상 가능 여부 판단의 핵심)
+ * - 보험만기일(종료일): 최소 중요도 (보험 심사에 무관)
+ *
+ * 비즈니스 로직:
+ * - 보험 심사 판단 기준: 사건 발생일과 보험 가입일의 선후관계
+ * - 사건 발생일 >= 보험 가입일 → 보상 가능
+ * - 사건 발생일 < 보험 가입일 → 보상 불가 (기왕증)
+ * - 만기일은 선후관계 판단에 무관
  */
 
 /**
@@ -62,15 +68,17 @@ export function parseInsurancePeriod(context, allDates = []) {
       return {
         insuranceStartDate: {
           date: startDate,
-          relevance: 'HIGH',
-          score: 85,
-          type: '보험가입일'
+          relevance: 'CRITICAL',  // 최고 중요도
+          score: 95,  // 보험 가입일은 핵심 정보
+          type: '보험가입일',
+          importance: 'critical'  // 심사 필수
         },
         insuranceEndDate: {
           date: endDate,
-          relevance: 'LOW',
-          score: 15,
-          type: '보험만기일'
+          relevance: 'VERY_LOW',  // 최소 중요도
+          score: 5,  // 만기일은 거의 무시
+          type: '보험만기일',
+          importance: 'low'  // 심사 무관
         }
       };
     }
@@ -86,9 +94,10 @@ export function parseInsurancePeriod(context, allDates = []) {
       return {
         insuranceStartDate: {
           date: startDate,
-          relevance: 'HIGH',
-          score: 85,
-          type: '보험가입일'
+          relevance: 'CRITICAL',
+          score: 95,
+          type: '보험가입일',
+          importance: 'critical'
         }
       };
     }
@@ -104,9 +113,10 @@ export function parseInsurancePeriod(context, allDates = []) {
       return {
         insuranceEndDate: {
           date: endDate,
-          relevance: 'LOW',
-          score: 15,
-          type: '보험만기일'
+          relevance: 'VERY_LOW',
+          score: 5,
+          type: '보험만기일',
+          importance: 'low'
         }
       };
     }
