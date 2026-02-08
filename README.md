@@ -1,5 +1,30 @@
 # VNEXSUS - 의료 문서 OCR 및 고지의무 분석 시스템
 
+---
+
+## 🪟 Windows 사용자 빠른 시작
+
+**비전문 개발자를 위한 초간단 가이드** 👉 [WINDOWS_사용자_가이드.md](./WINDOWS_사용자_가이드.md)
+
+### 🚀 가장 빠른 방법 (Docker 사용)
+
+1. **Docker Desktop 설치**: https://www.docker.com/products/docker-desktop/
+2. **`.env` 파일 설정**: `.env.secure`를 `.env`로 복사하고 API 키 입력
+3. **`start-docker.bat` 더블클릭**
+4. **브라우저에서 접속**: http://localhost:3030
+
+### 💻 Node.js로 직접 실행
+
+1. **Node.js 설치**: https://nodejs.org/ (LTS 버전)
+2. **`windows-setup.bat` 더블클릭** (관리자 권한)
+3. **`.env` 파일에 API 키 입력**
+4. **`start-server.bat` 더블클릭**
+5. **브라우저에서 접속**: http://localhost:3030
+
+자세한 내용은 **[WINDOWS_사용자_가이드.md](./WINDOWS_사용자_가이드.md)** 파일을 참조하세요.
+
+---
+
 ## 📋 프로젝트 개요
 
 VNEXSUS는 보험 손해사정 업무를 위한 AI 기반 의료 문서 분석 시스템입니다. Google Cloud Vision OCR을 활용하여 피보험자의 의무기록을 추출하고, 고지의무 위반 여부를 분석합니다.
