@@ -196,6 +196,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
+// Dev Case Manager 접근 경로 (메인 포트에서도 접근 가능)
+app.get('/dev-case-manager', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dev-case-manager.html'));
+});
+
 // 설정 파일 접근 경로 설정 
 app.use('/config', express.static(path.join(__dirname, 'public/config')));
 app.use('/config', express.static(path.join(__dirname, '../src/config')));

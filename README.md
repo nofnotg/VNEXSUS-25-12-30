@@ -176,7 +176,7 @@ npm start
 
 - **메인 애플리케이션**: http://localhost:3030
 - **파일 업로드**: http://localhost:3030/hybrid-interface.html
-- **Dev Case Manager**: http://localhost:8088
+- **Dev Case Manager**: http://localhost:3030/dev-case-manager (또는 http://localhost:8088)
 
 ---
 
