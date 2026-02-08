@@ -39,6 +39,31 @@
 - ✅ **원격 Linux 서버**: SSH 터널링 자동화
 - ✅ **Docker 환경**: 모든 환경에서 동일하게 동작
 
+### 🔐 SSH로 직접 접속하기
+
+**Docker 컨테이너에 SSH로 직접 접속**하여 서버를 관리하려면:
+👉 **[SSH_접속_가이드.md](./SSH_접속_가이드.md)** - SSH 접속 완벽 가이드
+
+**빠른 시작:**
+```bash
+# 1. SSH 지원 컨테이너 시작
+./start-ssh.sh
+
+# 2. SSH 접속
+ssh -p 2222 vnexsus@localhost
+# 비밀번호: vnexsus2024
+
+# 또는 간편 스크립트 사용
+./connect-ssh.sh  # Linux/Mac
+connect-ssh.bat   # Windows
+```
+
+**주요 기능:**
+- ✅ **SSH 서버 내장**: Docker 컨테이너에 SSH 직접 접속
+- ✅ **SSH 키 인증**: 비밀번호 없는 안전한 접속
+- ✅ **원격 관리**: 터미널을 통한 서버 관리 및 디버깅
+- ✅ **SFTP 지원**: 파일 전송 가능
+
 ---
 
 ## 📋 프로젝트 개요
