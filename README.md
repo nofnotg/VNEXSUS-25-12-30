@@ -13,13 +13,19 @@
 3. **`start-docker.bat` 더블클릭**
 4. **브라우저에서 접속**: http://localhost:3030
 
-### 💻 Node.js로 직접 실행
+### 💻 Node.js로 직접 실행 (권장 - 가장 간편)
 
-1. **Node.js 설치**: https://nodejs.org/ (LTS 버전)
-2. **`windows-setup.bat` 더블클릭** (관리자 권한)
-3. **`.env` 파일에 API 키 입력**
-4. **`start-server.bat` 더블클릭**
-5. **브라우저에서 접속**: http://localhost:3030
+**단 3단계로 시작!**
+
+1. **Node.js 설치**: https://nodejs.org/ (LTS 버전 18.x 이상)
+2. **`.env` 파일 설정**: `.env.secure`를 `.env`로 복사하고 API 키 입력
+3. **`start.bat` 더블클릭** ✨
+   - 자동으로 환경 설정 확인
+   - 필요한 패키지 자동 설치
+   - 5초 후 브라우저 자동 실행
+   - 포트 충돌 시 자동 해결 옵션 제공
+
+> **Tip**: 처음 실행 시 `start.bat`이 자동으로 초기 설정을 도와줍니다!
 
 자세한 내용은 **[WINDOWS_사용자_가이드.md](./WINDOWS_사용자_가이드.md)** 파일을 참조하세요.
 

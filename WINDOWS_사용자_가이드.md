@@ -6,12 +6,95 @@
 
 ## 🎯 두 가지 실행 방법
 
-### 방법 1: Docker로 실행 (가장 간단! 추천 ⭐)
-### 방법 2: Node.js로 직접 실행
+### 방법 1: Node.js로 직접 실행 (가장 간단! 추천 ⭐⭐⭐)
+### 방법 2: Docker로 실행
 
 ---
 
-## 🚀 방법 1: Docker로 실행 (추천)
+## 🚀 방법 1: Node.js로 직접 실행 (가장 간편! 추천 ⭐⭐⭐)
+
+Node.js로 직접 실행하면 **단 3단계**로 앱을 실행할 수 있습니다!
+
+### 📥 1단계: Node.js 설치
+
+1. **Node.js 다운로드**
+   - 웹사이트: https://nodejs.org/
+   - **LTS 버전** 다운로드 (18.x 이상 권장)
+   - 다운로드한 파일 실행하여 설치
+
+2. **설치 확인**
+   - 윈도우 검색창에서 "cmd" 입력 후 Enter
+   - 다음 명령어 입력: `node --version`
+   - 버전이 표시되면 설치 성공!
+
+### ⚙️ 2단계: 환경 설정
+
+1. **프로젝트 폴더로 이동**
+   ```
+   예: C:\Users\사용자이름\VNEXSUS-25-12-30
+   ```
+
+2. **`.env` 파일 생성**
+   - `.env.secure` 파일을 복사하여 `.env`로 이름 변경
+   - 또는 새로 `.env` 파일을 만들고 아래 내용 복사:
+
+```bash
+NODE_ENV=development
+PORT=3030
+
+# Google Cloud Vision OCR
+GOOGLE_CLOUD_VISION_API_KEY=여기에_API_키_입력
+GCS_BUCKET_NAME=medreport-vision-ocr-bucket
+GCP_PROJECT_ID=medreport-assistant
+
+# 필수 설정
+USE_CORE_ENGINE=true
+ENABLE_VISION_OCR=true
+USE_VISION=true
+
+# 기타 설정 (그대로 사용)
+CORS_ORIGIN=http://localhost:3030
+MAX_FILE_SIZE=209715200
+LOG_LEVEL=info
+```
+
+3. **API 키 입력**
+   - `.env` 파일을 메모장으로 열기
+   - `여기에_API_키_입력` 부분에 실제 API 키 입력
+   - 파일 저장
+
+### ▶️ 3단계: 앱 실행
+
+**이제 가장 중요한 단계입니다! 정말 간단합니다:**
+
+1. **프로젝트 폴더에서 `start.bat` 파일을 찾기**
+2. **더블클릭!** ✨
+
+**끝입니다!** 🎉
+
+`start.bat` 파일이 자동으로:
+- ✅ Node.js 버전 확인
+- ✅ 필요한 패키지 자동 설치
+- ✅ 포트 충돌 확인 및 자동 해결
+- ✅ 서버 시작
+- ✅ 5초 후 브라우저 자동 실행 (http://localhost:3030)
+
+### 🌐 브라우저에서 접속
+
+`start.bat` 실행 후 5초가 지나면 자동으로 브라우저가 열립니다!
+
+수동으로 접속하려면:
+- **메인 애플리케이션**: http://localhost:3030
+- **Dev Case Manager**: http://localhost:3030/dev-case-manager
+
+### 🛑 서버 중지하기
+
+- 실행 중인 명령 프롬프트 창에서 **Ctrl + C** 누르기
+- 또는 명령 프롬프트 창 닫기
+
+---
+
+## 🐳 방법 2: Docker로 실행
 
 Docker를 사용하면 **복잡한 설정 없이** 원클릭으로 실행할 수 있습니다.
 
@@ -97,7 +180,7 @@ docker-compose up -d
 
 - **메인 애플리케이션**: http://localhost:3030
 - **파일 업로드 페이지**: http://localhost:3030/hybrid-interface.html
-- **개발 관리자**: http://localhost:8088
+- **개발 관리자**: http://localhost:3030/dev-case-manager
 
 ### ⏹️ 앱 종료하기
 
@@ -170,7 +253,7 @@ Docker 없이 Node.js만으로도 실행할 수 있습니다.
 
 - **메인 애플리케이션**: http://localhost:3030
 - **파일 업로드 페이지**: http://localhost:3030/hybrid-interface.html
-- **개발 관리자**: http://localhost:8088
+- **개발 관리자**: http://localhost:3030/dev-case-manager
 
 ### ⏹️ 서버 종료하기
 
