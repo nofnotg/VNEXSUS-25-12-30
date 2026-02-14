@@ -1,5 +1,71 @@
 # VNEXSUS - 의료 문서 OCR 및 고지의무 분석 시스템
 
+---
+
+## 🪟 Windows 사용자 빠른 시작
+
+**비전문 개발자를 위한 초간단 가이드** 👉 [WINDOWS_사용자_가이드.md](./WINDOWS_사용자_가이드.md)
+
+### 🚀 가장 빠른 방법 (Docker 사용)
+
+1. **Docker Desktop 설치**: https://www.docker.com/products/docker-desktop/
+2. **`.env` 파일 설정**: `.env.secure`를 `.env`로 복사하고 API 키 입력
+3. **`start-docker.bat` 더블클릭**
+4. **브라우저에서 접속**: http://localhost:3030
+
+### 💻 Node.js로 직접 실행 (권장 - 가장 간편)
+
+**단 3단계로 시작!**
+
+1. **Node.js 설치**: https://nodejs.org/ (LTS 버전 18.x 이상)
+2. **`.env` 파일 설정**: `.env.secure`를 `.env`로 복사하고 API 키 입력
+3. **`start.bat` 더블클릭** ✨
+   - 자동으로 환경 설정 확인
+   - 필요한 패키지 자동 설치
+   - 5초 후 브라우저 자동 실행
+   - 포트 충돌 시 자동 해결 옵션 제공
+
+> **Tip**: 처음 실행 시 `start.bat`이 자동으로 초기 설정을 도와줍니다!
+
+자세한 내용은 **[WINDOWS_사용자_가이드.md](./WINDOWS_사용자_가이드.md)** 파일을 참조하세요.
+
+### 🌐 Linux/WSL에서 실행하고 Windows에서 접속하기
+
+**Claude Code를 Linux에서 실행**하고 **Windows에서 브라우저로 접속**하려면:
+👉 **[WINDOWS_접속_가이드.md](./WINDOWS_접속_가이드.md)** - WSL 및 원격 Linux 서버 접속 가이드
+
+**3가지 시나리오 지원:**
+- ✅ **WSL에서 실행**: 원클릭 스크립트로 즉시 시작
+- ✅ **원격 Linux 서버**: SSH 터널링 자동화
+- ✅ **Docker 환경**: 모든 환경에서 동일하게 동작
+
+### 🔐 SSH로 직접 접속하기
+
+**Docker 컨테이너에 SSH로 직접 접속**하여 서버를 관리하려면:
+👉 **[SSH_접속_가이드.md](./SSH_접속_가이드.md)** - SSH 접속 완벽 가이드
+
+**빠른 시작:**
+```bash
+# 1. SSH 지원 컨테이너 시작
+./start-ssh.sh
+
+# 2. SSH 접속
+ssh -p 2222 vnexsus@localhost
+# 비밀번호: vnexsus2024
+
+# 또는 간편 스크립트 사용
+./connect-ssh.sh  # Linux/Mac
+connect-ssh.bat   # Windows
+```
+
+**주요 기능:**
+- ✅ **SSH 서버 내장**: Docker 컨테이너에 SSH 직접 접속
+- ✅ **SSH 키 인증**: 비밀번호 없는 안전한 접속
+- ✅ **원격 관리**: 터미널을 통한 서버 관리 및 디버깅
+- ✅ **SFTP 지원**: 파일 전송 가능
+
+---
+
 ## 📋 프로젝트 개요
 
 VNEXSUS는 보험 손해사정 업무를 위한 AI 기반 의료 문서 분석 시스템입니다. Google Cloud Vision OCR을 활용하여 피보험자의 의무기록을 추출하고, 고지의무 위반 여부를 분석합니다.
@@ -151,7 +217,7 @@ npm start
 
 - **메인 애플리케이션**: http://localhost:3030
 - **파일 업로드**: http://localhost:3030/hybrid-interface.html
-- **Dev Case Manager**: http://localhost:8088
+- **Dev Case Manager**: http://localhost:3030/dev-case-manager (또는 http://localhost:8088)
 
 ---
 

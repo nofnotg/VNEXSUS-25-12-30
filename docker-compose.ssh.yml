@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  vnexsus-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.ssh
+    container_name: vnexsus-backend-ssh
+    ports:
+      - "3030:3030"    # 메인 애플리케이션
+      - "8088:8088"    # Dev Case Manager
+      - "2222:2222"    # SSH 접속 (호스트의 22번 포트와 충돌 방지)
+    environment:
+      - NODE_ENV=development
+      - PORT=3030
+      - USE_CORE_ENGINE=true
+      - ENABLE_VISION_OCR=true
+      - USE_VISION=true
+      - USE_TEXTRACT=false
+      # Google Cloud Vision OCR Configuration
+      - GCS_BUCKET_NAME=${GCS_BUCKET_NAME:-your-bucket-name}
+      - GCS_UPLOAD_PREFIX=${GCS_UPLOAD_PREFIX:-temp-uploads/}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID:-your-project-id}
+      - GOOGLE_CLOUD_VISION_API_KEY=${GOOGLE_CLOUD_VISION_API_KEY}
+      # Google Cloud Pub/Sub Configuration
+      - PUBSUB_TOPIC=${PUBSUB_TOPIC}
+      # 배치 처리 설정
+      - PARALLEL_LIMIT=6
+      - LIMIT_CASES=50
+      - ENABLE_VISION_IMAGE_FALLBACK=true
+      # OCR 품질 설정
+      - MIN_TEXT_LENGTH=100
+      # OpenAI API Configuration
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=gpt-4o-mini
+      - OPENAI_TEMPERATURE=0.2
+      # Google Gemini API Configuration
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
+      # Anthropic Claude API Configuration
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # 코어 엔진 설정
+      - DISCLOSURE_WINDOWS=3m,2y,5y
+      - DEFAULT_CLAIM_DIAGNOSIS=""
+      # 보안 설정
+      - CORS_ORIGIN=http://localhost:3030
+      - MAX_FILE_SIZE=209715200
+      - MAX_FILES_PER_REQUEST=5
+      - RATE_LIMIT_REQUESTS_PER_MINUTE=60
+      # 로깅 설정
+      - LOG_LEVEL=info
+      - DEBUG_MODE=false
+      # 테스트 환경 설정
+      - SKIP_PDF_TESTS=false
+      - TEST_DATA_PATH=./tests/data
+      # 모니터링 설정
+      - ENABLE_METRICS=true
+      - METRICS_PORT=9090
+    volumes:
+      - ./uploads:/app/uploads
+      - ./temp:/app/temp
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./backend/config:/app/backend/config
+      - ./ssh-keys:/home/vnexsus/.ssh:ro  # SSH 키를 위한 볼륨
+    restart: unless-stopped
+    networks:
+      - vnexsus-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3030/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  vnexsus-network:
+    driver: bridge
+
+volumes:
+  uploads:
+  temp:
+  logs:
+  reports:
