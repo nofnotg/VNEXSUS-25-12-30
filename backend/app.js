@@ -39,9 +39,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// dotenv 로드 (override: true로 시스템 환경변수보다 .env 우선)
-console.log('환경 변수를 로드합니다...');
-dotenv.config({ path: path.join(__dirname, '../.env'), override: true });
+// dotenv 로드 (NODE_ENV에 따라 환경별 파일 선택)
+const envFile = process.env.NODE_ENV === 'development' ? '.env.development' : '.env';
+console.log(`환경 변수를 로드합니다... [${envFile}]`);
+dotenv.config({ path: path.join(__dirname, `../${envFile}`), override: true });
 
 // 필수 환경변수 검증
 const requiredEnvVars = [

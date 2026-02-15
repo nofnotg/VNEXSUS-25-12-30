@@ -1,31 +1,22 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo VNEXSUS 개발 모드 서버 시작
-echo (파일 변경 시 자동 재시작)
+echo  VNEXSUS 개발 서버 시작 (PORT 5050)
+echo  접속: http://localhost:5050
+echo  외부: https://dev.vnexsus.com
 echo ========================================
 echo.
 
-cd backend
+:: 개발 환경 설정
+set NODE_ENV=development
 
-:: nodemon 확인
-call npm list nodemon >nul 2>&1
-if %errorLevel% neq 0 (
-    echo nodemon이 설치되지 않았습니다. 설치 중...
-    call npm install --save-dev nodemon
-)
+:: 프로젝트 루트에서 실행
+cd /d %~dp0
 
-echo.
-echo 개발 모드로 서버를 시작합니다...
-echo 파일이 변경되면 자동으로 재시작됩니다.
-echo.
-echo 메인 서버: http://localhost:3030
-echo Dev Manager: http://localhost:8088
-echo.
+echo 개발 서버를 시작합니다...
 echo 서버를 중지하려면 Ctrl+C를 누르세요.
-echo ========================================
 echo.
 
-npm run dev
+node backend/app.js
 
 pause
