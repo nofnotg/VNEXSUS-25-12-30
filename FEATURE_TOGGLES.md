@@ -1,27 +1,31 @@
 # VNEXSUS 기능 토글 현황
 
-**최종 업데이트:** 2026-01-24  
+**최종 업데이트:** 2026-02-15
 **목적:** 개발 시 혼동 방지를 위한 기능 ON/OFF 상태 명시
 
 ---
 
 ## 🎯 현재 활성화된 기능 (ON)
 
-### ✅ Vision LLM (GPT-4o Vision)
+### ✅ Google Cloud Vision OCR (메인 OCR 엔진)
 ```env
-USE_VISION_LLM=true
-DEFAULT_OCR_PROVIDER=gpt-4o-vision
+ENABLE_VISION_OCR=true
+USE_VISION=true
+ENABLE_VISION_IMAGE_FALLBACK=true
 ```
-- **역할:** 메인 OCR 엔진
-- **기술:** GPT-4o의 Vision 기능
-- **장점:**
-  - 표 구조 95% 인식 (vs Google OCR 70%)
-  - 글자 공백 자동 처리 ("보 험 기 간" → "보험기간")
-  - bbox 좌표 불필요 (문맥 이해 기반)
-- **구현 위치:** 
-  - TypeScript: `src/modules/medical-analysis/providers/ocr/GPT4oVisionProvider.ts`
-  - JavaScript: `backend/services/visionLLMService.js` ✅ 통합 완료
-- **상태:** ✅ JavaScript 백엔드 통합 완료 (2026-01-24)
+- **역할:** 메인 OCR 엔진 (확정됨)
+- **인증:** `GOOGLE_CLOUD_VISION_API_KEY` 사용
+- **구현 위치:** `backend/services/visionService.js`
+- **상태:** ✅ 활성화
+
+### ✅ LLM 보고서 생성 (GPT-4o-mini)
+```env
+OPENAI_MODEL=gpt-4o-mini
+```
+- **역할:** 10항목 구조화 보고서 생성 (JSON 모드)
+- **엔드포인트:** `POST /api/dna-report/generate`
+- **옵션:** `useNineItem: true` → 9항목 보고서 생성
+- **구현 위치:** `backend/routes/dnaReportRoutes.js`
 
 ### ✅ 코어 엔진
 ```env
@@ -41,18 +45,13 @@ DISCLOSURE_WINDOWS=3m,2y,5y
 
 ## 🔴 비활성화된 기능 (OFF)
 
-### ❌ Google Cloud Vision OCR (레거시)
+### ❌ Vision LLM (GPT-4o Vision) OCR
 ```env
-ENABLE_VISION_OCR=false
-USE_VISION=false
-ENABLE_VISION_IMAGE_FALLBACK=false
+# USE_VISION_LLM 설정 없음 (비활성화)
 ```
-- **이유:** Vision LLM(GPT-4o)으로 대체됨
-- **보존 이유:** 
-  - 향후 Ensemble 방식 (OCR + LLM 병합) 활용 가능
-  - bbox 좌표가 필요한 경우 fallback으로 사용 가능
-- **구현 위치:** `backend/services/visionService.js`
-- **주의:** 코드 삭제하지 말 것
+- **이유:** Google Cloud Vision OCR 사용으로 결정됨
+- **구현 위치:** `backend/services/visionLLMService.js`
+- **주의:** 코드 삭제하지 말 것 (향후 활용 가능)
 
 ### ❌ AWS Textract
 ```env
@@ -65,9 +64,9 @@ USE_TEXTRACT=false
 ```env
 ENABLE_DNA_SEQUENCING=false
 ```
-- **이유:** A-B-C 계획에 따라 보류
+- **이유:** 사용 보류 (Phase 3+ 예정)
 - **우선순위:** Phase 3+ 예정
-- **구현 위치:** `src/dna-engine/`
+- **구현 위치:** `src/dna-engine/`, `backend/controllers/dnaEngineController.js`
 - **상태:** 5% 미만 구현, 라우트 스텁만 존재
 
 ---
@@ -76,74 +75,76 @@ ENABLE_DNA_SEQUENCING=false
 
 | 기능 | 상태 | 환경변수 | 이유 |
 |------|------|----------|------|
-| Vision LLM (GPT-4o) | ✅ ON | `USE_VISION_LLM=true` | 메인 OCR |
-| Google Vision OCR | ❌ OFF | `ENABLE_VISION_OCR=false` | Vision LLM으로 대체 |
+| Google Vision OCR | ✅ ON | `ENABLE_VISION_OCR=true` | 메인 OCR (확정) |
+| Vision LLM (GPT-4o) | ❌ OFF | 미설정 | 보류 |
 | AWS Textract | ❌ OFF | `USE_TEXTRACT=false` | 미사용 |
 | DNA 시퀀싱 | ❌ OFF | `ENABLE_DNA_SEQUENCING=false` | 보류 |
 | 코어 엔진 | ✅ ON | `USE_CORE_ENGINE=true` | 고지의무 분석 |
+| LLM 보고서 (gpt-4o-mini) | ✅ ON | `OPENAI_MODEL=gpt-4o-mini` | 보고서 생성 |
 
 ---
 
-## 🔄 OCR 파이프라인 비교
+## 🔄 OCR 파이프라인
 
-### 이전 (Google Vision OCR)
+### 현재 (Google Vision OCR)
 ```
-PDF → 이미지 변환 → Google Vision OCR → {text, bbox} → 좌표 기반 정렬 → 날짜 추출
+PDF → pdfProcessor.js → Google Cloud Vision OCR → {text, bbox} → 날짜/의료정보 추출
+이미지 → visionService.extractTextFromImage() → Google Cloud Vision OCR → text
 ```
 - bbox 좌표 제공
-- 표 인식 70%
-- 글자 공백 "보 험 기 간"
+- Google Cloud Vision API 인증 필요
 
-### 현재 (Vision LLM + Poppler)
+### 보고서 생성 파이프라인
 ```
-PDF → Poppler(pdftoppm) 이미지 변환 → GPT-4o Vision → {text only} → 문맥 기반 추출 → 날짜 추출
+OCR Text → POST /api/dna-report/generate
+         → GPT-4o-mini (JSON 구조화 모드)
+         → StructuredReportGenerator (10항목 텍스트 변환)
+         → (선택) NineItemReportGenerator (9항목 보고서)
+         → 최종 보고서 반환
 ```
-- bbox 좌표 없음 (불필요)
-- 표 인식 95%
-- 글자 공백 자동 처리
-- Poppler: 안정적인 PDF→이미지 변환 (Playwright 대체)
+
+- **기본 모드** (`useStructuredJson: true`, 기본값): 10항목 구조화 보고서
+- **9항목 모드** (`useNineItem: true`): 9항목 보고서가 `report` 필드에 반환됨
 
 ---
 
 ## ⚠️ 개발 시 주의사항
 
-1. **Google Vision OCR 코드 삭제 금지**
-   - 향후 Ensemble 방식으로 활용 가능
-   - `backend/services/visionService.js` 보존
+1. **Vision LLM 코드 삭제 금지**
+   - 향후 활용 가능
+   - `backend/services/visionLLMService.js` 보존
 
 2. **DNA 시퀀싱 코드 수정 금지**
    - 현재 보류 상태
    - `src/dna-engine/` 보존
 
-3. **Vision LLM 통합 작업 필요**
-   - TypeScript → JavaScript 통합 필요
-   - `GPT4oVisionProvider.ts` 백엔드 연결 작업 진행 중
-
-4. **환경변수 변경 시 이 문서 업데이트**
+3. **환경변수 변경 시 이 문서 업데이트**
    - 기능 토글 변경 시 반드시 이 문서 수정
 
----
-
-## 📋 향후 계획
-
-### Phase 1: Vision LLM 통합 ✅ 완료 (2026-01-24)
-- [x] GPT4oVisionProvider TypeScript → JavaScript 통합
-- [x] 백엔드 API 라우트 연결
-- [x] visionLLMService.js 생성
-- [x] pdfProcessor.js 통합
-- [x] simple-server.js 업데이트
-- [x] E2E 테스트 ✅ (Poppler + GPT-4o Vision 성공)
-
-### Phase 2: A-B-C 계획 실행 ✅ 완료 (2026-01-24)
-- [x] T04: 기본 점수함수 구현 ✅ (`eventScoringEngine.js`)
-- [x] T05: 절대규칙 보완 ✅ (`criticalRiskRules.js`)
-- [x] T08: 보고서 템플릿 ✅ (`disclosureReportBuilder.js`)
-- [x] T09: 안전모드 로직 ✅ (`safeModeGuard.js`)
-
-### Phase 3+: DNA 시퀀싱 (보류)
-- 고지의무 분석 90% 달성 후 재검토
+4. **확정 조건 (변경 금지)**
+   - OCR: Google Vision OCR
+   - LLM (보고서 생성): gpt-4o-mini
+   - DNA 시퀀싱: OFF (보류)
 
 ---
 
-**작성일:** 2026-01-24  
+## 🐛 수정된 버그 (2026-02-15)
+
+1. **PostProcessingManager 싱글톤 오용** (`ocrController.js`)
+   - 문제: `new PostProcessingManager()` 호출 → `TypeError: PostProcessingManager is not a constructor`
+   - 원인: `postprocess/index.js`가 싱글톤 인스턴스를 export하는데 생성자로 호출
+   - 수정: `postProcessingManager.processOCRResult()` 직접 호출로 변경
+
+2. **9항목 보고서 텍스트 응답 누락** (`dnaReportRoutes.js`)
+   - 문제: `useNineItem: true` 옵션 사용 시 9항목 보고서가 `report` 필드에 포함되지 않음
+   - 원인: `useStructuredJson=true`(기본값)이 9항목 보고서보다 우선순위가 높았음
+   - 수정: `useNineItem: true`일 때 9항목 보고서가 `finalReport`로 사용되도록 우선순위 변경
+
+3. **FEATURE_TOGGLES.md와 .env 불일치**
+   - 문제: FEATURE_TOGGLES.md에 Google Vision OFF로 표기되어 있었으나 실제로 ON이어야 함
+   - 수정: FEATURE_TOGGLES.md를 실제 설정에 맞게 업데이트
+
+---
+
+**작성일:** 2026-02-15
 **작성자:** 개발팀

@@ -282,28 +282,26 @@ router.post('/generate', async (req, res) => {
       logProcessingError('rag_save', e, { patientId: patientInfo.patientId });
     }
     // 🆕 응답 메시지 결정
-    let responseMessage = 'Report_Sample.txt 양식 보고서 생성 완료';
-    if (useStructuredJson && structuredJsonData) {
-      responseMessage = '10항목 구조화 보고서 생성 완료 (JSON 모드)';
-    } else if (options.useNineItem) {
-      responseMessage = '9항목 보고서 생성 완료';
-    }
-
-    // 🆕 최종 보고서 결정 (우선순위: 구조화 JSON > 9항목 > 텍스트)
+    // 최종 보고서 결정 (우선순위: 9항목 > 구조화 JSON > 텍스트)
     let finalReport = enhancedText;
-    if (useStructuredJson && structuredJsonData) {
-      finalReport = enhancedText;  // structuredReportGenerator에서 생성된 텍스트
-    } else if (options.useNineItem && nineItemResult?.report) {
+    let responseMessage = 'Report_Sample.txt 양식 보고서 생성 완료';
+
+    if (options.useNineItem && nineItemResult?.report) {
+      // 9항목 보고서 요청 시 우선적으로 사용
       finalReport = nineItemResult.report;
+      responseMessage = '9항목 보고서 생성 완료';
+    } else if (useStructuredJson && structuredJsonData) {
+      finalReport = enhancedText;  // structuredReportGenerator에서 생성된 텍스트
+      responseMessage = '10항목 구조화 보고서 생성 완료 (JSON 모드)';
     }
 
     const responsePayload = {
       success: true,
       message: responseMessage,
-      pipeline: useStructuredJson ? 'Structured JSON + Template Engine' : 'Enhanced DNA Sequencing + Timeline Analysis',
+      pipeline: options.useNineItem ? '9항목 보고서 (Rule-based)' : (useStructuredJson ? 'Structured JSON + Template Engine' : 'Enhanced DNA Sequencing + Timeline Analysis'),
       report: finalReport,
       reportText: enhancedText,
-      structuredData: structuredJsonData,  // 🆕 JSON 구조화 데이터 포함
+      structuredData: structuredJsonData,
       processingTime: `${processingTimeMs}ms`,
       model: options.skipLLM ? 'skipped' : 'gpt-4o-mini',
       timestamp: new Date().toISOString(),
@@ -311,10 +309,11 @@ router.post('/generate', async (req, res) => {
       metadata: {
         insuranceValidation,
         translation: translationMeta,
-        useStructuredJson,  // 🆕 JSON 모드 사용 여부
+        useStructuredJson,
         termProcessing: termProcessingMeta,
         nineItem: nineItemResult
           ? {
+              report: nineItemResult.report,  // 9항목 보고서 텍스트 포함
               validation: nineItemResult.validation,
               statistics: nineItemResult.statistics,
               performanceMetrics: nineItemResult.performanceMetrics,

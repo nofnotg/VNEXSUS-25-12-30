@@ -13,7 +13,7 @@ import * as fileHelper from '../utils/fileHelper.js';
 import { logService } from '../utils/logger.js';
 import pdfProcessor from '../utils/pdfProcessor.js';
 import coreEngineService from '../services/coreEngineService.js';
-import PostProcessingManager from '../postprocess/index.js';
+import postProcessingManager from '../postprocess/index.js';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
@@ -554,8 +554,7 @@ async function processFiles(jobId, files) {
         const combinedText = allTexts.join('\n\n');
         
         // 후처리 파이프라인 실행
-        const postProcessor = new PostProcessingManager();
-        const postProcessResult = await postProcessor.processOCRResult(combinedText, {
+        const postProcessResult = await postProcessingManager.processOCRResult(combinedText, {
           patientInfo: {},
           reportFormat: 'json',
           useAIExtraction: false // 규칙 기반 처리만 사용 (LLM 비용 절감)
