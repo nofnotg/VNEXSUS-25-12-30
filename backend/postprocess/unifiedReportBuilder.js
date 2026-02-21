@@ -1,11 +1,16 @@
 /**
- * UnifiedReportBuilder — 통합 보고서 빌더 (v1.0)
+ * UnifiedReportBuilder — 통합 보고서 빌더 (v2.0)
  *
- * Report_Sample.txt 양식 기반 10항목 통합 보고서
- * - 기존 reportBuilder.js + disclosureReportBuilder.js 장점 흡수
- * - GPT-4o-mini 없이 룰엔진 결과만으로 풍성한 보고서 생성
- * - 3M 빨간(🔴) / 5Y 주황(🟠) 기간 마커 포함
- * - text / json / html 3종 출력 지원
+ * RAG 프롬프트 규칙 흡수 버전:
+ * - 메인 보고서: 날짜 오름차순 경과보고서 (날짜마다 10항목 반복)
+ * - 첨부1: 고지의무 분석
+ * - 첨부2: 결재용 요약본 (📑 손해사정 보고서)
+ * - 첨부3: 전산용 일자별 텍스트
+ *
+ * 10항목 구조 (각 내원일마다 반복):
+ *   ▸ 내원경위 / ▸ 진단병명(KCD-10+영문+한글) / ▸ 검사결과(질환군별)
+ *   ▸ 수술후조직검사(암만) / ▸ 치료내용 / ▸ 통원기간 / ▸ 입원기간
+ *   ▸ 과거병력 / ▸ 의사소견
  *
  * 입력: processOCRResult() 결과 + patientInfo(보험 가입일 포함)
  * 출력: { text, json, html, metadata }
@@ -66,14 +71,14 @@ function getPeriod(eventDate, enrollDate, cutoff3M, cutoff5Y) {
   return PERIOD.BEFORE_5Y;
 }
 
-function sortByDate(events) {
+function sortByDate(events, ascending = true) {
   return [...events].sort((a, b) => {
     const da = parseDate(a.date);
     const db = parseDate(b.date);
     if (!da && !db) return 0;
     if (!da) return 1;
     if (!db) return -1;
-    return da - db;
+    return ascending ? da - db : db - da;
   });
 }
 
@@ -87,9 +92,18 @@ function getEventHospital(evt) {
 
 function getEventDiagnosis(evt) {
   const code = safeStr(evt?.diagnosis?.code);
-  const desc = safeStr(evt?.diagnosis?.description) || safeStr(evt?.description);
-  if (code && desc) return `${desc} (${code})`;
-  return desc || code || '정보 없음';
+  const descKR = safeStr(evt?.diagnosis?.descriptionKR || evt?.diagnosis?.koreanName || '');
+  const descEN = safeStr(evt?.diagnosis?.descriptionEN || evt?.diagnosis?.englishName || evt?.diagnosis?.description || evt?.description || '');
+  // KCD-10 코드 + 영문 원어 + 한글 병명 순
+  if (code && descEN && descKR) return `${descEN} (${code}) — ${descKR}`;
+  if (code && descEN) return `${descEN} (${code})`;
+  if (code && descKR) return `${descKR} (${code})`;
+  if (descKR && descEN) return `${descEN} — ${descKR}`;
+  return descKR || descEN || code || '정보 없음';
+}
+
+function getEventDiagnosisCode(evt) {
+  return safeStr(evt?.diagnosis?.code);
 }
 
 function getEventType(evt) {
@@ -121,6 +135,172 @@ function renderSeparator(char = '─', len = 70) {
   return char.repeat(len);
 }
 
+// ─── 질환군별 검사결과 규칙 (RAG v1.0) ───────────────────────────────
+/**
+ * 이벤트의 진단명/유형을 기반으로 질환군을 판별하고
+ * 검사결과 항목에서 강조해야 할 항목 목록을 반환합니다.
+ *
+ * @param {Object} evt - 의료 이벤트 객체
+ * @returns {{ group: string, keyItems: string[], note: string }}
+ */
+function getExamFields(evt) {
+  const diag = (getEventDiagnosis(evt) + ' ' + (evt?.diagnosis?.code || '')).toLowerCase();
+  const desc = getEventDescription(evt).toLowerCase();
+  const combined = diag + ' ' + desc;
+
+  // 1. 협심증 (Angina pectoris, I20)
+  if (/협심증|angina|i20/.test(combined)) {
+    return {
+      group: '협심증',
+      keyItems: [
+        'Coronary CT-Angio (협착부위, 협착률, TIMI 분류)',
+        'Chest CT',
+        'Cardiac MRI',
+        'MRA',
+        'Coronary angiography (협착부위·협착률·TIMI)',
+      ],
+      note: '협착 부위·협착률·TIMI 분류를 명시해야 합니다.',
+    };
+  }
+
+  // 2. 급성심근경색 (Acute MI, I21~I22)
+  if (/심근경색|myocardial infarction|STEMI|NSTEMI|i21|i22/.test(combined)) {
+    return {
+      group: '급성심근경색',
+      keyItems: [
+        'Coronary CT-Angio (협착부위, 협착률, TIMI)',
+        'EKG — ST elevation 유무',
+        'Troponin 수치 (peak 값)',
+        'CK-MB 수치',
+        'PCI/스텐트 시행 여부 · 스텐트 위치',
+        'Cardiac MRI / MRA',
+        'Coronary angiography',
+      ],
+      note: 'Troponin/CK-MB peak 값, TIMI 분류, PCI 시행 여부를 명시해야 합니다.',
+    };
+  }
+
+  // 3. 부정맥 (Arrhythmia, I44~I49)
+  if (/부정맥|arrhythmia|심방세동|심방조동|WPW|i44|i45|i46|i47|i48|i49/.test(combined)) {
+    return {
+      group: '부정맥',
+      keyItems: [
+        'EKG — 리듬 종류, 이상 소견',
+        '24h Holter — 부정맥 종류, 빈도, 평균/최고/최저 HR',
+      ],
+      note: 'EKG 리듬/이상 소견, 24h Holter 부정맥 종류·빈도·HR을 명시해야 합니다.',
+    };
+  }
+
+  // 4. 뇌혈관질환 (I60~I69)
+  if (/뇌경색|뇌출혈|뇌혈관|cerebral|stroke|TIA|SAH|i60|i61|i62|i63|i64|i65|i66|i67|i68|i69/.test(combined)) {
+    return {
+      group: '뇌혈관질환',
+      keyItems: [
+        'Brain CT — 출혈/경색 부위, 범위',
+        'Brain MRI — 병변 부위, 크기',
+        'Brain CTA / MRA — 폐색·협착 부위',
+        'Cerebral Angiography',
+      ],
+      note: '병변 부위·폐색/출혈·범위를 명시해야 합니다.',
+    };
+  }
+
+  // 5. 암 (Cancer, C00~C97)
+  if (/암|cancer|carcinoma|종양|신생물|lymphoma|leukemia|c[0-9][0-9]/.test(combined)) {
+    return {
+      group: '암',
+      keyItems: [
+        '검사명 / 시행일 / 보고일',
+        '진단일 / 확진일 / 판독일',
+        'TNM 분류 (cTNM: 임상, pTNM: 병리)',
+        '원발 부위 + 전이 부위 (있는 경우)',
+        '조직검사 결과 (수술 전후 구분)',
+      ],
+      note: '검사일/보고일/진단일/확진일/TNM(cTNM·pTNM) 체계적으로 명시. 암 분류: [원발부위] 원발 + [전이부위] 전이 표시.',
+    };
+  }
+
+  // 6. 기타
+  return {
+    group: '기타',
+    keyItems: [
+      'CT / MRI / MRA / Angiography (정밀영상 우선)',
+      '(기초검사는 생략, 정밀 영상 및 특수검사 결과 중심)',
+    ],
+    note: '기초검사(CBC, 혈액검사 등)는 생략하고 정밀영상 결과를 우선 기재합니다.',
+  };
+}
+
+// ─── 고지의무 기산점 동적 계산 (RAG v2.0) ───────────────────────────
+/**
+ * productType (예: "3.2.5", "3.1.5", "3.1.2") 파싱으로
+ * 고지의무 기간 구간 윈도우를 동적으로 결정합니다.
+ *
+ * 수임서류에 기준 명시 시 우선 적용, 미기재 시 기본 3.2.5 적용
+ *
+ * 포맷: "A.B.C" → A=3개월(항상), B=중간기간(1년 or 2년), C=장기기간(5년)
+ *   3.2.5: 3개월 / 2년 / 5년 (기본값)
+ *   3.1.5: 3개월 / 1년 / 5년
+ *   3.1.2: 3개월 / 1년 / 2년
+ *
+ * @param {string|null} productType - 수임서류 기준 문자열 (예: "3.2.5")
+ * @returns {{ windows: Object, label: string, description: string }}
+ */
+function parseDisclosureWindows(productType) {
+  const DEFAULT = '3.2.5';
+  const raw = (productType || DEFAULT).toString().trim();
+  const parts = raw.split('.');
+  const w3m = 90;   // 3개월은 항상 고정
+  const wMid = (parseInt(parts[1]) || 2) * 365;   // 중간: 1년 or 2년
+  const wLong = (parseInt(parts[2]) || 5) * 365;  // 장기: 2년 or 5년
+
+  return {
+    windows: {
+      '3m':   w3m,
+      'mid':  wMid,
+      'long': wLong,
+    },
+    label: raw,
+    description: `3개월 / ${Math.round(wMid/365)}년 / ${Math.round(wLong/365)}년 기준 (${raw})`,
+  };
+}
+
+/**
+ * 내원일시와 가입일을 기준으로 고지의무 기산점 태그를 반환합니다.
+ *
+ * @param {Date|null} eventDate - 이벤트 날짜
+ * @param {Date|null} enrollDate - 보험 가입일
+ * @param {Object} windows - { 3m: number, mid: number, long: number } (일수)
+ * @returns {{ tag: string, daysBeforeEnroll: number|null }}
+ */
+function getDisclosureTag(eventDate, enrollDate, windows) {
+  if (!eventDate || !enrollDate) return { tag: '날짜 불명', daysBeforeEnroll: null };
+  const diff = Math.floor((enrollDate - eventDate) / (1000 * 60 * 60 * 24));
+  if (diff < 0) return { tag: '보험 가입 이후', daysBeforeEnroll: diff };
+  if (diff <= windows['3m'])   return { tag: `보험가입 3개월 이내 (D-${diff})`, daysBeforeEnroll: diff };
+  if (diff <= windows['mid'])  return { tag: `보험가입 ${Math.round(windows['mid']/365)}년 이내 (D-${diff})`, daysBeforeEnroll: diff };
+  if (diff <= windows['long']) return { tag: `보험가입 ${Math.round(windows['long']/365)}년 이내 (D-${diff})`, daysBeforeEnroll: diff };
+  return { tag: `보험가입 ${Math.round(windows['long']/365)}년 초과 (D-${diff})`, daysBeforeEnroll: diff };
+}
+
+// ─── 암 분류 헬퍼 ────────────────────────────────────────────────────
+/**
+ * 이벤트에서 암 원발/전이 분류 텍스트를 생성합니다.
+ * "분류: ✅ [원발부위명] 원발 + [전이부위명] 전이" 형태
+ *
+ * @param {Object} evt - 의료 이벤트
+ * @returns {string|null}
+ */
+function getCancerClassification(evt) {
+  const primary = safeStr(evt?.diagnosis?.primarySite || evt?.payload?.primarySite || '');
+  const metastasis = safeStr(evt?.diagnosis?.metastasisSite || evt?.payload?.metastasisSite || '');
+  if (!primary && !metastasis) return null;
+  if (primary && metastasis) return `분류: ✅ ${primary} 원발 + ${metastasis} 전이`;
+  if (primary) return `분류: ✅ ${primary} 원발`;
+  return `분류: ✅ ${metastasis} 전이`;
+}
+
 // ─── 메인 클래스 ──────────────────────────────────────────────────────
 class UnifiedReportBuilder {
   /**
@@ -131,6 +311,7 @@ class UnifiedReportBuilder {
    *   patientInfo.insuranceJoinDate | enrollmentDate: 보험 가입일
    *   patientInfo.insuranceCompany: 보험사
    *   patientInfo.productName: 보험 상품명
+   *   patientInfo.productType: 고지의무 기준 (예: "3.2.5")
    *   patientInfo.claimType: 청구 유형
    *   patientInfo.occupation: 직업
    */
@@ -147,21 +328,34 @@ class UnifiedReportBuilder {
       || null;
     this.enrollDate = parseDate(joinDateStr);
 
+    // 고지의무 기간 윈도우 (productType 동적 파싱)
+    const disclosureInfo = parseDisclosureWindows(patientInfo?.productType || null);
+    this.disclosureWindows = disclosureInfo.windows;
+    this.disclosureLabel = disclosureInfo.label;
+    this.disclosureDescription = disclosureInfo.description;
+
     // 기준일 계산
     if (this.enrollDate) {
       this.cutoff3M = new Date(this.enrollDate);
-      this.cutoff3M.setMonth(this.cutoff3M.getMonth() - 3);
+      this.cutoff3M.setDate(this.cutoff3M.getDate() - this.disclosureWindows['3m']);
       this.cutoff5Y = new Date(this.enrollDate);
-      this.cutoff5Y.setFullYear(this.cutoff5Y.getFullYear() - 5);
+      this.cutoff5Y.setDate(this.cutoff5Y.getDate() - this.disclosureWindows['long']);
+      this.cutoffMid = new Date(this.enrollDate);
+      this.cutoffMid.setDate(this.cutoffMid.getDate() - this.disclosureWindows['mid']);
     } else {
       this.cutoff3M = null;
       this.cutoff5Y = null;
+      this.cutoffMid = null;
     }
 
     // 이벤트에 period 태깅
     this._taggedEvents = this.events.map(evt => ({
       ...evt,
       _period: getPeriod(evt.date, this.enrollDate, this.cutoff3M, this.cutoff5Y),
+      _examFields: getExamFields(evt),
+      _disclosureTag: this.enrollDate
+        ? getDisclosureTag(parseDate(evt.date), this.enrollDate, this.disclosureWindows)
+        : { tag: '가입일 미입력', daysBeforeEnroll: null },
     }));
   }
 
@@ -178,17 +372,144 @@ class UnifiedReportBuilder {
     );
   }
 
-  // ── 섹션 1: 피보험자 및 보험 정보 ──
+  // ── 날짜별 10항목 블록 렌더러 (핵심) ──
+  /**
+   * 단일 이벤트를 10항목 형태로 텍스트 렌더링합니다.
+   * RAG 규칙: 각 내원일마다 10개 항목 반복
+   *
+   * @param {Object} evt - 태깅된 이벤트
+   * @param {Array} lines - 출력 라인 배열 (push-in-place)
+   */
+  _renderEventBlock(evt, lines) {
+    const date = formatDateKR(evt.date);
+    const hosp = getEventHospital(evt) || '병원 불명';
+    const period = evt._period;
+    const periodLabel = PERIOD_LABEL[period] || '';
+    const badge = COLOR[period]?.badge || '';
+    const examFields = evt._examFields || getExamFields(evt);
+    const isCancel = examFields.group === '암';
+
+    // 블록 헤더 ━━━━━━━━━━
+    lines.push('');
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    lines.push(`${badge} [${date}]  ${periodLabel}  ${hosp}`);
+    lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+    // ① 내원경위
+    const visitReason = getEventPayload(evt, 'visitReason')
+      || getEventPayload(evt, 'admissionPurpose')
+      || getEventPayload(evt, 'referralReason')
+      || getEventDescription(evt)
+      || '정보 없음';
+    lines.push(`▸ 내원경위: ${visitReason}`);
+
+    // ② 진단병명 (KCD-10 코드, 영문 원어 + 한글 병명)
+    const icdCode = getEventDiagnosisCode(evt);
+    const diagText = getEventDiagnosis(evt);
+    const diagLine = icdCode
+      ? `${diagText}  [KCD-10: ${icdCode}]`
+      : (diagText || '정보 없음');
+    lines.push(`▸ 진단병명: ${diagLine}`);
+
+    // ③ 검사결과 (질환군별 규칙 적용)
+    const examResult = getEventPayload(evt, 'examResult')
+      || getEventPayload(evt, 'testResult')
+      || getEventPayload(evt, 'findings')
+      || '';
+    lines.push(`▸ 검사결과 [${examFields.group}]:`);
+    if (examResult) {
+      lines.push(`    ${examResult}`);
+    }
+    // 질환군별 강조 항목 (데이터 없을 때도 항목 명시)
+    if (examFields.keyItems.length > 0) {
+      lines.push(`    ※ 확인 필요 항목: ${examFields.keyItems.join(' / ')}`);
+    }
+    if (!examResult) {
+      lines.push(`    (검사 데이터 없음)`);
+    }
+
+    // ④ 수술 후 조직검사 결과 (암의 경우만)
+    if (isCancel) {
+      const biopsy = getEventPayload(evt, 'biopsyResult')
+        || getEventPayload(evt, 'pathologyResult')
+        || getEventPayload(evt, 'surgicalPathology')
+        || '';
+      const examDate = getEventPayload(evt, 'examDate') || getEventPayload(evt, 'testDate') || '';
+      const reportDate = getEventPayload(evt, 'reportDate') || getEventPayload(evt, 'pathologyDate') || '';
+      const tnm = getEventPayload(evt, 'TNM') || getEventPayload(evt, 'tnm') || '';
+      const cTNM = getEventPayload(evt, 'cTNM') || '';
+      const pTNM = getEventPayload(evt, 'pTNM') || '';
+
+      lines.push(`▸ 수술 후 조직검사 결과 (암):`);
+      if (examDate)   lines.push(`    검사일: ${examDate}`);
+      if (reportDate) lines.push(`    보고일: ${reportDate}`);
+      if (biopsy)     lines.push(`    결과: ${biopsy}`);
+      if (cTNM)       lines.push(`    cTNM(임상): ${cTNM}`);
+      if (pTNM)       lines.push(`    pTNM(병리): ${pTNM}`);
+      if (tnm && !cTNM && !pTNM) lines.push(`    TNM: ${tnm}`);
+
+      // 암 원발/전이 분류
+      const cancerClass = getCancerClassification(evt);
+      if (cancerClass) lines.push(`    ${cancerClass}`);
+
+      if (!biopsy && !tnm && !cTNM && !pTNM) {
+        lines.push(`    (조직검사 데이터 없음)`);
+      }
+    }
+
+    // ⑤ 치료내용
+    const treatment = getEventPayload(evt, 'treatment')
+      || getEventPayload(evt, 'prescription')
+      || getEventPayload(evt, 'procedure')
+      || getEventPayload(evt, 'medication')
+      || '';
+    lines.push(`▸ 치료내용: ${treatment || '정보 없음'}`);
+
+    // ⑥ 통원기간
+    const outpatientStart = getEventPayload(evt, 'outpatientStart') || safeStr(evt.date);
+    const outpatientEnd   = getEventPayload(evt, 'outpatientEnd') || '';
+    const outpatientCount = getEventPayload(evt, 'outpatientCount') || getEventPayload(evt, 'visitCount') || '';
+    if (outpatientEnd && outpatientCount) {
+      lines.push(`▸ 통원기간: ${formatDateKR(outpatientStart)} ~ ${formatDateKR(outpatientEnd)} / ${outpatientCount}회 통원`);
+    } else if (outpatientCount) {
+      lines.push(`▸ 통원기간: ${formatDateKR(outpatientStart)} / ${outpatientCount}회 통원`);
+    } else {
+      lines.push(`▸ 통원기간: (정보 없음)`);
+    }
+
+    // ⑦ 입원기간
+    const admissionStart = getEventPayload(evt, 'admissionStart') || getEventPayload(evt, 'hospitalizationStart') || '';
+    const admissionEnd   = getEventPayload(evt, 'admissionEnd') || getEventPayload(evt, 'hospitalizationEnd') || '';
+    const admissionDays  = getEventPayload(evt, 'admissionDays') || getEventPayload(evt, 'hospitalizationDays') || '';
+    if (admissionStart && admissionEnd) {
+      lines.push(`▸ 입원기간: ${formatDateKR(admissionStart)} ~ ${formatDateKR(admissionEnd)}${admissionDays ? ` / ${admissionDays}일 입원` : ''}`);
+    } else if (admissionDays) {
+      lines.push(`▸ 입원기간: ${admissionDays}일 입원`);
+    } else {
+      lines.push(`▸ 입원기간: (해당 없음 또는 정보 없음)`);
+    }
+
+    // ⑧ 과거병력
+    const history = getEventPayload(evt, 'medicalHistory')
+      || getEventPayload(evt, 'pastHistory')
+      || getEventPayload(evt, 'history')
+      || '';
+    lines.push(`▸ 과거병력: ${history || '특이 사항 없음'}`);
+
+    // ⑨ 의사소견
+    const opinion = getEventPayload(evt, 'doctorOpinion')
+      || getEventPayload(evt, 'medicalOpinion')
+      || getEventPayload(evt, 'physicianNote')
+      || getEventPayload(evt, 'note')
+      || '';
+    lines.push(`▸ 의사소견: ${opinion || '(정보 없음)'}`);
+  }
+
+  // ── 섹션 1: 피보험자 및 보험 정보 (구조 데이터) ──
   _section1_patientInfo() {
     const p = this.patientInfo;
-    const joinDateStr = this.enrollDate
-      ? this.enrollDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })
-      : '미입력';
-    const cutoff3MStr = this.cutoff3M
-      ? this.cutoff3M.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })
-      : '—';
-    const cutoff5YStr = this.cutoff5Y
-      ? this.cutoff5Y.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })
+    const fmtDate = (d) => d
+      ? d.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })
       : '—';
 
     return {
@@ -197,14 +518,17 @@ class UnifiedReportBuilder {
       occupation: safeStr(p.occupation || p.job) || '미입력',
       insuranceCompany: safeStr(p.insuranceCompany) || '미입력',
       productName: safeStr(p.productName || p.insuranceProduct) || '미입력',
-      joinDate: joinDateStr,
+      joinDate: fmtDate(this.enrollDate),
       claimType: safeStr(p.claimType) || '미입력',
-      referenceDate3M: cutoff3MStr,
-      referenceDate5Y: cutoff5YStr,
+      referenceDate3M: fmtDate(this.cutoff3M),
+      referenceDateMid: fmtDate(this.cutoffMid),
+      referenceDate5Y: fmtDate(this.cutoff5Y),
+      disclosureLabel: this.disclosureLabel,
+      disclosureDescription: this.disclosureDescription,
     };
   }
 
-  // ── 섹션 2: 조사 개요 및 청구 경위 ──
+  // ── 섹션 2: 조사 개요 ──
   _section2_overview() {
     const events3M = this._getByPeriod(PERIOD.WITHIN_3M);
     const events5Y = this._getByPeriod(PERIOD.WITHIN_5Y);
@@ -212,7 +536,6 @@ class UnifiedReportBuilder {
     const preEnroll = this._getPreEnroll().length;
     const postEnroll = this._getByPeriod(PERIOD.POST_ENROLL).length;
 
-    // 고지의무 결론 요약
     let disclosureLevel = '불명확';
     let disclosureSummary = '고지의무 분석 데이터 없음';
     if (this.disclosureReport?.conclusion) {
@@ -242,17 +565,20 @@ class UnifiedReportBuilder {
       hospital: getEventHospital(evt),
       type: getEventType(evt),
       diagnosis: getEventDiagnosis(evt),
+      icdCode: getEventDiagnosisCode(evt),
       description: getEventDescription(evt),
       admissionPurpose: getEventPayload(evt, 'admissionPurpose') || getEventPayload(evt, 'visitReason'),
       prescription: getEventPayload(evt, 'prescription') || getEventPayload(evt, 'treatment'),
       note: getEventPayload(evt, 'note'),
       confidence: evt.confidence,
       isCritical: (evt.confidence || 0) >= 0.8,
+      examGroup: evt._examFields?.group || '기타',
+      disclosureTag: evt._disclosureTag?.tag || '',
       period: PERIOD.WITHIN_3M,
     }));
   }
 
-  // ── 섹션 4: 가입 전 5년 이내 의료기록 [5Y] (3개월 제외) ──
+  // ── 섹션 4: 가입 전 5년 이내 의료기록 [5Y] ──
   _section4_within5Y() {
     const events = sortByDate(this._getByPeriod(PERIOD.WITHIN_5Y));
     return events.map(evt => ({
@@ -260,15 +586,18 @@ class UnifiedReportBuilder {
       hospital: getEventHospital(evt),
       type: getEventType(evt),
       diagnosis: getEventDiagnosis(evt),
+      icdCode: getEventDiagnosisCode(evt),
       description: getEventDescription(evt),
       prescription: getEventPayload(evt, 'prescription') || getEventPayload(evt, 'treatment'),
       note: getEventPayload(evt, 'note'),
       confidence: evt.confidence,
+      examGroup: evt._examFields?.group || '기타',
+      disclosureTag: evt._disclosureTag?.tag || '',
       period: PERIOD.WITHIN_5Y,
     }));
   }
 
-  // ── 섹션 5: 가입 전 5년 초과 / 가입 이후 의료기록 ──
+  // ── 섹션 5: 5년 초과 / 가입 이후 ──
   _section5_others() {
     const before5Y = sortByDate(this._getByPeriod(PERIOD.BEFORE_5Y));
     const postEnroll = sortByDate(this._getByPeriod(PERIOD.POST_ENROLL));
@@ -292,12 +621,11 @@ class UnifiedReportBuilder {
 
   // ── 섹션 6: 진단서 및 영상검사 요약 ──
   _section6_diagnosis() {
-    // 진단/영상검사 유형 이벤트 추출
     const diagTypes = ['diagnosis', 'imaging', 'examination', 'checkup'];
     const diagEvents = sortByDate(this._taggedEvents.filter(evt => {
       const t = safeStr(evt?.eventType || evt?.type || '').toLowerCase();
       return diagTypes.some(dt => t.includes(dt)) ||
-             safeStr(evt?.diagnosis?.code).match(/^[A-Z]\d/) ||  // ICD 코드 있는 경우
+             safeStr(evt?.diagnosis?.code).match(/^[A-Z]\d/) ||
              safeStr(getEventDiagnosis(evt)).includes('MRI') ||
              safeStr(getEventDiagnosis(evt)).includes('CT') ||
              safeStr(getEventDescription(evt)).includes('영상') ||
@@ -308,9 +636,10 @@ class UnifiedReportBuilder {
       date: safeStr(evt.date),
       hospital: getEventHospital(evt),
       type: getEventType(evt),
-      icdCode: safeStr(evt?.diagnosis?.code),
+      icdCode: getEventDiagnosisCode(evt),
       diagnosis: getEventDiagnosis(evt),
       findings: getEventDescription(evt) || getEventPayload(evt, 'findings'),
+      examGroup: evt._examFields?.group || '기타',
       period: evt._period,
       periodLabel: PERIOD_SHORT[evt._period] || '[  ]',
     }));
@@ -323,12 +652,7 @@ class UnifiedReportBuilder {
     for (const evt of this._taggedEvents) {
       const hosp = getEventHospital(evt) || '병원 불명';
       if (!hospitalMap.has(hosp)) {
-        hospitalMap.set(hosp, {
-          hospital: hosp,
-          events: [],
-          periods: new Set(),
-          dates: [],
-        });
+        hospitalMap.set(hosp, { hospital: hosp, events: [], periods: new Set(), dates: [] });
       }
       const entry = hospitalMap.get(hosp);
       entry.events.push(evt);
@@ -341,14 +665,9 @@ class UnifiedReportBuilder {
       const sorted = sortByDate(data.events);
       const firstDate = sorted[0]?.date || '';
       const lastDate = sorted[sorted.length - 1]?.date || '';
-      const diagnoses = [...new Set(
-        sorted.map(e => safeStr(e?.diagnosis?.code || '')).filter(Boolean)
-      )];
-      const descriptions = [...new Set(
-        sorted.map(e => getEventDescription(e)).filter(Boolean)
-      )].slice(0, 3);
+      const diagnoses = [...new Set(sorted.map(e => getEventDiagnosisCode(e)).filter(Boolean))];
+      const descriptions = [...new Set(sorted.map(e => getEventDescription(e)).filter(Boolean))].slice(0, 3);
 
-      // 주요 기간 결정 (3M > 5Y > before > post > unknown)
       let dominantPeriod = PERIOD.UNKNOWN;
       for (const p of [PERIOD.WITHIN_3M, PERIOD.WITHIN_5Y, PERIOD.BEFORE_5Y, PERIOD.POST_ENROLL]) {
         if (data.periods.has(p)) { dominantPeriod = p; break; }
@@ -367,7 +686,6 @@ class UnifiedReportBuilder {
       });
     }
 
-    // 3M → 5Y → before5Y → post → unknown 순, 같은 기간은 방문수 내림차순
     const periodOrder = [PERIOD.WITHIN_3M, PERIOD.WITHIN_5Y, PERIOD.BEFORE_5Y, PERIOD.POST_ENROLL, PERIOD.UNKNOWN];
     episodes.sort((a, b) => {
       const pa = periodOrder.indexOf(a.period);
@@ -383,14 +701,9 @@ class UnifiedReportBuilder {
   _section8_disclosure() {
     if (!this.disclosureReport) {
       return {
-        hasData: false,
-        level: 'unknown',
+        hasData: false, level: 'unknown',
         summary: '고지의무 분석 데이터 없음',
-        within3M: [],
-        within5Y: [],
-        criticalCount: 0,
-        highCount: 0,
-        recommendations: [],
+        within3M: [], within5Y: [], criticalCount: 0, highCount: 0, recommendations: [],
       };
     }
 
@@ -398,23 +711,15 @@ class UnifiedReportBuilder {
     const conclusion = dr.conclusion || {};
     const sectionA = dr.sectionA || {};
     const sectionD = dr.sectionD || {};
-
-    // tier별 이벤트 수
     const tiers = sectionA.tiers || {};
     const criticalCount = (tiers.critical || []).length;
     const highCount = (tiers.high || []).length;
-
-    // 섹션B 기간별 이벤트
     const sectionB = dr.sectionB || {};
     const within3M = (sectionB.within3m || []).map(evt => ({
-      date: safeStr(evt.date),
-      hospital: getEventHospital(evt),
-      diagnosis: getEventDiagnosis(evt),
+      date: safeStr(evt.date), hospital: getEventHospital(evt), diagnosis: getEventDiagnosis(evt),
     }));
     const within5Y = (sectionB.within5y || sectionB.within2y || []).map(evt => ({
-      date: safeStr(evt.date),
-      hospital: getEventHospital(evt),
-      diagnosis: getEventDiagnosis(evt),
+      date: safeStr(evt.date), hospital: getEventHospital(evt), diagnosis: getEventDiagnosis(evt),
     }));
 
     return {
@@ -422,10 +727,7 @@ class UnifiedReportBuilder {
       level: conclusion.level || 'unknown',
       levelLabel: { critical: '고지의무 위반 의심', warning: '주의 요망', safe: '이상 없음' }[conclusion.level] || '불명확',
       summary: safeStr(conclusion.summary) || '결론 없음',
-      criticalCount,
-      highCount,
-      within3M,
-      within5Y,
+      criticalCount, highCount, within3M, within5Y,
       recommendations: Array.isArray(sectionD.recommendations) ? sectionD.recommendations : [],
     };
   }
@@ -441,8 +743,10 @@ class UnifiedReportBuilder {
       period: evt._period,
       periodLabel: PERIOD_SHORT[evt._period],
       periodFull: PERIOD_LABEL[evt._period],
+      disclosureTag: evt._disclosureTag?.tag || '',
       confidence: evt.confidence,
-      icdCode: safeStr(evt?.diagnosis?.code),
+      icdCode: getEventDiagnosisCode(evt),
+      examGroup: evt._examFields?.group || '기타',
     }));
   }
 
@@ -451,80 +755,66 @@ class UnifiedReportBuilder {
     const disclosure = this._section8_disclosure();
     const events3M = this._getByPeriod(PERIOD.WITHIN_3M);
     const events5Y = this._getByPeriod(PERIOD.WITHIN_5Y);
-
     const recs = [];
 
-    // 고지의무 위반 관련
     if (disclosure.level === 'critical' || events3M.length > 0) {
       recs.push({
-        priority: '긴급',
-        category: '고지의무',
+        priority: '긴급', category: '고지의무',
         action: `가입 전 3개월 이내 의료기록 ${events3M.length}건 확인 필요 — 고지의무 위반 여부 심사 요망`,
       });
     }
     if (events5Y.length > 0) {
       recs.push({
-        priority: '중요',
-        category: '고지의무',
+        priority: '중요', category: '고지의무',
         action: `가입 전 5년 이내 의료기록 ${events5Y.length}건 — 고지 대상 항목 포함 여부 검토 필요`,
       });
     }
-
-    // disclosure 권장조치 추가
     if (Array.isArray(disclosure.recommendations)) {
       for (const rec of disclosure.recommendations) {
         const recStr = typeof rec === 'string' ? rec : safeStr(rec?.action || rec?.text || JSON.stringify(rec));
-        if (recStr) {
-          recs.push({
-            priority: '일반',
-            category: '추가조사',
-            action: recStr,
-          });
-        }
+        if (recStr) recs.push({ priority: '일반', category: '추가조사', action: recStr });
       }
     }
-
-    // 기본 권장조치
     if (recs.length === 0) {
-      recs.push({
-        priority: '일반',
-        category: '검토',
-        action: '의료기록 검토 결과 특이사항 없음 — 보험금 처리 기준에 따라 판단',
-      });
+      recs.push({ priority: '일반', category: '검토', action: '의료기록 검토 결과 특이사항 없음 — 보험금 처리 기준에 따라 판단' });
     }
-
     return recs;
   }
 
   // ─────────────────────────────────────────────────────────────────
-  // TEXT 출력
+  // TEXT 출력 — 메인 보고서 (날짜 오름차순 경과보고서) + 첨부
   // ─────────────────────────────────────────────────────────────────
   _buildText() {
     const s1 = this._section1_patientInfo();
     const s2 = this._section2_overview();
-    const s3 = this._section3_within3M();
-    const s4 = this._section4_within5Y();
-    const s5 = this._section5_others();
-    const s6 = this._section6_diagnosis();
-    const s7 = this._section7_episodes();
     const s8 = this._section8_disclosure();
-    const s9 = this._section9_timeline();
     const s10 = this._section10_recommendations();
 
     const lines = [];
-    const H1 = (t) => lines.push('', `${'═'.repeat(70)}`, `  ${t}`, `${'═'.repeat(70)}`);
-    const H2 = (t) => lines.push('', `[ ${t} ]`, renderSeparator());
-    const H3 = (t) => lines.push(`▸ ${t}`);
+    const HR1 = (t) => {
+      lines.push('');
+      lines.push('═'.repeat(70));
+      lines.push(`  ${t}`);
+      lines.push('═'.repeat(70));
+    };
+    const HR2 = (t) => {
+      lines.push('');
+      lines.push(`[ ${t} ]`);
+      lines.push('─'.repeat(70));
+    };
     const ROW = (label, val) => lines.push(`  ${label.padEnd(16)}: ${val || '—'}`);
     const BLANK = () => lines.push('');
 
-    // 헤더
-    H1('VNEXSUS 손해사정 의료기록 분석 보고서');
+    // ═══════════════════════════════════
+    // 보고서 헤더
+    // ═══════════════════════════════════
+    HR1('손해사정 의료기록 분석 보고서');
     lines.push(`  생성일시: ${new Date().toLocaleString('ko-KR')}`);
+    lines.push(`  고지의무 기준: ${this.disclosureDescription}`);
     BLANK();
 
-    // ── [1] 피보험자 및 보험 정보
-    H2('[1] 피보험자 및 보험 정보');
+    // [피보험자 정보]
+    HR2('피보험자 및 보험 정보');
     ROW('피보험자', s1.name);
     ROW('생년월일', s1.birthDate);
     ROW('직업', s1.occupation);
@@ -533,170 +823,218 @@ class UnifiedReportBuilder {
     ROW('가입일', s1.joinDate);
     ROW('청구사항', s1.claimType);
     BLANK();
-    H3('기준일 (가입일 역산)');
-    ROW('3개월 기준일', s1.referenceDate3M + ' (이후 ~ 가입일: 🔴 3M 경고)');
-    ROW('5년 기준일', s1.referenceDate5Y + ' (이후 ~ 3개월: 🟠 5Y 주의)');
+    lines.push(`  ▸ 고지의무 기준일:`);
+    lines.push(`    - 🔴 3개월 기준: ${s1.referenceDate3M} 이후 ~ 가입일`);
+    if (this.cutoffMid) {
+      const midYr = Math.round(this.disclosureWindows['mid'] / 365);
+      lines.push(`    - 🟡 ${midYr}년 기준:  ${s1.referenceDateMid} 이후 ~ 3개월 기준일`);
+    }
+    lines.push(`    - 🟠 5년 기준:  ${s1.referenceDate5Y} 이후 ~ 가입일`);
+    BLANK();
 
-    // ── [2] 조사 개요 및 청구 경위
-    H2('[2] 조사 개요 및 청구 경위');
+    // [조사 개요]
+    HR2('조사 개요');
     ROW('청구 유형', s2.claimType);
     ROW('전체 이벤트', `${s2.totalEvents}건 (가입 전 ${s2.preEnrollEvents}건 / 가입 후 ${s2.postEnrollEvents}건)`);
-    ROW('3M 핵심', `${s2.within3MCount}건 🔴`);
-    ROW('5Y 주의', `${s2.within5YCount}건 🟠`);
+    ROW('🔴 3M 해당', `${s2.within3MCount}건`);
+    ROW('🟠 5Y 해당', `${s2.within5YCount}건`);
     ROW('고지의무 판단', s2.disclosureLevel);
-    if (s2.disclosureSummary && s2.disclosureSummary !== s2.disclosureLevel) {
-      lines.push(`  ${s2.disclosureSummary}`);
-    }
 
-    // ── [3] 가입 전 3개월 이내 핵심 의료기록
-    H2('[3] 가입 전 3개월 이내 핵심 의료기록 🔴 [3M]');
-    if (!this.enrollDate) {
-      lines.push('  ⚠️ 보험 가입일 미입력 — 3M 분류 불가');
-    } else if (s3.length === 0) {
-      lines.push('  해당 기간 의료기록 없음');
+    // ═══════════════════════════════════
+    // 【메인】 날짜 오름차순 경과보고서
+    // ═══════════════════════════════════
+    lines.push('');
+    lines.push('');
+    lines.push('═'.repeat(70));
+    lines.push('  【 경과보고서 — 날짜 오름차순 】');
+    lines.push(`  (전체 ${this._taggedEvents.length}건 / 고지의무 기준: ${this.disclosureLabel})`);
+    lines.push('═'.repeat(70));
+
+    const allSorted = sortByDate(this._taggedEvents, true);  // 오름차순
+    if (allSorted.length === 0) {
+      lines.push('');
+      lines.push('  (추출된 의료 이벤트 없음)');
     } else {
-      for (const evt of s3) {
-        BLANK();
-        H3(`${formatDateKR(evt.date)}  ${evt.hospital}`);
-        ROW('진료유형', evt.type);
-        ROW('진단명', evt.diagnosis);
-        if (evt.admissionPurpose) ROW('내원경위', evt.admissionPurpose);
-        if (evt.description) ROW('내용', evt.description);
-        if (evt.prescription) ROW('처방/처치', evt.prescription);
-        if (evt.note) ROW('기타', evt.note);
-        if (evt.isCritical) {
-          lines.push(`  ★ *[주의|보험사]* 고지의무위반 우려 가능성 있음`);
-        }
+      for (const evt of allSorted) {
+        this._renderEventBlock(evt, lines);
       }
     }
 
-    // ── [4] 가입 전 5년 이내 의료기록
-    H2('[4] 가입 전 5년 이내 의료기록 🟠 [5Y]');
+    // ═══════════════════════════════════
+    // 【첨부1】 고지의무 분석
+    // ═══════════════════════════════════
+    lines.push('');
+    lines.push('');
+    lines.push('═'.repeat(70));
+    lines.push('  【 첨부1: 고지의무 분석 】');
+    lines.push('═'.repeat(70));
+
     if (!this.enrollDate) {
-      lines.push('  ⚠️ 보험 가입일 미입력 — 5Y 분류 불가');
-    } else if (s4.length === 0) {
-      lines.push('  해당 기간 의료기록 없음');
+      lines.push('');
+      lines.push('  ⚠️ 보험 가입일 미입력 — 고지의무 분석 불가');
     } else {
-      for (const evt of s4) {
-        BLANK();
-        H3(`${formatDateKR(evt.date)}  ${evt.hospital}`);
-        ROW('진료유형', evt.type);
-        ROW('진단명', evt.diagnosis);
-        if (evt.description) ROW('내용', evt.description);
-        if (evt.prescription) ROW('처방/처치', evt.prescription);
-        if (evt.note) ROW('기타', evt.note);
-      }
-    }
+      const events3M = sortByDate(this._getByPeriod(PERIOD.WITHIN_3M));
+      const events5Y = sortByDate(this._getByPeriod(PERIOD.WITHIN_5Y));
 
-    // ── [5] 가입 전 5년 초과 / 가입 이후 의료기록
-    H2('[5] 가입 전 5년 초과 / 가입 이후 의료기록');
-    const { before5Y, postEnroll, unknown } = s5;
-
-    if (before5Y.length > 0) {
-      H3(`5년 초과 기록 (${before5Y.length}건)`);
-      for (const evt of before5Y) {
-        lines.push(`  ${formatDateKR(evt.date)}  ${evt.hospital}  ${evt.diagnosis}`);
-      }
-    }
-    if (postEnroll.length > 0) {
       BLANK();
-      H3(`가입 이후 기록 (${postEnroll.length}건)`);
-      for (const evt of postEnroll) {
-        lines.push(`  ${formatDateKR(evt.date)}  ${evt.hospital}  ${evt.diagnosis}`);
-      }
-    }
-    if (before5Y.length === 0 && postEnroll.length === 0 && unknown.length === 0) {
-      lines.push('  해당 기간 의료기록 없음');
-    }
+      lines.push(`  기준: ${this.disclosureDescription}`);
+      BLANK();
 
-    // ── [6] 진단서 및 영상검사 요약
-    H2('[6] 진단서 및 영상검사 요약');
-    if (s6.length === 0) {
-      lines.push('  해당 항목 없음');
-    } else {
-      for (const evt of s6) {
-        lines.push(`  ${evt.periodLabel} ${formatDateKR(evt.date)}  ${evt.hospital}`);
-        if (evt.icdCode) ROW('ICD 코드', evt.icdCode);
-        ROW('진단/검사', evt.diagnosis);
-        if (evt.findings) ROW('소견', evt.findings);
-        BLANK();
-      }
-    }
-
-    // ── [7] 병원별 에피소드 요약
-    H2('[7] 병원별 에피소드 요약');
-    if (s7.length === 0) {
-      lines.push('  데이터 없음');
-    } else {
-      for (const ep of s7) {
-        const badge = COLOR[ep.period]?.badge || '';
-        H3(`${badge} ${ep.hospital}`);
-        ROW('방문횟수', `${ep.visitCount}회`);
-        ROW('기간', ep.firstDate === ep.lastDate ? formatDateKR(ep.firstDate) : `${formatDateKR(ep.firstDate)} ~ ${formatDateKR(ep.lastDate)}`);
-        ROW('주요 기간', ep.periodLabel);
-        if (ep.icdCodes.length > 0) ROW('ICD 코드', ep.icdCodes.join(', '));
-        ROW('주요 내용', ep.summary);
-        if (ep.hasCritical) lines.push(`  ⚠️ 가입 전 3개월 이내 방문 포함`);
-        BLANK();
-      }
-    }
-
-    // ── [8] 고지의무 분석 결론
-    H2('[8] 고지의무 분석 결론');
-    if (!s8.hasData) {
-      lines.push('  고지의무 분석 데이터 없음');
-    } else {
-      const levelEmoji = { critical: '🔴', warning: '🟠', safe: '🟢', unknown: '❓' };
-      ROW('판정', `${levelEmoji[s8.level] || '❓'} ${s8.levelLabel}`);
-      ROW('Critical 건수', `${s8.criticalCount}건`);
-      ROW('High 건수', `${s8.highCount}건`);
-      if (s8.summary) lines.push(`\n  ${s8.summary}`);
-
-      if (s8.within3M.length > 0) {
-        BLANK();
-        H3('3개월 이내 주요 진료 (고지 필수 검토)');
-        for (const e of s8.within3M) {
-          lines.push(`  🔴 ${formatDateKR(e.date)}  ${e.hospital}  ${e.diagnosis}`);
+      // 3개월 이내
+      lines.push('  ─ 🔴 보험가입 3개월 이내 ──────────────────────────────────────────');
+      if (events3M.length === 0) {
+        lines.push('  해당 없음');
+      } else {
+        for (const evt of events3M) {
+          const tag = evt._disclosureTag?.tag || '';
+          const diag = getEventDiagnosis(evt);
+          const hosp = getEventHospital(evt);
+          lines.push(`  🔴 ${formatDateKR(evt.date)}  ${hosp}`);
+          lines.push(`     진단: ${diag}`);
+          lines.push(`     구간: ${tag}`);
+          // 태깅: 진단확정/의심소견/입원수술필요/추가검사 필요
+          const desc = getEventDescription(evt).toLowerCase();
+          const tags = [];
+          if (/확진|확정|암|cancer/.test(desc + diag.toLowerCase())) tags.push('진단확정');
+          if (/의심|r\.o\.|rule out/.test(desc + diag.toLowerCase())) tags.push('의심소견');
+          if (/입원|수술|surgery/.test(desc)) tags.push('입원/수술필요');
+          if (/추가검사|f\/u|follow/.test(desc)) tags.push('추가검사필요');
+          if (tags.length > 0) lines.push(`     태그: ${tags.join(' · ')}`);
+          BLANK();
         }
       }
-      if (s8.within5Y.length > 0) {
-        BLANK();
-        H3('5년 이내 주요 진료');
-        for (const e of s8.within5Y) {
-          lines.push(`  🟠 ${formatDateKR(e.date)}  ${e.hospital}  ${e.diagnosis}`);
+
+      // 5년 이내 (3개월 제외)
+      const longLabel = Math.round(this.disclosureWindows['long'] / 365);
+      lines.push(`  ─ 🟠 보험가입 ${longLabel}년 이내 (3개월 제외) ───────────────────────`);
+      if (events5Y.length === 0) {
+        lines.push('  해당 없음');
+      } else {
+        for (const evt of events5Y) {
+          const tag = evt._disclosureTag?.tag || '';
+          lines.push(`  🟠 ${formatDateKR(evt.date)}  ${getEventHospital(evt)}  ${getEventDiagnosis(evt)}`);
+          lines.push(`     구간: ${tag}`);
+          BLANK();
+        }
+      }
+
+      // 판정
+      BLANK();
+      lines.push('  ─ 판정 ────────────────────────────────────────────────────────────');
+      if (s8.hasData) {
+        const levelEmoji = { critical: '🔴', warning: '🟠', safe: '🟢' };
+        lines.push(`  ${levelEmoji[s8.level] || '❓'} ${s8.levelLabel}`);
+        if (s8.summary) lines.push(`  ${s8.summary}`);
+        if (s8.criticalCount > 0) lines.push(`  Critical 건수: ${s8.criticalCount}건`);
+      } else {
+        const hasCritical = events3M.length > 0;
+        if (hasCritical) {
+          lines.push('  🔴 고지의무 위반 의심 — 가입 전 3개월 이내 의료기록 존재');
+        } else if (events5Y.length > 0) {
+          lines.push('  🟠 검토 필요 — 가입 전 5년 이내 의료기록 존재');
+        } else {
+          lines.push('  🟢 이상 없음 — 고지의무 위반 의심 기록 없음');
         }
       }
     }
 
-    // ── [9] 전체 의료 타임라인
-    H2('[9] 전체 의료 타임라인');
-    lines.push('  범례: [3M]=🔴 3개월이내  [5Y]=🟠 5년이내  [  ]=5년초과  [가입후]=가입이후');
+    // ═══════════════════════════════════
+    // 【첨부2】 결재용 요약본
+    // ═══════════════════════════════════
+    lines.push('');
+    lines.push('');
+    lines.push('═'.repeat(70));
+    lines.push('  【 첨부2: 📑 손해사정 보고서 (결재용 요약본) 】');
+    lines.push('═'.repeat(70));
+
+    const criticalEvents = sortByDate([
+      ...this._getByPeriod(PERIOD.WITHIN_3M),
+      ...this._getByPeriod(PERIOD.WITHIN_5Y),
+    ], true);
+
+    if (criticalEvents.length === 0) {
+      BLANK();
+      lines.push('  고지의무 검토 대상 의료기록 없음');
+    } else {
+      for (const evt of criticalEvents) {
+        const periodLabel = PERIOD_LABEL[evt._period] || '';
+        const hosp = getEventHospital(evt);
+        const diag = getEventDiagnosis(evt);
+        const icdCode = getEventDiagnosisCode(evt);
+        const examFields = evt._examFields || getExamFields(evt);
+        const isAmSpecialty = examFields.group === '암';
+
+        BLANK();
+        lines.push('  ┌─────────────────────────────────────────────────────────────');
+        lines.push(`  │ ${periodLabel}`);
+        lines.push('  ├─────────────────────────────────────────────────────────────');
+        lines.push(`  │ 내원일시: ${formatDateKR(evt.date)}`);
+        lines.push(`  │ 내원경위: ${getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '정보 없음'}`);
+        lines.push(`  │ 진단병명: ${diag}${icdCode ? `  [KCD-10: ${icdCode}]` : ''}`);
+        lines.push(`  │ 검사결과: ${getEventPayload(evt, 'examResult') || getEventPayload(evt, 'findings') || '(정보 없음)'}`);
+
+        if (isAmSpecialty) {
+          const tnm = getEventPayload(evt, 'TNM') || getEventPayload(evt, 'cTNM') || '';
+          const pTNM = getEventPayload(evt, 'pTNM') || '';
+          const biopsy = getEventPayload(evt, 'biopsyResult') || getEventPayload(evt, 'pathologyResult') || '';
+          lines.push(`  │ 수술 후 조직검사 결과:`);
+          if (biopsy) lines.push(`  │   결과: ${biopsy}`);
+          if (tnm)    lines.push(`  │   cTNM: ${tnm}`);
+          if (pTNM)   lines.push(`  │   pTNM: ${pTNM}`);
+          const cancerClass = getCancerClassification(evt);
+          if (cancerClass) lines.push(`  │   ${cancerClass}`);
+          if (!biopsy && !tnm && !pTNM) lines.push(`  │   (데이터 없음)`);
+        }
+
+        lines.push(`  │ 치료내용: ${getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '정보 없음'}`);
+        const outCnt = getEventPayload(evt, 'outpatientCount');
+        lines.push(`  │ 통원기간: ${outCnt ? `${outCnt}회` : '정보 없음'}`);
+        const admDays = getEventPayload(evt, 'admissionDays');
+        lines.push(`  │ 입원기간: ${admDays ? `${admDays}일` : '해당 없음 또는 정보 없음'}`);
+        lines.push(`  │ 과거병력: ${getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '특이사항 없음'}`);
+        lines.push(`  │ 의사소견: ${getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '(정보 없음)'}`);
+        lines.push('  └─────────────────────────────────────────────────────────────');
+      }
+    }
+
+    // ═══════════════════════════════════
+    // 【첨부3】 전산용 일자별 텍스트
+    // ═══════════════════════════════════
+    lines.push('');
+    lines.push('');
+    lines.push('═'.repeat(70));
+    lines.push('  【 첨부3: 전산용 일자별 텍스트 (보험사 전산 붙여넣기용) 】');
+    lines.push('═'.repeat(70));
     BLANK();
-    if (s9.length === 0) {
-      lines.push('  타임라인 데이터 없음');
-    } else {
-      for (const evt of s9) {
-        const badge = COLOR[evt.period]?.badge || '  ';
-        const icd = evt.icdCode ? ` (${evt.icdCode})` : '';
-        lines.push(`  ${evt.periodLabel} ${badge} ${formatDateKR(evt.date)}  ${evt.hospital}  ${evt.diagnosis}${icd}`);
-      }
+
+    const allForComputer = sortByDate(this._taggedEvents, true);
+    for (const evt of allForComputer) {
+      const tag = evt._disclosureTag?.tag || '';
+      const diag = getEventDiagnosis(evt);
+      const hosp = getEventHospital(evt);
+      const badge = COLOR[evt._period]?.badge || '  ';
+      const icd = getEventDiagnosisCode(evt);
+      // 형식: YYYY.MM.DD ▶ [구간태그] / 진단명 / 핵심 소견 1줄
+      const oneLiner = getEventPayload(evt, 'examResult') || getEventDescription(evt) || '';
+      lines.push(`${badge} ${formatDateKR(evt.date)} ▶ ${tag} / ${diag}${icd ? ` (${icd})` : ''} / ${hosp}${oneLiner ? ` / ${oneLiner.slice(0, 40)}` : ''}`);
     }
 
-    // ── [10] 손해사정 권장조치
-    H2('[10] 손해사정 권장조치');
+    // ═══════════════════════════════════
+    // 권장조치
+    // ═══════════════════════════════════
+    HR2('손해사정 권장조치');
     const priorityEmoji = { '긴급': '🔴', '중요': '🟠', '일반': '📋' };
     for (const rec of s10) {
       const badge = priorityEmoji[rec.priority] || '📋';
-      lines.push(`  ${badge} [${rec.priority}] ${rec.category}`);
-      lines.push(`     ${rec.action}`);
-      BLANK();
+      lines.push(`  ${badge} [${rec.priority}] ${rec.category}: ${rec.action}`);
     }
 
     // 푸터
-    lines.push(renderSeparator('═', 70));
+    BLANK();
+    lines.push('═'.repeat(70));
     lines.push('  본 보고서는 VNEXSUS 자동화 파이프라인으로 생성되었습니다.');
     lines.push('  최종 판단은 담당 손해사정사 또는 보험사 심사 기준에 의거합니다.');
-    lines.push(renderSeparator('═', 70));
+    lines.push('═'.repeat(70));
 
     return lines.join('\n');
   }
@@ -706,8 +1044,13 @@ class UnifiedReportBuilder {
   // ─────────────────────────────────────────────────────────────────
   _buildJson() {
     return {
-      version: '1.0',
+      version: '2.0',
       generatedAt: new Date().toISOString(),
+      disclosureConfig: {
+        label: this.disclosureLabel,
+        description: this.disclosureDescription,
+        windows: this.disclosureWindows,
+      },
       section1_patientInfo: this._section1_patientInfo(),
       section2_overview: this._section2_overview(),
       section3_within3M: this._section3_within3M(),
@@ -718,6 +1061,25 @@ class UnifiedReportBuilder {
       section8_disclosure: this._section8_disclosure(),
       section9_timeline: this._section9_timeline(),
       section10_recommendations: this._section10_recommendations(),
+      // 경과보고서용 전체 정렬 이벤트 (오름차순)
+      mainReport_chronological: sortByDate(this._taggedEvents, true).map(evt => ({
+        date: safeStr(evt.date),
+        hospital: getEventHospital(evt),
+        period: evt._period,
+        periodLabel: PERIOD_LABEL[evt._period],
+        disclosureTag: evt._disclosureTag?.tag || '',
+        diagnosis: getEventDiagnosis(evt),
+        icdCode: getEventDiagnosisCode(evt),
+        examGroup: evt._examFields?.group || '기타',
+        examKeyItems: evt._examFields?.keyItems || [],
+        visitReason: getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || '',
+        treatment: getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '',
+        outpatientCount: getEventPayload(evt, 'outpatientCount') || '',
+        admissionDays: getEventPayload(evt, 'admissionDays') || '',
+        medicalHistory: getEventPayload(evt, 'medicalHistory') || '',
+        doctorOpinion: getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '',
+        cancerClassification: getCancerClassification(evt) || null,
+      })),
     };
   }
 
@@ -726,142 +1088,176 @@ class UnifiedReportBuilder {
   // ─────────────────────────────────────────────────────────────────
   _buildHtml() {
     const s1 = this._section1_patientInfo();
-    const s3 = this._section3_within3M();
-    const s4 = this._section4_within5Y();
-    const s7 = this._section7_episodes();
     const s8 = this._section8_disclosure();
-    const s9 = this._section9_timeline();
     const s10 = this._section10_recommendations();
+    const allSorted = sortByDate(this._taggedEvents, true);
 
     const css = `
       <style>
-        .vnx-report { font-family: 'Malgun Gothic', sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; }
-        .vnx-section { margin: 24px 0; }
-        .vnx-section-title { font-size: 16px; font-weight: 700; color: #1e293b; border-bottom: 2px solid #e2e8f0; padding: 8px 0; margin-bottom: 12px; }
+        body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
+        .vnx-report { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px; }
+        .vnx-title { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .vnx-subtitle { font-size: 13px; color: #64748b; margin-bottom: 24px; }
+        .vnx-section { margin: 28px 0; }
+        .vnx-section-title { font-size: 15px; font-weight: 700; color: #1e293b; border-left: 4px solid #6366f1; padding: 6px 12px; background: #f8fafc; margin-bottom: 14px; }
         .vnx-row { display: flex; gap: 8px; padding: 4px 0; font-size: 13px; }
-        .vnx-label { color: #64748b; min-width: 120px; font-weight: 500; }
+        .vnx-label { color: #64748b; min-width: 130px; font-weight: 500; flex-shrink: 0; }
         .vnx-value { color: #1e293b; }
-        .vnx-event-card { background: #f8fafc; border-radius: 8px; padding: 12px; margin: 8px 0; border-left: 4px solid #e2e8f0; }
-        .vnx-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin-right: 6px; }
+        .event-card { border-radius: 8px; padding: 14px 16px; margin: 10px 0; border: 1px solid #e2e8f0; }
+        .event-card-3m { background: #fff7f7; border-left: 4px solid #ef4444; }
+        .event-card-5y { background: #fffbf5; border-left: 4px solid #f97316; }
+        .event-card-before { background: #f8fafc; border-left: 4px solid #94a3b8; }
+        .event-card-post { background: #f0fdf4; border-left: 4px solid #22c55e; }
+        .event-header { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .event-date { color: #334155; }
+        .event-hosp { color: #4338ca; }
+        .event-item { font-size: 13px; color: #334155; margin: 3px 0; padding-left: 12px; border-left: 2px solid #e2e8f0; }
+        .event-item-label { font-weight: 600; color: #64748b; }
+        .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
         .badge-3m { background: #fee2e2; color: #b91c1c; border: 1px solid #ef4444; }
         .badge-5y { background: #ffedd5; color: #c2410c; border: 1px solid #f97316; }
         .badge-before { background: #e2e3e5; color: #383d41; border: 1px solid #6c757d; }
         .badge-post { background: #d1e7dd; color: #0a3622; border: 1px solid #198754; }
-        .card-3m { border-left-color: #ef4444; background: #fff7f7; }
-        .card-5y { border-left-color: #f97316; background: #fffbf5; }
-        .timeline-row { display: flex; align-items: center; gap: 10px; padding: 6px 4px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
-        .timeline-date { color: #64748b; min-width: 90px; }
-        .timeline-hosp { font-weight: 500; min-width: 130px; }
-        .timeline-diag { color: #334155; flex: 1; }
-        .warning-tag { color: #b91c1c; font-size: 12px; font-weight: 600; margin-top: 4px; }
+        .exam-group { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 11px; background: #ede9fe; color: #5b21b6; font-weight: 600; }
+        .section-header { font-size: 17px; font-weight: 800; color: #1e293b; border-bottom: 3px solid #6366f1; padding-bottom: 8px; margin: 32px 0 16px; }
+        .footer { margin-top: 40px; padding: 14px; background: #f1f5f9; border-radius: 8px; font-size: 11px; color: #64748b; text-align: center; }
+        table.info-table { border-collapse: collapse; width: 100%; font-size: 13px; }
+        table.info-table td { padding: 5px 10px; border-bottom: 1px solid #f1f5f9; }
+        table.info-table td:first-child { color: #64748b; font-weight: 500; width: 140px; }
+        .rec-card { padding: 10px 14px; border-radius: 6px; margin: 6px 0; background: #f8fafc; }
+        .rec-urgent { border-left: 4px solid #ef4444; }
+        .rec-important { border-left: 4px solid #f97316; }
+        .rec-normal { border-left: 4px solid #3b82f6; }
+        .warn-tag { font-size: 11px; color: #b91c1c; font-weight: 700; margin-top: 4px; }
       </style>
     `;
 
     const periodBadge = (period) => {
       const map = {
-        [PERIOD.WITHIN_3M]:   '<span class="vnx-badge badge-3m">🔴 3M</span>',
-        [PERIOD.WITHIN_5Y]:   '<span class="vnx-badge badge-5y">🟠 5Y</span>',
-        [PERIOD.BEFORE_5Y]:   '<span class="vnx-badge badge-before">⚫ 5Y+</span>',
-        [PERIOD.POST_ENROLL]: '<span class="vnx-badge badge-post">🟢 가입후</span>',
-        [PERIOD.UNKNOWN]:     '<span class="vnx-badge badge-before">❓</span>',
+        [PERIOD.WITHIN_3M]:   '<span class="badge badge-3m">🔴 3M</span>',
+        [PERIOD.WITHIN_5Y]:   '<span class="badge badge-5y">🟠 5Y</span>',
+        [PERIOD.BEFORE_5Y]:   '<span class="badge badge-before">⚫ 5Y+</span>',
+        [PERIOD.POST_ENROLL]: '<span class="badge badge-post">🟢 가입후</span>',
+        [PERIOD.UNKNOWN]:     '<span class="badge badge-before">❓</span>',
       };
       return map[period] || '';
     };
 
-    let html = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">${css}</head><body><div class="vnx-report">`;
-    html += `<h1 style="color:#1e293b;font-size:20px;">VNEXSUS 손해사정 의료기록 분석 보고서</h1>`;
-    html += `<p style="color:#64748b;font-size:12px;">생성일시: ${new Date().toLocaleString('ko-KR')}</p>`;
+    const cardClass = (period) => {
+      const map = {
+        [PERIOD.WITHIN_3M]: 'event-card-3m',
+        [PERIOD.WITHIN_5Y]: 'event-card-5y',
+        [PERIOD.BEFORE_5Y]: 'event-card-before',
+        [PERIOD.POST_ENROLL]: 'event-card-post',
+      };
+      return map[period] || 'event-card-before';
+    };
 
-    // Section 1
-    html += `<div class="vnx-section"><div class="vnx-section-title">[1] 피보험자 및 보험 정보</div>`;
+    const item = (label, val) => val
+      ? `<div class="event-item"><span class="event-item-label">${label}</span>: ${val}</div>`
+      : '';
+
+    let html = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>손해사정 보고서</title>${css}</head><body><div class="vnx-report">`;
+    html += `<div class="vnx-title">📋 손해사정 의료기록 분석 보고서</div>`;
+    html += `<div class="vnx-subtitle">생성일시: ${new Date().toLocaleString('ko-KR')} &nbsp;|&nbsp; 고지의무 기준: ${this.disclosureDescription}</div>`;
+
+    // 피보험자 정보
+    html += `<div class="vnx-section"><div class="vnx-section-title">피보험자 및 보험 정보</div>`;
+    html += `<table class="info-table">`;
     for (const [k, v] of Object.entries(s1)) {
-      html += `<div class="vnx-row"><span class="vnx-label">${k}</span><span class="vnx-value">${v || '—'}</span></div>`;
+      html += `<tr><td>${k}</td><td>${v || '—'}</td></tr>`;
     }
-    html += `</div>`;
+    html += `</table></div>`;
 
-    // Section 3 — 3M
-    html += `<div class="vnx-section"><div class="vnx-section-title">[3] 가입 전 3개월 이내 핵심 의료기록 🔴</div>`;
-    if (s3.length === 0) {
-      html += `<p style="color:#64748b;">해당 기간 의료기록 없음</p>`;
+    // 경과보고서 — 날짜 오름차순 (메인)
+    html += `<div class="section-header">【 경과보고서 — 날짜 오름차순 】</div>`;
+    html += `<div style="font-size:12px;color:#64748b;margin-bottom:16px;">전체 ${allSorted.length}건 · 범례: 🔴 3M이내 | 🟠 5Y이내 | ⚫ 5Y초과 | 🟢 가입이후</div>`;
+
+    if (allSorted.length === 0) {
+      html += `<p style="color:#64748b;">추출된 의료 이벤트 없음</p>`;
     } else {
-      for (const evt of s3) {
-        html += `<div class="vnx-event-card card-3m">`;
-        html += `${periodBadge(evt.period)} <strong>${formatDateKR(evt.date)}</strong> &nbsp; ${evt.hospital}`;
-        html += `<div class="vnx-row" style="margin-top:6px;"><span class="vnx-label">진단명</span><span class="vnx-value">${evt.diagnosis}</span></div>`;
-        if (evt.description) html += `<div class="vnx-row"><span class="vnx-label">내용</span><span class="vnx-value">${evt.description}</span></div>`;
-        if (evt.isCritical) html += `<div class="warning-tag">★ 고지의무위반 우려</div>`;
+      for (const evt of allSorted) {
+        const examFields = evt._examFields || getExamFields(evt);
+        const isCancel = examFields.group === '암';
+        const diag = getEventDiagnosis(evt);
+        const icd = getEventDiagnosisCode(evt);
+        const discTag = evt._disclosureTag?.tag || '';
+
+        html += `<div class="event-card ${cardClass(evt._period)}">`;
+        html += `<div class="event-header">`;
+        html += periodBadge(evt._period);
+        html += `<span class="event-date">${formatDateKR(evt.date)}</span>`;
+        html += `<span class="event-hosp">${getEventHospital(evt) || '병원 불명'}</span>`;
+        html += `<span class="exam-group">${examFields.group}</span>`;
+        if (discTag) html += `<span style="font-size:11px;color:#94a3b8;">${discTag}</span>`;
+        html += `</div>`;
+
+        html += item('▸ 내원경위', getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '정보 없음');
+        html += item('▸ 진단병명', `${diag}${icd ? ` <em>[KCD-10: ${icd}]</em>` : ''}`);
+
+        // 검사결과
+        const examResult = getEventPayload(evt, 'examResult') || getEventPayload(evt, 'findings') || '';
+        html += `<div class="event-item"><span class="event-item-label">▸ 검사결과</span>: `;
+        html += examResult || '(정보 없음)';
+        if (examFields.keyItems.length > 0) {
+          html += `<br><span style="font-size:11px;color:#64748b;">※ ${examFields.keyItems.join(' / ')}</span>`;
+        }
+        html += `</div>`;
+
+        // 암: 조직검사
+        if (isCancel) {
+          const biopsy = getEventPayload(evt, 'biopsyResult') || getEventPayload(evt, 'pathologyResult') || '';
+          const cTNM = getEventPayload(evt, 'cTNM') || getEventPayload(evt, 'TNM') || '';
+          const pTNM = getEventPayload(evt, 'pTNM') || '';
+          const cancerClass = getCancerClassification(evt);
+          html += `<div class="event-item"><span class="event-item-label">▸ 수술후 조직검사</span>: `;
+          html += biopsy ? biopsy : '(정보 없음)';
+          if (cTNM) html += `<br>cTNM: ${cTNM}`;
+          if (pTNM) html += `<br>pTNM: ${pTNM}`;
+          if (cancerClass) html += `<br><strong>${cancerClass}</strong>`;
+          html += `</div>`;
+        }
+
+        html += item('▸ 치료내용', getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '정보 없음');
+        const outCnt = getEventPayload(evt, 'outpatientCount');
+        html += item('▸ 통원기간', outCnt ? `${outCnt}회` : '정보 없음');
+        const admDays = getEventPayload(evt, 'admissionDays');
+        html += item('▸ 입원기간', admDays ? `${admDays}일` : '해당 없음 또는 정보 없음');
+        html += item('▸ 과거병력', getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '특이사항 없음');
+        html += item('▸ 의사소견', getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '(정보 없음)');
+
+        if (evt._period === PERIOD.WITHIN_3M && (evt.confidence || 0) >= 0.8) {
+          html += `<div class="warn-tag">★ 고지의무위반 우려 가능성 있음</div>`;
+        }
         html += `</div>`;
       }
     }
-    html += `</div>`;
 
-    // Section 4 — 5Y
-    html += `<div class="vnx-section"><div class="vnx-section-title">[4] 가입 전 5년 이내 의료기록 🟠</div>`;
-    if (s4.length === 0) {
-      html += `<p style="color:#64748b;">해당 기간 의료기록 없음</p>`;
-    } else {
-      for (const evt of s4) {
-        html += `<div class="vnx-event-card card-5y">`;
-        html += `${periodBadge(evt.period)} <strong>${formatDateKR(evt.date)}</strong> &nbsp; ${evt.hospital}`;
-        html += `<div class="vnx-row" style="margin-top:6px;"><span class="vnx-label">진단명</span><span class="vnx-value">${evt.diagnosis}</span></div>`;
-        if (evt.description) html += `<div class="vnx-row"><span class="vnx-label">내용</span><span class="vnx-value">${evt.description}</span></div>`;
-        html += `</div>`;
-      }
-    }
-    html += `</div>`;
-
-    // Section 7 — 에피소드
-    html += `<div class="vnx-section"><div class="vnx-section-title">[7] 병원별 에피소드 요약</div>`;
-    for (const ep of s7) {
-      html += `<div class="vnx-event-card ${ep.period === PERIOD.WITHIN_3M ? 'card-3m' : ep.period === PERIOD.WITHIN_5Y ? 'card-5y' : ''}">`;
-      html += `${periodBadge(ep.period)} <strong>${ep.hospital}</strong>`;
-      html += `<div class="vnx-row" style="margin-top:4px;">`;
-      html += `<span class="vnx-label">방문</span><span class="vnx-value">${ep.visitCount}회 / ${formatDateKR(ep.firstDate)}~${formatDateKR(ep.lastDate)}</span>`;
-      html += `</div>`;
-      html += `<div class="vnx-row"><span class="vnx-label">주요 내용</span><span class="vnx-value">${ep.summary}</span></div>`;
-      html += `</div>`;
-    }
-    html += `</div>`;
-
-    // Section 9 — 타임라인
-    html += `<div class="vnx-section"><div class="vnx-section-title">[9] 전체 의료 타임라인</div>`;
-    html += `<div style="font-size:11px;color:#64748b;margin-bottom:8px;">범례: 🔴 3M이내 | 🟠 5Y이내 | ⚫ 5Y초과 | 🟢 가입이후</div>`;
-    for (const evt of s9) {
-      html += `<div class="timeline-row">`;
-      html += periodBadge(evt.period);
-      html += `<span class="timeline-date">${formatDateKR(evt.date)}</span>`;
-      html += `<span class="timeline-hosp">${evt.hospital}</span>`;
-      html += `<span class="timeline-diag">${evt.diagnosis}${evt.icdCode ? ` <em>(${evt.icdCode})</em>` : ''}</span>`;
-      html += `</div>`;
-    }
-    html += `</div>`;
-
-    // Section 8 — 고지의무
-    html += `<div class="vnx-section"><div class="vnx-section-title">[8] 고지의무 분석 결론</div>`;
+    // 고지의무 분석
+    html += `<div class="section-header">【 첨부1: 고지의무 분석 】</div>`;
     if (s8.hasData) {
-      const levelColor = { critical: '#ef4444', warning: '#f97316', safe: '#198754', unknown: '#6c757d' };
-      html += `<div style="font-size:18px;font-weight:700;color:${levelColor[s8.level] || '#6c757d'};padding:8px 0;">${s8.levelLabel}</div>`;
-      html += `<p>${s8.summary}</p>`;
+      const lc = { critical: '#ef4444', warning: '#f97316', safe: '#198754', unknown: '#6c757d' };
+      html += `<div style="font-size:18px;font-weight:800;color:${lc[s8.level]||'#6c757d'};padding:8px 0;">${s8.levelLabel}</div>`;
+      html += `<p style="color:#334155;">${s8.summary}</p>`;
     } else {
-      html += `<p style="color:#64748b;">고지의무 분석 데이터 없음</p>`;
+      const ev3 = this._getByPeriod(PERIOD.WITHIN_3M);
+      const ev5 = this._getByPeriod(PERIOD.WITHIN_5Y);
+      if (ev3.length > 0) html += `<div style="color:#b91c1c;font-weight:700;">🔴 고지의무 위반 의심 — 가입 전 3개월 이내 의료기록 ${ev3.length}건 존재</div>`;
+      else if (ev5.length > 0) html += `<div style="color:#c2410c;font-weight:700;">🟠 검토 필요 — 가입 전 5년 이내 의료기록 ${ev5.length}건 존재</div>`;
+      else html += `<div style="color:#15803d;font-weight:700;">🟢 이상 없음</div>`;
     }
-    html += `</div>`;
 
-    // Section 10 — 권장조치
-    html += `<div class="vnx-section"><div class="vnx-section-title">[10] 손해사정 권장조치</div>`;
+    // 권장조치
+    html += `<div class="section-header">손해사정 권장조치</div>`;
     for (const rec of s10) {
-      const pcolor = { '긴급': '#ef4444', '중요': '#f97316', '일반': '#3b82f6' };
-      html += `<div style="padding:8px;border-left:3px solid ${pcolor[rec.priority] || '#3b82f6'};margin:6px 0;background:#f8fafc;">`;
-      html += `<span style="font-weight:700;color:${pcolor[rec.priority] || '#3b82f6'};">[${rec.priority}] ${rec.category}</span>`;
-      html += `<div style="margin-top:4px;font-size:13px;">${rec.action}</div>`;
+      const cls = { '긴급': 'rec-urgent', '중요': 'rec-important', '일반': 'rec-normal' };
+      html += `<div class="rec-card ${cls[rec.priority]||'rec-normal'}">`;
+      html += `<div style="font-weight:700;font-size:13px;">[${rec.priority}] ${rec.category}</div>`;
+      html += `<div style="font-size:13px;margin-top:4px;">${rec.action}</div>`;
       html += `</div>`;
     }
-    html += `</div>`;
 
-    html += `<div style="margin-top:40px;padding:12px;background:#f1f5f9;border-radius:8px;font-size:11px;color:#64748b;">
-      본 보고서는 VNEXSUS 자동화 파이프라인으로 생성되었습니다. 최종 판단은 담당 손해사정사 또는 보험사 심사 기준에 의거합니다.
-    </div>`;
-
+    html += `<div class="footer">본 보고서는 VNEXSUS 자동화 파이프라인으로 생성되었습니다.<br>최종 판단은 담당 손해사정사 또는 보험사 심사 기준에 의거합니다.</div>`;
     html += `</div></body></html>`;
     return html;
   }
@@ -875,8 +1271,10 @@ class UnifiedReportBuilder {
       json: this._buildJson(),
       html: this._buildHtml(),
       metadata: {
-        version: '1.0',
+        version: '2.0',
         generatedAt: new Date().toISOString(),
+        disclosureLabel: this.disclosureLabel,
+        disclosureDescription: this.disclosureDescription,
         enrollDate: this.enrollDate?.toISOString() || null,
         cutoff3M: this.cutoff3M?.toISOString() || null,
         cutoff5Y: this.cutoff5Y?.toISOString() || null,
@@ -892,4 +1290,4 @@ class UnifiedReportBuilder {
 
 // ─── Export ───────────────────────────────────────────────────────────
 export default UnifiedReportBuilder;
-export { UnifiedReportBuilder, PERIOD, PERIOD_LABEL, PERIOD_SHORT, COLOR };
+export { UnifiedReportBuilder, PERIOD, PERIOD_LABEL, PERIOD_SHORT, COLOR, getExamFields, parseDisclosureWindows, getDisclosureTag };
