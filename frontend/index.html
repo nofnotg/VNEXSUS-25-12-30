@@ -135,7 +135,9 @@
 
     .bookmark-tab {
       position: relative;
-      padding: 0.6rem 1.6rem;
+      min-width: 140px;          /* ← 두 탭 동일 너비 */
+      padding: 0.6rem 0;         /* 좌우는 min-width+text-center로 처리 */
+      text-align: center;
       font-weight: 700;
       font-size: 0.92rem;
       border: 1.5px solid #dde3f0;
@@ -192,7 +194,7 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 32px rgba(31,38,135,0.07);
       padding: 0;
-      overflow: hidden;
+      /* overflow: hidden 제거 — Bootstrap fade 전환 클리핑 방지 */
     }
 
     /* Analysis 탭 활성 시 왼쪽 모서리 직각 */
@@ -724,11 +726,12 @@
     window.VNEXSUSApp = window.VNEXSUSApp || {};
 
     /**
-     * 책갈피 탭 전환 함수
-     * Bootstrap Tab API 와 연동하여 기존 script.js 로직(report-tab 등)과 호환 유지
+     * 책갈피 탭 전환 함수 (v2 — 직접 DOM 제어)
+     * Bootstrap Tab API hidden 버튼 타이밍 문제 우회.
+     * script.js에서 bootstrap.Tab(reportTabBtn).show() 호출 시에도 동기화.
      */
     function switchBookmarkTab(target) {
-      // 1. 탭 버튼 active 클래스 토글
+      // 1. 책갈피 버튼 active 토글
       document.querySelectorAll('.bookmark-tab').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.target === target);
       });
@@ -740,40 +743,39 @@
         container.classList.toggle('report-active', target === 'report');
       }
 
-      // 3. Bootstrap Tab API 호출 (기존 script.js의 data-bs-toggle="tab" 로직과 동일)
-      const bsTabEl = document.querySelector(`#${target}-tab`);
+      // 3. 탭 패인 직접 전환 (fade 애니메이션 포함)
+      const allPanes = document.querySelectorAll('#mainTabContent .tab-pane');
+      const targetPane = document.getElementById(target);
+      allPanes.forEach(p => {
+        p.classList.remove('show', 'active');
+      });
+      if (targetPane) {
+        targetPane.classList.add('active');
+        // 한 프레임 뒤에 show 추가 → Bootstrap CSS fade transition 트리거
+        requestAnimationFrame(() => targetPane.classList.add('show'));
+      }
+
+      // 4. hidden Bootstrap 탭 버튼도 동기화 (script.js 내부 상태 유지)
+      const bsTabEl = document.getElementById(`${target}-tab`);
       if (bsTabEl) {
-        const bsTab = new bootstrap.Tab(bsTabEl);
-        bsTab.show();
-      } else {
-        // fallback: data-bs-target 방식
-        const paneEl = document.getElementById(target);
-        if (paneEl) {
-          document.querySelectorAll('.tab-pane').forEach(p => {
-            p.classList.remove('show', 'active');
-          });
-          paneEl.classList.add('show', 'active');
-        }
+        try { new bootstrap.Tab(bsTabEl).show(); } catch(e) {}
       }
     }
 
-    // script.js 에서 report-tab.show() 호출 시 책갈피도 동기화
+    // script.js 에서 bootstrap.Tab(reportTabBtn).show() 호출 시 책갈피 동기화
     document.addEventListener('DOMContentLoaded', () => {
-      // Bootstrap tab shown 이벤트 감지 → 책갈피 버튼 active 동기화
-      document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
-        el.addEventListener('shown.bs.tab', (e) => {
-          const target = e.target.dataset.bsTarget?.replace('#', '');
-          if (target) {
-            document.querySelectorAll('.bookmark-tab').forEach(btn => {
-              btn.classList.toggle('active', btn.dataset.target === target);
-            });
-            const container = document.getElementById('tabPanelContainer');
-            if (container) {
-              container.classList.toggle('analysis-active', target === 'analysis');
-              container.classList.toggle('report-active', target === 'report');
-            }
-          }
+      document.addEventListener('shown.bs.tab', (e) => {
+        const bsTarget = e.target?.dataset?.bsTarget?.replace('#', '');
+        if (!bsTarget) return;
+        // 책갈피 버튼 동기화
+        document.querySelectorAll('.bookmark-tab').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.target === bsTarget);
         });
+        const container = document.getElementById('tabPanelContainer');
+        if (container) {
+          container.classList.toggle('analysis-active', bsTarget === 'analysis');
+          container.classList.toggle('report-active', bsTarget === 'report');
+        }
       });
     });
   </script>
