@@ -18,21 +18,21 @@ if (!window.VNEXSUSApp.VisualizationComponents) {
                 border: '#c3e6cb',
                 contrast: 7.2 // WCAG AAA 준수
             },
-            // 가입 3개월 이내 (주의)
+            // 가입 3개월 이내 (🔴 빨간 — 고지의무위반 우려)
             within_3months: {
-                primary: '#ffc107',
-                secondary: '#fff3cd',
-                text: '#856404',
-                border: '#ffeaa7',
-                contrast: 6.8 // WCAG AAA 준수
+                primary: '#ef4444',
+                secondary: '#fee2e2',
+                text: '#b91c1c',
+                border: '#fca5a5',
+                contrast: 6.5 // WCAG AA 준수
             },
-            // 가입 5년 이내 (정보)
+            // 가입 5년 이내 (🟠 주황 — 주의)
             within_5years: {
-                primary: '#17a2b8',
-                secondary: '#d1ecf1',
-                text: '#0c5460',
-                border: '#bee5eb',
-                contrast: 5.2 // WCAG AA 준수
+                primary: '#f97316',
+                secondary: '#ffedd5',
+                text: '#c2410c',
+                border: '#fdba74',
+                contrast: 5.1 // WCAG AA 준수
             },
             // 가입 5년 이전 (중성)
             before_5years: {
@@ -53,9 +53,9 @@ if (!window.VNEXSUSApp.VisualizationComponents) {
         };
         
         this.icons = {
-            after_join: '✅',
-            within_3months: '⚠️',
-            within_5years: 'ℹ️',
+            after_join: '🟢',
+            within_3months: '🔴',
+            within_5years: '🟠',
             before_5years: '📅',
             unknown: '❓'
         };

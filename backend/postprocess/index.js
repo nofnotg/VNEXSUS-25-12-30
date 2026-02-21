@@ -24,6 +24,9 @@ import criticalRiskEngine from './criticalRiskRules.js';
 import disclosureReportBuilder from './disclosureReportBuilder.js';
 import safeModeGuard from './safeModeGuard.js';
 
+// Phase 3 — 통합 보고서
+import { UnifiedReportBuilder } from './unifiedReportBuilder.js';
+
 function clamp01(n) {
   const x = Number(n);
   if (!Number.isFinite(x)) return 0;
@@ -127,7 +130,11 @@ class PostProcessingManager {
       console.log('\n=== 2단계: 전처리 로직 적용 ===');
       const preprocessedData = await this.preprocessor.run(ocrText, {
         translateTerms: options.translateTerms || false,
-        requireKeywords: options.requireKeywords || false
+        requireKeywords: options.requireKeywords || false,
+        // enableTemplateCache: false → 다중 PDF 혼합 텍스트에서 과도한 노이즈 제거 방지
+        enableTemplateCache: options.enableTemplateCache !== undefined
+          ? options.enableTemplateCache
+          : true
       });
       
       // 3단계: 날짜 기반 데이터 정렬 및 구조화
@@ -300,6 +307,19 @@ class PostProcessingManager {
         console.warn(`⚠️ 고지의무 보고서 생성 실패: ${disclosureErr.message}`);
       }
 
+      // Phase 3: 통합 보고서 생성 (UnifiedReportBuilder)
+      let unifiedReport = null;
+      try {
+        const unifiedBuilder = new UnifiedReportBuilder(
+          { pipeline: { medicalEvents: unifiedMedicalEvents, disclosureReport } },
+          options.patientInfo || {}
+        );
+        unifiedReport = unifiedBuilder.buildReport();
+        console.log(`📄 통합 보고서 생성 완료: 3M ${unifiedReport.metadata.within3M}건, 5Y ${unifiedReport.metadata.within5Y}건`);
+      } catch (unifiedErr) {
+        console.warn(`⚠️ 통합 보고서 생성 실패: ${unifiedErr.message}`);
+      }
+
       let subsetValidation = null;
       try {
         const validator = new ReportSubsetValidator();
@@ -343,6 +363,8 @@ class PostProcessingManager {
           // Phase 2 결과
           disclosureReport,
           safeModeResult,
+          // Phase 3 결과
+          unifiedReport,
         },
         statistics: {
           originalTextLength: ocrText.length,
