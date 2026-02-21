@@ -44,7 +44,13 @@ router.post('/generate-report', async (req, res) => {
         sessionId: req.body.sessionId,
         patientInfo: {
           insuranceJoinDate: req.body.insuranceJoinDate || req.body.patientInfo?.insuranceJoinDate,
-          insuranceCompany: req.body.insuranceCompany || req.body.patientInfo?.insuranceCompany
+          insuranceCompany: req.body.insuranceCompany || req.body.patientInfo?.insuranceCompany,
+          // 🆕 추가 필드 전달 (UnifiedReportBuilder v2 필요)
+          name: req.body.patientName || req.body.name || req.body.patientInfo?.name || req.body.patientInfo?.patientName,
+          patientName: req.body.patientName || req.body.name || req.body.patientInfo?.patientName,
+          birthDate: req.body.birthDate || req.body.dateOfBirth || req.body.patientInfo?.birthDate,
+          productType: req.body.productType || req.body.patientInfo?.productType,
+          patientId: req.body.patientId || req.body.patientInfo?.patientId,
         },
         // 개선 옵션을 프록시에서 명시적으로 전달(기본값 활성화)
         // API 키가 없으면 자동으로 skipLLM 모드 활성화

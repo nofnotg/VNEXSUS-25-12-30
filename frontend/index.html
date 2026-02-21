@@ -124,18 +124,103 @@
       cursor: not-allowed;
     }
 
-    .nav-pills .nav-link {
-      color: var(--text-muted);
-      font-weight: 600;
-      padding: 0.75rem 1.5rem;
-      border-radius: 30px;
-      transition: all 0.3s;
+    /* ── 책갈피 탭 스타일 ── */
+    .bookmark-tabs {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      padding: 0 1rem;
+      margin-bottom: 0;
     }
 
-    .nav-pills .nav-link.active {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    .bookmark-tab {
+      position: relative;
+      padding: 0.6rem 1.6rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1.5px solid #dde3f0;
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: rgba(255,255,255,0.55);
+      color: var(--text-muted);
+      backdrop-filter: blur(6px);
+      user-select: none;
+      top: 1px; /* 패널과 살짝 겹쳐 이어진 느낌 */
+    }
+
+    .bookmark-tab:hover {
+      background: rgba(255,255,255,0.85);
+      color: var(--primary);
+    }
+
+    .bookmark-tab.active {
+      background: rgba(255,255,255,0.92);
+      color: var(--primary);
+      border-color: rgba(255,255,255,0.9);
+      border-bottom: 2px solid rgba(255,255,255,0.92); /* 패널 top 경계선 덮기 */
+      box-shadow: 0 -4px 14px rgba(37,99,235,0.09);
+      z-index: 2;
+    }
+
+    .bookmark-tab .tab-icon {
+      margin-right: 7px;
+      opacity: 0.75;
+    }
+
+    .bookmark-tab.active .tab-icon {
+      opacity: 1;
+    }
+
+    /* Analysis 탭 — 왼쪽 (활성 파란 포인트) */
+    .bookmark-tab[data-target="analysis"].active {
+      border-top: 3px solid var(--primary);
+    }
+
+    /* Report 탭 — 오른쪽 (활성 초록 포인트) */
+    .bookmark-tab[data-target="report"].active {
+      border-top: 3px solid var(--success);
+      color: var(--success);
+    }
+
+    /* 탭 패널 컨테이너 — 책갈피와 이어지는 패널 */
+    .tab-panel-container {
+      background: rgba(255,255,255,0.92);
+      border: 1.5px solid #dde3f0;
+      border-radius: 0 16px 16px 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(31,38,135,0.07);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* Analysis 탭 활성 시 왼쪽 모서리 직각 */
+    .tab-panel-container.analysis-active {
+      border-radius: 0 16px 16px 16px;
+    }
+
+    /* Report 탭 활성 시 왼쪽 모서리 동그라미 */
+    .tab-panel-container.report-active {
+      border-radius: 16px 0 16px 16px;
+    }
+
+    .tab-panel-inner {
+      padding: 2rem;
+    }
+
+    /* 탭 패널 내 glass-card 스타일 재정의 (컨테이너 안이므로 배경 단순화) */
+    .tab-panel-inner .glass-card {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 16px rgba(31,38,135,0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .tab-panel-inner .glass-card:last-child {
+      margin-bottom: 0;
     }
 
     .step-badge {
@@ -250,26 +335,26 @@
   <div class="glass-header">
     <div class="container d-flex justify-content-between align-items-center">
       <a href="/" class="brand-logo text-decoration-none" style="cursor: pointer;"><i class="bi bi-cpu-fill me-2"></i>VNEXSUS AI</a>
-      <div class="d-flex gap-3 align-items-center">
-        <ul class="nav nav-pills" id="mainTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active btn-sm py-1 px-3" id="analysis-tab" data-bs-toggle="tab"
-              data-bs-target="#analysis" type="button" role="tab">Analysis</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link btn-sm py-1 px-3" id="report-tab" data-bs-toggle="tab" data-bs-target="#report"
-              type="button" role="tab">Report View</button>
-          </li>
-        </ul>
-        <a href="/dev-case-manager" class="btn btn-sm btn-outline-primary" title="개발자용 케이스 관리자">
-          <i class="bi bi-gear me-1"></i>Dev Manager
-        </a>
-      </div>
+      <!-- 헤더에는 로고만 유지, 탭은 패널 상단으로 이동 -->
+      <div></div>
     </div>
   </div>
 
   <div class="container">
-    <div class="tab-content" id="mainTabContent">
+
+    <!-- ── 책갈피 탭 헤더 ── -->
+    <div class="bookmark-tabs" id="bookmarkTabBar">
+      <button class="bookmark-tab active" data-target="analysis" onclick="switchBookmarkTab('analysis')">
+        <i class="bi bi-search tab-icon"></i>Analysis
+      </button>
+      <button class="bookmark-tab" data-target="report" onclick="switchBookmarkTab('report')">
+        <i class="bi bi-file-earmark-text tab-icon"></i>Report View
+      </button>
+    </div>
+
+    <!-- ── 탭 패널 컨테이너 ── -->
+    <div class="tab-panel-container analysis-active" id="tabPanelContainer">
+      <div class="tab-content tab-panel-inner" id="mainTabContent">
 
       <!-- ==================== ANALYSIS TAB ==================== -->
       <div class="tab-pane fade show active" id="analysis" role="tabpanel">
@@ -591,17 +676,13 @@
             <div class="d-none">
               <div id="extracted-text-display"></div>
             </div>
-          </div>
-          <h6 class="text-muted text-uppercase small fw-bold">신뢰도 점수</h6>
-          <h2 class="fw-bold text-primary mb-0">98.5%</h2>
-        </div>
-      </div>
-    </div>
-  </div>
+          </div><!-- /.card-body (ai-report-section) -->
+        </div><!-- /#ai-report-section -->
+      </div><!-- /#report tab-pane -->
 
-  </div>
-  </div>
-  </div>
+      </div><!-- /.tab-panel-inner / #mainTabContent -->
+    </div><!-- /.tab-panel-container -->
+  </div><!-- /.container -->
 
   <!-- Result Modal (Hidden) -->
   <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
@@ -630,13 +711,71 @@
     </div>
   </div>
 
-  <!-- Hidden buttons for logic compatibility -->
+  <!-- Hidden buttons for logic compatibility (script.js bootstrap.Tab 호환용) -->
   <button id="viewResultsBtn" class="d-none"></button>
+  <div class="d-none" id="hiddenTabButtons">
+    <button id="analysis-tab" data-bs-toggle="tab" data-bs-target="#analysis" type="button"></button>
+    <button id="report-tab"   data-bs-toggle="tab" data-bs-target="#report"   type="button"></button>
+  </div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     window.VNEXSUSApp = window.VNEXSUSApp || {};
+
+    /**
+     * 책갈피 탭 전환 함수
+     * Bootstrap Tab API 와 연동하여 기존 script.js 로직(report-tab 등)과 호환 유지
+     */
+    function switchBookmarkTab(target) {
+      // 1. 탭 버튼 active 클래스 토글
+      document.querySelectorAll('.bookmark-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === target);
+      });
+
+      // 2. 패널 컨테이너 모서리 모양 전환
+      const container = document.getElementById('tabPanelContainer');
+      if (container) {
+        container.classList.toggle('analysis-active', target === 'analysis');
+        container.classList.toggle('report-active', target === 'report');
+      }
+
+      // 3. Bootstrap Tab API 호출 (기존 script.js의 data-bs-toggle="tab" 로직과 동일)
+      const bsTabEl = document.querySelector(`#${target}-tab`);
+      if (bsTabEl) {
+        const bsTab = new bootstrap.Tab(bsTabEl);
+        bsTab.show();
+      } else {
+        // fallback: data-bs-target 방식
+        const paneEl = document.getElementById(target);
+        if (paneEl) {
+          document.querySelectorAll('.tab-pane').forEach(p => {
+            p.classList.remove('show', 'active');
+          });
+          paneEl.classList.add('show', 'active');
+        }
+      }
+    }
+
+    // script.js 에서 report-tab.show() 호출 시 책갈피도 동기화
+    document.addEventListener('DOMContentLoaded', () => {
+      // Bootstrap tab shown 이벤트 감지 → 책갈피 버튼 active 동기화
+      document.querySelectorAll('[data-bs-toggle="tab"]').forEach(el => {
+        el.addEventListener('shown.bs.tab', (e) => {
+          const target = e.target.dataset.bsTarget?.replace('#', '');
+          if (target) {
+            document.querySelectorAll('.bookmark-tab').forEach(btn => {
+              btn.classList.toggle('active', btn.dataset.target === target);
+            });
+            const container = document.getElementById('tabPanelContainer');
+            if (container) {
+              container.classList.toggle('analysis-active', target === 'analysis');
+              container.classList.toggle('report-active', target === 'report');
+            }
+          }
+        });
+      });
+    });
   </script>
   <script src="components/visualizationComponents.js?v=1.0.9"></script>
   <script src="components/reportRenderer.js?v=1.0.9"></script>

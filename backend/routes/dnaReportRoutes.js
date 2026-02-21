@@ -18,6 +18,8 @@ import { validateReportSchema, applyDefaultValues, calculateVisitStatistics } fr
 import { logger, logApiRequest, logApiResponse, logProcessingStart, logProcessingComplete, logProcessingError } from '../../src/shared/logging/logger.js';
 import { ProgressiveRAGSystem } from '../../src/rag/progressiveRAG.js';
 import { normalizeDiagnosisLines } from '../../src/shared/utils/report/normalizeDiagnosisLine.js';
+// Phase 3 통합 보고서 — postprocess 파이프라인 싱글턴 (이벤트 추출 포함)
+import postProcessingManager from '../postprocess/index.js';
 // EnhancedMedicalTermProcessor는 CJS 모듈이므로 동적 import로 로드하여 테스트 환경(Jest) 호환성을 확보
 
 const router = express.Router();
@@ -297,6 +299,33 @@ router.post('/generate', async (req, res) => {
       finalReport = nineItemResult.report;
     }
 
+    // Phase 3: postprocess 파이프라인으로 UnifiedReport 생성 (RAG 규칙 v2)
+    // processOCRResult → medicalEvents 추출 → UnifiedReportBuilder.buildReport()
+    let unifiedReport = null;
+    try {
+      const pipelinePatientInfo = {
+        insuranceJoinDate: patientInfo.insuranceJoinDate,
+        insuranceCompany: patientInfo.insuranceCompany,
+        name: patientInfo.patientName || patientInfo.name,
+        birthDate: patientInfo.birthDate || patientInfo.dateOfBirth,
+        productType: patientInfo.productType,
+      };
+      const pipelineResult = await postProcessingManager.processOCRResult(extractedText, {
+        patientInfo: pipelinePatientInfo,
+        minConfidence: 0.35,
+        includeAll: false,
+        useHybridApproach: true,
+      });
+      unifiedReport = pipelineResult?.pipeline?.unifiedReport || null;
+      if (unifiedReport) {
+        logger.info({ event: 'unified_report_generated', within3M: unifiedReport.metadata?.within3M, within5Y: unifiedReport.metadata?.within5Y });
+      } else {
+        logger.warn({ event: 'unified_report_empty', pipelineSuccess: pipelineResult?.success });
+      }
+    } catch (unifiedErr) {
+      logger.warn({ event: 'unified_report_failed', error: unifiedErr.message });
+    }
+
     const responsePayload = {
       success: true,
       message: responseMessage,
@@ -304,6 +333,7 @@ router.post('/generate', async (req, res) => {
       report: finalReport,
       reportText: enhancedText,
       structuredData: structuredJsonData,  // 🆕 JSON 구조화 데이터 포함
+      unifiedReport,  // Phase 3: 날짜 오름차순 10항목 경과보고서 (RAG 규칙 v2)
       processingTime: `${processingTimeMs}ms`,
       model: options.skipLLM ? 'skipped' : 'gpt-4o-mini',
       timestamp: new Date().toISOString(),

@@ -69,10 +69,10 @@
     }
   }
 
-  // 설정
-  const BASE_URL = window.location.origin; // "http://localhost:5174"
-  const OCR_API_URL = 'http://localhost:3030/api/ocr';
-  const API_URL = 'http://localhost:3030/api';
+  // 설정 - 동일 출처 상대 경로 사용 (3030에서 프론트엔드와 백엔드 모두 제공)
+  const BASE_URL = window.location.origin;
+  const API_URL = `${BASE_URL}/api`;
+  const OCR_API_URL = `${API_URL}/ocr`;
   const POSTPROCESS_API_URL = `${API_URL}/postprocess`;
   const MAX_FILES = 100;
   const MAX_TOTAL_SIZE = 100 * 1024 * 1024; // 100MB
@@ -2246,11 +2246,21 @@
         updateReportProgress(100, "생성 완료");
 
         // AI 보고서 내용 표시
-        if (data.report) {
+        // 우선순위: unifiedReport.text (RAG 규칙 v2) > data.report (구버전 폴백)
+        const reportTextToShow = (data.unifiedReport && data.unifiedReport.text)
+          ? data.unifiedReport.text
+          : data.report;
+
+        if (reportTextToShow) {
           // 마크다운 형식 보고서 표시
           const aiReportContent = document.getElementById('ai-report-content');
           if (aiReportContent) {
-            aiReportContent.innerHTML = markdownToHtml(data.report);
+            // unifiedReport HTML이 있으면 HTML 우선 사용, 없으면 텍스트→마크다운 변환
+            if (data.unifiedReport && data.unifiedReport.html) {
+              aiReportContent.innerHTML = data.unifiedReport.html;
+            } else {
+              aiReportContent.innerHTML = markdownToHtml(reportTextToShow);
+            }
 
             // AI 보고서 섹션 표시 및 스크롤
             const aiReportSection = document.getElementById('ai-report-section');
@@ -2270,10 +2280,8 @@
               }, 300);
             }
 
-
-
             // 타임라인 데이터 추출 및 표시
-            const timelineData = extractTimelineFromReport(data.report);
+            const timelineData = extractTimelineFromReport(reportTextToShow);
             if (timelineData && timelineData.length > 0) {
               renderTimelineTable(timelineData);
 
