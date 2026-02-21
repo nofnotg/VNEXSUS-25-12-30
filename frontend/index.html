@@ -546,57 +546,6 @@
           </div>
         </div>
 
-        <!-- Summary Table Section (Hidden by default) -->
-        <div id="timeline-section" class="glass-card d-none">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h5 id="timeline-title" class="fw-bold text-info"><i class="bi bi-calendar-event me-2"></i>병력 타임라인</h5>
-              <div class="btn-group dev-mode-option" style="display: none;">
-                <button id="view-refined-text-btn" class="btn btn-sm btn-light">정제된 데이터</button>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead class="table-light">
-                  <tr>
-                    <th width="15%">날짜</th>
-                    <th width="25%">병원</th>
-                    <th width="30%">진단</th>
-                    <th width="30%">치료</th>
-                  </tr>
-                </thead>
-                <tbody id="timeline-body">
-                  <tr>
-                    <td colspan="4" class="text-center text-muted py-4">요약 데이터가 여기에 표시됩니다.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Phase 2-5: Low-value Info Collapsible Section -->
-            <div id="low-value-info-section" class="mt-4" style="display: none;">
-              <div class="border rounded-3 overflow-hidden" style="background: rgba(255, 255, 255, 0.5);">
-                <button id="low-value-toggle-btn" class="btn w-100 text-start d-flex align-items-center p-3"
-                        style="background: #f8fafc; border: none; transition: all 0.3s;">
-                  <i id="low-value-toggle-icon" class="bi bi-chevron-right me-2" style="transition: transform 0.3s; font-weight: bold;"></i>
-                  <span class="fw-bold" style="flex: 1;">
-                    <i class="bi bi-info-circle me-2 text-muted"></i>
-                    저가치 정보 (<span id="low-value-count">0</span>개 항목)
-                  </span>
-                  <span class="badge bg-secondary small">접기/펴기</span>
-                </button>
-                <div id="low-value-content" class="p-3" style="display: none; background: #fffbf0; border-top: 1px solid #e8e8e8;">
-                  <div class="alert alert-warning border-0 mb-3" style="background: rgba(255, 193, 7, 0.1);">
-                    <i class="bi bi-exclamation-triangle me-2"></i>
-                    <small>아래 정보는 주요 의료 이벤트와의 연관성이 낮게 평가되었으나, 단서로서 가치가 있을 수 있어 제공됩니다.</small>
-                  </div>
-                  <div id="low-value-items"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- ==================== REPORT TAB ==================== -->
@@ -680,6 +629,54 @@
             </div>
           </div><!-- /.card-body (ai-report-section) -->
         </div><!-- /#ai-report-section -->
+
+        <!-- 병력 타임라인 요약표 (보고서 생성 후 표시) -->
+        <div id="timeline-section" class="glass-card d-none">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 id="timeline-title" class="fw-bold text-info"><i class="bi bi-calendar-event me-2"></i>병력 타임라인</h5>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th width="15%">날짜</th>
+                    <th width="25%">병원</th>
+                    <th width="30%">진단</th>
+                    <th width="30%">치료</th>
+                  </tr>
+                </thead>
+                <tbody id="timeline-body">
+                  <tr>
+                    <td colspan="4" class="text-center text-muted py-4">요약 데이터가 여기에 표시됩니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- 저가치 정보 -->
+            <div id="low-value-info-section" class="mt-4" style="display: none;">
+              <div class="border rounded-3" style="background: rgba(255,255,255,0.5);">
+                <button id="low-value-toggle-btn" class="btn w-100 text-start d-flex align-items-center p-3"
+                        style="background: #f8fafc; border: none; transition: all 0.3s;">
+                  <i id="low-value-toggle-icon" class="bi bi-chevron-right me-2" style="transition: transform 0.3s; font-weight: bold;"></i>
+                  <span class="fw-bold" style="flex: 1;">
+                    <i class="bi bi-info-circle me-2 text-muted"></i>
+                    저가치 정보 (<span id="low-value-count">0</span>개 항목)
+                  </span>
+                  <span class="badge bg-secondary small">접기/펴기</span>
+                </button>
+                <div id="low-value-content" class="p-3" style="display: none; background: #fffbf0; border-top: 1px solid #e8e8e8;">
+                  <div class="alert alert-warning border-0 mb-3" style="background: rgba(255,193,7,0.1);">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <small>아래 정보는 주요 의료 이벤트와의 연관성이 낮게 평가되었으나 단서로서 가치가 있을 수 있어 제공됩니다.</small>
+                  </div>
+                  <div id="low-value-items"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /#timeline-section -->
+
       </div><!-- /#report tab-pane -->
 
       </div><!-- /.tab-panel-inner / #mainTabContent -->

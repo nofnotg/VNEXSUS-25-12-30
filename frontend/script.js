@@ -2181,10 +2181,14 @@
     // API 요청 시작
     createSummaryBtn.disabled = true;
     updateReportProgress(10, "요약표 생성 시작");
-    const reportTabBtnInit = document.getElementById('report-tab');
-    if (reportTabBtnInit) {
-      const reportTabInit = new bootstrap.Tab(reportTabBtnInit);
-      reportTabInit.show();
+    // Report View 탭으로 즉시 전환 (생성 시작 시점)
+    if (typeof switchBookmarkTab === 'function') {
+      switchBookmarkTab('report');
+    } else {
+      const reportTabBtnInit = document.getElementById('report-tab');
+      if (reportTabBtnInit) {
+        try { new bootstrap.Tab(reportTabBtnInit).show(); } catch(e) {}
+      }
     }
 
       console.log('AI 요약표 생성 요청 시작');
@@ -2215,12 +2219,11 @@
             }))
           },
           options: {
-            useNineItem: true,
+            useNineItem: false,
+            useStructuredJson: true,
             template: 'standard',
             enableTranslationEnhancement: true,
-            enableTermProcessing: true,
-            timelineLabelStyle: 'bracket',
-            timelineSummaryLimit: 2
+            enableTermProcessing: true
           }
         })
       });
@@ -2267,17 +2270,20 @@
             if (aiReportSection) {
               aiReportSection.classList.remove('d-none');
 
-              // 3. 보고서 탭으로 자동 전환 (사용자 요청)
-              const reportTabBtn = document.getElementById('report-tab');
-              if (reportTabBtn) {
-                const reportTab = new bootstrap.Tab(reportTabBtn);
-                reportTab.show();
+              // Report View 탭으로 전환 (switchBookmarkTab 직접 호출로 타이밍 문제 우회)
+              if (typeof switchBookmarkTab === 'function') {
+                switchBookmarkTab('report');
+              } else {
+                const reportTabBtn = document.getElementById('report-tab');
+                if (reportTabBtn) {
+                  try { new bootstrap.Tab(reportTabBtn).show(); } catch(e) {}
+                }
               }
 
               // 탭 전환 후 스크롤
               setTimeout(() => {
                 aiReportSection.scrollIntoView({ behavior: 'smooth' });
-              }, 300);
+              }, 350);
             }
 
             // 타임라인 데이터 추출 및 표시
