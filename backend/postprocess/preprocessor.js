@@ -50,7 +50,7 @@ class Preprocessor {
       // 옵션 기본값 설정
       const opts = {
         translateTerms: true,
-        requireKeywords: true,
+        requireKeywords: false, // false: 키워드 없어도 날짜/병원 있으면 섹션 포함 (누락 방지)
         enableTemplateCache: true, // 템플릿 캐시 활성화 (기본값: true)
         ...options
       };
@@ -313,12 +313,16 @@ class Preprocessor {
     for (const pattern of this.hospitalPatterns) {
       const regex = new RegExp(pattern);
       const match = regex.exec(text);
-      
+
       if (match && match[1]) {
-        return match[1].trim();
+        // 첫 줄만 취하고 공백 정리 (멀티라인 OCR 노이즈 제거)
+        const raw = match[1].trim();
+        const firstLine = raw.split(/\n/)[0].trim();
+        // 10자 이하 의미없는 조각은 무시 (예: "SM", "G" 등)
+        if (firstLine.length >= 3) return firstLine;
       }
     }
-    
+
     return null;
   }
   _scoreSection(info){
