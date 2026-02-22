@@ -76,20 +76,21 @@ class Preprocessor {
         }
       }
 
-      // 텍스트를 문단 또는 섹션으로 분할
-      const sections = this._splitIntoSections(processedText);
-      
-      // 각 섹션에서 데이터 추출
+      // 파일 헤더 파싱: "=== [파일명.pdf] ===" 형식으로 파일별 병원명 힌트 추출
+      // 프론트엔드/백엔드에서 파일별 OCR 텍스트를 이 헤더로 구분하여 합칠 수 있음
+      const fileSegments = this._splitByFileHeaders(processedText);
+
+      // 각 파일 세그먼트를 섹션으로 분할하여 처리
       const results = [];
-      
-      for (const section of sections) {
-        // 추출 작업 수행
-        const extractedData = this._processSection(section, opts);
-        
-        // 필요한 키워드가 있는 데이터만 추가(옵션에 따라)
-        if (!opts.requireKeywords || 
-            (extractedData.keywordMatches && extractedData.keywordMatches.length > 0)) {
-          results.push(extractedData);
+
+      for (const { text: segText, fileHospitalHint } of fileSegments) {
+        const sections = this._splitIntoSections(segText);
+        for (const section of sections) {
+          const extractedData = this._processSection(section, opts, fileHospitalHint);
+          if (!opts.requireKeywords ||
+              (extractedData.keywordMatches && extractedData.keywordMatches.length > 0)) {
+            results.push(extractedData);
+          }
         }
       }
 
@@ -108,10 +109,55 @@ class Preprocessor {
    * @returns {Object} 추출된 데이터 객체
    * @private
    */
-  _processSection(sectionText, options) {
+  /**
+   * 파일 헤더("=== [파일명.pdf] ===")로 텍스트를 세그먼트로 분리
+   * 헤더가 없으면 전체를 하나의 세그먼트로 반환
+   * @param {string} text
+   * @returns {Array<{text: string, fileHospitalHint: string|null}>}
+   * @private
+   */
+  _splitByFileHeaders(text) {
+    // 파일명에서 병원명 추정: "삼성서울병원.pdf" → "삼성서울병원"
+    const headerPattern = /===\s*\[(.+?)\]\s*===/g;
+    const matches = [...text.matchAll(headerPattern)];
+
+    if (matches.length === 0) {
+      return [{ text, fileHospitalHint: null }];
+    }
+
+    const segments = [];
+    let lastIndex = 0;
+    let lastHint = null;
+
+    for (const m of matches) {
+      if (m.index > lastIndex) {
+        segments.push({ text: text.slice(lastIndex, m.index), fileHospitalHint: lastHint });
+      }
+      // 파일명에서 확장자 제거 후 병원명 힌트 생성
+      lastHint = m[1].replace(/\.[a-zA-Z0-9]+$/, '').trim() || null;
+      lastIndex = m.index + m[0].length;
+    }
+    // 마지막 세그먼트
+    if (lastIndex < text.length) {
+      segments.push({ text: text.slice(lastIndex), fileHospitalHint: lastHint });
+    }
+
+    return segments.filter(s => s.text.trim().length > 0);
+  }
+
+  /**
+   * 섹션 텍스트를 처리하여 데이터 추출
+   * @param {string} sectionText 섹션 텍스트
+   * @param {Object} options 처리 옵션
+   * @param {string|null} fileHospitalHint 파일명에서 추출한 병원명 힌트 (없으면 null)
+   * @returns {Object} 추출된 데이터 객체
+   * @private
+   */
+  _processSection(sectionText, options, fileHospitalHint = null) {
     const dates = this._extractDates(sectionText);
     const extractedDate = dates.length > 0 ? dates[0] : null;
-    const hospitalName = this._extractHospitalName(sectionText);
+    // 텍스트에서 병원명 추출, 없으면 파일 힌트 사용, 그것도 없으면 '미상 병원'
+    const hospitalName = this._extractHospitalName(sectionText) || fileHospitalHint || '미상 병원';
     const { matches: keywordMatches } = dictionaryManager.checkRequiredKeywords(sectionText);
     const { shouldExclude, excludedMatches } = dictionaryManager.checkExcludedKeywords(sectionText);
     let translatedText = sectionText;
@@ -124,14 +170,14 @@ class Preprocessor {
     const confidence = this._scoreSection({
       text: sectionText,
       hasDate: !!extractedDate,
-      hasHospital: !!hospitalName,
+      hasHospital: !!(this._extractHospitalName(sectionText) || fileHospitalHint),
       keywordMatches,
       mappedTerms,
       shouldExclude
     });
     return {
       date: extractedDate,
-      hospital: hospitalName || '미상 병원',
+      hospital: hospitalName,
       rawText: sectionText,
       translatedText: translatedText !== sectionText ? translatedText : undefined,
       keywordMatches,

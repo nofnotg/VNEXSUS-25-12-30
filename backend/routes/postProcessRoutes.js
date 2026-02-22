@@ -229,8 +229,8 @@ router.post('/massive-date-blocks', async (req, res) => {
       options: Object.keys(options)
     });
     
-    // 거대 날짜 블록 처리만 실행
-    const result = await PostProcessingManager.massiveDateProcessor.processMassiveDateBlocks(ocrText, options);
+    // 거대 날짜 블록 처리: massiveDateProcessor가 없으므로 일반 파이프라인으로 대체
+    const result = await PostProcessingManager.processOCRResult(ocrText, options);
     
     res.json({
       success: true,
