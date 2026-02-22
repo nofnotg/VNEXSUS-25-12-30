@@ -129,14 +129,14 @@
       display: flex;
       align-items: flex-end;
       gap: 4px;
-      padding: 0 1rem;
+      padding: 0;          /* 좌측 패딩 제거 — 패널과 정렬 맞춤 */
       margin-bottom: 0;
     }
 
     .bookmark-tab {
       position: relative;
-      min-width: 140px;          /* ← 두 탭 동일 너비 */
-      padding: 0.6rem 0;         /* 좌우는 min-width+text-center로 처리 */
+      min-width: 150px;          /* 두 탭 동일 너비 */
+      padding: 0.65rem 1.2rem;
       text-align: center;
       font-weight: 700;
       font-size: 0.92rem;
@@ -208,7 +208,7 @@
     }
 
     .tab-panel-inner {
-      padding: 2rem;
+      padding: 1.5rem;   /* 2rem → 1.5rem: 내부 여백 약간 줄여 공간 확보 */
     }
 
     /* 탭 패널 내 glass-card 스타일 재정의 (컨테이너 안이므로 배경 단순화) */
@@ -218,11 +218,33 @@
       border-radius: 16px;
       backdrop-filter: blur(6px);
       box-shadow: 0 4px 16px rgba(31,38,135,0.05);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .tab-panel-inner .glass-card:last-child {
       margin-bottom: 0;
+    }
+
+    /* 보고서 컨텐츠 — 전체 너비 사용, 불필요한 max-width 제한 제거 */
+    #ai-report-wrapper {
+      width: 100%;
+    }
+
+    #ai-report-content {
+      font-size: 0.96rem !important;
+      line-height: 1.75 !important;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      padding: 1.5rem !important;
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      max-height: 75vh;
+      overflow-y: auto;
+      cursor: text;
+      user-select: text;
+      font-family: 'Outfit', 'Malgun Gothic', sans-serif;
     }
 
     .step-badge {
@@ -615,12 +637,8 @@
             </div>
 
             <!-- Report Content Container (Selectable) -->
-            <div id="ai-report-wrapper" class="mt-4" style="max-width: 900px; margin: 0 auto;">
-              <div id="ai-report-content" class="report-content" 
-                tabindex="0"
-                style="font-size: 1.06rem; line-height: 1.8; word-break: break-word; white-space: pre-wrap; 
-                       overflow-wrap: break-word; padding: 25px; background: #fafafa; border: 1px solid #e2e8f0; 
-                       border-radius: 12px; max-height: 70vh; overflow-y: auto; cursor: text; user-select: text;"></div>
+            <div id="ai-report-wrapper" class="mt-3">
+              <div id="ai-report-content" class="report-content" tabindex="0"></div>
             </div>
 
             <!-- Hidden Preview for Logic -->

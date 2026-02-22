@@ -200,7 +200,9 @@ class PostProcessingManager {
           date: evt.date,
           hospital: evt.hospital,
           eventType: evt.eventType || '진료',
-          description: evt.shortFact || '',
+          description: evt.shortFact || evt.rawText || '',
+          // rawText 보존 — unifiedReportBuilder._enrichFromRawText() 에서 진단명/치료내용 추출에 사용
+          rawText: typeof evt.rawText === 'string' ? evt.rawText : undefined,
           diagnosis:
             evt.diagnosis && (typeof evt.diagnosis.name === 'string' || typeof evt.diagnosis.code === 'string')
               ? {

@@ -92,14 +92,19 @@ function getEventHospital(evt) {
 
 function getEventDiagnosis(evt) {
   const code = safeStr(evt?.diagnosis?.code);
+  const diagName = safeStr(evt?.diagnosis?.name || '');
   const descKR = safeStr(evt?.diagnosis?.descriptionKR || evt?.diagnosis?.koreanName || '');
-  const descEN = safeStr(evt?.diagnosis?.descriptionEN || evt?.diagnosis?.englishName || evt?.diagnosis?.description || evt?.description || '');
+  const descEN = safeStr(evt?.diagnosis?.descriptionEN || evt?.diagnosis?.englishName || evt?.diagnosis?.description || '');
+  // description은 폴백 제외 — description은 shortFact(병원명)로 채워질 수 있으므로 진단명으로 사용하지 않음
+  // diagName 우선 사용 (preprocessor 제공 또는 _enrichFromRawText 보강값)
+  const primary = descKR || descEN || diagName;
   // KCD-10 코드 + 영문 원어 + 한글 병명 순
   if (code && descEN && descKR) return `${descEN} (${code}) — ${descKR}`;
   if (code && descEN) return `${descEN} (${code})`;
   if (code && descKR) return `${descKR} (${code})`;
+  if (code && diagName) return `${diagName} (${code})`;
   if (descKR && descEN) return `${descEN} — ${descKR}`;
-  return descKR || descEN || code || '정보 없음';
+  return primary || code || '';
 }
 
 function getEventDiagnosisCode(evt) {
@@ -348,15 +353,115 @@ class UnifiedReportBuilder {
       this.cutoffMid = null;
     }
 
-    // 이벤트에 period 태깅
-    this._taggedEvents = this.events.map(evt => ({
-      ...evt,
-      _period: getPeriod(evt.date, this.enrollDate, this.cutoff3M, this.cutoff5Y),
-      _examFields: getExamFields(evt),
-      _disclosureTag: this.enrollDate
-        ? getDisclosureTag(parseDate(evt.date), this.enrollDate, this.disclosureWindows)
-        : { tag: '가입일 미입력', daysBeforeEnroll: null },
-    }));
+    // 이벤트에 period 태깅 + rawText 보강
+    this._taggedEvents = this.events.map(evt => {
+      const enriched = this._enrichFromRawText(evt);
+      return {
+        ...evt,
+        ...enriched,
+        _period: getPeriod(evt.date, this.enrollDate, this.cutoff3M, this.cutoff5Y),
+        _examFields: getExamFields({ ...evt, ...enriched }),
+        _disclosureTag: this.enrollDate
+          ? getDisclosureTag(parseDate(evt.date), this.enrollDate, this.disclosureWindows)
+          : { tag: '가입일 미입력', daysBeforeEnroll: null },
+      };
+    });
+  }
+
+  // ── rawText 보강 (진단명/치료내용/의사소견 등 직접 파싱) ──────────────
+  /**
+   * preprocessor가 diagnosis/payload 필드를 못 채운 경우,
+   * evt.rawText (또는 evt.description)에서 직접 추출해 보강합니다.
+   */
+  _enrichFromRawText(evt) {
+    const raw = safeStr(evt?.rawText || evt?.description || '');
+    if (!raw) return {};
+
+    const enriched = {};
+
+    // 1. 진단병명 — diagnosis.name이 비어있을 때만 rawText에서 추출
+    const currentDiag = safeStr(evt?.diagnosis?.name || '');
+    const hospital = safeStr(evt?.hospital || '');
+    if (!currentDiag) {
+      // 병원명 단어들을 rawText에서 제거한 뒤 병명 추출
+      const rawWithoutHosp = hospital ? raw.replace(new RegExp(hospital.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '') : raw;
+
+      // 패턴1: "진단: XXX" / "병명: XXX" / "상병: XXX" 명시적 레이블 우선
+      const labelMatch = rawWithoutHosp.match(
+        /(?:진단명?|병명|상병명?|진단코드|확진|의심|주상병)\s*[:：]\s*([가-힣a-zA-Z0-9\s\-\(\)\/,\.]{2,30}?)(?:\s*$|\s*[,;\n])/
+      );
+      // 패턴2: 의학적 병명 키워드 — 병원/의원/클리닉/센터로 끝나는 단어 제외
+      const keywordMatch = !labelMatch && rawWithoutHosp.match(
+        /(?<![가-힣])([가-힣]{2,10}(?:고혈압|당뇨|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|암|종양|갑상선|폐렴|위염|장염|간염|신부전|골절|디스크|협착|탈구|빈혈|백내장|녹내장|당뇨병|고혈압성|동맥경화|혈전|색전))(?![병원|의원|클리닉|센터])/
+      ) || rawWithoutHosp.match(
+        /\b(고혈압|당뇨(?:병)?|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|폐렴|위염|장염|간염|신부전|골절|디스크|척추협착|빈혈|백내장|녹내장|동맥경화|혈전증|갑상선(?:암|기능저하|기능항진)?|유방암|폐암|위암|대장암|간암|전립선암|자궁암|췌장암|림프종|백혈병)\b/
+      );
+
+      const matched = labelMatch?.[1] || keywordMatch?.[1] || keywordMatch?.[0];
+      if (matched && matched.trim().length >= 2) {
+        enriched.diagnosis = {
+          ...(evt?.diagnosis || {}),
+          name: matched.trim(),
+          descriptionKR: matched.trim(),
+          code: evt?.diagnosis?.code || null,
+        };
+      }
+    }
+
+    // 2. 치료내용 — payload.treatment가 없을 때 rawText에서 추출
+    if (!getEventPayload(evt, 'treatment')) {
+      // 줄 단위로 처방/수술/치료 키워드가 포함된 줄을 추출
+      const txLine = raw.split('\n').find(l =>
+        /(?:처방|투약|수술|치료|처치|시행|투여)\s*[:：]/.test(l)
+      );
+      if (txLine) {
+        const txMatch = txLine.match(/(?:처방|투약|수술|치료|처치|시행|투여)\s*[:：]\s*(.+)/);
+        if (txMatch) {
+          enriched.payload = {
+            ...(evt?.payload || {}),
+            treatment: txMatch[1].trim(),
+          };
+        }
+      }
+    }
+
+    // 3. 내원경위 — rawText에서 추출 (없을 때만), 첫 문장만 사용
+    if (!getEventPayload(evt, 'visitReason') && !getEventPayload(evt, 'admissionPurpose')) {
+      // 내원경위 명시 키워드 우선
+      const visitLine = raw.split('\n').find(l =>
+        /(?:내원경위|내원사유|방문목적|내원|외래|입원|응급|전원|의뢰)\s*[:：]/.test(l)
+      );
+      let visitReason = '';
+      if (visitLine) {
+        const m = visitLine.match(/(?:내원경위|내원사유|방문목적|내원|외래|입원|응급|전원|의뢰)\s*[:：]\s*(.+)/);
+        visitReason = m ? m[1].trim() : visitLine.trim();
+      } else {
+        // 없으면 rawText 첫 줄(비어있지 않은) 사용, 병원명 제외
+        const firstLine = raw.split('\n').find(l => l.trim() && l.trim() !== hospital);
+        visitReason = firstLine ? firstLine.trim().substring(0, 80) : '';
+      }
+      if (visitReason) {
+        enriched.payload = {
+          ...(enriched.payload || evt?.payload || {}),
+          visitReason,
+        };
+      }
+    }
+
+    // 4. 의사소견 — rawText에서 소견/판독 문장 추출
+    if (!getEventPayload(evt, 'doctorOpinion') && !getEventPayload(evt, 'note')) {
+      const opMatch = raw.match(
+        /(?:소견|판독|결과|의견|진단소견|의사소견)\s*[:：]\s*([가-힣a-zA-Z0-9\s\-\(\)\/,\.]{5,200})/
+      );
+      if (opMatch) {
+        enriched.payload = {
+          ...(enriched.payload || evt?.payload || {}),
+          doctorOpinion: opMatch[1].trim(),
+        };
+      }
+    }
+
+    return enriched;
   }
 
   // ── 기간 분류 헬퍼 ──
@@ -396,19 +501,29 @@ class UnifiedReportBuilder {
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
     // ① 내원경위
+    const rawTextFull = safeStr(evt?.rawText || evt?.description || '');
     const visitReason = getEventPayload(evt, 'visitReason')
       || getEventPayload(evt, 'admissionPurpose')
       || getEventPayload(evt, 'referralReason')
       || getEventDescription(evt)
-      || '정보 없음';
+      || (rawTextFull ? rawTextFull.substring(0, 80) : '정보 없음');
     lines.push(`▸ 내원경위: ${visitReason}`);
 
     // ② 진단병명 (KCD-10 코드, 영문 원어 + 한글 병명)
     const icdCode = getEventDiagnosisCode(evt);
     const diagText = getEventDiagnosis(evt);
-    const diagLine = icdCode
-      ? `${diagText}  [KCD-10: ${icdCode}]`
-      : (diagText || '정보 없음');
+    // rawText에서 병명 키워드 직접 추출 (폴백 — 병원명 제외)
+    let diagFallback = '';
+    if (!diagText) {
+      const hospToExclude = getEventHospital(evt);
+      const rawNoHosp = hospToExclude ? rawTextFull.replace(new RegExp(hospToExclude.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '') : rawTextFull;
+      const m = rawNoHosp.match(
+        /\b(고혈압|당뇨(?:병)?|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|폐렴|위염|장염|간염|신부전|골절|디스크|척추협착|빈혈|백내장|녹내장|동맥경화|혈전증|갑상선(?:암|기능저하|기능항진)?|유방암|폐암|위암|대장암|간암|전립선암|자궁암|췌장암|림프종|백혈병)\b/
+      );
+      if (m) diagFallback = m[0];
+    }
+    const finalDiag = diagText || diagFallback || '(정보 없음)';
+    const diagLine = icdCode ? `${finalDiag}  [KCD-10: ${icdCode}]` : finalDiag;
     lines.push(`▸ 진단병명: ${diagLine}`);
 
     // ③ 검사결과 (질환군별 규칙 적용)

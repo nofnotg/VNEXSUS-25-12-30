@@ -164,6 +164,8 @@ export const MedicalEventSchema = z.object({
   confidence: z.number().min(0).max(1),
   tags: z.array(z.string()).optional(),
   payload: z.record(z.any()).optional(),
+  // rawText 보존 — unifiedReportBuilder._enrichFromRawText() 진단명 추출용
+  rawText: z.string().optional(),
 });
 
 export default {
