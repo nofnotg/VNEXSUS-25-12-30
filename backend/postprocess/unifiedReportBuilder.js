@@ -379,30 +379,94 @@ class UnifiedReportBuilder {
 
     const enriched = {};
 
+    // 영어 병명 → 한국어 매핑 (방사선과 판독문 대응)
+    const EN_DIAG_MAP = [
+      [/hepatic\s+heman[ig]+oma/i,     '간혈관종'],   // hemangioma / hemanigoma 오탈자 허용
+      [/liver\s+heman[ig]+oma/i,       '간혈관종'],
+      [/giant\s+hepatic\s+heman[ig]+oma/i,'거대 간혈관종'],
+      [/renal\s+cyst/i,                '신장낭종'],
+      [/ovarian\s+cyst/i,              '난소낭종'],
+      [/hepatocellular\s+carcinoma/i,  '간세포암'],
+      [/liver\s+cancer/i,              '간암'],
+      [/breast\s+cancer/i,             '유방암'],
+      [/lung\s+cancer/i,               '폐암'],
+      [/gastric\s+cancer/i,            '위암'],
+      [/colon\s+cancer/i,              '대장암'],
+      [/thyroid\s+cancer/i,            '갑상선암'],
+      [/pulmonary\s+embolism/i,        '폐색전증'],
+      [/deep\s+vein\s+thrombosis/i,    '심부정맥혈전증'],
+      [/myocardial\s+infarction/i,     '심근경색'],
+      [/cerebral\s+infarction/i,       '뇌경색'],
+      [/cerebral\s+hemorrhage/i,       '뇌출혈'],
+      [/hypertension/i,                '고혈압'],
+      [/diabetes\s+mellitus/i,         '당뇨병'],
+      [/pneumonia/i,                   '폐렴'],
+      [/cholecystitis/i,               '담낭염'],
+      [/appendicitis/i,                '충수염'],
+      [/spinal\s+stenosis/i,           '척추협착증'],
+      [/herniated\s+disc/i,            '추간판탈출증'],
+      [/fatty\s+liver/i,               '지방간'],
+      [/liver\s+cirrhosis/i,           '간경변'],
+      [/hepatitis/i,                   '간염'],
+      [/pancreatitis/i,                '췌장염'],
+      [/atherosclerosis/i,             '동맥경화증'],
+      [/anemia/i,                      '빈혈'],
+      [/lymphoma/i,                    '림프종'],
+      [/leukemia/i,                    '백혈병'],
+    ];
+
     // 1. 진단병명 — diagnosis.name이 비어있을 때만 rawText에서 추출
     const currentDiag = safeStr(evt?.diagnosis?.name || '');
     const hospital = safeStr(evt?.hospital || '');
     if (!currentDiag) {
-      // 병원명 단어들을 rawText에서 제거한 뒤 병명 추출
       const rawWithoutHosp = hospital ? raw.replace(new RegExp(hospital.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '') : raw;
+      let matched = '';
 
-      // 패턴1: "진단: XXX" / "병명: XXX" / "상병: XXX" 명시적 레이블 우선
+      // 패턴A: 한국어 명시 레이블 "진단: XXX"
       const labelMatch = rawWithoutHosp.match(
         /(?:진단명?|병명|상병명?|진단코드|확진|의심|주상병)\s*[:：]\s*([가-힣a-zA-Z0-9\s\-\(\)\/,\.]{2,30}?)(?:\s*$|\s*[,;\n])/
       );
-      // 패턴2: 의학적 병명 키워드 — 병원/의원/클리닉/센터로 끝나는 단어 제외
-      const keywordMatch = !labelMatch && rawWithoutHosp.match(
-        /(?<![가-힣])([가-힣]{2,10}(?:고혈압|당뇨|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|암|종양|갑상선|폐렴|위염|장염|간염|신부전|골절|디스크|협착|탈구|빈혈|백내장|녹내장|당뇨병|고혈압성|동맥경화|혈전|색전))(?![병원|의원|클리닉|센터])/
-      ) || rawWithoutHosp.match(
-        /\b(고혈압|당뇨(?:병)?|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|폐렴|위염|장염|간염|신부전|골절|디스크|척추협착|빈혈|백내장|녹내장|동맥경화|혈전증|갑상선(?:암|기능저하|기능항진)?|유방암|폐암|위암|대장암|간암|전립선암|자궁암|췌장암|림프종|백혈병)\b/
-      );
+      if (labelMatch) {
+        matched = labelMatch[1].trim();
+      }
 
-      const matched = labelMatch?.[1] || keywordMatch?.[1] || keywordMatch?.[0];
+      // 패턴B: 영어 Impression 섹션 파싱 (방사선과 판독문)
+      if (!matched) {
+        const impressionMatch = rawWithoutHosp.match(
+          /Impression\s*\n\s*[-*•]?\s*([A-Za-z][A-Za-z0-9\s\-\(\)\/,\.]{2,80}?)(?:\n|$)/i
+        );
+        if (impressionMatch) {
+          const engDiag = impressionMatch[1].trim();
+          // 영어 병명 → 한국어 변환
+          for (const [pattern, korean] of EN_DIAG_MAP) {
+            if (pattern.test(engDiag)) { matched = korean; break; }
+          }
+          // 변환 실패 시 영어 그대로
+          if (!matched && engDiag.length >= 3) matched = engDiag;
+        }
+      }
+
+      // 패턴C: rawText 전체에서 영어 병명 키워드 검색
+      if (!matched) {
+        for (const [pattern, korean] of EN_DIAG_MAP) {
+          if (pattern.test(rawWithoutHosp)) { matched = korean; break; }
+        }
+      }
+
+      // 패턴D: 한국어 병명 키워드
+      if (!matched) {
+        const kwMatch = rawWithoutHosp.match(
+          /\b(고혈압|당뇨(?:병)?|고지혈증|협심증|심근경색|부정맥|뇌경색|뇌출혈|폐렴|위염|장염|간염|신부전|골절|디스크|척추협착|빈혈|백내장|녹내장|동맥경화|혈전증|갑상선(?:암|기능저하|기능항진)?|유방암|폐암|위암|대장암|간암|전립선암|자궁암|췌장암|림프종|백혈병|간혈관종|신장낭종|난소낭종)\b/
+        );
+        if (kwMatch) matched = kwMatch[0];
+      }
+
       if (matched && matched.trim().length >= 2) {
         enriched.diagnosis = {
           ...(evt?.diagnosis || {}),
           name: matched.trim(),
           descriptionKR: matched.trim(),
+          descriptionEN: '',
           code: evt?.diagnosis?.code || null,
         };
       }
@@ -436,9 +500,51 @@ class UnifiedReportBuilder {
         const m = visitLine.match(/(?:내원경위|내원사유|방문목적|내원|외래|입원|응급|전원|의뢰)\s*[:：]\s*(.+)/);
         visitReason = m ? m[1].trim() : visitLine.trim();
       } else {
-        // 없으면 rawText 첫 줄(비어있지 않은) 사용, 병원명 제외
-        const firstLine = raw.split('\n').find(l => l.trim() && l.trim() !== hospital);
-        visitReason = firstLine ? firstLine.trim().substring(0, 80) : '';
+        // 없으면 rawText에서 의미 있는 줄 추출
+        // 날짜/병원명/단순 영문 대문자/빈줄 제외
+        const DATE_RE = /^\d{4}[-./]\d{1,2}[-./]\d{1,2}/;
+        // 병원명 Set 확장: hospital 필드 줄 분리 + rawText에서 hospital 관련 변형 추출
+        const hospLines = (hospital ? hospital.split('\n') : []).map(s => s.trim()).filter(Boolean);
+        const HOSPITAL_NAMES = new Set(hospLines);
+        // rawText 내 병원명 패턴 추가 — 영상의학과/의원/병원 포함 문자열
+        const rawLines = raw.split('\n');
+        rawLines.forEach(l => {
+          const t = l.trim();
+          if (/영상의학과|의원$|병원$|CLINIC$|HOSPITAL$|클리닉$|센터$/.test(t)) HOSPITAL_NAMES.add(t);
+        });
+        // 환자명/ID 감지용: rawText에서 Name 다음 줄이 환자명일 가능성 높음
+        const nameIdx = rawLines.findIndex(l => /^Name$/.test(l.trim()));
+        const patientNameLine = nameIdx >= 0 && nameIdx + 1 < rawLines.length ? rawLines[nameIdx + 1].trim() : '';
+        const idIdx = rawLines.findIndex(l => /^ID$/.test(l.trim()));
+        const patientIdLine = idIdx >= 0 && idIdx + 1 < rawLines.length ? rawLines[idIdx + 1].trim() : '';
+        const meaningfulLine = rawLines.find(l => {
+          const t = l.trim();
+          if (!t) return false;
+          if (HOSPITAL_NAMES.has(t)) return false;
+          if (DATE_RE.test(t)) return false;
+          if (/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}/.test(t)) return false; // 날짜+시간
+          if (/^[A-Z0-9\s\-_^]{1,40}$/.test(t)) return false; // 영문 대문자만 (병원코드/검사명 등)
+          if (/^[A-Za-z0-9\s\-_^\.]{2,50}$/.test(t) && /\d/.test(t) && /[A-Z]/.test(t) && !/[가-힣]/.test(t)) return false; // 검사명칭 형식 (영숫자, 숫자+대문자, 한글없음)
+          if (/^[_\-]?[A-Za-z]+[_\-][A-Za-z]+/.test(t) && !/[가-힣]/.test(t)) return false; // 검사명칭 스네이크케이스 (_Liver_Dynamic 등)
+          if (/CT\(/.test(t) || /^CT$/.test(t)) return false; // CT(날짜) 또는 단독 CT
+          if (/^\([A-Za-z]+\)$/.test(t)) return false; // (Adult) 등 괄호 단어
+          if (/^[A-Za-z]{2,6}$/.test(t) && !/[가-힣]/.test(t)) return false; // 짧은 영어 단어 (Rhees, G 등)
+          if (HOSPITAL_NAMES.has(t)) return false; // HOSPITAL_NAMES 한번 더 체크 (순서 보장)
+          if (/^Name$|^ID$|^Age|^Sex$|^Reading$|^검사명칭$|^판독전문의$/.test(t)) return false; // 영문/한글 필드명
+          if (/^[가-힣]{2,5}$/.test(t) && t.length <= 4) return false; // 짧은 한국어 이름 (2~4자 순수 한글 → 환자명 가능성)
+          if (patientNameLine && t === patientNameLine) return false; // 환자명 제외
+          if (patientIdLine && t === patientIdLine) return false; // 환자 ID 제외
+          // rawText 전체에서 한국어 이름 패턴 추출하여 제외 (Name/ID 필드 이후에도)
+          if (/^[가-힣]{2,4}$/.test(t) && raw.includes(t + '\n') && raw.includes('Name')) return false;
+          if (/^\d{5,}$/.test(t)) return false; // 순수 숫자 ID
+          if (/^[FM]$|^\d{3}Y$/.test(t)) return false; // 성별/나이 코드
+          if (/Tel\.|Fax\.|E-mail|@/.test(t)) return false; // 연락처/이메일
+          if (/^\d{2,4}-\d{2,4}-\d{4}/.test(t)) return false; // 전화번호
+          if (/손해사정|claim\s+adjust/i.test(t)) return false; // 손해사정사 정보
+          if (/영상의학과|의원$|병원$|CLINIC|HOSPITAL/.test(t)) return false; // 추가: 병원/과 명칭
+          return true;
+        });
+        visitReason = meaningfulLine ? meaningfulLine.trim().substring(0, 80) : '';
       }
       if (visitReason) {
         enriched.payload = {
@@ -448,9 +554,20 @@ class UnifiedReportBuilder {
       }
     }
 
-    // 4. 의사소견 — rawText에서 소견/판독 문장 추출
+    // 4. 의사소견 — rawText에서 소견/판독 문장 추출 (한국어 + 영어 판독문)
     if (!getEventPayload(evt, 'doctorOpinion') && !getEventPayload(evt, 'note')) {
-      const opMatch = raw.match(
+      // 영어 Impression 전체 추출 (방사선과 판독문)
+      const impressionBlockMatch = raw.match(/Impression\s*\n([\s\S]{5,400}?)(?:\n\n|$)/i);
+      if (impressionBlockMatch) {
+        const opText = impressionBlockMatch[1].replace(/^[-*•\s]+/gm, '').trim().substring(0, 300);
+        if (opText.length >= 5) {
+          enriched.payload = {
+            ...(enriched.payload || evt?.payload || {}),
+            doctorOpinion: opText,
+          };
+        }
+      }
+      const opMatch = !impressionBlockMatch && raw.match(
         /(?:소견|판독|결과|의견|진단소견|의사소견)\s*[:：]\s*([가-힣a-zA-Z0-9\s\-\(\)\/,\.]{5,200})/
       );
       if (opMatch) {
@@ -1042,8 +1159,10 @@ class UnifiedReportBuilder {
         if (s8.summary) lines.push(`  ${s8.summary}`);
         if (s8.criticalCount > 0) lines.push(`  Critical 건수: ${s8.criticalCount}건`);
       } else {
-        const hasCritical = events3M.length > 0;
-        if (hasCritical) {
+        if (!this.enrollDate) {
+          lines.push(`  ⚠️ 보험 가입일 미입력 — 기간 분류 불가 (총 ${this.events.length}건 추출됨)`);
+          lines.push('  가입일을 입력하면 3개월·5년 고지의무 위반 분석이 가능합니다.');
+        } else if (events3M.length > 0) {
           lines.push('  🔴 고지의무 위반 의심 — 가입 전 3개월 이내 의료기록 존재');
         } else if (events5Y.length > 0) {
           lines.push('  🟠 검토 필요 — 가입 전 5년 이내 의료기록 존재');
@@ -1351,15 +1470,41 @@ class UnifiedReportBuilder {
     // 고지의무 분석
     html += `<div class="section-header">【 첨부1: 고지의무 분석 】</div>`;
     if (s8.hasData) {
-      const lc = { critical: '#ef4444', warning: '#f97316', safe: '#198754', unknown: '#6c757d' };
-      html += `<div style="font-size:18px;font-weight:800;color:${lc[s8.level]||'#6c757d'};padding:8px 0;">${s8.levelLabel}</div>`;
-      html += `<p style="color:#334155;">${s8.summary}</p>`;
+      if (!this.enrollDate) {
+        // 가입일 미입력 — levelLabel 숨기고 경고 블록만 표시
+        const totalEvt = this.events.length;
+        html += `<div style="background:#fef9c3;border-left:4px solid #eab308;padding:12px 16px;border-radius:6px;margin-bottom:10px;">
+          <strong style="color:#713f12;">⚠️ 보험 가입일 미입력 — 기간 분류 불가</strong><br>
+          <span style="font-size:0.9em;color:#78350f;">
+            가입일을 입력하면 3개월·5년 고지의무 위반 분석이 가능합니다.<br>
+            현재 <strong>${totalEvt}건</strong>의 의료 이벤트가 추출되었으나 가입 전후 기간 분류가 불가합니다.
+          </span>
+        </div>`;
+      } else {
+        const lc = { critical: '#ef4444', warning: '#f97316', safe: '#198754', unknown: '#6c757d' };
+        html += `<div style="font-size:18px;font-weight:800;color:${lc[s8.level]||'#6c757d'};padding:8px 0;">${s8.levelLabel}</div>`;
+        html += `<p style="color:#334155;">${s8.summary}</p>`;
+      }
     } else {
       const ev3 = this._getByPeriod(PERIOD.WITHIN_3M);
       const ev5 = this._getByPeriod(PERIOD.WITHIN_5Y);
-      if (ev3.length > 0) html += `<div style="color:#b91c1c;font-weight:700;">🔴 고지의무 위반 의심 — 가입 전 3개월 이내 의료기록 ${ev3.length}건 존재</div>`;
-      else if (ev5.length > 0) html += `<div style="color:#c2410c;font-weight:700;">🟠 검토 필요 — 가입 전 5년 이내 의료기록 ${ev5.length}건 존재</div>`;
-      else html += `<div style="color:#15803d;font-weight:700;">🟢 이상 없음</div>`;
+      if (!this.enrollDate) {
+        // 가입일 미입력 — 기간 분류 불가 경고 (오해 방지)
+        const totalEvt = this.events.length;
+        html += `<div style="background:#fef9c3;border-left:4px solid #eab308;padding:12px 16px;border-radius:6px;">
+          <strong style="color:#713f12;">⚠️ 보험 가입일 미입력 — 기간 분류 불가</strong><br>
+          <span style="font-size:0.9em;color:#78350f;">
+            가입일을 입력하면 3개월·5년 고지의무 위반 분석이 가능합니다.<br>
+            현재 <strong>${totalEvt}건</strong>의 의료 이벤트가 추출되었으나 기간 분류가 불가합니다.
+          </span>
+        </div>`;
+      } else if (ev3.length > 0) {
+        html += `<div style="color:#b91c1c;font-weight:700;">🔴 고지의무 위반 의심 — 가입 전 3개월 이내 의료기록 ${ev3.length}건 존재</div>`;
+      } else if (ev5.length > 0) {
+        html += `<div style="color:#c2410c;font-weight:700;">🟠 검토 필요 — 가입 전 5년 이내 의료기록 ${ev5.length}건 존재</div>`;
+      } else {
+        html += `<div style="color:#15803d;font-weight:700;">🟢 이상 없음</div>`;
+      }
     }
 
     // 권장조치

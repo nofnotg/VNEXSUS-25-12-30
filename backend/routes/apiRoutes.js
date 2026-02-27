@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 // import openaiService from '../../src/services/openaiService.js'; // 비활성화됨
 import { GPT4oMiniEnhancedService } from '../../src/services/gpt4oMiniEnhancedService.js';
 import { MedicalTimelineGenerator } from '../../src/timeline/MedicalTimelineGenerator.js';
+import postProcessingManager from '../postprocess/index.js';
 
 // ES 모듈에서 __dirname 대체
 const __filename = fileURLToPath(import.meta.url);
@@ -34,11 +35,14 @@ router.post('/generate-report', async (req, res) => {
     console.log('요청 본문:', req.body);
 
     // DNA 시퀀싱 파이프라인으로 리다이렉트 (메인 서버의 라우트 사용)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000); // 25초 타임아웃
     const dnaResponse = await fetch(`http://localhost:${process.env.PORT || 3030}/api/dna-report/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      signal: controller.signal,
       body: JSON.stringify({
         extractedText: req.body.text || req.body.extractedText,
         sessionId: req.body.sessionId,
@@ -66,6 +70,7 @@ router.post('/generate-report', async (req, res) => {
       })
     });
 
+    clearTimeout(timeoutId);
     const dnaResult = await dnaResponse.json();
 
     if (dnaResult.success) {
@@ -83,16 +88,33 @@ router.post('/generate-report', async (req, res) => {
       stack: error.stack?.substring(0, 500)
     });
 
-    // 폴백: 단순화된 보고서 생성
+    // 폴백: 단순화된 보고서 생성 + postprocess pipeline으로 unifiedReport 생성
     try {
       console.log('🔄 단순화된 요약표 생성 요청 - 의료지식 처리 비활성화');
-      console.log('📝 입력 텍스트 길이:', (req.body.text || req.body.extractedText || '').length);
+      const extractedText = req.body.text || req.body.extractedText || '';
+      console.log('📝 입력 텍스트 길이:', extractedText.length);
 
-      const fallbackReport = generateSimplifiedReport(req.body.text || req.body.extractedText);
+      const fallbackReport = generateSimplifiedReport(extractedText);
+
+      // postprocess pipeline 직접 실행 (GPT 불필요 — 항상 성공)
+      let unifiedReport = null;
+      try {
+        const pipelineResult = await postProcessingManager.processOCRResult(
+          extractedText,
+          { patientInfo: req.body.patientInfo || {} }
+        );
+        unifiedReport = pipelineResult?.pipeline?.unifiedReport || null;
+        if (unifiedReport) {
+          console.log('✅ 폴백 unifiedReport 생성 성공 (postprocess)');
+        }
+      } catch (pipelineErr) {
+        console.warn('⚠️ 폴백 postprocess 실패 (무시):', pipelineErr.message);
+      }
 
       res.json({
         success: true,
         report: fallbackReport,
+        unifiedReport,
         message: '단순화된 보고서가 생성되었습니다.',
         fallback: true,
         timestamp: new Date().toISOString(),
