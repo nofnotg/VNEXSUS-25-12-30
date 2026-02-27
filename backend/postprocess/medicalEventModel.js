@@ -326,11 +326,15 @@ class MedicalEventModel {
      * 가입일 기준 플래그 설정
      */
     setEnrollmentFlags(events, patientInfo) {
-        if (!patientInfo || !patientInfo.enrollmentDate) {
+        const enrollDateStr = patientInfo?.enrollmentDate
+            || patientInfo?.insuranceJoinDate
+            || patientInfo?.contractDate
+            || patientInfo?.joinDate;
+        if (!patientInfo || !enrollDateStr) {
             return;
         }
 
-        const enrollmentDate = new Date(patientInfo.enrollmentDate);
+        const enrollmentDate = new Date(enrollDateStr);
         const threeMonthsAgo = new Date(enrollmentDate);
         threeMonthsAgo.setMonth(enrollmentDate.getMonth() - 3);
         const fiveYearsAgo = new Date(enrollmentDate);
@@ -361,6 +365,7 @@ class MedicalEventModel {
         console.warn('⚠️ 병합 불가: 날짜 또는 병원이 다름');
         return event1;
       }
+      const mergedHospital = event1.hospital;
 
         // 1. 모든 코드 수집 (relatedCodes 활용)
         const allCodes = new Set();
@@ -398,14 +403,21 @@ class MedicalEventModel {
             index === self.findIndex(t => t.name === treat.name)
         );
 
+      // rawText: 더 긴 것을 선택 (헤더 청크보다 내용 청크 우선)
+      const mergedRawText = (event2.rawText || '').length > (event1.rawText || '').length
+        ? event2.rawText
+        : (event1.rawText || event2.rawText);
+
       return {
         ...event1,
+        hospital: mergedHospital,
+        rawText: mergedRawText,
         diagnosis: mergedDiagnosis,
         relatedCodes: Array.from(allCodes), // 모든 코드 보존
         procedures: mergedProcedures,
         treatments: mergedTreatments,
         shortFact: this.generateShortFact({
-          hospital: event1.hospital,
+          hospital: mergedHospital,
           diagnosis: mergedDiagnosis.name,
           procedures: mergedProcedures
         }),

@@ -121,7 +121,10 @@ class EventScoringEngine {
    * @returns {Object} 점수 정보
    */
   calculateScore(event, patientInfo = {}, claimInfo = {}) {
-    this.enrollmentDate = patientInfo.enrollmentDate || patientInfo.contractDate;
+    this.enrollmentDate = patientInfo.enrollmentDate
+        || patientInfo.insuranceJoinDate
+        || patientInfo.contractDate
+        || patientInfo.joinDate;
     this.claimDiagnosis = claimInfo.claimDiagnosis || claimInfo.diagnosis;
     
     // 1. Severity Score (0-40점)
@@ -147,7 +150,7 @@ class EventScoringEngine {
         frequencyScore,
       },
       tier: this.determineTier(totalScore),
-      isCore: totalScore >= 50, // 50점 이상이면 Core 이벤트
+      isCore: totalScore >= 40, // 40점 이상이면 Core 이벤트 (가입 전 검사도 포함)
     };
   }
 
@@ -190,7 +193,9 @@ class EventScoringEngine {
    */
   getPeriodScore(event, patientInfo) {
     const eventDate = this.parseDate(event.date);
-    const enrollmentDate = this.parseDate(patientInfo.enrollmentDate || patientInfo.contractDate);
+    const enrollmentDate = this.parseDate(
+      patientInfo.enrollmentDate || patientInfo.insuranceJoinDate || patientInfo.contractDate || patientInfo.joinDate
+    );
     
     if (!eventDate || !enrollmentDate) {
       return 0;

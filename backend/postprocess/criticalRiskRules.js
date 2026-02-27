@@ -97,7 +97,9 @@ class CriticalRiskEngine {
    * @returns {Object} Critical Risk 평가 결과
    */
   evaluateCriticalRisk(event, patientInfo = {}) {
-    this.enrollmentDate = this.parseDate(patientInfo.enrollmentDate || patientInfo.contractDate);
+    this.enrollmentDate = this.parseDate(
+      patientInfo.enrollmentDate || patientInfo.insuranceJoinDate || patientInfo.contractDate || patientInfo.joinDate
+    );
     
     for (const [category, rules] of Object.entries(this.patterns)) {
       if (this.matchesCriticalPattern(event, rules)) {

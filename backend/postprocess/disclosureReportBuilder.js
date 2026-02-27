@@ -117,6 +117,28 @@ class DisclosureReportBuilder {
       processedEvents = criticalRiskEngine.evaluateEvents(processedEvents, patientInfo);
     }
     
+    // ── sourceRef 미리 주입: 각 이벤트에 PDF 위치 링크 필드 추가 ──────────────
+    // anchors.position이 있는 이벤트에 sourceRef 객체를 주입해
+    // 프론트엔드 Click-to-Evidence 기능에서 바로 사용 가능하도록 함
+    processedEvents = processedEvents.map(event => {
+      if (event.sourceRef) return event; // 이미 있으면 건너뜀
+      const pos = event.anchors?.position;
+      const hasValidBbox = pos && (pos.xMin !== 0 || pos.xMax !== 0 || pos.yMin !== 0 || pos.yMax !== 0);
+      if (pos?.page != null && hasValidBbox) {
+        return {
+          ...event,
+          sourceRef: {
+            page: pos.page,
+            bbox: { xMin: pos.xMin ?? 0, yMin: pos.yMin ?? 0, xMax: pos.xMax ?? 1, yMax: pos.yMax ?? 1 },
+            sourceFile: event.anchors?.sourceFile || null,
+            pdfUrl: null,
+            highlight: true,
+          },
+        };
+      }
+      return event;
+    });
+
     // 섹션 생성
     const sectionA = this.buildSectionA(processedEvents);
     const sectionB = this.buildSectionB(processedEvents, patientInfo);
@@ -130,7 +152,7 @@ class DisclosureReportBuilder {
         totalEvents: events.length,
         coreEvents: sectionA.coreEventCount,
         criticalEvents: sectionA.criticalCount,
-        enrollmentDate: patientInfo.enrollmentDate || patientInfo.contractDate || 'N/A',
+        enrollmentDate: patientInfo.enrollmentDate || patientInfo.insuranceJoinDate || patientInfo.contractDate || patientInfo.joinDate || 'N/A',
       },
       sectionA,
       sectionB,
@@ -214,7 +236,9 @@ class DisclosureReportBuilder {
    * Section B: 고지의무 기간별 분류
    */
   buildSectionB(events, patientInfo) {
-    const enrollmentDate = this.parseDate(patientInfo.enrollmentDate || patientInfo.contractDate);
+    const enrollmentDate = this.parseDate(
+      patientInfo.enrollmentDate || patientInfo.insuranceJoinDate || patientInfo.contractDate || patientInfo.joinDate
+    );
     
     const byPeriod = {
       within3m: [],
@@ -310,23 +334,51 @@ class DisclosureReportBuilder {
    * Section C: 근거 문서 참조
    */
   buildSectionC(events) {
-    const eventsWithSource = events.filter(e => e.sourceSpan);
-    
-    const sources = eventsWithSource.map(event => ({
-      eventId: event.id,
-      date: event.date,
-      eventType: event.eventType,
-      sourceSpan: event.sourceSpan,
-      rawText: event.rawText?.substring(0, 200) || '',
-    }));
-    
+    const eventsWithSource = events.filter(e => e.sourceSpan || e.anchors?.position?.page != null);
+
+    const sources = eventsWithSource.map(event => {
+      // anchors.position에서 좌표 정보 추출 (Click-to-Evidence용)
+      const pos = event.anchors?.position;
+      const hasValidBbox = pos && (pos.xMin !== 0 || pos.xMax !== 0 || pos.yMin !== 0 || pos.yMax !== 0);
+
+      // sourceRef: PDF 페이지 링크 정보 (프론트엔드 PDF 뷰어 연동용)
+      const sourceRef = (pos?.page != null && hasValidBbox) ? {
+        page: pos.page,
+        bbox: {
+          xMin: pos.xMin ?? 0,
+          yMin: pos.yMin ?? 0,
+          xMax: pos.xMax ?? 1,
+          yMax: pos.yMax ?? 1,
+        },
+        sourceFile: event.anchors?.sourceFile || null,
+        pdfUrl: null,      // pdfViewerRoutes.js에서 채워짐 (caseId 기반)
+        highlight: true,
+      } : null;
+
+      return {
+        eventId: event.id,
+        date: event.date,
+        hospital: event.hospital || null,
+        eventType: event.eventType,
+        sourceSpan: event.sourceSpan,
+        sourceRef,          // ← Click-to-Evidence 핵심 필드
+        rawText: event.rawText?.substring(0, 200) || '',
+      };
+    });
+
+    const withSourceRef = sources.filter(s => s.sourceRef !== null);
+
     return {
       title: this.templates.sectionC.title,
       sourcesCount: eventsWithSource.length,
-      attachmentRate: events.length > 0 
-        ? ((eventsWithSource.length / events.length) * 100).toFixed(1) 
+      sourceRefCount: withSourceRef.length,
+      attachmentRate: events.length > 0
+        ? ((eventsWithSource.length / events.length) * 100).toFixed(1)
         : 0,
-      sources: sources.slice(0, 10), // 상위 10개만
+      sourceRefRate: events.length > 0
+        ? ((withSourceRef.length / events.length) * 100).toFixed(1)
+        : 0,
+      sources: sources.slice(0, 20), // 상위 20개 (sourceRef 포함)
     };
   }
 
