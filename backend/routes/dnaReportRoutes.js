@@ -97,11 +97,20 @@ router.post('/generate', async (req, res) => {
     // 🆕 JSON 구조화 모드 (방안 C) 또는 기존 모드 선택
     const useStructuredJson = options.useStructuredJson ?? true;  // 기본값: true (JSON 모드)
     
+    // GPT 입력 텍스트 길이 제한 (토큰 초과 방지)
+    const MAX_INPUT_CHARS = 80000; // ~25,000 tokens (시스템 프롬프트 여유분 포함)
+    const textForLLM = extractedText.length > MAX_INPUT_CHARS
+      ? extractedText.slice(0, MAX_INPUT_CHARS) + '\n\n[이하 텍스트 길이 초과로 생략]'
+      : extractedText;
+    if (textForLLM !== extractedText) {
+      logger.warn({ event: 'input_truncated', originalLength: extractedText.length, truncatedLength: MAX_INPUT_CHARS });
+    }
+
     let systemPrompt, userPrompt;
     if (useStructuredJson) {
       // JSON 구조화 모드: 10항목 보고서를 JSON으로 생성
       const jsonPrompts = buildStructuredJsonPrompt(
-        extractedText,
+        textForLLM,
         knowledgeBase,
         patientInfo?.insuranceJoinDate,
         patientInfo  // 🆕 환자 정보 전달
@@ -112,7 +121,7 @@ router.post('/generate', async (req, res) => {
     } else {
       // 기존 모드: 텍스트 형식 보고서
       const legacyPrompts = buildEnhancedMedicalDnaPrompt(
-        extractedText,
+        textForLLM,
         knowledgeBase,
         patientInfo?.insuranceJoinDate
       );

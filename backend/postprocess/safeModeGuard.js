@@ -37,7 +37,7 @@ const DEFAULT_CONFIG = {
   
   // 안전모드 활성화 조건
   safeModeTriggers: {
-    lowConfidenceRatio: 0.3, // 30% 이상 저신뢰도 → 안전모드
+    lowConfidenceRatio: 0.7, // 70% 이상 저신뢰도 → 안전모드 (requireKeywords=false 기준 완화)
     missingFieldRatio: 0.2, // 20% 이상 필드 누락 → 안전모드
     conflictCount: 3, // 3개 이상 충돌 → 안전모드
   },
