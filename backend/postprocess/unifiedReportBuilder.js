@@ -86,6 +86,16 @@ function safeStr(v) {
   return (v && typeof v === 'string') ? v.trim() : '';
 }
 
+/** 빈 항목 판별 — '정보 없음', '특이사항 없음' 등 → true */
+function isEmptyFieldValue(v) {
+  if (!v || !v.trim()) return true;
+  return [
+    '정보 없음', '(정보 없음)', '해당 없음 또는 정보 없음',
+    '(해당 없음 또는 정보 없음)', '특이사항 없음', '특이 사항 없음',
+    '(검사 데이터 없음)', '(조직검사 데이터 없음)', '(해당 없음)',
+  ].includes(v.trim());
+}
+
 function getEventHospital(evt) {
   return safeStr(evt?.hospital) || safeStr(evt?.payload?.hospital) || '';
 }
@@ -542,9 +552,19 @@ class UnifiedReportBuilder {
           if (/^\d{2,4}-\d{2,4}-\d{4}/.test(t)) return false; // 전화번호
           if (/손해사정|claim\s+adjust/i.test(t)) return false; // 손해사정사 정보
           if (/영상의학과|의원$|병원$|CLINIC|HOSPITAL/.test(t)) return false; // 추가: 병원/과 명칭
+          // CT/MRI 방사선 판독 소견 → 내원경위 부적합 (검사결과/의사소견에 속함)
+          if (/^no definite|^no gross|follow[- ]?up|MDCT scan|CT scan|MRI scan|reveals,?$/i.test(t)) return false;
+          if (/cm sized|right lobe|left lobe|hemangioma|interval change|compared with previous/i.test(t)) return false;
+          // 영문 의학 판독 소견 일반: 30자 이상 영문 + 의학 측정값 포함
+          if (t.length >= 30 && /^[A-Za-z0-9\s,.\-();:*]+$/.test(t) &&
+              /\d+\.?\d*\s*cm|\d+\s*mm|lobe|liver|kidney|scan|hepatic|renal/i.test(t)) return false;
           return true;
         });
         visitReason = meaningfulLine ? meaningfulLine.trim().substring(0, 80) : '';
+        // visitReason 미발견 + rawText에 follow up/추적 패턴 → '정기 추적 관찰' 추론
+        if (!visitReason && /follow[- ]?up|추적|경과\s*관찰|interval\s+change|F\/U\b/i.test(raw)) {
+          visitReason = '정기 추적 관찰';
+        }
       }
       if (visitReason) {
         enriched.payload = {
@@ -618,13 +638,12 @@ class UnifiedReportBuilder {
     lines.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
     // ① 내원경위
-    const rawTextFull = safeStr(evt?.rawText || evt?.description || '');
     const visitReason = getEventPayload(evt, 'visitReason')
       || getEventPayload(evt, 'admissionPurpose')
       || getEventPayload(evt, 'referralReason')
       || getEventDescription(evt)
-      || (rawTextFull ? rawTextFull.substring(0, 80) : '정보 없음');
-    lines.push(`▸ 내원경위: ${visitReason}`);
+      || '';
+    if (!isEmptyFieldValue(visitReason)) lines.push(`▸ 내원경위: ${visitReason}`);
 
     // ② 진단병명 (KCD-10 코드, 영문 원어 + 한글 병명)
     const icdCode = getEventDiagnosisCode(evt);
@@ -643,21 +662,19 @@ class UnifiedReportBuilder {
     const diagLine = icdCode ? `${finalDiag}  [KCD-10: ${icdCode}]` : finalDiag;
     lines.push(`▸ 진단병명: ${diagLine}`);
 
-    // ③ 검사결과 (질환군별 규칙 적용)
+    // ③ 검사결과 (질환군별 규칙 적용) — 데이터 또는 확인 항목이 있을 때만 렌더링
     const examResult = getEventPayload(evt, 'examResult')
       || getEventPayload(evt, 'testResult')
       || getEventPayload(evt, 'findings')
       || '';
-    lines.push(`▸ 검사결과 [${examFields.group}]:`);
-    if (examResult) {
-      lines.push(`    ${examResult}`);
-    }
-    // 질환군별 강조 항목 (데이터 없을 때도 항목 명시)
-    if (examFields.keyItems.length > 0) {
-      lines.push(`    ※ 확인 필요 항목: ${examFields.keyItems.join(' / ')}`);
-    }
-    if (!examResult) {
-      lines.push(`    (검사 데이터 없음)`);
+    if (examResult || examFields.keyItems.length > 0) {
+      lines.push(`▸ 검사결과 [${examFields.group}]:`);
+      if (examResult) {
+        lines.push(`    ${examResult}`);
+      }
+      if (examFields.keyItems.length > 0) {
+        lines.push(`    ※ 확인 필요 항목: ${examFields.keyItems.join(' / ')}`);
+      }
     }
 
     // ④ 수술 후 조직검사 결과 (암의 경우만)
@@ -684,9 +701,6 @@ class UnifiedReportBuilder {
       const cancerClass = getCancerClassification(evt);
       if (cancerClass) lines.push(`    ${cancerClass}`);
 
-      if (!biopsy && !tnm && !cTNM && !pTNM) {
-        lines.push(`    (조직검사 데이터 없음)`);
-      }
     }
 
     // ⑤ 치료내용
@@ -695,7 +709,7 @@ class UnifiedReportBuilder {
       || getEventPayload(evt, 'procedure')
       || getEventPayload(evt, 'medication')
       || '';
-    lines.push(`▸ 치료내용: ${treatment || '정보 없음'}`);
+    if (!isEmptyFieldValue(treatment)) lines.push(`▸ 치료내용: ${treatment}`);
 
     // ⑥ 통원기간
     const outpatientStart = getEventPayload(evt, 'outpatientStart') || safeStr(evt.date);
@@ -705,20 +719,17 @@ class UnifiedReportBuilder {
       lines.push(`▸ 통원기간: ${formatDateKR(outpatientStart)} ~ ${formatDateKR(outpatientEnd)} / ${outpatientCount}회 통원`);
     } else if (outpatientCount) {
       lines.push(`▸ 통원기간: ${formatDateKR(outpatientStart)} / ${outpatientCount}회 통원`);
-    } else {
-      lines.push(`▸ 통원기간: (정보 없음)`);
     }
 
     // ⑦ 입원기간
     const admissionStart = getEventPayload(evt, 'admissionStart') || getEventPayload(evt, 'hospitalizationStart') || '';
     const admissionEnd   = getEventPayload(evt, 'admissionEnd') || getEventPayload(evt, 'hospitalizationEnd') || '';
     const admissionDays  = getEventPayload(evt, 'admissionDays') || getEventPayload(evt, 'hospitalizationDays') || '';
+    const _admDaysValid = admissionDays && !isEmptyFieldValue(admissionDays);
     if (admissionStart && admissionEnd) {
-      lines.push(`▸ 입원기간: ${formatDateKR(admissionStart)} ~ ${formatDateKR(admissionEnd)}${admissionDays ? ` / ${admissionDays}일 입원` : ''}`);
-    } else if (admissionDays) {
+      lines.push(`▸ 입원기간: ${formatDateKR(admissionStart)} ~ ${formatDateKR(admissionEnd)}${_admDaysValid ? ` / ${admissionDays}일 입원` : ''}`);
+    } else if (_admDaysValid) {
       lines.push(`▸ 입원기간: ${admissionDays}일 입원`);
-    } else {
-      lines.push(`▸ 입원기간: (해당 없음 또는 정보 없음)`);
     }
 
     // ⑧ 과거병력
@@ -726,7 +737,7 @@ class UnifiedReportBuilder {
       || getEventPayload(evt, 'pastHistory')
       || getEventPayload(evt, 'history')
       || '';
-    lines.push(`▸ 과거병력: ${history || '특이 사항 없음'}`);
+    if (!isEmptyFieldValue(history)) lines.push(`▸ 과거병력: ${history}`);
 
     // ⑨ 의사소견
     const opinion = getEventPayload(evt, 'doctorOpinion')
@@ -734,7 +745,7 @@ class UnifiedReportBuilder {
       || getEventPayload(evt, 'physicianNote')
       || getEventPayload(evt, 'note')
       || '';
-    lines.push(`▸ 의사소견: ${opinion || '(정보 없음)'}`);
+    if (!isEmptyFieldValue(opinion)) lines.push(`▸ 의사소견: ${opinion}`);
   }
 
   // ── 섹션 1: 피보험자 및 보험 정보 (구조 데이터) ──
@@ -1203,30 +1214,36 @@ class UnifiedReportBuilder {
         lines.push(`  │ ${periodLabel}`);
         lines.push('  ├─────────────────────────────────────────────────────────────');
         lines.push(`  │ 내원일시: ${formatDateKR(evt.date)}`);
-        lines.push(`  │ 내원경위: ${getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '정보 없음'}`);
+        const _vr = getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '';
+        if (!isEmptyFieldValue(_vr)) lines.push(`  │ 내원경위: ${_vr}`);
         lines.push(`  │ 진단병명: ${diag}${icdCode ? `  [KCD-10: ${icdCode}]` : ''}`);
-        lines.push(`  │ 검사결과: ${getEventPayload(evt, 'examResult') || getEventPayload(evt, 'findings') || '(정보 없음)'}`);
+        const _er = getEventPayload(evt, 'examResult') || getEventPayload(evt, 'findings') || '';
+        if (!isEmptyFieldValue(_er)) lines.push(`  │ 검사결과: ${_er}`);
 
         if (isAmSpecialty) {
           const tnm = getEventPayload(evt, 'TNM') || getEventPayload(evt, 'cTNM') || '';
           const pTNM = getEventPayload(evt, 'pTNM') || '';
           const biopsy = getEventPayload(evt, 'biopsyResult') || getEventPayload(evt, 'pathologyResult') || '';
-          lines.push(`  │ 수술 후 조직검사 결과:`);
-          if (biopsy) lines.push(`  │   결과: ${biopsy}`);
-          if (tnm)    lines.push(`  │   cTNM: ${tnm}`);
-          if (pTNM)   lines.push(`  │   pTNM: ${pTNM}`);
-          const cancerClass = getCancerClassification(evt);
-          if (cancerClass) lines.push(`  │   ${cancerClass}`);
-          if (!biopsy && !tnm && !pTNM) lines.push(`  │   (데이터 없음)`);
+          if (biopsy || tnm || pTNM) {
+            lines.push(`  │ 수술 후 조직검사 결과:`);
+            if (biopsy) lines.push(`  │   결과: ${biopsy}`);
+            if (tnm)    lines.push(`  │   cTNM: ${tnm}`);
+            if (pTNM)   lines.push(`  │   pTNM: ${pTNM}`);
+            const cancerClass = getCancerClassification(evt);
+            if (cancerClass) lines.push(`  │   ${cancerClass}`);
+          }
         }
 
-        lines.push(`  │ 치료내용: ${getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '정보 없음'}`);
+        const _tx = getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '';
+        if (!isEmptyFieldValue(_tx)) lines.push(`  │ 치료내용: ${_tx}`);
         const outCnt = getEventPayload(evt, 'outpatientCount');
-        lines.push(`  │ 통원기간: ${outCnt ? `${outCnt}회` : '정보 없음'}`);
+        if (outCnt && !isEmptyFieldValue(outCnt)) lines.push(`  │ 통원기간: ${outCnt}회`);
         const admDays = getEventPayload(evt, 'admissionDays');
-        lines.push(`  │ 입원기간: ${admDays ? `${admDays}일` : '해당 없음 또는 정보 없음'}`);
-        lines.push(`  │ 과거병력: ${getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '특이사항 없음'}`);
-        lines.push(`  │ 의사소견: ${getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '(정보 없음)'}`);
+        if (admDays && !isEmptyFieldValue(admDays)) lines.push(`  │ 입원기간: ${admDays}일`);
+        const _hist = getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '';
+        if (!isEmptyFieldValue(_hist)) lines.push(`  │ 과거병력: ${_hist}`);
+        const _op = getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '';
+        if (!isEmptyFieldValue(_op)) lines.push(`  │ 의사소견: ${_op}`);
         lines.push('  └─────────────────────────────────────────────────────────────');
       }
     }
@@ -1387,7 +1404,7 @@ class UnifiedReportBuilder {
       return map[period] || 'event-card-before';
     };
 
-    const item = (label, val) => val
+    const item = (label, val) => (val && !isEmptyFieldValue(val))
       ? `<div class="event-item"><span class="event-item-label">${label}</span>: ${val}</div>`
       : '';
 
@@ -1426,17 +1443,19 @@ class UnifiedReportBuilder {
         if (discTag) html += `<span style="font-size:11px;color:#94a3b8;">${discTag}</span>`;
         html += `</div>`;
 
-        html += item('▸ 내원경위', getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '정보 없음');
+        html += item('▸ 내원경위', getEventPayload(evt, 'visitReason') || getEventPayload(evt, 'admissionPurpose') || getEventDescription(evt) || '');
         html += item('▸ 진단병명', `${diag}${icd ? ` <em>[KCD-10: ${icd}]</em>` : ''}`);
 
-        // 검사결과
+        // 검사결과 — 데이터 또는 질환군 확인 항목이 있을 때만 렌더링
         const examResult = getEventPayload(evt, 'examResult') || getEventPayload(evt, 'findings') || '';
-        html += `<div class="event-item"><span class="event-item-label">▸ 검사결과</span>: `;
-        html += examResult || '(정보 없음)';
-        if (examFields.keyItems.length > 0) {
-          html += `<br><span style="font-size:11px;color:#64748b;">※ ${examFields.keyItems.join(' / ')}</span>`;
+        if (examResult || examFields.keyItems.length > 0) {
+          html += `<div class="event-item"><span class="event-item-label">▸ 검사결과</span>`;
+          if (examResult) html += `: ${examResult}`;
+          if (examFields.keyItems.length > 0) {
+            html += `<br><span style="font-size:11px;color:#64748b;">※ ${examFields.keyItems.join(' / ')}</span>`;
+          }
+          html += `</div>`;
         }
-        html += `</div>`;
 
         // 암: 조직검사
         if (isCancel) {
@@ -1452,13 +1471,13 @@ class UnifiedReportBuilder {
           html += `</div>`;
         }
 
-        html += item('▸ 치료내용', getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '정보 없음');
+        html += item('▸ 치료내용', getEventPayload(evt, 'treatment') || getEventPayload(evt, 'prescription') || '');
         const outCnt = getEventPayload(evt, 'outpatientCount');
-        html += item('▸ 통원기간', outCnt ? `${outCnt}회` : '정보 없음');
+        html += item('▸ 통원기간', outCnt ? `${outCnt}회` : '');
         const admDays = getEventPayload(evt, 'admissionDays');
-        html += item('▸ 입원기간', admDays ? `${admDays}일` : '해당 없음 또는 정보 없음');
-        html += item('▸ 과거병력', getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '특이사항 없음');
-        html += item('▸ 의사소견', getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '(정보 없음)');
+        html += item('▸ 입원기간', (admDays && !isEmptyFieldValue(admDays)) ? `${admDays}일` : '');
+        html += item('▸ 과거병력', getEventPayload(evt, 'medicalHistory') || getEventPayload(evt, 'history') || '');
+        html += item('▸ 의사소견', getEventPayload(evt, 'doctorOpinion') || getEventPayload(evt, 'note') || '');
 
         if (evt._period === PERIOD.WITHIN_3M && (evt.confidence || 0) >= 0.8) {
           html += `<div class="warn-tag">★ 고지의무위반 우려 가능성 있음</div>`;

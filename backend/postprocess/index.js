@@ -124,12 +124,15 @@ class PostProcessingManager {
       const baseEvents = medicalEventModel.unifyDuplicateEvents(medicalEvents);
 
       // ── GPT 이벤트 병합 (payload 보강) ───────────────────────────────────
-      const unifiedMedicalEvents = gptEvent
+      const mergedEvents = gptEvent
         ? this._mergeGptEvent(baseEvents, gptEvent)
         : baseEvents;
       if (gptEvent) {
         console.log(`🤖 GPT 이벤트 병합 완료 — ${gptEvent.date} / ${gptEvent.eventType}`);
       }
+
+      // ── 영문 필드 배치 번역 (visitReason, doctorOpinion) ─────────────────
+      const unifiedMedicalEvents = await this._translateEnglishFields(mergedEvents);
 
       // ── 3단계: 안전모드 검증 ─────────────────────────────────────────────
       let safeModeResult = null;
@@ -349,6 +352,72 @@ class PostProcessingManager {
         ? processingTime
         : (this.processingStats.averageProcessingTime + processingTime) / 2;
     this.processingStats.lastProcessingTime = new Date().toISOString();
+  }
+
+  /**
+   * 영문 비율 60% 초과 판별
+   * @param {string} text
+   * @returns {boolean}
+   */
+  _isEnglishDominant(text) {
+    if (!text || text.length < 8) return false;
+    const letters = (text.match(/[a-zA-Z가-힣]/g) || []);
+    if (letters.length < 5) return false;
+    return (text.match(/[a-zA-Z]/g) || []).length / letters.length > 0.6;
+  }
+
+  /**
+   * 영문 우세 필드(visitReason, doctorOpinion)를 GPT-4o-mini로 배치 번역
+   * 번역 실패 시 원문 그대로 유지 (비파괴적)
+   * @param {Array} events
+   * @returns {Promise<Array>}
+   */
+  async _translateEnglishFields(events) {
+    const targets = [];
+    events.forEach((evt, idx) => {
+      for (const field of ['visitReason', 'doctorOpinion']) {
+        const val = evt.payload?.[field] || '';
+        if (this._isEnglishDominant(val)) targets.push({ idx, field, text: val });
+      }
+    });
+    if (!targets.length) return events;
+
+    try {
+      const { OpenAI } = await import('openai');
+      const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, timeout: 15000 });
+      const items = targets.map((t, i) => `${i}: ${t.text}`).join('\n');
+      const res = await client.chat.completions.create({
+        model: 'gpt-4o-mini',
+        temperature: 0.1,
+        max_tokens: 1500,
+        response_format: { type: 'json_object' },
+        messages: [
+          {
+            role: 'system',
+            content:
+              '의료 문서 번역. 영문 의학 텍스트를 자연스러운 한국어로 번역하라. ' +
+              '전문용어는 한국 표준 의학 용어 사용. JSON {"0":"번역","1":"번역",...} 형식으로만 응답.',
+          },
+          { role: 'user', content: items },
+        ],
+      });
+      const map = JSON.parse(res.choices[0].message.content);
+      const result = events.map(e => ({ ...e }));
+      targets.forEach((t, i) => {
+        const tr = map[String(i)];
+        if (tr) {
+          result[t.idx] = {
+            ...result[t.idx],
+            payload: { ...(result[t.idx].payload || {}), [t.field]: tr },
+          };
+        }
+      });
+      console.log(`🌐 영문 필드 번역 완료 (${targets.length}건)`);
+      return result;
+    } catch (e) {
+      console.warn(`⚠️ 영문 번역 실패 — 원문 유지: ${e.message}`);
+      return events;
+    }
   }
 
   getProcessingStats() {
