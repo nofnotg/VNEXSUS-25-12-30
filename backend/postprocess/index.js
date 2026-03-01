@@ -233,9 +233,18 @@ class PostProcessingManager {
    * @returns {Object|null} MedicalEvent 형태의 객체
    */
   _convertGptToEvent(gptData, patientInfo = {}) {
-    if (!gptData || !gptData.visitDate) return null;
+    if (!gptData) return null;
+
+    // visitDate: 문자열 또는 객체 { date, time, hospital, department } 양쪽 처리
+    const dateStr = typeof gptData.visitDate === 'string'
+      ? gptData.visitDate
+      : (gptData.visitDate?.date || gptData.visitDate?.startDate || null);
+    if (!dateStr) return null;
 
     const primaryDiag = gptData.diagnoses?.[0] || {};
+    // 실제 GPT 스키마: nameKr (소문자 r), nameEn (소문자 n) — 대문자 KR/EN 폴백 포함
+    const diagName = primaryDiag.nameKr || primaryDiag.nameKR
+                  || primaryDiag.nameEn || primaryDiag.nameEN || '';
 
     // eventType 결정: 입원 > 수술 > 중대검사 > 진료
     let eventType = '진료';
@@ -247,18 +256,32 @@ class PostProcessingManager {
       eventType = '중대검사';
     }
 
+    // pastHistory: 문자열 또는 배열 [{ condition }] 양쪽 처리
+    const medicalHistory = Array.isArray(gptData.pastHistory)
+      ? gptData.pastHistory.map(h => h.condition || '').filter(Boolean).join(', ')
+      : (typeof gptData.pastHistory === 'string' ? gptData.pastHistory : '');
+
+    // doctorOpinion: 문자열 또는 객체 { summary } 양쪽 처리
+    const doctorOpinion = typeof gptData.doctorOpinion === 'string'
+      ? gptData.doctorOpinion
+      : (gptData.doctorOpinion?.summary || '');
+
+    // hospital: visitDate 객체에 있으면 우선 사용
+    const hospital = (typeof gptData.visitDate === 'object' && gptData.visitDate?.hospital)
+      || patientInfo.hospital || patientInfo.name || '진료';
+
     return {
-      id: `gpt_${gptData.visitDate}_main`,
-      date: gptData.visitDate,
-      hospital: patientInfo.hospital || patientInfo.name || '진료',
+      id: `gpt_${dateStr}_main`,
+      date: dateStr,
+      hospital,
       eventType,
-      description: gptData.chiefComplaint?.summary || primaryDiag.nameKR || '진료',
+      description: gptData.chiefComplaint?.summary || diagName || '진료',
       diagnosis: {
-        name: primaryDiag.nameKR || primaryDiag.nameEN || '',
+        name: diagName,
         code: primaryDiag.code || '',
       },
       procedures: (gptData.examinations || []).map(e => ({ name: e.name })),
-      confidence: 0.92,  // GPT 추출 → 고신뢰도
+      confidence: 0.92,
       payload: {
         visitReason:     gptData.chiefComplaint?.summary || '',
         examResult:      (gptData.examinations || [])
@@ -267,10 +290,13 @@ class PostProcessingManager {
         treatment:       (gptData.treatments || []).map(t => t.name).join(', ') || '',
         outpatientCount: gptData.outpatientPeriod?.totalVisits || null,
         admissionDays:   gptData.admissionPeriod?.totalDays    || null,
-        medicalHistory:  gptData.pastHistory || '',
-        doctorOpinion:   gptData.doctorOpinion || '',
+        medicalHistory,
+        doctorOpinion,
         allDiagnoses:    (gptData.diagnoses || [])
-                           .map(d => `${d.nameKR || d.nameEN || ''}${d.code ? ' [' + d.code + ']' : ''}`)
+                           .map(d => {
+                             const n = d.nameKr || d.nameKR || d.nameEn || d.nameEN || '';
+                             return n ? `${n}${d.code ? ' [' + d.code + ']' : ''}` : '';
+                           })
                            .filter(Boolean)
                            .join(', '),
       },
