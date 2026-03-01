@@ -324,6 +324,7 @@ router.post('/generate', async (req, res) => {
         minConfidence: 0.35,
         includeAll: false,
         useHybridApproach: true,
+        gptStructuredData: structuredJsonData || null,  // GPT 구조화 데이터 → 이벤트 카드 보강
       });
       unifiedReport = pipelineResult?.pipeline?.unifiedReport || null;
       if (unifiedReport) {

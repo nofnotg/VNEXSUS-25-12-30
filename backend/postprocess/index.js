@@ -39,6 +39,11 @@ class PostProcessingManager {
     const startTime = Date.now();
 
     try {
+      // ── GPT 구조화 데이터 → 이벤트 변환 (옵션) ────────────────────────
+      const gptEvent = options.gptStructuredData
+        ? this._convertGptToEvent(options.gptStructuredData, options.patientInfo || {})
+        : null;
+
       // ── 1단계: 날짜·병원명 파싱 및 보일러플레이트 제거 ─────────────────
       const dateBlocks = await this.preprocessor.run(ocrText, {
         translateTerms:    options.translateTerms    ?? false,
@@ -116,7 +121,15 @@ class PostProcessingManager {
       }
 
       // 중복 이벤트 병합
-      const unifiedMedicalEvents = medicalEventModel.unifyDuplicateEvents(medicalEvents);
+      const baseEvents = medicalEventModel.unifyDuplicateEvents(medicalEvents);
+
+      // ── GPT 이벤트 병합 (payload 보강) ───────────────────────────────────
+      const unifiedMedicalEvents = gptEvent
+        ? this._mergeGptEvent(baseEvents, gptEvent)
+        : baseEvents;
+      if (gptEvent) {
+        console.log(`🤖 GPT 이벤트 병합 완료 — ${gptEvent.date} / ${gptEvent.eventType}`);
+      }
 
       // ── 3단계: 안전모드 검증 ─────────────────────────────────────────────
       let safeModeResult = null;
@@ -211,6 +224,95 @@ class PostProcessingManager {
       this._updateStats(processingTime, false);
       throw new Error(`후처리 파이프라인 실패: ${error.message}`);
     }
+  }
+
+  /**
+   * GPT structuredJsonData → MedicalEvent 변환
+   * @param {Object} gptData - GPT가 반환한 12항목 구조화 JSON
+   * @param {Object} patientInfo - 환자 정보 (hospital 등 보완용)
+   * @returns {Object|null} MedicalEvent 형태의 객체
+   */
+  _convertGptToEvent(gptData, patientInfo = {}) {
+    if (!gptData || !gptData.visitDate) return null;
+
+    const primaryDiag = gptData.diagnoses?.[0] || {};
+
+    // eventType 결정: 입원 > 수술 > 중대검사 > 진료
+    let eventType = '진료';
+    if (gptData.admissionPeriod?.totalDays > 0) {
+      eventType = '입원';
+    } else if (gptData.treatments?.some(t => /수술|시술/i.test(t.name || ''))) {
+      eventType = '수술';
+    } else if (gptData.examinations?.some(e => /CT|MRI|PET|조직|내시경/i.test(e.name || ''))) {
+      eventType = '중대검사';
+    }
+
+    return {
+      id: `gpt_${gptData.visitDate}_main`,
+      date: gptData.visitDate,
+      hospital: patientInfo.hospital || patientInfo.name || '진료',
+      eventType,
+      description: gptData.chiefComplaint?.summary || primaryDiag.nameKR || '진료',
+      diagnosis: {
+        name: primaryDiag.nameKR || primaryDiag.nameEN || '',
+        code: primaryDiag.code || '',
+      },
+      procedures: (gptData.examinations || []).map(e => ({ name: e.name })),
+      confidence: 0.92,  // GPT 추출 → 고신뢰도
+      payload: {
+        visitReason:     gptData.chiefComplaint?.summary || '',
+        examResult:      (gptData.examinations || [])
+                           .map(e => `${e.name}${e.result ? ': ' + e.result : ''}`)
+                           .join(' / ') || '',
+        treatment:       (gptData.treatments || []).map(t => t.name).join(', ') || '',
+        outpatientCount: gptData.outpatientPeriod?.totalVisits || null,
+        admissionDays:   gptData.admissionPeriod?.totalDays    || null,
+        medicalHistory:  gptData.pastHistory || '',
+        doctorOpinion:   gptData.doctorOpinion || '',
+        allDiagnoses:    (gptData.diagnoses || [])
+                           .map(d => `${d.nameKR || d.nameEN || ''}${d.code ? ' [' + d.code + ']' : ''}`)
+                           .filter(Boolean)
+                           .join(', '),
+      },
+    };
+  }
+
+  /**
+   * postprocess 이벤트 배열에 GPT 이벤트를 병합
+   * - 날짜 일치: 기존 이벤트 payload 보강 (기존 필드 우선, 빈 필드에 GPT 값 채움)
+   * - 날짜 불일치: GPT 이벤트를 배열 선두에 추가
+   * @param {Array} postprocessEvents
+   * @param {Object} gptEvent
+   * @returns {Array}
+   */
+  _mergeGptEvent(postprocessEvents, gptEvent) {
+    if (!gptEvent) return postprocessEvents;
+
+    const matchIdx = postprocessEvents.findIndex(e => e.date === gptEvent.date);
+
+    if (matchIdx >= 0) {
+      const matched = postprocessEvents[matchIdx];
+      // payload 병합: 기존 필드가 있으면 유지, 비어있으면 GPT 값 사용
+      const mergedPayload = { ...(gptEvent.payload || {}) };
+      const existingPayload = matched.payload || {};
+      for (const key of Object.keys(mergedPayload)) {
+        if (existingPayload[key]) mergedPayload[key] = existingPayload[key];
+      }
+      const enriched = {
+        ...matched,
+        diagnosis:  matched.diagnosis?.name ? matched.diagnosis : gptEvent.diagnosis,
+        procedures: (matched.procedures?.length > 0) ? matched.procedures : gptEvent.procedures,
+        eventType:  (matched.eventType && matched.eventType !== '진료') ? matched.eventType : gptEvent.eventType,
+        payload:    mergedPayload,
+        confidence: Math.max(matched.confidence || 0, gptEvent.confidence),
+      };
+      const result = [...postprocessEvents];
+      result[matchIdx] = enriched;
+      return result;
+    }
+
+    // 날짜 불일치: GPT 이벤트를 선두에 추가
+    return [gptEvent, ...postprocessEvents];
   }
 
   _updateStats(processingTime, success) {
